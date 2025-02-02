@@ -279,6 +279,10 @@ function process_input_file_by_app() {
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
+            '' )
+                # Empty line.
+                continue
+                ;;
             '#'*$SETUP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*for* )
                 # Matching app record.
                 APP_MATCH=true
@@ -287,7 +291,14 @@ function process_input_file_by_app() {
                 ;;
             '#'*$SETUP*for* | '#'*$RESET*for* )
                 # Mismatched app record.
+                # Add empty seperator line between the setup of apps.
+                if $APP_MATCH; then
+                    printf '\n' >> "$COMMAND_FILE"
+                fi
                 APP_MATCH=false
+                ;;
+            '#'* )
+                # Comment line.
                 continue
                 ;;
             * )
@@ -315,6 +326,10 @@ function process_input_file_by_user() {
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
+            '' )
+                # Empty line.
+                continue
+                ;;
             '#'*$SETUP*for*'*' | '#'*$SETUP*for*$USER@$HOSTNAME* )
                 # Matching app record.
                 USER_MATCH=true
@@ -322,7 +337,14 @@ function process_input_file_by_user() {
                 ;;
             '#'*$SETUP*for* | '#'*$RESET*for* )
                 # Mismatched app record.
+                # Add empty seperator line between the setup of apps.
+                if $USER_MATCH; then
+                    printf '\n' >> "$COMMAND_FILE"
+                fi
                 USER_MATCH=false
+                ;;
+            '#'* )
+                # Comment line.
                 continue
                 ;;
             * )
@@ -418,8 +440,7 @@ function process_command_file() {
                         "$APP_NAME"
                 ;;
             '' | '#'* )
-                # Empty record or comment line.
-                logmsg "$COMMAND_RECORD"
+                # Empty or comment line.
                 continue
                 ;;
             * )

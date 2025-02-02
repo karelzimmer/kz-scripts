@@ -286,6 +286,10 @@ function process_input_file_by_app() {
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
+            '' )
+                # Empty line.
+                continue
+                ;;
             '#'*$INSTALL*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON* )
                 # Matching app record.
                 APP_MATCH=true
@@ -294,7 +298,14 @@ function process_input_file_by_app() {
                 ;;
             '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
+                # Add empty seperator line between the installation of apps.
+                if $APP_MATCH; then
+                    printf '\n' >> "$COMMAND_FILE"
+                fi
                 APP_MATCH=false
+                ;;
+            '#'* )
+                # Comment line.
                 continue
                 ;;
             * )
@@ -322,6 +333,10 @@ function process_input_file_by_host() {
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
+            '' )
+                # Empty line.
+                continue
+                ;;
             '#'*$INSTALL*$ON*'*' | '#'*$INSTALL*$ON*$HOSTNAME* )
                 # Matching app record.
                 HOST_MATCH=true
@@ -329,7 +344,14 @@ function process_input_file_by_host() {
                 ;;
             '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
+                # Add empty seperator line between the installation of apps.
+                if $HOST_MATCH; then
+                    printf '\n' >> "$COMMAND_FILE"
+                fi
                 HOST_MATCH=false
+                ;;
+            '#'* )
+                # Comment line.
                 continue
                 ;;
             * )
@@ -426,8 +448,7 @@ function process_command_file() {
                         "$APP_NAME"
                 ;;
             '' | '#'* )
-                # Empty record or comment line.
-                logmsg "$COMMAND_RECORD"
+                # Empty or comment line.
                 continue
                 ;;
             * )
