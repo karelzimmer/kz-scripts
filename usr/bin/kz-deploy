@@ -225,7 +225,7 @@ function upload_website() {
         errmsg "$TEXT"
         ERR_FLAG=true
     fi
-    # Empty REPLY with passowrd.
+    # Make reply with password empty.
     REPLY=''
 }
 
