@@ -363,7 +363,7 @@ function setup_apps() {
     local -i APP_TOT_NUM=0
 
     APP_TOT_NUM=$(
-        grep    --regexp="#.*$SETUP.*for"   \
+        grep    --regexp="#.*$SETUP.*on"    \
                 --count                     \
                 "$COMMAND_FILE"             || true
         )
