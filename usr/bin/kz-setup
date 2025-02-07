@@ -283,13 +283,13 @@ function process_input_file_by_app() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*for* )
+            '#'*$SETUP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*on* )
                 # Matching app record.
                 APP_MATCH=true
                 NO_APP_MATCH=false
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$SETUP*for* | '#'*$RESET*for* )
+            '#'*$SETUP*on* | '#'*$RESET*on* )
                 # Mismatched app record.
                 # Add empty seperator line between the setup of apps.
                 if $APP_MATCH; then
@@ -315,10 +315,10 @@ function process_input_file_by_app() {
 
 
 # This function generates the command file from the setup file and filters by
-# USER@$HOSTNAME.
+# hostname.
 function process_input_file_by_user() {
+    local HOST_MATCH=false
     local INPUT_RECORD=''
-    local USER_MATCH=false
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
@@ -326,21 +326,21 @@ function process_input_file_by_user() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP*for*'*' | '#'*$SETUP*for*$USER@$HOSTNAME* )
+            '#'*$SETUP*on*'*' | '#'*$SETUP*on*$HOSTNAME* )
                 # Matching app record.
-                USER_MATCH=true
+                HOST_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$SETUP*for* | '#'*$RESET*for* )
+            '#'*$SETUP*on* | '#'*$RESET*on* )
                 # Mismatched app record.
                 # Add empty seperator line between the setup of apps.
-                if $USER_MATCH; then
+                if $HOST_MATCH; then
                     printf '\n' >> "$COMMAND_FILE"
                 fi
-                USER_MATCH=false
+                HOST_MATCH=false
                 ;;
             * )
-                if $USER_MATCH; then
+                if $HOST_MATCH; then
                     # Record for command file.
                     printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi

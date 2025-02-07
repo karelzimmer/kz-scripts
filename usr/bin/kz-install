@@ -322,7 +322,7 @@ function process_input_file_by_app() {
 
 
 # This function generates the command file from the install file and filters by
-# HOSTNAME.
+# hostname.
 function process_input_file_by_host() {
     local HOST_MATCH=false
     local INPUT_RECORD=''

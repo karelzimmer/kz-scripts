@@ -90,9 +90,9 @@ l | l
 l | l
 l | l.
 T{
-# Setup \fI<app>\fR for <user>@<host>...
+# Setup \fI<app>\fR on <host>...
 T}:T{
-Set up \fI<app>\fR for <user>@<host>s (\fBApp record\fR)
+Set up \fI<app>\fR on <host>s (\fBApp record\fR)
 T}
 T{
 # Comment...
@@ -109,9 +109,9 @@ T}:T{
 Empty line (none, one or more)
 T}
 T{
-# Reset \fI<app>\fR for <user>@<host>...
+# Reset \fI<app>\fR on <host>...
 T}:T{
-Reset \fI<app>\fR for <user>@<host>s (\fBApp record\fR for option reset)
+Reset \fI<app>\fR on <host>s (\fBApp record\fR for option reset)
 T}
 T{
 Command
@@ -147,7 +147,7 @@ l | l.
 T{
 # Setup google-chrome for *
 T}:T{
-Set up google-chrome for any user, see [1]
+Set up google-chrome on any computer, see [1]
 T}
 T{
 kz-desktop --addbef=google-chrome
@@ -159,7 +159,7 @@ T}
 T{
 # Reset google-chrome for *
 T}:T{
-Reset google-chrome for any user, see [1]
+Reset google-chrome on any computer, see [1]
 T}
 T{
 kz-desktop --delete=google-chrome
@@ -169,9 +169,9 @@ T{
 T}:T{
 T}
 T{
-# Setup gnome for john@pc02
+# Setup gnome on pc02
 T}:T{
-Set up gnome only for John, see [2]
+Set up gnome only on pc02, see [2]
 T}
 T{
 gsettings set org.gnome.shell...
@@ -181,9 +181,9 @@ T{
 T}:T{
 T}
 T{
-# setup kvm for jane@pc01 john@pc02
+# setup kvm on pc01 pc02
 T}:T{
-Set up kvm for Jane and John, see [3]
+Set up kvm on pc01 and pc02, see [3]
 T}
 T{
 kz-desktop --addaft=virt-manager
@@ -206,20 +206,20 @@ T}
 .sp
 [1]
 .br
-The line with '*' causes the associated commands to run for every user.
+The line with '*' causes the associated commands to run on all computers.
 .sp
 [2]
 .br
-The line with 'john@pc02' ensures that the associated commands are executed
-only for John on pc02.
+The line with 'pc02' ensures that the associated commands are executed only on
+pc02 by default.
 .br
 The app can still be set up on another computer with the command 'kz setup goo\
 gle-earth'.
 .sp
 [3]
 .br
-The line with 'jane@pc01 john@pc02' ensures that the associated commands are
-executed only for Jane on pc01 and for John on pc02 by default.
+The line with 'pc01 pc02' ensures that the associated commands are executed
+only on pc01 and pc02 by default.
 .br
 The app can still be set up on another computer with the command 'kz setup kvm\
 '.

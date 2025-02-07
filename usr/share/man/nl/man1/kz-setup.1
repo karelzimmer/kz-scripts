@@ -91,9 +91,9 @@ T}
 l | l
 l | l.
 T{
-# Setup \fI<app>\fR for <user>@<host>...
+# Setup \fI<app>\fR on <host>...
 T}:T{
-De \fI<app>\fR instellen voor <user>@<host>s (\fBApp-regel\fR)
+De \fI<app>\fR instellen op <host>s (\fBApp-regel\fR)
 T}
 T{
 # Commentaar...
@@ -110,9 +110,9 @@ T}:T{
 Lege regel
 T}
 T{
-# Reset \fI<app>\fR for <user>@<host>...
+# Reset \fI<app>\fR on <host>...
 T}:T{
-De \fI<app>\fR resetten voor <user>@<host>s (\fBApp-regel\fR voor optie reset)
+De \fI<app>\fR resetten op <host>s (\fBApp-regel\fR voor optie reset)
 T}
 T{
 Opdracht
@@ -138,7 +138,7 @@ l | l.
 T{
 # Setup google-chrome for *
 T}:T{
-Stel google-chrome in voor iedere gebruiker, zie [1]
+Stel google-chrome in op iedere computer, zie [1]
 T}
 T{
 kz-desktop --addbef=google-chrome
@@ -150,7 +150,7 @@ T}
 T{
 # Reset google-chrome for *
 T}:T{
-Reset google-chrome voor iedere gebruiker, zie [1]
+Reset google-chrome op iedere computer, zie [1]
 T}
 T{
 kz-desktop --delete=google-chrome
@@ -160,9 +160,9 @@ T{
 T}:T{
 T}
 T{
-# Setup gnome for jan@pc02
+# Setup gnome on pc02
 T}:T{
-Stel gnome in alleen voor Jan, zie [2]
+Stel gnome in alleen op pc02, zie [2]
 T}
 T{
 gsettings set org.gnome.shell...
@@ -172,9 +172,9 @@ T{
 T}:T{
 T}
 T{
-# Setup kvm for jantine@pc01 jan@pc02
+# Setup kvm on pc01 pc02
 T}:T{
-Stel kvm in voor Jantine and Jan, zie [3]
+Stel kvm in op pc01 en pc02, zie [3]
 T}
 T{
 kz-desktop --addaft=virt-manager
@@ -197,22 +197,21 @@ T}
 .sp
 [1]
 .br
-De regel met '*' zorgt ervoor dat de bijbehorende opdrachten voor iedere
-gebruiker worden uitgevoerd.
+De regel met '*' zorgt ervoor dat de bijbehorende opdrachten op alle computers
+worden uitgevoerd.
 .sp
 [2]
 .br
-De regel met 'jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen voor
-Jan op pc02 worden uitgevoerd.
+De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
+alleen op pc02 worden uitgevoerd.
 .br
 De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
 setup gnome'.
 .sp
 [3]
 .br
-De regel met 'jantine@pc01 jan@pc02' zorgt ervoor dat de bijbehorende
-opdrachten standaard alleen voor Jantine op pc01 en voor Jan op pc02 worden
-uitgevoerd.
+De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
+alleen op pc01 en pc02 worden uitgevoerd.
 .br
 De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
 setup kvm'.

@@ -495,7 +495,6 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes libreoffice ; fi
 # Find files.
 if $APT ; then sudo apt-get install --assume-yes locate ; fi
 if $RPM ; then sudo dnf install --assumeyes mlocate ; fi
-
 sudo updatedb
 
 # Remove locate from pc06 pc07
