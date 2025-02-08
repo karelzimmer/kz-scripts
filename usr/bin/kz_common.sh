@@ -28,7 +28,6 @@ readonly MODULE_DESC
 
 readonly OPTIONS_USAGE='[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
-
 OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
