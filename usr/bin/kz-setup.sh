@@ -101,7 +101,7 @@ if $GUI && $RPM ; then echo 'App gdebi is not available.' ; fi
 
 # Reset gdebi on *
 # View and install deb files.
-echo 'App gdebi cannot be reset.'
+if $GUI ; then echo 'App gdebi cannot be reset.' ; fi
 
 
 # Setup git on pc06 pc07

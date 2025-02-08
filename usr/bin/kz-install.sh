@@ -821,7 +821,7 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes vlc ; fi
 # Install vscode on pc01 pc06 pc07
 # Editor.
 if $GUI && $APT ; then sudo apt-get install --assume-yes apt-transport-https ; fi
-if $GUI && $APT ; then wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg ; fi
+if $GUI && $APT ; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg ; fi
 if $GUI && $APT ; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list ; fi
 if $GUI && $APT ; then sudo apt-get update ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes code ; fi
@@ -844,7 +844,7 @@ if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo* ;
 # Install webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
-if $GUI && $APT ; then wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg ; fi
+if $GUI && $APT ; then wget --output-document=- https://www.webmin.com/jcameron-key.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg ; fi
 if $GUI && $APT ; then echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list ; fi
 if $GUI && $APT ; then sudo apt-get update ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes webmin ; fi
