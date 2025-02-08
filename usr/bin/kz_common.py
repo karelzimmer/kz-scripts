@@ -65,14 +65,17 @@ if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
     DEBIAN = True
     APT = True
-if subprocess.run("source /etc/os-release; [[ $ID = 'rocky' ]]",
+elif subprocess.run("source /etc/os-release; [[ $ID = 'rocky' ]]",
                   shell=True, executable='bash').returncode == OK:
     ROCKY = True
     RPM = True
-if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
+elif subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
     UBUNTU = True
     APT = True
+else:
+    print('[fail] unknown distro')
+    sys.exit(ERR)
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
