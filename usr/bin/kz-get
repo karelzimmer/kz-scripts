@@ -18,7 +18,7 @@ declare KZ_COMMON_LOCAL_FILE
         KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.sh")
 wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
         systemd-cat --identifier=kz-get --priority=debug
-if      [[ ${PIPESTATUS[0]} -gt 0 ]]; then   
+if      [[ ${PIPESTATUS[0]} -gt 0 ]]; then
         echo '[fail] download kz_common.sh' >&2
         echo '[hint] journalctl --no-pager --pager-end --identifier=kz-get'
         exit 1
