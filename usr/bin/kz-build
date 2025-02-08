@@ -12,8 +12,7 @@
 # Imports
 ###############################################################################
 
-# Use the kz_common.sh version of the current path to itself.
-source "$(dirname "$(realpath "$0")")"/kz_common.sh
+source ~/kz-scripts/usr/bin/kz_common.sh
 
 
 ###############################################################################
