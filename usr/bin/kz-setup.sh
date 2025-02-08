@@ -49,10 +49,10 @@ if $GUI && $DEBIAN ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com 
 if $GUI && $DEBIAN ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell disable-user-extensions false ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' ; fi
+if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32 ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT' ; fi
+if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position LEFT ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true ; fi
 
@@ -124,16 +124,16 @@ if $GUI ; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click
 if $GUI ; then gsettings set org.gnome.desktop.screensaver lock-enabled false ; fi
 if $GUI ; then gsettings set org.gnome.desktop.session idle-delay 900 ; fi
 if $GUI ; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true ; fi
-if $GUI ; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close' ; fi
+if $GUI ; then gsettings set org.gnome.desktop.wm.preferences button-layout :minimize,maximize,close ; fi
 if $GUI ; then gsettings set org.gnome.mutter center-new-windows true ; fi
-if $GUI ; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large' ; fi
-if $GUI ; then gsettings set org.gnome.nautilus.preferences click-policy 'single' ; fi
+if $GUI ; then gsettings set org.gnome.nautilus.icon-view default-zoom-level large ; fi
+if $GUI ; then gsettings set org.gnome.nautilus.preferences click-policy single ; fi
 if $GUI ; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true ; fi
 if $GUI ; then gsettings set org.gnome.nautilus.preferences show-create-link true ; fi
-if $GUI ; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always' ; fi
-if $GUI ; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive' ; fi
-if $GUI ; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing' ; fi
-if $GUI ; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing' ; fi
+if $GUI ; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails always ; fi
+if $GUI ; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive ; fi
+if $GUI ; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing ; fi
+if $GUI ; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing ; fi
 
 # Reset gnome on *
 # Desktop environment.
