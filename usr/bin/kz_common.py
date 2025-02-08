@@ -66,11 +66,11 @@ if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
     DEBIAN = True
     APT = True
 elif subprocess.run("source /etc/os-release; [[ $ID = 'rocky' ]]",
-                  shell=True, executable='bash').returncode == OK:
+                    shell=True, executable='bash').returncode == OK:
     ROCKY = True
     RPM = True
 elif subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
-                  shell=True, executable='bash').returncode == OK:
+                    shell=True, executable='bash').returncode == OK:
     UBUNTU = True
     APT = True
 else:
