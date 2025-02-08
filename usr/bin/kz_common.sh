@@ -66,14 +66,15 @@ fi
 if [[ $ID = 'debian' ]]; then
     DEBIAN=true
     APT=true
-fi
-if [[ $ID = 'rocky' ]]; then
+elif [[ $ID = 'rocky' ]]; then
     ROCKY=true
     RPM=true
-fi
-if [[ $ID = 'ubuntu' ]]; then
+elif [[ $ID = 'ubuntu' ]]; then
     UBUNTU=true
     APT=true
+else
+    echo '[fail] unknown distro' >&2
+    exit $ERR
 fi
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
