@@ -12,23 +12,16 @@
 # Imports
 ###############################################################################
 
-if [[ -f ~/kz-scripts/usr/bin/kz_common.sh && $PWD = ~/kz-scripts/usr/bin ]]
-then
-    # Use the version in dev which has been installed with kz-build.
-    source kz_common.sh
-else
-    # Use the version in prod which has been installed with kz-deploy.
-    declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
-            KZ_COMMON_SITE_FILE+='kz_common.sh'
-    declare KZ_COMMON_LOCAL_FILE
-            KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.sh")
-    wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
-            systemd-cat --identifier=kz-get --priority=debug
-    source  "$KZ_COMMON_LOCAL_FILE" 2> >(
-            systemd-cat --identifier=kz-get --priority=debug)
-    rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
-            systemd-cat --identifier=kz-get --priority=debug
-fi
+declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
+        KZ_COMMON_SITE_FILE+='kz_common.sh'
+declare KZ_COMMON_LOCAL_FILE
+        KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.sh")
+wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
+        systemd-cat --identifier=kz-get --priority=debug
+source  "$KZ_COMMON_LOCAL_FILE" 2> >(
+        systemd-cat --identifier=kz-get --priority=debug)
+rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
+        systemd-cat --identifier=kz-get --priority=debug
 
 
 ###############################################################################
