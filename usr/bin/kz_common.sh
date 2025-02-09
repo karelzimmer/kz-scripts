@@ -435,14 +435,17 @@ $COMMAND, code: $RC ($RC_DESC)."
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
                 errmsg "$TEXT"
                 if [[ $PROGRAM_ID = 'kz-get' ]]; then
+                    TEXT="
+$(gettext 'To resolve a package issue, you can try the following:')"
                     if $APT; then
-                        TEXT="[hint] sudo dpkg --configure --pending
-[hint] sudo apt-get update --fix-missing
-[hint] sudo apt-get install --fix-broken"
+                        TEXT+='
+sudo dpkg --configure --pending
+sudo apt-get update --fix-missing
+sudo apt-get install --fix-broken'
                         infomsg "$TEXT"
                     elif $RPM; then
-                        TEXT="[hint] sudo dnf clean all
-[hint] sudo dnf makecache"
+                        TEXT+='sudo dnf clean all
+sudo dnf makecache'
                         infomsg "$TEXT"
                     else
                         TEXT=$(gettext 'Unknown package manager.')
