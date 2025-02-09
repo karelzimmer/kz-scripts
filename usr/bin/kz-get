@@ -20,13 +20,11 @@ wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
         systemd-cat --identifier=kz-get --priority=debug
 if      [[ ${PIPESTATUS[0]} -gt 0 ]]; then
         echo '[fail] download kz_common.sh' >&2
-        echo '[hint] journalctl --no-pager --pager-end --identifier=kz-get'
         exit 1
 fi
 if  !   source "$KZ_COMMON_LOCAL_FILE" 2> >(
         systemd-cat --identifier=kz-get --priority=debug); then
         echo '[fail] source kz_common.sh' >&2
-        echo '[hint] journalctl --no-pager --pager-end --identifier=kz-get'
         exit 1
 fi
 rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
@@ -128,7 +126,6 @@ function prepare_processing() {
     local -i SLEEP=1
 
     sudo true
-    printf '%s\n' "[logs] journalctl --follow --pager-end --identifier=kz-get"
 
     # Progress indicator with growing [=>, [==>, etc. as long as the pid file
     # exists, i.e. installation is in progress.
