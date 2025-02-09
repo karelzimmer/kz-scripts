@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 10:09+0100\n"
+"POT-Creation-Date: 2025-02-09 17:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,6 +52,12 @@ msgstr ""
 
 #, sh-format
 msgid "Program $PROGRAM_ID encountered an error."
+msgstr ""
+
+msgid "To resolve a package issue, you can try the following:"
+msgstr ""
+
+msgid "Unknown package manager."
 msgstr ""
 
 #, sh-format
@@ -165,7 +171,7 @@ msgstr ""
 msgid "NUM  COMMAND"
 msgstr ""
 
-msgid "To execute a command: kz <command> [<arguments>]"
+msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
 msgid "Make backup"
@@ -373,9 +379,6 @@ msgstr ""
 msgid "Usage: kz get [<options>]"
 msgstr ""
 
-msgid "Unknown package manager."
-msgstr ""
-
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -469,7 +472,7 @@ msgid ""
 "> is the new setting (B):"
 msgstr ""
 
-msgid "When CHANGEs, execute: gsettings set CHANGE"
+msgid "Use \"gsettings set CHANGE\" for CHANGEs."
 msgstr ""
 
 msgid "Install apps"
@@ -525,19 +528,19 @@ msgstr ""
 msgid "  0  No apps found."
 msgstr ""
 
-msgid "To install the apps execute: kz-install <app>..."
+msgid "Use \"kz install <app>...\" to install the apps."
 msgstr ""
 
-msgid "To view the contents of the install file execute: kz-install --cat"
-msgstr ""
-
-msgid ""
-"To view the contents of the apps install file execute: kz-install --cat "
-"<app>..."
+msgid "Use \"kz install --cat\" to view the contents of the install file."
 msgstr ""
 
 msgid ""
-"To view the contents of the default install file execute: kz-install --browse"
+"Use \"kz install --cat <app>...\" to view the contents of the apps install "
+"file."
+msgstr ""
+
+msgid ""
+"Use \"kz install --browse\" to view the contents of the default install file."
 msgstr ""
 
 msgid "install"
@@ -867,18 +870,18 @@ msgstr ""
 msgid "No setup file found, looked for '$SETUP_FILE'."
 msgstr ""
 
-msgid "To set up the apps execute: kz-setup <app>..."
+msgid "Use \"kz setup <app>...\" to set up the apps."
 msgstr ""
 
-msgid "To view the contents of the setup file execute: kz-setup --cat"
-msgstr ""
-
-msgid ""
-"To view the contents of the apps setup file execute: kz-setup --cat <app>..."
+msgid "Use \"kz setup --cat\" to view the contents of the setup file."
 msgstr ""
 
 msgid ""
-"To view the contents of the default setup file execute: kz-setup --browse"
+"Use \"kz setup --cat <app>...\" to view the contents of the apps setup file."
+msgstr ""
+
+msgid ""
+"Use \"kz setup --browse\" to view the contents of the default setup file."
 msgstr ""
 
 msgid "Type 'kz setup --apps' for available apps."
@@ -1021,7 +1024,4 @@ msgid "guest"
 msgstr ""
 
 msgid "Complete!"
-msgstr ""
-
-msgid "To resolve a package issue, you can try the following:"
 msgstr ""

@@ -434,7 +434,8 @@ $COMMAND, code: $RC ($RC_DESC)."
                 TEXT="
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
                 errmsg "$TEXT"
-                if [[ $PROGRAM_ID = 'kz-get' ]]; then
+                if [[ $PROGRAM_ID = 'kz-get' || $PROGRAM_ID = 'kz-install' ]]
+                then
                     TEXT="
 $(gettext 'To resolve a package issue, you can try the following:')"
                     if $APT; then

@@ -185,10 +185,9 @@ function process_input() {
 
     # Add information records from the install file to the command file.
     COMMAND_FILE=$(mktemp -t "kz-install-commands-XXXXXXXXXX")
-    grep    --fixed-strings         \
-            --regexp='# [note] '    \
-            --regexp='# [info] '    \
-            $INSTALL_FILE           > "$COMMAND_FILE"
+    grep    --fixed-strings     \
+            --regexp='# NOTE '  \
+            $INSTALL_FILE       > "$COMMAND_FILE" || true
     printf '\n' >> "$COMMAND_FILE"
 
     if $ARGUMENT_APPS; then
@@ -243,12 +242,12 @@ $(gettext 'NUM  APP')
     if [[ -n $APPS ]]; then
         TEXT+="$APPS
 
-$(gettext "To install the apps execute: kz-install <app>...")
-$(gettext "To view the contents of the install file execute: kz-install --cat")
-$(gettext "To view the contents of the apps install file execute: kz-install \
---cat <app>...")
-$(gettext "To view the contents of the default install file execute: \
-kz-install --browse")"
+$(gettext 'Use "kz install <app>..." to install the apps.')
+$(gettext "Use \"kz install --cat\" to view the contents of the install file.")
+$(gettext "Use \"kz install --cat <app>...\" to view the contents of the apps \
+install file.")
+$(gettext "Use \"kz install --browse\" to view the contents of the default \
+install file.")"
     else
         TEXT+="$(gettext '  0  No apps found.')
 

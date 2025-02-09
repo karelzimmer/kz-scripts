@@ -251,8 +251,8 @@ function backup_setting_readme() {
 These files are used by kz-restore and others.
 
 Further reading:")
-    man kz-backup
-    man kz-restore"
+    man kz backup
+    man kz restore"
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE"
 }
 

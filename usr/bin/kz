@@ -125,7 +125,7 @@ $(
             --body-numbering=a
     )
 
-$(gettext "To execute a command: kz <command> [<arguments>]")"
+$(gettext 'Use "kz <command> [<arguments>]" to execute a command'.)"
     infomsg "$TEXT"
 }
 
