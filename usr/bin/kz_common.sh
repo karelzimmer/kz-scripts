@@ -15,7 +15,11 @@
 
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
+if  !  source /usr/bin/gettext.sh 2> >(
+       systemd-cat --identifier=kz_common.sh --priority=debug); then
+       echo '[fail] source gettext.sh' >&2
+       exit 1
+fi
 
 
 ###############################################################################
