@@ -296,12 +296,12 @@ function report_database_changes() {
     local TEXT=''
 
     TEXT="
-$(gettext "CHANGEs in the configuration database,
+$(gettext "Changes in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
 $(diff "$OUTPUT_FILE_1" "$OUTPUT_FILE_2" | grep --regexp='[>|<]' || true)
 
-$(gettext 'Use "gsettings set CHANGE" for CHANGEs.')"
+$(gettext 'Use "gsettings set <change>" for changes.')"
     infomsg "$TEXT"
 }
 
