@@ -223,6 +223,9 @@ function backup_settings() {
         backup_setting_desktop
         backup_setting_favs
     fi
+
+    # Remove previous version of settings folder.
+    rm --force --recursive --verbose "$HOME/kz-backup" |& $LOGCMD
 }
 
 
