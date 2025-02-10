@@ -209,13 +209,9 @@ function backup_settings() {
     logmsg 'Backup settings...'
 
     SETTINGS_DIR=$HOME/$(gettext 'Settings')
-    # Remove (previous version of) settings folder.
-    rm  --force             \
-        --recursive         \
-        --verbose           \
-        "$HOME/kz-backup"   \
-        "$SETTINGS_DIR"     |& $LOGCMD
-    mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
+    if [[ ! -d $SETTINGS_DIR ]]; then
+        mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
+    fi
 
     backup_setting_readme
     backup_setting_apps
@@ -227,6 +223,9 @@ function backup_settings() {
         backup_setting_desktop
         backup_setting_favs
     fi
+
+    # Remove previous version of settings folder.
+    rm --force --recursive --verbose "$HOME/kz-backup" |& $LOGCMD
 }
 
 
