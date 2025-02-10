@@ -195,7 +195,7 @@ Disconnect media via Files.")"
         TARGET=$MEDIUM/Backups/$USER@$HOSTNAME
 
         [[ -d $MEDIUM/Backups ]] ||
-            mkdir --mode=a=rwx --verbose "$MEDIUM/kz-backup" |& $LOGCMD
+            mkdir --mode=a=rwx --verbose "$MEDIUM/Backups" |& $LOGCMD
         TARGET_MEDIUM=$MEDIUM
     fi
 }
@@ -367,7 +367,7 @@ function backup_setting_avatar() {
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
-4. Select avatar in Personal folder / kz-backup, or another picture file.
+4. Select avatar in Personal folder / Settings, or another picture file.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"

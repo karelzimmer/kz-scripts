@@ -269,7 +269,9 @@ $(gettext "Try restoring the back up again.")"
 
 # This function restores the user settings.
 function restore_settings() {
-    local SETTINGS_DIR=$HOME/kz-backup
+    local SETTINGS_DIR=''
+
+    SETTINGS_DIR=$HOME/$(gettext 'Settings')
 
     if $GUI; then
         logmsg 'Restore settings...'
@@ -280,7 +282,7 @@ function restore_settings() {
 
 # This function restores the desktop background, if possible.
 function restore_setting_desktop() {
-    local INPUT_FILE="$SETTINGS_DIR/desktop"
+    local INPUT_FILE=$SETTINGS_DIR/desktop
 
     if [[ -f $INPUT_FILE ]]; then
         logmsg 'Restore the desktop background...'
