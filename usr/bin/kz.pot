@@ -228,16 +228,6 @@ msgid ""
 "Disconnect media via Files."
 msgstr ""
 
-msgid ""
-"Backup found with old name: 'backup-<hostname>-<username>'. Please rename to "
-"'<username>@<hostname>'."
-msgstr ""
-
-msgid ""
-"Backup found in wrong place: '<medium>/<username>@<hostname>'. Please move "
-"to '<medium>/kz-backup/'."
-msgstr ""
-
 msgid "Settings"
 msgstr ""
 

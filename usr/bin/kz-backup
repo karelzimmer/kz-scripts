@@ -192,27 +192,11 @@ Disconnect media via Files.")"
             fi
         fi
 
-        TARGET=$MEDIUM/kz-backup/$USER@$HOSTNAME
+        TARGET=$MEDIUM/Backups/$USER@$HOSTNAME
 
-        [[ -d $MEDIUM/kz-backup ]] ||
+        [[ -d $MEDIUM/Backups ]] ||
             mkdir --mode=a=rwx --verbose "$MEDIUM/kz-backup" |& $LOGCMD
         TARGET_MEDIUM=$MEDIUM
-    fi
-
-    if [[ -e $TARGET_MEDIUM/backup-$HOSTNAME-$USER ]]; then
-        TEXT="$(gettext "Backup found with old name: \
-'backup-<hostname>-<username>'. \
-Please rename to '<username>@<hostname>'.")"
-        errmsg "$TEXT"
-        exit $ERR
-    fi
-
-    if [[ -e $MEDIUM/$USER@$HOSTNAME ]]; then
-        TEXT="$(gettext "Backup found in wrong place: \
-'<medium>/<username>@<hostname>'. \
-Please move to '<medium>/kz-backup/'.")"
-        errmsg "$TEXT"
-        exit $ERR
     fi
 }
 

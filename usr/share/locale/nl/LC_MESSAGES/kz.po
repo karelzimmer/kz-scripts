@@ -249,20 +249,6 @@ msgstr ""
 "\n"
 "Koppel media af via Bestanden."
 
-msgid ""
-"Backup found with old name: 'backup-<hostname>-<username>'. Please rename to "
-"'<username>@<hostname>'."
-msgstr ""
-"Back-up gevonden met oude naam: 'backup-<computernaam>-<gebruikersnaam>'. "
-"Hernoem de back-up naar '<gebruikersnaam>@<computernaam>'."
-
-msgid ""
-"Backup found in wrong place: '<medium>/<username>@<hostname>'. Please move "
-"to '<medium>/kz-backup/'."
-msgstr ""
-"Back-up gevonden op verkeerde plek: '<medium>/<username>@<hostname>'. "
-"Verplaats de back-up naar '<medium>/kz-backup/'."
-
 msgid "Settings"
 msgstr "Instellingen"
 
