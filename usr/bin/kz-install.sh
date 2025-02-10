@@ -595,6 +595,19 @@ if $APT ; then sudo apt-get remove --purge --assume-yes rpm ; fi
 if $RPM ; then echo 'The rpm app cannot be removed.' ; fi
 
 
+# Install simplescreenrecorder on -none
+# Screen recorder.
+# Requires X11.
+if $GUI && $APT ; then sudo apt-get install --assume-yes simplescreenrecorder ; fi
+if $GUI && $RPM ; then echo 'The simplescreenrecorder app is not available.' ; fi
+
+# Remove simplescreenrecorder from -none
+# Screen recorder.
+# Enable Wayland?
+if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes simplescreenrecorder ; fi
+if $GUI && $RPM ; then echo 'The simplescreenrecorder app is not available.' ; fi
+
+
 # Install shellcheck on pc06 pc07
 # Shell script linter.
 # Web app: https://www.shellcheck.net
