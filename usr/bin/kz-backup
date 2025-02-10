@@ -219,14 +219,19 @@ Please move to '<medium>/kz-backup/'.")"
 
 # This function backups the user settings.
 function backup_settings() {
-    local SETTINGS_DIR=$HOME/kz-backup
+    local SETTINGS_DIR=''
     local TEXT=''
 
     logmsg 'Backup settings...'
 
-    if [[ ! -d $SETTINGS_DIR ]]; then
-        mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
-    fi
+    SETTINGS_DIR=$HOME/$(gettext 'Settings')
+    # Remove (previous version of) settings folder.
+    rm  --force             \
+        --recursive         \
+        --verbose           \
+        "$HOME/kz-backup"   \
+        "$SETTINGS_DIR"     |& $LOGCMD
+    mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
 
     backup_setting_readme
     backup_setting_apps
@@ -243,9 +248,11 @@ function backup_settings() {
 
 # This function creates a README.
 function backup_setting_readme() {
-    local OUTPUT_FILE=$SETTINGS_DIR/README
+    local OUTPUT_FILE=''
 
     logmsg 'Create settings README...'
+
+    OUTPUT_FILE=$SETTINGS_DIR/$(gettext 'README')
 
     TEXT="$(gettext "This folder contains files created by kz-backup.
 These files are used by kz-restore and others.
@@ -290,6 +297,8 @@ function backup_setting_users() {
     local OUTPUT_FILE=$SETTINGS_DIR/users.txt
     local USER_NAME=''
 
+    OUTPUT_FILE=$SETTINGS_DIR/$(gettext 'users.txt')
+
     USERS_LIST=$(
         gettext 'USERNAME|USERID|USER'
         printf  '\n'
@@ -300,7 +309,6 @@ function backup_setting_users() {
         tr      ':' '|'
         )
     GROUPS_LIST=$(
-        printf '\n'
         while read -r USER_NAME; do
             printf '\n'
             id "$USER_NAME"

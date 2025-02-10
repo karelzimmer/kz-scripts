@@ -263,6 +263,15 @@ msgstr ""
 "Back-up gevonden op verkeerde plek: '<medium>/<username>@<hostname>'. "
 "Verplaats de back-up naar '<medium>/kz-backup/'."
 
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "README"
+msgstr "LEESMIJ"
+
+msgid "users.txt"
+msgstr "gebruikers.txt"
+
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
