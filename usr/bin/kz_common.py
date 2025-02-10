@@ -300,7 +300,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
     try:
-        with open('/usr/share/doc/kz/kz-build.id') as fh:
+        with open('/usr/share/doc/kz/build.id') as fh:
             BUILD_ID = f'{fh.read()}'
     except FileNotFoundError as fnf:
         TEXT: str = str(fnf)
