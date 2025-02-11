@@ -56,10 +56,10 @@ UBUNTU: bool = False
 GUI: bool = False
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if not os.path.exists('/usr/bin/systemd'):
-    print(_('[fail] no systemd'))
+    print(_('fatal: no systemd available'))
     sys.exit(ERR)
 if not os.path.exists('/etc/os-release'):
-    print(_('[fail] no /etc/os-release'))
+    print(_('fatal: no os release file available'))
     sys.exit(ERR)
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
@@ -74,7 +74,7 @@ elif subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
     UBUNTU = True
     APT = True
 else:
-    print(_('[fail] unknown distro'))
+    print(_('fatal: unknown distribution'))
     sys.exit(ERR)
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',

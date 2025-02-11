@@ -32,14 +32,14 @@ msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
 msgid "  -v, --version  show program version"
 msgstr "  -v, --version  toon de programmaversie"
 
-msgid "[fail] no systemd"
-msgstr "[fout] geen systemd"
+msgid "fatal: no systemd available"
+msgstr "fataal: geen systemd beschikbaar"
 
-msgid "[fail] no /etc/os-release"
-msgstr "[fout] geen /etc/os-release"
+msgid "fatal: no os release file available"
+msgstr "fataal: geen os-releasebestand beschikbaar"
 
-msgid "[fail] unknown distro"
-msgstr "[fout] onbekende distributie"
+msgid "fatal: unknown distribution"
+msgstr "fataal: onbekende distributie"
 
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
