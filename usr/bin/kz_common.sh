@@ -431,7 +431,6 @@ $COMMAND, code: $RC ($RC_DESC)."
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
                 errmsg "$TEXT"
             fi
-            [[ $RC -eq $OK ]] || term_info
             exit "$RC"
             ;;
         exit )
@@ -439,40 +438,15 @@ $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            [[ $RC -eq $OK ]] || term_info
             exit "$RC"
             ;;
         * )
             TEXT="
 $(eval_gettext "Program \$PROGRAM_ID has been interrupted.")"
             errmsg "$TEXT"
-            [[ $RC -eq $OK ]] || term_info
             exit "$RC"
             ;;
     esac
-}
-
-
-# This function displays instructions for resolving a package issue.
-function term_info() {
-    if [[ $PROGRAM_ID = 'kz-get' || $PROGRAM_ID = 'kz-install' ]]; then
-        TEXT="
-$(gettext 'To resolve a package issue, you can try the following:')"
-        if $APT; then
-            TEXT+='
-sudo dpkg --configure --pending
-sudo apt-get update --fix-missing
-sudo apt-get install --fix-broken'
-            infomsg "$TEXT"
-        elif $RPM; then
-            TEXT+='sudo dnf clean all
-sudo dnf makecache'
-            infomsg "$TEXT"
-        else
-            TEXT=$(gettext 'Unknown package manager.')
-            errmsg "$TEXT"
-        fi
-    fi
 }
 
 

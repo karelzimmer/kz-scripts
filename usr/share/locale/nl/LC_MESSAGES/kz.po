@@ -54,9 +54,6 @@ msgstr "Reeds uitgevoerd door de beheerder."
 msgid "Program $PROGRAM_ID encountered an error."
 msgstr "In programma $PROGRAM_ID is een fout opgetreden."
 
-msgid "To resolve a package issue, you can try the following:"
-msgstr "Om een ​​pakketprobleem op te lossen, kunt u het volgende proberen:"
-
 msgid "Unknown package manager."
 msgstr "Onbekende pakketbeheerder."
 

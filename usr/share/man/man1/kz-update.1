@@ -22,13 +22,13 @@ kz-update \- Update system
 .sp
 Performs update and cleanup.
 .sp
-If the update fails for some reason, on a Debian-based system, run the
-following in sequence:
+If the update fails for some reason, on a Debian-based system, you can try the
+following:
     sudo dpkg --configure --pending
     sudo apt-get update --fix-missing
     sudo apt-get install --fix-broken
 .br
-On a Red Hat-based system, run:
+On a Red Hat-based system, try the following:
     sudo dnf clean all
     sudo dnf makecache
 .sp
