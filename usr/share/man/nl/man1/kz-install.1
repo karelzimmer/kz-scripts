@@ -73,6 +73,16 @@ Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
+.sp
+Als om één of andere reden het installeren van apps mislukt, op een
+Debian-gebaseerd systeem kunt u het volgende proberen:
+    sudo dpkg --configure --pending
+    sudo apt-get update --fix-missing
+    sudo apt-get install --fix-broken
+.br
+Op een Red Hat-gebaseerd systeem probeer het volgende:
+    sudo dnf clean all
+    sudo dnf makecache
 .\"
 .\"
 .SH BESTANDSINDELING
@@ -275,16 +285,6 @@ Toon de versie, de auteur, en het auteursrecht.
 .TP
 \fB--\fR
 Signaleert het einde van opties en schakelt verdere verwerking van opties uit.
-.sp
-Als om een of andere reden het installeren van apps mislukt, op een
-Debian-gebaseerd systeem, kunt u het volgende proberen:
-    sudo dpkg --configure --pending
-    sudo apt-get update --fix-missing
-    sudo apt-get install --fix-broken
-.br
-Op een Red Hat-gebaseerd systeem, probeer het volgende:
-    sudo dnf clean all
-    sudo dnf makecache
 .\"
 .\"
 .SH STOPSTATUS

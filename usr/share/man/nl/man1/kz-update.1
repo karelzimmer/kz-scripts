@@ -22,17 +22,17 @@ kz-update \- Systeem bijwerken
 .sp
 Voert bijwerken en opruimen uit.
 .sp
-Als om een of andere reden het bijwerken mislukt, op een Debian-gebaseerd
-systeem, kunt u het volgende proberen:
+Als om één of andere reden het bijwerken mislukt, op een Debian-gebaseerd
+systeem kunt u het volgende proberen:
     sudo dpkg --configure --pending
     sudo apt-get update --fix-missing
     sudo apt-get install --fix-broken
 .br
-Op een Red Hat-gebaseerd systeem, probeer het volgende:
+Op een Red Hat-gebaseerd systeem probeer het volgende:
     sudo dnf clean all
     sudo dnf makecache
 .sp
-Als om een of andere reden een nieuwe kernel moet worden gebouwd, voer dan 'su\
+Als om één of andere reden een nieuwe kernel moet worden gebouwd, voer dan 'su\
 do update-initramfs -u' uit.
 .br
 De noodzaak om deze opdracht handmatig uit te voeren is alleen onder zeer
