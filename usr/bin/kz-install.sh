@@ -70,6 +70,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk ; fi
 # Remove anydesk from pc06 pc07
 # Remote desktop. Consider removing the force-x11 app.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes anydesk ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list* ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes anydesk ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo* ; fi
@@ -655,6 +656,8 @@ if $GUI && $RPM ; then echo 'The spotify app is available as a web app.' ; fi
 # Remove spotify from pc01 pc02 pc06 pc07
 # Music and podcasts.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes spotify-client ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify*.list* ; fi
+
 if $GUI && $RPM ; then echo 'The spotify web app cannot be removed.' ; fi
 
 
@@ -848,6 +851,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes code ; fi
 # Editor.
 # Web app: https://vscode.dev
 if $GUI && $APT ; then sudo update-alternatives --remove editor /usr/bin/code ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/vscode*.list* ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes code ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes code ; fi
@@ -857,9 +861,9 @@ if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo* ;
 # Install webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
-if $GUI && $APT ; then wget --output-document=- https://www.webmin.com/jcameron-key.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg ; fi
-if $GUI && $APT ; then echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list ; fi
-if $GUI && $APT ; then sudo apt-get update ; fi
+if $GUI && $APT ; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
+if $GUI && $APT ; then yes | sudo bash /tmp/setup-repos.sh ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes webmin ; fi
 
 if $GUI && $RPM ; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
@@ -870,6 +874,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes webmin ; fi
 # Remove webmin from pc07
 # Web console.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes webmin ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin*.list* ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes webmin ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo* ; fi
