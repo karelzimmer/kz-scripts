@@ -18,6 +18,7 @@ if $GUI ; then kz-desktop --addaft=anydesk ; fi
 
 # Reset anydesk on pc06 pc07
 # Remote desktop.
+# Web app: https://my.anydesk.com/v2
 if $GUI ; then kz-desktop --delete=anydesk ; fi
 
 
@@ -37,6 +38,7 @@ if $GUI ; then kz-desktop --addaft=kz-cockpit ; fi
 
 # Reset cockpit on pc06
 # Web console.
+# Web app: https://localhost:9090
 if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
 if $GUI ; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop" ; fi
 
@@ -111,6 +113,7 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 # Reset git on pc06 pc07
 # Distributed revision control system.
+# Web app: https://github.com
 git config --global --unset alias.logg
 
 
@@ -241,6 +244,7 @@ if $GUI && $RPM ; then kz-desktop --addaft=kz-spotify ; fi
 
 # Reset spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
+# Web app: https://open.spotify.com
 if $GUI && $APT ; then kz-desktop --delete=spotify ; fi
 if $GUI && $RPM ; then kz-desktop --delete=kz-spotify ; fi
 
@@ -252,6 +256,7 @@ if $GUI ; then kz-desktop --addaft=com.teamviewer.TeamViewer ; fi
 
 # Reset teamviewer on *
 # Remote desktop.
+# Web app: https://web.teamviewer.com
 if $GUI ; then kz-desktop --delete=com.teamviewer.TeamViewer ; fi
 
 
@@ -295,6 +300,7 @@ if $GUI ; then kz-desktop --delete=kz-vm-hugowin732 ; fi
 
 # Setup vscode on pc01 pc06 pc07
 # Editor.
+# Web app: https://vscode.dev
 if $GUI ; then kz-desktop --addbef=code ; fi
 if $GUI ; then xdg-mime default code.desktop application/json ; fi
 if $GUI ; then xdg-mime default code.desktop application/x-desktop ; fi
@@ -319,6 +325,7 @@ if $GUI ; then kz-desktop --addaft=kz-webmin ; fi
 
 # Reset webmin on pc07
 # Web console.
+# Web app: https://localhost:10000
 if $GUI ; then kz-desktop --delete=kz-webmin ; fi
 if $GUI ; then rm --force --verbose "$HOME/.local/share/applications/kz-webmin.desktop" ; fi
 

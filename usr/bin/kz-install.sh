@@ -69,6 +69,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk ; fi
 
 # Remove anydesk from pc06 pc07
 # Remote desktop. Consider removing the force-x11 app.
+# Web app: https://my.anydesk.com/v2
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes anydesk ; fi
 if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list* ; fi
 
@@ -142,6 +143,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes cockpit cockpit-pcp ; fi
 
 # Remove cockpit from pc06
 # Web console.
+# Web app: https://localhost:9090
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes cockpit ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes cockpit ; fi
 
@@ -154,6 +156,7 @@ if $RPM ; then sudo dnf install --assumeyes cups ; fi
 
 # Remove cups from *
 # Common UNIX Printing System.
+# Web app: http://localhost:631
 if $APT ; then sudo apt-get remove --purge --assume-yes cups ; fi
 if $RPM ; then sudo dnf remove --assumeyes cups ; fi
 
@@ -327,6 +330,7 @@ if $RPM ; then sudo sudo dnf install --assumeyes git ; fi
 
 # Remove git from pc06 pc07
 # Distributed revision control system.
+# Web app: https://github.com
 if $APT ; then sudo apt-get remove --purge --assume-yes git ; fi
 if $RPM ; then sudo sudo dnf remove --assumeyes git ; fi
 
@@ -339,6 +343,7 @@ if $GUI && $RPM ; then echo 'The gnome-gmail app is not available.' ; fi
 
 # Remove gnome-gmail from pc01 pc06 pc07
 # Gmail for e-mail.
+# Web app: https://mail.google.com
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes gnome-gmail ; fi
 if $GUI && $RPM ; then echo 'The gnome-gmail app is not available.' ; fi
 
@@ -381,6 +386,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes https://dl.google.com/dl/lin
 
 # Remove google-earth from -none
 # Explore the planet.
+# Web app: https://earth.google.com
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes google-earth-pro-stable ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes google-earth-pro-stable ; fi
 
@@ -617,6 +623,7 @@ if $RPM ; then sudo dnf install --assumeyes shellcheck ; fi
 
 # Remove shellcheck from pc06 pc07
 # Shell script linter.
+# Web app: https://www.shellcheck.net
 if $APT ; then sudo apt-get remove --purge --assume-yes shellcheck ; fi
 if $RPM ; then sudo dnf remove --assumeyes shellcheck ; fi
 
@@ -655,6 +662,7 @@ if $GUI && $RPM ; then echo 'The spotify app is available as a web app.' ; fi
 
 # Remove spotify from pc01 pc02 pc06 pc07
 # Music and podcasts.
+# Web app: https://open.spotify.com
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes spotify-client ; fi
 if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify*.list* ; fi
 
@@ -719,6 +727,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes https://download.teamviewer.
 
 # Remove teamviewer from *
 # Remote desktop.
+# Web app: https://web.teamviewer.com
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes teamviewer ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes teamviewer ; fi
 
@@ -836,6 +845,7 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes vlc ; fi
 
 # Install vscode on pc01 pc06 pc07
 # Editor.
+# Web app: https://vscode.dev
 if $GUI && $APT ; then sudo apt-get install --assume-yes apt-transport-https ; fi
 if $GUI && $APT ; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg ; fi
 if $GUI && $APT ; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list ; fi
@@ -873,6 +883,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes webmin ; fi
 
 # Remove webmin from pc07
 # Web console.
+# Web app: https://localhost:10000
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes webmin ; fi
 if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin*.list* ; fi
 
