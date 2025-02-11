@@ -13,7 +13,6 @@
 # Setup anydesk on pc06 pc07
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
-# Remote display server Wayland is not supported.
 if $GUI ; then kz-desktop --addaft=anydesk ; fi
 
 # Reset anydesk on pc06 pc07

@@ -58,7 +58,7 @@ if $RPM ; then sudo dnf remove --assumeyes ansible ; fi
 # Install anydesk on pc06 pc07
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
-# Remote display server Wayland is not supported. Consider installing the force-x11 app.
+# Remote display server Wayland is not supported. Use X11 or install the force-x11 app.
 if $GUI && $APT ; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg ; fi
 if $GUI && $APT ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list ; fi
 if $GUI && $APT ; then sudo apt-get update ; fi
@@ -70,6 +70,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk ; fi
 # Remove anydesk from pc06 pc07
 # Remote desktop. Consider removing the force-x11 app.
 # Web app: https://my.anydesk.com/v2
+# Remote display server Wayland is not supported. Use X11 or install the force-x11 app.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes anydesk ; fi
 if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list* ; fi
 
@@ -196,6 +197,7 @@ grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 # Remove disabled-aer from pc06
 # Enable kernel config parameter PCIEAER.
+# To prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 if $APT ; then sudo update-grub ; fi
 if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
@@ -274,7 +276,7 @@ if $RPM ; then sudo dnf remove --assumeyes fdupes ; fi
 
 
 # Install force-x11 on -none
-# Disable choice on user login screen for X11 or Wayland and force X11.
+# Disable choice on user login screen for X11 or Wayland, and force X11.
 # Force means no choice on user login screen for X11 or Wayland!
 # Reboot required!
 if $GUI && $APT ; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf ; fi
@@ -283,6 +285,7 @@ if $GUI && $RPM ; then sudo sed --in-place --expression='s/^#WaylandEnable=false
 
 # Remove force-x11 from -none
 # Enable choice on user login screen for X11 or Wayland.
+# Force means no choice on user login screen for X11 or Wayland!
 # Reboot required!
 if $GUI && $APT ; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf ; fi
 if $GUI && $RPM ; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf ; fi
@@ -464,6 +467,7 @@ if $GUI && $RPM ; then sudo virsh --connect=qemu:///system net-autostart default
 
 # Remove kvm from pc06 pc07
 # Kernel-based Virtual Machine.
+# Images are in: /var/lib/libvirt/images/
 # Reboot required!
 if $GUI && $APT ; then sudo virsh --connect=qemu:///system net-autostart default --disable ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager ; fi
@@ -604,7 +608,7 @@ if $RPM ; then echo 'The rpm app cannot be removed.' ; fi
 
 # Install simplescreenrecorder on -none
 # Screen recorder.
-# Requires X11.
+# Requires X11!
 if $GUI && $APT ; then sudo apt-get install --assume-yes simplescreenrecorder ; fi
 if $GUI && $RPM ; then echo 'The simplescreenrecorder app is not available.' ; fi
 
@@ -721,7 +725,7 @@ if $GUI && $APT ; then wget --output-document=/tmp/teamviewer.deb https://downlo
 if $GUI && $APT ; then sudo apt-get install --assume-yes /tmp/teamviewer.deb ; fi
 if $GUI && $APT ; then rm --verbose /tmp/teamviewer.deb ; fi
 
-# Extra Packages for Enterprise Linux
+# Extra Packages for Enterprise Linux.
 if $GUI && $RPM ; then sudo dnf install --assumeyes epel-release ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm ; fi
 
@@ -825,6 +829,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes VirtualBox ; fi
 
 # Remove virtualbox from pc-van-hugo
 # Virtualization.
+# VirtualBox Guest user Additions ISO are in: /usr/share/virtualbox/
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes VirtualBox ; fi
 
@@ -833,7 +838,7 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes VirtualBox ; fi
 # Multimedia player.
 if $GUI && $GUI && $APT ; then sudo apt-get install --assume-yes vlc ; fi
 
-# Extra Packages for Enterprise Linux
+# Extra Packages for Enterprise Linux.
 if $GUI && $GUI && $RPM ; then sudo dnf install --assumeyes epel-release rpmfusion-free-release ; fi
 if $GUI && $GUI && $RPM ; then sudo dnf install --assumeyes vlc ; fi
 
