@@ -862,12 +862,12 @@ if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo* ;
 # Web console.
 # Web app: https://localhost:10000
 if $GUI && $APT ; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
-if $GUI && $APT ; then yes | sudo bash /tmp/setup-repos.sh ; fi
+if $GUI && $APT ; then sudo sh /tmp/setup-repos.sh --force; fi
 if $GUI && $APT ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes webmin ; fi
 
 if $GUI && $RPM ; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
-if $GUI && $RPM ; then yes | sudo bash /tmp/setup-repos.sh ; fi
+if $GUI && $RPM ; then sudo sh /tmp/setup-repos.sh --force ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes webmin ; fi
 
