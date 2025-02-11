@@ -186,7 +186,7 @@ function process_input() {
     # Add information records from the install file to the command file.
     COMMAND_FILE=$(mktemp -t "kz-install-commands-XXXXXXXXXX")
     grep    --fixed-strings     \
-            --regexp='# NOTE '  \
+            --regexp='# NOTE: ' \
             $INSTALL_FILE       > "$COMMAND_FILE" || true
     printf '\n' >> "$COMMAND_FILE"
 
@@ -270,6 +270,7 @@ function process_argument_app() {
     if $APP_NOT_FOUND; then
         TEXT="$(gettext "Type 'kz install --apps' for available apps.")"
         infomsg "$TEXT"
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
         exit $ERR
     fi
 }

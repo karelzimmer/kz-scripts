@@ -183,7 +183,7 @@ function process_input() {
     # Add information records from the setup file to the command file.
     COMMAND_FILE=$(mktemp -t "kz-setup-commands-XXXXXXXXXX")
     grep    --fixed-strings     \
-            --regexp='# NOTE '  \
+            --regexp='# NOTE: ' \
             $SETUP_FILE         > "$COMMAND_FILE" || true
     printf '\n' >> "$COMMAND_FILE"
 
@@ -308,6 +308,7 @@ function process_input_file_by_app() {
     if $NO_APP_MATCH; then
         APP_NOT_FOUND=true
         TEXT="$PROGRAM_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
         infomsg "$TEXT"
     fi
 }
