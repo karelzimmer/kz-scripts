@@ -54,12 +54,12 @@ declare UBUNTU=false
 declare GUI=false
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if ! [[ -e /usr/bin/systemd ]]; then
-    echo -e "$(gettext 'fatal: no systemd available')" >&2
+    printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
     exit $ERR
 fi
 if ! source /etc/os-release 2> >(
             systemd-cat --identifier=$MODULE_NAME --priority=debug); then
-    echo -e "$(gettext 'fatal: no os release file available')" >&2
+    printf '%s\n' "$(gettext 'fatal: no os release file available')" >&2
     exit $ERR
 fi
 if [[ $ID = 'debian' ]]; then
@@ -72,7 +72,7 @@ elif [[ $ID = 'ubuntu' ]]; then
     UBUNTU=true
     APT=true
 else
-    echo -e "$(gettext 'fatal: unknown distribution')" >&2
+    printf '%s\n' "$(gettext 'fatal: unknown distribution')" >&2
     exit $ERR
 fi
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]

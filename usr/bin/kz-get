@@ -19,12 +19,12 @@ declare KZ_COMMON_LOCAL_FILE
 wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
         systemd-cat --identifier=kz-get --priority=debug
 if      [[ ${PIPESTATUS[0]} -gt 0 ]]; then
-        echo 'fatal: download common module failed' >&2
+        printf '%s\n' 'fatal: download common module failed' >&2
         exit 1
 fi
 if  !   source "$KZ_COMMON_LOCAL_FILE" 2> >(
         systemd-cat --identifier=kz-get --priority=debug); then
-        echo 'fatal: import common module failed' >&2
+        printf '%s\n' 'fatal: import common module failed' >&2
         exit 1
 fi
 rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
