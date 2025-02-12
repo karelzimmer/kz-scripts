@@ -57,8 +57,9 @@ if $RPM ; then sudo dnf remove --assumeyes ansible ; fi
 
 # Install anydesk on pc06 pc07
 # Remote desktop.
+# Only outgoing sessions are supported if using Wayland.
+# Incoming sessions are only possible when using Xorg (i.e. X11).
 # Web app: https://my.anydesk.com/v2
-# Remote display server Wayland is not supported. Use X11 or install the force-x11 app.
 if $GUI && $APT ; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg ; fi
 if $GUI && $APT ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list ; fi
 if $GUI && $APT ; then sudo apt-get update ; fi
@@ -68,9 +69,10 @@ if $GUI && $RPM ; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=h
 if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk ; fi
 
 # Remove anydesk from pc06 pc07
-# Remote desktop. Consider removing the force-x11 app.
+# Remote desktop.
+# Only outgoing sessions are supported if using Wayland.
+# Incoming sessions are only possible when using Xorg (i.e. X11).
 # Web app: https://my.anydesk.com/v2
-# Remote display server Wayland is not supported. Use X11 or install the force-x11 app.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes anydesk ; fi
 if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list* ; fi
 
@@ -608,13 +610,13 @@ if $RPM ; then echo 'The rpm app cannot be removed.' ; fi
 
 # Install simplescreenrecorder on -none
 # Screen recorder.
-# Requires X11!
+# Requires the use of Xorg (i.e. X11).
 if $GUI && $APT ; then sudo apt-get install --assume-yes simplescreenrecorder ; fi
 if $GUI && $RPM ; then echo 'The simplescreenrecorder app is not available.' ; fi
 
 # Remove simplescreenrecorder from -none
 # Screen recorder.
-# Enable Wayland?
+# Required the use of Xorg (i.e. X11). Enable Wayland again?
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes simplescreenrecorder ; fi
 if $GUI && $RPM ; then echo 'The simplescreenrecorder app is not available.' ; fi
 
