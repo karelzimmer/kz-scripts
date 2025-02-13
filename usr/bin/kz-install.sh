@@ -58,7 +58,7 @@ if $RPM ; then sudo dnf remove --assumeyes ansible ; fi
 # Install anydesk on pc06 pc07
 # Remote desktop.
 # Only outgoing sessions are supported if using Wayland.
-# Incoming sessions are only possible when using Xorg (i.e. X11).
+# Incoming sessions are only possible when using Xorg/X11.
 # Web app: https://my.anydesk.com/v2
 if $GUI && $APT ; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg ; fi
 if $GUI && $APT ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list ; fi
@@ -71,7 +71,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk ; fi
 # Remove anydesk from pc06 pc07
 # Remote desktop.
 # Only outgoing sessions are supported if using Wayland.
-# Incoming sessions are only possible when using Xorg (i.e. X11).
+# Incoming sessions are only possible when using Xorg/X11.
 # Web app: https://my.anydesk.com/v2
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes anydesk ; fi
 if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list* ; fi
@@ -278,16 +278,16 @@ if $RPM ; then sudo dnf remove --assumeyes fdupes ; fi
 
 
 # Install force-x11 on -none
-# Disable choice on user login screen for X11 or Wayland, and force X11.
-# Force means no choice on user login screen for X11 or Wayland!
+# Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
+# Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
 if $GUI && $APT ; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf ; fi
 if $GUI && $RPM ; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf ; fi
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
 # Remove force-x11 from -none
-# Enable choice on user login screen for X11 or Wayland.
-# Force means no choice on user login screen for X11 or Wayland!
+# Enable choice on user login screen for Xorg/X11 or Wayland.
+# Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
 if $GUI && $APT ; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf ; fi
 if $GUI && $RPM ; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf ; fi
@@ -610,13 +610,13 @@ if $RPM ; then echo 'The rpm app cannot be removed.' ; fi
 
 # Install simplescreenrecorder on -none
 # Screen recorder.
-# Requires the use of Xorg (i.e. X11).
+# Requires the use of Xorg/X11.
 if $GUI && $APT ; then sudo apt-get install --assume-yes simplescreenrecorder ; fi
 if $GUI && $RPM ; then echo 'The simplescreenrecorder app is not available.' ; fi
 
 # Remove simplescreenrecorder from -none
 # Screen recorder.
-# Required the use of Xorg (i.e. X11). Enable Wayland again?
+# Required the use of Xorg/X11. Enable Wayland again?
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes simplescreenrecorder ; fi
 if $GUI && $RPM ; then echo 'The simplescreenrecorder app is not available.' ; fi
 
