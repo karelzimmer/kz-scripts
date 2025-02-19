@@ -1,0 +1,201 @@
+.\"############################################################################
+.\"# SPDX-FileComment: Man page for kz-install.sh
+.\"#
+.\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+.\"# SPDX-License-Identifier: CC0-1.0
+.\"############################################################################
+.\"
+.TH "KZ-INSTALL.SH" "1" "4.2.1" "Kz" "Kz Manual"
+.\"
+.\"
+.SH NAME
+kz-install.sh \- Install file for use with kz install
+.\"
+.\"
+.SH SYNOPSIS
+.B kz-install
+.\"
+.\"
+.SH DESCRIPTION
+This file contains commands to process as an installation file with kz
+install.
+.sp
+For the format of the install file see the \fBFILE FORMAT\fR section below.
+.\"
+.\"
+.SH FILE FORMAT
+The install file contains so-called \fBApp records\fR and \fBCommand
+records\fR.
+.sp
+See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
+are processed.
+.sp
+See \fBTable 2\fR for an \fBexample\fR of these records and how these records
+are processed.
+More examples can be seen through the \fBkz install --cat\fR command.
+.sp
+.sp
+.B Table 1. Record types and their processing
+.TS
+allbox tab(:);
+lb | lb.
+T{
+Record
+T}:T{
+Description
+T}
+.T&
+l | l
+l | l.
+T{
+# Install \fI<app>\fR on <host>...
+T}:T{
+Install the \fI<app>\fR on <host>s (\fBApp record\fR)
+T}
+T{
+# Comment...
+T}:T{
+Comment line (none, one or more)
+T}
+T{
+Command
+T}:T{
+Install command (one or more \fBCommand records\fR)
+T}
+T{
+T}:T{
+Empty line (none, one or more)
+T}
+T{
+# Remove \fI<app>\fR from <host>...
+T}:T{
+Remove the \fI<app>\fR from <host>s (\fBApp record\fR for option remove)
+T}
+T{
+Command
+T}:T{
+Remove command (one or more \fBCommand records\fR)
+T}
+.TE
+.sp
+.sp
+.B Table 2. Example of records and their processing
+.TS
+box tab(:);
+lb | lb.
+T{
+Record
+T}:T{
+Description
+T}
+.T&
+- | -
+l | l
+l | l.
+T{
+# Install gnome-gmail on *
+T}:T{
+Install gnome-gmail on any computer, see [1].
+T}
+T{
+sudo apt-get install --assume-yes gnome-gmail
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# Remove gnome-gmail from *
+T}:T{
+Remove gnome-gmail from any computer, see [1].
+T}
+T{
+sudo apt-get remove --purge --assume-yes gnome-gmail
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# Install ufw on pc02
+T}:T{
+Install ufw only on pc02, see [2].
+T}
+T{
+sudo apt-get install --assume-yes gufw
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# Install kvm on pc01 pc02
+T}:T{
+Install kvm on pc01 and pc02, see [3].
+T}
+T{
+sudo apt-get install --assume-yes qemu-kvm
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# Install google-earth on -none
+T}:T{
+Do not install Google Earth by default, see [4].
+T}
+T{
+sudo apt-get install --assume-yes google-earth
+T}:T{
+T}
+.TE
+.sp
+.sp
+[1]
+.br
+The line with '*' causes the associated commands to run on all computers.
+.sp
+[2]
+.br
+The line with 'pc02' ensures that the associated commands are executed only on
+pc02 by default.
+.br
+The app can still be installed on another computer with the command 'kz instal\
+l google-earth'.
+.sp
+[3]
+.br
+The line with 'pc01 pc02' ensures that the associated commands are executed
+only on pc01 and pc02 by default.
+.br
+The app can still be installed on another computer with the command 'kz instal\
+l kvm'.
+.sp
+[4]
+.br
+The line with '-none' ensures that the associated commands are not executed on
+a computer by default (NOTE: '-none' is not a valid computer name and will
+therefore never be selected by default).
+.br
+The app can still be installed with the command 'kz install google-earth'.
+.\"
+.\"
+.SH AUTHORS
+Written by Karel Zimmer <info@karelzimmer.nl>.
+.br
+License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH SEE ALSO
+\fBkz-install\fR(1),
+\fBhttps://karelzimmer.nl/en\fR
+.\"
+.\"
+.SH KZ
+Part of the \fBkz\fR(1) package, named after its creator, Karel Zimmer.
+.\"
+.\"
+.SH AVAILABILITY
+File \fBkz-install.sh\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website <https://karelzimmer.nl/en>, under Linux.

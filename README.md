@@ -10,7 +10,7 @@
 # kz-scripts
 
 Scripts for installing and managing Debian and Debian-based systems such as
-Ubuntu, and Red Hat and Red Hat-based systems such as Rocky Linux.
+Ubuntu, and Red Hat and Red Hat-based systems such as AlmaLinux and Rocky Linux.
 
 Part of Debian and RPM package *kz*, named after its creator, Karel Zimmer.
 

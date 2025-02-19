@@ -157,9 +157,17 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
+    local FAVORITE_APPS=''
     local TEXT=''
 
-    DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
+    if ! gsettings list-keys org.gnome.shell |& $LOGCMD; then
+        TEXT=$(gettext "No such schema 'org.gnome.shell'.")
+        infomsg "$TEXT"
+        exit $OK
+    else
+        FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+        DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
+    fi
 
     if $OPTION_ADDAFT; then
         process_OPTION_ADDAFT
@@ -179,10 +187,6 @@ function process_input() {
 
 # This function adds a favorite to the end of the dash/dock.
 function process_OPTION_ADDAFT () {
-    local FAVORITE_APPS=''
-
-    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
-
     if [[ $FAVORITE_APPS = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
     elif ! printf '%s' "$FAVORITE_APPS" | grep --quiet --regexp="$DESKTOPFILE"
@@ -197,10 +201,6 @@ function process_OPTION_ADDAFT () {
 
 # This function adds a favorite to the beginning of the dash/dock.
 function process_OPTION_ADDBEF () {
-    local FAVORITE_APPS=''
-
-    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
-
     if [[ $FAVORITE_APPS = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
     elif ! printf '%s' "$FAVORITE_APPS" | grep --quiet --regexp="$DESKTOPFILE"
@@ -214,10 +214,6 @@ function process_OPTION_ADDBEF () {
 
 # This function removes a favorite from the dash/dock.
 function process_OPTION_DELETE () {
-    local FAVORITE_APPS=''
-
-    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
-
     if [[ $FAVORITE_APPS = '@as []' ]]; then
         :
     elif [[ $FAVORITE_APPS = [$DESKTOPFILE] ]]; then

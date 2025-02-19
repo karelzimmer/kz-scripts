@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 09:25+0100\n"
+"POT-Creation-Date: 2025-02-19 15:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,10 +35,11 @@ msgstr ""
 msgid "fatal: no systemd available"
 msgstr ""
 
-msgid "fatal: no os release file available"
+msgid "fatal: no os-release file available"
 msgstr ""
 
-msgid "fatal: unknown distribution"
+#, sh-format
+msgid "fatal: $ID: unknown distribution"
 msgstr ""
 
 msgid "Press the Enter key to continue [Enter]: "
@@ -272,7 +273,8 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "Check the messages (also in $ERROR_FILE):"
+msgid ""
+"Use \"journalctl --boot --id=$PROGRAM_ID\" in Terminal to view log messages."
 msgstr ""
 
 msgid "Try creating the back up again."
@@ -450,6 +452,9 @@ msgid "  -l, --list     show favorites"
 msgstr ""
 
 msgid "  -r, --reset    set favorites on default values"
+msgstr ""
+
+msgid "No such schema 'org.gnome.shell'."
 msgstr ""
 
 msgid "Favorite apps:"

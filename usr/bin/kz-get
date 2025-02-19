@@ -16,19 +16,17 @@ declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
         KZ_COMMON_SITE_FILE+='kz_common.sh'
 declare KZ_COMMON_LOCAL_FILE
         KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.sh")
-wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
-        systemd-cat --identifier=kz-get --priority=debug
-if      [[ ${PIPESTATUS[0]} -gt 0 ]]; then
+if  !   wget    --quiet                                     \
+                --output-document="$KZ_COMMON_LOCAL_FILE"   \
+                $KZ_COMMON_SITE_FILE; then
         printf '%s\n' 'fatal: download common module failed' >&2
         exit 1
 fi
-if  !   source "$KZ_COMMON_LOCAL_FILE" 2> >(
-        systemd-cat --identifier=kz-get --priority=debug); then
+if  !   source "$KZ_COMMON_LOCAL_FILE"; then
         printf '%s\n' 'fatal: import common module failed' >&2
         exit 1
 fi
-rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
-        systemd-cat --identifier=kz-get --priority=debug
+rm      "$KZ_COMMON_LOCAL_FILE"
 
 
 ###############################################################################
@@ -149,7 +147,8 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.deb")
 
     logmsg  'Download Debian package kz...'
-    wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
+    wget    --no-verbose                            \
+            --output-document="$KZ_DEB_LOCAL_FILE"  \
             "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
     logmsg  'Downloaded Debian package kz.'
 

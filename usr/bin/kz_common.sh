@@ -46,44 +46,40 @@ readonly RED='\033[1;31m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
-declare APT=false
-declare RPM=false
-declare DEBIAN=false
-declare ROCKY=false
-declare UBUNTU=false
-declare GUI=false
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-if ! [[ -e /usr/bin/systemd ]]; then
+if ! [[ -e /usr/lib/systemd/systemd ]]; then
+    rm --force --verbose getkz getkz.{1..99} >&2
     printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
     exit $ERR
 fi
 if ! source /etc/os-release 2> >(
             systemd-cat --identifier=$MODULE_NAME --priority=debug); then
-    printf '%s\n' "$(gettext 'fatal: no os release file available')" >&2
+    rm --force --verbose getkz getkz.{1..99} >&2
+    printf '%s\n' "$(gettext 'fatal: no os-release file available')" >&2
     exit $ERR
 fi
-if [[ $ID = 'debian' ]]; then
-    DEBIAN=true
+
+readonly KNOWN_APT_DISTRO='debian ubuntu'
+readonly KNOWN_RPM_DISTRO='almalinux rocky'
+declare APT=false
+declare RPM=false
+declare GUI=false
+if [[ $KNOWN_APT_DISTRO =~ $ID ]]; then
     APT=true
-elif [[ $ID = 'rocky' ]]; then
-    ROCKY=true
+elif [[ $KNOWN_RPM_DISTRO =~ $ID ]]; then
     RPM=true
-elif [[ $ID = 'ubuntu' ]]; then
-    UBUNTU=true
-    APT=true
 else
-    printf '%s\n' "$(gettext 'fatal: unknown distribution')" >&2
+    rm --force --verbose getkz getkz.{1..99} >&2
+    printf '%s\n' "$(eval_gettext "fatal: \$ID: unknown distribution")" >&2
     exit $ERR
 fi
+
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
     GUI=true
 fi
 readonly APT
 readonly RPM
-readonly DEBIAN
-readonly ROCKY
-readonly UBUNTU
 readonly GUI
 
 
@@ -206,7 +202,6 @@ function init_script() {
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT="==== START logs for script $PROGRAM_ID ====
 Started ($PROGRAM_ID $* as $USER)."
-    local -g  ERREXIT=true
     local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_ID"
     local -g  OPTION_GUI=false
     local -g  KZ_PID_FILE=''
@@ -315,7 +310,7 @@ function process_option_version() {
     local BUILD_ID=''
     local TEXT=''
 
-    if [[ -e /usr/share/doc/kz/build.id ]]; then
+    if [[ -f /usr/share/doc/kz/build.id ]]; then
         BUILD_ID=$(cat /usr/share/doc/kz/build.id)
     else
         TEXT=$(gettext 'Build ID cannot be determined.')
@@ -426,11 +421,9 @@ $COMMAND, code: $RC ($RC_DESC)."
 
     case $SIGNAL in
         err )
-            if $ERREXIT; then
-                TEXT="
+            TEXT="
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
-                errmsg "$TEXT"
-            fi
+            errmsg "$TEXT"
             exit "$RC"
             ;;
         exit )

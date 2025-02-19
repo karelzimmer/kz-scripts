@@ -208,12 +208,10 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the backup.
 function restore_backup() {
-    local ERROR_FILE=''
+    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT=''
     local TITLE=''
     local -i RESTORE_RC=0
-
-    ERROR_FILE=$(mktemp -t "kz-restore-errors-XXXXXXXXXX")
 
     TITLE=$(gettext 'Restore backup')
     TEXT=$(gettext 'Preparing restore (this can take a while)')
@@ -226,7 +224,7 @@ function restore_backup() {
                 --verbose               \
                 "$SOURCE"/              \
                 "$HOME"/                \
-                2>> "$ERROR_FILE"       |
+                2> >($LOGCMD)           |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -245,7 +243,7 @@ function restore_backup() {
                 --verbose               \
                 --human-readable        \
                 "$SOURCE"/              \
-                "$HOME"/                2>> "$ERROR_FILE" || RESTORE_RC=$?
+                "$HOME"/                2> >($LOGCMD) || RESTORE_RC=$?
     fi
 
     if [[ $RESTORE_RC -ne $OK ]]; then
@@ -255,15 +253,13 @@ Some files may not be readable, or
 were any files added or removed while restoring the backup, or
 is there not enough space on \$HOME.")
 
-$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
-$(cat "$ERROR_FILE")
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_ID\" in Terminal to \
+view log messages.")
 
 $(gettext "Try restoring the back up again.")"
         errmsg "$TEXT"
         exit $ERR
     fi
-
-    rm --verbose "$ERROR_FILE" |& $LOGCMD
 }
 
 

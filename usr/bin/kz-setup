@@ -180,12 +180,7 @@ function process_input() {
         exit $OK
     fi
 
-    # Add information records from the setup file to the command file.
     COMMAND_FILE=$(mktemp -t "kz-setup-commands-XXXXXXXXXX")
-    grep    --fixed-strings     \
-            --regexp='# NOTE: ' \
-            $SETUP_FILE         > "$COMMAND_FILE" || true
-    printf '\n' >> "$COMMAND_FILE"
 
     if $ARGUMENT_APP; then
         process_argument_app
@@ -358,9 +353,12 @@ function process_option_cat() {
 
 # This function starts setting up the apps.
 function setup_apps() {
+    local NO_COMMANDS_FOUND=true
+    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT=''
     local TITLE=''
     local -i APP_TOT_NUM=0
+    local -A FAILED_APPS=()
 
     APP_TOT_NUM=$(
         grep    --regexp="#.*$SETUP.*on"    \
@@ -391,6 +389,26 @@ function setup_apps() {
     else
         process_command_file
     fi
+
+    if $NO_COMMANDS_FOUND; then
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
+        exit $OK
+    fi
+
+    if [[ -n ${FAILED_APPS[*]} ]]; then
+        TEXT="$(gettext "The set up of the following apps contains errors:")
+${FAILED_APPS[*]}
+
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_ID\" in Terminal to \
+view log messages.")
+
+$(gettext "Try to set up the apps again.")"
+        errmsg "$TEXT"
+        exit $ERR
+    fi
+
+    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
@@ -399,14 +417,9 @@ function process_command_file() {
     local APP_NAME_LINE=''
     local APP_NAME=''
     local COMMAND_RECORD=''
-    local ERROR_FILE=''
-    local NO_COMMANDS_FOUND=true
     local TEXT=''
     local -i APP_SEQ_NUM=0
     local -i CMD_SEQ_NUM=0
-    local -A FAILED_APPS=()
-
-    ERROR_FILE=$(mktemp -t "kz-setup-errors-XXXXXXXXXX")
 
     if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')
@@ -431,40 +444,17 @@ function process_command_file() {
                         "$APP_TOT_NUM"      \
                         "$APP_NAME"
                 ;;
-            '' | '#'* )
-                # Empty or comment line.
+            '' )
+                # Empty line can't be processed.
                 continue
                 ;;
             * )
-                # Command record.
+                # Process command record or comment line.
                 NO_COMMANDS_FOUND=false
                 execute_command "$COMMAND_RECORD"
                 ;;
         esac
     done < "$COMMAND_FILE"
-
-    if $NO_COMMANDS_FOUND; then
-        TEXT=$(gettext 'No commands to execute.' )
-        infomsg "$TEXT"
-        exit $OK
-    fi
-
-    if [[ -n ${FAILED_APPS[*]} ]]; then
-        TEXT="$(gettext "The set up of the following apps contains errors:")
-${FAILED_APPS[*]}
-
-$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
-$(cat "$ERROR_FILE")
-
-$(gettext "Try to set up the apps again.")"
-        errmsg "$TEXT"
-        TEXT=$(gettext "Log out of the computer to finish setting up the apps \
-and changing user settings.")
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-
-    rm --verbose "$COMMAND_FILE" "$ERROR_FILE" |& $LOGCMD
 }
 
 
@@ -507,10 +497,7 @@ $CMD"
     fi
 
     logmsg "$CMD"
-    ERREXIT=false
-    eval "$CMD" 1> >($LOGCMD) 2>> "$ERROR_FILE" ||
-        FAILED_APPS[$APP_NAME]=$APP_NAME
-    ERREXIT=true
+    eval "$CMD" &> >($LOGCMD) || FAILED_APPS[$APP_NAME]=$APP_NAME
 }
 
 
@@ -564,8 +551,6 @@ Type 'logout' to log out.")"
                 infomsg "$TEXT"
             fi
         fi
-    else
-        infomsg "$TEXT"
     fi
 
     exit $OK

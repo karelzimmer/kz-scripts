@@ -5,28 +5,22 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# NOTE: to manually run a command line, first run "source kz_common.sh"
-# NOTE: to learn more about the format of this file, run "man kz install"
+# To manually run a command line, first run "source kz_common.sh".
+# To learn more about the format of this install file, run "man kz install.sh".
 
-# First install app disabled-apport, then app update-system.
+# First install app update-system.
 # The rest of the apps are in alphabetical order of app name.
-
-# Install disabled-apport on *
-# Disable Ubuntu's automatic crash report generation.
-if $UBUNTU ; then sudo systemctl stop apport.service ; fi
-if $UBUNTU ; then sudo systemctl disable apport.service ; fi
-if $UBUNTU ; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport ; fi
-if $UBUNTU ; then sudo rm --force --verbose /var/crash/* ; fi
-
-# Remove disabled-apport from *
-# Enable Ubuntu's automatic crash report generation.
-if $UBUNTU ; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport ; fi
-if $UBUNTU ; then sudo systemctl enable --now apport.service ; fi
-
 
 # Install update-system on *
 # Update system.
-sudo kz-update
+# This may take a while...
+if $APT ; then sudo apt-get update ; fi
+if $APT ; then sudo apt-get upgrade --assume-yes ; fi
+if $APT && [[ -n $(type -t snap) ]] ; then sudo snap refresh ; fi
+
+if $RPM ; then sudo dnf check-update --refresh || true ; fi
+if $RPM ; then sudo dnf upgrade --assumeyes --refresh ; fi
+
 
 # Remove update-system from *
 # Update system.
@@ -124,20 +118,6 @@ if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes calibre ; fi
 if $GUI && $RPM ; then sudo calibre-uninstall ; fi
 
 
-# Install change-grub-timeout on *
-# GRand Unified Bootloader.
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=1/' /etc/default/grub
-if $APT ; then sudo update-grub ; fi
-if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
-
-# Remove change-grub-timeout from *
-# GRand Unified Bootloader.
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
-if $APT ; then sudo update-grub ; fi
-if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
-
-
 # Install cockpit on pc06
 # Web console.
 # Web app: https://localhost:9090
@@ -178,14 +158,20 @@ if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
 # Install dash-to-dock on *
 # Desktop dock.
 # Reboot required!
-if $GUI && $ROCKY ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock ; fi
-if $GUI && $DEBIAN ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock gnome-shell-extension-no-overview ; fi
+# Additional testing is needed because Ubuntu provides gnome-shell-extension-dashtodock as a virtual package which has been replaced by gnome-shell-extension-ubuntu-dock.
+if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock ; fi
+if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
+
+if $GUI && $RPM ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
 # Remove dash-to-dock from *
 # Desktop dock.
 # Reboot required!
-if $GUI && $ROCKY ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock ; fi
-if $GUI && $DEBIAN ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
+# Additional testing is needed because Ubuntu provides gnome-shell-extension-dashtodock as a virtual package which has been replaced by gnome-shell-extension-ubuntu-dock.
+if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
+if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
+
+if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
 
 # Install disabled-aer on pc06
@@ -518,12 +504,12 @@ if $RPM ; then sudo dnf remove --assumeyes mlocate ; fi
 
 # Install log-access-for-user on pc07
 # Log access.
-if [[ $HOSTNAME = 'pc07' ]] ; then sudo usermod --append --groups adm,systemd-journal karel ; fi
+sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
 # Remove log-access-for-user from pc07
 # Log access.
-if [[ $HOSTNAME = 'pc07' ]] ; then sudo deluser karel adm ; fi
-if [[ $HOSTNAME = 'pc07' ]] ; then sudo deluser karel systemd-journal ; fi
+sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # Install mypy on pc06 pc07
@@ -727,9 +713,8 @@ if $GUI && $APT ; then wget --output-document=/tmp/teamviewer.deb https://downlo
 if $GUI && $APT ; then sudo apt-get install --assume-yes /tmp/teamviewer.deb ; fi
 if $GUI && $APT ; then rm --verbose /tmp/teamviewer.deb ; fi
 
-# Extra Packages for Enterprise Linux.
-if $GUI && $RPM ; then sudo dnf install --assumeyes epel-release ; fi
-if $GUI && $RPM ; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm ; fi
+# SKIP: Error: Failed to download metadata for repo 'teamviewer': repomd.xml GPG signature verification error: Bad GPG signature
+# if $GUI && $RPM ; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm ; fi
 
 # Remove teamviewer from *
 # Remote desktop.
@@ -740,15 +725,13 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes teamviewer ; fi
 
 # Install thunderbird on *
 # E-mail and news.
-if $GUI && $ROCKY ; then sudo dnf install --assumeyes thunderbird ; fi
-if $GUI && $DEBIAN ; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl ; fi
-if $GUI && $UBUNTU ; then sudo apt-get install --assume-yes thunderbird thunderbird-locale-nl ; fi
+if $GUI && $APT ; then sudo apt-get install --assume-yes thunderbird ; fi
+if $GUI && $RPM ; then sudo dnf install --assumeyes thunderbird ; fi
 
 # Remove thunderbird from *
 # E-mail and news.
-if $GUI && $ROCKY ; then sudo dnf remove --assumeyes thunderbird ; fi
-if $GUI && $DEBIAN ; then sudo apt-get remove --purge --assume-yes thunderbird-l10n-nl ; fi
-if $GUI && $UBUNTU ; then sudo apt-get remove --purge --assume-yes thunderbird-locale-nl ; fi
+if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes thunderbird ; fi
+if $GUI && $RPM ; then sudo dnf remove --assumeyes thunderbird ; fi
 
 
 # Install tree on pc06 pc07
@@ -790,8 +773,8 @@ if $RPM ; then sudo dnf remove --assumeyes usbutils ; fi
 
 # Install user-guest on -none
 # Add guest user.
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
-sudo passwd --delete "$(gettext 'guest')"
+if ! id "$(gettext 'guest')" ; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" ; fi
+if id "$(gettext 'guest')" ; then sudo passwd --delete "$(gettext 'guest')" ; fi
 
 # Remove user-guest from -none
 # Remove guest user.
@@ -800,24 +783,24 @@ sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
 # Add user Karel.
-if [[ $HOSTNAME = 'pc01' ]] ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true ; fi
-if [[ $HOSTNAME = 'pc01' ]] ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel ; fi
-if [[ $HOSTNAME = 'pc01' ]] ; then sudo passwd --delete --expire karel ; fi
+if ! id karel ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel ; fi
+if id karel ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel ; fi
+if id karel ; then sudo passwd --delete --expire karel ; fi
 
 # Remove user-karel from pc01
 # Remove user Karel.
-if [[ $HOSTNAME = 'pc01' ]] ; then sudo userdel --remove karel ; fi
+if id karel ; then sudo userdel --remove karel ; fi
 
 
 # Install user-toos on Laptop
 # Add user Toos.
-if [[ $HOSTNAME = 'Laptop' ]] ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true ; fi
-if [[ $HOSTNAME = 'Laptop' ]] ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos ; fi
-if [[ $HOSTNAME = 'Laptop' ]] ; then sudo passwd --delete --expire toos ; fi
+if ! id toos ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos ; fi
+if id toos ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos ; fi
+if id toos ; then sudo passwd --delete --expire toos ; fi
 
 # Remove user-toos from Laptop
 # Remove user Toos.
-if [[ $HOSTNAME = 'Laptop' ]] ; then sudo userdel --remove toos ; fi
+if id toos ; then sudo userdel --remove toos ; fi
 
 
 # Install virtualbox on pc-van-hugo
@@ -838,11 +821,8 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes VirtualBox ; fi
 
 # Install vlc on *
 # Multimedia player.
-if $GUI && $GUI && $APT ; then sudo apt-get install --assume-yes vlc ; fi
-
-# Extra Packages for Enterprise Linux.
-if $GUI && $GUI && $RPM ; then sudo dnf install --assumeyes epel-release rpmfusion-free-release ; fi
-if $GUI && $GUI && $RPM ; then sudo dnf install --assumeyes vlc ; fi
+if $GUI && $APT ; then sudo apt-get install --assume-yes vlc ; fi
+if $GUI && $RPM ; then sudo dnf install --assumeyes vlc ; fi
 
 # Remove vlc from *
 # Multimedia player.

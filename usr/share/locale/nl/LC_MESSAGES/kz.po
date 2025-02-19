@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 17:42+0100\n"
+"POT-Creation-Date: 2025-02-19 15:11+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -35,11 +35,12 @@ msgstr "  -v, --version  toon de programmaversie"
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-msgid "fatal: no os release file available"
+msgid "fatal: no os-release file available"
 msgstr "fataal: geen os-releasebestand beschikbaar"
 
-msgid "fatal: unknown distribution"
-msgstr "fataal: onbekende distributie"
+#, sh-format
+msgid "fatal: $ID: unknown distribution"
+msgstr "fataal: $ID: onbekende distributie"
 
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
@@ -303,8 +304,11 @@ msgstr ""
 "is er te weinig ruimte op $TARGET."
 
 #, sh-format
-msgid "Check the messages (also in $ERROR_FILE):"
-msgstr "Controleer de berichten (ook in $ERROR_FILE):"
+msgid ""
+"Use \"journalctl --boot --id=$PROGRAM_ID\" in Terminal to view log messages."
+msgstr ""
+"Gebruik \"journalctl --boot --id=$PROGRAM_ID\" in Terminalvenster om "
+"logberichten te bekijken."
 
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
@@ -496,6 +500,9 @@ msgstr "  -l, --list     toon favorieten"
 
 msgid "  -r, --reset    set favorites on default values"
 msgstr "  -r, --reset    stel favorieten in op standaardwaarden"
+
+msgid "No such schema 'org.gnome.shell'."
+msgstr "Geen schema 'org.gnome.shell'."
 
 msgid "Favorite apps:"
 msgstr "Favorieten:"

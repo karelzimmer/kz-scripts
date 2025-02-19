@@ -5,9 +5,9 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# NOTE: to manually run a command line, first run "source kz_common.sh"
-# NOTE: to learn more about the format of this file, run "man kz setup"
-
+# To manually run a command line, first run "source kz_common.sh".
+# To learn more about the format of this setup file, run "man kz setup.sh".
+#
 # The apps are in alphabetical order of app name.
 
 # Setup anydesk on pc06 pc07
@@ -39,38 +39,40 @@ if $GUI ; then kz-desktop --addaft=kz-cockpit ; fi
 # Web console.
 # Web app: https://localhost:9090
 if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
-if $GUI ; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop" ; fi
+if $GUI ; then rm --force --verbose ~/.local/share/applications/kz-cockpit.desktop ; fi
 
 
 # Setup dash-to-dock on *
 # Desktop dock.
-if $GUI && $ROCKY ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
-if $GUI && $ROCKY ; then gnome-extensions enable no-overview@fthx ; fi
-if $GUI && $DEBIAN ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com ; fi
-if $GUI && $DEBIAN ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell disable-user-extensions false ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32 ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position LEFT ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true ; fi
+# Additional testing is needed because Ubuntu provides gnome-shell-extension-dashtodock as a virtual package which has been replaced by gnome-shell-extension-ubuntu-dock.
+if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com ; fi
+if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
+if $GUI && $RPM ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
+if $GUI && $RPM ; then gnome-extensions enable no-overview@fthx ; fi
+if $GUI ; then gsettings set org.gnome.shell disable-user-extensions false ; fi
+if $GUI ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true ; fi
+if $GUI ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews ; fi
+if $GUI ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32 ; fi
+if $GUI ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true ; fi
+if $GUI ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position LEFT ; fi
+if $GUI ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true ; fi
+if $GUI ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true ; fi
 
 # Reset dash-to-dock on *
 # Desktop dock.
-if $GUI && $ROCKY ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
-if $GUI && $ROCKY ; then echo 'Goto https://extensions.gnome.org/extension/4099/no-overview/, install, and switch OFF' ; fi
-if $GUI && $DEBIAN ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com ; fi
-if $GUI && $DEBIAN ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell disable-user-extensions ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height ; fi
-if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed ; fi
+# Additional testing is needed because Ubuntu provides gnome-shell-extension-dashtodock as a virtual package which has been replaced by gnome-shell-extension-ubuntu-dock.
+if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com ; fi
+if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup  ; fi
+if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
+if $GUI && $RPM ; then echo 'Goto https://extensions.gnome.org/extension/4099/no-overview/, install, and switch OFF' ; fi
+if $GUI ; then gsettings reset org.gnome.shell disable-user-extensions ; fi
+if $GUI ; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme ; fi
+if $GUI ; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action ; fi
+if $GUI ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size ; fi
+if $GUI ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed ; fi
+if $GUI ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position ; fi
+if $GUI ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height ; fi
+if $GUI ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed ; fi
 
 
 # Setup evolution on pc07
@@ -180,11 +182,11 @@ if $GUI ; then kz-desktop --delete=fr.handbrake.ghb ; fi
 
 # Setup hide-files on *
 # Hide files.
-if $GUI ; then echo 'snap' > "$HOME/.hidden" ; fi
+if $GUI ; then echo 'snap' > ~/.hidden ; fi
 
 # Reset hide-files on *
 # Hide files.
-if $GUI ; then rm --force --verbose "$HOME/.hidden" ; fi
+if $GUI ; then rm --force --verbose ~/.hidden ; fi
 
 
 # Setup kvm on pc06 pc07
@@ -198,19 +200,19 @@ if $GUI ; then kz-desktop --delete=virt-manager ; fi
 
 # Setup lynis on -none
 # Security auditing.
-git clone https://github.com/CISOfy/lynis "$HOME/lynis" || true
+if [[ ! -d ~/lynis ]] ; then git clone https://github.com/CISOfy/lynis ~/lynis ; fi
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
 
 # Reset lynis on -none
 # Security auditing.
-rm --force --recursive --verbose "$HOME/lynis"
+rm --force --recursive --verbose ~/lynis
 
 
 # Setup restore-thumbnails on -none
 # Restore thumbnails.
-rm --force --recursive --verbose "$HOME/.cache/thumbnails/"
+rm --force --recursive --verbose ~/.cache/thumbnails/
 
 # Reset restore-thumbnails on -none
 # Restore thumbnails.
@@ -219,11 +221,11 @@ echo 'App restore-thumbnails cannot be reset.'
 
 # Setup private-home on *
 # Private home.
-chmod 750 "$HOME"
+chmod 750 ~
 
 # Reset private-home on *
 # Private home.
-chmod 755 "$HOME"
+chmod 755 ~
 
 
 # Setup sound-juicer on pc-van-emily
@@ -263,16 +265,16 @@ if $GUI ; then kz-desktop --delete=com.teamviewer.TeamViewer ; fi
 # Terminal emulator.
 if $GUI ; then kz-desktop --addbef=org.gnome.Terminal ; fi
 # Turn on aliases.
-sed --in-place --expression='s/#alias/alias/g' "$HOME/.bashrc"
+sed --in-place --expression='s/#alias/alias/g' ~/.bashrc
 # Enable search forward in history (with Ctrl-S).
-sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
-echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME/.bashrc"
+sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
+echo 'stty -ixon  # Enable fwd search history (i-search)' >> ~/.bashrc
 
 # Reset terminal on pc01 pc06 pc07
 # Terminal emulator.
 if $GUI ; then kz-desktop --delete=org.gnome.Terminal ; fi
-sed --in-place --expression='s/alias/#alias/g' "$HOME/.bashrc"
-sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
+sed --in-place --expression='s/alias/#alias/g' ~/.bashrc
+sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 
 
 # Setup thunderbird on pc01 pc02 pc06
@@ -326,7 +328,6 @@ if $GUI ; then kz-desktop --addaft=kz-webmin ; fi
 # Web console.
 # Web app: https://localhost:10000
 if $GUI ; then kz-desktop --delete=kz-webmin ; fi
-if $GUI ; then rm --force --verbose "$HOME/.local/share/applications/kz-webmin.desktop" ; fi
 
 
 # Setup whatsapp on pc-van-hugo maria-desktop

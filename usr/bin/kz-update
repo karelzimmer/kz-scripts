@@ -104,7 +104,7 @@ def perform_apt_update() -> None:
     COMMAND: str = 'sudo apt-get update'
     perform_command(COMMAND)
 
-    COMMAND = 'sudo apt-get dist-upgrade --assume-yes'
+    COMMAND = 'sudo apt-get upgrade --assume-yes'
     perform_command(COMMAND)
 
     if subprocess.run('[[ -n $(type -t snap) ]]', shell=True,
@@ -138,7 +138,7 @@ def perform_rpm_update() -> None:
     COMMAND: str = 'sudo dnf check-update --refresh || true'
     perform_command(COMMAND)
 
-    COMMAND = 'sudo dnf upgrade --assumeyes --refresh --nogpgcheck'
+    COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(COMMAND)
 
 

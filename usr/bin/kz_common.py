@@ -13,6 +13,7 @@ This module provides access to global constants and functions.
 # Imports
 ###############################################################################
 
+import distro
 import gettext
 import os
 import subprocess
@@ -48,34 +49,27 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
-APT: bool = False
-RPM: bool = False
-DEBIAN: bool = False
-ROCKY: bool = False
-UBUNTU: bool = False
-GUI: bool = False
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-if not os.path.exists('/usr/bin/systemd'):
+if not os.path.exists('/usr/lib/systemd/systemd'):
     print(_('fatal: no systemd available'))
     sys.exit(ERR)
 if not os.path.exists('/etc/os-release'):
-    print(_('fatal: no os release file available'))
+    print(_('fatal: no os-release file available'))
     sys.exit(ERR)
-if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
-                  shell=True, executable='bash').returncode == OK:
-    DEBIAN = True
+
+KNOWN_APT_DISTRO: str = 'debian ubuntu'
+KNOWN_RPM_DISTRO: str = 'almalinux rocky'
+APT: bool = False
+RPM: bool = False
+GUI: bool = False
+if distro.id() in KNOWN_APT_DISTRO:
     APT = True
-elif subprocess.run("source /etc/os-release; [[ $ID = 'rocky' ]]",
-                    shell=True, executable='bash').returncode == OK:
-    ROCKY = True
+elif distro.id() in KNOWN_RPM_DISTRO:
     RPM = True
-elif subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
-                    shell=True, executable='bash').returncode == OK:
-    UBUNTU = True
-    APT = True
 else:
-    print(_('fatal: unknown distribution'))
+    print(_('fatal: {}: unknown distribution').format(distro.id()))
     sys.exit(ERR)
+
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
@@ -91,7 +85,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
     """
-    EXEC_SUDO: str = 'sudo '
+    EXEC_SUDO: str = 'exec sudo '
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
     if not become_root_check(PROGRAM_NAME, PROGRAM_DESC):

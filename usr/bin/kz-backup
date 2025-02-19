@@ -357,7 +357,7 @@ function backup_setting_avatar() {
     local OUTPUT_FILE_1=$SETTINGS_DIR/avatar
     local OUTPUT_FILE_2=$SETTINGS_DIR/avatar.txt
 
-    if [[ -e $INPUT_FILE ]]; then
+    if [[ -f $INPUT_FILE ]]; then
         logmsg 'Copy the user avatar...'
         cp --preserve --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD
     fi
@@ -393,7 +393,7 @@ function backup_setting_desktop() {
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
-    if [[ -e $INPUT_FILE && $INPUT_FILE != *.xml ]]; then
+    if [[ -f $INPUT_FILE && $INPUT_FILE != *.xml ]]; then
         logmsg 'Copy the desktop background...'
         cp --preserve --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD ||
             true
@@ -426,13 +426,12 @@ function backup_setting_favs() {
 
 # This function creates the backup.
 function create_backup() {
-    local ERROR_FILE=''
     local EXCLUDE_FILE=''
+    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT=''
     local TITLE=''
     local -i BACKUP_RC=0
 
-    ERROR_FILE=$(mktemp -t "kz-backup-errors-XXXXXXXXXX")
     EXCLUDE_FILE=$(mktemp -t "kz-backup-excludes-XXXXXXXXXX")
 
     cat << EOF > "$EXCLUDE_FILE"
@@ -463,7 +462,7 @@ EOF
                 --delete-excluded               \
                 "$HOME"/                        \
                 "$TARGET"/                      \
-                2>> "$ERROR_FILE"               |
+                2> >($LOGCMD)                   |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
                 --auto-close                    \
@@ -485,8 +484,7 @@ EOF
                 --exclude-from="$EXCLUDE_FILE"  \
                 --delete-excluded               \
                 "$HOME"/                        \
-                "$TARGET"/                      2>> "$ERROR_FILE" ||
-                                                    BACKUP_RC=$?
+                "$TARGET"/                      2> >($LOGCMD) || BACKUP_RC=$?
     fi
 
     TEXT=$(gettext "Writing data from memory (this may take a while)")
@@ -515,15 +513,15 @@ Some files may not be readable, or
 were any files added or removed while creating the backup, or
 is there not enough space on \$TARGET.")
 
-$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
-$(cat "$ERROR_FILE")
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_ID\" in Terminal to \
+view log messages.")
 
 $(gettext "Try creating the back up again.")"
         errmsg "$TEXT"
         exit $ERR
     fi
 
-    rm --verbose "$ERROR_FILE" "$EXCLUDE_FILE" |& $LOGCMD
+    rm --verbose "$EXCLUDE_FILE" |& $LOGCMD
 }
 
 
