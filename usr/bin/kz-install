@@ -507,7 +507,9 @@ $CMD"
     fi
 
     logmsg "$CMD"
+    ERREXIT=false
     eval "$CMD" &> >($LOGCMD) || FAILED_APPS[$APP_NAME]=$APP_NAME
+    ERREXIT=true
 }
 
 

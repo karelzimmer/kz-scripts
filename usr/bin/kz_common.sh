@@ -202,6 +202,7 @@ function init_script() {
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT="==== START logs for script $PROGRAM_ID ====
 Started ($PROGRAM_ID $* as $USER)."
+    local -g  ERREXIT=true
     local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_ID"
     local -g  OPTION_GUI=false
     local -g  KZ_PID_FILE=''
@@ -421,9 +422,11 @@ $COMMAND, code: $RC ($RC_DESC)."
 
     case $SIGNAL in
         err )
-            TEXT="
+            if $ERREXIT; then
+                TEXT="
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
-            errmsg "$TEXT"
+                errmsg "$TEXT"
+            fi
             exit "$RC"
             ;;
         exit )
