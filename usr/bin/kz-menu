@@ -180,7 +180,7 @@ function process_menu1_gui() {
                     FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}"   \
                     FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
                     FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
-                    2> >($LOGCMD)
+                    2> /dev/null
             ) || exit $OK
         process_menu1_choice
     done
@@ -289,7 +289,7 @@ Roughly boils down to:
                 --width     600         \
                 --height    100         \
                 --title     "$TITLE"    \
-                --text      "$TEXT"     2> >($LOGCMD)
+                --text      "$TEXT"     2> /dev/null
     else
         printf '%s\n' "$TEXT"
         wait_for_enter
@@ -356,7 +356,7 @@ function process_menu2_gui() {
                     FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_DESCS[3]}"   \
                     FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
                     FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
-                    2> >($LOGCMD)
+                    2> /dev/null
             ) || break
         process_menu2_choice
     done
@@ -482,7 +482,7 @@ $PROMPT"
                     --title         "$TITLE"            \
                     --text          "$TEXT"             \
                     --ok-label      "$(gettext 'Yes')"  \
-                    --cancel-label  "$(gettext 'No')"   2> >($LOGCMD); then
+                    --cancel-label  "$(gettext 'No')"   2> /dev/null; then
             EXECUTE_COMMAND=true
         else
             EXECUTE_COMMAND=false

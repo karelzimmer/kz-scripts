@@ -240,7 +240,7 @@ function install_package() {
     logmsg 'Calling kz-get (via wget and bash)...'
     # Call kz-get via wget and bash as a regular user would do.
     cd "$HOME"
-    if ! (wget karelzimmer.nl/getkz 2> >($LOGCMD); bash getkz); then
+    if ! (wget karelzimmer.nl/getkz; bash getkz); then
         TEXT=$(gettext 'Install package kz failed.')
         errmsg "$TEXT"
     fi

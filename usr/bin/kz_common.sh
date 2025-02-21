@@ -46,40 +46,44 @@ readonly RED='\033[1;31m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
-# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-if ! [[ -e /usr/lib/systemd/systemd ]]; then
+if ! type systemd &> /dev/null; then
     rm --force --verbose getkz getkz.{1..99} >&2
     printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
     exit $ERR
 fi
+# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if ! source /etc/os-release 2> >(
-            systemd-cat --identifier=$MODULE_NAME --priority=debug); then
+                systemd-cat --identifier=$MODULE_NAME --priority=debug); then
     rm --force --verbose getkz getkz.{1..99} >&2
-    printf '%s\n' "$(gettext 'fatal: no os-release file available')" >&2
+    printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
     exit $ERR
 fi
 
-readonly KNOWN_APT_DISTRO='debian ubuntu'
-readonly KNOWN_RPM_DISTRO='almalinux rocky'
+readonly KNOWN_APT_DISTROS='debian ubuntu'
+readonly KNOWN_RPM_DISTROS='almalinux rocky'
 declare APT=false
 declare RPM=false
-declare GUI=false
-if [[ $KNOWN_APT_DISTRO =~ $ID ]]; then
+if [[ $KNOWN_APT_DISTROS =~ $ID ]]; then
     APT=true
-elif [[ $KNOWN_RPM_DISTRO =~ $ID ]]; then
+elif [[ $KNOWN_RPM_DISTROS =~ $ID ]]; then
     RPM=true
 else
     rm --force --verbose getkz getkz.{1..99} >&2
     printf '%s\n' "$(eval_gettext "fatal: \$ID: unknown distribution")" >&2
     exit $ERR
 fi
-
-if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
-then
-    GUI=true
-fi
 readonly APT
 readonly RPM
+
+readonly KNOWN_DESKTOP_ENVIRONMENTS="cinnamon-session gnome-session \
+lxqt-session mate-session xfce4-session ksmserver"
+declare KNOWN_DESKTOP_ENVIRONMENT
+declare GUI=false
+for KNOWN_DESKTOP_ENVIRONMENT in $KNOWN_DESKTOP_ENVIRONMENTS; do
+    if type "$KNOWN_DESKTOP_ENVIRONMENT" &> /dev/null; then
+        GUI=true
+    fi
+done
 readonly GUI
 
 
@@ -173,7 +177,7 @@ function errmsg() {
                 --width     600         \
                 --height    100         \
                 --title     "$TITLE"    \
-                --text      "$*"        2> >($LOGCMD) || true
+                --text      "$*"        2> /dev/null || true
     else
         printf "${RED}%b${NORMAL}\n" "$*" >&2
     fi
@@ -190,7 +194,7 @@ function infomsg() {
                 --width     600         \
                 --height    100         \
                 --title     "$TITLE"    \
-                --text      "$*"        2> >($LOGCMD) || true
+                --text      "$*"        2> /dev/null || true
     else
         printf '%b\n' "$*"
     fi
@@ -288,7 +292,7 @@ function process_option_manual() {
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
 
     if $GUI; then
-        yelp man:"$PROGRAM_ID" 2> >($LOGCMD)
+        yelp man:"$PROGRAM_ID" 2> /dev/null
     else
         man --pager=cat "$PROGRAM_NAME"
     fi

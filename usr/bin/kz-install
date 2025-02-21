@@ -391,7 +391,7 @@ function install_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$TITLE"    \
-                    --text      "$TEXT"     2> >($LOGCMD)
+                    --text      "$TEXT"     2> /dev/null
             )
     else
         process_command_file

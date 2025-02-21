@@ -49,31 +49,39 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
-# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-if not os.path.exists('/usr/lib/systemd/systemd'):
+if subprocess.run(f'type systemd', shell=True,
+                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                  executable='bash').returncode != OK:
     print(_('fatal: no systemd available'))
     sys.exit(ERR)
+
+# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if not os.path.exists('/etc/os-release'):
-    print(_('fatal: no os-release file available'))
+    print(_('fatal: no os release available'))
     sys.exit(ERR)
 
-KNOWN_APT_DISTRO: str = 'debian ubuntu'
-KNOWN_RPM_DISTRO: str = 'almalinux rocky'
+KNOWN_APT_DISTROS: str = 'debian ubuntu'
+KNOWN_RPM_DISTROS: str = 'almalinux rocky'
 APT: bool = False
 RPM: bool = False
 GUI: bool = False
-if distro.id() in KNOWN_APT_DISTRO:
+if distro.id() in KNOWN_APT_DISTROS:
     APT = True
-elif distro.id() in KNOWN_RPM_DISTRO:
+elif distro.id() in KNOWN_RPM_DISTROS:
     RPM = True
 else:
     print(_('fatal: {}: unknown distribution').format(distro.id()))
     sys.exit(ERR)
 
-if subprocess.run('[[ -n $(type -t '
-                  '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
-                  shell=True, executable='bash').returncode == OK:
-    GUI = True
+KNOWN_DESKTOP_ENVIRONMENT: str = ''
+KNOWN_DESKTOP_ENVIRONMENTS: list[str] = ["cinnamon-session", "gnome-session",
+                                        "lxqt-session", "mate-session",
+                                        "xfce4-session", "ksmserver"]
+for KNOWN_DESKTOP_ENVIRONMENT in KNOWN_DESKTOP_ENVIRONMENTS:
+    if subprocess.run(f'type {KNOWN_DESKTOP_ENVIRONMENT}', shell=True,
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      executable='bash').returncode == OK:
+        GUI = True
 
 
 ###############################################################################

@@ -384,7 +384,7 @@ function setup_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$TITLE"    \
-                    --text      "$TEXT"     2> >($LOGCMD)
+                    --text      "$TEXT"     2> /dev/null
             )
     else
         process_command_file
@@ -536,15 +536,15 @@ Type 'logout' to log out.")"
         if $GUI; then
             $OPTION_GUI || wait_for_enter
 
-            if [[ -n $(type -t gnome-session) ]]; then
+            if type gnome-session &> /dev/null; then
                 gnome-session-quit --logout --no-prompt
-            elif [[ -n $(type -t ksmserver) ]]; then
+            elif type ksmserver &> /dev/null; then
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-            elif [[ -n $(type -t lxqt-session) ]]; then
+            elif type lxqt-session &> /dev/null; then
                 lxqt-leave --logout
-            elif [[ -n $(type -t mate-session) ]]; then
+            elif type mate-session &> /dev/null; then
                 mate-session-save --logout
-            elif [[ -n $(type -t xfce4-session) ]]; then
+            elif type xfce4-session &> /dev/null; then
                 xfce4-session-logout --logout
             else
                 TEXT='No logout command available.'

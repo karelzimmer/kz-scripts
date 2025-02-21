@@ -154,7 +154,7 @@ $USAGE"
         TARGET_MEDIUM=$TARGET_ARGUMENT
     else
 
-        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
+        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
 
         if [[ -z $MEDIUM ]]; then
             TEXT=$(gettext "No USB medium found.
@@ -163,7 +163,7 @@ Connect a USB medium.")
             infomsg "$TEXT"
 
             $OPTION_GUI || wait_for_enter
-            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
+            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
 
             if [[ -z $MEDIUM ]]; then
                 errmsg "$TEXT"
@@ -171,7 +171,7 @@ Connect a USB medium.")
             fi
         fi
 
-        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
+        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
 
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             TEXT="$(eval_gettext "Connect only one USB medium.
@@ -184,7 +184,7 @@ Disconnect media via Files.")"
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
+            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
 
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
                 errmsg "$TEXT"
@@ -264,11 +264,11 @@ function backup_setting_apps() {
     logmsg 'Create a list of installed apps...(ignore WARNING).'
 
     printf '%s\n' "$HEADER1" > "$OUTPUT_FILE"
-    apt list --manual-installed 2> >($LOGCMD) >> "$OUTPUT_FILE" || true
+    apt list --manual-installed 2> /dev/null >> "$OUTPUT_FILE" || true
     printf '%s\n' "$FOOTER1" >> "$OUTPUT_FILE"
 
     printf '\n%s\n' "$HEADER2" >> "$OUTPUT_FILE"
-    snap list 2> >($LOGCMD) >> "$OUTPUT_FILE" ||
+    snap list 2> /dev/null >> "$OUTPUT_FILE" ||
         printf '%s\n' "$(gettext 'snap is not installed')" >> "$OUTPUT_FILE"
     printf '%s\n' "$FOOTER2" >> "$OUTPUT_FILE"
 }
@@ -471,7 +471,7 @@ EOF
                 --width     600                 \
                 --height    50                  \
                 --title     "$TITLE"            \
-                --text      "$TEXT"             2> >($LOGCMD) || BACKUP_RC=$?
+                --text      "$TEXT"             2> /dev/null || BACKUP_RC=$?
     else
         TEXT+='...'
         infomsg "$TEXT"
@@ -484,7 +484,7 @@ EOF
                 --exclude-from="$EXCLUDE_FILE"  \
                 --delete-excluded               \
                 "$HOME"/                        \
-                "$TARGET"/                      2> >($LOGCMD) || BACKUP_RC=$?
+                "$TARGET"/                      2> /dev/null || BACKUP_RC=$?
     fi
 
     TEXT=$(gettext "Writing data from memory (this may take a while)")
@@ -592,8 +592,7 @@ function term_script_usb() {
                     --width     600         \
                     --height    50          \
                     --title     "$TITLE"    \
-                    --text      "$TEXT"     \
-                    2> >($LOGCMD)
+                    --text      "$TEXT"     2> /dev/null
             )
     else
         infomsg "$TEXT..."

@@ -16,13 +16,13 @@ declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
         KZ_COMMON_SITE_FILE+='kz_common.sh'
 declare KZ_COMMON_LOCAL_FILE
         KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.sh")
-if  !   wget    --quiet                                     \
+if    ! wget    --quiet                                     \
                 --output-document="$KZ_COMMON_LOCAL_FILE"   \
                 $KZ_COMMON_SITE_FILE; then
         printf '%s\n' 'fatal: download common module failed' >&2
         exit 1
 fi
-if  !   source "$KZ_COMMON_LOCAL_FILE"; then
+if    ! source "$KZ_COMMON_LOCAL_FILE"; then
         printf '%s\n' 'fatal: import common module failed' >&2
         exit 1
 fi
@@ -175,7 +175,7 @@ function install_rpm_package() {
 https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
     local MODE='install'
 
-    if [[ -n $(type -t kz) ]]; then
+    if type kz &> /dev/null; then
         MODE='reinstall'
     fi
 

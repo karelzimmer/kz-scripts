@@ -274,7 +274,7 @@ function save_configuration_database() {
     local OUTPUT_FILE=${2:-unknown}
     local TEXT=''
 
-    gsettings list-recursively > "$OUTPUT_FILE" 2> >($LOGCMD)
+    gsettings list-recursively > "$OUTPUT_FILE" 2> /dev/null
 
     sort    --unique                \
             --output="$OUTPUT_FILE" \

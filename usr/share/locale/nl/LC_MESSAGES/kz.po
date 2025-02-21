@@ -35,8 +35,8 @@ msgstr "  -v, --version  toon de programmaversie"
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-msgid "fatal: no os-release file available"
-msgstr "fataal: geen os-releasebestand beschikbaar"
+msgid "fatal: no os release available"
+msgstr "fataal: geen os release beschikbaar"
 
 #, sh-format
 msgid "fatal: $ID: unknown distribution"

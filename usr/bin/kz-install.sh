@@ -8,15 +8,28 @@
 # To manually run a command line, first run "source kz_common.sh".
 # To learn more about the format of this install file, run "man kz install.sh".
 
-# First install app update-system.
+# First install app disabled-apport, then app update-system.
 # The rest of the apps are in alphabetical order of app name.
+
+# Install disabled-apport on *
+# Disable Ubuntu's automatic crash report generation.
+if systemctl cat apport &> /dev/null ; then sudo systemctl stop apport.service ; fi
+if systemctl cat apport &> /dev/null ; then sudo systemctl disable apport.service ; fi
+if systemctl cat apport &> /dev/null ; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport ; fi
+if systemctl cat apport &> /dev/null ; then sudo rm --force --verbose /var/crash/* ; fi
+
+# Remove disabled-apport from *
+# Enable Ubuntu's automatic crash report generation.
+if systemctl cat apport &> /dev/null ; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport ; fi
+if systemctl cat apport &> /dev/null ; then sudo systemctl enable --now apport.service ; fi
+
 
 # Install update-system on *
 # Update system.
 # This may take a while...
 if $APT ; then sudo apt-get update ; fi
 if $APT ; then sudo apt-get upgrade --assume-yes ; fi
-if $APT && [[ -n $(type -t snap) ]] ; then sudo snap refresh ; fi
+if $APT && type snap &> /dev/null ; then sudo snap refresh ; fi
 
 if $RPM ; then sudo dnf check-update --refresh || true ; fi
 if $RPM ; then sudo dnf upgrade --assumeyes --refresh ; fi
@@ -54,12 +67,12 @@ if $RPM ; then sudo dnf remove --assumeyes ansible ; fi
 # Only outgoing sessions are supported if using Wayland.
 # Incoming sessions are only possible when using Xorg/X11.
 # Web app: https://my.anydesk.com/v2
-if $GUI && $APT ; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg ; fi
-if $GUI && $APT ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list ; fi
+if $GUI && $APT ; then wget --no-verbose --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg ; fi
+if $GUI && $APT ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null ; fi
 if $GUI && $APT ; then sudo apt-get update ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes anydesk ; fi
 
-if $GUI && $RPM ; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo ; fi
+if $GUI && $RPM ; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo > /dev/null ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk ; fi
 
 # Remove anydesk from pc06 pc07
@@ -110,7 +123,7 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes bleachbit ; fi
 # Install calibre on pc06 pc-van-hugo
 # E-book manager.
 if $GUI && $APT ; then sudo apt-get install --assume-yes calibre ; fi
-if $GUI && $RPM ; then sudo --validate && wget --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh ; fi
+if $GUI && $RPM ; then sudo --validate && wget --no-verbose --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh ; fi
 
 # Remove calibre from pc06 pc-van-hugo
 # E-book manager.
@@ -158,25 +171,30 @@ if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
 # Install dash-to-dock on *
 # Desktop dock.
 # Reboot required!
-# Additional testing is needed because Ubuntu provides gnome-shell-extension-dashtodock as a virtual package which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock ; fi
-if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
+# Additional testing is needed because Ubuntu provides
+# gnome-shell-extension-dashtodock as a virtual package
+# which has been replaced by gnome-shell-extension-ubuntu-dock.
+if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock ; fi
+if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
 
 if $GUI && $RPM ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
 # Remove dash-to-dock from *
 # Desktop dock.
 # Reboot required!
-# Additional testing is needed because Ubuntu provides gnome-shell-extension-dashtodock as a virtual package which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
-if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
+# Additional testing is needed because Ubuntu provides
+# gnome-shell-extension-dashtodock as a virtual package
+# which has been replaced by gnome-shell-extension-ubuntu-dock.
+if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
+if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
 
 # Install disabled-aer on pc06
-# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).
-# To prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
+# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
+# Express Advanced Error Reporting) to prevent the log gets flooded with
+# 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 if $APT ; then sudo update-grub ; fi
 if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
@@ -185,7 +203,9 @@ grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 # Remove disabled-aer from pc06
 # Enable kernel config parameter PCIEAER.
-# To prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
+# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
+# Express Advanced Error Reporting) to "allow" the log gets flooded with
+# 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 if $APT ; then sudo update-grub ; fi
 if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
@@ -209,7 +229,7 @@ sudo systemctl start fwupd.service
 # Install disabled-lidswitch on pc-van-hugo
 # Do nothing when the laptop lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
 
 # Remove disabled-lidswitch from pc-van-hugo
 # Restore the default action when the laptop lid is closed.
@@ -269,7 +289,8 @@ if $RPM ; then sudo dnf remove --assumeyes fdupes ; fi
 # Reboot required!
 if $GUI && $APT ; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf ; fi
 if $GUI && $RPM ; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf ; fi
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
+# To check, after reboot (!), execute "echo $XDG_SESSION_TYPE", should output
+# 'x11'.
 
 # Remove force-x11 from -none
 # Enable choice on user login screen for Xorg/X11 or Wayland.
@@ -277,7 +298,8 @@ if $GUI && $RPM ; then sudo sed --in-place --expression='s/^#WaylandEnable=false
 # Reboot required!
 if $GUI && $APT ; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf ; fi
 if $GUI && $RPM ; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf ; fi
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+# To check, after reboot (!), execute "echo $XDG_SESSION_TYPE", should output
+# 'wayland'.
 
 
 # Install gdebi on *
@@ -352,7 +374,7 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-tweaks ; fi
 
 # Install google-chrome on *
 # Web browser.
-if $GUI && $APT ; then wget --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb ; fi
+if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes /tmp/google-chrome.deb ; fi
 if $GUI && $APT ; then rm --verbose /tmp/google-chrome.deb ; fi
 
@@ -368,7 +390,7 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes google-chrome-stable ; fi
 # Install google-earth on -none
 # Explore the planet.
 # Web app: https://earth.google.com
-if $GUI && $APT ; then wget --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb ; fi
+if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes /tmp/google-earth.deb ; fi
 if $GUI && $APT ; then rm --verbose /tmp/google-earth.deb ; fi
 
@@ -440,18 +462,25 @@ if $GUI && $RPM ; then echo 'The krita app is not available.' ; fi
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
 # Reboot required!
-# Dpkg::Options to prevent interaction while restoring /etc/libvirt configuration files.
+# Dpkg::Options to prevent interaction while restoring /etc/libvirt
+# configuration files.
 if $GUI && $APT ; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager ; fi
 if $GUI && $APT ; then sudo usermod --append --groups libvirt,libvirt-qemu karel ; fi
-# Prevent "Error starting domain: Requested operation is not valid: network 'default' is not active".
+# Prevent "Error starting domain: Requested operation is not valid: network
+# 'default' is not active".
 if $GUI && $APT ; then sudo virsh --connect=qemu:///system net-autostart default ; fi
-# Check network 'default' with: sudo virsh --connect=qemu:///system net-info default (should output 'Autostart: yes')
+# Check network 'default' with
+# "sudo virsh --connect=qemu:///system net-info default", should output
+# 'Autostart: yes'.
 
 if $GUI && $RPM ; then sudo dnf groupinstall "Virtualization Host" ; fi
 if $GUI && $RPM ; then sudo systemctl enable --now libvirtd ; fi
-# Prevent "Error starting domain: Requested operation is not valid: network 'default' is not active".
+# Prevent "Error starting domain: Requested operation is not valid: network
+# 'default' is not active".
 if $GUI && $RPM ; then sudo virsh --connect=qemu:///system net-autostart default ; fi
-# Check network 'default' with: sudo virsh --connect=qemu:///system net-info default (should output 'Autostart: yes')
+# Check network 'default' with
+# "sudo virsh --connect=qemu:///system net-info default", should output
+# 'Autostart: yes'.
 
 # Remove kvm from pc06 pc07
 # Kernel-based Virtual Machine.
@@ -645,8 +674,8 @@ if $RPM ; then sudo dnf remove --assumeyes spice-vdagent ; fi
 # Install spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
-if $GUI && $APT ; then wget --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg ; fi
-if $GUI && $APT ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list ; fi
+if $GUI && $APT ; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg ; fi
+if $GUI && $APT ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null ; fi
 if $GUI && $APT ; then sudo apt-get update ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes spotify-client ; fi
 
@@ -709,11 +738,12 @@ if $RPM ; then sudo dnf remove --assumeyes bash-completion ; fi
 # Install teamviewer on *
 # Remote desktop.
 # Web app: https://web.teamviewer.com
-if $GUI && $APT ; then wget --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb ; fi
+if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes /tmp/teamviewer.deb ; fi
 if $GUI && $APT ; then rm --verbose /tmp/teamviewer.deb ; fi
 
-# SKIP: Error: Failed to download metadata for repo 'teamviewer': repomd.xml GPG signature verification error: Bad GPG signature
+# SKIP Error: Failed to download metadata for repo 'teamviewer': repomd.xml GPG
+# signature verification error: Bad GPG signature
 # if $GUI && $RPM ; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm ; fi
 
 # Remove teamviewer from *
@@ -805,8 +835,9 @@ if id toos ; then sudo userdel --remove toos ; fi
 
 # Install virtualbox on pc-van-hugo
 # Virtualization.
-# VirtualBox Guest user Additions ISO are in: /usr/share/virtualbox/
-# If the installation hangs or VBox does not work, check the virtualization settings in the BIOS/UEFI.
+# VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
+# If the installation hangs or VBox does not work, check the virtualization
+# settings in the BIOS/UEFI.
 if $GUI && $APT ; then echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso ; fi
 
@@ -814,7 +845,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes VirtualBox ; fi
 
 # Remove virtualbox from pc-van-hugo
 # Virtualization.
-# VirtualBox Guest user Additions ISO are in: /usr/share/virtualbox/
+# VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes VirtualBox ; fi
 
@@ -834,14 +865,14 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes vlc ; fi
 # Editor.
 # Web app: https://vscode.dev
 if $GUI && $APT ; then sudo apt-get install --assume-yes apt-transport-https ; fi
-if $GUI && $APT ; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg ; fi
-if $GUI && $APT ; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list ; fi
+if $GUI && $APT ; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg ; fi
+if $GUI && $APT ; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null ; fi
 if $GUI && $APT ; then sudo apt-get update ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes code ; fi
 if $GUI && $APT ; then sudo update-alternatives --set editor /usr/bin/code ; fi
 
 if $GUI && $RPM ; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc ; fi
-if $GUI && $RPM ; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo ; fi
+if $GUI && $RPM ; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes code ; fi
 
 # Remove vscode from pc01 pc06 pc07
@@ -858,12 +889,12 @@ if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo* ;
 # Install webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
-if $GUI && $APT ; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
+if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
 if $GUI && $APT ; then sudo sh /tmp/setup-repos.sh --force; fi
 if $GUI && $APT ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes webmin ; fi
 
-if $GUI && $RPM ; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
+if $GUI && $RPM ; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
 if $GUI && $RPM ; then sudo sh /tmp/setup-repos.sh --force ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes webmin ; fi
