@@ -803,34 +803,34 @@ if $RPM ; then sudo dnf remove --assumeyes usbutils ; fi
 
 # Install user-guest on -none
 # Add guest user.
-if ! id "$(gettext 'guest')" ; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" ; fi
-if id "$(gettext 'guest')" ; then sudo passwd --delete "$(gettext 'guest')" ; fi
+if ! id "$(gettext 'guest')" &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" ; fi
+if id "$(gettext 'guest')" &> /dev/null ; then sudo passwd --delete "$(gettext 'guest')" ; fi
 
 # Remove user-guest from -none
 # Remove guest user.
-sudo userdel --remove "$(gettext 'guest')"
+if id "$(gettext 'guest')" &> /dev/null ; then sudo userdel --remove "$(gettext 'guest')" ; fi
 
 
 # Install user-karel on pc01
 # Add user Karel.
-if ! id karel ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel ; fi
-if id karel ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel ; fi
-if id karel ; then sudo passwd --delete --expire karel ; fi
+if ! id karel &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel ; fi
+if id karel &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel ; fi
+if id karel &> /dev/null ; then sudo passwd --delete --expire karel ; fi
 
 # Remove user-karel from pc01
 # Remove user Karel.
-if id karel ; then sudo userdel --remove karel ; fi
+if id karel &> /dev/null ; then sudo userdel --remove karel ; fi
 
 
 # Install user-toos on Laptop
 # Add user Toos.
-if ! id toos ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos ; fi
-if id toos ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos ; fi
-if id toos ; then sudo passwd --delete --expire toos ; fi
+if ! id toos &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos ; fi
+if id toos &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos ; fi
+if id toos &> /dev/null ; then sudo passwd --delete --expire toos ; fi
 
 # Remove user-toos from Laptop
 # Remove user Toos.
-if id toos ; then sudo userdel --remove toos ; fi
+if id toos &> /dev/null ; then sudo userdel --remove toos ; fi
 
 
 # Install virtualbox on pc-van-hugo
