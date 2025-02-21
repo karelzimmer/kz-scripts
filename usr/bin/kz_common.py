@@ -75,8 +75,8 @@ else:
 
 KNOWN_DESKTOP_ENVIRONMENT: str = ''
 KNOWN_DESKTOP_ENVIRONMENTS: list[str] = ["cinnamon-session", "gnome-session",
-                                        "lxqt-session", "mate-session",
-                                        "xfce4-session", "ksmserver"]
+                                         "lxqt-session", "mate-session",
+                                         "xfce4-session", "ksmserver"]
 for KNOWN_DESKTOP_ENVIRONMENT in KNOWN_DESKTOP_ENVIRONMENTS:
     if subprocess.run(f'type {KNOWN_DESKTOP_ENVIRONMENT}', shell=True,
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
