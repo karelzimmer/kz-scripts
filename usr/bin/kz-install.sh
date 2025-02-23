@@ -169,29 +169,6 @@ if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes cups-backend-bjn
 if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
 
 
-# Install dash-to-dock on *
-# Desktop dock.
-# Reboot required!
-# Additional testing is needed because Ubuntu provides
-# gnome-shell-extension-dashtodock as a virtual package
-# which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock ; fi
-if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
-
-if $GUI && $RPM ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
-
-# Remove dash-to-dock from *
-# Desktop dock.
-# Reboot required!
-# Additional testing is needed because Ubuntu provides
-# gnome-shell-extension-dashtodock as a virtual package
-# which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
-if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
-
-if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
-
-
 # Install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) to prevent the log gets flooded with
