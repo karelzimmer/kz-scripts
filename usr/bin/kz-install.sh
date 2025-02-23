@@ -5,8 +5,8 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# To manually run a command line, first run "source kz_common.sh".
-# To learn more about the format of this install file, run "man kz install.sh".
+# Use "source kz_common.sh" before manually run a command line.
+# Use "man kz install.sh" to learn more about the format of this file.
 
 # First install app disabled-apport, then app update-system.
 # The rest of the apps are in alphabetical order of app name.

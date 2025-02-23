@@ -5,9 +5,9 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# To manually run a command line, first run "source kz_common.sh".
-# To learn more about the format of this setup file, run "man kz setup.sh".
-#
+# Use "source kz_common.sh" before manually run a command line.
+# Use "man kz setup.sh" to learn more about the format of this file.
+
 # The apps are in alphabetical order of app name.
 
 # Setup anydesk on pc06 pc07
