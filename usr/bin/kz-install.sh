@@ -33,6 +33,7 @@ if $APT && type snap &> /dev/null ; then sudo snap refresh ; fi
 
 if $RPM ; then sudo dnf check-update --refresh || true ; fi
 if $RPM ; then sudo dnf upgrade --assumeyes --refresh ; fi
+if $RPM && type snap &> /dev/null ; then sudo snap refresh ; fi
 
 
 # Remove update-system from *
