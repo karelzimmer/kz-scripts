@@ -27,14 +27,7 @@ if systemctl cat apport &> /dev/null ; then sudo systemctl enable --now apport.s
 # Install update-system on *
 # Update system.
 # This may take a while...
-if $APT ; then sudo apt-get update ; fi
-if $APT ; then sudo apt-get upgrade --assume-yes ; fi
-if $APT && type snap &> /dev/null ; then sudo snap refresh ; fi
-
-if $RPM ; then sudo dnf check-update --refresh || true ; fi
-if $RPM ; then sudo dnf upgrade --assumeyes --refresh ; fi
-if $RPM && type snap &> /dev/null ; then sudo snap refresh ; fi
-
+kz-update
 
 # Remove update-system from *
 # Update system.

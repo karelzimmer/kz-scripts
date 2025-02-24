@@ -142,6 +142,12 @@ def perform_rpm_update() -> None:
     COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(COMMAND)
 
+    if subprocess.run('type snap', shell=True,
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      executable='bash').returncode == kz_common.OK:
+        COMMAND = 'sudo snap refresh'
+        perform_command(COMMAND)
+
 
 def perform_rpm_cleanup() -> None:
     """
