@@ -67,8 +67,8 @@ if subprocess.run("grep --quiet --regexp='debian' /etc/os-release", shell=True,
                   executable='bash').returncode == OK:
     APT = True
 elif subprocess.run("grep --quiet --regexp='rhel' /etc/os-release", shell=True,
-                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                  executable='bash').returncode == OK:
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                    executable='bash').returncode == OK:
     RPM = True
 else:
     print(_('fatal: unknown distribution'))
