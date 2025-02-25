@@ -100,12 +100,10 @@ def process_input(OPTION_GUI: bool = False) -> None:
     """
     This function processes the script options and arguments.
     """
-    COMMAND: str = ''
+    COMMAND: str = 'nmcli device wifi show-password'
     NMCLI_OUTPUT: str = ''
-
     TEXT: str = f"{_('Record this data to connect to the wireless network.')}"
     TEXT += '\n'
-    COMMAND = 'nmcli device wifi show-password'
 
     if OPTION_GUI:
         try:

@@ -49,7 +49,8 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
-if subprocess.run('type systemd', executable='bash',
+COMMAND: str = 'type systemd'
+if subprocess.run(COMMAND, executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
     print(_('fatal: no systemd available'))
@@ -62,14 +63,13 @@ if not os.path.exists('/etc/os-release'):
 
 APT: bool = False
 RPM: bool = False
-
-if subprocess.run("grep --quiet --regexp='debian' /etc/os-release",
-                  executable='bash',
+COMMAND1: str = "grep --quiet --regexp='debian' /etc/os-release"
+COMMAND2: str = "grep --quiet --regexp='rhel' /etc/os-release"
+if subprocess.run(COMMAND1, executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode == OK:
     APT = True
-elif subprocess.run("grep --quiet --regexp='rhel' /etc/os-release",
-                    executable='bash',
+elif subprocess.run(COMMAND2, executable='bash',
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                     shell=True).returncode == OK:
     RPM = True
@@ -83,7 +83,8 @@ KNOWN_DESKTOP_ENVIRONMENTS: list[str] = ["cinnamon-session", "gnome-session",
                                          "xfce4-session", "ksmserver"]
 GUI: bool = False
 for KNOWN_DESKTOP_ENVIRONMENT in KNOWN_DESKTOP_ENVIRONMENTS:
-    if subprocess.run(f'type {KNOWN_DESKTOP_ENVIRONMENT}', executable='bash',
+    COMMAND = f'type {KNOWN_DESKTOP_ENVIRONMENT}'
+    if subprocess.run(COMMAND, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == OK:
         GUI = True
@@ -116,7 +117,8 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         logmsg(PROGRAM_NAME, TEXT)
 
         try:
-            subprocess.run(EXEC_SUDO, shell=True, check=True)
+            subprocess.run(EXEC_SUDO, executable='bash',
+                           shell=True, check=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_ID)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
@@ -139,11 +141,11 @@ def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str) -> bool:
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.
     """
+    COMMAND: str = 'groups $USER | grep --quiet --regexp=sudo --regexp=wheel'
     if os.getuid() == 0:
         return True
     try:
-        subprocess.run('groups $USER | grep --quiet --regexp=sudo \
-                       --regexp=wheel', shell=True, check=True)
+        subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception:
         TEXT: str = _('Already performed by the administrator.')
         infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
@@ -158,17 +160,15 @@ def check_apt_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     the next check if so.
     """
     CHECK_WAIT: int = 10
+    COMMAND: str = 'sudo fuser --silent /var/cache/debconf/config.dat '
+    COMMAND += '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*'
 
     if RPM:
         return OK
 
     while True:
         try:
-            subprocess.run('sudo fuser '
-                           '--silent '
-                           '/var/cache/debconf/config.dat '
-                           '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/'
-                           'lock*', executable='bash',
+            subprocess.run(COMMAND, executable='bash',
                            shell=True, check=True)
         except Exception:
             break
@@ -256,11 +256,14 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function displays the manual page..
     """
-    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
+    PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
+    COMMAND1: str = f'yelp man:{PROGRAM_ID}'
+    COMMAND2: str = f'man --pager=cat {PROGRAM_NAME}'
 
     if GUI:
         try:
-            subprocess.run(f'yelp man:{PROGRAM_ID}', stderr=subprocess.DEVNULL,
+            subprocess.run(COMMAND1, executable='bash',
+                           stderr=subprocess.DEVNULL,
                            shell=True, check=True,)
         except Exception as exc:
             TEXT: str = str(exc)
@@ -273,8 +276,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
             return OK
     else:
         try:
-            subprocess.run(f'man --pager=cat {PROGRAM_NAME}', shell=True,
-                           check=True)
+            subprocess.run(COMMAND2, executable='bash', shell=True, check=True)
         except Exception as exc:
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)

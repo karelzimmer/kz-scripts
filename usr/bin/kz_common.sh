@@ -82,8 +82,8 @@ for KNOWN_DESKTOP_ENVIRONMENT in $KNOWN_DESKTOP_ENVIRONMENTS; do
         GUI=true
     fi
 done
-unset KNOWN_DESKTOP_ENVIRONMENT
 readonly GUI
+unset KNOWN_DESKTOP_ENVIRONMENT
 
 
 ###############################################################################
