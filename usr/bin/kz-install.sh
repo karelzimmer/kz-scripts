@@ -26,8 +26,7 @@ if systemctl cat apport &> /dev/null ; then sudo systemctl enable --now apport.s
 
 # Install update-system on *
 # Update system.
-# This may take a while...
-kz-update
+kz-update # This may take a while...
 
 # Remove update-system from *
 # Update system.

@@ -457,12 +457,12 @@ function process_command_file() {
                         "$APP_TOT_NUM"      \
                         "$APP_NAME"
                 ;;
-            '' )
-                # Empty line can't be processed.
+            '' | '#'* )
+                # Empty or comment line.
                 continue
                 ;;
             * )
-                # Process command record or comment line.
+                # Process command record.
                 NO_COMMANDS_FOUND=false
                 execute_command "$COMMAND_RECORD"
                 ;;
