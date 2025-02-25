@@ -59,17 +59,15 @@ if ! source /etc/os-release 2> >(
     exit $ERR
 fi
 
-readonly KNOWN_APT_DISTROS='debian ubuntu'
-readonly KNOWN_RPM_DISTROS='almalinux rocky'
 declare APT=false
 declare RPM=false
-if [[ $KNOWN_APT_DISTROS =~ $ID ]]; then
+if grep --quiet --regexp='debian' /etc/os-release; then
     APT=true
-elif [[ $KNOWN_RPM_DISTROS =~ $ID ]]; then
+elif grep --quiet --regexp='rhel' /etc/os-release; then
     RPM=true
 else
     rm --force --verbose getkz getkz.{1..99} >&2
-    printf '%s\n' "$(eval_gettext "fatal: \$ID: unknown distribution")" >&2
+    printf '%s\n' "$(gettext "fatal: unknown distribution")" >&2
     exit $ERR
 fi
 readonly APT
@@ -84,6 +82,7 @@ for KNOWN_DESKTOP_ENVIRONMENT in $KNOWN_DESKTOP_ENVIRONMENTS; do
         GUI=true
     fi
 done
+unset KNOWN_DESKTOP_ENVIRONMENT
 readonly GUI
 
 

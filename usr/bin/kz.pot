@@ -38,8 +38,7 @@ msgstr ""
 msgid "fatal: no os release available"
 msgstr ""
 
-#, sh-format
-msgid "fatal: $ID: unknown distribution"
+msgid "fatal: unknown distribution"
 msgstr ""
 
 msgid "Press the Enter key to continue [Enter]: "

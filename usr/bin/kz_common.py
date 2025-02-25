@@ -49,7 +49,7 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
-if subprocess.run(f'type systemd', shell=True,
+if subprocess.run('type systemd', shell=True,
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   executable='bash').returncode != OK:
     print(_('fatal: no systemd available'))
@@ -60,23 +60,25 @@ if not os.path.exists('/etc/os-release'):
     print(_('fatal: no os release available'))
     sys.exit(ERR)
 
-KNOWN_APT_DISTROS: str = 'debian ubuntu'
-KNOWN_RPM_DISTROS: str = 'almalinux rocky'
 APT: bool = False
 RPM: bool = False
-GUI: bool = False
-if distro.id() in KNOWN_APT_DISTROS:
+if subprocess.run("grep --quiet --regexp='debian' /etc/os-release", shell=True,
+                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                  executable='bash').returncode == OK:
     APT = True
-elif distro.id() in KNOWN_RPM_DISTROS:
+elif subprocess.run("grep --quiet --regexp='rhel' /etc/os-release", shell=True,
+                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                  executable='bash').returncode == OK:
     RPM = True
 else:
-    print(_('fatal: {}: unknown distribution').format(distro.id()))
+    print(_('fatal: unknown distribution'))
     sys.exit(ERR)
 
 KNOWN_DESKTOP_ENVIRONMENT: str = ''
 KNOWN_DESKTOP_ENVIRONMENTS: list[str] = ["cinnamon-session", "gnome-session",
                                          "lxqt-session", "mate-session",
                                          "xfce4-session", "ksmserver"]
+GUI: bool = False
 for KNOWN_DESKTOP_ENVIRONMENT in KNOWN_DESKTOP_ENVIRONMENTS:
     if subprocess.run(f'type {KNOWN_DESKTOP_ENVIRONMENT}', shell=True,
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,

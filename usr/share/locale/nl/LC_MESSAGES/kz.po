@@ -38,9 +38,8 @@ msgstr "fataal: geen systemd beschikbaar"
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#, sh-format
-msgid "fatal: $ID: unknown distribution"
-msgstr "fataal: $ID: onbekende distributie"
+msgid "fatal: unknown distribution"
+msgstr "fataal: onbekende distributie"
 
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
