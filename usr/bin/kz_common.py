@@ -49,9 +49,9 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
-if subprocess.run('type systemd', shell=True,
+if subprocess.run('type systemd', executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                  executable='bash').returncode != OK:
+                  shell=True).returncode != OK:
     print(_('fatal: no systemd available'))
     sys.exit(ERR)
 
@@ -62,13 +62,16 @@ if not os.path.exists('/etc/os-release'):
 
 APT: bool = False
 RPM: bool = False
-if subprocess.run("grep --quiet --regexp='debian' /etc/os-release", shell=True,
+
+if subprocess.run("grep --quiet --regexp='debian' /etc/os-release",
+                  executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                  executable='bash').returncode == OK:
+                  shell=True).returncode == OK:
     APT = True
-elif subprocess.run("grep --quiet --regexp='rhel' /etc/os-release", shell=True,
+elif subprocess.run("grep --quiet --regexp='rhel' /etc/os-release",
+                    executable='bash',
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                    executable='bash').returncode == OK:
+                    shell=True).returncode == OK:
     RPM = True
 else:
     print(_('fatal: unknown distribution'))
@@ -80,9 +83,9 @@ KNOWN_DESKTOP_ENVIRONMENTS: list[str] = ["cinnamon-session", "gnome-session",
                                          "xfce4-session", "ksmserver"]
 GUI: bool = False
 for KNOWN_DESKTOP_ENVIRONMENT in KNOWN_DESKTOP_ENVIRONMENTS:
-    if subprocess.run(f'type {KNOWN_DESKTOP_ENVIRONMENT}', shell=True,
+    if subprocess.run(f'type {KNOWN_DESKTOP_ENVIRONMENT}', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      executable='bash').returncode == OK:
+                      shell=True).returncode == OK:
         GUI = True
 
 
@@ -165,8 +168,8 @@ def check_apt_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
                            '--silent '
                            '/var/cache/debconf/config.dat '
                            '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/'
-                           'lock*',
-                           shell=True, executable='bash', check=True)
+                           'lock*', executable='bash',
+                           shell=True, check=True)
         except Exception:
             break
         else:
@@ -191,7 +194,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
                                 --height    100         \
                                 --title     "{TITLE}"   \
                                 --text      "{TEXT}"'
-        subprocess.run(COMMAND, shell=True, check=True, executable='bash')
+        subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     else:
         print(f'\n{RED}{TEXT}{NORMAL}')
 
@@ -208,7 +211,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
                                 --height    100         \
                                 --title     "{TITLE}"   \
                                 --text      "{TEXT}"'
-        subprocess.run(COMMAND, shell=True, check=True, executable='bash')
+        subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     else:
         print(f'{TEXT}')
 
@@ -257,8 +260,8 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
 
     if GUI:
         try:
-            subprocess.run(f'yelp man:{PROGRAM_ID}', shell=True, check=True,
-                           stderr=subprocess.DEVNULL)
+            subprocess.run(f'yelp man:{PROGRAM_ID}', stderr=subprocess.DEVNULL,
+                           shell=True, check=True,)
         except Exception as exc:
             TEXT: str = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
