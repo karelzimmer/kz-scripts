@@ -306,13 +306,13 @@ function backup_setting_users() {
     if $GUI; then
         TEXT="$(gettext 'Additional users can be added manually:')
 
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
-on Users.
+$(gettext "1. Type 'user' on the activities overview[1] and click behind \
+Settings on Users.
 2. Click on Unlock and then Add User.
-3. Enter Name <user> and Username <username>.
+3. Enter Name <user> and Username <username>.")
 
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
-(Chromebook).")
+$(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
+click on Activities at the top left.")
 
 $USERS_LIST
 $GROUPS_LIST"
@@ -364,13 +364,14 @@ function backup_setting_avatar() {
     logmsg 'Save instructions for restoring the avatar...'
     TEXT="$(gettext "To set the users avatar:
 
-1. Press the Super key[1], type 'user' and click behind Settings on Users.
+1. Type 'user' on the activities overview[1] and click behind Settings on \
+Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
-4. Select avatar in Personal folder / Settings, or another picture file.
+4. Select avatar in Personal folder / Settings, or another picture file.")
 
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
-(Chromebook).")"
+$(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
+click on Activities at the top left.")"
 
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
 }
@@ -403,12 +404,12 @@ function backup_setting_desktop() {
 
     TEXT="$(gettext "To set the desktop background:
 
-1. Press the Super key[1], type 'file' and click on Files.
+1. Type 'file' on the activities overview[1] and click on Files.
 2. Open the folder containing the desired image.
-3. Right-click on the desired image and choose Set as Background.
+3. Right-click on the desired image and choose Set as Background.")
 
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
-(Chromebook).")"
+$(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
+click on Activities at the top left.")"
 
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
 }
