@@ -77,9 +77,10 @@ else:
     sys.exit(ERR)
 
 KNOWN_DESKTOP_ENVIRONMENT: str = ''
-KNOWN_DESKTOP_ENVIRONMENTS: list[str] = ["cinnamon-session", "gnome-session",
-                                         "lxqt-session", "mate-session",
-                                         "xfce4-session", "ksmserver"]
+# Python < 3.9 cannot use ': list[str]'.
+KNOWN_DESKTOP_ENVIRONMENTS = ["cinnamon-session", "gnome-session",
+                              "lxqt-session", "mate-session", "xfce4-session",
+                              "ksmserver"]
 GUI: bool = False
 for KNOWN_DESKTOP_ENVIRONMENT in KNOWN_DESKTOP_ENVIRONMENTS:
     COMMAND = f'type {KNOWN_DESKTOP_ENVIRONMENT}'
