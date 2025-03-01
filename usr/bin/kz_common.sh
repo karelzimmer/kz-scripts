@@ -46,7 +46,7 @@ readonly RED='\033[1;31m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
-if ! type systemd &> /dev/null; then
+if ! type systemctl &> /dev/null; then
     rm --force getkz getkz.{1..99}
     printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
     exit $ERR

@@ -49,7 +49,7 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
-COMMAND: str = 'type systemd'
+COMMAND: str = 'type systemctl'
 if subprocess.run(COMMAND, executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
