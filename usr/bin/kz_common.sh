@@ -51,9 +51,8 @@ if ! type systemctl &> /dev/null; then
     printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
     exit $ERR
 fi
-# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-if ! source /etc/os-release 2> >(
-                systemd-cat --identifier=$MODULE_NAME --priority=debug); then
+
+if ! [[ -f /etc/os-release ]]; then
     rm --force getkz getkz.{1..99}
     printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
     exit $ERR

@@ -56,7 +56,6 @@ if subprocess.run(COMMAND, executable='bash',
     print(_('fatal: no systemd available'))
     sys.exit(ERR)
 
-# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if not os.path.exists('/etc/os-release'):
     print(_('fatal: no os release available'))
     sys.exit(ERR)
