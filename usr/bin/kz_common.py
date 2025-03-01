@@ -13,7 +13,6 @@ This module provides access to global constants and functions.
 # Imports
 ###############################################################################
 
-import distro
 import gettext
 import os
 import subprocess
