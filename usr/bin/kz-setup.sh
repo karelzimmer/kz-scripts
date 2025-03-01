@@ -39,7 +39,6 @@ if $GUI ; then kz-desktop --addaft=kz-cockpit ; fi
 # Web console.
 # Web app: https://localhost:9090
 if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
-if $GUI ; then rm --force --verbose ~/.local/share/applications/kz-cockpit.desktop ; fi
 
 
 # Setup dash-to-dock on pc07
@@ -194,7 +193,7 @@ if $GUI ; then echo 'snap' > ~/.hidden ; fi
 
 # Reset hide-files on *
 # Hide files.
-if $GUI ; then rm --force --verbose ~/.hidden ; fi
+if $GUI ; then rm --force ~/.hidden ; fi
 
 
 # Setup kvm on pc06 pc07
@@ -215,12 +214,12 @@ if [[ ! -d ~/lynis ]] ; then git clone https://github.com/CISOfy/lynis ~/lynis ;
 
 # Reset lynis on -none
 # Security auditing.
-rm --force --recursive --verbose ~/lynis
+rm --force --recursive ~/lynis
 
 
 # Setup restore-thumbnails on -none
 # Restore thumbnails.
-rm --force --recursive --verbose ~/.cache/thumbnails/
+rm --force --recursive ~/.cache/thumbnails/
 
 # Reset restore-thumbnails on -none
 # Restore thumbnails.

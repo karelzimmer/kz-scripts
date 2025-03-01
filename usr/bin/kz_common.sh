@@ -47,14 +47,14 @@ readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
 if ! type systemd &> /dev/null; then
-    rm --force --verbose getkz getkz.{1..99} >&2
+    rm --force getkz getkz.{1..99}
     printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
     exit $ERR
 fi
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if ! source /etc/os-release 2> >(
                 systemd-cat --identifier=$MODULE_NAME --priority=debug); then
-    rm --force --verbose getkz getkz.{1..99} >&2
+    rm --force getkz getkz.{1..99}
     printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
     exit $ERR
 fi
@@ -66,7 +66,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then
 elif grep --quiet --regexp='rhel' /etc/os-release; then
     RPM=true
 else
-    rm --force --verbose getkz getkz.{1..99} >&2
+    rm --force getkz getkz.{1..99}
     printf '%s\n' "$(gettext "fatal: unknown distribution")" >&2
     exit $ERR
 fi
@@ -345,13 +345,10 @@ function term() {
     local TEXT=''
     local -i RC_DESC_SIGNALNO=0
 
-    rm --force --verbose "$KZ_PID_FILE" |& $LOGCMD
+    rm --force "$KZ_PID_FILE"
     if [[ $PROGRAM_ID = 'kz-get' ]]; then
         logmsg "Delete getkz files ($MODULE_NAME)..."
-        rm  --force         \
-            --verbose       \
-            getkz           \
-            getkz.{1..99}   |& $LOGCMD
+        rm --force getkz getkz.{1..99}
         logmsg "Deleted getkz files ($MODULE_NAME)."
     fi
 

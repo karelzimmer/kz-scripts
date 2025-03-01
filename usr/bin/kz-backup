@@ -225,7 +225,7 @@ function backup_settings() {
     fi
 
     # Remove previous version of settings folder.
-    rm --force --recursive --verbose "$HOME/kz-backup" |& $LOGCMD
+    rm --force --recursive "$HOME/kz-backup" |& $LOGCMD
 }
 
 
@@ -396,8 +396,7 @@ function backup_setting_desktop() {
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
     if [[ -f $INPUT_FILE && $INPUT_FILE != *.xml ]]; then
         logmsg 'Copy the desktop background...'
-        cp --preserve --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD ||
-            true
+        cp --preserve "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD || true
     fi
 
     logmsg 'Save instructions for setting the desktop background...'
@@ -522,7 +521,7 @@ $(gettext "Try creating the back up again.")"
         exit $ERR
     fi
 
-    rm --verbose "$EXCLUDE_FILE" |& $LOGCMD
+    rm --force "$EXCLUDE_FILE" |& $LOGCMD
 }
 
 

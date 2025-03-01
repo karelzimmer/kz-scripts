@@ -26,7 +26,7 @@ if    ! source "$KZ_COMMON_LOCAL_FILE"; then
         printf '%s\n' 'fatal: import common module failed' >&2
         exit 1
 fi
-rm      "$KZ_COMMON_LOCAL_FILE"
+rm      --force "$KZ_COMMON_LOCAL_FILE"
 
 
 ###############################################################################
