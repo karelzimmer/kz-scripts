@@ -76,8 +76,7 @@ else:
     sys.exit(ERR)
 
 KNOWN_DESKTOP_ENVIRONMENT: str = ''
-# AlmaLinux 8: TypeError: 'type' object is not subscriptable ==>
-# do not use ': list[str]', list[str] is only valid starting in Python 3.9.
+# AlmaLinux 8: TypeError: ': list[str]' is only valid from Python 3.9.
 KNOWN_DESKTOP_ENVIRONMENTS = ["cinnamon-session", "gnome-session",
                               "lxqt-session", "mate-session", "xfce4-session",
                               "ksmserver"]
