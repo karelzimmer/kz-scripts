@@ -76,8 +76,7 @@ else:
     sys.exit(ERR)
 
 KNOWN_DESKTOP_ENVIRONMENT: str = ''
-# AlmaLinux 8: TypeError: ': list[str]' is only valid from Python 3.9.
-KNOWN_DESKTOP_ENVIRONMENTS = ["cinnamon-session", "gnome-session",
+KNOWN_DESKTOP_ENVIRONMENTS: list[str] = ["cinnamon-session", "gnome-session",
                               "lxqt-session", "mate-session", "xfce4-session",
                               "ksmserver"]
 GUI: bool = False
