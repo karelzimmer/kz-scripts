@@ -155,8 +155,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     check_apt_package_manager |& $LOGCMD
 
     logmsg 'Install Debian package kz...'
-    # Ubuntu 18.04: E: Invalid operation reinstall ==> install --reinstall.
-    sudo    DEBIAN_FRONTEND=noninteractive  \
+\    sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
             --allow-downgrades              \
