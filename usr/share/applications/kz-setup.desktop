@@ -12,6 +12,6 @@ Comment=Set up apps and change user settings
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-setup --gui
-Icon=kz-setup
+Icon=kz
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

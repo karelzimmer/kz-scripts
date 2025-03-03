@@ -12,6 +12,6 @@ Comment=Install apps and changes system settings
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-install --gui
-Icon=kz-install
+Icon=kz
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

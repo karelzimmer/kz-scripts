@@ -12,6 +12,6 @@ Comment=Restores a backup copy of the Home folder
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-restore --gui
-Icon=kz-restore
+Icon=kz
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

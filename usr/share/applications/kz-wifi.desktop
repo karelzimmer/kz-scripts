@@ -12,6 +12,6 @@ Comment=Show WiFi details
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-wifi --gui
-Icon=kz-wifi
+Icon=kz
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

@@ -12,6 +12,6 @@ Comment=Make a backup copy of the Home folder
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-backup --gui
-Icon=kz-backup
+Icon=kz
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
