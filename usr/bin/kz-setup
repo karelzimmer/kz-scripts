@@ -476,9 +476,7 @@ function execute_command() {
         if [[ $CMD_SEQ_NUM -eq 1 ]]; then
             logmsg "$APP_NAME_LINE"
         fi
-        printf '%s\n' "#$APP_NAME_LINE
-
-$CMD"
+        printf '%s\n' "#$APP_NAME_LINE\n\n$CMD"
     else
         if [[ $CMD_SEQ_NUM -eq 1 ]]; then
             logmsg  "$APP_NAME_LINE"
