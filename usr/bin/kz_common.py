@@ -134,7 +134,8 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
             term(PROGRAM_NAME, RC)
 
 
-def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str) -> bool:
+def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                      OPTION_GUI: bool) -> bool:
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.
@@ -146,7 +147,7 @@ def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str) -> bool:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception:
         TEXT: str = _('Already performed by the administrator.')
-        infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
         return False
     else:
         return True
