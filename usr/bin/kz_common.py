@@ -92,7 +92,8 @@ for KNOWN_DESKTOP_ENVIRONMENT in KNOWN_DESKTOP_ENVIRONMENTS:
 # Functions
 ###############################################################################
 
-def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
+def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                OPTION_GUI: bool = False) -> None:
     """
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
@@ -100,7 +101,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     EXEC_SUDO: str = 'exec sudo '
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
-    if not become_root_check(PROGRAM_NAME, PROGRAM_DESC):
+    if not become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         RC: int = OK
         term(PROGRAM_NAME, RC)
 
