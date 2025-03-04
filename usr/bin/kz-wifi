@@ -105,6 +105,8 @@ def process_input(OPTION_GUI: bool = False) -> None:
     TEXT: str = f"{_('Record this data to connect to the wireless network.')}"
     TEXT += '\n'
 
+    kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
+
     if OPTION_GUI:
         try:
             NMCLI_OUTPUT = subprocess.run(COMMAND, executable='bash',
