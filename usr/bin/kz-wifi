@@ -105,7 +105,7 @@ def process_input(OPTION_GUI: bool = False) -> None:
     TEXT: str = f"{_('Use this data to connect to the wireless network.')}"
     TEXT += '\n'
 
-    kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
+    kz_common.become_root_check(PROGRAM_NAME, PROGRAM_DESC)
 
     if OPTION_GUI:
         try:
