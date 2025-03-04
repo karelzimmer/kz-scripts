@@ -46,8 +46,8 @@ if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
 # Additional testing is needed because Ubuntu provides
 # gnome-shell-extension-dashtodock as a virtual package
 # which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && gsettings list-keys gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com ; fi
-if $GUI && $APT && gsettings list-keys gnome-shell-extension-no-overview &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
+if $GUI && $APT && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com ; fi
+if $GUI && $APT && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
 
 if $GUI && $RPM ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
 if $GUI && $RPM ; then gnome-extensions enable no-overview@fthx ; fi
@@ -66,8 +66,8 @@ if $GUI && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/n
 # Additional testing is needed because Ubuntu provides
 # gnome-shell-extension-dashtodock as a virtual package
 # which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && gsettings list-keys gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com ; fi
-if $GUI && $APT && gsettings list-keys gnome-shell-extension-no-overview &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup  ; fi
+if $GUI && $APT && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com ; fi
+if $GUI && $APT && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup  ; fi
 
 if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
 if $GUI && $RPM ; then echo 'Goto https://extensions.gnome.org/extension/4099/no-overview/, install, and switch OFF' ; fi
