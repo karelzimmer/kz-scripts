@@ -900,7 +900,7 @@ msgstr ""
 msgid "Cleanup"
 msgstr ""
 
-msgid "Record this data to connect to the wireless network."
+msgid "Use this data to connect to the wireless network."
 msgstr ""
 
 msgid "No WiFi device found."

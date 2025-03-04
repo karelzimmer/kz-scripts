@@ -102,7 +102,7 @@ def process_input(OPTION_GUI: bool = False) -> None:
     """
     COMMAND: str = 'nmcli device wifi show-password'
     NMCLI_OUTPUT: str = ''
-    TEXT: str = f"{_('Record this data to connect to the wireless network.')}"
+    TEXT: str = f"{_('Use this data to connect to the wireless network.')}"
     TEXT += '\n'
 
     kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)

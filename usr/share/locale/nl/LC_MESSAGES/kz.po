@@ -1033,9 +1033,9 @@ msgstr "Bijwerken"
 msgid "Cleanup"
 msgstr "Opruimen"
 
-msgid "Record this data to connect to the wireless network."
+msgid "Use this data to connect to the wireless network."
 msgstr ""
-"Leg deze gegevens vast om verbinding te maken met het draadloze netwerk."
+"Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
