@@ -103,7 +103,6 @@ def process_input(OPTION_GUI: bool = False) -> None:
     COMMAND: str = 'nmcli device wifi show-password'
     NMCLI_OUTPUT: str = ''
     TEXT: str = f"{_('Use this data to connect to the wireless network.')}"
-    TEXT += '\n'
 
     if not kz_common.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         RC = kz_common.OK
@@ -122,16 +121,17 @@ def process_input(OPTION_GUI: bool = False) -> None:
         else:
             NMCLI_OUTPUT = NMCLI_OUTPUT.stdout  # type: ignore
             NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")  # type: ignore
-            TEXT = TEXT + '\n' + NMCLI_OUTPUT
+            TEXT = NMCLI_OUTPUT + TEXT
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     else:
-        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
             subprocess.run(COMMAND, executable='bash',
                            stderr=subprocess.DEVNULL, shell=True, check=True)
         except Exception:
             TEXT = _('No WiFi device found.')
+            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        else:
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
