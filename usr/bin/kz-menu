@@ -66,16 +66,16 @@ MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
 readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
 readonly -a  MENU2_ACTIONS=(
-            [1]="$(gettext 'Show WiFi information')"
-                "$(gettext 'Make backup')"
+            [1]="$(gettext 'Make backup')"
+                "$(gettext 'Show WiFi information')"
                 "$(gettext 'Install apps')"
                 "$(gettext 'Restore backup')"
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Go to installation menu')"
             )
 readonly -a  MENU2_DESCS=(
-            [1]='kz wifi'
-                'kz backup'
+            [1]='kz backup'
+                'kz wifi'
                 'kz install'
                 'kz restore'
                 'kz setup'
@@ -262,7 +262,6 @@ function process_menu1_choice1() {
     local TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
     local -a ROWS=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
-            "${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
         )
 
     process_commands
