@@ -13,15 +13,15 @@
 
 # Install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
-if systemctl cat apport &> /dev/null ; then sudo systemctl stop apport.service ; fi
-if systemctl cat apport &> /dev/null ; then sudo systemctl disable apport.service ; fi
-if systemctl cat apport &> /dev/null ; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport ; fi
-if systemctl cat apport &> /dev/null ; then sudo rm --force /var/crash/* ; fi
+sudo systemctl stop apport.service || true
+sudo systemctl disable apport.service || true
+sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport || true
+sudo rm --force /var/crash/* || true
 
 # Remove disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
-if systemctl cat apport &> /dev/null ; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport ; fi
-if systemctl cat apport &> /dev/null ; then sudo systemctl enable --now apport.service ; fi
+sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport || true
+sudo systemctl enable --now apport.service || true
 
 
 # Install update-system on *
@@ -29,10 +29,10 @@ if systemctl cat apport &> /dev/null ; then sudo systemctl enable --now apport.s
 # This may take a while...
 if $APT ; then sudo apt-get update ; fi
 if $APT ; then sudo apt-get upgrade --assume-yes ; fi
-if $APT && type snap &> /dev/null ; then sudo snap refresh ; fi
+if $APT ; then sudo snap refresh || true ; fi
 
 if $RPM ; then sudo dnf upgrade --assumeyes --refresh ; fi
-if $RPM && type snap &> /dev/null ; then sudo snap refresh ; fi
+if $RPM ; then sudo snap refresh || true ; fi
 
 # Remove update-system from *
 # Update system.
@@ -170,22 +170,16 @@ if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
 # Install dash-to-dock on pc07
 # Desktop dock.
 # Reboot required!
-# Additional testing is needed because Ubuntu provides
-# gnome-shell-extension-dashtodock as a virtual package
-# which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock ; fi
-if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
+if $GUI && $APT ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock || true ; fi
+if $GUI && $APT ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview || true ; fi
 
 if $GUI && $RPM ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
 # Remove dash-to-dock from pc07
 # Desktop dock.
 # Reboot required!
-# Additional testing is needed because Ubuntu provides
-# gnome-shell-extension-dashtodock as a virtual package
-# which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && apt-cache show gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
-if $GUI && $APT && apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
+if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock || true ; fi
+if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview || true ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
@@ -237,8 +231,8 @@ sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install dual-monitor on pc06
 # Preserve dual monitor settings.
-if [[ -f ~karel/.config/monitors.xml ]] ; then sudo cp --preserve ~karel/.config/monitors.xml ~gdm/.config/monitors.xml ; fi
-if [[ -f ~gdm/.config/monitors.xml ]] ; then sudo chown gdm:gdm ~gdm/.config/monitors.xml ; fi
+sudo cp --preserve ~karel/.config/monitors.xml ~gdm/.config/monitors.xml || true
+sudo chown gdm:gdm ~gdm/.config/monitors.xml || true
 
 # Remove dual-monitor from pc06
 # Remove dual monitor settings.
@@ -694,17 +688,17 @@ if $GUI && $RPM ; then echo 'The spotify web app cannot be removed.' ; fi
 if $APT ; then sudo apt-get install --assume-yes ssh ; fi
 if $RPM ; then sudo dnf install --assumeyes openssh ; fi
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts ; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts ; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='3a192.168.1.2   pc06' /etc/hosts ; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts ; fi
+sudo sed --in-place --expression='/^192.168.1./d'       /etc/hosts
+sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
+sudo sed --in-place --expression='3a192.168.1.2   pc06' /etc/hosts
+sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts
 # Check for remote root access.
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
 # Remove ssh from pc01 pc06 pc07
 # Secure SHell.
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts ; fi
+sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if $APT ; then sudo apt-get remove --purge --assume-yes ssh ; fi
 if $RPM ; then sudo dnf remove --assumeyes openssh ; fi
@@ -802,34 +796,34 @@ if $RPM ; then sudo dnf remove --assumeyes usbutils ; fi
 
 # Install user-guest on -none
 # Add guest user.
-if ! id "$(gettext 'guest')" &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" ; fi
-if id "$(gettext 'guest')" &> /dev/null ; then sudo passwd --delete "$(gettext 'guest')" ; fi
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
+sudo passwd --delete "$(gettext 'guest')" || true
 
 # Remove user-guest from -none
 # Remove guest user.
-if id "$(gettext 'guest')" &> /dev/null ; then sudo userdel --remove "$(gettext 'guest')" ; fi
+sudo userdel --remove "$(gettext 'guest')" || true
 
 
 # Install user-karel on pc01
 # Add user Karel.
-if ! id karel &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel ; fi
-if id karel &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel ; fi
-if id karel &> /dev/null ; then sudo passwd --delete --expire karel ; fi
+sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true
+sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel || true
+sudo passwd --delete --expire karel || true
 
 # Remove user-karel from pc01
 # Remove user Karel.
-if id karel &> /dev/null ; then sudo userdel --remove karel ; fi
+sudo userdel --remove karel || true
 
 
 # Install user-toos on Laptop
 # Add user Toos.
-if ! id toos &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos ; fi
-if id toos &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos ; fi
-if id toos &> /dev/null ; then sudo passwd --delete --expire toos ; fi
+sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true
+sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos || true
+sudo passwd --delete --expire toos || true
 
 # Remove user-toos from Laptop
 # Remove user Toos.
-if id toos &> /dev/null ; then sudo userdel --remove toos ; fi
+sudo userdel --remove toos || true
 
 
 # Install virtualbox on pc-van-hugo

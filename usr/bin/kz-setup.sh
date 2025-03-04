@@ -205,7 +205,7 @@ if $GUI ; then kz-desktop --delete=virt-manager ; fi
 
 # Setup lynis on -none
 # Security auditing.
-if [[ ! -d ~/lynis ]] ; then git clone https://github.com/CISOfy/lynis ~/lynis ; fi
+git clone https://github.com/CISOfy/lynis ~/lynis || true
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
