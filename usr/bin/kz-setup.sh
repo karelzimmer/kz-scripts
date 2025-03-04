@@ -205,23 +205,23 @@ if $GUI ; then kz-desktop --addaft=virt-manager ; fi
 if $GUI ; then kz-desktop --delete=virt-manager ; fi
 
 
-# Setup lynis on -none
+# Setup lynis on -none-
 # Security auditing.
 if [[ ! -d ~/lynis ]] ; then git clone https://github.com/CISOfy/lynis ~/lynis ; fi
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
 
-# Reset lynis on -none
+# Reset lynis on -none-
 # Security auditing.
 rm --force --recursive ~/lynis
 
 
-# Setup restore-thumbnails on -none
+# Setup restore-thumbnails on -none-
 # Restore thumbnails.
 rm --force --recursive ~/.cache/thumbnails/
 
-# Reset restore-thumbnails on -none
+# Reset restore-thumbnails on -none-
 # Restore thumbnails.
 echo 'App restore-thumbnails cannot be reset.'
 
