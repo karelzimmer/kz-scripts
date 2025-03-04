@@ -86,23 +86,23 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes anydesk ; fi
 if $GUI && $RPM ; then sudo rm --force /etc/yum.repos.d/AnyDesk-RHEL.repo* ; fi
 
 
-# Install apt on -none
+# Install apt on -none-
 # Package manager.
 if $APT ; then sudo apt-get install --assume-yes apt ; fi
 if $RPM ; then sudo dnf install --assumeyes apt ; fi
 
-# Remove apt from -none
+# Remove apt from -none-
 # Package manager.
 if $APT ; then echo 'The apt app cannot be removed from an APT system.' ; fi
 if $RPM ; then sudo dnf remove --assumeyes apt ; fi
 
 
-# Install backintime on -none
+# Install backintime on -none-
 # Backups/snapshots.
 if $GUI && $APT ; then sudo apt-get install --assume-yes backintime-qt ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes backintime-qt ; fi
 
-# Remove backintime from -none
+# Remove backintime from -none-
 # Backups/snapshots.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes backintime-qt ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes backintime-qt ; fi
@@ -206,13 +206,13 @@ if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 
-# Install disabled-fwupd on -none
+# Install disabled-fwupd on -none-
 # Disable FirmWare UPdate Daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove disabled-fwupd from -none
+# Remove disabled-fwupd from -none-
 # Disable FirmWare UPdate Daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
@@ -261,7 +261,7 @@ if $APT ; then sudo apt-get remove --purge --assume-yes fakeroot ; fi
 if $RPM ; then sudo dnf remove --assumeyes fakeroot ; fi
 
 
-# Install fdupes on -none
+# Install fdupes on -none-
 # Find duplicate files.
 if $APT ; then sudo apt-get install --assume-yes fdupes ; fi
 if $RPM ; then sudo dnf install --assumeyes fdupes ; fi
@@ -270,13 +270,13 @@ if $RPM ; then sudo dnf install --assumeyes fdupes ; fi
 # $ fdupes -rd /path/to/folder  # Delete, interactively, from /path/to/folder
 # $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
 
-# Remove fdupes from -none
+# Remove fdupes from -none-
 # Find duplicate files.
 if $APT ; then sudo apt-get remove --purge --assume-yes fdupes ; fi
 if $RPM ; then sudo dnf remove --assumeyes fdupes ; fi
 
 
-# Install force-x11 on -none
+# Install force-x11 on -none-
 # Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
@@ -285,7 +285,7 @@ if $GUI && $RPM ; then sudo sed --in-place --expression='s/^#WaylandEnable=false
 # To check, after reboot (!), execute "echo $XDG_SESSION_TYPE", should output
 # 'x11'.
 
-# Remove force-x11 from -none
+# Remove force-x11 from -none-
 # Enable choice on user login screen for Xorg/X11 or Wayland.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
@@ -380,7 +380,7 @@ if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes google-chrome-st
 if $GUI && $RPM ; then sudo dnf remove --assumeyes google-chrome-stable ; fi
 
 
-# Install google-earth on -none
+# Install google-earth on -none-
 # Explore the planet.
 # Web app: https://earth.google.com
 if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb ; fi
@@ -390,7 +390,7 @@ if $GUI && $APT ; then rm /tmp/google-earth.deb ; fi
 if $GUI && $RPM ; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm ; fi
 
-# Remove google-earth from -none
+# Remove google-earth from -none-
 # Explore the planet.
 # Web app: https://earth.google.com
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes google-earth-pro-stable ; fi
@@ -567,7 +567,7 @@ if $APT ; then sudo apt-get remove --purge --assume-yes nmap ; fi
 if $RPM ; then sudo dnf remove --assumeyes nmap ; fi
 
 
-# Install ntfs on -none
+# Install ntfs on -none-
 # NTFS support.
 if $APT ; then sudo apt-get install --assume-yes ntfs-3g ; fi
 if $RPM ; then sudo dnf install --assumeyes ntfs-3g ntfsprogs ; fi
@@ -583,7 +583,7 @@ if $RPM ; then sudo dnf install --assumeyes ntfs-3g ntfsprogs ; fi
 # $ sudo -b ntfsfix /dev/sdba1  # Clear the bad sector list
 # $ sudo -d ntfsfix /dev/sdba1  # Clear the volume dirty flag
 
-# Remove ntfs from -none
+# Remove ntfs from -none-
 # NTFS support.
 if $APT ; then sudo apt-get remove --purge --assume-yes ntfs-3g ; fi
 if $RPM ; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs ; fi
@@ -616,13 +616,13 @@ if $APT ; then sudo apt-get remove --purge --assume-yes rpm ; fi
 if $RPM ; then echo 'The rpm app cannot be removed.' ; fi
 
 
-# Install simplescreenrecorder on -none
+# Install simplescreenrecorder on -none-
 # Screen recorder.
 # Requires the use of Xorg/X11.
 if $GUI && $APT ; then sudo apt-get install --assume-yes simplescreenrecorder ; fi
 if $GUI && $RPM ; then echo 'The simplescreenrecorder app is not available.' ; fi
 
-# Remove simplescreenrecorder from -none
+# Remove simplescreenrecorder from -none-
 # Screen recorder.
 # Required the use of Xorg/X11. Enable Wayland again?
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes simplescreenrecorder ; fi
@@ -794,12 +794,12 @@ if $APT ; then sudo apt-get remove --purge --assume-yes usbutils ; fi
 if $RPM ; then sudo dnf remove --assumeyes usbutils ; fi
 
 
-# Install user-guest on -none
+# Install user-guest on -none-
 # Add guest user.
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
 sudo passwd --delete "$(gettext 'guest')" || true
 
-# Remove user-guest from -none
+# Remove user-guest from -none-
 # Remove guest user.
 sudo userdel --remove "$(gettext 'guest')" || true
 
@@ -902,14 +902,14 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes webmin ; fi
 if $GUI && $RPM ; then sudo rm --force /etc/yum.repos.d/webmin.repo* ; fi
 
 
-# Install wine on -none
+# Install wine on -none-
 # Run Windows applications.
 if $GUI && $APT ; then sudo dpkg --add-architecture i386 ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes wine winetricks playonlinux ; fi
 
 if $GUI && $RPM ; then sudo dnf install --assumeyes wine playonlinux ; fi
 
-# Remove wine from -none
+# Remove wine from -none-
 # Run Windows applications.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes wine winetricks playonlinux ; fi
 if $GUI && $APT ; then sudo dpkg --remove-architecture i386 ; fi
