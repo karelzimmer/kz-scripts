@@ -480,7 +480,7 @@ function execute_command() {
 
     (( ++CMD_SEQ_NUM ))
 
-    check_apt_package_manager
+    check_package_manager
 
     if $OPTION_GUI; then
         if [[ $CMD_SEQ_NUM -eq 1 ]]; then

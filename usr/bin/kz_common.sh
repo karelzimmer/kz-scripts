@@ -138,13 +138,13 @@ function become_root_check() {
 }
 
 
-# This function checks for another running APT package manager and waits for
-# the next check if so.
-function check_apt_package_manager() {
+# This function checks for another running package manager and waits for the
+# next check if so.
+function check_package_manager() {
     local TEXT=''
     local -i CHECK_WAIT=10
 
-    if ! $APT; then
+    if $RPM; then
         return $OK
     fi
 

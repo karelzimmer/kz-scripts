@@ -154,10 +154,10 @@ def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
         return True
 
 
-def check_apt_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
+def check_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
-    This function checks for another running APT package manager and waits for
-    the next check if so.
+    This function checks for another running package manager and waits for the
+    next check if so.
     """
     CHECK_WAIT: int = 10
     COMMAND: str = 'sudo fuser --silent /var/cache/debconf/config.dat '

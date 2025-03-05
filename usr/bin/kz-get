@@ -152,7 +152,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
     logmsg  'Downloaded Debian package kz.'
 
-    check_apt_package_manager |& $LOGCMD
+    check_package_manager |& $LOGCMD
 
     logmsg 'Install Debian package kz...'
     sudo    DEBIAN_FRONTEND=noninteractive  \

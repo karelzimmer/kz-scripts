@@ -132,7 +132,7 @@ def perform_apt_cleanup() -> None:
 
 def perform_rpm_update() -> None:
     """
-    This function updates installed RPM packages.
+    This function updates installed RPM packages and snaps if installed.
     """
     TEXT: str = f"{kz_common.BOLD}{_('Update')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
@@ -171,7 +171,7 @@ def perform_command(COMMAND: str = '') -> None:
 
     TEXT: str = f'{kz_common.BOLD}{COMMAND}{kz_common.NORMAL}'
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-    kz_common.check_apt_package_manager(PROGRAM_NAME, PROGRAM_DESC)
+    kz_common.check_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception as exc:

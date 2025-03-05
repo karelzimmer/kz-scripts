@@ -300,7 +300,7 @@ function install_deb_package() {
 
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
-    check_apt_package_manager
+    check_package_manager
 
     # Copied from kz-get.
     # Progress indicator with growing [=>, [==>, etc. as long as the pid file
