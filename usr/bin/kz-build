@@ -112,7 +112,7 @@ $USAGE"
 function process_input() {
     local TEXT=''
 
-    if ! $APT; then
+    if ! $DEB; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
         exit $ERR

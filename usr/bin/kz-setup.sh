@@ -46,8 +46,8 @@ if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
 # Additional testing is needed because Ubuntu provides
 # gnome-shell-extension-dashtodock as a virtual package
 # which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com ; fi
-if $GUI && $APT && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
+if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com ; fi
+if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
 
 if $GUI && $RPM ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
 if $GUI && $RPM ; then gnome-extensions enable no-overview@fthx ; fi
@@ -66,8 +66,8 @@ if $GUI && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/n
 # Additional testing is needed because Ubuntu provides
 # gnome-shell-extension-dashtodock as a virtual package
 # which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $APT && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com ; fi
-if $GUI && $APT && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup  ; fi
+if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com ; fi
+if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup  ; fi
 
 if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
 if $GUI && $RPM ; then echo 'Goto https://extensions.gnome.org/extension/4099/no-overview/, install, and switch OFF' ; fi
@@ -106,7 +106,7 @@ if $GUI ; then kz-desktop --addbef=firefox_firefox ; fi
 
 # Setup gdebi on *
 # View and install deb files.
-if $GUI && $APT ; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package ; fi
+if $GUI && $DEB ; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package ; fi
 if $GUI && $RPM ; then echo 'App gdebi is not available.' ; fi
 
 # Reset gdebi on *
@@ -247,13 +247,13 @@ if $GUI ; then kz-desktop --delete=org.gnome.SoundJuicer ; fi
 # Setup spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
-if $GUI && $APT ; then kz-desktop --addaft=spotify ; fi
+if $GUI && $DEB ; then kz-desktop --addaft=spotify ; fi
 if $GUI && $RPM ; then kz-desktop --addaft=kz-spotify ; fi
 
 # Reset spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
-if $GUI && $APT ; then kz-desktop --delete=spotify ; fi
+if $GUI && $DEB ; then kz-desktop --delete=spotify ; fi
 if $GUI && $RPM ; then kz-desktop --delete=kz-spotify ; fi
 
 

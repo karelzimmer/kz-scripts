@@ -81,9 +81,9 @@ def process_input() -> None:
     """
     This function processes the script options and arguments.
     """
-    if kz_common.APT:
-        perform_apt_update()
-        perform_apt_cleanup()
+    if kz_common.DEB:
+        perform_deb_update()
+        perform_deb_cleanup()
     elif kz_common.RPM:
         perform_rpm_update()
         perform_rpm_cleanup()
@@ -94,7 +94,7 @@ def process_input() -> None:
         kz_common.term(PROGRAM_NAME, RC)
 
 
-def perform_apt_update() -> None:
+def perform_deb_update() -> None:
     """
     This function updates installed Debian packages and snaps if installed.
     """
@@ -116,7 +116,7 @@ def perform_apt_update() -> None:
         perform_command(COMMAND)
 
 
-def perform_apt_cleanup() -> None:
+def perform_deb_cleanup() -> None:
     """
     This function performs a Debian packages cleanup.
     """

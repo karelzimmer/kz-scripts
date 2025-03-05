@@ -107,8 +107,8 @@ function process_input() {
 
     become_root_check || exit $OK
     prepare_processing
-    if $APT; then
-        install_apt_package
+    if $DEB; then
+        install_deb_package
     elif $RPM; then
         install_rpm_package
     else
@@ -139,7 +139,7 @@ function prepare_processing() {
 
 
 # This function downloads and installs Debian package kz.
-function install_apt_package() {
+function install_deb_package() {
     local KZ_DEB_SITE_FILE="\
 https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     local KZ_DEB_LOCAL_FILE=''

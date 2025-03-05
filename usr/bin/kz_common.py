@@ -59,14 +59,14 @@ if not os.path.exists('/etc/os-release'):
     print(_('fatal: no os release available'))
     sys.exit(ERR)
 
-APT: bool = False
+DEB: bool = False
 RPM: bool = False
 COMMAND1: str = "grep --quiet --regexp='debian' /etc/os-release"
 COMMAND2: str = "grep --quiet --regexp='rhel' /etc/os-release"
 if subprocess.run(COMMAND1, executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode == OK:
-    APT = True
+    DEB = True
 elif subprocess.run(COMMAND2, executable='bash',
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                     shell=True).returncode == OK:

@@ -58,10 +58,10 @@ if ! [[ -f /etc/os-release ]]; then
     exit $ERR
 fi
 
-declare APT=false
+declare DEB=false
 declare RPM=false
 if grep --quiet --regexp='debian' /etc/os-release; then
-    APT=true
+    DEB=true
 elif grep --quiet --regexp='rhel' /etc/os-release; then
     RPM=true
 else
@@ -69,7 +69,7 @@ else
     printf '%s\n' "$(gettext "fatal: unknown distribution")" >&2
     exit $ERR
 fi
-readonly APT
+readonly DEB
 readonly RPM
 
 readonly KNOWN_DESKTOP_ENVIRONMENTS="cinnamon-session gnome-session \
@@ -363,7 +363,7 @@ function term() {
             RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
             ;;
         100 )
-            if $APT; then
+            if $DEB; then
                 RC_DESC='apt/dpkg exited with error'
             elif $RPM; then
                 RC_DESC='there are updates available'
