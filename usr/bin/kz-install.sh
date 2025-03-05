@@ -16,7 +16,7 @@
 if systemctl cat apport &> /dev/null ; then sudo systemctl stop apport.service ; fi
 if systemctl cat apport &> /dev/null ; then sudo systemctl disable apport.service ; fi
 if systemctl cat apport &> /dev/null ; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport ; fi
-if systemctl cat apport &> /dev/null ; then sudo rm --force /var/crash/* ; fi
+if systemctl cat apport &> /dev/null ; then sudo rm --force --verbose /var/crash/* ; fi
 
 # Remove disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
@@ -80,10 +80,10 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk ; fi
 # Incoming sessions are only possible when using Xorg/X11.
 # Web app: https://my.anydesk.com/v2
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes anydesk ; fi
-if $GUI && $APT ; then sudo rm --force /etc/apt/sources.list.d/anydesk*.list* ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list* ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes anydesk ; fi
-if $GUI && $RPM ; then sudo rm --force /etc/yum.repos.d/AnyDesk-RHEL.repo* ; fi
+if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo* ; fi
 
 
 # Install apt on -none-
@@ -237,12 +237,12 @@ sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install dual-monitor on pc06
 # Preserve dual monitor settings.
-if [[ -f ~karel/.config/monitors.xml ]] ; then sudo cp --preserve ~karel/.config/monitors.xml ~gdm/.config/monitors.xml ; fi
-if [[ -f ~gdm/.config/monitors.xml ]] ; then sudo chown gdm:gdm ~gdm/.config/monitors.xml ; fi
+if [[ -f ~karel/.config/monitors.xml ]] ; then sudo cp --preserve --verbose ~karel/.config/monitors.xml ~gdm/.config/monitors.xml ; fi
+if [[ -f ~gdm/.config/monitors.xml ]] ; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml ; fi
 
 # Remove dual-monitor from pc06
 # Remove dual monitor settings.
-sudo rm --force ~gdm/.config/monitors.xml
+sudo rm --force --verbose ~gdm/.config/monitors.xml
 
 
 # Install exiftool on pc06 pc07
@@ -375,7 +375,7 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-tweaks ; fi
 # Web browser.
 if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes /tmp/google-chrome.deb ; fi
-if $GUI && $APT ; then rm /tmp/google-chrome.deb ; fi
+if $GUI && $APT ; then rm --verbose /tmp/google-chrome.deb ; fi
 
 if $GUI && $RPM ; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm ; fi
@@ -391,7 +391,7 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes google-chrome-stable ; fi
 # Web app: https://earth.google.com
 if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes /tmp/google-earth.deb ; fi
-if $GUI && $APT ; then rm /tmp/google-earth.deb ; fi
+if $GUI && $APT ; then rm --verbose /tmp/google-earth.deb ; fi
 
 if $GUI && $RPM ; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm ; fi
@@ -606,7 +606,7 @@ if $RPM ; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-
 # Remove python from pc06 pc07
 # Programming language.
 if $APT ; then sudo apt-get remove --purge --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3 ; fi
-if $APT ; then sudo rm --force /usr/bin/pep8 /usr/bin/pip ; fi
+if $APT ; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip ; fi
 
 if $RPM ; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip ; fi
 
@@ -684,7 +684,7 @@ if $GUI && $RPM ; then echo 'The spotify app is available as a web app.' ; fi
 # Music and podcasts.
 # Web app: https://open.spotify.com
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes spotify-client ; fi
-if $GUI && $APT ; then sudo rm --force /etc/apt/sources.list.d/spotify*.list* ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify*.list* ; fi
 
 if $GUI && $RPM ; then echo 'The spotify web app cannot be removed.' ; fi
 
@@ -739,7 +739,7 @@ if $RPM ; then sudo dnf remove --assumeyes bash-completion ; fi
 # Web app: https://web.teamviewer.com
 if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes /tmp/teamviewer.deb ; fi
-if $GUI && $APT ; then rm /tmp/teamviewer.deb ; fi
+if $GUI && $APT ; then rm --verbose /tmp/teamviewer.deb ; fi
 
 # SKIP Error: Failed to download metadata for repo 'teamviewer': repomd.xml GPG
 # signature verification error: Bad GPG signature
@@ -878,11 +878,11 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes code ; fi
 # Editor.
 # Web app: https://vscode.dev
 if $GUI && $APT ; then sudo update-alternatives --remove editor /usr/bin/code ; fi
-if $GUI && $APT ; then sudo rm --force /etc/apt/sources.list.d/vscode*.list* ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/vscode*.list* ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes code ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes code ; fi
-if $GUI && $RPM ; then sudo rm --force /etc/yum.repos.d/vscode.repo* ; fi
+if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo* ; fi
 
 
 # Install webmin on pc07
@@ -890,22 +890,22 @@ if $GUI && $RPM ; then sudo rm --force /etc/yum.repos.d/vscode.repo* ; fi
 # Web app: https://localhost:10000
 if $GUI && $APT ; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
 if $GUI && $APT ; then sudo sh /tmp/setup-repos.sh --force; fi
-if $GUI && $APT ; then sudo rm --force /tmp/setup-repos.sh ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
 if $GUI && $APT ; then sudo apt-get install --assume-yes webmin ; fi
 
 if $GUI && $RPM ; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
 if $GUI && $RPM ; then sudo sh /tmp/setup-repos.sh --force ; fi
-if $GUI && $RPM ; then sudo rm --force /tmp/setup-repos.sh ; fi
+if $GUI && $RPM ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes webmin ; fi
 
 # Remove webmin from pc07
 # Web console.
 # Web app: https://localhost:10000
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes webmin ; fi
-if $GUI && $APT ; then sudo rm --force /etc/apt/sources.list.d/webmin*.list* ; fi
+if $GUI && $APT ; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin*.list* ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes webmin ; fi
-if $GUI && $RPM ; then sudo rm --force /etc/yum.repos.d/webmin.repo* ; fi
+if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo* ; fi
 
 
 # Install wine on -none-

@@ -193,7 +193,7 @@ if $GUI ; then echo 'snap' > ~/.hidden ; fi
 
 # Reset hide-files on *
 # Hide files.
-if $GUI ; then rm --force ~/.hidden ; fi
+if $GUI ; then rm --force --verbose ~/.hidden ; fi
 
 
 # Setup kvm on pc06 pc07

@@ -225,7 +225,7 @@ function backup_settings() {
     fi
 
     # Remove previous version of settings folder.
-    rm --force --recursive "$HOME/kz-backup" |& $LOGCMD
+    rm --force --recursive --verbose "$HOME/kz-backup" |& $LOGCMD
 }
 
 
@@ -521,7 +521,7 @@ $(gettext "Try creating the back up again.")"
         exit $ERR
     fi
 
-    rm --force "$EXCLUDE_FILE" |& $LOGCMD
+    rm --force --verbose "$EXCLUDE_FILE" |& $LOGCMD
 }
 
 
