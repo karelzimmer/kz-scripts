@@ -532,11 +532,6 @@ function term_script() {
 
 $(gettext "The computer will now reboot to finish installing the apps and \
 changing system settings.")"
-    else
-        TEXT+="
-
-$(gettext "Reboot the computer to finish installing the apps and changing \
-system settings.")"
     fi
     infomsg "$TEXT"
 

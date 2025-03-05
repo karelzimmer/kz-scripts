@@ -527,11 +527,9 @@ the apps and changing user settings.")"
         else
             TEXT+="
 
-$(gettext "You must log out of the computer to finish setting up the apps and \
-changing user settings.")
-$(gettext "Type 'logout' to log out.")"
+$(gettext "Type 'logout' to log out of the computer to finish setting up the \
+apps and changing user settings.")"
         fi
-
         infomsg "$TEXT"
 
         if $GUI; then
@@ -555,10 +553,6 @@ $(gettext "Type 'logout' to log out.")"
             fi
         fi
     else
-        TEXT+="
-
-$(gettext "You must log out of the computer to finish setting up the apps and \
-changing user settings.")"
         infomsg "$TEXT"
     fi
 
