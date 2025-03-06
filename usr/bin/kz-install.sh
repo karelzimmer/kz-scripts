@@ -173,8 +173,8 @@ if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
 # Additional testing is needed because Ubuntu provides
 # gnome-shell-extension-dashtodock as a virtual package
 # which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $DEB && apt-cache show gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock ; fi
-if $GUI && $DEB && apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
+if $GUI && $DEB && apt-cache show gnome-shell-extension-dashtodock  &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock  ; fi
+if $GUI && $DEB && apt-cache show gnome-shell-extension-no-overview &> /dev/null                                                  ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
 
 if $GUI && $RPM ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
@@ -184,8 +184,8 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes gnome-shell-extension-dash-t
 # Additional testing is needed because Ubuntu provides
 # gnome-shell-extension-dashtodock as a virtual package
 # which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $DEB && apt-cache show gnome-shell-extension-dashtodock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
-if $GUI && $DEB && apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
+if $GUI && $DEB && apt-cache show gnome-shell-extension-dashtodock  &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock  ; fi
+if $GUI && $DEB && apt-cache show gnome-shell-extension-no-overview &> /dev/null                                                  ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
