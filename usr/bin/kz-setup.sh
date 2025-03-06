@@ -148,24 +148,24 @@ if $GUI && gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-
 
 # Reset gnome on *
 # Desktop environment.
-if $GUI && gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null ; then gsettings set org.gnome.desktop.calendar show-weekdate                            ; fi
-if $GUI && gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null ; then gsettings set org.gnome.desktop.interface clock-show-date                         ; fi
-if $GUI && gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null ; then gsettings set org.gnome.desktop.interface clock-show-weekday                      ; fi
-if $GUI && gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null ; then gsettings set org.gnome.desktop.interface show-battery-percentage                 ; fi
-if $GUI && gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null ; then gsettings set org.gnome.desktop.peripherals.touchpad                              ; fi
-if $GUI && gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null ; then gsettings set org.gnome.desktop.screensaver lock-enabled                          ; fi
-if $GUI && gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null ; then gsettings set org.gnome.desktop.session idle-delay                                ; fi
-if $GUI && gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null ; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent              ; fi
-if $GUI && gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null ; then gsettings set org.gnome.desktop.wm.preferences button-layout                      ; fi
-if $GUI && gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null ; then gsettings set org.gnome.mutter center-new-windows                                 ; fi
-if $GUI && gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null ; then gsettings set org.gnome.nautilus.icon-view default-zoom-level                     ; fi
-if $GUI && gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null ; then gsettings set org.gnome.nautilus.preferences click-policy                         ; fi
-if $GUI && gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null ; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover             ; fi
-if $GUI && gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null ; then gsettings set org.gnome.nautilus.preferences show-create-link                     ; fi
-if $GUI && gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null ; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails                ; fi
-if $GUI && gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null ; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action         ; fi
-if $GUI && gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null ; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      ; fi
-if $GUI && gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null ; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type ; fi
+if $GUI && gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null ; then gsettings reset org.gnome.desktop.calendar show-weekdate                            ; fi
+if $GUI && gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null ; then gsettings reset org.gnome.desktop.interface clock-show-date                         ; fi
+if $GUI && gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null ; then gsettings reset org.gnome.desktop.interface clock-show-weekday                      ; fi
+if $GUI && gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null ; then gsettings reset org.gnome.desktop.interface show-battery-percentage                 ; fi
+if $GUI && gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null ; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click                 ; fi
+if $GUI && gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null ; then gsettings reset org.gnome.desktop.screensaver lock-enabled                          ; fi
+if $GUI && gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null ; then gsettings reset org.gnome.desktop.session idle-delay                                ; fi
+if $GUI && gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null ; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent              ; fi
+if $GUI && gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null ; then gsettings reset org.gnome.desktop.wm.preferences button-layout                      ; fi
+if $GUI && gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null ; then gsettings reset org.gnome.mutter center-new-windows                                 ; fi
+if $GUI && gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null ; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level                     ; fi
+if $GUI && gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null ; then gsettings reset org.gnome.nautilus.preferences click-policy                         ; fi
+if $GUI && gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null ; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover             ; fi
+if $GUI && gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null ; then gsettings reset org.gnome.nautilus.preferences show-create-link                     ; fi
+if $GUI && gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null ; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails                ; fi
+if $GUI && gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null ; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action         ; fi
+if $GUI && gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null ; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      ; fi
+if $GUI && gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null ; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type ; fi
 
 
 # Setup google-chrome on *
