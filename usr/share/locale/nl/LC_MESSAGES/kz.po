@@ -750,8 +750,8 @@ msgstr "Installatie uitvoeren"
 msgid "Finish installation"
 msgstr "Installatie afronden"
 
-msgid "Provision user"
-msgstr "Gebruiker inrichten"
+msgid "Set up user"
+msgstr "Gebruiker instellen"
 
 msgid "Command menu"
 msgstr "Opdrachtmenu"

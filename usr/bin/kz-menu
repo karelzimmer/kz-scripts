@@ -48,7 +48,7 @@ readonly -a  MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
-                "$(gettext 'Provision user')"
+                "$(gettext 'Set up user')"
                 "$(gettext 'Command menu')"
                 "$(gettext 'Exit')"
             )

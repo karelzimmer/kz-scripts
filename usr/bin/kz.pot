@@ -665,7 +665,7 @@ msgstr ""
 msgid "Finish installation"
 msgstr ""
 
-msgid "Provision user"
+msgid "Set up user"
 msgstr ""
 
 msgid "Command menu"
