@@ -46,7 +46,7 @@ if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
 # Additional testing is needed because Ubuntu provides
 # gnome-shell-extension-dashtodock as a virtual package
 # which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                  ; fi
+if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && source /etc/os-release && [[ $ID != ubuntu ]] ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                  ; fi
 if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null                                                  ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
 
 if $GUI && $RPM ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
@@ -66,7 +66,7 @@ if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 # Additional testing is needed because Ubuntu provides
 # gnome-shell-extension-dashtodock as a virtual package
 # which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && ! [[ $(uname --kernel-version) =~ 'Ubuntu' ]] ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                              ; fi
+if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && source /etc/os-release && [[ $ID != ubuntu ]] ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                              ; fi
 if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null                                                  ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
 
 if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
