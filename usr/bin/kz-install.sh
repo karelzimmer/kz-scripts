@@ -170,22 +170,16 @@ if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
 # Install dash-to-dock on pc07
 # Desktop dock.
 # Reboot required!
-# Additional testing is needed because Ubuntu provides
-# gnome-shell-extension-dashtodock as a virtual package
-# which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $DEB && apt-cache show gnome-shell-extension-dashtodock  &> /dev/null && source /etc/os-release && [[ $ID != ubuntu ]] ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock  ; fi
-if $GUI && $DEB && apt-cache show gnome-shell-extension-no-overview &> /dev/null                                                  ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
+if $GUI && $DEB && ! apt-cache show gnome-shell-extension-ubuntu-dock &> /dev/null ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock  ; fi
+if $GUI && $DEB &&   apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
 
 if $GUI && $RPM ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
 # Remove dash-to-dock from pc07
 # Desktop dock.
 # Reboot required!
-# Additional testing is needed because Ubuntu provides
-# gnome-shell-extension-dashtodock as a virtual package
-# which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $DEB && apt-cache show gnome-shell-extension-dashtodock  &> /dev/null && source /etc/os-release && [[ $ID != ubuntu ]] ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock  ; fi
-if $GUI && $DEB && apt-cache show gnome-shell-extension-no-overview &> /dev/null                                                  ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
+if $GUI && $DEB && ! apt-cache show gnome-shell-extension-ubuntu-dock &> /dev/null ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock  ; fi
+if $GUI && $DEB &&   apt-cache show gnome-shell-extension-no-overview &> /dev/null ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview ; fi
 
@@ -238,7 +232,7 @@ sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 # Install dual-monitor on pc06
 # Preserve dual monitor settings.
 if [[ -f ~karel/.config/monitors.xml ]] ; then sudo cp --preserve --verbose ~karel/.config/monitors.xml ~gdm/.config/monitors.xml ; fi
-if [[ -f ~gdm/.config/monitors.xml ]] ; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml ; fi
+if [[ -f ~gdm/.config/monitors.xml ]]   ; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml ; fi
 
 # Remove dual-monitor from pc06
 # Remove dual monitor settings.
@@ -803,7 +797,7 @@ if $RPM ; then sudo dnf remove --assumeyes usbutils ; fi
 # Install user-guest on -none-
 # Add guest user.
 if ! id "$(gettext 'guest')" &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" ; fi
-if id "$(gettext 'guest')" &> /dev/null ; then sudo passwd --delete "$(gettext 'guest')" ; fi
+if   id "$(gettext 'guest')" &> /dev/null ; then sudo passwd --delete "$(gettext 'guest')" ; fi
 
 # Remove user-guest from -none-
 # Remove guest user.
@@ -813,8 +807,8 @@ if id "$(gettext 'guest')" &> /dev/null ; then sudo userdel --remove "$(gettext 
 # Install user-karel on pc01
 # Add user Karel.
 if ! id karel &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel ; fi
-if id karel &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel ; fi
-if id karel &> /dev/null ; then sudo passwd --delete --expire karel ; fi
+if   id karel &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel ; fi
+if   id karel &> /dev/null ; then sudo passwd --delete --expire karel ; fi
 
 # Remove user-karel from pc01
 # Remove user Karel.
@@ -824,8 +818,8 @@ if id karel &> /dev/null ; then sudo userdel --remove karel ; fi
 # Install user-toos on Laptop
 # Add user Toos.
 if ! id toos &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos ; fi
-if id toos &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos ; fi
-if id toos &> /dev/null ; then sudo passwd --delete --expire toos ; fi
+if   id toos &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos ; fi
+if   id toos &> /dev/null ; then sudo passwd --delete --expire toos ; fi
 
 # Remove user-toos from Laptop
 # Remove user Toos.

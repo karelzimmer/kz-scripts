@@ -43,14 +43,11 @@ if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
 
 # Setup dash-to-dock on pc07
 # Desktop dock.
-# Additional testing is needed because Ubuntu provides
-# gnome-shell-extension-dashtodock as a virtual package
-# which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && source /etc/os-release && [[ $ID != ubuntu ]] ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                  ; fi
-if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null                                                  ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
+if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                  ; fi
+if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
 
-if $GUI && $RPM ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
-if $GUI && $RPM ; then gnome-extensions enable no-overview@fthx ; fi
+if $GUI && $RPM && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
+if $GUI && $RPM && gnome-extensions info no-overview@fthx                                       &> /dev/null ; then gnome-extensions enable no-overview@fthx                                       ; fi
 
 if $GUI && gsettings get org.gnome.shell disable-user-extensions                    &> /dev/null ; then gsettings set org.gnome.shell disable-user-extensions false                             ; fi
 if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true           ; fi
@@ -63,14 +60,11 @@ if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 
 # Reset dash-to-dock on pc07
 # Desktop dock.
-# Additional testing is needed because Ubuntu provides
-# gnome-shell-extension-dashtodock as a virtual package
-# which has been replaced by gnome-shell-extension-ubuntu-dock.
-if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null && source /etc/os-release && [[ $ID != ubuntu ]] ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                              ; fi
-if $GUI && $DEB && gsettings list-keys org.gnome.shell.extensions.dash-to-dock &> /dev/null                                                  ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
+if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                              ; fi
+if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
 
 if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
-if $GUI && $RPM ; then echo 'Goto https://extensions.gnome.org/extension/4099/no-overview/, install, and switch OFF' ; fi
+if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                          ; fi
 
 if $GUI && gsettings get org.gnome.shell disable-user-extensions                    &> /dev/null ; then gsettings reset org.gnome.shell disable-user-extensions                    ; fi
 if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme ; fi
@@ -310,15 +304,15 @@ if $GUI ; then kz-desktop --delete=kz-vm-hugowin732 ; fi
 # Editor.
 # Web app: https://vscode.dev
 if $GUI ; then kz-desktop --addbef=code ; fi
-if $GUI ; then xdg-mime default code.desktop application/json ; fi
-if $GUI ; then xdg-mime default code.desktop application/x-desktop ; fi
+if $GUI ; then xdg-mime default code.desktop application/json          ; fi
+if $GUI ; then xdg-mime default code.desktop application/x-desktop     ; fi
 if $GUI ; then xdg-mime default code.desktop application/x-shellscript ; fi
-if $GUI ; then xdg-mime default code.desktop application/xml ; fi
-if $GUI ; then xdg-mime default code.desktop text/html ; fi
-if $GUI ; then xdg-mime default code.desktop text/markdown ; fi
-if $GUI ; then xdg-mime default code.desktop text/plain ; fi
-if $GUI ; then xdg-mime default code.desktop text/troff ; fi
-if $GUI ; then xdg-mime default code.desktop text/x-python ; fi
+if $GUI ; then xdg-mime default code.desktop application/xml           ; fi
+if $GUI ; then xdg-mime default code.desktop text/html                 ; fi
+if $GUI ; then xdg-mime default code.desktop text/markdown             ; fi
+if $GUI ; then xdg-mime default code.desktop text/plain                ; fi
+if $GUI ; then xdg-mime default code.desktop text/troff                ; fi
+if $GUI ; then xdg-mime default code.desktop text/x-python             ; fi
 
 # Reset vscode on pc01 pc06 pc07
 # Editor.
