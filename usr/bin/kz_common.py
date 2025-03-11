@@ -305,7 +305,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function displays version, author, and license information.
     """
-    BUILD_ID: str = ''
+    BUILD_ID: str = ''  # ISO 8601
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
     try:

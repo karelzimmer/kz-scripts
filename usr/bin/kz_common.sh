@@ -310,7 +310,7 @@ $TEXT"
 
 # This function displays version, author, and license information.
 function process_option_version() {
-    local BUILD_ID=''
+    local BUILD_ID='' # ISO 8601
     local TEXT=''
 
     if [[ -f /usr/share/doc/kz/build.id ]]; then
