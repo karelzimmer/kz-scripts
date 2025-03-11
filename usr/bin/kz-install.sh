@@ -13,25 +13,25 @@
 
 # Install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
-if systemctl cat apport &> /dev/null ; then sudo systemctl stop apport.service ; fi
-if systemctl cat apport &> /dev/null ; then sudo systemctl disable apport.service ; fi
+if systemctl cat apport &> /dev/null ; then sudo systemctl stop apport.service                                            ; fi
+if systemctl cat apport &> /dev/null ; then sudo systemctl disable apport.service                                         ; fi
 if systemctl cat apport &> /dev/null ; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport ; fi
-if systemctl cat apport &> /dev/null ; then sudo rm --force --verbose /var/crash/* ; fi
+if systemctl cat apport &> /dev/null ; then sudo rm --force --verbose /var/crash/*                                        ; fi
 
 # Remove disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
 if systemctl cat apport &> /dev/null ; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport ; fi
-if systemctl cat apport &> /dev/null ; then sudo systemctl enable --now apport.service ; fi
+if systemctl cat apport &> /dev/null ; then sudo systemctl enable --now apport.service                                    ; fi
 
 
 # Install update-system on *
 # Update system.
 # This may take a while...
-if $DEB ; then sudo apt-get update ; fi
-if $DEB ; then sudo apt-get upgrade --assume-yes ; fi
+if $DEB ; then sudo apt-get update                         ; fi
+if $DEB ; then sudo apt-get upgrade --assume-yes           ; fi
 if $DEB && type snap &> /dev/null ; then sudo snap refresh ; fi
 
-if $RPM ; then sudo dnf upgrade --assumeyes --refresh ; fi
+if $RPM ; then sudo dnf upgrade --assumeyes --refresh      ; fi
 if $RPM && type snap &> /dev/null ; then sudo snap refresh ; fi
 
 # Remove update-system from *
@@ -66,23 +66,23 @@ if $RPM ; then sudo dnf remove --assumeyes ansible ; fi
 # Only outgoing sessions are supported if using Wayland.
 # Incoming sessions are only possible when using Xorg/X11.
 # Web app: https://my.anydesk.com/v2
-if $GUI && $DEB ; then wget --no-verbose --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg ; fi
+if $GUI && $DEB ; then wget --no-verbose --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg           ; fi
 if $GUI && $DEB ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null ; fi
-if $GUI && $DEB ; then sudo apt-get update ; fi
-if $GUI && $DEB ; then sudo apt-get install --assume-yes anydesk ; fi
+if $GUI && $DEB ; then sudo apt-get update                                                                                                                                            ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes anydesk                                                                                                                      ; fi
 
 if $GUI && $RPM ; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo > /dev/null ; fi
-if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk ; fi
+if $GUI && $RPM ; then sudo dnf install --assumeyes anydesk                                                                                                                                                                                                   ; fi
 
 # Remove anydesk from pc06 pc07
 # Remote desktop.
 # Only outgoing sessions are supported if using Wayland.
 # Incoming sessions are only possible when using Xorg/X11.
 # Web app: https://my.anydesk.com/v2
-if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes anydesk ; fi
+if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes anydesk                 ; fi
 if $GUI && $DEB ; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list* ; fi
 
-if $GUI && $RPM ; then sudo dnf remove --assumeyes anydesk ; fi
+if $GUI && $RPM ; then sudo dnf remove --assumeyes anydesk                           ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo* ; fi
 
 
@@ -208,15 +208,15 @@ if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
 
 # Install disabled-fwupd on -none-
 # Disable FirmWare UPdate Daemon.
-sudo systemctl stop fwupd.service
+sudo systemctl stop    fwupd.service
 sudo systemctl disable fwupd.service
-sudo systemctl mask fwupd.service
+sudo systemctl mask    fwupd.service
 
 # Remove disabled-fwupd from -none-
 # Disable FirmWare UPdate Daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
-sudo systemctl start fwupd.service
+sudo systemctl start  fwupd.service
 
 
 # Install disabled-lidswitch on pc-van-hugo
@@ -368,10 +368,10 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-tweaks ; fi
 # Install google-chrome on *
 # Web browser.
 if $GUI && $DEB ; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb ; fi
-if $GUI && $DEB ; then sudo apt-get install --assume-yes /tmp/google-chrome.deb ; fi
-if $GUI && $DEB ; then rm --verbose /tmp/google-chrome.deb ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes /tmp/google-chrome.deb                                                                                ; fi
+if $GUI && $DEB ; then rm --verbose /tmp/google-chrome.deb                                                                                                     ; fi
 
-if $GUI && $RPM ; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub ; fi
+if $GUI && $RPM ; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub                                        ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm ; fi
 
 # Remove google-chrome from *
@@ -384,10 +384,10 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes google-chrome-stable ; fi
 # Explore the planet.
 # Web app: https://earth.google.com
 if $GUI && $DEB ; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb ; fi
-if $GUI && $DEB ; then sudo apt-get install --assume-yes /tmp/google-earth.deb ; fi
-if $GUI && $DEB ; then rm --verbose /tmp/google-earth.deb ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes /tmp/google-earth.deb                                                                                   ; fi
+if $GUI && $DEB ; then rm --verbose /tmp/google-earth.deb                                                                                                        ; fi
 
-if $GUI && $RPM ; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub ; fi
+if $GUI && $RPM ; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub                                           ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm ; fi
 
 # Remove google-earth from -none-
@@ -458,16 +458,16 @@ if $GUI && $RPM ; then echo 'The krita app is not available.' ; fi
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt
 # configuration files.
 if $GUI && $DEB ; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager ; fi
-if $GUI && $DEB ; then sudo usermod --append --groups libvirt,libvirt-qemu karel ; fi
+if $GUI && $DEB ; then sudo usermod --append --groups libvirt,libvirt-qemu karel                                                                                                                                                                                                        ; fi
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
-if $GUI && $DEB ; then sudo virsh --connect=qemu:///system net-autostart default ; fi
+if $GUI && $DEB ; then sudo virsh --connect=qemu:///system net-autostart default                                                                                                                                                                                                        ; fi
 # Check network 'default' with
 # "sudo virsh --connect=qemu:///system net-info default", should output
 # 'Autostart: yes'.
 
-if $GUI && $RPM ; then sudo dnf groupinstall "Virtualization Host" ; fi
-if $GUI && $RPM ; then sudo systemctl enable --now libvirtd ; fi
+if $GUI && $RPM ; then sudo dnf groupinstall "Virtualization Host"               ; fi
+if $GUI && $RPM ; then sudo systemctl enable --now libvirtd                      ; fi
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
 if $GUI && $RPM ; then sudo virsh --connect=qemu:///system net-autostart default ; fi
@@ -479,14 +479,14 @@ if $GUI && $RPM ; then sudo virsh --connect=qemu:///system net-autostart default
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
 # Reboot required!
-if $GUI && $DEB ; then sudo virsh --connect=qemu:///system net-autostart default --disable ; fi
+if $GUI && $DEB ; then sudo virsh --connect=qemu:///system net-autostart default --disable                                                                                ; fi
 if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager ; fi
-if $GUI && $DEB ; then sudo delgroup libvirtd-dnsmasq ; fi
-if $GUI && $DEB ; then sudo deluser karel libvirtd ; fi
-if $GUI && $DEB ; then sudo deluser karel libvirtd-qemu ; fi
-if $GUI && $DEB ; then sudo delgroup libvirtd ; fi
+if $GUI && $DEB ; then sudo delgroup libvirtd-dnsmasq                                                                                                                     ; fi
+if $GUI && $DEB ; then sudo deluser karel libvirtd                                                                                                                        ; fi
+if $GUI && $DEB ; then sudo deluser karel libvirtd-qemu                                                                                                                   ; fi
+if $GUI && $DEB ; then sudo delgroup libvirtd                                                                                                                             ; fi
 
-if $GUI && $RPM ; then sudo systemctl disable --now libvirtd ; fi
+if $GUI && $RPM ; then sudo systemctl disable --now libvirtd      ; fi
 if $GUI && $RPM ; then sudo dnf groupremove "Virtualization Host" ; fi
 
 
@@ -592,15 +592,15 @@ if $RPM ; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs ; fi
 # Install python on pc06 pc07
 # Programming language.
 if $DEB ; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3 ; fi
-if $DEB ; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8 ; fi
-if $DEB ; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip ; fi
+if $DEB ; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8                                         ; fi
+if $DEB ; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip                                                 ; fi
 
 if $RPM ; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-pip ; fi
 
 # Remove python from pc06 pc07
 # Programming language.
 if $DEB ; then sudo apt-get remove --purge --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3 ; fi
-if $DEB ; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip ; fi
+if $DEB ; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip                                                                    ; fi
 
 if $RPM ; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip ; fi
 
@@ -667,17 +667,17 @@ if $RPM ; then sudo dnf remove --assumeyes spice-vdagent ; fi
 # Install spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
-if $GUI && $DEB ; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg ; fi
+if $GUI && $DEB ; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg   ; fi
 if $GUI && $DEB ; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null ; fi
-if $GUI && $DEB ; then sudo apt-get update ; fi
-if $GUI && $DEB ; then sudo apt-get install --assume-yes spotify-client ; fi
+if $GUI && $DEB ; then sudo apt-get update                                                                                                                                                         ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes spotify-client                                                                                                                            ; fi
 
 if $GUI && $RPM ; then echo 'The spotify app is available as a web app.' ; fi
 
 # Remove spotify from pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
-if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes spotify-client ; fi
+if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes spotify-client          ; fi
 if $GUI && $DEB ; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify*.list* ; fi
 
 if $GUI && $RPM ; then echo 'The spotify web app cannot be removed.' ; fi
@@ -688,7 +688,7 @@ if $GUI && $RPM ; then echo 'The spotify web app cannot be removed.' ; fi
 if $DEB ; then sudo apt-get install --assume-yes ssh ; fi
 if $RPM ; then sudo dnf install --assumeyes openssh ; fi
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts ; fi
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='/^192.168.1./d'       /etc/hosts ; fi
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts ; fi
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='3a192.168.1.2   pc06' /etc/hosts ; fi
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]] ; then sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts ; fi
@@ -732,8 +732,8 @@ if $RPM ; then sudo dnf remove --assumeyes bash-completion ; fi
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 if $GUI && $DEB ; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb ; fi
-if $GUI && $DEB ; then sudo apt-get install --assume-yes /tmp/teamviewer.deb ; fi
-if $GUI && $DEB ; then rm --verbose /tmp/teamviewer.deb ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes /tmp/teamviewer.deb                                                                       ; fi
+if $GUI && $DEB ; then rm --verbose /tmp/teamviewer.deb                                                                                            ; fi
 
 # SKIP Error: Failed to download metadata for repo 'teamviewer': repomd.xml GPG
 # signature verification error: Bad GPG signature
@@ -772,7 +772,7 @@ if $RPM ; then sudo dnf remove --assumeyes tree ; fi
 if $GUI && $DEB ; then sudo apt-get install --assume-yes gufw ; fi
 if $GUI && $RPM ; then sudo dnf install --assumeyes gufw ; fi
 if $GUI ; then sudo ufw allow ssh ; fi
-if $GUI ; then sudo ufw enable ; fi
+if $GUI ; then sudo ufw enable    ; fi
 
 # Remove ufw from pc01 pc06 pc07
 # Uncomplicated FireWall.
@@ -832,7 +832,7 @@ if id toos &> /dev/null ; then sudo userdel --remove toos ; fi
 # If the installation hangs or VBox does not work, check the virtualization
 # settings in the BIOS/UEFI.
 if $GUI && $DEB ; then echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections ; fi
-if $GUI && $DEB ; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso  ; fi
 
 if $GUI && $RPM ; then sudo dnf install --assumeyes VirtualBox ; fi
 
@@ -840,7 +840,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes VirtualBox ; fi
 # Virtualization.
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
 if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso ; fi
-if $GUI && $RPM ; then sudo dnf remove --assumeyes VirtualBox ; fi
+if $GUI && $RPM ; then sudo dnf remove --assumeyes VirtualBox                                                                 ; fi
 
 
 # Install vlc on *
@@ -857,25 +857,25 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes vlc ; fi
 # Install vscode on pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
-if $GUI && $DEB ; then sudo apt-get install --assume-yes apt-transport-https ; fi
-if $GUI && $DEB ; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes apt-transport-https                                                                                                                                        ; fi
+if $GUI && $DEB ; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg                       ; fi
 if $GUI && $DEB ; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null ; fi
-if $GUI && $DEB ; then sudo apt-get update ; fi
-if $GUI && $DEB ; then sudo apt-get install --assume-yes code ; fi
-if $GUI && $DEB ; then sudo update-alternatives --set editor /usr/bin/code ; fi
+if $GUI && $DEB ; then sudo apt-get update                                                                                                                                                                          ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes code                                                                                                                                                       ; fi
+if $GUI && $DEB ; then sudo update-alternatives --set editor /usr/bin/code                                                                                                                                          ; fi
 
-if $GUI && $RPM ; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc ; fi
+if $GUI && $RPM ; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc                                                                                                                                                                    ; fi
 if $GUI && $RPM ; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null ; fi
-if $GUI && $RPM ; then sudo dnf install --assumeyes code ; fi
+if $GUI && $RPM ; then sudo dnf install --assumeyes code                                                                                                                                                                                                      ; fi
 
 # Remove vscode from pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
-if $GUI && $DEB ; then sudo update-alternatives --remove editor /usr/bin/code ; fi
+if $GUI && $DEB ; then sudo update-alternatives --remove editor /usr/bin/code          ; fi
 if $GUI && $DEB ; then sudo rm --force --verbose /etc/apt/sources.list.d/vscode*.list* ; fi
-if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes code ; fi
+if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes code                   ; fi
 
-if $GUI && $RPM ; then sudo dnf remove --assumeyes code ; fi
+if $GUI && $RPM ; then sudo dnf remove --assumeyes code                        ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo* ; fi
 
 
@@ -883,28 +883,28 @@ if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo* ;
 # Web console.
 # Web app: https://localhost:10000
 if $GUI && $DEB ; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
-if $GUI && $DEB ; then sudo sh /tmp/setup-repos.sh --force; fi
-if $GUI && $DEB ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
-if $GUI && $DEB ; then sudo apt-get install --assume-yes webmin ; fi
+if $GUI && $DEB ; then sudo sh /tmp/setup-repos.sh --force                                                                                           ; fi
+if $GUI && $DEB ; then sudo rm --force --verbose /tmp/setup-repos.sh                                                                                 ; fi
+if $GUI && $DEB ; then sudo apt-get install --assume-yes webmin                                                                                      ; fi
 
 if $GUI && $RPM ; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
-if $GUI && $RPM ; then sudo sh /tmp/setup-repos.sh --force ; fi
-if $GUI && $RPM ; then sudo rm --force --verbose /tmp/setup-repos.sh ; fi
-if $GUI && $RPM ; then sudo dnf install --assumeyes webmin ; fi
+if $GUI && $RPM ; then sudo sh /tmp/setup-repos.sh --force                                                                                           ; fi
+if $GUI && $RPM ; then sudo rm --force --verbose /tmp/setup-repos.sh                                                                                 ; fi
+if $GUI && $RPM ; then sudo dnf install --assumeyes webmin                                                                                           ; fi
 
 # Remove webmin from pc07
 # Web console.
 # Web app: https://localhost:10000
-if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes webmin ; fi
+if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes webmin                 ; fi
 if $GUI && $DEB ; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin*.list* ; fi
 
-if $GUI && $RPM ; then sudo dnf remove --assumeyes webmin ; fi
+if $GUI && $RPM ; then sudo dnf remove --assumeyes webmin                      ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo* ; fi
 
 
 # Install wine on -none-
 # Run Windows applications.
-if $GUI && $DEB ; then sudo dpkg --add-architecture i386 ; fi
+if $GUI && $DEB ; then sudo dpkg --add-architecture i386                             ; fi
 if $GUI && $DEB ; then sudo apt-get install --assume-yes wine winetricks playonlinux ; fi
 
 if $GUI && $RPM ; then sudo dnf install --assumeyes wine playonlinux ; fi
@@ -912,7 +912,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes wine playonlinux ; fi
 # Remove wine from -none-
 # Run Windows applications.
 if $GUI && $DEB ; then sudo apt-get remove --purge --assume-yes wine winetricks playonlinux ; fi
-if $GUI && $DEB ; then sudo dpkg --remove-architecture i386 ; fi
+if $GUI && $DEB ; then sudo dpkg --remove-architecture i386                                 ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes wine playonlinux ; fi
 

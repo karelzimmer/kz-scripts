@@ -87,14 +87,14 @@ if $GUI ; then kz-desktop --addbef=org.gnome.Evolution ; fi
 
 # Setup firefox on pc01 pc02 pc06 pc07 pc-van-emily
 # Web browser.
-if $GUI ; then kz-desktop --delete=firefox ; fi
-if $GUI ; then kz-desktop --delete=firefox-esr ; fi
+if $GUI ; then kz-desktop --delete=firefox         ; fi
+if $GUI ; then kz-desktop --delete=firefox-esr     ; fi
 if $GUI ; then kz-desktop --delete=firefox_firefox ; fi
 
 # Reset firefox on pc01 pc02 pc06 pc07 pc-van-emily
 # Web browser.
-if $GUI ; then kz-desktop --addbef=firefox ; fi
-if $GUI ; then kz-desktop --addbef=firefox-esr ; fi
+if $GUI ; then kz-desktop --addbef=firefox         ; fi
+if $GUI ; then kz-desktop --addbef=firefox-esr     ; fi
 if $GUI ; then kz-desktop --addbef=firefox_firefox ; fi
 
 
@@ -164,7 +164,7 @@ if $GUI && gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-
 
 # Setup google-chrome on *
 # Web browser.
-if $GUI ; then kz-desktop --addbef=google-chrome ; fi
+if $GUI ; then kz-desktop --addbef=google-chrome                      ; fi
 if $GUI ; then xdg-mime default google-chrome.desktop application/pdf ; fi
 
 # Reset google-chrome on *
@@ -266,37 +266,37 @@ if $GUI ; then kz-desktop --delete=com.teamviewer.TeamViewer ; fi
 # Terminal emulator.
 if $GUI ; then kz-desktop --addbef=org.gnome.Terminal ; fi
 # Turn on aliases.
-sed --in-place --expression='s/#alias/alias/g' ~/.bashrc
+sed --in-place --expression='s/#alias/alias/g'               ~/.bashrc
 # Enable search forward in history (with Ctrl-S).
-sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
+sed --in-place --expression='/^stty -ixon/d'                 ~/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> ~/.bashrc
 
 # Reset terminal on pc01 pc06 pc07
 # Terminal emulator.
 if $GUI ; then kz-desktop --delete=org.gnome.Terminal ; fi
 sed --in-place --expression='s/alias/#alias/g' ~/.bashrc
-sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
+sed --in-place --expression='/^stty -ixon/d'   ~/.bashrc
 
 
 # Setup thunderbird on pc01 pc02 pc06
 # E-mail and news.
-if $GUI ; then kz-desktop --delete=thunderbird ; fi
+if $GUI ; then kz-desktop --delete=thunderbird             ; fi
 if $GUI ; then kz-desktop --delete=thunderbird_thunderbird ; fi
 
 # Reset thunderbird on pc01 pc02 pc06
 # E-mail and news.
-if $GUI ; then kz-desktop --addbef=thunderbird ; fi
+if $GUI ; then kz-desktop --addbef=thunderbird             ; fi
 if $GUI ; then kz-desktop --addbef=thunderbird_thunderbird ; fi
 
 
 # Setup virtualbox on pc-van-hugo
 # Virtualization.
-if $GUI ; then kz-desktop --addaft=virtualbox ; fi
+if $GUI ; then kz-desktop --addaft=virtualbox       ; fi
 if $GUI ; then kz-desktop --addaft=kz-vm-hugowin732 ; fi
 
 # Reset virtualbox on pc-van-hugo
 # Virtualization.
-if $GUI ; then kz-desktop --delete=virtualbox ; fi
+if $GUI ; then kz-desktop --delete=virtualbox       ; fi
 if $GUI ; then kz-desktop --delete=kz-vm-hugowin732 ; fi
 
 
