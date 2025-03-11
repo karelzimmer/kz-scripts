@@ -13,7 +13,7 @@
 
 # Install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
-if systemctl cat apport &> /dev/null ; then sudo systemctl stop apport.service                                            ; fi
+if systemctl cat apport &> /dev/null ; then sudo systemctl stop    apport.service                                         ; fi
 if systemctl cat apport &> /dev/null ; then sudo systemctl disable apport.service                                         ; fi
 if systemctl cat apport &> /dev/null ; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport ; fi
 if systemctl cat apport &> /dev/null ; then sudo rm --force --verbose /var/crash/*                                        ; fi
@@ -770,9 +770,9 @@ if $RPM ; then sudo dnf remove --assumeyes tree ; fi
 # Install ufw on pc01 pc06 pc07
 # Uncomplicated FireWall.
 if $GUI && $DEB ; then sudo apt-get install --assume-yes gufw ; fi
-if $GUI && $RPM ; then sudo dnf install --assumeyes gufw ; fi
-if $GUI ; then sudo ufw allow ssh ; fi
-if $GUI ; then sudo ufw enable    ; fi
+if $GUI && $RPM ; then sudo dnf install --assumeyes gufw      ; fi
+if $GUI         ; then sudo ufw allow ssh                     ; fi
+if $GUI         ; then sudo ufw enable                        ; fi
 
 # Remove ufw from pc01 pc06 pc07
 # Uncomplicated FireWall.
@@ -797,7 +797,7 @@ if $RPM ; then sudo dnf remove --assumeyes usbutils ; fi
 # Install user-guest on -none-
 # Add guest user.
 if ! id "$(gettext 'guest')" &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" ; fi
-if   id "$(gettext 'guest')" &> /dev/null ; then sudo passwd --delete "$(gettext 'guest')" ; fi
+if   id "$(gettext 'guest')" &> /dev/null ; then sudo passwd --delete "$(gettext 'guest')"                                                                 ; fi
 
 # Remove user-guest from -none-
 # Remove guest user.
@@ -807,8 +807,8 @@ if id "$(gettext 'guest')" &> /dev/null ; then sudo userdel --remove "$(gettext 
 # Install user-karel on pc01
 # Add user Karel.
 if ! id karel &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel ; fi
-if   id karel &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel ; fi
-if   id karel &> /dev/null ; then sudo passwd --delete --expire karel ; fi
+if   id karel &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel         ; fi
+if   id karel &> /dev/null ; then sudo passwd --delete --expire karel                                             ; fi
 
 # Remove user-karel from pc01
 # Remove user Karel.
@@ -818,8 +818,8 @@ if id karel &> /dev/null ; then sudo userdel --remove karel ; fi
 # Install user-toos on Laptop
 # Add user Toos.
 if ! id toos &> /dev/null ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos ; fi
-if   id toos &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos ; fi
-if   id toos &> /dev/null ; then sudo passwd --delete --expire toos ; fi
+if   id toos &> /dev/null ; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos          ; fi
+if   id toos &> /dev/null ; then sudo passwd --delete --expire toos                                              ; fi
 
 # Remove user-toos from Laptop
 # Remove user Toos.

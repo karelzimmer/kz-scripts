@@ -43,37 +43,37 @@ if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
 
 # Setup dash-to-dock on pc07
 # Desktop dock.
-if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                  ; fi
-if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
+if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com                          &> /dev/null ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                   ; fi
+if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com                          &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true  ; fi
 
-if $GUI && $RPM && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
-if $GUI && $RPM && gnome-extensions info no-overview@fthx                                       &> /dev/null ; then gnome-extensions enable no-overview@fthx                                       ; fi
+if $GUI && $RPM && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com          ; fi
+if $GUI && $RPM && gnome-extensions info no-overview@fthx                                       &> /dev/null ; then gnome-extensions enable no-overview@fthx                                                ; fi
 
-if $GUI && gsettings get org.gnome.shell disable-user-extensions                    &> /dev/null ; then gsettings set org.gnome.shell disable-user-extensions false                             ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true           ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock click-action       &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32             ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed         &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true                   ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock dock-position      &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position LEFT                ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock extend-height      &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true                ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed    &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true              ; fi
+if $GUI         && gsettings get org.gnome.shell disable-user-extensions                        &> /dev/null ; then gsettings set org.gnome.shell disable-user-extensions false                             ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme     &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true           ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock click-action           &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size     &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32             ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed             &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true                   ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock dock-position          &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position LEFT                ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock extend-height          &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true                ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed        &> /dev/null ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true              ; fi
 
 # Reset dash-to-dock on pc07
 # Desktop dock.
-if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                              ; fi
-if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
+if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com                      &> /dev/null ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                              ; fi
+if $GUI && $DEB && gnome-extensions info dash-to-dock@micxgx.gmail.com                      &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
 
-if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
-if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                          ; fi
+if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com                                                                                              ; fi
+if $GUI && $RPM ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                                                                                                                       ; fi
 
-if $GUI && gsettings get org.gnome.shell disable-user-extensions                    &> /dev/null ; then gsettings reset org.gnome.shell disable-user-extensions                    ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock click-action       &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action       ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed         &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed         ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock dock-position      &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position      ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock extend-height      &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height      ; fi
-if $GUI && gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed    &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed    ; fi
+if $GUI         && gsettings get org.gnome.shell disable-user-extensions                    &> /dev/null ; then gsettings reset org.gnome.shell disable-user-extensions                             ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme          ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock click-action       &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action                ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size          ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed         &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed                  ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock dock-position      &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position               ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock extend-height      &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height               ; fi
+if $GUI         && gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed    &> /dev/null ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed             ; fi
 
 
 # Setup evolution on pc07
