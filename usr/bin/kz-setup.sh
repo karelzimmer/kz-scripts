@@ -303,7 +303,7 @@ if $GUI ; then kz-desktop --delete=kz-vm-hugowin732 ; fi
 # Setup vscode on pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
-if $GUI ; then kz-desktop --addbef=code ; fi
+if $GUI ; then kz-desktop --addbef=code                                ; fi
 if $GUI ; then xdg-mime default code.desktop application/json          ; fi
 if $GUI ; then xdg-mime default code.desktop application/x-desktop     ; fi
 if $GUI ; then xdg-mime default code.desktop application/x-shellscript ; fi
