@@ -466,9 +466,6 @@ function process_command_file() {
 # This function reports and executes a command from the command file.
 function execute_command() {
     local CMD=${1:-unknown}
-    local CMD_DIS=''
-    local -i CMD_DIS_LEN=0
-    local -i CMD_DIS_MAX=0
 
     (( ++CMD_SEQ_NUM ))
 
@@ -482,19 +479,7 @@ function execute_command() {
             logmsg  "$APP_NAME_LINE"
             infomsg "$APP_NAME_LINE"
         fi
-
-        # Width 9 characters less, 9 for leading spaces.
-        CMD_DIS_MAX=$(( $(tput cols) - 9 ))
-
-        if [[ ${#CMD} -gt $CMD_DIS_MAX ]]; then
-            # Width 12 characters less, 9 for leading spaces and 3 for trailing
-            # ellipsis.
-            CMD_DIS_LEN=$(( $(tput cols) - 12 ))
-            CMD_DIS=${CMD:0:CMD_DIS_LEN}...
-        else
-            CMD_DIS=$CMD
-        fi
-        infomsg "         $CMD_DIS"
+        infomsg "         $CMD"
     fi
 
     logmsg "$CMD"
