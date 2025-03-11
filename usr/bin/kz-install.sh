@@ -93,7 +93,7 @@ if $RPM ; then sudo dnf install --assumeyes apt ; fi
 
 # Remove apt from -none-
 # Package manager.
-if $DEB ; then echo 'The apt app cannot be removed from an Debian system.' ; fi
+if $DEB ; then echo 'The apt app cannot be removed from an Debian or Debian-based system.' ; fi
 if $RPM ; then sudo dnf remove --assumeyes apt ; fi
 
 
