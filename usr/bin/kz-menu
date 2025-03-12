@@ -318,9 +318,7 @@ function process_menu1_choice4() {
     process_commands
 
     # User must type 'logout' to log out.
-    if [[ ${DISPLAY-} ]]; then
-        exit $OK
-    fi
+    [[ ${DISPLAY-} ]] || exit $OK
 }
 
 
