@@ -265,6 +265,7 @@ function process_menu1_choice1() {
         )
 
     process_commands
+    $OPTION_GUI || wait_for_enter
 }
 
 
@@ -304,6 +305,7 @@ function process_menu1_choice3() {
         )
 
     process_commands
+    $OPTION_GUI || wait_for_enter
 }
 
 
@@ -410,6 +412,7 @@ function process_menu2_choice() {
 
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
         process_commands
+        $OPTION_GUI || wait_for_enter
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         process_menu1_tui
     else
@@ -440,7 +443,6 @@ function process_commands() {
                 )
             TITLE="$DESCRIPTION ($COMMAND)"
             execute_command
-            $OPTION_GUI || wait_for_enter
         done
     fi
 }
