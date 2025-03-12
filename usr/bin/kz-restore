@@ -83,7 +83,7 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $GUI; then
+                if [[ -z ${DISPLAY-} ]]; then
                     TEXT=\
 "$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -114,7 +114,7 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
@@ -136,7 +136,7 @@ function check_source() {
     local TEXT=''
     local USB_MOUNT_POINT="/media/$USER"
 
-    if $RPM; then
+    if grep --quiet rhel /etc/os-release; then
         USB_MOUNT_POINT="/run/media/$USER"
     fi
 
@@ -269,7 +269,7 @@ function restore_settings() {
 
     SETTINGS_DIR=$HOME/$(gettext 'Settings')
 
-    if $GUI; then
+    if [[ ${DISPLAY-} ]]; then
         logmsg 'Restore settings...'
         restore_setting_desktop
     fi
@@ -303,10 +303,10 @@ function term_script() {
         USERS_LIST=$(
             gettext 'USERNAME|USERID|USER'
             printf  '\n'
-            grep    --regexp='/bin/bash' /etc/passwd    |
-            grep    --regexp='root' --invert-match      |
-            cut     --delimiter=':' --fields=1,3,5      |
-            tr      ',,,' '   '                         |
+            grep    /bin/bash /etc/passwd           |
+            grep    root --invert-match             |
+            cut     --delimiter=':' --fields=1,3,5  |
+            tr      ',,,' '   '                     |
             tr      ':' '|'
             )
         TEXT="$(eval_gettext "The backup has restored for \$USER (there are \

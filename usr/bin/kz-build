@@ -92,15 +92,8 @@ function process_x_options() {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-
-    if ! $GUI; then
-        TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -112,7 +105,7 @@ $USAGE"
 function process_input() {
     local TEXT=''
 
-    if ! $DEB; then
+    if ! grep --quiet debian /etc/os-release; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
         exit $ERR
@@ -221,7 +214,7 @@ function build_deb_package() {
             "$DEB_REPO_DISTDIR/usr/share/man/man1"/*    \
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man1"/* |& $LOGCMD
 
-    # Capture build id Debian package (ISO 8601).
+    # Capture build id Debian package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
     mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
     printf '%s' "$BUILD_ID" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
@@ -274,7 +267,7 @@ function build_rpm_package() {
             "$RPM_REPO_DISTDIR/usr/share/man/man1"/*    \
             "$RPM_REPO_DISTDIR/usr/share/man/nl/man1"/* |& $LOGCMD
 
-    # Capture build id RPM package (ISO 8601).
+    # Capture build id RPM package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
     mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
     printf '%s' "$BUILD_ID" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/build.id"

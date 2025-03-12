@@ -118,7 +118,7 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $GUI; then
+                if [[ -z ${DISPLAY-} ]]; then
                     TEXT=\
 "$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -138,7 +138,7 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
@@ -318,7 +318,9 @@ function process_menu1_choice4() {
     process_commands
 
     # User must type 'logout' to log out.
-    $GUI || exit $OK
+    if [[ ${DISPLAY-} ]]; then
+        exit $OK
+    fi
 }
 
 

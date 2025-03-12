@@ -78,15 +78,8 @@ function process_x_options() {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-
-    if ! $GUI; then
-        TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -98,7 +91,7 @@ $USAGE"
 function process_input() {
     local TEXT=''
 
-    if ! $DEB; then
+    if ! grep --quiet debian /etc/os-release; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
         exit $ERR

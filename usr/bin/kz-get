@@ -92,7 +92,7 @@ function process_x_options() {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
@@ -107,9 +107,9 @@ function process_input() {
 
     become_root_check || exit $OK
     prepare_processing
-    if $DEB; then
+    if grep --quiet debian /etc/os-release; then
         install_deb_package
-    elif $RPM; then
+    elif grep --quiet rhel /etc/os-release; then
         install_rpm_package
     else
         TEXT=$(gettext 'Unknown package manager.')
@@ -199,7 +199,7 @@ Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under \
 Linux.")"
-    if $GUI; then
+    if [[ ${DISPLAY-} ]]; then
         TEXT+="
 
 $(gettext "Type 'exit' to close this window.")"

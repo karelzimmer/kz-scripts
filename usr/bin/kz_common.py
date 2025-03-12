@@ -48,8 +48,7 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
-COMMAND: str = 'type systemctl'
-if subprocess.run(COMMAND, executable='bash',
+if subprocess.run('type systemctl', executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
     print(_('fatal: no systemd available'))
@@ -58,34 +57,6 @@ if subprocess.run(COMMAND, executable='bash',
 if not os.path.exists('/etc/os-release'):
     print(_('fatal: no os release available'))
     sys.exit(ERR)
-
-DEB: bool = False
-RPM: bool = False
-COMMAND1: str = "grep --quiet --regexp='debian' /etc/os-release"
-COMMAND2: str = "grep --quiet --regexp='rhel' /etc/os-release"
-if subprocess.run(COMMAND1, executable='bash',
-                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                  shell=True).returncode == OK:
-    DEB = True
-elif subprocess.run(COMMAND2, executable='bash',
-                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                    shell=True).returncode == OK:
-    RPM = True
-else:
-    print(_('fatal: unknown distribution'))
-    sys.exit(ERR)
-
-KNOWN_DESKTOP_ENVIRONMENT: str = ''
-KNOWN_DESKTOP_ENVIRONMENTS: list[str] = ["cinnamon-session", "gnome-session",
-                                         "lxqt-session", "mate-session",
-                                         "xfce4-session", "ksmserver"]
-GUI: bool = False
-for KNOWN_DESKTOP_ENVIRONMENT in KNOWN_DESKTOP_ENVIRONMENTS:
-    COMMAND = f'type {KNOWN_DESKTOP_ENVIRONMENT}'
-    if subprocess.run(COMMAND, executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode == OK:
-        GUI = True
 
 
 ###############################################################################
@@ -160,15 +131,18 @@ def check_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     next check if so.
     """
     CHECK_WAIT: int = 10
-    COMMAND: str = 'sudo fuser --silent /var/cache/debconf/config.dat '
-    COMMAND += '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*'
+    COMMAND1: str = 'grep --quiet rhel /etc/os-release'
+    COMMAND2: str = 'sudo fuser --silent /var/cache/debconf/config.dat '
+    COMMAND2 += '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*'
 
-    if RPM:
+    if subprocess.run(COMMAND1, executable='bash',
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      shell=True).returncode == OK:
         return OK
 
     while True:
         try:
-            subprocess.run(COMMAND, executable='bash',
+            subprocess.run(COMMAND2, executable='bash',
                            shell=True, check=True)
         except Exception:
             break
@@ -241,7 +215,9 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
     YELP_MAN_URL: str = ''
 
-    if GUI:
+    if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      shell=True).returncode == OK:
         YELP_MAN_URL = f"{_(', or see the ')}"
         YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_ID}\x1b\\{PROGRAM_ID} '
         YELP_MAN_URL += f"{_('man page')}\x1b]8;;\x1b\\"
@@ -260,7 +236,9 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     COMMAND1: str = f'yelp man:{PROGRAM_ID}'
     COMMAND2: str = f'man --pager=cat {PROGRAM_NAME}'
 
-    if GUI:
+    if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      shell=True).returncode == OK:
         try:
             subprocess.run(COMMAND1, executable='bash',
                            stderr=subprocess.DEVNULL,
@@ -305,7 +283,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function displays version, author, and license information.
     """
-    BUILD_ID: str = ''  # ISO 8601
+    BUILD_ID: str = ''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
     try:

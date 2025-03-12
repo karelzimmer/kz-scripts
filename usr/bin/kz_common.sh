@@ -58,32 +58,6 @@ if ! [[ -f /etc/os-release ]]; then
     exit $ERR
 fi
 
-declare DEB=false
-declare RPM=false
-if grep --quiet --regexp='debian' /etc/os-release; then
-    DEB=true
-elif grep --quiet --regexp='rhel' /etc/os-release; then
-    RPM=true
-else
-    rm --force getkz getkz.{1..99}
-    printf '%s\n' "$(gettext "fatal: unknown distribution")" >&2
-    exit $ERR
-fi
-readonly DEB
-readonly RPM
-
-readonly KNOWN_DESKTOP_ENVIRONMENTS="cinnamon-session gnome-session \
-lxqt-session mate-session xfce4-session ksmserver"
-declare KNOWN_DESKTOP_ENVIRONMENT
-declare GUI=false
-for KNOWN_DESKTOP_ENVIRONMENT in $KNOWN_DESKTOP_ENVIRONMENTS; do
-    if type "$KNOWN_DESKTOP_ENVIRONMENT" &> /dev/null; then
-        GUI=true
-    fi
-done
-readonly GUI
-unset KNOWN_DESKTOP_ENVIRONMENT
-
 
 ###############################################################################
 # Functions
@@ -144,7 +118,7 @@ function check_package_manager() {
     local TEXT=''
     local -i CHECK_WAIT=10
 
-    if $RPM; then
+    if grep --quiet rhel /etc/os-release; then
         return $OK
     fi
 
@@ -271,7 +245,7 @@ function process_option_help() {
     local TEXT=''
     local YELP_MAN_URL=''
 
-    if $GUI; then
+    if [[ ${DISPLAY-} ]]; then
         YELP_MAN_URL="$(gettext ', or see the ')"
         YELP_MAN_URL+="\033]8;;man:$PROGRAM_ID\033\\$PROGRAM_ID "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
@@ -289,7 +263,7 @@ $TEXT"
 function process_option_manual() {
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
 
-    if $GUI; then
+    if [[ ${DISPLAY-} ]]; then
         yelp man:"$PROGRAM_ID" 2> /dev/null
     else
         man --pager=cat "$PROGRAM_NAME"
@@ -310,7 +284,7 @@ $TEXT"
 
 # This function displays version, author, and license information.
 function process_option_version() {
-    local BUILD_ID='' # ISO 8601
+    local BUILD_ID='' # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local TEXT=''
 
     if [[ -f /usr/share/doc/kz/build.id ]]; then
@@ -363,9 +337,9 @@ function term() {
             RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
             ;;
         100 )
-            if $DEB; then
+            if grep --quiet debian /etc/os-release; then
                 RC_DESC='apt/dpkg exited with error'
-            elif $RPM; then
+            elif grep --quiet rhel /etc/os-release; then
                 RC_DESC='there are updates available'
             else
                 RC_DESC="previous errors/it didn't work"

@@ -83,11 +83,14 @@ def process_options() -> bool:
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.gui:
-        if not kz_common.GUI:
+        if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
+                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                          shell=True).returncode == kz_common.ERR:
             TEXT: str = f"{PROGRAM_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
+            TEXT += f"\n{_('Usage:')} {USAGE}"
             OPTION_GUI = False
-            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             RC = kz_common.OK
             kz_common.term(PROGRAM_NAME, RC)
         else:

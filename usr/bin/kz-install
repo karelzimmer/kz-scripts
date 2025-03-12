@@ -117,7 +117,7 @@ $USAGE"
                 shift 2
                 ;;
             -g | --gui )
-                if ! $GUI; then
+                if [[ -z ${DISPLAY-} ]]; then
                     TEXT=\
 "$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -145,10 +145,10 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         ARGUMENT_APPS=true
         REBOOT=false
-        while [[ -n $* ]]; do
+        while [[ $* ]]; do
             APP_ARGUMENTS[$1]=$1
             shift
         done
@@ -220,20 +220,20 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     APPS=$(
-        grep    --regexp="#.*$INSTALL.*$ON" \
-                "$INSTALL_FILE"             |
-        tr      --squeeze-repeats           \
-                '[:space:]'                 |
-        cut     --delimiter=' '             \
-                --fields=3                  |
-        sort    --unique                    |
-        nl      --number-width=3            \
-                --number-format=rn          \
-                --number-separator='  '     \
-                --body-numbering=a          || true
+        grep    "#.*$INSTALL.*$ON"      \
+                "$INSTALL_FILE"         |
+        tr      --squeeze-repeats       \
+                '[:space:]'             |
+        cut     --delimiter=' '         \
+                --fields=3              |
+        sort    --unique                |
+        nl      --number-width=3        \
+                --number-format=rn      \
+                --number-separator='  ' \
+                --body-numbering=a      || true
         )
 
-    if [[ -n $APPS ]]; then
+    if [[ $APPS ]]; then
         TEXT+="$APPS
 
 $(gettext 'Use "kz install <app>..." to install the apps.')
@@ -353,12 +353,7 @@ function process_input_file_by_host() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    # Add usage information from the install file at the top.
-    TEXT=$(grep --regexp='# Use "' $INSTALL_FILE || true)
-    printf '%b\n' "$TEXT\n\n$(cat "$COMMAND_FILE")" > "$COMMAND_FILE"
-
     less --no-init --quit-if-one-screen "$COMMAND_FILE"
-
     rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
@@ -372,11 +367,7 @@ function install_apps() {
     local -i APP_TOT_NUM=0
     local -A FAILED_APPS=()
 
-    APP_TOT_NUM=$(
-        grep    --regexp="#.*$INSTALL.*$ON" \
-                --count                     \
-                "$COMMAND_FILE"             || true
-        )
+    APP_TOT_NUM=$(grep --count "#.*$INSTALL.*$ON" "$COMMAND_FILE" || true)
     if [[ $APP_TOT_NUM -eq 0 ]]; then
         return $OK
     fi
@@ -408,7 +399,7 @@ function install_apps() {
         exit $OK
     fi
 
-    if [[ -n ${FAILED_APPS[*]} ]]; then
+    if [[ ${FAILED_APPS[*]} ]]; then
         TEXT="$(gettext "The installation of the following apps contains \
 errors:")
 ${FAILED_APPS[*]}

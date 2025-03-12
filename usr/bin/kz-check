@@ -78,15 +78,8 @@ function process_x_options() {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-
-    if ! $GUI; then
-        TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -103,7 +96,7 @@ function process_input() {
     local SCRIPTS_REPO=$HOME/kz-scripts
     local TEXT=''
 
-    if ! $DEB; then
+    if ! grep --quiet debian /etc/os-release; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
         exit $ERR
@@ -241,13 +234,13 @@ function check_code() {
     local TAB_COMPLETION_SCRIPT='# ''shellcheck shell=bash'
     local TEXT=''
 
-    if grep --quiet --line-regexp --regexp="$BASH_SCRIPT" "$SCRIPT"; then
+    if grep --quiet --line-regexp "$BASH_SCRIPT" "$SCRIPT"; then
         check_shellcheck
         check_script
-    elif grep --quiet --line-regexp --regexp="$TAB_COMPLETION_SCRIPT" "$SCRIPT"
+    elif grep --quiet --line-regexp "$TAB_COMPLETION_SCRIPT" "$SCRIPT"
         then
         check_shellcheck
-    elif grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"; then
+    elif grep --quiet --line-regexp "$PYTHON_SCRIPT" "$SCRIPT"; then
         check_pycodestyle
         check_mypy
         check_script
@@ -323,7 +316,7 @@ not found.")
     fi
 
     # PolicyKit action definition file (Only with so-called root scripts).
-    if grep --quiet --regexp="$ROOT_SCRIPT" "$FILE"; then
+    if grep --quiet "$ROOT_SCRIPT" "$FILE"; then
         DIR=$SCRIPTS_REPO/usr/share/polkit-1/actions
 
         if [[ ! -e $DIR/nl.karelzimmer.$SCRIPTNAME.policy ]]; then
@@ -363,7 +356,7 @@ function check_record_length() {
     local -i MAX_LINE_LENGTH=79
 
     # Python is checked by pycodestyle.
-    if grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"; then
+    if grep --quiet --line-regexp "$PYTHON_SCRIPT" "$SCRIPT"; then
         return $OK
     fi
 
@@ -397,7 +390,6 @@ function check_shellcheck() {
     cd "$SCRIPTDIR"
     shellcheck  --external-sources                  \
                 --enable add-default-case           \
-                --enable avoid-nullary-conditions   \
                 --enable require-double-brackets    \
                 "$SCRIPTNAME"                       || ERR_FLAG=true
     cd "$SCRIPTS_REPO"
@@ -438,13 +430,13 @@ ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 function check_trailing_spaces() {
     local TEXT=''
 
-    if grep --quiet --regexp=' ''$' "$SCRIPT"; then
+    if grep --quiet ' ''$' "$SCRIPT"; then
         TEXT="
 ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 ${RED}    $(gettext 'End spaces found.')$NORMAL
 "
         infomsg "$TEXT"
-        grep    --line-number --regexp=' ''$' "$SCRIPT" |
+        grep    --line-number ' ''$' "$SCRIPT" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
         ERR_FLAG=true
     fi
