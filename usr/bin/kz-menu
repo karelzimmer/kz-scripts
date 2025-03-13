@@ -406,12 +406,18 @@ function process_menu2_tui() {
 function process_menu2_choice() {
         local TEXT=''
         local TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
+        local -i REPLY_SAVE=''
         local -a ROWS=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
             )
 
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
+        REPLY_SAVE=$REPLY
         process_commands
+        # Setup apps on a server means manual logout.
+        if [[ $REPLY_SAVE -eq 5 ]] && ! [[ ${DISPLAY-} ]]; then
+            exit $RC
+        fi
         $OPTION_GUI || wait_for_enter
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         process_menu1_tui
