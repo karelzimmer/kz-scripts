@@ -7,23 +7,22 @@
 ###############################################################################
 # Use "man kz install.sh" to learn more about the format of this file.
 
-# First install app disabled-apport, then app update-system.
-# The rest of the apps are in alphabetical order of app name.
+# The apps are listed in alphabetical order by app name.
 
-# Install disabled-apport on *
+# Install 1-disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
 if systemctl cat apport; then sudo systemctl stop apport.service; fi
 if systemctl cat apport; then sudo systemctl disable apport.service; fi
 if systemctl cat apport; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
 if systemctl cat apport; then sudo rm --force --verbose /var/crash/*; fi
 
-# Remove disabled-apport from *
+# Remove 1-disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
 if systemctl cat apport; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
 if systemctl cat apport; then sudo systemctl enable --now apport.service; fi
 
 
-# Install update-system on *
+# Install 2-update-system on *
 # Update system.
 # This may take a while...
 if grep debian /etc/os-release; then sudo apt-get update; fi
@@ -33,7 +32,7 @@ if grep debian /etc/os-release && type snap; then sudo snap refresh; fi
 if grep rhel /etc/os-release; then sudo dnf upgrade --assumeyes --refresh; fi
 if grep rhel /etc/os-release && type snap; then sudo snap refresh; fi
 
-# Remove update-system from *
+# Remove 2-update-system from *
 # Update system.
 echo 'The update-system app cannot be removed.'
 

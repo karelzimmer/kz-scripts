@@ -7,7 +7,7 @@
 ###############################################################################
 # Use "man kz setup.sh" to learn more about the format of this file.
 
-# The apps are in alphabetical order of app name.
+# The apps are listed in alphabetical order by app name.
 
 # Setup anydesk on pc06 pc07
 # Remote desktop.
