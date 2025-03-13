@@ -75,8 +75,8 @@ function become_root() {
     become_root_check || exit $OK
 
     if [[ $UID -ne 0 ]]; then
+        export DISPLAY
         if $OPTION_GUI; then
-            export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
             TEXT="Restart (pkexec $PKEXEC_PROGRAM ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
