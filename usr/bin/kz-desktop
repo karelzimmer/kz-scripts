@@ -146,9 +146,7 @@ $USAGE"
         exit $ERR
     fi
 
-    if [[ -z ${DISPLAY-} ]]; then
-        exit $OK
-    fi
+    [[ ${DISPLAY-} ]] || exit $OK
 }
 
 

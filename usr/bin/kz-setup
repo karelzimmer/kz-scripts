@@ -117,7 +117,7 @@ $USAGE"
                 shift 2
                 ;;
             -g | --gui )
-                if [[ -z ${DISPLAY-} ]]; then
+                if ! [[ ${DISPLAY-} ]]; then
                     TEXT=\
 "$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"

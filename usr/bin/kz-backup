@@ -83,7 +83,7 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if [[ -z ${DISPLAY-} ]]; then
+                if ! [[ ${DISPLAY-} ]]; then
                     TEXT=\
 "$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
