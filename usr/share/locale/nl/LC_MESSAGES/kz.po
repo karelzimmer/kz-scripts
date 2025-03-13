@@ -751,7 +751,7 @@ msgid "Finish installation"
 msgstr "Installatie afronden"
 
 msgid "Set up user"
-msgstr "Gebruiker instellen"
+msgstr "Gebruiker inrichten"
 
 msgid "Command menu"
 msgstr "Opdrachtmenu"
