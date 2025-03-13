@@ -146,7 +146,12 @@ $USAGE"
         exit $ERR
     fi
 
-    [[ ${DISPLAY-} ]] || exit $OK
+    if ! [[ ${DISPLAY-} ]]; then
+        TEXT="$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
+$USAGE"
+        infomsg "$TEXT"
+        exit $OK
+    fi
 }
 
 
