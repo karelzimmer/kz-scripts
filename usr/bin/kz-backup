@@ -541,7 +541,6 @@ $USERS_LIST"
 
     if [[ $TARGET_MEDIUM == */media/$USER* ]]; then
         term_script_usb || RC=$?
-
         if [[ $RC -eq $OK ]]; then
             TEXT+="
 
@@ -551,7 +550,6 @@ $(gettext 'The USB medium can be removed.')"
 
 $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
         fi
-
     fi
     infomsg "$TEXT"
 

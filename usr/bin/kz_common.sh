@@ -75,7 +75,6 @@ function become_root() {
     become_root_check || exit $OK
 
     if [[ $UID -ne 0 ]]; then
-
         if $OPTION_GUI; then
             export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
@@ -90,7 +89,6 @@ function become_root() {
             logmsg "$TEXT"
             exec sudo "$PROGRAM_ID" "${COMMANDLINE_ARGS[@]}"
         fi
-
     fi
 }
 

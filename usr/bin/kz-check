@@ -285,7 +285,6 @@ error.")
             errmsg "$TEXT"
             ERR_FLAG=true
         fi
-
     fi
 
     # Tab-completion script (Only with so-called root scripts).
@@ -325,7 +324,6 @@ not found.")
             errmsg "$TEXT"
             ERR_FLAG=true
         fi
-
     fi
 }
 
