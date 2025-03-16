@@ -147,8 +147,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.deb")
 
     logmsg  'Download Debian package kz...'
-    wget    --no-verbose                            \
-            --output-document="$KZ_DEB_LOCAL_FILE"  \
+    wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
             "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
     logmsg  'Downloaded Debian package kz.'
 
