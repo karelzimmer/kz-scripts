@@ -293,7 +293,7 @@ function process_option_version() {
         BUILD_ID=$TEXT
     fi
 
-    TEXT="$(eval_gettext "kz version 4.2.1 (\$BUILD_ID).")
+    TEXT="$(eval_gettext "kz version 4.2.1 (built \$BUILD_ID).")
 
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 \

@@ -303,7 +303,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         RC = ERR
         term(PROGRAM_NAME, RC)
     finally:
-        TEXT = f"{_('kz version 4.2.1 ({}).').format(BUILD_ID)}\n\n"
+        TEXT = f"{_('kz version 4.2.1 (built {}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         TEXT += _('License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.')
