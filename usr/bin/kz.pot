@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 09:28+0100\n"
+"POT-Creation-Date: 2025-03-17 16:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,7 +126,7 @@ msgid "kz version 4.2.1 (built $BUILD_ID)."
 msgstr ""
 
 #, sh-format
-msgid "kz version 4.2.1 ({})."
+msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
 msgid "{}: i am a module"
