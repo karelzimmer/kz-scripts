@@ -155,7 +155,7 @@ $USAGE"
     else
         MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
 
-        if [[ -z $MEDIUM ]]; then
+        if ! [[ $MEDIUM ]]; then
             TEXT=$(gettext "No USB medium found.
 
 Connect a USB medium.")
@@ -165,7 +165,7 @@ Connect a USB medium.")
 
             MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
 
-            if [[ -z $MEDIUM ]]; then
+            if ! [[ $MEDIUM ]]; then
                 errmsg "$TEXT"
                 exit $ERR
             fi
