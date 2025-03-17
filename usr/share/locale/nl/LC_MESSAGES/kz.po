@@ -166,6 +166,9 @@ msgstr "  <argumenten>   argumenten voor opdracht"
 msgid "invalid option"
 msgstr "ongeldige optie"
 
+msgid "command is required"
+msgstr "opdracht is vereist"
+
 msgid "command does not exist"
 msgstr "opdracht bestaat niet"
 
