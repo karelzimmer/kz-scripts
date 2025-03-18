@@ -45,7 +45,6 @@ ERR: int = 1
 # List NORMAL last here so that Python debugger (pdb) doesn't bork the display.
 BOLD: str = '\033[1m'
 RED: str = '\033[1;31m'
-GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
 if subprocess.run('type systemctl', executable='bash',
