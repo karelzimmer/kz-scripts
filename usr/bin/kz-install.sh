@@ -416,6 +416,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes htop; 
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes htop; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes htop; fi
 
+
 # Install imagination on pc06 pc07
 # Slideshow maker.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes imagination; fi
@@ -764,6 +765,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes tree; 
 # Display directory tree.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes tree; fi
+
 
 # Install ufw on pc01 pc06 pc07
 # Uncomplicated FireWall.
