@@ -73,7 +73,7 @@ def process() -> None:
             else:
                 EXEC += '-' + str(sys.argv[arg_num])
                 if not os.path.exists(EXEC):
-                    TEXT = f'{PROGRAM_NAME}: {EXEC}: '
+                    TEXT = f'{PROGRAM_NAME}: {str(sys.argv[arg_num])}: '
                     TEXT += f"{_('command does not exist')}\n"
                     TEXT += f"{_('Usage:')} {USAGE}"
                     print(TEXT)
