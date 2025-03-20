@@ -66,12 +66,14 @@ def process() -> None:
         if ARG_NUM == 0:
             continue
         if ARG_NUM == 1:
+            # Check if the option for kz is specified.
             if sys.argv[ARG_NUM].startswith('-'):
                 kz_common.process_options(PROGRAM_NAME, USAGE, PROGRAM_DESC,
                                           HELP)
                 process_x_options()
                 sys.exit(kz_common.OK)
             else:
+                # Build kz-<command> and check if kz-<command> exists.
                 EXEC += '-' + sys.argv[ARG_NUM]
                 if not os.path.exists(EXEC):
                     TEXT = f'{PROGRAM_NAME}: {sys.argv[ARG_NUM]}: '
@@ -80,6 +82,7 @@ def process() -> None:
                     print(TEXT)
                     sys.exit(kz_common.ERR)
         else:
+            # Build kz-<command> <arguments>...
             EXEC += ' ' + sys.argv[ARG_NUM]
 
     if EXEC == '/usr/bin/kz':
