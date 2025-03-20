@@ -1,5 +1,9 @@
-#!/usr/bin/env bash
-# shellcheck source=kz_common.sh
+#!/usr/bin/env python3
+"""
+Run command.
+
+This script runs a command with optional parameters.
+"""
 ###############################################################################
 # SPDX-FileComment: Run command
 #
@@ -12,164 +16,140 @@
 # Imports
 ###############################################################################
 
-source kz_common.sh
+import argparse
+import gettext
+import kz_common
+import os
+import subprocess
+import sys
+
+gettext.bindtextdomain('kz', '/usr/share/locale')
+gettext.textdomain('kz')
+_ = gettext.gettext
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz'
-PROGRAM_DESC=$(gettext 'Run command')
-readonly PROGRAM_DESC
+PROGRAM_NAME: str = 'kz'
+PROGRAM_DESC: str = _('Run command')
 
-USAGE=$(eval_gettext "Usage: kz [-l|--list] \$OPTIONS_USAGE
-          <command> [<arguments>]")
-readonly USAGE
+USAGE: str = (f"{_('kz <command> [<arguments>] [-l|--list]')} "
+              f"{kz_common.OPTIONS_USAGE}")
 
-X_OPTIONS_HELP=$(gettext '  -l, --list     show available commands')
-readonly X_OPTIONS_HELP
+X_OPTIONS_HELP: str = f"{_('  -l, --list     show available commands')}"
 
-HELP="$(gettext "Usage: kz [<options>] <command> [<arguments>]")
-
-$PROGRAM_DESC.
-
-$(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP
-
-$(gettext 'Arguments:')
-$(gettext '  <command>      execute command')
-$(gettext '  <arguments>    arguments for command')"
-readonly HELP
-
-readonly X_OPTIONS_SHORT='l'
-readonly X_OPTIONS_LONG=',list'
+HELP: str = (f"{_('Usage: {} [<options>]').format(PROGRAM_NAME)}\n\n"
+             f'{PROGRAM_DESC}.\n\n'
+             f"{_('Options:')}\n"
+             f'{X_OPTIONS_HELP}\n'
+             f'{kz_common.OPTIONS_HELP}\n\n'
+             f"{_('Arguments:')}\n"
+             f"{_('  <command>      execute command')}\n"
+             f"{_('  <arguments>    arguments for command')}")
 
 
 ###############################################################################
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
-function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+def process() -> None:
+    """
+    This function performs the script actions, such as checking the input.
+    """
+    EXEC: str = '/usr/bin/kz'
+    TEXT: str = ''
 
-    if ! [[ $* ]]; then
-        TEXT="$PROGRAM_NAME: $(gettext "command is required")
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERR
-        # infomsg "$USAGE"
-        # exit $ERR
-    fi
+    for arg_num in range(len(sys.argv)):
+        if arg_num == 0:
+            continue
+        if arg_num == 1:
+            if str(sys.argv[arg_num]).startswith('-'):
+                kz_common.process_options(PROGRAM_NAME, USAGE, PROGRAM_DESC,
+                                          HELP)
+                process_x_options()
+                sys.exit(kz_common.OK)
+            else:
+                EXEC += '-' + str(sys.argv[arg_num])
+                if not os.path.exists(EXEC):
+                    TEXT = f'{PROGRAM_NAME}: {EXEC}: '
+                    TEXT += f"{_('command does not exist')}\n"
+                    TEXT += f"{_('Usage:')} {USAGE}"
+                    print(TEXT)
+                    sys.exit(kz_common.ERR)
+        else:
+            EXEC += ' ' + str(sys.argv[arg_num])
 
-    if [[ $1 == -* ]]; then
-        PARSED=$(
-            getopt  --alternative                                       \
-                    --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                    --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                    --name          "$PROGRAM_NAME"                     \
-                    --              "$@"
-            ) || RC=$?
-        if [[ $RC -ne $OK ]]; then
-            infomsg "$USAGE"
-            exit $ERR
-        fi
-        eval set -- "$PARSED"
-
-        process_options   "$@"
-        process_x_options "$@"
-    fi
-}
-
-
-# This function handles the extra options and arguments.
-function process_x_options() {
-    while true; do
-        case $1 in
-            -l | --list )
-                process_option_list
-                exit $OK
-                ;;
-            -- )
-                shift
-                break
-                ;;
-            * )
-                shift
-                ;;
-        esac
-    done
-}
+    if EXEC == '/usr/bin/kz':
+        TEXT = f"kz: {_('command is required')}\n{USAGE}"
+        print(TEXT)
+        sys.exit(kz_common.ERR)
+    else:
+        TEXT = f'Restart (exec {EXEC}...)'
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
+        try:
+            subprocess.run(f'exec {EXEC}', executable='bash',
+                           shell=True, check=True)
+        except Exception:
+            sys.exit(kz_common.ERR)
 
 
-# This function displays all available commands.
-function process_option_list() {
-    local TEXT=''
+def process_x_options() -> None:
+    """
+    This function handles the script options and arguments.
+    """
+    parser = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+                                     add_help=False)
 
-    TEXT="$(gettext 'The following commands are available:')
+    parser.add_argument('-l', '--list', action='store_true')
 
-$(gettext 'NUM  COMMAND')
-$(
-    find    /usr/bin/kz-*           \
-            -maxdepth 1             \
-            -type f                 \
-            -executable             \
-            -readable               \
-            -not -name '*~'         \
-            -not -name kz           \
-            -printf '%f\n'          |
-    sort                            |
-    sed     --expression='s/kz-//'  |
-    nl      --number-width=3        \
-            --number-format=rn      \
-            --number-separator='  ' \
-            --body-numbering=a
-    )
+    args = parser.parse_args()
 
-$(gettext 'Use "kz <command> [<arguments>]" to execute a command'.)"
-    infomsg "$TEXT"
-}
+    if args.list:
+        process_option_list()
 
 
-# This function processes the script options and arguments.
-function process_input() {
-    local COMMAND=$1
+def process_option_list() -> None:
+    """
+    This function performs the script actions, such as checking the input.
+    """
+    TEXT: str = f"{_('The following commands are available:')}\n\n"
+    TEXT += f"{_('NUM  COMMAND')}\n\n"
+    COMMAND: str = f"find   /usr/bin/kz-*               \
+                            -maxdepth 1                 \
+                            -type f                     \
+                            -executable                 \
+                            -readable                   \
+                            -not -name '*~'             \
+                            -not -name kz               \
+                            -printf '%f\n'          |   \
+                     sort                           |   \
+                     sed    --expression='s/kz-//'  |   \
+                     nl     --number-width=3            \
+                            --number-format=rn          \
+                            --number-separator='  '     \
+                            --body-numbering=a"
+    TEXT += subprocess.run(COMMAND, shell=True, check=True, text=True,
+                           stdout=subprocess.PIPE).stdout
+    TEXT += f"\n{_('Use "kz <command> [<arguments>]" to execute a command.')}"
+    print(TEXT)
+    RC = kz_common.OK
+    kz_common.term(PROGRAM_NAME, RC)
 
-    local TEXT=''
 
-    if [[ ! -f /usr/bin/kz-$COMMAND ]]; then
-        TEXT="$PROGRAM_NAME: $COMMAND: $(gettext "command does not exist")"
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-
-    shift
-
-    TEXT="Restart (exec kz-$COMMAND $*...)"
-    logmsg "$TEXT"
-
-    exec "kz-$COMMAND" "$@"
-}
-
-
-# This function controls the termination of the script.
-function term_script() {
-    exit $OK
-}
+def term() -> None:
+    """
+    This function controls the termination of the script.
+    """
+    RC = kz_common.OK
+    kz_common.term(PROGRAM_NAME, RC)
 
 
 ###############################################################################
 # Main
 ###############################################################################
 
-function main() {
-    init_script "$@"
-    check_input "$@"
-    process_input "$@"
-    term_script
-}
-
-main "$@"
+kz_common.init(PROGRAM_NAME)
+process()
+term()

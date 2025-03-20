@@ -140,13 +140,8 @@ msgstr "{}: ik ben een module"
 msgid "Run command"
 msgstr "Opdracht uitvoeren"
 
-#, sh-format
-msgid ""
-"Usage: kz [-l|--list] $OPTIONS_USAGE\n"
-"          <command> [<arguments>]"
-msgstr ""
-"Gebruik: kz [-l|--list] $OPTIONS_USAGE\n"
-"            <opdracht> [<argumenten>]"
+msgid "kz <command> [<arguments>] [-l|--list]"
+msgstr "kz <opdracht> [<argumenten>] [-l|--list]"
 
 msgid "Usage: kz [<options>] <command> [<arguments>]"
 msgstr "Gebruik: kz [<opties>] <opdracht> [<argumenten>]"

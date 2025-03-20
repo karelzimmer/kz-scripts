@@ -53,7 +53,26 @@ readonly HELP
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function performs the script actions, such as checking the input.
+function process() {
+    local TEXT=''
+
+    check_input "$@"
+    become_root_check || exit $OK
+    prepare_processing
+    if grep --quiet debian /etc/os-release; then
+        install_deb_package
+    elif grep --quiet rhel /etc/os-release; then
+        install_rpm_package
+    else
+        TEXT=$(gettext 'Unknown package manager.')
+        errmsg "$TEXT"
+        exit $ERR
+    fi
+}
+
+
+# This function handles the options and arguments.
 function check_input() {
     local PARSED=''
     local -i RC=$OK
@@ -76,7 +95,7 @@ function check_input() {
 }
 
 
-# This function handles the extra options and arguments.
+# This function handles the script options and arguments.
 function process_x_options() {
     local TEXT=''
 
@@ -96,24 +115,6 @@ function process_x_options() {
         TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERR
-    fi
-}
-
-
-# This function processes the script options and arguments.
-function process_input() {
-    local TEXT=''
-
-    become_root_check || exit $OK
-    prepare_processing
-    if grep --quiet debian /etc/os-release; then
-        install_deb_package
-    elif grep --quiet rhel /etc/os-release; then
-        install_rpm_package
-    else
-        TEXT=$(gettext 'Unknown package manager.')
-        errmsg "$TEXT"
         exit $ERR
     fi
 }
@@ -184,7 +185,7 @@ https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     local TEXT=''
 
     # Progress indicator ends like [====]100%.
@@ -221,10 +222,9 @@ $(gettext "Type 'exit' to close this window.")"
 ###############################################################################
 
 function main() {
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

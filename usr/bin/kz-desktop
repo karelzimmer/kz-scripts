@@ -59,7 +59,38 @@ readonly X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function performs the script actions, such as checking the input.
+function process() {
+    local FAVORITE_APPS=''
+    local TEXT=''
+
+    check_input "$@"
+    if ! gsettings list-keys org.gnome.shell |& $LOGCMD; then
+        TEXT=$(gettext "No such schema 'org.gnome.shell'.")
+        infomsg "$TEXT"
+        exit $OK
+    else
+        FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+        DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
+    fi
+
+    if $OPTION_ADDAFT; then
+        process_OPTION_ADDAFT
+    elif $OPTION_ADDBEF; then
+        process_OPTION_ADDBEF
+    elif $OPTION_DELETE; then
+        process_OPTION_DELETE
+    elif $OPTION_LIST; then
+        process_OPTION_LIST
+    elif $OPTION_RESET; then
+        process_OPTION_RESET
+    else
+        capture_gnome_changes
+    fi
+}
+
+
+# This function handles the options and arguments.
 function check_input() {
     local PARSED=''
     local -i RC=$OK
@@ -82,7 +113,7 @@ function check_input() {
 }
 
 
-# This function handles the extra options and arguments.
+# This function handles the script options and arguments.
 function process_x_options() {
     local TEXT=''
 
@@ -151,36 +182,6 @@ $USAGE"
 $USAGE"
         infomsg "$TEXT"
         exit $OK
-    fi
-}
-
-
-# This function processes the script options and arguments.
-function process_input() {
-    local FAVORITE_APPS=''
-    local TEXT=''
-
-    if ! gsettings list-keys org.gnome.shell |& $LOGCMD; then
-        TEXT=$(gettext "No such schema 'org.gnome.shell'.")
-        infomsg "$TEXT"
-        exit $OK
-    else
-        FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
-        DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
-    fi
-
-    if $OPTION_ADDAFT; then
-        process_OPTION_ADDAFT
-    elif $OPTION_ADDBEF; then
-        process_OPTION_ADDBEF
-    elif $OPTION_DELETE; then
-        process_OPTION_DELETE
-    elif $OPTION_LIST; then
-        process_OPTION_LIST
-    elif $OPTION_RESET; then
-        process_OPTION_RESET
-    else
-        capture_gnome_changes
     fi
 }
 
@@ -303,7 +304,7 @@ $(gettext 'Use "gsettings set <change>" for changes.')"
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     exit $OK
 }
 
@@ -320,10 +321,9 @@ function main() {
     local OPTION_LIST=false
     local OPTION_RESET=false
 
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

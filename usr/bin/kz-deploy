@@ -39,7 +39,24 @@ readonly HELP
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function performs the script actions, such as checking the input.
+function process() {
+    local TEXT=''
+
+    check_input "$@"
+    if ! grep --quiet debian /etc/os-release; then
+        TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
+        infomsg "$TEXT"
+        exit $ERR
+    fi
+    become_root_check || exit $OK
+    build
+    check
+    deploy
+}
+
+
+# This function handles the options and arguments.
 function check_input() {
     local PARSED=''
     local -i RC=$OK
@@ -62,7 +79,7 @@ function check_input() {
 }
 
 
-# This function handles the extra options and arguments.
+# This function handles the script options and arguments.
 function process_x_options() {
     local TEXT=''
 
@@ -84,22 +101,6 @@ $USAGE"
         infomsg "$TEXT"
         exit $ERR
     fi
-}
-
-
-# This function processes the script options and arguments.
-function process_input() {
-    local TEXT=''
-
-    if ! grep --quiet debian /etc/os-release; then
-        TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-    become_root_check || exit $OK
-    build
-    check
-    deploy
 }
 
 
@@ -243,7 +244,7 @@ function install_package() {
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     if $ERR_FLAG; then
         TEXT=$(gettext "Please check all the messages above and fix them if \
 necessary.")
@@ -264,10 +265,9 @@ necessary.")
 function main() {
     local ERR_FLAG=false
 
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

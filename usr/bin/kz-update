@@ -46,43 +46,17 @@ HELP: str = (f"{_('Usage: {} [<options>]').format(PROGRAM_NAME)}\n\n"
 # Functions
 ###############################################################################
 
-def process_options() -> None:
+def process() -> None:
     """
-    This function handles the script options and arguments.
-    """
-    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
-                                     add_help=False)
-
-    PARSER.add_argument('-h', '--help', action='store_true')
-    PARSER.add_argument('-m', '--manual', action='store_true')
-    PARSER.add_argument('-u', '--usage', action='store_true')
-    PARSER.add_argument('-v', '--version', action='store_true')
-    args = PARSER.parse_args()
-
-    if args.help:
-        kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
-    elif args.manual:
-        kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
-    elif args.usage:
-        kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
-    elif args.version:
-        kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
-
-
-def process_input() -> None:
-    """
-    This function processes the script options and arguments.
+    This function performs the script actions, such as checking the input.
     """
     COMMAND1: str = "grep --quiet debian /etc/os-release"
     COMMAND2: str = "grep --quiet rhel /etc/os-release"
+
+    kz_common.process_options(PROGRAM_NAME, USAGE, PROGRAM_DESC, HELP)
+    process_x_options()
+
+    kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
 
     if subprocess.run(COMMAND1, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -99,6 +73,16 @@ def process_input() -> None:
         kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         RC = kz_common.ERR
         kz_common.term(PROGRAM_NAME, RC)
+
+
+def process_x_options() -> None:
+    """
+    This function handles the script options and arguments.
+    """
+    parser = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+                                     add_help=False)
+
+    args = parser.parse_args()
 
 
 def perform_deb_update() -> None:
@@ -146,7 +130,7 @@ def perform_rpm_update() -> None:
     COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(COMMAND)
 
-    if subprocess.run('type snap', executable='bash',
+    if subprocess.run((['type', 'snap']), executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == kz_common.OK:
@@ -190,7 +174,7 @@ def perform_command(COMMAND: str = '') -> None:
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, '')
 
 
-def term_script() -> None:
+def term() -> None:
     """
     This function controls the termination of the script.
     """
@@ -204,12 +188,6 @@ def term_script() -> None:
 # Main
 ###############################################################################
 
-kz_common.init_script(PROGRAM_NAME)
-
-process_options()
-
-kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
-
-process_input()
-
-term_script()
+kz_common.init(PROGRAM_NAME)
+process()
+term()

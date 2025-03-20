@@ -50,62 +50,16 @@ HELP: str = (f"{_('Usage: {} [<options>]').format(PROGRAM_NAME)}\n\n"
 # Functions
 ###############################################################################
 
-def process_options() -> bool:
+def process(OPTION_GUI: bool = False) -> None:
     """
-    This function handles the script options and arguments.
-    """
-    OPTION_GUI: bool = False
-
-    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
-                                     add_help=False)
-
-    PARSER.add_argument('-h', '--help', action='store_true')
-    PARSER.add_argument('-m', '--manual', action='store_true')
-    PARSER.add_argument('-u', '--usage', action='store_true')
-    PARSER.add_argument('-v', '--version', action='store_true')
-    PARSER.add_argument('-g', '--gui', action='store_true')
-    args = PARSER.parse_args()
-
-    if args.help:
-        kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
-    elif args.manual:
-        kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
-    elif args.usage:
-        kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
-    elif args.version:
-        kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
-    elif args.gui:
-        if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
-                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                          shell=True).returncode == kz_common.ERR:
-            TEXT: str = f"{PROGRAM_NAME}: {sys.argv[1]}: "
-            TEXT += f"{_('no desktop environment available')}"
-            TEXT += f"\n{_('Usage:')} {USAGE}"
-            OPTION_GUI = False
-            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            RC = kz_common.OK
-            kz_common.term(PROGRAM_NAME, RC)
-        else:
-            OPTION_GUI = True
-
-    return OPTION_GUI
-
-
-def process_input(OPTION_GUI: bool = False) -> None:
-    """
-    This function processes the script options and arguments.
+    This function performs the script actions, such as checking the input.
     """
     COMMAND: str = 'nmcli device wifi show-password'
     NMCLI_OUTPUT: str = ''
     TEXT: str = f"{_('Use this data to connect to the wireless network.')}"
+
+    kz_common.process_options(PROGRAM_NAME, USAGE, PROGRAM_DESC, HELP)
+    OPTION_GUI = process_x_options()
 
     if not kz_common.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         RC = kz_common.OK
@@ -138,7 +92,36 @@ def process_input(OPTION_GUI: bool = False) -> None:
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
-def term_script() -> None:
+def process_x_options() -> bool:
+    """
+    This function handles the script options and arguments.
+    """
+    OPTION_GUI: bool = False
+
+    parser = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+                                     add_help=False)
+
+    parser.add_argument('-g', '--gui', action='store_true')
+    args = parser.parse_args()
+
+    if args.gui:
+        if subprocess.run(['[[ ${DISPLAY-} ]]'], executable='bash',
+                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                          shell=True).returncode == kz_common.ERR:
+            TEXT: str = f"{PROGRAM_NAME}: {sys.argv[1]}: "
+            TEXT += f"{_('no desktop environment available')}"
+            TEXT += f"\n{_('Usage:')} {USAGE}"
+            OPTION_GUI = False
+            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            RC = kz_common.OK
+            kz_common.term(PROGRAM_NAME, RC)
+        else:
+            OPTION_GUI = True
+
+    return OPTION_GUI
+
+
+def term() -> None:
     """
     This function controls the termination of the script.
     """
@@ -150,10 +133,6 @@ def term_script() -> None:
 # Main
 ###############################################################################
 
-kz_common.init_script(PROGRAM_NAME)
-
-OPTION_GUI = process_options()
-
-process_input(OPTION_GUI)
-
-term_script()
+kz_common.init(PROGRAM_NAME)
+process()
+term()

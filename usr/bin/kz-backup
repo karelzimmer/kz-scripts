@@ -53,7 +53,16 @@ readonly X_OPTIONS_LONG=',gui,target:'
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function performs the script actions, such as checking the input.
+function process() {
+    check_input "$@"
+    check_target
+    backup_settings
+    create_backup
+}
+
+
+# This function handles the options and arguments.
 function check_input() {
     local PARSED=''
     local -i RC=$OK
@@ -76,7 +85,7 @@ function check_input() {
 }
 
 
-# This function handles the extra options and arguments.
+# This function handles the script options and arguments.
 function process_x_options() {
     local TEXT=''
 
@@ -120,14 +129,6 @@ $USAGE"
         infomsg "$TEXT"
         exit $ERR
     fi
-}
-
-
-# This function processes the script options and arguments.
-function process_input() {
-    check_target
-    backup_settings
-    create_backup
 }
 
 
@@ -523,7 +524,7 @@ $(gettext "Try creating the back up again.")"
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     local TEXT=''
     local -i NUM_USERS=0
     local -i RC=$OK
@@ -540,7 +541,7 @@ $USERS_LIST"
     fi
 
     if [[ $TARGET_MEDIUM == */media/$USER* ]]; then
-        term_script_usb || RC=$?
+        term_usb || RC=$?
         if [[ $RC -eq $OK ]]; then
             TEXT+="
 
@@ -558,7 +559,7 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 
 # This function tries to unmount the USB device.
-function term_script_usb() {
+function term_usb() {
     local DEV=''
     local TEXT=''
 
@@ -579,7 +580,7 @@ function term_script_usb() {
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         logmsg "$TEXT..."
-        term_script_unmount > >(
+        term_unmount > >(
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -591,7 +592,7 @@ function term_script_usb() {
             )
     else
         infomsg "$TEXT..."
-        term_script_unmount
+        term_unmount
     fi
 
     return $RC
@@ -599,7 +600,7 @@ function term_script_usb() {
 
 
 # This function unmounts the USB device.
-function term_script_unmount() {
+function term_unmount() {
     umount "$TARGET_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
@@ -617,10 +618,9 @@ function main() {
     local OPTION_TARGET=false
     local TARGET_ARGUMENT=''
 
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

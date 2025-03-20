@@ -88,7 +88,18 @@ readonly MENU2_LINES=${#MENU2_DESCS[@]}
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function performs the script actions, such as checking the input.
+function process() {
+    check_input "$@"
+    if $OPTION_GUI; then
+        process_menu1_gui
+    else
+        process_menu1_tui
+    fi
+}
+
+
+# This function handles the options and arguments.
 function check_input() {
     local PARSED=''
     local -i RC=$OK
@@ -111,7 +122,7 @@ function check_input() {
 }
 
 
-# This function handles the extra options and arguments.
+# This function handles the script options and arguments.
 function process_x_options() {
     local TEXT=''
 
@@ -143,16 +154,6 @@ $USAGE"
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
-    fi
-}
-
-
-# This function processes the script options and arguments.
-function process_input() {
-    if $OPTION_GUI; then
-        process_menu1_gui
-    else
-        process_menu1_tui
     fi
 }
 
@@ -540,7 +541,7 @@ function execute_command() {
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     exit $OK
 }
 
@@ -550,10 +551,9 @@ function term_script() {
 ###############################################################################
 
 function main() {
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

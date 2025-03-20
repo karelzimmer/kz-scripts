@@ -171,7 +171,7 @@ function infomsg() {
 
 
 # This function performs initial actions such as set traps (script-hardening).
-function init_script() {
+function init() {
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT="==== START logs for script $PROGRAM_ID ====
 Started ($PROGRAM_ID $* as $USER)."
@@ -188,12 +188,12 @@ Started ($PROGRAM_ID $* as $USER)."
     set -o nounset
     set -o pipefail
 
-    trap 'term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
-    trap 'term exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
-    trap 'term sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
-    trap 'term sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
-    trap 'term sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
-    trap 'term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
+    trap 'term_sig err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
+    trap 'term_sig exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
+    trap 'term_sig sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
+    trap 'term_sig sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
+    trap 'term_sig sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
+    trap 'term_sig sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     logmsg "$TEXT"
 }
@@ -205,7 +205,7 @@ function logmsg() {
 }
 
 
-# This function handles the common options.
+# This function handles the common options and arguments.
 function process_options() {
     while true; do
         case $1 in
@@ -302,7 +302,7 @@ $(gettext "License CC0 1.0 \
 
 
 # This function controls the termination.
-function term() {
+function term_sig() {
     local SIGNAL=$1
     local -i LINENO=$2
     local FUNCTION=$3

@@ -53,7 +53,25 @@ readonly RPM_NAME=kz-4.2.1-1.noarch.rpm
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function performs the script actions, such as checking the input.
+function process() {
+    local TEXT=''
+
+    check_input "$@"
+    if ! grep --quiet debian /etc/os-release; then
+        TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
+        infomsg "$TEXT"
+        exit $ERR
+    fi
+    become_root_check || exit $OK
+    build_website
+    generate_mo_file
+    build_deb_package
+    build_rpm_package
+    install_deb_package
+}
+
+# This function handles the options and arguments.
 function check_input() {
     local PARSED=''
     local -i RC=$OK
@@ -76,7 +94,7 @@ function check_input() {
 }
 
 
-# This function handles the extra options and arguments.
+# This function handles the script options and arguments.
 function process_x_options() {
     local TEXT=''
 
@@ -100,23 +118,6 @@ $USAGE"
     fi
 }
 
-
-# This function processes the script options and arguments.
-function process_input() {
-    local TEXT=''
-
-    if ! grep --quiet debian /etc/os-release; then
-        TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-    become_root_check || exit $OK
-    build_website
-    generate_mo_file
-    build_deb_package
-    build_rpm_package
-    install_deb_package
-}
 
 # This function builds the website.
 function build_website() {
@@ -320,7 +321,7 @@ function install_deb_package() {
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     TEXT=$(gettext 'Complete!')
     infomsg "$TEXT"
     exit $OK
@@ -332,10 +333,9 @@ function term_script() {
 ###############################################################################
 
 function main() {
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

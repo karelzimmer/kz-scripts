@@ -64,7 +64,50 @@ readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,reset'
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function performs the script actions, such as checking the input.
+function process() {
+    local COMMAND_FILE=''
+    local SETUP_FILE=/usr/bin/kz-setup.sh
+    local TEXT=''
+
+    check_input "$@"
+
+    if $OPTION_FILE; then
+        SETUP_FILE=$FILE_ARGUMENT
+    fi
+
+    if [[ ! -f $SETUP_FILE ]]; then
+        TEXT=$(eval_gettext "No setup file found, looked for '\$SETUP_FILE'.")
+        errmsg "$TEXT"
+        exit $ERR
+    fi
+
+    if $OPTION_BROWSE; then
+        process_option_browse
+        exit $OK
+    fi
+
+    if $OPTION_APPS; then
+        process_option_apps
+        exit $OK
+    fi
+
+    COMMAND_FILE=$(mktemp -t "kz-setup-commands-XXXXXXXXXX")
+
+    if $ARGUMENT_APP; then
+        process_argument_app
+    else
+        process_file_by_user
+    fi
+
+    if $OPTION_CAT; then
+        process_option_cat
+        exit $OK
+    fi
+
+    setup_apps
+}
+# This function handles the options and arguments.
 function check_input() {
     local PARSED=''
     local -i RC=$OK
@@ -87,7 +130,7 @@ function check_input() {
 }
 
 
-# This function handles the extra options and arguments.
+# This function handles the script options and arguments.
 function process_x_options() {
     local TEXT=''
 
@@ -154,47 +197,6 @@ $USAGE"
 }
 
 
-# This function processes the script options and arguments.
-function process_input() {
-    local COMMAND_FILE=''
-    local SETUP_FILE=/usr/bin/kz-setup.sh
-    local TEXT=''
-
-    if $OPTION_FILE; then
-        SETUP_FILE=$FILE_ARGUMENT
-    fi
-
-    if [[ ! -f $SETUP_FILE ]]; then
-        TEXT=$(eval_gettext "No setup file found, looked for '\$SETUP_FILE'.")
-        errmsg "$TEXT"
-        exit $ERR
-    fi
-
-    if $OPTION_BROWSE; then
-        process_option_browse
-        exit $OK
-    fi
-
-    if $OPTION_APPS; then
-        process_option_apps
-        exit $OK
-    fi
-
-    COMMAND_FILE=$(mktemp -t "kz-setup-commands-XXXXXXXXXX")
-
-    if $ARGUMENT_APP; then
-        process_argument_app
-    else
-        process_input_file_by_user
-    fi
-
-    if $OPTION_CAT; then
-        process_option_cat
-        exit $OK
-    fi
-
-    setup_apps
-}
 
 
 # This function browses through the setup file.
@@ -251,7 +253,7 @@ function process_argument_app() {
     local TEXT=''
 
     for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
-        process_input_file_by_app
+        process_file_by_app
     done
 
     if $APP_NOT_FOUND; then
@@ -264,7 +266,7 @@ function process_argument_app() {
 
 # This function generates the command file from the setup file and filters by
 # <app>.
-function process_input_file_by_app() {
+function process_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
@@ -310,7 +312,7 @@ function process_input_file_by_app() {
 
 # This function generates the command file from the setup file and filters by
 # hostname.
-function process_input_file_by_user() {
+function process_file_by_user() {
     local HOST_MATCH=false
     local INPUT_RECORD=''
 
@@ -481,7 +483,7 @@ function execute_command() {
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     local OPERATION
     local TEXT=''
 
@@ -553,10 +555,9 @@ function main() {
     local SETUP='Setup'
     local -A APP_ARGUMENTS=()
 
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

@@ -39,56 +39,8 @@ readonly HELP
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
-function check_input() {
-    local PARSED=''
-    local -i RC=$OK
-
-    PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
-                --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERR
-    fi
-    eval set -- "$PARSED"
-
-    process_options   "$@"
-    process_x_options "$@"
-}
-
-
-# This function handles the extra options and arguments.
-function process_x_options() {
-    local TEXT=''
-
-    while true; do
-        case $1 in
-            -- )
-                shift
-                break
-                ;;
-            * )
-                shift
-                ;;
-        esac
-    done
-
-    if [[ $* ]]; then
-        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-}
-
-
-# This function processes the script options and arguments.
-function process_input() {
+# This function performs the script actions, such as checking the input.
+function process() {
     local FILE=''
     local SCRIPT=''
     local SCRIPTDIR=''
@@ -96,6 +48,7 @@ function process_input() {
     local SCRIPTS_REPO=$HOME/kz-scripts
     local TEXT=''
 
+    check_input "$@"
     if ! grep --quiet debian /etc/os-release; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
@@ -170,6 +123,54 @@ function process_input() {
             sort
             )
     cd "$HOME"
+}
+
+
+# This function handles the options and arguments.
+function check_input() {
+    local PARSED=''
+    local -i RC=$OK
+
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                --              "$@"
+        ) || RC=$?
+    if [[ $RC -ne $OK ]]; then
+        infomsg "$USAGE"
+        exit $ERR
+    fi
+    eval set -- "$PARSED"
+
+    process_options   "$@"
+    process_x_options "$@"
+}
+
+
+# This function handles the script options and arguments.
+function process_x_options() {
+    local TEXT=''
+
+    while true; do
+        case $1 in
+            -- )
+                shift
+                break
+                ;;
+            * )
+                shift
+                ;;
+        esac
+    done
+
+    if [[ $* ]]; then
+        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE"
+        infomsg "$TEXT"
+        exit $ERR
+    fi
 }
 
 
@@ -442,7 +443,7 @@ ${RED}    $(gettext 'End spaces found.')$NORMAL
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     local TEXT=''
 
     if $ERR_FLAG; then
@@ -465,10 +466,9 @@ necessary.")
 function main() {
     local ERR_FLAG=false
 
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

@@ -64,7 +64,57 @@ readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,remove'
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function performs the script actions, such as checking the input.
+function process() {
+    local COMMAND_FILE=''
+    local INSTALL_FILE=/usr/bin/kz-install.sh
+    local TEXT=''
+
+    check_input "$@"
+
+    if $OPTION_FILE; then
+        INSTALL_FILE=$FILE_ARGUMENT
+    fi
+
+    if [[ ! -f $INSTALL_FILE ]]; then
+        TEXT=$(eval_gettext "No install file found, looked for \
+'\$INSTALL_FILE'.")
+        errmsg "$TEXT"
+        exit $ERR
+    fi
+
+    if $OPTION_BROWSE; then
+        process_option_browse
+        exit $OK
+    fi
+
+    if $OPTION_APPS; then
+        process_option_apps
+        exit $OK
+    fi
+
+    COMMAND_FILE=$(mktemp -t "kz-install-commands-XXXXXXXXXX")
+
+    if $ARGUMENT_APPS; then
+        process_argument_app
+    else
+        process_file_by_host
+    fi
+
+    if $OPTION_CAT; then
+        process_option_cat
+        exit $OK
+    fi
+
+    if [[ $UID -ne 0 ]]; then
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
+    fi
+    become_root
+    install_apps
+}
+
+
+# This function handles the options and arguments.
 function check_input() {
     local PARSED=''
     local -i RC=$OK
@@ -87,7 +137,7 @@ function check_input() {
 }
 
 
-# This function handles the extra options and arguments.
+# This function handles the script options and arguments.
 function process_x_options() {
     local TEXT=''
 
@@ -156,54 +206,6 @@ $USAGE"
 }
 
 
-# This function processes the script options and arguments.
-function process_input() {
-    local COMMAND_FILE=''
-    local INSTALL_FILE=/usr/bin/kz-install.sh
-    local TEXT=''
-
-    if $OPTION_FILE; then
-        INSTALL_FILE=$FILE_ARGUMENT
-    fi
-
-    if [[ ! -f $INSTALL_FILE ]]; then
-        TEXT=$(eval_gettext "No install file found, looked for \
-'\$INSTALL_FILE'.")
-        errmsg "$TEXT"
-        exit $ERR
-    fi
-
-    if $OPTION_BROWSE; then
-        process_option_browse
-        exit $OK
-    fi
-
-    if $OPTION_APPS; then
-        process_option_apps
-        exit $OK
-    fi
-
-    COMMAND_FILE=$(mktemp -t "kz-install-commands-XXXXXXXXXX")
-
-    if $ARGUMENT_APPS; then
-        process_argument_app
-    else
-        process_input_file_by_host
-    fi
-
-    if $OPTION_CAT; then
-        process_option_cat
-        exit $OK
-    fi
-
-    if [[ $UID -ne 0 ]]; then
-        rm --verbose "$COMMAND_FILE" |& $LOGCMD
-    fi
-    become_root
-    install_apps
-}
-
-
 # This function browses through the install file.
 function process_option_browse() {
     less --no-init --quit-if-one-screen "$INSTALL_FILE"
@@ -258,7 +260,7 @@ function process_argument_app() {
     local TEXT=''
 
     for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
-        process_input_file_by_app
+        process_file_by_app
     done
 
     if $APP_NOT_FOUND; then
@@ -272,7 +274,7 @@ function process_argument_app() {
 
 # This function generates the command file from the install file and filters by
 # <app>.
-function process_input_file_by_app() {
+function process_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
@@ -317,7 +319,7 @@ function process_input_file_by_app() {
 
 # This function generates the command file from the install file and filters by
 # hostname.
-function process_input_file_by_host() {
+function process_file_by_host() {
     local HOST_MATCH=false
     local INPUT_RECORD=''
 
@@ -491,7 +493,7 @@ function execute_command() {
 
 
 # This function controls the termination of the script.
-function term_script() {
+function term() {
     local OPERATION
     local TEXT=''
 
@@ -539,10 +541,9 @@ function main() {
     local REMOVE='Remove'
     local -A APP_ARGUMENTS=()
 
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    init    "$@"
+    process "$@"
+    term
 }
 
 main "$@"

@@ -13,6 +13,7 @@ This module provides access to global constants and functions.
 # Imports
 ###############################################################################
 
+import argparse
 import gettext
 import os
 import subprocess
@@ -47,7 +48,7 @@ BOLD: str = '\033[1m'
 RED: str = '\033[1;31m'
 NORMAL: str = '\033[0m'
 
-if subprocess.run('type systemctl', executable='bash',
+if subprocess.run(['type', 'systemctl'], executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
     print(_('fatal: no systemd available'))
@@ -186,10 +187,10 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
                                 --text      "{TEXT}"'
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     else:
-        print(f'{TEXT}')
+        print(TEXT)
 
 
-def init_script(PROGRAM_NAME: str) -> None:
+def init(PROGRAM_NAME: str) -> None:
     """
     This function performs initial actions.
     """
@@ -206,6 +207,41 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_ID}', f'MESSAGE={TEXT}')
 
 
+def process_options(PROGRAM_NAME: str, USAGE: str, PROGRAM_DESC: str,
+                    HELP: str) -> None:
+    """
+    This function handles the common options and arguments.
+    """
+    parser = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+                                     add_help=False)
+
+    parser.add_argument('-h', '--help', action='store_true')
+    parser.add_argument('-m', '--manual', action='store_true')
+    parser.add_argument('-u', '--usage', action='store_true')
+    parser.add_argument('-v', '--version', action='store_true')
+
+    args, unknown = parser.parse_known_args()
+
+    if args.help:
+        process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
+        RC = OK
+        term(PROGRAM_NAME, RC)
+    elif args.manual:
+        process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
+        RC = OK
+        term(PROGRAM_NAME, RC)
+    elif args.usage:
+        process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
+        RC = OK
+        term(PROGRAM_NAME, RC)
+    elif args.version:
+        process_option_version(PROGRAM_NAME, PROGRAM_DESC)
+        RC = OK
+        term(PROGRAM_NAME, RC)
+    elif unknown:
+        None
+
+
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
                         HELP: str) -> None:
     """
@@ -214,7 +250,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
     YELP_MAN_URL: str = ''
 
-    if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
+    if subprocess.run(['[[ ${DISPLAY-} ]]'], executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == OK:
         YELP_MAN_URL = f"{_(', or see the ')}"
