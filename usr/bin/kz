@@ -58,28 +58,29 @@ def process() -> None:
     """
     This function performs the script actions, such as checking the input.
     """
+    ARG_NUM: int = 0
     EXEC: str = '/usr/bin/kz'
     TEXT: str = ''
 
-    for arg_num in range(len(sys.argv)):
-        if arg_num == 0:
+    for ARG_NUM in range(len(sys.argv)):
+        if ARG_NUM == 0:
             continue
-        if arg_num == 1:
-            if sys.argv[arg_num].startswith('-'):
+        if ARG_NUM == 1:
+            if sys.argv[ARG_NUM].startswith('-'):
                 kz_common.process_options(PROGRAM_NAME, USAGE, PROGRAM_DESC,
                                           HELP)
                 process_x_options()
                 sys.exit(kz_common.OK)
             else:
-                EXEC += '-' + sys.argv[arg_num]
+                EXEC += '-' + sys.argv[ARG_NUM]
                 if not os.path.exists(EXEC):
-                    TEXT = f'{PROGRAM_NAME}: {sys.argv[arg_num]}: '
+                    TEXT = f'{PROGRAM_NAME}: {sys.argv[ARG_NUM]}: '
                     TEXT += f"{_('command does not exist')}\n"
                     TEXT += f"{_('Usage:')} {USAGE}"
                     print(TEXT)
                     sys.exit(kz_common.ERR)
         else:
-            EXEC += ' ' + sys.argv[arg_num]
+            EXEC += ' ' + sys.argv[ARG_NUM]
 
     if EXEC == '/usr/bin/kz':
         TEXT = f"kz: {_('command is required')}\n{USAGE}"
@@ -99,14 +100,17 @@ def process_x_options() -> None:
     """
     This function handles the script options and arguments.
     """
-    parser = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+    ARGS = None
+    PARSER = None
+
+    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
                                      add_help=False)
 
-    parser.add_argument('-l', '--list', action='store_true')
+    PARSER.add_argument('-l', '--list', action='store_true')
 
-    args = parser.parse_args()
+    ARGS = PARSER.parse_args()
 
-    if args.list:
+    if ARGS.list:
         process_option_list()
 
 

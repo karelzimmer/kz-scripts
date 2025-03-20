@@ -212,33 +212,37 @@ def process_options(PROGRAM_NAME: str, USAGE: str, PROGRAM_DESC: str,
     """
     This function handles the common options and arguments.
     """
-    parser = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+    ARGS = None
+    PARSER = None
+    UNKNOWN = None
+
+    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
                                      add_help=False)
 
-    parser.add_argument('-h', '--help', action='store_true')
-    parser.add_argument('-m', '--manual', action='store_true')
-    parser.add_argument('-u', '--usage', action='store_true')
-    parser.add_argument('-v', '--version', action='store_true')
+    PARSER.add_argument('-h', '--help', action='store_true')
+    PARSER.add_argument('-m', '--manual', action='store_true')
+    PARSER.add_argument('-u', '--usage', action='store_true')
+    PARSER.add_argument('-v', '--version', action='store_true')
 
-    args, unknown = parser.parse_known_args()
+    ARGS, UNKNOWN = PARSER.parse_known_args()
 
-    if args.help:
+    if ARGS.help:
         process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
         RC = OK
         term(PROGRAM_NAME, RC)
-    elif args.manual:
+    elif ARGS.manual:
         process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
         RC = OK
         term(PROGRAM_NAME, RC)
-    elif args.usage:
+    elif ARGS.usage:
         process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
         RC = OK
         term(PROGRAM_NAME, RC)
-    elif args.version:
+    elif ARGS.version:
         process_option_version(PROGRAM_NAME, PROGRAM_DESC)
         RC = OK
         term(PROGRAM_NAME, RC)
-    elif unknown:
+    elif UNKNOWN:
         None
 
 

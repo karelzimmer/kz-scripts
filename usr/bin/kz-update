@@ -79,10 +79,13 @@ def process_x_options() -> None:
     """
     This function handles the script options and arguments.
     """
-    parser = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+    ARGS = None
+    PARSER = None
+
+    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
                                      add_help=False)
 
-    args = parser.parse_args()
+    ARGS = PARSER.parse_args()
 
 
 def perform_deb_update() -> None:

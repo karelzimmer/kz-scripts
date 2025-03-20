@@ -97,14 +97,16 @@ def process_x_options() -> bool:
     This function handles the script options and arguments.
     """
     OPTION_GUI: bool = False
+    ARGS = None
+    PARSER = None
 
-    parser = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
                                      add_help=False)
 
-    parser.add_argument('-g', '--gui', action='store_true')
-    args = parser.parse_args()
+    PARSER.add_argument('-g', '--gui', action='store_true')
+    ARGS = PARSER.parse_args()
 
-    if args.gui:
+    if ARGS.gui:
         if subprocess.run(['[[ ${DISPLAY-} ]]'], executable='bash',
                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                           shell=True).returncode == kz_common.ERR:
