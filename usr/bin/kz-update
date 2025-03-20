@@ -2,7 +2,7 @@
 """
 Update system.
 
-This script performs a repair, update, and cleanup.
+This script performs an update and cleanup.
 """
 ###############################################################################
 # SPDX-FileComment: Update system
@@ -20,7 +20,6 @@ import argparse
 import gettext
 import kz_common
 import subprocess
-import sys
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
