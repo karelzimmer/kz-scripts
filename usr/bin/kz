@@ -65,21 +65,21 @@ def process() -> None:
         if arg_num == 0:
             continue
         if arg_num == 1:
-            if str(sys.argv[arg_num]).startswith('-'):
+            if sys.argv[arg_num].startswith('-'):
                 kz_common.process_options(PROGRAM_NAME, USAGE, PROGRAM_DESC,
                                           HELP)
                 process_x_options()
                 sys.exit(kz_common.OK)
             else:
-                EXEC += '-' + str(sys.argv[arg_num])
+                EXEC += '-' + sys.argv[arg_num]
                 if not os.path.exists(EXEC):
-                    TEXT = f'{PROGRAM_NAME}: {str(sys.argv[arg_num])}: '
+                    TEXT = f'{PROGRAM_NAME}: {sys.argv[arg_num]}: '
                     TEXT += f"{_('command does not exist')}\n"
                     TEXT += f"{_('Usage:')} {USAGE}"
                     print(TEXT)
                     sys.exit(kz_common.ERR)
         else:
-            EXEC += ' ' + str(sys.argv[arg_num])
+            EXEC += ' ' + sys.argv[arg_num]
 
     if EXEC == '/usr/bin/kz':
         TEXT = f"kz: {_('command is required')}\n{USAGE}"
