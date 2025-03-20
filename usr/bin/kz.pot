@@ -135,6 +135,9 @@ msgstr ""
 msgid "Run command"
 msgstr ""
 
+msgid "Usage: {} <arguments> [<options>]"
+msgstr ""
+
 msgid "kz <command> [<arguments>] [-l|--list]"
 msgstr ""
 

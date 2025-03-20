@@ -140,6 +140,9 @@ msgstr "{}: ik ben een module"
 msgid "Run command"
 msgstr "Opdracht uitvoeren"
 
+msgid "Usage: {} <arguments> [<options>]"
+msgstr "Gebruik: {} <argumenten> [<opties>]"
+
 msgid "kz <command> [<arguments>] [-l|--list]"
 msgstr "kz <opdracht> [<argumenten>] [-l|--list]"
 
