@@ -87,6 +87,9 @@ def process_x_options() -> None:
 
     ARGS = PARSER.parse_args()
 
+    if ARGS:
+        None
+
 
 def perform_deb_update() -> None:
     """
