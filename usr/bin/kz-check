@@ -339,10 +339,7 @@ function check_pycodestyle() {
 function check_mypy() {
     # Mypy doesn't work well with absolute filenames.
     cd "$SCRIPTDIR"
-
-    infomsg "
-  ${BOLD}$SCRIPTDIR / $SCRIPTNAME${NORMAL}"
-    mypy "$SCRIPTNAME" || ERR_FLAG=true
+    mypy --no-error-summary "$SCRIPTNAME" || ERR_FLAG=true
     cd "$SCRIPTS_REPO"
 }
 
