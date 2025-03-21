@@ -40,9 +40,8 @@ USAGE: str = (f"{_('kz <command> [<arguments>] [-l|--list]')} "
 
 X_OPTIONS_HELP: str = f"{_('  -l, --list     show available commands')}"
 
-HELP: str = (f"{_('Usage: {} <arguments> [<options>]')
-                .format(PROGRAM_NAME)}\n\n"
-             f'{PROGRAM_DESC}.\n\n'
+HELP: str = (f"{_('Usage: {} <arguments> [<options>]').format(PROGRAM_NAME)}"
+             f'\n\n{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
              f'{X_OPTIONS_HELP}\n'
              f'{kz_common.OPTIONS_HELP}\n\n'
