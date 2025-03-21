@@ -139,7 +139,7 @@ def process_option_list() -> None:
                             --body-numbering=a"
     TEXT += subprocess.run(COMMAND, shell=True, check=True, text=True,
                            stdout=subprocess.PIPE).stdout
-    TEXT += f"\n{_('Use "kz <command> [<arguments>]" to execute a command.')}"
+    TEXT += '\n' + _('Use "kz <command> [<arguments>]" to execute a command.')
     print(TEXT)
     RC = kz_common.OK
     kz_common.term(PROGRAM_NAME, RC)
