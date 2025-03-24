@@ -132,7 +132,7 @@ msgstr ""
 msgid "{}: i am a module"
 msgstr ""
 
-msgid "Run command"
+msgid "Run the kz command"
 msgstr ""
 
 msgid "Usage: {} <arguments> [<options>]"
@@ -1006,7 +1006,7 @@ msgstr ""
 msgid "Install apps and changes system settings"
 msgstr ""
 
-msgid "Run commands through a menu"
+msgid "Run the kz commands through a menu"
 msgstr ""
 
 msgid "Restores a backup copy of the Home folder"
