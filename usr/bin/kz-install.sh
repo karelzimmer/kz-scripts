@@ -601,6 +601,17 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assum
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
 
+# Install poedit on pc06 pc07
+# Gettext catalogs editor.
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes poedit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes poedit; fi
+
+# Remove poedit from pc06 pc07
+# Gettext catalogs editor.
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes poedit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes poedit; fi
+
+
 # Install python on pc06 pc07
 # Programming language.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
