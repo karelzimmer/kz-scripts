@@ -378,7 +378,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remov
 
 # Install google-chrome on *
 # Web browser.
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then rm --verbose /tmp/google-chrome.deb; fi
 
@@ -394,7 +394,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remov
 # Install google-earth on -none-
 # Explore the planet.
 # Web app: https://earth.google.com
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then rm --verbose /tmp/google-earth.deb; fi
 
@@ -743,7 +743,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes bash-co
 # Install teamviewer on *
 # Remote desktop.
 # Web app: https://web.teamviewer.com
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then rm --verbose /tmp/teamviewer.deb; fi
 
