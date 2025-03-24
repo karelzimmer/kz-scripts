@@ -57,7 +57,7 @@ function process() {
 
     check_website
 
-    TEXT=$(gettext 'Check scripts')...
+    TEXT=$(gettext 'Check scripts (this may take a while)')...
     infomsg "$TEXT"
 
     check_gettext

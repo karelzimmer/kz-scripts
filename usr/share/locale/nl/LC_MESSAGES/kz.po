@@ -1056,8 +1056,8 @@ msgstr ""
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
-msgid "Check scripts"
-msgstr "Controleer scripts"
+msgid "Check scripts (this may take a while)"
+msgstr "Controleer scripts (dit kan even duren)"
 
 #, sh-format
 msgid "Script $SCRIPTNAME --version returned an error."
