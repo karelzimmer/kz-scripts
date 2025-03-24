@@ -914,7 +914,7 @@ msgid ""
 msgstr ""
 "Geen back-up gevonden op aangekoppeld usb-medium.\n"
 "\n"
-"Koppel een usb-medium aan met hierop de map $USER@$<hostname>."
+"Koppel een usb-medium aan met hierop de map $USER@$HOSTNAME."
 
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
@@ -1077,11 +1077,11 @@ msgstr "Berichtencatalogus $FILE niet gevonden."
 
 #, sh-format
 msgid "Desktop configuration file $DIR/$SCRIPTNAME.desktop not found."
-msgstr "Bureaubladconfiguratiebestand $DIR/$SCRIPTNAME.desktop niet gevonden"
+msgstr "Bureaubladconfiguratiebestand $DIR/$SCRIPTNAME.desktop niet gevonden."
 
 #, sh-format
 msgid "Tab completion script $DIR/$SCRIPTNAME not found."
-msgstr "Tabvoltooiingsscript $DIR/$SCRIPTNAME niet gevonden"
+msgstr "Tabvoltooiingsscript $DIR/$SCRIPTNAME niet gevonden."
 
 #, sh-format
 msgid "Manual $DIR/$SCRIPTNAME.1 not found."
