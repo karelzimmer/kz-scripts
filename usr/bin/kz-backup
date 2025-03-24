@@ -202,16 +202,24 @@ Disconnect media via Files.")"
 
     if [[ -e $TARGET_MEDIUM/backup-$HOSTNAME-$USER ]]; then
         TEXT="$(gettext "Backup found with old name: \
-'backup-<hostname>-<username>'. \
-Please rename to '<username>@<hostname>'.")"
+backup-<hostname>-<username>
+Please rename to:           <username>@<hostname>")"
+        errmsg "$TEXT"
+        exit $ERR
+    fi
+
+    if [[ -e $TARGET_MEDIUM/kz-backup-$HOSTNAME-$USER ]]; then
+        TEXT="$(gettext "Backup found with old name: \
+kz-backup-<hostname>-<username>
+Please rename to:           <username>@<hostname>")"
         errmsg "$TEXT"
         exit $ERR
     fi
 
     if [[ -e $MEDIUM/$USER@$HOSTNAME ]]; then
         TEXT="$(gettext "Backup found in wrong place: \
-'<medium>/<username>@<hostname>'. \
-Please move to '<medium>/kz-backup/'.")"
+<medium>/<username>@<hostname>
+Please move to:              <medium>/Backups/")"
         errmsg "$TEXT"
         exit $ERR
     fi
