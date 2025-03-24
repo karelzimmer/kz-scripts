@@ -171,6 +171,9 @@ msgstr ""
 msgid "NUM  COMMAND"
 msgstr ""
 
+msgid "Use \"man kz\" to check for available commands."
+msgstr ""
+
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
