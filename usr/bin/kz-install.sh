@@ -494,8 +494,8 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo virsh --c
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo delgroup libvirtd-dnsmasq; fi
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo deluser karel libvirtd; fi
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo deluser karel libvirtd-qemu; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo deluser "$USER" libvirt; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo deluser $USER libvirtd-qemu; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo delgroup libvirtd; fi
 
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo systemctl disable --now libvirtd; fi
