@@ -137,17 +137,17 @@ def process_option_list() -> None:
                             --number-format=rn          \
                             --number-separator='  '     \
                             --body-numbering=a"
-    
+
     # Python 3.6.9 version on Ubuntu 18.04 does not have parameter 'text=True'.
     try:
         TEXT += subprocess.run(COMMAND, shell=True, check=True, text=True,
                                stdout=subprocess.PIPE).stdout
     except Exception:
         TEXT += '  0  ' + _('Use "man kz" for available commands.') + '\n'
-    
+
     TEXT += '\n' + _('Use "kz <command> [<arguments>]" to execute a command.')
     print(TEXT)
-    
+
     RC = kz_common.OK
     kz_common.term(PROGRAM_NAME, RC)
 
