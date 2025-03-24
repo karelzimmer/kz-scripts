@@ -195,7 +195,7 @@ function check_gettext() {
     # GNU gettext message catalogue template (.pot).
     FILE=$SCRIPTS_REPO/usr/bin/kz.pot
 
-    if [[ ! -e $FILE ]]; then
+    if ! [[ -f $FILE ]]; then
         infomsg "
   $SCRIPTS_REPO/usr/bin / kz.pot"
         TEXT=$(eval_gettext "Gettext message catalog template \$FILE not \
@@ -207,7 +207,7 @@ found.")
     # GNU gettext message catalogue (.po).
     FILE=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.po
 
-    if [[ ! -e $FILE ]]; then
+    if ! [[ -f $FILE ]]; then
         infomsg "
   $SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES / kz.po"
         TEXT=$(eval_gettext "Gettext message catalog \$FILE not found.")
@@ -218,7 +218,7 @@ found.")
     # GNU message catalog (.mo).
     FILE=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.mo
 
-    if [[ ! -e $FILE ]]; then
+    if ! [[ -f $FILE ]]; then
         infomsg "
   $SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES / kz.mo"
         TEXT=$(eval_gettext "Message catalog \$FILE not found.")
@@ -278,7 +278,7 @@ error.")
     if grep --quiet --regexp="$GUI_OPTION" "$FILE"; then
         DIR=$SCRIPTS_REPO/usr/share/applications
 
-        if [[ ! -e $DIR/$SCRIPTNAME.desktop ]]; then
+        if ! [[ -f $DIR/$SCRIPTNAME.desktop ]]; then
         infomsg "
   ${BOLD}$SCRIPTDIR / $SCRIPTNAME${NORMAL}"
             TEXT='    '$(eval_gettext "Desktop configuration file \
@@ -291,7 +291,7 @@ error.")
     # Tab-completion script (Only with so-called root scripts).
     DIR=$SCRIPTS_REPO/usr/share/bash-completion/completions
 
-    if [[ ! -e $DIR/$SCRIPTNAME ]]; then
+    if ! [[ -f $DIR/$SCRIPTNAME ]]; then
         TEXT='    '$(eval_gettext "Tab completion script \$DIR/\$SCRIPTNAME \
 not found.")
         errmsg "$TEXT"
@@ -301,7 +301,7 @@ not found.")
     # Manual page (EN + NL).
     DIR=$SCRIPTS_REPO/usr/share/man/man1
 
-    if [[ ! -e $DIR/$SCRIPTNAME.1 ]]; then
+    if ! [[ -f $DIR/$SCRIPTNAME.1 ]]; then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errmsg "$TEXT"
         ERR_FLAG=true
@@ -309,7 +309,7 @@ not found.")
 
     DIR=$SCRIPTS_REPO/usr/share/man/nl/man1
 
-    if [[ ! -e $DIR/$SCRIPTNAME.1 ]]; then
+    if ! [[ -f $DIR/$SCRIPTNAME.1 ]]; then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errmsg "$TEXT"
         ERR_FLAG=true
@@ -319,7 +319,7 @@ not found.")
     if grep --quiet "$ROOT_SCRIPT" "$FILE"; then
         DIR=$SCRIPTS_REPO/usr/share/polkit-1/actions
 
-        if [[ ! -e $DIR/nl.karelzimmer.$SCRIPTNAME.policy ]]; then
+        if ! [[ -f $DIR/nl.karelzimmer.$SCRIPTNAME.policy ]]; then
             TEXT='    '$(eval_gettext "PolicyKit action definition file \
 \$DIR/nl.karelzimmer.\$SCRIPTNAME.policy not found.")
             errmsg "$TEXT"

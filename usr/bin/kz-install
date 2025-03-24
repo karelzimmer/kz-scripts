@@ -76,7 +76,7 @@ function process() {
         INSTALL_FILE=$FILE_ARGUMENT
     fi
 
-    if [[ ! -f $INSTALL_FILE ]]; then
+    if ! [[ -f $INSTALL_FILE ]]; then
         TEXT=$(eval_gettext "No install file found, looked for \
 '\$INSTALL_FILE'.")
         errmsg "$TEXT"

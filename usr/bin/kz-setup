@@ -76,7 +76,7 @@ function process() {
         SETUP_FILE=$FILE_ARGUMENT
     fi
 
-    if [[ ! -f $SETUP_FILE ]]; then
+    if ! [[ -f $SETUP_FILE ]]; then
         TEXT=$(eval_gettext "No setup file found, looked for '\$SETUP_FILE'.")
         errmsg "$TEXT"
         exit $ERR

@@ -143,7 +143,7 @@ function check_source() {
 
     if $OPTION_SOURCE; then
 
-        if [[ ! -d $SOURCE_ARGUMENT ]]; then
+        if ! [[ -d $SOURCE_ARGUMENT ]]; then
             TEXT="$PROGRAM_NAME: $SOURCE_ARGUMENT: \
 $(gettext 'directory does not exist')
 $USAGE"
@@ -196,7 +196,7 @@ Disconnect media via Files.")"
         SOURCE=$MEDIUM/Backups/$USER@$HOSTNAME
         SOURCE_MEDIUM=$MEDIUM
 
-        if [[ ! -d $SOURCE ]]; then
+        if ! [[ -d $SOURCE ]]; then
             TEXT=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")

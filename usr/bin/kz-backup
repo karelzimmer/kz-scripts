@@ -143,7 +143,7 @@ function check_target() {
 
     if $OPTION_TARGET; then
 
-        if [[ ! -d $TARGET_ARGUMENT ]]; then
+        if ! [[ -d $TARGET_ARGUMENT ]]; then
             TEXT="$PROGRAM_NAME: $TARGET_ARGUMENT: \
 $(gettext 'directory does not exist')
 $USAGE"
@@ -234,7 +234,7 @@ function backup_settings() {
     logmsg 'Backup settings...'
 
     SETTINGS_DIR=$HOME/$(gettext 'Settings')
-    if [[ ! -d $SETTINGS_DIR ]]; then
+    if ! [[ -d $SETTINGS_DIR ]]; then
         mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
     fi
 

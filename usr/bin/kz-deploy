@@ -201,7 +201,7 @@ function upload_website() {
     TEXT=$(gettext 'Upload website')...
     infomsg "$TEXT"
 
-    if [[ ! -f $FTP_LOGIN ]]; then
+    if ! [[ -f $FTP_LOGIN ]]; then
         PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
         read -rp "$PROMPT" < /dev/tty
         printf '%s' "$REPLY" > "$FTP_LOGIN"
