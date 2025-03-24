@@ -142,7 +142,7 @@ def process_option_list() -> None:
         TEXT += subprocess.run(COMMAND, shell=True, check=True, text=True,
                                stdout=subprocess.PIPE).stdout
     except Exception:
-        TEXT += '  0  ' +  _('Use "man kz" for available commands.') + '\n'
+        TEXT += '  0  ' + _('Use "man kz" for available commands.') + '\n'
     TEXT += '\n' + _('Use "kz <command> [<arguments>]" to execute a command.')
     print(TEXT)
     RC = kz_common.OK
