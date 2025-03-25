@@ -19,7 +19,7 @@ import os
 import subprocess
 import sys
 import time
-import systemd.journal
+import systemd.journal  # type: ignore
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
