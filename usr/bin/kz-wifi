@@ -62,8 +62,7 @@ def process(OPTION_GUI: bool = False) -> None:
     OPTION_GUI = process_x_options()
 
     if not kz_common.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
-        RC = kz_common.OK
-        kz_common.term(PROGRAM_NAME, RC)
+        term()
 
     if OPTION_GUI:
         try:
@@ -71,12 +70,12 @@ def process(OPTION_GUI: bool = False) -> None:
                                           stdout=subprocess.PIPE,
                                           stderr=subprocess.DEVNULL,
                                           shell=True, check=True,
-                                          )  # type: ignore
+                                          ).stdout  # type: ignore
         except Exception:
             TEXT = _('No WiFi device found.')
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
         else:
-            NMCLI_OUTPUT = NMCLI_OUTPUT.stdout  # type: ignore
+            NMCLI_OUTPUT = NMCLI_OUTPUT  # type: ignore
             NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")  # type: ignore
             TEXT = NMCLI_OUTPUT + TEXT
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
@@ -107,7 +106,7 @@ def process_x_options() -> bool:
     ARGS = PARSER.parse_args()
 
     if ARGS.gui:
-        if subprocess.run(['[[ ${DISPLAY-} ]]'], executable='bash',
+        if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                           shell=True).returncode == kz_common.ERR:
             TEXT: str = f"{PROGRAM_NAME}: {sys.argv[1]}: "
@@ -115,8 +114,7 @@ def process_x_options() -> bool:
             TEXT += f"\n{_('Usage:')} {USAGE}"
             OPTION_GUI = False
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            RC = kz_common.OK
-            kz_common.term(PROGRAM_NAME, RC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
         else:
             OPTION_GUI = True
 
@@ -127,8 +125,7 @@ def term() -> None:
     """
     This function controls the termination of the script.
     """
-    RC = kz_common.OK
-    kz_common.term(PROGRAM_NAME, RC)
+    kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
 ###############################################################################

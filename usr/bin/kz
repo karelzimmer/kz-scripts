@@ -71,7 +71,7 @@ def process() -> None:
                 kz_common.process_options(PROGRAM_NAME, USAGE, PROGRAM_DESC,
                                           HELP)
                 process_x_options()
-                sys.exit(kz_common.OK)
+                term()
             else:
                 # Build kz-<command> and check if kz-<command> exists.
                 EXEC += '-' + sys.argv[ARG_NUM]
@@ -80,7 +80,7 @@ def process() -> None:
                     TEXT += f"{_('command does not exist')}\n"
                     TEXT += f"{_('Usage:')} {USAGE}"
                     print(TEXT)
-                    sys.exit(kz_common.ERR)
+                    kz_common.term(PROGRAM_NAME, kz_common.ERR)
         else:
             # Build kz-<command> <arguments>...
             EXEC += ' ' + sys.argv[ARG_NUM]
@@ -88,7 +88,7 @@ def process() -> None:
     if EXEC == '/usr/bin/kz':
         TEXT = f"kz: {_('command is required')}\n{_('Usage:')} {USAGE}"
         print(TEXT)
-        sys.exit(kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
         TEXT = f'Restart (exec {EXEC}...)'
         kz_common.logmsg(PROGRAM_NAME, TEXT)
@@ -96,7 +96,7 @@ def process() -> None:
             subprocess.run(f'exec {EXEC}', executable='bash',
                            shell=True, check=True)
         except Exception:
-            sys.exit(kz_common.ERR)
+            kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
 
 def process_x_options() -> None:
@@ -140,24 +140,22 @@ def process_option_list() -> None:
 
     # Python 3.6.9 version on Ubuntu 18.04 does not have parameter 'text=True'.
     try:
-        TEXT += subprocess.run(COMMAND, shell=True, check=True, text=True,
-                               stdout=subprocess.PIPE).stdout
+        TEXT += subprocess.run(COMMAND, stdout=subprocess.PIPE,
+                               shell=True, check=True, text=True).stdout
     except Exception:
         TEXT += '  0  ' + _('Use "man kz" for available commands.') + '\n'
 
     TEXT += '\n' + _('Use "kz <command> [<arguments>]" to execute a command.')
     print(TEXT)
 
-    RC = kz_common.OK
-    kz_common.term(PROGRAM_NAME, RC)
+    term()
 
 
 def term() -> None:
     """
     This function controls the termination of the script.
     """
-    RC = kz_common.OK
-    kz_common.term(PROGRAM_NAME, RC)
+    kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
 ###############################################################################

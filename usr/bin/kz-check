@@ -57,7 +57,7 @@ function process() {
 
     check_website
 
-    TEXT=$(gettext 'Check scripts (this may take a while)')...
+    TEXT=$(gettext 'Check scripts (this may take a while)...')
     infomsg "$TEXT"
 
     check_gettext
@@ -178,7 +178,7 @@ $USAGE"
 function check_website() {
     local TEXT=''
 
-    TEXT=$(gettext 'Check website')...
+    TEXT=$(gettext 'Check website...')
     infomsg "$TEXT"
 
     # Call rchecklink.

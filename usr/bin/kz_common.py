@@ -48,7 +48,7 @@ BOLD: str = '\033[1m'
 RED: str = '\033[1;31m'
 NORMAL: str = '\033[0m'
 
-if subprocess.run(['type', 'systemctl'], executable='bash',
+if subprocess.run('type systemctl', executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
     print(_('fatal: no systemd available'))
@@ -73,8 +73,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
     if not become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
-        RC: int = OK
-        term(PROGRAM_NAME, RC)
+        term(PROGRAM_NAME, OK)
 
     if os.getuid() != 0:
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
@@ -92,22 +91,19 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_ID)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            RC = ERR
-            term(PROGRAM_NAME, RC)
+            term(PROGRAM_NAME, ERR)
         except Exception as exc:
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            RC = ERR
-            term(PROGRAM_NAME, RC)
+            term(PROGRAM_NAME, ERR)
         else:
-            RC = OK
-            term(PROGRAM_NAME, RC)
+            term(PROGRAM_NAME, ERR)
 
 
 def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                      OPTION_GUI: bool) -> bool:
+                      OPTION_GUI: bool = False) -> bool:
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.
@@ -142,8 +138,7 @@ def check_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
 
     while True:
         try:
-            subprocess.run(COMMAND2, executable='bash',
-                           shell=True, check=True)
+            subprocess.run(COMMAND2, executable='bash', shell=True, check=True)
         except Exception:
             break
         else:
@@ -168,7 +163,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
                                 --height    100         \
                                 --title     "{TITLE}"   \
                                 --text      "{TEXT}"'
-        subprocess.run(COMMAND, executable='bash', shell=True, check=True)
+        subprocess.run(COMMAND, executable='bash', shell=True)
     else:
         print(f'\n{RED}{TEXT}{NORMAL}')
 
@@ -185,7 +180,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
                                 --height    100         \
                                 --title     "{TITLE}"   \
                                 --text      "{TEXT}"'
-        subprocess.run(COMMAND, executable='bash', shell=True, check=True)
+        subprocess.run(COMMAND, executable='bash', shell=True)
     else:
         print(TEXT)
 
@@ -228,20 +223,16 @@ def process_options(PROGRAM_NAME: str, USAGE: str, PROGRAM_DESC: str,
 
     if ARGS.help:
         process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
-        RC = OK
-        term(PROGRAM_NAME, RC)
+        term(PROGRAM_NAME, OK)
     elif ARGS.manual:
         process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
-        RC = OK
-        term(PROGRAM_NAME, RC)
+        term(PROGRAM_NAME, OK)
     elif ARGS.usage:
         process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
-        RC = OK
-        term(PROGRAM_NAME, RC)
+        term(PROGRAM_NAME, OK)
     elif ARGS.version:
         process_option_version(PROGRAM_NAME, PROGRAM_DESC)
-        RC = OK
-        term(PROGRAM_NAME, RC)
+        term(PROGRAM_NAME, OK)
     elif UNKNOWN:
         None
 
@@ -254,7 +245,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
     YELP_MAN_URL: str = ''
 
-    if subprocess.run(['[[ ${DISPLAY-} ]]'], executable='bash',
+    if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == OK:
         YELP_MAN_URL = f"{_(', or see the ')}"
@@ -287,8 +278,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            RC = ERR
-            term(PROGRAM_NAME, RC)
+            term(PROGRAM_NAME, ERR)
         else:
             return OK
     else:
@@ -299,8 +289,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            RC = ERR
-            term(PROGRAM_NAME, RC)
+            term(PROGRAM_NAME, ERR)
         else:
             return OK
 
@@ -339,8 +328,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        RC = ERR
-        term(PROGRAM_NAME, RC)
+        term(PROGRAM_NAME, ERR)
     finally:
         TEXT = f"{_('kz version 4.2.1 (built {}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
@@ -376,15 +364,13 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     except KeyboardInterrupt:
         TEXT = _('Program {} has been interrupted.').format(PROGRAM_ID)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        RC = ERR
-        term(PROGRAM_NAME, RC)
+        term(PROGRAM_NAME, ERR)
     except Exception as exc:
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        RC = ERR
-        term(PROGRAM_NAME, RC)
+        term(PROGRAM_NAME, ERR)
     else:
         return OK
 

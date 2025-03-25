@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-24 10:25+0100\n"
+"POT-Creation-Date: 2025-03-25 10:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -342,6 +342,9 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr ""
 
+msgid "Check scripts (this may take a while)..."
+msgstr ""
+
 msgid "Build website"
 msgstr ""
 
@@ -419,16 +422,16 @@ msgstr ""
 msgid "Usage: kz dev [<options>]"
 msgstr ""
 
-msgid "Check dependencies"
+msgid "Check dependencies..."
 msgstr ""
 
-msgid "Clone repos"
+msgid "Clone repos..."
 msgstr ""
 
-msgid "Pull repos"
+msgid "Pull repos..."
 msgstr ""
 
-msgid "Status repos"
+msgid "Status repos..."
 msgstr ""
 
 msgid "Download website"
@@ -921,9 +924,6 @@ msgstr ""
 msgid "No WiFi device found."
 msgstr ""
 
-msgid "Check scripts"
-msgstr ""
-
 #, sh-format
 msgid "Script $SCRIPTNAME --version returned an error."
 msgstr ""
@@ -958,7 +958,7 @@ msgid ""
 "found."
 msgstr ""
 
-msgid "Check website"
+msgid "Check website..."
 msgstr ""
 
 msgid "Authentication is required to install apps"

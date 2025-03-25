@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-24 10:18+0100\n"
+"POT-Creation-Date: 2025-03-25 10:07+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -379,6 +379,9 @@ msgstr "Gebruik: kz check $OPTIONS_USAGE"
 msgid "Usage: kz check [<options>]"
 msgstr "Gebruik: kz check [<opties>]"
 
+msgid "Check scripts (this may take a while)..."
+msgstr "Controleer scripts (dit kan even duren)..."
+
 msgid "Build website"
 msgstr "Bouw website"
 
@@ -461,17 +464,17 @@ msgstr "Gebruik: kz dev $OPTIONS_USAGE"
 msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
 
-msgid "Check dependencies"
-msgstr "Controleer afhankelijkheden"
+msgid "Check dependencies..."
+msgstr "Controleer afhankelijkheden..."
 
-msgid "Clone repos"
-msgstr "Clone repo's"
+msgid "Clone repos..."
+msgstr "Clone repo's..."
 
-msgid "Pull repos"
-msgstr "Pull repo's"
+msgid "Pull repos..."
+msgstr "Pull repo's..."
 
-msgid "Status repos"
-msgstr "Status repo's"
+msgid "Status repos..."
+msgstr "Status repo's..."
 
 msgid "Download website"
 msgstr "Download website"
@@ -1056,9 +1059,6 @@ msgstr ""
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
-msgid "Check scripts (this may take a while)"
-msgstr "Controleer scripts (dit kan even duren)"
-
 #, sh-format
 msgid "Script $SCRIPTNAME --version returned an error."
 msgstr "Script $SCRIPTNAME --version gaf een fout."
@@ -1095,8 +1095,8 @@ msgstr ""
 "PolicyKit actiedefinitiebestand $DIR/nl.karelzimmer.$SCRIPTNAME.policy niet "
 "gevonden."
 
-msgid "Check website"
-msgstr "Controleer website"
+msgid "Check website..."
+msgstr "Controleer website..."
 
 msgid "Authentication is required to install apps"
 msgstr "Authenticatie is vereist om apps te installeren"
