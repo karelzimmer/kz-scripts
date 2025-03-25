@@ -184,7 +184,7 @@ msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
 
 msgid "Backup home folder"
-msgstr "Back-up thuismap"
+msgstr "Back-up persoonlijke map"
 
 #, sh-format
 msgid ""
@@ -806,7 +806,7 @@ msgid "Show WiFi information"
 msgstr "Wifi-informatie weergeven"
 
 msgid "Restore home folder"
-msgstr "Herstel thuismap"
+msgstr "Herstel persoonlijke map"
 
 msgid "Set up apps"
 msgstr "Apps instellen"
