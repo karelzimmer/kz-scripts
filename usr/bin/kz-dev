@@ -21,7 +21,7 @@ import gettext
 import kz_common
 import os
 import subprocess
-from getpass import getpass
+import getpass
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -32,7 +32,7 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-PROGRAM_NAME: str = 'kz'
+PROGRAM_NAME: str = 'kz-dev'
 PROGRAM_DESC: str = _('Build development environment')
 
 USAGE: str = f'{PROGRAM_NAME} {kz_common.OPTIONS_USAGE}'
@@ -239,7 +239,7 @@ def download_website() -> None:
     if not os.path.exists(FTP_LOGIN):
         TEXT = f"{_('Password for')} ftp://{FTP_HOST}': "
         with open(FTP_LOGIN, 'w') as FILE:
-            FILE.write(getpass(TEXT))
+            FILE.write(getpass.getpass(TEXT))
         os.chmod(FTP_LOGIN, 0o600)
 
     COMMAND: str = f"lftp   --user      {FTP_USER}                  \

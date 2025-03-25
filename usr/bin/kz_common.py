@@ -19,7 +19,7 @@ import os
 import subprocess
 import sys
 import time
-from systemd import journal  # type: ignore
+import systemd.journal
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -199,7 +199,7 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
 
-    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_ID}', f'MESSAGE={TEXT}')
+    systemd.journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_ID}', f'MESSAGE={TEXT}')
 
 
 def process_options(PROGRAM_NAME: str, USAGE: str, PROGRAM_DESC: str,
