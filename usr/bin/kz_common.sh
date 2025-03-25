@@ -1,5 +1,3 @@
-# This module provides access to global constants and functions.
-#
 # shellcheck shell=bash source=/dev/null disable=SC2034
 ###############################################################################
 # SPDX-FileComment: Common module for kz Bourne-Again shell scripts

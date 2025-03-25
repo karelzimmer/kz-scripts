@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Run the kz command.
-
-This script runs the specified kz command with optional arguments.
-"""
 ###############################################################################
 # SPDX-FileComment: Run the kz command
 #

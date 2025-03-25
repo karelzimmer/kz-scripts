@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Build development environment.
-
-This script builds the development environment.
-"""
 ###############################################################################
 # SPDX-FileComment: Build development environment
 #

@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Show WiFi information.
-
-This script shows WiFi information.
-"""
 ###############################################################################
 # SPDX-FileComment: Show WiFi information
 #
