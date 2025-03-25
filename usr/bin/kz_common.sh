@@ -1,4 +1,4 @@
-# shellcheck shell=bash source=/dev/null disable=SC2034
+# shellcheck shell=bash source=/dev/null
 ###############################################################################
 # SPDX-FileComment: Common module for kz Bourne-Again shell scripts
 #
@@ -22,23 +22,29 @@ source /usr/bin/gettext.sh
 
 readonly MODULE_NAME='kz_common.sh'
 MODULE_DESC=$(gettext 'Common module for shell scripts')
+# shellcheck disable=SC2034
 readonly MODULE_DESC
 
+# shellcheck disable=SC2034
 readonly OPTIONS_USAGE='[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
 OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
+# shellcheck disable=SC2034
 readonly OPTIONS_HELP
 
+# shellcheck disable=SC2034
 readonly OPTIONS_SHORT='hmuv'
+# shellcheck disable=SC2034
 readonly OPTIONS_LONG='help,manual,usage,version'
 
 readonly OK=0
 readonly ERR=1
 
 # List NORMAL last here so that -x doesn't bork the display.
+# shellcheck disable=SC2034
 readonly BOLD='\033[1m'
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
@@ -287,6 +293,7 @@ function process_option_version() {
     else
         TEXT=$(gettext 'Build ID cannot be determined.')
         logmsg "$TEXT"
+        # shellcheck disable=SC2034
         BUILD_ID=$TEXT
     fi
 
