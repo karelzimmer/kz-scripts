@@ -23,7 +23,7 @@ if cat apport &> /dev/null; then sudo systemctl enable --now apport.service; fi
 
 
 # Install 2-update-system on *
-# Update system.
+# Update and cleanup system.
 # This may take a while...
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get upgrade --assume-yes; fi
@@ -33,7 +33,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf upgrade --assumeyes --refr
 if grep --quiet rhel   /etc/os-release && type snap &> /dev/null; then sudo snap refresh; fi
 
 # Remove 2-update-system from *
-# Update system.
+# Update and cleanup system.
 echo 'The update-system app cannot be removed.'
 
 

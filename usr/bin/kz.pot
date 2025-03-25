@@ -177,7 +177,7 @@ msgstr ""
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
-msgid "Make backup"
+msgid "Backup home folder"
 msgstr ""
 
 #, sh-format
@@ -716,7 +716,7 @@ msgstr ""
 msgid "Show WiFi information"
 msgstr ""
 
-msgid "Restore backup"
+msgid "Restore home folder"
 msgstr ""
 
 msgid "Set up apps"
@@ -909,7 +909,7 @@ msgstr ""
 msgid "reset"
 msgstr ""
 
-msgid "Update system"
+msgid "Update and cleanup system"
 msgstr ""
 
 msgid "Update"

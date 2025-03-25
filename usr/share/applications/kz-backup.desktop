@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name=Make backup
+Name=Backup home folder
 Comment=Make a backup copy of the Home folder
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz

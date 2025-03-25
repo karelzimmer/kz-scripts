@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Restore backup
+# SPDX-FileComment: Restore home folder
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -20,7 +20,7 @@ source kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-restore'
-PROGRAM_DESC=$(gettext 'Restore backup')
+PROGRAM_DESC=$(gettext 'Restore home folder')
 readonly PROGRAM_DESC
 
 USAGE="$(eval_gettext "Usage: kz restore [-g|--gui] [-s|--source <directory>]
@@ -214,7 +214,7 @@ function restore_backup() {
     local TITLE=''
     local -i RESTORE_RC=0
 
-    TITLE=$(gettext 'Restore backup')
+    TITLE=$(gettext 'Restore home folder')
     TEXT=$(gettext 'Preparing restore (this can take a while)')
 
     if $OPTION_GUI; then
@@ -350,7 +350,7 @@ function term_usb() {
                 --fields=1
     )
 
-    TITLE=$(gettext 'Restore backup')
+    TITLE=$(gettext 'Restore home folder')
     TEXT=$(gettext 'Disconnect the USB media')
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions

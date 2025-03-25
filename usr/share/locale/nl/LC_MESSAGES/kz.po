@@ -183,8 +183,8 @@ msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
 
-msgid "Make backup"
-msgstr "Back-up maken"
+msgid "Backup home folder"
+msgstr "Back-up thuismap"
 
 #, sh-format
 msgid ""
@@ -805,8 +805,8 @@ msgstr "Menu verlaten"
 msgid "Show WiFi information"
 msgstr "Wifi-informatie weergeven"
 
-msgid "Restore backup"
-msgstr "Back-up terugzetten"
+msgid "Restore home folder"
+msgstr "Herstel thuismap"
 
 msgid "Set up apps"
 msgstr "Apps instellen"
@@ -1043,8 +1043,8 @@ msgstr "instellen"
 msgid "reset"
 msgstr "resetten"
 
-msgid "Update system"
-msgstr "Systeem bijwerken"
+msgid "Update and cleanup system"
+msgstr "Systeem bijwerken en opschonen"
 
 msgid "Update"
 msgstr "Bijwerken"

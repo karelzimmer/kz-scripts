@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Make backup
+# SPDX-FileComment: Backup home folder
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -20,7 +20,7 @@ source kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz backup'
-PROGRAM_DESC=$(gettext 'Make backup')
+PROGRAM_DESC=$(gettext 'Backup home folder')
 readonly PROGRAM_DESC
 
 USAGE="$(eval_gettext "Usage: kz backup [-g|--gui] [-t|--target <directory>]
@@ -470,7 +470,7 @@ $(
     )
 EOF
 
-    TITLE=$(gettext 'Make backup')
+    TITLE=$(gettext 'Backup home folder')
     TEXT=$(gettext 'Preparing backup (this may take a while)')
 
     if $OPTION_GUI; then
@@ -598,7 +598,7 @@ function term_usb() {
                 --fields=1
     )
 
-    TITLE=$(gettext 'Make backup')
+    TITLE=$(gettext 'Backup home folder')
     TEXT=$(gettext 'Disconnect the USB media')
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
