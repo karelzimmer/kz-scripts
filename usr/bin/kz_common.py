@@ -242,7 +242,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == OK:
         YELP_MAN_URL = f"{_(', or see the ')}"
-        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}\x1b\\{DISPLAY_NAME} '
+        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}\x1b\\{DISPLAY_NAME}(1) '
         YELP_MAN_URL += f"{_('man page')}\x1b]8;;\x1b\\"
     TEXT: str = (f'{HELP}\n\n'
                  f'''{_("Type '{} --manual' or 'man {}'{} ").
