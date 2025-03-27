@@ -82,7 +82,8 @@ def process() -> None:
             EXEC += ' ' + sys.argv[ARG_NUM]
 
     if EXEC == '/usr/bin/kz':
-        TEXT = f"kz: {_('command is required')}\n{_('Usage:')} {USAGE}"
+        TEXT = f"{DISPLAY_NAME}: {_('command is required')}\n{_('Usage:')}"
+        TEXT += f" {USAGE}"
         print(TEXT)
         kz_common.term(DISPLAY_NAME, kz_common.ERR)
     else:
