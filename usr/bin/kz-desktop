@@ -22,7 +22,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-desktop'
 PROGRAM_DESC=$(gettext 'Change desktop environment')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE="$(eval_gettext "Usage: kz desktop [-a|--addaft <favorite>] \
 [-b|--addbef <favorite>]

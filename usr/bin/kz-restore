@@ -22,7 +22,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-restore'
 PROGRAM_DESC=$(gettext 'Restore home folder')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE="$(eval_gettext "Usage: kz restore [-g|--gui] [-s|--source <directory>]
                   \$OPTIONS_USAGE")"

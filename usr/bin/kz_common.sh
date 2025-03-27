@@ -245,7 +245,7 @@ function process_option_help() {
 
     if [[ ${DISPLAY-} ]]; then
         YELP_MAN_URL="$(gettext ', or see the ')"
-        YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME\033\\$PROGRAM_NAME "
+        YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME\033\\$DISPLAY_NAME "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
     fi
 

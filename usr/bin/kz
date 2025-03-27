@@ -64,8 +64,8 @@ def process() -> None:
         if ARG_NUM == 1:
             # Check if the option for kz is specified.
             if sys.argv[ARG_NUM].startswith('-'):
-                kz_common.process_options(DISPLAY_NAME, USAGE, PROGRAM_DESC,
-                                          HELP)
+                kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC,
+                                          DISPLAY_NAME, USAGE, HELP)
                 process_x_options()
                 term()
             else:

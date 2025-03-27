@@ -54,7 +54,8 @@ def process(OPTION_GUI: bool = False) -> None:
     NMCLI_OUTPUT: str = ''
     TEXT: str = f"{_('Use this data to connect to the wireless network.')}"
 
-    kz_common.process_options(DISPLAY_NAME, USAGE, PROGRAM_DESC, HELP)
+    kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME, USAGE,
+                              HELP)
     OPTION_GUI = process_x_options()
 
     if not kz_common.become_root_check(DISPLAY_NAME, PROGRAM_DESC, OPTION_GUI):

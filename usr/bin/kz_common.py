@@ -196,8 +196,8 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
                           f'MESSAGE={TEXT}')
 
 
-def process_options(DISPLAY_NAME: str, USAGE: str, PROGRAM_DESC: str,
-                    HELP: str) -> None:
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
+                    USAGE: str, HELP: str) -> None:
     """
     This function handles the common options and arguments.
     """
@@ -216,7 +216,7 @@ def process_options(DISPLAY_NAME: str, USAGE: str, PROGRAM_DESC: str,
     ARGS, UNKNOWN = PARSER.parse_known_args()
 
     if ARGS.help:
-        process_option_help(DISPLAY_NAME, PROGRAM_DESC, HELP)
+        process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME, HELP)
         term(DISPLAY_NAME, OK)
     elif ARGS.manual:
         process_option_manual(DISPLAY_NAME, PROGRAM_DESC)
@@ -231,8 +231,8 @@ def process_options(DISPLAY_NAME: str, USAGE: str, PROGRAM_DESC: str,
         None
 
 
-def process_option_help(DISPLAY_NAME: str, PROGRAM_DESC: str,
-                        HELP: str) -> None:
+def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                        DISPLAY_NAME: str, HELP: str) -> None:
     """
     This function shows the available help.
     """
@@ -242,7 +242,7 @@ def process_option_help(DISPLAY_NAME: str, PROGRAM_DESC: str,
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == OK:
         YELP_MAN_URL = f"{_(', or see the ')}"
-        YELP_MAN_URL += f'\x1b]8;;man:{DISPLAY_NAME}\x1b\\{DISPLAY_NAME} '
+        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}\x1b\\{DISPLAY_NAME} '
         YELP_MAN_URL += f"{_('man page')}\x1b]8;;\x1b\\"
     TEXT: str = (f'{HELP}\n\n'
                  f'''{_("Type '{} --manual' or 'man {}'{} ").

@@ -21,7 +21,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-menu'
 PROGRAM_DESC=$(gettext 'Installation menu')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE=$(eval_gettext "Usage: kz menu [-g|--gui] \$OPTIONS_USAGE")
 readonly USAGE

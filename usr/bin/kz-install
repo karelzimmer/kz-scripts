@@ -22,7 +22,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-install'
 PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE=$(eval_gettext "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]
                   [-f|--file <file>] [-g|--gui] [-r|--remove]

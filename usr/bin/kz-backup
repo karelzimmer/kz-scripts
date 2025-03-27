@@ -22,7 +22,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-backup'
 PROGRAM_DESC=$(gettext 'Backup home folder')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE="$(eval_gettext "Usage: kz backup [-g|--gui] [-t|--target <directory>]
                  \$OPTIONS_USAGE")"
