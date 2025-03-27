@@ -51,15 +51,15 @@ msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
 #, sh-format
-msgid "Program $PROGRAM_ID encountered an error."
-msgstr "In programma $PROGRAM_ID is een fout opgetreden."
+msgid "Program $PROGRAM_NAME encountered an error."
+msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
 msgid "Unknown package manager."
 msgstr "Onbekende pakketbeheerder."
 
 #, sh-format
-msgid "Program $PROGRAM_ID has been interrupted."
-msgstr "Programma $PROGRAM_ID is onderbroken."
+msgid "Program $PROGRAM_NAME has been interrupted."
+msgstr "Programma $PROGRAM_NAME is onderbroken."
 
 msgid ""
 "If the package manager gives apt errors, launch a Terminal window and "
@@ -76,15 +76,15 @@ msgstr "man-pagina"
 
 #, sh-format
 msgid ""
-"Type '$PROGRAM_NAME --manual' or 'man $PROGRAM_NAME'$YELP_MAN_URL for more "
+"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$YELP_MAN_URL for more "
 "information."
 msgstr ""
-"Typ '$PROGRAM_NAME --manual' of 'man $PROGRAM_NAME'$YELP_MAN_URL voor meer "
+"Typ '$DISPLAY_NAME --manual' of 'man $DISPLAY_NAME'$YELP_MAN_URL voor meer "
 "informatie."
 
 #, sh-format
-msgid "Type '$PROGRAM_NAME --help' for more information."
-msgstr "Typ '$PROGRAM_NAME --help' voor meer informatie."
+msgid "Type '$DISPLAY_NAME --help' for more information."
+msgstr "Typ '$DISPLAY_NAME --help' voor meer informatie."
 
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
@@ -329,9 +329,9 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Use \"journalctl --boot --id=$PROGRAM_ID\" in Terminal to view log messages."
+"Use \"journalctl --boot --id=$PROGRAM_NAME\" in Terminal to view log messages."
 msgstr ""
-"Gebruik \"journalctl --boot --id=$PROGRAM_ID\" in Terminalvenster om "
+"Gebruik \"journalctl --boot --id=$PROGRAM_NAME\" in Terminalvenster om "
 "logberichten te bekijken."
 
 msgid "Try creating the back up again."

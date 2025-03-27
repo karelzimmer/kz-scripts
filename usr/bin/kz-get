@@ -33,7 +33,7 @@ rm      --force "$KZ_COMMON_LOCAL_FILE"
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz get'
+readonly DISPLAY_NAME='kz get'
 PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
 
@@ -81,7 +81,7 @@ function check_input() {
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+                --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -112,7 +112,7 @@ function process_x_options() {
     done
 
     if [[ $* ]]; then
-        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -206,12 +206,12 @@ $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "$TEXT"
 
-    logmsg "Delete getkz files ($PROGRAM_NAME)..."
+    logmsg "Delete getkz files ($DISPLAY_NAME)..."
     rm  --force         \
         --verbose       \
         getkz           \
         getkz.{1..99}   |& $LOGCMD
-    logmsg "Deleted getkz files ($PROGRAM_NAME)."
+    logmsg "Deleted getkz files ($DISPLAY_NAME)."
 
     exit $OK
 }
