@@ -67,7 +67,7 @@ def become_root(DISPLAY_NAME: str, PROGRAM_DESC: str,
     restarts the script as user root if not.
     """
     EXEC_SUDO: str = 'exec sudo '
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz ', 'kz-')
+    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
 
     if not become_root_check(DISPLAY_NAME, PROGRAM_DESC, OPTION_GUI):
         term(DISPLAY_NAME, OK)
@@ -304,7 +304,7 @@ def process_option_version(DISPLAY_NAME: str, PROGRAM_DESC: str) -> None:
     This function displays version, author, and license information.
     """
     BUILD_ID: str = ''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz ', 'kz-')
+    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
 
     try:
         with open('/usr/share/doc/kz/build.id') as fh:
@@ -333,7 +333,7 @@ def term(DISPLAY_NAME: str, RC: int) -> None:
     """
     This function controls the termination.
     """
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz ', 'kz-')
+    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
 
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(DISPLAY_NAME, TEXT)
@@ -348,7 +348,7 @@ def wait_for_enter(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function waits for the user to press Enter.
     """
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz ', 'kz-')
+    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
 
     try:
         TEXT: str = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"

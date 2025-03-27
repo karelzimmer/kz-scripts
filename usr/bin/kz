@@ -29,7 +29,7 @@ _ = gettext.gettext
 
 PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Run the kz command')
-DISPLAY_NAME: str = PROGRAM_NAME.replace('kz ', 'kz-')
+DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
 USAGE: str = (f"{_('kz <command> [<arguments>] [-l|--list]')} "
               f"{kz_common.OPTIONS_USAGE}")

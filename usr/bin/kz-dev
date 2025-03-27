@@ -29,7 +29,7 @@ _ = gettext.gettext
 
 PROGRAM_NAME: str = 'kz-dev'
 PROGRAM_DESC: str = _('Build development environment')
-DISPLAY_NAME: str = PROGRAM_NAME.replace('kz ', 'kz-')
+DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
 USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
@@ -89,7 +89,7 @@ def check_dependencies() -> None:
     """
     ESC_GETTEXT: str = 'gettext'
     TEXT: str = _('Check dependencies...')
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz ', 'kz-')
+    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
 
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
@@ -139,7 +139,7 @@ def pull_repos() -> None:
     This function retrieves the public repos.
     """
     BIN_REPO: str = f'{os.getenv("HOME")}/bin'
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz ', 'kz-')
+    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
 
     TEXT: str = _('Clone repos...')
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)

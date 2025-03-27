@@ -27,8 +27,7 @@ _ = gettext.gettext
 
 PROGRAM_NAME: str = 'kz-update'
 PROGRAM_DESC: str = _('Update and cleanup system')
-DISPLAY_NAME = PROGRAM_NAME.replace('kz ', 'kz-')
-
+DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
 USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 

@@ -28,7 +28,7 @@ _ = gettext.gettext
 
 PROGRAM_NAME: str = 'kz-wifi'
 PROGRAM_DESC: str = _('Show WiFi information')
-DISPLAY_NAME: str = PROGRAM_NAME.replace('kz ', 'kz-')
+DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
 USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE} [-g|--gui]'
 
