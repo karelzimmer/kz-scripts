@@ -151,8 +151,6 @@ def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     This function returns an error message.
     """
-    PROGRAM_NAME: str = DISPLAY_NAME.replace('kz ', 'kz-')
-
     if OPTION_GUI:
         TITLE: str = f"{PROGRAM_DESC} {_('error message')} ({DISPLAY_NAME})"
         COMMAND: str = f'zenity --error                 \
@@ -190,13 +188,12 @@ def init(DISPLAY_NAME: str) -> None:
     logmsg(DISPLAY_NAME, TEXT)
 
 
-def logmsg(DISPLAY_NAME: str, TEXT: str) -> None:
+def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     This function records a message to the log.
     """
-    PROGRAM_NAME: str = DISPLAY_NAME.replace('kz ', 'kz-')
-
-    systemd.journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
+    systemd.journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}',
+                          f'MESSAGE={TEXT}')
 
 
 def process_options(DISPLAY_NAME: str, USAGE: str, PROGRAM_DESC: str,
@@ -239,14 +236,13 @@ def process_option_help(DISPLAY_NAME: str, PROGRAM_DESC: str,
     """
     This function shows the available help.
     """
-    PROGRAM_NAME: str = DISPLAY_NAME.replace('kz ', 'kz-')
     YELP_MAN_URL: str = ''
 
     if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == OK:
         YELP_MAN_URL = f"{_(', or see the ')}"
-        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}\x1b\\{PROGRAM_NAME} '
+        YELP_MAN_URL += f'\x1b]8;;man:{DISPLAY_NAME}\x1b\\{DISPLAY_NAME} '
         YELP_MAN_URL += f"{_('man page')}\x1b]8;;\x1b\\"
     TEXT: str = (f'{HELP}\n\n'
                  f'''{_("Type '{} --manual' or 'man {}'{} ").
@@ -255,13 +251,12 @@ def process_option_help(DISPLAY_NAME: str, PROGRAM_DESC: str,
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_manual(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
+def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function displays the manual page..
     """
-    PROGRAM_NAME: str = DISPLAY_NAME.replace('kz ', 'kz-')
     COMMAND1: str = f'yelp man:{PROGRAM_NAME}'
-    COMMAND2: str = f'man --pager=cat {DISPLAY_NAME}'
+    COMMAND2: str = f'man --pager=cat {PROGRAM_NAME}'
 
     if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -272,10 +267,10 @@ def process_option_manual(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
                            shell=True, check=True,)
         except Exception as exc:
             TEXT: str = str(exc)
-            logmsg(DISPLAY_NAME, TEXT)
+            logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            term(DISPLAY_NAME, ERR)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            term(PROGRAM_NAME, ERR)
         else:
             return OK
     else:
@@ -283,10 +278,10 @@ def process_option_manual(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
             subprocess.run(COMMAND2, executable='bash', shell=True, check=True)
         except Exception as exc:
             TEXT = str(exc)
-            logmsg(DISPLAY_NAME, TEXT)
+            logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            term(DISPLAY_NAME, ERR)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            term(PROGRAM_NAME, ERR)
         else:
             return OK
 

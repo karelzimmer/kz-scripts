@@ -33,9 +33,10 @@ rm      --force "$KZ_COMMON_LOCAL_FILE"
 # Constants
 ###############################################################################
 
-readonly DISPLAY_NAME='kz get'
+readonly PROGRAM_NAME='kz-get'
 PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
 
 USAGE=$(eval_gettext "Usage: kz get \$OPTIONS_USAGE")
 readonly USAGE

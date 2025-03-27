@@ -19,9 +19,10 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly DISPLAY_NAME='kz check'
+readonly PROGRAM_NAME='kz-check'
 PROGRAM_DESC=$(gettext 'Check scripts and website')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
 
 USAGE=$(eval_gettext "Usage: kz check \$OPTIONS_USAGE")
 readonly USAGE

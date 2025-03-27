@@ -19,9 +19,10 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly DISPLAY_NAME='kz setup'
+readonly PROGRAM_NAME='kz-setup'
 PROGRAM_DESC=$(gettext 'Set up apps')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
 
 USAGE=$(eval_gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
                 [-f|--file <file>] [-g|--gui] [-r|--reset]

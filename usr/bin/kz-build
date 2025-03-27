@@ -19,9 +19,10 @@ source ~/kz-scripts/usr/bin/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly DISPLAY_NAME='kz build'
+readonly PROGRAM_NAME='kz-build'
 PROGRAM_DESC=$(gettext 'Build website including kz packages')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
 
 USAGE=$(eval_gettext "Usage: kz build \$OPTIONS_USAGE")
 readonly USAGE

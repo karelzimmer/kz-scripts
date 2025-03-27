@@ -19,9 +19,10 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly DISPLAY_NAME='kz deploy'
+readonly PROGRAM_NAME='kz-deploy'
 PROGRAM_DESC=$(gettext 'Distribute website including kz packages')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz /kz-}
 
 USAGE=$(eval_gettext "Usage: kz deploy \$OPTIONS_USAGE")
 readonly USAGE
