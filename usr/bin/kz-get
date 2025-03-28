@@ -207,12 +207,12 @@ $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "$TEXT"
 
-    logmsg "Delete getkz files ($DISPLAY_NAME)..."
+    logmsg "Delete getkz files ($PROGRAM_NAME)..."
     rm  --force         \
         --verbose       \
         getkz           \
         getkz.{1..99}   |& $LOGCMD
-    logmsg "Deleted getkz files ($DISPLAY_NAME)."
+    logmsg "Deleted getkz files ($PROGRAM_NAME)."
 
     exit $OK
 }

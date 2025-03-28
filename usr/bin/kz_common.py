@@ -91,7 +91,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
         except Exception as exc:
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
-            TEXT = _('Program {} encountered an error.').format(DISPLAY_NAME)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
             errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
         else:
@@ -268,7 +268,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
         except Exception as exc:
             TEXT: str = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
-            TEXT = _('Program {} encountered an error.').format(DISPLAY_NAME)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
             errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
     else:
@@ -312,7 +312,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str,
     except Exception as exc:
         TEXT = str(exc)
         logmsg(DISPLAY_NAME, TEXT)
-        TEXT = _('Program {} encountered an error.').format(DISPLAY_NAME)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         term(PROGRAM_NAME, ERR)
     finally:
@@ -345,13 +345,13 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str,
         TEXT: str = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
         input(TEXT)
     except KeyboardInterrupt:
-        TEXT = _('Program {} has been interrupted.').format(DISPLAY_NAME)
+        TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         term(PROGRAM_NAME, ERR)
     except Exception as exc:
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
-        TEXT = _('Program {} encountered an error.').format(DISPLAY_NAME)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         term(PROGRAM_NAME, ERR)
     else:
