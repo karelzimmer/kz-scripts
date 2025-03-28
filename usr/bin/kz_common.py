@@ -216,7 +216,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
     ARGS, UNKNOWN = PARSER.parse_known_args()
 
     if ARGS.help:
-        process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME, HELP)
+        process_option_help(DISPLAY_NAME, PROGRAM_DESC, HELP, PROGRAM_NAME)
         term(DISPLAY_NAME, OK)
     elif ARGS.manual:
         process_option_manual(DISPLAY_NAME, PROGRAM_DESC)
@@ -231,8 +231,8 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
         None
 
 
-def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                        DISPLAY_NAME: str, HELP: str) -> None:
+def process_option_help(DISPLAY_NAME: str, PROGRAM_DESC: str, HELP: str,
+                        PROGRAM_NAME: str) -> None:
     """
     This function shows the available help.
     """
