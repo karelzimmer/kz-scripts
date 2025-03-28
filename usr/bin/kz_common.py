@@ -85,7 +85,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
             subprocess.run(EXEC_SUDO, executable='bash',
                            shell=True, check=True)
         except KeyboardInterrupt:
-            TEXT = _('Program {} has been interrupted.').format(DISPLAY_NAME)
+            TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
         except Exception as exc:

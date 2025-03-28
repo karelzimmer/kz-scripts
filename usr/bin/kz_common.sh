@@ -393,7 +393,7 @@ $COMMAND, code: $RC ($RC_DESC)."
         err )
             if $ERREXIT; then
                 TEXT="
-$(eval_gettext "Program \$DISPLAY_NAME encountered an error.")"
+$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
                 errmsg "$TEXT"
             fi
             exit "$RC"
@@ -407,7 +407,7 @@ $(eval_gettext "Program \$DISPLAY_NAME encountered an error.")"
             ;;
         * )
             TEXT="
-$(eval_gettext "Program \$DISPLAY_NAME has been interrupted.")"
+$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             errmsg "$TEXT"
             exit "$RC"
             ;;
