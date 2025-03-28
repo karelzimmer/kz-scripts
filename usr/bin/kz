@@ -90,11 +90,19 @@ def process() -> None:
         TEXT = f'Restart (exec {EXEC}...)'
         kz_common.logmsg(PROGRAM_NAME, TEXT)
         try:
-            subprocess.run(f'exec {EXEC}', executable='bash',
-                           stderr=subprocess.DEVNULL,
-                           shell=True, check=True)
-        except Exception:
+            subprocess.run(f'exec {EXEC}', executable='bash', shell=True)
+        except KeyboardInterrupt:
+            TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+            kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.term(PROGRAM_NAME, kz_common.ERR)
+        except Exception as exc:
+            TEXT = str(exc)
+            kz_common.logmsg(PROGRAM_NAME, TEXT)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        else:
+            term()
 
 
 def process_x_options() -> None:
