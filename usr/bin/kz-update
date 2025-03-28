@@ -52,7 +52,7 @@ def process() -> None:
                               HELP)
     process_x_options()
 
-    kz_common.become_root(DISPLAY_NAME, PROGRAM_DESC)
+    kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
     if subprocess.run(COMMAND1, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,

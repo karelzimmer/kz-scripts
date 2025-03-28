@@ -88,7 +88,7 @@ def process() -> None:
         kz_common.term(DISPLAY_NAME, kz_common.ERR)
     else:
         TEXT = f'Restart (exec {EXEC}...)'
-        kz_common.logmsg(DISPLAY_NAME, TEXT)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
         try:
             subprocess.run(f'exec {EXEC}', executable='bash',
                            shell=True, check=True)

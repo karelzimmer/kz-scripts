@@ -400,7 +400,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             ;;
         exit )
             TEXT="Ended (code=exited, status=$STATUS).
-==== END logs for script $DISPLAY_NAME ===="
+==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$RC"

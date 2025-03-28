@@ -60,17 +60,16 @@ if not os.path.exists('/etc/os-release'):
 # Functions
 ###############################################################################
 
-def become_root(DISPLAY_NAME: str, PROGRAM_DESC: str,
+def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
                 OPTION_GUI: bool = False) -> None:
     """
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
     """
     EXEC_SUDO: str = 'exec sudo '
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
 
     if not become_root_check(DISPLAY_NAME, PROGRAM_DESC, OPTION_GUI):
-        term(DISPLAY_NAME, OK)
+        term(PROGRAM_NAME, OK)
 
     if os.getuid() != 0:
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
@@ -86,17 +85,17 @@ def become_root(DISPLAY_NAME: str, PROGRAM_DESC: str,
             subprocess.run(EXEC_SUDO, executable='bash',
                            shell=True, check=True)
         except KeyboardInterrupt:
-            TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+            TEXT = _('Program {} has been interrupted.').format(DISPLAY_NAME)
             errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            term(DISPLAY_NAME, ERR)
+            term(PROGRAM_NAME, ERR)
         except Exception as exc:
             TEXT = str(exc)
-            logmsg(DISPLAY_NAME, TEXT)
-            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            logmsg(PROGRAM_NAME, TEXT)
+            TEXT = _('Program {} encountered an error.').format(DISPLAY_NAME)
             errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            term(DISPLAY_NAME, ERR)
+            term(PROGRAM_NAME, ERR)
         else:
-            term(DISPLAY_NAME, ERR)
+            term(PROGRAM_NAME, ERR)
 
 
 def become_root_check(DISPLAY_NAME: str, PROGRAM_DESC: str,
@@ -217,16 +216,16 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
 
     if ARGS.help:
         process_option_help(DISPLAY_NAME, PROGRAM_DESC, HELP, PROGRAM_NAME)
-        term(DISPLAY_NAME, OK)
+        term(PROGRAM_NAME, OK)
     elif ARGS.manual:
-        process_option_manual(DISPLAY_NAME, PROGRAM_DESC)
-        term(DISPLAY_NAME, OK)
+        process_option_manual(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        term(PROGRAM_NAME, OK)
     elif ARGS.usage:
         process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
-        term(DISPLAY_NAME, OK)
+        term(PROGRAM_NAME, OK)
     elif ARGS.version:
-        process_option_version(DISPLAY_NAME, PROGRAM_DESC)
-        term(DISPLAY_NAME, OK)
+        process_option_version(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        term(PROGRAM_NAME, OK)
     elif UNKNOWN:
         None
 
@@ -251,7 +250,8 @@ def process_option_help(DISPLAY_NAME: str, PROGRAM_DESC: str, HELP: str,
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
+def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                          DISPLAY_NAME: str) -> None:
     """
     This function displays the manual page..
     """
@@ -268,11 +268,9 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
         except Exception as exc:
             TEXT: str = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
-            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            TEXT = _('Program {} encountered an error.').format(DISPLAY_NAME)
+            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
-        else:
-            return OK
     else:
         try:
             subprocess.run(COMMAND2, executable='bash', shell=True, check=True)
@@ -280,12 +278,8 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
-        else:
-            return OK
-
-    return OK
 
 
 def process_option_usage(DISPLAY_NAME: str, PROGRAM_DESC: str,
@@ -299,12 +293,12 @@ def process_option_usage(DISPLAY_NAME: str, PROGRAM_DESC: str,
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_version(DISPLAY_NAME: str, PROGRAM_DESC: str) -> None:
+def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                           DISPLAY_NAME: str) -> None:
     """
     This function displays version, author, and license information.
     """
     BUILD_ID: str = ''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
 
     try:
         with open('/usr/share/doc/kz/build.id') as fh:
@@ -318,9 +312,9 @@ def process_option_version(DISPLAY_NAME: str, PROGRAM_DESC: str) -> None:
     except Exception as exc:
         TEXT = str(exc)
         logmsg(DISPLAY_NAME, TEXT)
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        TEXT = _('Program {} encountered an error.').format(DISPLAY_NAME)
         errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        term(DISPLAY_NAME, ERR)
+        term(PROGRAM_NAME, ERR)
     finally:
         TEXT = f"{_('kz version 4.2.1 (built {}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
@@ -329,14 +323,12 @@ def process_option_version(DISPLAY_NAME: str, PROGRAM_DESC: str) -> None:
         infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(DISPLAY_NAME: str, RC: int) -> None:
+def term(PROGRAM_NAME: str, RC: int) -> None:
     """
     This function controls the termination.
     """
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
-
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
-    logmsg(DISPLAY_NAME, TEXT)
+    logmsg(PROGRAM_NAME, TEXT)
 
     if RC == OK:
         sys.exit(OK)
@@ -344,25 +336,24 @@ def term(DISPLAY_NAME: str, RC: int) -> None:
         sys.exit(ERR)
 
 
-def wait_for_enter(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
+def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                   DISPLAY_NAME: str) -> int:
     """
     This function waits for the user to press Enter.
     """
-    PROGRAM_NAME = DISPLAY_NAME.replace('kz-', 'kz ')
-
     try:
         TEXT: str = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
         input(TEXT)
     except KeyboardInterrupt:
-        TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        TEXT = _('Program {} has been interrupted.').format(DISPLAY_NAME)
         errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        term(DISPLAY_NAME, ERR)
+        term(PROGRAM_NAME, ERR)
     except Exception as exc:
         TEXT = str(exc)
-        logmsg(DISPLAY_NAME, TEXT)
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        logmsg(PROGRAM_NAME, TEXT)
+        TEXT = _('Program {} encountered an error.').format(DISPLAY_NAME)
         errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        term(DISPLAY_NAME, ERR)
+        term(PROGRAM_NAME, ERR)
     else:
         return OK
 
