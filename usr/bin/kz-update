@@ -67,7 +67,7 @@ def process() -> None:
     else:
         TEXT: str = _('Unknown package manager.')
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
 
 def process_x_options() -> None:
@@ -164,10 +164,10 @@ def perform_command(COMMAND: str = '') -> None:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception as exc:
         TEXT = str(exc)
-        kz_common.logmsg(DISPLAY_NAME, TEXT)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
         kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, '')
 
@@ -178,7 +178,7 @@ def term() -> None:
     """
     TEXT = _('Complete!')
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-    kz_common.term(DISPLAY_NAME, kz_common.OK)
+    kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
 ###############################################################################

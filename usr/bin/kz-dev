@@ -60,7 +60,7 @@ def process() -> None:
                       shell=True).returncode != kz_common.OK:
         TEXT: str = _('Must run on a Debian or Debian-based system.')
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
     check_dependencies()
     pull_repos()
@@ -95,7 +95,7 @@ def check_dependencies() -> None:
 
     # Call kz install.
     TEXT = 'Calling kz install...'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
     COMMAND: str = f"kz install         \
                         fakeroot        \
                         {ESC_GETTEXT}   \
@@ -111,27 +111,27 @@ def check_dependencies() -> None:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception as exc:
         TEXT = str(exc)
-        kz_common.logmsg(DISPLAY_NAME, TEXT)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     TEXT = 'Called kz install.'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
 
     # Call kz setup.
     TEXT = 'Calling kz install...'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
     COMMAND = 'kz setup vscode'
     try:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception as exc:
         TEXT = str(exc)
-        kz_common.logmsg(DISPLAY_NAME, TEXT)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     TEXT = 'Called kz setup.'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
 
 
 def pull_repos() -> None:
@@ -150,10 +150,10 @@ def pull_repos() -> None:
             subprocess.run(COMMAND, executable='bash', shell=True, check=True)
         except Exception as exc:
             TEXT = str(exc)
-            kz_common.logmsg(DISPLAY_NAME, TEXT)
+            kz_common.logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
             kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(DISPLAY_NAME, kz_common.ERR)
+            kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
         COMMAND = 'git clone https://github.com/karelzimmer/bin.git '
         COMMAND += f'{BIN_REPO}'
@@ -161,61 +161,61 @@ def pull_repos() -> None:
             subprocess.run(COMMAND, executable='bash', shell=True, check=True)
         except Exception as exc:
             TEXT = str(exc)
-            kz_common.logmsg(DISPLAY_NAME, TEXT)
+            kz_common.logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
             kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(DISPLAY_NAME, kz_common.ERR)
+            kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
     # Call gitclone.
     TEXT = 'Calling gitclone...'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
     COMMAND = f'{BIN_REPO}/gitclone'
     try:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception as exc:
         TEXT = str(exc)
-        kz_common.logmsg(DISPLAY_NAME, TEXT)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     TEXT = 'Called gitclone.'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
 
     TEXT = _('Pull repos...')
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
     # Call gitpull.
     TEXT = 'Calling gitpull...'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
     COMMAND = f'{BIN_REPO}/gitpull'
     try:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception as exc:
         TEXT = str(exc)
-        kz_common.logmsg(DISPLAY_NAME, TEXT)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     TEXT = 'Called gitpull.'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
 
     TEXT = _('Status repos...')
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
     # Call gitstatus.
     TEXT = 'Calling gitstatus...'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
     COMMAND = f'{BIN_REPO}/gitstatus'
     try:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception as exc:
         TEXT = str(exc)
-        kz_common.logmsg(DISPLAY_NAME, TEXT)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     TEXT = 'Called gitstatus.'
-    kz_common.logmsg(DISPLAY_NAME, TEXT)
+    kz_common.logmsg(PROGRAM_NAME, TEXT)
 
 
 def download_website() -> None:
@@ -250,14 +250,14 @@ def download_website() -> None:
         os.remove(FTP_LOGIN)
         TEXT = _('Website download failed.')
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
 
 def term() -> None:
     """
     This function controls the termination of the script.
     """
-    kz_common.term(DISPLAY_NAME, kz_common.OK)
+    kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
 ###############################################################################
