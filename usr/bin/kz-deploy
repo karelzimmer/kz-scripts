@@ -19,9 +19,10 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz deploy'
+readonly PROGRAM_NAME='kz-deploy'
 PROGRAM_DESC=$(gettext 'Distribute website including kz packages')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE=$(eval_gettext "Usage: kz deploy \$OPTIONS_USAGE")
 readonly USAGE
@@ -65,7 +66,7 @@ function check_input() {
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+                --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -96,7 +97,7 @@ function process_x_options() {
     done
 
     if [[ $* ]]; then
-        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR

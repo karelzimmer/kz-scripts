@@ -25,12 +25,13 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-PROGRAM_NAME: str = 'kz update'
+PROGRAM_NAME: str = 'kz-update'
 PROGRAM_DESC: str = _('Update and cleanup system')
+DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
-USAGE: str = f'{PROGRAM_NAME} {kz_common.OPTIONS_USAGE}'
+USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
-HELP: str = (f"{_('Usage: {} [<options>]').format(PROGRAM_NAME)}\n\n"
+HELP: str = (f"{_('Usage: {} [<options>]').format(DISPLAY_NAME)}\n\n"
              f'{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
              f'{kz_common.OPTIONS_HELP}')
@@ -47,10 +48,11 @@ def process() -> None:
     COMMAND1: str = "grep --quiet debian /etc/os-release"
     COMMAND2: str = "grep --quiet rhel   /etc/os-release"
 
-    kz_common.process_options(PROGRAM_NAME, USAGE, PROGRAM_DESC, HELP)
+    kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME, USAGE,
+                              HELP)
     process_x_options()
 
-    kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
+    kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
     if subprocess.run(COMMAND1, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -64,7 +66,7 @@ def process() -> None:
         perform_rpm_cleanup()
     else:
         TEXT: str = _('Unknown package manager.')
-        kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
 
@@ -75,7 +77,7 @@ def process_x_options() -> None:
     ARGS = None
     PARSER = None
 
-    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
+    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
 
     ARGS = PARSER.parse_args()
@@ -89,7 +91,7 @@ def perform_deb_update() -> None:
     This function updates installed Debian packages and snaps if installed.
     """
     TEXT: str = f"{kz_common.BOLD}{_('Update')}...{kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo apt-get update'
     perform_command(COMMAND)
@@ -110,7 +112,7 @@ def perform_deb_cleanup() -> None:
     This function performs a Debian packages cleanup.
     """
     TEXT: str = f"{kz_common.BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo apt-get autoclean'
     perform_command(COMMAND)
@@ -124,7 +126,7 @@ def perform_rpm_update() -> None:
     This function updates installed RPM packages and snaps if installed.
     """
     TEXT: str = f"{kz_common.BOLD}{_('Update')}...{kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(COMMAND)
@@ -142,7 +144,7 @@ def perform_rpm_cleanup() -> None:
     This function performs a RPM packages cleanup.
     """
     TEXT: str = f"{kz_common.BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo dnf clean all'
     perform_command(COMMAND)
@@ -155,21 +157,19 @@ def perform_command(COMMAND: str = '') -> None:
     """
     This function executes a Bourne-Again SHell command.
     """
-    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
-
     TEXT: str = f'{kz_common.BOLD}{COMMAND}{kz_common.NORMAL}'
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-    kz_common.check_package_manager(PROGRAM_NAME, PROGRAM_DESC)
+    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    kz_common.check_package_manager(DISPLAY_NAME, PROGRAM_DESC)
     try:
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception as exc:
         TEXT = str(exc)
         kz_common.logmsg(PROGRAM_NAME, TEXT)
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
-        kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
-        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, '')
+        kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, '')
 
 
 def term() -> None:
@@ -177,7 +177,7 @@ def term() -> None:
     This function controls the termination of the script.
     """
     TEXT = _('Complete!')
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
     kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
@@ -185,6 +185,6 @@ def term() -> None:
 # Main
 ###############################################################################
 
-kz_common.init(PROGRAM_NAME)
+kz_common.init(DISPLAY_NAME)
 process()
 term()

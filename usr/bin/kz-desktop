@@ -19,9 +19,10 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz desktop'
+readonly PROGRAM_NAME='kz-desktop'
 PROGRAM_DESC=$(gettext 'Change desktop environment')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE="$(eval_gettext "Usage: kz desktop [-a|--addaft <favorite>] \
 [-b|--addbef <favorite>]
@@ -99,7 +100,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$PROGRAM_NAME"                     \
+                --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -121,7 +122,7 @@ function process_x_options() {
         case $1 in
             -a | --addaft )
                 if $OPTION_ADDAFT; then
-                    TEXT="$PROGRAM_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -132,7 +133,7 @@ $USAGE"
                 ;;
             -b | --addbef )
                 if $OPTION_ADDBEF; then
-                    TEXT="$PROGRAM_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -143,7 +144,7 @@ $USAGE"
                 ;;
             -d | --delete )
                 if $OPTION_DELETE; then
-                    TEXT="$PROGRAM_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -171,14 +172,14 @@ $USAGE"
     done
 
     if [[ $* ]]; then
-        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
     fi
 
     if ! [[ ${DISPLAY-} ]]; then
-        TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
+        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
         exit $OK

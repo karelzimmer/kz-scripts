@@ -69,9 +69,8 @@ fi
 # This function checks whether the script is started as user root and restarts
 # the script as user root if not.
 function become_root() {
-    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     # pkexec needs fully qualified path to the program to be executed.
-    local PKEXEC_PROGRAM=/usr/bin/$PROGRAM_ID
+    local PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
     local TEXT=''
     local -i RC=$OK
 
@@ -88,9 +87,9 @@ function become_root() {
             pkexec "$PKEXEC_PROGRAM" "${COMMANDLINE_ARGS[@]}" || RC=$?
             exit $RC
         else
-            TEXT="Restart (exec sudo $PROGRAM_ID ${COMMANDLINE_ARGS[*]})..."
+            TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
-            exec sudo "$PROGRAM_ID" "${COMMANDLINE_ARGS[@]}"
+            exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
         fi
     fi
 }
@@ -145,7 +144,7 @@ function errmsg() {
     local TITLE=''
 
     if $OPTION_GUI; then
-        TITLE="$PROGRAM_DESC $(gettext 'error message') ($PROGRAM_NAME)"
+        TITLE="$PROGRAM_DESC $(gettext 'error message') ($DISPLAY_NAME)"
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
@@ -162,7 +161,7 @@ function infomsg() {
     local TITLE=''
 
     if $OPTION_GUI; then
-        TITLE="$PROGRAM_DESC $(gettext 'information') ($PROGRAM_NAME)"
+        TITLE="$PROGRAM_DESC $(gettext 'information') ($DISPLAY_NAME)"
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
@@ -176,11 +175,10 @@ function infomsg() {
 
 # This function performs initial actions such as set traps (script-hardening).
 function init() {
-    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
-    local TEXT="==== START logs for script $PROGRAM_ID ====
-Started ($PROGRAM_ID $* as $USER)."
+    local TEXT="==== START logs for script $PROGRAM_NAME ====
+Started ($PROGRAM_NAME $* as $USER)."
     local -g  ERREXIT=true
-    local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_ID"
+    local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     local -g  OPTION_GUI=false
     local -g  KZ_PID_FILE=''
     local -g  RC=$OK
@@ -242,18 +240,17 @@ function process_options() {
 
 # This function shows the available help.
 function process_option_help() {
-    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT=''
     local YELP_MAN_URL=''
 
     if [[ ${DISPLAY-} ]]; then
         YELP_MAN_URL="$(gettext ', or see the ')"
-        YELP_MAN_URL+="\033]8;;man:$PROGRAM_ID\033\\$PROGRAM_ID "
+        YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
     fi
 
-    TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --manual' or 'man \
-\$PROGRAM_NAME'\$YELP_MAN_URL for more information.")"
+    TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \
+\$DISPLAY_NAME'\$YELP_MAN_URL for more information.")"
     infomsg "$HELP
 
 $TEXT"
@@ -262,12 +259,10 @@ $TEXT"
 
 # This function displays the manual page.
 function process_option_manual() {
-    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
-
     if [[ ${DISPLAY-} ]]; then
-        yelp man:"$PROGRAM_ID" 2> /dev/null
+        yelp man:"$PROGRAM_NAME" 2> /dev/null
     else
-        man --pager=cat "$PROGRAM_NAME"
+        man --pager=cat "$DISPLAY_NAME"
     fi
 }
 
@@ -276,7 +271,7 @@ function process_option_manual() {
 function process_option_usage() {
     local TEXT=''
 
-    TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --help' for more information.")"
+    TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
     infomsg "$USAGE
 
 $TEXT"
@@ -314,14 +309,13 @@ function term_sig() {
     local COMMAND=$4
     local -i RC=$5
 
-    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local RC_DESC=''
     local STATUS=$RC/error
     local TEXT=''
     local -i RC_DESC_SIGNALNO=0
 
     rm --force "$KZ_PID_FILE"
-    if [[ $PROGRAM_ID = 'kz-get' ]]; then
+    if [[ $PROGRAM_NAME = 'kz-get' ]]; then
         logmsg "Delete getkz files ($MODULE_NAME)..."
         rm --force getkz getkz.{1..99}
         logmsg "Deleted getkz files ($MODULE_NAME)."
@@ -399,7 +393,7 @@ $COMMAND, code: $RC ($RC_DESC)."
         err )
             if $ERREXIT; then
                 TEXT="
-$(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
+$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
                 errmsg "$TEXT"
             fi
             exit "$RC"
@@ -413,7 +407,7 @@ $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
             ;;
         * )
             TEXT="
-$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")"
+$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             errmsg "$TEXT"
             exit "$RC"
             ;;

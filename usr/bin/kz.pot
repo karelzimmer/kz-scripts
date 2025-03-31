@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-25 10:09+0100\n"
+"POT-Creation-Date: 2025-03-28 18:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,14 +51,14 @@ msgid "Already performed by the administrator."
 msgstr ""
 
 #, sh-format
-msgid "Program $PROGRAM_ID encountered an error."
+msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
 msgid "Unknown package manager."
 msgstr ""
 
 #, sh-format
-msgid "Program $PROGRAM_ID has been interrupted."
+msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
 
 msgid ""
@@ -74,12 +74,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Type '$PROGRAM_NAME --manual' or 'man $PROGRAM_NAME'$YELP_MAN_URL for more "
+"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$YELP_MAN_URL for more "
 "information."
 msgstr ""
 
 #, sh-format
-msgid "Type '$PROGRAM_NAME --help' for more information."
+msgid "Type '$DISPLAY_NAME --help' for more information."
 msgstr ""
 
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
@@ -294,7 +294,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Use \"journalctl --boot --id=$PROGRAM_ID\" in Terminal to view log messages."
+"Use \"journalctl --boot --id=$PROGRAM_NAME\" in Terminal to view log "
+"messages."
 msgstr ""
 
 msgid "Try creating the back up again."

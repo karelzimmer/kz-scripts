@@ -19,9 +19,10 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz backup'
+readonly PROGRAM_NAME='kz-backup'
 PROGRAM_DESC=$(gettext 'Backup home folder')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE="$(eval_gettext "Usage: kz backup [-g|--gui] [-t|--target <directory>]
                  \$OPTIONS_USAGE")"
@@ -71,7 +72,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$PROGRAM_NAME"                     \
+                --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -94,7 +95,7 @@ function process_x_options() {
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
                     TEXT=\
-"$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
+"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -104,7 +105,7 @@ $USAGE"
                 ;;
             -t | --target )
                 if $OPTION_TARGET; then
-                    TEXT="$PROGRAM_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -124,7 +125,7 @@ $USAGE"
     done
 
     if [[ $* ]]; then
-        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -144,7 +145,7 @@ function check_target() {
     if $OPTION_TARGET; then
 
         if ! [[ -d $TARGET_ARGUMENT ]]; then
-            TEXT="$PROGRAM_NAME: $TARGET_ARGUMENT: \
+            TEXT="$DISPLAY_NAME: $TARGET_ARGUMENT: \
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"
@@ -449,7 +450,6 @@ function backup_setting_favs() {
 # This function creates the backup.
 function create_backup() {
     local EXCLUDE_FILE=''
-    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT=''
     local TITLE=''
     local -i BACKUP_RC=0
@@ -535,7 +535,7 @@ Some files may not be readable, or
 were any files added or removed while creating the backup, or
 is there not enough space on \$TARGET.")
 
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_ID\" in Terminal to \
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
 view log messages.")
 
 $(gettext "Try creating the back up again.")"

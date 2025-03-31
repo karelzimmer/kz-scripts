@@ -19,9 +19,10 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz setup'
+readonly PROGRAM_NAME='kz-setup'
 PROGRAM_DESC=$(gettext 'Set up apps')
 readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE=$(eval_gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
                 [-f|--file <file>] [-g|--gui] [-r|--reset]
@@ -116,7 +117,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$PROGRAM_NAME"                     \
+                --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -150,7 +151,7 @@ function process_x_options() {
                 ;;
             -f | --file )
                 if $OPTION_FILE; then
-                    TEXT="$PROGRAM_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -162,7 +163,7 @@ $USAGE"
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
                     TEXT=\
-"$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
+"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -303,7 +304,7 @@ function process_file_by_app() {
 
     if $NO_APP_MATCH; then
         APP_NOT_FOUND=true
-        TEXT="$PROGRAM_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
+        TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
         rm --verbose "$COMMAND_FILE" |& $LOGCMD
         infomsg "$TEXT"
     fi
@@ -356,7 +357,6 @@ function process_option_cat() {
 # This function starts setting up the apps.
 function setup_apps() {
     local NO_COMMANDS_FOUND=true
-    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT=''
     local TITLE=''
     local -i APP_TOT_NUM=0
@@ -398,7 +398,7 @@ function setup_apps() {
         TEXT="$(gettext "The set up of the following apps contains errors:")
 ${FAILED_APPS[*]}
 
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_ID\" in Terminal to \
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
 view log messages.")
 
 $(gettext "Try to set up the apps again.")"
