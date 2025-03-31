@@ -252,7 +252,7 @@ function capture_gnome_changes() {
     local CONFIG_B_FILE=''
     local TEXT=''
 
-    CONFIG_A_FILE=$(mktemp -t "kz-desktop-config-a-XXXXXXXXXX")
+    CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
     save_configuration_database A "$CONFIG_A_FILE"
 
     TEXT=$(gettext 'Now make the change in the desktop environment.')
@@ -260,7 +260,7 @@ function capture_gnome_changes() {
 
     wait_for_enter
 
-    CONFIG_B_FILE=$(mktemp -t "kz-desktop-config-b-XXXXXXXXXX")
+    CONFIG_B_FILE=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
     save_configuration_database B "$CONFIG_B_FILE"
 
     report_database_changes "$CONFIG_A_FILE" "$CONFIG_B_FILE"

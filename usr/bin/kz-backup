@@ -209,7 +209,7 @@ Please rename to:           <username>@<hostname>")"
         exit $ERR
     fi
 
-    if [[ -e $TARGET_MEDIUM/kz-backup-$HOSTNAME-$USER ]]; then
+    if [[ -e $TARGET_MEDIUM/$PROGRAM_NAME-$HOSTNAME-$USER ]]; then
         TEXT="$(gettext "Backup found with old name: \
 kz-backup-<hostname>-<username>
 Please rename to:           <username>@<hostname>")"
@@ -454,7 +454,7 @@ function create_backup() {
     local TITLE=''
     local -i BACKUP_RC=0
 
-    EXCLUDE_FILE=$(mktemp -t "kz-backup-excludes-XXXXXXXXXX")
+    EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-excludes-XXXXXXXXXX")
 
     cat << EOF > "$EXCLUDE_FILE"
 # Exclude Git-managed directories.

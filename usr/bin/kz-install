@@ -68,7 +68,7 @@ readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,remove'
 # This function performs the script actions, such as checking the input.
 function process() {
     local COMMAND_FILE=''
-    local INSTALL_FILE=/usr/bin/kz-install.sh
+    local INSTALL_FILE=/usr/bin/$PROGRAM_NAME.sh
     local TEXT=''
 
     check_input "$@"
@@ -94,7 +94,7 @@ function process() {
         exit $OK
     fi
 
-    COMMAND_FILE=$(mktemp -t "kz-install-commands-XXXXXXXXXX")
+    COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 
     if $ARGUMENT_APPS; then
         process_argument_app
