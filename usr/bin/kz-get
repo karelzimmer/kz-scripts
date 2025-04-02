@@ -193,6 +193,10 @@ function term() {
     rm --verbose "$KZ_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
 
+    logmsg "Delete getkz files ($PROGRAM_NAME)..."
+    rm --force --verbose getkz getkz.{1..99} |& $LOGCMD
+    logmsg "Deleted getkz files ($PROGRAM_NAME)."
+
     TEXT="
 $(gettext "Package kz has been successfully installed.
 
@@ -206,13 +210,6 @@ Linux.")"
 $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "$TEXT"
-
-    logmsg "Delete getkz files ($PROGRAM_NAME)..."
-    rm  --force         \
-        --verbose       \
-        getkz           \
-        getkz.{1..99}   |& $LOGCMD
-    logmsg "Deleted getkz files ($PROGRAM_NAME)."
 
     exit $OK
 }
