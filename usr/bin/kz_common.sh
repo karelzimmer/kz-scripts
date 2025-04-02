@@ -20,6 +20,7 @@ source /usr/bin/gettext.sh
 # Constants
 ###############################################################################
 
+# shellcheck disable=SC2034
 readonly MODULE_NAME='kz_common.sh'
 MODULE_DESC=$(gettext 'Common module for shell scripts')
 # shellcheck disable=SC2034
@@ -314,11 +315,11 @@ function term_sig() {
     local TEXT=''
     local -i RC_DESC_SIGNALNO=0
 
-    rm --force "$KZ_PID_FILE"
+    rm --force --verbose "$KZ_PID_FILE" |& $LOGCMD
     if [[ $PROGRAM_NAME = 'kz-get' ]]; then
-        logmsg "Delete getkz files ($MODULE_NAME)..."
-        rm --force getkz getkz.{1..99}
-        logmsg "Deleted getkz files ($MODULE_NAME)."
+        logmsg "Delete getkz files..."
+        rm --force --verbose getkz getkz.{1..99} |& $LOGCMD
+        logmsg "Deleted getkz files."
     fi
 
     case $RC in
