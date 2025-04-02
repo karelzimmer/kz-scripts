@@ -248,8 +248,6 @@ function process_OPTION_RESET () {
 
 # This function records a change made through the desktop environment.
 function capture_gnome_changes() {
-    local KZ_CONFIG_A_FILE=''
-    local KZ_CONFIG_B_FILE=''
     local TEXT=''
 
     KZ_CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
