@@ -248,22 +248,22 @@ function process_OPTION_RESET () {
 
 # This function records a change made through the desktop environment.
 function capture_gnome_changes() {
-    local CONFIG_A_FILE=''
-    local CONFIG_B_FILE=''
+    local KZ_CONFIG_A_FILE=''
+    local KZ_CONFIG_B_FILE=''
     local TEXT=''
 
-    CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
-    save_configuration_database A "$CONFIG_A_FILE"
+    KZ_CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
+    save_configuration_database A "$KZ_CONFIG_A_FILE"
 
     TEXT=$(gettext 'Now make the change in the desktop environment.')
     infomsg "$TEXT"
 
     wait_for_enter
 
-    CONFIG_B_FILE=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
-    save_configuration_database B "$CONFIG_B_FILE"
+    KZ_CONFIG_B_FILE=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
+    save_configuration_database B "$KZ_CONFIG_B_FILE"
 
-    report_database_changes "$CONFIG_A_FILE" "$CONFIG_B_FILE"
+    report_database_changes "$KZ_CONFIG_A_FILE" "$KZ_CONFIG_B_FILE"
 }
 
 

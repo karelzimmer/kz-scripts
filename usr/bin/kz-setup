@@ -69,7 +69,6 @@ readonly ON='on'
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    local COMMAND_FILE=''
     local SETUP_FILE=/usr/bin/$PROGRAM_NAME.sh
     local TEXT=''
 
@@ -95,7 +94,7 @@ function process() {
         exit $OK
     fi
 
-    COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
+    KZ_COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 
     if $ARGUMENT_APP; then
         process_argument_app
@@ -285,20 +284,20 @@ function process_file_by_app() {
                 # Matching app record.
                 APP_MATCH=true
                 NO_APP_MATCH=false
-                printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
+                printf '%s\n' "$INPUT_RECORD" >> "$KZ_COMMAND_FILE"
                 ;;
             '#'*$SETUP*$ON* | '#'*$RESET*$ON* )
                 # Mismatched app record.
                 # Add empty seperator line between the setup of apps.
                 if $APP_MATCH; then
-                    printf '\n' >> "$COMMAND_FILE"
+                    printf '\n' >> "$KZ_COMMAND_FILE"
                 fi
                 APP_MATCH=false
                 ;;
             * )
                 if $APP_MATCH; then
                     # Record for command file.
-                    printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
+                    printf '%s\n' "$INPUT_RECORD" >> "$KZ_COMMAND_FILE"
                 fi
                 ;;
         esac
@@ -327,20 +326,20 @@ function process_file_by_user() {
             '#'*$SETUP*$ON*'*' | '#'*$SETUP*$ON*$HOSTNAME* )
                 # Matching app record.
                 HOST_MATCH=true
-                printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
+                printf '%s\n' "$INPUT_RECORD" >> "$KZ_COMMAND_FILE"
                 ;;
             '#'*$SETUP*$ON* | '#'*$RESET*$ON* )
                 # Mismatched app record.
                 # Add empty seperator line between the setup of apps.
                 if $HOST_MATCH; then
-                    printf '\n' >> "$COMMAND_FILE"
+                    printf '\n' >> "$KZ_COMMAND_FILE"
                 fi
                 HOST_MATCH=false
                 ;;
             * )
                 if $HOST_MATCH; then
                     # Record for command file.
-                    printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
+                    printf '%s\n' "$INPUT_RECORD" >> "$KZ_COMMAND_FILE"
                 fi
                 ;;
         esac
@@ -350,7 +349,7 @@ function process_file_by_user() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    less --no-init --quit-if-one-screen "$COMMAND_FILE"
+    less --no-init --quit-if-one-screen "$KZ_COMMAND_FILE"
 }
 
 
@@ -362,7 +361,7 @@ function setup_apps() {
     local -i APP_TOT_NUM=0
     local -A FAILED_APPS=()
 
-    APP_TOT_NUM=$(grep --count "#.*$SETUP.*$ON" "$COMMAND_FILE" || true)
+    APP_TOT_NUM=$(grep --count "#.*$SETUP.*$ON" "$KZ_COMMAND_FILE" || true)
     if [[ $APP_TOT_NUM -eq 0 ]]; then
         return $OK
     fi
@@ -450,7 +449,7 @@ function process_command_file() {
                 execute_command "$COMMAND_RECORD"
                 ;;
         esac
-    done < "$COMMAND_FILE"
+    done < "$KZ_COMMAND_FILE"
 }
 
 

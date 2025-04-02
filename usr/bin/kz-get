@@ -144,7 +144,6 @@ function prepare_processing() {
 function install_deb_package() {
     local KZ_DEB_SITE_FILE="\
 https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
-    local KZ_DEB_LOCAL_FILE=''
 
     KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 

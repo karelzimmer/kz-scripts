@@ -449,14 +449,13 @@ function backup_setting_favs() {
 
 # This function creates the backup.
 function create_backup() {
-    local EXCLUDE_FILE=''
     local TEXT=''
     local TITLE=''
     local -i BACKUP_RC=0
 
-    EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-excludes-XXXXXXXXXX")
+    KZ_EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-excludes-XXXXXXXXXX")
 
-    cat << EOF > "$EXCLUDE_FILE"
+    cat << EOF > "$KZ_EXCLUDE_FILE"
 # Exclude Git-managed directories.
 $(
     find    "$HOME"         \
@@ -475,25 +474,26 @@ EOF
 
     if $OPTION_GUI; then
         logmsg "$TITLE..."
-        rsync   --archive                       \
-                --acls                          \
-                --xattrs                        \
-                --verbose                       \
-                --delete                        \
-                --exclude-from="$EXCLUDE_FILE"  \
-                --delete-excluded               \
-                "$HOME"/                        \
-                "$TARGET"/                      \
-                2> >($LOGCMD)                   |
-        sed     --expression='s/^/#/'           |
-        zenity  --progress                      \
-                --auto-close                    \
-                --no-cancel                     \
-                --pulsate                       \
-                --width     600                 \
-                --height    50                  \
-                --title     "$TITLE"            \
-                --text      "$TEXT"             2> /dev/null || BACKUP_RC=$?
+        rsync   --archive                           \
+                --acls                              \
+                --xattrs                            \
+                --verbose                           \
+                --delete                            \
+                --exclude-from="$KZ_EXCLUDE_FILE"   \
+                --delete-excluded                   \
+                "$HOME"/                            \
+                "$TARGET"/                          \
+                2> >($LOGCMD)                       |
+        sed     --expression='s/^/#/'               |
+        zenity  --progress                          \
+                --auto-close                        \
+                --no-cancel                         \
+                --pulsate                           \
+                --width     600                     \
+                --height    50                      \
+                --title     "$TITLE"                \
+                --text      "$TEXT"                 \
+                2> /dev/null                        || BACKUP_RC=$?
     else
         TEXT+='...'
         infomsg "$TEXT"
@@ -503,7 +503,7 @@ EOF
                 --verbose                       \
                 --human-readable                \
                 --delete                        \
-                --exclude-from="$EXCLUDE_FILE"  \
+                --exclude-from="$KZ_EXCLUDE_FILE"  \
                 --delete-excluded               \
                 "$HOME"/                        \
                 "$TARGET"/                      2> /dev/null || BACKUP_RC=$?

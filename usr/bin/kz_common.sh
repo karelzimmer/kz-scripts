@@ -171,12 +171,12 @@ function infomsg() {
 function init() {
     local TEXT="==== START logs for script $PROGRAM_NAME ====
 Started ($PROGRAM_NAME $* as $USER)."
-    local -g  COMMAND_FILE=''
-    local -g  CONFIG_A_FILE=''
-    local -g  CONFIG_B_FILE=''
     local -g  ERREXIT=true
-    local -g  EXCLUDE_FILE=''
+    local -g  KZ_COMMAND_FILE=''
+    local -g  KZ_CONFIG_A_FILE=''
+    local -g  KZ_CONFIG_B_FILE=''
     local -g  KZ_DEB_LOCAL_FILE=''
+    local -g  KZ_EXCLUDE_FILE=''
     local -g  KZ_PID_FILE=''
     local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     local -g  OPTION_GUI=false
@@ -317,11 +317,11 @@ function term_sig() {
         --verbose               \
         getkz                   \
         getkz.{1..99}           \
+        "$KZ_COMMAND_FILE"      \
+        "$KZ_CONFIG_A_FILE"     \
+        "$KZ_CONFIG_B_FILE"     \
         "$KZ_DEB_LOCAL_FILE"    \
-        "$COMMAND_FILE"         \
-        "$CONFIG_A_FILE"        \
-        "$CONFIG_B_FILE"        \
-        "$EXCLUDE_FILE"         \
+        "$KZ_EXCLUDE_FILE"      \
         "$KZ_PID_FILE"          |& $LOGCMD
 
     case $RC in
