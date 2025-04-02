@@ -307,12 +307,17 @@ function term_sig() {
     local TEXT=''
     local -i RC_DESC_SIGNALNO=0
 
-    rm --force --verbose "$KZ_PID_FILE" |& $LOGCMD
-    if [[ $PROGRAM_NAME = 'kz-get' ]]; then
-        logmsg "Delete getkz files..."
-        rm --force --verbose getkz getkz.{1..99} |& $LOGCMD
-        logmsg "Deleted getkz files."
-    fi
+    # Cleanup temporary files.
+    rm  --force                 \
+        --verbose               \
+        getkz                   \
+        getkz.{1..99}           \
+        "$KZ_DEB_LOCAL_FILE"    \
+        "$COMMAND_FILE"         \
+        "$CONFIG_A_FILE"        \
+        "$CONFIG_B_FILE"        \
+        "$EXCLUDE_FILE"         \
+        "$KZ_PID_FILE"          |& $LOGCMD
 
     case $RC in
         0 )

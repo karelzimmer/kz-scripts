@@ -307,7 +307,6 @@ function process_file_by_app() {
     if $NO_APP_MATCH; then
         APP_NOT_FOUND=true
         TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
-        rm --verbose "$COMMAND_FILE" |& $LOGCMD
         infomsg "$TEXT"
     fi
 }
@@ -352,7 +351,6 @@ function process_file_by_user() {
 # This function displays the contents of the command file.
 function process_option_cat() {
     less --no-init --quit-if-one-screen "$COMMAND_FILE"
-    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
@@ -407,8 +405,6 @@ $(gettext "Try to set up the apps again.")"
         errmsg "$TEXT"
         exit $ERR
     fi
-
-    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 

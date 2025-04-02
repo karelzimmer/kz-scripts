@@ -267,7 +267,6 @@ function process_argument_app() {
     if $APP_NOT_FOUND; then
         TEXT="$(gettext "Type 'kz install --apps' for available apps.")"
         infomsg "$TEXT"
-        rm --verbose "$COMMAND_FILE" |& $LOGCMD
         exit $ERR
     fi
 }
@@ -357,7 +356,6 @@ function process_file_by_host() {
 # This function displays the contents of the command file.
 function process_option_cat() {
     less --no-init --quit-if-one-screen "$COMMAND_FILE"
-    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
@@ -413,8 +411,6 @@ $(gettext "Try installing the apps again.")"
         errmsg "$TEXT"
         exit $ERR
     fi
-
-    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
