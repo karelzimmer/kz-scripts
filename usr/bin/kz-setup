@@ -486,7 +486,7 @@ function execute_command() {
 
 # This function controls the termination of the script.
 function term() {
-    local OPERATION
+    local OPERATION=''
     local TEXT=''
 
     OPERATION=$(gettext 'set up')
