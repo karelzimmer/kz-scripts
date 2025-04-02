@@ -96,7 +96,7 @@ def perform_deb_update() -> None:
     COMMAND: str = 'sudo apt-get update'
     perform_command(COMMAND)
 
-    COMMAND = 'sudo apt-get upgrade --assume-yes'
+    COMMAND = 'sudo apt-get dist-upgrade --assume-yes'
     perform_command(COMMAND)
 
     if subprocess.run('type snap', executable='bash',
