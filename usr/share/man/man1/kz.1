@@ -53,15 +53,19 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value is not
+equal to 0.
 .\"
 .\"
-.SH KZ COMMANDS
+.SH NOTES
 .sp
-kz's commands are divided into high-level commands ("porcelain") and low-level
-commands ("plumbing").
-.\"
-.\"
-.SH HIGH-LEVEL COMMANDS (PORCELAIN)
+\fBkz\fR's commands are divided into high-level commands ("porcelain") and
+low-level commands ("plumbing").
+.sp
+.LP
+\fBHigh-level commands (porcelain)\fR
+.br
 These commands can be executed in a desktop environment with the Install menu
 or by searching for the command, and in the Terminal window.
 .TP
@@ -82,9 +86,10 @@ Set up apps.
 .TP
 \fBkz-wifi\fR(1)
 Show WiFi information.
-.\"
-.\"
-.SH LOW-LEVEL COMMANDS (PLUMBING)
+.sp
+.LP
+\fBLow-level commands (plumbing)\fR
+.br
 These commands can only be run in the Terminal window and are supporting the
 management and use of kz and Linux.
 .TP
@@ -120,15 +125,7 @@ Git status of all local branches in the home directory.
 .TP
 \fBrchecklink\fR
 Reverse checklink.
-.\"
-.\"
-.SH EXIT STATUS
-Normally exit value 0 is returned; if an error occurs, the exit value is not
-equal to 0.
-.\"
-.\"
-.SH NOTES
-.sp
+.LP
 Package \fBkz\fR implements and with the documents and scripts supports for:
 .br
 \fB1. IaC\fR
