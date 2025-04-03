@@ -4,19 +4,16 @@
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
-.\"
+
 .TH "KZ-DEV" "1" "4.2.1" "kz" "User commands"
-.\"
-.\"
+
 .SH NAME
 kz-dev \- Build development environment
-.\"
-.\"
+
 .SH SYNOPSIS
 .B kz dev
 [<options>]
-.\"
-.\"
+
 .SH DESCRIPTION
 \fBkz dev\fR builds the development environment for the kz package and the
 website https://karelzimmer.nl.
@@ -32,8 +29,7 @@ With command \fBkz deploy\fR the package kz and the website can be placed on
 the internet.
 .sp
 Command \fBkz dev\fR can only be run in a desktop environment.
-.\"
-.\"
+
 .SH OPTIONS
 .TP
 \fB-h\fR, \fB--help\fR
@@ -47,13 +43,11 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
-.\"
-.\"
+
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
-.\"
-.\"
+
 .SH FILES
 ~/kz-deb/src/*
 .RS
@@ -112,8 +106,7 @@ Git status of all local branches in the home directory.
 .RS
 Debian package kz.
 .RE
-.\"
-.\"
+
 .SH NOTES
 .IP " 1." 4
 CI/CD and Day 0 Operations
@@ -121,8 +114,7 @@ CI/CD and Day 0 Operations
 \fBkz dev\fR is mainly used for \fBCI/CD\fR and \fBDay 0 Operations\fR. See
 \fBkz\fR(1) for an explanation.
 .RE
-.\"
-.\"
+
 .SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),

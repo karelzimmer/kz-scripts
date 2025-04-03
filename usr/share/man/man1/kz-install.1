@@ -4,19 +4,16 @@
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
-.\"
+
 .TH "KZ-INSTALL" "1" "4.2.1" "kz" "User commands"
-.\"
-.\"
+
 .SH NAME
 kz-install \- Install apps
-.\"
-.\"
+
 .SH SYNOPSIS
 .B kz install
 [<options>] [--] [\fI<app>\fR...]
-.\"
-.\"
+
 .SH DESCRIPTION
 \fBkz install\fR installs apps and changes system settings.
 .sp
@@ -75,8 +72,7 @@ can try the following:
 On a Red Hat-based system try the following:
     sudo dnf clean all
     sudo dnf makecache
-.\"
-.\"
+
 .sp
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
@@ -117,13 +113,11 @@ Show the version, author, and copyright.
 .TP
 \fB--\fR
 Signals the end of options and disables further option processing.
-.\"
-.\"
+
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
-.\"
-.\"
+
 .SH FILES
 /usr/bin/kz-install.sh
 .RS
@@ -139,8 +133,7 @@ Command file, e.g. kz-install-commands-SYpGEKVWZI.
 .RS
 Instructions for adding additional users.
 .RE
-.\"
-.\"
+
 .SH NOTES
 .IP " 1." 4
 Checklist install
@@ -159,8 +152,7 @@ IaC and Day 1 Operations
 \fBkz install\fR is mainly used for \fBIaC\fR and \fBDay 1 Operations\fR. See
 \fBkz\fR(1) for an explanation.
 .RE
-.\"
-.\"
+
 .SH EXAMPLES
 .sp
 \fBkz install\fR
@@ -188,8 +180,7 @@ Show install commands for Google Chrome.
 .RS
 Show remove commands for Google Chrome.
 .RE
-.\"
-.\"
+
 .SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),

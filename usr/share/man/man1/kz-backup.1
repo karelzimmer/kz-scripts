@@ -4,19 +4,16 @@
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
-.\"
+
 .TH "KZ-BACKUP" "1" "4.2.1" "kz" "User commands"
-.\"
-.\"
+
 .SH NAME
 kz-backup \- Backup home folder
-.\"
-.\"
+
 .SH SYNOPSIS
 .B kz backup
 [<options>]
-.\"
-.\"
+
 .SH DESCRIPTION
 \fBkz backup\fR makes a backup copy of the Home folder.
 .sp
@@ -46,8 +43,7 @@ Files deleted from the Home folder are also removed from the backup (rsync's
 --delete option is used).
 .sp
 With command \fBkz restore\fR the Home folder can be restored.
-.\"
-.\"
+
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
 .TP
@@ -69,13 +65,11 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
-.\"
-.\"
+
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
-.\"
-.\"
+
 .SH FILES
 ~/Settings/apps.txt
 .RS
@@ -121,8 +115,7 @@ Saved WiFi information.
 .RS
 Exclude file, e.g. kz-backup-excludes-4VkzCfrDsU.
 .RE
-.\"
-.\"
+
 .SH NOTES
 .IP " 1." 4
 Checklist install
@@ -135,8 +128,7 @@ Day 2 Operations
 \fBkz backup\fR is mainly used for Day 2 Operations. See \fBkz\fR(1) for an
 explanation.
 .RE
-.\"
-.\"
+
 .SH EXAMPLES
 .sp
 \fBkz backup\fR
@@ -151,8 +143,7 @@ environment.
 Back up the Home folder of John on pc02 to /media/john/usbstick in the folder
 john@pc02 (this folder will be created as needed).
 .RE
-.\"
-.\"
+
 .SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),

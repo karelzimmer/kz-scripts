@@ -4,19 +4,16 @@
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
-.\"
+
 .TH "KZ-BUILD" "1" "4.2.1" "kz" "User commands"
-.\"
-.\"
+
 .SH NAME
 kz-build \- Build website including kz packages
-.\"
-.\"
+
 .SH SYNOPSIS
 .B kz build
 [<options>]
-.\"
-.\"
+
 .SH DESCRIPTION
 \fBkz build\fR builds the Debain and RPM package kz and the website
 https://karelzimmer.nl.
@@ -78,8 +75,7 @@ PolicyKit action definition files (nl.karelzimmer.kz*.policy)
 .RE
 .sp
 Command \fBkz build\fR can only be run in a desktop environment.
-.\"
-.\"
+
 .SH OPTIONS
 .TP
 \fB-h\fR, \fB--help\fR
@@ -93,13 +89,11 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
-.\"
-.\"
+
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
-.\"
-.\"
+
 .SH FILES
 ~/kz-deb/src/*
 .RS
@@ -168,8 +162,7 @@ Build ID file.
 .RS
 Downloaded debian file, e.g. kz-build-Ocxpm2bJgl.deb.
 .RE
-.\"
-.\"
+
 .SH NOTES
 .IP " 1." 4
 CI/CD and Day 1 Operations
@@ -177,8 +170,7 @@ CI/CD and Day 1 Operations
 \fBkz build\fR is mainly used for \fBCI/CD\fR and \fBDay 1 Operations\fR. See
 \fBkz\fR(1) for an explanation.
 .RE
-.\"
-.\"
+
 .SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),

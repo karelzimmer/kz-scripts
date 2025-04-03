@@ -4,19 +4,16 @@
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
-.\"
+
 .TH "KZ-DEPLOY" "1" "4.2.1" "kz" "User commands"
-.\"
-.\"
+
 .SH NAME
 kz-deploy \- Distribute website including kz packages
-.\"
-.\"
+
 .SH SYNOPSIS
 .B kz deploy
 [<options>]
-.\"
-.\"
+
 .SH DESCRIPTION
 \fBkz deploy\fR builds and distributes package kz and the website.
 .sp
@@ -29,8 +26,7 @@ With command \fBkz dev\fR the development environment (website plus package kz)
 can be placed on the local computer.
 .sp
 Command \fBkz deploy\fR can only be run in a desktop environment.
-.\"
-.\"
+
 .SH OPTIONS
 .TP
 \fB-h\fR, \fB--help\fR
@@ -44,13 +40,11 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
-.\"
-.\"
+
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
-.\"
-.\"
+
 .SH FILES
 ~/kz-deb/src/*
 .RS
@@ -94,8 +88,7 @@ Distribution files website karelzimmer.nl.
 .RS
 Debian package kz.
 .RE
-.\"
-.\"
+
 .SH NOTES
 .IP " 1." 4
 CI/CD and Day 1 Operations
@@ -103,8 +96,7 @@ CI/CD and Day 1 Operations
 \fBkz deploy\fR is mainly used for \fBCI/CD\fR and \fBDay 1 Operations\fR. See
 \fBkz\fR(1) for an explanation.
 .RE
-.\"
-.\"
+
 .SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
