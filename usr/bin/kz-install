@@ -67,6 +67,7 @@ readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,remove'
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    local COMMAND_FILE=''
     local INSTALL_FILE=/usr/bin/$PROGRAM_NAME.sh
     local TEXT=''
 
@@ -93,7 +94,7 @@ function process() {
         exit $OK
     fi
 
-    KZ_COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
+    COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 
     if $ARGUMENT_APPS; then
         process_argument_app
@@ -107,7 +108,7 @@ function process() {
     fi
 
     if [[ $UID -ne 0 ]]; then
-        rm --verbose "$KZ_COMMAND_FILE" |& $LOGCMD
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
     fi
     become_root
     install_apps
@@ -266,6 +267,7 @@ function process_argument_app() {
     if $APP_NOT_FOUND; then
         TEXT="$(gettext "Type 'kz install --apps' for available apps.")"
         infomsg "$TEXT"
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
         exit $ERR
     fi
 }
@@ -289,20 +291,20 @@ function process_file_by_app() {
                 # Matching app record.
                 APP_MATCH=true
                 NO_APP_MATCH=false
-                printf '%s\n' "$INPUT_RECORD" >> "$KZ_COMMAND_FILE"
+                printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
             '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
                 # Add empty seperator line between the installation of apps.
                 if $APP_MATCH; then
-                    printf '\n' >> "$KZ_COMMAND_FILE"
+                    printf '\n' >> "$COMMAND_FILE"
                 fi
                 APP_MATCH=false
                 ;;
             * )
                 if $APP_MATCH; then
                     # Record for command file.
-                    printf '%s\n' "$INPUT_RECORD" >> "$KZ_COMMAND_FILE"
+                    printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
                 ;;
         esac
@@ -331,20 +333,20 @@ function process_file_by_host() {
             '#'*$INSTALL*$ON*'*' | '#'*$INSTALL*$ON*$HOSTNAME* )
                 # Matching app record.
                 HOST_MATCH=true
-                printf '%s\n' "$INPUT_RECORD" >> "$KZ_COMMAND_FILE"
+                printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
             '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
                 # Add empty seperator line between the installation of apps.
                 if $HOST_MATCH; then
-                    printf '\n' >> "$KZ_COMMAND_FILE"
+                    printf '\n' >> "$COMMAND_FILE"
                 fi
                 HOST_MATCH=false
                 ;;
             * )
                 if $HOST_MATCH; then
                     # Record for command file.
-                    printf '%s\n' "$INPUT_RECORD" >> "$KZ_COMMAND_FILE"
+                    printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
                 ;;
         esac
@@ -354,7 +356,8 @@ function process_file_by_host() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    less --no-init --quit-if-one-screen "$KZ_COMMAND_FILE"
+    less --no-init --quit-if-one-screen "$COMMAND_FILE"
+    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
@@ -366,7 +369,7 @@ function install_apps() {
     local -i APP_TOT_NUM=0
     local -A FAILED_APPS=()
 
-    APP_TOT_NUM=$(grep --count "#.*$INSTALL.*$ON" "$KZ_COMMAND_FILE" || true)
+    APP_TOT_NUM=$(grep --count "#.*$INSTALL.*$ON" "$COMMAND_FILE" || true)
     if [[ $APP_TOT_NUM -eq 0 ]]; then
         return $OK
     fi
@@ -391,6 +394,8 @@ function install_apps() {
     else
         process_command_file
     fi
+
+    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 
     if $NO_COMMANDS_FOUND; then
         TEXT=$(gettext 'No commands to execute.' )
@@ -455,7 +460,7 @@ function process_command_file() {
                 execute_command "$COMMAND_RECORD"
                 ;;
         esac
-    done < "$KZ_COMMAND_FILE"
+    done < "$COMMAND_FILE"
 }
 
 

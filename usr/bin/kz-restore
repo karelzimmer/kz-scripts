@@ -234,8 +234,7 @@ function restore_backup() {
                 --width     600         \
                 --height    50          \
                 --title     "$TITLE"    \
-                --text      "$TEXT"     \
-                2> /dev/null            || RESTORE_RC=$?
+                --text      "$TEXT"     2> /dev/null || RESTORE_RC=$?
     else
         TEXT+='...'
         infomsg "$TEXT"

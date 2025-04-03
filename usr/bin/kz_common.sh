@@ -172,12 +172,6 @@ function init() {
     local TEXT="==== START logs for script $PROGRAM_NAME ====
 Started ($PROGRAM_NAME $* as $USER)."
     local -g  ERREXIT=true
-    local -g  KZ_COMMAND_FILE=''
-    local -g  KZ_CONFIG_A_FILE=''
-    local -g  KZ_CONFIG_B_FILE=''
-    local -g  KZ_DEB_LOCAL_FILE=''
-    local -g  KZ_EXCLUDE_FILE=''
-    local -g  KZ_PID_FILE=''
     local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     local -g  OPTION_GUI=false
     local -g  RC=$OK
@@ -312,17 +306,8 @@ function term_sig() {
     local TEXT=''
     local -i RC_DESC_SIGNALNO=0
 
-    # Cleanup temporary files.
-    rm  --force                 \
-        --verbose               \
-        getkz                   \
-        getkz.{1..99}           \
-        "$KZ_COMMAND_FILE"      \
-        "$KZ_CONFIG_A_FILE"     \
-        "$KZ_CONFIG_B_FILE"     \
-        "$KZ_DEB_LOCAL_FILE"    \
-        "$KZ_EXCLUDE_FILE"      \
-        "$KZ_PID_FILE"          |& $LOGCMD
+    # Clean up temporary files.
+    rm --force --verbose getkz getkz.{1..99} "kz-??????????.pid" |& $LOGCMD
 
     case $RC in
         0 )
