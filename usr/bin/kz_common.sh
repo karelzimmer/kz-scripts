@@ -307,7 +307,11 @@ function term_sig() {
     local -i RC_DESC_SIGNALNO=0
 
     # Clean up temporary files.
-    rm --force --verbose getkz getkz.{1..99} "kz-??????????.pid" |& $LOGCMD
+    rm  --force                     \
+        --verbose                   \
+        getkz                       \
+        getkz.{1..99}               \
+        "/tmp/kz-??????????.pid"    |& $LOGCMD
 
     case $RC in
         0 )
