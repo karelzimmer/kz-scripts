@@ -12,14 +12,14 @@
 # Install 1-disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
 if systemctl cat apport &> /dev/null; then sudo systemctl stop apport.service; fi
-if cat apport           &> /dev/null; then sudo systemctl disable apport.service; fi
-if cat apport           &> /dev/null; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
-if cat apport           &> /dev/null; then sudo rm --force --verbose /var/crash/*; fi
+if systemctl cat apport &> /dev/null; then sudo systemctl disable apport.service; fi
+if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
+if systemctl cat apport &> /dev/null; then sudo rm --force --verbose /var/crash/*; fi
 
 # Remove 1-disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
-if cat apport &> /dev/null; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
-if cat apport &> /dev/null; then sudo systemctl enable --now apport.service; fi
+if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
+if systemctl cat apport &> /dev/null; then sudo systemctl enable --now apport.service; fi
 
 
 # Install 2-update-system on *
