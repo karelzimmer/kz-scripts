@@ -408,6 +408,17 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get r
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
 
 
+# Install groff on pc06 pc07
+# Compose manual pages with GNU roff.
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes groff; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes groff; fi
+
+# Remove groff on pc06 pc07
+# Compose manual pages with GNU roff.
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes groff; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes groff; fi
+
+
 # Install handbrake on pc-van-emily
 # Video-dvd ripper and transcoder.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes handbrake; fi

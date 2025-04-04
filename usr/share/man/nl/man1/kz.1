@@ -11,8 +11,9 @@
 kz \- Opdracht uitvoeren
 
 .SH SAMENVATTING
-.B kz
+.SY kz
 \fI<opdracht>\fR [\fI<argumenten>\fR] [<opties>]
+.YS
 
 .SH BESCHRIJVING
 \fBkz\fR voert \fI<opdracht>\fR uit, geïnstalleerd door pakket kz, eventueel
@@ -59,8 +60,7 @@ afsluitwaarde ongelijk 0.
 De opdrachten van \fBkz\fR zijn verdeeld in opdrachten op hoog niveau
 ("porcelein") en opdrachten op laag niveau ("loodgieterswerk").
 .sp
-.LP
-\fBOpdrachten op hoog niveau (porcelein)\fR
+.SS Opdrachten op hoog niveau (porcelein)
 .br
 Deze opdrachten zijn uit te voeren in een desktopomgeving met het
 Installatiemenu of door te zoeken naar de opdracht, en in het Terminalvenster.
@@ -83,8 +83,7 @@ Apps instellen.
 \fBkz-wifi\fR(1)
 Wifi-informatie weergeven.
 .sp
-.LP
-\fBOpdrachten op laag niveau (loodgieterswerk)\fR
+.SS Opdrachten op laag niveau (loodgieterswerk)
 .br
 Deze opdrachten zijn alleen uit te voeren in het Terminalvenster en zijn
 ondersteunend voor het beheer en gebruik van kz en Linux.
@@ -121,8 +120,8 @@ Git status van alle lokale branches in de Persoonlijke map.
 .TP
 \fBrchecklink\fR
 Omgekeerde checklink.
-.LP
-Pakket \fBkz\fR geeft met de documenten en scripts invulling aan en
+.SS Modern
+Pakket \fBkz\fR geeft met de documenten en scripts invulling aan en biedt
 ondersteuning voor:
 .br
 \fB1. IaC\fR
@@ -220,6 +219,7 @@ Hier gaat de meeste aandacht uit naar het onderhouden, bewaken en optimaliseren
 Voorbeelden zijn \fBkz backup\fR en \fBkz update\fR.
 
 .SH VOORBEELDEN
+.EX
 \fBkz update\fR
 .RS
 Werk systeem bij.
@@ -234,6 +234,8 @@ Installeer Google Chrome.
 .RS
 Toon instel-opdrachten voor Google Chrome.
 .RE
+.EE
 
 .SH ZIE OOK
-\fBhttps://karelzimmer.nl\fR
+.UR https://karelzimmer.nl/en
+.UE
