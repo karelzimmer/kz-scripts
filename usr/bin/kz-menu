@@ -278,7 +278,7 @@ function process_menu1_choice2() {
 
     TEXT="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
-Checklist installation can be found on https://karelzimmer.nl/en, under Linux.
+Checklist installation can be found on https://karelzimmer.nl/en.
 
 Roughly boils down to:
 
