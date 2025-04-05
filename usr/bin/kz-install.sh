@@ -7,8 +7,6 @@
 ###############################################################################
 # Use "man kz-install.sh" to learn more about the format of this file.
 
-# The apps are listed in alphabetical order by app name.
-
 # Install 1-disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
 if systemctl cat apport &> /dev/null; then sudo systemctl stop apport.service; fi
