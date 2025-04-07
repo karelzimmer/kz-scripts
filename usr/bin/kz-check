@@ -80,6 +80,10 @@ function process() {
                 check_trailing_spaces
                 check_record_length
                 ;;
+            *.7 )
+                check_trailing_spaces
+                check_record_length
+                ;;
             *.desktop )
                 check_trailing_spaces
                 check_record_length
