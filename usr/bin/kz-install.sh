@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# Use "man kz-install.sh" to learn more about the format of this file.
+# Use "man 7 kz-install.sh" to learn more about the format of this file.
 
 # Install 1-disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
