@@ -336,10 +336,10 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 # This function tries to unmount the USB device.
 function term_usb() {
-    local DEV=''
+    local DEVICE=''
     local TEXT=''
 
-    DEV='/dev/'$(
+    DEVICE='/dev/'$(
         lsblk   --ascii             |
         grep    --before-context=1  \
                 "$SOURCE_MEDIUM"    |
@@ -348,7 +348,7 @@ function term_usb() {
                 --fields=2          |
         cut     --delimiter=' '     \
                 --fields=1
-    )
+        )
 
     TITLE=$(gettext 'Restore home folder')
     TEXT=$(gettext 'Disconnect the USB media')
@@ -377,9 +377,9 @@ function term_usb() {
 
 # This function unmounts the USB device.
 function term_unmount() {
-    umount "$SOURCE_MEDIUM"                     |& $LOGCMD || RC+=$?
-    udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
-    udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
+    umount "$SOURCE_MEDIUM"                         |& $LOGCMD || RC+=$?
+    udisksctl lock --block-device "$DEVICE"         |& $LOGCMD || RC+=$?
+    udisksctl power-off --block-device "$DEVICE"    |& $LOGCMD || RC+=$?
 }
 
 
