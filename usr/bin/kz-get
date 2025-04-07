@@ -38,16 +38,23 @@ PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: kz get \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: kz get [-d|--dev] \$OPTIONS_USAGE")
 readonly USAGE
 
-HELP="$(gettext "Usage: kz get [<options>]")
+X_OPTIONS_HELP=$(gettext '  -d, --dev      use the development version of kz')
+readonly X_OPTIONS_HELP
+
+HELP="$(gettext "Usage: kz get [-d|--dev] [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
+$X_OPTIONS_HELP
 $OPTIONS_HELP"
 readonly HELP
+
+readonly X_OPTIONS_SHORT='d'
+readonly X_OPTIONS_LONG=',dev'
 
 
 ###############################################################################
@@ -79,10 +86,10 @@ function check_input() {
     local -i RC=$OK
 
     PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+        getopt  --alternative                                       \
+                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
+                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
+                --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -102,6 +109,10 @@ function process_x_options() {
 
     while true; do
         case $1 in
+            -d | --dev )
+                OPTION_DEV=true
+                shift
+                ;;
             -- )
                 shift
                 break
@@ -142,11 +153,20 @@ function prepare_processing() {
 
 # This function downloads and installs Debian package kz.
 function install_deb_package() {
-    local KZ_DEB_SITE_FILE="\
+    local KZ_DEB_DEV_SITE_FILE="\
+https://karelzimmer.nl/assets/packages/kz-dev_4.2.1-1_all.deb"
+    local KZ_DEB_PRD_SITE_FILE="\
 https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     local KZ_DEB_LOCAL_FILE=''
+    local KZ_DEB_SITE_FILE=''
 
     KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+
+    if $OPTION_DEV; then
+        KZ_DEB_SITE_FILE=$KZ_DEB_DEV_SITE_FILE
+    else
+        KZ_DEB_SITE_FILE=$KZ_DEB_PRD_SITE_FILE
+    fi
 
     logmsg  'Download Debian package kz...'
     wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
@@ -171,12 +191,22 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
 
 # This function installs RPM package kz.
 function install_rpm_package() {
-    local KZ_RPM_SITE_FILE="\
+    local KZ_RPM_PRD_SITE_FILE="\
 https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
+    local KZ_RPM_DEV_SITE_FILE="\
+https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
+    local KZ_RPM_SITE_FILE=''
+    local KZ_RPM_SITE_FILE=''
     local MODE='install'
 
     if type kz &> /dev/null; then
         MODE='reinstall'
+    fi
+
+    if $OPTION_DEV; then
+        KZ_RPM_SITE_FILE=$KZ_RPM_DEV_SITE_FILE
+    else
+        KZ_RPM_SITE_FILE=$KZ_RPM_PRD_SITE_FILE
     fi
 
     logmsg 'Install RPM package kz...'
@@ -192,6 +222,14 @@ function term() {
     # Progress indicator ends like [====]100%.
     rm --verbose "$KZ_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
+
+    if $OPTION_DEV; then
+        TEXT="
+$(gettext "Please note: then development version of the kz package is \
+installed")
+"
+        errmsg "$TEXT"
+    fi
 
     TEXT="
 $(gettext "Package kz has been successfully installed.
@@ -215,6 +253,8 @@ $(gettext "Type 'exit' to close this window.")"
 ###############################################################################
 
 function main() {
+    local OPTION_DEV=false
+
     init    "$@"
     process "$@"
     term

@@ -21,6 +21,9 @@ kz.
 .sp
 The built Debian package, kz, will then be installed locally.
 .sp
+If the development repositories are not on main or not clean, a development
+version will be created (kz-dev-....).
+.sp
 This is to develop and test the package, the website, and the installation, and
 to distribute it later with \fBkz deploy\fR.
 .sp
@@ -152,6 +155,21 @@ Reverse checklink.
 ~/kz-uploads/dist/assets/packages/kz_4.2.1-1_all.deb
 .RS
 Debian package kz.
+.RE
+.sp
+~/kz-uploads/dist/assets/packages/kz-dev_4.2.1-1_all.deb
+.RS
+Debian development package kz.
+.RE
+.sp
+~/kz-uploads/dist/assets/packages/kz-4.2.1-1.noarch.rpm
+.RS
+RPM package kz.
+.RE
+.sp
+~/kz-uploads/dist/assets/packages/kz-dev-4.2.1-1.noarch.rpm
+.RS
+RPM development package kz.
 .RE
 .sp
 /usr/share/doc/kz/build.id

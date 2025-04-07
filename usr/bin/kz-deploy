@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-source kz_common.sh
+source ~/kz-scripts/usr/bin/kz_common.sh
 
 
 ###############################################################################
@@ -121,7 +121,7 @@ function build() {
 
 # This function performs checks.
 function check() {
-    check_repos
+    check_repos || ERR_FLAG=true
     check_scripts_and_website
 }
 
@@ -132,45 +132,6 @@ function deploy() {
     install_package
 }
 
-
-# This function check that the repos are in the desired state.
-function check_repos() {
-    local DEB_REPO=$HOME/kz-deb
-    local DOCS_REPO=$HOME/kz-docs
-    local SCRIPTS_REPO=$HOME/kz-scripts
-    local TEXT=''
-    local UPLOADS_REPO=$HOME/kz-uploads
-
-    TEXT=$(gettext 'Check that all repos are on branch main')...
-    infomsg "$TEXT"
-
-    for REPO in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
-        cd "$REPO"
-        if [[ $(git branch --show-current) != 'main' ]]; then
-            TEXT=$(eval_gettext "Repo \$REPO not on branch main.")
-            errmsg "$TEXT"
-            git status
-            ERR_FLAG=true
-        fi
-    done
-
-    TEXT=$(gettext 'Check that all repos are clean')...
-    infomsg "$TEXT"
-
-    for REPO in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
-        cd "$REPO"
-
-        # Prevent false positives.
-        git status |& $LOGCMD
-
-        if ! git diff-index --quiet HEAD; then
-            TEXT=$(eval_gettext "Repo \$REPO is not clean.")
-            errmsg "$TEXT"
-            git status
-            ERR_FLAG=true
-        fi
-    done
-}
 
 # This function check the scripts and website.
 function check_scripts_and_website() {

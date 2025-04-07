@@ -133,6 +133,53 @@ function check_package_manager() {
 }
 
 
+# This function check that the repos are in the desired state.
+function check_repos() {
+    local REPO_LIST='kz-deb kz-docs kz-rpm kz-scripts kz-uploads'
+    local ERR_FLAG=false
+    local STARTDIR=$PWD
+    local TEXT=''
+
+    TEXT=$(gettext 'Check that all repos are on branch main')...
+    infomsg "$TEXT"
+
+    for REPO in $REPO_LIST; do
+        cd "$HOME/$REPO"
+        if [[ $(git branch --show-current) != 'main' ]]; then
+            TEXT=$(eval_gettext "Repo \$REPO not on branch main.")
+            errmsg "$TEXT"
+            git status
+            ERR_FLAG=true
+        fi
+    done
+
+    TEXT=$(gettext 'Check that all repos are clean')...
+    infomsg "$TEXT"
+
+    for REPO in $REPO_LIST; do
+        cd "$HOME/$REPO"
+
+        # Prevent false positives.
+        git status |& $LOGCMD
+
+        if ! git diff-index --quiet HEAD; then
+            TEXT=$(eval_gettext "Repo \$REPO is not clean.")
+            errmsg "$TEXT"
+            git status
+            ERR_FLAG=true
+        fi
+    done
+
+    cd "$STARTDIR"
+
+    if $ERR_FLAG; then
+        return $ERR
+    else
+        return $OK
+    fi
+}
+
+
 # This function returns an error message.
 function errmsg() {
     local TITLE=''

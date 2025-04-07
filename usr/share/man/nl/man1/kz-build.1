@@ -20,6 +20,9 @@ kz-build - Website bouwen inclusief kz-pakketten
 .sp
 Het gebouwde Debian-pakket kz wordt vervolgens lokaal geïnstalleerd.
 .sp
+Als de ontwikkelingsrepositories niet op main staan of niet schoon zijn, wordt
+er een ontwikkelingsversie gemaakt (kz-dev-....).
+.sp
 Dit om het pakket, de website, en de installatie te kunnen ontwikkelen, testen,
 en later te distribueren met \fBkz deploy\fR.
 .sp
@@ -151,6 +154,21 @@ Omgekeerde checklink.
 ~/kz-uploads/dist/assets/packages/kz_4.2.1-1_all.deb
 .RS
 Debian-pakket kz.
+.RE
+.sp
+~/kz-uploads/dist/assets/packages/kz-dev_4.2.1-1_all.deb
+.RS
+Debian-ontwikkelpakket kz.
+.RE
+.sp
+~/kz-uploads/dist/assets/packages/kz-4.2.1-1.noarch.rpm
+.RS
+RPM-pakket kz.
+.RE
+.sp
+~/kz-uploads/dist/assets/packages/kz-dev-4.2.1-1.noarch.rpm
+.RS
+RPM-ontwikkelpakket kz.
 .RE
 .sp
 /usr/share/doc/kz/build.id

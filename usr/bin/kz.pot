@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-05 14:13+0200\n"
+"POT-Creation-Date: 2025-04-07 14:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -395,10 +395,16 @@ msgid "Download and install Debian or RPM package kz"
 msgstr ""
 
 #, sh-format
-msgid "Usage: kz get $OPTIONS_USAGE"
+msgid "Usage: kz get [-d|--dev] $OPTIONS_USAGE"
 msgstr ""
 
-msgid "Usage: kz get [<options>]"
+msgid "  -d, --dev      use the development version of kz"
+msgstr ""
+
+msgid "Usage: kz get [-d|--dev] [<options>]"
+msgstr ""
+
+msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
 msgid ""
