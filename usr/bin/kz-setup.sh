@@ -18,11 +18,11 @@ kz-desktop --addaft=anydesk
 kz-desktop --delete=anydesk
 
 
-# Setup calibre on pc06 pc-van-hugo
+# Setup calibre on pc06
 # E-book manager.
 kz-desktop --addaft=calibre-gui
 
-# Reset calibre on pc06 pc-van-hugo
+# Reset calibre on pc06
 # E-book manager.
 kz-desktop --delete=calibre-gui
 
@@ -82,13 +82,13 @@ kz-desktop --delete=org.gnome.Evolution
 kz-desktop --addbef=org.gnome.Evolution
 
 
-# Setup firefox on pc01 pc02 pc06 pc07 pc-van-emily
+# Setup firefox on pc01 pc02 pc06 pc07
 # Web browser.
 kz-desktop --delete=firefox
 kz-desktop --delete=firefox-esr
 kz-desktop --delete=firefox_firefox
 
-# Reset firefox on pc01 pc02 pc06 pc07 pc-van-emily
+# Reset firefox on pc01 pc02 pc06 pc07
 # Web browser.
 kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
@@ -169,11 +169,11 @@ if [[ ${DISPLAY-} ]]; then xdg-mime default google-chrome.desktop application/pd
 kz-desktop --delete=google-chrome
 
 
-# Setup handbrake on pc-van-emily
+# Setup handbrake on -none-
 # Video-dvd ripper and transcoder.
 kz-desktop --addaft=fr.handbrake.ghb
 
-# Reset handbrake on pc-van-emily
+# Reset handbrake on -none-
 # Video-dvd ripper and transcoder.
 kz-desktop --delete=fr.handbrake.ghb
 
@@ -226,11 +226,11 @@ chmod 750 ~
 chmod 755 ~
 
 
-# Setup sound-juicer on pc-van-emily
+# Setup sound-juicer on -none-
 # Audio-cd ripper and player.
 kz-desktop --addaft=org.gnome.SoundJuicer
 
-# Reset sound-juicer on pc-van-emily
+# Reset sound-juicer on -none-
 # Audio-cd ripper and player.
 kz-desktop --delete=org.gnome.SoundJuicer
 
@@ -286,12 +286,12 @@ kz-desktop --addbef=thunderbird
 kz-desktop --addbef=thunderbird_thunderbird
 
 
-# Setup virtualbox on pc-van-hugo
+# Setup virtualbox on -none-
 # Virtualization.
 kz-desktop --addaft=virtualbox
 kz-desktop --addaft=kz-vm-hugowin732
 
-# Reset virtualbox on pc-van-hugo
+# Reset virtualbox on -none-
 # Virtualization.
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
@@ -328,20 +328,20 @@ kz-desktop --addaft=kz-webmin
 kz-desktop --delete=kz-webmin
 
 
-# Setup whatsapp on pc-van-hugo maria-desktop
+# Setup whatsapp on maria-desktop
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --addaft=kz-whatsapp
 
-# Reset whatsapp on pc-van-hugo maria-desktop
+# Reset whatsapp on maria-desktop
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --delete=kz-whatsapp
 
 
-# Setup youtube-dl on pc-van-emily
+# Setup youtube-dl on -none-
 # Download videos.
 kz-desktop --addaft=youtubedl-gui
 
-# Reset youtube-dl on pc-van-emily
+# Reset youtube-dl on -none-
 # Download videos.
 kz-desktop --delete=youtubedl-gui
 

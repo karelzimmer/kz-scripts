@@ -104,23 +104,23 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get r
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes backintime-qt; fi
 
 
-# Install bleachbit on pc-van-hugo
+# Install bleachbit on -none-
 # Delete files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes bleachbit; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes bleachbit; fi
 
-# Remove bleachbit from pc-van-hugo
+# Remove bleachbit from -none-
 # Delete files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes bleachbit; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes bleachbit; fi
 
 
-# Install calibre on pc06 pc-van-hugo
+# Install calibre on pc06
 # E-book manager.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes calibre; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo --validate && wget --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
 
-# Remove calibre from pc06 pc-van-hugo
+# Remove calibre from pc06
 # E-book manager.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes calibre; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo calibre-uninstall; fi
@@ -152,12 +152,12 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assum
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes cups; fi
 
 
-# Install cups-backend-bjnp on pc-van-emily
+# Install cups-backend-bjnp on -none-
 # Printer backend.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The cups-backend-bjnp app is not available.'; fi
 
-# Remove cups-backend-bjnp from pc-van-emily
+# Remove cups-backend-bjnp from -none-
 # Printer backend.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes cups-backend-bjnp; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The cups-backend-bjnp app is not available.'; fi
@@ -228,12 +228,12 @@ sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
 
-# Install disabled-lidswitch on pc-van-hugo
+# Install disabled-lidswitch on -none-
 # Do nothing when the laptop lid is closed.
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
 
-# Remove disabled-lidswitch from pc-van-hugo
+# Remove disabled-lidswitch from -none-
 # Restore the default action when the laptop lid is closed.
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
@@ -326,12 +326,12 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assum
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes gettext; fi
 
 
-# Install gimp on pc-van-hugo pc06
+# Install gimp on pc06
 # GNU Image Manipulation Program.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-nl; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes gimp; fi
 
-# Remove gimp from pc-van-hugo pc06
+# Remove gimp from pc06
 # GNU Image Manipulation Program.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes gimp gimp-help-en gimp-help-nl; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gimp; fi
@@ -417,12 +417,12 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assum
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes groff; fi
 
 
-# Install handbrake on pc-van-emily
+# Install handbrake on -none-
 # Video-dvd ripper and transcoder.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes handbrake; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The handbrake app is not available.'; fi
 
-# Remove handbrake from pc-van-emily
+# Remove handbrake from -none-
 # Video-dvd ripper and transcoder.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes handbrake; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The handbrake app is not available.'; fi
@@ -674,12 +674,12 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assum
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
 
 
-# Install sound-juicer on pc-van-emily
+# Install sound-juicer on -none-
 # Audio-cd ripper and player.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes sound-juicer; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The sound-juicer app is not available.'; fi
 
-# Remove sound-juicer from pc-van-emily
+# Remove sound-juicer from -none-
 # Audio-cd ripper and player.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes sound-juicer; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The sound-juicer app is not available.'; fi
@@ -837,7 +837,7 @@ if   id "$(gettext 'guest')" &> /dev/null; then sudo passwd --delete "$(gettext 
 if id "$(gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext 'guest')"; fi
 
 
-# Install virtualbox on pc-van-hugo
+# Install virtualbox on -none-
 # Virtualization.
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
 # If the installation hangs or VBox does not work, check the virtualization
@@ -847,7 +847,7 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get i
 
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes VirtualBox; fi
 
-# Remove virtualbox from pc-van-hugo
+# Remove virtualbox from -none-
 # Virtualization.
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
@@ -928,12 +928,12 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dpkg --re
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes wine playonlinux; fi
 
 
-# Install youtube-dl on pc-van-emily pc-van-hugo
+# Install youtube-dl on -none-
 # Download videos.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes youtubedl-gui; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes youtube-dl; fi
 
-# Remove youtube-dl from pc-van-emily pc-van-hugo
+# Remove youtube-dl from -none-
 # Download videos.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes youtubedl-gui; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes youtube-dl; fi
