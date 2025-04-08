@@ -100,7 +100,7 @@ function process() {
     if $ARGUMENT_APPS; then
         process_argument_app
     else
-        process_file_by_any
+        process_setup_file_by_any_host
     fi
 
     if $OPTION_CAT; then
@@ -260,14 +260,14 @@ function process_argument_app() {
     local TEXT=''
 
     for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
-        process_file_by_app
+        process_install_file_by_app
     done
 }
 
 
 # This function generates the command file from the install file and filters by
 # <app>.
-function process_file_by_app() {
+function process_install_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
@@ -310,9 +310,9 @@ function process_file_by_app() {
 
 
 # This function generates the command file from the install file and filters by
-# any (*).
-function process_file_by_any() {
-    local ANY_MATCH=false
+# any host (*).
+function process_setup_file_by_any_host() {
+    local ANY_HOST_MATCH=false
     local INPUT_RECORD=''
 
     while read -r INPUT_RECORD; do
@@ -323,19 +323,19 @@ function process_file_by_any() {
                 ;;
             '#'*$INSTALL*$ON*'*' )
                 # Matching app record.
-                ANY_MATCH=true
+                ANY_HOST_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
             '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
                 # Add empty seperator line between the installation of apps.
-                if $ANY_MATCH; then
+                if $ANY_HOST_MATCH; then
                     printf '\n' >> "$COMMAND_FILE"
                 fi
-                ANY_MATCH=false
+                ANY_HOST_MATCH=false
                 ;;
             * )
-                if $ANY_MATCH; then
+                if $ANY_HOST_MATCH; then
                     # Record for command file.
                     printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
