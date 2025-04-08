@@ -837,28 +837,6 @@ if   id "$(gettext 'guest')" &> /dev/null; then sudo passwd --delete "$(gettext 
 if id "$(gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext 'guest')"; fi
 
 
-# Install user-karel on pc01
-# Add user Karel.
-if ! id karel &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel; fi
-if   id karel &> /dev/null; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel; fi
-if   id karel &> /dev/null; then sudo passwd --delete --expire karel; fi
-
-# Remove user-karel from pc01
-# Remove user Karel.
-if  id karel &> /dev/null; then sudo userdel --remove karel; fi
-
-
-# Install user-toos on Laptop
-# Add user Toos.
-if ! id toos &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos; fi
-if   id toos &> /dev/null; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos; fi
-if   id toos &> /dev/null; then sudo passwd --delete --expire toos; fi
-
-# Remove user-toos from Laptop
-# Remove user Toos.
-if id toos &> /dev/null; then sudo userdel --remove toos; fi
-
-
 # Install virtualbox on pc-van-hugo
 # Virtualization.
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
