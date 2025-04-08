@@ -28,13 +28,14 @@ van systeeminstellingen, \fBkz setup\fR is een post-installatie-instelscript.
 instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
 Standaard verwerkt \fBkz setup\fR het instelbestand /usr/bin/kz-setup.sh dat
-opdrachten bavat voor alle hierin opgenomen gebruikers.
+opdrachten bevat voor alle ('*') en specifieke ('?') hierin opgenomen
+computers.
 .br
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
-Bij het verwerken van het instelbestand worden de opdrachten voor iedere en de
-huidige gebruiker geselecteerd en gekopieerd naar het opdrachtbestand.
+Bij het verwerken van het instelbestand worden de opdrachten voor iedere ('*')
+computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .br
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 Na succesvolle voltooiing wordt de gebruiker uitgelogd.
@@ -109,8 +110,13 @@ IaC en Day 1 Operations
 .sp
 \fBkz setup\fR
 .RS
-Stel alles in wat in het standaard instelbestand staat. Hiervoor is in een
-desktopomgeving ook starter \fBApps instellen\fR beschikbaar.
+Installeer alles  wat in het standaard
+installatiebestand staat.
+
+Stel alles in voor ieder ('*') computer wat in het standaard instelbestand
+staat.
+Hiervoor is in een desktopomgeving ook starter \fBApps instellen\fR
+beschikbaar.
 .RE
 .sp
 \fBkz setup google-chrome\fR
