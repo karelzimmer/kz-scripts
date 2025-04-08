@@ -94,6 +94,7 @@ function process() {
         exit $OK
     fi
 
+    become_root
     COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 
     if $ARGUMENT_APPS; then
@@ -110,7 +111,6 @@ function process() {
     if [[ $UID -ne 0 ]]; then
         rm --verbose "$COMMAND_FILE" |& $LOGCMD
     fi
-    become_root
     install_apps
 }
 
@@ -257,19 +257,11 @@ $USAGE"
 # This function processes argument <app>.
 function process_argument_app() {
     local APP_ARGUMENT=''
-    local APP_NOT_FOUND=false
     local TEXT=''
 
     for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
         process_file_by_app
     done
-
-    if $APP_NOT_FOUND; then
-        TEXT="$(gettext "Type 'kz install --apps' for available apps.")"
-        infomsg "$TEXT"
-        rm --verbose "$COMMAND_FILE" |& $LOGCMD
-        exit $ERR
-    fi
 }
 
 
@@ -311,7 +303,6 @@ function process_file_by_app() {
     done < "$INSTALL_FILE"
 
     if $NO_APP_MATCH; then
-        APP_NOT_FOUND=true
         TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
         infomsg "$TEXT"
     fi
@@ -363,15 +354,16 @@ function process_option_cat() {
 
 # This function starts installing the apps.
 function install_apps() {
-    local NO_COMMANDS_FOUND=true
     local TEXT=''
     local TITLE=''
     local -i APP_TOT_NUM=0
-    local -A FAILED_APPS=()
 
     APP_TOT_NUM=$(grep --count "#.*$INSTALL.*$ON" "$COMMAND_FILE" || true)
     if [[ $APP_TOT_NUM -eq 0 ]]; then
-        return $OK
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
+        exit $OK
     fi
 
     TITLE=$(gettext 'Install apps')
@@ -396,25 +388,6 @@ function install_apps() {
     fi
 
     rm --verbose "$COMMAND_FILE" |& $LOGCMD
-
-    if $NO_COMMANDS_FOUND; then
-        TEXT=$(gettext 'No commands to execute.' )
-        infomsg "$TEXT"
-        exit $OK
-    fi
-
-    if [[ ${FAILED_APPS[*]} ]]; then
-        TEXT="$(gettext "The installation of the following apps contains \
-errors:")
-${FAILED_APPS[*]}
-
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
-view log messages.")
-
-$(gettext "Try installing the apps again.")"
-        errmsg "$TEXT"
-        exit $ERR
-    fi
 }
 
 
@@ -456,7 +429,6 @@ function process_command_file() {
                 ;;
             * )
                 # Process command record.
-                NO_COMMANDS_FOUND=false
                 execute_command "$COMMAND_RECORD"
                 ;;
         esac
@@ -496,6 +468,19 @@ function execute_command() {
 function term() {
     local OPERATION=''
     local TEXT=''
+
+    if [[ ${FAILED_APPS[*]} ]]; then
+        TEXT="$(gettext "The installation of the following apps contains \
+errors:")
+${FAILED_APPS[*]}
+
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
+view log messages.")
+
+$(gettext "Try installing the apps again.")"
+        errmsg "$TEXT"
+        exit $ERR
+    fi
 
     OPERATION=$(gettext 'install')
 
@@ -540,6 +525,7 @@ function main() {
     local REBOOT=true
     local REMOVE='Remove'
     local -A APP_ARGUMENTS=()
+    local -A FAILED_APPS=()
 
     init    "$@"
     process "$@"
