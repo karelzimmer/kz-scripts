@@ -24,7 +24,8 @@ are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in file
 kz-setup.sh.
-More examples can be seen through the \fBkz setup --cat\fR command.
+.sp
+More examples can be seen through the \fBkz setup --browse\fR command.
 .LP
 .B Table 1. Record types and their processing
 .TS
@@ -41,9 +42,14 @@ l | l
 l | l
 l | l.
 T{
-# Setup \fI<app>\fR on <host>...
+# Setup \fI<app>\fR on *
 T}:T{
-Set up \fI<app>\fR on <host>s (\fBApp record\fR)
+Set up \fI<app>\fR on any computer (\fBApp record\fR)
+T}
+T{
+# Setup \fI<app>\fR on ?
+T}:T{
+Set up \fI<app>\fR on a specific computer (\fBApp record\fR)
 T}
 T{
 # Comment...
@@ -60,9 +66,14 @@ T}:T{
 Empty line (none, one or more)
 T}
 T{
-# Reset \fI<app>\fR on <host>...
+# Reset \fI<app>\fR on *
 T}:T{
-Reset \fI<app>\fR on <host>s (\fBApp record\fR for option reset)
+Reset \fI<app>\fR on any computer (\fBApp record\fR for option reset)
+T}
+T{
+# Reset \fI<app>\fR on ?
+T}:T{
+Reset \fI<app>\fR on a specific computer (\fBApp record\fR for option reset)
 T}
 T{
 Command
@@ -82,16 +93,6 @@ Description
 T}
 .T&
 - | -
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
 l | l
 l | l.
 T{
@@ -119,33 +120,9 @@ T{
 T}:T{
 T}
 T{
-# Setup gnome on pc02
+# Setup google-earth for ?
 T}:T{
-Set up gnome only on pc02, see [2]
-T}
-T{
-gsettings set org.gnome.shell...
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# setup kvm on pc01 pc02
-T}:T{
-Set up kvm on pc01 and pc02, see [3]
-T}
-T{
-kz-desktop --addaft=virt-manager
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# Setup google-earth for -none-
-T}:T{
-Do not set up Google Earth by default, see [4]
+Do not set up Google Earth by default, see [2]
 T}
 T{
 kz-desktop --addaft=google-earth
@@ -160,25 +137,8 @@ The line with '*' causes the associated commands to run on all computers.
 .sp
 [2]
 .br
-The line with 'pc02' ensures that the associated commands are executed only on
-pc02 by default.
-.br
-The app can still be set up on another computer with the command 'kz setup goo\
-gle-earth'.
-.sp
-[3]
-.br
-The line with 'pc01 pc02' ensures that the associated commands are executed
-only on pc01 and pc02 by default.
-.br
-The app can still be set up on another computer with the command 'kz setup kvm\
-'.
-.sp
-[4]
-.br
-The line with '-none-' ensures that the associated commands are not executed by
-default (NOTE: '-none-' is not a valid computer name and will therefore never
-be selected by default).
+The line with '?' ensures that the associated commands are not executed by
+default.
 .br
 The app can still be set up with the command 'kz setup google-earth'.
 

@@ -25,7 +25,8 @@ are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records and how these records
 are processed.
-More examples can be seen through the \fBkz install --cat\fR command.
+.sp
+More examples can be seen through the \fBkz install --browse\fR command.
 .LP
 .B Table 1. Record types and their processing
 .TS
@@ -40,9 +41,14 @@ T}
 l | l
 l | l.
 T{
-# Install \fI<app>\fR on <host>...
+# Install \fI<app>\fR on *
 T}:T{
-Install the \fI<app>\fR on <host>s (\fBApp record\fR)
+Install the \fI<app>\fR on any computer (\fBApp record\fR)
+T}
+T{
+# Install \fI<app>\fR on ?
+T}:T{
+Install the \fI<app>\fR on a specific computer (\fBApp record\fR)
 T}
 T{
 # Comment...
@@ -59,9 +65,15 @@ T}:T{
 Empty line (none, one or more)
 T}
 T{
-# Remove \fI<app>\fR from <host>...
+# Remove \fI<app>\fR from *
 T}:T{
-Remove the \fI<app>\fR from <host>s (\fBApp record\fR for option remove)
+Remove the \fI<app>\fR from any computer (\fBApp record\fR for option remove)
+T}
+T{
+# Remove \fI<app>\fR from ?
+T}:T{
+Remove the \fI<app>\fR from a specific computer (\fBApp record\fR for option
+remove)
 T}
 T{
 Command
@@ -108,33 +120,9 @@ T{
 T}:T{
 T}
 T{
-# Install ufw on pc02
+# Install google-earth on ?
 T}:T{
-Install ufw only on pc02, see [2].
-T}
-T{
-sudo apt-get install --assume-yes gufw
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# Install kvm on pc01 pc02
-T}:T{
-Install kvm on pc01 and pc02, see [3].
-T}
-T{
-sudo apt-get install --assume-yes qemu-kvm
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# Install google-earth on -none-
-T}:T{
-Do not install Google Earth by default, see [4].
+Do not install Google Earth by default, see [2].
 T}
 T{
 sudo apt-get install --assume-yes google-earth
@@ -149,25 +137,8 @@ The line with '*' causes the associated commands to run on all computers.
 .sp
 [2]
 .br
-The line with 'pc02' ensures that the associated commands are executed only on
-pc02 by default.
-.br
-The app can still be installed on another computer with the command 'kz instal\
-l google-earth'.
-.sp
-[3]
-.br
-The line with 'pc01 pc02' ensures that the associated commands are executed
-only on pc01 and pc02 by default.
-.br
-The app can still be installed on another computer with the command 'kz instal\
-l kvm'.
-.sp
-[4]
-.br
-The line with '-none-' ensures that the associated commands are not executed on
-a computer by default (NOTE: '-none-' is not a valid computer name and will
-therefore never be selected by default).
+The line with '?' ensures that the associated commands are not executed on a
+computer by default.
 .br
 The app can still be installed with the command 'kz install google-earth'.
 
