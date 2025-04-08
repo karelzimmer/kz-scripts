@@ -27,13 +27,14 @@ the exact location.
 .sp
 The backup is placed on a mounted USB medium such as a USB external hard disk
 in folder \fB<user_name>@<computer name>\fR, this folder is created as needed,
-for example /media/john/backupdisk/john@pc02 for John at pc02.
+for example /media/karel/backupdisk/karel@pc-of-karel for Karel at pc-of-karel.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz backup\fR runs in graphical mode. A
 desktop environment is required.
 .sp
 With option \fB-t\fR, \fB--target\fR \fI<directory>\fR another location can be
-specified. For example /media/john/usbstick instead of /media/john/backupdisk.
+specified. For example /media/karel/usbstick instead of
+/media/karel/backupdisk.
 .sp
 Locations ignored by \fBkz backup\fR are directories managed by Git.
 Example: ~/kz-scripts is skipped due to the presence of ~/kz-scripts/.git.
@@ -141,10 +142,10 @@ Starter \fBMake a backup\fR is also available for this in a desktop
 environment.
 .RE
 .sp
-\fBkz backup --target /media/john/usbstick\fR
+\fBkz backup --target /media/karel/usbstick\fR
 .RS
-Back up the Home folder of John on pc02 to /media/john/usbstick in the folder
-john@pc02 (this folder will be created as needed).
+Back up the Home folder of Karel on pc-of-karel to /media/karel/usbstick in the
+folder karel@pc-of-karel (this folder will be created as needed).
 .RE
 .EE
 
