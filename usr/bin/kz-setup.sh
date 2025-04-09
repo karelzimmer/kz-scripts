@@ -328,11 +328,11 @@ kz-desktop --addaft=kz-webmin
 kz-desktop --delete=kz-webmin
 
 
-# Setup whatsapp on maria-desktop
+# Setup whatsapp on -none-
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --addaft=kz-whatsapp
 
-# Reset whatsapp on maria-desktop
+# Reset whatsapp on -none-
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --delete=kz-whatsapp
 
