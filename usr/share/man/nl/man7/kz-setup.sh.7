@@ -25,8 +25,7 @@ verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze deze regels en hoe deze
 regels verwerkt worden.
-.sp
-Meer voorbeelden zijn te zien met de opdracht \fBkz setup --browse\fR.
+Meer voorbeelden zijn te zien met de opdracht \fBkz setup --cat\fR.
 .LP
 .B Tabel 1. Soorten regels en hun verwerking
 .TS
@@ -41,14 +40,9 @@ T}
 l | l
 l | l.
 T{
-# Setup \fI<app>\fR on *
+# Setup \fI<app>\fR on <host>...
 T}:T{
-De \fI<app>\fR instellen op iedere computer (\fBApp-regel\fR)
-T}
-T{
-# Setup \fI<app>\fR on ?
-T}:T{
-De \fI<app>\fR instellen op een specifieke computer (\fBApp-regel\fR)
+De \fI<app>\fR instellen op <host>s (\fBApp-regel\fR)
 T}
 T{
 # Commentaar...
@@ -65,16 +59,10 @@ T}:T{
 Lege regel
 T}
 T{
-# Reset \fI<app>\fR on *
+# Reset \fI<app>\fR on <host>...
 T}:T{
-De \fI<app>\fR resetten op iedere computer (\fBApp-regel\fR voor optie
-\fB-r\fR, \fB--reset\fR)
-T}
-T{
-# Reset \fI<app>\fR on ?
-T}:T{
-De \fI<app>\fR resetten op een specifieke computer (\fBApp-regel\fR voor optie
-\fB-r\fR, \fB--reset\fR)
+De \fI<app>\fR resetten op <host>s (\fBApp-regel\fR voor optie \fB-r\fR,
+\fB--reset\fR)
 T}
 T{
 Opdracht
@@ -121,9 +109,33 @@ T{
 T}:T{
 T}
 T{
-# Setup google-earth for ?
+# Setup gnome on pc02
 T}:T{
-Standaard niet google-earth instellen, zie [2]
+Stel gnome in alleen op pc02, zie [2]
+T}
+T{
+gsettings set org.gnome.shell...
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# Setup kvm on pc01 pc02
+T}:T{
+Stel kvm in op pc01 en pc02, zie [3]
+T}
+T{
+kz-desktop --addaft=virt-manager
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# Setup google-earth for -none-
+T}:T{
+Standaard niet google-earth instellen, zie [4]
 T}
 T{
 kz-desktop --addaft=google-earth
@@ -139,8 +151,25 @@ worden uitgevoerd.
 .sp
 [2]
 .br
-De regel met '?' zorgt ervoor dat de bijbehorende opdrachten standaard niet
-worden uitgevoerd.
+De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
+alleen op pc02 worden uitgevoerd.
+.br
+De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
+setup gnome'.
+.sp
+[3]
+.br
+De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
+alleen op pc01 en pc02 worden uitgevoerd.
+.br
+De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
+setup kvm'.
+.sp
+[4]
+.br
+De regel met '-none-' zorgt ervoor dat de bijbehorende opdrachten standaard
+niet worden uitgevoerd (OPMERKING: '-none-' is geen geldige computernaam en
+wordt daarom nooit standaard geselecteerd).
 .br
 De app kan alsnog worden ingesteld met de opdracht 'kz setup google-earth'.
 
