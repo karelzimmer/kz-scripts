@@ -76,10 +76,14 @@ On a Red Hat-based system try the following:
     sudo dnf makecache
 
 .sp
-For non-standard installations there may be additional commands to run.
+For non-default installations there may be additional commands to run.
 .br
 If necessary, use the following command:
     gpg --decrypt /usr/bin/kz-install.gpg | grep $HOSTNAME
+.sp
+This gpg file (GNU Privacy Guard, or GnuPG, or GPG) was previously created for
+non-default installations with the command:
+    gpg --symmetric ~/kz-install
 
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
