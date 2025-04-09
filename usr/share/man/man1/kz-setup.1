@@ -28,13 +28,13 @@ Use (first) \fBkz install\fR to install apps and changes system settings,
 apps and changing user settings.
 .sp
 By default, \fBkz setup\fR processes the setup file /usr/bin/kz-setup.sh, which
-contains commands for any ('*') or a specific ('?') computer included in it.
+contains commands for all users included in it.
 .br
 The commands supplied by with \fBkz setup\fR are arranged in such a way that
 the result remains the same when executed repeatedly (idempotent).
 .sp
-When processing the setup file, the commands for any ('*') computer are
-selected and copied to a command file.
+When processing the setup file, the commands for any and the current computer
+are selected and copied to a command file.
 .br
 The commands in the command file are executed.
 Upon successful completion the user will be logged out.
@@ -151,7 +151,7 @@ IaC and Day 1 Operations
 .sp
 \fBkz setup\fR
 .RS
-Set everything for any  ('*') computer in the default setup file.
+Set up everything in the default setup file.
 Starter \fBSetup apps\fR is also available for this in a desktop environment.
 .RE
 .sp

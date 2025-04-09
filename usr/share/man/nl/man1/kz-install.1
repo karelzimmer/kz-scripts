@@ -30,14 +30,14 @@ wijzigen van gebruikersinstellingen.
 installeren van apps en het wijzigen van systeeminstellingen.
 .sp
 Standaard verwerkt \fBkz install\fR het installatiebestand
-/usr/bin/kz-install.sh, dat opdrachten bevat voor alle ('*') en specifieke
-('?') hierin opgenomen computers.
+/usr/bin/kz-install.sh, dat opdrachten bavat voor alle hierin opgenomen
+computers.
 .br
 De opdrachten meegeleverd bij \fBkz install\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
 Bij het verwerken van het installatiebestand worden de opdrachten voor iedere
-('*') computer geselecteerd en gekopieerd naar het opdrachtbestand.
+en de huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .br
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 Na succesvolle voltooiing wordt de computer opnieuw opgestart.
@@ -167,10 +167,8 @@ IaC en Day 1 Operations
 .sp
 \fBkz install\fR
 .RS
-Installeer alles voor ieder ('*') computer wat in het standaard
-installatiebestand staat.
-Hiervoor is in een desktopomgeving ook starter \fBApps installeren\fR
-beschikbaar.
+Installeer alles wat in het standaard installatiebestand staat. Hiervoor is in
+een desktopomgeving ook starter \fBApps installeren\fR beschikbaar.
 .RE
 .sp
 \fBkz install google-chrome\fR
