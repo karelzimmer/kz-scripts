@@ -604,7 +604,7 @@ msgstr "  <app>...       installeer opgegeven apps"
 
 #, sh-format
 msgid "App '$APP_ARGUMENT' not found"
-msgstr "App $APP_ARGUMENT niet gevonden"
+msgstr "App '$APP_ARGUMENT' niet gevonden"
 
 #, sh-format
 msgid "No install file found, looked for '$INSTALL_FILE'."
