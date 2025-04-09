@@ -80,8 +80,13 @@ Debian-gebaseerd systeem kunt u het volgende proberen:
 Op een Red Hat-gebaseerd systeem probeer het volgende:
     sudo dnf clean all
     sudo dnf makecache
-
 .sp
+Voor niet-standaard installaties zijn er mogelijk extra opdrachten om uit te
+voeren.
+.br
+Gebruik de volgende opdracht om dit vast te stellen:
+    gpg --decrypt /usr/bin/kz-install.gpg | grep $HOSTNAME
+
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP

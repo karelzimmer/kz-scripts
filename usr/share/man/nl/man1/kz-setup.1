@@ -62,6 +62,57 @@ Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
+.sp
+Voor niet-standaard installaties zijn er mogelijk extra opdrachten om uit te
+voeren.
+.br
+Gebruik de volgende opdracht om dit vast te stellen:
+    gpg --decrypt /usr/bin/kz-setup.gpg | grep $HOSTNAME
+
+.SH OPTIES
+Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
+.TP
+\fI<app>\fR...
+Installeer de opgegeven apps.
+.TP
+\fB-a\fR, \fB--apps\fR
+Toon een lijst van te installeren apps.
+.TP
+\fB-b\fR, \fB--browse\fR
+Blader door het installatiebestand.
+.TP
+\fB-c\fR, \fB--cat\fR
+Toon de inhoud van het opdrachtbestand.
+.TP
+\fB-f\fR, \fB--file\fR \fI<bestand>\fR
+Verwerk het opgegeven bestand.
+.TP
+\fB-g\fR, \fB--gui\fR
+Draai in grafische modus (gui=graphical user interface; grafische
+gebruikersinterface). Een desktopomgeving is vereist.
+.TP
+\fB-r\fR, \fB--remove\fR
+Verwijder de apps.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-m\fR, \fB--manual\fR
+Toon de handleidingpagina.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Signaleert het einde van opties en schakelt verdere verwerking van opties uit.
+
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
+
 
 .SH FILES
 /usr/bin/kz-setup.sh
