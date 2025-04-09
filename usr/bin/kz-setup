@@ -60,7 +60,7 @@ readonly HELP
 readonly X_OPTIONS_SHORT='abcf:gr'
 readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,reset'
 
-readonly ON='on'
+readonly ON_HOST='on host'
 
 
 ###############################################################################
@@ -177,8 +177,8 @@ $USAGE"
                 ;;
             -r | --reset )
                 OPTION_RESET=true
-                SETUP='Reset'
-                RESET='Setup'
+                SETUP_APP='Reset app'
+                RESET_APP='Setup app'
                 shift
                 ;;
             -- )
@@ -220,7 +220,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     APPS=$(
-        grep    "#.*$SETUP.*on"         \
+        grep    "#.*$SETUP_APP.*on"     \
                 "$SETUP_FILE"           |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
@@ -276,13 +276,13 @@ function process_setup_file_by_app() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON* )
+            '#'*$SETUP_APP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON_HOST* )
                 # Matching app record.
                 APP_MATCH=true
                 NO_APP_MATCH=false
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$SETUP*$ON* | '#'*$RESET*$ON* )
+            '#'*$SETUP_APP*$ON_HOST* | '#'*$RESET_APP*$ON_HOST* )
                 # Mismatched app record.
                 # Add empty seperator line between the setup of apps.
                 if $APP_MATCH; then
@@ -318,12 +318,12 @@ function process_setup_file_by_host() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP*on*'*' | '#'*$SETUP*on*$HOSTNAME* )
+            '#'*$SETUP_APP*$ON_HOST*'*' | '#'*$SETUP_APP*$ON_HOST*$HOSTNAME* )
                 # Matching app record.
                 ANY_HOST_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$SETUP*$ON* | '#'*$RESET*$ON* )
+            '#'*$SETUP_APP*$ON_HOST* | '#'*$RESET_APP*$ON_HOST* )
                 # Mismatched app record.
                 # Add empty seperator line between the setup of apps.
                 if $ANY_HOST_MATCH; then
@@ -355,7 +355,11 @@ function setup_apps() {
     local TITLE=''
     local -i APP_TOT_NUM=0
 
-    APP_TOT_NUM=$(grep --count "#.*$SETUP.*$ON" "$COMMAND_FILE" || true)
+    APP_TOT_NUM=$(
+        grep    --count                     \
+                "#.*$SETUP_APP.*$ON_HOST"   \
+                "$COMMAND_FILE"             ||true
+        )
     if [[ $APP_TOT_NUM -eq 0 ]]; then
         rm --verbose "$COMMAND_FILE" |& $LOGCMD
         TEXT=$(gettext 'No commands to execute.' )
@@ -405,7 +409,7 @@ function process_command_file() {
 
     while read -r COMMAND_RECORD; do
         case $COMMAND_RECORD in
-            '#'*$SETUP* )
+            '#'*$SETUP_APP* )
                 # App record.
                 APP_NAME=$(
                     printf '%s\n' "$COMMAND_RECORD"     |
@@ -540,8 +544,8 @@ function main() {
     local OPTION_CAT=false
     local OPTION_FILE=false
     local OPTION_RESET=false
-    local RESET='Reset'
-    local SETUP='Setup'
+    local RESET_APP='Reset app'
+    local SETUP_APP='Setup app'
     local -A APP_ARGUMENTS=()
     local -A FAILED_APPS=()
 

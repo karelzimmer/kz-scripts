@@ -180,10 +180,10 @@ $USAGE"
                 ;;
             -r | --remove )
                 OPTION_REMOVE=true
-                INSTALL='Remove'
-                ON='from'
-                REMOVE='Install'
-                FROM='on'
+                INSTALL_APP='Remove app'
+                ON_HOST='from host'
+                REMOVE_APP='Install app'
+                FROM_HOST='on host'
                 shift
                 ;;
             -- )
@@ -223,7 +223,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     APPS=$(
-        grep    "#.*$INSTALL.*$ON"      \
+        grep    "#.*$INSTALL_APP.*$ON_HOST"      \
                 "$INSTALL_FILE"         |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
@@ -279,13 +279,13 @@ function process_install_file_by_app() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$INSTALL*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON* )
+            '#'*$INSTALL_APP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON_HOST* )
                 # Matching app record.
                 APP_MATCH=true
                 NO_APP_MATCH=false
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
+            '#'*$INSTALL_APP*$ON_HOST* | '#'*$REMOVE_APP*$FROM_HOST* )
                 # Mismatched app record.
                 # Add empty seperator line between the installation of apps.
                 if $APP_MATCH; then
@@ -321,12 +321,13 @@ function process_setup_file_by_host() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$INSTALL*$ON*'*' | '#'*$INSTALL*$ON*$HOSTNAME* )
+            '#'*$INSTALL_APP*$ON_HOST*'*' | \
+            '#'*$INSTALL_APP*$ON_HOST*$HOSTNAME* )
                 # Matching app record.
                 ANY_HOST_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
+            '#'*$INSTALL_APP*$ON_HOST* | '#'*$REMOVE_APP*$FROM_HOST* )
                 # Mismatched app record.
                 # Add empty seperator line between the installation of apps.
                 if $ANY_HOST_MATCH; then
@@ -358,7 +359,11 @@ function install_apps() {
     local TITLE=''
     local -i APP_TOT_NUM=0
 
-    APP_TOT_NUM=$(grep --count "#.*$INSTALL.*$ON" "$COMMAND_FILE" || true)
+    APP_TOT_NUM=$(
+        grep    --count                     \
+                "#.*$INSTALL_APP.*$ON_HOST" \
+                "$COMMAND_FILE"             || true
+        )
     if [[ $APP_TOT_NUM -eq 0 ]]; then
         rm --verbose "$COMMAND_FILE" |& $LOGCMD
         TEXT=$(gettext 'No commands to execute.' )
@@ -408,7 +413,7 @@ function process_command_file() {
 
     while read -r COMMAND_RECORD; do
         case $COMMAND_RECORD in
-            '#'*$INSTALL*$ON* )
+            '#'*$INSTALL_APP*$ON_HOST* )
                 # App record.
                 APP_NAME=$(
                     printf '%s\n' "$COMMAND_RECORD"     |
@@ -514,16 +519,16 @@ changing system settings.")"
 function main() {
     local ARGUMENT_APPS=false
     local FILE_ARGUMENT=''
-    local FROM='from'
-    local INSTALL='Install'
-    local ON='on'
+    local FROM_HOST='from host'
+    local INSTALL_APP='Install app'
+    local ON_HOST='on host'
     local OPTION_APPS=false
     local OPTION_BROWSE=false
     local OPTION_CAT=false
     local OPTION_FILE=false
     local OPTION_REMOVE=false
     local REBOOT=true
-    local REMOVE='Remove'
+    local REMOVE_APP='Remove app'
     local -A APP_ARGUMENTS=()
     local -A FAILED_APPS=()
 
