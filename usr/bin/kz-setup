@@ -300,8 +300,8 @@ function process_setup_file_by_app() {
     done < "$SETUP_FILE"
 
     if $NO_APP_MATCH; then
-        TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
-        infomsg "$TEXT"
+        TEXT=$(eval_gettext "App '\$APP_ARGUMENT' not found")
+        errmsg "$TEXT"
     fi
 }
 

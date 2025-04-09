@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-07 14:36+0200\n"
+"POT-Creation-Date: 2025-04-09 13:07+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -602,8 +602,9 @@ msgstr "Typ 'kz install --apps' voor beschikbare apps."
 msgid "  <app>...       install specified apps"
 msgstr "  <app>...       installeer opgegeven apps"
 
-msgid "app not found"
-msgstr "app niet gevonden"
+#, sh-format
+msgid "App '$APP_ARGUMENT' not found"
+msgstr "App $APP_ARGUMENT niet gevonden"
 
 #, sh-format
 msgid "No install file found, looked for '$INSTALL_FILE'."
