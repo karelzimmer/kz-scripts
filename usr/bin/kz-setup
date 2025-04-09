@@ -100,7 +100,7 @@ function process() {
     if $ARGUMENT_APP; then
         process_argument_app
     else
-        process_setup_file_by_any_host
+        process_setup_file_by_host
     fi
 
     if $OPTION_CAT; then
@@ -257,14 +257,14 @@ function process_argument_app() {
     local TEXT=''
 
     for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
-        process_setup_file_by_any_host_by_app
+        process_setup_file_by_app
     done
 }
 
 
 # This function generates the command file from the setup file and filters by
 # <app>.
-function process_setup_file_by_any_host_by_app() {
+function process_setup_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
@@ -307,8 +307,8 @@ function process_setup_file_by_any_host_by_app() {
 
 
 # This function generates the command file from the setup file and filters by
-# any host (*).
-function process_setup_file_by_any_host() {
+# host.
+function process_setup_file_by_host() {
     local ANY_HOST_MATCH=false
     local INPUT_RECORD=''
 
@@ -318,7 +318,7 @@ function process_setup_file_by_any_host() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP*$ON*'*' )
+            '#'*$SETUP*on*'*' | '#'*$SETUP*on*$HOSTNAME* )
                 # Matching app record.
                 ANY_HOST_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"

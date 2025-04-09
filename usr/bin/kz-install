@@ -100,7 +100,7 @@ function process() {
     if $ARGUMENT_APPS; then
         process_argument_app
     else
-        process_setup_file_by_any_host
+        process_setup_file_by_host
     fi
 
     if $OPTION_CAT; then
@@ -310,8 +310,8 @@ function process_install_file_by_app() {
 
 
 # This function generates the command file from the install file and filters by
-# any host (*).
-function process_setup_file_by_any_host() {
+# host.
+function process_setup_file_by_host() {
     local ANY_HOST_MATCH=false
     local INPUT_RECORD=''
 
@@ -321,7 +321,7 @@ function process_setup_file_by_any_host() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$INSTALL*$ON*'*' )
+            '#'*$INSTALL*$ON*'*' | '#'*$INSTALL*$ON*$HOSTNAME* )
                 # Matching app record.
                 ANY_HOST_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
