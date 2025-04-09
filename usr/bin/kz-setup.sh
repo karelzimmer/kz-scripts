@@ -7,38 +7,38 @@
 ###############################################################################
 # Use "man kz-setup.sh" to learn more about the format of this file.
 
-# Setup anydesk on ?
+# Setup anydesk on pc06 pc07
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
 kz-desktop --addaft=anydesk
 
-# Reset anydesk on ?
+# Reset anydesk on pc06 pc07
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
 kz-desktop --delete=anydesk
 
 
-# Setup calibre on ?
+# Setup calibre on pc06
 # E-book manager.
 kz-desktop --addaft=calibre-gui
 
-# Reset calibre on ?
+# Reset calibre on pc06
 # E-book manager.
 kz-desktop --delete=calibre-gui
 
 
-# Setup cockpit on ?
+# Setup cockpit on pc06
 # Web console.
 # Web app: https://localhost:9090
 kz-desktop --addaft=kz-cockpit
 
-# Reset cockpit on ?
+# Reset cockpit on pc06
 # Web console.
 # Web app: https://localhost:9090
 kz-desktop --delete=kz-cockpit
 
 
-# Setup dash-to-dock on ?
+# Setup dash-to-dock on pc07
 # Desktop dock.
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
@@ -55,7 +55,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position      &> /
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 
-# Reset dash-to-dock on ?
+# Reset dash-to-dock on pc07
 # Desktop dock.
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
@@ -73,22 +73,22 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height      &> /
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed    &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
 
-# Setup evolution on ?
+# Setup evolution on pc07
 # E-mail and organizer.
 kz-desktop --delete=org.gnome.Evolution
 
-# Reset evolution on ?
+# Reset evolution on pc07
 # E-mail and organizer.
 kz-desktop --addbef=org.gnome.Evolution
 
 
-# Setup firefox on ?
+# Setup firefox on pc01 pc02 pc06 pc07
 # Web browser.
 kz-desktop --delete=firefox
 kz-desktop --delete=firefox-esr
 kz-desktop --delete=firefox_firefox
 
-# Reset firefox on ?
+# Reset firefox on pc01 pc02 pc06 pc07
 # Web browser.
 kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
@@ -105,12 +105,12 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'App gdeb
 if [[ ${DISPLAY-} ]]; then echo 'App gdebi cannot be reset.'; fi
 
 
-# Setup git on ?
+# Setup git on pc06 pc07
 # Distributed revision control system.
 # Web app: https://github.com
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
-# Reset git on ?
+# Reset git on pc06 pc07
 # Distributed revision control system.
 # Web app: https://github.com
 git config --global --unset alias.logg
@@ -169,11 +169,11 @@ if [[ ${DISPLAY-} ]]; then xdg-mime default google-chrome.desktop application/pd
 kz-desktop --delete=google-chrome
 
 
-# Setup handbrake on ?
+# Setup handbrake on -none-
 # Video-dvd ripper and transcoder.
 kz-desktop --addaft=fr.handbrake.ghb
 
-# Reset handbrake on ?
+# Reset handbrake on -none-
 # Video-dvd ripper and transcoder.
 kz-desktop --delete=fr.handbrake.ghb
 
@@ -187,32 +187,32 @@ if [[ ${DISPLAY-} ]]; then echo 'snap' > ~/.hidden; fi
 if [[ ${DISPLAY-} ]]; then rm --force --verbose ~/.hidden; fi
 
 
-# Setup kvm on ?
+# Setup kvm on pc06 pc07
 # Kernel-based Virtual Machine.
 kz-desktop --addaft=virt-manager
 
-# Reset kvm on ?
+# Reset kvm on pc06 pc07
 # Kernel-based Virtual Machine.
 kz-desktop --delete=virt-manager
 
 
-# Setup lynis on ?
+# Setup lynis on -none-
 # Security auditing.
 if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; fi
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
 
-# Reset lynis on ?
+# Reset lynis on -none-
 # Security auditing.
 rm --force --recursive ~/lynis
 
 
-# Setup restore-thumbnails on ?
+# Setup restore-thumbnails on -none-
 # Restore thumbnails.
 rm --force --recursive ~/.cache/thumbnails/
 
-# Reset restore-thumbnails on ?
+# Reset restore-thumbnails on -none-
 # Restore thumbnails.
 echo 'App restore-thumbnails cannot be reset.'
 
@@ -226,22 +226,22 @@ chmod 750 ~
 chmod 755 ~
 
 
-# Setup sound-juicer on ?
+# Setup sound-juicer on -none-
 # Audio-cd ripper and player.
 kz-desktop --addaft=org.gnome.SoundJuicer
 
-# Reset sound-juicer on ?
+# Reset sound-juicer on -none-
 # Audio-cd ripper and player.
 kz-desktop --delete=org.gnome.SoundJuicer
 
 
-# Setup spotify on ?
+# Setup spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
 
-# Reset spotify on ?
+# Reset spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
@@ -259,7 +259,7 @@ kz-desktop --addaft=com.teamviewer.TeamViewer
 kz-desktop --delete=com.teamviewer.TeamViewer
 
 
-# Setup terminal on ?
+# Setup terminal on pc01 pc06 pc07
 # Terminal emulator.
 kz-desktop --addbef=org.gnome.Terminal
 # Turn on aliases.
@@ -268,36 +268,36 @@ sed --in-place 's/#alias/alias/g'                           ~/.bashrc
 sed --in-place '/^stty -ixon/d'                             ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
-# Reset terminal on ?
+# Reset terminal on pc01 pc06 pc07
 # Terminal emulator.
 kz-desktop --delete=org.gnome.Terminal
 sed --in-place 's/alias/#alias/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d'   ~/.bashrc
 
 
-# Setup thunderbird on ?
+# Setup thunderbird on pc01 pc02 pc06
 # E-mail and news.
 kz-desktop --delete=thunderbird
 kz-desktop --delete=thunderbird_thunderbird
 
-# Reset thunderbird on ?
+# Reset thunderbird on pc01 pc02 pc06
 # E-mail and news.
 kz-desktop --addbef=thunderbird
 kz-desktop --addbef=thunderbird_thunderbird
 
 
-# Setup virtualbox on ?
+# Setup virtualbox on -none-
 # Virtualization.
 kz-desktop --addaft=virtualbox
 kz-desktop --addaft=kz-vm-hugowin732
 
-# Reset virtualbox on ?
+# Reset virtualbox on -none-
 # Virtualization.
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
 
 
-# Setup vscode on ?
+# Setup vscode on pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
 kz-desktop --addbef=code
@@ -311,45 +311,45 @@ if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/plain; fi
 if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/troff; fi
 if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
-# Reset vscode on ?
+# Reset vscode on pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
 kz-desktop --delete=code
 
 
-# Setup webmin on ?
+# Setup webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
 kz-desktop --addaft=kz-webmin
 
-# Reset webmin on ?
+# Reset webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
 kz-desktop --delete=kz-webmin
 
 
-# Setup whatsapp on ?
+# Setup whatsapp on maria-desktop
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --addaft=kz-whatsapp
 
-# Reset whatsapp on ?
+# Reset whatsapp on maria-desktop
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --delete=kz-whatsapp
 
 
-# Setup youtube-dl on ?
+# Setup youtube-dl on -none-
 # Download videos.
 kz-desktop --addaft=youtubedl-gui
 
-# Reset youtube-dl on ?
+# Reset youtube-dl on -none-
 # Download videos.
 kz-desktop --delete=youtubedl-gui
 
 
-# Setup zoom on ?
+# Setup zoom on pc01
 # Videoconferencing.
 kz-desktop --addaft=kz-zoom
 
-# Reset zoom on ?
+# Reset zoom on pc01
 # Videoconferencing.
 kz-desktop --delete=kz-zoom
