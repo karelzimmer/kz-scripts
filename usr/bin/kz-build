@@ -351,10 +351,8 @@ function install_deb_package() {
 # This function controls the termination of the script.
 function term() {
     if $DEV; then
-        TEXT="
-$(gettext "Please note: the development version of the kz package is \
-installed")
-"
+        TEXT=$(gettext "Please note: the development version of the kz \
+package is installed")
         errmsg "$TEXT"
     fi
     TEXT=$(gettext 'Complete!')
