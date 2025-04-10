@@ -7,7 +7,7 @@
 ###############################################################################
 # Use "man kz-install.sh" to learn more about the format of this file.
 
-# Install app 1-disabled-apport on host host *
+# Install app 1-disabled-apport on host *
 # Disable Ubuntu's automatic crash report generation.
 if systemctl cat apport &> /dev/null; then sudo systemctl stop apport.service; fi
 if systemctl cat apport &> /dev/null; then sudo systemctl disable apport.service; fi
@@ -20,7 +20,7 @@ if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=0/enab
 if systemctl cat apport &> /dev/null; then sudo systemctl enable --now apport.service; fi
 
 
-# Install app 2-update-system on host host *
+# Install app 2-update-system on host *
 # Update and cleanup system.
 # This may take a while...
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
@@ -35,7 +35,7 @@ if grep --quiet rhel   /etc/os-release && type snap &> /dev/null; then sudo snap
 echo 'The update-system app cannot be removed.'
 
 
-# Install app 7zip on host host *
+# Install app 7zip on host *
 # File archiver.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes p7zip-full; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes p7zip; fi
