@@ -188,15 +188,22 @@ function upload_website() {
 
 # This function installs package kz.
 function install_package() {
+    local DEV=false
+    local PARM=''
     local TEXT=''
 
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
 
+    check_repos || DEV=true
+
     logmsg 'Calling kz-get (via wget and bash)...'
     # Call kz-get via wget and bash as a regular user would do.
     cd "$HOME"
-    if ! (wget karelzimmer.nl/getkz; bash getkz); then
+    if $DEV; then
+        PARM='--dev'
+    fi
+    if ! (wget karelzimmer.nl/getkz; bash getkz "$PARM"); then
         TEXT=$(gettext 'Install package kz failed.')
         errmsg "$TEXT"
     fi
