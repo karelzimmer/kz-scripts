@@ -69,10 +69,7 @@ function process() {
         SCRIPTNAME=$(basename "$SCRIPT")
         FILE=$SCRIPTDIR/$SCRIPTNAME
         case $SCRIPTNAME in
-            *.gpg )
-                continue
-                ;;
-            *.png )
+            *.gpg | *.png )
                 continue
                 ;;
             *.json | *.policy )

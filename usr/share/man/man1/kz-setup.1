@@ -62,14 +62,14 @@ With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .sp
 A -- signals the end of options and disables further option processing.
 .sp
-For non-default installations there may be additional commands to run.
+For non-default installations there may be extra commands to run.
 .br
 If necessary, use the following command:
-    gpg --decrypt /usr/bin/kz-setup.gpg | grep $HOSTNAME
+    gpg --decrypt /usr/bin/kz-setup-extra.gpg | grep $HOSTNAME
 .sp
 This gpg file (GNU Privacy Guard, or GnuPG, or GPG) was previously created for
 non-default installations with the command:
-    gpg --symmetric ~/kz-setup
+    gpg --symmetric --no-symkey-cache kz-setup-extra
 
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.

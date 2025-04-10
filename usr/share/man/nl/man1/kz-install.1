@@ -86,11 +86,11 @@ Voor niet-standaard installaties zijn er mogelijk extra opdrachten om uit te
 voeren.
 .br
 Gebruik eventueel de volgende opdracht:
-    gpg --decrypt /usr/bin/kz-install.gpg | grep $HOSTNAME
+    gpg --decrypt /usr/bin/kz-install-extra.gpg | grep $HOSTNAME
 .sp
 Dit gpg-bestand (GNU Privacy Guard, of GnuPG, of GPG) is eerder gemaakt voor
-niet-standaard installaties met de opdracht::
-    gpg --symmetric ~/kz-install
+niet-standaard installaties met de opdracht:
+    gpg --symmetric --no-symkey-cache kz-install-extra
 
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.

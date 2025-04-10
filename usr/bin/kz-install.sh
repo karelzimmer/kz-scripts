@@ -720,10 +720,6 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The spot
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ssh; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes openssh; fi
 sudo sed --in-place 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d' /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '2a192.168.1.100 pc01' /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '3a192.168.1.2 pc06' /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '4a192.168.1.219 pc07' /etc/hosts; fi
 # Check for remote root access.
 grep 'PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
