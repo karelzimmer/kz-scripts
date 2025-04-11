@@ -110,7 +110,7 @@ function become_root_check() {
 # next check if so.
 function check_package_manager() {
     local TEXT=''
-    local -i CHECK_WAIT=10
+    local -i CHECK_WAIT_TIME=10
 
     if grep --quiet rhel /etc/os-release; then
         return $OK
@@ -120,8 +120,8 @@ function check_package_manager() {
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        TEXT=$(gettext "Wait \$CHECK_WAIT seconds for another package manager \
-to finish")
+        TEXT=$(gettext "Wait \$CHECK_WAIT_TIME seconds for another package \
+manager to finish")
         if $OPTION_GUI; then
             logmsg "$TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.
@@ -129,7 +129,7 @@ to finish")
         else
             infomsg "$TEXT..."
         fi
-        sleep $CHECK_WAIT
+        sleep $CHECK_WAIT_TIME
     done
 }
 

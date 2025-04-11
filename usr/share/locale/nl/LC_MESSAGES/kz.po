@@ -45,8 +45,8 @@ msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
 #, sh-format
-msgid "Wait $CHECK_WAIT seconds for another package manager to finish"
-msgstr "Wacht $CHECK_WAIT seconden tot andere pakketbeheerder klaar is"
+msgid "Wait $CHECK_WAIT_TIME seconds for another package manager to finish"
+msgstr "Wacht $CHECK_WAIT_TIME seconden tot andere pakketbeheerder klaar is"
 
 msgid "Wait {} seconds for another package manager to finish"
 msgstr "Wacht {} seconden tot andere pakketbeheerder klaar is"
