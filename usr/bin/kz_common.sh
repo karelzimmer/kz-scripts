@@ -120,7 +120,8 @@ function check_package_manager() {
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        TEXT=$(gettext 'Wait for another package manager to finish')
+        TEXT=$(gettext "Wait \$CHECK_WAIT seconds for another package manager \
+to finish")
         if $OPTION_GUI; then
             logmsg "$TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.

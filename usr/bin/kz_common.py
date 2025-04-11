@@ -138,7 +138,9 @@ def check_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
         except Exception:
             break
         else:
-            TEXT: str = _('Wait for another package manager to finish') + '...'
+            TEXT: str = _('Wait {} seconds for another package manager to \
+finish').format(CHECK_WAIT)
+            TEXT += '...'
             infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             time.sleep(CHECK_WAIT)
 
