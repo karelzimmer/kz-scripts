@@ -1126,9 +1126,6 @@ msgstr "Spotify"
 msgid "Listen to music and podcasts via a web browser"
 msgstr "Luister naar muziek en podcasts via een webbrowser"
 
-msgid "Skype"
-msgstr "Skype"
-
 msgid "Video call with others from a web browser"
 msgstr "Videogesprek met anderen vanuit een webbrowser"
 
