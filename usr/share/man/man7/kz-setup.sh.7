@@ -41,9 +41,9 @@ l | l
 l | l
 l | l.
 T{
-# Setup \fI<app>\fR on <host>...
+# Setup app \fI<app>\fR on host <host>...
 T}:T{
-Set up \fI<app>\fR on <host>s (\fBApp record\fR)
+Set up \fI<app>\fR on host <host>s (\fBApp record\fR)
 T}
 T{
 # Comment...
@@ -53,21 +53,21 @@ T}
 T{
 Command
 T}:T{
-Setup command (one or more \fBCommand records\fR)
+Setup app command (one or more \fBCommand records\fR)
 T}
 T{
 T}:T{
 Empty line (none, one or more)
 T}
 T{
-# Reset \fI<app>\fR on <host>...
+# Setup \fI<app>\fR on host <host>...
 T}:T{
-Reset \fI<app>\fR on <host>s (\fBApp record\fR for option reset)
+Reset app \fI<app>\fR on host <host>s (\fBApp record\fR for option reset)
 T}
 T{
 Command
 T}:T{
-Reset command (one or more \fBCommand records\fR)
+Reset app command (one or more \fBCommand records\fR)
 T}
 .TE
 .LP
@@ -95,7 +95,7 @@ l | l
 l | l
 l | l.
 T{
-# Setup google-chrome for *
+# Setup app google-chrome for *
 T}:T{
 Set up google-chrome on any computer, see [1]
 T}
@@ -107,9 +107,9 @@ T{
 T}:T{
 T}
 T{
-# Reset google-chrome for *
+# Reset app google-chrome for *
 T}:T{
-Reset google-chrome on any computer, see [1]
+Reset app google-chrome on any computer, see [1]
 T}
 T{
 kz-desktop --delete=google-chrome
@@ -119,9 +119,9 @@ T{
 T}:T{
 T}
 T{
-# Setup gnome on pc02
+# Setup app gnome on host pc01
 T}:T{
-Set up gnome only on pc02, see [2]
+Set up gnome only on host pc01, see [2]
 T}
 T{
 gsettings set org.gnome.shell...
@@ -131,9 +131,9 @@ T{
 T}:T{
 T}
 T{
-# setup kvm on pc01 pc02
+# setup kvm on host pc01 pc02
 T}:T{
-Set up kvm on pc01 and pc02, see [3]
+Set up kvm on host pc01 and pc02, see [3]
 T}
 T{
 kz-desktop --addaft=virt-manager
@@ -143,7 +143,7 @@ T{
 T}:T{
 T}
 T{
-# Setup google-earth for -none-
+# Setup app google-earth for #none
 T}:T{
 Do not set up Google Earth by default, see [4]
 T}
@@ -160,8 +160,8 @@ The line with '*' causes the associated commands to run on all computers.
 .sp
 [2]
 .br
-The line with 'pc02' ensures that the associated commands are executed only on
-pc02 by default.
+The line with 'pc01' ensures that the associated commands are executed only on
+host pc01 by default.
 .br
 The app can still be set up on another computer with the command 'kz setup goo\
 gle-earth'.
@@ -169,15 +169,15 @@ gle-earth'.
 [3]
 .br
 The line with 'pc01 pc02' ensures that the associated commands are executed
-only on pc01 and pc02 by default.
+only on host pc01 and pc02 by default.
 .br
 The app can still be set up on another computer with the command 'kz setup kvm\
 '.
 .sp
 [4]
 .br
-The line with '-none-' ensures that the associated commands are not executed by
-default (NOTE: '-none-' is not a valid computer name and will therefore never
+The line with '#none' ensures that the associated commands are not executed by
+default (NOTE: '#none' is not a valid computer name and will therefore never
 be selected by default).
 .br
 The app can still be set up with the command 'kz setup google-earth'.

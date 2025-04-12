@@ -224,10 +224,8 @@ function term() {
     printf '\b%s\n' '=]100%'
 
     if $OPTION_DEV; then
-        TEXT="
-$(gettext "Please note: then development version of the kz package is \
-installed")
-"
+        TEXT=$(gettext "Please note: then development version of the kz \
+package is installed")
         errmsg "$TEXT"
     fi
 

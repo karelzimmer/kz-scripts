@@ -23,7 +23,7 @@ zoeken naar \fBback\fR, klik op \fBBack-up terugzetten\fR.
 .sp
 De back-up wordt verwacht op een aangekoppeld usb-medium zoals een usb
 externe harddisk in map \fB<gebruikersnaam>@<computernaam>\fR, bijvoorbeeld
-/media/jan/backupdisk/jan@pc02 voor Jan op pc02.
+/media/karel/backupdisk/karel@pc-van-karel voor Karel op pc-van-karel.
 .sp
 In een desktopomgeving als de back-up is teruggezet, wordt de de eerder
 ingestelde bureaubladachtergrond teruggezet, zie de sectie \fBBESTANDEN\fR
@@ -33,7 +33,8 @@ Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz restore\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
 .sp
 Met optie \fB-s\fR, \fB--source\fR \fI<map>\fR kan een andere locatie opgegeven
-worden. Bijvoorbeeld /media/jan/usbstick in plaats van /media/jan/backupdisk.
+worden. Bijvoorbeeld /media/karel/usbstick in plaats van
+/media/karel/backupdisk.
 .sp
 Voor het terugzetten van de back-up wordt rsync gebruikt.
 .sp
@@ -100,10 +101,10 @@ Zet alles in de back-up (reservekopie) terug. Hiervoor is in een
 desktopomgeving ook starter \fBBack-up terugzetten\fR beschikbaar.
 .RE
 .sp
-\fBkz restore --source /media/jan/usbstick\fR
+\fBkz restore --source /media/karel/usbstick\fR
 .RS
-Zet de back-up van de Persoonlijke map van Jan op pc02 terug vanaf
-/media/jan/usbstick uit de map jan@pc02.
+Zet de back-up van de Persoonlijke map van Karel op pc-van-karel terug vanaf
+/media/karel/usbstick uit de map karel@pc-van-karel.
 .RE
 .EE
 

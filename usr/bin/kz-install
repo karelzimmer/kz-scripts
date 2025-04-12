@@ -94,12 +94,13 @@ function process() {
         exit $OK
     fi
 
+    become_root
     COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 
     if $ARGUMENT_APPS; then
         process_argument_app
     else
-        process_file_by_host
+        process_setup_file_by_host
     fi
 
     if $OPTION_CAT; then
@@ -110,7 +111,6 @@ function process() {
     if [[ $UID -ne 0 ]]; then
         rm --verbose "$COMMAND_FILE" |& $LOGCMD
     fi
-    become_root
     install_apps
 }
 
@@ -180,10 +180,10 @@ $USAGE"
                 ;;
             -r | --remove )
                 OPTION_REMOVE=true
-                INSTALL='Remove'
-                ON='from'
-                REMOVE='Install'
-                FROM='on'
+                INSTALL_APP='Remove app'
+                ON_HOST='from host'
+                REMOVE_APP='Install app'
+                FROM_HOST='on host'
                 shift
                 ;;
             -- )
@@ -223,7 +223,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     APPS=$(
-        grep    "#.*$INSTALL.*$ON"      \
+        grep    "#.*$INSTALL_APP.*$ON_HOST"      \
                 "$INSTALL_FILE"         |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
@@ -257,25 +257,17 @@ $USAGE"
 # This function processes argument <app>.
 function process_argument_app() {
     local APP_ARGUMENT=''
-    local APP_NOT_FOUND=false
     local TEXT=''
 
     for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
-        process_file_by_app
+        process_install_file_by_app
     done
-
-    if $APP_NOT_FOUND; then
-        TEXT="$(gettext "Type 'kz install --apps' for available apps.")"
-        infomsg "$TEXT"
-        rm --verbose "$COMMAND_FILE" |& $LOGCMD
-        exit $ERR
-    fi
 }
 
 
 # This function generates the command file from the install file and filters by
 # <app>.
-function process_file_by_app() {
+function process_install_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
@@ -287,13 +279,13 @@ function process_file_by_app() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$INSTALL*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON* )
+            '#'*$INSTALL_APP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON_HOST* )
                 # Matching app record.
                 APP_MATCH=true
                 NO_APP_MATCH=false
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
+            '#'*$INSTALL_APP*$ON_HOST* | '#'*$REMOVE_APP*$FROM_HOST* )
                 # Mismatched app record.
                 # Add empty seperator line between the installation of apps.
                 if $APP_MATCH; then
@@ -311,17 +303,16 @@ function process_file_by_app() {
     done < "$INSTALL_FILE"
 
     if $NO_APP_MATCH; then
-        APP_NOT_FOUND=true
-        TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
-        infomsg "$TEXT"
+        TEXT=$(eval_gettext "App '\$APP_ARGUMENT' not found")
+        errmsg "$TEXT"
     fi
 }
 
 
 # This function generates the command file from the install file and filters by
-# hostname.
-function process_file_by_host() {
-    local HOST_MATCH=false
+# host.
+function process_setup_file_by_host() {
+    local ANY_HOST_MATCH=false
     local INPUT_RECORD=''
 
     while read -r INPUT_RECORD; do
@@ -330,21 +321,22 @@ function process_file_by_host() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$INSTALL*$ON*'*' | '#'*$INSTALL*$ON*$HOSTNAME* )
+            '#'*$INSTALL_APP*$ON_HOST*'*' | \
+            '#'*$INSTALL_APP*$ON_HOST*$HOSTNAME* )
                 # Matching app record.
-                HOST_MATCH=true
+                ANY_HOST_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
+            '#'*$INSTALL_APP*$ON_HOST* | '#'*$REMOVE_APP*$FROM_HOST* )
                 # Mismatched app record.
                 # Add empty seperator line between the installation of apps.
-                if $HOST_MATCH; then
+                if $ANY_HOST_MATCH; then
                     printf '\n' >> "$COMMAND_FILE"
                 fi
-                HOST_MATCH=false
+                ANY_HOST_MATCH=false
                 ;;
             * )
-                if $HOST_MATCH; then
+                if $ANY_HOST_MATCH; then
                     # Record for command file.
                     printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
@@ -363,15 +355,20 @@ function process_option_cat() {
 
 # This function starts installing the apps.
 function install_apps() {
-    local NO_COMMANDS_FOUND=true
     local TEXT=''
     local TITLE=''
     local -i APP_TOT_NUM=0
-    local -A FAILED_APPS=()
 
-    APP_TOT_NUM=$(grep --count "#.*$INSTALL.*$ON" "$COMMAND_FILE" || true)
+    APP_TOT_NUM=$(
+        grep    --count                     \
+                "#.*$INSTALL_APP.*$ON_HOST" \
+                "$COMMAND_FILE"             || true
+        )
     if [[ $APP_TOT_NUM -eq 0 ]]; then
-        return $OK
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
+        exit $OK
     fi
 
     TITLE=$(gettext 'Install apps')
@@ -396,25 +393,6 @@ function install_apps() {
     fi
 
     rm --verbose "$COMMAND_FILE" |& $LOGCMD
-
-    if $NO_COMMANDS_FOUND; then
-        TEXT=$(gettext 'No commands to execute.' )
-        infomsg "$TEXT"
-        exit $OK
-    fi
-
-    if [[ ${FAILED_APPS[*]} ]]; then
-        TEXT="$(gettext "The installation of the following apps contains \
-errors:")
-${FAILED_APPS[*]}
-
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
-view log messages.")
-
-$(gettext "Try installing the apps again.")"
-        errmsg "$TEXT"
-        exit $ERR
-    fi
 }
 
 
@@ -435,7 +413,7 @@ function process_command_file() {
 
     while read -r COMMAND_RECORD; do
         case $COMMAND_RECORD in
-            '#'*$INSTALL*$ON* )
+            '#'*$INSTALL_APP*$ON_HOST* )
                 # App record.
                 APP_NAME=$(
                     printf '%s\n' "$COMMAND_RECORD"     |
@@ -456,7 +434,6 @@ function process_command_file() {
                 ;;
             * )
                 # Process command record.
-                NO_COMMANDS_FOUND=false
                 execute_command "$COMMAND_RECORD"
                 ;;
         esac
@@ -497,6 +474,19 @@ function term() {
     local OPERATION=''
     local TEXT=''
 
+    if [[ ${FAILED_APPS[*]} ]]; then
+        TEXT="$(gettext "The installation of the following apps contains \
+errors:")
+${FAILED_APPS[*]}
+
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
+view log messages.")
+
+$(gettext "Try installing the apps again.")"
+        errmsg "$TEXT"
+        exit $ERR
+    fi
+
     OPERATION=$(gettext 'install')
 
     if $OPTION_REMOVE; then
@@ -529,17 +519,18 @@ changing system settings.")"
 function main() {
     local ARGUMENT_APPS=false
     local FILE_ARGUMENT=''
-    local FROM='from'
-    local INSTALL='Install'
-    local ON='on'
+    local FROM_HOST='from host'
+    local INSTALL_APP='Install app'
+    local ON_HOST='on host'
     local OPTION_APPS=false
     local OPTION_BROWSE=false
     local OPTION_CAT=false
     local OPTION_FILE=false
     local OPTION_REMOVE=false
     local REBOOT=true
-    local REMOVE='Remove'
+    local REMOVE_APP='Remove app'
     local -A APP_ARGUMENTS=()
+    local -A FAILED_APPS=()
 
     init    "$@"
     process "$@"

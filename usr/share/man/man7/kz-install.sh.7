@@ -40,9 +40,9 @@ T}
 l | l
 l | l.
 T{
-# Install \fI<app>\fR on <host>...
+# Install app \fI<app>\fR on host <host>...
 T}:T{
-Install the \fI<app>\fR on <host>s (\fBApp record\fR)
+Install the app \fI<app>\fR on host <host>s (\fBApp record\fR)
 T}
 T{
 # Comment...
@@ -52,21 +52,22 @@ T}
 T{
 Command
 T}:T{
-Install command (one or more \fBCommand records\fR)
+Install app command (one or more \fBCommand records\fR)
 T}
 T{
 T}:T{
 Empty line (none, one or more)
 T}
 T{
-# Remove \fI<app>\fR from <host>...
+# Remove app \fI<app>\fR from host <host>...
 T}:T{
-Remove the \fI<app>\fR from <host>s (\fBApp record\fR for option remove)
+Remove the app \fI<app>\fR from host <host>s (\fBApp record\fR for option
+remove)
 T}
 T{
 Command
 T}:T{
-Remove command (one or more \fBCommand records\fR)
+Remove app command (one or more \fBCommand records\fR)
 T}
 .TE
 .LP
@@ -84,9 +85,9 @@ T}
 l | l
 l | l.
 T{
-# Install gnome-gmail on *
+# Install app gnome-gmail on host *
 T}:T{
-Install gnome-gmail on any computer, see [1].
+Install app gnome-gmail on any computer, see [1].
 T}
 T{
 sudo apt-get install --assume-yes gnome-gmail
@@ -96,9 +97,9 @@ T{
 T}:T{
 T}
 T{
-# Remove gnome-gmail from *
+# Remove app gnome-gmail from host *
 T}:T{
-Remove gnome-gmail from any computer, see [1].
+Remove app gnome-gmail from any computer, see [1].
 T}
 T{
 sudo apt-get remove --purge --assume-yes gnome-gmail
@@ -108,9 +109,9 @@ T{
 T}:T{
 T}
 T{
-# Install ufw on pc02
+# Install app ufw on host pc01
 T}:T{
-Install ufw only on pc02, see [2].
+Install app ufw only on host pc01, see [2].
 T}
 T{
 sudo apt-get install --assume-yes gufw
@@ -120,9 +121,9 @@ T{
 T}:T{
 T}
 T{
-# Install kvm on pc01 pc02
+# Install app kvm on host pc01 pc02
 T}:T{
-Install kvm on pc01 and pc02, see [3].
+Install app kvm on host pc01 and pc02, see [3].
 T}
 T{
 sudo apt-get install --assume-yes qemu-kvm
@@ -132,7 +133,7 @@ T{
 T}:T{
 T}
 T{
-# Install google-earth on -none-
+# Install app google-earth on host #none
 T}:T{
 Do not install Google Earth by default, see [4].
 T}
@@ -149,8 +150,8 @@ The line with '*' causes the associated commands to run on all computers.
 .sp
 [2]
 .br
-The line with 'pc02' ensures that the associated commands are executed only on
-pc02 by default.
+The line with 'pc01' ensures that the associated commands are executed only on
+host pc01 by default.
 .br
 The app can still be installed on another computer with the command 'kz instal\
 l google-earth'.
@@ -158,15 +159,15 @@ l google-earth'.
 [3]
 .br
 The line with 'pc01 pc02' ensures that the associated commands are executed
-only on pc01 and pc02 by default.
+only on host pc01 and pc02 by default.
 .br
 The app can still be installed on another computer with the command 'kz instal\
 l kvm'.
 .sp
 [4]
 .br
-The line with '-none-' ensures that the associated commands are not executed on
-a computer by default (NOTE: '-none-' is not a valid computer name and will
+The line with '#none' ensures that the associated commands are not executed on
+a computer by default (NOTE: '#none' is not a valid computer name and will
 therefore never be selected by default).
 .br
 The app can still be installed with the command 'kz install google-earth'.

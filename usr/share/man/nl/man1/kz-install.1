@@ -52,6 +52,7 @@ in het installatiebestand.
 .sp
 Naar keuze kunnen te installeren apps opgegeven worden met argument
 \fI<app>\fR.
+.br
 Per opgegeven app worden de opdrachten geselecteerd uit het installatiebestand
 en gekopieerd naar het opdrachtbestand.
 .sp
@@ -80,8 +81,20 @@ Debian-gebaseerd systeem kunt u het volgende proberen:
 Op een Red Hat-gebaseerd systeem probeer het volgende:
     sudo dnf clean all
     sudo dnf makecache
-
 .sp
+Sommige computers vereisen extra opdrachten om de installatie te voltooien.
+Deze opdrachten vereisen mogelijk gevoelige informatie, zoals een
+gebruikersnaam.
+Daarom worden deze opdrachten opgenomen in een met een wachtwoord beveiligd
+bestand.
+.br
+Gebruik eventueel de volgende opdracht:
+    gpg --decrypt /usr/bin/kz-install-extra.gpg | grep $HOSTNAME
+.sp
+Dit gpg-bestand (GNU Privacy Guard, of GnuPG, of GPG) is eerder gemaakt met de
+opdracht:
+    gpg --symmetric --no-symkey-cache kz-install-extra
+
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
@@ -130,6 +143,12 @@ afsluitwaarde ongelijk 0.
 /usr/bin/kz-install.sh
 .RS
 Installatiebestand.
+.RE
+.sp
+/usr/bin/kz-install.gpg
+.RS
+Bestand met mogelijke aanvullende handmatige opdrachten. Alleen van toepassing
+op niet-standaard installaties.
 .RE
 .sp
 /tmp/kz-install-commands-XXXXXXXXXX

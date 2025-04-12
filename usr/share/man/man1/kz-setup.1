@@ -33,8 +33,8 @@ contains commands for all users included in it.
 The commands supplied by with \fBkz setup\fR are arranged in such a way that
 the result remains the same when executed repeatedly (idempotent).
 .sp
-When processing the setup file, the commands for any and the current user are
-selected and copied to a command file.
+When processing the setup file, the commands for any and the current computer
+are selected and copied to a command file.
 .br
 The commands in the command file are executed.
 Upon successful completion the user will be logged out.
@@ -44,6 +44,7 @@ For the format of the setup file see \fBman kz-setup.sh\fR.
 Option \fB-a\fR, \fB--apps\fR lists all apps available in the setup file.
 .sp
 Optionally, apps to be setup can be specified with argument \fI<app>\fR.
+.br
 Per specified app, the commands are selected from the setup file and are copied
 to the command file.
 .sp
@@ -60,6 +61,17 @@ desktop environment is required.
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .sp
 A -- signals the end of options and disables further option processing.
+.sp
+Some computers require additional commands to complete the installation.
+These commands may require sensitive information, such as a username.
+For this reason, these commands are included in a password-protected file.
+.br
+If necessary, use the following command:
+    gpg --decrypt /usr/bin/kz-setup-extra.gpg | grep $HOSTNAME
+.sp
+This gpg file (GNU Privacy Guard, or GnuPG, or GPG) was previously created with
+the command:
+    gpg --symmetric --no-symkey-cache kz-setup-extra
 
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
@@ -111,6 +123,12 @@ equal to 0.
 Setup file.
 .RE
 .sp
+/usr/bin/kz-setup.gpg
+.RS
+File containing possible additional manual commands. Only applicable to
+non-default installations.
+.RE
+.sp
 /tmp/kz-setup-commands-XXXXXXXXXX
 .RS
 Command file, e.g. kz-setup-commands-SYpGEKVWZI.
@@ -151,7 +169,7 @@ IaC and Day 1 Operations
 .sp
 \fBkz setup\fR
 .RS
-Set everything in the default setup file.
+Set up everything in the default setup file.
 Starter \fBSetup apps\fR is also available for this in a desktop environment.
 .RE
 .sp

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-07 14:36+0200\n"
+"POT-Creation-Date: 2025-04-10 16:47+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -44,8 +44,12 @@ msgstr "fataal: onbekende distributie"
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-msgid "Wait for another package manager to finish"
-msgstr "Wacht tot andere pakketbeheerder klaar is"
+#, sh-format
+msgid "Wait $CHECK_WAIT_TIME seconds for another package manager to finish"
+msgstr "Wacht $CHECK_WAIT_TIME seconden tot andere pakketbeheerder klaar is"
+
+msgid "Wait {} seconds for another package manager to finish"
+msgstr "Wacht {} seconden tot andere pakketbeheerder klaar is"
 
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
@@ -602,8 +606,9 @@ msgstr "Typ 'kz install --apps' voor beschikbare apps."
 msgid "  <app>...       install specified apps"
 msgstr "  <app>...       installeer opgegeven apps"
 
-msgid "app not found"
-msgstr "app niet gevonden"
+#, sh-format
+msgid "App '$APP_ARGUMENT' not found"
+msgstr "App '$APP_ARGUMENT' niet gevonden"
 
 #, sh-format
 msgid "No install file found, looked for '$INSTALL_FILE'."
@@ -1120,9 +1125,6 @@ msgstr "Spotify"
 
 msgid "Listen to music and podcasts via a web browser"
 msgstr "Luister naar muziek en podcasts via een webbrowser"
-
-msgid "Skype"
-msgstr "Skype"
 
 msgid "Video call with others from a web browser"
 msgstr "Videogesprek met anderen vanuit een webbrowser"

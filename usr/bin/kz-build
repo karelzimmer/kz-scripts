@@ -311,6 +311,7 @@ function build_rpm_package() {
 # This function installs Debian-package kz.
 function install_deb_package() {
     local TEXT=''
+    local TO_INSTALL=''
     local -i SLEEP=1
 
     TEXT=$(gettext 'Install package')...
@@ -329,11 +330,17 @@ function install_deb_package() {
         sleep $SLEEP
     done &
 
-    sudo    DEBIAN_FRONTEND=noninteractive                      \
-            apt-get                                             \
-            reinstall                                           \
-            --assume-yes                                        \
-            "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
+    if $DEV; then
+        TO_INSTALL=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME
+    else
+        TO_INSTALL=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
+    fi
+
+    sudo    DEBIAN_FRONTEND=noninteractive  \
+            apt-get                         \
+            reinstall                       \
+            --assume-yes                    \
+            "$TO_INSTALL"                   |& $LOGCMD
 
     # Progress indicator ends like [====]100%.
     rm --verbose "$KZ_PID_FILE" |& $LOGCMD
@@ -344,10 +351,8 @@ function install_deb_package() {
 # This function controls the termination of the script.
 function term() {
     if $DEV; then
-        TEXT="
-$(gettext "Please note: the development version of the kz package is \
-installed")
-"
+        TEXT=$(gettext "Please note: the development version of the kz \
+package is installed")
         errmsg "$TEXT"
     fi
     TEXT=$(gettext 'Complete!')

@@ -46,6 +46,7 @@ For the format of the install file see \fBman kz-install.sh\fR.
 Option \fB-a\fR, \fB--apps\fR lists all apps available in the install file.
 .sp
 Optionally, apps to be installed can be specified with argument \fI<app>\fR.
+.br
 Per specified app, the commands are selected from the install file and are
 copied to the command file.
 .sp
@@ -73,8 +74,18 @@ can try the following:
 On a Red Hat-based system try the following:
     sudo dnf clean all
     sudo dnf makecache
-
 .sp
+Some computers require additional commands to complete the installation.
+These commands may require sensitive information, such as a username.
+For this reason, these commands are included in a password-protected file.
+.br
+If necessary, use the following command:
+    gpg --decrypt /usr/bin/kz-install-extra.gpg | grep $HOSTNAME
+.sp
+This gpg file (GNU Privacy Guard, or GnuPG, or GPG) was previously created with
+the command:
+    gpg --symmetric --no-symkey-cache kz-install-extra
+
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
 .TP
@@ -123,6 +134,12 @@ equal to 0.
 /usr/bin/kz-install.sh
 .RS
 Install file.
+.RE
+.sp
+/usr/bin/kz-install.gpg
+.RS
+File containing possible additional manual commands. Only applicable to
+non-default installations.
 .RE
 .sp
 /tmp/kz-install-commands-XXXXXXXXXX
@@ -192,4 +209,3 @@ Show remove commands for Google Chrome.
 \fBkz-setup\fR(1),
 \fBkz-update\fR(1),
 \fBkz-install.sh\fR(7)
-

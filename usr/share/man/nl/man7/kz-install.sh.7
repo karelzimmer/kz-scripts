@@ -41,9 +41,9 @@ T}
 l | l
 l | l.
 T{
-# Install \fI<app>\fR on <host>...
+# Install app \fI<app>\fR on host <host>...
 T}:T{
-De \fI<app>\fR installeren op <host>s (\fBApp-regel\fR)
+De app \fI<app>\fR installeren op host <host>s (\fBApp-regel\fR)
 T}
 T{
 # Commentaar...
@@ -53,17 +53,17 @@ T}
 T{
 Opdracht
 T}:T{
-Installatie-opdracht (één of meer \fBOpdracht-regels\fR)
+App installatie-opdracht (één of meer \fBOpdracht-regels\fR)
 T}
 T{
 T}:T{
 Lege regel (geen, één of meer)
 T}
 T{
-# Remove \fI<app>\fR from <host>...
+# Remove app \fI<app>\fR from host <host>...
 T}:T{
-De \fI<app>\fR verwijderen van <host>s (\fBApp-regel\fR voor optie \fB-r\fR,
-\fB--remove\fR)
+De app \fI<app>\fR verwijderen van host <host>s (\fBApp-regel\fR voor optie
+\fB-r\fR, \fB--remove\fR)
 T}
 T{
 Opdracht
@@ -86,9 +86,9 @@ T}
 l | l
 l | l.
 T{
-# Install gnome-gmail on *
+# Install app gnome-gmail on host *
 T}:T{
-Installeer gnome-gmail op iedere computer, zie [1]
+Installeer app gnome-gmail op iedere computer, zie [1]
 T}
 T{
 sudo apt-get install --assume-yes gnome-gmail
@@ -98,9 +98,9 @@ T{
 T}:T{
 T}
 T{
-# Remove gnome-gmail from *
+# Remove app gnome-gmail from host *
 T}:T{
-Verwijder gnome-gmail van iedere computer, zie [1]
+Verwijder app gnome-gmail van iedere computer, zie [1]
 T}
 T{
 sudo apt-get remove --purge --assume-yes gnome-gmail
@@ -110,9 +110,9 @@ T{
 T}:T{
 T}
 T{
-# Install ufw on pc02
+# Install app ufw on host pc01
 T}:T{
-Installeer ufw alleen op pc02, zie [2]
+Installeer app ufw alleen op host pc01, zie [2]
 T}
 T{
 sudo apt-get install --assume-yes gufw
@@ -122,9 +122,9 @@ T{
 T}:T{
 T}
 T{
-# Install kvm on pc01 pc02
+# Install app kvm on host pc01 pc02
 T}:T{
-Installeer kvm op pc01 en pc02, zie [3]
+Installeer app kvm op host pc01 en pc02, zie [3]
 T}
 T{
 sudo apt-get install --assume-yes qemu-kvm
@@ -134,9 +134,9 @@ T{
 T}:T{
 T}
 T{
-# Install google-earth on -none-
+# Install app google-earth on host #none
 T}:T{
-Standaard niet google-earth installeren, zie [4]
+Standaard niet app google-earth installeren, zie [4]
 T}
 T{
 sudo apt-get install --assume-yes google-earth
@@ -152,8 +152,8 @@ worden uitgevoerd.
 .sp
 [2]
 .br
-De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc02 worden uitgevoerd.
+De regel met 'pc01' zorgt ervoor dat de bijbehorende opdrachten standaard
+alleen op host pc01 worden uitgevoerd.
 .br
 De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 'kz install gnome'.
@@ -161,15 +161,15 @@ De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 [3]
 .br
 De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc01 en pc02 worden uitgevoerd.
+alleen op host pc01 en pc02 worden uitgevoerd.
 .br
 De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 'kz install kvm'.
 .sp
 [4]
 .br
-De regel '-none-' zorgt ervoor dat de bijbehorende opdrachten standaard niet
-worden uitgevoerd op een computer (OPMERKING: '-none-' is geen geldige
+De regel '#none' zorgt ervoor dat de bijbehorende opdrachten standaard niet
+worden uitgevoerd op een computer (OPMERKING: '#none' is geen geldige
 computernaam en wordt daarom nooit standaard geselecteerd).
 .br
 De app kan alsnog worden geïnstalleerd met de opdracht 'kz install google-eart\

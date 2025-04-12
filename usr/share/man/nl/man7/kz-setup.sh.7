@@ -40,9 +40,9 @@ T}
 l | l
 l | l.
 T{
-# Setup \fI<app>\fR on <host>...
+# Setup app \fI<app>\fR on <host>...
 T}:T{
-De \fI<app>\fR instellen op <host>s (\fBApp-regel\fR)
+De app \fI<app>\fR instellen op host <host>s (\fBApp-regel\fR)
 T}
 T{
 # Commentaar...
@@ -52,17 +52,17 @@ T}
 T{
 Opdracht
 T}:T{
-Instel-opdracht (één of meer \fBOpdracht-regels\fR)
+App instel-opdracht (één of meer \fBOpdracht-regels\fR)
 T}
 T{
 T}:T{
 Lege regel
 T}
 T{
-# Reset \fI<app>\fR on <host>...
+# Reset app \fI<app>\fR on <host>...
 T}:T{
-De \fI<app>\fR resetten op <host>s (\fBApp-regel\fR voor optie \fB-r\fR,
-\fB--reset\fR)
+De app \fI<app>\fR resetten op host <host>s (\fBApp-regel\fR voor optie
+\fB-r\fR, \fB--reset\fR)
 T}
 T{
 Opdracht
@@ -85,9 +85,9 @@ T}
 l | l
 l | l.
 T{
-# Setup google-chrome for *
+# Setup app google-chrome for *
 T}:T{
-Stel google-chrome in op iedere computer, zie [1]
+Stel app google-chrome in op iedere computer, zie [1]
 T}
 T{
 kz-desktop --addbef=google-chrome
@@ -97,9 +97,9 @@ T{
 T}:T{
 T}
 T{
-# Reset google-chrome for *
+# Reset app google-chrome for *
 T}:T{
-Reset google-chrome op iedere computer, zie [1]
+Reset app google-chrome op iedere computer, zie [1]
 T}
 T{
 kz-desktop --delete=google-chrome
@@ -109,9 +109,9 @@ T{
 T}:T{
 T}
 T{
-# Setup gnome on pc02
+# Setup app gnome on pc01
 T}:T{
-Stel gnome in alleen op pc02, zie [2]
+Stel app gnome in alleen op host pc01, zie [2]
 T}
 T{
 gsettings set org.gnome.shell...
@@ -121,9 +121,9 @@ T{
 T}:T{
 T}
 T{
-# Setup kvm on pc01 pc02
+# Setup app kvm on host pc01 pc02
 T}:T{
-Stel kvm in op pc01 en pc02, zie [3]
+Stel app kvm in op host pc01 en pc02, zie [3]
 T}
 T{
 kz-desktop --addaft=virt-manager
@@ -133,9 +133,9 @@ T{
 T}:T{
 T}
 T{
-# Setup google-earth for -none-
+# Setup app google-earth for host #none
 T}:T{
-Standaard niet google-earth instellen, zie [4]
+Standaard niet app google-earth instellen, zie [4]
 T}
 T{
 kz-desktop --addaft=google-earth
@@ -151,8 +151,8 @@ worden uitgevoerd.
 .sp
 [2]
 .br
-De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc02 worden uitgevoerd.
+De regel met 'pc01' zorgt ervoor dat de bijbehorende opdrachten standaard
+alleen op host pc01 worden uitgevoerd.
 .br
 De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
 setup gnome'.
@@ -160,15 +160,15 @@ setup gnome'.
 [3]
 .br
 De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc01 en pc02 worden uitgevoerd.
+alleen op host pc01 en pc02 worden uitgevoerd.
 .br
 De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
 setup kvm'.
 .sp
 [4]
 .br
-De regel met '-none-' zorgt ervoor dat de bijbehorende opdrachten standaard
-niet worden uitgevoerd (OPMERKING: '-none-' is geen geldige computernaam en
+De regel met '#none' zorgt ervoor dat de bijbehorende opdrachten standaard
+niet worden uitgevoerd (OPMERKING: '#none' is geen geldige computernaam en
 wordt daarom nooit standaard geselecteerd).
 .br
 De app kan alsnog worden ingesteld met de opdracht 'kz setup google-earth'.

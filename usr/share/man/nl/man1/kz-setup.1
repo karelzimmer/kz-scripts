@@ -33,8 +33,8 @@ opdrachten bavat voor alle hierin opgenomen gebruikers.
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
-Bij het verwerken van het instelbestand worden de opdrachten voor iedere en de
-huidige gebruiker geselecteerd en gekopieerd naar het opdrachtbestand.
+Bij het verwerken van het instelbestand worden de opdrachten voor voor iedere
+en de huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .br
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 Na succesvolle voltooiing wordt de gebruiker uitgelogd.
@@ -45,6 +45,7 @@ Optie \fB-a\fR, \fB--apps\fR geeft een lijst alle van apps die beschikbaar zijn
 in het instelbestand.
 .sp
 Naar keuze kunnen in te stellen apps opgegeven worden met argument \fI<app>\fR.
+.br
 Per opgegeven app worden de opdrachten geselecteerd uit het instelbestand en
 gekopieerd naar het opdrachtbestand.
 .sp
@@ -62,11 +63,76 @@ Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
+.sp
+Voor sommige computers zijn er extra opdrachten nodig om de installatie te
+voltooien.
+Sommige computers vereisen extra opdrachten om de installatie te voltooien.
+Deze opdrachten vereisen mogelijk gevoelige informatie, zoals een
+gebruikersnaam.
+Daarom worden deze opdrachten opgenomen in een met een wachtwoord beveiligd
+bestand.
+.br
+Gebruik eventueel de volgende opdracht:
+    gpg --decrypt /usr/bin/kz-setup-extra.gpg | grep $HOSTNAME
+.sp
+Dit gpg-bestand (GNU Privacy Guard, of GnuPG, of GPG) is eerder gemaakt met de
+opdracht:
+    gpg --symmetric ~/kz-setup
+
+.SH OPTIES
+Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
+.TP
+\fI<app>\fR...
+Stel de opgegeven apps in.
+.TP
+\fB-a\fR, \fB--apps\fR
+Toon een lijst van in te stellen apps.
+.TP
+\fB-b\fR, \fB--browse\fR
+Blader door het instelbestand.
+.TP
+\fB-c\fR, \fB--cat\fR
+Toon de inhoud van het opdrachtbestand.
+.TP
+\fB-f\fR, \fB--file\fR \fI<bestand>\fR
+Verwerk het opgegeven bestand.
+.TP
+\fB-g\fR, \fB--gui\fR
+Draai in grafische modus (gui=graphical user interface; grafische
+gebruikersinterface). Een desktopomgeving is vereist.
+.TP
+\fB-r\fR, \fB--reset\fR
+Stel de apps in op standaardwaarden
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-m\fR, \fB--manual\fR
+Toon de handleidingpagina.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Signaleert het einde van opties en schakelt verdere verwerking van opties uit.
+
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
 
 .SH FILES
 /usr/bin/kz-setup.sh
 .RS
 Setup bestand.
+.RE
+.sp
+/usr/bin/kz-setup.gpg
+.RS
+Bestand met mogelijke aanvullende handmatige opdrachten. Alleen van toepassing
+op niet-standaard installaties.
 .RE
 .sp
 /tmp/kz-setup-commands-XXXXXXXXXX

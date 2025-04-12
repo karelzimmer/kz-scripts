@@ -60,7 +60,7 @@ readonly HELP
 readonly X_OPTIONS_SHORT='abcf:gr'
 readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,reset'
 
-readonly ON='on'
+readonly ON_HOST='on host'
 
 
 ###############################################################################
@@ -100,7 +100,7 @@ function process() {
     if $ARGUMENT_APP; then
         process_argument_app
     else
-        process_file_by_user
+        process_setup_file_by_host
     fi
 
     if $OPTION_CAT; then
@@ -110,6 +110,8 @@ function process() {
 
     setup_apps
 }
+
+
 # This function handles the options and arguments.
 function check_input() {
     local PARSED=''
@@ -175,8 +177,8 @@ $USAGE"
                 ;;
             -r | --reset )
                 OPTION_RESET=true
-                SETUP='Reset'
-                RESET='Setup'
+                SETUP_APP='Reset app'
+                RESET_APP='Setup app'
                 shift
                 ;;
             -- )
@@ -218,7 +220,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     APPS=$(
-        grep    "#.*$SETUP.*on"         \
+        grep    "#.*$SETUP_APP.*on"     \
                 "$SETUP_FILE"           |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
@@ -252,24 +254,17 @@ $USAGE"
 # This function processes argument <app>.
 function process_argument_app() {
     local APP_ARGUMENT=''
-    local APP_NOT_FOUND=false
     local TEXT=''
 
     for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
-        process_file_by_app
+        process_setup_file_by_app
     done
-
-    if $APP_NOT_FOUND; then
-        TEXT="$(gettext "Type 'kz setup --apps' for available apps.")"
-        infomsg "$TEXT"
-        exit $ERR
-    fi
 }
 
 
 # This function generates the command file from the setup file and filters by
 # <app>.
-function process_file_by_app() {
+function process_setup_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
@@ -281,13 +276,13 @@ function process_file_by_app() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON* )
+            '#'*$SETUP_APP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON_HOST* )
                 # Matching app record.
                 APP_MATCH=true
                 NO_APP_MATCH=false
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$SETUP*$ON* | '#'*$RESET*$ON* )
+            '#'*$SETUP_APP*$ON_HOST* | '#'*$RESET_APP*$ON_HOST* )
                 # Mismatched app record.
                 # Add empty seperator line between the setup of apps.
                 if $APP_MATCH; then
@@ -305,18 +300,16 @@ function process_file_by_app() {
     done < "$SETUP_FILE"
 
     if $NO_APP_MATCH; then
-        APP_NOT_FOUND=true
-        TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
-        rm --verbose "$COMMAND_FILE" |& $LOGCMD
-        infomsg "$TEXT"
+        TEXT=$(eval_gettext "App '\$APP_ARGUMENT' not found")
+        errmsg "$TEXT"
     fi
 }
 
 
 # This function generates the command file from the setup file and filters by
-# hostname.
-function process_file_by_user() {
-    local HOST_MATCH=false
+# host.
+function process_setup_file_by_host() {
+    local ANY_HOST_MATCH=false
     local INPUT_RECORD=''
 
     while read -r INPUT_RECORD; do
@@ -325,21 +318,21 @@ function process_file_by_user() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP*$ON*'*' | '#'*$SETUP*$ON*$HOSTNAME* )
+            '#'*$SETUP_APP*$ON_HOST*'*' | '#'*$SETUP_APP*$ON_HOST*$HOSTNAME* )
                 # Matching app record.
-                HOST_MATCH=true
+                ANY_HOST_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$SETUP*$ON* | '#'*$RESET*$ON* )
+            '#'*$SETUP_APP*$ON_HOST* | '#'*$RESET_APP*$ON_HOST* )
                 # Mismatched app record.
                 # Add empty seperator line between the setup of apps.
-                if $HOST_MATCH; then
+                if $ANY_HOST_MATCH; then
                     printf '\n' >> "$COMMAND_FILE"
                 fi
-                HOST_MATCH=false
+                ANY_HOST_MATCH=false
                 ;;
             * )
-                if $HOST_MATCH; then
+                if $ANY_HOST_MATCH; then
                     # Record for command file.
                     printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
@@ -358,15 +351,20 @@ function process_option_cat() {
 
 # This function starts setting up the apps.
 function setup_apps() {
-    local NO_COMMANDS_FOUND=true
     local TEXT=''
     local TITLE=''
     local -i APP_TOT_NUM=0
-    local -A FAILED_APPS=()
 
-    APP_TOT_NUM=$(grep --count "#.*$SETUP.*$ON" "$COMMAND_FILE" || true)
+    APP_TOT_NUM=$(
+        grep    --count                     \
+                "#.*$SETUP_APP.*$ON_HOST"   \
+                "$COMMAND_FILE"             ||true
+        )
     if [[ $APP_TOT_NUM -eq 0 ]]; then
-        return $OK
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
+        exit $OK
     fi
 
     TITLE=$(gettext 'Set up apps')
@@ -391,24 +389,6 @@ function setup_apps() {
     fi
 
     rm --verbose "$COMMAND_FILE" |& $LOGCMD
-
-    if $NO_COMMANDS_FOUND; then
-        TEXT=$(gettext 'No commands to execute.' )
-        infomsg "$TEXT"
-        exit $OK
-    fi
-
-    if [[ ${FAILED_APPS[*]} ]]; then
-        TEXT="$(gettext "The set up of the following apps contains errors:")
-${FAILED_APPS[*]}
-
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
-view log messages.")
-
-$(gettext "Try to set up the apps again.")"
-        errmsg "$TEXT"
-        exit $ERR
-    fi
 }
 
 
@@ -429,7 +409,7 @@ function process_command_file() {
 
     while read -r COMMAND_RECORD; do
         case $COMMAND_RECORD in
-            '#'*$SETUP* )
+            '#'*$SETUP_APP* )
                 # App record.
                 APP_NAME=$(
                     printf '%s\n' "$COMMAND_RECORD"     |
@@ -450,7 +430,6 @@ function process_command_file() {
                 ;;
             * )
                 # Process command record.
-                NO_COMMANDS_FOUND=false
                 execute_command "$COMMAND_RECORD"
                 ;;
         esac
@@ -488,6 +467,18 @@ function execute_command() {
 function term() {
     local OPERATION=''
     local TEXT=''
+
+    if [[ ${FAILED_APPS[*]} ]]; then
+        TEXT="$(gettext "The set up of the following apps contains errors:")
+${FAILED_APPS[*]}
+
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
+view log messages.")
+
+$(gettext "Try to set up the apps again.")"
+        errmsg "$TEXT"
+        exit $ERR
+    fi
 
     OPERATION=$(gettext 'set up')
 
@@ -553,9 +544,10 @@ function main() {
     local OPTION_CAT=false
     local OPTION_FILE=false
     local OPTION_RESET=false
-    local RESET='Reset'
-    local SETUP='Setup'
+    local RESET_APP='Reset app'
+    local SETUP_APP='Setup app'
     local -A APP_ARGUMENTS=()
+    local -A FAILED_APPS=()
 
     init    "$@"
     process "$@"
