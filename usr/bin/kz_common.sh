@@ -44,13 +44,11 @@ readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 if ! type systemctl &> /dev/null; then
-    rm --force getkz getkz.{1..99}
     printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
     exit $ERR
 fi
 
 if ! [[ -f /etc/os-release ]]; then
-    rm --force getkz getkz.{1..99}
     printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
     exit $ERR
 fi
@@ -110,7 +108,7 @@ function become_root_check() {
 # next check if so.
 function check_package_manager() {
     local TEXT=''
-    local -i CHECK_WAIT_TIME=10
+    local -i SLEEP=10
 
     if grep --quiet rhel /etc/os-release; then
         return $OK
@@ -120,8 +118,8 @@ function check_package_manager() {
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        TEXT=$(gettext "Wait \$CHECK_WAIT_TIME seconds for another package \
-manager to finish")
+        TEXT=$(gettext "Wait \$SLEEP seconds for another package manager to \
+finish")
         if $OPTION_GUI; then
             logmsg "$TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.
@@ -129,7 +127,7 @@ manager to finish")
         else
             infomsg "$TEXT..."
         fi
-        sleep $CHECK_WAIT_TIME
+        sleep $SLEEP
     done
 }
 
@@ -215,7 +213,7 @@ function infomsg() {
 }
 
 
-# This function performs initial actions such as set traps (script-hardening).
+# This function performs initial actions.
 function init() {
     local TEXT="==== START logs for script $PROGRAM_NAME ====
 Started ($PROGRAM_NAME $* as $USER)."
@@ -353,13 +351,6 @@ function term_sig() {
     local STATUS=$RC/error
     local TEXT=''
     local -i RC_DESC_SIGNALNO=0
-
-    # Clean up temporary files.
-    rm  --force                     \
-        --verbose                   \
-        getkz                       \
-        getkz.{1..99}               \
-        "/tmp/kz-??????????.pid"    |& $LOGCMD
 
     case $RC in
         0 )

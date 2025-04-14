@@ -65,7 +65,7 @@ def process() -> None:
         perform_rpm_update()
         perform_rpm_cleanup()
     else:
-        TEXT: str = _('Unknown package manager.')
+        TEXT: str = _('fatal: unknown os release.')
         kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 

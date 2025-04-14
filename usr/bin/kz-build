@@ -161,12 +161,11 @@ function build_website() {
     done
     cd "$STARTDIR"
 
-    # Copy kz-get and kz_common.sh to kz-uploads.
+    # Copy kz-get to kz-uploads.
     mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/scripts" |& $LOGCMD
     cp  --preserve                              \
         --verbose                               \
         "$SCRIPTS_REPO/usr/bin/kz-get"          \
-        "$SCRIPTS_REPO/usr/bin/kz_common.sh"    \
         "$UPLOADS_REPO_DISTDIR/assets/scripts"  |& $LOGCMD
 
 }
@@ -321,11 +320,10 @@ function install_deb_package() {
     # Copied from kz-get.
     # Progress indicator with growing [=>, [==>, etc. as long as the pid file
     # exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will also remove the pid file upon exit.
-    KZ_PID_FILE=$(mktemp -t "kz-XXXXXXXXXX.pid")
-    printf '%i\n' $$ > "$KZ_PID_FILE"
-    printf '[ '
-    while test -e "$KZ_PID_FILE"; do
+    KZ_BUILD_PID_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.pid")
+    printf '%i\n' $$ > "$KZ_BUILD_PID_FILE"
+    printf '%s' '[ '
+    while test -e "$KZ_BUILD_PID_FILE"; do
         printf '\b%s' '=>'
         sleep $SLEEP
     done &
@@ -343,7 +341,7 @@ function install_deb_package() {
             "$TO_INSTALL"                   |& $LOGCMD
 
     # Progress indicator ends like [====]100%.
-    rm --verbose "$KZ_PID_FILE" |& $LOGCMD
+    rm --verbose "$KZ_BUILD_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
 }
 

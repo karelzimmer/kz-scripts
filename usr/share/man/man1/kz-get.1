@@ -59,38 +59,28 @@ following:
 On a Red Hat-based system try the following:
     sudo dnf clean all
     sudo dnf makecache
-#FIXME voeg optie -d, --dev toe: waarom + bestanden .deb/.rpm
 .sp
 With command \fBkz dev\fR the development environment can be placed on the
 local computer so that the package and the website can be developed and tested.
 
 .SH OPTIONS
 .TP
-\fB-h\fR, \fB--help\fR
-Show a short description of the available options.
-.TP
-\fB-m\fR, \fB--manual\fR
-Show the manual page.
-.TP
-\fB-u\fR, \fB--usage\fR
-Show the available options.
-.TP
-\fB-v\fR, \fB--version\fR
-Show the version, author, and copyright.
+\fB-d\fR, \fB--dev\fR
+Download and install the development version of the kz package.
 
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
 
 .SH FILES
-/tmp/kz-get-common-XXXXXXXXXX.sh
-.RS
-Downloaded common module, bijvoorbeeld kz-get-common-MXstBzIEmh.sh.
-.RE
-.sp
 /tmp/kz-get-XXXXXXXXXX.deb
 .RS
-Downloaded debian file, e.g. kz-build-AEOzIjJyie.deb.
+Downloaded debian file, e.g. kz-get-AEOzIjJyie.deb.
+.RE
+.sp
+/tmp/kz-get-XXXXXXXXXX.pid
+.RS
+PID-file, e.g. kz-get-Tyx5KJaqtV.pid.
 .RE
 .sp
 ~/kz-uploads/dist/assets/packages/kz_4.2.1-1_all.deb
@@ -123,5 +113,4 @@ IaC en Day 1 Operations
 
 .SH SEE ALSO
 \fBkz\fR(1),
-\fBkz_common.sh\fR(1),
 \fBkz-dev\fR(1)

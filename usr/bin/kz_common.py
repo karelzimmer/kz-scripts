@@ -122,7 +122,7 @@ def check_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
     This function checks for another running package manager and waits for the
     next check if so.
     """
-    CHECK_WAIT_TIME: int = 10
+    SLEEP: int = 10
     COMMAND1: str = 'grep --quiet rhel /etc/os-release'
     COMMAND2: str = 'sudo fuser --silent /var/cache/debconf/config.dat '
     COMMAND2 += '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*'
@@ -139,10 +139,10 @@ def check_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
             break
         else:
             TEXT: str = _('Wait {} seconds for another package manager to \
-finish').format(CHECK_WAIT_TIME)
+finish').format(SLEEP)
             TEXT += '...'
             infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            time.sleep(CHECK_WAIT_TIME)
+            time.sleep(SLEEP)
 
     return OK
 

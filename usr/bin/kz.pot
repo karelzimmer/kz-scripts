@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 16:47+0200\n"
+"POT-Creation-Date: 2025-04-14 07:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,14 +38,14 @@ msgstr ""
 msgid "fatal: no os release available"
 msgstr ""
 
-msgid "fatal: unknown distribution"
+msgid "fatal: unknown os release."
 msgstr ""
 
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
 #, sh-format
-msgid "Wait $CHECK_WAIT_TIME seconds for another package manager to finish"
+msgid "Wait $SLEEP seconds for another package manager to finish"
 msgstr ""
 
 msgid "Wait {} seconds for another package manager to finish"
@@ -56,9 +56,6 @@ msgstr ""
 
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
-msgstr ""
-
-msgid "Unknown package manager."
 msgstr ""
 
 #, sh-format
@@ -214,6 +211,9 @@ msgid "no desktop environment available"
 msgstr ""
 
 msgid "arguments are not allowed"
+msgstr ""
+
+msgid "only option -d or --dev is allowed"
 msgstr ""
 
 msgid "directory does not exist"

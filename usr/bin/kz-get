@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck shell=bash source=kz_common.sh
+# shellcheck shell=bash
 ###############################################################################
 # SPDX-FileComment: Download and install Debian or RPM package kz
 #
@@ -12,21 +12,9 @@
 # Imports
 ###############################################################################
 
-declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
-        KZ_COMMON_SITE_FILE+='kz_common.sh'
-declare KZ_COMMON_LOCAL_FILE
-        KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
-if    ! wget    --quiet                                     \
-                --output-document="$KZ_COMMON_LOCAL_FILE"   \
-                $KZ_COMMON_SITE_FILE; then
-        printf '%s\n' 'fatal: download common module failed' >&2
-        exit 1
-fi
-if    ! source "$KZ_COMMON_LOCAL_FILE"; then
-        printf '%s\n' 'fatal: import common module failed' >&2
-        exit 1
-fi
-rm      --force "$KZ_COMMON_LOCAL_FILE"
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+source /usr/bin/gettext.sh
 
 
 ###############################################################################
@@ -34,101 +22,73 @@ rm      --force "$KZ_COMMON_LOCAL_FILE"
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-get'
-PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
-readonly PROGRAM_DESC
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: kz get [-d|--dev] \$OPTIONS_USAGE")
-readonly USAGE
-
-X_OPTIONS_HELP=$(gettext '  -d, --dev      use the development version of kz')
-readonly X_OPTIONS_HELP
-
-HELP="$(gettext "Usage: kz get [-d|--dev] [<options>]")
-
-$PROGRAM_DESC.
-
-$(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP"
-readonly HELP
-
-readonly X_OPTIONS_SHORT='d'
-readonly X_OPTIONS_LONG=',dev'
+readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+readonly RED='\033[1;31m'
+readonly NORMAL='\033[0m'
 
 
 ###############################################################################
 # Functions
 ###############################################################################
 
+# This function performs initial actions.
+function init() {
+    # Script-hardening.
+    set -o errexit
+    set -o errtrace
+    set -o nounset
+    set -o pipefail
+
+    trap 'rm --force getkz getkz.{1..99} /tmp/kz-get-*' EXIT
+}
+
+
 # This function performs the script actions, such as checking the input.
 function process() {
-    local TEXT=''
-
     check_input "$@"
-    become_root_check || exit $OK
     prepare_processing
     if grep --quiet debian /etc/os-release; then
         install_deb_package
     elif grep --quiet rhel /etc/os-release; then
         install_rpm_package
     else
-        TEXT=$(gettext 'Unknown package manager.')
-        errmsg "$TEXT"
-        exit $ERR
+        TEXT=$(gettext 'fatal: unknown os release.')
+        printf '%s\n' "$TEXT"
+        exit 1
     fi
 }
 
 
 # This function handles the options and arguments.
 function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+    local OPTION=${1:-''}
 
-    PARSED=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
-                --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERR
-    fi
-    eval set -- "$PARSED"
-
-    process_options   "$@"
-    process_x_options "$@"
-}
-
-
-# This function handles the script options and arguments.
-function process_x_options() {
-    local TEXT=''
-
-    while true; do
-        case $1 in
-            -d | --dev )
-                OPTION_DEV=true
-                shift
-                ;;
-            -- )
-                shift
-                break
-                ;;
-            * )
-                shift
-                ;;
-        esac
-    done
-
-    if [[ $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERR
-    fi
+    case $OPTION in
+        '' )
+            return 0
+            ;;
+        -d | --dev )
+            OPTION_DEV=true
+            return 0
+            ;;
+        '--version' )
+            # Needed for kz-check, calls any script as "<script> --version".
+            exit 0
+            ;;
+        -* )
+            TEXT="$DISPLAY_NAME: $*: \
+$(gettext 'only option -d or --dev is allowed')"
+            printf '%s\n' "$TEXT"
+            exit 1
+            ;;
+        * )
+            TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')"
+            printf '%s\n' "$TEXT"
+            exit 1
+            ;;
+    esac
 }
 
 
@@ -140,11 +100,10 @@ function prepare_processing() {
 
     # Progress indicator with growing [=>, [==>, etc. as long as the pid file
     # exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will also remove the pid file upon exit.
-    KZ_PID_FILE=$(mktemp -t "kz-XXXXXXXXXX.pid")
-    printf '%i\n' $$ > "$KZ_PID_FILE"
-    printf '[ '
-    while test -e "$KZ_PID_FILE"; do
+    KZ_GET_PID_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.pid")
+    printf '%i\n' $$ > "$KZ_GET_PID_FILE"
+    printf '%s' '[ '
+    while test -e "$KZ_GET_PID_FILE"; do
         printf '\b%s' '=>'
         sleep $SLEEP
     done &
@@ -168,14 +127,9 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
         KZ_DEB_SITE_FILE=$KZ_DEB_PRD_SITE_FILE
     fi
 
-    logmsg  'Download Debian package kz...'
     wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
             "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
-    logmsg  'Downloaded Debian package kz.'
 
-    check_package_manager |& $LOGCMD
-
-    logmsg 'Install Debian package kz...'
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
@@ -183,7 +137,6 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --reinstall                     \
             --assume-yes                    \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD
-    logmsg 'Installed Debian package kz.'
 
     rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
 }
@@ -209,24 +162,20 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
         KZ_RPM_SITE_FILE=$KZ_RPM_PRD_SITE_FILE
     fi
 
-    logmsg 'Install RPM package kz...'
     sudo dnf $MODE --assumeyes "$KZ_RPM_SITE_FILE" |& $LOGCMD
-    logmsg 'Installed RPM package kz.'
 }
 
 
 # This function controls the termination of the script.
 function term() {
-    local TEXT=''
-
     # Progress indicator ends like [====]100%.
-    rm --verbose "$KZ_PID_FILE" |& $LOGCMD
+    rm --verbose "$KZ_GET_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
 
     if $OPTION_DEV; then
-        TEXT=$(gettext "Please note: then development version of the kz \
-package is installed")
-        errmsg "$TEXT"
+        TEXT=${RED}$(gettext "Please note: the development version of the kz \
+package is installed")${NORMAL}
+        printf '%b\n' "$TEXT"
     fi
 
     TEXT="
@@ -240,9 +189,9 @@ Checklist installation can be found on https://karelzimmer.nl/en.")"
 
 $(gettext "Type 'exit' to close this window.")"
     fi
-    infomsg "$TEXT"
+    printf '%s\n' "$TEXT"
 
-    exit $OK
+    exit 0
 }
 
 
@@ -251,7 +200,9 @@ $(gettext "Type 'exit' to close this window.")"
 ###############################################################################
 
 function main() {
+    local KZ_GET_PID_FILE=''
     local OPTION_DEV=false
+    local TEXT=''
 
     init    "$@"
     process "$@"
