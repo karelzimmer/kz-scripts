@@ -147,7 +147,6 @@ https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
     local KZ_RPM_DEV_SITE_FILE="\
 https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
     local KZ_RPM_SITE_FILE=''
-    local KZ_RPM_SITE_FILE=''
     local MODE='install'
 
     if type kz &> /dev/null; then
