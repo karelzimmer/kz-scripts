@@ -45,7 +45,7 @@ def process() -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    COMMAND1: str = "grep --quiet debianxx /etc/os-release"
+    COMMAND1: str = "grep --quiet debian /etc/os-release"
     COMMAND2: str = "grep --quiet rhel   /etc/os-release"
 
     kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME, USAGE,
