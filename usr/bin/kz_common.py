@@ -48,11 +48,11 @@ NORMAL: str = '\033[0m'
 if subprocess.run('type systemctl', executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
-    print(_('fatal: no systemd available'))
+    print(f'{MODULE_NAME}: {_("fatal: no systemd available")}')
     sys.exit(ERR)
 
 if not os.path.exists('/etc/os-release'):
-    print(_('fatal: no os release available'))
+    print(f'{MODULE_NAME}: {_("fatal: no os release available")}')
     sys.exit(ERR)
 
 

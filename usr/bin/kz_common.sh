@@ -44,12 +44,13 @@ readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 if ! type systemctl &> /dev/null; then
-    printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
+    printf '%s\n' "$MODULE_NAME: $(gettext 'fatal: no systemd available')" >&2
     exit $ERR
 fi
 
 if ! [[ -f /etc/os-release ]]; then
-    printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
+    printf '%s\n' "$MODULE_NAME: \
+$(gettext 'fatal: no os release available')" >&2
     exit $ERR
 fi
 
