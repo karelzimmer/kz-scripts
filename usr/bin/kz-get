@@ -25,8 +25,6 @@ readonly PROGRAM_NAME='kz-get'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
-readonly RED='\033[1;31m'
-readonly NORMAL='\033[0m'
 
 
 ###############################################################################
@@ -168,13 +166,16 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
 
 # This function controls the termination of the script.
 function term() {
+    local RED='\033[1;31m'
+    local NORMAL='\033[0m'
+
     # Progress indicator ends like [====]100%.
     rm --verbose "$KZ_GET_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
 
     if $OPTION_DEV; then
-        TEXT=${RED}$(gettext "Please note: the development version of the kz \
-package is installed")${NORMAL}
+        TEXT=$RED$(gettext "Please note: the development version of the kz \
+package is installed")$NORMAL
         printf '%b\n' "$TEXT"
     fi
 

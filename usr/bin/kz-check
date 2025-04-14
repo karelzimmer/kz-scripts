@@ -253,7 +253,7 @@ function check_code() {
     else
         TEXT="
 ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
-${RED}    $(gettext "Unknown script. Function check_code cannot check script \
+$RED    $(gettext "Unknown script. Function check_code cannot check script \
 code.")$NORMAL
 "
         infomsg "$TEXT"
@@ -272,7 +272,7 @@ function check_script() {
     # Script.
     if ! "$FILE" --version |& $LOGCMD; then
         infomsg "
-  ${BOLD}$SCRIPTDIR / $SCRIPTNAME${NORMAL}"
+  $BOLD$SCRIPTDIR / $SCRIPTNAME$NORMAL"
         TEXT='    '$(eval_gettext "Script \$SCRIPTNAME --version returned an \
 error.")
         errmsg "$TEXT"
@@ -285,7 +285,7 @@ error.")
 
         if ! [[ -f $DIR/$SCRIPTNAME.desktop ]]; then
         infomsg "
-  ${BOLD}$SCRIPTDIR / $SCRIPTNAME${NORMAL}"
+  $BOLD$SCRIPTDIR / $SCRIPTNAME$NORMAL"
             TEXT='    '$(eval_gettext "Desktop configuration file \
 \$DIR/\$SCRIPTNAME.desktop not found.")
             errmsg "$TEXT"
@@ -366,7 +366,7 @@ function check_record_length() {
     if [[ $MAX_LINE_LENGTH_FOUND -gt $MAX_LINE_LENGTH ]]; then
         TEXT="
 ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
-${RED}    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
+$RED    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
 (\$MAX_LINE_LENGTH_FOUND).")$NORMAL"
         infomsg "$TEXT"
         ERR_FLAG=true
@@ -379,7 +379,7 @@ function check_desktop_file_validation() {
     if ! desktop-file-validate "$SCRIPT" | systemd-cat --identifier=kz-check
     then
         infomsg "
-  ${BOLD}$SCRIPTDIR / $SCRIPTNAME${NORMAL}"
+  $BOLD$SCRIPTDIR / $SCRIPTNAME$NORMAL"
         desktop-file-validate "$SCRIPT" || ERR_FLAG=true
     fi
 }
@@ -434,7 +434,7 @@ function check_trailing_spaces() {
     if grep --quiet ' ''$' "$SCRIPT"; then
         TEXT="
 ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
-${RED}    $(gettext 'End spaces found.')$NORMAL
+$RED    $(gettext 'End spaces found.')$NORMAL
 "
         infomsg "$TEXT"
         grep    --line-number ' ''$' "$SCRIPT" |
