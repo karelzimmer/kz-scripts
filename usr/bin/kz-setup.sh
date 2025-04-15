@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# Use "man kz-setup.sh" to learn more about the format of this file.
+# Use "man kz setup.sh" to learn more about the format of this file.
 
 # Setup app anydesk on host pc06 pc07
 # Remote desktop.
