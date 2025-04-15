@@ -240,7 +240,7 @@ sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install app dual-monitor on host pc06
 # Preserve dual monitor settings.
-if [[ -f ~karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose ~karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~$USER/.config/monitors.xml ]]; then sudo cp --preserve --verbose ~$USER/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml   ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
 # Remove app dual-monitor from host pc06
@@ -479,7 +479,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The krit
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt
 # configuration files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo usermod --append --groups libvirt,libvirt-qemu karel; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo usermod --append --groups libvirt,libvirt-qemu $USER; fi
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo virsh --connect=qemu:///system net-autostart default; fi
