@@ -240,8 +240,8 @@ sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install app dual-monitor on host pc06
 # Preserve dual monitor settings.
-if [[ -f ~$USER/.config/monitors.xml ]]; then sudo cp --preserve --verbose ~"$USER"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
-if [[ -f ~gdm/.config/monitors.xml   ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
+if [[ -f $HOME/.config/monitors.xml ]]; then sudo cp --preserve --verbose "$HOME"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f  ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
 # Remove app dual-monitor from host pc06
 # Remove app dual monitor settings.
