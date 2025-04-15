@@ -22,7 +22,6 @@ source /usr/bin/gettext.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-get'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
 
@@ -53,7 +52,7 @@ function process() {
         install_rpm_package
     else
         TEXT="$PROGRAM_NAME: $(gettext 'fatal: unknown os release.')"
-        printf '%s\n' "$TEXT"
+        printf '%s\n' "$TEXT" >&2
         exit 1
     fi
 }
@@ -76,14 +75,13 @@ function check_input() {
             exit 0
             ;;
         -* )
-            TEXT="$DISPLAY_NAME: $*: \
-$(gettext 'only option -d or --dev is allowed')"
-            printf '%s\n' "$TEXT"
+            TEXT="kz get: $*: $(gettext 'only option -d or --dev is allowed')"
+            printf '%s\n' "$TEXT" >&2
             exit 1
             ;;
         * )
-            TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')"
-            printf '%s\n' "$TEXT"
+            TEXT="kz get: $*: $(gettext 'arguments are not allowed')"
+            printf '%s\n' "$TEXT" >&2
             exit 1
             ;;
     esac
