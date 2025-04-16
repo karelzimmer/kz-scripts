@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-14 07:50+0200\n"
+"POT-Creation-Date: 2025-04-15 17:31+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -109,9 +109,6 @@ msgstr "Programma {} is onderbroken."
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-msgid "Usage: {} [<options>]"
-msgstr "Gebruik: {} [<opties>]"
-
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
@@ -141,8 +138,8 @@ msgstr "{}: ik ben een module"
 msgid "Run the kz command"
 msgstr "Voer de kz-opdracht uit"
 
-msgid "Usage: {} <arguments> [<options>]"
-msgstr "Gebruik: {} <argumenten> [<opties>]"
+msgid "Usage: kz <arguments> [<options>]"
+msgstr "Gebruik: kz <argumenten> [<opties>]"
 
 msgid "kz <command> [<arguments>] [-l|--list]"
 msgstr "kz <opdracht> [<argumenten>] [-l|--list]"
@@ -466,10 +463,6 @@ msgstr "Typ 'exit' om dit venster te sluiten."
 
 msgid "Build development environment"
 msgstr "Ontwikkelomgeving bouwen"
-
-#, sh-format
-msgid "Usage: kz dev $OPTIONS_USAGE"
-msgstr "Gebruik: kz dev $OPTIONS_USAGE"
 
 msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
@@ -1056,11 +1049,17 @@ msgstr "resetten"
 msgid "Update and cleanup system"
 msgstr "Systeem bijwerken en opschonen"
 
+msgid "Usage: kz update [<options>]"
+msgstr "Gebruik: kz update [<opties>]"
+
 msgid "Update"
 msgstr "Bijwerken"
 
 msgid "Cleanup"
 msgstr "Opruimen"
+
+msgid "Usage: kz wifi [<options>]"
+msgstr "Gebruik: kz wifi [<opties>]"
 
 msgid "Use this data to connect to the wireless network."
 msgstr ""

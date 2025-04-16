@@ -48,11 +48,11 @@ NORMAL: str = '\033[0m'
 if subprocess.run('type systemctl', executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
-    print(f'{MODULE_NAME}: {_("fatal: no systemd available")}')
+    print(_('fatal: no systemd available'))
     sys.exit(ERR)
 
 if not os.path.exists('/etc/os-release'):
-    print(f'{MODULE_NAME}: {_("fatal: no os release available")}')
+    print(_('fatal: no os release available'))
     sys.exit(ERR)
 
 
@@ -60,7 +60,7 @@ if not os.path.exists('/etc/os-release'):
 # Functions
 ###############################################################################
 
-def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
+def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
                 OPTION_GUI: bool = False) -> None:
     """
     This function checks whether the script is started as user root and
@@ -68,7 +68,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
     """
     EXEC_SUDO: str = 'exec sudo '
 
-    if not become_root_check(DISPLAY_NAME, PROGRAM_DESC, OPTION_GUI):
+    if not become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term(PROGRAM_NAME, OK)
 
     if os.getuid() != 0:
@@ -79,26 +79,26 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
             else:
                 EXEC_SUDO += ' ' + str(sys.argv[arg_num])
         TEXT: str = f'Restart ({EXEC_SUDO})'
-        logmsg(DISPLAY_NAME, TEXT)
+        logmsg(PROGRAM_NAME, TEXT)
 
         try:
             subprocess.run(EXEC_SUDO, executable='bash',
                            shell=True, check=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
         except Exception as exc:
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
         else:
             term(PROGRAM_NAME, ERR)
 
 
-def become_root_check(DISPLAY_NAME: str, PROGRAM_DESC: str,
+def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
                       OPTION_GUI: bool = False) -> bool:
     """
     This function checks if the user is allowed to become root and returns 0 if
@@ -111,13 +111,13 @@ def become_root_check(DISPLAY_NAME: str, PROGRAM_DESC: str,
         subprocess.run(COMMAND, executable='bash', shell=True, check=True)
     except Exception:
         TEXT: str = _('Already performed by the administrator.')
-        infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
         return False
     else:
         return True
 
 
-def check_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
+def check_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function checks for another running package manager and waits for the
     next check if so.
@@ -141,18 +141,19 @@ def check_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
             TEXT: str = _('Wait {} seconds for another package manager to \
 finish').format(SLEEP)
             TEXT += '...'
-            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             time.sleep(SLEEP)
 
     return OK
 
 
-def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
+def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
            OPTION_GUI: bool = False) -> None:
     """
     This function returns an error message.
     """
     if OPTION_GUI:
+        DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
         TITLE: str = f"{PROGRAM_DESC} {_('error message')} ({DISPLAY_NAME})"
         COMMAND: str = f'zenity --error                 \
                                 --width     600         \
@@ -164,12 +165,13 @@ def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
         print(f'\n{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
+def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
             OPTION_GUI: bool = False) -> None:
     """
     This function returns an informational message.
     """
     if OPTION_GUI:
+        DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
         TITLE: str = f"{PROGRAM_DESC} {_('information')} ({DISPLAY_NAME})"
         COMMAND: str = f'zenity --info                  \
                                 --width     600         \
@@ -181,12 +183,12 @@ def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
         print(TEXT)
 
 
-def init(DISPLAY_NAME: str) -> None:
+def init(PROGRAM_NAME: str) -> None:
     """
     This function performs initial actions.
     """
-    TEXT: str = f'==== START logs for script {DISPLAY_NAME} ===='
-    logmsg(DISPLAY_NAME, TEXT)
+    TEXT: str = f'==== START logs for script {PROGRAM_NAME} ===='
+    logmsg(PROGRAM_NAME, TEXT)
 
 
 def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
@@ -197,14 +199,15 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
                           f'MESSAGE={TEXT}')
 
 
-def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
-                    USAGE: str, HELP: str) -> None:
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                    HELP: str) -> None:
     """
     This function handles the common options and arguments.
     """
     ARGS = None
     PARSER = None
     UNKNOWN = None
+    DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
     PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
@@ -217,27 +220,28 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, DISPLAY_NAME: str,
     ARGS, UNKNOWN = PARSER.parse_known_args()
 
     if ARGS.help:
-        process_option_help(DISPLAY_NAME, PROGRAM_DESC, HELP, PROGRAM_NAME)
+        process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
         term(PROGRAM_NAME, OK)
     elif ARGS.manual:
-        process_option_manual(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
         term(PROGRAM_NAME, OK)
     elif ARGS.usage:
-        process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
+        process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
         term(PROGRAM_NAME, OK)
     elif ARGS.version:
-        process_option_version(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        process_option_version(PROGRAM_NAME, PROGRAM_DESC)
         term(PROGRAM_NAME, OK)
     elif UNKNOWN:
         None
 
 
-def process_option_help(DISPLAY_NAME: str, PROGRAM_DESC: str, HELP: str,
-                        PROGRAM_NAME: str) -> None:
+def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                        HELP: str) -> None:
     """
     This function shows the available help.
     """
     YELP_MAN_URL: str = ''
+    DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
     if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -249,16 +253,16 @@ def process_option_help(DISPLAY_NAME: str, PROGRAM_DESC: str, HELP: str,
                  f'''{_("Type '{} --manual' or 'man {}'{} ").
                       format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}'''
                  f"{_('for more information.')}")
-    infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                          DISPLAY_NAME: str) -> None:
+def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function displays the manual page..
     """
     COMMAND1: str = f'yelp man:{PROGRAM_NAME}'
     COMMAND2: str = f'man --pager=cat {PROGRAM_NAME}'
+    DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
     if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -271,7 +275,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
             TEXT: str = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
     else:
         try:
@@ -280,23 +284,23 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
 
 
-def process_option_usage(DISPLAY_NAME: str, PROGRAM_DESC: str,
+def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
                          USAGE: str) -> None:
     """
     This function shows the available options.
     """
+    DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
     TEXT: str = (f"{_('Usage:')} {USAGE}\n\n"
                  f'''{_("Type '{} --help' for more information.").
                       format(DISPLAY_NAME)}''')
-    infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                           DISPLAY_NAME: str) -> None:
+def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function displays version, author, and license information.
     """
@@ -307,22 +311,22 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str,
             BUILD_ID = f'{fh.read()}'
     except FileNotFoundError as fnf:
         TEXT: str = str(fnf)
-        logmsg(DISPLAY_NAME, TEXT)
+        logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Build ID cannot be determined.')
-        logmsg(DISPLAY_NAME, TEXT)
+        logmsg(PROGRAM_NAME, TEXT)
         BUILD_ID = TEXT
     except Exception as exc:
         TEXT = str(exc)
-        logmsg(DISPLAY_NAME, TEXT)
+        logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         term(PROGRAM_NAME, ERR)
     finally:
         TEXT = f"{_('kz version 4.2.1 (built {}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         TEXT += _('License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.')
-        infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
 def term(PROGRAM_NAME: str, RC: int) -> None:
@@ -338,8 +342,7 @@ def term(PROGRAM_NAME: str, RC: int) -> None:
         sys.exit(ERR)
 
 
-def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                   DISPLAY_NAME: str) -> int:
+def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function waits for the user to press Enter.
     """
@@ -348,13 +351,13 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str,
         input(TEXT)
     except KeyboardInterrupt:
         TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         term(PROGRAM_NAME, ERR)
     except Exception as exc:
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         term(PROGRAM_NAME, ERR)
     else:
         return OK

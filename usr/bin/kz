@@ -29,14 +29,13 @@ _ = gettext.gettext
 
 PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Run the kz command')
-DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
 USAGE: str = (f"{_('kz <command> [<arguments>] [-l|--list]')} "
               f"{kz_common.OPTIONS_USAGE}")
 
 X_OPTIONS_HELP: str = f"{_('  -l, --list     show available commands')}"
 
-HELP: str = (f"{_('Usage: {} <arguments> [<options>]').format(DISPLAY_NAME)}"
+HELP: str = (f"{_('Usage: kz <arguments> [<options>]')}"
              f'\n\n{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
              f'{X_OPTIONS_HELP}\n'
@@ -64,28 +63,28 @@ def process() -> None:
         if ARG_NUM == 1:
             # Check if the option for kz is specified.
             if sys.argv[ARG_NUM].startswith('-'):
-                kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC,
-                                          DISPLAY_NAME, USAGE, HELP)
+                kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE,
+                                          HELP)
                 process_x_options()
                 term()
             else:
                 # Build kz-<command> and check if kz-<command> exists.
                 EXEC += '-' + sys.argv[ARG_NUM]
                 if not os.path.exists(EXEC):
-                    TEXT = f'{DISPLAY_NAME}: {sys.argv[ARG_NUM]}: '
+                    TEXT = f'kz: {sys.argv[ARG_NUM]}: '
                     TEXT += f"{_('command does not exist')}\n"
                     TEXT += f"{_('Usage:')} {USAGE}"
                     print(TEXT)
-                    kz_common.term(DISPLAY_NAME, kz_common.ERR)
+                    kz_common.term(PROGRAM_NAME, kz_common.ERR)
         else:
             # Build kz-<command> <arguments>...
             EXEC += ' ' + sys.argv[ARG_NUM]
 
     if EXEC == '/usr/bin/kz':
-        TEXT = f"{DISPLAY_NAME}: {_('command is required')}\n"
+        TEXT = f"kz: {_('command is required')}\n"
         TEXT += f"{_('Usage:')} {USAGE}"
         print(TEXT)
-        kz_common.term(DISPLAY_NAME, kz_common.ERR)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
         TEXT = f'Restart (exec {EXEC}...)'
         kz_common.logmsg(PROGRAM_NAME, TEXT)
@@ -93,14 +92,14 @@ def process() -> None:
             subprocess.run(f'exec {EXEC}', executable='bash', shell=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             kz_common.term(PROGRAM_NAME, kz_common.ERR)
         except Exception as exc:
             TEXT = str(exc)
             kz_common.logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(DISPLAY_NAME, kz_common.ERR)
+            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            kz_common.term(PROGRAM_NAME, kz_common.ERR)
         else:
             term()
 
@@ -112,14 +111,17 @@ def process_x_options() -> None:
     ARGS = None
     PARSER = None
 
-    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
+    PARSER = argparse.ArgumentParser(prog='kz', usage=USAGE,
                                      add_help=False)
 
     PARSER.add_argument('-l', '--list', action='store_true')
 
-    ARGS = PARSER.parse_args()
+    try:
+        ARGS = PARSER.parse_args()
+    except Exception:
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
-    if ARGS.list:
+    if ARGS.list:  # type: ignore
         process_option_list()
 
 
@@ -161,13 +163,13 @@ def term() -> None:
     """
     This function controls the termination of the script.
     """
-    kz_common.term(DISPLAY_NAME, kz_common.OK)
+    kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
 ###############################################################################
 # Main
 ###############################################################################
 
-kz_common.init(DISPLAY_NAME)
+kz_common.init(PROGRAM_NAME)
 process()
 term()

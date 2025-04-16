@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-14 07:51+0200\n"
+"POT-Creation-Date: 2025-04-15 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,9 +104,6 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-msgid "Usage: {} [<options>]"
-msgstr ""
-
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
@@ -136,7 +133,7 @@ msgstr ""
 msgid "Run the kz command"
 msgstr ""
 
-msgid "Usage: {} <arguments> [<options>]"
+msgid "Usage: kz <arguments> [<options>]"
 msgstr ""
 
 msgid "kz <command> [<arguments>] [-l|--list]"
@@ -423,10 +420,6 @@ msgid "Type 'exit' to close this window."
 msgstr ""
 
 msgid "Build development environment"
-msgstr ""
-
-#, sh-format
-msgid "Usage: kz dev $OPTIONS_USAGE"
 msgstr ""
 
 msgid "Usage: kz dev [<options>]"
@@ -922,10 +915,16 @@ msgstr ""
 msgid "Update and cleanup system"
 msgstr ""
 
+msgid "Usage: kz update [<options>]"
+msgstr ""
+
 msgid "Update"
 msgstr ""
 
 msgid "Cleanup"
+msgstr ""
+
+msgid "Usage: kz wifi [<options>]"
 msgstr ""
 
 msgid "Use this data to connect to the wireless network."

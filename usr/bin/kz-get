@@ -51,7 +51,7 @@ function process() {
     elif grep --quiet rhel /etc/os-release; then
         install_rpm_package
     else
-        TEXT="kz get: $(gettext 'fatal: unknown os release.')"
+        TEXT="$(gettext 'fatal: unknown os release.')"
         printf '%s\n' "$TEXT" >&2
         exit 1
     fi

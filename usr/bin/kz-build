@@ -22,7 +22,6 @@ source ~/kz-scripts/usr/bin/kz_common.sh
 readonly PROGRAM_NAME='kz-build'
 PROGRAM_DESC=$(gettext 'Build website including kz packages')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE=$(eval_gettext "Usage: kz build \$OPTIONS_USAGE")
 readonly USAGE
@@ -84,7 +83,7 @@ function check_input() {
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --name          'kz build'          \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -115,7 +114,7 @@ function process_x_options() {
     done
 
     if [[ $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="kz build: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR

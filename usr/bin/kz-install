@@ -22,7 +22,6 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-install'
 PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE=$(eval_gettext "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]
                   [-f|--file <file>] [-g|--gui] [-r|--remove]
@@ -124,7 +123,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+                --name          "kz install"                        \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -158,7 +157,7 @@ function process_x_options() {
                 ;;
             -f | --file )
                 if $OPTION_FILE; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="kz install: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -170,7 +169,7 @@ $USAGE"
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
                     TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+"kz install: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR

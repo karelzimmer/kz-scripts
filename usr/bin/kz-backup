@@ -22,7 +22,6 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-backup'
 PROGRAM_DESC=$(gettext 'Backup home folder')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE="$(eval_gettext "Usage: kz backup [-g|--gui] [-t|--target <directory>]
                  \$OPTIONS_USAGE")"
@@ -72,7 +71,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+                --name          'kz backup'                         \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -95,7 +94,7 @@ function process_x_options() {
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
                     TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+"kz backup: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -105,7 +104,7 @@ $USAGE"
                 ;;
             -t | --target )
                 if $OPTION_TARGET; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="kz backup: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -125,7 +124,7 @@ $USAGE"
     done
 
     if [[ $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="kz backup: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -145,7 +144,7 @@ function check_target() {
     if $OPTION_TARGET; then
 
         if ! [[ -d $TARGET_ARGUMENT ]]; then
-            TEXT="$DISPLAY_NAME: $TARGET_ARGUMENT: \
+            TEXT="kz backup: $TARGET_ARGUMENT: \
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"

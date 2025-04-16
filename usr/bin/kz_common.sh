@@ -44,13 +44,12 @@ readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 if ! type systemctl &> /dev/null; then
-    printf '%s\n' "$MODULE_NAME: $(gettext 'fatal: no systemd available')" >&2
+    printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
     exit $ERR
 fi
 
 if ! [[ -f /etc/os-release ]]; then
-    printf '%s\n' "$MODULE_NAME: \
-$(gettext 'fatal: no os release available')" >&2
+    printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
     exit $ERR
 fi
 
@@ -182,9 +181,9 @@ function check_repos() {
 
 # This function returns an error message.
 function errmsg() {
-    local TITLE=''
-
     if $OPTION_GUI; then
+        local DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+        local TITLE=''
         TITLE="$PROGRAM_DESC $(gettext 'error message') ($DISPLAY_NAME)"
         zenity  --error                 \
                 --width     600         \
@@ -199,9 +198,9 @@ function errmsg() {
 
 # This function returns an informational message.
 function infomsg() {
-    local TITLE=''
-
     if $OPTION_GUI; then
+        local DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+        local TITLE=''
         TITLE="$PROGRAM_DESC $(gettext 'information') ($DISPLAY_NAME)"
         zenity  --info                  \
                 --width     600         \
@@ -280,6 +279,7 @@ function process_options() {
 
 # This function shows the available help.
 function process_option_help() {
+    local DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
     local TEXT=''
     local YELP_MAN_URL=''
 
@@ -302,13 +302,14 @@ function process_option_manual() {
     if [[ ${DISPLAY-} ]]; then
         yelp man:"$PROGRAM_NAME" 2> /dev/null
     else
-        man --pager=cat "$DISPLAY_NAME"
+        man --pager=cat "$PROGRAM_NAME"
     fi
 }
 
 
 # This function shows the available options.
 function process_option_usage() {
+    local DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
     local TEXT=''
 
     TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"

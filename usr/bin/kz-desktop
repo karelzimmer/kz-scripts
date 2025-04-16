@@ -22,7 +22,6 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-desktop'
 PROGRAM_DESC=$(gettext 'Change desktop environment')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE="$(eval_gettext "Usage: kz desktop [-a|--addaft <favorite>] \
 [-b|--addbef <favorite>]
@@ -100,7 +99,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+                --name          "kz desktop"                        \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -122,7 +121,7 @@ function process_x_options() {
         case $1 in
             -a | --addaft )
                 if $OPTION_ADDAFT; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="kz desktop: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -133,7 +132,7 @@ $USAGE"
                 ;;
             -b | --addbef )
                 if $OPTION_ADDBEF; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="kz desktop: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -144,7 +143,7 @@ $USAGE"
                 ;;
             -d | --delete )
                 if $OPTION_DELETE; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="kz desktop: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -172,14 +171,14 @@ $USAGE"
     done
 
     if [[ $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="kz desktop: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
     fi
 
     if ! [[ ${DISPLAY-} ]]; then
-        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
+        TEXT="kz desktop: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
         exit $OK
