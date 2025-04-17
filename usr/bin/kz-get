@@ -22,7 +22,6 @@ source /usr/bin/gettext.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-get'
-
 readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
 
 
@@ -32,6 +31,13 @@ readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
 
 # This function performs initial actions.
 function init() {
+    ###########################################################################
+    # Global variables
+    ###########################################################################
+    local -g KZ_GET_PID_FILE=''
+    local -g OPTION_DEV=false
+    local -g TEXT=''
+
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -51,7 +57,7 @@ function process() {
     elif grep --quiet rhel /etc/os-release; then
         install_rpm_package
     else
-        TEXT="$(gettext 'fatal: unknown os release.')"
+        TEXT="$(gettext 'fatal: unknown os release')"
         printf '%s\n' "$TEXT" >&2
         exit 1
     fi
@@ -60,9 +66,9 @@ function process() {
 
 # This function handles the options and arguments.
 function check_input() {
-    local OPTION=${1:-''}
+    local option=${1:-''}
 
-    case $OPTION in
+    case $option in
         '' )
             return 0
             ;;
@@ -90,7 +96,7 @@ function check_input() {
 
 # This function prepares further processing.
 function prepare_processing() {
-    local -i SLEEP=1
+    local -i sleep=1
 
     sudo true
 
@@ -101,30 +107,30 @@ function prepare_processing() {
     printf '%s' '[ '
     while test -e "$KZ_GET_PID_FILE"; do
         printf '\b%s' '=>'
-        sleep $SLEEP
+        sleep $sleep
     done &
 }
 
 
 # This function downloads and installs Debian package kz.
 function install_deb_package() {
-    local KZ_DEB_DEV_SITE_FILE="\
+    local kz_deb_dev_site_file="\
 https://karelzimmer.nl/assets/packages/kz-dev_4.2.1-1_all.deb"
-    local KZ_DEB_PRD_SITE_FILE="\
+    local kz_deb_prd_site_file="\
 https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
-    local KZ_DEB_LOCAL_FILE=''
-    local KZ_DEB_SITE_FILE=''
+    local kz_deb_local_file=''
+    local kz_deb_site_file=''
 
-    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
     if $OPTION_DEV; then
-        KZ_DEB_SITE_FILE=$KZ_DEB_DEV_SITE_FILE
+        kz_deb_site_file=$kz_deb_dev_site_file
     else
-        KZ_DEB_SITE_FILE=$KZ_DEB_PRD_SITE_FILE
+        kz_deb_site_file=$kz_deb_prd_site_file
     fi
 
-    wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
-            "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
+    wget    --output-document="$kz_deb_local_file"  \
+            "$kz_deb_site_file"                     |& $LOGCMD
 
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -132,47 +138,47 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --allow-downgrades              \
             --reinstall                     \
             --assume-yes                    \
-            "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD
+            "$kz_deb_local_file"            |& $LOGCMD
 
-    rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
+    rm --verbose "$kz_deb_local_file" |& $LOGCMD
 }
 
 
 # This function installs RPM package kz.
 function install_rpm_package() {
-    local KZ_RPM_PRD_SITE_FILE="\
+    local kz_rpm_prd_site_file="\
 https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
-    local KZ_RPM_DEV_SITE_FILE="\
+    local kz_rpm_dev_site_file="\
 https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
-    local KZ_RPM_SITE_FILE=''
-    local MODE='install'
+    local kz_rpm_site_file=''
+    local mode='install'
 
     if type kz &> /dev/null; then
-        MODE='reinstall'
+        mode='reinstall'
     fi
 
     if $OPTION_DEV; then
-        KZ_RPM_SITE_FILE=$KZ_RPM_DEV_SITE_FILE
+        kz_rpm_site_file=$kz_rpm_dev_site_file
     else
-        KZ_RPM_SITE_FILE=$KZ_RPM_PRD_SITE_FILE
+        kz_rpm_site_file=$kz_rpm_prd_site_file
     fi
 
-    sudo dnf $MODE --assumeyes "$KZ_RPM_SITE_FILE" |& $LOGCMD
+    sudo dnf $mode --assumeyes "$kz_rpm_site_file" |& $LOGCMD
 }
 
 
 # This function controls the termination of the script.
 function term() {
-    local RED='\033[1;31m'
-    local NORMAL='\033[0m'
+    local red='\033[1;31m'
+    local normal='\033[0m'
 
     # Progress indicator ends like [====]100%.
     rm --verbose "$KZ_GET_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
 
     if $OPTION_DEV; then
-        TEXT=$RED$(gettext "Please note: the development version of the kz \
-package is installed")$NORMAL
+        TEXT=$red$(gettext "Please note: the development version of the kz \
+package is installed")$normal
         printf '%b\n' "$TEXT"
     fi
 
@@ -198,10 +204,6 @@ $(gettext "Type 'exit' to close this window.")"
 ###############################################################################
 
 function main() {
-    local KZ_GET_PID_FILE=''
-    local OPTION_DEV=false
-    local TEXT=''
-
     init    "$@"
     process "$@"
     term

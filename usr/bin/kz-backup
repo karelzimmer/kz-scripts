@@ -55,6 +55,15 @@ readonly X_OPTIONS_LONG=',gui,target:'
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    ###########################################################################
+    # Global variables
+    ###########################################################################
+    local -g MEDIUM=''
+    local -g TARGET=''
+    local -g TARGET_MEDIUM=''
+    local -g OPTION_TARGET=false
+    local -g TARGET_ARGUMENT=''
+
     check_input "$@"
     check_target
     backup_settings
@@ -64,10 +73,9 @@ function process() {
 
 # This function handles the options and arguments.
 function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+    local parsed=''
 
-    PARSED=$(
+    parsed=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
@@ -78,7 +86,7 @@ function check_input() {
         infomsg "$USAGE"
         exit $ERR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
 
     process_options   "$@"
     process_x_options "$@"
@@ -87,8 +95,6 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_x_options() {
-    local TEXT=''
-
     while true; do
         case $1 in
             -g | --gui )
@@ -134,11 +140,10 @@ $USAGE"
 
 # This function checks if the target is available.
 function check_target() {
-    local TEXT=''
-    local USB_MOUNT_POINT="/media/$USER"
+    local usb_mount_point="/media/$USER"
 
     if grep --quiet rhel /etc/os-release; then
-        USB_MOUNT_POINT="/run/media/$USER"
+        usb_mount_point="/run/media/$USER"
     fi
 
     if $OPTION_TARGET; then
@@ -155,7 +160,7 @@ $USAGE"
         TARGET_MEDIUM=$TARGET_ARGUMENT
     else
 
-        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
+        MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
         if ! [[ $MEDIUM ]]; then
             TEXT=$(gettext "No USB medium found.
@@ -164,7 +169,7 @@ Connect a USB medium.")
             infomsg "$TEXT"
 
             $OPTION_GUI || wait_for_enter
-            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
+            MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
             if ! [[ $MEDIUM ]]; then
                 errmsg "$TEXT"
@@ -172,7 +177,7 @@ Connect a USB medium.")
             fi
         fi
 
-        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
+        MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             TEXT="$(eval_gettext "Connect only one USB medium.
@@ -185,7 +190,7 @@ Disconnect media via Files.")"
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
+            MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
                 errmsg "$TEXT"
@@ -228,14 +233,13 @@ Please move to:              <medium>/Backups/")"
 
 # This function backups the user settings.
 function backup_settings() {
-    local SETTINGS_DIR=''
-    local TEXT=''
+    local settings_dir=''
 
     logmsg 'Backup settings...'
 
-    SETTINGS_DIR=$HOME/$(gettext 'Settings')
-    if ! [[ -d $SETTINGS_DIR ]]; then
-        mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
+    settings_dir=$HOME/$(gettext 'Settings')
+    if ! [[ -d $settings_dir ]]; then
+        mkdir --verbose "$settings_dir" |& $LOGCMD
     fi
 
     backup_setting_readme
@@ -256,11 +260,11 @@ function backup_settings() {
 
 # This function creates a README.
 function backup_setting_readme() {
-    local OUTPUT_FILE=''
+    local output_file=''
 
     logmsg 'Create settings README...'
 
-    OUTPUT_FILE=$SETTINGS_DIR/$(gettext 'README')
+    output_file=$settings_dir/$(gettext 'README')
 
     TEXT="$(gettext "This folder contains files created by kz-backup.
 These files are used by kz-restore and others.
@@ -268,46 +272,47 @@ These files are used by kz-restore and others.
 Further reading:")
     man kz backup
     man kz restore"
-    printf '%s\n' "$TEXT" > "$OUTPUT_FILE"
+    printf '%s\n' "$TEXT" > "$output_file"
 }
 
 
 # This function creates a list of installed apps.
 function backup_setting_apps() {
-    local FOOTER1
-    local FOOTER2
-    local HEADER1
-    local HEADER2
-    local OUTPUT_FILE=$SETTINGS_DIR/apps.txt
+    local footer1
+    local footer2
+    local header1
+    local header2
+    local output_file=$settings_dir/apps.txt
 
-    HEADER1=$(gettext "==== START list of manual installed packages \
+    header1=$(gettext "==== START list of manual installed packages \
 ====")
-    FOOTER1=$(gettext '==== END list of manual installed packages ====')
-    HEADER2=$(gettext '==== START list of installed snaps ====')
-    FOOTER2=$(gettext '==== END list of installed snaps ====')
+    footer1=$(gettext '==== END list of manual installed packages ====')
+    header2=$(gettext '==== START list of installed snaps ====')
+    footer2=$(gettext '==== END list of installed snaps ====')
 
     logmsg 'Create a list of installed apps...(ignore WARNING).'
 
-    printf '%s\n' "$HEADER1" > "$OUTPUT_FILE"
-    apt list --manual-installed 2> /dev/null >> "$OUTPUT_FILE" || true
-    printf '%s\n' "$FOOTER1" >> "$OUTPUT_FILE"
+    printf '%s\n' "$header1" > "$output_file"
+    apt list --manual-installed 2> /dev/null >> "$output_file" || true
+    printf '%s\n' "$footer1" >> "$output_file"
 
-    printf '\n%s\n' "$HEADER2" >> "$OUTPUT_FILE"
-    snap list 2> /dev/null >> "$OUTPUT_FILE" ||
-        printf '%s\n' "$(gettext 'snap is not installed')" >> "$OUTPUT_FILE"
-    printf '%s\n' "$FOOTER2" >> "$OUTPUT_FILE"
+    printf '\n%s\n' "$header2" >> "$output_file"
+    snap list 2> /dev/null >> "$output_file" ||
+        printf '%s\n' "$(gettext 'snap is not installed')" >> "$output_file"
+    printf '%s\n' "$footer2" >> "$output_file"
 }
 
 
 # This function saves instructions for adding additional users.
 function backup_setting_users() {
-    local GROUPS_LIST=''
-    local OUTPUT_FILE=$SETTINGS_DIR/users.txt
-    local USER_NAME=''
+    local groups=''
+    local output_file=$settings_dir/users.txt
+    local user=''
+    local users=''
 
-    OUTPUT_FILE=$SETTINGS_DIR/$(gettext 'users.txt')
+    output_file=$settings_dir/$(gettext 'users.txt')
 
-    USERS_LIST=$(
+    users=$(
         gettext 'USERNAME|USERID|USER'
         printf  '\n'
         grep    /bin/bash /etc/passwd           |
@@ -316,10 +321,10 @@ function backup_setting_users() {
         tr      ',,,' '   '                     |
         tr      ':' '|'
         )
-    GROUPS_LIST=$(
-        while read -r USER_NAME; do
+    groups=$(
+        while read -r user; do
             printf '\n'
-            id "$USER_NAME"
+            id "$user"
         done < <(grep /home /etc/passwd | cut --delimiter=':' --fields=1)
         )
 
@@ -336,8 +341,8 @@ Settings on Users.
 $(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
 click on Activities at the top left.")
 
-$USERS_LIST
-$GROUPS_LIST"
+$users
+$groups"
     else
         TEXT="$(gettext 'Additional users can be added manually:')
 
@@ -351,23 +356,23 @@ sudo usermod --append --groups wheel <username>
 # User sets password on first login:
 sudo passwd --delete --expire <username>")
 
-$USERS_LIST
-$GROUPS_LIST"
+$users
+$groups"
     fi
 
-    printf '%b\n' "$TEXT" > "$OUTPUT_FILE"
+    printf '%b\n' "$TEXT" > "$output_file"
 }
 
 
 # This function saves the WiFi information.
 function backup_setting_wifi() {
-    local OUTPUT_FILE=$SETTINGS_DIR/wifi.txt
+    local output_file=$settings_dir/wifi.txt
 
     logmsg 'Save the WiFi information...'
 
     # Call kz wifi.
     logmsg 'Calling kz wifi...'
-    kz wifi > "$OUTPUT_FILE"
+    kz wifi > "$output_file"
     logmsg 'Called kz wifi.'
 }
 
@@ -375,13 +380,13 @@ function backup_setting_wifi() {
 # This function copies the user avatar and saves instructions for restoring, if
 # possible.
 function backup_setting_avatar() {
-    local INPUT_FILE=/var/lib/AccountsService/icons/$USER
-    local OUTPUT_FILE_1=$SETTINGS_DIR/avatar
-    local OUTPUT_FILE_2=$SETTINGS_DIR/avatar.txt
+    local input_file=/var/lib/AccountsService/icons/$USER
+    local output_file_1=$settings_dir/avatar
+    local output_file_2=$settings_dir/avatar.txt
 
-    if [[ -f $INPUT_FILE ]]; then
+    if [[ -f $input_file ]]; then
         logmsg 'Copy the user avatar...'
-        cp --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD
+        cp --verbose "$input_file" "$output_file_1" |& $LOGCMD
     fi
     logmsg 'Save instructions for restoring the avatar...'
     TEXT="$(gettext "To set the users avatar:
@@ -395,18 +400,18 @@ Users.
 $(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
 click on Activities at the top left.")"
 
-    printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
+    printf '%s\n' "$TEXT" > "$output_file_2"
 }
 
 
 # This function copies the desktop background, if available, and saves
 # instructions for setting desktop background.
 function backup_setting_desktop() {
-    local INPUT_FILE
-    local OUTPUT_FILE_1=$SETTINGS_DIR/desktop
-    local OUTPUT_FILE_2=$SETTINGS_DIR/desktop.txt
+    local input_file
+    local output_file_1=$settings_dir/desktop
+    local output_file_2=$settings_dir/desktop.txt
 
-    INPUT_FILE=$(
+    input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
         sed 's|%20| |g'                                         |
         sed "s/'//g"                                            |
@@ -416,9 +421,9 @@ function backup_setting_desktop() {
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
-    if [[ -f $INPUT_FILE && $INPUT_FILE != *.xml ]]; then
+    if [[ -f $input_file && $input_file != *.xml ]]; then
         logmsg 'Copy the desktop background...'
-        cp "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD || true
+        cp "$input_file" "$output_file_1" |& $LOGCMD || true
     fi
 
     logmsg 'Save instructions for setting the desktop background...'
@@ -432,30 +437,29 @@ function backup_setting_desktop() {
 $(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
 click on Activities at the top left.")"
 
-    printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
+    printf '%s\n' "$TEXT" > "$output_file_2"
 }
 
 
 # This function saves the favorite apps in the dash.
 function backup_setting_favs() {
-    local OUTPUT_FILE=$SETTINGS_DIR/favs.txt
+    local output_file=$settings_dir/favs.txt
 
     logmsg 'Save the favorite apps...'
     gsettings get                           \
-              org.gnome.shell favorite-apps > "$OUTPUT_FILE" |& $LOGCMD || true
+              org.gnome.shell favorite-apps > "$output_file" |& $LOGCMD || true
 }
 
 
 # This function creates the backup.
 function create_backup() {
-    local EXCLUDE_FILE=''
-    local TEXT=''
-    local TITLE=''
-    local -i BACKUP_RC=0
+    local exclude_file=''
+    local title=''
+    local -i backup_rc=0
 
-    EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-excludes-XXXXXXXXXX")
+    exclude_file=$(mktemp -t "$PROGRAM_NAME-excludes-XXXXXXXXXX")
 
-    cat << EOF > "$EXCLUDE_FILE"
+    cat << EOF > "$exclude_file"
 # Exclude Git-managed directories.
 $(
     find    "$HOME"         \
@@ -469,17 +473,17 @@ $(
     )
 EOF
 
-    TITLE=$(gettext 'Backup home folder')
+    title=$(gettext 'Backup home folder')
     TEXT=$(gettext 'Preparing backup (this may take a while)')
 
     if $OPTION_GUI; then
-        logmsg "$TITLE..."
+        logmsg "$title..."
         rsync   --archive                       \
                 --acls                          \
                 --xattrs                        \
                 --verbose                       \
                 --delete                        \
-                --exclude-from="$EXCLUDE_FILE"  \
+                --exclude-from="$exclude_file"  \
                 --delete-excluded               \
                 "$HOME"/                        \
                 "$TARGET"/                      \
@@ -491,8 +495,8 @@ EOF
                 --pulsate                       \
                 --width     600                 \
                 --height    50                  \
-                --title     "$TITLE"            \
-                --text      "$TEXT"             2> /dev/null || BACKUP_RC=$?
+                --title     "$title"            \
+                --text      "$TEXT"             2> /dev/null || backup_rc=$?
     else
         TEXT+='...'
         infomsg "$TEXT"
@@ -502,13 +506,13 @@ EOF
                 --verbose                       \
                 --human-readable                \
                 --delete                        \
-                --exclude-from="$EXCLUDE_FILE"  \
+                --exclude-from="$exclude_file"  \
                 --delete-excluded               \
                 "$HOME"/                        \
-                "$TARGET"/                      2> /dev/null || BACKUP_RC=$?
+                "$TARGET"/                      2> /dev/null || backup_rc=$?
     fi
 
-    rm --verbose "$EXCLUDE_FILE" |& $LOGCMD
+    rm --verbose "$exclude_file" |& $LOGCMD
 
     TEXT=$(gettext "Writing data from memory (this may take a while)")
 
@@ -521,7 +525,7 @@ EOF
                 --no-cancel             \
                 --width     600         \
                 --height    50          \
-                --title     "$TITLE"    \
+                --title     "$title"    \
                 --text      "$TEXT"     &> >($LOGCMD)
     else
         TEXT+='...'
@@ -529,7 +533,7 @@ EOF
         sync |& $LOGCMD
     fi
 
-    if [[ $BACKUP_RC -ne $OK ]]; then
+    if [[ $backup_rc -ne $OK ]]; then
         TEXT="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable, or
@@ -548,19 +552,27 @@ $(gettext "Try creating the back up again.")"
 
 # This function controls the termination of the script.
 function term() {
-    local TEXT=''
-    local -i NUM_USERS=0
-    local -i RC=$OK
+    local users=''
+    local -i num_users=0
 
-    NUM_USERS=$(find /home/* -prune -print | wc --lines)
+    users=$(
+        gettext 'USERNAME|USERID|USER'
+        printf  '\n'
+        grep    /bin/bash /etc/passwd           |
+        grep    root --invert-match             |
+        cut     --delimiter=':' --fields=1,3,5  |
+        tr      ',,,' '   '                     |
+        tr      ':' '|'
+        )
+    num_users=$(find /home/* -prune -print | wc --lines)
 
-    if [[ $NUM_USERS -eq 1 ]]; then
+    if [[ $num_users -eq 1 ]]; then
         TEXT=$(gettext "The backup has been made.")
     else
         TEXT="$(eval_gettext "The backup has been made for \$USER (there are \
-\$NUM_USERS users).")
+\$num_users users).")
 
-$USERS_LIST"
+$users"
     fi
 
     if [[ $TARGET_MEDIUM == */media/$USER* ]]; then
@@ -583,10 +595,9 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 # This function tries to unmount the USB device.
 function term_usb() {
-    local DEVICE=''
-    local TEXT=''
+    local device=''
 
-    DEVICE='/dev/'$(
+    device='/dev/'$(
         lsblk   --ascii             |
         grep    --before-context=1  \
                 "$TARGET_MEDIUM"    |
@@ -597,7 +608,7 @@ function term_usb() {
                 --fields=1
         )
 
-    TITLE=$(gettext 'Backup home folder')
+    title=$(gettext 'Backup home folder')
     TEXT=$(gettext 'Disconnect the USB media')
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -610,7 +621,7 @@ function term_usb() {
                     --no-cancel             \
                     --width     600         \
                     --height    50          \
-                    --title     "$TITLE"    \
+                    --title     "$title"    \
                     --text      "$TEXT"     2> /dev/null
             )
     else
@@ -625,8 +636,8 @@ function term_usb() {
 # This function unmounts the USB device.
 function term_unmount() {
     umount "$TARGET_MEDIUM"                         |& $LOGCMD || RC+=$?
-    udisksctl lock --block-device "$DEVICE"         |& $LOGCMD || RC+=$?
-    udisksctl power-off --block-device "$DEVICE"    |& $LOGCMD || RC+=$?
+    udisksctl lock --block-device "$device"         |& $LOGCMD || RC+=$?
+    udisksctl power-off --block-device "$device"    |& $LOGCMD || RC+=$?
 }
 
 
@@ -635,12 +646,6 @@ function term_unmount() {
 ###############################################################################
 
 function main() {
-    local MEDIUM=''
-    local TARGET=''
-    local TARGET_MEDIUM=''
-    local OPTION_TARGET=false
-    local TARGET_ARGUMENT=''
-
     init    "$@"
     process "$@"
     term

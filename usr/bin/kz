@@ -53,43 +53,42 @@ def process() -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    ARG_NUM: int = 0
-    EXEC: str = '/usr/bin/kz'
-    TEXT: str = ''
+    arg_num: int = 0
+    exec: str = '/usr/bin/kz'
 
-    for ARG_NUM in range(len(sys.argv)):
-        if ARG_NUM == 0:
+    for arg_num in range(len(sys.argv)):
+        if arg_num == 0:
             continue
-        if ARG_NUM == 1:
+        if arg_num == 1:
             # Check if the option for kz is specified.
-            if sys.argv[ARG_NUM].startswith('-'):
+            if sys.argv[arg_num].startswith('-'):
                 kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE,
                                           HELP)
                 process_x_options()
                 term()
             else:
                 # Build kz-<command> and check if kz-<command> exists.
-                EXEC += '-' + sys.argv[ARG_NUM]
-                if not os.path.exists(EXEC):
-                    TEXT = f'kz: {sys.argv[ARG_NUM]}: '
+                exec += '-' + sys.argv[arg_num]
+                if not os.path.exists(exec):
+                    TEXT = f'kz: {sys.argv[arg_num]}: '
                     TEXT += f"{_('command does not exist')}\n"
                     TEXT += f"{_('Usage:')} {USAGE}"
                     print(TEXT)
                     kz_common.term(PROGRAM_NAME, kz_common.ERR)
         else:
             # Build kz-<command> <arguments>...
-            EXEC += ' ' + sys.argv[ARG_NUM]
+            exec += ' ' + sys.argv[arg_num]
 
-    if EXEC == '/usr/bin/kz':
+    if exec == '/usr/bin/kz':
         TEXT = f"kz: {_('command is required')}\n"
         TEXT += f"{_('Usage:')} {USAGE}"
         print(TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
-        TEXT = f'Restart (exec {EXEC}...)'
+        TEXT = f'Restart (exec {exec}...)'
         kz_common.logmsg(PROGRAM_NAME, TEXT)
         try:
-            subprocess.run(f'exec {EXEC}', executable='bash', shell=True)
+            subprocess.run(f'exec {exec}', executable='bash', shell=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
@@ -108,20 +107,20 @@ def process_x_options() -> None:
     """
     This function handles the script options and arguments.
     """
-    ARGS = None
-    PARSER = None
+    args = None
+    parser = None
 
-    PARSER = argparse.ArgumentParser(prog='kz', usage=USAGE,
+    parser = argparse.ArgumentParser(prog='kz', usage=USAGE,
                                      add_help=False)
 
-    PARSER.add_argument('-l', '--list', action='store_true')
+    parser.add_argument('-l', '--list', action='store_true')
 
     try:
-        ARGS = PARSER.parse_args()
+        args = parser.parse_args()
     except Exception:
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
-    if ARGS.list:  # type: ignore
+    if args.list:  # type: ignore
         process_option_list()
 
 
@@ -129,9 +128,9 @@ def process_option_list() -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    TEXT: str = f"{_('The following commands are available:')}\n\n"
-    TEXT += f"{_('NUM  COMMAND')}\n"
-    COMMAND: str = f"find   /usr/bin/kz-*               \
+    TEXT = f"{_('The following commands are available:')}\n\n"
+    TEXT += f"{_('NUM  command')}\n"
+    command: str = f"find   /usr/bin/kz-*               \
                             -maxdepth 1                 \
                             -type f                     \
                             -executable                 \
@@ -148,7 +147,7 @@ def process_option_list() -> None:
 
     # Python 3.6.9 version on Ubuntu 18.04 does not have parameter 'text=True'.
     try:
-        TEXT += subprocess.run(COMMAND, stdout=subprocess.PIPE,
+        TEXT += subprocess.run(command, stdout=subprocess.PIPE,
                                shell=True, check=True, text=True).stdout
     except Exception:
         TEXT += '  0  ' + _('Use "man kz" for available commands.') + '\n'

@@ -55,6 +55,15 @@ readonly X_OPTIONS_LONG=',gui,source:'
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    ###########################################################################
+    # Global variables
+    ###########################################################################
+    local -g MEDIUM=''
+    local -g OPTION_SOURCE=false
+    local -g SOURCE_ARGUMENT=''
+    local -g SOURCE_MEDIUM=''
+    local -g SOURCE=''
+
     check_input "$@"
     check_source
     restore_backup
@@ -64,10 +73,9 @@ function process() {
 
 # This function handles the options and arguments.
 function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+    local parsed=''
 
-    PARSED=$(
+    parsed=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
@@ -78,7 +86,7 @@ function check_input() {
         infomsg "$USAGE"
         exit $ERR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
 
     process_options   "$@"
     process_x_options "$@"
@@ -87,8 +95,6 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_x_options() {
-    local TEXT=''
-
     while true; do
         case $1 in
             -g | --gui )
@@ -134,11 +140,10 @@ $USAGE"
 
 # This function checks if the source is available.
 function check_source() {
-    local TEXT=''
-    local USB_MOUNT_POINT="/media/$USER"
+    local usb_mount_point="/media/$USER"
 
     if grep --quiet rhel /etc/os-release; then
-        USB_MOUNT_POINT="/run/media/$USER"
+        usb_mount_point="/run/media/$USER"
     fi
 
     if $OPTION_SOURCE; then
@@ -154,7 +159,7 @@ $USAGE"
         SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
         SOURCE_MEDIUM=$SOURCE_ARGUMENT
     else
-        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
+        MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
         if ! [[ $MEDIUM ]]; then
             TEXT=$(gettext "No USB medium found.
@@ -164,7 +169,7 @@ Connect a USB medium.")
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
+            MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
             if ! [[ $MEDIUM ]]; then
                 errmsg "$TEXT"
@@ -172,7 +177,7 @@ Connect a USB medium.")
             fi
         fi
 
-        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
+        MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             TEXT="$(eval_gettext "Connect only one USB medium.
@@ -185,7 +190,7 @@ Disconnect media via Files.")"
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> /dev/null || true)
+            MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
                 errmsg "$TEXT"
@@ -209,15 +214,14 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the backup.
 function restore_backup() {
-    local TEXT=''
-    local TITLE=''
-    local -i RESTORE_RC=0
+    local title=''
+    local -i restore_rc=0
 
-    TITLE=$(gettext 'Restore home folder')
+    title=$(gettext 'Restore home folder')
     TEXT=$(gettext 'Preparing restore (this can take a while)')
 
     if $OPTION_GUI; then
-        logmsg "$TITLE"...
+        logmsg "$title"...
         rsync   --archive               \
                 --acls                  \
                 --xattrs                \
@@ -232,8 +236,8 @@ function restore_backup() {
                 --pulsate               \
                 --width     600         \
                 --height    50          \
-                --title     "$TITLE"    \
-                --text      "$TEXT"     2> /dev/null || RESTORE_RC=$?
+                --title     "$title"    \
+                --text      "$TEXT"     2> /dev/null || restore_rc=$?
     else
         TEXT+='...'
         infomsg "$TEXT"
@@ -243,10 +247,10 @@ function restore_backup() {
                 --verbose               \
                 --human-readable        \
                 "$SOURCE"/              \
-                "$HOME"/                2> /dev/null || RESTORE_RC=$?
+                "$HOME"/                2> /dev/null || restore_rc=$?
     fi
 
-    if [[ $RESTORE_RC -ne $OK ]]; then
+    if [[ $restore_rc -ne $OK ]]; then
         TEXT="$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable, or
@@ -265,9 +269,9 @@ $(gettext "Try restoring the back up again.")"
 
 # This function restores the user settings.
 function restore_settings() {
-    local SETTINGS_DIR=''
+    local settings_dir=''
 
-    SETTINGS_DIR=$HOME/$(gettext 'Settings')
+    settings_dir=$HOME/$(gettext 'Settings')
 
     if [[ ${DISPLAY-} ]]; then
         logmsg 'Restore settings...'
@@ -278,29 +282,28 @@ function restore_settings() {
 
 # This function restores the desktop background, if possible.
 function restore_setting_desktop() {
-    local INPUT_FILE=$SETTINGS_DIR/desktop
+    local input_file=$settings_dir/desktop
 
-    if [[ -f $INPUT_FILE ]]; then
+    if [[ -f $input_file ]]; then
         logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
-                    "file://$INPUT_FILE"
+                    "file://$input_file"
     fi
 }
 
 
 # This function controls the termination of the script.
 function term() {
-    local USERS_LIST=''
-    local -i NUM_USERS=0
-    local -i RC=$OK
+    local users=''
+    local -i num_users=0
 
-    NUM_USERS=$(find /home/* -prune -print | wc --lines)
+    num_users=$(find /home/* -prune -print | wc --lines)
 
-    if [[ $NUM_USERS -eq 1 ]]; then
+    if [[ $num_users -eq 1 ]]; then
         TEXT=$(gettext 'The backup has been restored.')
     else
-        USERS_LIST=$(
+        users=$(
             gettext 'USERNAME|USERID|USER'
             printf  '\n'
             grep    /bin/bash /etc/passwd           |
@@ -310,9 +313,9 @@ function term() {
             tr      ':' '|'
             )
         TEXT="$(eval_gettext "The backup has restored for \$USER (there are \
-\$NUM_USERS users).")
+\$num_users users).")
 
-$USERS_LIST"
+$users"
     fi
 
     if [[ $SOURCE_MEDIUM == */media/* ]]; then
@@ -335,10 +338,9 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 # This function tries to unmount the USB device.
 function term_usb() {
-    local DEVICE=''
-    local TEXT=''
+    local device=''
 
-    DEVICE='/dev/'$(
+    device='/dev/'$(
         lsblk   --ascii             |
         grep    --before-context=1  \
                 "$SOURCE_MEDIUM"    |
@@ -349,7 +351,7 @@ function term_usb() {
                 --fields=1
         )
 
-    TITLE=$(gettext 'Restore home folder')
+    title=$(gettext 'Restore home folder')
     TEXT=$(gettext 'Disconnect the USB media')
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -362,7 +364,7 @@ function term_usb() {
                     --no-cancel             \
                     --width     600         \
                     --height    50          \
-                    --title     "$TITLE"    \
+                    --title     "$title"    \
                     --text      "$TEXT"     2> /dev/null
             )
     else
@@ -377,8 +379,8 @@ function term_usb() {
 # This function unmounts the USB device.
 function term_unmount() {
     umount "$SOURCE_MEDIUM"                         |& $LOGCMD || RC+=$?
-    udisksctl lock --block-device "$DEVICE"         |& $LOGCMD || RC+=$?
-    udisksctl power-off --block-device "$DEVICE"    |& $LOGCMD || RC+=$?
+    udisksctl lock --block-device "$device"         |& $LOGCMD || RC+=$?
+    udisksctl power-off --block-device "$device"    |& $LOGCMD || RC+=$?
 }
 
 
@@ -387,12 +389,6 @@ function term_unmount() {
 ###############################################################################
 
 function main() {
-    local MEDIUM=''
-    local OPTION_SOURCE=false
-    local SOURCE_ARGUMENT=''
-    local SOURCE_MEDIUM=''
-    local SOURCE=''
-
     init    "$@"
     process "$@"
     term

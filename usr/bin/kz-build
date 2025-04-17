@@ -57,7 +57,10 @@ readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    local TEXT=''
+    ###########################################################################
+    # Global variables
+    ###########################################################################
+    local -g DEV=false
 
     check_input "$@"
     if ! grep --quiet debian /etc/os-release; then
@@ -76,10 +79,9 @@ function process() {
 
 # This function handles the options and arguments.
 function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+    local parsed=''
 
-    PARSED=$(
+    parsed=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
@@ -90,7 +92,7 @@ function check_input() {
         infomsg "$USAGE"
         exit $ERR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
 
     process_options   "$@"
     process_x_options "$@"
@@ -99,8 +101,6 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_x_options() {
-    local TEXT=''
-
     while true; do
         case $1 in
             -- )
@@ -124,11 +124,10 @@ $USAGE"
 
 # This function builds the website.
 function build_website() {
-    local DIR=''
-    local FILE=''
-    local FILENAME=''
-    local STARTDIR=$PWD
-    local TEXT=''
+    local dir=''
+    local file=''
+    local filename=''
+    local startdir=$PWD
 
     TEXT=$(gettext 'Build website')...
     infomsg "$TEXT"
@@ -141,24 +140,24 @@ function build_website() {
             "$UPLOADS_REPO_DISTDIR" |& $LOGCMD
 
     # Make sure all necessary directories are available.
-    for DIR in "${UPLOADS_TARGETS[@]}"; do
-        mkdir --parents "$DIR" |& $LOGCMD
+    for dir in "${UPLOADS_TARGETS[@]}"; do
+        mkdir --parents "$dir" |& $LOGCMD
     done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
     cd "$DOCS_REPO"
-    for FILE in *.odt *.txt; do
-        FILENAME=${FILE%.*}
+    for file in *.odt *.txt; do
+        filename=${file%.*}
 
-        if [[ $FILE -nt $UPLOADS_REPO_DISTDIR/assets/documents/$FILENAME.pdf ]]
+        if [[ $file -nt $UPLOADS_REPO_DISTDIR/assets/documents/$filename.pdf ]]
         then
             lowriter    --headless                                          \
                         --convert-to pdf                                    \
                         --outdir "$UPLOADS_REPO_DISTDIR/assets/documents"   \
-                        "$FILE"
+                        "$file"
         fi
     done
-    cd "$STARTDIR"
+    cd "$startdir"
 
     # Copy kz-get to kz-uploads.
     mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/scripts" |& $LOGCMD
@@ -173,18 +172,16 @@ function build_website() {
 # This function generates the gettext binary Machine Object (.mo) file from the
 # readable Portable Object (.po) file.
 function generate_mo_file() {
-    local LC_MESSAGES_DIR=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
-    local TEXT=''
+    local lc_messages_dir=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
 
-    msgfmt --output-file="$LC_MESSAGES_DIR/kz.mo" "$LC_MESSAGES_DIR/kz.po"
+    msgfmt --output-file="$lc_messages_dir/kz.mo" "$lc_messages_dir/kz.po"
 }
 
 
 # This function builds Debian package kz.
 function build_deb_package() {
-    local BUILD_ID=''
-    local TEXT=''
-    local TO_BUILD=''
+    local build_id=''
+    local to_build=''
 
     TEXT=$(gettext 'Build Debian package')...
     infomsg "$TEXT"
@@ -222,27 +219,26 @@ function build_deb_package() {
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man7"/* |& $LOGCMD
 
     # Capture build id Debian package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
-    BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
+    build_id=$(date '+%Y-%m-%dT%H:%M:%S')
     mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
-    printf '%s' "$BUILD_ID" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
+    printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
     # Create Debian package in kz-uploads.
     # Debian 11: .deb uses unknown compression ==> -Z=xz.
     if $DEV; then
-        TO_BUILD="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME"
+        to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME"
     else
-        TO_BUILD="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"
+        to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"
     fi
-    fakeroot dpkg-deb --build -Z=xz "$DEB_REPO_DISTDIR" "$TO_BUILD" |& $LOGCMD
+    fakeroot dpkg-deb --build -Z=xz "$DEB_REPO_DISTDIR" "$to_build" |& $LOGCMD
 }
 
 
 # This function builds RPM package kz.
 function build_rpm_package() {
-    local BUILD_ID=''
-    local STARTDIR=$PWD
-    local TEXT=''
-    local TO_COPY=''
+    local build_id=''
+    local startdir=$PWD
+    local to_copy=''
 
     TEXT=$(gettext 'Build RPM package')...
     infomsg "$TEXT"
@@ -280,9 +276,9 @@ function build_rpm_package() {
             "$RPM_REPO_DISTDIR/usr/share/man/nl/man7"/* |& $LOGCMD
 
     # Capture build id RPM package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
-    BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
+    build_id=$(date '+%Y-%m-%dT%H:%M:%S')
     mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
-    printf '%s' "$BUILD_ID" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/build.id"
+    printf '%s' "$build_id" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
     # Create RPM package in kz-rpm/dist/.
     cd "$HOME"
@@ -290,33 +286,31 @@ function build_rpm_package() {
                 --build-in-place                                \
                 --define "_topdir $RPM_REPO_DISTDIR/rpmbuild"   \
                 "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"      |& $LOGCMD
-    cd "$STARTDIR"
+    cd "$startdir"
 
     if $DEV; then
-        TO_COPY=$UPLOADS_REPO_DISTDIR/assets/packages/$RPM_DEV_NAME
+        to_copy=$UPLOADS_REPO_DISTDIR/assets/packages/$RPM_DEV_NAME
     else
-        TO_COPY=$UPLOADS_REPO_DISTDIR/assets/packages/$RPM_NAME
+        to_copy=$UPLOADS_REPO_DISTDIR/assets/packages/$RPM_NAME
     fi
 
     # Copy RPM package to kz-uploads.
     cp  --preserve                                          \
         --verbose                                           \
         "$RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch/$RPM_NAME"  \
-        "$TO_COPY"                                          |& $LOGCMD
+        "$to_copy"                                          |& $LOGCMD
 }
 
 
 # This function installs Debian-package kz.
 function install_deb_package() {
-    local TEXT=''
-    local TO_INSTALL=''
-    local -i SLEEP=1
+    local to_install=''
+    local -i sleep=1
 
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
     check_package_manager
 
-    # Copied from kz-get.
     # Progress indicator with growing [=>, [==>, etc. as long as the pid file
     # exists, i.e. installation is in progress.
     KZ_BUILD_PID_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.pid")
@@ -324,20 +318,20 @@ function install_deb_package() {
     printf '%s' '[ '
     while test -e "$KZ_BUILD_PID_FILE"; do
         printf '\b%s' '=>'
-        sleep $SLEEP
+        sleep $sleep
     done &
 
     if $DEV; then
-        TO_INSTALL=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME
+        to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME
     else
-        TO_INSTALL=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
+        to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
     fi
 
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
             --assume-yes                    \
-            "$TO_INSTALL"                   |& $LOGCMD
+            "$to_install"                   |& $LOGCMD
 
     # Progress indicator ends like [====]100%.
     rm --verbose "$KZ_BUILD_PID_FILE" |& $LOGCMD
@@ -363,8 +357,6 @@ package is installed")
 ###############################################################################
 
 function main() {
-    local DEV=false
-
     init    "$@"
     process "$@"
     term

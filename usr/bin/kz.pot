@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-15 17:34+0200\n"
+"POT-Creation-Date: 2025-04-17 15:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,14 +38,14 @@ msgstr ""
 msgid "fatal: no os release available"
 msgstr ""
 
-msgid "fatal: unknown os release."
+msgid "fatal: unknown os release"
 msgstr ""
 
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
 #, sh-format
-msgid "Wait $SLEEP seconds for another package manager to finish"
+msgid "Wait $sleep seconds for another package manager to finish"
 msgstr ""
 
 msgid "Wait {} seconds for another package manager to finish"
@@ -75,12 +75,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$YELP_MAN_URL for more "
+"Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
 "information."
 msgstr ""
 
 #, sh-format
-msgid "Type '$DISPLAY_NAME --help' for more information."
+msgid "Type '$program_name --help' for more information."
 msgstr ""
 
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
@@ -120,7 +120,7 @@ msgid "Build ID cannot be determined."
 msgstr ""
 
 #, sh-format
-msgid "kz version 4.2.1 (built $BUILD_ID)."
+msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
 #, sh-format
@@ -315,7 +315,7 @@ msgid "The backup has been made."
 msgstr ""
 
 #, sh-format
-msgid "The backup has been made for $USER (there are $NUM_USERS users)."
+msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
 msgid "Build website including kz packages"
@@ -373,14 +373,14 @@ msgid "Check that all repos are on branch main"
 msgstr ""
 
 #, sh-format
-msgid "Repo $REPO not on branch main."
+msgid "Repo $repo not on branch main."
 msgstr ""
 
 msgid "Check that all repos are clean"
 msgstr ""
 
 #, sh-format
-msgid "Repo $REPO is not clean."
+msgid "Repo $repo is not clean."
 msgstr ""
 
 msgid "Upload website"
@@ -490,7 +490,7 @@ msgid "Now make the change in the desktop environment."
 msgstr ""
 
 #, sh-format
-msgid "Config database content captured ($FASE)."
+msgid "Config database content captured ($fase)."
 msgstr ""
 
 msgid ""
@@ -540,11 +540,11 @@ msgid "  <app>...       install specified apps"
 msgstr ""
 
 #, sh-format
-msgid "App '$APP_ARGUMENT' not found"
+msgid "App '$app_argument' not found"
 msgstr ""
 
 #, sh-format
-msgid "No install file found, looked for '$INSTALL_FILE'."
+msgid "No install file found, looked for '$install_file'."
 msgstr ""
 
 msgid "The following apps are available:"
@@ -604,7 +604,7 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "Apps $OPERATION completed."
+msgid "Apps $operation completed."
 msgstr ""
 
 msgid ""
@@ -629,7 +629,7 @@ msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
 #, sh-format
-msgid "A line is longer than $MAX_LINE_LENGTH ($MAX_LINE_LENGTH_FOUND)."
+msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr ""
 
 msgid "Faulty line(s) found."
@@ -790,7 +790,7 @@ msgid "No"
 msgstr ""
 
 #, sh-format
-msgid "$PROMPT [Y/n]: "
+msgid "$prompt [Y/n]: "
 msgstr ""
 
 msgid "The following has been executed:"
@@ -857,7 +857,7 @@ msgid "The backup has been restored."
 msgstr ""
 
 #, sh-format
-msgid "The backup has restored for $USER (there are $NUM_USERS users)."
+msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr ""
 
 #, sh-format
@@ -886,7 +886,7 @@ msgid "  <app>...       set up specified apps"
 msgstr ""
 
 #, sh-format
-msgid "No setup file found, looked for '$SETUP_FILE'."
+msgid "No setup file found, looked for '$setup_file'."
 msgstr ""
 
 msgid "Use \"kz setup <app>...\" to set up the apps."
@@ -934,36 +934,36 @@ msgid "No WiFi device found."
 msgstr ""
 
 #, sh-format
-msgid "Script $SCRIPTNAME --version returned an error."
+msgid "Script $scriptname --version returned an error."
 msgstr ""
 
 #, sh-format
-msgid "Gettext message catalog template $FILE not found."
+msgid "Gettext message catalog template $file not found."
 msgstr ""
 
 #, sh-format
-msgid "Gettext message catalog $FILE not found."
+msgid "Gettext message catalog $file not found."
 msgstr ""
 
 #, sh-format
-msgid "Message catalog $FILE not found."
+msgid "Message catalog $file not found."
 msgstr ""
 
 #, sh-format
-msgid "Desktop configuration file $DIR/$SCRIPTNAME.desktop not found."
+msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
 #, sh-format
-msgid "Tab completion script $DIR/$SCRIPTNAME not found."
+msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
 #, sh-format
-msgid "Manual $DIR/$SCRIPTNAME.1 not found."
+msgid "Manual $dir/$scriptname.1 not found."
 msgstr ""
 
 #, sh-format
 msgid ""
-"PolicyKit action definition file $DIR/nl.karelzimmer.$SCRIPTNAME.policy not "
+"PolicyKit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 

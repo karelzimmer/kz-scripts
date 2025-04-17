@@ -61,8 +61,17 @@ readonly X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    local FAVORITE_APPS=''
-    local TEXT=''
+    ###########################################################################
+    # Global variables
+    ###########################################################################
+    local -g FAVORITE_ARGUMENT=''
+    local -g OPTION_ADDAFT=false
+    local -g OPTION_ADDBEF=false
+    local -g OPTION_DELETE=false
+    local -g OPTION_LIST=false
+    local -g OPTION_RESET=false
+
+    local favorite_apps=''
 
     check_input "$@"
     if ! gsettings list-keys org.gnome.shell |& $LOGCMD; then
@@ -70,7 +79,7 @@ function process() {
         infomsg "$TEXT"
         exit $OK
     else
-        FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+        favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
         DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
     fi
 
@@ -92,10 +101,9 @@ function process() {
 
 # This function handles the options and arguments.
 function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+    local parsed=''
 
-    PARSED=$(
+    parsed=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
@@ -106,7 +114,7 @@ function check_input() {
         infomsg "$USAGE"
         exit $ERR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
 
     process_options   "$@"
     process_x_options "$@"
@@ -115,8 +123,6 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_x_options() {
-    local TEXT=''
-
     while true; do
         case $1 in
             -a | --addaft )
@@ -188,12 +194,12 @@ $USAGE"
 
 # This function adds a favorite to the end of the dash/dock.
 function process_OPTION_ADDAFT () {
-    if [[ $FAVORITE_APPS = '@as []' ]]; then
+    if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif ! printf '%s' "$FAVORITE_APPS" | grep --quiet "$DESKTOPFILE"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet "$DESKTOPFILE"
     then
         gsettings set org.gnome.shell favorite-apps "$(
-            printf '%s' "$FAVORITE_APPS" |
+            printf '%s' "$favorite_apps" |
             cut --delimiter=']' --fields=1
             ), '$DESKTOPFILE']"
     fi
@@ -202,12 +208,12 @@ function process_OPTION_ADDAFT () {
 
 # This function adds a favorite to the beginning of the dash/dock.
 function process_OPTION_ADDBEF () {
-    if [[ $FAVORITE_APPS = '@as []' ]]; then
+    if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif ! printf '%s' "$FAVORITE_APPS" | grep --quiet "$DESKTOPFILE"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet "$DESKTOPFILE"
     then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE', $(
-                printf '%s' "$FAVORITE_APPS" | cut --delimiter='[' --fields=2
+                printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
                 )"
     fi
 }
@@ -215,13 +221,13 @@ function process_OPTION_ADDBEF () {
 
 # This function removes a favorite from the dash/dock.
 function process_OPTION_DELETE () {
-    if [[ $FAVORITE_APPS = '@as []' ]]; then
+    if [[ $favorite_apps = '@as []' ]]; then
         :
-    elif [[ $FAVORITE_APPS = [$DESKTOPFILE] ]]; then
+    elif [[ $favorite_apps = [$DESKTOPFILE] ]]; then
         gsettings set org.gnome.shell favorite-apps "[]"
     else
         gsettings set org.gnome.shell favorite-apps "$(
-            printf  '%s' "$FAVORITE_APPS"                   |
+            printf  '%s' "$favorite_apps"                   |
             sed     --expression="s/'$DESKTOPFILE', //g"    |
             sed     --expression="s/, '$DESKTOPFILE'//"
         )"
@@ -231,8 +237,6 @@ function process_OPTION_DELETE () {
 
 # This feature lists the favorite apps in the dash/dock.
 function process_OPTION_LIST () {
-    local TEXT=''
-
     TEXT="$(gettext 'Favorite apps:')
 $(gsettings get org.gnome.shell favorite-apps)"
     infomsg "$TEXT"
@@ -247,56 +251,53 @@ function process_OPTION_RESET () {
 
 # This function records a change made through the desktop environment.
 function capture_gnome_changes() {
-    local CONFIG_A_FILE=''
-    local CONFIG_B_FILE=''
-    local TEXT=''
+    local config_a_file=''
+    local config_b_file=''
 
-    CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
-    save_configuration_database A "$CONFIG_A_FILE"
+    config_a_file=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
+    save_configuration_database A "$config_a_file"
 
     TEXT=$(gettext 'Now make the change in the desktop environment.')
     infomsg "$TEXT"
 
     wait_for_enter
 
-    CONFIG_B_FILE=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
-    save_configuration_database B "$CONFIG_B_FILE"
+    config_b_file=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
+    save_configuration_database B "$config_b_file"
 
-    report_database_changes "$CONFIG_A_FILE" "$CONFIG_B_FILE"
+    report_database_changes "$config_a_file" "$config_b_file"
 
-    rm --verbose "$CONFIG_A_FILE" "$CONFIG_B_FILE" |& $LOGCMD
+    rm --verbose "$config_a_file" "$config_b_file" |& $LOGCMD
 }
 
 
 # This function stores the desktop configuration database.
 function save_configuration_database() {
     # shellcheck disable=SC2034
-    local FASE=${1:-unknown}
-    local OUTPUT_FILE=${2:-unknown}
-    local TEXT=''
+    local fase=${1:-unknown}
+    local output_file=${2:-unknown}
 
-    gsettings list-recursively > "$OUTPUT_FILE" 2> /dev/null
+    gsettings list-recursively > "$output_file" 2> /dev/null
 
     sort    --unique                \
-            --output="$OUTPUT_FILE" \
-            "$OUTPUT_FILE"
+            --output="$output_file" \
+            "$output_file"
 
-    TEXT=$(eval_gettext "Config database content captured (\$FASE).")
+    TEXT=$(eval_gettext "Config database content captured (\$fase).")
     infomsg "$TEXT"
 }
 
 
 # This function reports the changes to the desktop configuration database.
 function report_database_changes() {
-    local OUTPUT_FILE_1=${1:-unknown}
-    local OUTPUT_FILE_2=${2:-unknown}
-    local TEXT=''
+    local output_file_1=${1:-unknown}
+    local output_file_2=${2:-unknown}
 
     TEXT="
 $(gettext "Changes in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
-$(diff "$OUTPUT_FILE_1" "$OUTPUT_FILE_2" | grep '[>|<]' || true)
+$(diff "$output_file_1" "$output_file_2" | grep '[>|<]' || true)
 
 $(gettext 'Use "gsettings set <change>" for changes.')"
     infomsg "$TEXT"
@@ -314,13 +315,6 @@ function term() {
 ###############################################################################
 
 function main() {
-    local FAVORITE_ARGUMENT=''
-    local OPTION_ADDAFT=false
-    local OPTION_ADDBEF=false
-    local OPTION_DELETE=false
-    local OPTION_LIST=false
-    local OPTION_RESET=false
-
     init    "$@"
     process "$@"
     term

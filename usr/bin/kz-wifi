@@ -49,9 +49,8 @@ def process(OPTION_GUI: bool = False) -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    COMMAND: str = 'nmcli device wifi show-password'
-    NMCLI_OUTPUT: str = ''
-    TEXT: str = f"{_('Use this data to connect to the wireless network.')}"
+    command: str = 'nmcli device wifi show-password'
+    nmcli_output: str = ''
 
     kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
     OPTION_GUI = process_x_options()
@@ -59,9 +58,10 @@ def process(OPTION_GUI: bool = False) -> None:
     if not kz_common.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term()
 
+    TEXT = f"{_('Use this data to connect to the wireless network.')}"
     if OPTION_GUI:
         try:
-            NMCLI_OUTPUT = subprocess.run(COMMAND, executable='bash',
+            nmcli_output = subprocess.run(command, executable='bash',
                                           stdout=subprocess.PIPE,
                                           stderr=subprocess.DEVNULL,
                                           shell=True, check=True,
@@ -70,14 +70,14 @@ def process(OPTION_GUI: bool = False) -> None:
             TEXT = _('No WiFi device found.')
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
         else:
-            NMCLI_OUTPUT = NMCLI_OUTPUT  # type: ignore
-            NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")  # type: ignore
-            TEXT = NMCLI_OUTPUT + TEXT
+            nmcli_output = nmcli_output  # type: ignore
+            nmcli_output = nmcli_output.decode("utf-8")  # type: ignore
+            TEXT = nmcli_output + TEXT
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     else:
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
-            subprocess.run(COMMAND, executable='bash',
+            subprocess.run(command, executable='bash',
                            stderr=subprocess.DEVNULL, shell=True, check=True)
         except Exception:
             TEXT = _('No WiFi device found.')
@@ -91,24 +91,24 @@ def process_x_options() -> bool:
     This function handles the script options and arguments.
     """
     OPTION_GUI: bool = False
-    ARGS = None
-    PARSER = None
+    args = None
+    parser = None
 
-    PARSER = argparse.ArgumentParser(prog='kz wifi', usage=USAGE,
+    parser = argparse.ArgumentParser(prog='kz wifi', usage=USAGE,
                                      add_help=False)
 
-    PARSER.add_argument('-g', '--gui', action='store_true')
+    parser.add_argument('-g', '--gui', action='store_true')
 
     try:
-        ARGS = PARSER.parse_args()
+        args = parser.parse_args()
     except Exception:
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
-    if ARGS.gui:  # type: ignore
+    if args.gui:  # type: ignore
         if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                           shell=True).returncode == kz_common.ERR:
-            TEXT: str = f"kz wifi: {sys.argv[1]}: "
+            TEXT = f"kz wifi: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
             TEXT += f"\n{_('Usage:')} {USAGE}"
             OPTION_GUI = False

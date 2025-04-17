@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-15 17:31+0200\n"
+"POT-Creation-Date: 2025-04-17 15:07+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -38,15 +38,15 @@ msgstr "fataal: geen systemd beschikbaar"
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-msgid "fatal: unknown os release."
+msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
 #, sh-format
-msgid "Wait $SLEEP seconds for another package manager to finish"
-msgstr "Wacht $SLEEP seconden tot andere pakketbeheerder klaar is"
+msgid "Wait $sleep seconds for another package manager to finish"
+msgstr "Wacht $sleep seconden tot andere pakketbeheerder klaar is"
 
 msgid "Wait {} seconds for another package manager to finish"
 msgstr "Wacht {} seconden tot andere pakketbeheerder klaar is"
@@ -77,15 +77,15 @@ msgstr "man-pagina"
 
 #, sh-format
 msgid ""
-"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$YELP_MAN_URL for more "
+"Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
 "information."
 msgstr ""
-"Typ '$DISPLAY_NAME --manual' of 'man $DISPLAY_NAME'$YELP_MAN_URL voor meer "
+"Typ '$program_name --manual' of 'man $program_name'$yelp_man_url voor meer "
 "informatie."
 
 #, sh-format
-msgid "Type '$DISPLAY_NAME --help' for more information."
-msgstr "Typ '$DISPLAY_NAME --help' voor meer informatie."
+msgid "Type '$program_name --help' for more information."
+msgstr "Typ '$program_name --help' voor meer informatie."
 
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
@@ -125,8 +125,8 @@ msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
 #, sh-format
-msgid "kz version 4.2.1 (built $BUILD_ID)."
-msgstr "kz versie 4.2.1 (gebouwd $BUILD_ID)."
+msgid "kz version 4.2.1 (built $build_id)."
+msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
 #, sh-format
 msgid "kz version 4.2.1 (built {})."
@@ -352,8 +352,8 @@ msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
 #, sh-format
-msgid "The backup has been made for $USER (there are $NUM_USERS users)."
-msgstr "De back-up is gemaakt voor $USER (er zijn $NUM_USERS gebruikers)."
+msgid "The backup has been made for $USER (there are $num_users users)."
+msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
 
 msgid "Build website including kz packages"
 msgstr "Website bouwen inclusief kz pakketten"
@@ -410,15 +410,15 @@ msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
 #, sh-format
-msgid "Repo $REPO not on branch main."
-msgstr "Repo $REPO staat niet op branch main."
+msgid "Repo $repo not on branch main."
+msgstr "Repo $repo staat niet op branch main."
 
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
 #, sh-format
-msgid "Repo $REPO is not clean."
-msgstr "Repo $REPO is niet schoon."
+msgid "Repo $repo is not clean."
+msgstr "Repo $repo is niet schoon."
 
 msgid "Upload website"
 msgstr "Uploaden website"
@@ -541,8 +541,8 @@ msgid "Now make the change in the desktop environment."
 msgstr "Voer nu de wijziging uit in de desktopomgeving."
 
 #, sh-format
-msgid "Config database content captured ($FASE)."
-msgstr "Inhoud configuratiedatabase vastgelegd ($FASE)."
+msgid "Config database content captured ($fase)."
+msgstr "Inhoud configuratiedatabase vastgelegd ($fase)."
 
 msgid ""
 "Changes in the configuration database,\n"
@@ -600,12 +600,12 @@ msgid "  <app>...       install specified apps"
 msgstr "  <app>...       installeer opgegeven apps"
 
 #, sh-format
-msgid "App '$APP_ARGUMENT' not found"
-msgstr "App '$APP_ARGUMENT' niet gevonden"
+msgid "App '$app_argument' not found"
+msgstr "App '$app_argument' niet gevonden"
 
 #, sh-format
-msgid "No install file found, looked for '$INSTALL_FILE'."
-msgstr "Geen installatiebestand gevonden, zocht '$INSTALL_FILE'."
+msgid "No install file found, looked for '$install_file'."
+msgstr "Geen installatiebestand gevonden, zocht '$install_file'."
 
 msgid "The following apps are available:"
 msgstr "De volgende apps zijn beschikbaar:"
@@ -672,8 +672,8 @@ msgstr ""
 "de gebruikersinstellingen te voltooien."
 
 #, sh-format
-msgid "Apps $OPERATION completed."
-msgstr "Apps $OPERATION is voltooid."
+msgid "Apps $operation completed."
+msgstr "Apps $operation is voltooid."
 
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
@@ -703,8 +703,8 @@ msgid "Unknown script. Function check_code cannot check script code."
 msgstr "Onbekend script.  Functie check_code kan scriptcode niet controleren."
 
 #, sh-format
-msgid "A line is longer than $MAX_LINE_LENGTH ($MAX_LINE_LENGTH_FOUND)."
-msgstr "Een regel is langer dan $MAX_LINE_LENGTH ($MAX_LINE_LENGTH_FOUND)."
+msgid "A line is longer than $max_line_length ($max_line_length_found)."
+msgstr "Een regel is langer dan $max_line_length ($max_line_length_found)."
 
 msgid "Faulty line(s) found."
 msgstr "Foutieve regel(s) gevonden."
@@ -888,8 +888,8 @@ msgid "No"
 msgstr "Nee"
 
 #, sh-format
-msgid "$PROMPT [Y/n]: "
-msgstr "$PROMPT [J/n]: "
+msgid "$prompt [Y/n]: "
+msgstr "$prompt [J/n]: "
 
 msgid "The following has been executed:"
 msgstr "Het volgende is uitgevoerd:"
@@ -980,8 +980,8 @@ msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
 #, sh-format
-msgid "The backup has restored for $USER (there are $NUM_USERS users)."
-msgstr "De back-up is teruggezet voor $USER (er zijn $NUM_USERS gebruikers)."
+msgid "The backup has restored for $USER (there are $num_users users)."
+msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
 
 #, sh-format
 msgid ""
@@ -1015,8 +1015,8 @@ msgid "  <app>...       set up specified apps"
 msgstr "  <app>...       stel opgegeven apps in"
 
 #, sh-format
-msgid "No setup file found, looked for '$SETUP_FILE'."
-msgstr "Geen instelbestand gevonden, zocht '$SETUP_FILE'."
+msgid "No setup file found, looked for '$setup_file'."
+msgstr "Geen instelbestand gevonden, zocht '$setup_file'."
 
 msgid "Use \"kz setup <app>...\" to set up the apps."
 msgstr "Gebruik \"kz setup <app>...\" om de apps in te stellen."
@@ -1069,39 +1069,39 @@ msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
 #, sh-format
-msgid "Script $SCRIPTNAME --version returned an error."
-msgstr "Script $SCRIPTNAME --version gaf een fout."
+msgid "Script $scriptname --version returned an error."
+msgstr "Script $scriptname --version gaf een fout."
 
 #, sh-format
-msgid "Gettext message catalog template $FILE not found."
-msgstr "Gettext berichtencatalogus-sjabloon $FILE niet gevonden."
+msgid "Gettext message catalog template $file not found."
+msgstr "Gettext berichtencatalogus-sjabloon $file niet gevonden."
 
 #, sh-format
-msgid "Gettext message catalog $FILE not found."
-msgstr "Gettext berichtencatalogus $FILE niet gevonden."
+msgid "Gettext message catalog $file not found."
+msgstr "Gettext berichtencatalogus $file niet gevonden."
 
 #, sh-format
-msgid "Message catalog $FILE not found."
-msgstr "Berichtencatalogus $FILE niet gevonden."
+msgid "Message catalog $file not found."
+msgstr "Berichtencatalogus $file niet gevonden."
 
 #, sh-format
-msgid "Desktop configuration file $DIR/$SCRIPTNAME.desktop not found."
-msgstr "Bureaubladconfiguratiebestand $DIR/$SCRIPTNAME.desktop niet gevonden."
+msgid "Desktop configuration file $dir/$scriptname.desktop not found."
+msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
 #, sh-format
-msgid "Tab completion script $DIR/$SCRIPTNAME not found."
-msgstr "Tabvoltooiingsscript $DIR/$SCRIPTNAME niet gevonden."
+msgid "Tab completion script $dir/$scriptname not found."
+msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
 #, sh-format
-msgid "Manual $DIR/$SCRIPTNAME.1 not found."
-msgstr "Man-pagina $DIR/$SCRIPTNAME.1 niet gevonden."
+msgid "Manual $dir/$scriptname.1 not found."
+msgstr "Man-pagina $dir/$scriptname.1 niet gevonden."
 
 #, sh-format
 msgid ""
-"PolicyKit action definition file $DIR/nl.karelzimmer.$SCRIPTNAME.policy not "
+"PolicyKit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
-"PolicyKit actiedefinitiebestand $DIR/nl.karelzimmer.$SCRIPTNAME.policy niet "
+"PolicyKit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
 msgid "Check website..."

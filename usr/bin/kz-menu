@@ -101,10 +101,9 @@ function process() {
 
 # This function handles the options and arguments.
 function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+    local parsed=''
 
-    PARSED=$(
+    parsed=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
@@ -115,7 +114,7 @@ function check_input() {
         infomsg "$USAGE"
         exit $ERR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
 
     process_options   "$@"
     process_x_options "$@"
@@ -124,8 +123,6 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_x_options() {
-    local TEXT=''
-
     while true; do
         case $1 in
             -g | --gui )
@@ -160,7 +157,7 @@ $USAGE"
 
 # This function shows and processes menu 1 in GUI mode.
 function process_menu1_gui() {
-    local TITLE=$MENU1_TITLE
+    local title=$MENU1_TITLE
 
     while true; do
         REPLY=$(
@@ -168,7 +165,7 @@ function process_menu1_gui() {
                     --radiolist                                         \
                     --width         520                                 \
                     --height        420                                 \
-                    --title         "$TITLE"                            \
+                    --title         "$title"                            \
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \
                     --cancel-label  "$(gettext 'Exit')"                 \
@@ -190,8 +187,8 @@ function process_menu1_gui() {
 
 # This function shows and processes menu 1 in TUI mode.
 function process_menu1_tui() {
-    local MENU1_ACTION=''
-    local PROMPT=''
+    local menu1_action=''
+    local prompt=''
 
     while true; do
         printf  '\n%s\n\n%3s  %-24s  %s\n'  \
@@ -199,16 +196,16 @@ function process_menu1_tui() {
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
-        for MENU1_ACTION in "${!MENU1_ACTIONS[@]}"; do
+        for menu1_action in "${!MENU1_ACTIONS[@]}"; do
             printf  '%3s  %-24s  %s\n'                  \
-                    "$MENU1_ACTION"                     \
-                    "${MENU1_ACTIONS[$MENU1_ACTION]}"   \
-                    "${MENU1_DESCS[$MENU1_ACTION]}"
+                    "$menu1_action"                     \
+                    "${MENU1_ACTIONS[$menu1_action]}"   \
+                    "${MENU1_DESCS[$menu1_action]}"
         done
 
         printf '\n'
-        PROMPT=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
-        read -rp "$PROMPT"
+        prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
+        read -rp "$prompt"
 
         case $REPLY in
             *[^[:digit:]]* )
@@ -228,8 +225,6 @@ function process_menu1_tui() {
 
 # This function processes menu 1 choice.
 function process_menu1_choice() {
-    local TEXT=''
-
     case $REPLY in
         1 )
             process_menu1_choice1
@@ -260,8 +255,8 @@ function process_menu1_choice() {
 
 # This function processes menu 1 choice 1.
 function process_menu1_choice1() {
-    local TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
-    local -a ROWS=(
+    local title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
+    local -a rows=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
         )
 
@@ -272,8 +267,7 @@ function process_menu1_choice1() {
 
 # This function processes menu 1 choice 2.
 function process_menu1_choice2() {
-    local TEXT=''
-    local TITLE="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
+    local title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
 
     TEXT="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
@@ -289,7 +283,7 @@ Roughly boils down to:
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
-                --title     "$TITLE"    \
+                --title     "$title"    \
                 --text      "$TEXT"     2> /dev/null
     else
         printf '%s\n' "$TEXT"
@@ -300,8 +294,8 @@ Roughly boils down to:
 
 # This function processes menu 1 choice 3.
 function process_menu1_choice3() {
-    local TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
-    local -a ROWS=(
+    local title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
+    local -a rows=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
         )
 
@@ -312,8 +306,8 @@ function process_menu1_choice3() {
 
 # This function processes menu 1 choice 4.
 function process_menu1_choice4() {
-    local TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
-    local -a ROWS=(
+    local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
+    local -a rows=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
             "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
         )
@@ -337,7 +331,7 @@ function process_menu2() {
 
 # This function shows and processes menu 2 in GUI mode.
 function process_menu2_gui() {
-    local TITLE=$MENU2_TITLE
+    local title=$MENU2_TITLE
 
     while true; do
         REPLY=$(
@@ -345,7 +339,7 @@ function process_menu2_gui() {
                     --radiolist                                         \
                     --width         520                                 \
                     --height        420                                 \
-                    --title         "$TITLE"                            \
+                    --title         "$title"                            \
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \
                     --cancel-label  "$(gettext 'Back')"                 \
@@ -367,8 +361,8 @@ function process_menu2_gui() {
 
 # This function shows and processes menu 2 in TUI mode.
 function process_menu2_tui() {
-    local MENU2_ACTION=''
-    local PROMPT=''
+    local menu2_action=''
+    local prompt=''
 
     while true; do
         printf  '\n%s\n\n%3s  %-25s  %s\n'  \
@@ -376,16 +370,16 @@ function process_menu2_tui() {
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
-        for MENU2_ACTION in "${!MENU2_ACTIONS[@]}"; do
+        for menu2_action in "${!MENU2_ACTIONS[@]}"; do
             printf  '%3s  %-25s  %s\n'                  \
-                    "$MENU2_ACTION"                     \
-                    "${MENU2_ACTIONS[$MENU2_ACTION]}"   \
-                    "${MENU2_DESCS[$MENU2_ACTION]}"
+                    "$menu2_action"                     \
+                    "${MENU2_ACTIONS[$menu2_action]}"   \
+                    "${MENU2_DESCS[$menu2_action]}"
         done
 
         printf '\n'
-        PROMPT=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
-        read -rp "$PROMPT"
+        prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
+        read -rp "$prompt"
 
         case $REPLY in
             *[^[:digit:]]* )
@@ -405,18 +399,17 @@ function process_menu2_tui() {
 
 # This function processes menu 2 choice.
 function process_menu2_choice() {
-        local TEXT=''
-        local TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
-        local -i REPLY_SAVE=''
-        local -a ROWS=(
-            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
-            )
+    local title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
+    local -i reply_save=''
+    local -a rows=(
+        [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
+        )
 
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        REPLY_SAVE=$REPLY
+        reply_save=$REPLY
         process_commands
         # Setup apps on a server means manual logout.
-        if [[ $REPLY_SAVE -eq 5 ]] && ! [[ ${DISPLAY-} ]]; then
+        if [[ $reply_save -eq 5 ]] && ! [[ ${DISPLAY-} ]]; then
             exit $RC
         fi
         $OPTION_GUI || wait_for_enter
@@ -432,23 +425,23 @@ function process_menu2_choice() {
 
 # This function processes the command corresponding to the choice made.
 function process_commands() {
-    local COMMAND=''
-    local DESCRIPTION=''
-    local EXECUTE_COMMAND=false
-    local TITLE=''
-    local -i ROW=0
+    local command=''
+    local description=''
+    local execute_command=false
+    local title=''
+    local -i row=0
 
     show_commands_before_execution
 
-    if $EXECUTE_COMMAND; then
-        for ROW in "${!ROWS[@]}"; do
-            DESCRIPTION=$(
-                printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=1
+    if $execute_command; then
+        for row in "${!rows[@]}"; do
+            description=$(
+                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
                 )
-            COMMAND=$(
-                printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=2
+            command=$(
+                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
                 )
-            TITLE="$DESCRIPTION ($COMMAND)"
+            title="$description ($command)"
             execute_command
         done
     fi
@@ -457,55 +450,54 @@ function process_commands() {
 
 # This function shows the commands before they are executed.
 function show_commands_before_execution() {
-    local COMMAND=''
-    local DESCRIPTION=''
-    local PROMPT=''
-    local TEXT=''
-    local -i ROW=0
+    local command=''
+    local description=''
+    local prompt=''
+    local -i row=0
 
     TEXT="$(gettext 'The following will be executed:')
 "
-    for ROW in "${!ROWS[@]}"; do
-        DESCRIPTION=$(
-            printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=1
+    for row in "${!rows[@]}"; do
+        description=$(
+            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
             )
-        COMMAND=$(
-            printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=2
+        command=$(
+            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
         TEXT+="
-[$ROW] $DESCRIPTION ($COMMAND)"
+[$row] $description ($command)"
     done
 
     TEXT+="
 "
-    PROMPT="$(gettext 'Proceed?')"
+    prompt="$(gettext 'Proceed?')"
 
     if $OPTION_GUI; then
         TEXT+="
-$PROMPT"
+$prompt"
         if zenity   --question                          \
                     --no-markup                         \
                     --width         600                 \
                     --height        100                 \
-                    --title         "$TITLE"            \
+                    --title         "$title"            \
                     --text          "$TEXT"             \
                     --ok-label      "$(gettext 'Yes')"  \
                     --cancel-label  "$(gettext 'No')"   2> /dev/null; then
-            EXECUTE_COMMAND=true
+            execute_command=true
         else
-            EXECUTE_COMMAND=false
+            execute_command=false
         fi
     else
         printf '\n%s\n' "$TEXT"
         while true; do
-            read -rp "$(eval_gettext "\$PROMPT [Y/n]: ")"
+            read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
                 [YyJj]* | '' )
-                    EXECUTE_COMMAND=true
+                    execute_command=true
                     break
                     ;;
                 [Nn]* )
-                    EXECUTE_COMMAND=false
+                    execute_command=false
                     break
                     ;;
                 * )
@@ -519,24 +511,23 @@ $PROMPT"
 
 # This function executes the commands.
 function execute_command() {
-    local ARG=''
-    local CMD=''
-    local GUI_OPTION=''
-    local -i RC=$OK
+    local arg=''
+    local cmd=''
+    local gui_option=''
 
-    CMD=$(
-        printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=1
+    cmd=$(
+        printf '%s' "$command" | cut --delimiter=' ' --fields=1
         )
-    ARG=$(
-        printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=2-
+    arg=$(
+        printf '%s' "$command" | cut --delimiter=' ' --fields=2-
         )
 
     if $OPTION_GUI; then
-        GUI_OPTION='--gui'
+        gui_option='--gui'
     fi
 
-    "$CMD" "$ARG" $GUI_OPTION || RC=$?
-    logmsg "$COMMAND: rc=$RC"
+    "$cmd" "$arg" $gui_option || RC=$?
+    logmsg "$command: RC=$RC"
 }
 
 

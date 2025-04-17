@@ -41,7 +41,10 @@ readonly HELP
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    local TEXT=''
+    ###########################################################################
+    # Global variables
+    ###########################################################################
+    local -g ERR_FLAG=false
 
     check_input "$@"
     if ! grep --quiet debian /etc/os-release; then
@@ -58,10 +61,9 @@ function process() {
 
 # This function handles the options and arguments.
 function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+    local parsed=''
 
-    PARSED=$(
+    parsed=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
@@ -72,7 +74,7 @@ function check_input() {
         infomsg "$USAGE"
         exit $ERR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
 
     process_options   "$@"
     process_x_options "$@"
@@ -81,8 +83,6 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_x_options() {
-    local TEXT=''
-
     while true; do
         case $1 in
             -- )
@@ -106,8 +106,6 @@ $USAGE"
 
 # This function builds package kz and website.
 function build() {
-    local TEXT=''
-
     TEXT=$(gettext 'Build website including kz packages')...
     infomsg "$TEXT"
 
@@ -134,8 +132,6 @@ function deploy() {
 
 # This function check the scripts and website.
 function check_scripts_and_website() {
-    local TEXT=''
-
     TEXT=$(gettext 'Check scripts and website')...
     infomsg "$TEXT"
 
@@ -148,34 +144,33 @@ function check_scripts_and_website() {
 
 # This function uploads the website.
 function upload_website() {
-    local FTP_FROM=$HOME/kz-uploads/dist
-    local FTP_HOST=server106.hosting2go.nl
-    local FTP_LOGIN=$HOME/.$FTP_HOST'.login'
-    local FTP_OPTS='--reverse --delete --verbose'
-    local FTP_SET='set ssl:verify-certificate no'
-    local FTP_TO=/httpdocs
-    local FTP_USER=kzimmer
-    local FTP_X_CMD="mirror $FTP_OPTS $FTP_FROM $FTP_TO; exit"
-    local PROMPT=''
-    local TEXT=''
+    local ftp_from=$HOME/kz-uploads/dist
+    local ftp_host=server106.hosting2go.nl
+    local ftp_login=$HOME/.$ftp_host'.login'
+    local ftp_opts='--reverse --delete --verbose'
+    local ftp_set='set ssl:verify-certificate no'
+    local ftp_to=/httpdocs
+    local ftp_user=kzimmer
+    local ftp_x_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
+    local prompt=''
 
     TEXT=$(gettext 'Upload website')...
     infomsg "$TEXT"
 
-    if ! [[ -f $FTP_LOGIN ]]; then
-        PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
-        read -rp "$PROMPT" < /dev/tty
-        printf '%s' "$REPLY" > "$FTP_LOGIN"
+    if ! [[ -f $ftp_login ]]; then
+        prompt="$(gettext 'Password for') ftp://$ftp_host': "
+        read -rp "$prompt" < /dev/tty
+        printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
-        chmod --verbose 'u=rw,g=,o=' "$FTP_LOGIN" |& $LOGCMD
+        chmod --verbose 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
 
-    if ! lftp   --user      "$FTP_USER"             \
-                --password  "$(cat "$FTP_LOGIN")"   \
-                -e          "$FTP_SET; $FTP_X_CMD"  \
-                "$FTP_HOST"; then
+    if ! lftp   --user      "$ftp_user"             \
+                --password  "$(cat "$ftp_login")"   \
+                -e          "$ftp_set; $ftp_x_cmd"  \
+                "$ftp_host"; then
         # Force entering the password next time.
-        rm --verbose "$FTP_LOGIN"*
+        rm --verbose "$ftp_login"*
         TEXT=$(gettext 'Website upload failed.')
         errmsg "$TEXT"
         ERR_FLAG=true
@@ -187,22 +182,21 @@ function upload_website() {
 
 # This function installs package kz.
 function install_package() {
-    local DEV=false
-    local PARM=''
-    local TEXT=''
+    local dev=false
+    local parm=''
 
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
 
-    check_repos || DEV=true
+    check_repos || dev=true
 
     logmsg 'Calling kz-get (via wget and bash)...'
     # Call kz-get via wget and bash as a regular user would do.
     cd "$HOME"
-    if $DEV; then
-        PARM='--dev'
+    if $dev; then
+        parm='--dev'
     fi
-    if ! (wget karelzimmer.nl/getkz; bash getkz "$PARM"); then
+    if ! (wget karelzimmer.nl/getkz; bash getkz "$parm"); then
         TEXT=$(gettext 'Install package kz failed.')
         errmsg "$TEXT"
     fi
@@ -231,8 +225,6 @@ necessary.")
 ###############################################################################
 
 function main() {
-    local ERR_FLAG=false
-
     init    "$@"
     process "$@"
     term

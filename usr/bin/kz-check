@@ -41,12 +41,16 @@ readonly HELP
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    local FILE=''
-    local SCRIPT=''
-    local SCRIPTDIR=''
-    local SCRIPTNAME=''
-    local SCRIPTS_REPO=$HOME/kz-scripts
-    local TEXT=''
+    ###########################################################################
+    # Global variables
+    ###########################################################################
+    local -g ERR_FLAG=false
+
+    local file=''
+    local script=''
+    local scriptdir=''
+    local scriptname=''
+    local scripts_repo=$HOME/kz-scripts
 
     check_input "$@"
     if ! grep --quiet debian /etc/os-release; then
@@ -62,12 +66,12 @@ function process() {
 
     check_gettext
 
-    cd "$SCRIPTS_REPO"
-    while read -r SCRIPT; do
-        SCRIPTDIR=$(dirname "$(realpath "$SCRIPT")")
-        SCRIPTNAME=$(basename "$SCRIPT")
-        FILE=$SCRIPTDIR/$SCRIPTNAME
-        case $SCRIPTNAME in
+    cd "$scripts_repo"
+    while read -r script; do
+        scriptdir=$(dirname "$(realpath "$script")")
+        scriptname=$(basename "$script")
+        file=$scriptdir/$scriptname
+        case $scriptname in
             *.gpg | *.png )
                 continue
                 ;;
@@ -132,10 +136,9 @@ function process() {
 
 # This function handles the options and arguments.
 function check_input() {
-    local PARSED=''
-    local -i RC=$OK
+    local parsed=''
 
-    PARSED=$(
+    parsed=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
@@ -146,7 +149,7 @@ function check_input() {
         infomsg "$USAGE"
         exit $ERR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
 
     process_options   "$@"
     process_x_options "$@"
@@ -155,8 +158,6 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_x_options() {
-    local TEXT=''
-
     while true; do
         case $1 in
             -- )
@@ -180,8 +181,6 @@ $USAGE"
 
 # This function checks the website for missing or not used files.
 function check_website() {
-    local TEXT=''
-
     TEXT=$(gettext 'Check website...')
     infomsg "$TEXT"
 
@@ -194,38 +193,36 @@ function check_website() {
 
 # This function checks for gettext required files.
 function check_gettext() {
-    local TEXT=''
-
     # GNU gettext message catalogue template (.pot).
-    FILE=$SCRIPTS_REPO/usr/bin/kz.pot
+    file=$scripts_repo/usr/bin/kz.pot
 
-    if ! [[ -f $FILE ]]; then
+    if ! [[ -f $file ]]; then
         infomsg "
-  $SCRIPTS_REPO/usr/bin / kz.pot"
-        TEXT=$(eval_gettext "Gettext message catalog template \$FILE not \
+  $scripts_repo/usr/bin / kz.pot"
+        TEXT=$(eval_gettext "Gettext message catalog template \$file not \
 found.")
         errmsg "    $TEXT"
         ERR_FLAG=true
     fi
 
     # GNU gettext message catalogue (.po).
-    FILE=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.po
+    file=$scripts_repo/usr/share/locale/nl/LC_MESSAGES/kz.po
 
-    if ! [[ -f $FILE ]]; then
+    if ! [[ -f $file ]]; then
         infomsg "
-  $SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES / kz.po"
-        TEXT=$(eval_gettext "Gettext message catalog \$FILE not found.")
+  $scripts_repo/usr/share/locale/nl/LC_MESSAGES / kz.po"
+        TEXT=$(eval_gettext "Gettext message catalog \$file not found.")
         errmsg "    $TEXT"
         ERR_FLAG=true
     fi
 
     # GNU message catalog (.mo).
-    FILE=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.mo
+    file=$scripts_repo/usr/share/locale/nl/LC_MESSAGES/kz.mo
 
-    if ! [[ -f $FILE ]]; then
+    if ! [[ -f $file ]]; then
         infomsg "
-  $SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES / kz.mo"
-        TEXT=$(eval_gettext "Message catalog \$FILE not found.")
+  $scripts_repo/usr/share/locale/nl/LC_MESSAGES / kz.mo"
+        TEXT=$(eval_gettext "Message catalog \$file not found.")
         errmsg "    $TEXT"
         ERR_FLAG=true
     fi
@@ -234,24 +231,23 @@ found.")
 
 # This function checks Shell and Python script code.
 function check_code() {
-    local BASH_SCRIPT='#!''/usr/bin/env bash'
-    local PYTHON_SCRIPT='#!''/usr/bin/env python3'
-    local TAB_COMPLETION_SCRIPT='# ''shellcheck shell=bash'
-    local TEXT=''
+    local bash_script='#!''/usr/bin/env bash'
+    local python_script='#!''/usr/bin/env python3'
+    local tab_completion_script='# ''shellcheck shell=bash'
 
-    if grep --quiet --line-regexp "$BASH_SCRIPT" "$SCRIPT"; then
+    if grep --quiet --line-regexp "$bash_script" "$script"; then
         check_shellcheck
         check_script
-    elif grep --quiet --line-regexp "$TAB_COMPLETION_SCRIPT" "$SCRIPT"
+    elif grep --quiet --line-regexp "$tab_completion_script" "$script"
         then
         check_shellcheck
-    elif grep --quiet --line-regexp "$PYTHON_SCRIPT" "$SCRIPT"; then
+    elif grep --quiet --line-regexp "$python_script" "$script"; then
         check_pycodestyle
         check_mypy
         check_script
     else
         TEXT="
-${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
+${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(gettext "Unknown script. Function check_code cannot check script \
 code.")$NORMAL
 "
@@ -263,69 +259,68 @@ code.")$NORMAL
 
 # This function checks the operation of the script and associated files.
 function check_script() {
-    local DIR=''
-    local GUI_OPTION='-''-''g''u''i'
-    local ROOT_SCRIPT=' ''b''e''c''o''m''e''_''r''o''o''t''$'
-    local TEXT=''
+    local dir=''
+    local gui_option='-''-''g''u''i'
+    local root_script=' ''b''e''c''o''m''e''_''r''o''o''t''$'
 
     # Script.
-    if ! "$FILE" --version |& $LOGCMD; then
+    if ! "$file" --version |& $LOGCMD; then
         infomsg "
-  $BOLD$SCRIPTDIR / $SCRIPTNAME$NORMAL"
-        TEXT='    '$(eval_gettext "Script \$SCRIPTNAME --version returned an \
+  $BOLD$scriptdir / $scriptname$NORMAL"
+        TEXT='    '$(eval_gettext "Script \$scriptname --version returned an \
 error.")
         errmsg "$TEXT"
         ERR_FLAG=true
     fi
 
     # Desktop file (Only with so-called GUI scripts).
-    if grep --quiet --regexp="$GUI_OPTION" "$FILE"; then
-        DIR=$SCRIPTS_REPO/usr/share/applications
+    if grep --quiet --regexp="$gui_option" "$file"; then
+        dir=$scripts_repo/usr/share/applications
 
-        if ! [[ -f $DIR/$SCRIPTNAME.desktop ]]; then
+        if ! [[ -f $dir/$scriptname.desktop ]]; then
         infomsg "
-  $BOLD$SCRIPTDIR / $SCRIPTNAME$NORMAL"
+  $BOLD$scriptdir / $scriptname$NORMAL"
             TEXT='    '$(eval_gettext "Desktop configuration file \
-\$DIR/\$SCRIPTNAME.desktop not found.")
+\$dir/\$scriptname.desktop not found.")
             errmsg "$TEXT"
             ERR_FLAG=true
         fi
     fi
 
     # Tab-completion script (Only with so-called root scripts).
-    DIR=$SCRIPTS_REPO/usr/share/bash-completion/completions
+    dir=$scripts_repo/usr/share/bash-completion/completions
 
-    if ! [[ -f $DIR/$SCRIPTNAME ]]; then
-        TEXT='    '$(eval_gettext "Tab completion script \$DIR/\$SCRIPTNAME \
+    if ! [[ -f $dir/$scriptname ]]; then
+        TEXT='    '$(eval_gettext "Tab completion script \$dir/\$scriptname \
 not found.")
         errmsg "$TEXT"
         ERR_FLAG=true
     fi
 
     # Manual page (EN + NL).
-    DIR=$SCRIPTS_REPO/usr/share/man/man1
+    dir=$scripts_repo/usr/share/man/man1
 
-    if ! [[ -f $DIR/$SCRIPTNAME.1 ]]; then
-        TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
+    if ! [[ -f $dir/$scriptname.1 ]]; then
+        TEXT='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
         errmsg "$TEXT"
         ERR_FLAG=true
     fi
 
-    DIR=$SCRIPTS_REPO/usr/share/man/nl/man1
+    dir=$scripts_repo/usr/share/man/nl/man1
 
-    if ! [[ -f $DIR/$SCRIPTNAME.1 ]]; then
-        TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
+    if ! [[ -f $dir/$scriptname.1 ]]; then
+        TEXT='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
         errmsg "$TEXT"
         ERR_FLAG=true
     fi
 
     # PolicyKit action definition file (Only with so-called root scripts).
-    if grep --quiet "$ROOT_SCRIPT" "$FILE"; then
-        DIR=$SCRIPTS_REPO/usr/share/polkit-1/actions
+    if grep --quiet "$root_script" "$file"; then
+        dir=$scripts_repo/usr/share/polkit-1/actions
 
-        if ! [[ -f $DIR/nl.karelzimmer.$SCRIPTNAME.policy ]]; then
+        if ! [[ -f $dir/nl.karelzimmer.$scriptname.policy ]]; then
             TEXT='    '$(eval_gettext "PolicyKit action definition file \
-\$DIR/nl.karelzimmer.\$SCRIPTNAME.policy not found.")
+\$dir/nl.karelzimmer.\$scriptname.policy not found.")
             errmsg "$TEXT"
             ERR_FLAG=true
         fi
@@ -335,38 +330,37 @@ not found.")
 
 # This function checks Python script code with pycodestyle.
 function check_pycodestyle() {
-    pycodestyle "$SCRIPT" || ERR_FLAG=true
+    pycodestyle "$script" || ERR_FLAG=true
 }
 
 
 # This function checks Python script code with mypy.
 function check_mypy() {
     # Mypy doesn't work well with absolute filenames.
-    cd "$SCRIPTDIR"
-    mypy --no-error-summary "$SCRIPTNAME" || ERR_FLAG=true
-    cd "$SCRIPTS_REPO"
+    cd "$scriptdir"
+    mypy --no-error-summary "$scriptname" || ERR_FLAG=true
+    cd "$scripts_repo"
 }
 
 
 # This function checks on record length.
 function check_record_length() {
-    local PYTHON_SCRIPT='#!''/usr/bin/python3'
-    local TEXT=''
-    local -i MAX_LINE_LENGTH_FOUND=0
-    local -i MAX_LINE_LENGTH=79
+    local python_script='#!''/usr/bin/python3'
+    local -i max_line_length_found=0
+    local -i max_line_length=79
 
     # Python is checked by pycodestyle.
-    if grep --quiet --line-regexp "$PYTHON_SCRIPT" "$SCRIPT"; then
+    if grep --quiet --line-regexp "$python_script" "$script"; then
         return $OK
     fi
 
-    MAX_LINE_LENGTH_FOUND=$(wc --max-line-length < "$SCRIPT")
+    max_line_length_found=$(wc --max-line-length < "$script")
 
-    if [[ $MAX_LINE_LENGTH_FOUND -gt $MAX_LINE_LENGTH ]]; then
+    if [[ $max_line_length_found -gt $max_line_length ]]; then
         TEXT="
-${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
-$RED    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
-(\$MAX_LINE_LENGTH_FOUND).")$NORMAL"
+${BOLD}In $scriptdir / $scriptname:$NORMAL
+$RED    $(eval_gettext "A line is longer than \$max_line_length \
+(\$max_line_length_found).")$NORMAL"
         infomsg "$TEXT"
         ERR_FLAG=true
     fi
@@ -375,11 +369,11 @@ $RED    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
 
 # This function validates the desktop file.
 function check_desktop_file_validation() {
-    if ! desktop-file-validate "$SCRIPT" | systemd-cat --identifier=kz-check
+    if ! desktop-file-validate "$script" | systemd-cat --identifier=kz-check
     then
         infomsg "
-  $BOLD$SCRIPTDIR / $SCRIPTNAME$NORMAL"
-        desktop-file-validate "$SCRIPT" || ERR_FLAG=true
+  $BOLD$scriptdir / $scriptname$NORMAL"
+        desktop-file-validate "$script" || ERR_FLAG=true
     fi
 }
 
@@ -387,37 +381,36 @@ function check_desktop_file_validation() {
 # This function checks Shell script code.
 function check_shellcheck() {
     # Shellcheck doesn't work well with absolute filenames.
-    cd "$SCRIPTDIR"
+    cd "$scriptdir"
     shellcheck  --external-sources                  \
                 --enable add-default-case           \
                 --enable require-double-brackets    \
-                "$SCRIPTNAME"                       || ERR_FLAG=true
-    cd "$SCRIPTS_REPO"
+                "$scriptname"                       || ERR_FLAG=true
+    cd "$scripts_repo"
 }
 
 
 # This function checks the existence of tags.
 function check_tags() {
-    local ESC_BUG='#''B''U''G'
-    local ESC_FIXME='#''F''I''X''M''E'
-    local ESC_TODO='#''T''O''D''O'
-    local TEXT=''
+    local esc_bug='#''B''U''G'
+    local esc_fixme='#''F''I''X''M''E'
+    local esc_todo='#''T''O''D''O'
 
     if grep --quiet                 \
-            --regexp="$ESC_BUG"     \
-            --regexp="$ESC_FIXME"   \
-            --regexp="$ESC_TODO"    \
-            "$SCRIPT"; then
+            --regexp="$esc_bug"     \
+            --regexp="$esc_fixme"   \
+            --regexp="$esc_todo"    \
+            "$script"; then
         TEXT="
-${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
+${BOLD}In $scriptdir / $scriptname:$NORMAL
     $(gettext 'Flagged annotation found.')
 "
         infomsg "$TEXT"
         grep    --line-number           \
-                --regexp="$ESC_BUG"     \
-                --regexp="$ESC_FIXME"   \
-                --regexp="$ESC_TODO"    \
-                "$SCRIPT"               |
+                --regexp="$esc_bug"     \
+                --regexp="$esc_fixme"   \
+                --regexp="$esc_todo"    \
+                "$script"               |
         nl      --number-width=4        \
                 --number-separator=''   \
                 --body-numbering=n
@@ -428,15 +421,13 @@ ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces() {
-    local TEXT=''
-
-    if grep --quiet ' ''$' "$SCRIPT"; then
+    if grep --quiet ' ''$' "$script"; then
         TEXT="
-${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
+${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(gettext 'End spaces found.')$NORMAL
 "
         infomsg "$TEXT"
-        grep    --line-number ' ''$' "$SCRIPT" |
+        grep    --line-number ' ''$' "$script" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
         ERR_FLAG=true
     fi
@@ -445,8 +436,6 @@ $RED    $(gettext 'End spaces found.')$NORMAL
 
 # This function controls the termination of the script.
 function term() {
-    local TEXT=''
-
     if $ERR_FLAG; then
         TEXT=$(gettext "Please check all the messages above and fix them if \
 necessary.")
@@ -465,8 +454,6 @@ necessary.")
 ###############################################################################
 
 function main() {
-    local ERR_FLAG=false
-
     init    "$@"
     process "$@"
     term
