@@ -335,10 +335,10 @@ function process_setup_file_by_host() {
     # Add possible extra install commands for this computer.
     printf  '\n'                            >> "$command_file"
     gpg     --import                        \
-            /usr/share/kz/kz-public-key.gpg 2> /dev/null
+            /usr/share/kz/kz-public-key.gpg 2> >($LOGCMD)
     gpg     --decrypt                       \
             /usr/bin/kz-install-extra.gpg   \
-            2> /dev/null                    |
+            2> >($LOGCMD)                   |
     grep    "$HOSTNAME"                     >> "$command_file" || true
 }
 
