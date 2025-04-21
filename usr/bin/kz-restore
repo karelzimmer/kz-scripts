@@ -339,6 +339,7 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 # This function tries to unmount the USB device.
 function term_usb() {
     local device=''
+    local text=''
 
     device='/dev/'$(
         lsblk   --ascii             |
@@ -352,7 +353,7 @@ function term_usb() {
         )
 
     title=$(gettext 'Restore home folder')
-    TEXT=$(gettext 'Disconnect the USB media')
+    text=$(gettext 'Disconnect the USB media')
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
@@ -365,10 +366,10 @@ function term_usb() {
                     --width     600         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$TEXT"     2> /dev/null
+                    --text      "$text"     2> /dev/null
             )
     else
-        infomsg "$TEXT..."
+        infomsg "$text..."
         term_unmount
     fi
 
