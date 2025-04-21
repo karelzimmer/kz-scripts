@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-17 15:08+0200\n"
+"POT-Creation-Date: 2025-04-21 11:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -508,7 +508,7 @@ msgstr ""
 #, sh-format
 msgid ""
 "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
+"                  [-f|--file <file>] [-g|--gui]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [<app>...]"
 msgstr ""
@@ -528,9 +528,6 @@ msgstr ""
 msgid ""
 "  -f, --file <file>\n"
 "                 process specified install file"
-msgstr ""
-
-msgid "  -r, --remove   delete apps"
 msgstr ""
 
 msgid "Type 'kz install --apps' for available apps."
@@ -574,9 +571,6 @@ msgstr ""
 msgid "install"
 msgstr ""
 
-msgid "remove"
-msgstr ""
-
 msgid "NUM/TOT  APP"
 msgstr ""
 
@@ -604,7 +598,7 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "Apps $operation completed."
+msgid "Apps set up completed."
 msgstr ""
 
 msgid ""
@@ -618,6 +612,10 @@ msgid ""
 msgstr ""
 
 msgid "Log out of the computer yourself."
+msgstr ""
+
+#, sh-format
+msgid "Apps install completed."
 msgstr ""
 
 msgid ""
@@ -863,7 +861,7 @@ msgstr ""
 #, sh-format
 msgid ""
 "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
+"                [-f|--file <file>] [-g|--gui]\n"
 "                $OPTIONS_USAGE\n"
 "                [--] [<app>...]"
 msgstr ""
@@ -874,9 +872,6 @@ msgstr ""
 msgid ""
 "  -f, --file <file>\n"
 "                 process specified setup file"
-msgstr ""
-
-msgid "  -r, --reset    set apps on default values"
 msgstr ""
 
 msgid "Usage: kz setup [<options>] [<app>...]"
@@ -907,9 +902,6 @@ msgid "Type 'kz setup --apps' for available apps."
 msgstr ""
 
 msgid "set up"
-msgstr ""
-
-msgid "reset"
 msgstr ""
 
 msgid "Update and cleanup system"

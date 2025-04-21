@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-17 15:07+0200\n"
+"POT-Creation-Date: 2025-04-21 11:46+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -562,12 +562,12 @@ msgstr "Apps installeren"
 #, sh-format
 msgid ""
 "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
+"                  [-f|--file <file>] [-g|--gui]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [<app>...]"
 msgstr ""
 "Gebruik: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                    [-f|--file <bestand>] [-g|--gui] [-r|--remove]\n"
+"                    [-f|--file <bestand>] [-g|--gui]\n"
 "                    $OPTIONS_USAGE\n"
 "                    [--] [<app>...]"
 
@@ -589,9 +589,6 @@ msgid ""
 msgstr ""
 "  -f, --file <bestand>\n"
 "                 verwerk opgegeven installatiebestand"
-
-msgid "  -r, --remove   delete apps"
-msgstr "  -r, --remove   verwijder apps"
 
 msgid "Type 'kz install --apps' for available apps."
 msgstr "Typ 'kz install --apps' voor beschikbare apps."
@@ -640,9 +637,6 @@ msgstr ""
 msgid "install"
 msgstr "installeren"
 
-msgid "remove"
-msgstr "verwijderen"
-
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
@@ -672,8 +666,8 @@ msgstr ""
 "de gebruikersinstellingen te voltooien."
 
 #, sh-format
-msgid "Apps $operation completed."
-msgstr "Apps $operation is voltooid."
+msgid "Apps set up completed."
+msgstr "Apps instellen is voltooid."
 
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
@@ -691,6 +685,10 @@ msgstr ""
 
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
+
+#, sh-format
+msgid "Apps install completed."
+msgstr "Apps installeren is voltooid."
 
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
@@ -986,12 +984,12 @@ msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
 #, sh-format
 msgid ""
 "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
+"                [-f|--file <file>] [-g|--gui]\n"
 "                $OPTIONS_USAGE\n"
 "                [--] [<app>...]"
 msgstr ""
 "Gebruik: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <bestand>] [-g|--gui] [-r|--reset]\n"
+"                  [-f|--file <bestand>] [-g|--gui]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [<app>...]"
 
@@ -1004,9 +1002,6 @@ msgid ""
 msgstr ""
 "  -f, --file <bestand>\n"
 "                 verwerk opgegeven instelbestand"
-
-msgid "  -r, --reset    set apps on default values"
-msgstr "  -r, --reset    stel apps in op standaardwaarden"
 
 msgid "Usage: kz setup [<options>] [<app>...]"
 msgstr "Gebruik: kz setup [<opties>] [<app>...]"
@@ -1042,9 +1037,6 @@ msgstr "Typ 'kz setup --apps' voor beschikbare apps."
 
 msgid "set up"
 msgstr "instellen"
-
-msgid "reset"
-msgstr "resetten"
 
 msgid "Update and cleanup system"
 msgstr "Systeem bijwerken en opschonen"

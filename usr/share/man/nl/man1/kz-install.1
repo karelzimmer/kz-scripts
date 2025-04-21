@@ -67,10 +67,14 @@ installatiebestand opgegeven worden.
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz install\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
 .sp
-Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
-.sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
+.sp
+Om een app te verwijderen, op een Debian-gebaseerd systeem gebruik:
+    sudo apt-get remove --purge --assume-yes <app>
+.br
+Op een Red Hat-gebaseerd systeem gebruik:
+   sudo dnf remove --assumeyes <app>
 .sp
 Als om één of andere reden het installeren van apps mislukt, op een
 Debian-gebaseerd systeem kunt u het volgende proberen:
@@ -85,15 +89,7 @@ Op een Red Hat-gebaseerd systeem probeer het volgende:
 Sommige computers vereisen extra opdrachten om de installatie te voltooien.
 Deze opdrachten vereisen mogelijk gevoelige informatie, zoals een
 gebruikersnaam.
-Daarom worden deze opdrachten opgenomen in een met een wachtwoord beveiligd
-bestand.
-.br
-Gebruik eventueel de volgende opdracht:
-    gpg --decrypt /usr/bin/kz-install-extra.gpg | grep $HOSTNAME
-.sp
-Dit gpg-bestand (GNU Privacy Guard, of GnuPG, of GPG) is eerder gemaakt met de
-opdracht:
-    gpg --symmetric kz-install-extra
+Daarom zijn deze opdrachten opgenomen in een GPG-beveiligd bestand.
 
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
@@ -116,9 +112,6 @@ Verwerk het opgegeven bestand.
 \fB-g\fR, \fB--gui\fR
 Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
-.TP
-\fB-r\fR, \fB--remove\fR
-Verwijder de apps.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.
@@ -145,10 +138,10 @@ afsluitwaarde ongelijk 0.
 Installatiebestand.
 .RE
 .sp
-/usr/bin/kz-install.gpg
+/usr/bin/kz-install-extra.gpg
 .RS
-Bestand met mogelijke aanvullende handmatige opdrachten. Alleen van toepassing
-op niet-standaard installaties.
+Bestand met mogelijke aanvullende opdrachten. Toepasselijke opdrachten worden
+automatisch toegevoegd aan het opdrachtenbestand.
 .RE
 .sp
 /tmp/kz-install-commands-XXXXXXXXXX
@@ -195,19 +188,9 @@ een desktopomgeving ook starter \fBApps installeren\fR beschikbaar.
 Installeer Google Chrome.
 .RE
 .sp
-\fBkz install --remove google-chrome\fR
-.RS
-Verwijder Google Chrome.
-.RE
-.sp
 \fBkz install --cat google-chrome\fR
 .RS
 Toon installatie-opdrachten voor Google Chrome.
-.RE
-.sp
-\fBkz install --cat --remove google-chrome\fR
-.RS
-Toon verwijder-opdrachten voor Google Chrome.
 .RE
 
 .SH ZIE OOK

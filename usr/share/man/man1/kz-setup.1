@@ -58,20 +58,11 @@ specified.
 With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode. A
 desktop environment is required.
 .sp
-With option \fB-r\fR, \fB--reset\fR the setting can be undone.
-.sp
 A -- signals the end of options and disables further option processing.
 .sp
 Some computers require additional commands to complete the installation.
 These commands may require sensitive information, such as a username.
-For this reason, these commands are included in a password-protected file.
-.br
-If necessary, use the following command:
-    gpg --decrypt /usr/bin/kz-setup-extra.gpg | grep $HOSTNAME
-.sp
-This gpg file (GNU Privacy Guard, or GnuPG, or GPG) was previously created with
-the command:
-    gpg --symmetric kz-setup-extra
+For this reason, these commands are included in a GPG-protected file.
 
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
@@ -94,9 +85,6 @@ Process the specified file.
 \fB-g\fR, \fB--gui\fR
 Run in graphical mode (gui=graphical user interface). A desktop environment is
 required.
-.TP
-\fB-r\fR, \fB--reset\fR
-Reset the apps.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.
@@ -125,8 +113,8 @@ Setup file.
 .sp
 /usr/bin/kz-setup.gpg
 .RS
-File containing possible additional manual commands. Only applicable to
-non-default installations.
+File containing possible additional commands. Applicable commands will be added
+to the command file automatically.
 .RE
 .sp
 /tmp/kz-setup-commands-XXXXXXXXXX
@@ -178,19 +166,9 @@ Starter \fBSetup apps\fR is also available for this in a desktop environment.
 Set up Google Chrome.
 .RE
 .sp
-\fBkz setup --reset google-chrome\fR
-.RS
-Reset Google Chrome.
-.RE
-.sp
 \fBkz setup --cat google-chrome\fR
 .RS
 Show set up commands for Google Chrome.
-.RE
-.sp
-\fBkz setup --cat --reset google-chrome\fR
-.RS
-Show reset commands for Google Chrome.
 .RE
 .EE
 

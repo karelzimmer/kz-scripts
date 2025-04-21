@@ -59,25 +59,15 @@ opgegeven worden.
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz setup\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
 .sp
-Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
-.sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
 .sp
 Voor sommige computers zijn er extra opdrachten nodig om de installatie te
 voltooien.
-Sommige computers vereisen extra opdrachten om de installatie te voltooien.
 Deze opdrachten vereisen mogelijk gevoelige informatie, zoals een
 gebruikersnaam.
-Daarom worden deze opdrachten opgenomen in een met een wachtwoord beveiligd
-bestand.
-.br
-Gebruik eventueel de volgende opdracht:
-    gpg --decrypt /usr/bin/kz-setup-extra.gpg | grep $HOSTNAME
-.sp
-Dit gpg-bestand (GNU Privacy Guard, of GnuPG, of GPG) is eerder gemaakt met de
-opdracht:
-    gpg --symmetric kz-setup-extra
+Daarom zijn deze opdrachten opgenomen in een GPG-beveiligd bestand.
+
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
@@ -99,9 +89,6 @@ Verwerk het opgegeven bestand.
 \fB-g\fR, \fB--gui\fR
 Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
-.TP
-\fB-r\fR, \fB--reset\fR
-Stel de apps in op standaardwaarden
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.
@@ -130,13 +117,13 @@ Setup bestand.
 .sp
 /usr/bin/kz-setup.gpg
 .RS
-Bestand met mogelijke aanvullende handmatige opdrachten. Alleen van toepassing
-op niet-standaard installaties.
+Bestand met mogelijke aanvullende opdrachten. Toepasselijke opdrachten worden
+automatisch toegevoegd aan het opdrachtenbestand.
 .RE
 .sp
 /tmp/kz-setup-commands-XXXXXXXXXX
 .RS
-Instelbestand, bijvoorbeeld kz-setup-commands-SYpGEKVWZI.
+Opdrachtbestand, bijvoorbeeld kz-setup-commands-SYpGEKVWZI.
 .RE
 .sp
 ~/Instellingen/avatar
@@ -183,19 +170,9 @@ desktopomgeving ook starter \fBApps instellen\fR beschikbaar.
 Stel Google Chrome in.
 .RE
 .sp
-\fBkz setup --reset google-chrome\fR
-.RS
-Reset Google Chrome.
-.RE
-.sp
 \fBkz setup --cat google-chrome\fR
 .RS
 Toon instel-opdrachten voor Google Chrome.
-.RE
-.sp
-\fBkz setup --cat --reset google-chrome\fR
-.RS
-Toon reset-opdrachten voor Google Chrome.
 .RE
 .EE
 

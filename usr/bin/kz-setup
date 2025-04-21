@@ -24,7 +24,7 @@ PROGRAM_DESC=$(gettext 'Set up apps')
 readonly PROGRAM_DESC
 
 USAGE=$(eval_gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
-                [-f|--file <file>] [-g|--gui] [-r|--reset]
+                [-f|--file <file>] [-g|--gui]
                 \$OPTIONS_USAGE
                 [--] [<app>...]")
 readonly USAGE
@@ -38,8 +38,7 @@ $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
                  process specified setup file")
 $(gettext '  -g, --gui      run in graphical mode,')
-$(gettext '                 requires a desktop environment')
-$(gettext '  -r, --reset    set apps on default values')"
+$(gettext '                 requires a desktop environment')"
 readonly X_OPTIONS_HELP
 
 HELP="$(gettext "Usage: kz setup [<options>] [<app>...]")
@@ -57,9 +56,7 @@ $(gettext '  <app>...       set up specified apps')"
 readonly HELP
 
 readonly X_OPTIONS_SHORT='abcf:gr'
-readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,reset'
-
-readonly ON_HOST='on host'
+readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui'
 
 
 ###############################################################################
@@ -78,9 +75,6 @@ function process() {
     local -g  OPTION_BROWSE=false
     local -g  OPTION_CAT=false
     local -g  OPTION_FILE=false
-    local -g  OPTION_RESET=false
-    local -g  RESET_APP='Reset app'
-    local -g  SETUP_APP='Setup app'
     local -gA APP_ARGUMENTS=()
     local -gA FAILED_APPS=()
 
@@ -186,12 +180,6 @@ $USAGE"
                 OPTION_GUI=true
                 shift
                 ;;
-            -r | --reset )
-                OPTION_RESET=true
-                SETUP_APP='Reset app'
-                RESET_APP='Setup app'
-                shift
-                ;;
             -- )
                 shift
                 break
@@ -230,7 +218,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    "#.*$SETUP_APP.*on"     \
+        grep    "#.*Setup app.*on host" \
                 "$setup_file"           |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
@@ -284,18 +272,14 @@ function process_setup_file_by_app() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP_APP*[[:space:]]"$app_argument"[[:space:]]*$ON_HOST* )
+            '#'*'Setup app'*" $app_argument "*'on host'* )
                 # Matching app record.
                 app_match=true
                 no_app_match=false
-                printf '%s\n' "$input_record" >> "$command_file"
+                printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$SETUP_APP*$ON_HOST* | '#'*$RESET_APP*$ON_HOST* )
+            '#'*'Setup app'*'on host'* )
                 # Mismatched app record.
-                # Add empty seperator line between the setup of apps.
-                if $app_match; then
-                    printf '\n' >> "$command_file"
-                fi
                 app_match=false
                 ;;
             * )
@@ -317,7 +301,7 @@ function process_setup_file_by_app() {
 # This function generates the command file from the setup file and filters by
 # host.
 function process_setup_file_by_host() {
-    local any_host_match=false
+    local host_match=false
     local input_record=''
 
     while read -r input_record; do
@@ -326,27 +310,33 @@ function process_setup_file_by_host() {
                 # Empty line.
                 continue
                 ;;
-            '#'*$SETUP_APP*$ON_HOST*'*' | '#'*$SETUP_APP*$ON_HOST*$HOSTNAME* )
+            '#'*'Setup app'*'on host'*'*' | \
+            '#'*'Setup app'*'on host'*$HOSTNAME* )
                 # Matching app record.
-                any_host_match=true
-                printf '%s\n' "$input_record" >> "$command_file"
+                host_match=true
+                printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$SETUP_APP*$ON_HOST* | '#'*$RESET_APP*$ON_HOST* )
+            '#'*'Setup app'*'on host'* )
                 # Mismatched app record.
-                # Add empty seperator line between the setup of apps.
-                if $any_host_match; then
-                    printf '\n' >> "$command_file"
-                fi
-                any_host_match=false
+                host_match=false
                 ;;
             * )
-                if $any_host_match; then
+                if $host_match; then
                     # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
         esac
     done < "$setup_file"
+
+    # Add possible extra setup commands for this computer.
+    printf  '\n'                            >> "$command_file"
+    gpg     --import                        \
+            /usr/share/kz/kz-public-key.gpg 2> /dev/null
+    gpg     --decrypt                       \
+            /usr/bin/kz-setup-extra.gpg     \
+            2> /dev/null                    |
+    grep    "$HOSTNAME"                     >> "$command_file" || true
 }
 
 
@@ -363,9 +353,9 @@ function setup_apps() {
     local -i app_tot_num=0
 
     app_tot_num=$(
-        grep    --count                     \
-                "#.*$SETUP_APP.*$ON_HOST"   \
-                "$command_file"             ||true
+        grep    --count                 \
+                "#.*Setup app.*on host" \
+                "$command_file"         ||true
         )
     if [[ $app_tot_num -eq 0 ]]; then
         rm --verbose "$command_file" |& $LOGCMD
@@ -415,7 +405,7 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '#'*$SETUP_APP* )
+            '#'*'Setup app'* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
@@ -471,8 +461,6 @@ function execute_command() {
 
 # This function controls the termination of the script.
 function term() {
-    local operation=''
-
     if [[ ${FAILED_APPS[*]} ]]; then
         TEXT="$(gettext "The set up of the following apps contains errors:")
 ${FAILED_APPS[*]}
@@ -485,13 +473,7 @@ $(gettext "Try to set up the apps again.")"
         exit $ERR
     fi
 
-    operation=$(gettext 'set up')
-
-    if $OPTION_RESET; then
-        # shellcheck disable=SC2034
-        operation=$(gettext 'reset')
-    fi
-    TEXT=$(eval_gettext "Apps \$operation completed.")
+    TEXT=$(eval_gettext "Apps set up completed.")
 
     if $LOGOUT; then
 
