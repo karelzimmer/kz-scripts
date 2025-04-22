@@ -62,7 +62,7 @@ A -- signals the end of options and disables further option processing.
 .sp
 Some computers require additional commands to complete the installation.
 These commands may require sensitive information, such as a username.
-For this reason, these commands are included in a GPG-protected file.
+For this reason, these commands are included in a OpenPGP-protected file.
 
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
@@ -113,13 +113,13 @@ Setup file.
 .sp
 /usr/bin/kz-setup.gpg
 .RS
-File containing possible additional commands. Applicable commands will be added
-to the command file automatically.
+OpenPGP file containing possible additional commands. Applicable commands will
+be added to the command file automatically.
 .RE
 .sp
 /usr/share/kz/kz-public-key.gpg
 .RS
-Public PGP key for package kz. Needed to decrypt kz-install-extra.gpg.
+OpenPGP public key for package kz. Needed to decrypt kz-install-extra.gpg.
 .RE
 .sp
 /tmp/kz-setup-commands-XXXXXXXXXX
