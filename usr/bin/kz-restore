@@ -232,7 +232,7 @@ function restore_backup() {
                 --verbose               \
                 "$source"/              \
                 "$HOME"/                \
-                2> >($PROGRAM_LOGS)           |
+                2> >($PROGRAM_LOGS)     |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \

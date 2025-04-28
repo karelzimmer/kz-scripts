@@ -492,7 +492,7 @@ EOF
                 --delete-excluded               \
                 "$HOME"/                        \
                 "$TARGET"/                      \
-                2> >($PROGRAM_LOGS)                   |
+                2> >($PROGRAM_LOGS)             |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
                 --auto-close                    \
