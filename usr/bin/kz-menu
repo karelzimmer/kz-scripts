@@ -19,9 +19,9 @@ source kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-menu'
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Installation menu')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(eval_gettext "Usage: kz menu [-g|--gui] \$OPTIONS_USAGE")
 readonly USAGE

@@ -20,9 +20,9 @@ source ~/kz-scripts/usr/bin/kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-deploy'
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Distribute website including kz packages')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(eval_gettext "Usage: kz deploy \$OPTIONS_USAGE")
 readonly USAGE

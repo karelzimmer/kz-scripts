@@ -20,9 +20,9 @@ source kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-setup'
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Set up apps')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(eval_gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
                 [-f|--file <file>] [-g|--gui] [-r|--reset]

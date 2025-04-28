@@ -20,9 +20,9 @@ source kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-restore'
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Restore home folder')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE="$(eval_gettext "Usage: kz restore [-g|--gui] [-s|--source <directory>]
                   \$OPTIONS_USAGE")"
