@@ -97,6 +97,19 @@ function process() {
 
     if $option_file; then
         install_file=$file_argument
+        # Initialise the install file extra as "empty" with file header (GPG).
+    cat << EOF > "$install_file_extra"
+# shellcheck shell=bash
+###############################################################################
+# SPDX-FileComment: Install file for use with kz-install script (GPG)
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+# Use "man kz install.sh" to learn more about the format of this file.
+
+# No commands to execute.
+EOF
     else
         # Install commands in GPG file.
         gpg --import                        \
