@@ -15,9 +15,9 @@ kz-install.sh - Install file for use with kz install
 .YS
 
 .SH DESCRIPTION
-This file contains commands to process as an install file with kz install.
+This file contains commands to process as an installation file with kz install.
 .sp
-The install file contains so-called \fBApp records\fR and \fBCommand
+The installation file contains so-called \fBApp records\fR and \fBCommand
 records\fR.
 .sp
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
@@ -58,6 +58,17 @@ T{
 T}:T{
 Empty line (none, one or more)
 T}
+T{
+# Remove app \fI<app>\fR from host <host>...
+T}:T{
+Remove the app \fI<app>\fR from host <host>s (\fBApp record\fR for option
+remove)
+T}
+T{
+Command
+T}:T{
+Remove app command (one or more \fBCommand records\fR)
+T}
 .TE
 .LP
 .B Table 2. Example of records and their processing
@@ -80,6 +91,18 @@ Install app gnome-gmail on any computer, see [1].
 T}
 T{
 sudo apt-get install --assume-yes gnome-gmail
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# Remove app gnome-gmail from host *
+T}:T{
+Remove app gnome-gmail from any computer, see [1].
+T}
+T{
+sudo apt-get remove --purge --assume-yes gnome-gmail
 T}:T{
 T}
 T{

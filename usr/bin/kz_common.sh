@@ -62,6 +62,17 @@ fi
 
 
 ###############################################################################
+# Globals
+###############################################################################
+
+declare ERREXIT=true
+declare OPTION_GUI=false
+declare TEXT=''
+declare -i RC=$OK
+declare -a COMMANDLINE_ARGS=("$@")
+
+
+###############################################################################
 # Functions
 ###############################################################################
 
@@ -77,7 +88,7 @@ function become_root() {
     if [[ $UID -ne 0 ]]; then
         export DISPLAY
         if $OPTION_GUI; then
-            xhost +si:localuser:root |& $LOGCMD
+            xhost +si:localuser:root |& $PROGRAM_LOGS
             TEXT="Restart (pkexec $pkexec_program ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
             # Because $pkexec_program will be started again, do not trap twice.
@@ -162,7 +173,7 @@ function check_repos() {
         cd "$HOME/$repo"
 
         # Prevent false positives.
-        git status |& $LOGCMD
+        git status |& $PROGRAM_LOGS
 
         if ! git diff-index --quiet HEAD; then
             TEXT=$(eval_gettext "Repo \$repo is not clean.")
@@ -220,16 +231,6 @@ function infomsg() {
 
 # This function performs initial actions.
 function init() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g  ERREXIT=true
-    local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
-    local -g  OPTION_GUI=false
-    local -g  TEXT=''
-    local -gi RC=$OK
-    local -ga COMMANDLINE_ARGS=("$@")
-
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -251,7 +252,7 @@ Started ($PROGRAM_NAME $* as $USER)."
 
 # This function records a message to the log.
 function logmsg() {
-    printf '%b\n' "$*" |& $LOGCMD
+    printf '%b\n' "$*" |& $PROGRAM_LOGS
 }
 
 
@@ -438,6 +439,10 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit )
+            # Clean up temporary files.
+            TEXT='Cleaning up temporary files...'
+            logmsg "$TEXT"
+            rm --verbose --force /tmp/"$PROGRAM_NAME"* |& $PROGRAM_LOGS || true
             TEXT="Ended (code=exited, status=$status).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"

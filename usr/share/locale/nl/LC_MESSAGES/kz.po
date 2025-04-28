@@ -562,12 +562,12 @@ msgstr "Apps installeren"
 #, sh-format
 msgid ""
 "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <file>] [-g|--gui]\n"
+"                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [<app>...]"
 msgstr ""
 "Gebruik: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                    [-f|--file <bestand>] [-g|--gui]\n"
+"                    [-f|--file <bestand>] [-g|--gui] [-r|--remove]\n"
 "                    $OPTIONS_USAGE\n"
 "                    [--] [<app>...]"
 
@@ -577,7 +577,7 @@ msgstr "Gebruik: kz install [<opties>] [<app>...]"
 msgid "  -a, --apps     show list of apps"
 msgstr "  -a, --apps     toon lijst van apps"
 
-msgid "  -b, --browse   browse install file"
+msgid "  -b, --browse   browse installation file"
 msgstr "  -b, --browse   blader door installatiebestand"
 
 msgid "  -c, --cat      show contents of command file"
@@ -585,10 +585,13 @@ msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
 
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified install file"
+"                 process specified installation file"
 msgstr ""
 "  -f, --file <bestand>\n"
 "                 verwerk opgegeven installatiebestand"
+
+msgid "  -r, --remove   delete apps"
+msgstr "  -r, --remove   verwijder apps"
 
 msgid "Type 'kz install --apps' for available apps."
 msgstr "Typ 'kz install --apps' voor beschikbare apps."
@@ -601,7 +604,7 @@ msgid "App '$app_argument' not found"
 msgstr "App '$app_argument' niet gevonden"
 
 #, sh-format
-msgid "No install file found, looked for '$install_file'."
+msgid "No installation file found, looked for '$install_file'."
 msgstr "Geen installatiebestand gevonden, zocht '$install_file'."
 
 msgid "The following apps are available:"
@@ -616,7 +619,7 @@ msgstr "  0  Geen apps gevonden."
 msgid "Use \"kz install <app>...\" to install the apps."
 msgstr "Gebruik \"kz install <app>...\" om de apps te installeren."
 
-msgid "Use \"kz install --cat\" to view the contents of the install file."
+msgid "Use \"kz install --cat\" to view the contents of the installation file."
 msgstr ""
 "Gebruik \"kz install --cat\" om de inhoud van het installatiebestand te "
 "bekijken."
@@ -629,13 +632,16 @@ msgstr ""
 "installatiebestand voor apps te bekijken."
 
 msgid ""
-"Use \"kz install --browse\" to view the contents of the default install file."
+"Use \"kz install --browse\" to view the contents of the default installation file."
 msgstr ""
 "Gebruik \"kz install --browse\" om de inhoud van het standaard "
 "installatiebestand te bekijken."
 
 msgid "install"
 msgstr "installeren"
+
+msgid "remove"
+msgstr "verwijderen"
 
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
@@ -666,8 +672,8 @@ msgstr ""
 "de gebruikersinstellingen te voltooien."
 
 #, sh-format
-msgid "Apps set up completed."
-msgstr "Apps instellen is voltooid."
+msgid "Apps $operation completed."
+msgstr "Apps $operation is voltooid."
 
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
@@ -984,12 +990,12 @@ msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
 #, sh-format
 msgid ""
 "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                [-f|--file <file>] [-g|--gui]\n"
+"                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
 "                $OPTIONS_USAGE\n"
 "                [--] [<app>...]"
 msgstr ""
 "Gebruik: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <bestand>] [-g|--gui]\n"
+"                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [<app>...]"
 
@@ -1002,6 +1008,9 @@ msgid ""
 msgstr ""
 "  -f, --file <bestand>\n"
 "                 verwerk opgegeven instelbestand"
+
+msgid "  -r, --reset    set apps on default values"
+msgstr "  -r, --reset    stel apps in op standaardwaarden"
 
 msgid "Usage: kz setup [<options>] [<app>...]"
 msgstr "Gebruik: kz setup [<opties>] [<app>...]"
@@ -1037,6 +1046,9 @@ msgstr "Typ 'kz setup --apps' voor beschikbare apps."
 
 msgid "set up"
 msgstr "instellen"
+
+msgid "reset"
+msgstr "resetten"
 
 msgid "Update and cleanup system"
 msgstr "Systeem bijwerken en opschonen"

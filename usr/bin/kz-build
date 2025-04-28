@@ -22,6 +22,7 @@ source ~/kz-scripts/usr/bin/kz_common.sh
 readonly PROGRAM_NAME='kz-build'
 PROGRAM_DESC=$(gettext 'Build website including kz packages')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(eval_gettext "Usage: kz build \$OPTIONS_USAGE")
 readonly USAGE
@@ -52,16 +53,18 @@ readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 
 
 ###############################################################################
+# Globals
+###############################################################################
+
+declare DEV=false
+
+
+###############################################################################
 # Functions
 ###############################################################################
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g DEV=false
-
     check_input "$@"
     if ! grep --quiet debian /etc/os-release; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
@@ -137,11 +140,11 @@ function build_website() {
             --verbose               \
             --checksum              \
             "$UPLOADS_REPO_SRCDIR"/ \
-            "$UPLOADS_REPO_DISTDIR" |& $LOGCMD
+            "$UPLOADS_REPO_DISTDIR" |& $PROGRAM_LOGS
 
     # Make sure all necessary directories are available.
     for dir in "${UPLOADS_TARGETS[@]}"; do
-        mkdir --parents "$dir" |& $LOGCMD
+        mkdir --parents "$dir" |& $PROGRAM_LOGS
     done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
@@ -160,11 +163,11 @@ function build_website() {
     cd "$startdir"
 
     # Copy kz-get to kz-uploads.
-    mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/scripts" |& $LOGCMD
+    mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/scripts" |& $PROGRAM_LOGS
     cp  --preserve                              \
         --verbose                               \
         "$SCRIPTS_REPO/usr/bin/kz-get"          \
-        "$UPLOADS_REPO_DISTDIR/assets/scripts"  |& $LOGCMD
+        "$UPLOADS_REPO_DISTDIR/assets/scripts"  |& $PROGRAM_LOGS
 
 }
 
@@ -191,11 +194,17 @@ function build_deb_package() {
             --delete            \
             --verbose           \
             "$DEB_REPO_SRCDIR"/ \
-            "$DEB_REPO_DISTDIR" |& $LOGCMD
+            "$DEB_REPO_DISTDIR" |& $PROGRAM_LOGS
 
     # Make sure the permissions are correct for the sync with repo kz-scripts.
-    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin"/*  |& $LOGCMD
-    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin"/*.*            |& $LOGCMD
+    chmod   --verbose                   \
+            'u=rwx,g=rx,o=rx'           \
+            --                          \
+            "$SCRIPTS_REPO/usr/bin"/*   |& $PROGRAM_LOGS
+    chmod   --verbose                   \
+            'a-x'                       \
+            --                          \
+            "$SCRIPTS_REPO/usr/bin"/*.* |& $PROGRAM_LOGS
 
     # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive               \
@@ -208,7 +217,7 @@ function build_deb_package() {
             --exclude='kz.po'       \
             --exclude='kz.pot'      \
             "$SCRIPTS_REPO"/        \
-            "$DEB_REPO_DISTDIR"     |& $LOGCMD
+            "$DEB_REPO_DISTDIR"     |& $PROGRAM_LOGS
 
     # Compress man pages.
     gzip    --best                                      \
@@ -216,11 +225,11 @@ function build_deb_package() {
             "$DEB_REPO_DISTDIR/usr/share/man/man1"/*    \
             "$DEB_REPO_DISTDIR/usr/share/man/man7"/*    \
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man1"/* \
-            "$DEB_REPO_DISTDIR/usr/share/man/nl/man7"/* |& $LOGCMD
+            "$DEB_REPO_DISTDIR/usr/share/man/nl/man7"/* |& $PROGRAM_LOGS
 
     # Capture build id Debian package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     build_id=$(date '+%Y-%m-%dT%H:%M:%S')
-    mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
+    mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
     # Create Debian package in kz-uploads.
@@ -230,7 +239,10 @@ function build_deb_package() {
     else
         to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"
     fi
-    fakeroot dpkg-deb --build -Z=xz "$DEB_REPO_DISTDIR" "$to_build" |& $LOGCMD
+    fakeroot    dpkg-deb            \
+                --build -Z=xz       \
+                "$DEB_REPO_DISTDIR" \
+                "$to_build"         |& $PROGRAM_LOGS
 }
 
 
@@ -248,11 +260,17 @@ function build_rpm_package() {
             --delete            \
             --verbose           \
             "$RPM_REPO_SRCDIR"/ \
-            "$RPM_REPO_DISTDIR" |& $LOGCMD
+            "$RPM_REPO_DISTDIR" |& $PROGRAM_LOGS
 
     # Make sure the permissions are correct for the sync with repo kz-scripts.
-    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin"/*  |& $LOGCMD
-    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin"/*.*            |& $LOGCMD
+    chmod   --verbose                   \
+            'u=rwx,g=rx,o=rx'           \
+            --                          \
+            "$SCRIPTS_REPO/usr/bin"/*   |& $PROGRAM_LOGS
+    chmod   --verbose                   \
+            'a-x'                       \
+            --                          \
+            "$SCRIPTS_REPO/usr/bin"/*.* |& $PROGRAM_LOGS
 
     # Fill kz-rpm/dist/ with repo kz-scripts.
     rsync   --archive               \
@@ -265,7 +283,7 @@ function build_rpm_package() {
             --exclude='kz.po'       \
             --exclude='kz.pot'      \
             "$SCRIPTS_REPO"/        \
-            "$RPM_REPO_DISTDIR"     |& $LOGCMD
+            "$RPM_REPO_DISTDIR"     |& $PROGRAM_LOGS
 
     # Compress man pages.
     gzip    --best                                      \
@@ -273,19 +291,20 @@ function build_rpm_package() {
             "$RPM_REPO_DISTDIR/usr/share/man/man1"/*    \
             "$RPM_REPO_DISTDIR/usr/share/man/man7"/*    \
             "$RPM_REPO_DISTDIR/usr/share/man/nl/man1"/* \
-            "$RPM_REPO_DISTDIR/usr/share/man/nl/man7"/* |& $LOGCMD
+            "$RPM_REPO_DISTDIR/usr/share/man/nl/man7"/* |& $PROGRAM_LOGS
 
     # Capture build id RPM package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     build_id=$(date '+%Y-%m-%dT%H:%M:%S')
-    mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
+    mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
     # Create RPM package in kz-rpm/dist/.
     cd "$HOME"
-    rpmbuild    -ba                                             \
-                --build-in-place                                \
-                --define "_topdir $RPM_REPO_DISTDIR/rpmbuild"   \
-                "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"      |& $LOGCMD
+    rpmbuild    -ba                                         \
+                --build-in-place                            \
+                --define                                    \
+                "_topdir $RPM_REPO_DISTDIR/rpmbuild"        \
+                "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"  |& $PROGRAM_LOGS
     cd "$startdir"
 
     if $DEV; then
@@ -298,7 +317,7 @@ function build_rpm_package() {
     cp  --preserve                                          \
         --verbose                                           \
         "$RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch/$RPM_NAME"  \
-        "$to_copy"                                          |& $LOGCMD
+        "$to_copy"                                          |& $PROGRAM_LOGS
 }
 
 
@@ -331,10 +350,10 @@ function install_deb_package() {
             apt-get                         \
             reinstall                       \
             --assume-yes                    \
-            "$to_install"                   |& $LOGCMD
+            "$to_install"                   |& $PROGRAM_LOGS
 
     # Progress indicator ends like [====]100%.
-    rm --verbose "$KZ_BUILD_PID_FILE" |& $LOGCMD
+    rm --verbose "$KZ_BUILD_PID_FILE" |& $PROGRAM_LOGS
     printf '\b%s\n' '=]100%'
 }
 

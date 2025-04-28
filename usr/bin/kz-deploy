@@ -22,6 +22,7 @@ source ~/kz-scripts/usr/bin/kz_common.sh
 readonly PROGRAM_NAME='kz-deploy'
 PROGRAM_DESC=$(gettext 'Distribute website including kz packages')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(eval_gettext "Usage: kz deploy \$OPTIONS_USAGE")
 readonly USAGE
@@ -36,16 +37,18 @@ readonly HELP
 
 
 ###############################################################################
+# Globals
+###############################################################################
+
+declare ERR_FLAG=false
+
+
+###############################################################################
 # Functions
 ###############################################################################
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g ERR_FLAG=false
-
     check_input "$@"
     if ! grep --quiet debian /etc/os-release; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
@@ -162,7 +165,7 @@ function upload_website() {
         read -rp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
-        chmod --verbose 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
+        chmod --verbose 'u=rw,g=,o=' "$ftp_login" |& $PROGRAM_LOGS
     fi
 
     if ! lftp   --user      "$ftp_user"             \

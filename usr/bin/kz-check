@@ -22,6 +22,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-check'
 PROGRAM_DESC=$(gettext 'Check scripts and website')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(eval_gettext "Usage: kz check \$OPTIONS_USAGE")
 readonly USAGE
@@ -36,16 +37,18 @@ readonly HELP
 
 
 ###############################################################################
+# Globals
+###############################################################################
+
+declare ERR_FLAG=false
+
+
+###############################################################################
 # Functions
 ###############################################################################
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g ERR_FLAG=false
-
     local file=''
     local script=''
     local scriptdir=''
@@ -264,7 +267,7 @@ function check_script() {
     local root_script=' ''b''e''c''o''m''e''_''r''o''o''t''$'
 
     # Script.
-    if ! "$file" --version |& $LOGCMD; then
+    if ! "$file" --version |& $PROGRAM_LOGS; then
         infomsg "
   $BOLD$scriptdir / $scriptname$NORMAL"
         TEXT='    '$(eval_gettext "Script \$scriptname --version returned an \

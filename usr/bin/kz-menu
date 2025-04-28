@@ -21,6 +21,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-menu'
 PROGRAM_DESC=$(gettext 'Installation menu')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(eval_gettext "Usage: kz menu [-g|--gui] \$OPTIONS_USAGE")
 readonly USAGE
@@ -82,6 +83,11 @@ readonly -a  MENU2_DESCS=(
                 "$(gettext 'Back')"
             )
 readonly MENU2_LINES=${#MENU2_DESCS[@]}
+
+
+###############################################################################
+# Globals
+###############################################################################
 
 
 ###############################################################################

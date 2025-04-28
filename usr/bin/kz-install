@@ -22,9 +22,10 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-install'
 PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(eval_gettext "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]
-                  [-f|--file <file>] [-g|--gui]
+                  [-f|--file <file>] [-g|--gui] [-r|--remove]
                   \$OPTIONS_USAGE
                   [--] [<app>...]")
 readonly USAGE
@@ -33,12 +34,13 @@ X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
-$(gettext '  -b, --browse   browse install file')
+$(gettext '  -b, --browse   browse installation file')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
-                 process specified install file")
+                 process specified installation file")
 $(gettext '  -g, --gui      run in graphical mode,')
-$(gettext '                 requires a desktop environment')"
+$(gettext '                 requires a desktop environment')
+$(gettext '  -r, --remove   delete apps')"
 readonly X_OPTIONS_HELP
 
 HELP="$(gettext "Usage: kz install [<options>] [<app>...]")
@@ -56,7 +58,16 @@ $(gettext '  <app>...       install specified apps')"
 readonly HELP
 
 readonly X_OPTIONS_SHORT='abcf:gr'
-readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui'
+readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,remove'
+
+
+###############################################################################
+# Globals
+###############################################################################
+
+declare OPTION_REMOVE=false
+declare REBOOT=true
+declare -A FAILED_APPS=()
 
 
 ###############################################################################
@@ -65,60 +76,69 @@ readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui'
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g  ARGUMENT_APPS=false
-    local -g  FILE_ARGUMENT=''
-    local -g  OPTION_APPS=false
-    local -g  OPTION_BROWSE=false
-    local -g  OPTION_CAT=false
-    local -g  OPTION_FILE=false
-    local -g  REBOOT=true
-    local -gA APP_ARGUMENTS=()
-    local -gA FAILED_APPS=()
-
+    local argument_app=false
     local command_file=''
+    local file_argument=''
+    local from_host='from host'
+    local install_app='Install app'
+    local install_file_extra=''
     local install_file=/usr/bin/$PROGRAM_NAME.sh
+    local on_host='on host'
+    local option_apps=false
+    local option_browse=false
+    local option_cat=false
+    local option_file=false
+    local remove_app='Remove app'
+    local -A app_arguments=()
 
     check_input "$@"
 
-    if $OPTION_FILE; then
-        install_file=$FILE_ARGUMENT
+    install_file_extra=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
+
+    if $option_file; then
+        install_file=$file_argument
+    else
+        # Install commands in GPG file.
+        gpg --import                        \
+            /usr/share/kz/kz-public-key.gpg \
+            2> >($PROGRAM_LOGS)
+        gpg --decrypt                       \
+            /usr/bin/kz-install.sh.gpg      \
+            2> >($PROGRAM_LOGS)             > "$install_file_extra" || true
+
     fi
 
     if ! [[ -f $install_file ]]; then
-        TEXT=$(eval_gettext "No install file found, looked for \
+        TEXT=$(eval_gettext "No installation file found, looked for \
 '\$install_file'.")
         errmsg "$TEXT"
         exit $ERR
     fi
 
-    if $OPTION_BROWSE; then
+    if $option_browse; then
         process_option_browse
         exit $OK
     fi
 
-    if $OPTION_APPS; then
+    if $option_apps; then
         process_option_apps
         exit $OK
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 
-    if $ARGUMENT_APPS; then
+    if $argument_app; then
         process_argument_app
     else
         process_setup_file_by_host
     fi
 
-    if $OPTION_CAT; then
+    if $option_cat; then
         process_option_cat
         exit $OK
     fi
 
     if [[ $UID -ne 0 ]]; then
-        rm --verbose "$command_file" |& $LOGCMD
         become_root
     fi
     install_apps
@@ -152,26 +172,26 @@ function process_x_options() {
     while true; do
         case $1 in
             -a | --apps )
-                OPTION_APPS=true
+                option_apps=true
                 shift
                 ;;
             -b | --browse )
-                OPTION_BROWSE=true
+                option_browse=true
                 shift
                 ;;
             -c | --cat )
-                OPTION_CAT=true
+                option_cat=true
                 shift
                 ;;
             -f | --file )
-                if $OPTION_FILE; then
+                if $option_file; then
                     TEXT="kz install: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
                 fi
-                OPTION_FILE=true
-                FILE_ARGUMENT=$2
+                option_file=true
+                file_argument=$2
                 shift 2
                 ;;
             -g | --gui )
@@ -185,6 +205,14 @@ $USAGE"
                 OPTION_GUI=true
                 shift
                 ;;
+            -r | --remove )
+                OPTION_REMOVE=true
+                install_app='Remove app'
+                on_host='from host'
+                remove_app='Install app'
+                from_host='on host'
+                shift
+                ;;
             -- )
                 shift
                 break
@@ -196,23 +224,23 @@ $USAGE"
     done
 
     if [[ $* ]]; then
-        ARGUMENT_APPS=true
+        argument_app=true
         REBOOT=false
         while [[ $* ]]; do
-            APP_ARGUMENTS[$1]=$1
+            app_arguments[$1]=$1
             shift
         done
     fi
 }
 
 
-# This function browses through the install file.
+# This function browses through the installation file.
 function process_option_browse() {
-    less --no-init --quit-if-one-screen "$install_file"
+    less --no-init --quit-if-one-screen "$install_file" "$install_file_extra"
 }
 
 
-# This function shows the available apps from the install file.
+# This function shows the available apps from the installation file.
 function process_option_apps() {
     local apps=''
 
@@ -221,8 +249,9 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    '#.*Install app.*on host'   \
-                "$install_file"             |
+        grep    "#.*$install_app.*$on_host" \
+                "$install_file"             \
+                "$install_file_extra"       |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |
         cut     --delimiter=' '             \
@@ -238,11 +267,12 @@ $(gettext 'NUM  APP')
         TEXT+="$apps
 
 $(gettext 'Use "kz install <app>..." to install the apps.')
-$(gettext "Use \"kz install --cat\" to view the contents of the install file.")
+$(gettext "Use \"kz install --cat\" to view the contents of the installation \
+file.")
 $(gettext "Use \"kz install --cat <app>...\" to view the contents of the apps \
-install file.")
+installation file.")
 $(gettext "Use \"kz install --browse\" to view the contents of the default \
-install file.")"
+installation file.")"
     else
         TEXT+="$(gettext '  0  No apps found.')
 
@@ -256,14 +286,14 @@ $USAGE"
 function process_argument_app() {
     local app_argument=''
 
-    for app_argument in "${APP_ARGUMENTS[@]}"; do
+    for app_argument in "${app_arguments[@]}"; do
         process_install_file_by_app
     done
 }
 
 
-# This function generates the command file from the install file and filters by
-# <app>.
+# This function generates the command file from the installation file and
+# filters by <app>.
 function process_install_file_by_app() {
     local app_match=false
     local input_record=''
@@ -275,13 +305,13 @@ function process_install_file_by_app() {
                 # Empty line.
                 continue
                 ;;
-            '#'*'Install app'*" $app_argument "*'on host'* )
+            '#'*$install_app*[[:space:]]"$app_argument"[[:space:]]*$on_host* )
                 # Matching app record.
                 app_match=true
                 no_app_match=false
                 printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*'Install app'*'on host'* )
+            '#'*$install_app*$on_host* | '#'*$remove_app*$from_host* )
                 # Mismatched app record.
                 app_match=false
                 ;;
@@ -292,7 +322,7 @@ function process_install_file_by_app() {
                 fi
                 ;;
         esac
-    done < "$install_file"
+    done < <(cat "$install_file" "$install_file_extra")
 
     if $no_app_match; then
         TEXT=$(eval_gettext "App '\$app_argument' not found")
@@ -301,8 +331,8 @@ function process_install_file_by_app() {
 }
 
 
-# This function generates the command file from the install file and filters by
-# host.
+# This function generates the command file from the installation file and
+# filters by host.
 function process_setup_file_by_host() {
     local host_match=false
     local input_record=''
@@ -313,13 +343,13 @@ function process_setup_file_by_host() {
                 # Empty line.
                 continue
                 ;;
-            '#'*'Install app'*'on host'*'*' | \
-            '#'*'Install app'*'on host'*$HOSTNAME* )
+            '#'*$install_app*$on_host*'*' | \
+            '#'*$install_app*$on_host*$HOSTNAME* )
                 # Matching app record.
                 host_match=true
                 printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*'Install app'*'on host'* )
+            '#'*$install_app*$on_host* | '#'*$remove_app*$from_host* )
                 # Mismatched app record.
                 host_match=false
                 ;;
@@ -330,23 +360,13 @@ function process_setup_file_by_host() {
                 fi
                 ;;
         esac
-    done < "$install_file"
-
-    # Add possible extra install commands for this computer.
-    printf  '\n'                            >> "$command_file"
-    gpg     --import                        \
-            /usr/share/kz/kz-public-key.gpg 2> >($LOGCMD)
-    gpg     --decrypt                       \
-            /usr/bin/kz-install-extra.gpg   \
-            2> >($LOGCMD)                   |
-    grep    "$HOSTNAME"                     >> "$command_file" || true
+    done < <(cat "$install_file" "$install_file_extra")
 }
 
 
 # This function displays the contents of the command file.
 function process_option_cat() {
     less --no-init --quit-if-one-screen "$command_file"
-    rm --verbose "$command_file" |& $LOGCMD
 }
 
 
@@ -356,12 +376,11 @@ function install_apps() {
     local -i app_tot_num=0
 
     app_tot_num=$(
-        grep    --count                         \
-                "#.*'Install app'.*'on host'"   \
-                "$command_file"                 || true
+        grep    --count                     \
+                "#.*$install_app.*$on_host" \
+                "$command_file"             || true
         )
     if [[ $app_tot_num -eq 0 ]]; then
-        rm --verbose "$command_file" |& $LOGCMD
         TEXT=$(gettext 'No commands to execute.' )
         infomsg "$TEXT"
         exit $OK
@@ -387,8 +406,6 @@ function install_apps() {
     else
         process_command_file
     fi
-
-    rm --verbose "$command_file" |& $LOGCMD
 }
 
 
@@ -408,12 +425,12 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '#'*'Install app'*'on host'* )
+            '#'*$install_app*$on_host* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=3
+                    cut --delimiter=' ' --fields=4
                     )
                 (( ++app_seq_num ))
                 cmd_seq_num=0
@@ -459,13 +476,15 @@ function execute_command() {
 
     logmsg "$cmd"
     ERREXIT=false
-    eval "$cmd" &> >($LOGCMD) || FAILED_APPS[$app_name]=$app_name
+    eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
     ERREXIT=true
 }
 
 
 # This function controls the termination of the script.
 function term() {
+    local operation=''
+
     if [[ ${FAILED_APPS[*]} ]]; then
         TEXT="$(gettext "The installation of the following apps contains \
 errors:")
@@ -479,7 +498,13 @@ $(gettext "Try installing the apps again.")"
         exit $ERR
     fi
 
-    TEXT=$(eval_gettext "Apps install completed.")
+    operation=$(gettext 'install')
+
+    if $OPTION_REMOVE; then
+        # shellcheck disable=SC2034
+        operation=$(gettext 'remove')
+    fi
+    TEXT=$(eval_gettext "Apps \$operation completed.")
 
     if $REBOOT; then
         TEXT+="

@@ -22,6 +22,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-restore'
 PROGRAM_DESC=$(gettext 'Restore home folder')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE="$(eval_gettext "Usage: kz restore [-g|--gui] [-s|--source <directory>]
                   \$OPTIONS_USAGE")"
@@ -50,19 +51,23 @@ readonly X_OPTIONS_LONG=',gui,source:'
 
 
 ###############################################################################
+# Globals
+###############################################################################
+
+declare SOURCE_MEDIUM=''
+declare -i RESTORE_RC=0
+
+
+###############################################################################
 # Functions
 ###############################################################################
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g MEDIUM=''
-    local -g OPTION_SOURCE=false
-    local -g SOURCE_ARGUMENT=''
-    local -g SOURCE_MEDIUM=''
-    local -g SOURCE=''
+    local medium=''
+    local option_source=false
+    local source_argument=''
+    local source=''
 
     check_input "$@"
     check_source
@@ -109,14 +114,14 @@ $USAGE"
                 shift
                 ;;
             -s | --source )
-                if $OPTION_SOURCE; then
+                if $option_source; then
                     TEXT="kz restore: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
                 fi
-                OPTION_SOURCE=true
-                SOURCE_ARGUMENT=$2
+                option_source=true
+                source_argument=$2
                 shift 2
                 ;;
             -- )
@@ -146,22 +151,22 @@ function check_source() {
         usb_mount_point="/run/media/$USER"
     fi
 
-    if $OPTION_SOURCE; then
+    if $option_source; then
 
-        if ! [[ -d $SOURCE_ARGUMENT ]]; then
-            TEXT="kz restore: $SOURCE_ARGUMENT: \
+        if ! [[ -d $source_argument ]]; then
+            TEXT="kz restore: $source_argument: \
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"
             exit $ERR
         fi
 
-        SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
-        SOURCE_MEDIUM=$SOURCE_ARGUMENT
+        source=$source_argument/$USER@$HOSTNAME
+        SOURCE_MEDIUM=$source_argument
     else
-        MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+        medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
-        if ! [[ $MEDIUM ]]; then
+        if ! [[ $medium ]]; then
             TEXT=$(gettext "No USB medium found.
 
 Connect a USB medium.")
@@ -169,39 +174,39 @@ Connect a USB medium.")
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+            medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
-            if ! [[ $MEDIUM ]]; then
+            if ! [[ $medium ]]; then
                 errmsg "$TEXT"
                 exit $ERR
             fi
         fi
 
-        MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+        medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
-        if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             TEXT="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
-\$MEDIUM
+\$medium
 
 Disconnect media via Files.")"
             infomsg "$TEXT"
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+            medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
-            if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 errmsg "$TEXT"
                 exit $ERR
             fi
         fi
 
-        SOURCE=$MEDIUM/Backups/$USER@$HOSTNAME
-        SOURCE_MEDIUM=$MEDIUM
+        source=$medium/Backups/$USER@$HOSTNAME
+        SOURCE_MEDIUM=$medium
 
-        if ! [[ -d $SOURCE ]]; then
+        if ! [[ -d $source ]]; then
             TEXT=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
@@ -215,7 +220,6 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 # This function restores the backup.
 function restore_backup() {
     local title=''
-    local -i restore_rc=0
 
     title=$(gettext 'Restore home folder')
     TEXT=$(gettext 'Preparing restore (this can take a while)')
@@ -226,9 +230,9 @@ function restore_backup() {
                 --acls                  \
                 --xattrs                \
                 --verbose               \
-                "$SOURCE"/              \
+                "$source"/              \
                 "$HOME"/                \
-                2> >($LOGCMD)           |
+                2> >($PROGRAM_LOGS)           |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -237,7 +241,7 @@ function restore_backup() {
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$TEXT"     2> /dev/null || restore_rc=$?
+                --text      "$TEXT"     2> /dev/null || RESTORE_RC=$?
     else
         TEXT+='...'
         infomsg "$TEXT"
@@ -246,23 +250,8 @@ function restore_backup() {
                 --xattrs                \
                 --verbose               \
                 --human-readable        \
-                "$SOURCE"/              \
-                "$HOME"/                2> /dev/null || restore_rc=$?
-    fi
-
-    if [[ $restore_rc -ne $OK ]]; then
-        TEXT="$(eval_gettext "Restore ended with warnings or errors.
-
-Some files may not be readable, or
-were any files added or removed while restoring the backup, or
-is there not enough space on \$HOME.")
-
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
-view log messages.")
-
-$(gettext "Try restoring the back up again.")"
-        errmsg "$TEXT"
-        exit $ERR
+                "$source"/              \
+                "$HOME"/                2> /dev/null || RESTORE_RC=$?
     fi
 }
 
@@ -297,6 +286,21 @@ function restore_setting_desktop() {
 function term() {
     local users=''
     local -i num_users=0
+
+    if [[ $RESTORE_RC -ne $OK ]]; then
+        TEXT="$(eval_gettext "Restore ended with warnings or errors.
+
+Some files may not be readable, or
+were any files added or removed while restoring the backup, or
+is there not enough space on \$HOME.")
+
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
+view log messages.")
+
+$(gettext "Try restoring the back up again.")"
+        errmsg "$TEXT"
+        exit $ERR
+    fi
 
     num_users=$(find /home/* -prune -print | wc --lines)
 
@@ -379,9 +383,9 @@ function term_usb() {
 
 # This function unmounts the USB device.
 function term_unmount() {
-    umount "$SOURCE_MEDIUM"                         |& $LOGCMD || RC+=$?
-    udisksctl lock --block-device "$device"         |& $LOGCMD || RC+=$?
-    udisksctl power-off --block-device "$device"    |& $LOGCMD || RC+=$?
+    umount "$SOURCE_MEDIUM"                         |& $PROGRAM_LOGS || RC+=$?
+    udisksctl lock --block-device "$device"         |& $PROGRAM_LOGS || RC+=$?
+    udisksctl power-off --block-device "$device"    |& $PROGRAM_LOGS || RC+=$?
 }
 
 

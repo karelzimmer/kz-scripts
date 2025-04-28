@@ -22,7 +22,16 @@ source /usr/bin/gettext.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-get'
-readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+
+
+###############################################################################
+# Globals
+###############################################################################
+
+declare KZ_GET_PID_FILE=''
+declare OPTION_DEV=false
+declare TEXT=''
 
 
 ###############################################################################
@@ -31,13 +40,6 @@ readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
 
 # This function performs initial actions.
 function init() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g KZ_GET_PID_FILE=''
-    local -g OPTION_DEV=false
-    local -g TEXT=''
-
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -130,7 +132,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     fi
 
     wget    --output-document="$kz_deb_local_file"  \
-            "$kz_deb_site_file"                     |& $LOGCMD
+            "$kz_deb_site_file"                     |& $PROGRAM_LOGS
 
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -138,9 +140,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --allow-downgrades              \
             --reinstall                     \
             --assume-yes                    \
-            "$kz_deb_local_file"            |& $LOGCMD
-
-    rm --verbose "$kz_deb_local_file" |& $LOGCMD
+            "$kz_deb_local_file"            |& $PROGRAM_LOGS
 }
 
 
@@ -163,7 +163,7 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
         kz_rpm_site_file=$kz_rpm_prd_site_file
     fi
 
-    sudo dnf $mode --assumeyes "$kz_rpm_site_file" |& $LOGCMD
+    sudo dnf $mode --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
 }
 
 
@@ -173,7 +173,7 @@ function term() {
     local normal='\033[0m'
 
     # Progress indicator ends like [====]100%.
-    rm --verbose "$KZ_GET_PID_FILE" |& $LOGCMD
+    rm --verbose "$KZ_GET_PID_FILE" |& $PROGRAM_LOGS
     printf '\b%s\n' '=]100%'
 
     if $OPTION_DEV; then

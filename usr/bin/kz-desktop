@@ -22,6 +22,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-desktop'
 PROGRAM_DESC=$(gettext 'Change desktop environment')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE="$(eval_gettext "Usage: kz desktop [-a|--addaft <favorite>] \
 [-b|--addbef <favorite>]
@@ -56,43 +57,45 @@ readonly X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
 
 ###############################################################################
+# Globals
+###############################################################################
+
+
+###############################################################################
 # Functions
 ###############################################################################
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g FAVORITE_ARGUMENT=''
-    local -g OPTION_ADDAFT=false
-    local -g OPTION_ADDBEF=false
-    local -g OPTION_DELETE=false
-    local -g OPTION_LIST=false
-    local -g OPTION_RESET=false
-
+    local desktopfile=''
     local favorite_apps=''
+    local favorite_argument=''
+    local option_addaft=false
+    local option_addbef=false
+    local option_delete=false
+    local option_list=false
+    local option_reset=false
 
     check_input "$@"
-    if ! gsettings list-keys org.gnome.shell |& $LOGCMD; then
+    if ! gsettings list-keys org.gnome.shell |& $PROGRAM_LOGS; then
         TEXT=$(gettext "No such schema 'org.gnome.shell'.")
         infomsg "$TEXT"
         exit $OK
     else
         favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
-        DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
+        desktopfile=$favorite_argument.desktop
     fi
 
-    if $OPTION_ADDAFT; then
-        process_OPTION_ADDAFT
-    elif $OPTION_ADDBEF; then
-        process_OPTION_ADDBEF
-    elif $OPTION_DELETE; then
-        process_OPTION_DELETE
-    elif $OPTION_LIST; then
-        process_OPTION_LIST
-    elif $OPTION_RESET; then
-        process_OPTION_RESET
+    if $option_addaft; then
+        process_option_addaft
+    elif $option_addbef; then
+        process_option_addbef
+    elif $option_delete; then
+        process_option_delete
+    elif $option_list; then
+        process_option_list
+    elif $option_reset; then
+        process_option_reset
     else
         capture_gnome_changes
     fi
@@ -126,44 +129,44 @@ function process_x_options() {
     while true; do
         case $1 in
             -a | --addaft )
-                if $OPTION_ADDAFT; then
+                if $option_addaft; then
                     TEXT="kz desktop: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
                 fi
-                OPTION_ADDAFT=true
-                FAVORITE_ARGUMENT=$2
+                option_addaft=true
+                favorite_argument=$2
                 shift 2
                 ;;
             -b | --addbef )
-                if $OPTION_ADDBEF; then
+                if $option_addbef; then
                     TEXT="kz desktop: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
                 fi
-                OPTION_ADDBEF=true
-                FAVORITE_ARGUMENT=$2
+                option_addbef=true
+                favorite_argument=$2
                 shift 2
                 ;;
             -d | --delete )
-                if $OPTION_DELETE; then
+                if $option_delete; then
                     TEXT="kz desktop: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
                 fi
-                OPTION_DELETE=true
-                FAVORITE_ARGUMENT=$2
+                option_delete=true
+                favorite_argument=$2
                 shift 2
                 ;;
             -l | --list )
-                OPTION_LIST=true
+                option_list=true
                 shift
                 ;;
             -r | --reset )
-                OPTION_RESET=true
+                option_reset=true
                 shift
                 ;;
             -- )
@@ -193,26 +196,26 @@ $USAGE"
 
 
 # This function adds a favorite to the end of the dash/dock.
-function process_OPTION_ADDAFT () {
+function process_option_addaft () {
     if [[ $favorite_apps = '@as []' ]]; then
-        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet "$DESKTOPFILE"
+        gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"
     then
         gsettings set org.gnome.shell favorite-apps "$(
             printf '%s' "$favorite_apps" |
             cut --delimiter=']' --fields=1
-            ), '$DESKTOPFILE']"
+            ), '$desktopfile']"
     fi
 }
 
 
 # This function adds a favorite to the beginning of the dash/dock.
-function process_OPTION_ADDBEF () {
+function process_option_addbef () {
     if [[ $favorite_apps = '@as []' ]]; then
-        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet "$DESKTOPFILE"
+        gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"
     then
-        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE', $(
+        gsettings set org.gnome.shell favorite-apps "['$desktopfile', $(
                 printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
                 )"
     fi
@@ -220,23 +223,23 @@ function process_OPTION_ADDBEF () {
 
 
 # This function removes a favorite from the dash/dock.
-function process_OPTION_DELETE () {
+function process_option_delete () {
     if [[ $favorite_apps = '@as []' ]]; then
         :
-    elif [[ $favorite_apps = [$DESKTOPFILE] ]]; then
+    elif [[ $favorite_apps = [$desktopfile] ]]; then
         gsettings set org.gnome.shell favorite-apps "[]"
     else
         gsettings set org.gnome.shell favorite-apps "$(
             printf  '%s' "$favorite_apps"                   |
-            sed     --expression="s/'$DESKTOPFILE', //g"    |
-            sed     --expression="s/, '$DESKTOPFILE'//"
+            sed     --expression="s/'$desktopfile', //g"    |
+            sed     --expression="s/, '$desktopfile'//"
         )"
     fi
 }
 
 
 # This feature lists the favorite apps in the dash/dock.
-function process_OPTION_LIST () {
+function process_option_list () {
     TEXT="$(gettext 'Favorite apps:')
 $(gsettings get org.gnome.shell favorite-apps)"
     infomsg "$TEXT"
@@ -244,7 +247,7 @@ $(gsettings get org.gnome.shell favorite-apps)"
 
 
 # This function resets the favorites to the factory settings.
-function process_OPTION_RESET () {
+function process_option_reset () {
     gsettings reset org.gnome.shell favorite-apps
 }
 
@@ -266,8 +269,6 @@ function capture_gnome_changes() {
     save_configuration_database B "$config_b_file"
 
     report_database_changes "$config_a_file" "$config_b_file"
-
-    rm --verbose "$config_a_file" "$config_b_file" |& $LOGCMD
 }
 
 

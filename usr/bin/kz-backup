@@ -22,6 +22,7 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-backup'
 PROGRAM_DESC=$(gettext 'Backup home folder')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE="$(eval_gettext "Usage: kz backup [-g|--gui] [-t|--target <directory>]
                  \$OPTIONS_USAGE")"
@@ -50,19 +51,23 @@ readonly X_OPTIONS_LONG=',gui,target:'
 
 
 ###############################################################################
+# Globals
+###############################################################################
+
+declare TARGET_MEDIUM=''
+declare TARGET=''
+declare -i BACKUP_RC=0
+
+
+###############################################################################
 # Functions
 ###############################################################################
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    ###########################################################################
-    # Global variables
-    ###########################################################################
-    local -g MEDIUM=''
-    local -g TARGET=''
-    local -g TARGET_MEDIUM=''
-    local -g OPTION_TARGET=false
-    local -g TARGET_ARGUMENT=''
+    local medium=''
+    local option_target=false
+    local target_argument=''
 
     check_input "$@"
     check_target
@@ -109,14 +114,14 @@ $USAGE"
                 shift
                 ;;
             -t | --target )
-                if $OPTION_TARGET; then
+                if $option_target; then
                     TEXT="kz backup: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
                 fi
-                OPTION_TARGET=true
-                TARGET_ARGUMENT=$2
+                option_target=true
+                target_argument=$2
                 shift 2
                 ;;
             -- )
@@ -146,63 +151,63 @@ function check_target() {
         usb_mount_point="/run/media/$USER"
     fi
 
-    if $OPTION_TARGET; then
+    if $option_target; then
 
-        if ! [[ -d $TARGET_ARGUMENT ]]; then
-            TEXT="kz backup: $TARGET_ARGUMENT: \
+        if ! [[ -d $target_argument ]]; then
+            TEXT="kz backup: $target_argument: \
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"
             exit $ERR
         fi
 
-        TARGET=$TARGET_ARGUMENT/$USER@$HOSTNAME
-        TARGET_MEDIUM=$TARGET_ARGUMENT
+        TARGET=$target_argument/$USER@$HOSTNAME
+        TARGET_MEDIUM=$target_argument
     else
 
-        MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+        medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
-        if ! [[ $MEDIUM ]]; then
+        if ! [[ $medium ]]; then
             TEXT=$(gettext "No USB medium found.
 
 Connect a USB medium.")
             infomsg "$TEXT"
 
             $OPTION_GUI || wait_for_enter
-            MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+            medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
-            if ! [[ $MEDIUM ]]; then
+            if ! [[ $medium ]]; then
                 errmsg "$TEXT"
                 exit $ERR
             fi
         fi
 
-        MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+        medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
-        if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             TEXT="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
-\$MEDIUM
+\$medium
 
 Disconnect media via Files.")"
             infomsg "$TEXT"
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+            medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
-            if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 errmsg "$TEXT"
                 exit $ERR
             fi
         fi
 
-        TARGET=$MEDIUM/Backups/$USER@$HOSTNAME
+        TARGET=$medium/Backups/$USER@$HOSTNAME
 
-        [[ -d $MEDIUM/Backups ]] ||
-            mkdir --mode=a=rwx --verbose "$MEDIUM/Backups" |& $LOGCMD
-        TARGET_MEDIUM=$MEDIUM
+        [[ -d $medium/Backups ]] ||
+            mkdir --mode=a=rwx --verbose "$medium/Backups" |& $PROGRAM_LOGS
+        TARGET_MEDIUM=$medium
     fi
 
     if [[ -e $TARGET_MEDIUM/backup-$HOSTNAME-$USER ]]; then
@@ -221,7 +226,7 @@ Please rename to:           <username>@<hostname>")"
         exit $ERR
     fi
 
-    if [[ -e $MEDIUM/$USER@$HOSTNAME ]]; then
+    if [[ -e $medium/$USER@$HOSTNAME ]]; then
         TEXT="$(gettext "Backup found in wrong place: \
 <medium>/<username>@<hostname>
 Please move to:              <medium>/Backups/")"
@@ -239,7 +244,7 @@ function backup_settings() {
 
     settings_dir=$HOME/$(gettext 'Settings')
     if ! [[ -d $settings_dir ]]; then
-        mkdir --verbose "$settings_dir" |& $LOGCMD
+        mkdir --verbose "$settings_dir" |& $PROGRAM_LOGS
     fi
 
     backup_setting_readme
@@ -254,7 +259,7 @@ function backup_settings() {
     fi
 
     # Remove previous version of settings folder.
-    rm --force --recursive --verbose "$HOME/kz-backup" |& $LOGCMD
+    rm --force --recursive --verbose "$HOME/kz-backup" |& $PROGRAM_LOGS
 }
 
 
@@ -386,7 +391,7 @@ function backup_setting_avatar() {
 
     if [[ -f $input_file ]]; then
         logmsg 'Copy the user avatar...'
-        cp --verbose "$input_file" "$output_file_1" |& $LOGCMD
+        cp --verbose "$input_file" "$output_file_1" |& $PROGRAM_LOGS
     fi
     logmsg 'Save instructions for restoring the avatar...'
     TEXT="$(gettext "To set the users avatar:
@@ -423,7 +428,7 @@ function backup_setting_desktop() {
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
     if [[ -f $input_file && $input_file != *.xml ]]; then
         logmsg 'Copy the desktop background...'
-        cp "$input_file" "$output_file_1" |& $LOGCMD || true
+        cp "$input_file" "$output_file_1" |& $PROGRAM_LOGS || true
     fi
 
     logmsg 'Save instructions for setting the desktop background...'
@@ -447,7 +452,8 @@ function backup_setting_favs() {
 
     logmsg 'Save the favorite apps...'
     gsettings get                           \
-              org.gnome.shell favorite-apps > "$output_file" |& $LOGCMD || true
+              org.gnome.shell favorite-apps \
+              > "$output_file"              |& $PROGRAM_LOGS || true
 }
 
 
@@ -455,7 +461,6 @@ function backup_setting_favs() {
 function create_backup() {
     local exclude_file=''
     local title=''
-    local -i backup_rc=0
 
     exclude_file=$(mktemp -t "$PROGRAM_NAME-excludes-XXXXXXXXXX")
 
@@ -487,7 +492,7 @@ EOF
                 --delete-excluded               \
                 "$HOME"/                        \
                 "$TARGET"/                      \
-                2> >($LOGCMD)                   |
+                2> >($PROGRAM_LOGS)                   |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
                 --auto-close                    \
@@ -496,7 +501,7 @@ EOF
                 --width     600                 \
                 --height    50                  \
                 --title     "$title"            \
-                --text      "$TEXT"             2> /dev/null || backup_rc=$?
+                --text      "$TEXT"             2> /dev/null || BACKUP_RC=$?
     else
         TEXT+='...'
         infomsg "$TEXT"
@@ -509,13 +514,10 @@ EOF
                 --exclude-from="$exclude_file"  \
                 --delete-excluded               \
                 "$HOME"/                        \
-                "$TARGET"/                      2> /dev/null || backup_rc=$?
+                "$TARGET"/                      2> /dev/null || BACKUP_RC=$?
     fi
 
-    rm --verbose "$exclude_file" |& $LOGCMD
-
     TEXT=$(gettext "Writing data from memory (this may take a while)")
-
     if $OPTION_GUI; then
         logmsg "$TEXT..."
         sync                            |
@@ -526,14 +528,21 @@ EOF
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$TEXT"     &> >($LOGCMD)
+                --text      "$TEXT"     &> >($PROGRAM_LOGS)
     else
         TEXT+='...'
         infomsg "$TEXT"
-        sync |& $LOGCMD
+        sync |& $PROGRAM_LOGS
     fi
+}
 
-    if [[ $backup_rc -ne $OK ]]; then
+
+# This function controls the termination of the script.
+function term() {
+    local users=''
+    local -i num_users=0
+
+    if [[ $BACKUP_RC -ne $OK ]]; then
         TEXT="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable, or
@@ -547,13 +556,6 @@ $(gettext "Try creating the back up again.")"
         errmsg "$TEXT"
         exit $ERR
     fi
-}
-
-
-# This function controls the termination of the script.
-function term() {
-    local users=''
-    local -i num_users=0
 
     users=$(
         gettext 'USERNAME|USERID|USER'
@@ -636,9 +638,9 @@ function term_usb() {
 
 # This function unmounts the USB device.
 function term_unmount() {
-    umount "$TARGET_MEDIUM"                         |& $LOGCMD || RC+=$?
-    udisksctl lock --block-device "$device"         |& $LOGCMD || RC+=$?
-    udisksctl power-off --block-device "$device"    |& $LOGCMD || RC+=$?
+    umount "$TARGET_MEDIUM"                         |& $PROGRAM_LOGS || RC+=$?
+    udisksctl lock --block-device "$device"         |& $PROGRAM_LOGS || RC+=$?
+    udisksctl power-off --block-device "$device"    |& $PROGRAM_LOGS || RC+=$?
 }
 
 

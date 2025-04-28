@@ -59,6 +59,17 @@ T{
 T}:T{
 Lege regel (geen, één of meer)
 T}
+T{
+# Remove app \fI<app>\fR from host <host>...
+T}:T{
+De app \fI<app>\fR verwijderen van host <host>s (\fBApp-regel\fR voor optie
+\fB-r\fR, \fB--remove\fR)
+T}
+T{
+Opdracht
+T}:T{
+Verwijder-opdracht (één of meer \fBOpdracht-regels\fR)
+T}
 .TE
 .LP
 .B Tabel 2. Voorbeeld van regels en hun verwerking
@@ -81,6 +92,18 @@ Installeer app gnome-gmail op iedere computer, zie [1]
 T}
 T{
 sudo apt-get install --assume-yes gnome-gmail
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# Remove app gnome-gmail from host *
+T}:T{
+Verwijder app gnome-gmail van iedere computer, zie [1]
+T}
+T{
+sudo apt-get remove --purge --assume-yes gnome-gmail
 T}:T{
 T}
 T{
