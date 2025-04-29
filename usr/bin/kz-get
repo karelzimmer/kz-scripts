@@ -26,8 +26,8 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
 
-USAGE="$(gettext "Usage: getkz [<options>]")
-$(gettext "       kz get [<options>]")
+USAGE="$(gettext "Usage: kz get [<options>]")
+$(gettext "       wget karelzimmer.nl/getkz; bash getkz [<options>]")
 
 $PROGRAM_DESC.
 
