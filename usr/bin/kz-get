@@ -23,7 +23,16 @@ source /usr/bin/gettext.sh
 
 readonly PROGRAM_NAME='kz-get'
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
+readonly PROGRAM_DESC
 
+USAGE="$(gettext "Usage: getkz [<options>]")
+$(gettext "       kz get [<options>]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$(gettext '  -d, --dev      use the development version of kz')"
 
 ###############################################################################
 # Globals
@@ -83,12 +92,14 @@ function check_input() {
             exit 0
             ;;
         -* )
-            TEXT="kz get: $*: $(gettext 'only option -d or --dev is allowed')"
+            TEXT="kz get: $*: $(gettext 'only option -d or --dev is allowed')
+$USAGE"
             printf '%s\n' "$TEXT" >&2
             exit 1
             ;;
         * )
-            TEXT="kz get: $*: $(gettext 'arguments are not allowed')"
+            TEXT="kz get: $*: $(gettext 'arguments are not allowed')
+$USAGE"
             printf '%s\n' "$TEXT" >&2
             exit 1
             ;;
