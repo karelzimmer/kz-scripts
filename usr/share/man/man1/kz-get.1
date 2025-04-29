@@ -14,6 +14,8 @@ kz-get - Download and install Debian or RPM package kz
 .SY kz\ get
 [<options>]
 .YS
+.SY wget\ karelzimmer.nl/getkz;\ bash\ getkz
+.YS
 
 .SH DESCRIPTION
 \fBkz get\fR downloads and installs Debian or RPM package kz.
@@ -73,12 +75,12 @@ Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
 
 .SH FILES
-/tmp/kz-get.deb-XXXXXXXXXX
+/tmp/kz-get-XXXXXXXXXX.deb
 .RS
-Downloaded debian file, e.g. kz-get.deb-AEOzIjJyie.
+Downloaded debian file, e.g. kz-get-AEOzIjJyie.deb.
 .RE
 .sp
-/tmp/kz-get.pid-XXXXXXXXXX
+/tmp/kz-get-XXXXXXXXXX.pid
 .RS
 PID-file, e.g. kz-get.pid-Tyx5KJaqtV.
 .RE
