@@ -218,6 +218,10 @@ $USAGE"
                 reset_app='Setup app'
                 shift
                 ;;
+            -- )
+                shift
+                break
+                ;;
             * )
                 shift
                 ;;
