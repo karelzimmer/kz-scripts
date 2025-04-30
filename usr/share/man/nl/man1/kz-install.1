@@ -12,7 +12,7 @@ kz-install - Apps installeren
 
 .SH SAMENVATTING
 .SY kz\ install
-[<opties>] [--] [\fI<app>\fR...]
+[<opties>] [\fI<app>\fR...]
 .YS
 
 .SH BESCHRIJVING
@@ -73,9 +73,6 @@ uitgevoerd. Een desktopomgeving is vereist.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .sp
-Een -- signaleert het einde van opties en schakelt verdere verwerking van
-opties uit.
-.sp
 Om een app te verwijderen, op een Debian-gebaseerd systeem gebruik:
     sudo apt-get remove --purge --assume-yes <app>
 .br
@@ -94,9 +91,6 @@ Op een Red Hat-gebaseerd systeem probeer het volgende:
 
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
-.TP
-\fI<app>\fR...
-Installeer de opgegeven apps.
 .TP
 \fB-a\fR, \fB--apps\fR
 Toon een lijst van te installeren apps.
@@ -128,9 +122,6 @@ Toon de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur, en het auteursrecht.
-.TP
-\fB--\fR
-Signaleert het einde van opties en schakelt verdere verwerking van opties uit.
 
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de

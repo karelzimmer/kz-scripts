@@ -30,12 +30,12 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Run the kz command')
 
-USAGE: str = (f"{_('kz <command> [<arguments>] [-l|--list]')} "
-              f"{kz_common.OPTIONS_USAGE}")
+USAGE: str = (f'kz [-l|--list] {kz_common.OPTIONS_USAGE} '
+              f"{_('<command> [<arguments>]')} ")
 
 X_OPTIONS_HELP: str = f"{_('  -l, --list     show available commands')}"
 
-HELP: str = (f"{_('Usage: kz <arguments> [<options>]')}"
+HELP: str = (f"{_('Usage: kz [<options>] <command> [<arguments>]')}"
              f'\n\n{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
              f'{X_OPTIONS_HELP}\n'
