@@ -196,7 +196,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remov
 # Install app disabled-aer on host pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) to prevent the log gets flooded with
-# 'AER: Corrected errors received'. Usually needed for HP hardware.
+# 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
 sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
@@ -207,7 +207,7 @@ grep 'pci=noaer' /etc/default/grub
 # Enable kernel config parameter PCIEAER.
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) to "allow" the log gets flooded with
-# 'AER: Corrected errors received'. Usually needed for HP hardware.
+# 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
 sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
@@ -599,7 +599,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes ntfs-3
 # $ lsblk
 # NAME                        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
 # sda                           8:0    0 931,5G  0 disk
-# └─sda1                        8:1    0 931,5G  0 part  /media/...
+# +-sda1                        8:1    0 931,5G  0 part  /media/...
 # $ sudo ntfsfix /dev/sdba1     # Fix an NTFS partition
 # $ sudo -b ntfsfix /dev/sdba1  # Clear the bad sector list
 # $ sudo -d ntfsfix /dev/sdba1  # Clear the volume dirty flag
