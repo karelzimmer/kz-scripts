@@ -595,7 +595,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes ntfs-3
 # Usage:
 # $ findmnt (or lsblk)
 # TARGET          SOURCE    FSTYPE OPTIONS
-# /media/...      /dev/sdba ntfs3  rw,nosuid,nodev,relatime,uid=...
+# /media/...      /dev/sda1 ntfs3  rw,nosuid,nodev,relatime,uid=...
 # $ lsblk
 # NAME                        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
 # sda                           8:0    0 931,5G  0 disk
