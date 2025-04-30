@@ -169,10 +169,6 @@ $USAGE"
                 option_reset=true
                 shift
                 ;;
-            -- )
-                shift
-                break
-                ;;
             * )
                 shift
                 ;;

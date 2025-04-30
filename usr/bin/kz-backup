@@ -124,10 +124,6 @@ $USAGE"
                 target_argument=$2
                 shift 2
                 ;;
-            -- )
-                shift
-                break
-                ;;
             * )
                 shift
                 ;;

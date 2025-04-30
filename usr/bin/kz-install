@@ -224,10 +224,6 @@ $USAGE"
                 from_host='on host'
                 shift
                 ;;
-            -- )
-                shift
-                break
-                ;;
             * )
                 shift
                 ;;

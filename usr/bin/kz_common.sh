@@ -276,9 +276,6 @@ function process_options() {
                 process_option_version
                 exit $OK
                 ;;
-            -- )
-                break
-                ;;
             * )
                 shift
                 ;;

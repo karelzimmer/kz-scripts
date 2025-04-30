@@ -142,10 +142,6 @@ $USAGE"
                 OPTION_GUI=true
                 shift
                 ;;
-            -- )
-                shift
-                break
-                ;;
             * )
                 shift
                 ;;

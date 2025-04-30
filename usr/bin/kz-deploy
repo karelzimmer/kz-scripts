@@ -88,10 +88,6 @@ function check_input() {
 function process_x_options() {
     while true; do
         case $1 in
-            -- )
-                shift
-                break
-                ;;
             * )
                 shift
                 ;;
