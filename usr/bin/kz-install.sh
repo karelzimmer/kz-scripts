@@ -140,13 +140,13 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remov
 
 
 # Install app cups on host *
-# Common UNIX Printing System.
+# Common Unix Printing System.
 # Web app: http://localhost:631
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes cups; fi
 
 # Remove app cups from host *
-# Common UNIX Printing System.
+# Common Unix Printing System.
 # Web app: http://localhost:631
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes cups; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes cups; fi
