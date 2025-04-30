@@ -109,7 +109,7 @@ $USAGE"
 
 # This function prepares further processing.
 function prepare_processing() {
-    local -i sleep=1
+    local sleep=.5
 
     sudo true
 

@@ -122,7 +122,7 @@ function become_root_check() {
 # This function checks for another running package manager and waits for the
 # next check if so.
 function check_package_manager() {
-    local -i sleep=10
+    local -i sleep=5
 
     if grep --quiet rhel /etc/os-release; then
         return $OK
