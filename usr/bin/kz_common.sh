@@ -442,7 +442,9 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             # Clean up temporary files.
             TEXT='Cleaning up temporary files...'
             logmsg "$TEXT"
-            rm --verbose --force /tmp/"$PROGRAM_NAME"* |& $PROGRAM_LOGS || true
+            rm  --verbose   \
+                --force     \
+                /tmp/"$PROGRAM_NAME-"*??????????* |& $PROGRAM_LOGS || true
             TEXT="Ended (code=exited, status=$status).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"
