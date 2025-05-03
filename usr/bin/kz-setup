@@ -27,7 +27,7 @@ readonly PROGRAM_DESC
 USAGE=$(eval_gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
                 [-f|--file <file>] [-g|--gui] [-r|--reset]
                 \$OPTIONS_USAGE
-                [--] [<app>...]")
+                [<app>...]")
 readonly USAGE
 
 X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
@@ -55,8 +55,9 @@ $(gettext 'Arguments:')
 $(gettext '  <app>...       set up specified apps')"
 readonly HELP
 
-readonly X_OPTIONS_SHORT='abcf:gr'
-readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,reset'
+readonly OPTIONS_SHORT='abcf:grhmuv'
+readonly OPTIONS_LONG="apps,browse,cat,file:,gui,reset,help,manual,usage,\
+version"
 
 readonly ON_HOST='on host'
 
@@ -152,30 +153,30 @@ EOF
 }
 
 
-# This function handles the options and arguments.
+# This function checks the script input.
 function check_input() {
     local parsed=''
+    local program_name=${PROGRAM_NAME/kz-/kz }
 
-    parsed=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "kz setup"                     \
-                --              "$@"
-        ) || RC=$?
+    parsed=$(getopt --alternative                       \
+                    --options       "$OPTIONS_SHORT"    \
+                    --longoptions   "$OPTIONS_LONG"     \
+                    --name          "$program_name"     \
+                    --              "$@")               || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
         exit $ERR
     fi
     eval set -- "$parsed"
 
-    process_options   "$@"
-    process_x_options "$@"
+    process_options "$@"
 }
 
 
 # This function handles the script options and arguments.
-function process_x_options() {
+function process_options() {
+    local program_name=${PROGRAM_NAME/kz-/kz }
+
     while true; do
         case $1 in
             -a | --apps )
@@ -192,7 +193,7 @@ function process_x_options() {
                 ;;
             -f | --file )
                 if $option_file; then
-                    TEXT="kz setup: $1 $2: $(gettext 'too many options')
+                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -203,8 +204,8 @@ $USAGE"
                 ;;
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
-                    TEXT=\
-"kz setup: $1: $(gettext 'no desktop environment available')
+                    TEXT="$program_name: $1: \
+$(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -217,6 +218,22 @@ $USAGE"
                 setup_app='Reset app'
                 reset_app='Setup app'
                 shift
+                ;;
+            -h | --help )
+                process_option_help
+                exit $OK
+                ;;
+            -m | --manual )
+                process_option_manual
+                exit $OK
+                ;;
+            -u | --usage )
+                process_option_usage
+                exit $OK
+                ;;
+            -v | --version )
+                process_option_version
+                exit $OK
                 ;;
             -- )
                 shift
@@ -237,8 +254,6 @@ $USAGE"
         done
     fi
 }
-
-
 
 
 # This function browses through the setup file.

@@ -11,7 +11,7 @@
 # Imports
 ###############################################################################
 
-import argparse
+import getopt
 import gettext
 import kz_common
 import os
@@ -33,16 +33,19 @@ PROGRAM_DESC: str = _('Run the kz command')
 USAGE: str = (f'kz [-l|--list] {kz_common.OPTIONS_USAGE} '
               f"{_('<command> [<arguments>]')} ")
 
-X_OPTIONS_HELP: str = f"{_('  -l, --list     show available commands')}"
+OPTIONS_HELP: str = f"{_('  -l, --list     show available commands')}"
 
 HELP: str = (f"{_('Usage: kz [<options>] <command> [<arguments>]')}"
              f'\n\n{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
-             f'{X_OPTIONS_HELP}\n'
+             f'{OPTIONS_HELP}\n'
              f'{kz_common.OPTIONS_HELP}\n\n'
              f"{_('Arguments:')}\n"
              f"{_('  <command>      execute command')}\n"
              f"{_('  <arguments>    arguments for command')}")
+
+OPTIONS_SHORT: str = 'hmuvl'
+OPTIONS_LONG: list = ['help', 'manual', 'usage', 'version', 'list']
 
 
 ###############################################################################
@@ -59,6 +62,7 @@ def process() -> None:
     This function performs the script actions, such as checking the input.
     """
     arg_num: int = 0
+    exc: str = ''
     exec: str = '/usr/bin/kz'
 
     for arg_num in range(len(sys.argv)):
@@ -67,9 +71,7 @@ def process() -> None:
         if arg_num == 1:
             # Check if the option for kz is specified.
             if sys.argv[arg_num].startswith('-'):
-                kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE,
-                                          HELP)
-                process_x_options()
+                process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
                 term()
             else:
                 # Build kz-<command> and check if kz-<command> exists.
@@ -78,16 +80,16 @@ def process() -> None:
                     TEXT = f'kz: {sys.argv[arg_num]}: '
                     TEXT += f"{_('command does not exist')}\n"
                     TEXT += f"{_('Usage:')} {USAGE}"
-                    print(TEXT)
+                    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
                     kz_common.term(PROGRAM_NAME, kz_common.ERR)
         else:
             # Build kz-<command> <arguments>...
             exec += ' ' + sys.argv[arg_num]
 
     if exec == '/usr/bin/kz':
-        TEXT = f"kz: {_('command is required')}\n"
+        TEXT = f"{PROGRAM_NAME}: {_('command is required')}\n"
         TEXT += f"{_('Usage:')} {USAGE}"
-        print(TEXT)
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
         TEXT = f'Restart (exec {exec}...)'
@@ -108,25 +110,46 @@ def process() -> None:
             term()
 
 
-def process_x_options() -> None:
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                    HELP: str) -> None:
     """
     This function handles the script options and arguments.
     """
-    args = None
-    parser = None
-
-    parser = argparse.ArgumentParser(prog='kz', usage=USAGE,
-                                     add_help=False)
-
-    parser.add_argument('-l', '--list', action='store_true')
+    args: list = []
+    err: str = ''
+    opt: str = ''
+    opts: list = []
+    program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
     try:
-        args = parser.parse_args()
-    except Exception:
+        opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
+                                       OPTIONS_LONG)
+    except getopt.error as err:
+        TEXT = f'{program_name}: {err}\n'
+        TEXT += f"{_('Usage:')} {USAGE}"
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
-    if args.list:  # type: ignore
-        process_option_list()
+    for opt, arg in opts:
+        if opt in ('-l', '--list'):
+            process_option_list()
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-h', '--help'):
+            kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-m', '--manual'):
+            kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-u', '--usage'):
+            kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-v', '--version'):
+            kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+
+    if args:
+        # Check for arguments N/A for this script, is handled earlier.
+        None
 
 
 def process_option_list() -> None:
@@ -158,9 +181,7 @@ def process_option_list() -> None:
         TEXT += '  0  ' + _('Use "man kz" for available commands.') + '\n'
 
     TEXT += '\n' + _('Use "kz <command> [<arguments>]" to execute a command.')
-    print(TEXT)
-
-    term()
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
 def term() -> None:

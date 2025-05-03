@@ -11,10 +11,11 @@
 # Imports
 ###############################################################################
 
-import argparse
+import getopt
 import gettext
 import kz_common
 import subprocess
+import sys
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -35,6 +36,11 @@ HELP: str = (f"{_('Usage: kz update [<options>]')}\n\n"
              f"{_('Options:')}\n"
              f'{kz_common.OPTIONS_HELP}')
 
+OPTIONS_SHORT: str = 'hmuv'
+OPTIONS_LONG: list = ['help', 'manual', 'usage', 'version']
+
+BOLD: str = '\033[1m'
+
 
 ###############################################################################
 # Globals
@@ -52,8 +58,7 @@ def process() -> None:
     command1: str = "grep --quiet debian /etc/os-release"
     command2: str = "grep --quiet rhel   /etc/os-release"
 
-    kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
-    process_x_options()
+    process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
     kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
 
@@ -73,23 +78,45 @@ def process() -> None:
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
 
-def process_x_options() -> None:
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                    HELP: str) -> None:
     """
     This function handles the script options and arguments.
     """
-    args = None
-    parser = None
-
-    parser = argparse.ArgumentParser(prog='kz update', usage=USAGE,
-                                     add_help=False)
+    args: list = []
+    err: str = ''
+    opt: str = ''
+    opts: list = []
+    program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
     try:
-        args = parser.parse_args()
-    except Exception:
+        opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
+                                       OPTIONS_LONG)
+    except getopt.error as err:
+        TEXT = f'{program_name}: {err}\n'
+        TEXT += f"{_('Usage:')} {USAGE}"
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
+    for opt, arg in opts:
+        if opt in ('-h', '--help'):
+            kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-m', '--manual'):
+            kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-u', '--usage'):
+            kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-v', '--version'):
+            kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+
     if args:
-        None
+        TEXT = f"{program_name}: {args}: {_('arguments are not allowed')}\n"
+        TEXT += f"{_('Usage:')} {USAGE}"
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
 
 def perform_deb_update() -> None:
@@ -163,6 +190,8 @@ def perform_command(command: str = '') -> None:
     """
     This function executes a Bourne-Again SHell command.
     """
+    exc: str = ''
+
     TEXT = f'{kz_common.BOLD}{command}{kz_common.NORMAL}'
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     kz_common.check_package_manager(PROGRAM_NAME, PROGRAM_DESC)

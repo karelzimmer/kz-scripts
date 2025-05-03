@@ -36,17 +36,10 @@ $(gettext '  -v, --version  show program version')"
 # shellcheck disable=SC2034
 readonly OPTIONS_HELP
 
-# shellcheck disable=SC2034
-readonly OPTIONS_SHORT='hmuv'
-# shellcheck disable=SC2034
-readonly OPTIONS_LONG='help,manual,usage,version'
-
 readonly OK=0
 readonly ERR=1
 
 # List NORMAL last here so that -x doesn't bork the display.
-# shellcheck disable=SC2034
-readonly BOLD='\033[1m'
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
@@ -253,37 +246,6 @@ Started ($PROGRAM_NAME $* as $USER)."
 # This function records a message to the log.
 function logmsg() {
     printf '%b\n' "$*" |& $PROGRAM_LOGS
-}
-
-
-# This function handles the common options and arguments.
-function process_options() {
-    while true; do
-        case $1 in
-            -h | --help )
-                process_option_help
-                exit $OK
-                ;;
-            -m | --manual )
-                process_option_manual
-                exit $OK
-                ;;
-            -u | --usage )
-                process_option_usage
-                exit $OK
-                ;;
-            -v | --version )
-                process_option_version
-                exit $OK
-                ;;
-            -- )
-                break
-                ;;
-            * )
-                shift
-                ;;
-        esac
-    done
 }
 
 

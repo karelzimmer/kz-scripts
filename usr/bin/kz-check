@@ -35,6 +35,11 @@ $(gettext 'Options:')
 $OPTIONS_HELP"
 readonly HELP
 
+readonly OPTIONS_SHORT='hmuv'
+readonly OPTIONS_LONG='help,manual,usage,version'
+
+readonly BOLD='\033[1m'
+
 
 ###############################################################################
 # Globals
@@ -137,32 +142,48 @@ function process() {
 }
 
 
-# This function handles the options and arguments.
+# This function checks the script input.
 function check_input() {
     local parsed=''
+    local program_name=${PROGRAM_NAME/kz-/kz }
 
-    parsed=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          'kz check'          \
-                --              "$@"
-        ) || RC=$?
+    parsed=$(getopt --alternative                       \
+                    --options       "$OPTIONS_SHORT"    \
+                    --longoptions   "$OPTIONS_LONG"     \
+                    --name          "$program_name"     \
+                    --              "$@")               || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
         exit $ERR
     fi
     eval set -- "$parsed"
 
-    process_options   "$@"
-    process_x_options "$@"
+    process_options "$@"
 }
 
 
 # This function handles the script options and arguments.
-function process_x_options() {
+function process_options() {
+    local program_name=${PROGRAM_NAME/kz-/kz }
+
     while true; do
         case $1 in
+            -h | --help )
+                process_option_help
+                exit $OK
+                ;;
+            -m | --manual )
+                process_option_manual
+                exit $OK
+                ;;
+            -u | --usage )
+                process_option_usage
+                exit $OK
+                ;;
+            -v | --version )
+                process_option_version
+                exit $OK
+                ;;
             -- )
                 shift
                 break
@@ -174,12 +195,13 @@ function process_x_options() {
     done
 
     if [[ $* ]]; then
-        TEXT="kz check: $*: $(gettext 'arguments are not allowed')
+        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
     fi
 }
+
 
 
 # This function checks the website for missing or not used files.

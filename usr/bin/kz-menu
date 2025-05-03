@@ -39,8 +39,8 @@ $X_OPTIONS_HELP
 $OPTIONS_HELP"
 readonly HELP
 
-readonly X_OPTIONS_SHORT='g'
-readonly X_OPTIONS_LONG=',gui'
+readonly OPTIONS_SHORT='ghmuv'
+readonly OPTIONS_LONG='gui,help,manual,usage,version'
 
 MENU1_TITLE=$(gettext 'Installation menu')
 readonly MENU1_TITLE
@@ -105,42 +105,58 @@ function process() {
 }
 
 
-# This function handles the options and arguments.
+# This function checks the script input.
 function check_input() {
     local parsed=''
+    local program_name=${PROGRAM_NAME/kz-/kz }
 
-    parsed=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "kz menu"                           \
-                --              "$@"
-        ) || RC=$?
+    parsed=$(getopt --alternative                       \
+                    --options       "$OPTIONS_SHORT"    \
+                    --longoptions   "$OPTIONS_LONG"     \
+                    --name          "$program_name"     \
+                    --              "$@")               || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
         exit $ERR
     fi
     eval set -- "$parsed"
 
-    process_options   "$@"
-    process_x_options "$@"
+    process_options "$@"
 }
 
 
 # This function handles the script options and arguments.
-function process_x_options() {
+function process_options() {
+    local program_name=${PROGRAM_NAME/kz-/kz }
+
     while true; do
         case $1 in
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
-                    TEXT=\
-"kz menu: $1: $(gettext 'no desktop environment available')
+                    TEXT="$program_name: $1: \
+$(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
                 fi
                 OPTION_GUI=true
                 shift
+                ;;
+            -h | --help )
+                process_option_help
+                exit $OK
+                ;;
+            -m | --manual )
+                process_option_manual
+                exit $OK
+                ;;
+            -u | --usage )
+                process_option_usage
+                exit $OK
+                ;;
+            -v | --version )
+                process_option_version
+                exit $OK
                 ;;
             -- )
                 shift
@@ -153,7 +169,7 @@ $USAGE"
     done
 
     if [[ $* ]]; then
-        TEXT="kz menu: $*: $(gettext 'arguments are not allowed')
+        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR

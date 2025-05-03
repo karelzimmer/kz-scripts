@@ -11,7 +11,7 @@
 # Imports
 ###############################################################################
 
-import argparse
+import getopt
 import gettext
 import kz_common
 import subprocess
@@ -29,16 +29,19 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz-wifi'
 PROGRAM_DESC: str = _('Show WiFi information')
 
-USAGE: str = f'kz wifi {kz_common.OPTIONS_USAGE} [-g|--gui]'
+USAGE: str = f'kz wifi [-g|--gui] {kz_common.OPTIONS_USAGE}'
 
-X_OPTIONS_HELP: str = f"{_('  -g, --gui      run in graphical mode,')}\n"
-X_OPTIONS_HELP += f"{_('                 requires a desktop environment')}"
+OPTIONS_HELP: str = (f"{_('  -g, --gui      run in graphical mode,')}\n"
+                     f"{_('                 requires a desktop environment')}")
 
 HELP: str = (f"{_('Usage: kz wifi [<options>]')}\n\n"
              f'{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
-             f'{X_OPTIONS_HELP}\n'
+             f'{OPTIONS_HELP}\n'
              f'{kz_common.OPTIONS_HELP}')
+
+OPTIONS_SHORT: str = 'ghmuv'
+OPTIONS_LONG: list = ['gui', 'help', 'manual', 'usage', 'version']
 
 
 ###############################################################################
@@ -57,8 +60,7 @@ def process(OPTION_GUI: bool = False) -> None:
     command: str = 'nmcli device wifi show-password'
     nmcli_output: str = ''
 
-    kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
-    OPTION_GUI = process_x_options()
+    OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
     if not kz_common.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term()
@@ -91,36 +93,48 @@ def process(OPTION_GUI: bool = False) -> None:
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_x_options() -> bool:
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                    HELP: str) -> bool:
     """
     This function handles the script options and arguments.
     """
+    args: list = []
+    err: str = ''
+    opt: str = ''
+    opts: list = []
+    program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     OPTION_GUI: bool = False
-    args = None
-    parser = None
-
-    parser = argparse.ArgumentParser(prog='kz wifi', usage=USAGE,
-                                     add_help=False)
-
-    parser.add_argument('-g', '--gui', action='store_true')
 
     try:
-        args = parser.parse_args()
-    except Exception:
+        opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
+                                       OPTIONS_LONG)
+    except getopt.error as err:
+        TEXT = f'{program_name}: {err}\n'
+        TEXT += f"{_('Usage:')} {USAGE}"
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
-    if args.gui:  # type: ignore
-        if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
-                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                          shell=True).returncode == kz_common.ERR:
-            TEXT = f"kz wifi: {sys.argv[1]}: "
-            TEXT += f"{_('no desktop environment available')}"
-            TEXT += f"\n{_('Usage:')} {USAGE}"
-            OPTION_GUI = False
-            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
-        else:
+    for opt, arg in opts:
+        if opt in ('-g', '--gui'):
             OPTION_GUI = True
+        elif opt in ('-h', '--help'):
+            kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-m', '--manual'):
+            kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-u', '--usage'):
+            kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-v', '--version'):
+            kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+
+    if args:
+        TEXT = f"{program_name}: {args}: {_('arguments are not allowed')}\n"
+        TEXT += f"{_('Usage:')} {USAGE}"
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
     return OPTION_GUI
 

@@ -10,7 +10,6 @@
 # Imports
 ###############################################################################
 
-import argparse
 import gettext
 import os
 import subprocess
@@ -41,7 +40,6 @@ OK: int = 0
 ERR: int = 1
 
 # List NORMAL last here so that Python debugger (pdb) doesn't bork the display.
-BOLD: str = '\033[1m'
 RED: str = '\033[1;31m'
 NORMAL: str = '\033[0m'
 
@@ -73,6 +71,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
     """
+    exc: str = ''
     exec_sudo: str = 'exec sudo '
 
     if not become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
@@ -207,42 +206,6 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
                           f'MESSAGE={TEXT}')
 
 
-def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
-                    HELP: str) -> None:
-    """
-    This function handles the common options and arguments.
-    """
-    args = None
-    parser = None
-    unknown = None
-    program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
-
-    parser = argparse.ArgumentParser(prog=program_name, usage=USAGE,
-                                     add_help=False)
-
-    parser.add_argument('-h', '--help', action='store_true')
-    parser.add_argument('-m', '--manual', action='store_true')
-    parser.add_argument('-u', '--usage', action='store_true')
-    parser.add_argument('-v', '--version', action='store_true')
-
-    args, unknown = parser.parse_known_args()
-
-    if args.help:
-        process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
-        term(PROGRAM_NAME, OK)
-    elif args.manual:
-        process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
-        term(PROGRAM_NAME, OK)
-    elif args.usage:
-        process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
-        term(PROGRAM_NAME, OK)
-    elif args.version:
-        process_option_version(PROGRAM_NAME, PROGRAM_DESC)
-        term(PROGRAM_NAME, OK)
-    elif unknown:
-        None
-
-
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
                         HELP: str) -> None:
     """
@@ -270,6 +233,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     command1: str = f'yelp man:{PROGRAM_NAME}'
     command2: str = f'man --pager=cat {PROGRAM_NAME}'
+    exc: str = ''
 
     if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -313,6 +277,8 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function displays version, author, and license information.
     """
     build_id: str = ''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
+    fnf: str = ''
+    exc: str = ''
 
     try:
         with open('/usr/share/doc/kz/build.id') as fh:
@@ -355,6 +321,8 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function waits for the user to press Enter.
     """
+    exc: str = ''
+
     try:
         TEXT = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
         input(TEXT)

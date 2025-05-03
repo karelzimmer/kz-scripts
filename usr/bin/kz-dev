@@ -11,12 +11,13 @@
 # Imports
 ###############################################################################
 
-import argparse
+import getopt
 import gettext
 import kz_common
 import os
 import subprocess
 import getpass
+import sys
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -37,6 +38,9 @@ HELP: str = (f"{_('Usage: kz dev [<options>]')}\n\n"
              f"{_('Options:')}\n"
              f'{kz_common.OPTIONS_HELP}')
 
+OPTIONS_SHORT: str = 'hmuv'
+OPTIONS_LONG: list = ['help', 'manual', 'usage', 'version']
+
 
 ###############################################################################
 # Globals
@@ -53,8 +57,7 @@ def process() -> None:
     """
     command: str = "grep --quiet debian /etc/os-release"
 
-    kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
-    process_x_options()
+    process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
     kz_common.become_root_check(PROGRAM_NAME, PROGRAM_DESC)
 
@@ -70,23 +73,45 @@ def process() -> None:
     download_website()
 
 
-def process_x_options() -> None:
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                    HELP: str) -> None:
     """
     This function handles the script options and arguments.
     """
-    args = None
-    parser = None
-
-    parser = argparse.ArgumentParser(prog='kz dev', usage=USAGE,
-                                     add_help=False)
+    args: list = []
+    err: str = ''
+    opt: str = ''
+    opts: list = []
+    program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
     try:
-        args = parser.parse_args()
-    except Exception:
+        opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
+                                       OPTIONS_LONG)
+    except getopt.error as err:
+        TEXT = f'{program_name}: {err}\n'
+        TEXT += f"{_('Usage:')} {USAGE}"
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
+    for opt, arg in opts:
+        if opt in ('-h', '--help'):
+            kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-m', '--manual'):
+            kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-u', '--usage'):
+            kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+        elif opt in ('-v', '--version'):
+            kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
+            kz_common.term(PROGRAM_NAME, kz_common.OK)
+
     if args:
-        None
+        TEXT = f"{program_name}: {args}: {_('arguments are not allowed')}\n"
+        TEXT += f"{_('Usage:')} {USAGE}"
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
 
 def check_dependencies() -> None:
@@ -94,6 +119,7 @@ def check_dependencies() -> None:
     This function checks and installs dependencies.
     """
     esc_gettext: str = 'gettext'
+    exc: str = ''
 
     TEXT = _('Check dependencies...')
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
@@ -144,6 +170,7 @@ def pull_repos() -> None:
     This function retrieves the public repos.
     """
     bin_repo: str = f'{os.getenv("HOME")}/bin'
+    exc: str = ''
 
     TEXT = _('Clone repos...')
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)

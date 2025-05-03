@@ -52,9 +52,10 @@ $X_OPTIONS_HELP
 $OPTIONS_HELP"
 readonly HELP
 
-readonly X_OPTIONS_SHORT='a:b:d:lr'
-readonly X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
+readonly OPTIONS_SHORT='a:b:d:lrhmuv'
+readonly OPTIONS_LONG="addaft:,addbef:,delete:,list,reset,help,manual,usage,\
+version"
 
 ###############################################################################
 # Globals
@@ -102,35 +103,35 @@ function process() {
 }
 
 
-# This function handles the options and arguments.
+# This function checks the script input.
 function check_input() {
     local parsed=''
+    local program_name=${PROGRAM_NAME/kz-/kz }
 
-    parsed=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "kz desktop"                        \
-                --              "$@"
-        ) || RC=$?
+    parsed=$(getopt --alternative                       \
+                    --options       "$OPTIONS_SHORT"    \
+                    --longoptions   "$OPTIONS_LONG"     \
+                    --name          "$program_name"     \
+                    --              "$@")               || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
         exit $ERR
     fi
     eval set -- "$parsed"
 
-    process_options   "$@"
-    process_x_options "$@"
+    process_options "$@"
 }
 
 
 # This function handles the script options and arguments.
-function process_x_options() {
+function process_options() {
+    local program_name=${PROGRAM_NAME/kz-/kz }
+
     while true; do
         case $1 in
             -a | --addaft )
                 if $option_addaft; then
-                    TEXT="kz desktop: $1 $2: $(gettext 'too many options')
+                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -141,7 +142,7 @@ $USAGE"
                 ;;
             -b | --addbef )
                 if $option_addbef; then
-                    TEXT="kz desktop: $1 $2: $(gettext 'too many options')
+                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -152,7 +153,7 @@ $USAGE"
                 ;;
             -d | --delete )
                 if $option_delete; then
-                    TEXT="kz desktop: $1 $2: $(gettext 'too many options')
+                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -169,6 +170,22 @@ $USAGE"
                 option_reset=true
                 shift
                 ;;
+            -h | --help )
+                process_option_help
+                exit $OK
+                ;;
+            -m | --manual )
+                process_option_manual
+                exit $OK
+                ;;
+            -u | --usage )
+                process_option_usage
+                exit $OK
+                ;;
+            -v | --version )
+                process_option_version
+                exit $OK
+                ;;
             -- )
                 shift
                 break
@@ -180,19 +197,20 @@ $USAGE"
     done
 
     if [[ $* ]]; then
-        TEXT="kz desktop: $*: $(gettext 'arguments are not allowed')
+        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
     fi
 
     if ! [[ ${DISPLAY-} ]]; then
-        TEXT="kz desktop: $(gettext 'no desktop environment available')
+        TEXT="$program_name: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
         exit $OK
     fi
 }
+
 
 
 # This function adds a favorite to the end of the dash/dock.
