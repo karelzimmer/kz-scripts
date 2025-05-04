@@ -99,6 +99,7 @@ function check_input() {
         exit $ERR
     fi
     eval set -- "$parsed"
+    unset parsed
 
     process_options "$@"
 }
@@ -131,7 +132,9 @@ function process_options() {
                 break
                 ;;
             * )
-                shift
+                TEXT="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                errmsg "$TEXT"
+                exit $ERR
                 ;;
         esac
     done

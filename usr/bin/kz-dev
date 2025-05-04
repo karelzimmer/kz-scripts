@@ -106,6 +106,10 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         elif opt in ('-v', '--version'):
             kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz_common.term(PROGRAM_NAME, kz_common.OK)
+        else:
+            TEXT = f'{PROGRAM_NAME}: getopt: {_('internal error')}'
+            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
     if args:
         TEXT = f"{program_name}: {args}: {_('arguments are not allowed')}\n"

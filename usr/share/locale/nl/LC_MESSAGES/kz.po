@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-29 08:01+0200\n"
+"POT-Creation-Date: 2025-05-04 09:26+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -61,6 +61,9 @@ msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
+
+msgid "internal error"
+msgstr "interne fout"
 
 msgid ""
 "If the package manager gives apt errors, launch a Terminal window and "
