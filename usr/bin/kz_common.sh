@@ -1,6 +1,6 @@
 # shellcheck shell=bash source=/dev/null
 ###############################################################################
-# SPDX-FileComment: Common module for kz Bourne-Again shell scripts
+# SPDX-FileComment: Common module for kz Bash scripts
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -22,7 +22,7 @@ source /usr/bin/gettext.sh
 
 # shellcheck disable=SC2034
 readonly MODULE_NAME='kz_common.sh'
-MODULE_DESC=$(gettext 'Common module for shell scripts')
+MODULE_DESC=$(gettext 'Common module for kz Bash scripts')
 # shellcheck disable=SC2034
 readonly MODULE_DESC
 

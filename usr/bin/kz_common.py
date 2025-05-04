@@ -27,7 +27,7 @@ _ = gettext.gettext
 ###############################################################################
 
 MODULE_NAME: str = 'kz_common.py'
-MODULE_DESC: str = _('Common module for Python scripts')
+MODULE_DESC: str = _('Common module for kz Python scripts')
 
 OPTIONS_USAGE: str = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
