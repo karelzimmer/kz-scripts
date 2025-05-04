@@ -26,9 +26,6 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-MODULE_NAME: str = 'kz_common.py'
-MODULE_DESC: str = _('Common module for kz Python scripts')
-
 OK: int = 0
 ERR: int = 1
 
@@ -39,11 +36,11 @@ NORMAL: str = '\033[0m'
 if subprocess.run('type systemctl', executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
-    print(_('fatal: no systemd available'))
+    print(f'{RED}{_('fatal: no systemd available')}{NORMAL}')
     sys.exit(ERR)
 
 if not os.path.exists('/etc/os-release'):
-    print(_('fatal: no os release available'))
+    print(f'{RED}{_('fatal: no os release available')}{NORMAL}')
     sys.exit(ERR)
 
 
@@ -333,12 +330,3 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
         return OK
 
     return OK
-
-
-###############################################################################
-# Main
-###############################################################################
-
-if __name__ == '__main__':
-    TEXT = _('{}: i am a module').format(MODULE_NAME)
-    print(TEXT)

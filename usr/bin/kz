@@ -31,19 +31,19 @@ PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Run the kz command')
 
 USAGE: str = (f'kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage] '
-              f" [-v|--version] {_('<command> [<arguments>]')} ")
+              f' [-v|--version] {_('<command> [<arguments>]')} ')
 
-HELP: str = (f"{_('Usage: kz [<options>] <command> [<arguments>]')}\n\n"
+HELP: str = (f'{_('Usage: kz [<options>] <command> [<arguments>]')}\n\n'
              f'{PROGRAM_DESC}.\n\n'
-             f"{_('Options:')}\n"
-             f"{_('  -l, --list     show available commands')}\n"
-             f"{_('  -h, --help     show this help text')}\n"
-             f"{_('  -m, --manual   show manual page')}\n"
-             f"{_('  -u, --usage    show a short usage summary')}\n"
-             f"{_('  -v, --version  show program version')}\n\n"
-             f"{_('Arguments:')}\n"
-             f"{_('  <command>      execute command')}\n"
-             f"{_('  <arguments>    arguments for command')}")
+             f'{_('Options:')}\n'
+             f'{_('  -l, --list     show available commands')}\n'
+             f'{_('  -h, --help     show this help text')}\n'
+             f'{_('  -m, --manual   show manual page')}\n'
+             f'{_('  -u, --usage    show a short usage summary')}\n'
+             f'{_('  -v, --version  show program version')}\n\n'
+             f'{_('Arguments:')}\n'
+             f'{_('  <command>      execute command')}\n'
+             f'{_('  <arguments>    arguments for command')}')
 
 OPTIONS_SHORT: str = 'hmuvl'
 OPTIONS_LONG: list = ['help', 'manual', 'usage', 'version', 'list']
@@ -79,8 +79,8 @@ def process() -> None:
                 exec += '-' + sys.argv[arg_num]
                 if not os.path.exists(exec):
                     TEXT = f'kz: {sys.argv[arg_num]}: '
-                    TEXT += f"{_('command does not exist')}\n"
-                    TEXT += f"{_('Usage:')} {USAGE}"
+                    TEXT += f'{_('command does not exist')}\n'
+                    TEXT += f'{_('Usage:')} {USAGE}'
                     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
                     kz_common.term(PROGRAM_NAME, kz_common.ERR)
         else:
@@ -88,8 +88,8 @@ def process() -> None:
             exec += ' ' + sys.argv[arg_num]
 
     if exec == '/usr/bin/kz':
-        TEXT = f"{PROGRAM_NAME}: {_('command is required')}\n"
-        TEXT += f"{_('Usage:')} {USAGE}"
+        TEXT = f'{PROGRAM_NAME}: {_('command is required')}\n'
+        TEXT += f'{_('Usage:')} {USAGE}'
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
@@ -127,7 +127,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
                                        OPTIONS_LONG)
     except getopt.error as err:
         TEXT = f'{program_name}: {err}\n'
-        TEXT += f"{_('Usage:')} {USAGE}"
+        TEXT += f'{_('Usage:')} {USAGE}'
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
@@ -161,8 +161,8 @@ def process_option_list() -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    TEXT = f"{_('The following commands are available:')}\n\n"
-    TEXT += f"{_('NUM  command')}\n"
+    TEXT = f'{_('The following commands are available:')}\n\n'
+    TEXT += f'{_('NUM  command')}\n'
     command: str = f"find   /usr/bin/kz-*               \
                             -maxdepth 1                 \
                             -type f                     \

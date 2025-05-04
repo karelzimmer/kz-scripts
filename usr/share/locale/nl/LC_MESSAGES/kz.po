@@ -135,9 +135,6 @@ msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-msgid "{}: i am a module"
-msgstr "{}: ik ben een module"
-
 msgid "Run the kz command"
 msgstr "Voer de kz-opdracht uit"
 

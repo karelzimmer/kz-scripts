@@ -130,9 +130,6 @@ msgstr ""
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-msgid "{}: i am a module"
-msgstr ""
-
 msgid "Run the kz command"
 msgstr ""
 

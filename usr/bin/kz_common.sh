@@ -20,12 +20,6 @@ source /usr/bin/gettext.sh
 # Constants
 ###############################################################################
 
-# shellcheck disable=SC2034
-readonly MODULE_NAME='kz_common.sh'
-MODULE_DESC=$(gettext 'Common module for kz Bash scripts')
-# shellcheck disable=SC2034
-readonly MODULE_DESC
-
 readonly OK=0
 readonly ERR=1
 
@@ -34,12 +28,12 @@ readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 if ! type systemctl &> /dev/null; then
-    printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
+    printf '%b\n' "$RED$(gettext 'fatal: no systemd available')$NORMAL" >&2
     exit $ERR
 fi
 
 if ! [[ -f /etc/os-release ]]; then
-    printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
+    printf '%b\n' "$RED$(gettext 'fatal: no os release available')$NORMAL" >&2
     exit $ERR
 fi
 

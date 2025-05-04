@@ -33,13 +33,13 @@ PROGRAM_DESC: str = _('Build development environment')
 
 USAGE: str = f'kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
-HELP: str = (f"{_('Usage: kz dev [<options>]')}\n\n"
+HELP: str = (f'{_('Usage: kz dev [<options>]')}\n\n'
              f'{PROGRAM_DESC}.\n\n'
-             f"{_('Options:')}\n"
-             f"{_('  -h, --help     show this help text')}\n"
-             f"{_('  -m, --manual   show manual page')}\n"
-             f"{_('  -u, --usage    show a short usage summary')}\n"
-             f"{_('  -v, --version  show program version')}")
+             f'{_('Options:')}\n'
+             f'{_('  -h, --help     show this help text')}\n'
+             f'{_('  -m, --manual   show manual page')}\n'
+             f'{_('  -u, --usage    show a short usage summary')}\n'
+             f'{_('  -v, --version  show program version')}')
 
 OPTIONS_SHORT: str = 'hmuv'
 OPTIONS_LONG: list = ['help', 'manual', 'usage', 'version']
@@ -92,7 +92,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
                                        OPTIONS_LONG)
     except getopt.error as err:
         TEXT = f'{program_name}: {err}\n'
-        TEXT += f"{_('Usage:')} {USAGE}"
+        TEXT += f'{_('Usage:')} {USAGE}'
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
@@ -115,8 +115,8 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
     if args:
-        TEXT = f"{program_name}: {args}: {_('arguments are not allowed')}\n"
-        TEXT += f"{_('Usage:')} {USAGE}"
+        TEXT = f'{program_name}: {args}: {_('arguments are not allowed')}\n'
+        TEXT += f'{_('Usage:')} {USAGE}'
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
@@ -134,7 +134,7 @@ def check_dependencies() -> None:
     # Call kz install.
     TEXT = 'Calling kz install...'
     kz_common.logmsg(PROGRAM_NAME, TEXT)
-    command: str = f"kz install         \
+    command: str = f'kz install         \
                         fakeroot        \
                         {esc_gettext}   \
                         git             \
@@ -144,7 +144,7 @@ def check_dependencies() -> None:
                         python          \
                         rpm             \
                         shellcheck      \
-                        vscode"
+                        vscode'
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except Exception as exc:
