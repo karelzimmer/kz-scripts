@@ -26,7 +26,7 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
 
-USAGE="$(gettext "Usage: kz get [<options>]")
+HELP="$(gettext "Usage: kz get [<options>]")
 $(gettext "       wget karelzimmer.nl/getkz; bash getkz [<options>]")
 
 $PROGRAM_DESC.
@@ -95,13 +95,13 @@ function check_input() {
         -* )
             TEXT="$program_name: $*: \
 $(gettext 'only option -d or --dev is allowed')
-$USAGE"
+$HELP"
             printf '%s\n' "$TEXT" >&2
             exit 1
             ;;
         * )
             TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
-$USAGE"
+$HELP"
             printf '%s\n' "$TEXT" >&2
             exit 1
             ;;

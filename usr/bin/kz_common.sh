@@ -26,16 +26,6 @@ MODULE_DESC=$(gettext 'Common module for kz Bash scripts')
 # shellcheck disable=SC2034
 readonly MODULE_DESC
 
-# shellcheck disable=SC2034
-readonly OPTIONS_USAGE='[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
-
-OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
-# shellcheck disable=SC2034
-readonly OPTIONS_HELP
-
 readonly OK=0
 readonly ERR=1
 

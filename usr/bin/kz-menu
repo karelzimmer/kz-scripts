@@ -23,20 +23,21 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Installation menu')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: kz menu [-g|--gui] \$OPTIONS_USAGE")
+USAGE=$(gettext "Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] \
+[-u|--usage] [-v|--version]")
 readonly USAGE
-
-X_OPTIONS_HELP="$(gettext '  -g, --gui      run in graphical mode,')
-$(gettext '                 requires a desktop environment')"
-readonly X_OPTIONS_HELP
 
 HELP="$(gettext "Usage: kz menu [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP"
+$(gettext '  -g, --gui      run in graphical mode,')
+$(gettext '                 requires a desktop environment')
+$(gettext '  -h, --help     show this help text')
+$(gettext '  -m, --manual   show manual page')
+$(gettext '  -u, --usage    show a short usage summary')
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='ghmuv'

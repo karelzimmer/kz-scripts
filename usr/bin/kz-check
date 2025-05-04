@@ -24,7 +24,8 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Check scripts and website')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: kz check \$OPTIONS_USAGE")
+USAGE=$(gettext "Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] \
+[-v|--version]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz check [<options>]")
@@ -32,7 +33,10 @@ HELP="$(gettext "Usage: kz check [<options>]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$OPTIONS_HELP"
+$(gettext '  -h, --help     show this help text')
+$(gettext '  -m, --manual   show manual page')
+$(gettext '  -u, --usage    show a short usage summary')
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='hmuv'

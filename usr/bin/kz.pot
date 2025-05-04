@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-04 09:29+0200\n"
+"POT-Creation-Date: 2025-05-04 18:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -178,8 +178,9 @@ msgstr ""
 msgid "Backup home folder"
 msgstr ""
 
-#, sh-format
-msgid "Usage: kz backup [-g|--gui] [-t|--target <directory>] $OPTIONS_USAGE"
+msgid ""
+"Usage: kz backup [-g|--gui] [-t|--target <directory>] [-h|--help] [-m|--"
+"manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz backup [<options>]"
@@ -319,8 +320,7 @@ msgstr ""
 msgid "Build website including kz packages"
 msgstr ""
 
-#, sh-format
-msgid "Usage: kz build $OPTIONS_USAGE"
+msgid "Usage: kz build [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz build [<options>]"
@@ -335,8 +335,7 @@ msgstr ""
 msgid "Check scripts and website"
 msgstr ""
 
-#, sh-format
-msgid "Usage: kz check $OPTIONS_USAGE"
+msgid "Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz check [<options>]"
@@ -360,8 +359,7 @@ msgstr ""
 msgid "Distribute website including kz packages"
 msgstr ""
 
-#, sh-format
-msgid "Usage: kz deploy $OPTIONS_USAGE"
+msgid "Usage: kz deploy [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz deploy [<options>]"
@@ -449,11 +447,10 @@ msgstr ""
 msgid "Change desktop environment"
 msgstr ""
 
-#, sh-format
 msgid ""
 "Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
 "                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]\n"
-"                  $OPTIONS_USAGE"
+"                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz desktop [<options>]"
@@ -505,11 +502,10 @@ msgstr ""
 msgid "Install apps"
 msgstr ""
 
-#, sh-format
 msgid ""
 "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
 "                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
-"                  $OPTIONS_USAGE\n"
+"                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                  [<app>...]"
 msgstr ""
 
@@ -652,8 +648,9 @@ msgstr ""
 msgid "Go to installation menu"
 msgstr ""
 
-#, sh-format
-msgid "Usage: kz menu [-g|--gui] $OPTIONS_USAGE"
+msgid ""
+"Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage] [-v|--"
+"version]"
 msgstr ""
 
 msgid "Usage: kz menu [<options>]"
@@ -801,8 +798,9 @@ msgstr ""
 msgid "The following has been executed:"
 msgstr ""
 
-#, sh-format
-msgid "Usage: kz restore [-g|--gui] [-s|--source <directory>] $OPTIONS_USAGE"
+msgid ""
+"Usage: kz restore [-g|--gui] [-s|--source <directory>] [-h|--help] [-m|--"
+"manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz restore [<options>]"
@@ -863,11 +861,10 @@ msgstr ""
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr ""
 
-#, sh-format
 msgid ""
 "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
 "                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
-"                $OPTIONS_USAGE\n"
+"                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                [<app>...]"
 msgstr ""
 

@@ -24,14 +24,19 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Change desktop environment')
 readonly PROGRAM_DESC
 
-USAGE="$(eval_gettext "Usage: kz desktop [-a|--addaft <favorite>] \
+USAGE=$(gettext "Usage: kz desktop [-a|--addaft <favorite>] \
 [-b|--addbef <favorite>]
                   [-d|--delete <favorite>] [-l|--list] [-r|--reset]
-                  \$OPTIONS_USAGE")"
+                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]")
 readonly USAGE
 
-X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
-mandatory for short options too.")
+HELP="$(gettext "Usage: kz desktop [<options>]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$(gettext "  Mandatory arguments to long options are mandatory for short \
+options too.")
 
 $(gettext '  -a, --addaft <favorite>
                  add favorite at the end')
@@ -40,16 +45,11 @@ $(gettext '  -b, --addbef <favorite>
 $(gettext '  -d, --delete <favorite>
                  delete favorite')
 $(gettext '  -l, --list     show favorites')
-$(gettext '  -r, --reset    set favorites on default values')"
-readonly X_OPTIONS_HELP
-
-HELP="$(gettext "Usage: kz desktop [<options>]")
-
-$PROGRAM_DESC.
-
-$(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP"
+$(gettext '  -r, --reset    set favorites on default values')
+$(gettext '  -h, --help     show this help text')
+$(gettext '  -m, --manual   show manual page')
+$(gettext '  -u, --usage    show a short usage summary')
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
 

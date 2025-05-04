@@ -29,13 +29,6 @@ _ = gettext.gettext
 MODULE_NAME: str = 'kz_common.py'
 MODULE_DESC: str = _('Common module for kz Python scripts')
 
-OPTIONS_USAGE: str = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
-
-OPTIONS_HELP: str = (f"{_('  -h, --help     show this help text')}\n"
-                     f"{_('  -m, --manual   show manual page')}\n"
-                     f"{_('  -u, --usage    show a short usage summary')}\n"
-                     f"{_('  -v, --version  show program version')}")
-
 OK: int = 0
 ERR: int = 1
 

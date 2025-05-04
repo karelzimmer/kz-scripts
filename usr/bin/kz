@@ -30,16 +30,17 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Run the kz command')
 
-USAGE: str = (f'kz [-l|--list] {kz_common.OPTIONS_USAGE} '
-              f"{_('<command> [<arguments>]')} ")
+USAGE: str = (f'kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage] '
+              f" [-v|--version] {_('<command> [<arguments>]')} ")
 
-OPTIONS_HELP: str = f"{_('  -l, --list     show available commands')}"
-
-HELP: str = (f"{_('Usage: kz [<options>] <command> [<arguments>]')}"
-             f'\n\n{PROGRAM_DESC}.\n\n'
+HELP: str = (f"{_('Usage: kz [<options>] <command> [<arguments>]')}\n\n"
+             f'{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
-             f'{OPTIONS_HELP}\n'
-             f'{kz_common.OPTIONS_HELP}\n\n'
+             f"{_('  -l, --list     show available commands')}\n"
+             f"{_('  -h, --help     show this help text')}\n"
+             f"{_('  -m, --manual   show manual page')}\n"
+             f"{_('  -u, --usage    show a short usage summary')}\n"
+             f"{_('  -v, --version  show program version')}\n\n"
              f"{_('Arguments:')}\n"
              f"{_('  <command>      execute command')}\n"
              f"{_('  <arguments>    arguments for command')}")
