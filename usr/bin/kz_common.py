@@ -15,7 +15,7 @@ import os
 import subprocess
 import sys
 import time
-import systemd.journal  # type: ignore
+from systemd import journal  # type: ignore
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -192,8 +192,7 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     This function records a message to the log.
     """
-    systemd.journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}',
-                          f'MESSAGE={TEXT}')
+    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
