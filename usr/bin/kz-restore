@@ -85,11 +85,10 @@ function check_input() {
                     --options       "$OPTIONS_SHORT"    \
                     --longoptions   "$OPTIONS_LONG"     \
                     --name          "$program_name"     \
-                    --              "$@")               || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERR
-    fi
+                    --              "$@")               || {
+                                                            infomsg "$USAGE"
+                                                            exit $ERR
+                                                            }
     eval set -- "$parsed"
     unset parsed
 
@@ -305,6 +304,8 @@ function restore_setting_desktop() {
 function term() {
     local users=''
     local -i num_users=0
+    local -i rc=0
+
 
     if [[ $RESTORE_RC -ne $OK ]]; then
         TEXT="$(eval_gettext "Restore ended with warnings or errors.
@@ -342,8 +343,8 @@ $users"
     fi
 
     if [[ $SOURCE_MEDIUM == */media/* ]]; then
-        term_usb || RC=$?
-        if [[ $RC -eq $OK ]]; then
+        term_usb || rc=$?
+        if [[ $rc -eq $OK ]]; then
             TEXT+="
 
 $(gettext 'The USB medium can be removed.')"
@@ -396,15 +397,15 @@ function term_usb() {
         term_unmount
     fi
 
-    return $RC
+    return $rc
 }
 
 
 # This function unmounts the USB device.
 function term_unmount() {
-    umount "$SOURCE_MEDIUM"                         |& $PROGRAM_LOGS || RC+=$?
-    udisksctl lock --block-device "$device"         |& $PROGRAM_LOGS || RC+=$?
-    udisksctl power-off --block-device "$device"    |& $PROGRAM_LOGS || RC+=$?
+    umount "$SOURCE_MEDIUM"                         |& $PROGRAM_LOGS || rc+=$?
+    udisksctl lock --block-device "$device"         |& $PROGRAM_LOGS || rc+=$?
+    udisksctl power-off --block-device "$device"    |& $PROGRAM_LOGS || rc+=$?
 }
 
 

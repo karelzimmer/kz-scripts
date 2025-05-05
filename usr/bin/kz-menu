@@ -97,6 +97,8 @@ readonly MENU2_LINES=${#MENU2_DESCS[@]}
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    local -i rc=0
+
     check_input "$@"
     if $OPTION_GUI; then
         process_menu1_gui
@@ -115,11 +117,10 @@ function check_input() {
                     --options       "$OPTIONS_SHORT"    \
                     --longoptions   "$OPTIONS_LONG"     \
                     --name          "$program_name"     \
-                    --              "$@")               || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERR
-    fi
+                    --              "$@")               || {
+                                                            infomsg "$USAGE"
+                                                            exit $ERR
+                                                            }
     eval set -- "$parsed"
     unset parsed
 
@@ -436,7 +437,7 @@ function process_menu2_choice() {
         process_commands
         # Setup apps on a server means manual logout.
         if [[ $reply_save -eq 5 ]] && ! [[ ${DISPLAY-} ]]; then
-            exit $RC
+            exit $rc
         fi
         $OPTION_GUI || wait_for_enter
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
@@ -552,8 +553,8 @@ function execute_command() {
         gui_option='--gui'
     fi
 
-    "$cmd" "$arg" $gui_option || RC=$?
-    logmsg "$command: RC=$RC"
+    "$cmd" "$arg" $gui_option || rc=$?
+    logmsg "$command: rc=$rc"
 }
 
 

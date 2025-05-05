@@ -293,7 +293,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(PROGRAM_NAME: str, RC: int) -> None:
+def term(PROGRAM_NAME: str, rc: int) -> None:
     """
     This function controls the termination.
     """
@@ -301,7 +301,7 @@ def term(PROGRAM_NAME: str, RC: int) -> None:
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
 
-    if RC == OK:
+    if rc == OK:
         sys.exit(OK)
     else:
         sys.exit(ERR)

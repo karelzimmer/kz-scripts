@@ -42,11 +42,7 @@ fi
 # Globals
 ###############################################################################
 
-declare ERREXIT=true
-declare OPTION_GUI=false
 declare TEXT=''
-declare -i RC=$OK
-declare -a COMMANDLINE_ARGS=("$@")
 
 
 ###############################################################################
@@ -59,19 +55,20 @@ function become_root() {
     # pkexec needs fully qualified path to the program to be executed.
     # shellcheck disable=SC2153
     local pkexec_program=/usr/bin/$PROGRAM_NAME
+    local -i rc=$OK
 
     become_root_check || exit $OK
 
     if [[ $UID -ne 0 ]]; then
         export DISPLAY
-        if $OPTION_GUI; then
+        if ${OPTION_GUI:-false}; then
             xhost +si:localuser:root |& $PROGRAM_LOGS
             TEXT="Restart (pkexec $pkexec_program ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
             # Because $pkexec_program will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            pkexec "$pkexec_program" "${COMMANDLINE_ARGS[@]}" || RC=$?
-            exit "$RC"
+            pkexec "$pkexec_program" "${COMMANDLINE_ARGS[@]}" || rc=$?
+            exit "$rc"
         else
             TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
@@ -111,7 +108,7 @@ function check_package_manager() {
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
         TEXT=$(gettext "Wait \$sleep seconds for another package manager to \
 finish")
-        if $OPTION_GUI; then
+        if ${OPTION_GUI:-false}; then
             logmsg "$TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$TEXT"
@@ -175,7 +172,7 @@ function errmsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
-    if $OPTION_GUI; then
+    if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'error message') ($program_name)"
         zenity  --error                 \
                 --width     600         \
@@ -193,7 +190,7 @@ function infomsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
-    if $OPTION_GUI; then
+    if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'information') ($program_name)"
         zenity  --info                  \
                 --width     600         \
@@ -343,7 +340,7 @@ function term_sig() {
             rc_desc='terminated by control-c'
             ;;
         13[1-9] | 140 )                     # 131 (128 + 3)--140 (128 + 12)
-            rc_desc_signalno=$(( RC - 128 ))
+            rc_desc_signalno=$(( rc - 128 ))
             rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
             ;;
         141 )                               # SIGPIPE (128 + 13)
@@ -356,7 +353,7 @@ function term_sig() {
             rc_desc='termination signal'
             ;;
         14[4-9] | 1[5-8][0-9] | 19[0-2])    # 144 (128 + 16)--192 (128 + 64)
-            rc_desc_signalno=$(( RC - 128 ))
+            rc_desc_signalno=$(( rc - 128 ))
             rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
             ;;
         200 )
@@ -377,7 +374,7 @@ $command, code: $rc ($rc_desc)."
 
     case $signal in
         err )
-            if $ERREXIT; then
+            if ${ERREXIT:-true}; then
                 TEXT="
 $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
                 errmsg "$TEXT"
