@@ -42,7 +42,7 @@ HELP: str = (f'{_('Usage: kz dev [<options>]')}\n\n'
              f'{_('  -v, --version  show program version')}')
 
 OPTIONS_SHORT: str = 'hmuv'
-OPTIONS_LONG: list = ['help', 'manual', 'usage', 'version']
+OPTIONS_LONG: list[str] = ['help', 'manual', 'usage', 'version']
 
 
 ###############################################################################
@@ -81,10 +81,10 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     """
     This function handles the script options and arguments.
     """
-    args: list = []
+    args: list[str] = []
     err: str = ''
     opt: str = ''
-    opts: list = []
+    opts: list[tuple[str, str]] = []
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
     try:

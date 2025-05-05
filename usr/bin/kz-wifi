@@ -43,7 +43,7 @@ HELP: str = (f'{_('Usage: kz wifi [<options>]')}\n\n'
              f'{_('  -v, --version  show program version')}')
 
 OPTIONS_SHORT: str = 'ghmuv'
-OPTIONS_LONG: list = ['gui', 'help', 'manual', 'usage', 'version']
+OPTIONS_LONG: list[str] = ['gui', 'help', 'manual', 'usage', 'version']
 
 
 ###############################################################################
@@ -60,7 +60,7 @@ def process(OPTION_GUI: bool = False) -> None:
     This function performs the script actions, such as checking the input.
     """
     command: str = 'nmcli device wifi show-password'
-    nmcli_output: str = ''
+    nmcli_output: bytes
 
     OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
@@ -74,14 +74,12 @@ def process(OPTION_GUI: bool = False) -> None:
                                           stdout=subprocess.PIPE,
                                           stderr=subprocess.DEVNULL,
                                           shell=True, check=True,
-                                          ).stdout  # type: ignore
+                                          ).stdout
         except Exception:
             TEXT = _('No WiFi device found.')
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
         else:
-            nmcli_output = nmcli_output  # type: ignore
-            nmcli_output = nmcli_output.decode("utf-8")  # type: ignore
-            TEXT = nmcli_output + TEXT
+            TEXT = str(nmcli_output.decode("utf-8")) + TEXT
             kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     else:
         try:
@@ -100,10 +98,10 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     """
     This function handles the script options and arguments.
     """
-    args: list = []
+    args: list[str] = []
     err: str = ''
     opt: str = ''
-    opts: list = []
+    opts: list[tuple[str, str]] = []
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     OPTION_GUI: bool = False
 
