@@ -20,9 +20,9 @@ source kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-check'
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Check scripts and website')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] \
 [-v|--version]")

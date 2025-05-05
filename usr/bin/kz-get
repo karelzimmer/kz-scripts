@@ -22,9 +22,9 @@ source /usr/bin/gettext.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-get'
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 HELP="$(gettext "Usage: kz get [<options>]")
 $(gettext "       wget karelzimmer.nl/getkz; bash getkz [<options>]")

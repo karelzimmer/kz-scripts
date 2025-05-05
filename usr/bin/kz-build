@@ -20,9 +20,9 @@ source ~/kz-scripts/usr/bin/kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-build'
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Build website including kz packages')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz build [-h|--help] [-m|--manual] [-u|--usage] \
 [-v|--version]")

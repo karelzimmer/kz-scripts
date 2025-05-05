@@ -20,9 +20,9 @@ source kz_common.sh
 ###############################################################################
 
 readonly PROGRAM_NAME='kz-install'
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]
                   [-f|--file <file>] [-g|--gui] [-r|--remove]
