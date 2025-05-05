@@ -64,6 +64,7 @@ version"
 # Globals
 ###############################################################################
 
+declare OPTION_GUI=false
 declare OPTION_REMOVE=false
 declare REBOOT=true
 declare -a COMMANDLINE_ARGS=("$@")

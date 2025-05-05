@@ -66,6 +66,7 @@ readonly ON_HOST='on host'
 # Globals
 ###############################################################################
 
+declare OPTION_GUI=false
 declare OPTION_RESET=false
 declare LOGOUT=true
 declare -A FAILED_APPS=()

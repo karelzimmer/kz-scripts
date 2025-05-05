@@ -54,6 +54,7 @@ readonly OPTIONS_LONG='gui,target:,help,manual,usage,version'
 # Globals
 ###############################################################################
 
+declare OPTION_GUI=false
 declare TARGET_MEDIUM=''
 declare TARGET=''
 declare -i BACKUP_RC=0

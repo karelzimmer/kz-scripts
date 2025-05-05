@@ -54,6 +54,7 @@ readonly OPTIONS_LONG='gui,source:,help,manual,usage,version'
 # Globals
 ###############################################################################
 
+declare OPTION_GUI=false
 declare SOURCE_MEDIUM=''
 declare -i RESTORE_RC=0
 
