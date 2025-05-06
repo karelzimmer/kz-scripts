@@ -55,7 +55,6 @@ function become_root() {
     # pkexec needs fully qualified path to the program to be executed.
     # shellcheck disable=SC2153
     local pkexec_program=/usr/bin/$PROGRAM_NAME
-    local -i rc=$OK
 
     become_root_check || exit $OK
 
@@ -67,8 +66,7 @@ function become_root() {
             logmsg "$TEXT"
             # Because $pkexec_program will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            pkexec "$pkexec_program" "${COMMANDLINE_ARGS[@]}" || rc=$?
-            exit "$rc"
+            pkexec "$pkexec_program" "${COMMANDLINE_ARGS[@]}"
         else
             TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
