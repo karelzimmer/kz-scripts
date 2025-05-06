@@ -67,6 +67,7 @@ function become_root() {
             # Because $pkexec_program will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             pkexec "$pkexec_program" "${COMMANDLINE_ARGS[@]}"
+            exit
         else
             TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
