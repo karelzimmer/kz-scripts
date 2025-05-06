@@ -149,6 +149,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     This function returns an error message.
     """
+    logmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
         title: str = f"{PROGRAM_DESC} {_('error message')} ({program_name})"
@@ -167,6 +168,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
     """
     This function returns an informational message.
     """
+    logmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
         title: str = f"{PROGRAM_DESC} {_('information')} ({program_name})"
@@ -184,7 +186,9 @@ def init(PROGRAM_NAME: str) -> None:
     """
     This function performs initial actions.
     """
-    TEXT = f'==== START logs for script {PROGRAM_NAME} ===='
+    TEXT = f'==== START logs for script {PROGRAM_NAME} ====\n'
+    logmsg(PROGRAM_NAME, TEXT)
+    TEXT = f'Started ({' '.join(sys.argv)} as {os.getlogin()}) ===='
     logmsg(PROGRAM_NAME, TEXT)
 
 
@@ -296,7 +300,13 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
     """
     This function controls the termination.
     """
+    status: str = '1/FAILURE'
 
+    if rc == OK:
+        status = '0/SUCCESS'
+
+    TEXT=f'Ended (code=exited, status={status}).'
+    logmsg(PROGRAM_NAME, TEXT)
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
 

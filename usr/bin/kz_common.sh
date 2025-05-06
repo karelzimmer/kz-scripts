@@ -171,6 +171,7 @@ function errmsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
+    logmsg "$*"
     if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'error message') ($program_name)"
         zenity  --error                 \
@@ -189,6 +190,7 @@ function infomsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
+    logmsg "$*"
     if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'information') ($program_name)"
         zenity  --info                  \
@@ -218,7 +220,7 @@ function init() {
     trap 'term_sig sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     TEXT="==== START logs for script $PROGRAM_NAME ====
-Started ($PROGRAM_NAME $* as $USER)."
+Started ($0 as $USER)."
     logmsg "$TEXT"
 }
 
@@ -300,13 +302,13 @@ function term_sig() {
     local -i rc=$5
 
     local rc_desc=''
-    local status=$rc/error
+    local status=$rc/FAILURE
     local -i rc_desc_signalno=0
 
     case $rc in
         0 )
             rc_desc='successful termination'
-            status=$rc/OK
+            status=0/SUCCESS
             ;;
         1 )
             rc_desc='terminated with error'
@@ -368,7 +370,7 @@ function term_sig() {
     esac
 
     TEXT="Signal: $signal, line: $lineno, function: $function, command: \
-$command, code: $rc ($rc_desc)."
+$command, exit code: $rc ($rc_desc)."
     logmsg "$TEXT"
 
     case $signal in

@@ -363,7 +363,6 @@ function process_setup_file_by_host() {
     local input_record=''
 
     while read -r input_record; do
-        echo "input_record=$input_record"
         case $input_record in
             '' )
                 # Empty line.
