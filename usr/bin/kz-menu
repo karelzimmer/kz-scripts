@@ -235,6 +235,7 @@ function process_menu1_tui() {
 
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
+        logmsg "$prompt"
         read -rp "$prompt"
 
         case $REPLY in
@@ -409,6 +410,7 @@ function process_menu2_tui() {
 
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
+        logmsg "$prompt"
         read -rp "$prompt"
 
         case $REPLY in
@@ -501,6 +503,7 @@ function show_commands_before_execution() {
     TEXT+="
 "
     prompt="$(gettext 'Proceed?')"
+    logmsg "$prompt"
 
     if $OPTION_GUI; then
         TEXT+="

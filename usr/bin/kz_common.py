@@ -305,7 +305,7 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
     if rc == OK:
         status = '0/SUCCESS'
 
-    TEXT=f'Ended (code=exited, status={status}).'
+    TEXT = f'Ended (code=exited, status={status}).'
     logmsg(PROGRAM_NAME, TEXT)
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
@@ -324,6 +324,7 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
 
     try:
         TEXT = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
+        logmsg(PROGRAM_NAME, TEXT)
         input(TEXT)
     except KeyboardInterrupt:
         TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
