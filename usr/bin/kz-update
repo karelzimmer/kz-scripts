@@ -196,7 +196,7 @@ def perform_rpm_cleanup() -> None:
 
 def perform_command(command: str = '') -> None:
     """
-    This function executes a Bourne-Again SHell command.
+    This function executes a Bash command.
     """
     exc: str = ''
 
