@@ -97,10 +97,11 @@ function check_input() {
                     --options       "$OPTIONS_SHORT"    \
                     --longoptions   "$OPTIONS_LONG"     \
                     --name          "$program_name"     \
-                    --              "$@")               || {
-                                                            infomsg "$USAGE"
-                                                            exit $ERR
-                                                            }
+                    --              "$@")               ||
+                    {
+                        infomsg "$USAGE"
+                        exit $ERR
+                    }
     eval set -- "$parsed"
     unset parsed
 
