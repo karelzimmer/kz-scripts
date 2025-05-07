@@ -218,7 +218,7 @@ function upload_website() {
 function install_package() {
     local parm=''
 
-    TEXT=$(gettext 'Install Debian package')...
+    TEXT=$(gettext 'Install Debian package...')
     infomsg "$TEXT"
 
     logmsg 'Calling kz-get (via wget and bash)...'
