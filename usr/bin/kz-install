@@ -335,28 +335,28 @@ function process_install_file_by_app_argument() {
     while read -r input_record; do
         case $input_record in
             '' )
-                # Empty line.
+                # Skip empty line.
                 continue
                 ;;
             '#'*$install_app*[[:space:]]"$app_argument"[[:space:]]*$on_host* )
-                # Matching app record.
+                # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
                 printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
             '#'*$install_app*$on_host* | '#'*$remove_app*$from_host* )
-                # Mismatched app record.
+                # Skip mismatched app record.
                 app_match=false
                 ;;
             * )
                 if $app_match; then
-                    # Record for command file.
+                    # Add record to command file.
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
         esac
     done < <(cat "$install_file" "$install_file_extra")
-    # Add extra empty line.
+    # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 
     if $no_app_match; then
@@ -375,28 +375,28 @@ function process_setup_file_by_hostname() {
     while read -r input_record; do
         case $input_record in
             '' )
-                # Empty line.
+                # Skip empty line.
                 continue
                 ;;
             '#'*$install_app*$on_host*'*' | \
             '#'*$install_app*$on_host*$HOSTNAME* )
-                # Matching app record.
+                # Add matching app record to command file.
                 host_match=true
                 printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
             '#'*$install_app*$on_host* | '#'*$remove_app*$from_host* )
-                # Mismatched app record.
+                # Skip mismatched app record.
                 host_match=false
                 ;;
             * )
                 if $host_match; then
-                    # Record for command file.
+                    # Add record to command file.
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
         esac
     done < <(cat "$install_file" "$install_file_extra")
-    # Add extra empty line.
+    # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 }
 
