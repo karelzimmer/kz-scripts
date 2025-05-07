@@ -17,7 +17,6 @@ kz-desktop --addaft=anydesk
 # Web app: https://my.anydesk.com/v2
 kz-desktop --delete=anydesk
 
-
 # Setup app calibre on host pc06
 # E-book manager.
 kz-desktop --addaft=calibre-gui
@@ -25,7 +24,6 @@ kz-desktop --addaft=calibre-gui
 # Reset app calibre on host pc06
 # E-book manager.
 kz-desktop --delete=calibre-gui
-
 
 # Setup app cockpit on host pc06
 # Web console.
@@ -37,15 +35,12 @@ kz-desktop --addaft=kz-cockpit
 # Web app: https://localhost:9090
 kz-desktop --delete=kz-cockpit
 
-
 # Setup app dash-to-dock on host pc07
 # Desktop dock.
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
-
 if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if grep --quiet rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                       &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
-
 if gsettings get org.gnome.shell disable-user-extensions                     &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action        &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews; fi
@@ -60,10 +55,8 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network &> 
 # Desktop dock.
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
-
 if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-
 if gsettings get org.gnome.shell disable-user-extensions                     &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action        &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
@@ -74,7 +67,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height       &> 
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed     &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
 
-
 # Setup app evolution on host pc07
 # E-mail and organizer.
 kz-desktop --delete=org.gnome.Evolution
@@ -82,7 +74,6 @@ kz-desktop --delete=org.gnome.Evolution
 # Reset app evolution on host pc07
 # E-mail and organizer.
 kz-desktop --addbef=org.gnome.Evolution
-
 
 # Setup app firefox on host pc01 pc02 pc06 pc07
 # Web browser.
@@ -96,7 +87,6 @@ kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
 kz-desktop --addbef=firefox_firefox
 
-
 # Setup app gdebi on host *
 # View and install deb files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
@@ -105,7 +95,6 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'App gdeb
 # Reset app gdebi on host *
 # View and install deb files.
 if [[ ${DISPLAY-} ]]; then echo 'App gdebi cannot be reset.'; fi
-
 
 # Setup app git on host pc06 pc07
 # Distributed revision control system.
@@ -116,7 +105,6 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 # Distributed revision control system.
 # Web app: https://github.com
 git config --global --unset alias.logg
-
 
 # Setup app gnome on host *
 # Desktop environment.
@@ -162,7 +150,6 @@ if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 
-
 # Setup app google-chrome on host *
 # Web browser.
 kz-desktop --addbef=google-chrome
@@ -172,7 +159,6 @@ if [[ ${DISPLAY-} ]]; then xdg-mime default google-chrome.desktop application/pd
 # Web browser.
 kz-desktop --delete=google-chrome
 
-
 # Setup app handbrake on host #none
 # Video-dvd ripper and transcoder.
 kz-desktop --addaft=fr.handbrake.ghb
@@ -180,7 +166,6 @@ kz-desktop --addaft=fr.handbrake.ghb
 # Reset app handbrake on host #none
 # Video-dvd ripper and transcoder.
 kz-desktop --delete=fr.handbrake.ghb
-
 
 # Setup app hide-files on host *
 # Hide files.
@@ -190,7 +175,6 @@ if [[ ${DISPLAY-} ]]; then echo 'snap' > ~/.hidden; fi
 # Hide files.
 if [[ ${DISPLAY-} ]]; then rm --force --verbose ~/.hidden; fi
 
-
 # Setup app kvm on host pc06 pc07
 # Kernel-based Virtual Machine.
 kz-desktop --addaft=virt-manager
@@ -198,7 +182,6 @@ kz-desktop --addaft=virt-manager
 # Reset app kvm on host pc06 pc07
 # Kernel-based Virtual Machine.
 kz-desktop --delete=virt-manager
-
 
 # Setup app lynis on host #none
 # Security auditing.
@@ -211,7 +194,6 @@ if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; f
 # Security auditing.
 rm --force --recursive ~/lynis
 
-
 # Setup app restore-thumbnails on host #none
 # Restore thumbnails.
 rm --force --recursive ~/.cache/thumbnails/
@@ -219,7 +201,6 @@ rm --force --recursive ~/.cache/thumbnails/
 # Reset app restore-thumbnails on host #none
 # Restore thumbnails.
 echo 'App restore-thumbnails cannot be reset.'
-
 
 # Setup app private-home on host *
 # Private home.
@@ -229,7 +210,6 @@ chmod 750 ~
 # Private home.
 chmod 755 ~
 
-
 # Setup app sound-juicer on host #none
 # Audio-cd ripper and player.
 kz-desktop --addaft=org.gnome.SoundJuicer
@@ -237,7 +217,6 @@ kz-desktop --addaft=org.gnome.SoundJuicer
 # Reset app sound-juicer on host #none
 # Audio-cd ripper and player.
 kz-desktop --delete=org.gnome.SoundJuicer
-
 
 # Setup app spotify on host pc01 pc02 pc06 pc07
 # Music and podcasts.
@@ -251,7 +230,6 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --a
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=kz-spotify; fi
 
-
 # Setup app teamviewer on host *
 # Remote desktop.
 # Web app: https://web.teamviewer.com
@@ -261,7 +239,6 @@ kz-desktop --addaft=com.teamviewer.TeamViewer
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 kz-desktop --delete=com.teamviewer.TeamViewer
-
 
 # Setup app terminal on host pc01 pc06 pc07
 # Terminal emulator.
@@ -278,7 +255,6 @@ kz-desktop --delete=org.gnome.Terminal
 sed --in-place 's/alias/#alias/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d'   ~/.bashrc
 
-
 # Setup app thunderbird on host pc01 pc02 pc06
 # E-mail and news.
 kz-desktop --delete=thunderbird
@@ -289,7 +265,6 @@ kz-desktop --delete=thunderbird_thunderbird
 kz-desktop --addbef=thunderbird
 kz-desktop --addbef=thunderbird_thunderbird
 
-
 # Setup app virtualbox on host #none
 # Virtualization.
 kz-desktop --addaft=virtualbox
@@ -299,7 +274,6 @@ kz-desktop --addaft=kz-vm-hugowin732
 # Virtualization.
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
-
 
 # Setup app vscode on host pc01 pc06 pc07
 # Editor.
@@ -320,7 +294,6 @@ if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 # Web app: https://vscode.dev
 kz-desktop --delete=code
 
-
 # Setup app webmin on host pc07
 # Web console.
 # Web app: https://localhost:10000
@@ -331,7 +304,6 @@ kz-desktop --addaft=kz-webmin
 # Web app: https://localhost:10000
 kz-desktop --delete=kz-webmin
 
-
 # Setup app whatsapp on host #none
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --addaft=kz-whatsapp
@@ -340,7 +312,6 @@ kz-desktop --addaft=kz-whatsapp
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --delete=kz-whatsapp
 
-
 # Setup app youtube-dl on host #none
 # Download videos.
 kz-desktop --addaft=youtubedl-gui
@@ -348,7 +319,6 @@ kz-desktop --addaft=youtubedl-gui
 # Reset app youtube-dl on host #none
 # Download videos.
 kz-desktop --delete=youtubedl-gui
-
 
 # Setup app zoom on host pc01
 # Videoconferencing.
