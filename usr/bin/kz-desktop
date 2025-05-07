@@ -278,12 +278,14 @@ function capture_gnome_changes() {
     local config_a_file=''
     local config_b_file=''
 
-    config_a_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-a.conf")
-    config_b_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-b.conf")
+    config_a_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-a.config")
+    config_b_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-b.config")
+    # Capturing the configuration database before.
     save_configuration_database A "$config_a_file"
     TEXT=$(gettext 'Now make the change in the desktop environment.')
     infomsg "$TEXT"
     wait_for_enter
+    # Capturing the configuration database after.
     save_configuration_database B "$config_b_file"
     report_database_changes "$config_a_file" "$config_b_file"
 }
