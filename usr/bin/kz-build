@@ -352,7 +352,7 @@ function build_rpm_package() {
 function install_deb_package() {
     local to_install=''
 
-    TEXT=$(gettext 'Install Debian package kz')...
+    TEXT=$(gettext 'Install Debian package')...
     infomsg "$TEXT"
     check_package_manager
 
