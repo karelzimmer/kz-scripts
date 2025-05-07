@@ -47,6 +47,7 @@ readonly OPTIONS_LONG='help,manual,usage,version'
 # Globals
 ###############################################################################
 
+declare DEV=false
 declare ERR_FLAG=false
 
 
@@ -147,7 +148,10 @@ function build() {
 
 # This function performs checks.
 function check() {
-    check_repos || ERR_FLAG=true
+    if ! check_repos; then
+        DEV=true
+        ERR_FLAG=true
+    fi
     check_scripts_and_website
 }
 
@@ -212,18 +216,15 @@ function upload_website() {
 
 # This function installs package kz.
 function install_package() {
-    local dev=false
     local parm=''
 
     TEXT=$(gettext 'Install Debian package')...
     infomsg "$TEXT"
 
-    check_repos || dev=true
-
     logmsg 'Calling kz-get (via wget and bash)...'
     # Call kz-get via wget and bash as a regular user would do.
     cd "$HOME"
-    if $dev; then
+    if $DEV; then
         parm='--dev'
     fi
     if ! (wget karelzimmer.nl/getkz; bash getkz "$parm"); then
