@@ -389,7 +389,7 @@ msgstr "Bouw Debian-pakket"
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-msgid "Install package"
+msgid "Install Debian package kz"
 msgstr "Installeer pakket"
 
 msgid "Distribute website including kz packages"
@@ -422,7 +422,7 @@ msgstr "Uploaden website"
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-msgid "Install package kz failed."
+msgid "Install Debian package kz kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
 
 msgid "Download and install Debian or RPM package kz"

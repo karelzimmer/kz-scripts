@@ -215,7 +215,7 @@ function install_package() {
     local dev=false
     local parm=''
 
-    TEXT=$(gettext 'Install package')...
+    TEXT=$(gettext 'Install Debian package kz')...
     infomsg "$TEXT"
 
     check_repos || dev=true
@@ -227,7 +227,7 @@ function install_package() {
         parm='--dev'
     fi
     if ! (wget karelzimmer.nl/getkz; bash getkz "$parm"); then
-        TEXT=$(gettext 'Install package kz failed.')
+        TEXT=$(gettext 'Install Debian package kz kz failed.')
         errmsg "$TEXT"
     fi
     cd "$OLDPWD"
