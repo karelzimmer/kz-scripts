@@ -94,7 +94,7 @@ function process() {
 
     check_input "$@"
 
-    install_file_extra=$(mktemp -t "$PROGRAM_NAME-decryptd-XXXXXXXXXX.sh.gpg")
+    install_file_extra=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
 
     if $option_file; then
         install_file=$file_argument
@@ -139,7 +139,7 @@ EOF
         exit $OK
     fi
 
-    command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
+    command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-commands.sh")
 
     if $argument_app; then
         process_argument_app
