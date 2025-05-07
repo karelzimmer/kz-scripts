@@ -94,7 +94,7 @@ function process() {
 
     check_input "$@"
 
-    setup_file_extra=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
+    setup_file_extra=$(mktemp -t "$PROGRAM_NAME-decryptd-XXXXXXXXXX.sh.gpg")
 
     if $option_file; then
         setup_file=$file_argument
@@ -142,7 +142,7 @@ EOF
     if $argument_app; then
         process_argument_app
     else
-        process_setup_file_by_host
+        process_setup_file_by_hostname
     fi
 
     if $option_cat; then
@@ -312,14 +312,14 @@ function process_argument_app() {
     local app_argument=''
 
     for app_argument in "${app_arguments[@]}"; do
-        process_setup_file_by_app
+        process_setup_file_by_app_argument
     done
 }
 
 
 # This function generates the command file from the setup file and filters by
 # <app>.
-function process_setup_file_by_app() {
+function process_setup_file_by_app_argument() {
     local app_match=false
     local input_record=''
     local no_app_match=true
@@ -348,6 +348,8 @@ function process_setup_file_by_app() {
                 ;;
         esac
     done < <(cat "$setup_file" "$setup_file_extra")
+    # Extra newline.
+    printf '\n' >> "$command_file"
 
     if $no_app_match; then
         TEXT=$(eval_gettext "App '\$app_argument' not found")
@@ -358,7 +360,7 @@ function process_setup_file_by_app() {
 
 # This function generates the command file from the setup file and filters by
 # host.
-function process_setup_file_by_host() {
+function process_setup_file_by_hostname() {
     local host_match=false
     local input_record=''
 
@@ -385,6 +387,8 @@ function process_setup_file_by_host() {
                 ;;
         esac
     done < <(cat "$setup_file" "$setup_file_extra")
+    # Extra newline.
+    printf '\n' >> "$command_file"
 }
 
 
