@@ -7,19 +7,19 @@
 ###############################################################################
 # Use "man kz install.sh" to learn more about the format of this file.
 
-# Install app 1-disabled-apport on host *
+# Install app disabled-apport on host *
 # Disable Ubuntu's automatic crash report generation.
 if systemctl cat apport &> /dev/null; then sudo systemctl stop apport.service; fi
 if systemctl cat apport &> /dev/null; then sudo systemctl disable apport.service; fi
 if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
 if systemctl cat apport &> /dev/null; then sudo rm --force --verbose /var/crash/*; fi
 
-# Remove app 1-disabled-apport from host *
+# Remove app disabled-apport from host *
 # Enable Ubuntu's automatic crash report generation.
 if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
 if systemctl cat apport &> /dev/null; then sudo systemctl enable --now apport.service; fi
 
-# Install app 2-update-system on host *
+# Install app update-system on host *
 # Update and cleanup system.
 # This may take a while...
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
@@ -29,7 +29,7 @@ if grep --quiet debian /etc/os-release && type snap &> /dev/null; then sudo snap
 if grep --quiet rhel   /etc/os-release; then sudo dnf upgrade --assumeyes --refresh; fi
 if grep --quiet rhel   /etc/os-release && type snap &> /dev/null; then sudo snap refresh; fi
 
-# Remove app 2-update-system from host *
+# Remove app update-system from host *
 # Update and cleanup system.
 echo 'The update-system app cannot be removed.'
 # Install app 7zip on host *
