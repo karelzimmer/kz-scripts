@@ -351,21 +351,10 @@ function build_rpm_package() {
 # This function installs Debian-package kz.
 function install_deb_package() {
     local to_install=''
-    local sleep=.5
 
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
     check_package_manager
-
-    # Progress indicator with growing [=>, [==>, etc. as long as the pid file
-    # exists, i.e. installation is in progress.
-    KZ_BUILD_PID_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.pid")
-    printf '%i\n' $$ > "$KZ_BUILD_PID_FILE"
-    printf '%s' '[ '
-    while test -e "$KZ_BUILD_PID_FILE"; do
-        printf '\b%s' '=>'
-        sleep $sleep
-    done &
 
     if $DEV; then
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME
@@ -378,10 +367,6 @@ function install_deb_package() {
             reinstall                       \
             --assume-yes                    \
             "$to_install"                   |& $PROGRAM_LOGS
-
-    # Progress indicator ends like [====]100%.
-    rm --verbose "$KZ_BUILD_PID_FILE" |& $PROGRAM_LOGS
-    printf '\b%s\n' '=]100%'
 }
 
 
