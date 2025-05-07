@@ -111,7 +111,7 @@ $HELP"
 
 # This function prepares further processing.
 function prepare_processing() {
-    local sleep=.5
+    local sleep=0.5
 
     sudo true
 
