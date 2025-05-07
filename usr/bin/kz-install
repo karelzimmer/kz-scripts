@@ -356,7 +356,7 @@ function process_install_file_by_app_argument() {
                 ;;
         esac
     done < <(cat "$install_file" "$install_file_extra")
-    # Extra empty line.
+    # Add extra empty line.
     printf '\n' >> "$command_file"
 
     if $no_app_match; then
@@ -396,7 +396,7 @@ function process_setup_file_by_hostname() {
                 ;;
         esac
     done < <(cat "$install_file" "$install_file_extra")
-    # Extra empty line.
+    # Add extra empty line.
     printf '\n' >> "$command_file"
 }
 
