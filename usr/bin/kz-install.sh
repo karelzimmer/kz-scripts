@@ -25,7 +25,6 @@ if systemctl cat apport &> /dev/null; then sudo systemctl enable --now apport.se
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get upgrade --assume-yes; fi
 if grep --quiet debian /etc/os-release && type snap &> /dev/null; then sudo snap refresh; fi
-
 if grep --quiet rhel   /etc/os-release; then sudo dnf upgrade --assumeyes --refresh; fi
 if grep --quiet rhel   /etc/os-release && type snap &> /dev/null; then sudo snap refresh; fi
 
@@ -61,7 +60,6 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes anydesk; fi
-
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo > /dev/null; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes anydesk; fi
 
@@ -72,7 +70,6 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf insta
 # Web app: https://my.anydesk.com/v2
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes anydesk; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list*; fi
-
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes anydesk; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo*; fi
 
@@ -642,7 +639,6 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes spotify-client; fi
-
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The spotify app is available as a web app.'; fi
 
 # Remove app spotify from host pc01 pc02 pc06 pc07
@@ -650,7 +646,6 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The spot
 # Web app: https://open.spotify.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes spotify-client; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify*.list*; fi
-
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The spotify web app cannot be removed.'; fi
 
 # Install app ssh on host pc01 pc06 pc07
@@ -661,7 +656,6 @@ sudo sed --in-place 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /e
 # Check for remote root access.
 grep 'PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
-
 
 # Remove app ssh from host pc01 pc06 pc07
 # Secure SHell.
