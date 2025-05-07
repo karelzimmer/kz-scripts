@@ -83,6 +83,7 @@ function process() {
         scriptdir=$(dirname "$(realpath "$script")")
         scriptname=$(basename "$script")
         file=$scriptdir/$scriptname
+        logmsg "Process $script..."
         case $scriptname in
             *.gpg | *.png )
                 continue
