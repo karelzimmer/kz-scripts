@@ -36,11 +36,11 @@ NORMAL: str = '\033[0m'
 if subprocess.run('type systemctl', executable='bash',
                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                   shell=True).returncode != OK:
-    print(f'{RED}{_('fatal: no systemd available')}{NORMAL}')
+    print(f"{RED}{_('fatal: no systemd available')}{NORMAL}")
     sys.exit(ERR)
 
 if not os.path.exists('/etc/os-release'):
-    print(f'{RED}{_('fatal: no os release available')}{NORMAL}')
+    print(f"{RED}{_('fatal: no os release available')}{NORMAL}")
     sys.exit(ERR)
 
 
@@ -188,7 +188,7 @@ def init(PROGRAM_NAME: str) -> None:
     """
     TEXT = f'==== START logs for script {PROGRAM_NAME} ====\n'
     logmsg(PROGRAM_NAME, TEXT)
-    TEXT = f'Started ({' '.join(sys.argv)} as {os.getlogin()}) ===='
+    TEXT = f"Started ({' '.join(sys.argv)} as {os.getlogin()}) ===="
     logmsg(PROGRAM_NAME, TEXT)
 
 

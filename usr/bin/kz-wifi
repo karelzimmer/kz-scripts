@@ -32,15 +32,15 @@ PROGRAM_DESC: str = _('Show WiFi information')
 USAGE: str = f'kz wifi [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage] \
 [-v|--version]'
 
-HELP: str = (f'{_('Usage: kz wifi [<options>]')}\n\n'
+HELP: str = (f"{_('Usage: kz wifi [<options>]')}\n\n"
              f'{PROGRAM_DESC}.\n\n'
-             f'{_('Options:')}\n'
-             f'{_('  -g, --gui      run in graphical mode,')}\n'
-             f'{_('                 requires a desktop environment')}\n'
-             f'{_('  -h, --help     show this help text')}\n'
-             f'{_('  -m, --manual   show manual page')}\n'
-             f'{_('  -u, --usage    show a short usage summary')}\n'
-             f'{_('  -v, --version  show program version')}')
+             f"{_('Options:')}\n"
+             f"{_('  -g, --gui      run in graphical mode,')}\n"
+             f"{_('                 requires a desktop environment')}\n"
+             f"{_('  -h, --help     show this help text')}\n"
+             f"{_('  -m, --manual   show manual page')}\n"
+             f"{_('  -u, --usage    show a short usage summary')}\n"
+             f"{_('  -v, --version  show program version')}")
 
 OPTIONS_SHORT: str = 'ghmuv'
 OPTIONS_LONG: list[str] = ['gui', 'help', 'manual', 'usage', 'version']
@@ -67,7 +67,7 @@ def process(OPTION_GUI: bool = False) -> None:
     if not kz_common.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term()
 
-    TEXT = f'{_('Use this data to connect to the wireless network.')}'
+    TEXT = f"{_('Use this data to connect to the wireless network.')}"
     if OPTION_GUI:
         try:
             nmcli_output = subprocess.run(command, executable='bash',
@@ -110,7 +110,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
                                        OPTIONS_LONG)
     except getopt.error as err:
         TEXT = f'{program_name}: {err}\n'
-        TEXT += f'{_('Usage:')} {USAGE}'
+        TEXT += f"{_('Usage:')} {USAGE}"
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
@@ -130,14 +130,14 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz_common.term(PROGRAM_NAME, kz_common.OK)
         else:
-            TEXT = f'{PROGRAM_NAME}: getopt: {_('internal error')}'
+            TEXT = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
             kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
     if args:
-        TEXT = f'{program_name}: {' '.join(args)}: '
-        TEXT += f'{_('arguments are not allowed')}\n'
-        TEXT += f'{_('Usage:')} {USAGE}'
+        TEXT = f"{program_name}: {' '.join(args)}: "
+        TEXT += f"{_('arguments are not allowed')}\n"
+        TEXT += f"{_('Usage:')} {USAGE}"
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 

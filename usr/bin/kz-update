@@ -31,13 +31,13 @@ PROGRAM_DESC: str = _('Update and cleanup system')
 
 USAGE: str = f'kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
-HELP: str = (f'{_('Usage: kz update [<options>]')}\n\n'
+HELP: str = (f"{_('Usage: kz update [<options>]')}\n\n"
              f'{PROGRAM_DESC}.\n\n'
-             f'{_('Options:')}\n'
-             f'{_('  -h, --help     show this help text')}\n'
-             f'{_('  -m, --manual   show manual page')}\n'
-             f'{_('  -u, --usage    show a short usage summary')}\n'
-             f'{_('  -v, --version  show program version')}')
+             f"{_('Options:')}\n"
+             f"{_('  -h, --help     show this help text')}\n"
+             f"{_('  -m, --manual   show manual page')}\n"
+             f"{_('  -u, --usage    show a short usage summary')}\n"
+             f"{_('  -v, --version  show program version')}")
 
 OPTIONS_SHORT: str = 'hmuv'
 OPTIONS_LONG: list[str] = ['help', 'manual', 'usage', 'version']
@@ -97,7 +97,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
                                        OPTIONS_LONG)
     except getopt.error as err:
         TEXT = f'{program_name}: {err}\n'
-        TEXT += f'{_('Usage:')} {USAGE}'
+        TEXT += f"{_('Usage:')} {USAGE}"
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
@@ -115,14 +115,14 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz_common.term(PROGRAM_NAME, kz_common.OK)
         else:
-            TEXT = f'{PROGRAM_NAME}: getopt: {_('internal error')}'
+            TEXT = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
             kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
     if args:
-        TEXT = f'{program_name}: {' '.join(args)}: '
-        TEXT += f'{_('arguments are not allowed')}\n'
-        TEXT += f'{_('Usage:')} {USAGE}'
+        TEXT = f"{program_name}: {' '.join(args)}: "
+        TEXT += f"{_('arguments are not allowed')}\n"
+        TEXT += f"{_('Usage:')} {USAGE}"
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
@@ -131,7 +131,7 @@ def perform_deb_update() -> None:
     """
     This function updates installed Debian packages and snaps if installed.
     """
-    TEXT = f'{BOLD}{_('Update')}...{kz_common.NORMAL}\n'
+    TEXT = f"{BOLD}{_('Update')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     command: str = 'sudo apt-get update'
@@ -152,7 +152,7 @@ def perform_deb_cleanup() -> None:
     """
     This function performs a Debian packages cleanup.
     """
-    TEXT = f'{BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n'
+    TEXT = f"{BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     command: str = 'sudo apt-get autoclean'
@@ -166,7 +166,7 @@ def perform_rpm_update() -> None:
     """
     This function updates installed RPM packages and snaps if installed.
     """
-    TEXT = f'{BOLD}{_('Update')}...{kz_common.NORMAL}\n'
+    TEXT = f"{BOLD}{_('Update')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     command: str = 'sudo dnf upgrade --assumeyes --refresh'
@@ -184,7 +184,7 @@ def perform_rpm_cleanup() -> None:
     """
     This function performs a RPM packages cleanup.
     """
-    TEXT = f'{BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n'
+    TEXT = f"{BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     command: str = 'sudo dnf clean all'
