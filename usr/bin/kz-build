@@ -352,6 +352,7 @@ function build_rpm_package() {
 function install_deb_package() {
     local to_install=''
 
+    sudo true
     TEXT=$(gettext 'Install Debian package (this may take a while)...')
     infomsg "$TEXT"
     check_package_manager

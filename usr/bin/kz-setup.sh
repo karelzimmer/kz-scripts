@@ -49,10 +49,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed             
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position            &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position LEFT; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height            &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed          &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts              &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash               &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 
 # Reset app dash-to-dock on host pc07
 # Desktop dock.
@@ -68,10 +64,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed             
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position            &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height            &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed          &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts              &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash               &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 
 # Setup app evolution on host pc07
 # E-mail and organizer.
@@ -132,6 +124,10 @@ if gsettings get org.gnome.nautilus.preferences show-image-thumbnails           
 if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 
 # Reset app gnome on host *
@@ -154,6 +150,10 @@ if gsettings get org.gnome.nautilus.preferences show-image-thumbnails           
 if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 
 # Setup app google-chrome on host *
