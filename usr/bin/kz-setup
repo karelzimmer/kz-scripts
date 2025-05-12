@@ -88,18 +88,18 @@ function process() {
     local option_file=false
     local reset_app='Reset app'
     local setup_app='Setup app'
-    local setup_file_extra=''
+    local setup_file_gpg=''
     local setup_file=/usr/bin/$PROGRAM_NAME.sh
     local -A app_arguments=()
 
     check_input "$@"
 
-    setup_file_extra=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
+    setup_file_gpg=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
 
     if $option_file; then
         setup_file=$file_argument
-        # Initialise the setup file extra as "empty" with file header (GPG).
-    cat << EOF > "$setup_file_extra"
+        # Initialise the setup file gpg as "empty" with file header (GPG).
+        cat << EOF > "$setup_file_gpg"
 # shellcheck shell=bash
 ###############################################################################
 # SPDX-FileComment: Setup file for use with kz-setup script (GPG)
@@ -118,7 +118,7 @@ EOF
             2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-setup.sh.gpg        \
-            2> >($PROGRAM_LOGS)             > "$setup_file_extra" || true
+            2> >($PROGRAM_LOGS)             > "$setup_file_gpg" || true
     fi
 
     if ! [[ -f $setup_file ]]; then
@@ -262,7 +262,7 @@ $USAGE"
 
 # This function browses through the setup file.
 function process_option_browse() {
-    less --no-init --quit-if-one-screen "$setup_file" "$setup_file_extra"
+    less --no-init --quit-if-one-screen "$setup_file" "$setup_file_gpg"
 }
 
 
@@ -277,7 +277,7 @@ $(gettext 'NUM  APP')
     apps=$(
         grep    "#.*$setup_app.*on"     \
                 "$setup_file"           \
-                "$setup_file_extra"     |
+                "$setup_file_gpg"     |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
         cut     --delimiter=' '         \
@@ -347,7 +347,7 @@ function process_setup_file_by_app_argument() {
                 fi
                 ;;
         esac
-    done < <(cat "$setup_file" "$setup_file_extra")
+    done < <(cat "$setup_file" "$setup_file_gpg")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 
@@ -386,7 +386,7 @@ function process_setup_file_by_hostname() {
                 fi
                 ;;
         esac
-    done < <(cat "$setup_file" "$setup_file_extra")
+    done < <(cat "$setup_file" "$setup_file_gpg")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 }

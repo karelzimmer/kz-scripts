@@ -82,7 +82,7 @@ function process() {
     local file_argument=''
     local from_host='from host'
     local install_app='Install app'
-    local install_file_extra=''
+    local install_file_gpg=''
     local install_file=/usr/bin/$PROGRAM_NAME.sh
     local on_host='on host'
     local option_apps=false
@@ -94,12 +94,12 @@ function process() {
 
     check_input "$@"
 
-    install_file_extra=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
+    install_file_gpg=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
 
     if $option_file; then
         install_file=$file_argument
-        # Initialise the install file extra as "empty" with file header (GPG).
-    cat << EOF > "$install_file_extra"
+        # Initialise the install file gpg as "empty" with file header (GPG).
+        cat << EOF > "$install_file_gpg"
 # shellcheck shell=bash
 ###############################################################################
 # SPDX-FileComment: Install file for use with kz-install script (GPG)
@@ -118,7 +118,7 @@ EOF
             2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-install.sh.gpg      \
-            2> >($PROGRAM_LOGS)             > "$install_file_extra" || true
+            2> >($PROGRAM_LOGS)             > "$install_file_gpg" || true
 
     fi
 
@@ -269,7 +269,7 @@ $USAGE"
 
 # This function browses through the installation file.
 function process_option_browse() {
-    less --no-init --quit-if-one-screen "$install_file" "$install_file_extra"
+    less --no-init --quit-if-one-screen "$install_file" "$install_file_gpg"
 }
 
 
@@ -284,7 +284,7 @@ $(gettext 'NUM  APP')
     apps=$(
         grep    "#.*$install_app.*$on_host" \
                 "$install_file"             \
-                "$install_file_extra"       |
+                "$install_file_gpg"       |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |
         cut     --delimiter=' '             \
@@ -355,7 +355,7 @@ function process_install_file_by_app_argument() {
                 fi
                 ;;
         esac
-    done < <(cat "$install_file" "$install_file_extra")
+    done < <(cat "$install_file" "$install_file_gpg")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 
@@ -395,7 +395,7 @@ function process_setup_file_by_hostname() {
                 fi
                 ;;
         esac
-    done < <(cat "$install_file" "$install_file_extra")
+    done < <(cat "$install_file" "$install_file_gpg")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 }
