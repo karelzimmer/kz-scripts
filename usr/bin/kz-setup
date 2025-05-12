@@ -102,7 +102,7 @@ function process() {
         cat << EOF > "$setup_file_gpg"
 # shellcheck shell=bash
 ###############################################################################
-# SPDX-FileComment: Setup file for use with kz-setup script (GPG)
+# SPDX-FileComment: Setup file gpg for use with kz-setup script
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
