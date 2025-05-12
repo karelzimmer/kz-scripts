@@ -118,7 +118,7 @@ EOF
             2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-install.sh.gpg      \
-            2> >($PROGRAM_LOGS)             > "$install_file_gpg" || true
+            2> >($PROGRAM_LOGS)             > "$install_file_gpg"
 
     fi
 

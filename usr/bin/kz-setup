@@ -118,7 +118,7 @@ EOF
             2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-setup.sh.gpg        \
-            2> >($PROGRAM_LOGS)             > "$setup_file_gpg" || true
+            2> >($PROGRAM_LOGS)             > "$setup_file_gpg"
     fi
 
     if ! [[ -f $setup_file ]]; then
