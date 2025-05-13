@@ -560,9 +560,9 @@ EOF
 
 # This function controls the termination of the script.
 function term() {
-    local users=''
     local -i num_users=0
     local -i rc=0
+    local users=''
 
     if [[ $BACKUP_RC -ne $OK ]]; then
         TEXT="$(eval_gettext "Backup ended with warnings or errors.

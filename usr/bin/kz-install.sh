@@ -31,6 +31,7 @@ if grep --quiet rhel   /etc/os-release && type snap &> /dev/null; then sudo snap
 # Remove app update-system from host *
 # Update and cleanup system.
 echo 'The update-system app cannot be removed.'
+
 # Install app 7zip on host *
 # File archiver.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes p7zip-full; fi

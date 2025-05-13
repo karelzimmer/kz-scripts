@@ -378,9 +378,9 @@ function check_mypy() {
 
 # This function checks on record length.
 function check_record_length() {
-    local python_script='#!''/usr/bin/python3'
     local -i max_line_length_found=0
     local -i max_line_length=79
+    local python_script='#!''/usr/bin/python3'
 
     # Python is checked by pycodestyle.
     if grep --quiet --line-regexp "$python_script" "$script"; then

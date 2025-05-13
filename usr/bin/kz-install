@@ -25,7 +25,7 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]
-                  [-f|--file <file>] [-g|--gui] [-r|--remove]
+                  [-f|--file <file>...] [-g|--gui] [-r|--remove]
                   [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
                   [<app>...]")
 readonly USAGE
@@ -39,10 +39,10 @@ $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
 $(gettext '  -a, --apps     show list of apps')
-$(gettext '  -b, --browse   browse installation file')
+$(gettext '  -b, --browse   browse installation files')
 $(gettext '  -c, --cat      show contents of command file')
-$(gettext "  -f, --file <file>
-                 process specified installation file")
+$(gettext "  -f, --file <file>...
+                 process specified installation files")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --remove   delete apps')
@@ -77,55 +77,49 @@ declare -A FAILED_APPS=()
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    local -A app_arguments=()
+    local -a install_files=()
+    local -i install_file_num=0
     local argument_app=false
     local command_file=''
-    local file_argument=''
+    local err_flag=false
     local from_host='from host'
     local install_app='Install app'
-    local install_file_gpg=''
-    local install_file=/usr/bin/$PROGRAM_NAME.sh
+    local install_file_default_gpg=''
+    local install_file_default=/usr/bin/$PROGRAM_NAME.sh
+    local install_file=''
     local on_host='on host'
     local option_apps=false
     local option_browse=false
     local option_cat=false
     local option_file=false
     local remove_app='Remove app'
-    local -A app_arguments=()
 
     check_input "$@"
 
-    install_file_gpg=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
-
-    if $option_file; then
-        install_file=$file_argument
-        # Initialise the install file gpg as "empty" with file header (GPG).
-        cat << EOF > "$install_file_gpg"
-# shellcheck shell=bash
-###############################################################################
-# SPDX-FileComment: Install file for use with kz-install script (gpg)
-#
-# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0-1.0
-###############################################################################
-# Use "man kz install.sh" to learn more about the format of this file.
-
-# No commands to execute.
-EOF
-    else
-        # Install commands in GPG file.
+    if ! $option_file; then
+        install_files[++install_file_num]=$install_file_default
+        # Install commands in gpg file.
+        install_file_default_gpg=\
+$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         gpg --import                        \
             /usr/share/kz/kz-public-key.gpg \
             2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-install.sh.gpg      \
-            2> >($PROGRAM_LOGS)             > "$install_file_gpg"
-
+            2> >($PROGRAM_LOGS)             > "$install_file_default_gpg"
+        install_files[++install_file_num]=$install_file_default_gpg
     fi
 
-    if ! [[ -f $install_file ]]; then
-        TEXT=$(eval_gettext "No installation file found, looked for \
-'\$install_file'.")
-        errmsg "$TEXT"
+    for install_file in "${install_files[@]}"; do
+        if [[ ! -f $install_file ]]; then
+            TEXT=$(eval_gettext "Installation file '\$install_file' not \
+found.")
+            errmsg "$TEXT"
+            err_flag=true
+        fi
+    done
+    if $err_flag; then
         exit $ERR
     fi
 
@@ -199,14 +193,8 @@ function process_options() {
                 shift
                 ;;
             -f | --file )
-                if $option_file; then
-                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
-                fi
                 option_file=true
-                file_argument=$2
+                install_files[++install_file_num]=$2
                 shift 2
                 ;;
             -g | --gui )
@@ -269,7 +257,7 @@ $USAGE"
 
 # This function browses through the installation file.
 function process_option_browse() {
-    less --no-init --quit-if-one-screen "$install_file" "$install_file_gpg"
+    less --no-init --quit-if-one-screen "${install_files[@]}"
 }
 
 
@@ -283,8 +271,7 @@ $(gettext 'NUM  APP')
 "
     apps=$(
         grep    "#.*$install_app.*$on_host" \
-                "$install_file"             \
-                "$install_file_gpg"         |
+                "${install_files[@]}"       |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |
         cut     --delimiter=' '             \
@@ -355,7 +342,7 @@ function process_install_file_by_app_argument() {
                 fi
                 ;;
         esac
-    done < <(cat "$install_file" "$install_file_gpg")
+    done < <(cat "${install_files[@]}")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 
@@ -395,7 +382,7 @@ function process_setup_file_by_hostname() {
                 fi
                 ;;
         esac
-    done < <(cat "$install_file" "$install_file_gpg")
+    done < <(cat "${install_files[@]}")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 }
@@ -409,8 +396,8 @@ function process_option_cat() {
 
 # This function starts installing the apps.
 function install_apps() {
-    local title=''
     local -i app_tot_num=0
+    local title=''
 
     app_tot_num=$(
         grep    --count                     \
@@ -448,11 +435,11 @@ function install_apps() {
 
 # This function reads commands from the command file for further processing.
 function process_command_file() {
+    local -i app_seq_num=0
+    local -i cmd_seq_num=0
     local app_name_line=''
     local app_name=''
     local command_record=''
-    local -i app_seq_num=0
-    local -i cmd_seq_num=0
 
     if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')

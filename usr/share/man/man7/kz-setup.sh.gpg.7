@@ -1,0 +1,41 @@
+.\"############################################################################
+.\"# SPDX-FileComment: Man page for kz-setup.sh.gpg
+.\"#
+.\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+.\"# SPDX-License-Identifier: CC0-1.0
+.\"############################################################################
+
+.TH "KZ-SETUP.SH.GPG" "7" "4.2.1" "kz" "File format"
+
+.SH NAME
+kz-setup.sh.gpg - Setup file for use with kz install (gpg)
+
+.SH SYNOPSIS
+.SY kz-setup.sh.gpg
+.YS
+
+.SH DESCRIPTION
+This file contains commands to process as an setup file with kz setup.
+.sp
+Commands with personal information such as a username are included in this
+encrypted setup file.
+.sp
+It is created with e.g. commands:
+.br
+gpg --import /usr/share/kz/kz-public-key.gpg
+.br
+gpg --sign --output <encrypted-file> <file>
+.sp
+This encrypted file is decrypted before the commands are used in script
+kz-setup with e.g. commands:
+.br
+gpg --import /usr/share/kz/kz-public-key.gpg
+.br
+gpg --decrypt --output <file> <encrypted-file>
+.sp
+For the format of the records in this install file please use
+\fBman kz setup.sh\fR.
+
+.SH SEE ALSO
+\fBkz-setup\fR(1),
+\fBkz-setup.sh\fR(7)

@@ -25,7 +25,7 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
-                [-f|--file <file>] [-g|--gui] [-r|--reset]
+                [-f|--file <file>...] [-g|--gui] [-r|--reset]
                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
                 [<app>...]")
 readonly USAGE
@@ -39,10 +39,10 @@ $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
 $(gettext '  -a, --apps     show list of apps')
-$(gettext '  -b, --browse   browse setup file')
+$(gettext '  -b, --browse   browse setup files')
 $(gettext '  -c, --cat      show contents of command file')
-$(gettext "  -f, --file <file>
-                 process specified setup file")
+$(gettext "  -f, --file <file>...
+                 process specified setup files")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --reset    set apps on default values')
@@ -79,51 +79,46 @@ declare -A FAILED_APPS=()
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    local -A app_arguments=()
+    local -a setup_files=()
+    local -i setup_file_num=0
     local argument_app=false
     local command_file=''
-    local file_argument=''
+    local err_flag=false
     local option_apps=false
     local option_browse=false
     local option_cat=false
     local option_file=false
     local reset_app='Reset app'
     local setup_app='Setup app'
-    local setup_file_gpg=''
-    local setup_file=/usr/bin/$PROGRAM_NAME.sh
-    local -A app_arguments=()
+    local setup_file_default_gpg=''
+    local setup_file_default=/usr/bin/$PROGRAM_NAME.sh
+    local setup_file=''
 
     check_input "$@"
 
-    setup_file_gpg=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
-
-    if $option_file; then
-        setup_file=$file_argument
-        # Initialise the setup file gpg as "empty" with file header (GPG).
-        cat << EOF > "$setup_file_gpg"
-# shellcheck shell=bash
-###############################################################################
-# SPDX-FileComment: Setup file for use with kz-setup script (gpg)
-#
-# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0-1.0
-###############################################################################
-# Use "man kz setup.sh" to learn more about the format of this file.
-
-# No commands to execute.
-EOF
-    else
-        # Setup commands in GPG file.
+    if ! $option_file; then
+        setup_files[++setup_file_num]=$setup_file_default
+        # Setup commands in gpg file.
+        setup_file_default_gpg=\
+$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         gpg --import                        \
             /usr/share/kz/kz-public-key.gpg \
             2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-setup.sh.gpg        \
-            2> >($PROGRAM_LOGS)             > "$setup_file_gpg"
+            2> >($PROGRAM_LOGS)             > "$setup_file_default_gpg"
+        setup_files[++setup_file_num]=$setup_file_default_gpg
     fi
 
-    if ! [[ -f $setup_file ]]; then
-        TEXT=$(eval_gettext "No setup file found, looked for '\$setup_file'.")
-        errmsg "$TEXT"
+    for setup_file in "${setup_files[@]}"; do
+        if [[ ! -f $setup_file ]]; then
+            TEXT=$(eval_gettext "Setup file '\$setup_file' not found.")
+            errmsg "$TEXT"
+            err_flag=true
+        fi
+    done
+    if $err_flag; then
         exit $ERR
     fi
 
@@ -194,14 +189,8 @@ function process_options() {
                 shift
                 ;;
             -f | --file )
-                if $option_file; then
-                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
-                fi
                 option_file=true
-                file_argument=$2
+                setup_files[++setup_file_num]=$2
                 shift 2
                 ;;
             -g | --gui )
@@ -262,7 +251,7 @@ $USAGE"
 
 # This function browses through the setup file.
 function process_option_browse() {
-    less --no-init --quit-if-one-screen "$setup_file" "$setup_file_gpg"
+    less --no-init --quit-if-one-screen "${setup_files[@]}"
 }
 
 
@@ -276,8 +265,7 @@ $(gettext 'NUM  APP')
 "
     apps=$(
         grep    "#.*$setup_app.*on"     \
-                "$setup_file"           \
-                "$setup_file_gpg"       |
+                "${setup_files[@]}"     |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
         cut     --delimiter=' '         \
@@ -347,7 +335,7 @@ function process_setup_file_by_app_argument() {
                 fi
                 ;;
         esac
-    done < <(cat "$setup_file" "$setup_file_gpg")
+    done < <(cat "${setup_files[@]}")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 
@@ -386,7 +374,7 @@ function process_setup_file_by_hostname() {
                 fi
                 ;;
         esac
-    done < <(cat "$setup_file" "$setup_file_gpg")
+    done < <(cat "${setup_files[@]}")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 }
@@ -400,8 +388,8 @@ function process_option_cat() {
 
 # This function starts setting up the apps.
 function setup_apps() {
-    local title=''
     local -i app_tot_num=0
+    local title=''
 
     app_tot_num=$(
         grep    --count                     \
@@ -439,11 +427,11 @@ function setup_apps() {
 
 # This function reads commands from the command file for further processing.
 function process_command_file() {
+    local -i app_seq_num=0
+    local -i cmd_seq_num=0
     local app_name_line=''
     local app_name=''
     local command_record=''
-    local -i app_seq_num=0
-    local -i cmd_seq_num=0
 
     if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')

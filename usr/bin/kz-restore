@@ -304,10 +304,9 @@ function restore_setting_desktop() {
 
 # This function controls the termination of the script.
 function term() {
-    local users=''
     local -i num_users=0
     local -i rc=0
-
+    local users=''
 
     if [[ $RESTORE_RC -ne $OK ]]; then
         TEXT="$(eval_gettext "Restore ended with warnings or errors.

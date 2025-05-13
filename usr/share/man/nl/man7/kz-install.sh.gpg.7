@@ -1,0 +1,42 @@
+.\"############################################################################
+.\"# SPDX-FileComment: Man page for kz-install.sh.gpg (Dutch)
+.\"#
+.\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+.\"# SPDX-License-Identifier: CC0-1.0
+.\"############################################################################
+
+.TH "KZ-INSTALL.SH.GPG" "7" "4.2.1" "kz" "Bestandsindeling"
+
+.SH NAAM
+kz-install.sh.gpg - Installatiebestand voor gebruik met kz install (gpg)
+
+.SH SAMENVATTING
+.SY kz-install.sh.gpg
+.YS
+
+.SH BESCHRIJVING
+Dit bestand bevat opdrachten om te verwerken als installatiebestand met kz
+install.
+.sp
+Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
+in dit versleuteld installatiebestand.
+.sp
+Dit bestand is aangemaakt met de volgende voorbeeld opdrachten:
+.br
+gpg --import /usr/share/kz/kz-public-key.gpg
+.br
+gpg --sign --output <encrypted-file> <file>
+.sp
+Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
+kz-install met bijvoorbeeld de opdrachten:
+.br
+gpg --import /usr/share/kz/kz-public-key.gpg
+.br
+gpg --decrypt --output <file> <encrypted-file>
+.sp
+Gebruik voor de opmaak van de records in dit installatiebestand
+\fBman kz install.sh\fR.
+
+.SH ZIE OOK
+\fBkz-install\fR(1),
+\fBkz-install.sh\fR(7)

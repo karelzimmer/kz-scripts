@@ -46,7 +46,8 @@ en de huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 Na succesvolle voltooiing wordt de computer opnieuw opgestart.
 .sp
-Voor de indeling van het installatiebestand zie \fBman kz-install.sh\fR.
+Voor de indeling van de installatiebestanden zie \fBman kz-install.sh\fR en
+\fBman kz-install.sh.gpg\fR.
 .sp
 Voor instructies over het toevoegen van extra gebruikers, zie de sectie
 \fBBESTANDEN\fR hieronder.
@@ -65,8 +66,8 @@ installatiebestand.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander
-installatiebestand opgegeven worden.
+Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kunnen andere
+installatiebestanden opgegeven worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz install\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
@@ -102,7 +103,7 @@ Blader door het installatiebestand.
 Toon de inhoud van het opdrachtbestand.
 .TP
 \fB-f\fR, \fB--file\fR \fI<bestand>\fR
-Verwerk het opgegeven bestand.
+Verwerk de opgegeven bestanden.
 .TP
 \fB-g\fR, \fB--gui\fR
 Draai in grafische modus (gui=graphical user interface; grafische
@@ -197,6 +198,7 @@ Installeer Google Chrome.
 \fBkz install --remove google-chrome\fR
 .RS
 Verwijder Google Chrome..RE
+.RE
 .sp
 \fBkz install --cat google-chrome\fR
 .RS
@@ -214,4 +216,5 @@ Toon verwijder-opdrachten voor Google Chrome.
 \fBkz-menu\fR(1),
 \fBkz-setup\fR(1),
 \fBkz-update\fR(1),
-\fBkz-install.sh\fR(7)
+\fBkz-install.sh\fR(7),
+\fBkz-install.sh.gpg\fR(7)

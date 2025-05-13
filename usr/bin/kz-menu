@@ -286,10 +286,10 @@ function process_menu1_choice() {
 
 # This function processes menu 1 choice 1.
 function process_menu1_choice1() {
-    local title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
     local -a rows=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
         )
+    local title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
 
     process_commands
     $OPTION_GUI || wait_for_enter
@@ -325,10 +325,10 @@ Roughly boils down to:
 
 # This function processes menu 1 choice 3.
 function process_menu1_choice3() {
-    local title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
     local -a rows=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
         )
+    local title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
 
     process_commands
     $OPTION_GUI || wait_for_enter
@@ -337,11 +337,11 @@ function process_menu1_choice3() {
 
 # This function processes menu 1 choice 4.
 function process_menu1_choice4() {
-    local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
     local -a rows=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
             "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
         )
+    local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
 
     process_commands
 
@@ -431,11 +431,11 @@ function process_menu2_tui() {
 
 # This function processes menu 2 choice.
 function process_menu2_choice() {
-    local title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
-    local -i reply_save=''
     local -a rows=(
         [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
         )
+    local -i reply_save=''
+    local title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
 
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
         reply_save=$REPLY
@@ -457,11 +457,11 @@ function process_menu2_choice() {
 
 # This function processes the command corresponding to the choice made.
 function process_commands() {
+    local -i row=0
     local command=''
     local description=''
     local execute_command=false
     local title=''
-    local -i row=0
 
     show_commands_before_execution
 
@@ -482,10 +482,10 @@ function process_commands() {
 
 # This function shows the commands before they are executed.
 function show_commands_before_execution() {
+    local -i row=0
     local command=''
     local description=''
     local prompt=''
-    local -i row=0
 
     TEXT="$(gettext 'The following will be executed:')
 "

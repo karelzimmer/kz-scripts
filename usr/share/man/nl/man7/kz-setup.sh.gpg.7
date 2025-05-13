@@ -1,0 +1,41 @@
+.\"############################################################################
+.\"# SPDX-FileComment: Man page for kz-setup.sh.gpg (Dutch)
+.\"#
+.\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+.\"# SPDX-License-Identifier: CC0-1.0
+.\"############################################################################
+
+.TH "KZ-SETUP.SH.GPG" "7" "4.2.1" "kz" "Bestandsindeling"
+
+.SH NAAM
+kz-setup.sh.gpg - Instelbestand voor gebruik met kz setup (gpg)
+
+.SH SAMENVATTING
+.SY kz-setup.sh.gpg
+.YS
+
+.SH BESCHRIJVING
+Dit bestand bevat opdrachten om te verwerken als instelbestand met kz setup.
+.sp
+Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
+in dit versleuteld instelbestand.
+.sp
+Dit bestand is aangemaakt met de volgende voorbeeld opdrachten:
+.br
+gpg --import /usr/share/kz/kz-public-key.gpg
+.br
+gpg --sign --output <encrypted-file> <file>
+.sp
+Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
+kz-setup met bijvoorbeeld de opdrachten:
+.br
+gpg --import /usr/share/kz/kz-public-key.gpg
+.br
+gpg --decrypt --output <file> <encrypted-file>
+.sp
+Gebruik voor de opmaak van de records in dit instelbestand
+\fBman kz setup.sh\fR.
+
+.SH ZIE OOK
+\fBkz-setup\fR(1),
+\fBkz-setup.sh\fR(7)

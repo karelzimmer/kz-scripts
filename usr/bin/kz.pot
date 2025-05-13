@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-08 17:36+0200\n"
+"POT-Creation-Date: 2025-05-13 09:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -501,7 +501,7 @@ msgstr ""
 
 msgid ""
 "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
+"                  [-f|--file <file>...] [-g|--gui] [-r|--remove]\n"
 "                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                  [<app>...]"
 msgstr ""
@@ -512,15 +512,15 @@ msgstr ""
 msgid "  -a, --apps     show list of apps"
 msgstr ""
 
-msgid "  -b, --browse   browse installation file"
+msgid "  -b, --browse   browse installation files"
 msgstr ""
 
 msgid "  -c, --cat      show contents of command file"
 msgstr ""
 
 msgid ""
-"  -f, --file <file>\n"
-"                 process specified installation file"
+"  -f, --file <file>...\n"
+"                 process specified installation files"
 msgstr ""
 
 msgid "  -r, --remove   delete apps"
@@ -537,7 +537,7 @@ msgid "App '$app_argument' not found"
 msgstr ""
 
 #, sh-format
-msgid "No installation file found, looked for '$install_file'."
+msgid "Installation file '$install_file' not found."
 msgstr ""
 
 msgid "The following apps are available:"
@@ -860,17 +860,17 @@ msgstr ""
 
 msgid ""
 "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
+"                [-f|--file <file>...] [-g|--gui] [-r|--reset]\n"
 "                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                [<app>...]"
 msgstr ""
 
-msgid "  -b, --browse   browse setup file"
+msgid "  -b, --browse   browse setup files"
 msgstr ""
 
 msgid ""
-"  -f, --file <file>\n"
-"                 process specified setup file"
+"  -f, --file <file>...\n"
+"                 process specified setup files"
 msgstr ""
 
 msgid "  -r, --reset    set apps on default values"
@@ -883,7 +883,7 @@ msgid "  <app>...       set up specified apps"
 msgstr ""
 
 #, sh-format
-msgid "No setup file found, looked for '$setup_file'."
+msgid "Setup file '$setup_file' not found."
 msgstr ""
 
 msgid "Use \"kz setup <app>...\" to set up the apps."

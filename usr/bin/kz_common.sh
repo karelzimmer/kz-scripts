@@ -301,9 +301,9 @@ function term_sig() {
     local command=$4
     local -i rc=$5
 
+    local -i rc_desc_signalno=0
     local rc_desc=''
     local status=$rc/FAILURE
-    local -i rc_desc_signalno=0
 
     case $rc in
         0 )
