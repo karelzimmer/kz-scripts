@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-13 09:08+0200\n"
+"POT-Creation-Date: 2025-05-13 16:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -501,7 +501,7 @@ msgstr ""
 
 msgid ""
 "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <file>...] [-g|--gui] [-r|--remove]\n"
+"                  [-f|--file <file>]... [-g|--gui] [-r|--remove]\n"
 "                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                  [<app>...]"
 msgstr ""
@@ -519,8 +519,8 @@ msgid "  -c, --cat      show contents of command file"
 msgstr ""
 
 msgid ""
-"  -f, --file <file>...\n"
-"                 process specified installation files"
+"  -f, --file <file>\n"
+"                 process specified installation file"
 msgstr ""
 
 msgid "  -r, --remove   delete apps"
@@ -529,7 +529,7 @@ msgstr ""
 msgid "Type 'kz install --apps' for available apps."
 msgstr ""
 
-msgid "  <app>...       install specified apps"
+msgid "  <app>          process specified app"
 msgstr ""
 
 #, sh-format
@@ -860,7 +860,7 @@ msgstr ""
 
 msgid ""
 "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                [-f|--file <file>...] [-g|--gui] [-r|--reset]\n"
+"                [-f|--file <file>]... [-g|--gui] [-r|--reset]\n"
 "                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                [<app>...]"
 msgstr ""
@@ -869,17 +869,14 @@ msgid "  -b, --browse   browse setup files"
 msgstr ""
 
 msgid ""
-"  -f, --file <file>...\n"
-"                 process specified setup files"
+"  -f, --file <file>\n"
+"                 process specified setup file"
 msgstr ""
 
 msgid "  -r, --reset    set apps on default values"
 msgstr ""
 
 msgid "Usage: kz setup [<options>] [<app>...]"
-msgstr ""
-
-msgid "  <app>...       set up specified apps"
 msgstr ""
 
 #, sh-format

@@ -49,7 +49,7 @@ For the format of the setup files see \fBman kz-setup.sh\fR and
 .sp
 Option \fB-a\fR, \fB--apps\fR lists all apps available in the setup file.
 .sp
-Optionally, apps to be setup can be specified with argument \fI<app>\fR.
+Optionally, apps to be processed can be specified with argument \fI<app>\fR.
 .br
 Per specified app, the commands are selected from the setup file and are copied
 to the command file.
@@ -58,8 +58,8 @@ With option \fB-b\fR, \fB--browse\fR you can browse through the setup file.
 .sp
 Option \fB-c\fR, \fB--cat\fR gives the contents of the command file.
 .sp
-With option \fB-f\fR, \fB--file\fR \fI<file>\fR other setup files can be
-specified.
+With option \fB-f\fR, \fB--file\fR \fI<file>\fR another setup file can be
+specified. This option can be used repeatedly.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode. A
 desktop environment is required.
@@ -79,7 +79,7 @@ Browse through the setup file.
 Display the contents of the command file.
 .TP
 \fB-f\fR, \fB--file\fR \fI<file>\fR
-Process the specified files.
+Process the specified file. This option can be used repeatedly.
 .TP
 \fB-g\fR, \fB--gui\fR
 Run in graphical mode (gui=graphical user interface). A desktop environment is

@@ -25,7 +25,7 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
-                [-f|--file <file>...] [-g|--gui] [-r|--reset]
+                [-f|--file <file>]... [-g|--gui] [-r|--reset]
                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
                 [<app>...]")
 readonly USAGE
@@ -41,8 +41,8 @@ options too.")
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -b, --browse   browse setup files')
 $(gettext '  -c, --cat      show contents of command file')
-$(gettext "  -f, --file <file>...
-                 process specified setup files")
+$(gettext "  -f, --file <file>
+                 process specified setup file")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --reset    set apps on default values')
@@ -52,7 +52,7 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')
 
 $(gettext 'Arguments:')
-$(gettext '  <app>...       set up specified apps')"
+$(gettext '  <app>          process specified app')"
 readonly HELP
 
 readonly OPTIONS_SHORT='abcf:grhmuv'
