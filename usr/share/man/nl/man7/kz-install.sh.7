@@ -41,9 +41,9 @@ T}
 l | l
 l | l.
 T{
-# Install app \fI<app>\fR on host <host>...
+# Install \fI<app>\fR on <host>...
 T}:T{
-De app \fI<app>\fR installeren op host <host>s (\fBApp-regel\fR)
+De app \fI<app>\fR installeren op <host>... (\fBApp-regel\fR)
 T}
 T{
 # Commentaar...
@@ -60,9 +60,9 @@ T}:T{
 Lege regel (geen, één of meer)
 T}
 T{
-# Remove app \fI<app>\fR from host <host>...
+# Remove \fI<app>\fR from <host>...
 T}:T{
-De app \fI<app>\fR verwijderen van host <host>s (\fBApp-regel\fR voor optie
+De app \fI<app>\fR verwijderen van <host>... (\fBApp-regel\fR voor optie
 \fB-r\fR, \fB--remove\fR)
 T}
 T{
@@ -86,7 +86,7 @@ T}
 l | l
 l | l.
 T{
-# Install app gnome-gmail on host *
+# Install gnome-gmail on *
 T}:T{
 Installeer app gnome-gmail op iedere computer, zie [1]
 T}
@@ -98,7 +98,7 @@ T{
 T}:T{
 T}
 T{
-# Remove app gnome-gmail from host *
+# Remove gnome-gmail from *
 T}:T{
 Verwijder app gnome-gmail van iedere computer, zie [1]
 T}
@@ -110,9 +110,9 @@ T{
 T}:T{
 T}
 T{
-# Install app ufw on host pc01
+# Install ufw on pc01
 T}:T{
-Installeer app ufw alleen op host pc01, zie [2]
+Installeer app ufw alleen op pc01, zie [2]
 T}
 T{
 sudo apt-get install --assume-yes gufw
@@ -122,9 +122,9 @@ T{
 T}:T{
 T}
 T{
-# Install app kvm on host pc01 pc02
+# Install kvm on pc01 pc02
 T}:T{
-Installeer app kvm op host pc01 en pc02, zie [3]
+Installeer app kvm op pc01 en pc02, zie [3]
 T}
 T{
 sudo apt-get install --assume-yes qemu-kvm
@@ -134,7 +134,7 @@ T{
 T}:T{
 T}
 T{
-# Install app google-earth on host #none
+# Install google-earth on #none
 T}:T{
 Standaard niet app google-earth installeren, zie [4]
 T}
@@ -153,7 +153,7 @@ worden uitgevoerd.
 [2]
 .br
 De regel met 'pc01' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op host pc01 worden uitgevoerd.
+alleen op pc01 worden uitgevoerd.
 .br
 De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 'kz install gnome'.
@@ -161,7 +161,7 @@ De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 [3]
 .br
 De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op host pc01 en pc02 worden uitgevoerd.
+alleen op pc01 en pc02 worden uitgevoerd.
 .br
 De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 'kz install kvm'.

@@ -59,8 +59,6 @@ readonly OPTIONS_SHORT='abcf:grhmuv'
 readonly OPTIONS_LONG="apps,browse,cat,file:,gui,reset,help,manual,usage,\
 version"
 
-readonly ON_HOST='on host'
-
 
 ###############################################################################
 # Globals
@@ -70,7 +68,6 @@ declare OPTION_GUI=false
 declare OPTION_RESET=false
 declare LOGOUT=true
 declare -A FAILED_APPS=()
-
 
 
 ###############################################################################
@@ -89,8 +86,8 @@ function process() {
     local option_browse=false
     local option_cat=false
     local option_file=false
-    local reset_app='Reset app'
-    local setup_app='Setup app'
+    local reset='Reset'
+    local setup='Setup'
     local setup_file_default_gpg=''
     local setup_file_default=/usr/bin/$PROGRAM_NAME.sh
     local setup_file=''
@@ -206,8 +203,8 @@ $USAGE"
                 ;;
             -r | --reset )
                 OPTION_RESET=true
-                setup_app='Reset app'
-                reset_app='Setup app'
+                setup='Reset'
+                reset='Setup'
                 shift
                 ;;
             -h | --help )
@@ -264,7 +261,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    "#.*$setup_app.*on"     \
+        grep    "#.*$setup.*on"         \
                 "${setup_files[@]}"     |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
@@ -318,13 +315,13 @@ function process_setup_file_by_app_argument() {
                 # Skip empty line.
                 continue
                 ;;
-            '#'*$setup_app*[[:space:]]"$app_argument"[[:space:]]*$ON_HOST* )
+            '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*'on'* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
                 printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$setup_app*$ON_HOST* | '#'*$reset_app*$ON_HOST* )
+            '#'*$setup*'on'* | '#'*$reset*'on'* )
                 # Skip mismatched app record.
                 app_match=false
                 ;;
@@ -358,12 +355,12 @@ function process_setup_file_by_hostname() {
                 # Skip empty line.
                 continue
                 ;;
-            '#'*$setup_app*$ON_HOST*'*' | '#'*$setup_app*$ON_HOST*$HOSTNAME* )
+            '#'*$setup*'on'*'*' | '#'*$setup*'on'*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
                 printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$setup_app*$ON_HOST* | '#'*$reset_app*$ON_HOST* )
+            '#'*$setup*'on'* | '#'*$reset*'on'* )
                 # Skip mismatched app record.
                 host_match=false
                 ;;
@@ -392,9 +389,9 @@ function setup_apps() {
     local title=''
 
     app_tot_num=$(
-        grep    --count                     \
-                "#.*$setup_app.*$ON_HOST"   \
-                "$command_file"             ||true
+        grep    --count             \
+                "#.*$setup.*'on'"   \
+                "$command_file"     ||true
         )
     if [[ $app_tot_num -eq 0 ]]; then
         TEXT=$(gettext 'No commands to execute.' )
@@ -441,7 +438,7 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '#'*$setup_app* )
+            '#'*$setup* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |

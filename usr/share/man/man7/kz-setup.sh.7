@@ -37,13 +37,11 @@ Description
 T}
 .T&
 l | l
-l | l
-l | l
 l | l.
 T{
-# Setup app \fI<app>\fR on host <host>...
+# Setup \fI<app>\fR on <host>...
 T}:T{
-Set up \fI<app>\fR on host <host>s (\fBApp record\fR)
+Set up \fI<app>\fR on <host>... (\fBApp record\fR)
 T}
 T{
 # Comment...
@@ -53,11 +51,22 @@ T}
 T{
 Command
 T}:T{
-Setup app command (one or more \fBCommand records\fR)
+Setup command (one or more \fBCommand records\fR)
 T}
 T{
 T}:T{
 Empty line (none, one or more)
+T}
+T{
+# Reset \fI<app>\fR on <host>...
+T}:T{
+Reset the app \fI<app>\fR on <host>... (\fBApp record\fR for option
+\fB-r\fR, \fB--remove\fR)
+T}
+T{
+Opdracht
+T}:T{
+Reset command (one or more \fBCommand records\fR)
 T}
 .TE
 .LP
@@ -73,29 +82,9 @@ T}
 .T&
 - | -
 l | l
-l | l
-T}
-T{
-# Setup \fI<app>\fR on host <host>...
-T}:T{
-Reset app \fI<app>\fR on host <host>s (\fBApp record\fR for option reset)
-T}
-T{
-Command
-T}:T{
-Reset app command (one or more \fBCommand records\fR)
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
-# Setup app google-chrome for *
+# Setup google-chrome on *
 T}:T{
 Set up google-chrome on any computer, see [1]
 T}
@@ -107,7 +96,7 @@ T{
 T}:T{
 T}
 T{
-# Reset app google-chrome for *
+# Reset google-chrome on *
 T}:T{
 Reset app google-chrome on any computer, see [1]
 T}
@@ -119,9 +108,9 @@ T{
 T}:T{
 T}
 T{
-# Setup app gnome on host pc01
+# Setup gnome on pc01
 T}:T{
-Set up gnome only on host pc01, see [2]
+Set up gnome only on pc01, see [2]
 T}
 T{
 gsettings set org.gnome.shell...
@@ -131,9 +120,9 @@ T{
 T}:T{
 T}
 T{
-# setup kvm on host pc01 pc02
+# setup kvm on pc01 pc02
 T}:T{
-Set up kvm on host pc01 and pc02, see [3]
+Set up kvm on pc01 and pc02, see [3]
 T}
 T{
 kz-desktop --addaft=virt-manager
@@ -143,7 +132,7 @@ T{
 T}:T{
 T}
 T{
-# Setup app google-earth for #none
+# Setup google-earth on #none
 T}:T{
 Do not set up Google Earth by default, see [4]
 T}
@@ -169,7 +158,7 @@ gle-earth'.
 [3]
 .br
 The line with 'pc01 pc02' ensures that the associated commands are executed
-only on host pc01 and pc02 by default.
+only on pc01 and pc02 by default.
 .br
 The app can still be set up on another computer with the command 'kz setup kvm\
 '.

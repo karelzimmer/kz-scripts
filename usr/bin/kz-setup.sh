@@ -7,35 +7,35 @@
 ###############################################################################
 # Use "man kz setup.sh" to learn more about the format of this file.
 
-# Setup app anydesk on host pc06 pc07
+# Setup anydesk on pc06 pc07
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
 kz-desktop --addaft=anydesk
 
-# Reset app anydesk on host pc06 pc07
+# Reset anydesk on pc06 pc07
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
 kz-desktop --delete=anydesk
 
-# Setup app calibre on host pc06
+# Setup calibre on pc06
 # E-book manager.
 kz-desktop --addaft=calibre-gui
 
-# Reset app calibre on host pc06
+# Reset calibre on pc06
 # E-book manager.
 kz-desktop --delete=calibre-gui
 
-# Setup app cockpit on host pc06
+# Setup cockpit on pc06
 # Web console.
 # Web app: https://localhost:9090
 kz-desktop --addaft=kz-cockpit
 
-# Reset app cockpit on host pc06
+# Reset cockpit on pc06
 # Web console.
 # Web app: https://localhost:9090
 kz-desktop --delete=kz-cockpit
 
-# Setup app dash-to-dock on host pc07
+# Setup dash-to-dock on pc07
 # Desktop dock.
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
@@ -50,7 +50,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position          
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height            &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed          &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 
-# Reset app dash-to-dock on host pc07
+# Reset dash-to-dock on pc07
 # Desktop dock.
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
@@ -65,46 +65,46 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position          
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height            &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed          &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
-# Setup app evolution on host pc07
+# Setup evolution on pc07
 # E-mail and organizer.
 kz-desktop --delete=org.gnome.Evolution
 
-# Reset app evolution on host pc07
+# Reset evolution on pc07
 # E-mail and organizer.
 kz-desktop --addbef=org.gnome.Evolution
 
-# Setup app firefox on host pc01 pc02 pc06 pc07
+# Setup firefox on pc01 pc02 pc06 pc07
 # Web browser.
 kz-desktop --delete=firefox
 kz-desktop --delete=firefox-esr
 kz-desktop --delete=firefox_firefox
 
-# Reset app firefox on host pc01 pc02 pc06 pc07
+# Reset firefox on pc01 pc02 pc06 pc07
 # Web browser.
 kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
 kz-desktop --addbef=firefox_firefox
 
-# Setup app gdebi on host *
+# Setup gdebi on *
 # View and install deb files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'App gdebi is not available.'; fi
 
-# Reset app gdebi on host *
+# Reset gdebi on *
 # View and install deb files.
 if [[ ${DISPLAY-} ]]; then echo 'App gdebi cannot be reset.'; fi
 
-# Setup app git on host pc06 pc07
+# Setup git on pc06 pc07
 # Distributed revision control system.
 # Web app: https://github.com
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
-# Reset app git on host pc06 pc07
+# Reset git on pc06 pc07
 # Distributed revision control system.
 # Web app: https://github.com
 git config --global --unset alias.logg
 
-# Setup app gnome on host *
+# Setup gnome on *
 # Desktop environment.
 if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
@@ -130,7 +130,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounte
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 
-# Reset app gnome on host *
+# Reset gnome on *
 # Desktop environment.
 if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
@@ -156,97 +156,97 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounte
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 
-# Setup app google-chrome on host *
+# Setup google-chrome on *
 # Web browser.
 kz-desktop --addbef=google-chrome
 if [[ ${DISPLAY-} ]]; then xdg-mime default google-chrome.desktop application/pdf; fi
 
-# Reset app google-chrome on host *
+# Reset google-chrome on *
 # Web browser.
 kz-desktop --delete=google-chrome
 
-# Setup app handbrake on host #none
+# Setup handbrake on #none
 # Video-dvd ripper and transcoder.
 kz-desktop --addaft=fr.handbrake.ghb
 
-# Reset app handbrake on host #none
+# Reset handbrake on #none
 # Video-dvd ripper and transcoder.
 kz-desktop --delete=fr.handbrake.ghb
 
-# Setup app hide-files on host *
+# Setup hide-files on *
 # Hide files.
 if [[ ${DISPLAY-} ]]; then echo 'snap' > ~/.hidden; fi
 
-# Reset app hide-files on host *
+# Reset hide-files on *
 # Hide files.
 if [[ ${DISPLAY-} ]]; then rm --force --verbose ~/.hidden; fi
 
-# Setup app kvm on host pc06 pc07
+# Setup kvm on pc06 pc07
 # Kernel-based Virtual Machine.
 kz-desktop --addaft=virt-manager
 
-# Reset app kvm on host pc06 pc07
+# Reset kvm on pc06 pc07
 # Kernel-based Virtual Machine.
 kz-desktop --delete=virt-manager
 
-# Setup app lynis on host #none
+# Setup lynis on #none
 # Security auditing.
 if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; fi
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
 
-# Reset app lynis on host #none
+# Reset lynis on #none
 # Security auditing.
 rm --force --recursive ~/lynis
 
-# Setup app restore-thumbnails on host #none
+# Setup restore-thumbnails on #none
 # Restore thumbnails.
 rm --force --recursive ~/.cache/thumbnails/
 
-# Reset app restore-thumbnails on host #none
+# Reset restore-thumbnails on #none
 # Restore thumbnails.
 echo 'App restore-thumbnails cannot be reset.'
 
-# Setup app private-home on host *
+# Setup private-home on *
 # Private home.
 chmod 750 ~
 
-# Reset app private-home on host *
+# Reset private-home on *
 # Private home.
 chmod 755 ~
 
-# Setup app sound-juicer on host #none
+# Setup sound-juicer on #none
 # Audio-cd ripper and player.
 kz-desktop --addaft=org.gnome.SoundJuicer
 
-# Reset app sound-juicer on host #none
+# Reset sound-juicer on #none
 # Audio-cd ripper and player.
 kz-desktop --delete=org.gnome.SoundJuicer
 
-# Setup app spotify on host pc01 pc02 pc06 pc07
+# Setup spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
 
-# Reset app spotify on host pc01 pc02 pc06 pc07
+# Reset spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=kz-spotify; fi
 
-# Setup app teamviewer on host *
+# Setup teamviewer on *
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 kz-desktop --addaft=com.teamviewer.TeamViewer
 
-# Reset app teamviewer on host *
+# Reset teamviewer on *
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 kz-desktop --delete=com.teamviewer.TeamViewer
 
-# Setup app terminal on host pc01 pc06 pc07
+# Setup terminal on pc01 pc06 pc07
 # Terminal emulator.
 kz-desktop --addbef=org.gnome.Terminal
 # Enable aliases.
@@ -255,33 +255,33 @@ sed --in-place 's/#alias/alias/g'                           ~/.bashrc
 sed --in-place '/^stty -ixon/d'                             ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
-# Reset app terminal on host pc01 pc06 pc07
+# Reset terminal on pc01 pc06 pc07
 # Terminal emulator.
 kz-desktop --delete=org.gnome.Terminal
 sed --in-place 's/alias/#alias/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d'   ~/.bashrc
 
-# Setup app thunderbird on host pc01 pc02 pc06
+# Setup thunderbird on pc01 pc02 pc06
 # E-mail and news.
 kz-desktop --delete=thunderbird
 kz-desktop --delete=thunderbird_thunderbird
 
-# Reset app thunderbird on host pc01 pc02 pc06
+# Reset thunderbird on pc01 pc02 pc06
 # E-mail and news.
 kz-desktop --addbef=thunderbird
 kz-desktop --addbef=thunderbird_thunderbird
 
-# Setup app virtualbox on host #none
+# Setup virtualbox on #none
 # Virtualization.
 kz-desktop --addaft=virtualbox
 kz-desktop --addaft=kz-vm-hugowin732
 
-# Reset app virtualbox on host #none
+# Reset virtualbox on #none
 # Virtualization.
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
 
-# Setup app vscode on host pc01 pc06 pc07
+# Setup vscode on pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
 kz-desktop --addbef=code
@@ -295,41 +295,41 @@ if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/plain; fi
 if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/troff; fi
 if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
-# Reset app vscode on host pc01 pc06 pc07
+# Reset vscode on pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
 kz-desktop --delete=code
 
-# Setup app webmin on host pc07
+# Setup webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
 kz-desktop --addaft=kz-webmin
 
-# Reset app webmin on host pc07
+# Reset webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
 kz-desktop --delete=kz-webmin
 
-# Setup app whatsapp on host #none
+# Setup whatsapp on #none
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --addaft=kz-whatsapp
 
-# Reset app whatsapp on host #none
+# Reset whatsapp on #none
 # Instant messaging (IM) and voice-over-IP (VoIP).
 kz-desktop --delete=kz-whatsapp
 
-# Setup app youtube-dl on host #none
+# Setup youtube-dl on #none
 # Download videos.
 kz-desktop --addaft=youtubedl-gui
 
-# Reset app youtube-dl on host #none
+# Reset youtube-dl on #none
 # Download videos.
 kz-desktop --delete=youtubedl-gui
 
-# Setup app zoom on host pc01
+# Setup zoom on pc01
 # Videoconferencing.
 kz-desktop --addaft=kz-zoom
 
-# Reset app zoom on host pc01
+# Reset zoom on pc01
 # Videoconferencing.
 kz-desktop --delete=kz-zoom

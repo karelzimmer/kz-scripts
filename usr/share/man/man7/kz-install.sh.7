@@ -40,9 +40,9 @@ T}
 l | l
 l | l.
 T{
-# Install app \fI<app>\fR on host <host>...
+# Install \fI<app>\fR on <host>...
 T}:T{
-Install the app \fI<app>\fR on host <host>s (\fBApp record\fR)
+Install the app \fI<app>\fR on <host>... (\fBApp record\fR)
 T}
 T{
 # Comment...
@@ -59,10 +59,10 @@ T}:T{
 Empty line (none, one or more)
 T}
 T{
-# Remove app \fI<app>\fR from host <host>...
+# Remove \fI<app>\fR from <host>...
 T}:T{
-Remove the app \fI<app>\fR from host <host>s (\fBApp record\fR for option
-remove)
+Remove the app \fI<app>\fR from <host>... (\fBApp record\fR for option
+\fB-r\fR, \fB--remove\fR)
 T}
 T{
 Command
@@ -85,7 +85,7 @@ T}
 l | l
 l | l.
 T{
-# Install app gnome-gmail on host *
+# Install gnome-gmail on *
 T}:T{
 Install app gnome-gmail on any computer, see [1].
 T}
@@ -97,7 +97,7 @@ T{
 T}:T{
 T}
 T{
-# Remove app gnome-gmail from host *
+# Remove gnome-gmail from *
 T}:T{
 Remove app gnome-gmail from any computer, see [1].
 T}
@@ -109,9 +109,9 @@ T{
 T}:T{
 T}
 T{
-# Install app ufw on host pc01
+# Install ufw on pc01
 T}:T{
-Install app ufw only on host pc01, see [2].
+Install app ufw only on pc01, see [2].
 T}
 T{
 sudo apt-get install --assume-yes gufw
@@ -121,9 +121,9 @@ T{
 T}:T{
 T}
 T{
-# Install app kvm on host pc01 pc02
+# Install kvm on pc01 pc02
 T}:T{
-Install app kvm on host pc01 and pc02, see [3].
+Install app kvm on pc01 and pc02, see [3].
 T}
 T{
 sudo apt-get install --assume-yes qemu-kvm
@@ -133,7 +133,7 @@ T{
 T}:T{
 T}
 T{
-# Install app google-earth on host #none
+# Install google-earth on #none
 T}:T{
 Do not install Google Earth by default, see [4].
 T}
@@ -159,7 +159,7 @@ l google-earth'.
 [3]
 .br
 The line with 'pc01 pc02' ensures that the associated commands are executed
-only on host pc01 and pc02 by default.
+only on pc01 and pc02 by default.
 .br
 The app can still be installed on another computer with the command 'kz instal\
 l kvm'.
