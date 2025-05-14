@@ -398,11 +398,7 @@ function installs() {
     local -i app_tot_num=0
     local title=''
 
-    app_tot_num=$(
-        grep    --count             \
-                "#.*$install.*$on"  \
-                "$command_file"     || true
-        )
+    app_tot_num=$(grep --count "#.*$install.*$on" "$command_file" || true)
     if [[ $app_tot_num -eq 0 ]]; then
         TEXT=$(gettext 'No commands to execute.' )
         infomsg "$TEXT"
