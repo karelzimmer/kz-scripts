@@ -266,7 +266,7 @@ $(gettext 'NUM  APP')
         tr      --squeeze-repeats       \
                 '[:space:]'             |
         cut     --delimiter=' '         \
-                --fields=4              |
+                --fields=3              |
         sort    --unique                |
         nl      --number-width=3        \
                 --number-format=rn      \
