@@ -28,11 +28,11 @@ van systeeminstellingen, \fBkz setup\fR is een post-installatie-instelscript.
 instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
 Standaard verwerkt \fBkz setup\fR de instelbestanden /usr/bin/kz-setup.sh en
-/usr/bin/kz-setup.gpg dat opdrachten bevat voor alle hierin opgenomen
+/usr/bin/kz-setup.sh.gpg dat opdrachten bevat voor alle hierin opgenomen
 computers.
 .br
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
-in versleuteld instelbestand /usr/bin/kz-setup.gpg.
+in versleuteld instelbestand /usr/bin/kz-setup.sh.gpg.
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt.
 .sp
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
@@ -111,7 +111,7 @@ afsluitwaarde ongelijk 0.
 Instelbestand.
 .RE
 .sp
-/usr/bin/kz-setup.gpg
+/usr/bin/kz-setup.sh.gpg
 .RS
 Versleuteld instelbestand.
 .RE
