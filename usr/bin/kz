@@ -84,7 +84,7 @@ def process() -> None:
                     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
                     kz_common.term(PROGRAM_NAME, kz_common.ERR)
         else:
-            # Build kz-<command> <arguments>...
+            # Build kz-<command> <arguments>.
             exec += ' ' + sys.argv[arg_num]
 
     if exec == '/usr/bin/kz':
