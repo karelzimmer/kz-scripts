@@ -211,7 +211,6 @@ $USAGE"
 }
 
 
-
 # This function checks the website for missing or not used files.
 function check_website() {
     TEXT=$(gettext 'Check website...')

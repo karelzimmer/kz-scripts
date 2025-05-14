@@ -215,7 +215,6 @@ $USAGE"
 }
 
 
-
 # This function adds a favorite to the end of the dash/dock.
 function process_option_addaft () {
     if [[ $favorite_apps = '@as []' ]]; then
