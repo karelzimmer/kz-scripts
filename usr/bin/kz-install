@@ -211,7 +211,7 @@ $USAGE"
             -r | --remove )
                 OPTION_REMOVE=true
                 install='Remove'
-                on=''
+                on='from'
                 remove='Install'
                 from='on'
                 shift
