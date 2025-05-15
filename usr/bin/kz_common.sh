@@ -222,6 +222,8 @@ function init() {
     TEXT="==== START logs for script $PROGRAM_NAME ====
 Started ($0 as $USER)."
     logmsg "$TEXT"
+
+    declare -ag COMMANDLINE_ARGS=("$@")
 }
 
 

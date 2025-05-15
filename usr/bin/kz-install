@@ -67,7 +67,6 @@ version"
 declare OPTION_GUI=false
 declare OPTION_REMOVE=false
 declare REBOOT=true
-declare -a COMMANDLINE_ARGS=("$@")
 declare -A FAILED_APPS=()
 
 
@@ -449,7 +448,7 @@ function process_command_file() {
                 app_name=$(
                     printf '%s\n' "$command_record"     |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=4
+                    cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))
                 cmd_seq_num=0
