@@ -1,5 +1,5 @@
 # Dutch translations for kz package.
-# Copyright (C) 2023 THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2023 kz package COPYRIGHT HOLDER
 # This file is distributed under the same license as the kz package.
 # Karel Zimmer <info@karelzimmer.nl>, 2023.
 #
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-13 16:27+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
-"Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
+"Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
