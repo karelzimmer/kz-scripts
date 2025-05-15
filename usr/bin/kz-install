@@ -443,7 +443,7 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '#'*$install*$on* )
+            '#'*$install* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
