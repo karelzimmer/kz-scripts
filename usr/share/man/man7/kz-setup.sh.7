@@ -17,14 +17,31 @@ kz-setup.sh - Setup file for use with kz install
 .SH DESCRIPTION
 This file contains commands to process as an setup file with kz setup.
 .sp
-The setup file contains so-called \fBApp records\fR and \fBCommand records\fR.
+The setup file contains so-called \fBapp record\fRs and \fBcommand record\fRs.
+.sp
+The \fBapp record\fR indicates where the commands should be executed and is
+followed by one or more lines of commands (\fBcommand record\fRs).
+.sp
+An \fBapp record\fR consists of five parts, each part separated by at least one
+space, like '# setup <app> on <hosts>' and '# reset <app> on <hosts>'.
+.br
+1. #        (comment symbol)
+.br
+2. <action> (setup or reset)
+.br
+3. <app>    (the name of the app)
+.br
+4. on
+.br
+5. <hosts>  (the name of the computer or computers)
 .sp
 See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in file
 kz-setup.sh.
-More examples can be seen through the \fBkz setup --cat\fR command.
+More examples can be seen through the \fBkz setup --browse\fR and
+\fBkz setup --cat\fR commands.
 .LP
 .B Table 1. Record types and their processing
 .TS
@@ -39,9 +56,9 @@ T}
 l | l
 l | l.
 T{
-# Setup \fI<app>\fR on <host>...
+# setup \fI<app>\fR on <hosts>
 T}:T{
-Set up \fI<app>\fR on <host>... (\fBApp record\fR)
+Set up \fI<app>\fR on <hosts> (\fBapp record\fR)
 T}
 T{
 # Comment...
@@ -51,22 +68,22 @@ T}
 T{
 Command
 T}:T{
-Setup command (one or more \fBCommand records\fR)
+Setup command (one or more \fBcommand record\fRs)
 T}
 T{
 T}:T{
 Empty line (none, one or more)
 T}
 T{
-# Reset \fI<app>\fR on <host>...
+# reset \fI<app>\fR on <hosts>
 T}:T{
-Reset the app \fI<app>\fR on <host>... (\fBApp record\fR for option
+Reset the app \fI<app>\fR on <hosts> (\fBapp record\fR for option
 \fB-r\fR, \fB--remove\fR)
 T}
 T{
 Opdracht
 T}:T{
-Reset command (one or more \fBCommand records\fR)
+Reset command (one or more \fBcommand record\fRs)
 T}
 .TE
 .LP
@@ -84,7 +101,7 @@ T}
 l | l
 l | l.
 T{
-# Setup google-chrome on *
+# setup google-chrome on *
 T}:T{
 Set up google-chrome on any computer, see [1]
 T}
@@ -96,7 +113,7 @@ T{
 T}:T{
 T}
 T{
-# Reset google-chrome on *
+# reset google-chrome on *
 T}:T{
 Reset app google-chrome on any computer, see [1]
 T}
@@ -108,7 +125,7 @@ T{
 T}:T{
 T}
 T{
-# Setup gnome on pc01
+# setup gnome on pc01
 T}:T{
 Set up gnome only on pc01, see [2]
 T}
@@ -132,7 +149,7 @@ T{
 T}:T{
 T}
 T{
-# Setup google-earth on #none
+# setup google-earth on #none
 T}:T{
 Do not set up Google Earth by default, see [4]
 T}

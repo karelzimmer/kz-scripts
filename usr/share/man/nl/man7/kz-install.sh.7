@@ -18,15 +18,33 @@ kz-install.sh - Installatiebestand voor gebruik met kz install
 Dit bestand bevat opdrachten om te verwerken als installatiebestand met kz
 install.
 .sp
-In het installatiebestand staan zogenaamde \fBApp-regels\fR en
-\fBOpdracht-regels\fR.
+In het installatiebestand staan zogenaamde \fBapp-regel\fRs en
+\fBopdracht-regel\fRs.
+.sp
+De \fBapp-regel\fR geeft aan waar de opdrachten uitgevoerd moeten worden en
+wordt gevolgd door één of meer regels met opdrachten (\fBopdracht-regel\fRs).
+.sp
+Een \fBapp-regel\fR bestaat uit vijf delen, elk deel gescheiden door minstens
+één spatie, zoals '# install <app> on <hosts>' en '# remove <app> from
+<hosts>'.
+.br
+1. #        (commentaarsymbool)
+.br
+2. <actie>  (install of remove)
+.br
+3. <app>    (de naam van de app)
+.br
+4. on       (from als <actie> remove is)
+.br
+5. <hosts>  (de naam van de computer of computers)
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels en hoe deze regels
 verwerkt worden.
-Meer voorbeelden zijn te zien met de opdracht \fBkz install --cat\fR.
+Meer voorbeelden zijn te zien met de opdrachten \fBkz install --browse\fR en
+\fBkz install --cat\fR.
 .LP
 .B Tabel 1. Soorten regels en hun verwerking
 .TS
@@ -41,9 +59,9 @@ T}
 l | l
 l | l.
 T{
-# Install \fI<app>\fR on <host>...
+# install \fI<app>\fR on <hosts>
 T}:T{
-De app \fI<app>\fR installeren op <host>... (\fBApp-regel\fR)
+De app \fI<app>\fR installeren op <hosts> (\fBapp-regel\fR)
 T}
 T{
 # Commentaar...
@@ -53,22 +71,22 @@ T}
 T{
 Opdracht
 T}:T{
-App installatie-opdracht (één of meer \fBOpdracht-regels\fR)
+App installatie-opdracht (één of meer \fBopdracht-regel\fRs)
 T}
 T{
 T}:T{
 Lege regel (geen, één of meer)
 T}
 T{
-# Remove \fI<app>\fR from <host>...
+# remove \fI<app>\fR from <hosts>
 T}:T{
-De app \fI<app>\fR verwijderen van <host>... (\fBApp-regel\fR voor optie
+De app \fI<app>\fR verwijderen van <hosts> (\fBapp-regel\fR voor optie
 \fB-r\fR, \fB--remove\fR)
 T}
 T{
 Opdracht
 T}:T{
-Verwijder-opdracht (één of meer \fBOpdracht-regels\fR)
+Verwijder-opdracht (één of meer \fBopdracht-regel\fRs)
 T}
 .TE
 .LP
@@ -86,7 +104,7 @@ T}
 l | l
 l | l.
 T{
-# Install gnome-gmail on *
+# install gnome-gmail on *
 T}:T{
 Installeer app gnome-gmail op iedere computer, zie [1]
 T}
@@ -98,7 +116,7 @@ T{
 T}:T{
 T}
 T{
-# Remove gnome-gmail from *
+# remove gnome-gmail from *
 T}:T{
 Verwijder app gnome-gmail van iedere computer, zie [1]
 T}
@@ -110,7 +128,7 @@ T{
 T}:T{
 T}
 T{
-# Install ufw on pc01
+# install ufw on pc01
 T}:T{
 Installeer app ufw alleen op pc01, zie [2]
 T}
@@ -122,7 +140,7 @@ T{
 T}:T{
 T}
 T{
-# Install kvm on pc01 pc02
+# install kvm on pc01 pc02
 T}:T{
 Installeer app kvm op pc01 en pc02, zie [3]
 T}
@@ -134,7 +152,7 @@ T{
 T}:T{
 T}
 T{
-# Install google-earth on #none
+# install google-earth on #none
 T}:T{
 Standaard niet app google-earth installeren, zie [4]
 T}

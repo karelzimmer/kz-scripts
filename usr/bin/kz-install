@@ -30,7 +30,7 @@ USAGE=$(gettext "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]
                   [--] [<app>...]")
 readonly USAGE
 
-HELP="$(gettext "Usage: kz install [<options>] [--] [<app>...]")
+HELP="$(gettext "Usage: kz install [<options>] [--] [<arguments>]")
 
 $PROGRAM_DESC.
 
@@ -83,7 +83,7 @@ function process() {
     local command_file=''
     local err_flag=false
     local from='from'
-    local install='Install'
+    local install='install'
     local install_file_default_gpg=''
     local install_file_default=/usr/bin/$PROGRAM_NAME.sh
     local install_file=''
@@ -92,7 +92,7 @@ function process() {
     local option_browse=false
     local option_cat=false
     local option_file=false
-    local remove='Remove'
+    local remove='remove'
 
     check_input "$@"
 
@@ -209,9 +209,9 @@ $USAGE"
                 ;;
             -r | --remove )
                 OPTION_REMOVE=true
-                install='Remove'
+                install='remove'
                 on='from'
-                remove='Install'
+                remove='install'
                 from='on'
                 shift
                 ;;
@@ -342,12 +342,13 @@ function process_install_file_by_app_argument() {
                 ;;
         esac
     done < <(cat "${install_files[@]}")
-    # Add extra empty line  to command file.
-    printf '\n' >> "$command_file"
 
     if $no_app_match; then
         TEXT=$(eval_gettext "App '\$app_argument' not found")
         errmsg "$TEXT"
+    else
+        # Add extra empty line  to command file.
+        printf '\n' >> "$command_file"
     fi
 }
 
@@ -444,7 +445,7 @@ function process_command_file() {
     while read -r command_record; do
         case $command_record in
             '#'*$install* )
-                # App record.
+                # app record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
                     tr --squeeze-repeats '[:space:]'    |

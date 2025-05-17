@@ -17,15 +17,32 @@ kz-install.sh - Install file for use with kz install
 .SH DESCRIPTION
 This file contains commands to process as an installation file with kz install.
 .sp
-The installation file contains so-called \fBApp records\fR and \fBCommand
-records\fR.
+The installation file contains so-called \fBapp record\fRs and
+\fBcommand record\fRs.
+.sp
+The \fBapp record\fR indicates where the commands should be executed and is
+followed by one or more lines of commands (\fBcommand record\fRs).
+.sp
+An \fBapp record\fR consists of five parts, each part separated by at least one
+space, like '# install <app> on <hosts>' and '# remove <app> from <hosts>'.
+.br
+1. #        (comment symbol)
+.br
+2. <action> (install or remove)
+.br
+3. <app>    (the name of the app)
+.br
+4. on       (from if <action> is remove)
+.br
+5. <hosts>  (the name of the computer or computers)
 .sp
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records and how these records
 are processed.
-More examples can be seen through the \fBkz install --cat\fR command.
+More examples can be seen through the \fBkz install --browse\fR and
+\fBkz install --cat\fR commands.
 .LP
 .B Table 1. Record types and their processing
 .TS
@@ -40,9 +57,9 @@ T}
 l | l
 l | l.
 T{
-# Install \fI<app>\fR on <host>...
+# install \fI<app>\fR on <hosts>
 T}:T{
-Install the app \fI<app>\fR on <host>... (\fBApp record\fR)
+Install the app \fI<app>\fR on <hosts> (\fBapp record\fR)
 T}
 T{
 # Comment...
@@ -52,22 +69,22 @@ T}
 T{
 Command
 T}:T{
-Install app command (one or more \fBCommand records\fR)
+Install app command (one or more \fBcommand record\fRs)
 T}
 T{
 T}:T{
 Empty line (none, one or more)
 T}
 T{
-# Remove \fI<app>\fR from <host>...
+# remove \fI<app>\fR from <hosts>
 T}:T{
-Remove the app \fI<app>\fR from <host>... (\fBApp record\fR for option
+Remove the app \fI<app>\fR from <hosts> (\fBapp record\fR for option
 \fB-r\fR, \fB--remove\fR)
 T}
 T{
 Command
 T}:T{
-Remove app command (one or more \fBCommand records\fR)
+Remove app command (one or more \fBcommand record\fRs)
 T}
 .TE
 .LP
@@ -85,7 +102,7 @@ T}
 l | l
 l | l.
 T{
-# Install gnome-gmail on *
+# install gnome-gmail on *
 T}:T{
 Install app gnome-gmail on any computer, see [1].
 T}
@@ -97,7 +114,7 @@ T{
 T}:T{
 T}
 T{
-# Remove gnome-gmail from *
+# remove gnome-gmail from *
 T}:T{
 Remove app gnome-gmail from any computer, see [1].
 T}
@@ -109,7 +126,7 @@ T{
 T}:T{
 T}
 T{
-# Install ufw on pc01
+# install ufw on pc01
 T}:T{
 Install app ufw only on pc01, see [2].
 T}
@@ -121,7 +138,7 @@ T{
 T}:T{
 T}
 T{
-# Install kvm on pc01 pc02
+# install kvm on pc01 pc02
 T}:T{
 Install app kvm on pc01 and pc02, see [3].
 T}
@@ -133,7 +150,7 @@ T{
 T}:T{
 T}
 T{
-# Install google-earth on #none
+# install google-earth on #none
 T}:T{
 Do not install Google Earth by default, see [4].
 T}

@@ -30,7 +30,7 @@ USAGE=$(gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
                 [--] [<app>...]")
 readonly USAGE
 
-HELP="$(gettext "Usage: kz setup [<options>] [--] [<app>...]")
+HELP="$(gettext "Usage: kz setup [<options>] [--] [<arguments>]")
 
 $PROGRAM_DESC.
 
@@ -86,8 +86,8 @@ function process() {
     local option_browse=false
     local option_cat=false
     local option_file=false
-    local reset='Reset'
-    local setup='Setup'
+    local reset='reset'
+    local setup='setup'
     local setup_file_default_gpg=''
     local setup_file_default=/usr/bin/$PROGRAM_NAME.sh
     local setup_file=''
@@ -333,12 +333,13 @@ function process_setup_file_by_app_argument() {
                 ;;
         esac
     done < <(cat "${setup_files[@]}")
-    # Add extra empty line  to command file.
-    printf '\n' >> "$command_file"
 
     if $no_app_match; then
         TEXT=$(eval_gettext "App '\$app_argument' not found")
         errmsg "$TEXT"
+    else
+        # Add extra empty line  to command file.
+        printf '\n' >> "$command_file"
     fi
 }
 
@@ -388,7 +389,7 @@ function setup_apps() {
     local -i app_tot_num=0
     local title=''
 
-    app_tot_num=$(grep --count "#.*$setup.*on" "$command_file" ||true)
+    app_tot_num=$(grep --count "#.*$setup.*on" "$command_file" || true)
     if [[ $app_tot_num -eq 0 ]]; then
         TEXT=$(gettext 'No commands to execute.' )
         infomsg "$TEXT"

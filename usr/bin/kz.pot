@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-14 07:36+0200\n"
+"POT-Creation-Date: 2025-05-17 09:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -506,7 +506,7 @@ msgid ""
 "                  [--] [<app>...]"
 msgstr ""
 
-msgid "Usage: kz install [<options>] [--] [<app>...]"
+msgid "Usage: kz install [<options>] [--] [<arguments>]"
 msgstr ""
 
 msgid "  -a, --apps     show list of apps"
@@ -876,7 +876,7 @@ msgstr ""
 msgid "  -r, --reset    set apps on default values"
 msgstr ""
 
-msgid "Usage: kz setup [<options>] [--] [<app>...]"
+msgid "Usage: kz setup [<options>] [--] [<arguments>]"
 msgstr ""
 
 #, sh-format

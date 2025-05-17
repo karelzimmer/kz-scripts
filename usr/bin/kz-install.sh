@@ -7,19 +7,19 @@
 ###############################################################################
 # Use "man kz install.sh" to learn more about the format of this file.
 
-# Install disabled-apport on *
+# install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
 if systemctl cat apport &> /dev/null; then sudo systemctl stop apport.service; fi
 if systemctl cat apport &> /dev/null; then sudo systemctl disable apport.service; fi
 if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
 if systemctl cat apport &> /dev/null; then sudo rm --force --verbose /var/crash/*; fi
 
-# Remove disabled-apport from *
+# remove disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
 if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
 if systemctl cat apport &> /dev/null; then sudo systemctl enable --now apport.service; fi
 
-# Install update-system on *
+# install update-system on *
 # Update and cleanup system.
 # This may take a while...
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
@@ -28,31 +28,31 @@ if grep --quiet debian /etc/os-release && type snap &> /dev/null; then sudo snap
 if grep --quiet rhel   /etc/os-release; then sudo dnf upgrade --assumeyes --refresh; fi
 if grep --quiet rhel   /etc/os-release && type snap &> /dev/null; then sudo snap refresh; fi
 
-# Remove update-system from *
+# remove update-system from *
 # Update and cleanup system.
 echo 'The update-system app cannot be removed.'
 
-# Install 7zip on *
+# install 7zip on *
 # File archiver.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes p7zip-full; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes p7zip; fi
 
-# Remove 7zip from *
+# remove 7zip from *
 # File archiver.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes p7zip-full; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes p7zip; fi
 
-# Install ansible on pc06 pc07
+# install ansible on pc06 pc07
 # Configuration management, deployment, and task execution.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes ansible; fi
 
-# Remove ansible from pc06 pc07
+# remove ansible from pc06 pc07
 # Configuration management, deployment, and task execution.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes ansible; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes ansible; fi
 
-# Install anydesk on pc06 pc07
+# install anydesk on pc06 pc07
 # Remote desktop.
 # Only outgoing sessions are supported if using Wayland.
 # Incoming sessions are only possible when using Xorg/X11.
@@ -64,7 +64,7 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get i
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo > /dev/null; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes anydesk; fi
 
-# Remove anydesk from pc06 pc07
+# remove anydesk from pc06 pc07
 # Remote desktop.
 # Only outgoing sessions are supported if using Wayland.
 # Incoming sessions are only possible when using Xorg/X11.
@@ -74,107 +74,107 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --forc
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes anydesk; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo*; fi
 
-# Install apt on #none
+# install apt on #none
 # Package manager.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes apt; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes apt; fi
 
-# Remove apt from #none
+# remove apt from #none
 # Package manager.
 if grep --quiet debian /etc/os-release; then echo 'The apt app cannot be removed from an Debian or Debian-based system.'; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes apt; fi
 
-# Install backintime on #none
+# install backintime on #none
 # Backups/snapshots.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes backintime-qt; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes backintime-qt; fi
 
-# Remove backintime from #none
+# remove backintime from #none
 # Backups/snapshots.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes backintime-qt; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes backintime-qt; fi
 
-# Install bleachbit on #none
+# install bleachbit on #none
 # Delete files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes bleachbit; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes bleachbit; fi
 
-# Remove bleachbit from #none
+# remove bleachbit from #none
 # Delete files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes bleachbit; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes bleachbit; fi
 
-# Install calibre on pc06
+# install calibre on pc06
 # E-book manager.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes calibre; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo --validate && wget --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
 
-# Remove calibre from pc06
+# remove calibre from pc06
 # E-book manager.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes calibre; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo calibre-uninstall; fi
 
-# Install cockpit on pc06
+# install cockpit on pc06
 # Web console.
 # Web app: https://localhost:9090
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes cockpit cockpit-pcp; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes cockpit cockpit-pcp; fi
 
-# Remove cockpit from pc06
+# remove cockpit from pc06
 # Web console.
 # Web app: https://localhost:9090
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes cockpit; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes cockpit; fi
 
-# Install cups on *
+# install cups on *
 # Common Unix Printing System.
 # Web app: http://localhost:631
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes cups; fi
 
-# Remove cups from *
+# remove cups from *
 # Common Unix Printing System.
 # Web app: http://localhost:631
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes cups; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes cups; fi
 
-# Install cups-backend-bjnp on #none
+# install cups-backend-bjnp on #none
 # Printer backend.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The cups-backend-bjnp app is not available.'; fi
 
-# Remove cups-backend-bjnp from #none
+# remove cups-backend-bjnp from #none
 # Printer backend.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes cups-backend-bjnp; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The cups-backend-bjnp app is not available.'; fi
 
-# Install dash-to-dock on pc07
+# install dash-to-dock on pc07
 # Desktop dock.
 # Reboot required!
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]] && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
 
-# Remove dash-to-dock from pc07
+# remove dash-to-dock from pc07
 # Desktop dock.
 # Reboot required!
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]] && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
 
-# Install desktop-backgrounds on *
+# install desktop-backgrounds on *
 # Desktop backgrounds.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes '*-backgrounds'; fi
 if grep --quiet ubuntu /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes ubuntu-wallpapers-* '*-backgrounds'; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes desktop-backgrounds-* gnome-backgrounds*; fi
 
-# Remove desktop-backgrounds from *
+# remove desktop-backgrounds from *
 # Desktop backgrounds.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes '*-backgrounds'; fi
 if grep --quiet ubuntu /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes ubuntu-wallpapers-* '*-backgrounds'; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes desktop-backgrounds-* gnome-backgrounds*; fi
 
-# Install disabled-aer on pc06
+# install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) to prevent the log gets flooded with
 # 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
@@ -184,7 +184,7 @@ if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/
 # Check for kernel config parameter pci=noaer.
 grep 'pci=noaer' /etc/default/grub
 
-# Remove disabled-aer from pc06
+# remove disabled-aer from pc06
 # Enable kernel config parameter PCIEAER.
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) to "allow" the log gets flooded with
@@ -195,57 +195,57 @@ if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/
 # Check for kernel config parameter pci=noaer.
 ! grep 'pci=noaer' /etc/default/grub
 
-# Install disabled-fwupd on #none
+# install disabled-fwupd on #none
 # Disable FirmWare UPdate Daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove disabled-fwupd from #none
+# remove disabled-fwupd from #none
 # Disable FirmWare UPdate Daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
-# Install disabled-lidswitch on #none
+# install disabled-lidswitch on #none
 # Do nothing when the laptop lid is closed.
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
 
-# Remove disabled-lidswitch from #none
+# remove disabled-lidswitch from #none
 # Restore the default action when the laptop lid is closed.
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-# Install dual-monitor on pc06
+# install dual-monitor on pc06
 # Preserve dual monitor settings.
 if [[ -f $HOME/.config/monitors.xml ]]; then sudo cp --preserve --verbose "$HOME"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f  ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
-# Remove dual-monitor from pc06
+# remove dual-monitor from pc06
 # Remove dual monitor settings.
 sudo rm --force --verbose ~gdm/.config/monitors.xml
 
-# Install exiftool on pc06 pc07
+# install exiftool on pc06 pc07
 # Read and write meta information.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes perl-Image-ExifTool; fi
 
-# Remove exiftool from pc06 pc07
+# remove exiftool from pc06 pc07
 # Read and write meta information.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes libimage-exiftool-perl; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes perl-Image-ExifTool; fi
 
-# Install fakeroot on pc06 pc07
+# install fakeroot on pc06 pc07
 # Simulate superuser privileges.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes fakeroot; fi
 
-# Remove fakeroot from pc06 pc07
+# remove fakeroot from pc06 pc07
 # Simulate superuser privileges.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes fakeroot; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes fakeroot; fi
 
-# Install fdupes on #none
+# install fdupes on #none
 # Find duplicate files.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fdupes; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes fdupes; fi
@@ -254,13 +254,13 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes fdupes
 # $ fdupes -rd /path/to/folder  # Delete, interactively, from /path/to/folder
 # $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
 
-# Remove fdupes from #none
+# remove fdupes from #none
 # Find duplicate files.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes fdupes; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
 
-# Install force-x11 on #none
-# Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
+# install force-x11 on #none
+# Disable choice from user login screen for Xorg/X11 or Wayland, and force X11.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
@@ -268,7 +268,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo sed --in-
 # To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
 # 'x11'.
 
-# Remove force-x11 from #none
+# remove force-x11 from #none
 # Enable choice on user login screen for Xorg/X11 or Wayland.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
@@ -277,71 +277,71 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo sed --in-
 # To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
 # 'wayland'.
 
-# Install gdebi on *
+# install gdebi on *
 # View and install deb files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gdebi; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The gdebi app is not available.'; fi
 
-# Remove gdebi from *
+# remove gdebi from *
 # View and install deb files.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes gdebi; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The gdebi app is not available.'; fi
 
-# Install gettext on pc06 pc07
+# install gettext on pc06 pc07
 # GNU Internationalization.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gettext; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes gettext; fi
 
-# Remove gettext from pc06 pc07
+# remove gettext from pc06 pc07
 # GNU Internationalization.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes gettext; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes gettext; fi
 
-# Install gimp on pc06
+# install gimp on pc06
 # GNU Image Manipulation Program.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-nl; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes gimp; fi
 
-# Remove gimp from pc06
+# remove gimp from pc06
 # GNU Image Manipulation Program.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes gimp gimp-help-en gimp-help-nl; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gimp; fi
 
-# Install git on pc06 pc07
+# install git on pc06 pc07
 # Distributed revision control system.
 # Web app: https://github.com
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
 if grep --quiet rhel   /etc/os-release; then sudo sudo dnf install --assumeyes git; fi
 
-# Remove git from pc06 pc07
+# remove git from pc06 pc07
 # Distributed revision control system.
 # Web app: https://github.com
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes git; fi
 if grep --quiet rhel   /etc/os-release; then sudo sudo dnf remove --assumeyes git; fi
 
-# Install gnome-gmail on pc01 pc06 pc07
+# install gnome-gmail on pc01 pc06 pc07
 # Gmail for e-mail.
 # Web app: https://mail.google.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gnome-gmail; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The gnome-gmail app is not available.'; fi
 
-# Remove gnome-gmail from pc01 pc06 pc07
+# remove gnome-gmail from pc01 pc06 pc07
 # Gmail for e-mail.
 # Web app: https://mail.google.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes gnome-gmail; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The gnome-gmail app is not available.'; fi
 
-# Install gnome-tweaks on pc01 pc06 pc07
+# install gnome-tweaks on pc01 pc06 pc07
 # Adjust advanced settings.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-tweaks; fi
 
-# Remove gnome-tweaks from pc01 pc06 pc07
+# remove gnome-tweaks from pc01 pc06 pc07
 # Adjust advanced settings.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes gnome-tweaks; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
-# Install google-chrome on *
+# install google-chrome on *
 # Web browser.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
@@ -349,12 +349,12 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then rm --verbose /
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
-# Remove google-chrome from *
+# remove google-chrome from *
 # Web browser.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes google-chrome-stable; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes google-chrome-stable; fi
 
-# Install google-earth on #none
+# install google-earth on #none
 # Explore the planet.
 # Web app: https://earth.google.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
@@ -363,73 +363,73 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then rm --verbose /
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 
-# Remove google-earth from #none
+# remove google-earth from #none
 # Explore the planet.
 # Web app: https://earth.google.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes google-earth-pro-stable; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
 
-# Install groff on pc06 pc07
+# install groff on pc06 pc07
 # Compose manual pages with GNU roff.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes groff; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes groff; fi
 
-# Remove groff from pc06 pc07
+# remove groff from pc06 pc07
 # Compose manual pages with GNU roff.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes groff; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes groff; fi
 
-# Install handbrake on #none
+# install handbrake on #none
 # Video-dvd ripper and transcoder.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes handbrake; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The handbrake app is not available.'; fi
 
-# Remove handbrake from #none
+# remove handbrake from #none
 # Video-dvd ripper and transcoder.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes handbrake; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The handbrake app is not available.'; fi
 
-# Install htop on pc06 pc07
+# install htop on pc06 pc07
 # Process viewer.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes htop; fi
 
-# Remove htop from pc06 pc07
+# remove htop from pc06 pc07
 # Process viewer.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes htop; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes htop; fi
 
-# Install imagination on pc06 pc07
+# install imagination on pc06 pc07
 # Slideshow maker.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes imagination; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The imagination app is not available.'; fi
 
-# Remove imagination from pc06 pc07
+# remove imagination from pc06 pc07
 # Slideshow maker.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes imagination; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The imagination app is not available.'; fi
 
-# Install jq on pc06 pc07
+# install jq on pc06 pc07
 # JSON processor.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes jq; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes jq; fi
 
-# Remove jq from pc06 pc07
+# remove jq from pc06 pc07
 # JSON processor.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes jq; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes jq; fi
 
-# Install krita on pc06
+# install krita on pc06
 # Image manipulation.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes krita; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The krita app is not available.'; fi
 
-# Remove krita from pc06
+# remove krita from pc06
 # Image manipulation.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes krita; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The krita app is not available.'; fi
 
-# Install kvm on pc06 pc07
+# install kvm on pc06 pc07
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
 # Reboot required!
@@ -452,7 +452,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo virsh --c
 # "sudo virsh --connect=qemu:///system net-info default", should output
 # 'Autostart: yes'.
 
-# Remove kvm from pc06 pc07
+# remove kvm from pc06 pc07
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
 # Reboot required!
@@ -465,77 +465,77 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo delgroup 
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo systemctl disable --now libvirtd; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf groupremove "Virtualization Host"; fi
 
-# Install lftp on pc06 pc07
+# install lftp on pc06 pc07
 # FTP/HTTP/BitTorrent client.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes lftp; fi
 
-# Remove lftp from pc06 pc07
+# remove lftp from pc06 pc07
 # FTP/HTTP/BitTorrent client.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes lftp; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes lftp; fi
 
-# Install libreoffice on *
+# install libreoffice on *
 # Office suite.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes libreoffice; fi
 
-# Remove libreoffice from *
+# remove libreoffice from *
 # Office suite.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes libreoffice; fi
 
-# Install locate on pc06 pc07
+# install locate on pc06 pc07
 # Find files.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes locate; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes mlocate; fi
 sudo updatedb
 
-# Remove locate from pc06 pc07
+# remove locate from pc06 pc07
 # Find files.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes locate; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes mlocate; fi
 
-# Install log-access-for-user on pc07
+# install log-access-for-user on pc07
 # Log access.
 sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
-# Remove log-access-for-user from pc07
+# remove log-access-for-user from pc07
 # Log access.
 sudo deluser "${SUDO_USER:-$USER}" adm
 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
-# Install mypy on pc06 pc07
+# install mypy on pc06 pc07
 # Python static typing.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes mypy; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes python3-mypy; fi
 
-# Remove mypy from pc06 pc07
+# remove mypy from pc06 pc07
 # Python static typing.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes mypy; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes python3-mypy; fi
 
-# Install nautilus-admin on pc06 pc07
+# install nautilus-admin on pc06 pc07
 # Administrative operations.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes nautilus-admin; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The nautilus-admin app is not available.'; fi
 
-# Remove nautilus-admin from pc06 pc07
+# remove nautilus-admin from pc06 pc07
 # Administrative operations.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes nautilus-admin; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The nautilus-admin app is not available.'; fi
 
-# Install nmap on pc06 pc07
+# install nmap on pc06 pc07
 # Network MAPper.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes nmap; fi
 
-# Remove nmap from pc06 pc07
+# remove nmap from pc06 pc07
 # Network MAPper.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes nmap; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
 
-# Install ntfs on #none
+# install ntfs on #none
 # NTFS support.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes ntfs-3g ntfsprogs; fi
@@ -551,89 +551,89 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes ntfs-3
 # $ sudo -b ntfsfix /dev/sdba1  # Clear the bad sector list
 # $ sudo -d ntfsfix /dev/sdba1  # Clear the volume dirty flag
 
-# Remove ntfs from #none
+# remove ntfs from #none
 # NTFS support.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes ntfs-3g; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
-# Install poedit on pc06 pc07
+# install poedit on pc06 pc07
 # Gettext catalogs editor.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes poedit; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes poedit; fi
 
-# Remove poedit from pc06 pc07
+# remove poedit from pc06 pc07
 # Gettext catalogs editor.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes poedit; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes poedit; fi
 
-# Install python on pc06 pc07
+# install python on pc06 pc07
 # Programming language.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-pip; fi
 
-# Remove python from pc06 pc07
+# remove python from pc06 pc07
 # Programming language.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip; fi
 
-# Install rpm on pc06 pc07
+# install rpm on pc06 pc07
 # Package manager.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes rpm; fi
 
-# Remove rpm from pc06 pc07
+# remove rpm from pc06 pc07
 # Package manager for RPM.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes rpm; fi
 if grep --quiet rhel   /etc/os-release; then echo 'The rpm app cannot be removed.'; fi
 
-# Install simplescreenrecorder on #none
+# install simplescreenrecorder on #none
 # Screen recorder.
 # Requires the use of Xorg/X11.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes simplescreenrecorder; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The simplescreenrecorder app is not available.'; fi
 
-# Remove simplescreenrecorder from #none
+# remove simplescreenrecorder from #none
 # Screen recorder.
 # Required the use of Xorg/X11. Enable Wayland again?
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes simplescreenrecorder; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The simplescreenrecorder app is not available.'; fi
 
-# Install shellcheck on pc06 pc07
+# install shellcheck on pc06 pc07
 # Shell script linter.
 # Web app: https://www.shellcheck.net
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
 
-# Remove shellcheck from pc06 pc07
+# remove shellcheck from pc06 pc07
 # Shell script linter.
 # Web app: https://www.shellcheck.net
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes shellcheck; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
 
-# Install sound-juicer on #none
+# install sound-juicer on #none
 # Audio-cd ripper and player.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes sound-juicer; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The sound-juicer app is not available.'; fi
 
-# Remove sound-juicer from #none
+# remove sound-juicer from #none
 # Audio-cd ripper and player.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes sound-juicer; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The sound-juicer app is not available.'; fi
 
-# Install spice-vdagent on *
+# install spice-vdagent on *
 # Spice agent.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes spice-vdagent; fi
 
-# Remove spice-vdagent from *
+# remove spice-vdagent from *
 # Spice agent.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes spice-vdagent; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; fi
 
-# Install spotify on pc01 pc02 pc06 pc07
+# install spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
@@ -642,14 +642,14 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get u
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes spotify-client; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The spotify app is available as a web app.'; fi
 
-# Remove spotify from pc01 pc02 pc06 pc07
+# remove spotify from pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes spotify-client; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify*.list*; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'The spotify web app cannot be removed.'; fi
 
-# Install ssh on pc01 pc06 pc07
+# install ssh on pc01 pc06 pc07
 # Secure SHell.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ssh; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes openssh; fi
@@ -658,36 +658,36 @@ sudo sed --in-place 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /e
 grep 'PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
-# Remove ssh from pc01 pc06 pc07
+# remove ssh from pc01 pc06 pc07
 # Secure SHell.
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d' /etc/hosts; fi
+if [[ 'pc01 on pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d' /etc/hosts; fi
 sudo sed --in-place 's/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes ssh; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes openssh; fi
 
-# Install sushi on pc06
+# install sushi on pc06
 # Quick preview.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gnome-sushi; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes sushi; fi
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
 
-# Remove sushi from pc06
+# remove sushi from pc06
 # Quick preview.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes gnome-sushi; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes sushi; fi
 
-# Install tab-completion on *
+# install tab-completion on *
 # Bash completion.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes bash-completion; fi
 
-# Remove tab-completion from *
+# remove tab-completion from *
 # Bash completion.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes bash-completion; fi
 
-# Install teamviewer on *
+# install teamviewer on *
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
@@ -697,67 +697,67 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then rm --verbose /
 # signature verification error: Bad GPG signature
 # if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
-# Remove teamviewer from *
+# remove teamviewer from *
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes teamviewer; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes teamviewer; fi
 
-# Install thunderbird on *
+# install thunderbird on *
 # E-mail and news.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes thunderbird; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes thunderbird; fi
 
-# Remove thunderbird from *
+# remove thunderbird from *
 # E-mail and news.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes thunderbird; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes thunderbird; fi
 
-# Install tree on pc06 pc07
+# install tree on pc06 pc07
 # Display directory tree.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes tree; fi
 
-# Remove tree from pc06 pc07
+# remove tree from pc06 pc07
 # Display directory tree.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes tree; fi
 
-# Install ufw on pc01 pc06 pc07
+# install ufw on pc01 pc06 pc07
 # Uncomplicated FireWall.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gufw; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes gufw; fi
 if [[ ${DISPLAY-} ]]; then sudo ufw allow ssh; fi
 if [[ ${DISPLAY-} ]]; then sudo ufw enable; fi
 
-# Remove ufw from pc01 pc06 pc07
+# remove ufw from pc01 pc06 pc07
 # Uncomplicated FireWall.
 sudo ufw disable
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes gufw; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes gufw; fi
 
-# Install usbutils on pc07
+# install usbutils on pc07
 # USB utilities.
 # This package contains the lsusb utility.
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes usbutils; fi
 
-# Remove usbutils from pc07
+# remove usbutils from pc07
 # USB utilities.
 # This package contains the lsusb utility.
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes usbutils; fi
 
-# Install user-guest on #none
+# install user-guest on #none
 # Add guest user.
 if ! id "$(gettext 'guest')" &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')"; fi
 if id "$(gettext 'guest')" &> /dev/null; then sudo passwd --delete "$(gettext 'guest')"; fi
 
-# Remove user-guest from #none
-# Remove guest user.
+# remove user-guest from #none
+# Delete guest user.
 if id "$(gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext 'guest')"; fi
 
-# Install virtualbox on #none
+# install virtualbox on #none
 # Virtualization.
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
 # If the installation hangs or VBox does not work, check the virtualization
@@ -766,23 +766,23 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'virtualb
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes VirtualBox; fi
 
-# Remove virtualbox from #none
+# remove virtualbox from #none
 # Virtualization.
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes VirtualBox; fi
 
-# Install vlc on *
+# install vlc on *
 # Multimedia player.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes vlc; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes vlc; fi
 
-# Remove vlc from *
+# remove vlc from *
 # Multimedia player.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes vlc; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes vlc; fi
 
-# Install vscode on pc01 pc06 pc07
+# install vscode on pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes apt-transport-https; fi
@@ -795,7 +795,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rpm --imp
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes code; fi
 
-# Remove vscode from pc01 pc06 pc07
+# remove vscode from pc01 pc06 pc07
 # Editor.
 # Web app: https://vscode.dev
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo update-alternatives --remove editor /usr/bin/code; fi
@@ -804,7 +804,7 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get r
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes code; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo*; fi
 
-# Install webmin on pc07
+# install webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
@@ -816,7 +816,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo sh /tmp/s
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes webmin; fi
 
-# Remove webmin from pc07
+# remove webmin from pc07
 # Web console.
 # Web app: https://localhost:10000
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes webmin; fi
@@ -824,24 +824,24 @@ if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --forc
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes webmin; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo*; fi
 
-# Install wine on #none
+# install wine on #none
 # Run Windows applications.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dpkg --add-architecture i386; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes wine playonlinux; fi
 
-# Remove wine from #none
+# remove wine from #none
 # Run Windows applications.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes wine winetricks playonlinux; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dpkg --remove-architecture i386; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes wine playonlinux; fi
 
-# Install youtube-dl on #none
+# install youtube-dl on #none
 # Download videos.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes youtubedl-gui; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes youtube-dl; fi
 
-# Remove youtube-dl from #none
+# remove youtube-dl from #none
 # Download videos.
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes youtubedl-gui; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remove --assumeyes youtube-dl; fi
