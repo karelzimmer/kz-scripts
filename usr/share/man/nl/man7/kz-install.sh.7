@@ -199,11 +199,15 @@ h'.
 .EX
 # install gnome-tweaks on pc01 pc06 pc07
 # Adjust advanced settings.
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-tweaks; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get\
+ install --assume-yes gnome-tweaks; fi
+if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf ins\
+tall --assumeyes gnome-tweaks; fi
 .RS
-De "if grep --quiet debian /etc/os-release" is om te controleren of op Debian of op Debian gebaseerd systeem zoals Ubuntu.
-De "if grep --quiet rhel   /etc/os-release" is om te controleren of op Red Hat gebaseerd systeem zoals AlmaLinux en Rocky Linux.
+De "if grep --quiet debian /etc/os-release" is om te controleren of op Debian \
+of op Debian gebaseerd systeem zoals Ubuntu.
+De "if grep --quiet rhel   /etc/os-release" is om te controleren of op Red Hat\
+ gebaseerd systeem zoals AlmaLinux en Rocky Linux.
 De "if [[ ${DISPLAY-} ]]" is om te controleren of er een grafische omgeving is.
 .RE
 .EE
