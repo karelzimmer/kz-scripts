@@ -445,7 +445,7 @@ function process_command_file() {
     while read -r command_record; do
         case $command_record in
             '#'*$install* )
-                # app record.
+                # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
                     tr --squeeze-repeats '[:space:]'    |

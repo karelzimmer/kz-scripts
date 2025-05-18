@@ -35,6 +35,9 @@ space, like '# install <app> on <hosts>' and '# remove <app> from <hosts>'.
 4. on       (from if <action> is remove)
 .br
 5. <hosts>  (the name of the computer or computers)
+.br
+This is followed by one or more \fBcommand record\fRs containing commands for
+<app>.
 .sp
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
@@ -188,6 +191,19 @@ a computer by default (NOTE: '#none' is not a valid computername and will
 therefore never be selected by default).
 .br
 The app can still be installed with the command 'kz install google-earth'.
+
+.SH EXAMPLES
+.EX
+# install gnome-tweaks on pc01 pc06 pc07
+# Adjust advanced settings.
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-tweaks; fi
+.RS
+The "if grep --quiet debian /etc/os-release" is to check whether Debian or Debian based system like Ubuntu.
+The "if grep --quiet rhel   /etc/os-release" is to check for Red Hat based system such as AlmaLinux and Rocky Linux.
+The "if [[ ${DISPLAY-} ]]" is to check if there is a graphical environment.
+.RE
+.EE
 
 .SH SEE ALSO
 \fBkz-install\fR(1),

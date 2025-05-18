@@ -34,6 +34,9 @@ space, like '# setup <app> on <hosts>' and '# reset <app> on <hosts>'.
 4. on
 .br
 5. <hosts>  (the name of the computer or computers)
+.br
+This is followed by one or more \fBcommand record\fRs containing commands for
+<app>.
 .sp
 See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
@@ -187,6 +190,20 @@ default (NOTE: '#none' is not a valid computername and will therefore never
 be selected by default).
 .br
 The app can still be set up with the command 'kz setup google-earth'.
+
+.SH EXAMPLES
+.EX
+# setup spotify on pc01 pc02 pc06 pc07
+# Music and podcasts.
+# Web app: https://open.spotify.com
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
+if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
+.RS
+The "if grep --quiet debian /etc/os-release" is to check whether Debian or Debian based system like Ubuntu.
+The "if grep --quiet rhel   /etc/os-release" is to check for Red Hat based system such as AlmaLinux and Rocky Linux.
+The "if [[ ${DISPLAY-} ]]" is to check if there is a graphical environment.
+.RE
+.EE
 
 .SH SEE ALSO
 \fBkz-setup\fR(1),

@@ -35,6 +35,8 @@ Een \fBapp-regel\fR bestaat uit vijf delen, elk deel gescheiden door minstens
 4. on
 .br
 5. <hosts>  (de naam van de computer of computers)
+.br
+Hierna volgen één of meer \fBopdracht-regel\fRs met opdrachten voor <app>.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
@@ -189,6 +191,20 @@ niet worden uitgevoerd (OPMERKING: '#none' is geen geldige computernaam en
 wordt daarom nooit standaard geselecteerd).
 .br
 De app kan alsnog worden ingesteld met de opdracht 'kz setup google-earth'.
+
+.SH VOORBEELDEN
+.EX
+# setup spotify on pc01 pc02 pc06 pc07
+# Music and podcasts.
+# Web app: https://open.spotify.com
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
+if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
+.RS
+De "if grep --quiet debian /etc/os-release" is om te controleren of op Debian of op Debian gebaseerd systeem zoals Ubuntu.
+De "if grep --quiet rhel   /etc/os-release" is om te controleren of op Red Hat gebaseerd systeem zoals AlmaLinux en Rocky Linux.
+De "if [[ ${DISPLAY-} ]]" is om te controleren of er een grafische omgeving is.
+.RE
+.EE
 
 .SH ZIE OOK
 \fBkz-setup\fR(1),

@@ -260,7 +260,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --purge --assum
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
 
 # install force-x11 on #none
-# Disable choice from user login screen for Xorg/X11 or Wayland, and force X11.
+# Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
