@@ -485,7 +485,7 @@ function create_backup() {
 
     exclude_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.exclude")
 
-    cat << EOF > "$exclude_file"
+    cat <<EOF > "$exclude_file"
 # Exclude Git-managed directories.
 $(
     find    "$HOME"         \
