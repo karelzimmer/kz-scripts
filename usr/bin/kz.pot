@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-17 09:46+0200\n"
+"POT-Creation-Date: 2025-05-20 19:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -314,6 +314,9 @@ msgstr ""
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
+msgid "BUILD"
+msgstr ""
+
 msgid "Build website including kz packages"
 msgstr ""
 
@@ -327,6 +330,9 @@ msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
 msgid "Please check all the messages above and fix them if necessary."
+msgstr ""
+
+msgid "CHECK"
 msgstr ""
 
 msgid "Check scripts and website"
@@ -374,6 +380,9 @@ msgstr ""
 
 #, sh-format
 msgid "Repo $repo is not clean."
+msgstr ""
+
+msgid "DEPLOY"
 msgstr ""
 
 msgid "Upload website"
@@ -912,10 +921,13 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr ""
 
-msgid "Update"
+msgid "UPDATE"
 msgstr ""
 
-msgid "Cleanup"
+msgid "UPGRADE"
+msgstr ""
+
+msgid "CLEANUP"
 msgstr ""
 
 msgid "Usage: kz wifi [<options>]"

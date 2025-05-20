@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-13 16:27+0200\n"
+"POT-Creation-Date: 2025-05-20 19:39+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -351,6 +351,9 @@ msgstr "De back-up is gemaakt."
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
 
+msgid "BUILD"
+msgstr "BOUW"
+
 msgid "Build website including kz packages"
 msgstr "Website bouwen inclusief kz pakketten"
 
@@ -366,6 +369,9 @@ msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
 msgid "Please check all the messages above and fix them if necessary."
 msgstr "Controleer alle meldingen hierboven en los ze op indien nodig."
+
+msgid "CHECK"
+msgstr "CONTROLEER"
 
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
@@ -415,6 +421,9 @@ msgstr "Controleer of alle repo's schoon zijn"
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
+
+msgid "DEPLOY"
+msgstr "DISTRIBUEER"
 
 msgid "Upload website"
 msgstr "Uploaden website"
@@ -1051,11 +1060,14 @@ msgstr "Systeem bijwerken en opschonen"
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-msgid "Update"
-msgstr "Bijwerken"
+msgid "UPDATE"
+msgstr "BIJWERKEN"
 
-msgid "Cleanup"
-msgstr "Opruimen"
+msgid "UPGRADE"
+msgstr "UPGRADEN"
+
+msgid "CLEANUP"
+msgstr "OPRUIMEN"
 
 msgid "Usage: kz wifi [<options>]"
 msgstr "Gebruik: kz wifi [<opties>]"

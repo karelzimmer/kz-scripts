@@ -131,12 +131,13 @@ def perform_deb_update() -> None:
     """
     This function updates installed Debian packages and snaps if installed.
     """
-    TEXT = f"{BOLD}{_('Update')}...{kz_common.NORMAL}\n"
+    TEXT = f"{BOLD}{_('UPDATE')}{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-
     command: str = 'sudo apt-get update'
     perform_command(command)
 
+    TEXT = f"{BOLD}{_('UPGRADE')}{kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     command = 'sudo apt-get dist-upgrade --assume-yes'
     perform_command(command)
 
@@ -152,12 +153,10 @@ def perform_deb_cleanup() -> None:
     """
     This function performs a Debian packages cleanup.
     """
-    TEXT = f"{BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
+    TEXT = f"{BOLD}{_('CLEANUP')}{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-
     command: str = 'sudo apt-get autoclean'
     perform_command(command)
-
     command = 'sudo apt-get autoremove --assume-yes'
     perform_command(command)
 
@@ -166,12 +165,13 @@ def perform_rpm_update() -> None:
     """
     This function updates installed RPM packages and snaps if installed.
     """
-    TEXT = f"{BOLD}{_('Update')}...{kz_common.NORMAL}\n"
+    TEXT = f"{BOLD}{_('UPDATE')}{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-
     command: str = 'sudo dnf check-update || true'
     perform_command(command)
 
+    TEXT = f"{BOLD}{_('UPGRADE')}{kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     command = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(command)
 
@@ -187,12 +187,10 @@ def perform_rpm_cleanup() -> None:
     """
     This function performs a RPM packages cleanup.
     """
-    TEXT = f"{BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
+    TEXT = f"{BOLD}{_('CLEANUP')}{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-
     command: str = 'sudo dnf clean all'
     perform_command(command)
-
     command = 'sudo dnf autoremove --assumeyes'
     perform_command(command)
 

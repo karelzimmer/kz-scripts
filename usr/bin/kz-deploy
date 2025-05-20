@@ -136,6 +136,8 @@ $USAGE"
 
 # This function builds package kz and website.
 function build() {
+    TEXT=$(gettext 'BUILD')
+    infomsg "$TEXT"
     TEXT=$(gettext 'Build website including kz packages')...
     infomsg "$TEXT"
 
@@ -148,6 +150,8 @@ function build() {
 
 # This function performs checks.
 function check() {
+    TEXT=$(gettext 'CHECK')
+    infomsg "\n$TEXT"
     if ! check_repos; then
         DEV=true
         ERR_FLAG=true
@@ -158,6 +162,8 @@ function check() {
 
 # This function performs the deploy.
 function deploy() {
+    TEXT=$(gettext 'DEPLOY')
+    infomsg "\n$TEXT"
     upload_website
     install_package
 }
