@@ -169,10 +169,10 @@ def perform_rpm_update() -> None:
     TEXT = f"{BOLD}{_('Update')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
-    command: str = 'sudo dnf check-update'
+    command: str = 'sudo dnf check-update || true'
     perform_command(command)
 
-    command: str = 'sudo dnf upgrade --assumeyes --refresh'
+    command = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(command)
 
     if subprocess.run('type snap', executable='bash',
