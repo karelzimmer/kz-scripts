@@ -219,7 +219,8 @@ function init() {
     trap 'term_sig sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'term_sig sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    TEXT="==== START logs for script $PROGRAM_NAME ====
+    TEXT="==== START logs for script $PROGRAM_NAME ===========================\
+===========
 Started ($0 as $USER)."
     logmsg "$TEXT"
 
@@ -392,7 +393,8 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
                 --force     \
                 /tmp/"$PROGRAM_NAME-"*??????????* |& $PROGRAM_LOGS || true
             TEXT="Ended (code=exited, status=$status).
-==== END logs for script $PROGRAM_NAME ===="
+==== END logs for script $PROGRAM_NAME =======================================\
+="
             logmsg "$TEXT"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
