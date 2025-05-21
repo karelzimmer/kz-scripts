@@ -91,7 +91,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
             errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             term(PROGRAM_NAME, ERR)
         else:
-            term(PROGRAM_NAME, ERR)
+            term(PROGRAM_NAME, OK)
 
 
 def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
@@ -186,7 +186,8 @@ def init(PROGRAM_NAME: str) -> None:
     """
     This function performs initial actions.
     """
-    TEXT = f'==== START logs for script {PROGRAM_NAME} ====\n'
+    TEXT = f"\
+==== START logs for script {PROGRAM_NAME} ==================================\n"
     logmsg(PROGRAM_NAME, TEXT)
     TEXT = f"Started ({' '.join(sys.argv)} as {os.getlogin()}) ===="
     logmsg(PROGRAM_NAME, TEXT)
@@ -307,7 +308,8 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
 
     TEXT = f'Ended (code=exited, status={status}).'
     logmsg(PROGRAM_NAME, TEXT)
-    TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
+    TEXT = f'\
+==== END logs for script {PROGRAM_NAME} ======================================'
     logmsg(PROGRAM_NAME, TEXT)
 
     if rc == OK:
