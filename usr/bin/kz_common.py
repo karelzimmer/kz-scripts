@@ -186,8 +186,8 @@ def init(PROGRAM_NAME: str) -> None:
     """
     This function performs initial actions.
     """
-    TEXT = f"\
-==== START logs for script {PROGRAM_NAME} ==================================\n"
+    TEXT = f'\
+==== START logs for script {PROGRAM_NAME} ==================================\n'
     logmsg(PROGRAM_NAME, TEXT)
     TEXT = f"Started ({' '.join(sys.argv)} as {os.getlogin()}) ===="
     logmsg(PROGRAM_NAME, TEXT)
