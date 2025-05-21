@@ -144,12 +144,20 @@ finish').format(sleep)
     return OK
 
 
+def debugmsg(PROGRAM_NAME: str, TEXT: str) -> None:
+    """
+    This function records a debugging message to the log.
+    """
+    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}',
+                  f'PRIORITY=7')
+
+
 def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
            OPTION_GUI: bool = False) -> None:
     """
     This function returns an error message.
     """
-    logmsg(PROGRAM_NAME, TEXT)
+    debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
         title: str = f"{PROGRAM_DESC} {_('error message')} ({program_name})"
@@ -168,7 +176,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
     """
     This function returns an informational message.
     """
-    logmsg(PROGRAM_NAME, TEXT)
+    debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
         title: str = f"{PROGRAM_DESC} {_('information')} ({program_name})"
@@ -195,7 +203,7 @@ def init(PROGRAM_NAME: str) -> None:
 
 def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
-    This function records a message to the log.
+    This function records a informational message to the log.
     """
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 

@@ -166,12 +166,18 @@ function check_repos() {
 }
 
 
+# This function records a debugging message to the log.
+function debugmsg() {
+    printf '%b\n' "$*" |& $PROGRAM_LOGS --priority=debug
+}
+
+
 # This function returns an error message.
 function errmsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
-    logmsg "$*"
+    debugmsg "$*"
     if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'error message') ($program_name)"
         zenity  --error                 \
@@ -190,7 +196,7 @@ function infomsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
-    logmsg "$*"
+    debugmsg "$*"
     if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'information') ($program_name)"
         zenity  --info                  \
@@ -228,7 +234,7 @@ Started ($0 as $USER)."
 }
 
 
-# This function records a message to the log.
+# This function records a informational message to the log.
 function logmsg() {
     printf '%b\n' "$*" |& $PROGRAM_LOGS
 }
