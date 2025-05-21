@@ -474,6 +474,9 @@ function process_command_file() {
 
 # This function reports and executes a command from the command file.
 function execute_command() {
+    local -i cmd_dis_len=0
+    local -i cmd_dis_max=0
+    local cmd_dis=''
     local cmd=${1:-unknown}
 
     (( ++cmd_seq_num ))
@@ -490,7 +493,18 @@ function execute_command() {
             logmsg  "$app_name_line"
             infomsg "$app_name_line"
         fi
-        infomsg "         $cmd"
+        # Ellipsize terminal output.
+        # Width 9 characters less, 9 for leading spaces.
+        cmd_dis_max=$(( $(tput cols) - 9 ))
+        if [[ ${#cmd} -gt $cmd_dis_max ]]; then
+            # Width 12 characters less, 9 for leading spaces and 3 for trailing
+            # ellipsis.
+            cmd_dis_len=$(( $(tput cols) - 12 ))
+            cmd_dis=${cmd:0:cmd_dis_len}...
+        else
+            cmd_dis=$cmd
+        fi
+        infomsg "         $cmd_dis"
     fi
 
     logmsg "$cmd"
