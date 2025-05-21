@@ -419,7 +419,7 @@ function wait_for_enter() {
     local prompt=''
 
     prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    logmsg "$prompt"
+    debugmsg "$prompt"
     printf '\n'
     read -rp "$prompt" < /dev/tty
     printf '\n'

@@ -398,7 +398,7 @@ function setup_apps() {
 
     title=$(gettext 'Set up apps')
     TEXT=$(gettext 'Preparing set up')
-    logmsg "$title"...
+    debugmsg "$title"...
 
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -474,12 +474,11 @@ function execute_command() {
 
     if $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            logmsg "$app_name_line"
+            debugmsg "$app_name_line"
         fi
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
-            logmsg  "$app_name_line"
             infomsg "$app_name_line"
         fi
         # Ellipsize terminal output.
@@ -496,7 +495,7 @@ function execute_command() {
         infomsg "         $cmd_dis"
     fi
 
-    logmsg "$cmd"
+    debugmsg "$cmd"
     ERREXIT=false
     eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
     ERREXIT=true
@@ -557,7 +556,7 @@ apps and changing user settings.")"
                 xfce4-session-logout --logout
             else
                 TEXT='No logout command available.'
-                logmsg "$TEXT"
+                debugmsg "$TEXT"
                 TEXT=$(gettext 'Log out of the computer yourself.')
                 infomsg "$TEXT"
             fi

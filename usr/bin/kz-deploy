@@ -198,7 +198,7 @@ function upload_website() {
 
     if ! [[ -f $ftp_login ]]; then
         prompt="$(gettext 'Password for') ftp://$ftp_host': "
-        logmsg "$prompt"
+        debugmsg "$prompt"
         read -rp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'

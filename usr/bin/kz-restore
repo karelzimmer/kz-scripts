@@ -245,7 +245,7 @@ function restore_backup() {
     TEXT=$(gettext 'Preparing restore (this can take a while)')
 
     if $OPTION_GUI; then
-        logmsg "$title"...
+        debugmsg "$title"...
         rsync   --archive               \
                 --acls                  \
                 --xattrs                \
@@ -382,7 +382,7 @@ function term_usb() {
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        logmsg "$TEXT..."
+        debugmsg "$text..."
         term_unmount > >(
             zenity  --progress              \
                     --pulsate               \

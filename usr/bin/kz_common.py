@@ -334,7 +334,7 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
 
     try:
         TEXT = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
-        logmsg(PROGRAM_NAME, TEXT)
+        debugmsg(PROGRAM_NAME, TEXT)
         input(TEXT)
     except KeyboardInterrupt:
         TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
