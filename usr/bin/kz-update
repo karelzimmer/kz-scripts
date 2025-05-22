@@ -42,10 +42,6 @@ HELP: str = (f"{_('Usage: kz update [<options>]')}\n\n"
 OPTIONS_SHORT: str = 'hmuv'
 OPTIONS_LONG: list[str] = ['help', 'manual', 'usage', 'version']
 
-# List NORMAL last here so that -x doesn't bork the display.
-BOLD: str = '\033[1m'
-NORMAL = '\033[0m'
-
 
 ###############################################################################
 # Globals
@@ -137,12 +133,12 @@ def perform_deb_update() -> None:
     """
     text: str
 
-    text = f"{BOLD}{_('UPDATE')}{NORMAL}"
+    text = f"{_('UPDATE')}"
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command: str = 'sudo apt-get update'
     perform_command(command)
 
-    text = f"\n{BOLD}{_('UPGRADE')}{NORMAL}"
+    text = f"\n{_('UPGRADE')}"
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command = 'sudo apt-get dist-upgrade --assume-yes'
     perform_command(command)
@@ -161,7 +157,7 @@ def perform_deb_cleanup() -> None:
     """
     text: str
 
-    text = f"\n{BOLD}{_('CLEANUP')}{NORMAL}"
+    text = f"\n{_('CLEANUP')}"
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command: str = 'sudo apt-get autoclean'
     perform_command(command)
@@ -175,12 +171,12 @@ def perform_rpm_update() -> None:
     """
     text: str
 
-    text = f"{BOLD}{_('UPDATE')}{NORMAL}"
+    text = f"{_('UPDATE')}"
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command: str = 'sudo dnf check-update || true'
     perform_command(command)
 
-    text = f"\n{BOLD}{_('UPGRADE')}{NORMAL}"
+    text = f"\n{_('UPGRADE')}"
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(command)
@@ -199,7 +195,7 @@ def perform_rpm_cleanup() -> None:
     """
     text: str
 
-    text = f"\n{BOLD}{_('CLEANUP')}{NORMAL}"
+    text = f"\n{_('CLEANUP')}"
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command: str = 'sudo dnf clean all'
     perform_command(command)
@@ -214,7 +210,7 @@ def perform_command(command: str = '') -> None:
     exc: str = ''
     text: str
 
-    text = f'\n{BOLD}{command}{NORMAL}'
+    text = f'\n{command}'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     kz.check_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
