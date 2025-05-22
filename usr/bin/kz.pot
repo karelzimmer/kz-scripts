@@ -259,16 +259,16 @@ msgid ""
 "Further reading:"
 msgstr ""
 
-msgid "==== START list of manual installed packages ===="
+msgid "START list of manual installed packages"
 msgstr ""
 
-msgid "==== END list of manual installed packages ===="
+msgid "END list of manual installed packages"
 msgstr ""
 
-msgid "==== START list of installed snaps ===="
+msgid "START list of installed snaps"
 msgstr ""
 
-msgid "==== END list of installed snaps ===="
+msgid "END list of installed snaps"
 msgstr ""
 
 msgid "snap is not installed"
