@@ -59,6 +59,7 @@ readonly OPTIONS_SHORT='abcf:grhmuv'
 readonly OPTIONS_LONG="apps,browse,cat,file:,gui,remove,help,manual,usage,\
 version"
 
+# Required for kz.become_root.
 readonly COMMANDLINE_ARGS=("$@")
 
 

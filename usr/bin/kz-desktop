@@ -52,7 +52,6 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 readonly HELP
 
-
 readonly OPTIONS_SHORT='a:b:d:lrhmuv'
 readonly OPTIONS_LONG="addaft:,addbef:,delete:,list,reset,help,manual,usage,\
 version"

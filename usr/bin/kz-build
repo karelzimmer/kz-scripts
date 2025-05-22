@@ -42,6 +42,7 @@ readonly HELP
 readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
+# The following directories are used to build the website and packages.
 readonly DOCS_REPO=$HOME/kz-docs
 readonly SCRIPTS_REPO=$HOME/kz-scripts
 

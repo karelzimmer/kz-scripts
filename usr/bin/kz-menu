@@ -43,6 +43,7 @@ readonly HELP
 readonly OPTIONS_SHORT='ghmuv'
 readonly OPTIONS_LONG='gui,help,manual,usage,version'
 
+# Define the menu1 options.
 MENU1_TITLE=$(gettext 'Installation menu')
 readonly MENU1_TITLE
 readonly MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
@@ -64,6 +65,7 @@ readonly -a  MENU1_DESCS=(
             )
 readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
+# Define the menu2 options.
 MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
 readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
