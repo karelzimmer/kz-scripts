@@ -23,30 +23,6 @@ _ = gettext.gettext
 
 
 ###############################################################################
-# Checks
-###############################################################################
-
-"""
-Check if systemd is available.
-"""
-if subprocess.run('type systemctl', executable='bash',
-                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                  shell=True).returncode != 0:
-    print(f"\033[1;31m{_('fatal: no systemd available')}\033[0m",
-          file=sys. stderr)
-    sys.exit(1)
-
-
-"""
-Check if os release is available.
-"""
-if not os.path.exists('/etc/os-release'):
-    print(f"\033[1;31m{_('fatal: no os release available')}\033[0m",
-          file=sys. stderr)
-    sys.exit(1)
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
@@ -193,6 +169,18 @@ def init(PROGRAM_NAME: str) -> None:
     This function performs initial actions.
     """
     text: str
+
+    if subprocess.run('type systemctlxx', executable='bash',
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                    shell=True).returncode != 0:
+        print(f"\033[1;31m{_('fatal: no systemd available')}\033[0m",
+            file=sys. stderr)
+        sys.exit(1)
+
+    if not os.path.exists('/etc/os-release'):
+        print(f"\033[1;31m{_('fatal: no os release available')}\033[0m",
+            file=sys. stderr)
+        sys.exit(1)
 
     text = f'\
 ==== START logs for script {PROGRAM_NAME} ==================================\n'

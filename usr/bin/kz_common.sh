@@ -17,25 +17,6 @@ source /usr/bin/gettext.sh
 
 
 ###############################################################################
-# Checks
-###############################################################################
-
-# Check if systemd is available.
-if ! type systemctl &> /dev/null; then
-    printf  '\033[1;31m%b\n\033[0m' \
-            "$(gettext 'fatal: no systemd available')" >&2
-    exit 1
-fi
-
-# Check if os release is available.
-if ! [[ -f /etc/os-release ]]; then
-    printf  '\033[1;31m%b\n\033[0m' \
-            "$(gettext 'fatal: no os release available')" >&2
-    exit 1
-fi
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
@@ -209,7 +190,18 @@ function kz.infomsg() {
 function kz.init() {
     local text=''
 
-    # Script-hardening.
+    if ! type systemctl &> /dev/null; then
+        printf  '\033[1;31m%b\n\033[0m' \
+                "$(gettext 'fatal: no systemd available')" >&2
+        exit 1
+    fi
+
+    if ! [[ -f /etc/os-release ]]; then
+        printf  '\033[1;31m%b\n\033[0m' \
+                "$(gettext 'fatal: no os release available')" >&2
+        exit 1
+    fi
+
     set -o errexit
     set -o errtrace
     set -o nounset
