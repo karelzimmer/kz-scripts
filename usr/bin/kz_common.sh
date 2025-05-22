@@ -190,23 +190,27 @@ function kz.infomsg() {
 function kz.init() {
     local text=''
 
+    # Check if systemd is available.
     if ! type systemctl &> /dev/null; then
         printf  '\033[1;31m%b\n\033[0m' \
                 "$(gettext 'fatal: no systemd available')" >&2
         exit 1
     fi
 
+    # Check if os release is available.
     if ! [[ -f /etc/os-release ]]; then
         printf  '\033[1;31m%b\n\033[0m' \
                 "$(gettext 'fatal: no os release available')" >&2
         exit 1
     fi
 
+    # Script-hardening.
     set -o errexit
     set -o errtrace
     set -o nounset
     set -o pipefail
 
+    # Trap signals.
     trap 'term_sig err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
     trap 'term_sig exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
     trap 'term_sig sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
