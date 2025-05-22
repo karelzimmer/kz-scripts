@@ -42,7 +42,7 @@ $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -b, --browse   browse setup files')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
-                 process specified setup file")
+                 process specified setup files")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --reset    set apps on default values')
@@ -52,7 +52,7 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')
 
 $(gettext 'Arguments:')
-$(gettext '  <app>          process specified app')"
+$(gettext '  <app>          process specified apps')"
 readonly HELP
 
 readonly OPTIONS_SHORT='abcf:grhmuv'
@@ -91,6 +91,7 @@ function process() {
     local setup_file_default_gpg=''
     local setup_file_default=/usr/bin/$PROGRAM_NAME.sh
     local setup_file=''
+    local text=''
 
     check_input "$@"
 
@@ -110,23 +111,23 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
 
     for setup_file in "${setup_files[@]}"; do
         if [[ ! -f $setup_file ]]; then
-            TEXT=$(eval_gettext "Setup file '\$setup_file' not found.")
-            errmsg "$TEXT"
+            text=$(eval_gettext "Setup file '\$setup_file' not found.")
+            kz.errmsg "text"
             err_flag=true
         fi
     done
     if $err_flag; then
-        exit $ERR
+        exit 1
     fi
 
     if $option_browse; then
         process_option_browse
-        exit $OK
+        exit 0
     fi
 
     if $option_apps; then
         process_option_apps
-        exit $OK
+        exit 0
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-commands.sh")
@@ -139,7 +140,7 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
 
     if $option_cat; then
         process_option_cat
-        exit $OK
+        exit 0
     fi
 
     setup_apps
@@ -157,8 +158,8 @@ function check_input() {
                     --name          "$program_name"     \
                     --              "$@")               ||
                     {
-                        infomsg "$USAGE"
-                        exit $ERR
+                        kz.infomsg "$USAGE"
+                        exit 1
                     }
     eval set -- "$parsed"
     unset parsed
@@ -170,6 +171,7 @@ function check_input() {
 # This function handles the script options and arguments.
 function process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
     while true; do
         case $1 in
@@ -192,11 +194,11 @@ function process_options() {
                 ;;
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
-                    TEXT="$program_name: $1: \
+                    text="$program_name: $1: \
 $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "text"
+                    exit 1
                 fi
                 OPTION_GUI=true
                 shift
@@ -208,29 +210,29 @@ $USAGE"
                 shift
                 ;;
             -h | --help )
-                process_option_help
-                exit $OK
+                kz.process_option_help
+                exit 0
                 ;;
             -m | --manual )
-                process_option_manual
-                exit $OK
+                kz.process_option_manual
+                exit 0
                 ;;
             -u | --usage )
-                process_option_usage
-                exit $OK
+                kz.process_option_usage
+                exit 0
                 ;;
             -v | --version )
-                process_option_version
-                exit $OK
+                kz.process_option_version
+                exit 0
                 ;;
             -- )
                 shift
                 break
                 ;;
             * )
-                TEXT="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                errmsg "$TEXT"
-                exit $ERR
+                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                kz.errmsg "text"
+                exit 1
                 ;;
         esac
     done
@@ -255,8 +257,9 @@ function process_option_browse() {
 # This function shows the available apps from the setup file.
 function process_option_apps() {
     local apps=''
+    local text=''
 
-    TEXT="$(gettext 'The following apps are available:')
+    text="$(gettext 'The following apps are available:')
 
 $(gettext 'NUM  APP')
 "
@@ -275,7 +278,7 @@ $(gettext 'NUM  APP')
         )
 
     if [[ $apps ]]; then
-        TEXT+="$apps
+        text+="$apps
 
 $(gettext 'Use "kz setup <app>..." to set up the apps.')
 $(gettext 'Use "kz setup --cat" to view the contents of the setup file.')
@@ -284,11 +287,11 @@ setup file.")
 $(gettext "Use \"kz setup --browse\" to view the contents of the default \
 setup file.")"
     else
-        TEXT+="$(gettext '  0  No apps found.')
+        text+="$(gettext '  0  No apps found.')
 
 $USAGE"
     fi
-    infomsg "$TEXT"
+    kz.infomsg "text"
 }
 
 
@@ -308,6 +311,7 @@ function process_setup_file_by_app_argument() {
     local app_match=false
     local input_record=''
     local no_app_match=true
+    local text=''
 
     while read -r input_record; do
         case $input_record in
@@ -335,8 +339,8 @@ function process_setup_file_by_app_argument() {
     done < <(cat "${setup_files[@]}")
 
     if $no_app_match; then
-        TEXT=$(eval_gettext "App '\$app_argument' not found")
-        errmsg "$TEXT"
+        text=$(eval_gettext "App '\$app_argument' not found")
+        kz.errmsg "text"
     else
         # Add extra empty line  to command file.
         printf '\n' >> "$command_file"
@@ -387,18 +391,19 @@ function process_option_cat() {
 # This function starts setting up the apps.
 function setup_apps() {
     local -i app_tot_num=0
+    local text=''
     local title=''
 
     app_tot_num=$(grep --count "#.*$setup.*on" "$command_file" || true)
     if [[ $app_tot_num -eq 0 ]]; then
-        TEXT=$(gettext 'No commands to execute.' )
-        infomsg "$TEXT"
-        exit $OK
+        text=$(gettext 'No commands to execute.' )
+        kz.infomsg "text"
+        exit 0
     fi
 
     title=$(gettext 'Set up apps')
-    TEXT=$(gettext 'Preparing set up')
-    debugmsg "$title"...
+    text=$(gettext 'Preparing set up')
+    kz.debugmsg "$title"...
 
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -411,7 +416,7 @@ function setup_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$TEXT"     2> /dev/null
+                    --text      "text"     2> /dev/null
             )
     else
         process_command_file
@@ -426,11 +431,12 @@ function process_command_file() {
     local app_name_line=''
     local app_name=''
     local command_record=''
+    local text=''
 
     if ! $OPTION_GUI; then
-        TEXT="$(gettext 'NUM/TOT  APP')
+        text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
-        infomsg "$TEXT"
+        kz.infomsg "text"
     fi
 
     while read -r command_record; do
@@ -474,12 +480,12 @@ function execute_command() {
 
     if $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            debugmsg "$app_name_line"
+            kz.debugmsg "$app_name_line"
         fi
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
-            infomsg "$app_name_line"
+            kz.infomsg "$app_name_line"
         fi
         # Ellipsize terminal output.
         # Width 9 characters less, 9 for leading spaces.
@@ -492,10 +498,10 @@ function execute_command() {
         else
             cmd_dis=$cmd
         fi
-        infomsg "         $cmd_dis"
+        kz.infomsg "         $cmd_dis"
     fi
 
-    debugmsg "$cmd"
+    kz.debugmsg "$cmd"
     ERREXIT=false
     eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
     ERREXIT=true
@@ -505,17 +511,18 @@ function execute_command() {
 # This function controls the termination of the script.
 function term() {
     local operation=''
+    local text=''
 
     if [[ ${FAILED_APPS[*]} ]]; then
-        TEXT="$(gettext "The set up of the following apps contains errors:")
+        text="$(gettext "The set up of the following apps contains errors:")
 ${FAILED_APPS[*]}
 
 $(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
 view log messages.")
 
 $(gettext "Try to set up the apps again.")"
-        errmsg "$TEXT"
-        exit $ERR
+        kz.errmsg "text"
+        exit 1
     fi
 
     operation=$(gettext 'set up')
@@ -524,25 +531,25 @@ $(gettext "Try to set up the apps again.")"
         # shellcheck disable=SC2034
         operation=$(gettext 'reset')
     fi
-    TEXT=$(eval_gettext "Apps \$operation completed.")
+    text=$(eval_gettext "Apps \$operation completed.")
 
     if $LOGOUT; then
 
         if [[ ${DISPLAY-} ]]; then
-            TEXT+="
+            text+="
 
 $(gettext "You will now be logged out of the computer to finish setting up \
 the apps and changing user settings.")"
         else
-            TEXT+="
+            text+="
 
 $(gettext "Type 'logout' to log out of the computer to finish setting up the \
 apps and changing user settings.")"
         fi
-        infomsg "$TEXT"
+        kz.infomsg "text"
 
         if [[ ${DISPLAY-} ]]; then
-            $OPTION_GUI || wait_for_enter
+            $OPTION_GUI || kz.wait_for_enter
 
             if type gnome-session &> /dev/null; then
                 gnome-session-quit --logout --no-prompt
@@ -555,17 +562,17 @@ apps and changing user settings.")"
             elif type xfce4-session &> /dev/null; then
                 xfce4-session-logout --logout
             else
-                TEXT='No logout command available.'
-                debugmsg "$TEXT"
-                TEXT=$(gettext 'Log out of the computer yourself.')
-                infomsg "$TEXT"
+                text='No logout command available.'
+                kz.debugmsg "text"
+                text=$(gettext 'Log out of the computer yourself.')
+                kz.infomsg "text"
             fi
         fi
     else
-        infomsg "$TEXT"
+        kz.infomsg "text"
     fi
 
-    exit $OK
+    exit 0
 }
 
 
@@ -574,7 +581,7 @@ apps and changing user settings.")"
 ###############################################################################
 
 function main() {
-    init    "$@"
+    kz.init "$@"
     process "$@"
     term
 }

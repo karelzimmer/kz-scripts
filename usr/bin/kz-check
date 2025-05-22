@@ -42,7 +42,10 @@ readonly HELP
 readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
+# List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
+readonly RED='\033[1;31m'
+readonly NORMAL='\033[0m'
 
 
 ###############################################################################
@@ -63,18 +66,19 @@ function process() {
     local scriptdir=''
     local scriptname=''
     local scripts_repo=$HOME/kz-scripts
+    local text=''
 
     check_input "$@"
     if ! grep --quiet debian /etc/os-release; then
-        TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
-        infomsg "$TEXT"
-        exit $ERR
+        text=$(gettext 'Must run on a Debian or Debian-based system.')
+        kz.infomsg "$text"
+        exit 1
     fi
 
     check_website
 
-    TEXT=$(gettext 'Check scripts (this may take a while)...')
-    infomsg "$TEXT"
+    text=$(gettext 'Check scripts (this may take a while)...')
+    kz.infomsg "$text"
 
     check_gettext
 
@@ -83,7 +87,7 @@ function process() {
         scriptdir=$(dirname "$(realpath "$script")")
         scriptname=$(basename "$script")
         file=$scriptdir/$scriptname
-        logmsg "Process $script..."
+        kz.logmsg "Process $script..."
         case $scriptname in
             *.gpg | *.png )
                 continue
@@ -158,8 +162,8 @@ function check_input() {
                     --name          "$program_name"     \
                     --              "$@")               ||
                     {
-                        infomsg "$USAGE"
-                        exit $ERR
+                        kz.infomsg "$USAGE"
+                        exit 1
                     }
     eval set -- "$parsed"
     unset parsed
@@ -171,69 +175,74 @@ function check_input() {
 # This function handles the script options and arguments.
 function process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
     while true; do
         case $1 in
             -h | --help )
-                process_option_help
-                exit $OK
+                kz.process_option_help
+                exit 0
                 ;;
             -m | --manual )
-                process_option_manual
-                exit $OK
+                kz.process_option_manual
+                exit 0
                 ;;
             -u | --usage )
-                process_option_usage
-                exit $OK
+                kz.process_option_usage
+                exit 0
                 ;;
             -v | --version )
-                process_option_version
-                exit $OK
+                kz.process_option_version
+                exit 0
                 ;;
             -- )
                 shift
                 break
                 ;;
             * )
-                TEXT="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                errmsg "$TEXT"
-                exit $ERR
+                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                kz.errmsg "$text"
+                exit 1
                 ;;
         esac
     done
 
     if [[ $* ]]; then
-        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
+        text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$TEXT"
-        exit $ERR
+        kz.infomsg "$text"
+        exit 1
     fi
 }
 
 
 # This function checks the website for missing or not used files.
 function check_website() {
-    TEXT=$(gettext 'Check website...')
-    infomsg "$TEXT"
+    local text=''
+
+    text=$(gettext 'Check website...')
+    kz.infomsg "$text"
 
     # Call rchecklink.
-    logmsg 'Calling rchecklink...'
+    kz.logmsg 'Calling rchecklink...'
     rchecklink || ERR_FLAG=true
-    logmsg 'Called rchecklink.'
+    kz.logmsg 'Called rchecklink.'
 }
 
 
 # This function checks for gettext required files.
 function check_gettext() {
+    local text=''
+
     # GNU gettext message catalogue template (.pot).
     file=$scripts_repo/usr/bin/kz.pot
 
     if ! [[ -f $file ]]; then
-        infomsg "
+        kz.infomsg "
   $scripts_repo/usr/bin / kz.pot"
-        TEXT=$(eval_gettext "Gettext message catalog template \$file not \
+        text=$(eval_gettext "Gettext message catalog template \$file not \
 found.")
-        errmsg "    $TEXT"
+        kz.errmsg "    $text"
         ERR_FLAG=true
     fi
 
@@ -241,10 +250,10 @@ found.")
     file=$scripts_repo/usr/share/locale/nl/LC_MESSAGES/kz.po
 
     if ! [[ -f $file ]]; then
-        infomsg "
+        kz.infomsg "
   $scripts_repo/usr/share/locale/nl/LC_MESSAGES / kz.po"
-        TEXT=$(eval_gettext "Gettext message catalog \$file not found.")
-        errmsg "    $TEXT"
+        text=$(eval_gettext "Gettext message catalog \$file not found.")
+        kz.errmsg "    $text"
         ERR_FLAG=true
     fi
 
@@ -252,10 +261,10 @@ found.")
     file=$scripts_repo/usr/share/locale/nl/LC_MESSAGES/kz.mo
 
     if ! [[ -f $file ]]; then
-        infomsg "
+        kz.infomsg "
   $scripts_repo/usr/share/locale/nl/LC_MESSAGES / kz.mo"
-        TEXT=$(eval_gettext "Message catalog \$file not found.")
-        errmsg "    $TEXT"
+        text=$(eval_gettext "Message catalog \$file not found.")
+        kz.errmsg "    $text"
         ERR_FLAG=true
     fi
 }
@@ -266,6 +275,7 @@ function check_code() {
     local bash_script='#!''/usr/bin/env bash'
     local python_script='#!''/usr/bin/env python3'
     local tab_completion_script='# ''shellcheck shell=bash'
+    local text=''
 
     if grep --quiet --line-regexp "$bash_script" "$script"; then
         check_shellcheck
@@ -278,12 +288,12 @@ function check_code() {
         check_mypy
         check_script
     else
-        TEXT="
+        text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(gettext "Unknown script. Function check_code cannot check script \
 code.")$NORMAL
 "
-        infomsg "$TEXT"
+        kz.infomsg "$text"
         ERR_FLAG=true
     fi
 }
@@ -294,14 +304,15 @@ function check_script() {
     local dir=''
     local gui_option='-''-''g''u''i'
     local root_script=' ''b''e''c''o''m''e''_''r''o''o''t''$'
+    local text=''
 
     # Script.
     if ! "$file" --version |& $PROGRAM_LOGS; then
-        infomsg "
+        kz.infomsg "
   $BOLD$scriptdir / $scriptname$NORMAL"
-        TEXT='    '$(eval_gettext "Script \$scriptname --version returned an \
-error.")
-        errmsg "$TEXT"
+        text='    '$(eval_gettext "Script \$scriptname --version returned \
+an error.")
+        kz.errmsg "$text"
         ERR_FLAG=true
     fi
 
@@ -310,11 +321,11 @@ error.")
         dir=$scripts_repo/usr/share/applications
 
         if ! [[ -f $dir/$scriptname.desktop ]]; then
-        infomsg "
+        kz.infomsg "
   $BOLD$scriptdir / $scriptname$NORMAL"
-            TEXT='    '$(eval_gettext "Desktop configuration file \
+            text='    '$(eval_gettext "Desktop configuration file \
 \$dir/\$scriptname.desktop not found.")
-            errmsg "$TEXT"
+            kz.errmsg "$text"
             ERR_FLAG=true
         fi
     fi
@@ -323,9 +334,9 @@ error.")
     dir=$scripts_repo/usr/share/bash-completion/completions
 
     if ! [[ -f $dir/$scriptname ]]; then
-        TEXT='    '$(eval_gettext "Tab completion script \$dir/\$scriptname \
+        text='    '$(eval_gettext "Tab completion script \$dir/\$scriptname \
 not found.")
-        errmsg "$TEXT"
+        kz.errmsg "$text"
         ERR_FLAG=true
     fi
 
@@ -333,16 +344,16 @@ not found.")
     dir=$scripts_repo/usr/share/man/man1
 
     if ! [[ -f $dir/$scriptname.1 ]]; then
-        TEXT='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
-        errmsg "$TEXT"
+        text='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
+        kz.errmsg "$text"
         ERR_FLAG=true
     fi
 
     dir=$scripts_repo/usr/share/man/nl/man1
 
     if ! [[ -f $dir/$scriptname.1 ]]; then
-        TEXT='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
-        errmsg "$TEXT"
+        text='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
+        kz.errmsg "$text"
         ERR_FLAG=true
     fi
 
@@ -351,9 +362,9 @@ not found.")
         dir=$scripts_repo/usr/share/polkit-1/actions
 
         if ! [[ -f $dir/nl.karelzimmer.$scriptname.policy ]]; then
-            TEXT='    '$(eval_gettext "PolicyKit action definition file \
+            text='    '$(eval_gettext "PolicyKit action definition file \
 \$dir/nl.karelzimmer.\$scriptname.policy not found.")
-            errmsg "$TEXT"
+            kz.errmsg "$text"
             ERR_FLAG=true
         fi
     fi
@@ -380,20 +391,21 @@ function check_record_length() {
     local -i max_line_length_found=0
     local -i max_line_length=79
     local python_script='#!''/usr/bin/python3'
+    local text=''
 
     # Python is checked by pycodestyle.
     if grep --quiet --line-regexp "$python_script" "$script"; then
-        return $OK
+        return 0
     fi
 
     max_line_length_found=$(wc --max-line-length < "$script")
 
     if [[ $max_line_length_found -gt $max_line_length ]]; then
-        TEXT="
+        text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(eval_gettext "A line is longer than \$max_line_length \
 (\$max_line_length_found).")$NORMAL"
-        infomsg "$TEXT"
+        kz.infomsg "$text"
         ERR_FLAG=true
     fi
 }
@@ -403,7 +415,7 @@ $RED    $(eval_gettext "A line is longer than \$max_line_length \
 function check_desktop_file_validation() {
     if ! desktop-file-validate "$script" | systemd-cat --identifier=kz-check
     then
-        infomsg "
+        kz.infomsg "
   $BOLD$scriptdir / $scriptname$NORMAL"
         desktop-file-validate "$script" || ERR_FLAG=true
     fi
@@ -427,17 +439,18 @@ function check_tags() {
     local esc_bug='#''B''U''G'
     local esc_fixme='#''F''I''X''M''E'
     local esc_todo='#''T''O''D''O'
+    local text=''
 
     if grep --quiet                 \
             --regexp="$esc_bug"     \
             --regexp="$esc_fixme"   \
             --regexp="$esc_todo"    \
             "$script"; then
-        TEXT="
+        text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
     $(gettext 'Flagged annotation found.')
 "
-        infomsg "$TEXT"
+        kz.infomsg "$text"
         grep    --line-number           \
                 --regexp="$esc_bug"     \
                 --regexp="$esc_fixme"   \
@@ -453,12 +466,14 @@ ${BOLD}In $scriptdir / $scriptname:$NORMAL
 
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces() {
+    local text=''
+
     if grep --quiet ' ''$' "$script"; then
-        TEXT="
+        text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(gettext 'End spaces found.')$NORMAL
 "
-        infomsg "$TEXT"
+        kz.infomsg "$text"
         grep    --line-number ' ''$' "$script" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
         ERR_FLAG=true
@@ -468,15 +483,17 @@ $RED    $(gettext 'End spaces found.')$NORMAL
 
 # This function controls the termination of the script.
 function term() {
+    local text=''
+
     if $ERR_FLAG; then
-        TEXT=$(gettext "Please check all the messages above and fix them if \
+        text=$(gettext "Please check all the messages above and fix them if \
 necessary.")
-        errmsg "$TEXT"
-        exit $ERR
+        kz.errmsg "$text"
+        exit 1
     else
-        TEXT=$(gettext 'Complete!')
-        infomsg "$TEXT"
-        exit $OK
+        text=$(gettext 'Complete!')
+        kz.infomsg "$text"
+        exit 0
     fi
 }
 
@@ -486,7 +503,7 @@ necessary.")
 ###############################################################################
 
 function main() {
-    init    "$@"
+    kz.init "$@"
     process "$@"
     term
 }

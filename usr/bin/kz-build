@@ -72,16 +72,18 @@ declare DEV=false
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    local text=''
+
     check_input "$@"
     if ! grep --quiet debian /etc/os-release; then
-        TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
-        infomsg "$TEXT"
-        exit $ERR
+        text=$(gettext 'Must run on a Debian or Debian-based system.')
+        kz.infomsg "$text"
+        exit 1
     fi
-    become_root_check || exit $OK
+    kz.become_root_check || exit 0
     build_website
     generate_mo_file
-    check_repos || DEV=true
+    kz.check_repos || DEV=true
     build_deb_package
     build_rpm_package
     install_deb_package
@@ -99,8 +101,8 @@ function check_input() {
                     --name          "$program_name"     \
                     --              "$@")               ||
                     {
-                        infomsg "$USAGE"
-                        exit $ERR
+                        kz.infomsg "$USAGE"
+                        exit 1
                     }
     eval set -- "$parsed"
     unset parsed
@@ -112,42 +114,43 @@ function check_input() {
 # This function handles the script options and arguments.
 function process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
     while true; do
         case $1 in
             -h | --help )
-                process_option_help
-                exit $OK
+                kz.process_option_help
+                exit 0
                 ;;
             -m | --manual )
-                process_option_manual
-                exit $OK
+                kz.process_option_manual
+                exit 0
                 ;;
             -u | --usage )
-                process_option_usage
-                exit $OK
+                kz.process_option_usage
+                exit 0
                 ;;
             -v | --version )
-                process_option_version
-                exit $OK
+                kz.process_option_version
+                exit 0
                 ;;
             -- )
                 shift
                 break
                 ;;
             * )
-                TEXT="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                errmsg "$TEXT"
-                exit $ERR
+                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                kz.errmsg "$text"
+                exit 1
                 ;;
         esac
     done
 
     if [[ $* ]]; then
-        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
+        text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$TEXT"
-        exit $ERR
+        kz.infomsg "$text"
+        exit 1
     fi
 }
 
@@ -158,9 +161,10 @@ function build_website() {
     local file=''
     local filename=''
     local startdir=$PWD
+    local text=''
 
-    TEXT=$(gettext 'Build website')...
-    infomsg "$TEXT"
+    text=$(gettext 'Build website')...
+    kz.infomsg "$text"
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/src/.
     rsync   --archive               \
@@ -211,10 +215,11 @@ function generate_mo_file() {
 # This function builds Debian package kz.
 function build_deb_package() {
     local build_id=''
+    local text=''
     local to_build=''
 
-    TEXT=$(gettext 'Build Debian package')...
-    infomsg "$TEXT"
+    text=$(gettext 'Build Debian package')...
+    kz.infomsg "$text"
 
     # Fill kz-deb/dist/ with kz-deb/src/.
     rsync   --archive           \
@@ -277,10 +282,11 @@ function build_deb_package() {
 function build_rpm_package() {
     local build_id=''
     local startdir=$PWD
+    local text=''
     local to_copy=''
 
-    TEXT=$(gettext 'Build RPM package')...
-    infomsg "$TEXT"
+    text=$(gettext 'Build RPM package')...
+    kz.infomsg "$text"
 
     # Fill kz-rpm/dist/ with kz-rpm/src/.
     rsync   --archive           \
@@ -350,12 +356,13 @@ function build_rpm_package() {
 
 # This function installs Debian-package kz.
 function install_deb_package() {
+    local text=''
     local to_install=''
 
     sudo true
-    TEXT=$(gettext 'Install Debian package (this may take a while)...')
-    infomsg "$TEXT"
-    check_package_manager
+    text=$(gettext 'Install Debian package (this may take a while)...')
+    kz.infomsg "$text"
+    kz.check_package_manager
 
     if $DEV; then
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME
@@ -373,14 +380,15 @@ function install_deb_package() {
 
 # This function controls the termination of the script.
 function term() {
+    local text=''
     if $DEV; then
-        TEXT=$(gettext "Please note: the development version of the kz \
+        text=$(gettext "Please note: the development version of the kz \
 package is installed")
-        errmsg "$TEXT"
+        kz.errmsg "$text"
     fi
-    TEXT=$(gettext 'Complete!')
-    infomsg "$TEXT"
-    exit $OK
+    text=$(gettext 'Complete!')
+    kz.infomsg "$text"
+    exit 0
 }
 
 
@@ -389,7 +397,7 @@ package is installed")
 ###############################################################################
 
 function main() {
-    init    "$@"
+    kz.init "$@"
     process "$@"
     term
 }

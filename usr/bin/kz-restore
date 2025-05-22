@@ -88,8 +88,8 @@ function check_input() {
                     --name          "$program_name"     \
                     --              "$@")               ||
                     {
-                        infomsg "$USAGE"
-                        exit $ERR
+                        kz.infomsg "$USAGE"
+                        exit 1
                     }
     eval set -- "$parsed"
     unset parsed
@@ -101,64 +101,66 @@ function check_input() {
 # This function handles the script options and arguments.
 function process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
     while true; do
         case $1 in
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
-                    TEXT="$program_name: $1: \
+                    text="$program_name: $1: \
 $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "$text"
+                    exit 1
                 fi
                 OPTION_GUI=true
                 shift
                 ;;
             -s | --source )
                 if $option_source; then
-                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
+                    text="$program_name: $1 $2: \
+$(gettext 'too many options')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "$text"
+                    exit 1
                 fi
                 option_source=true
                 source_argument=$2
                 shift 2
                 ;;
             -h | --help )
-                process_option_help
-                exit $OK
+                kz.process_option_help
+                exit 0
                 ;;
             -m | --manual )
-                process_option_manual
-                exit $OK
+                kz.process_option_manual
+                exit 0
                 ;;
             -u | --usage )
-                process_option_usage
-                exit $OK
+                kz.process_option_usage
+                exit 0
                 ;;
             -v | --version )
-                process_option_version
-                exit $OK
+                kz.process_option_version
+                exit 0
                 ;;
             -- )
                 shift
                 break
                 ;;
             * )
-                TEXT="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                errmsg "$TEXT"
-                exit $ERR
+                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                kz.errmsg "$text"
+                exit 1
                 ;;
         esac
     done
 
     if [[ $* ]]; then
-        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
+        text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$TEXT"
-        exit $ERR
+        kz.infomsg "$text"
+        exit 1
     fi
 }
 
@@ -166,6 +168,7 @@ $USAGE"
 # This function checks if the source is available.
 function check_source() {
     local usb_mount_point="/media/$USER"
+    local text=''
 
     if grep --quiet rhel /etc/os-release; then
         usb_mount_point="/run/media/$USER"
@@ -174,11 +177,11 @@ function check_source() {
     if $option_source; then
 
         if ! [[ -d $source_argument ]]; then
-            TEXT="$program_name: $source_argument: \
+            text="$program_name: $source_argument: \
 $(gettext 'directory does not exist')
 $USAGE"
-            infomsg "$TEXT"
-            exit $ERR
+            kz.infomsg "$text"
+            exit 1
         fi
 
         source=$source_argument/$USER@$HOSTNAME
@@ -187,39 +190,39 @@ $USAGE"
         medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
         if ! [[ $medium ]]; then
-            TEXT=$(gettext "No USB medium found.
+            text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
-            infomsg "$TEXT"
+            kz.infomsg "$text"
 
-            $OPTION_GUI || wait_for_enter
+            $OPTION_GUI || kz.wait_for_enter
 
             medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
             if ! [[ $medium ]]; then
-                errmsg "$TEXT"
-                exit $ERR
+                kz.errmsg "$text"
+                exit 1
             fi
         fi
 
         medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            TEXT="$(eval_gettext "Connect only one USB medium.
+            text="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
 \$medium
 
 Disconnect media via Files.")"
-            infomsg "$TEXT"
+            kz.infomsg "$text"
 
-            $OPTION_GUI || wait_for_enter
+            $OPTION_GUI || kz.wait_for_enter
 
             medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                errmsg "$TEXT"
-                exit $ERR
+                kz.errmsg "$text"
+                exit 1
             fi
         fi
 
@@ -227,11 +230,11 @@ Disconnect media via Files.")"
         SOURCE_MEDIUM=$medium
 
         if ! [[ -d $source ]]; then
-            TEXT=$(eval_gettext "No backup found on connected USB medium.
+            text=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
-            errmsg "$TEXT"
-            exit $ERR
+            kz.errmsg "$text"
+            exit 1
         fi
     fi
 }
@@ -239,13 +242,14 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the backup.
 function restore_backup() {
+    local text=''
     local title=''
 
     title=$(gettext 'Restore home folder')
-    TEXT=$(gettext 'Preparing restore (this can take a while)')
+    text=$(gettext 'Preparing restore (this can take a while)')
 
     if $OPTION_GUI; then
-        debugmsg "$title"...
+        kz.debugmsg "$title"...
         rsync   --archive               \
                 --acls                  \
                 --xattrs                \
@@ -261,10 +265,10 @@ function restore_backup() {
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$TEXT"     2> /dev/null || RESTORE_RC=$?
+                --text      "$text"     2> /dev/null || RESTORE_RC=$?
     else
-        TEXT+='...'
-        infomsg "$TEXT"
+        text+='...'
+        kz.infomsg "$text"
         rsync   --archive               \
                 --acls                  \
                 --xattrs                \
@@ -283,7 +287,7 @@ function restore_settings() {
     settings_dir=$HOME/$(gettext 'Settings')
 
     if [[ ${DISPLAY-} ]]; then
-        logmsg 'Restore settings...'
+        kz.logmsg 'Restore settings...'
         restore_setting_desktop
     fi
 }
@@ -294,7 +298,7 @@ function restore_setting_desktop() {
     local input_file=$settings_dir/desktop
 
     if [[ -f $input_file ]]; then
-        logmsg 'Restore the desktop background...'
+        kz.logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
                     "file://$input_file"
@@ -306,10 +310,11 @@ function restore_setting_desktop() {
 function term() {
     local -i num_users=0
     local -i rc=0
+    local text=''
     local users=''
 
-    if [[ $RESTORE_RC -ne $OK ]]; then
-        TEXT="$(eval_gettext "Restore ended with warnings or errors.
+    if [[ $RESTORE_RC -ne 0 ]]; then
+        text="$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while restoring the backup, or
@@ -319,14 +324,14 @@ $(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
 view log messages.")
 
 $(gettext "Try restoring the back up again.")"
-        errmsg "$TEXT"
-        exit $ERR
+        kz.errmsg "$text"
+        exit 1
     fi
 
     num_users=$(find /home/* -prune -print | wc --lines)
 
     if [[ $num_users -eq 1 ]]; then
-        TEXT=$(gettext 'The backup has been restored.')
+        text=$(gettext 'The backup has been restored.')
     else
         users=$(
             gettext 'USERNAME|USERID|USER'
@@ -337,7 +342,7 @@ $(gettext "Try restoring the back up again.")"
             tr      ',,,' '   '                     |
             tr      ':' '|'
             )
-        TEXT="$(eval_gettext "The backup has restored for \$USER (there are \
+        text="$(eval_gettext "The backup has restored for \$USER (there are \
 \$num_users users).")
 
 $users"
@@ -345,19 +350,19 @@ $users"
 
     if [[ $SOURCE_MEDIUM == */media/* ]]; then
         term_usb || rc=$?
-        if [[ $rc -eq $OK ]]; then
-            TEXT+="
+        if [[ $rc -eq 0 ]]; then
+            text+="
 
 $(gettext 'The USB medium can be removed.')"
         else
-            TEXT+="
+            text+="
 
 $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
         fi
     fi
-    infomsg "$TEXT"
+    kz.infomsg "$text"
 
-    exit $OK
+    exit 0
 }
 
 
@@ -382,7 +387,7 @@ function term_usb() {
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        debugmsg "$text..."
+        kz.debugmsg "$text..."
         term_unmount > >(
             zenity  --progress              \
                     --pulsate               \
@@ -394,7 +399,7 @@ function term_usb() {
                     --text      "$text"     2> /dev/null
             )
     else
-        infomsg "$text..."
+        kz.infomsg "$text..."
         term_unmount
     fi
 
@@ -415,7 +420,7 @@ function term_unmount() {
 ###############################################################################
 
 function main() {
-    init    "$@"
+    kz.init "$@"
     process "$@"
     term
 }

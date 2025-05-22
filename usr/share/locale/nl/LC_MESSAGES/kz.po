@@ -17,9 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Common module for shell scripts"
-msgstr "Algemene module voor shell scripts"
-
 msgid "  -h, --help     show this help text"
 msgstr "  -h, --help     toon deze hulptekst"
 
@@ -102,9 +99,6 @@ msgstr "informatie"
 
 msgid "error message"
 msgstr "foutmelding"
-
-msgid "Common module for Python scripts"
-msgstr "Algemene module voor Python scripts"
 
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
@@ -590,10 +584,10 @@ msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
 
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified installation file"
+"                 process specified installation files"
 msgstr ""
 "  -f, --file <bestand>\n"
-"                 verwerk opgegeven installatiebestand"
+"                 verwerk opgegeven installatiebestanden"
 
 msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
@@ -601,8 +595,8 @@ msgstr "  -r, --remove   verwijder apps"
 msgid "Type 'kz install --apps' for available apps."
 msgstr "Typ 'kz install --apps' voor beschikbare apps."
 
-msgid "  <app>          process specified app"
-msgstr "  <app>          verwerk opgegeven app"
+msgid "  <app>          process specified apps"
+msgstr "  <app>          verwerk opgegeven apps"
 
 #, sh-format
 msgid "App '$app_argument' not found"
@@ -1011,10 +1005,10 @@ msgstr "  -b, --browse   blader door instelbestand"
 
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified setup file"
+"                 process specified setup files"
 msgstr ""
 "  -f, --file <bestand>\n"
-"                 verwerk opgegeven instelbestand"
+"                 verwerk opgegeven instelbestanden"
 
 msgid "  -r, --reset    set apps on default values"
 msgstr "  -r, --reset    stel apps in op standaardwaarden"

@@ -88,8 +88,8 @@ function check_input() {
                     --name          "$program_name"     \
                     --              "$@")               ||
                     {
-                        infomsg "$USAGE"
-                        exit $ERR
+                        kz.infomsg "$USAGE"
+                        exit 1
                     }
     eval set -- "$parsed"
     unset parsed
@@ -101,64 +101,65 @@ function check_input() {
 # This function handles the script options and arguments.
 function process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
     while true; do
         case $1 in
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
-                    TEXT="$program_name: $1: \
+                    text="$program_name: $1: \
 $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "$text"
+                    exit 1
                 fi
                 OPTION_GUI=true
                 shift
                 ;;
             -t | --target )
                 if $option_target; then
-                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
+                    text="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "$text"
+                    exit 1
                 fi
                 option_target=true
                 target_argument=$2
                 shift 2
                 ;;
             -h | --help )
-                process_option_help
-                exit $OK
+                kz.process_option_help
+                exit 0
                 ;;
             -m | --manual )
-                process_option_manual
-                exit $OK
+                kz.process_option_manual
+                exit 0
                 ;;
             -u | --usage )
-                process_option_usage
-                exit $OK
+                kz.process_option_usage
+                exit 0
                 ;;
             -v | --version )
-                process_option_version
-                exit $OK
+                kz.process_option_version
+                exit 0
                 ;;
             -- )
                 shift
                 break
                 ;;
             * )
-                TEXT="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                errmsg "$TEXT"
-                exit $ERR
+                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                kz.errmsg "$text"
+                exit 1
                 ;;
         esac
     done
 
     if [[ $* ]]; then
-        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
+        text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$TEXT"
-        exit $ERR
+        kz.infomsg "$text"
+        exit 1
     fi
 }
 
@@ -166,6 +167,7 @@ $USAGE"
 # This function checks if the target is available.
 function check_target() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
     local usb_mount_point="/media/$USER"
 
     if grep --quiet rhel /etc/os-release; then
@@ -175,11 +177,11 @@ function check_target() {
     if $option_target; then
 
         if ! [[ -d $target_argument ]]; then
-            TEXT="$program_name: $target_argument: \
+            text="$program_name: $target_argument: \
 $(gettext 'directory does not exist')
 $USAGE"
-            infomsg "$TEXT"
-            exit $ERR
+            kz.infomsg "$text"
+            exit 1
         fi
 
         TARGET=$target_argument/$USER@$HOSTNAME
@@ -189,38 +191,38 @@ $USAGE"
         medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
         if ! [[ $medium ]]; then
-            TEXT=$(gettext "No USB medium found.
+            text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
-            infomsg "$TEXT"
+            kz.infomsg "$text"
 
-            $OPTION_GUI || wait_for_enter
+            $OPTION_GUI || kz.wait_for_enter
             medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
             if ! [[ $medium ]]; then
-                errmsg "$TEXT"
-                exit $ERR
+                kz.errmsg "$text"
+                exit 1
             fi
         fi
 
         medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            TEXT="$(eval_gettext "Connect only one USB medium.
+            text="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
 \$medium
 
 Disconnect media via Files.")"
-            infomsg "$TEXT"
+            kz.infomsg "$text"
 
-            $OPTION_GUI || wait_for_enter
+            $OPTION_GUI || kz.wait_for_enter
 
             medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
 
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                errmsg "$TEXT"
-                exit $ERR
+                kz.errmsg "$text"
+                exit 1
             fi
         fi
 
@@ -232,27 +234,27 @@ Disconnect media via Files.")"
     fi
 
     if [[ -e $TARGET_MEDIUM/backup-$HOSTNAME-$USER ]]; then
-        TEXT="$(gettext "Backup found with old name: \
+        text="$(gettext "Backup found with old name: \
 backup-<hostname>-<username>
 Please rename to:           <username>@<hostname>")"
-        errmsg "$TEXT"
-        exit $ERR
+        kz.errmsg "$text"
+        exit 1
     fi
 
     if [[ -e $TARGET_MEDIUM/$PROGRAM_NAME-$HOSTNAME-$USER ]]; then
-        TEXT="$(gettext "Backup found with old name: \
+        text="$(gettext "Backup found with old name: \
 kz-backup-<hostname>-<username>
 Please rename to:           <username>@<hostname>")"
-        errmsg "$TEXT"
-        exit $ERR
+        kz.errmsg "$text"
+        exit 1
     fi
 
     if [[ -e $medium/$USER@$HOSTNAME ]]; then
-        TEXT="$(gettext "Backup found in wrong place: \
+        text="$(gettext "Backup found in wrong place: \
 <medium>/<username>@<hostname>
 Please move to:              <medium>/Backups/")"
-        errmsg "$TEXT"
-        exit $ERR
+        kz.errmsg "$text"
+        exit 1
     fi
 }
 
@@ -261,7 +263,7 @@ Please move to:              <medium>/Backups/")"
 function backup_settings() {
     local settings_dir=''
 
-    logmsg 'Backup settings...'
+    kz.logmsg 'Backup settings...'
 
     settings_dir=$HOME/$(gettext 'Settings')
     if ! [[ -d $settings_dir ]]; then
@@ -287,18 +289,19 @@ function backup_settings() {
 # This function creates a README.
 function backup_setting_readme() {
     local output_file=''
+    local text=''
 
-    logmsg 'Create settings README...'
+    kz.logmsg 'Create settings README...'
 
     output_file=$settings_dir/$(gettext 'README')
 
-    TEXT="$(gettext "This folder contains files created by kz-backup.
+    text="$(gettext "This folder contains files created by kz-backup.
 These files are used by kz-restore and others.
 
 Further reading:")
     man kz backup
     man kz restore"
-    printf '%s\n' "$TEXT" > "$output_file"
+    printf '%s\n' "$text" > "$output_file"
 }
 
 
@@ -320,7 +323,7 @@ function backup_setting_apps() {
     text=$(gettext 'END list of installed snaps')
     footer2=$(gettext "==== $text ===========================================")
 
-    logmsg 'Create a list of installed apps...(ignore WARNING).'
+    kz.logmsg 'Create a list of installed apps...(ignore WARNING).'
 
     printf '%s\n' "$header1" > "$output_file"
     apt list --manual-installed 2> /dev/null >> "$output_file" || true
@@ -337,6 +340,7 @@ function backup_setting_apps() {
 function backup_setting_users() {
     local groups=''
     local output_file=$settings_dir/users.txt
+    local text=''
     local user=''
     local users=''
 
@@ -358,10 +362,10 @@ function backup_setting_users() {
         done < <(grep /home /etc/passwd | cut --delimiter=':' --fields=1)
         )
 
-    logmsg 'Save instructions for adding additional users...'
+    kz.logmsg 'Save instructions for adding additional users...'
 
     if [[ ${DISPLAY-} ]]; then
-        TEXT="$(gettext 'Additional users can be added manually:')
+        text="$(gettext 'Additional users can be added manually:')
 
 $(gettext "1. Type 'user' on the activities overview[1] and click behind \
 Settings on Users.
@@ -374,7 +378,7 @@ click on Activities at the top left.")
 $users
 $groups"
     else
-        TEXT="$(gettext 'Additional users can be added manually:')
+        text="$(gettext 'Additional users can be added manually:')
 
 $(gettext "# Standard user:
 sudo useradd --create-home --comment '<user>' <username>
@@ -390,7 +394,7 @@ $users
 $groups"
     fi
 
-    printf '%b\n' "$TEXT" > "$output_file"
+    printf '%b\n' "$text" > "$output_file"
 }
 
 
@@ -398,12 +402,12 @@ $groups"
 function backup_setting_wifi() {
     local output_file=$settings_dir/wifi.txt
 
-    logmsg 'Save the WiFi information...'
+    kz.logmsg 'Save the WiFi information...'
 
     # Call kz wifi.
-    logmsg 'Calling kz wifi...'
+    kz.logmsg 'Calling kz wifi...'
     kz wifi > "$output_file"
-    logmsg 'Called kz wifi.'
+    kz.logmsg 'Called kz wifi.'
 }
 
 
@@ -413,13 +417,14 @@ function backup_setting_avatar() {
     local input_file=/var/lib/AccountsService/icons/$USER
     local output_file_1=$settings_dir/avatar
     local output_file_2=$settings_dir/avatar.txt
+    local text=''
 
     if [[ -f $input_file ]]; then
-        logmsg 'Copy the user avatar...'
+        kz.logmsg 'Copy the user avatar...'
         cp --verbose "$input_file" "$output_file_1" |& $PROGRAM_LOGS
     fi
-    logmsg 'Save instructions for restoring the avatar...'
-    TEXT="$(gettext "To set the users avatar:
+    kz.logmsg 'Save instructions for restoring the avatar...'
+    text="$(gettext "To set the users avatar:
 
 1. Type 'user' on the activities overview[1] and click behind Settings on \
 Users.
@@ -430,7 +435,7 @@ Users.
 $(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
 click on Activities at the top left.")"
 
-    printf '%s\n' "$TEXT" > "$output_file_2"
+    printf '%s\n' "$text" > "$output_file_2"
 }
 
 
@@ -440,6 +445,7 @@ function backup_setting_desktop() {
     local input_file
     local output_file_1=$settings_dir/desktop
     local output_file_2=$settings_dir/desktop.txt
+    local text=''
 
     input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
@@ -452,13 +458,13 @@ function backup_setting_desktop() {
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
     if [[ -f $input_file && $input_file != *.xml ]]; then
-        logmsg 'Copy the desktop background...'
+        kz.logmsg 'Copy the desktop background...'
         cp "$input_file" "$output_file_1" |& $PROGRAM_LOGS || true
     fi
 
-    logmsg 'Save instructions for setting the desktop background...'
+    kz.logmsg 'Save instructions for setting the desktop background...'
 
-    TEXT="$(gettext "To set the desktop background:
+    text="$(gettext "To set the desktop background:
 
 1. Type 'file' on the activities overview[1] and click on Files.
 2. Open the folder containing the desired image.
@@ -467,7 +473,7 @@ function backup_setting_desktop() {
 $(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
 click on Activities at the top left.")"
 
-    printf '%s\n' "$TEXT" > "$output_file_2"
+    printf '%s\n' "$text" > "$output_file_2"
 }
 
 
@@ -475,7 +481,7 @@ click on Activities at the top left.")"
 function backup_setting_favs() {
     local output_file=$settings_dir/favs.txt
 
-    logmsg 'Save the favorite apps...'
+    kz.logmsg 'Save the favorite apps...'
     gsettings get                           \
               org.gnome.shell favorite-apps \
               > "$output_file"              |& $PROGRAM_LOGS || true
@@ -485,6 +491,7 @@ function backup_setting_favs() {
 # This function creates the backup.
 function create_backup() {
     local exclude_file=''
+    local text=''
     local title=''
 
     exclude_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.exclude")
@@ -504,10 +511,10 @@ $(
 EOF
 
     title=$(gettext 'Backup home folder')
-    TEXT=$(gettext 'Preparing backup (this may take a while)')
+    text=$(gettext 'Preparing backup (this may take a while)')
 
     if $OPTION_GUI; then
-        debugmsg "$title..."
+        kz.debugmsg "$title..."
         rsync   --archive                       \
                 --acls                          \
                 --xattrs                        \
@@ -526,10 +533,10 @@ EOF
                 --width     600                 \
                 --height    50                  \
                 --title     "$title"            \
-                --text      "$TEXT"             2> /dev/null || BACKUP_RC=$?
+                --text      "$text"             2> /dev/null || BACKUP_RC=$?
     else
-        TEXT+='...'
-        infomsg "$TEXT"
+        text+='...'
+        kz.infomsg "$text"
         rsync   --archive                       \
                 --acls                          \
                 --xattrs                        \
@@ -542,9 +549,9 @@ EOF
                 "$TARGET"/                      2> /dev/null || BACKUP_RC=$?
     fi
 
-    TEXT=$(gettext "Writing data from memory (this may take a while)")
+    text=$(gettext "Writing data from memory (this may take a while)")
     if $OPTION_GUI; then
-        debugmsg "$TEXT..."
+        kz.debugmsg "$text..."
         sync                            |
         zenity  --progress              \
                 --pulsate               \
@@ -553,10 +560,10 @@ EOF
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$TEXT"     &> >($PROGRAM_LOGS)
+                --text      "$text"     &> >($PROGRAM_LOGS)
     else
-        TEXT+='...'
-        infomsg "$TEXT"
+        text+='...'
+        kz.infomsg "$text"
         sync |& $PROGRAM_LOGS
     fi
 }
@@ -566,10 +573,11 @@ EOF
 function term() {
     local -i num_users=0
     local -i rc=0
+    local text=''
     local users=''
 
-    if [[ $BACKUP_RC -ne $OK ]]; then
-        TEXT="$(eval_gettext "Backup ended with warnings or errors.
+    if [[ $BACKUP_RC -ne 0 ]]; then
+        text="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while creating the backup, or
@@ -579,8 +587,8 @@ $(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
 view log messages.")
 
 $(gettext "Try creating the back up again.")"
-        errmsg "$TEXT"
-        exit $ERR
+        kz.errmsg "$text"
+        exit 1
     fi
 
     users=$(
@@ -595,29 +603,29 @@ $(gettext "Try creating the back up again.")"
     num_users=$(find /home/* -prune -print | wc --lines)
 
     if [[ $num_users -eq 1 ]]; then
-        TEXT=$(gettext "The backup has been made.")
+        text=$(gettext "The backup has been made.")
     else
-        TEXT="$(eval_gettext "The backup has been made for \$USER (there are \
-\$num_users users).")
+        text="$(eval_gettext "The backup has been made for \$USER (there \
+are \$num_users users).")
 
 $users"
     fi
 
     if [[ $TARGET_MEDIUM == */media/$USER* ]]; then
         term_usb || rc=$?
-        if [[ $rc -eq $OK ]]; then
-            TEXT+="
+        if [[ $rc -eq 0 ]]; then
+            text+="
 
 $(gettext 'The USB medium can be removed.')"
         else
-            TEXT+="
+            text+="
 
 $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
         fi
     fi
-    infomsg "$TEXT"
+    kz.infomsg "$text"
 
-    exit $OK
+    exit 0
 }
 
 
@@ -642,7 +650,7 @@ function term_usb() {
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        debugmsg "$TEXT..."
+        kz.debugmsg "$text..."
         term_unmount > >(
             zenity  --progress              \
                     --pulsate               \
@@ -654,7 +662,7 @@ function term_usb() {
                     --text      "$text"     2> /dev/null
             )
     else
-        infomsg "$text..."
+        kz.infomsg "$text..."
         term_unmount
     fi
 
@@ -675,7 +683,7 @@ function term_unmount() {
 ###############################################################################
 
 function main() {
-    init    "$@"
+    kz.init "$@"
     process "$@"
     term
 }

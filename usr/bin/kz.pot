@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-20 19:41+0200\n"
+"POT-Creation-Date: 2025-05-22 15:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,9 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid "Common module for shell scripts"
-msgstr ""
 
 msgid "  -h, --help     show this help text"
 msgstr ""
@@ -96,9 +93,6 @@ msgid "information"
 msgstr ""
 
 msgid "error message"
-msgstr ""
-
-msgid "Common module for Python scripts"
 msgstr ""
 
 msgid "Program {} has been interrupted."
@@ -529,7 +523,7 @@ msgstr ""
 
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified installation file"
+"                 process specified installation files"
 msgstr ""
 
 msgid "  -r, --remove   delete apps"
@@ -538,7 +532,7 @@ msgstr ""
 msgid "Type 'kz install --apps' for available apps."
 msgstr ""
 
-msgid "  <app>          process specified app"
+msgid "  <app>          process specified apps"
 msgstr ""
 
 #, sh-format
@@ -879,7 +873,7 @@ msgstr ""
 
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified setup file"
+"                 process specified setup files"
 msgstr ""
 
 msgid "  -r, --reset    set apps on default values"

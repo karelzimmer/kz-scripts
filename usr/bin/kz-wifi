@@ -61,13 +61,16 @@ def process(OPTION_GUI: bool = False) -> None:
     """
     command: str = 'nmcli device wifi show-password'
     nmcli_output: bytes
+    text: str
 
     OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
+    # This scripts is not usefull for a reglar user.
+    # To show secrets it needs root privileges.
     if not kz.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term()
 
-    TEXT = f"{_('Use this data to connect to the wireless network.')}"
+    text = f"{_('Use this data to connect to the wireless network.')}"
     if OPTION_GUI:
         try:
             nmcli_output = subprocess.run(command, executable='bash',
@@ -76,21 +79,21 @@ def process(OPTION_GUI: bool = False) -> None:
                                           shell=True, check=True,
                                           ).stdout
         except Exception:
-            TEXT = _('No WiFi device found.')
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
+            text = _('No WiFi device found.')
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
         else:
-            TEXT = str(nmcli_output.decode("utf-8")) + TEXT
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
+            text = str(nmcli_output.decode("utf-8")) + text
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
     else:
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
             subprocess.run(command, executable='bash',
                            stderr=subprocess.DEVNULL, shell=True, check=True)
         except Exception:
-            TEXT = _('No WiFi device found.')
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            text = _('No WiFi device found.')
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         else:
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 
 def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
@@ -103,43 +106,44 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     opt: str = ''
     opts: list[tuple[str, str]] = []
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
+    text: str
     OPTION_GUI: bool = False
 
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
                                        OPTIONS_LONG)
     except getopt.error as err:
-        TEXT = f'{program_name}: {err}\n'
-        TEXT += f"{_('Usage:')} {USAGE}"
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        kz.term(PROGRAM_NAME, kz.ERR)
+        text = f'{program_name}: {err}\n'
+        text += f"{_('Usage:')} {USAGE}"
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.term(PROGRAM_NAME, 1)
 
     for opt, arg in opts:
         if opt in ('-g', '--gui'):
             OPTION_GUI = True
         elif opt in ('-h', '--help'):
             kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
-            kz.term(PROGRAM_NAME, kz.OK)
+            kz.term(PROGRAM_NAME, 0)
         elif opt in ('-m', '--manual'):
             kz.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
-            kz.term(PROGRAM_NAME, kz.OK)
+            kz.term(PROGRAM_NAME, 0)
         elif opt in ('-u', '--usage'):
             kz.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
-            kz.term(PROGRAM_NAME, kz.OK)
+            kz.term(PROGRAM_NAME, 0)
         elif opt in ('-v', '--version'):
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
-            kz.term(PROGRAM_NAME, kz.OK)
+            kz.term(PROGRAM_NAME, 0)
         else:
-            TEXT = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
-            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            kz.term(PROGRAM_NAME, kz.ERR)
+            text = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+            kz.term(PROGRAM_NAME, 1)
 
     if args:
-        TEXT = f"{program_name}: {' '.join(args)}: "
-        TEXT += f"{_('arguments are not allowed')}\n"
-        TEXT += f"{_('Usage:')} {USAGE}"
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        kz.term(PROGRAM_NAME, kz.ERR)
+        text = f"{program_name}: {' '.join(args)}: "
+        text += f"{_('arguments are not allowed')}\n"
+        text += f"{_('Usage:')} {USAGE}"
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.term(PROGRAM_NAME, 1)
 
     return OPTION_GUI
 
@@ -148,7 +152,7 @@ def term() -> None:
     """
     This function controls the termination of the script.
     """
-    kz.term(PROGRAM_NAME, kz.OK)
+    kz.term(PROGRAM_NAME, 0)
 
 
 ###############################################################################

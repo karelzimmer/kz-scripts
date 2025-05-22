@@ -40,7 +40,6 @@ $(gettext '  -d, --dev      use the development version of kz')"
 
 declare KZ_GET_PID_FILE=''
 declare OPTION_DEV=false
-declare TEXT=''
 
 
 ###############################################################################
@@ -61,6 +60,8 @@ function init() {
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    local text=''
+
     check_input "$@"
     prepare_processing
     if grep --quiet debian /etc/os-release; then
@@ -68,8 +69,8 @@ function process() {
     elif grep --quiet rhel /etc/os-release; then
         install_rpm_package
     else
-        TEXT="$(gettext 'fatal: unknown os release')"
-        printf '%s\n' "$TEXT" >&2
+        text="$(gettext 'fatal: unknown os release')"
+        printf '%s\n' "$text" >&2
         exit 1
     fi
 }
@@ -79,6 +80,7 @@ function process() {
 function check_input() {
     local option=${1:-''}
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
     case $option in
         '' )
@@ -93,16 +95,16 @@ function check_input() {
             exit 0
             ;;
         -* )
-            TEXT="$program_name: $*: \
+            text="$program_name: $*: \
 $(gettext 'only option -d or --dev is allowed')
 $HELP"
-            printf '%s\n' "$TEXT" >&2
+            printf '%s\n' "$text" >&2
             exit 1
             ;;
         * )
-            TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
+            text="$program_name: $*: $(gettext 'arguments are not allowed')
 $HELP"
-            printf '%s\n' "$TEXT" >&2
+            printf '%s\n' "$text" >&2
             exit 1
             ;;
     esac
@@ -184,29 +186,30 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
 function term() {
     local red='\033[1;31m'
     local normal='\033[0m'
+    local text=''
 
     # Progress indicator ends like [====]100%.
     rm --verbose "$KZ_GET_PID_FILE" |& $PROGRAM_LOGS
     printf '\b%s\n' '=]100%'
 
     if $OPTION_DEV; then
-        TEXT=$red$(gettext "Please note: the development version of the kz \
+        text=$red$(gettext "Please note: the development version of the kz \
 package is installed")$normal
-        printf '%b\n' "$TEXT"
+        printf '%b\n' "$text"
     fi
 
-    TEXT="
+    text="
 $(gettext "Package kz has been successfully installed.
 
 Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en.")"
     if [[ ${DISPLAY-} ]]; then
-        TEXT+="
+        text+="
 
 $(gettext "Type 'exit' to close this window.")"
     fi
-    printf '%s\n' "$TEXT"
+    printf '%s\n' "$text"
 
     exit 0
 }

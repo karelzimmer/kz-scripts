@@ -121,8 +121,8 @@ function check_input() {
                     --name          "$program_name"     \
                     --              "$@")               ||
                     {
-                        infomsg "$USAGE"
-                        exit $ERR
+                        kz.infomsg "$USAGE"
+                        exit 1
                     }
     eval set -- "$parsed"
     unset parsed
@@ -134,53 +134,54 @@ function check_input() {
 # This function handles the script options and arguments.
 function process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
     while true; do
         case $1 in
             -g | --gui )
                 if ! [[ ${DISPLAY-} ]]; then
-                    TEXT="$program_name: $1: \
+                    text="$program_name: $1: \
 $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "$text"
+                    exit 1
                 fi
                 OPTION_GUI=true
                 shift
                 ;;
             -h | --help )
-                process_option_help
-                exit $OK
+                kz.process_option_help
+                exit 0
                 ;;
             -m | --manual )
-                process_option_manual
-                exit $OK
+                kz.process_option_manual
+                exit 0
                 ;;
             -u | --usage )
-                process_option_usage
-                exit $OK
+                kz.process_option_usage
+                exit 0
                 ;;
             -v | --version )
-                process_option_version
-                exit $OK
+                kz.process_option_version
+                exit 0
                 ;;
             -- )
                 shift
                 break
                 ;;
             * )
-                TEXT="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                errmsg "$TEXT"
-                exit $ERR
+                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                kz.errmsg "$text"
+                exit 1
                 ;;
         esac
     done
 
     if [[ $* ]]; then
-        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
+        text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$TEXT"
-        exit $ERR
+        kz.infomsg "$text"
+        exit 1
     fi
 }
 
@@ -209,7 +210,7 @@ function process_menu1_gui() {
                     FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
                     FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
                     2> /dev/null
-            ) || exit $OK
+            ) || exit 0
         process_menu1_choice
     done
 }
@@ -235,7 +236,7 @@ function process_menu1_tui() {
 
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
-        debugmsg "$prompt"
+        kz.debugmsg "$prompt"
         read -rp "$prompt"
 
         case $REPLY in
@@ -256,6 +257,8 @@ function process_menu1_tui() {
 
 # This function processes menu 1 choice.
 function process_menu1_choice() {
+    local text=''
+
     case $REPLY in
         1 )
             process_menu1_choice1
@@ -273,12 +276,12 @@ function process_menu1_choice() {
             process_menu2
             ;;
         6 )
-            exit $OK
+            exit 0
             ;;
         * )
-            TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-            errmsg "$TEXT"
-            exit $ERR
+            text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
+            kz.errmsg "$text"
+            exit 1
             ;;
     esac
 }
@@ -292,15 +295,16 @@ function process_menu1_choice1() {
     local title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
 
     process_commands
-    $OPTION_GUI || wait_for_enter
+    $OPTION_GUI || kz.wait_for_enter
 }
 
 
 # This function processes menu 1 choice 2.
 function process_menu1_choice2() {
+    local text=''
     local title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
 
-    TEXT="
+    text="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on https://karelzimmer.nl/en.
 
@@ -315,10 +319,10 @@ Roughly boils down to:
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$TEXT"     2> /dev/null
+                --text      "$text"     2> /dev/null
     else
-        printf '%s\n' "$TEXT"
-        wait_for_enter
+        printf '%s\n' "$text"
+        kz.wait_for_enter
     fi
 }
 
@@ -331,7 +335,7 @@ function process_menu1_choice3() {
     local title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
 
     process_commands
-    $OPTION_GUI || wait_for_enter
+    $OPTION_GUI || kz.wait_for_enter
 }
 
 
@@ -346,7 +350,7 @@ function process_menu1_choice4() {
     process_commands
 
     # User must type 'logout' to log out.
-    $OPTION_GUI || exit $OK
+    $OPTION_GUI || exit 0
 }
 
 
@@ -410,7 +414,7 @@ function process_menu2_tui() {
 
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
-        debugmsg "$prompt"
+        kz.debugmsg "$prompt"
         read -rp "$prompt"
 
         case $REPLY in
@@ -431,6 +435,8 @@ function process_menu2_tui() {
 
 # This function processes menu 2 choice.
 function process_menu2_choice() {
+    local text=''
+
     local -a rows=(
         [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
         )
@@ -444,13 +450,13 @@ function process_menu2_choice() {
         if [[ $reply_save -eq 5 ]] && ! [[ ${DISPLAY-} ]]; then
             exit $rc
         fi
-        $OPTION_GUI || wait_for_enter
+        $OPTION_GUI || kz.wait_for_enter
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         process_menu1_tui
     else
-        TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-        errmsg "$TEXT"
-        exit $ERR
+        text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
+        kz.errmsg "$text"
+        exit 1
     fi
 }
 
@@ -486,8 +492,9 @@ function show_commands_before_execution() {
     local command=''
     local description=''
     local prompt=''
+    local text=''
 
-    TEXT="$(gettext 'The following will be executed:')
+    text="$(gettext 'The following will be executed:')
 "
     for row in "${!rows[@]}"; do
         description=$(
@@ -496,24 +503,24 @@ function show_commands_before_execution() {
         command=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
-        TEXT+="
+        text+="
 [$row] $description ($command)"
     done
 
-    TEXT+="
+    text+="
 "
     prompt="$(gettext 'Proceed?')"
-    debugmsg "$prompt"
+    kz.debugmsg "$prompt"
 
     if $OPTION_GUI; then
-        TEXT+="
+        text+="
 $prompt"
         if zenity   --question                          \
                     --no-markup                         \
                     --width         600                 \
                     --height        100                 \
                     --title         "$title"            \
-                    --text          "$TEXT"             \
+                    --text          "$text"             \
                     --ok-label      "$(gettext 'Yes')"  \
                     --cancel-label  "$(gettext 'No')"   2> /dev/null; then
             execute_command=true
@@ -521,7 +528,7 @@ $prompt"
             execute_command=false
         fi
     else
-        printf '\n%s\n' "$TEXT"
+        printf '\n%s\n' "$text"
         while true; do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
@@ -560,13 +567,13 @@ function execute_command() {
     fi
 
     "$cmd" "$arg" $gui_option || rc=$?
-    logmsg "$command: rc=$rc"
+    kz.logmsg "$command: rc=$rc"
 }
 
 
 # This function controls the termination of the script.
 function term() {
-    exit $OK
+    exit 0
 }
 
 
@@ -575,7 +582,7 @@ function term() {
 ###############################################################################
 
 function main() {
-    init    "$@"
+    kz.init "$@"
     process "$@"
     term
 }

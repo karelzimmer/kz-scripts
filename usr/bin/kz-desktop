@@ -76,12 +76,13 @@ function process() {
     local option_delete=false
     local option_list=false
     local option_reset=false
+    local text=''
 
     check_input "$@"
     if ! gsettings list-keys org.gnome.shell |& $PROGRAM_LOGS; then
-        TEXT=$(gettext "No such schema 'org.gnome.shell'.")
-        infomsg "$TEXT"
-        exit $OK
+        text=$(gettext "No such schema 'org.gnome.shell'.")
+        kz.infomsg "$text"
+        exit 0
     else
         favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
         desktopfile=$favorite_argument.desktop
@@ -114,8 +115,8 @@ function check_input() {
                     --name          "$program_name"     \
                     --              "$@")               ||
                     {
-                        infomsg "$USAGE"
-                        exit $ERR
+                        kz.infomsg "$USAGE"
+                        exit 1
                     }
     eval set -- "$parsed"
     unset parsed
@@ -127,15 +128,16 @@ function check_input() {
 # This function handles the script options and arguments.
 function process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
     while true; do
         case $1 in
             -a | --addaft )
                 if $option_addaft; then
-                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
+                    text="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "$text"
+                    exit 1
                 fi
                 option_addaft=true
                 favorite_argument=$2
@@ -143,10 +145,10 @@ $USAGE"
                 ;;
             -b | --addbef )
                 if $option_addbef; then
-                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
+                    text="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "$text"
+                    exit 1
                 fi
                 option_addbef=true
                 favorite_argument=$2
@@ -154,10 +156,10 @@ $USAGE"
                 ;;
             -d | --delete )
                 if $option_delete; then
-                    TEXT="$program_name: $1 $2: $(gettext 'too many options')
+                    text="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
+                    kz.infomsg "$text"
+                    exit 1
                 fi
                 option_delete=true
                 favorite_argument=$2
@@ -172,45 +174,45 @@ $USAGE"
                 shift
                 ;;
             -h | --help )
-                process_option_help
-                exit $OK
+                kz.process_option_help
+                exit 0
                 ;;
             -m | --manual )
-                process_option_manual
-                exit $OK
+                kz.process_option_manual
+                exit 0
                 ;;
             -u | --usage )
-                process_option_usage
-                exit $OK
+                kz.process_option_usage
+                exit 0
                 ;;
             -v | --version )
-                process_option_version
-                exit $OK
+                kz.process_option_version
+                exit 0
                 ;;
             -- )
                 shift
                 break
                 ;;
             * )
-                TEXT="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                errmsg "$TEXT"
-                exit $ERR
+                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                kz.errmsg "$text"
+                exit 1
                 ;;
         esac
     done
 
     if [[ $* ]]; then
-        TEXT="$program_name: $*: $(gettext 'arguments are not allowed')
+        text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$TEXT"
-        exit $ERR
+        kz.infomsg "$text"
+        exit 1
     fi
 
     if ! [[ ${DISPLAY-} ]]; then
-        TEXT="$program_name: $(gettext 'no desktop environment available')
+        text="$program_name: $(gettext 'no desktop environment available')
 $USAGE"
-        infomsg "$TEXT"
-        exit $OK
+        kz.infomsg "$text"
+        exit 0
     fi
 }
 
@@ -260,9 +262,11 @@ function process_option_delete () {
 
 # This feature lists the favorite apps in the dash/dock.
 function process_option_list () {
-    TEXT="$(gettext 'Favorite apps:')
+    local text=''
+
+    text="$(gettext 'Favorite apps:')
 $(gsettings get org.gnome.shell favorite-apps)"
-    infomsg "$TEXT"
+    kz.infomsg "$text"
 }
 
 
@@ -276,14 +280,15 @@ function process_option_reset () {
 function capture_gnome_changes() {
     local config_a_file=''
     local config_b_file=''
+    local text=''
 
     config_a_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-a.config")
     config_b_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-b.config")
     # Capturing the configuration database before.
     save_configuration_database A "$config_a_file"
-    TEXT=$(gettext 'Now make the change in the desktop environment.')
-    infomsg "$TEXT"
-    wait_for_enter
+    text=$(gettext 'Now make the change in the desktop environment.')
+    kz.infomsg "$text"
+    kz.wait_for_enter
     # Capturing the configuration database after.
     save_configuration_database B "$config_b_file"
     report_database_changes "$config_a_file" "$config_b_file"
@@ -295,6 +300,7 @@ function save_configuration_database() {
     # shellcheck disable=SC2034
     local fase=${1:-unknown}
     local output_file=${2:-unknown}
+    local text=''
 
     gsettings list-recursively > "$output_file" 2> /dev/null
 
@@ -302,8 +308,8 @@ function save_configuration_database() {
             --output="$output_file" \
             "$output_file"
 
-    TEXT=$(eval_gettext "Config database content captured (\$fase).")
-    infomsg "$TEXT"
+    text=$(eval_gettext "Config database content captured (\$fase).")
+    kz.infomsg "$text"
 }
 
 
@@ -311,21 +317,22 @@ function save_configuration_database() {
 function report_database_changes() {
     local output_file_1=${1:-unknown}
     local output_file_2=${2:-unknown}
+    local text=''
 
-    TEXT="
+    text="
 $(gettext "Changes in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
 $(diff "$output_file_1" "$output_file_2" | grep '[>|<]' || true)
 
 $(gettext 'Use "gsettings set <change>" for changes.')"
-    infomsg "$TEXT"
+    kz.infomsg "$text"
 }
 
 
 # This function controls the termination of the script.
 function term() {
-    exit $OK
+    exit 0
 }
 
 
@@ -334,7 +341,7 @@ function term() {
 ###############################################################################
 
 function main() {
-    init    "$@"
+    kz.init "$@"
     process "$@"
     term
 }

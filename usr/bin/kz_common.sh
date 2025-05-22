@@ -17,59 +17,50 @@ source /usr/bin/gettext.sh
 
 
 ###############################################################################
-# Constants
+# Checks
 ###############################################################################
 
-readonly OK=0
-readonly ERR=1
-
-# List NORMAL last here so that -x doesn't bork the display.
-readonly RED='\033[1;31m'
-readonly NORMAL='\033[0m'
-
+# Check if systemd is available.
 if ! type systemctl &> /dev/null; then
-    printf '%b\n' "$RED$(gettext 'fatal: no systemd available')$NORMAL" >&2
-    exit $ERR
+    printf  '\033[1;31m%b\n\033[0m' \
+            "$(gettext 'fatal: no systemd available')" >&2
+    exit 1
 fi
 
+# Check if os release is available.
 if ! [[ -f /etc/os-release ]]; then
-    printf '%b\n' "$RED$(gettext 'fatal: no os release available')$NORMAL" >&2
-    exit $ERR
+    printf  '\033[1;31m%b\n\033[0m' \
+            "$(gettext 'fatal: no os release available')" >&2
+    exit 1
 fi
-
-
-###############################################################################
-# Globals
-###############################################################################
-
-declare TEXT=''
 
 
 ###############################################################################
 # Functions
 ###############################################################################
 
-# This function checks whether the script is started as user root and restarts
-# the script as user root if not.
-function become_root() {
+# This function checks if the script was started as user root and restarts the
+# script as user root if not.
+function kz.become_root() {
     # pkexec needs fully qualified path to the program to be executed.
     # shellcheck disable=SC2153
     local pkexec_program=/usr/bin/$PROGRAM_NAME
+    local text=''
 
-    become_root_check || exit $OK
+    kz.become_root_check || exit 0
 
     if [[ $UID -ne 0 ]]; then
         export DISPLAY
         if ${OPTION_GUI:-false}; then
             xhost +si:localuser:root |& $PROGRAM_LOGS
-            TEXT="Restart (pkexec $pkexec_program ${COMMANDLINE_ARGS[*]})..."
-            logmsg "$TEXT"
+            text="Restart (pkexec $pkexec_program ${COMMANDLINE_ARGS[*]})..."
+            kz.logmsg "$text"
             # Because $pkexec_program will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             pkexec "$pkexec_program" "${COMMANDLINE_ARGS[@]}"
         else
-            TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
-            logmsg "$TEXT"
+            text="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
+            kz.logmsg "$text"
             exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
         fi
         exit
@@ -79,40 +70,43 @@ function become_root() {
 
 # This function checks if the user is allowed to become root and returns 0 if
 # so, otherwise returns 1 with descriptive message.
-function become_root_check() {
+function kz.become_root_check() {
+    local text=''
+
     if [[ $UID -eq 0 ]]; then
-        return $OK
+        return 0
     elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
-        return $OK
+        return 0
     else
-        TEXT=$(gettext 'Already performed by the administrator.')
-        infomsg "$TEXT"
-        return $ERR
+        text=$(gettext 'Already performed by the administrator.')
+        kz.infomsg "$text"
+        return 1
     fi
 }
 
 
 # This function checks for another running package manager and waits for the
 # next check if so.
-function check_package_manager() {
+function kz.check_package_manager() {
     local -i sleep=5
+    local text=''
 
     if grep --quiet rhel /etc/os-release; then
-        return $OK
+        return 0
     fi
 
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        TEXT=$(eval_gettext "Wait \$sleep seconds for another package manager \
+        text=$(eval_gettext "Wait \$sleep seconds for another package manager \
 to finish")
         if ${OPTION_GUI:-false}; then
-            logmsg "$TEXT..."
+            kz.logmsg "$text..."
             # Inform the user in 'zenity --progress' why there is a wait.
-            printf '%s\n' "#$TEXT"
+            printf '%s\n' "#$text"
         else
-            infomsg "$TEXT..."
+            kz.infomsg "$text..."
         fi
         sleep $sleep
     done
@@ -120,27 +114,28 @@ to finish")
 
 
 # This function check that the repos are in the desired state.
-function check_repos() {
+function kz.check_repos() {
     local err_flag=false
     local repo=''
     local repos='kz-deb kz-docs kz-rpm kz-scripts kz-uploads'
     local startdir=$PWD
+    local text=''
 
-    TEXT=$(gettext 'Check that all repos are on branch main')...
-    infomsg "$TEXT"
+    text=$(gettext 'Check that all repos are on branch main')...
+    kz.infomsg "$text"
 
     for repo in $repos; do
         cd "$HOME/$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            TEXT=$(eval_gettext "Repo \$repo not on branch main.")
-            errmsg "$TEXT"
+            text=$(eval_gettext "Repo \$repo not on branch main.")
+            kz.errmsg "$text"
             git status
             err_flag=true
         fi
     done
 
-    TEXT=$(gettext 'Check that all repos are clean')...
-    infomsg "$TEXT"
+    text=$(gettext 'Check that all repos are clean')...
+    kz.infomsg "$text"
 
     for repo in $repos; do
         cd "$HOME/$repo"
@@ -149,8 +144,8 @@ function check_repos() {
         git status |& $PROGRAM_LOGS
 
         if ! git diff-index --quiet HEAD; then
-            TEXT=$(eval_gettext "Repo \$repo is not clean.")
-            errmsg "$TEXT"
+            text=$(eval_gettext "Repo \$repo is not clean.")
+            kz.errmsg "$text"
             git status
             err_flag=true
         fi
@@ -159,25 +154,25 @@ function check_repos() {
     cd "$startdir"
 
     if $err_flag; then
-        return $ERR
+        return 1
     else
-        return $OK
+        return 0
     fi
 }
 
 
 # This function records a debugging message to the log.
-function debugmsg() {
+function kz.debugmsg() {
     printf '%b\n' "$*" |& $PROGRAM_LOGS --priority=debug
 }
 
 
 # This function returns an error message.
-function errmsg() {
+function kz.errmsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
-    debugmsg "$*"
+    kz.debugmsg "$*"
     if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'error message') ($program_name)"
         zenity  --error                 \
@@ -186,17 +181,17 @@ function errmsg() {
                 --title     "$title"    \
                 --text      "$*"        2> /dev/null || true
     else
-        printf "$RED%b$NORMAL\n" "$*" >&2
+        printf "\033[1;31m%b\033[0m\n" "$*" >&2
     fi
 }
 
 
 # This function returns an informational message.
-function infomsg() {
+function kz.infomsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
-    debugmsg "$*"
+    kz.debugmsg "$*"
     if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'information') ($program_name)"
         zenity  --info                  \
@@ -211,7 +206,9 @@ function infomsg() {
 
 
 # This function performs initial actions.
-function init() {
+function kz.init() {
+    local text=''
+
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -225,24 +222,25 @@ function init() {
     trap 'term_sig sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'term_sig sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    TEXT="\
+    text="\
 ==== START logs for script $PROGRAM_NAME ======================================
 Started ($0 as $USER)."
-    logmsg "$TEXT"
+    kz.logmsg "$text"
 
     declare -ag COMMANDLINE_ARGS=("$@")
 }
 
 
 # This function records a informational message to the log.
-function logmsg() {
+function kz.logmsg() {
     printf '%b\n' "$*" |& $PROGRAM_LOGS
 }
 
 
 # This function shows the available help.
-function process_option_help() {
+function kz.process_option_help() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
     local yelp_man_url=''
 
     if [[ ${DISPLAY-} ]]; then
@@ -251,16 +249,16 @@ function process_option_help() {
         yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
     fi
 
-    TEXT="$(eval_gettext "Type '\$program_name --manual' or 'man \
+    text="$(eval_gettext "Type '\$program_name --manual' or 'man \
 \$program_name'\$yelp_man_url for more information.")"
-    infomsg "$HELP
+    kz.infomsg "$HELP
 
-$TEXT"
+$text"
 }
 
 
 # This function displays the manual page.
-function process_option_manual() {
+function kz.process_option_manual() {
     if [[ ${DISPLAY-} ]]; then
         yelp man:"$PROGRAM_NAME" 2> /dev/null
     else
@@ -270,35 +268,38 @@ function process_option_manual() {
 
 
 # This function shows the available options.
-function process_option_usage() {
+function kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
 
-    TEXT="$(eval_gettext "Type '\$program_name --help' for more information.")"
-    infomsg "$USAGE
+    text="$(eval_gettext "Type '\$program_name --help' for more \
+information.")"
+    kz.infomsg "$USAGE
 
-$TEXT"
+$text"
 }
 
 
 # This function displays version, author, and license information.
-function process_option_version() {
+function kz.process_option_version() {
     local build_id='' # ISO 8601 YYYY-MM-DDTHH:MM:SS
+    local text=''
 
     if [[ -f /usr/share/doc/kz/build.id ]]; then
         build_id=$(cat /usr/share/doc/kz/build.id)
     else
-        TEXT=$(gettext 'Build ID cannot be determined.')
-        logmsg "$TEXT"
+        text=$(gettext 'Build ID cannot be determined.')
+        kz.logmsg "$text"
         # shellcheck disable=SC2034
-        build_id=$TEXT
+        build_id=$text
     fi
 
-    TEXT="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
+    text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
 
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.")"
-    infomsg "$TEXT"
+    kz.infomsg "$text"
 }
 
 
@@ -313,6 +314,7 @@ function term_sig() {
     local -i rc_desc_signalno=0
     local rc_desc=''
     local status=$rc/FAILURE
+    local text=''
 
     case $rc in
         0 )
@@ -378,36 +380,36 @@ function term_sig() {
             ;;
     esac
 
-    TEXT="Signal: $signal, line: $lineno, function: $function, command: \
+    text="Signal: $signal, line: $lineno, function: $function, command: \
 $command, exit code: $rc ($rc_desc)."
-    logmsg "$TEXT"
+    kz.logmsg "$text"
 
     case $signal in
         err )
             if ${ERREXIT:-true}; then
-                TEXT="
+                text="
 $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
-                errmsg "$TEXT"
+                kz.errmsg "$text"
             fi
             exit "$rc"
             ;;
         exit )
             # Clean up temporary files.
-            TEXT='Cleaning up temporary files...'
-            logmsg "$TEXT"
+            text='Cleaning up temporary files...'
+            kz.logmsg "$text"
             rm  --verbose   \
                 --force     \
                 /tmp/"$PROGRAM_NAME-"*??????????* |& $PROGRAM_LOGS || true
-            TEXT="Ended (code=exited, status=$status).
+            text="Ended (code=exited, status=$status).
 ==== END logs for script $PROGRAM_NAME ======================================="
-            logmsg "$TEXT"
+            kz.logmsg "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
         * )
-            TEXT="
+            text="
 $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
-            errmsg "$TEXT"
+            kz.errmsg "$text"
             exit "$rc"
             ;;
     esac
@@ -415,11 +417,11 @@ $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
 
 
 # This function waits for the user to press Enter.
-function wait_for_enter() {
+function kz.wait_for_enter() {
     local prompt=''
 
     prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    debugmsg "$prompt"
+    kz.debugmsg "$prompt"
     printf '\n'
     read -rp "$prompt" < /dev/tty
     printf '\n'
