@@ -13,7 +13,7 @@
 
 import getopt
 import gettext
-import kz_common
+import kz_common as kz
 import os
 import subprocess
 import sys
@@ -81,8 +81,8 @@ def process() -> None:
                     TEXT = f"kz: {sys.argv[arg_num]}: "
                     TEXT += f"{_('command does not exist')}\n"
                     TEXT += f"{_('Usage:')} {USAGE}"
-                    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-                    kz_common.term(PROGRAM_NAME, kz_common.ERR)
+                    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+                    kz.term(PROGRAM_NAME, kz.ERR)
         else:
             # Build kz-<command> <arguments>.
             exec += ' ' + sys.argv[arg_num]
@@ -90,23 +90,23 @@ def process() -> None:
     if exec == '/usr/bin/kz':
         TEXT = f"{PROGRAM_NAME}: {_('command is required')}\n"
         TEXT += f"{_('Usage:')} {USAGE}"
-        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(PROGRAM_NAME, kz_common.ERR)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz.term(PROGRAM_NAME, kz.ERR)
     else:
         TEXT = f'Restart (exec {exec}...)'
-        kz_common.logmsg(PROGRAM_NAME, TEXT)
+        kz.logmsg(PROGRAM_NAME, TEXT)
         try:
             subprocess.run(f'exec {exec}', executable='bash', shell=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(PROGRAM_NAME, kz_common.ERR)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            kz.term(PROGRAM_NAME, kz.ERR)
         except Exception as exc:
             TEXT = str(exc)
-            kz_common.logmsg(PROGRAM_NAME, TEXT)
+            kz.logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(PROGRAM_NAME, kz_common.ERR)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            kz.term(PROGRAM_NAME, kz.ERR)
         else:
             term()
 
@@ -128,29 +128,29 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     except getopt.error as err:
         TEXT = f'{program_name}: {err}\n'
         TEXT += f"{_('Usage:')} {USAGE}"
-        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(PROGRAM_NAME, kz_common.ERR)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz.term(PROGRAM_NAME, kz.ERR)
 
     for opt, arg in opts:
         if opt in ('-l', '--list'):
             process_option_list()
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.term(PROGRAM_NAME, kz.OK)
         elif opt in ('-h', '--help'):
-            kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
+            kz.term(PROGRAM_NAME, kz.OK)
         elif opt in ('-m', '--manual'):
-            kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
+            kz.term(PROGRAM_NAME, kz.OK)
         elif opt in ('-u', '--usage'):
-            kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
+            kz.term(PROGRAM_NAME, kz.OK)
         elif opt in ('-v', '--version'):
-            kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
+            kz.term(PROGRAM_NAME, kz.OK)
         else:
             TEXT = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
-            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(PROGRAM_NAME, kz_common.ERR)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            kz.term(PROGRAM_NAME, kz.ERR)
 
     if args:
         # Check for arguments N/A for this script, is handled earlier.
@@ -186,20 +186,20 @@ def process_option_list() -> None:
         TEXT += '  0  ' + _('Use "man kz" for available commands.') + '\n'
 
     TEXT += '\n' + _('Use "kz <command> [<arguments>]" to execute a command.')
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
 def term() -> None:
     """
     This function controls the termination of the script.
     """
-    kz_common.term(PROGRAM_NAME, kz_common.OK)
+    kz.term(PROGRAM_NAME, kz.OK)
 
 
 ###############################################################################
 # Main
 ###############################################################################
 
-kz_common.init(PROGRAM_NAME)
+kz.init(PROGRAM_NAME)
 process()
 term()

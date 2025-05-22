@@ -13,7 +13,7 @@
 
 import getopt
 import gettext
-import kz_common
+import kz_common as kz
 import subprocess
 import sys
 
@@ -63,22 +63,22 @@ def process() -> None:
 
     process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
-    kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
+    kz.become_root(PROGRAM_NAME, PROGRAM_DESC)
 
     if subprocess.run(command1, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode == kz_common.OK:
+                      shell=True).returncode == kz.OK:
         perform_deb_update()
         perform_deb_cleanup()
     elif subprocess.run(command2, executable='bash',
                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                        shell=True).returncode == kz_common.OK:
+                        shell=True).returncode == kz.OK:
         perform_rpm_update()
         perform_rpm_cleanup()
     else:
         TEXT = _('fatal: unknown os release')
-        kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(PROGRAM_NAME, kz_common.ERR)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz.term(PROGRAM_NAME, kz.ERR)
 
 
 def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
@@ -98,53 +98,53 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     except getopt.error as err:
         TEXT = f'{program_name}: {err}\n'
         TEXT += f"{_('Usage:')} {USAGE}"
-        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(PROGRAM_NAME, kz_common.ERR)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz.term(PROGRAM_NAME, kz.ERR)
 
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
+            kz.term(PROGRAM_NAME, kz.OK)
         elif opt in ('-m', '--manual'):
-            kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
+            kz.term(PROGRAM_NAME, kz.OK)
         elif opt in ('-u', '--usage'):
-            kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
+            kz.term(PROGRAM_NAME, kz.OK)
         elif opt in ('-v', '--version'):
-            kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
-            kz_common.term(PROGRAM_NAME, kz_common.OK)
+            kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
+            kz.term(PROGRAM_NAME, kz.OK)
         else:
             TEXT = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
-            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(PROGRAM_NAME, kz_common.ERR)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            kz.term(PROGRAM_NAME, kz.ERR)
 
     if args:
         TEXT = f"{program_name}: {' '.join(args)}: "
         TEXT += f"{_('arguments are not allowed')}\n"
         TEXT += f"{_('Usage:')} {USAGE}"
-        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(PROGRAM_NAME, kz_common.ERR)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz.term(PROGRAM_NAME, kz.ERR)
 
 
 def perform_deb_update() -> None:
     """
     This function updates installed Debian packages and snaps if installed.
     """
-    TEXT = f"{BOLD}{_('UPDATE')}{kz_common.NORMAL}"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    TEXT = f"{BOLD}{_('UPDATE')}{kz.NORMAL}"
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     command: str = 'sudo apt-get update'
     perform_command(command)
 
-    TEXT = f"\n{BOLD}{_('UPGRADE')}{kz_common.NORMAL}"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    TEXT = f"\n{BOLD}{_('UPGRADE')}{kz.NORMAL}"
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     command = 'sudo apt-get dist-upgrade --assume-yes'
     perform_command(command)
 
     if subprocess.run('type snap', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
-                      shell=True,).returncode == kz_common.OK:
+                      shell=True,).returncode == kz.OK:
         command = 'sudo snap refresh'
         perform_command(command)
 
@@ -153,8 +153,8 @@ def perform_deb_cleanup() -> None:
     """
     This function performs a Debian packages cleanup.
     """
-    TEXT = f"\n{BOLD}{_('CLEANUP')}{kz_common.NORMAL}"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    TEXT = f"\n{BOLD}{_('CLEANUP')}{kz.NORMAL}"
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     command: str = 'sudo apt-get autoclean'
     perform_command(command)
     command = 'sudo apt-get autoremove --assume-yes'
@@ -165,20 +165,20 @@ def perform_rpm_update() -> None:
     """
     This function updates installed RPM packages and snaps if installed.
     """
-    TEXT = f"{BOLD}{_('UPDATE')}{kz_common.NORMAL}"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    TEXT = f"{BOLD}{_('UPDATE')}{kz.NORMAL}"
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     command: str = 'sudo dnf check-update || true'
     perform_command(command)
 
-    TEXT = f"\n{BOLD}{_('UPGRADE')}{kz_common.NORMAL}"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    TEXT = f"\n{BOLD}{_('UPGRADE')}{kz.NORMAL}"
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     command = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(command)
 
     if subprocess.run('type snap', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
-                      shell=True,).returncode == kz_common.OK:
+                      shell=True,).returncode == kz.OK:
         command = 'sudo snap refresh'
         perform_command(command)
 
@@ -187,8 +187,8 @@ def perform_rpm_cleanup() -> None:
     """
     This function performs a RPM packages cleanup.
     """
-    TEXT = f"\n{BOLD}{_('CLEANUP')}{kz_common.NORMAL}"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    TEXT = f"\n{BOLD}{_('CLEANUP')}{kz.NORMAL}"
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     command: str = 'sudo dnf clean all'
     perform_command(command)
     command = 'sudo dnf autoremove --assumeyes'
@@ -201,17 +201,17 @@ def perform_command(command: str = '') -> None:
     """
     exc: str = ''
 
-    TEXT = f'\n{BOLD}{command}{kz_common.NORMAL}'
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-    kz_common.check_package_manager(PROGRAM_NAME, PROGRAM_DESC)
+    TEXT = f'\n{BOLD}{command}{kz.NORMAL}'
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz.check_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except Exception as exc:
         TEXT = str(exc)
-        kz_common.logmsg(PROGRAM_NAME, TEXT)
+        kz.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        kz_common.term(PROGRAM_NAME, kz_common.ERR)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        kz.term(PROGRAM_NAME, kz.ERR)
 
 
 def term() -> None:
@@ -219,14 +219,14 @@ def term() -> None:
     This function controls the termination of the script.
     """
     TEXT = _('Complete!')
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-    kz_common.term(PROGRAM_NAME, kz_common.OK)
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz.term(PROGRAM_NAME, kz.OK)
 
 
 ###############################################################################
 # Main
 ###############################################################################
 
-kz_common.init(PROGRAM_NAME)
+kz.init(PROGRAM_NAME)
 process()
 term()
