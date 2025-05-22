@@ -73,7 +73,7 @@ function process() {
     check_input "$@"
     check_target
     backup_settings
-    # create_backup
+    create_backup
 }
 
 
