@@ -222,8 +222,6 @@ function kz.init() {
 ==== START logs for script $PROGRAM_NAME ======================================
 Started ($0 as $USER)."
     kz.logmsg "$text"
-
-    declare -ag COMMANDLINE_ARGS=("$@")
 }
 
 
