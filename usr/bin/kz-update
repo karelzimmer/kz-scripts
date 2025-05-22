@@ -210,7 +210,7 @@ def perform_command(command: str = '') -> None:
     exc: str = ''
     text: str
 
-    text = f'\n{command}'
+    text = f'\n{command}...'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     kz.check_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
