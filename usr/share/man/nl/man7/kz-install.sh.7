@@ -205,9 +205,9 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf ins\
 tall --assumeyes gnome-tweaks; fi
 .RS
 Met "if grep --quiet debian /etc/os-release" wordt gecontroleerd of het een De\
-bian- of Debian-gebaseerd systeem is, zoals Ubuntu.
+bian of op Debian-gebaseerd systeem is, zoals Ubuntu.
 Met "if grep --quiet rhel   /etc/os-release" wordt gecontroleerd of het een Re\
-d Hat gebaseerd systeem is, zoals AlmaLinux en Rocky Linux.
+d Hat of op Red Hat gebaseerd systeem is, zoals Rocky Linux.
 De "if [[ ${DISPLAY-} ]]" is om te controleren of er een grafische omgeving is.
 .RE
 .EE
