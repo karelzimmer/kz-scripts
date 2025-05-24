@@ -15,6 +15,8 @@ export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
 
+echo "arguments: '$*'" | systemd-cat --identifier=kz_common.sh --priority=debug
+
 
 ###############################################################################
 # Functions
