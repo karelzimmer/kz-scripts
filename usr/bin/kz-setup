@@ -197,7 +197,7 @@ function process_options() {
                     text="$program_name: $1: \
 $(gettext 'no desktop environment available')
 $USAGE"
-                    kz.infomsg "text"
+                    kz.infomsg "$text"
                     exit 1
                 fi
                 OPTION_GUI=true
@@ -291,7 +291,7 @@ setup file.")"
 
 $USAGE"
     fi
-    kz.infomsg "text"
+    kz.infomsg "$text"
 }
 
 
@@ -397,7 +397,7 @@ function setup_apps() {
     app_tot_num=$(grep --count "#.*$setup.*on" "$command_file" || true)
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
-        kz.infomsg "text"
+        kz.infomsg "$text"
         exit 0
     fi
 
@@ -436,7 +436,7 @@ function process_command_file() {
     if ! $OPTION_GUI; then
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
-        kz.infomsg "text"
+        kz.infomsg "$text"
     fi
 
     while read -r command_record; do
@@ -565,11 +565,11 @@ apps and changing user settings.")"
                 text='No logout command available.'
                 kz.debugmsg "text"
                 text=$(gettext 'Log out of the computer yourself.')
-                kz.infomsg "text"
+                kz.infomsg "$text"
             fi
         fi
     else
-        kz.infomsg "text"
+        kz.infomsg "$text"
     fi
 
     exit 0
