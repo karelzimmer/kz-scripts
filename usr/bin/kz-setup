@@ -546,7 +546,7 @@ the apps and changing user settings.")"
 $(gettext "Type 'logout' to log out of the computer to finish setting up the \
 apps and changing user settings.")"
         fi
-        kz.infomsg "text"
+        kz.infomsg "$text"
 
         if [[ ${DISPLAY-} ]]; then
             $OPTION_GUI || kz.wait_for_enter
