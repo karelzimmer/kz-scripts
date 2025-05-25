@@ -33,8 +33,8 @@ function kz.become_root() {
     kz.become_root_check || exit 0
 
     if [[ $UID -ne 0 ]]; then
-        export DISPLAY
         if ${OPTION_GUI:-false}; then
+            export DISPLAY
             xhost +si:localuser:root |& $PROGRAM_LOGS
             text="Restart (pkexec $pkexec_program ${COMMANDLINE_ARGS[*]})..."
             kz.logmsg "$text"
