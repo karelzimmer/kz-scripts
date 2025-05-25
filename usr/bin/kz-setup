@@ -59,6 +59,9 @@ readonly OPTIONS_SHORT='abcf:grhmuv'
 readonly OPTIONS_LONG="apps,browse,cat,file:,gui,reset,help,manual,usage,\
 version"
 
+# To be like kz-install; there it is a global.
+readonly on='on'
+
 
 ###############################################################################
 # Globals
@@ -264,7 +267,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    "#.*$setup.*on"         \
+        grep    "#.*$setup.*$on"        \
                 "${setup_files[@]}"     |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
@@ -319,13 +322,13 @@ function process_setup_file_by_app_argument() {
                 # Skip empty line.
                 continue
                 ;;
-            '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*'on'* )
+            '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*$on* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
                 printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$setup*'on'* | '#'*$reset*'on'* )
+            '#'*$setup*$on* | '#'*$reset*$on* )
                 # Skip mismatched app record.
                 app_match=false
                 ;;
@@ -360,12 +363,12 @@ function process_setup_file_by_hostname() {
                 # Skip empty line.
                 continue
                 ;;
-            '#'*$setup*'on'*'*' | '#'*$setup*'on'*$HOSTNAME* )
+            '#'*$setup*$on*'*' | '#'*$setup*$on*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
                 printf '\n%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$setup*'on'* | '#'*$reset*'on'* )
+            '#'*$setup*$on* | '#'*$reset*$on* )
                 # Skip mismatched app record.
                 host_match=false
                 ;;
@@ -394,7 +397,7 @@ function setup_apps() {
     local text=''
     local title=''
 
-    app_tot_num=$(grep --count "#.*$setup.*on" "$command_file" || true)
+    app_tot_num=$(grep --count "#.*$setup.*$on" "$command_file" || true)
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
         kz.infomsg "$text"
@@ -441,7 +444,7 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '#'*$setup*'on'* )
+            '#'*$setup*$on* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
