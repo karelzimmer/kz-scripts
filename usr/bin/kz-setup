@@ -115,7 +115,7 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
     for setup_file in "${setup_files[@]}"; do
         if [[ ! -f $setup_file ]]; then
             text=$(eval_gettext "Setup file '\$setup_file' not found.")
-            kz.errmsg "text"
+            kz.errmsg "$text"
             err_flag=true
         fi
     done
@@ -234,7 +234,7 @@ $USAGE"
                 ;;
             * )
                 text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                kz.errmsg "text"
+                kz.errmsg "$text"
                 exit 1
                 ;;
         esac
@@ -343,7 +343,7 @@ function process_setup_file_by_app_argument() {
 
     if $no_app_match; then
         text=$(eval_gettext "App '\$app_argument' not found")
-        kz.errmsg "text"
+        kz.errmsg "$text"
     else
         # Add extra empty line  to command file.
         printf '\n' >> "$command_file"
@@ -419,7 +419,7 @@ function setup_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "text"     2> /dev/null
+                    --text      "$text"     2> /dev/null
             )
     else
         process_command_file
@@ -524,7 +524,7 @@ $(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
 view log messages.")
 
 $(gettext "Try to set up the apps again.")"
-        kz.errmsg "text"
+        kz.errmsg "$text"
         exit 1
     fi
 
@@ -566,7 +566,7 @@ apps and changing user settings.")"
                 xfce4-session-logout --logout
             else
                 text='No logout command available.'
-                kz.debugmsg "text"
+                kz.debugmsg "$text"
                 text=$(gettext 'Log out of the computer yourself.')
                 kz.infomsg "$text"
             fi
