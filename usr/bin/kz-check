@@ -100,7 +100,7 @@ function process() {
                 check_trailing_spaces
                 check_record_length
                 ;;
-            *.7 )
+            *.5 )
                 check_trailing_spaces
                 check_record_length
                 ;;

@@ -256,9 +256,11 @@ function build_deb_package() {
     gzip    --best                                      \
             --force                                     \
             "$DEB_REPO_DISTDIR/usr/share/man/man1"/*    \
-            "$DEB_REPO_DISTDIR/usr/share/man/man7"/*    \
+            "$DEB_REPO_DISTDIR/usr/share/man/man2"/*    \
+            "$DEB_REPO_DISTDIR/usr/share/man/man5"/*    \
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man1"/* \
-            "$DEB_REPO_DISTDIR/usr/share/man/nl/man7"/* |& $PROGRAM_LOGS
+            "$DEB_REPO_DISTDIR/usr/share/man/nl/man2"/* \
+            "$DEB_REPO_DISTDIR/usr/share/man/nl/man5"/* |& $PROGRAM_LOGS
 
     # Capture build id Debian package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     build_id=$(date '+%Y-%m-%dT%H:%M:%S')
@@ -323,9 +325,11 @@ function build_rpm_package() {
     gzip    --best                                      \
             --force                                     \
             "$RPM_REPO_DISTDIR/usr/share/man/man1"/*    \
-            "$RPM_REPO_DISTDIR/usr/share/man/man7"/*    \
+            "$RPM_REPO_DISTDIR/usr/share/man/man2"/*    \
+            "$RPM_REPO_DISTDIR/usr/share/man/man5"/*    \
             "$RPM_REPO_DISTDIR/usr/share/man/nl/man1"/* \
-            "$RPM_REPO_DISTDIR/usr/share/man/nl/man7"/* |& $PROGRAM_LOGS
+            "$RPM_REPO_DISTDIR/usr/share/man/nl/man2"/* \
+            "$RPM_REPO_DISTDIR/usr/share/man/nl/man5"/* |& $PROGRAM_LOGS
 
     # Capture build id RPM package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     build_id=$(date '+%Y-%m-%dT%H:%M:%S')
@@ -363,7 +367,6 @@ function install_deb_package() {
     sudo true
     text=$(gettext 'Install Debian package (this may take a while)...')
     kz.infomsg "$text"
-    kz.check_package_manager
 
     if $DEV; then
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME

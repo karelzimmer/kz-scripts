@@ -41,13 +41,6 @@ msgstr "fataal: onbekende os release"
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#, sh-format
-msgid "Wait $sleep seconds for another package manager to finish"
-msgstr "Wacht $sleep seconden tot andere pakketbeheerder klaar is"
-
-msgid "Wait {} seconds for another package manager to finish"
-msgstr "Wacht {} seconden tot andere pakketbeheerder klaar is"
-
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 

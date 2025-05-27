@@ -1,0 +1,30 @@
+.\"############################################################################
+.\"# SPDX-FileComment: Man page for kz-install.sh
+.\"#
+.\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+.\"# SPDX-License-Identifier: CC0-1.0
+.\"############################################################################
+
+.TH "KZ-INSTALL-CMD" "2" "4.2.1" "kz" "System calls"
+
+.SH NAME
+kz-install-cmd - run kz-install command and log the output
+
+.SH LIBRARY
+Package kz library
+.RI (bin)
+
+.SH SYNOPSIS
+.nf
+.B pkexec /usr/bin/kz-install-cmd <command>
+.YS
+
+.SH DESCRIPTION
+\fBkz-install-cmd\fR executes the command given as argument to the call and
+records the output to the log.
+.sp
+This uses PolicyKit (polkit) profile
+/usr/share/polkit-1/actions/nl.karelzimmer.kz-install.policy.
+
+.SH SEE ALSO
+\fBkz-install\fR(1)

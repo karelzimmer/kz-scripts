@@ -490,8 +490,6 @@ function execute_command() {
 
     (( ++cmd_seq_num ))
 
-    kz.check_package_manager
-
     if $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
             kz.debugmsg "$app_name_line"
@@ -517,7 +515,8 @@ function execute_command() {
 
     kz.debugmsg "$cmd"
     ERREXIT=false
-    eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
+    pkexec /usr/bin/kz-install-cmd "$cmd" || FAILED_APPS[$app_name]=$app_name
+    #eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
     ERREXIT=true
 }
 

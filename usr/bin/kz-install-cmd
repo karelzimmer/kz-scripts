@@ -1,10 +1,11 @@
-# shellcheck shell=bash
+#!/usr/bin/env bash
+# shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Tab-completion-script for kz-get
+# SPDX-FileComment: Run install apps command and log the output
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-declare DASHOPTIONS='-d --dev --version'
-complete -o default -W "$DASHOPTIONS" kz-get
+eval "${1:-false}" &> >(systemd-cat --identifier=kz-install)
+exit $?

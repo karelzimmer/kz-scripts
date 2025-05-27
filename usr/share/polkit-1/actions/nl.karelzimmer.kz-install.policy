@@ -5,7 +5,7 @@
 
 <!--
 ###############################################################################
-# SPDX-FileComment: PolicyKit action definition file for kz-install
+# SPDX-FileComment: PolicyKit (polkit) action definition file for kz-install
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -16,15 +16,15 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <action id="nl.karelzimmer.kz-install">
+    <action id="nl.karelzimmer.kz-install-cmd">
         <description gettext-domain="kz">Install apps</description>
         <message gettext-domain="kz">Authentication is required to install apps</message>
-        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install</annotate>
+        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install-cmd</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
-            <allow_any>auth_admin</allow_any>
-            <allow_inactive>auth_admin</allow_inactive>
-            <allow_active>auth_admin</allow_active>
+            <allow_any>yes</allow_any>
+            <allow_inactive>yes</allow_inactive>
+            <allow_active>yes</allow_active>
         </defaults>
     </action>
 

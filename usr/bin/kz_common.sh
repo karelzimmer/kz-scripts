@@ -25,28 +25,22 @@ echo "arguments: '$*'" | systemd-cat --identifier=kz_common.sh --priority=debug
 # This function checks if the script was started as user root and restarts the
 # script as user root if not.
 function kz.become_root() {
-    # pkexec needs fully qualified path to the program to be executed.
-    # shellcheck disable=SC2153
-    local pkexec_program=/usr/bin/$PROGRAM_NAME
     local text=''
 
     kz.become_root_check || exit 0
 
     if [[ $UID -ne 0 ]]; then
         if ${OPTION_GUI:-false}; then
-            export DISPLAY
-            xhost +si:localuser:root |& $PROGRAM_LOGS
-            text="Restart (pkexec $pkexec_program ${COMMANDLINE_ARGS[*]})..."
+            text="Started as a GUI script, sudo is executed with pkexec..."
             kz.logmsg "$text"
-            # Because $pkexec_program will be started again, do not trap twice.
-            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            pkexec "$pkexec_program" "${COMMANDLINE_ARGS[@]}"
+            return
         else
+            # shellcheck disable=SC2153
             text="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
             kz.logmsg "$text"
             exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
+            exit
         fi
-        exit
     fi
 }
 
@@ -65,34 +59,6 @@ function kz.become_root_check() {
         kz.infomsg "$text"
         return 1
     fi
-}
-
-
-# This function checks for another running package manager and waits for the
-# next check if so.
-function kz.check_package_manager() {
-    local -i sleep=5
-    local text=''
-
-    if grep --quiet rhel /etc/os-release; then
-        return 0
-    fi
-
-    while sudo  fuser                           \
-                --silent                        \
-                /var/cache/debconf/config.dat   \
-                /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        text=$(eval_gettext "Wait \$sleep seconds for another package manager \
-to finish")
-        if ${OPTION_GUI:-false}; then
-            kz.logmsg "$text..."
-            # Inform the user in 'zenity --progress' why there is a wait.
-            printf '%s\n' "#$text"
-        else
-            kz.infomsg "$text..."
-        fi
-        sleep $sleep
-    done
 }
 
 
