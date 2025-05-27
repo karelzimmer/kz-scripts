@@ -91,8 +91,8 @@ function check_input() {
             return 0
             ;;
         '--version' )
-            # Hidden long option for kz-check.
-            # Script kz-check calls any script as "<script> --version".
+            # Hidden long option.
+            # Script kz-check calls each script as "<script> --version".
             exit 0
             ;;
         -* )

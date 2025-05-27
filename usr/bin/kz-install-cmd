@@ -7,5 +7,11 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
+# Hidden long option.
+# Script kz-check calls each script as "<script> --version".
+if [[ ${1:-false} = '--version' ]]; then
+    exit 0
+fi
+
 eval "${1:-false}" &> >(systemd-cat --identifier=kz-install)
 exit $?
