@@ -96,11 +96,7 @@ function process() {
                 check_trailing_spaces
                 continue
                 ;;
-            *.1 )
-                check_trailing_spaces
-                check_record_length
-                ;;
-            *.5 )
+            *.1 | *.2 | *.5 )
                 check_trailing_spaces
                 check_record_length
                 ;;
