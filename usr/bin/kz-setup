@@ -342,7 +342,7 @@ function process_setup_file_by_app_argument() {
     done < <(cat "${setup_files[@]}")
 
     if $no_app_match; then
-        text=$(eval_gettext "App '\$app_argument' not found")
+        text=$(eval_gettext "App '\$app_argument' not found.")
         kz.errmsg "$text"
     else
         # Add extra empty line  to command file.

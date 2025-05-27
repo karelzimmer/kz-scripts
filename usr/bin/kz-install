@@ -152,7 +152,7 @@ found.")
     if [[ $UID -ne 0 ]]; then
         kz.become_root
     fi
-    installs
+    install_apps
 }
 
 
@@ -351,7 +351,7 @@ function process_install_file_by_app_argument() {
     done < <(cat "${install_files[@]}")
 
     if $no_app_match; then
-        text=$(eval_gettext "App '\$app_argument' not found")
+        text=$(eval_gettext "App '\$app_argument' not found.")
         kz.errmsg "$text"
     else
         # Add extra empty line  to command file.
@@ -401,7 +401,7 @@ function process_option_cat() {
 
 
 # This function starts installing the apps.
-function installs() {
+function install_apps() {
     local -i app_tot_num=0
     local text=''
     local title=''
