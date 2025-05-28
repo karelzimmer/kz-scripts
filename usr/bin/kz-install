@@ -524,8 +524,8 @@ function execute_command() {
     if $OPTION_GUI; then
         # Use 'pkexec' to run the command in graphical mode.
         # This is required for commands that need root privileges.
-        pkexec /usr/bin/kz-install-cmd "$cmd" &>    \
-            >(systemd-cat --identifier=kz-install)  ||
+        pkexec /usr/bin/kz-install-cmd "$cmd"           \
+            &> >(systemd-cat --identifier=kz-install)   ||
             FAILED_APPS[$app_name]=$app_name
     else
         # Use 'sudo' to run the command in terminal mode.
@@ -540,6 +540,7 @@ function execute_command() {
 
 # This function controls the termination of the script.
 function term() {
+    local cmd=''
     local operation=''
     local text=''
 
@@ -573,8 +574,21 @@ changing system settings.")"
     kz.infomsg "$text"
 
     if $REBOOT; then
+        cmd='sudo systemctl reboot'
+        if $OPTION_GUI; then
+            # Use 'pkexec' to run the command in graphical mode.
+            # This is required for commands that need root privileges.
+            pkexec /usr/bin/kz-install-cmd "$cmd"           \
+                &> >(systemd-cat --identifier=kz-install)   ||
+                FAILED_APPS[$app_name]=$app_name
+        else
+            # Use 'sudo' to run the command in terminal mode.
+            # This script is run with 'sudo' (kz.become_root) so the command is
+            # run with root privileges.
+            # Use 'eval' to expand variables in the command.
+            eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
+        fi
         $OPTION_GUI || kz.wait_for_enter
-        sudo systemctl reboot
     fi
 
     exit 0
