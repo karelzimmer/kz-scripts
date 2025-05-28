@@ -301,10 +301,15 @@ $USAGE"
 # This function processes argument <app>.
 function process_argument_app() {
     local app_argument=''
+    local err_flag=false
 
     for app_argument in "${app_arguments[@]}"; do
         process_setup_file_by_app_argument
     done
+
+    if $err_flag; then
+        exit 1
+    fi
 }
 
 
@@ -342,6 +347,7 @@ function process_setup_file_by_app_argument() {
     done < <(cat "${setup_files[@]}")
 
     if $no_app_match; then
+        err_flag=true
         text=$(eval_gettext "App '\$app_argument' not found.")
         kz.errmsg "$text"
     else

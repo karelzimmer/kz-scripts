@@ -38,6 +38,9 @@ msgstr "fataal: geen os release beschikbaar"
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
+msgid "Cannot start with root privileges."
+msgstr "Kan niet starten met root-rechten."
+
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 

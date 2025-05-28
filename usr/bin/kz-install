@@ -310,10 +310,15 @@ $USAGE"
 # This function processes argument <app>.
 function process_argument_app() {
     local app_argument=''
+    local err_flag=false
 
     for app_argument in "${app_arguments[@]}"; do
         process_install_file_by_app_argument
     done
+
+    if $err_flag; then
+        exit 1
+    fi
 }
 
 
@@ -351,6 +356,7 @@ function process_install_file_by_app_argument() {
     done < <(cat "${install_files[@]}")
 
     if $no_app_match; then
+        err_flag=true
         text=$(eval_gettext "App '\$app_argument' not found.")
         kz.errmsg "$text"
     else
@@ -515,8 +521,19 @@ function execute_command() {
 
     kz.debugmsg "$cmd"
     ERREXIT=false
-    pkexec /usr/bin/kz-install-cmd "$cmd" || FAILED_APPS[$app_name]=$app_name
-    #eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
+    if $OPTION_GUI; then
+        # Use 'pkexec' to run the command in graphical mode.
+        # This is required for commands that need root privileges.
+        pkexec /usr/bin/kz-install-cmd "$cmd" &>    \
+            >(systemd-cat --identifier=kz-install)  ||
+            FAILED_APPS[$app_name]=$app_name
+    else
+        # Use 'sudo' to run the command in terminal mode.
+        # This script is run with 'sudo' (kz.become_root) so the command is
+        # run with root privileges.
+        # Use 'eval' to expand variables in the command.
+        eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
+    fi
     ERREXIT=true
 }
 

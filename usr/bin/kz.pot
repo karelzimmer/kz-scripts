@@ -38,6 +38,9 @@ msgstr ""
 msgid "fatal: unknown os release"
 msgstr ""
 
+msgid "Cannot start with root privileges."
+msgstr ""
+
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 

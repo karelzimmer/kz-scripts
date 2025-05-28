@@ -12,7 +12,11 @@
 # Imports
 ###############################################################################
 
-source ~/kz-scripts/usr/bin/kz_common.sh as kz
+if [[ -e ~/kz-scripts/usr/bin/kz_common.sh ]]; then
+    source ~/kz-scripts/usr/bin/kz_common.sh as kz
+else
+    source kz_common.sh as kz
+fi
 
 
 ###############################################################################
@@ -66,6 +70,7 @@ function process() {
         exit 1
     fi
     kz.become_root_check || exit 0
+    kz.no_root_check
     build
     check
     deploy

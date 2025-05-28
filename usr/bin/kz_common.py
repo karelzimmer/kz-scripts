@@ -34,7 +34,7 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     exc: str = ''
     exec_sudo: str = 'exec sudo '
-    text: str
+    text: str = ''
 
     if not become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term(PROGRAM_NAME, 0)
@@ -73,7 +73,7 @@ def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
     so, otherwise returns 1 with descriptive message.
     """
     command: str = 'groups $USER | grep --quiet --regexp=sudo --regexp=wheel'
-    text: str
+    text: str = ''
 
     if os.getuid() == 0:
         return True
@@ -111,10 +111,10 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
                                 --text      "{TEXT}"'
         subprocess.run(command, executable='bash', shell=True)
     else:
-        print(f'\n\033[1;31m{TEXT}\033[0m')
+        print(f'\033[1;31m{TEXT}\033[0m')
 
 
-def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
+def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
             OPTION_GUI: bool = False) -> None:
     """
     This function returns an informational message.
@@ -137,7 +137,7 @@ def init(PROGRAM_NAME: str) -> None:
     """
     This function performs initial actions.
     """
-    text: str
+    text: str = ''
 
     # Check if systemd is available.
     if subprocess.run('type systemctl', executable='bash',
@@ -167,6 +167,19 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
+def no_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
+    """
+    This function checks whether the script was started as user root and
+    generates an error if this is the case end exits.
+    """
+    text: str = ''
+
+    if os.getuid() == 0:
+        text = f"{_('Cannot start with root privileges.')}"
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        term(PROGRAM_NAME, 1)
+
+
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
                         HELP: str) -> None:
     """
@@ -174,7 +187,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     yelp_man_url: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
-    text: str
+    text: str = ''
 
     if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -197,7 +210,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command1: str = f'yelp man:{PROGRAM_NAME}'
     command2: str = f'man --pager=cat {PROGRAM_NAME}'
     exc: str = ''
-    text: str
+    text: str = ''
 
     if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -229,7 +242,7 @@ def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
     This function shows the available options.
     """
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
-    text: str
+    text: str = ''
 
     text = (f"{_('Usage:')} {USAGE}\n\n"
             f'''{_("Type '{} --help' for more information.").
@@ -244,7 +257,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     build_id: str = ''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     fnf: str = ''
     exc: str = ''
-    text: str
+    text: str = ''
 
     try:
         with open('/usr/share/doc/kz/build.id') as fh:
@@ -274,7 +287,7 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
     This function controls the termination.
     """
     status: str = '1/FAILURE'
-    text: str
+    text: str = ''
 
     if rc == 0:
         status = '0/SUCCESS'
@@ -296,7 +309,7 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     This function waits for the user to press Enter.
     """
     exc: str = ''
-    text: str
+    text: str = ''
 
     try:
         text = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"

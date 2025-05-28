@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Run install apps command and log the output
+# SPDX-FileComment: Run install apps command
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -13,5 +13,5 @@ if [[ ${1:-false} = '--version' ]]; then
     exit 0
 fi
 
-eval "${1:-false}" &> >(systemd-cat --identifier=kz-install)
+eval "${1:-false}"
 exit $?

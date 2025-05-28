@@ -64,6 +64,7 @@ def process() -> None:
     process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
     kz.become_root_check(PROGRAM_NAME, PROGRAM_DESC)
+    kz.no_root_check(PROGRAM_NAME, PROGRAM_DESC)
 
     if subprocess.run(command, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,

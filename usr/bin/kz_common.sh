@@ -31,7 +31,7 @@ function kz.become_root() {
 
     if [[ $UID -ne 0 ]]; then
         if ${OPTION_GUI:-false}; then
-            text="Started as a GUI script, sudo is executed with pkexec..."
+            text="Started as a GUI script, use pkexec for root privileges..."
             kz.logmsg "$text"
             return
         else
@@ -196,6 +196,19 @@ Started ($0 as $USER)."
 # This function records a informational message to the log.
 function kz.logmsg() {
     printf '%b\n' "$*" |& $PROGRAM_LOGS
+}
+
+
+# This function checks whether the script was started as user root and
+# generates an error if this is the case end exits.
+function kz.no_root_check() {
+    local text=''
+
+    if [[ $UID -eq 0 ]]; then
+        text=$(gettext 'Cannot start with root privileges.')
+        kz.errmsg "$text"
+        exit 1
+    fi
 }
 
 
