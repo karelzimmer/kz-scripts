@@ -583,7 +583,7 @@ changing system settings.")"
             # Use 'sudo' to run the command in terminal mode.
             # This script is run with 'sudo' (kz.become_root) so the command is
             # run with root privileges.
-            "$cmd"
+            eval "$cmd"
         fi
         $OPTION_GUI || kz.wait_for_enter
     fi
