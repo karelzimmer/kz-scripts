@@ -524,6 +524,7 @@ function execute_command() {
     if $OPTION_GUI; then
         # Use 'pkexec' to run the command in graphical mode.
         # This is required for commands that need root privileges.
+        # It is using polkit policy file nl.karelzimmer.kz-install.policy.
         pkexec /usr/bin/kz-install-cmd "$cmd"           \
             &> >(systemd-cat --identifier=kz-install)   ||
             FAILED_APPS[$app_name]=$app_name
@@ -578,6 +579,7 @@ changing system settings.")"
         if $OPTION_GUI; then
             # Use 'pkexec' to run the command in graphical mode.
             # This is required for commands that need root privileges.
+            # It is using polkit policy file nl.karelzimmer.kz-install.policy.
             pkexec /usr/bin/kz-install-cmd "$cmd"
         else
             # Use 'sudo' to run the command in terminal mode.
