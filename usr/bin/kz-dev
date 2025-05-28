@@ -61,11 +61,6 @@ def process() -> None:
     command: str = "grep --quiet debian /etc/os-release"
     text: str
 
-    process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
-
-    kz.become_root_check(PROGRAM_NAME, PROGRAM_DESC)
-    kz.no_root_check(PROGRAM_NAME, PROGRAM_DESC)
-
     if subprocess.run(command, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode != 0:
@@ -73,6 +68,9 @@ def process() -> None:
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
+    kz.become_root_check(PROGRAM_NAME, PROGRAM_DESC)
+    kz.no_root_check(PROGRAM_NAME, PROGRAM_DESC)
+    process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
     check_dependencies()
     pull_repos()
     download_website()
