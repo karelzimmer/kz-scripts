@@ -60,7 +60,7 @@ def process() -> None:
     command2: str = "grep --quiet rhel   /etc/os-release"
     text: str
 
-    process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+    check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
     kz.become_root(PROGRAM_NAME, PROGRAM_DESC)
 
@@ -80,14 +80,13 @@ def process() -> None:
         kz.term(PROGRAM_NAME, 1)
 
 
-def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
-                    HELP: str) -> None:
+def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                HELP: str) -> None:
     """
-    This function handles the script options and arguments.
+    This function checks the script input.
     """
     args: list[str] = []
     err: str = ''
-    opt: str = ''
     opts: list[tuple[str, str]] = []
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
@@ -100,6 +99,20 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         text += f"{_('Usage:')} {USAGE}"
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
+
+    process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts, args)
+
+
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                    HELP: str, opts: list[tuple[str, str]],
+                    args: list[str]) -> None:
+    """
+    This function handles the script options and arguments.
+    """
+    arg: str = ''
+    opt: str = ''
+    program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
+    text: str
 
     for opt, arg in opts:
         if opt in ('-h', '--help'):

@@ -63,7 +63,7 @@ def process(OPTION_GUI: bool = False) -> None:
     nmcli_output: bytes
     text: str
 
-    OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+    OPTION_GUI = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
     # This scripts is not usefull for a reglar user.
     # To show secrets it needs root privileges.
@@ -96,14 +96,13 @@ def process(OPTION_GUI: bool = False) -> None:
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 
-def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
-                    HELP: str) -> bool:
+def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                HELP: str) -> bool:
     """
-    This function handles the script options and arguments.
+    This function checks the script input.
     """
     args: list[str] = []
     err: str = ''
-    opt: str = ''
     opts: list[tuple[str, str]] = []
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
@@ -117,6 +116,23 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         text += f"{_('Usage:')} {USAGE}"
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
+
+    OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts,
+                                 args)
+
+    return OPTION_GUI
+
+
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                    HELP: str, opts: list[tuple[str, str]],
+                    args: list[str]) -> bool:
+    """
+    This function handles the script options and arguments.
+    """
+    arg: str = ''
+    opt: str = ''
+    program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
+    text: str
 
     for opt, arg in opts:
         if opt in ('-g', '--gui'):
