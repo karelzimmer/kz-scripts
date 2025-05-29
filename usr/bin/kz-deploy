@@ -70,6 +70,7 @@ function process() {
         exit 1
     fi
     kz.become_root_check || exit 0
+    sudo true
     build
     check
     deploy
