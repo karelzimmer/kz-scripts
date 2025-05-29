@@ -199,19 +199,6 @@ function kz.logmsg() {
 }
 
 
-# This function checks whether the script was started as user root and
-# generates an error if this is the case end exits.
-function kz.no_root_check() {
-    local text=''
-
-    if [[ $UID -eq 0 ]]; then
-        text=$(gettext 'Cannot start with root privileges.')
-        kz.errmsg "$text"
-        exit 1
-    fi
-}
-
-
 # This function shows the available help.
 function kz.process_option_help() {
     local program_name=${PROGRAM_NAME/kz-/kz }

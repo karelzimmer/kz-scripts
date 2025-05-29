@@ -86,8 +86,6 @@ function process() {
         exit 1
     fi
     kz.become_root_check || exit 0
-    kz.no_root_check
-    sudo true
     build_website
     generate_mo_file
     kz.check_repos || DEV=true

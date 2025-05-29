@@ -69,7 +69,6 @@ def process() -> None:
         kz.term(PROGRAM_NAME, 1)
 
     kz.become_root_check(PROGRAM_NAME, PROGRAM_DESC)
-    kz.no_root_check(PROGRAM_NAME, PROGRAM_DESC)
     process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
     check_dependencies()
     pull_repos()

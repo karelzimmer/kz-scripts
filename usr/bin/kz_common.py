@@ -167,19 +167,6 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
-def no_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
-    """
-    This function checks whether the script was started as user root and
-    generates an error if this is the case end exits.
-    """
-    text: str = ''
-
-    if os.getuid() == 0:
-        text = f"{_('Cannot start with root privileges.')}"
-        errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        term(PROGRAM_NAME, 1)
-
-
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
                         HELP: str) -> None:
     """
