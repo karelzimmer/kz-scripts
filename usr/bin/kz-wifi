@@ -59,55 +59,26 @@ def process(OPTION_GUI: bool = False) -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    command: str = 'nmcli device wifi show-password'
-    nmcli_output: bytes
-    text: str
-
-    OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+    OPTION_GUI = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
     # This scripts is not usefull for a reglar user.
-    # To show secrets it needs root privileges.
+    # To show secrets, the user must have root privileges.
     if not kz.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term()
 
-    text = f"{_('Use this data to connect to the wireless network.')}"
-    if OPTION_GUI:
-        try:
-            nmcli_output = subprocess.run(command, executable='bash',
-                                          stdout=subprocess.PIPE,
-                                          stderr=subprocess.DEVNULL,
-                                          shell=True, check=True,
-                                          ).stdout
-        except Exception:
-            text = _('No WiFi device found.')
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
-        else:
-            text = str(nmcli_output.decode("utf-8")) + text
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
-    else:
-        try:
-            # Shows in Terminal QR code for quick connection to Wi-Fi network.
-            subprocess.run(command, executable='bash',
-                           stderr=subprocess.DEVNULL, shell=True, check=True)
-        except Exception:
-            text = _('No WiFi device found.')
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        else:
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+    show_secrets(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI)
 
 
-def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
-                    HELP: str) -> bool:
+def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                HELP: str) -> bool:
     """
-    This function handles the script options and arguments.
+    This function checks the script input.
     """
     args: list[str] = []
     err: str = ''
-    opt: str = ''
     opts: list[tuple[str, str]] = []
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
-    OPTION_GUI: bool = False
 
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
@@ -117,6 +88,24 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         text += f"{_('Usage:')} {USAGE}"
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
+
+    OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP,opts,
+                                 args)
+
+    return OPTION_GUI
+
+
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+                    HELP: str, opts: list[tuple[str, str]],
+                    args: list[str]) -> bool:
+    """
+    This function handles the script options and arguments.
+    """
+    arg: str = ''
+    opt: str = ''
+    program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
+    text: str
+    OPTION_GUI: bool = False
 
     for opt, arg in opts:
         if opt in ('-g', '--gui'):
@@ -146,6 +135,40 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.term(PROGRAM_NAME, 1)
 
     return OPTION_GUI
+
+
+def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                 OPTION_GUI: bool = False ) -> None:
+    """ This function shows the Wi-Fi secrets.
+    """ 
+    command: str = 'nmcli device wifi show-password'
+    nmcli_output: bytes
+    text = f"{_('Use this data to connect to the wireless network.')}"
+    text: str
+
+    if OPTION_GUI:
+        try:
+            nmcli_output = subprocess.run(command, executable='bash',
+                                          stdout=subprocess.PIPE,
+                                          stderr=subprocess.DEVNULL,
+                                          shell=True, check=True,
+                                          ).stdout
+        except Exception:
+            text = _('No WiFi device found.')
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
+        else:
+            text = str(nmcli_output.decode("utf-8")) + text
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
+    else:
+        try:
+            # Shows in Terminal QR code for quick connection to Wi-Fi network.
+            subprocess.run(command, executable='bash',
+                           stderr=subprocess.DEVNULL, shell=True, check=True)
+        except Exception:
+            text = _('No WiFi device found.')
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        else:
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 
 def term() -> None:
