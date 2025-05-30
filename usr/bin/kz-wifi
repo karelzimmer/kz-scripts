@@ -89,7 +89,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
-    OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP,opts,
+    OPTION_GUI = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts,
                                  args)
 
     return OPTION_GUI
@@ -138,13 +138,13 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
 
 
 def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                 OPTION_GUI: bool = False ) -> None:
-    """ This function shows the Wi-Fi secrets.
-    """ 
+                 OPTION_GUI: bool = False) -> None:
+    """
+    This function shows the Wi-Fi secrets.
+    """
     command: str = 'nmcli device wifi show-password'
     nmcli_output: bytes
-    text = f"{_('Use this data to connect to the wireless network.')}"
-    text: str
+    text: str = f"{_('Use this data to connect to the wireless network.')}"
 
     if OPTION_GUI:
         try:
