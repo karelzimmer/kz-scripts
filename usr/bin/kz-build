@@ -278,7 +278,8 @@ function build_deb_package() {
         to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"
     fi
     fakeroot    dpkg-deb            \
-                --build -Z=xz       \
+                --build             \
+                -Z=xz               \
                 "$DEB_REPO_DISTDIR" \
                 "$to_build"         |& $PROGRAM_LOGS
 }
