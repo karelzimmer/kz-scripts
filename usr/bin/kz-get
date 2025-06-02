@@ -39,7 +39,6 @@ readonly HELP_USAGE
 # Globals
 ###############################################################################
 
-declare KZ_GET_PID_FILE=''
 declare OPTION_DEV=false
 
 
@@ -64,7 +63,6 @@ function process() {
     local text=''
 
     check_input "$@"
-    prepare_processing
     if grep --quiet debian /etc/os-release; then
         install_deb_package
     elif grep --quiet rhel /etc/os-release; then
@@ -117,24 +115,6 @@ $(gettext "Type 'man kz get' for more information.")"
 }
 
 
-# This function prepares further processing.
-function prepare_processing() {
-    local sleep=0.5
-
-    sudo true
-
-    # Progress indicator with growing [=>, [==>, etc. as long as the pid file
-    # exists, i.e. installation is in progress.
-    KZ_GET_PID_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.pid")
-    printf '%i\n' $$ > "$KZ_GET_PID_FILE"
-    printf '%s' '[ '
-    while test -e "$KZ_GET_PID_FILE"; do
-        printf '\b%s' '=>'
-        sleep $sleep
-    done &
-}
-
-
 # This function downloads and installs Debian package kz.
 function install_deb_package() {
     local kz_deb_dev_site_file="\
@@ -161,7 +141,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --allow-downgrades              \
             --reinstall                     \
             --assume-yes                    \
-            "$kz_deb_local_file"            |& $PROGRAM_LOGS
+            "$kz_deb_local_file"
 }
 
 
@@ -184,7 +164,7 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
         kz_rpm_site_file=$kz_rpm_prd_site_file
     fi
 
-    sudo dnf $mode --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
+    sudo dnf $mode --assumeyes "$kz_rpm_site_file"
 }
 
 
@@ -193,10 +173,6 @@ function term() {
     local red='\033[1;31m'
     local normal='\033[0m'
     local text=''
-
-    # Progress indicator ends like [====]100%.
-    rm --verbose "$KZ_GET_PID_FILE" |& $PROGRAM_LOGS
-    printf '\b%s\n' '=]100%'
 
     if $OPTION_DEV; then
         text=$red$(gettext "Please note: the development version of the kz \
