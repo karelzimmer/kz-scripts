@@ -87,7 +87,7 @@ function process() {
         scriptdir=$(dirname "$(realpath "$script")")
         scriptname=$(basename "$script")
         file=$scriptdir/$scriptname
-        kz.logmsg "Process $script..."
+        kz.debugmsg "Process $script..."
         case $scriptname in
             *.gpg | *.png )
                 continue
@@ -299,15 +299,15 @@ code.")$NORMAL
 function check_script() {
     local dir=''
     local gui_option='-''-''g''u''i'
-    local root_script=' ''b''e''c''o''m''e''_''r''o''o''t''$'
+    local root_script=' ''b''e''c''o''m''e''$'
     local text=''
 
     # Script.
-    if ! "$file" --version |& $PROGRAM_LOGS; then
+    if ! "$file" --usage |& $PROGRAM_LOGS; then
         kz.infomsg "
   $BOLD$scriptdir / $scriptname$NORMAL"
-        text='    '$(eval_gettext "Script \$scriptname --version returned \
-an error.")
+        text='    '$(eval_gettext "Script \$scriptname --usage returned an \
+error.")
         kz.errmsg "$text"
         ERR_FLAG=true
     fi

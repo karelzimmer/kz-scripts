@@ -26,13 +26,14 @@ PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-HELP="$(gettext "Usage: kz get [<options>]")
+HELP_USAGE="$(gettext "Usage: kz get [-d|--dev]")
 $(gettext "       wget karelzimmer.nl/getkz; bash getkz [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $(gettext '  -d, --dev      use the development version of kz')"
+readonly HELP_USAGE
 
 ###############################################################################
 # Globals
@@ -90,23 +91,27 @@ function check_input() {
             OPTION_DEV=true
             return 0
             ;;
-        '--version' )
-            # Hidden long option.
-            # Script kz-check calls each script as "<script> --version".
-            exit 0
-            ;;
         -* )
-            text="$program_name: $*: \
-$(gettext 'only option -d or --dev is allowed')
-$HELP"
-            printf '%s\n' "$text" >&2
-            exit 1
+            text="$program_name: $(gettext 'unknown option') '$*'
+$HELP_USAGE"
+            if man kz-get &> /dev/null; then
+                text+="
+
+$(gettext "Type 'man kz get' for more information.")"
+            fi
+            printf '%s\n' "$text"
+            exit 0
             ;;
         * )
             text="$program_name: $*: $(gettext 'arguments are not allowed')
-$HELP"
-            printf '%s\n' "$text" >&2
-            exit 1
+$HELP_USAGE"
+            if man kz-get &> /dev/null; then
+                text+="
+
+$(gettext "Type 'man kz get' for more information.")"
+            fi
+            printf '%s\n' "$text"
+            exit 0
             ;;
     esac
 }

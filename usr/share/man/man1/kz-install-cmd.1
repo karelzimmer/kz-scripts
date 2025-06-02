@@ -8,7 +8,7 @@
 .TH "KZ-INSTALL-CMD" "1" "4.2.1" "kz" "User commands"
 
 .SH NAME
-kz-install-cmd - run kz-install command and log the output
+kz-install-cmd - run the kz-install command (wrapper script)
 
 .SH SYNOPSIS
 .nf
@@ -16,11 +16,9 @@ kz-install-cmd - run kz-install command and log the output
 .YS
 
 .SH DESCRIPTION
-\fBkz-install-cmd\fR executes the command given as argument to the call and
-records the output to the log.
-.sp
-This uses PolicyKit (polkit) profile
-/usr/share/polkit-1/actions/nl.karelzimmer.kz-install.policy.
+When called by \fBkz-install\fR, \fBkz-install-cmd\fR executes the command
+passed as an argument to the call.
 
 .SH SEE ALSO
-\fBkz-install\fR(1)
+\fBkz-install\fR(1),
+\fBkz\fR(1)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-27 20:37+0200\n"
+"POT-Creation-Date: 2025-06-01 21:29+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -202,9 +202,6 @@ msgstr "geen desktopomgeving beschikbaar"
 
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
-
-msgid "only option -d or --dev is allowed"
-msgstr "alleen optie -d of --dev is toegestaan"
 
 msgid "directory does not exist"
 msgstr "map bestaat niet"
@@ -424,20 +421,20 @@ msgstr "Installatie van Debian-pakket is mislukt."
 msgid "Download and install Debian or RPM package kz"
 msgstr "Download en installeer Debian- of RPM-pakket kz"
 
-msgid "Usage: kz get [<options>]"
-msgstr "Gebruik: kz get [<opties>]"
-
 msgid "       wget karelzimmer.nl/getkz; bash getkz [<options>]"
 msgstr "         wget karelzimmer.nl/getkz; bash getkz [<opties>]"
 
 msgid "  -d, --dev      use the development version of kz"
 msgstr "  -d, --dev      gebruik de ontwikkelingsversie van kz"
 
-msgid "Usage: kz dev [<options>]"
-msgstr "Gebruik: kz dev [<opties>]"
+msgid "Type 'man kz get' for more information."
+msgstr "Typ 'man kz get' voor meer informatie."
 
-msgid "Usage: kz get [-d|--dev] [<options>]"
-msgstr "Gebruik: kz get [-d|--dev] [<opties>]"
+msgid "Usage: kz get [-d|--dev]"
+msgstr "Gebruik: kz get [-d|--dev]"
+
+msgid "unknown option"
+msgstr "onbekende optie"
 
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
@@ -460,6 +457,9 @@ msgstr "Typ 'exit' om dit venster te sluiten."
 
 msgid "Build development environment"
 msgstr "Ontwikkelomgeving bouwen"
+
+msgid "Usage: kz dev [<options>]"
+msgstr "Gebruik: kz dev [<opties>]"
 
 msgid "Check dependencies..."
 msgstr "Controleer afhankelijkheden..."
@@ -591,8 +591,7 @@ msgstr "Typ 'kz install --apps' voor beschikbare apps."
 msgid "  <app>          process specified apps"
 msgstr "  <app>          verwerk opgegeven apps"
 
-#, fuzzy, sh-format
-#| msgid "App '$app_argument' not found."
+#, sh-format
 msgid "App '$app_argument' not found."
 msgstr "App '$app_argument' niet gevonden."
 
@@ -1068,8 +1067,8 @@ msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
 #, sh-format
-msgid "Script $scriptname --version returned an error."
-msgstr "Script $scriptname --version gaf een fout."
+msgid "Script $scriptname --usage returned an error."
+msgstr "Script $scriptname --usage gaf een fout."
 
 #, sh-format
 msgid "Gettext message catalog template $file not found."

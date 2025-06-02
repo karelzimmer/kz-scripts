@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-27 20:37+0200\n"
+"POT-Creation-Date: 2025-06-02 10:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,9 +191,6 @@ msgid "no desktop environment available"
 msgstr ""
 
 msgid "arguments are not allowed"
-msgstr ""
-
-msgid "only option -d or --dev is allowed"
 msgstr ""
 
 msgid "directory does not exist"
@@ -384,19 +381,19 @@ msgstr ""
 msgid "Download and install Debian or RPM package kz"
 msgstr ""
 
-msgid "Usage: kz get [<options>]"
-msgstr ""
-
 msgid "       wget karelzimmer.nl/getkz; bash getkz [<options>]"
 msgstr ""
 
 msgid "  -d, --dev      use the development version of kz"
 msgstr ""
 
-msgid "Usage: kz dev [<options>]"
+msgid "Type 'man kz get' for more information."
 msgstr ""
 
-msgid "Usage: kz get [-d|--dev] [<options>]"
+msgid "Usage: kz get [-d|--dev]"
+msgstr ""
+
+msgid "unknown option"
 msgstr ""
 
 msgid "Please note: the development version of the kz package is installed"
@@ -414,6 +411,9 @@ msgid "Type 'exit' to close this window."
 msgstr ""
 
 msgid "Build development environment"
+msgstr ""
+
+msgid "Usage: kz dev [<options>]"
 msgstr ""
 
 msgid "Check dependencies..."
@@ -927,7 +927,7 @@ msgid "No WiFi device found."
 msgstr ""
 
 #, sh-format
-msgid "Script $scriptname --version returned an error."
+msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
 #, sh-format

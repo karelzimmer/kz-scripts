@@ -8,7 +8,7 @@
 .TH "KZ-INSTALL-CMD" "1" "4.2.1" "kz" "Gebruikersopdrachten"
 
 .SH NAAM
-kz-install-cmd - kz-install opdracht uitvoeren en uitvoer vastleggen
+kz-install-cmd - voer de kz-install pdracht uit (wrapperscript)
 
 .SH SAMENVATTING
 .nf
@@ -16,11 +16,10 @@ kz-install-cmd - kz-install opdracht uitvoeren en uitvoer vastleggen
 .YS
 
 .SH BESCHRIJVING
-\fBkz-install-cmd\fR Voert de opdracht uit die als argument aan de aanroep is
-meegegeven en registreert de uitvoer in het logboek.
-.sp
-Hierbij wordt PolicyKit (polkit) profiel
-/usr/share/polkit-1/actions/nl.karelzimmer.kz-install.policy gebruikt.
+Wanneer aangeroepen door \fBkz-install\fR, voert \fBkz-install-cmd\fR de
+opdracht uit die als argument aan de aanroep is doorgegeven.
 
 .SH ZIE OOK
-\fBkz-install\fR(1)
+\fBkz-install\fR(1),
+\fBkz\fR(1)
+

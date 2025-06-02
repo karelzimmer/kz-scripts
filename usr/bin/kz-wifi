@@ -63,7 +63,7 @@ def process(OPTION_GUI: bool = False) -> None:
 
     # This scripts is not usefull for a reglar user.
     # To show secrets, the user must have root privileges.
-    if not kz.become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
+    if not kz.become_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term()
 
     show_secrets(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI)

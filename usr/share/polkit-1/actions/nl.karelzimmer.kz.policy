@@ -5,7 +5,7 @@
 
 <!--
 ###############################################################################
-# SPDX-FileComment: PolicyKit (polkit) action definition file for kz-install
+# SPDX-FileComment: PolicyKit (polkit) action definition file for package kz
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

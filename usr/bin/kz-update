@@ -62,7 +62,7 @@ def process() -> None:
 
     check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
-    kz.become_root(PROGRAM_NAME, PROGRAM_DESC)
+    kz.become(PROGRAM_NAME, PROGRAM_DESC)
 
     if subprocess.run(command1, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,

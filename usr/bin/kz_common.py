@@ -26,20 +26,20 @@ _ = gettext.gettext
 # Functions
 ###############################################################################
 
-def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                OPTION_GUI: bool = False) -> None:
+def become(PROGRAM_NAME: str, PROGRAM_DESC: str,
+           OPTION_GUI: bool = False) -> None:
     """
-    This function checks if the script was started as user root and restarts
-    the script as user root if not.
+    This function checks if the script was started in the terminal as user root
+    and restarts the script as user root if not.
     """
     exc: str = ''
     exec_sudo: str = 'exec sudo '
     text: str = ''
 
-    if not become_root_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
+    if not become_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term(PROGRAM_NAME, 0)
 
-    if os.getuid() != 0:
+    if not ( OPTION_GUI == True or os.getuid() == 0 ):
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
         for arg_num in range(len(sys.argv)):
             if arg_num == 0:
@@ -66,8 +66,8 @@ def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str,
             term(PROGRAM_NAME, 0)
 
 
-def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                      OPTION_GUI: bool = False) -> bool:
+def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                 OPTION_GUI: bool = False) -> bool:
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.

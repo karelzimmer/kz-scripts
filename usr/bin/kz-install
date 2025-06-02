@@ -59,7 +59,7 @@ readonly OPTIONS_SHORT='abcf:grhmuv'
 readonly OPTIONS_LONG="apps,browse,cat,file:,gui,remove,help,manual,usage,\
 version"
 
-# Required for kz.become_root.
+# Required for kz.become.
 readonly COMMANDLINE_ARGS=("$@")
 
 
@@ -149,9 +149,7 @@ found.")
         exit 0
     fi
 
-    if [[ $UID -ne 0 ]]; then
-        kz.become_root
-    fi
+    kz.become
     install_apps
 }
 
@@ -522,17 +520,15 @@ function execute_command() {
     kz.debugmsg "$cmd"
     ERREXIT=false
     if $OPTION_GUI; then
-        # Use 'pkexec' to run the command in graphical mode.
+        # Use 'pkexec' to run the command ($cmd) in graphical mode.
         # This is required for commands that need root privileges.
-        # It is using polkit policy file nl.karelzimmer.kz-install.policy.
         pkexec /usr/bin/kz-install-cmd "$cmd"           \
             &> >(systemd-cat --identifier=kz-install)   ||
             FAILED_APPS[$app_name]=$app_name
     else
         # Use 'sudo' to run the command in terminal mode.
-        # This script is run with 'sudo' (kz.become_root) so the command is
-        # run with root privileges.
-        # Use 'eval' to expand variables in the command.
+        # This script (kz-install) is started with 'sudo' (kz.become)
+        # so the command ($cmd) is run with root privileges.
         eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
     fi
     ERREXIT=true
@@ -576,14 +572,13 @@ changing system settings.")"
 
     if $REBOOT; then
         if $OPTION_GUI; then
-            # Use 'pkexec' to run the command in graphical mode.
+            # Use 'pkexec' to run the command ($cmd) in graphical mode.
             # This is required for commands that need root privileges.
-            # It is using polkit policy file nl.karelzimmer.kz-install.policy.
             pkexec /usr/bin/kz-install-cmd "$cmd"
         else
             # Use 'sudo' to run the command in terminal mode.
-            # This script is run with 'sudo' (kz.become_root) so the command is
-            # run with root privileges.
+            # This script (kz-install) is started with 'sudo' (kz.become)
+            # so the command ($cmd) is run with root privileges.
             kz.wait_for_enter
             eval "$cmd"
         fi

@@ -185,8 +185,6 @@ def process_option_list() -> None:
                             -executable                 \
                             -readable                   \
                             -not -name '*~'             \
-                            -not -name kz               \
-                            -not -name kz-install-cmd   \
                             -printf '%f\n'          |   \
                      sort                           |   \
                      sed    --expression='s/kz-//'  |   \
