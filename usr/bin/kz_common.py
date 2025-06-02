@@ -39,7 +39,7 @@ def become(PROGRAM_NAME: str, PROGRAM_DESC: str,
     if not become_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
         term(PROGRAM_NAME, 0)
 
-    if not ( OPTION_GUI == True or os.getuid() == 0 ):
+    if not (OPTION_GUI is True or os.getuid() == 0):
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
         for arg_num in range(len(sys.argv)):
             if arg_num == 0:
