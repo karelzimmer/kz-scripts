@@ -944,11 +944,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes bash-co
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then rm --verbose /tmp/teamviewer.deb; fi
-#------------------------------------------------------------------------------
-# SKIP Error: Failed to download metadata for repo 'teamviewer': repomd.xml GPG
-# signature verification error: Bad GPG signature
-# if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
-#------------------------------------------------------------------------------
+if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 # remove teamviewer from *
 #------------------------------------------------------------------------------
