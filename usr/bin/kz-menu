@@ -78,11 +78,11 @@ readonly -a  MENU2_ACTIONS=(
                 "$(gettext 'Go to installation menu')"
             )
 readonly -a  MENU2_DESCS=(
-            [1]='kz-backup'
-                'kz-wifi'
-                'kz-install'
-                'kz-restore'
-                'kz-setup'
+            [1]='kz backup'
+                'kz wifi'
+                'kz install'
+                'kz restore'
+                'kz setup'
                 "$(gettext 'Back')"
             )
 readonly MENU2_LINES=${#MENU2_DESCS[@]}
@@ -553,13 +553,15 @@ $prompt"
 
 # This function executes the commands.
 function execute_command() {
+    local cmd=${command/kz /kz-}
     local gui_option=''
 
     if $OPTION_GUI; then
         gui_option='--gui'
     fi
 
-    "$command" $gui_option || rc=$?
+    # Use e.g. 'kz-install' instead of 'kz install'.
+    "$cmd" $gui_option || rc=$?
     kz.logmsg "$command: rc=$rc"
 }
 
