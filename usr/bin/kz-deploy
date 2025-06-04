@@ -151,10 +151,10 @@ function build() {
     text=$(gettext 'Build website including kz packages')...
     kz.infomsg "$text"
 
-    # Call kz build.
-    kz.logmsg 'Calling kz build...'
-    kz build || ERR_FLAG=true
-    kz.logmsg 'Called kz build.'
+    # Call kz-build.
+    kz.logmsg 'Calling kz-build...'
+    kz-build || ERR_FLAG=true
+    kz.logmsg 'Called kz-build.'
 }
 
 
@@ -190,10 +190,10 @@ function check_scripts_and_website() {
     text=$(gettext 'Check scripts and website')...
     kz.infomsg "$text"
 
-    # Call kz check.
-    kz.logmsg 'Calling kz check...'
-    kz check || ERR_FLAG=true
-    kz.logmsg 'Called kz check.'
+    # Call kz-check.
+    kz.logmsg 'Calling kz-check...'
+    kz-check || ERR_FLAG=true
+    kz.logmsg 'Called kz-check.'
 }
 
 

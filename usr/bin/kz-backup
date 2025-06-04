@@ -404,10 +404,10 @@ function backup_setting_wifi() {
 
     kz.logmsg 'Save the WiFi information...'
 
-    # Call kz wifi.
-    kz.logmsg 'Calling kz wifi...'
-    kz wifi > "$output_file"
-    kz.logmsg 'Called kz wifi.'
+    # Call kz-wifi.
+    kz.logmsg 'Calling kz-wifi...'
+    kz-wifi > "$output_file"
+    kz.logmsg 'Called kz-wifi.'
 }
 
 
