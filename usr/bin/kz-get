@@ -131,9 +131,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
         kz_deb_site_file=$kz_deb_prd_site_file
     fi
 
-    wget    --no-verbose                            \
-            --output-document="$kz_deb_local_file"  \
-            "$kz_deb_site_file"
+    wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
 
     # Suppress warnings (W:) and informational (N:) messages from apt-get.
     sudo    DEBIAN_FRONTEND=noninteractive  \
