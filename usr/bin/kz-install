@@ -545,8 +545,8 @@ function term() {
 errors:")
 ${FAILED_APPS[*]}
 
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
-view log messages.")
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
+to view the log messages.")
 
 $(gettext "Try installing the apps again.")"
         kz.errmsg "$text"

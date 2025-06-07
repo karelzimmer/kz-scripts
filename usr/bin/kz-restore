@@ -320,8 +320,8 @@ Some files may not be readable, or
 were any files added or removed while restoring the backup, or
 is there not enough space on \$HOME.")
 
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
-view log messages.")
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
+to view the log messages.")
 
 $(gettext "Try restoring the back up again.")"
         kz.errmsg "$text"

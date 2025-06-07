@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-02 10:07+0200\n"
+"POT-Creation-Date: 2025-06-07 11:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,7 +275,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Use \"journalctl --boot --id=$PROGRAM_NAME\" in Terminal to view log "
+"Use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal to view the log "
 "messages."
 msgstr ""
 

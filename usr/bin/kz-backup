@@ -583,8 +583,8 @@ Some files may not be readable, or
 were any files added or removed while creating the backup, or
 is there not enough space on \$TARGET.")
 
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in Terminal to \
-view log messages.")
+$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
+to view the log messages.")
 
 $(gettext "Try creating the back up again.")"
         kz.errmsg "$text"

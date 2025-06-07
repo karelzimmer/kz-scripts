@@ -310,11 +310,11 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Use \"journalctl --boot --id=$PROGRAM_NAME\" in Terminal to view log "
+"Use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal to view the log "
 "messages."
 msgstr ""
-"Gebruik \"journalctl --boot --id=$PROGRAM_NAME\" in Terminalvenster om "
-"logberichten te bekijken."
+"Gebruik \"journalctl --boot --id=$PROGRAM_NAME\" in het Terminalvenster om "
+"de logberichten te bekijken."
 
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
