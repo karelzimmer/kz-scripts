@@ -313,14 +313,14 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --a
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
 if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=kz-spotify; fi
 
-# setup teamviewer on *
+# setup teamviewer on pc06 pc07
 #------------------------------------------------------------------------------
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 #------------------------------------------------------------------------------
 kz-desktop --addaft=com.teamviewer.TeamViewer
 
-# reset teamviewer on *
+# reset teamviewer on pc06 pc07
 #------------------------------------------------------------------------------
 # Remote desktop.
 # Web app: https://web.teamviewer.com
