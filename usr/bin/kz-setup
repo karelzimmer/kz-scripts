@@ -511,9 +511,7 @@ function execute_command() {
     fi
 
     kz.debugmsg "$cmd"
-    ERREXIT=false
     eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
-    ERREXIT=true
 }
 
 

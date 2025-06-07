@@ -26,23 +26,6 @@ if systemctl cat apport &> /dev/null; then sudo rm --force --verbose /var/crash/
 if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
 if systemctl cat apport &> /dev/null; then sudo systemctl enable --now apport.service; fi
 
-# install update-system on *
-#------------------------------------------------------------------------------
-# Update and cleanup system.
-# This may take a while...
-#------------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get upgrade --assume-yes; fi
-if grep --quiet debian /etc/os-release && type snap &> /dev/null; then sudo snap refresh; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf upgrade --assumeyes --refresh; fi
-if grep --quiet rhel   /etc/os-release && type snap &> /dev/null; then sudo snap refresh; fi
-
-# remove update-system from *
-#------------------------------------------------------------------------------
-# Update and cleanup system.
-#------------------------------------------------------------------------------
-echo 'The update-system app cannot be removed.'
-
 # install 7zip on *
 #------------------------------------------------------------------------------
 # File archiver.

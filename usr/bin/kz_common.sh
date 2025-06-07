@@ -177,7 +177,6 @@ function kz.init() {
     trap 'term_sig exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
     trap 'term_sig sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
     trap 'term_sig sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
-    trap 'term_sig sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'term_sig sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     text="\
@@ -342,11 +341,9 @@ $command, exit code: $rc ($rc_desc)."
 
     case $signal in
         err )
-            if ${ERREXIT:-true}; then
-                text="
+            text="
 $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
-                kz.errmsg "$text"
-            fi
+            kz.errmsg "$text"
             exit "$rc"
             ;;
         exit )
