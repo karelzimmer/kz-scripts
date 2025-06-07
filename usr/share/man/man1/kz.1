@@ -48,6 +48,30 @@ Show the version, author, and copyright.
 Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
 
+.SH EXAMPLES
+.EX
+\fBkz update\fR
+.RS
+Update and cleanup system.
+.RE
+.sp
+\fBkz install google-chrome\fR
+.RS
+Install Google Chrome.
+.RE
+.sp
+\fBkz setup --cat google-chrome\fR
+.RS
+Show set up commands for Google Chrome.
+.RE
+.EE
+
+.SH SEE ALSO
+\fBkz-menu\fR(1)
+
+.SH KZ
+Part of the \fBkz\fR(1) suite.
+
 .SH NOTES
 .sp
 \fBkz\fR's commands are divided into high-level commands ("porcelain") and
@@ -205,24 +229,3 @@ Here, most attention is paid to maintaining, monitoring, and optimizing the
 system.
 .br
 Examples are \fBkz backup\fR and \fBkz update\fR.
-
-.SH EXAMPLES
-.EX
-\fBkz update\fR
-.RS
-Update and cleanup system.
-.RE
-.sp
-\fBkz install google-chrome\fR
-.RS
-Install Google Chrome.
-.RE
-.sp
-\fBkz setup --cat google-chrome\fR
-.RS
-Show set up commands for Google Chrome.
-.RE
-.EE
-
-.SH SEE ALSO
-\fBkz-menu\fR(1)
