@@ -19,7 +19,7 @@ case $1 in
         exit 0
         ;;
     * )
-        # Use eval to execute the command in the variable as a shell command.
+        # Use 'eval' to execute the command in the variable as a shell command.
         eval "$1"
         exit $?
         ;;
