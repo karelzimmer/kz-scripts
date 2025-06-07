@@ -19,7 +19,7 @@ case $1 in
         exit 0
         ;;
     * )
-        # Use 'eval' to execute $cmd as a shell command.
+        # Use 'eval' to execute <command> as a shell command.
         eval "$1"
         exit $?
         ;;
