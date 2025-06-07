@@ -1047,14 +1047,14 @@ msgstr "Systeem bijwerken en opschonen"
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-msgid "UPDATE"
-msgstr "BIJWERKEN"
+msgid "UPDATE -- 1/3"
+msgstr "BIJWERKEN -- 1/3"
 
-msgid "UPGRADE"
-msgstr "UPGRADEN"
+msgid "UPGRADE -- 2/3"
+msgstr "UPGRADEN -- 2/3"
 
-msgid "CLEANUP"
-msgstr "OPRUIMEN"
+msgid "CLEANUP -- 3/3"
+msgstr "OPRUIMEN -- 3/3"
 
 msgid "Usage: kz wifi [<options>]"
 msgstr "Gebruik: kz wifi [<opties>]"
