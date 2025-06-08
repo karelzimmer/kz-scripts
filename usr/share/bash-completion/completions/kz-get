@@ -6,5 +6,5 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-declare DASHOPTIONS='-d --dev --version'
+declare DASHOPTIONS='-d --dev'
 complete -o default -W "$DASHOPTIONS" kz-get

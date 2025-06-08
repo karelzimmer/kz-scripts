@@ -20,8 +20,11 @@ kz-build - website bouwen inclusief kz-pakketten
 .sp
 Het gebouwde Debian-pakket kz wordt vervolgens lokaal geïnstalleerd.
 .sp
+Met optie \fB-d\fR, \fB--dev\fR wordt de ontwikkelingsversie van het kz-pakket
+gebouwd.
+.sp
 Als de ontwikkelingsrepositories niet op main staan of niet schoon zijn, wordt
-er een ontwikkelingsversie gemaakt (kz-dev-....).
+er ook een ontwikkelingsversie gemaakt (kz-dev-....).
 .sp
 Dit om het pakket, de website, en de installatie te kunnen ontwikkelen, testen,
 en later te distribueren met \fBkz deploy\fR.
@@ -80,6 +83,9 @@ PolicyKit actiedefinitiebestanden (nl.karelzimmer.kz*.policy)
 Opdracht \fBkz build\fR kan alleen worden uitgevoerd op een desktop.
 
 .SH OPTIES
+.TP
+\fB-d\fR, \fB--dev\fR
+Bouw de ontwikkelingsversie van pakket kz.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.

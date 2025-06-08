@@ -31,7 +31,7 @@ $(gettext "       wget karelzimmer.nl/getkz; bash getkz [<options>]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -d, --dev      use the development version of kz')"
+$(gettext '  -d, --dev      download the development version of package kz')"
 readonly HELP_USAGE
 
 ###############################################################################

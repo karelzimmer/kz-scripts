@@ -28,8 +28,8 @@ PROGRAM_DESC=$(gettext 'Distribute website including kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz deploy [-h|--help] [-m|--manual] [-u|--usage] \
-[-v|--version]")
+USAGE=$(gettext "Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] \
+[-u|--usage] [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz deploy [<options>]")
@@ -37,21 +37,22 @@ HELP="$(gettext "Usage: kz deploy [<options>]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
+$(gettext '  -d, --dev      deploy the development version of package kz')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='hmuv'
-readonly OPTIONS_LONG='help,manual,usage,version'
+readonly OPTIONS_SHORT='dhmuv'
+readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
 
 ###############################################################################
 # Globals
 ###############################################################################
 
-declare DEV=false
+declare OPTION_DEV=false
 declare ERR_FLAG=false
 
 
@@ -105,6 +106,9 @@ function process_options() {
 
     while true; do
         case $1 in
+            -d | --dev )
+                OPTION_DEV=true
+                ;;
             -h | --help )
                 kz.process_option_help
                 exit 0
@@ -165,7 +169,7 @@ function check() {
     text=$(gettext 'CHECK')
     kz.infomsg "\n$text"
     if ! kz.check_repos; then
-        DEV=true
+        OPTION_DEV=true
         ERR_FLAG=true
     fi
     check_scripts_and_website
@@ -248,7 +252,7 @@ function install_package() {
     kz.logmsg 'Calling kz-get (via wget and bash)...'
     # Call kz-get via wget and bash as a regular user would do.
     cd "$HOME"
-    if $DEV; then
+    if $OPTION_DEV; then
         parm='--dev'
     fi
     if ! (wget karelzimmer.nl/getkz; bash getkz "$parm"); then

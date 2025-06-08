@@ -28,8 +28,8 @@ PROGRAM_DESC=$(gettext 'Build website including kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz build [-h|--help] [-m|--manual] [-u|--usage] \
-[-v|--version]")
+USAGE=$(gettext "Usage: kz build [-d|--dev] [-h|--help] [-m|--manual] \
+[-u|--usage] [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz build [<options>]")
@@ -37,14 +37,15 @@ HELP="$(gettext "Usage: kz build [<options>]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
+$(gettext '  -d, --dev      build the development version of package kz')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='hmuv'
-readonly OPTIONS_LONG='help,manual,usage,version'
+readonly OPTIONS_SHORT='dhmuv'
+readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
 # The following directories are used to build the website and packages.
 readonly DOCS_REPO=$HOME/kz-docs
@@ -68,7 +69,7 @@ readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 # Globals
 ###############################################################################
 
-declare DEV=false
+declare OPTION_DEV=false
 
 
 ###############################################################################
@@ -89,7 +90,7 @@ function process() {
     sudo true
     build_website
     generate_mo_file
-    kz.check_repos || DEV=true
+    kz.check_repos || OPTION_DEV=true
     build_deb_package
     build_rpm_package
     install_deb_package
@@ -124,6 +125,9 @@ function process_options() {
 
     while true; do
         case $1 in
+            -d | --dev )
+                OPTION_DEV=true
+                ;;
             -h | --help )
                 kz.process_option_help
                 exit 0
@@ -272,7 +276,7 @@ function build_deb_package() {
 
     # Create Debian package in kz-uploads.
     # Debian 11: .deb uses unknown compression ==> -Z=xz.
-    if $DEV; then
+    if $OPTION_DEV; then
         to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME"
     else
         to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"
@@ -347,7 +351,7 @@ function build_rpm_package() {
                 "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"  |& $PROGRAM_LOGS
     cd "$startdir"
 
-    if $DEV; then
+    if $OPTION_DEV; then
         to_copy=$UPLOADS_REPO_DISTDIR/assets/packages/$RPM_DEV_NAME
     else
         to_copy=$UPLOADS_REPO_DISTDIR/assets/packages/$RPM_NAME
@@ -369,7 +373,7 @@ function install_deb_package() {
     text=$(gettext 'Install Debian package (this may take a while)...')
     kz.infomsg "$text"
 
-    if $DEV; then
+    if $OPTION_DEV; then
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME
     else
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
@@ -386,7 +390,7 @@ function install_deb_package() {
 # This function controls the termination of the script.
 function term() {
     local text=''
-    if $DEV; then
+    if $OPTION_DEV; then
         text=$(gettext "Please note: the development version of the kz \
 package is installed")
         kz.errmsg "$text"
