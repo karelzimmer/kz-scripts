@@ -335,8 +335,8 @@ msgstr "De back-up is gemaakt."
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
 
-msgid "BUILD"
-msgstr "BOUWEN"
+msgid "BUILD -- 1/3"
+msgstr "BOUWEN -- 1/3"
 
 msgid "Build website including kz packages"
 msgstr "Website bouwen inclusief kz pakketten"
@@ -357,8 +357,8 @@ msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 msgid "Please check all the messages above and fix them if necessary."
 msgstr "Controleer alle meldingen hierboven en los ze op indien nodig."
 
-msgid "CHECK"
-msgstr "CONTROLEREN"
+msgid "CHECK -- 2/3"
+msgstr "CONTROLEREN -- 2/3"
 
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
@@ -411,8 +411,8 @@ msgstr "Controleer of alle repo's schoon zijn"
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-msgid "DEPLOY"
-msgstr "DISTRIBUEREN"
+msgid "DEPLOY -- 3/3"
+msgstr "DISTRIBUEREN -- 3/3"
 
 msgid "Upload website"
 msgstr "Uploaden website"
