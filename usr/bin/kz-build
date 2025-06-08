@@ -127,6 +127,7 @@ function process_options() {
         case $1 in
             -d | --dev )
                 OPTION_DEV=true
+                shift
                 ;;
             -h | --help )
                 kz.process_option_help
