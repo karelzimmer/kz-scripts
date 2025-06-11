@@ -15,8 +15,6 @@ export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
 
-echo "arguments: '$*'" | systemd-cat --identifier=kz_common.sh --priority=debug
-
 
 ###############################################################################
 # Functions
@@ -352,7 +350,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             kz.logmsg "$text"
             rm  --verbose   \
                 --force     \
-                /tmp/"$PROGRAM_NAME-"*??????????* |& $PROGRAM_LOGS || true
+                /tmp/"$PROGRAM_NAME-"*??????????*.* |& $PROGRAM_LOGS || true
             text="Ended (code=exited, status=$status).
 ==== END logs for script $PROGRAM_NAME ======================================="
             kz.logmsg "$text"

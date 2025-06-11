@@ -67,10 +67,11 @@ readonly COMMANDLINE_ARGS=("$@")
 # Globals
 ###############################################################################
 
+declare -A FAILED_APPS=()
+declare ERRORLOG=''
 declare OPTION_GUI=false
 declare OPTION_REMOVE=false
 declare REBOOT=true
-declare -A FAILED_APPS=()
 
 
 ###############################################################################
@@ -420,6 +421,7 @@ function install_apps() {
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
     kz.debugmsg "$title"...
+    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
 
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -471,6 +473,8 @@ function process_command_file() {
                         "$app_seq_num"      \
                         "$app_tot_num"      \
                         "$app_name"
+                # To corrolate possible error messages with app name.
+                printf '%s\n' "-- App $app_name" >> "$ERRORLOG"
                 ;;
             '' | '#'* )
                 # Empty or comment line.
@@ -521,15 +525,20 @@ function execute_command() {
     if $OPTION_GUI; then
         # Use 'pkexec' to run the command in graphical mode.
         # This is required for commands that need root privileges.
-        pkexec /usr/bin/kz-install-cmd "$cmd"           \
-            &> >(systemd-cat --identifier=kz-install)   ||
-            FAILED_APPS[$app_name]=$app_name
+        pkexec  /usr/bin/kz-install-cmd \
+                "$cmd"                  \
+                1> >($PROGRAM_LOGS)     \
+                2>> "$ERRORLOG"         ||
+                FAILED_APPS[$app_name]=$app_name
     else
         # Use 'sudo' to run the command in terminal mode.
         # This script is started with 'sudo' so the command is run with root
         # privileges.
         # Use 'eval' to execute the command in the variable as a shell command.
-        eval "$cmd" &> >($PROGRAM_LOGS) || FAILED_APPS[$app_name]=$app_name
+        eval    "$cmd"              \
+                1> >($PROGRAM_LOGS) \
+                2>> "$ERRORLOG"     ||
+                FAILED_APPS[$app_name]=$app_name
     fi
 }
 
@@ -538,19 +547,43 @@ function execute_command() {
 function term() {
     local cmd='sudo systemctl reboot'
     local operation=''
+    local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
+    local title=''
 
     if [[ ${FAILED_APPS[*]} ]]; then
+        title="$PROGRAM_DESC $(gettext 'error messages') ($program_name)"
+        # Errors also to the log.
+        kz.logmsg '==========================================================='
+        kz.logmsg "$title $ERRORLOG:"
+        printf '%s' "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
+        kz.logmsg '==========================================================='
+
         text="$(gettext "The installation of the following apps contains \
 errors:")
 ${FAILED_APPS[*]}
 
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
+$(gettext "Please check the error messages after this for more information, \
+or")
+$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
 to view the log messages.")
 
 $(gettext "Try installing the apps again.")"
         kz.errmsg "$text"
+
+        if $OPTION_GUI; then
+            zenity  --text-info             \
+                    --filename="$ERRORLOG"  \
+                    --width     700         \
+                    --height    500         \
+                    --title     "$title"    2> /dev/null || true
+        else
+            kz.infomsg "$title $ERRORLOG:"
+            less --no-init --quit-if-one-screen "$ERRORLOG"
+        fi
         exit 1
+    else
+        rm "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     operation=$(gettext 'install')
@@ -575,12 +608,12 @@ changing system settings.")"
             # This is required for commands that need root privileges.
             pkexec /usr/bin/kz-install-cmd "$cmd"
         else
+            kz.wait_for_enter
             # Use 'sudo' to run the command in terminal mode.
             # This script is started with 'sudo' so the command is run with
             # root privileges.
             # Use 'eval' to execute the command in the variable as a shell
             # command.
-            kz.wait_for_enter
             eval "$cmd"
         fi
     fi

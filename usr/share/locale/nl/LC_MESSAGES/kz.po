@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-08 10:37+0200\n"
+"POT-Creation-Date: 2025-06-10 15:32+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -92,6 +92,9 @@ msgstr "informatie"
 
 msgid "error message"
 msgstr "foutmelding"
+
+msgid "error messages"
+msgstr "foutmeldingen"
 
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
@@ -308,14 +311,6 @@ msgstr ""
 "of\n"
 "is er te weinig ruimte op $TARGET."
 
-#, sh-format
-msgid ""
-"Use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal to view the log "
-"messages."
-msgstr ""
-"Gebruik \"journalctl --boot --id=$PROGRAM_NAME\" in het Terminalvenster om "
-"de logberichten te bekijken."
-
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
@@ -388,8 +383,9 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Distribute website including kz packages"
 msgstr "Website distribueren inclusief kz pakketten"
 
-msgid "Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage] "
-"[-v|--version]"
+msgid ""
+"Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage] [-v|--"
+"version]"
 msgstr ""
 "Gebruik: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage] [-v|--"
 "version]"
@@ -664,6 +660,17 @@ msgstr "Probeer de apps opnieuw te installeren."
 
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
+
+msgid "Please check the error messages after this for more information, or"
+msgstr "Controleer de foutmeldingen hierna voor meer informatie, of"
+
+#, sh-format
+msgid ""
+"use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal to view the log "
+"messages."
+msgstr ""
+"gebruik \"journalctl --boot --id=$PROGRAM_NAME\" in het Terminalvenster om "
+"de logberichten te bekijken."
 
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."

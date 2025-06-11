@@ -54,9 +54,10 @@ readonly OPTIONS_LONG='gui,source:,help,manual,usage,version'
 # Globals
 ###############################################################################
 
+declare -i RESTORE_RC=0
+declare ERRORLOG=''
 declare OPTION_GUI=false
 declare SOURCE_MEDIUM=''
-declare -i RESTORE_RC=0
 
 
 ###############################################################################
@@ -247,16 +248,18 @@ function restore_backup() {
 
     title=$(gettext 'Restore home folder')
     text=$(gettext 'Preparing restore (this can take a while)')
+    kz.debugmsg "$title"...
+    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
 
     if $OPTION_GUI; then
-        kz.debugmsg "$title"...
         rsync   --archive               \
                 --acls                  \
                 --xattrs                \
                 --verbose               \
                 "$source"/              \
                 "$HOME"/                \
-                2> >($PROGRAM_LOGS)     |
+                1> >($PROGRAM_LOGS)     \
+                2>> "$ERRORLOG"         |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -275,7 +278,7 @@ function restore_backup() {
                 --verbose               \
                 --human-readable        \
                 "$source"/              \
-                "$HOME"/                2> /dev/null || RESTORE_RC=$?
+                "$HOME"/                2>> "$ERRORLOG" || RESTORE_RC=$?
     fi
 }
 
@@ -310,22 +313,45 @@ function restore_setting_desktop() {
 function term() {
     local -i num_users=0
     local -i rc=0
+    local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
     local users=''
 
     if [[ $RESTORE_RC -ne 0 ]]; then
+        title="$PROGRAM_DESC $(gettext 'error messages') ($program_name)"
+        # Errors also to the log.
+        kz.logmsg '==========================================================='
+        kz.logmsg "$title $ERRORLOG:"
+        printf "%s" "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
+        kz.logmsg '==========================================================='
+
         text="$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while restoring the backup, or
 is there not enough space on \$HOME.")
 
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
+$(gettext "Please check the error messages after this for more information, \
+or")
+$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
 to view the log messages.")
 
 $(gettext "Try restoring the back up again.")"
         kz.errmsg "$text"
+
+        if $OPTION_GUI; then
+            zenity  --text-info             \
+                    --filename="$ERRORLOG"  \
+                    --width     700         \
+                    --height    500         \
+                    --title     "$title"    2> /dev/null || true
+        else
+            kz.infomsg "$title $ERRORLOG:"
+            less --no-init --quit-if-one-screen "$ERRORLOG"
+        fi
         exit 1
+    else
+        rm "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     num_users=$(find /home/* -prune -print | wc --lines)

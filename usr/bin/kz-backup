@@ -54,10 +54,11 @@ readonly OPTIONS_LONG='gui,target:,help,manual,usage,version'
 # Globals
 ###############################################################################
 
+declare -i BACKUP_RC=0
+declare ERRORLOG=''
 declare OPTION_GUI=false
 declare TARGET_MEDIUM=''
 declare TARGET=''
-declare -i BACKUP_RC=0
 
 
 ###############################################################################
@@ -512,9 +513,10 @@ EOF
 
     title=$(gettext 'Backup home folder')
     text=$(gettext 'Preparing backup (this may take a while)')
+    kz.debugmsg "$title"...
+    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
 
     if $OPTION_GUI; then
-        kz.debugmsg "$title..."
         rsync   --archive                       \
                 --acls                          \
                 --xattrs                        \
@@ -524,7 +526,8 @@ EOF
                 --delete-excluded               \
                 "$HOME"/                        \
                 "$TARGET"/                      \
-                2> >($PROGRAM_LOGS)             |
+                1> >($PROGRAM_LOGS)             \
+                2>> "$ERRORLOG"                 |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
                 --auto-close                    \
@@ -546,7 +549,7 @@ EOF
                 --exclude-from="$exclude_file"  \
                 --delete-excluded               \
                 "$HOME"/                        \
-                "$TARGET"/                      2> /dev/null || BACKUP_RC=$?
+                "$TARGET"/                      2>> "$ERRORLOG" || BACKUP_RC=$?
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")
@@ -560,11 +563,13 @@ EOF
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$text"     &> >($PROGRAM_LOGS)
+                --text      "$text"     \
+                1> >($PROGRAM_LOGS)     \
+                2>> "$ERRORLOG"
     else
         text+='...'
         kz.infomsg "$text"
-        sync |& $PROGRAM_LOGS
+        sync 1> >($PROGRAM_LOGS) 2>> "$ERRORLOG"
     fi
 }
 
@@ -573,22 +578,46 @@ EOF
 function term() {
     local -i num_users=0
     local -i rc=0
+    local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
+    local title=''
     local users=''
 
     if [[ $BACKUP_RC -ne 0 ]]; then
+        title="$PROGRAM_DESC $(gettext 'error messages') ($program_name)"
+        # Errors also to the log.
+        kz.logmsg '==========================================================='
+        kz.logmsg "$title $ERRORLOG:"
+        printf '%s' "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
+        kz.logmsg '==========================================================='
+
         text="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while creating the backup, or
 is there not enough space on \$TARGET.")
 
-$(eval_gettext "Use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
+$(gettext "Please check the error messages after this for more information, \
+or")
+$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
 to view the log messages.")
 
 $(gettext "Try creating the back up again.")"
         kz.errmsg "$text"
+
+        if $OPTION_GUI; then
+            zenity  --text-info             \
+                    --filename="$ERRORLOG"  \
+                    --width     700         \
+                    --height    500         \
+                    --title     "$title"    2> /dev/null || true
+        else
+            kz.infomsg "$title $ERRORLOG:"
+            less --no-init --quit-if-one-screen "$ERRORLOG"
+        fi
         exit 1
+    else
+        rm "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     users=$(

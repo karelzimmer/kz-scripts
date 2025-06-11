@@ -61,7 +61,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes ansible
 # Incoming sessions are only possible when using Xorg/X11.
 # Web app: https://my.anydesk.com/v2
 #------------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes anydesk; fi
@@ -127,7 +127,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remov
 # E-book manager.
 #------------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes calibre; fi
-if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo --validate && wget --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
+if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo --validate && wget --no-verbose --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
 
 # remove calibre from pc06
 #------------------------------------------------------------------------------
@@ -850,7 +850,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes spice-v
 # Music and podcasts.
 # Web app: https://open.spotify.com
 #------------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes spotify-client; fi
@@ -1050,7 +1050,7 @@ if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then sudo dnf remov
 # Web app: https://vscode.dev
 #------------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes apt-transport-https; fi
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg; fi
+if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then sudo apt-get install --assume-yes code; fi

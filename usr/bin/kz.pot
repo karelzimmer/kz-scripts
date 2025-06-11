@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-08 11:07+0200\n"
+"POT-Creation-Date: 2025-06-10 15:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,6 +86,9 @@ msgid "information"
 msgstr ""
 
 msgid "error message"
+msgstr ""
+
+msgid "error messages"
 msgstr ""
 
 msgid "Program {} has been interrupted."
@@ -271,12 +274,6 @@ msgid ""
 "Some files may not be readable, or\n"
 "were any files added or removed while creating the backup, or\n"
 "is there not enough space on $TARGET."
-msgstr ""
-
-#, sh-format
-msgid ""
-"Use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal to view the log "
-"messages."
 msgstr ""
 
 msgid "Try creating the back up again."
@@ -593,6 +590,15 @@ msgid "Try installing the apps again."
 msgstr ""
 
 msgid "The set up of the following apps contains errors:"
+msgstr ""
+
+msgid "Please check the error messages after this for more information, or"
+msgstr ""
+
+#, sh-format
+msgid ""
+"use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal to view the log "
+"messages."
 msgstr ""
 
 msgid "Try to set up the apps again."
