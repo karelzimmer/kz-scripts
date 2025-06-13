@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-10 15:32+0200\n"
+"POT-Creation-Date: 2025-06-11 09:46+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -125,8 +125,11 @@ msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-msgid "Run the kz command"
+msgid "Execute the kz command"
 msgstr "Voer de kz-opdracht uit"
+
+msgid "Execute the kz command requiring root privileges"
+msgstr "Voer de kz-opdracht uit waarvoor root-rechten nodig zijn"
 
 msgid "<command> [<arguments>]"
 msgstr "<opdracht> [<argumenten>]"
@@ -442,6 +445,13 @@ msgstr "Gebruik: kz get [-d|--dev]"
 
 msgid "unknown option"
 msgstr "onbekende optie"
+
+#, sh-format
+msgid "Wait $sleep seconds for another package manager to finish"
+msgstr "Wacht $sleep seconden totdat een andere pakketbeheerder klaar is"
+
+msgid "Wait {} seconds for another package manager to finish"
+msgstr "Wacht {} seconden totdat een andere pakketbeheerder klaar is"
 
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
@@ -1114,10 +1124,10 @@ msgstr "Man-pagina $dir/$scriptname.1 niet gevonden."
 
 #, sh-format
 msgid ""
-"PolicyKit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
+"Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
-"PolicyKit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
+"Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
 msgid "Check website..."
@@ -1165,7 +1175,7 @@ msgstr "Zoom"
 msgid "Install apps and changes system settings"
 msgstr "Installeer apps en wijzig systeeminstellingen"
 
-msgid "Run the kz commands through a menu"
+msgid "Execute the kz commands through a menu"
 msgstr "Voer kz-opdrachten uit via een menu"
 
 msgid "Restores a backup copy of the Home folder"

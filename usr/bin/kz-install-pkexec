@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+###############################################################################
+# SPDX-FileComment: Execute the command (wrapper script).
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+
+eval "$1"

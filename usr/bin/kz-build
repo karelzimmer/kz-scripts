@@ -380,6 +380,7 @@ function install_deb_package() {
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
     fi
 
+    kz.check_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \

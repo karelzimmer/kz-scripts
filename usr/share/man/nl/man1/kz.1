@@ -77,7 +77,7 @@ Onderdeel van het \fBkz\fR(1)-pakket.
 .sp
 De opdrachten van \fBkz\fR zijn verdeeld in opdrachten op hoog niveau
 ("porcelein") en opdrachten op laag niveau ("loodgieterswerk").
-.sp
+
 .SS Opdrachten op hoog niveau (porcelein)
 .br
 Deze opdrachten zijn uit te voeren in een desktopomgeving met het
@@ -98,13 +98,19 @@ Herstel persoonlijke map.
 \fBkz-setup\fR(1)
 Apps instellen.
 .TP
+\fBkz-update\fR(1)
+Systeem bijwerken en opschonen.
+.TP
 \fBkz-wifi\fR(1)
 Wifi-informatie weergeven.
-.sp
+
 .SS Opdrachten op laag niveau (loodgieterswerk)
 .br
 Deze opdrachten zijn alleen uit te voeren in het Terminalvenster en zijn
 ondersteunend voor het beheer en gebruik van kz en Linux.
+.TP
+\fBkz_common-pkexec\fR(1)
+Voer fuse uit (wrapperscript).
 .TP
 \fBkz-build\fR(1)
 Website bouwen inclusief pakket kz.
@@ -127,11 +133,11 @@ Ontwikkelomgeving bouwen.
 \fBkz-get\fR(1)
 Download en installeer Debian- of RPM-pakket kz.
 .TP
-\fBkz-install-cmd\fR(1)
-Voer de kz-install opdracht uit (wrapperscript).
+\fBkz-install-pkexec\fR(1)
+Voer de opdracht uit (wrapperscript).
 .TP
-\fBkz-update\fR(1)
-Systeem bijwerken en opschonen.
+\fBkz-wifi-pkexec\fR(1)
+Voer nmcli uit (wrapperscript).
 .TP
 \fBgitclone\fR
 Git clone van alle publieke remote repo's in de Persoonlijke map.
@@ -144,6 +150,7 @@ Git status van alle lokale branches in de Persoonlijke map.
 .TP
 \fBrchecklink\fR
 Omgekeerde checklink.
+
 .SS Modern
 Pakket \fBkz\fR geeft met de documenten en scripts invulling aan en biedt
 ondersteuning voor:

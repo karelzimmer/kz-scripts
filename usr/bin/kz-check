@@ -94,7 +94,6 @@ function process() {
                 ;;
             *.json | *.policy )
                 check_trailing_spaces
-                continue
                 ;;
             *.1 | *.5 )
                 check_trailing_spaces
@@ -111,7 +110,8 @@ function process() {
                 check_pycodestyle
                 check_mypy
                 ;;
-            kz_common.sh )
+            kz_common.sh | kz-get | *-pkexec )
+                # This includes polkit wrapper scripts.
                 check_trailing_spaces
                 check_tags
                 check_record_length
@@ -353,12 +353,12 @@ not found.")
         ERR_FLAG=true
     fi
 
-    # PolicyKit action definition file (Only with so-called root scripts).
+    # Polkit action definition file (Only with so-called root scripts).
     if grep --quiet "$root_script" "$file"; then
         dir=$scripts_repo/usr/share/polkit-1/actions
 
         if ! [[ -f $dir/nl.karelzimmer.$scriptname.policy ]]; then
-            text='    '$(eval_gettext "PolicyKit action definition file \
+            text='    '$(eval_gettext "Polkit action definition file \
 \$dir/nl.karelzimmer.\$scriptname.policy not found.")
             kz.errmsg "$text"
             ERR_FLAG=true

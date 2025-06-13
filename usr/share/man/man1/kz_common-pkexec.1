@@ -1,0 +1,29 @@
+.\"############################################################################
+.\"# SPDX-FileComment: Man page for kz_common-pkexec
+.\"#
+.\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+.\"# SPDX-License-Identifier: CC0-1.0
+.\"############################################################################
+
+.TH "KZ_COMMON-PKEXEC" "1" "4.2.1" "kz" "User commands"
+
+.SH NAME
+kz_common-pkexec - Execute the fuse command (wrapper script)
+
+.SH SYNOPSIS
+.nf
+.B pkexec /usr/bin/kz_common-pkexec
+.YS
+
+.SH DESCRIPTION
+When called from \fBkz_common.py\fR or \fBkz_common.sh\fR, \
+\fBkz_common-pkexec\fR executes the fuse command requiring root privileges.
+
+.SH SEE ALSO
+\fBkz_commons.py\fR(1),
+\fBkz_commons.sh\fR(1),
+\fBpkexec\fR(1),
+\fBpolkit\fR(8)
+
+.SH KZ
+Part of the \fBkz\fR(1) package.

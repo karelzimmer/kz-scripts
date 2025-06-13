@@ -242,6 +242,7 @@ def perform_command(command: str = '') -> None:
     text = f'\n{command}...'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
+    kz.check_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except Exception as exc:

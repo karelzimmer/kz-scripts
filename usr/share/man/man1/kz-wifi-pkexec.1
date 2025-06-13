@@ -1,0 +1,28 @@
+.\"############################################################################
+.\"# SPDX-FileComment: Man page for kz-wifi-pkexec
+.\"#
+.\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+.\"# SPDX-License-Identifier: CC0-1.0
+.\"############################################################################
+
+.TH "KZ-WIFI-PKEXEC" "1" "4.2.1" "kz" "User commands"
+
+.SH NAME
+kz-wifi-pkexec - Execute the nmcli command (wrapper script)
+
+.SH SYNOPSIS
+.nf
+.B pkexec /usr/bin/kz-wifi-pkexec
+.YS
+
+.SH DESCRIPTION
+When called from \fBkz-wifi\fR, \fBkz-wifi-pkexec\fR executes the nmcli command
+requiring root privileges.
+
+.SH SEE ALSO
+\fBkz_wifi\fR(1),
+\fBpkexec\fR(1),
+\fBpolkit\fR(8)
+
+.SH KZ
+Part of the \fBkz\fR(1) package.

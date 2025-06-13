@@ -515,11 +515,9 @@ function execute_command() {
     fi
 
     kz.debugmsg "$cmd"
-    # Use 'eval' to execute the command in the variable as a shell command.
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
-            2>> "$ERRORLOG"     ||
-            FAILED_APPS[$app_name]=$app_name
+            2>> "$ERRORLOG"     || FAILED_APPS[$app_name]=$app_name
 }
 
 

@@ -1,27 +1,28 @@
 .\"############################################################################
-.\"# SPDX-FileComment: Man page for kz-install.sh
+.\"# SPDX-FileComment: Man page for kz-install-pkexec
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
 
-.TH "KZ-INSTALL-CMD" "1" "4.2.1" "kz" "User commands"
+.TH "KZ-INSTALL-PKEXEC" "1" "4.2.1" "kz" "User commands"
 
 .SH NAME
-kz-install-cmd - run the kz-install command (wrapper script)
+kz-install-pkexec - execute the command (wrapper script)
 
 .SH SYNOPSIS
 .nf
-.B pkexec /usr/bin/kz-install-cmd <command>
+.B pkexec /usr/bin/kz-install-pkexec <command>
 .YS
 
 .SH DESCRIPTION
-When called by \fBkz-install\fR, \fBkz-install-cmd\fR executes the command
-passed as an argument to the call.
+When called from \fBkz-install\fR, \fBkz-install-pkexec\fR executes the command
+requiring root privileges.
 
 .SH SEE ALSO
 \fBkz-install\fR(1),
-\fBkz\fR(1)
+\fBpkexec\fR(1),
+\fBpolkit\fR(8)
 
 .SH KZ
 Part of the \fBkz\fR(1) package.

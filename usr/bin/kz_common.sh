@@ -54,6 +54,30 @@ function kz.become_check() {
 }
 
 
+# This function checks for another running package manager and waits for the
+# next check if so.
+function kz.check_package_manager() {
+    local -i sleep=5
+
+    if grep --quiet rhel /etc/os-release; then
+        return 0
+    fi
+
+    while pkexec /usr/bin/kz_common-pkexec; do
+        TEXT=$(eval_gettext "Wait \$sleep seconds for another package manager \
+to finish")
+        if ${OPTION_GUI:-false}; then
+            kz.logmsg "$TEXT..."
+            # Inform the user in 'zenity --progress' why there is a wait.
+            printf '%s\n' "#$TEXT"
+        else
+            kz.infomsg "$TEXT..."
+        fi
+        sleep $sleep
+    done
+}
+
+
 # This function check that the repos are in the desired state.
 function kz.check_repos() {
     local err_flag=false
@@ -354,7 +378,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             text="Ended (code=exited, status=$status).
 ==== END logs for script $PROGRAM_NAME ======================================="
             kz.logmsg "$text"
-            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+            trap - ERR EXIT SIGHUP SIGINT SIGTERM
             exit "$rc"
             ;;
         * )

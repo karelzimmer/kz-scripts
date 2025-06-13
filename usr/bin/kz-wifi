@@ -61,11 +61,6 @@ def process(OPTION_GUI: bool = False) -> None:
     """
     OPTION_GUI = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
-    # This scripts is not usefull for a reglar user.
-    # To show secrets, the user must have root privileges.
-    if not kz.become_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
-        term()
-
     show_secrets(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI)
 
 
@@ -142,7 +137,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     This function shows the Wi-Fi secrets.
     """
-    command: str = 'nmcli device wifi show-password'
+    command: str = 'pkexec /usr/bin/kz-wifi-pkexec'
     nmcli_output: bytes
     text: str = f"{_('Use this data to connect to the wireless network.')}"
 

@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Installation menu
-Comment=Run the kz commands through a menu
+Comment=Execute the kz commands through a menu
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-menu --gui

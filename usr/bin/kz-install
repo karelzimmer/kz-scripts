@@ -493,6 +493,7 @@ function process_command_file() {
 function execute_command() {
     local -i cmd_dis_len=0
     local -i cmd_dis_max=0
+    local -i pkexec_rc=0
     local cmd_dis=''
     local cmd=${1:-unknown}
 
@@ -523,22 +524,21 @@ function execute_command() {
 
     kz.debugmsg "$cmd"
     if $OPTION_GUI; then
-        # Use 'pkexec' to run the command in graphical mode.
-        # This is required for commands that need root privileges.
-        pkexec  /usr/bin/kz-install-cmd \
+        kz.check_package_manager
+        pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                  \
                 1> >($PROGRAM_LOGS)     \
-                2>> "$ERRORLOG"         ||
-                FAILED_APPS[$app_name]=$app_name
+                2>> "$ERRORLOG"         || pkexec_rc=$?
+        if [[ $pkexec_rc -eq 126 || $pkexec_rc -eq 127 ]]; then
+            exit $pkexec_rc
+        else
+            FAILED_APPS[$app_name]=$app_name
+        fi
     else
-        # Use 'sudo' to run the command in terminal mode.
-        # This script is started with 'sudo' so the command is run with root
-        # privileges.
-        # Use 'eval' to execute the command in the variable as a shell command.
+        kz.check_package_manager
         eval    "$cmd"              \
                 1> >($PROGRAM_LOGS) \
-                2>> "$ERRORLOG"     ||
-                FAILED_APPS[$app_name]=$app_name
+                2>> "$ERRORLOG"     || FAILED_APPS[$app_name]=$app_name
     fi
 }
 
@@ -604,16 +604,9 @@ changing system settings.")"
 
     if $REBOOT; then
         if $OPTION_GUI; then
-            # Use 'pkexec' to run the command in graphical mode.
-            # This is required for commands that need root privileges.
-            pkexec /usr/bin/kz-install-cmd "$cmd"
+            pkexec /usr/bin/kz-install-pkexec "$cmd"
         else
             kz.wait_for_enter
-            # Use 'sudo' to run the command in terminal mode.
-            # This script is started with 'sudo' so the command is run with
-            # root privileges.
-            # Use 'eval' to execute the command in the variable as a shell
-            # command.
             eval "$cmd"
         fi
     fi

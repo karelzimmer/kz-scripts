@@ -87,6 +87,36 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
         return True
 
 
+def check_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
+    """
+    This function checks for another running package manager and waits for the
+    next check if so.
+    """
+    command1: str = 'grep --quiet rhel /etc/os-release'
+    command2: str = 'pkexec /usr/bin/kz_common-pkexec'
+    sleep: int = 5
+    text: str = ''
+
+    if subprocess.run(command1, executable='bash',
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      shell=True).returncode == 0:
+        return 0
+
+    while True:
+        try:
+            subprocess.run(command2, executable='bash', shell=True, check=True)
+        except Exception:
+            break
+        else:
+            text = _('Wait {} seconds for another package manager to \
+finish').format(sleep)
+            text += '...'
+            infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+            time.sleep(sleep)
+
+    return 0
+
+
 def debugmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     This function records a debugging message to the log.

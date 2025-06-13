@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-10 15:34+0200\n"
+"POT-Creation-Date: 2025-06-11 11:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,7 +120,10 @@ msgstr ""
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-msgid "Run the kz command"
+msgid "Execute the kz command"
+msgstr ""
+
+msgid "Execute the kz command requiring root privileges"
 msgstr ""
 
 msgid "<command> [<arguments>]"
@@ -401,6 +404,13 @@ msgid "Usage: kz get [-d|--dev]"
 msgstr ""
 
 msgid "unknown option"
+msgstr ""
+
+#, sh-format
+msgid "Wait $sleep seconds for another package manager to finish"
+msgstr ""
+
+msgid "Wait {} seconds for another package manager to finish"
 msgstr ""
 
 msgid "Please note: the development version of the kz package is installed"
@@ -972,7 +982,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"PolicyKit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
+"Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
@@ -1021,7 +1031,7 @@ msgstr ""
 msgid "Install apps and changes system settings"
 msgstr ""
 
-msgid "Run the kz commands through a menu"
+msgid "Execute the kz commands through a menu"
 msgstr ""
 
 msgid "Restores a backup copy of the Home folder"

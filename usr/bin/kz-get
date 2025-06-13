@@ -97,7 +97,7 @@ $HELP_USAGE"
 $(gettext "Type 'man kz get' for more information.")"
             fi
             printf '%s\n' "$text"
-            exit 0
+            exit 1
             ;;
         * )
             text="$program_name: $*: $(gettext 'arguments are not allowed')
@@ -108,7 +108,7 @@ $HELP_USAGE"
 $(gettext "Type 'man kz get' for more information.")"
             fi
             printf '%s\n' "$text"
-            exit 0
+            exit 1
             ;;
     esac
 }
@@ -131,19 +131,38 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
         kz_deb_site_file=$kz_deb_prd_site_file
     fi
 
+    sudo true
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
+    # Prevent the error message:
+    # ...file '/tmp/kz-get-XXXXXXXXXX.deb' couldn't be accessed by user '_apt'.
+    chmod o+r "$kz_deb_local_file"
 
-    # Suppress warnings (W:) and informational (N:) messages from apt-get.
+    check_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
             --allow-downgrades              \
             --reinstall                     \
             --assume-yes                    \
-            "$kz_deb_local_file"            |&
-    grep    --invert-match                  \
-            --regexp='^W: '                 \
-            --regexp='^N: '
+            "$kz_deb_local_file"
+}
+
+
+# This function checks for another running package manager and waits for the
+# next check if so.
+function check_package_manager() {
+    local -i sleep=5
+    local text=''
+
+    while sudo  fuser                           \
+                --silent                        \
+                /var/cache/debconf/config.dat   \
+                /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
+        text=$(eval_gettext "Wait \$sleep seconds for another package manager \
+to finish")
+        printf '%s\n' "$text..."
+        sleep $sleep
+    done
 }
 
 

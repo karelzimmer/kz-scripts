@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 ###############################################################################
-# SPDX-FileComment: Run the kz command
+# SPDX-FileComment: Execute the kz command
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -28,7 +28,7 @@ _ = gettext.gettext
 ###############################################################################
 
 PROGRAM_NAME: str = 'kz'
-PROGRAM_DESC: str = _('Run the kz command')
+PROGRAM_DESC: str = _('Execute the kz command')
 
 USAGE: str = (f'kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage] '
               f" [-v|--version] {_('<command> [<arguments>]')} ")

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+###############################################################################
+# SPDX-FileComment: Execute the nmcli command (wrapper script).
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+
+nmcli device wifi show-password

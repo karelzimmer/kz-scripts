@@ -8,7 +8,7 @@
 .TH "KZ" "1" "4.2.1" "kz" "User commands"
 
 .SH NAME
-kz - run the kz command
+kz - Execute the kz command
 
 .SH SYNOPSIS
 .SY kz
@@ -76,7 +76,7 @@ Part of the \fBkz\fR(1) package.
 .sp
 \fBkz\fR's commands are divided into high-level commands ("porcelain") and
 low-level commands ("plumbing").
-.sp
+
 .SS High-level commands (porcelain)
 .br
 These commands can be executed in a desktop environment with the Install menu
@@ -97,13 +97,19 @@ Restore home folder.
 \fBkz-setup\fR(1)
 Set up apps.
 .TP
+\fBkz-update\fR(1)
+Update and cleanup system.
+.TP
 \fBkz-wifi\fR(1)
 Show WiFi information.
-.sp
+
 .SS Low-level commands (plumbing)
 .br
 These commands can only be run in the Terminal window and are supporting the
 management and use of kz and Linux.
+.TP
+\fBkz_common-pkexec\fR(1)
+Execute the fuse command (wrapper script).
 .TP
 \fBkz-build\fR(1)
 Build website including kz packages.
@@ -123,11 +129,11 @@ Build development environment.
 \fBkz-get\fR(1)
 Download and install Debian or RPM package kz.
 .TP
-\fBkz-install-cmd\fR(1)
-Run the kz-install command (wrapper script).
+\fBkz-install-pkexec\fR(1)
+Execute the command (wrapper script).
 .TP
-\fBkz-update\fR(1)
-Update and cleanup system.
+\fBkz-wifi-pkexec\fR(1)
+Execute the nmcli command (wrapper script).
 .TP
 \fBgitclone\fR
 Git clone of all public remote repos in the home directory.
@@ -140,6 +146,8 @@ Git status of all local branches in the home directory.
 .TP
 \fBrchecklink\fR
 Reverse checklink.
+
+
 .SS Modern
 Package \fBkz\fR implements and with the documents and scripts supports for:
 .br
