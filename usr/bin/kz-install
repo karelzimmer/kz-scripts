@@ -531,7 +531,7 @@ function execute_command() {
                 2>> "$ERRORLOG"         || pkexec_rc=$?
         if [[ $pkexec_rc -eq 126 || $pkexec_rc -eq 127 ]]; then
             exit $pkexec_rc
-        else
+        elif [[ $pkexec_rc -gt 0 ]]; then
             FAILED_APPS[$app_name]=$app_name
         fi
     else
