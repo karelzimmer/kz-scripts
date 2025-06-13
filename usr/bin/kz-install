@@ -530,8 +530,11 @@ function execute_command() {
                 1> >($PROGRAM_LOGS)     \
                 2>> "$ERRORLOG"         || pkexec_rc=$?
         if [[ $pkexec_rc -eq 126 || $pkexec_rc -eq 127 ]]; then
+            # pkexec_rc = 126: The user dismissed the authentication dialog.
+            # pkexec_rc = 127: The calling process is not authorized.
             exit $pkexec_rc
         elif [[ $pkexec_rc -gt 0 ]]; then
+            # pkexec_rc > 0: The command failed.
             FAILED_APPS[$app_name]=$app_name
         fi
     else

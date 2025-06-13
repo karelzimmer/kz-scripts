@@ -6,6 +6,6 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-sudo fuser  --silent                        \
-            /var/cache/debconf/config.dat   \
-            /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*
+fuser   --silent                        \
+        /var/cache/debconf/config.dat   \
+        /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*
