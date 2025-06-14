@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###############################################################################
-# SPDX-FileComment: Execute the fuse command (wrapper script).
+# SPDX-FileComment: Wrapper script for kz_common.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

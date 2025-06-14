@@ -17,8 +17,8 @@
     <vendor_url>https://karelzimmer.nl/en</vendor_url>
 
     <action id="nl.karelzimmer.kz.common">
-        <description gettext-domain="kz">Execute the fuser command</description>
-        <message gettext-domain="kz">Execute the fuser command requiring root privileges</message>
+        <description>Wrapper script for kz-common</description>
+        <message>Execute the command requiring root privileges</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz_common-pkexec</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
@@ -41,8 +41,8 @@
     </action>
 
     <action id="nl.karelzimmer.kz.wifi">
-        <description gettext-domain="kz">Execute the nmcli command</description>
-        <message gettext-domain="kz">Execute the nmcli command requiring root privileges</message>
+        <description>Wrapper script voor kz-wifi</description>
+        <message>Execute the command requiring root privileges</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-wifi-pkexec</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
