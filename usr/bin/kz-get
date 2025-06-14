@@ -146,11 +146,11 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --assume-yes                    \
             "$kz_deb_local_file"
 
-    # Zenity is used to show a dialog box when the script is run in a
-    # *graphical* environment.
+# Zenity is used to display a dialog when the script is run in a *graphical*
+# environment, usually already installed on e.g. GNOME systems.
     check_package_manager
     if [[ ${DISPLAY-} ]]; then
-        sudo apt-get install --assume-yes zenity
+        type zenity || sudo apt-get install --assume-yes zenity
     fi
 }
 
@@ -194,10 +194,10 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
 
     sudo dnf $mode --assumeyes "$kz_rpm_site_file"
 
-    # Zenity is used to show a dialog box when the script is run in a
-    # *graphical* environment.
+# Zenity is used to display a dialog when the script is run in a *graphical*
+# environment, usually already installed on e.g. GNOME systems.
     if [[ ${DISPLAY-} ]]; then
-        sudo dnf install --assumeyes zenity
+        type zenity || sudo dnf install --assumeyes zenity
     fi
 }
 
