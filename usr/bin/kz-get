@@ -114,7 +114,7 @@ $(gettext "Type 'man kz get' for more information.")"
 }
 
 
-# This function downloads and installs Debian package kz.
+# This function downloads and installs Debian package kz and its dependencies.
 function install_deb_package() {
     local kz_deb_dev_site_file="\
 https://karelzimmer.nl/assets/packages/kz-dev_4.2.1-1_all.deb"
@@ -145,6 +145,13 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --reinstall                     \
             --assume-yes                    \
             "$kz_deb_local_file"
+
+    # Zenity is used to show a dialog box when the script is run in a
+    # *graphical* environment.
+    check_package_manager
+    if [[ ${DISPLAY-} ]]; then
+        sudo apt-get install --assume-yes zenity
+    fi
 }
 
 
@@ -166,7 +173,7 @@ to finish")
 }
 
 
-# This function installs RPM package kz.
+# This function installs RPM package kz and its dependencies.
 function install_rpm_package() {
     local kz_rpm_prd_site_file="\
 https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
@@ -186,6 +193,12 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
     fi
 
     sudo dnf $mode --assumeyes "$kz_rpm_site_file"
+
+    # Zenity is used to show a dialog box when the script is run in a
+    # *graphical* environment.
+    if [[ ${DISPLAY-} ]]; then
+        sudo dnf install --assumeyes zenity
+    fi
 }
 
 
