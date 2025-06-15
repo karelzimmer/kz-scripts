@@ -87,6 +87,12 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
+msgid "Wrapper script for kz-common"
+msgstr "Wrapper-script voor kz-common"
+
+msgid "Execute the command requiring root privileges"
+msgstr "Voer de opdracht uit waarvoor root-rechten nodig zijn"
+
 msgid "information"
 msgstr "informatie"
 
@@ -1093,6 +1099,9 @@ msgstr ""
 
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
+
+msgid "Wrapper script for kz-wifi"
+msgstr "Wrapper-script voor kz-wifi"
 
 #, sh-format
 msgid "Script $scriptname --usage returned an error."

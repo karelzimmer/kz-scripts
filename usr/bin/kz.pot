@@ -82,6 +82,12 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
+msgid "Wrapper script for kz-common"
+msgstr ""
+
+msgid "Execute the command requiring root privileges"
+msgstr ""
+
 msgid "information"
 msgstr ""
 
@@ -950,6 +956,9 @@ msgid "Use this data to connect to the wireless network."
 msgstr ""
 
 msgid "No WiFi device found."
+msgstr ""
+
+msgid "Wrapper script for kz-wifi"
 msgstr ""
 
 #, sh-format
