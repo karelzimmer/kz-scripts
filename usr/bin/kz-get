@@ -114,7 +114,7 @@ $(gettext "Type 'man kz get' for more information.")"
 }
 
 
-# This function downloads and installs Debian package kz and its dependencies.
+# This function downloads and installs Debian package kz.
 function install_deb_package() {
     local kz_deb_dev_site_file="\
 https://karelzimmer.nl/assets/packages/kz-dev_4.2.1-1_all.deb"
@@ -166,7 +166,7 @@ to finish")
 }
 
 
-# This function installs RPM package kz and its dependencies.
+# This function installs RPM package kz.
 function install_rpm_package() {
     local kz_rpm_prd_site_file="\
 https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
