@@ -21,6 +21,7 @@
         <message gettext-domain="kz">Execute the fuser command requiring root privileges</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz_common-pkexec</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+        <icon_name>kz</icon_name>
         <defaults>
             <allow_any>yes</allow_any>
             <allow_inactive>yes</allow_inactive>
@@ -33,6 +34,7 @@
         <message gettext-domain="kz">Authentication is required to install apps</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install-pkexec</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+        <icon_name>kz</icon_name>
         <defaults>
             <allow_any>auth_self_keep</allow_any>
             <allow_inactive>auth_self_keep</allow_inactive>
@@ -45,6 +47,7 @@
         <message gettext-domain="kz">Execute the nmcli command requiring root privileges</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-wifi-pkexec</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+        <icon_name>kz</icon_name>
         <defaults>
             <allow_any>yes</allow_any>
             <allow_inactive>yes</allow_inactive>
