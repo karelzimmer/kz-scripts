@@ -133,7 +133,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
 
     sudo true
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
-    # Prevent the error message:
+    # Prevent the message:
     # ...file '/tmp/kz-get-XXXXXXXXXX.deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
@@ -145,17 +145,6 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --reinstall                     \
             --assume-yes                    \
             "$kz_deb_local_file"
-
-    # Zenity is used to display a dialog when the script is run in a
-    # *graphical* environment, usually already installed on e.g. GNOME systems.
-    if [[ ${DISPLAY-} ]]; then
-        # Graphical environment available, check if zenity is installed.
-        # If not, install it.
-        if ! type zenity &> /dev/null; then
-                check_package_manager
-                sudo apt-get install --assume-yes zenity
-        fi
-    fi
 }
 
 
@@ -197,14 +186,6 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
     fi
 
     sudo dnf $mode --assumeyes "$kz_rpm_site_file"
-
-    # Zenity is used to display a dialog when the script is run in a
-    # *graphical* environment, usually already installed on e.g. GNOME systems.
-    if [[ ${DISPLAY-} ]]; then
-        # Graphical environment available, check if zenity is installed.
-        # If not, install it.
-        type zenity &> /dev/null || sudo dnf install --assumeyes zenity
-    fi
 }
 
 
