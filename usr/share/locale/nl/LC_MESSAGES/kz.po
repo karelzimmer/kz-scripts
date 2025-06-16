@@ -87,11 +87,11 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-msgid "Wrapper script for kz-common"
-msgstr "Wrapper-script voor kz-common"
+msgid "Wrapper script for kz_common"
+msgstr "Wrapper-script voor kz_common"
 
-msgid "Execute the command requiring root privileges"
-msgstr "Voer de opdracht uit waarvoor root-rechten nodig zijn"
+msgid "Execute the fuser command requiring root privileges"
+msgstr "Voer de opdracht fuser uit waarvoor root-rechten nodig zijn"
 
 msgid "information"
 msgstr "informatie"
@@ -133,9 +133,6 @@ msgstr "kz versie 4.2.1 (gebouwd {})."
 
 msgid "Execute the kz command"
 msgstr "Voer de kz-opdracht uit"
-
-msgid "Execute the kz command requiring root privileges"
-msgstr "Voer de kz-opdracht uit waarvoor root-rechten nodig zijn"
 
 msgid "<command> [<arguments>]"
 msgstr "<opdracht> [<argumenten>]"
@@ -1102,6 +1099,9 @@ msgstr "Geen wifi-apparaat gevonden."
 
 msgid "Wrapper script for kz-wifi"
 msgstr "Wrapper-script voor kz-wifi"
+
+msgid "Execute the nmcli command requiring root privileges"
+msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
 #, sh-format
 msgid "Script $scriptname --usage returned an error."

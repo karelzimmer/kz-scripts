@@ -82,10 +82,10 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-msgid "Wrapper script for kz-common"
+msgid "Wrapper script for kz_common"
 msgstr ""
 
-msgid "Execute the command requiring root privileges"
+msgid "Execute the fuser command requiring root privileges"
 msgstr ""
 
 msgid "information"
@@ -127,9 +127,6 @@ msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
 msgid "Execute the kz command"
-msgstr ""
-
-msgid "Execute the kz command requiring root privileges"
 msgstr ""
 
 msgid "<command> [<arguments>]"
@@ -959,6 +956,9 @@ msgid "No WiFi device found."
 msgstr ""
 
 msgid "Wrapper script for kz-wifi"
+msgstr ""
+
+msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
 #, sh-format
