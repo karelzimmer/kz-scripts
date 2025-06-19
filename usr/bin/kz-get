@@ -150,8 +150,8 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     # *graphical* environment, usually already installed. If not, install it.
     if [[ ${DISPLAY-} ]]; then
         if ! type zenity &> /dev/null; then
-                check_package_manager
-                sudo apt-get install --assume-yes zenity
+            check_package_manager
+            sudo apt-get install --assume-yes zenity
         fi
     fi
 }
@@ -200,7 +200,7 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
     # *graphical* environment, usually already installed. If not, install it.
     if [[ ${DISPLAY-} ]]; then
         if ! type zenity &> /dev/null; then
-                sudo dnf install --assumeyes zenity
+            sudo dnf install --assumeyes zenity
         fi
     fi
 }
