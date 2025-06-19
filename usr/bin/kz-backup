@@ -25,7 +25,8 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz backup [-g|--gui] [-t|--target <directory>] \
-[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]")
+[-h|--help] [-m|--manual]
+                 [-u|--usage] [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz backup [<options>]")

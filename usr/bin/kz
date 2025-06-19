@@ -30,8 +30,8 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Execute the kz command')
 
-USAGE: str = (f'kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage] '
-              f" [-v|--version] {_('<command> [<arguments>]')} ")
+USAGE: str = _("Usage: kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage]\n"
+               "[-v|--version] <command> [<arguments>]")
 
 HELP: str = (f"{_('Usage: kz [<options>] <command> [<arguments>]')}\n\n"
              f'{PROGRAM_DESC}.\n\n'
@@ -178,7 +178,7 @@ def process_option_list() -> None:
     text: str
 
     text = f"{_('The following commands are available:')}\n\n"
-    text += f"{_('NUM  command')}\n"
+    text += f"{_('NUM  COMMAND')}\n"
     command: str = f"find   /usr/bin/kz-*               \
                             -maxdepth 1                 \
                             -type f                     \

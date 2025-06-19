@@ -108,8 +108,8 @@ def check_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
         except Exception:
             break
         else:
-            text = _('Wait {} seconds for another package manager to \
-finish').format(sleep)
+            text = _('Wait {} seconds for another package manager to finish').\
+                format(sleep)
             text += '...'
             infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
             time.sleep(sleep)
@@ -183,10 +183,8 @@ def init(PROGRAM_NAME: str) -> None:
               file=sys. stderr)
         sys.exit(1)
 
-    text = f'\
-==== START logs for script {PROGRAM_NAME} ==================================\n'
-    logmsg(PROGRAM_NAME, text)
-    text = f"Started ({' '.join(sys.argv)} as {os.getlogin()}) ===="
+    text = f'==== START logs for script {PROGRAM_NAME} ======================='
+    text += f"\nStarted ({' '.join(sys.argv)} as {os.getlogin()})."
     logmsg(PROGRAM_NAME, text)
 
 
@@ -261,7 +259,7 @@ def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str = ''
 
-    text = (f"{_('Usage:')} {USAGE}\n\n"
+    text = (f"{USAGE}\n\n"
             f'''{_("Type '{} --help' for more information.").
                  format(program_name)}''')
     infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
@@ -309,10 +307,8 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
     if rc == 0:
         status = '0/SUCCESS'
 
-    text = f'Ended (code=exited, status={status}).'
-    logmsg(PROGRAM_NAME, text)
-    text = f'\
-==== END logs for script {PROGRAM_NAME} ======================================'
+    text = f'Ended (code=exited, status={status}).\n'
+    text += f'==== END logs for script {PROGRAM_NAME} ========================'
     logmsg(PROGRAM_NAME, text)
 
     if rc == 0:

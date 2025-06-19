@@ -64,8 +64,8 @@ function kz.check_package_manager() {
     fi
 
     while pkexec /usr/bin/kz_common-pkexec; do
-        TEXT=$(eval_gettext "Wait \$sleep seconds for another package manager \
-to finish")
+        TEXT=$(eval_gettext \
+            "Wait \$sleep seconds for another package manager to finish")
         if ${OPTION_GUI:-false}; then
             kz.logmsg "$TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.
@@ -201,9 +201,8 @@ function kz.init() {
     trap 'term_sig sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
     trap 'term_sig sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    text="\
-==== START logs for script $PROGRAM_NAME ======================================
-Started ($0 as $USER)."
+    text="==== START logs for script $PROGRAM_NAME ==========================="
+    text+="\nStarted ($0 as $USER)."
     kz.logmsg "$text"
 }
 
@@ -226,8 +225,9 @@ function kz.process_option_help() {
         yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
     fi
 
-    text="$(eval_gettext "Type '\$program_name --manual' or 'man \
-\$program_name'\$yelp_man_url for more information.")"
+    text="$(eval_gettext \
+"Type '\$program_name --manual' or 'man \$program_name'\$yelp_man_url for \
+more information.")"
     kz.infomsg "$HELP
 
 $text"
@@ -249,11 +249,10 @@ function kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
-    text="$(eval_gettext "Type '\$program_name --help' for more \
-information.")"
-    kz.infomsg "$USAGE
+    text="$USAGE
 
-$text"
+$(eval_gettext "Type '\$program_name --help' for more information.")"
+    kz.infomsg "$text"
 }
 
 
@@ -357,8 +356,8 @@ function term_sig() {
             ;;
     esac
 
-    text="Signal: $signal, line: $lineno, function: $function, command: \
-$command, exit code: $rc ($rc_desc)."
+    text="Signal: $signal, line: $lineno, function: $function, "
+    text+="command: $command, exit code: $rc ($rc_desc)."
     kz.logmsg "$text"
 
     case $signal in
@@ -375,8 +374,8 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             rm  --verbose   \
                 --force     \
                 /tmp/"$PROGRAM_NAME-"*??????????*.* |& $PROGRAM_LOGS || true
-            text="Ended (code=exited, status=$status).
-==== END logs for script $PROGRAM_NAME ======================================="
+            text="Ended (code=exited, status=$status).\n"
+            text+="==== END logs for script $PROGRAM_NAME ===================="
             kz.logmsg "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGTERM
             exit "$rc"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 11:57+0200\n"
+"POT-Creation-Date: 2025-06-19 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -129,7 +129,9 @@ msgstr ""
 msgid "Execute the kz command"
 msgstr ""
 
-msgid "<command> [<arguments>]"
+msgid ""
+"Usage: kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage]\n"
+"          [-v|--version] <command> [<arguments>]"
 msgstr ""
 
 msgid "Usage: kz [<options>] <command> [<arguments>]"
@@ -173,7 +175,8 @@ msgstr ""
 
 msgid ""
 "Usage: kz backup [-g|--gui] [-t|--target <directory>] [-h|--help] [-m|--"
-"manual] [-u|--usage] [-v|--version]"
+"manual]\n"
+"                 [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz backup [<options>]"
@@ -308,8 +311,8 @@ msgid "Build website including kz packages"
 msgstr ""
 
 msgid ""
-"Usage: kz build [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage] [-v|--"
-"version]"
+"Usage: kz build [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]\n"
+"                [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz build [<options>]"
@@ -352,8 +355,8 @@ msgid "Distribute website including kz packages"
 msgstr ""
 
 msgid ""
-"Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage] [-v|--"
-"version]"
+"Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]\n"
+"                [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz deploy [<options>]"
@@ -431,6 +434,9 @@ msgid "Type 'exit' to close this window."
 msgstr ""
 
 msgid "Build development environment"
+msgstr ""
+
+msgid "Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz dev [<options>]"
@@ -671,8 +677,8 @@ msgid "Go to installation menu"
 msgstr ""
 
 msgid ""
-"Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage] [-v|--"
-"version]"
+"Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage]\n"
+"               [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz menu [<options>]"
@@ -822,7 +828,8 @@ msgstr ""
 
 msgid ""
 "Usage: kz restore [-g|--gui] [-s|--source <directory>] [-h|--help] [-m|--"
-"manual] [-u|--usage] [-v|--version]"
+"manual]\n"
+"                  [-u|--usage] [-v|--version]"
 msgstr ""
 
 msgid "Usage: kz restore [<options>]"
@@ -934,6 +941,9 @@ msgstr ""
 msgid "Update and cleanup system"
 msgstr ""
 
+msgid "Usage: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
+msgstr ""
+
 msgid "Usage: kz update [<options>]"
 msgstr ""
 
@@ -944,6 +954,11 @@ msgid "UPGRADE -- 2/3"
 msgstr ""
 
 msgid "CLEANUP -- 3/3"
+msgstr ""
+
+msgid ""
+"Usage: kz wifi [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage]\n"
+"[-v|--version]"
 msgstr ""
 
 msgid "Usage: kz wifi [<options>]"

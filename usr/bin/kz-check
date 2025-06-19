@@ -432,9 +432,9 @@ function check_shellcheck() {
 
 # This function checks the existence of tags.
 function check_tags() {
-    local esc_bug='#''B''U''G'
-    local esc_fixme='#''F''I''X''M''E'
-    local esc_todo='#''T''O''D''O'
+    local esc_bug='B''U''G'
+    local esc_fixme='F''I''X''M''E'
+    local esc_todo='T''O''D''O'
     local text=''
 
     if grep --quiet                 \
