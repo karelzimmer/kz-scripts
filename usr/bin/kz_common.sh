@@ -58,20 +58,21 @@ function kz.become_check() {
 # next check if so.
 function kz.check_package_manager() {
     local -i sleep=5
+    local text=''
 
     if grep --quiet rhel /etc/os-release; then
         return 0
     fi
 
     while pkexec /usr/bin/kz_common-pkexec; do
-        TEXT=$(eval_gettext \
-            "Wait \$sleep seconds for another package manager to finish")
+        text=$(eval_gettext "Wait \$sleep seconds for another package manager \
+to finish")
         if ${OPTION_GUI:-false}; then
-            kz.logmsg "$TEXT..."
+            kz.logmsg "$text..."
             # Inform the user in 'zenity --progress' why there is a wait.
-            printf '%s\n' "#$TEXT"
+            printf '%s\n' "#$text"
         else
-            kz.infomsg "$TEXT..."
+            kz.infomsg "$text..."
         fi
         sleep $sleep
     done
@@ -225,9 +226,8 @@ function kz.process_option_help() {
         yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
     fi
 
-    text="$(eval_gettext \
-"Type '\$program_name --manual' or 'man \$program_name'\$yelp_man_url for \
-more information.")"
+    text="$(eval_gettext "Type '\$program_name --manual' or 'man \
+\$program_name'\$yelp_man_url for more information.")"
     kz.infomsg "$HELP
 
 $text"
