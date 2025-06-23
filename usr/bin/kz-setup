@@ -536,7 +536,8 @@ function term() {
         printf "%s" "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
         kz.logmsg '==========================================================='
 
-        text="$(gettext "The set up of the following apps contains errors:")
+        text="$(gettext "The set up of the following apps contains warnings \
+or errors:")
 ${FAILED_APPS[*]}
 
 $(gettext "Please check the warning and error messages after this for more \

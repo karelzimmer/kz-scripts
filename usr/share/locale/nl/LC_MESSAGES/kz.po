@@ -673,14 +673,14 @@ msgstr "OPDRACHT"
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
-msgid "The installation of the following apps contains errors:"
-msgstr "De installatie van de volgende apps bevat fouten:"
+msgid "The installation of the following apps contains warnings or errors:"
+msgstr "De installatie van de volgende apps bevat waarschuwingen of fouten:"
 
 msgid "Try installing the apps again."
 msgstr "Probeer de apps opnieuw te installeren."
 
-msgid "The set up of the following apps contains errors:"
-msgstr "Het instellen van de volgende apps bevat fouten:"
+msgid "The set up of the following apps contains warnings or errors:"
+msgstr "Het instellen van de volgende apps bevat waarschuwingen of fouten:"
 
 msgid "Please check the warning and error messages after this for more "
 "information, or"

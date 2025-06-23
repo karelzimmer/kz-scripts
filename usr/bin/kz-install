@@ -563,7 +563,7 @@ function term() {
         kz.logmsg '==========================================================='
 
         text="$(gettext "The installation of the following apps contains \
-errors:")
+warnings or errors:")
 ${FAILED_APPS[*]}
 
 $(gettext "Please check the warning and error messages after this for more \
