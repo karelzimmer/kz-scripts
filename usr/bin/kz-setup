@@ -539,8 +539,8 @@ function term() {
         text="$(gettext "The set up of the following apps contains errors:")
 ${FAILED_APPS[*]}
 
-$(gettext "Please check the error messages after this for more information, \
-or")
+$(gettext "Please check the warning and error messages after this for more \
+information, or")
 $(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
 to view the log messages.")
 

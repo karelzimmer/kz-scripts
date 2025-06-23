@@ -682,8 +682,10 @@ msgstr "Probeer de apps opnieuw te installeren."
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-msgid "Please check the error messages after this for more information, or"
-msgstr "Controleer de foutmeldingen hierna voor meer informatie, of"
+msgid "Please check the warning and error messages after this for more "
+"information, or"
+msgstr "Controleer de waarschuwings- en foutmeldingen hierna voor meer "
+"informatie, of"
 
 #, sh-format
 msgid ""

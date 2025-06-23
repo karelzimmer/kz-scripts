@@ -35,13 +35,17 @@ With option \fB-s\fR, \fB--source\fR \fIDIRECTORY\fR another location can be
 specified. For example /media/karel/usbstick instead of
 /media/karel/backupdisk.
 .sp
-rsync is used to restore the backup.
-.sp
+Tool rsync is used to restore the backup.
+.br
 Files in the Home folder that are not in the backup are not deleted (rsync's
 --delete option is not used).
 .sp
 In a desktop environment, the desktop background, if available, will be
 restored.
+.sp
+If the restore is successful, an attempt is made to unmount the medium.
+.br
+If warnings or errors are found, an overview of these messages is given.
 .sp
 With command \fBkz backup\fR the Home folder can be backed up.
 

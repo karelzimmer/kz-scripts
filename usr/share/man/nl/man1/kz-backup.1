@@ -43,9 +43,15 @@ Voorbeeld: ~/kz-scripts wordt overgeslagen vanwege de aanwezigheid van
 ~/kz-scripts/.git.
 .sp
 Voor het maken van de back-up wordt rsync gebruikt.
-.sp
+.br
 Bestanden die verwijderd zijn uit de Persoonlijke map worden ook verwijderd uit
 de back-up (rsync's optie --delete wordt gebruikt).
+.sp
+Als de backup succesvol is gemaakt, wordt geprobeerd het aangekoppelde medium
+af te koppelen.
+.br
+Als er waarschuwingen of fouten zijn geconstateerd wordt een overzicht gegeven
+van deze meldingen.
 .sp
 Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 

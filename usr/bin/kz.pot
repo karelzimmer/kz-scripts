@@ -8,7 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2025-06-23 11:20+0200\n"
+=======
+"POT-Creation-Date: 2025-06-23 13:59+0200\n"
+>>>>>>> feature/manpag
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -611,7 +615,9 @@ msgstr ""
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-msgid "Please check the error messages after this for more information, or"
+msgid ""
+"Please check the warning and error messages after this for more information, "
+"or"
 msgstr ""
 
 #, sh-format
