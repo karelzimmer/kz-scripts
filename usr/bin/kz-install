@@ -555,7 +555,8 @@ function term() {
     local title=''
 
     if [[ ${FAILED_APPS[*]} ]]; then
-        title="$PROGRAM_DESC $(gettext 'error messages') ($program_name)"
+        title="$PROGRAM_DESC $(gettext 'warning and error messages') "
+        title+="($program_name)"
         # Errors also to the log.
         kz.logmsg '==========================================================='
         kz.logmsg "$title $ERRORLOG:"
