@@ -142,7 +142,7 @@ found.")
     if $argument_app; then
         process_argument_app
     else
-        process_setup_file_by_hostname
+        process_install_file_by_hostname
     fi
 
     if $option_cat; then
@@ -367,7 +367,7 @@ function process_install_file_by_app_argument() {
 
 # This function generates the command file from the installation file and
 # filters by host.
-function process_setup_file_by_hostname() {
+function process_install_file_by_hostname() {
     local host_match=false
     local input_record=''
 

@@ -61,7 +61,7 @@ function init() {
 function process() {
     local text=''
 
-    check_input "$@"
+    check_input_process_options "$@"
     if grep --quiet debian /etc/os-release; then
         install_deb_package
     elif grep --quiet rhel /etc/os-release; then
@@ -74,8 +74,9 @@ function process() {
 }
 
 
-# This function checks the script input.
-function check_input() {
+# This function checks the script input, and handles the script options and
+# arguments..
+function check_input_process_options() {
     local option=${1:-''}
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
@@ -84,7 +85,7 @@ function check_input() {
         '' )
             return 0
             ;;
-        -d | --dev )
+        -d | -de | -dev | --d | --de | --dev )
             OPTION_DEV=true
             return 0
             ;;
@@ -210,8 +211,8 @@ function term() {
 
     text='------------------------------------------------------------------\n'
     if $OPTION_DEV; then
-        text+=$red$(gettext "Please note: the development version of the kz \
-package is installed")$normal
+        text+="$red$(gettext "Please note: the development version of the kz \
+package is installed")$normal\n"
     fi
 
     text+="$(gettext "Package kz has been successfully installed.

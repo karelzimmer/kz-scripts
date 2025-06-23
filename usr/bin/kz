@@ -31,7 +31,7 @@ PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Execute the kz command')
 
 USAGE: str = _("Usage: kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage]\n"
-               "[-v|--version] <command> [<arguments>]")
+               "          [-v|--version] <command> [<arguments>]")
 
 HELP: str = (f"{_('Usage: kz [<options>] <command> [<arguments>]')}\n\n"
              f'{PROGRAM_DESC}.\n\n'

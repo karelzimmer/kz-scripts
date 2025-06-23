@@ -30,7 +30,8 @@ PROGRAM_NAME: str = 'kz-wifi'
 PROGRAM_DESC: str = _('Show WiFi information')
 
 USAGE: str = _("Usage: kz wifi [-g|--gui] [-h|--help] [-m|--manual] "
-               "[-u|--usage]\n[-v|--version]")
+               "[-u|--usage]\n"
+               "               [-v|--version]")
 
 HELP: str = (f"{_('Usage: kz wifi [<options>]')}\n\n"
              f'{PROGRAM_DESC}.\n\n'
