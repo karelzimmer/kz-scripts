@@ -99,8 +99,8 @@ msgstr "informatie"
 msgid "error message"
 msgstr "foutmelding"
 
-msgid "error messages"
-msgstr "foutmeldingen"
+msgid "warning and error messages"
+msgstr "waarschuwings- en foutmeldingen"
 
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."

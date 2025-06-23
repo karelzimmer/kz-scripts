@@ -94,7 +94,7 @@ msgstr ""
 msgid "error message"
 msgstr ""
 
-msgid "error messages"
+msgid "warning and error messages"
 msgstr ""
 
 msgid "Program {} has been interrupted."
