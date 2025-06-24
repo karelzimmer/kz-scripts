@@ -524,7 +524,7 @@ function execute_command() {
 
     kz.debugmsg "$cmd"
     if $OPTION_GUI; then
-        kz.check_package_manager
+        kz.check_debian_package_manager
         pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                  \
                 1> >($PROGRAM_LOGS)     \
@@ -538,7 +538,7 @@ function execute_command() {
             FAILED_APPS[$app_name]=$app_name
         fi
     else
-        kz.check_package_manager
+        kz.check_debian_package_manager
         eval    "$cmd"              \
                 1> >($PROGRAM_LOGS) \
                 2>> "$ERRORLOG"     || FAILED_APPS[$app_name]=$app_name
@@ -555,7 +555,7 @@ function term() {
     local title=''
 
     if [[ ${FAILED_APPS[*]} ]]; then
-        title="$PROGRAM_DESC $(gettext 'warning and error messages') "
+        title="$PROGRAM_DESC $(gettext 'error messages') "
         title+="($program_name)"
         # Errors also to the log.
         kz.logmsg '==========================================================='
@@ -564,14 +564,14 @@ function term() {
         kz.logmsg '==========================================================='
 
         text="$(gettext "The installation of the following apps contains \
-warnings or errors:")
+errors:")
 ${FAILED_APPS[*]}
 
-$(gettext "Please check the warning and error messages after this for more \
-information, or")
-$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
-to view the log messages.")
-
+$(gettext 'Actions to take:')
+$(gettext "Please check the error messages after this, or")
+$(eval_gettext "look in file \$ERRORLOG, or")
+$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the \
+Terminal.")
 $(gettext "Try installing the apps again.")"
         kz.errmsg "$text"
 
@@ -587,7 +587,7 @@ $(gettext "Try installing the apps again.")"
         fi
         exit 1
     else
-        rm "$ERRORLOG" |& $PROGRAM_LOGS
+        rm --verbose "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     operation=$(gettext 'install')

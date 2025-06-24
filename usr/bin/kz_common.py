@@ -87,14 +87,14 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
         return True
 
 
-def check_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
+def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
-    This function checks for another running package manager and waits for the
-    next check if so.
+    This function checks if a Debian package manager is already running and
+    waits for the next check if so.
     """
     command1: str = 'grep --quiet rhel /etc/os-release'
     command2: str = 'pkexec /usr/bin/kz_common-pkexec'
-    sleep: int = 5
+    sleep: int = 1
     text: str = ''
 
     if subprocess.run(command1, executable='bash',

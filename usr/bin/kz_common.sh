@@ -54,10 +54,10 @@ function kz.become_check() {
 }
 
 
-# This function checks for another running package manager and waits for the
-# next check if so.
-function kz.check_package_manager() {
-    local -i sleep=5
+# This function checks if a Debian package manager is already running and waits
+# for the next check if so.
+function kz.check_debian_package_manager() {
+    local -i sleep=1
     local text=''
 
     if grep --quiet rhel /etc/os-release; then

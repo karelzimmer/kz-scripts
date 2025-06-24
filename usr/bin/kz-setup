@@ -529,7 +529,7 @@ function term() {
     local title=''
 
     if [[ ${FAILED_APPS[*]} ]]; then
-        title="$PROGRAM_DESC $(gettext 'warning and error messages') "
+        title="$PROGRAM_DESC $(gettext 'error messages') "
         title+="($program_name)"
         # Errors also to the log.
         kz.logmsg '==========================================================='
@@ -537,15 +537,14 @@ function term() {
         printf "%s" "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
         kz.logmsg '==========================================================='
 
-        text="$(gettext "The set up of the following apps contains warnings \
-or errors:")
+        text="$(gettext "The set up of the following apps contains errors:")
 ${FAILED_APPS[*]}
 
-$(gettext "Please check the warning and error messages after this for more \
-information, or")
-$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
-to view the log messages.")
-
+$(gettext 'Actions to take:')
+$(gettext "Please check the error messages after this, or")
+$(eval_gettext "look in file \$ERRORLOG, or")
+$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the \
+Terminal.")
 $(gettext "Try to set up the apps again.")"
         kz.errmsg "$text"
 
@@ -561,7 +560,7 @@ $(gettext "Try to set up the apps again.")"
         fi
         exit 1
     else
-        rm "$ERRORLOG" |& $PROGRAM_LOGS
+        rm --verbose "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     operation=$(gettext 'set up')

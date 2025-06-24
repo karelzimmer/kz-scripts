@@ -138,7 +138,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     # ...file '/tmp/kz-get-XXXXXXXXXX.deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
-    check_package_manager
+    check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
@@ -150,16 +150,16 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     # Zenity is used to display a dialog when the script is run in a
     # *graphical* environment, usually already installed. If not, install it.
     if [[ ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
-        check_package_manager
+        check_debian_package_manager
         sudo apt-get install --assume-yes zenity
     fi
 }
 
 
-# This function checks for another running package manager and waits for the
-# next check if so.
-function check_package_manager() {
-    local -i sleep=5
+# This function checks if a Debian package manager is already running and waits
+# for the next check if so.
+function check_debian_package_manager() {
+    local -i sleep=1
     local text=''
 
     while sudo  fuser                           \

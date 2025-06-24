@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 14:37+0200\n"
+"POT-Creation-Date: 2025-06-24 13:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,7 @@ msgstr ""
 msgid "error message"
 msgstr ""
 
-msgid "warning and error messages"
+msgid "error messages"
 msgstr ""
 
 msgid "Program {} has been interrupted."
@@ -278,23 +278,18 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Backup ended with warnings or errors.\n"
+"Backup ended with errors.\n"
 "\n"
-"Some files may not be readable, or\n"
-"were any files added or removed while creating the backup, or\n"
+"Possible causes:\n"
+"Were any files added or deleted during the backup, or\n"
+"some files may not be readable or changeable, or\n"
 "is there not enough space on $TARGET."
 msgstr ""
 
 msgid "Try creating the back up again."
 msgstr ""
 
-msgid "Disconnect the USB media"
-msgstr ""
-
-msgid "The USB medium can be removed."
-msgstr ""
-
-msgid "Disconnect the USB medium SAFELY YOURSELF!"
+msgid "Remember to SAFELY disconnect the USB media."
 msgstr ""
 
 msgid "The backup has been made."
@@ -602,24 +597,27 @@ msgstr ""
 msgid "No commands to execute."
 msgstr ""
 
-msgid "The installation of the following apps contains warnings or errors:"
+msgid "The installation of the following apps contains errors:"
 msgstr ""
 
 msgid "Try installing the apps again."
 msgstr ""
 
-msgid "The set up of the following apps contains warnings or errors:"
+msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-msgid ""
-"Please check the warning and error messages after this for more information, "
-"or"
+msgid "Actions to take:"
+msgstr ""
+
+msgid "Please check the error messages after this, or"
 msgstr ""
 
 #, sh-format
-msgid ""
-"use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal to view the log "
-"messages."
+msgid "look in file $ERRORLOG, or"
+msgstr ""
+
+#, sh-format
+msgid "use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal."
 msgstr ""
 
 msgid "Try to set up the apps again."
@@ -875,10 +873,11 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Restore ended with warnings or errors.\n"
+"Restore ended with errors.\n"
 "\n"
-"Some files may not be readable, or\n"
-"were any files added or removed while restoring the backup, or\n"
+"Possible causes:\n"
+"Were any files added or deleted during the restore, or\n"
+"some files may not be readable or changeable, or\n"
 "is there not enough space on $HOME."
 msgstr ""
 

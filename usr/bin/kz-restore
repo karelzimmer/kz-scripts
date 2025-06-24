@@ -313,13 +313,12 @@ function restore_setting_desktop() {
 # This function controls the termination of the script.
 function term() {
     local -i num_users=0
-    local -i rc=0
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
     local users=''
 
     if [[ $RESTORE_RC -ne 0 ]]; then
-        title="$PROGRAM_DESC $(gettext 'warning and error messages') "
+        title="$PROGRAM_DESC $(gettext 'error messages') "
         title+="($program_name)"
         # Errors also to the log.
         kz.logmsg '==========================================================='
@@ -327,18 +326,19 @@ function term() {
         printf "%s" "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
         kz.logmsg '==========================================================='
 
-        text="$(eval_gettext "Restore ended with warnings or errors.
+        text="$(eval_gettext "Restore ended with errors.
 
-Some files may not be readable, or
-were any files added or removed while restoring the backup, or
+Possible causes:
+Were any files added or deleted during the restore, or
+some files may not be readable or changeable, or
 is there not enough space on \$HOME.")
 
-$(gettext "Please check the warning and error messages after this for more \
-information, or")
-$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the Terminal \
-to view the log messages.")
-
-$(gettext "Try restoring the back up again.")"
+$(gettext 'Actions to take:')
+$(gettext 'Please check the error messages after this, or')
+$(eval_gettext "look in file \$ERRORLOG, or")
+$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the \
+Terminal.")
+$(gettext 'Try restoring the back up again.')"
         kz.errmsg "$text"
 
         if $OPTION_GUI; then
@@ -353,7 +353,7 @@ $(gettext "Try restoring the back up again.")"
         fi
         exit 1
     else
-        rm "$ERRORLOG" |& $PROGRAM_LOGS
+        rm --verbose "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     num_users=$(find /home/* -prune -print | wc --lines)
@@ -375,71 +375,15 @@ $(gettext "Try restoring the back up again.")"
 
 $users"
     fi
-
-    if [[ $SOURCE_MEDIUM == */media/* ]]; then
-        term_usb || rc=$?
-        if [[ $rc -eq 0 ]]; then
-            text+="
-
-$(gettext 'The USB medium can be removed.')"
-        else
-            text+="
-
-$(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
-        fi
-    fi
     kz.infomsg "$text"
 
-    exit 0
-}
-
-
-# This function tries to unmount the USB device.
-function term_usb() {
-    local device=''
-    local text=''
-
-    device='/dev/'$(
-        lsblk   --ascii             |
-        grep    --before-context=1  \
-                "$SOURCE_MEDIUM"    |
-        head    -1                  |
-        cut     --delimiter='-'     \
-                --fields=2          |
-        cut     --delimiter=' '     \
-                --fields=1
-        )
-
-    title=$(gettext 'Restore home folder')
-    text=$(gettext 'Disconnect the USB media')
-    if $OPTION_GUI; then
-        # With '|& zenity --progress' global variables from called functions
-        # are not passed, hence the process substitution with '> >(zenity...)'.
-        kz.debugmsg "$text..."
-        term_unmount > >(
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     600         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> /dev/null
-            )
-    else
-        kz.infomsg "$text..."
-        term_unmount
+    if [[ $SOURCE_MEDIUM == /media/* ]]; then
+        text=$(gettext 'Remember to SAFELY disconnect the USB media.')
+        kz.infomsg "
+$text"
     fi
 
-    return $rc
-}
-
-
-# This function unmounts the USB device.
-function term_unmount() {
-    umount "$SOURCE_MEDIUM"                         |& $PROGRAM_LOGS || rc+=$?
-    udisksctl lock --block-device "$device"         |& $PROGRAM_LOGS || rc+=$?
-    udisksctl power-off --block-device "$device"    |& $PROGRAM_LOGS || rc+=$?
+    exit 0
 }
 
 
