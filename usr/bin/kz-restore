@@ -259,7 +259,6 @@ function restore_backup() {
                 --verbose               \
                 "$source"/              \
                 "$HOME"/                \
-                1> >($PROGRAM_LOGS)     \
                 2>> "$ERRORLOG"         |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
@@ -375,13 +374,12 @@ $(gettext 'Try restoring the back up again.')"
 
 $users"
     fi
-    kz.infomsg "$text"
-
     if [[ $SOURCE_MEDIUM == /media/* ]]; then
-        text=$(gettext 'Remember to SAFELY disconnect the USB media.')
-        kz.infomsg "
-$text"
+        text+="
+
+$(gettext 'Remember to SAFELY disconnect the USB media.')"
     fi
+    kz.infomsg "$text"
 
     exit 0
 }

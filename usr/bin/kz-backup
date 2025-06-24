@@ -527,7 +527,6 @@ EOF
                 --delete-excluded               \
                 "$HOME"/                        \
                 "$TARGET"/                      \
-                1> >($PROGRAM_LOGS)             \
                 2>> "$ERRORLOG"                 |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
@@ -641,13 +640,12 @@ are \$num_users users).")
 
 $users"
     fi
-    kz.infomsg "$text"
-
     if [[ $TARGET_MEDIUM == /media/$USER* ]]; then
-        text=$(gettext 'Remember to SAFELY disconnect the USB media.')
-        kz.infomsg "
-$text"
+        text+="
+
+$(gettext 'Remember to SAFELY disconnect the USB media.')"
     fi
+    kz.infomsg "$text"
 
     exit 0
 }
