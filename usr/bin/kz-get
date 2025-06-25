@@ -166,7 +166,7 @@ function check_debian_package_manager() {
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        text=$(eval_gettext "Wait \$sleep seconds for another package manager \
+        text=$(eval_gettext "Wait \$sleep second for another package manager \
 to finish")
         printf '%s\n' "$text..."
         sleep $sleep

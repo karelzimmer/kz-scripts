@@ -65,7 +65,7 @@ function kz.check_debian_package_manager() {
     fi
 
     while pkexec /usr/bin/kz_common-pkexec; do
-        text=$(eval_gettext "Wait \$sleep seconds for another package manager \
+        text=$(eval_gettext "Wait \$sleep second for another package manager \
 to finish")
         if ${OPTION_GUI:-false}; then
             kz.logmsg "$text..."
