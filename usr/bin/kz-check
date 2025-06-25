@@ -422,7 +422,6 @@ function check_desktop_file_validation() {
 function check_shellcheck() {
     # Shellcheck doesn't work well with absolute filenames.
     cd "$scriptdir"
-                # --enable check-extra-masked-returns \
     shellcheck  --external-sources                  \
                 --enable add-default-case           \
                 --enable avoid-nullary-conditions   \
