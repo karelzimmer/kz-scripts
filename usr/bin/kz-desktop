@@ -208,8 +208,7 @@ $USAGE"
     fi
 
     if ! [[ ${DISPLAY-} ]]; then
-        text="$program_name: $(gettext 'no desktop environment available')
-$USAGE"
+        text="$program_name: $(gettext 'no desktop environment available')"
         kz.infomsg "$text"
         exit 0
     fi
