@@ -169,7 +169,6 @@ $USAGE"
 
 # This function builds the website.
 function build_website() {
-    local dir=''
     local file=''
     local filename=''
     local startdir=$PWD
@@ -184,11 +183,6 @@ function build_website() {
             --checksum              \
             "$UPLOADS_REPO_SRCDIR"/ \
             "$UPLOADS_REPO_DISTDIR" |& $PROGRAM_LOGS
-
-    # Make sure all necessary directories are available.
-    for dir in "${UPLOADS_TARGETS[@]}"; do
-        mkdir --parents "$dir" |& $PROGRAM_LOGS
-    done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
     cd "$DOCS_REPO"

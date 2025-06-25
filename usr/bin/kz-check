@@ -369,7 +369,7 @@ not found.")
 
 # This function checks Python script code with pycodestyle.
 function check_pycodestyle() {
-    pycodestyle "$script" || ERR_FLAG=true
+    pycodestyle --show-source "$script" || ERR_FLAG=true
 }
 
 
@@ -424,6 +424,9 @@ function check_shellcheck() {
     cd "$scriptdir"
     shellcheck  --external-sources                  \
                 --enable add-default-case           \
+                --enable check-unassigned-uppercase \
+                --enable deprecate-which            \
+                --enable quote-safe-variables       \
                 --enable require-double-brackets    \
                 "$scriptname"                       || ERR_FLAG=true
     cd "$scripts_repo"

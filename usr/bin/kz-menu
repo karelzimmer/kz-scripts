@@ -456,7 +456,7 @@ function process_menu2_choice() {
         process_commands
         # Setup apps on a server means manual logout.
         if [[ $reply_save -eq 5 ]] && ! [[ ${DISPLAY-} ]]; then
-            exit $rc
+            exit "$rc"
         fi
         $OPTION_GUI || kz.wait_for_enter
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
@@ -568,7 +568,7 @@ function execute_command() {
 
     # Use e.g. 'kz-install' instead of 'kz install'.
     # Rocky Linux 8 gives Python 'TypeError' if 'kz install' is used.
-    "$cmd" $gui_option || rc=$?
+    "$cmd" "$gui_option" || rc=$?
     kz.logmsg "$command: rc=$rc"
 }
 

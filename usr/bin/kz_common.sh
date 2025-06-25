@@ -28,7 +28,7 @@ function kz.become() {
     kz.become_check || exit 0
 
     if ! ( ${OPTION_GUI:-false} || [[ $UID -eq 0 ]] ); then
-        # shellcheck disable=SC2153
+        # shellcheck disable=SC2153,SC2154
         text="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
         kz.logmsg "$text"
         exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
@@ -74,7 +74,7 @@ to finish")
         else
             kz.infomsg "$text..."
         fi
-        sleep $sleep
+        sleep "$sleep"
     done
 }
 
@@ -107,6 +107,7 @@ function kz.check_repos() {
         cd "$HOME/$repo"
 
         # Prevent false positives.
+        # shellcheck disable=SC2154
         git status |& $PROGRAM_LOGS
 
         if ! git diff-index --quiet HEAD; then
@@ -140,6 +141,7 @@ function kz.errmsg() {
 
     kz.debugmsg "$*"
     if ${OPTION_GUI:-false}; then
+        # shellcheck disable=SC2154
         title="$PROGRAM_DESC $(gettext 'error message')"
         zenity  --error                 \
                 --width     600         \
@@ -228,6 +230,7 @@ function kz.process_option_help() {
 
     text="$(eval_gettext "Type '\$program_name --manual' or 'man \
 \$program_name'\$yelp_man_url for more information.")"
+    # shellcheck disable=SC2154
     kz.infomsg "$HELP
 
 $text"
@@ -249,6 +252,7 @@ function kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
+    # shellcheck disable=SC2154
     text="$USAGE
 
 $(eval_gettext "Type '\$program_name --help' for more information.")"

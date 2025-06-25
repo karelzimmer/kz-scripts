@@ -169,7 +169,7 @@ function check_debian_package_manager() {
         text=$(eval_gettext "Wait \$sleep second for another package manager \
 to finish")
         printf '%s\n' "$text..."
-        sleep $sleep
+        sleep "$sleep"
     done
 }
 
@@ -193,7 +193,7 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
         kz_rpm_site_file=$kz_rpm_prd_site_file
     fi
 
-    sudo dnf $mode --assumeyes "$kz_rpm_site_file"
+    sudo dnf "$mode" --assumeyes "$kz_rpm_site_file"
 
     # Zenity is used to display a dialog when the script is run in a
     # *graphical* environment, usually already installed. If not, install it.
