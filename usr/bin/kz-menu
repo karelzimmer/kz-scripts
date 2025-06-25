@@ -142,7 +142,7 @@ function process_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! [[ ${DISPLAY-} ]]; then
+                if [[ -z ${DISPLAY-} ]]; then
                     text="$program_name: $1: $(gettext "no desktop \
 environment available")"
                     kz.infomsg "$text"
@@ -179,7 +179,7 @@ environment available")"
         esac
     done
 
-    if [[ $* ]]; then
+    if [[ -n $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         kz.infomsg "$text"
@@ -455,7 +455,7 @@ function process_menu2_choice() {
         reply_save=$REPLY
         process_commands
         # Setup apps on a server means manual logout.
-        if [[ $reply_save -eq 5 ]] && ! [[ ${DISPLAY-} ]]; then
+        if [[ $reply_save -eq 5 ]] && [[ -z ${DISPLAY-} ]]; then
             exit "$rc"
         fi
         $OPTION_GUI || kz.wait_for_enter

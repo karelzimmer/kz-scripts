@@ -222,7 +222,7 @@ function kz.process_option_help() {
     local text=''
     local yelp_man_url=''
 
-    if [[ ${DISPLAY-} ]]; then
+    if [[ -n ${DISPLAY-} ]]; then
         yelp_man_url="$(gettext ', or see the ')"
         yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
         yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
@@ -239,7 +239,7 @@ $text"
 
 # This function displays the manual page.
 function kz.process_option_manual() {
-    if [[ ${DISPLAY-} ]]; then
+    if [[ -n ${DISPLAY-} ]]; then
         yelp man:"$PROGRAM_NAME" 2> /dev/null
     else
         man --pager=cat "$PROGRAM_NAME"

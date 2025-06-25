@@ -200,14 +200,14 @@ $USAGE"
         esac
     done
 
-    if [[ $* ]]; then
+    if [[ -n $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         kz.infomsg "$text"
         exit 1
     fi
 
-    if ! [[ ${DISPLAY-} ]]; then
+    if [[ -z ${DISPLAY-} ]]; then
         text="$program_name: $(gettext 'no desktop environment available')"
         kz.infomsg "$text"
         exit 0

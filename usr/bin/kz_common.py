@@ -204,7 +204,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str = ''
 
-    if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
+    if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         yelp_man_url = f"{_(', or see the ')}"
@@ -227,7 +227,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     exc: str = ''
     text: str = ''
 
-    if subprocess.run('[[ ${DISPLAY-} ]]', executable='bash',
+    if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         try:

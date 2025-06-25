@@ -116,14 +116,14 @@ kz-desktop --addbef=firefox_firefox
 #------------------------------------------------------------------------------
 # View and install deb files.
 #------------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
-if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then echo 'App gdebi is not available.'; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'App gdebi is not available.'; fi
 
 # reset gdebi on *
 #------------------------------------------------------------------------------
 # View and install deb files.
 #------------------------------------------------------------------------------
-if [[ ${DISPLAY-} ]]; then echo 'App gdebi cannot be reset.'; fi
+if [[ -n ${DISPLAY-} ]]; then echo 'App gdebi cannot be reset.'; fi
 
 # setup git on pc06 pc07
 #------------------------------------------------------------------------------
@@ -200,7 +200,7 @@ if gsettings get org.gnome.shell.extensions.ding show-home                      
 # Web browser.
 #------------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
-if [[ ${DISPLAY-} ]]; then xdg-mime default google-chrome.desktop application/pdf; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # reset google-chrome on *
 #------------------------------------------------------------------------------
@@ -224,13 +224,13 @@ kz-desktop --delete=fr.handbrake.ghb
 #------------------------------------------------------------------------------
 # Hide files.
 #------------------------------------------------------------------------------
-if [[ ${DISPLAY-} ]]; then echo 'snap' > ~/.hidden; fi
+if [[ -n ${DISPLAY-} ]]; then echo 'snap' > ~/.hidden; fi
 
 # reset hide-files on *
 #------------------------------------------------------------------------------
 # Hide files.
 #------------------------------------------------------------------------------
-if [[ ${DISPLAY-} ]]; then rm --force --verbose ~/.hidden; fi
+if [[ -n ${DISPLAY-} ]]; then rm --force --verbose ~/.hidden; fi
 
 # setup kvm on pc06 pc07
 #------------------------------------------------------------------------------
@@ -302,16 +302,16 @@ kz-desktop --delete=org.gnome.SoundJuicer
 # Music and podcasts.
 # Web app: https://open.spotify.com
 #------------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
-if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
 
 # reset spotify on pc01 pc02 pc06 pc07
 #------------------------------------------------------------------------------
 # Music and podcasts.
 # Web app: https://open.spotify.com
 #------------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
-if grep --quiet rhel   /etc/os-release && [[ ${DISPLAY-} ]]; then kz-desktop --delete=kz-spotify; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --delete=kz-spotify; fi
 
 # setup teamviewer on pc06 pc07
 #------------------------------------------------------------------------------
@@ -384,15 +384,15 @@ kz-desktop --delete=kz-vm-hugowin732
 # Web app: https://vscode.dev
 #------------------------------------------------------------------------------
 kz-desktop --addbef=code
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop application/json; fi
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop application/x-desktop; fi
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop application/x-shellscript; fi
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop application/xml; fi
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/html; fi
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/markdown; fi
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/plain; fi
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/troff; fi
-if [[ ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/json; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/x-desktop; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/x-shellscript; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/xml; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/html; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/markdown; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/plain; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/troff; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
 # reset vscode on pc01 pc06 pc07
 #------------------------------------------------------------------------------

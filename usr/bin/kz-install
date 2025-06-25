@@ -201,7 +201,7 @@ function process_options() {
                 shift 2
                 ;;
             -g | --gui )
-                if ! [[ ${DISPLAY-} ]]; then
+                if [[ -z ${DISPLAY-} ]]; then
                     text="$program_name: $1: $(gettext "no desktop \
 environment available")"
                     kz.infomsg "$text"
@@ -246,10 +246,10 @@ environment available")"
         esac
     done
 
-    if [[ $* ]]; then
+    if [[ -n $* ]]; then
         argument_app=true
         REBOOT=false
-        while [[ $* ]]; do
+        while [[ -n $* ]]; do
             app_arguments[$1]=$1
             shift
         done
@@ -286,7 +286,7 @@ $(gettext 'NUM  APP')
                 --body-numbering=a      || true
         )
 
-    if [[ $apps ]]; then
+    if [[ -n $apps ]]; then
         text+="$apps
 
 $(gettext 'Use "kz install <app>..." to install the apps.')
@@ -553,7 +553,7 @@ function term() {
     local text=''
     local title=''
 
-    if [[ ${FAILED_APPS[*]} ]]; then
+    if [[ -n ${FAILED_APPS[*]} ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"
         # Errors also to the log.
         kz.logmsg '==========================================================='

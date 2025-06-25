@@ -139,7 +139,7 @@ function process_options() {
         esac
     done
 
-    if [[ $* ]]; then
+    if [[ -n $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         kz.infomsg "$text"
