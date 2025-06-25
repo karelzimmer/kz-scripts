@@ -25,7 +25,7 @@ source /usr/bin/gettext.sh
 function kz.become() {
     local text=''
 
-    kz.become_check || exit 0
+    kz.become_check
 
     if ! ( ${OPTION_GUI:-false} || [[ $UID -eq 0 ]] ); then
         # shellcheck disable=SC2153,SC2154
@@ -38,7 +38,7 @@ function kz.become() {
 
 
 # This function checks if the user is allowed to become root and returns 0 if
-# so, otherwise returns 1 with descriptive message.
+# so, otherwise exit 1 with descriptive message.
 function kz.become_check() {
     local text=''
 
@@ -49,7 +49,7 @@ function kz.become_check() {
     else
         text=$(gettext 'Already performed by the administrator.')
         kz.infomsg "$text"
-        return 1
+        exit 0
     fi
 }
 
