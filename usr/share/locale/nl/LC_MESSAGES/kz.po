@@ -329,8 +329,8 @@ msgstr "is er te weinig ruimte op $TARGET."
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-msgid "Remember to SAFELY disconnect the USB media."
-msgstr "Vergeet niet om het USB-medium VEILIG los te koppelen."
+msgid "Remember to SAFELY remove the USB media."
+msgstr "Vergeet niet om het USB-medium VEILIG te verwijderen."
 
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."

@@ -298,7 +298,7 @@ msgstr ""
 msgid "Try creating the back up again."
 msgstr ""
 
-msgid "Remember to SAFELY disconnect the USB media."
+msgid "Remember to SAFELY remove the USB media."
 msgstr ""
 
 msgid "The backup has been made."
