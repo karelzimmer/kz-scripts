@@ -59,7 +59,7 @@ readonly OPTIONS_SHORT='abcf:grhmuv'
 readonly OPTIONS_LONG="apps,browse,cat,file:,gui,reset,help,manual,usage,\
 version"
 
-# To be like kz-install; there it is a global.
+# To be like kz-install; there it is a global (install on, remove from).
 readonly on='on'
 
 
