@@ -140,7 +140,7 @@ function kz.errmsg() {
 
     kz.debugmsg "$*"
     if ${OPTION_GUI:-false}; then
-        title="$PROGRAM_DESC $(gettext 'error message') ($program_name)"
+        title="$PROGRAM_DESC $(gettext 'error message')"
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
@@ -159,7 +159,7 @@ function kz.infomsg() {
 
     kz.debugmsg "$*"
     if ${OPTION_GUI:-false}; then
-        title="$PROGRAM_DESC $(gettext 'information') ($program_name)"
+        title="$PROGRAM_DESC $(gettext 'information')"
         zenity  --info                  \
                 --width     600         \
                 --height    100         \

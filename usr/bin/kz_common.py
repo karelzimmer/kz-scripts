@@ -133,7 +133,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
-        title: str = f"{PROGRAM_DESC} {_('error message')} ({program_name})"
+        title: str = f"{PROGRAM_DESC} {_('error message')}"
         command: str = f'zenity --error                 \
                                 --width     600         \
                                 --height    100         \
@@ -152,7 +152,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
-        title: str = f"{PROGRAM_DESC} {_('information')} ({program_name})"
+        title: str = f"{PROGRAM_DESC} {_('information')}"
         command: str = f'zenity --info                  \
                                 --width     600         \
                                 --height    100         \

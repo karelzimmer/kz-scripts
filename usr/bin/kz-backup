@@ -512,7 +512,7 @@ $(
     )
 EOF
 
-    title=$(gettext 'Backup home folder')
+    title="$(gettext 'Backup home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing backup (this may take a while)')
     kz.debugmsg "$title"...
     ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
@@ -583,26 +583,22 @@ function term() {
     local users=''
 
     if [[ $BACKUP_RC -ne 0 ]]; then
-        title="$PROGRAM_DESC $(gettext 'error messages') "
-        title+="($program_name)"
+        title="$PROGRAM_DESC $(gettext 'error messages')"
         # Errors also to the log.
         kz.logmsg '==========================================================='
-        kz.logmsg "$title $ERRORLOG:"
+        kz.logmsg "$title ($ERRORLOG):"
         printf '%s' "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
         kz.logmsg '==========================================================='
 
-        text="$(eval_gettext "Backup ended with errors.
+        text="$(gettext 'Backup ended with errors.')
 
-Possible causes:
-Were any files added or deleted during the backup, or
-some files may not be readable or changeable, or
-is there not enough space on \$TARGET.")
+$(gettext 'Possible causes:')
+$(gettext 'Were any files added or deleted during the backup, or')
+$(gettext 'some files may not be readable or changeable, or')
+$(eval_gettext "is there not enough space on \$TARGET.")
 
 $(gettext 'Actions to take:')
-$(gettext 'Please check the error messages after this, or')
-$(eval_gettext "look in file \$ERRORLOG, or")
-$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the \
-Terminal.")
+$(gettext 'Check the error messages after this.')
 $(gettext 'Try creating the back up again.')"
         kz.errmsg "$text"
 

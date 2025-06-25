@@ -411,7 +411,7 @@ function setup_apps() {
         exit 0
     fi
 
-    title=$(gettext 'Set up apps')
+    title="$(gettext 'Set up apps') $(gettext 'progress')"
     text=$(gettext 'Preparing set up')
     kz.debugmsg "$title"...
     ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
@@ -529,8 +529,7 @@ function term() {
     local title=''
 
     if [[ ${FAILED_APPS[*]} ]]; then
-        title="$PROGRAM_DESC $(gettext 'error messages') "
-        title+="($program_name)"
+        title="$PROGRAM_DESC $(gettext 'error messages')"
         # Errors also to the log.
         kz.logmsg '==========================================================='
         kz.logmsg "$title $ERRORLOG:"
@@ -541,10 +540,7 @@ function term() {
 ${FAILED_APPS[*]}
 
 $(gettext 'Actions to take:')
-$(gettext "Please check the error messages after this, or")
-$(eval_gettext "look in file \$ERRORLOG, or")
-$(eval_gettext "use \"journalctl --boot --id=\$PROGRAM_NAME\" in the \
-Terminal.")
+$(gettext 'Check the error messages after this.')
 $(gettext "Try to set up the apps again.")"
         kz.errmsg "$text"
 

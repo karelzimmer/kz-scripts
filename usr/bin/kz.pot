@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-24 13:52+0200\n"
+"POT-Creation-Date: 2025-06-25 08:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -173,6 +173,9 @@ msgstr ""
 msgid "Backup home folder"
 msgstr ""
 
+msgid "progress"
+msgstr ""
+
 msgid ""
 "Usage: kz backup [-g|--gui] [-t|--target <directory>] [-h|--help] [-m|--"
 "manual]\n"
@@ -276,14 +279,20 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
+msgid "Backup ended with errors."
+msgstr ""
+
+msgid "Possible causes:"
+msgstr ""
+
+msgid "Were any files added or deleted during the backup, or"
+msgstr ""
+
+msgid "some files may not be readable or changeable, or"
+msgstr ""
+
 #, sh-format
-msgid ""
-"Backup ended with errors.\n"
-"\n"
-"Possible causes:\n"
-"Were any files added or deleted during the backup, or\n"
-"some files may not be readable or changeable, or\n"
-"is there not enough space on $TARGET."
+msgid "is there not enough space on $TARGET."
 msgstr ""
 
 msgid "Try creating the back up again."
@@ -609,15 +618,7 @@ msgstr ""
 msgid "Actions to take:"
 msgstr ""
 
-msgid "Please check the error messages after this, or"
-msgstr ""
-
-#, sh-format
-msgid "look in file $ERRORLOG, or"
-msgstr ""
-
-#, sh-format
-msgid "use \"journalctl --boot --id=$PROGRAM_NAME\" in the Terminal."
+msgid "Check the error messages after this."
 msgstr ""
 
 msgid "Try to set up the apps again."
@@ -871,14 +872,14 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
+msgid "Restore ended with errors."
+msgstr ""
+
+msgid "Were any files added or deleted during the restore, or"
+msgstr ""
+
 #, sh-format
-msgid ""
-"Restore ended with errors.\n"
-"\n"
-"Possible causes:\n"
-"Were any files added or deleted during the restore, or\n"
-"some files may not be readable or changeable, or\n"
-"is there not enough space on $HOME."
+msgid "is there not enough space on $HOME."
 msgstr ""
 
 msgid "Try restoring the back up again."
