@@ -146,13 +146,6 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --reinstall                     \
             --assume-yes                    \
             "$kz_deb_local_file"
-
-    # Zenity is used to display a dialog when the script is run in a
-    # *graphical* environment, usually already installed. If not, install it.
-    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
-        check_debian_package_manager
-        sudo apt-get install --assume-yes zenity
-    fi
 }
 
 
@@ -194,12 +187,6 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
     fi
 
     sudo dnf "$mode" --assumeyes "$kz_rpm_site_file"
-
-    # Zenity is used to display a dialog when the script is run in a
-    # *graphical* environment, usually already installed. If not, install it.
-    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
-        sudo dnf install --assumeyes zenity
-    fi
 }
 
 
