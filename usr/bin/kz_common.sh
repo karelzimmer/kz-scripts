@@ -198,11 +198,11 @@ function kz.init() {
     set -o pipefail
 
     # Trap signals.
-    trap 'kz.term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
-    trap 'kz.term exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
-    trap 'kz.term sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
-    trap 'kz.term sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
-    trap 'kz.term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
+    trap 'kz.term err     $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' ERR
+    trap 'kz.term exit    $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' EXIT
+    trap 'kz.term sighup  $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGHUP
+    trap 'kz.term sigint  $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGINT
+    trap 'kz.term sigterm $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGTERM
 
     text="==== START logs for script $PROGRAM_NAME ==========================="
     text+="\nStarted ($0 as $USER)."
