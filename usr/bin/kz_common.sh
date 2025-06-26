@@ -198,11 +198,11 @@ function kz.init() {
     set -o pipefail
 
     # Trap signals.
-    trap 'term_sig err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
-    trap 'term_sig exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
-    trap 'term_sig sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
-    trap 'term_sig sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
-    trap 'term_sig sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
+    trap 'kz.term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
+    trap 'kz.term exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
+    trap 'kz.term sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
+    trap 'kz.term sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
+    trap 'kz.term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     text="==== START logs for script $PROGRAM_NAME ==========================="
     text+="\nStarted ($0 as $USER)."
@@ -283,8 +283,8 @@ $(gettext "License CC0 1.0 \
 }
 
 
-# This function controls the termination.
-function term_sig() {
+# This function controls the termination of the scripts.
+function kz.term() {
     local signal=$1
     local -i lineno=$2
     local function=$3
