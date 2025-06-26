@@ -200,6 +200,7 @@ if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-\
 get install --assume-yes gnome-tweaks; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf \
 install --assumeyes gnome-tweaks; fi
+.sp
 .RS
 The "if grep --quiet debian /etc/os-release" will check if it is a Debian or D\
 ebian-based system, such as Ubuntu.

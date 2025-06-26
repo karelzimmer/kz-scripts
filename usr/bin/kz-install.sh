@@ -971,8 +971,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes tree; f
 #------------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gufw; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gufw; fi
-if [[ -n ${DISPLAY-} ]]; then sudo ufw allow ssh; fi
-if [[ -n ${DISPLAY-} ]]; then sudo ufw enable; fi
+sudo ufw allow ssh
+sudo ufw enable
 
 # remove ufw from pc01 pc06 pc07
 #------------------------------------------------------------------------------
