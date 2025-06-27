@@ -454,10 +454,10 @@ msgstr "onbekende optie"
 
 #, sh-format
 msgid "Wait $sleep second for another package manager to finish"
-msgstr "Wacht $sleep seconden totdat een andere pakketbeheerder klaar is"
+msgstr "Wacht $sleep seconde totdat een andere pakketbeheerder klaar is"
 
 msgid "Wait {} second for another package manager to finish"
-msgstr "Wacht {} seconden totdat een andere pakketbeheerder klaar is"
+msgstr "Wacht {} seconde totdat een andere pakketbeheerder klaar is"
 
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
