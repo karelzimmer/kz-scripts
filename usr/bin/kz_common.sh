@@ -198,6 +198,7 @@ function kz.init() {
     set -o pipefail
 
     # Trap signals.
+    # The FUNCNAME variable exists only when a shell function is executing.
     trap 'kz.term err     $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' ERR
     trap 'kz.term exit    $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' EXIT
     trap 'kz.term sighup  $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGHUP
