@@ -53,7 +53,7 @@ function init() {
     set -o nounset
     set -o pipefail
 
-    trap 'rm --force getkz getkz.{1..99} /tmp/kz-get-*' EXIT
+    trap 'rm --force getkz getkz.{1..99} /tmp/kz-get-??????????.deb' EXIT
 }
 
 
