@@ -62,6 +62,7 @@ function process() {
     local text=''
 
     check_input_process_options "$@"
+    become_check || exit 0
     if grep --quiet debian /etc/os-release; then
         install_deb_package
     elif grep --quiet rhel /etc/os-release; then
@@ -71,7 +72,6 @@ function process() {
         printf '%s\n' "$text" >&2
         exit 1
     fi
-    become_check || exit 0
 }
 
 
