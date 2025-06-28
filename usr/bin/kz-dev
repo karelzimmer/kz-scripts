@@ -72,7 +72,7 @@ def process() -> None:
 
     check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
     if not kz.become_check(PROGRAM_NAME, PROGRAM_DESC):
-        term(PROGRAM_NAME, 0)
+        kz.term(PROGRAM_NAME, 0)
 
     try:
         subprocess.run(command2, executable='bash', shell=True, check=True)
