@@ -53,7 +53,7 @@ function init() {
     set -o nounset
     set -o pipefail
 
-    # Trap output signal to clean up temporary files.
+    # Trap exit signal to clean up temporary files.
     trap 'rm --force getkz getkz.{1..99} /tmp/kz-get-??????????.deb' EXIT
 }
 
