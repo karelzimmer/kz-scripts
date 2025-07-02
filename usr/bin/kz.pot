@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-30 12:47+0200\n"
+"POT-Creation-Date: 2025-07-02 13:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,9 +105,11 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
+#: nl.karelzimmer.kz.policy:21
 msgid "Wrapper script for kz_common"
 msgstr ""
 
+#: nl.karelzimmer.kz.policy:22
 msgid "Execute the fuser command requiring root privileges"
 msgstr ""
 
@@ -207,7 +209,7 @@ msgstr ""
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
-#: kz-backup:23 kz-backup:514 kz-menu:74
+#: kz-backup:23 kz-backup:514 kz-menu:74 kz-backup.desktop:11
 msgid "Backup home folder"
 msgstr ""
 
@@ -660,7 +662,8 @@ msgstr ""
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr ""
 
-#: kz-install:23 kz-install:420 kz-menu:76
+#: kz-install:23 kz-install:420 kz-menu:76 kz-install.desktop:11
+#: nl.karelzimmer.kz.policy:33
 msgid "Install apps"
 msgstr ""
 
@@ -847,7 +850,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-menu:22 kz-menu:48
+#: kz-menu:22 kz-menu:48 kz-menu.desktop:11
 msgid "Installation menu"
 msgstr ""
 
@@ -944,15 +947,15 @@ msgstr ""
 msgid "Exit menu"
 msgstr ""
 
-#: kz-menu:75 kz-wifi:30
+#: kz-menu:75 kz-wifi:30 kz-wifi.desktop:11
 msgid "Show WiFi information"
 msgstr ""
 
-#: kz-menu:77 kz-restore:23 kz-restore:249
+#: kz-menu:77 kz-restore:23 kz-restore:249 kz-restore.desktop:11
 msgid "Restore home folder"
 msgstr ""
 
-#: kz-menu:78 kz-setup:23 kz-setup:413
+#: kz-menu:78 kz-setup:23 kz-setup:413 kz-setup.desktop:11
 msgid "Set up apps"
 msgstr ""
 
@@ -1218,9 +1221,11 @@ msgstr ""
 msgid "No WiFi device found."
 msgstr ""
 
+#: nl.karelzimmer.kz.policy:45
 msgid "Wrapper script for kz-wifi"
 msgstr ""
 
+#: nl.karelzimmer.kz.policy:46
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
@@ -1270,60 +1275,69 @@ msgstr ""
 msgid "Check website..."
 msgstr ""
 
+#: nl.karelzimmer.kz.policy:34
 msgid "Authentication is required to install apps"
 msgstr ""
 
+#: kz-backup.desktop:12
 msgid "Make a backup copy of the Home folder"
 msgstr ""
 
+#: kz-cockpit.desktop:11
 msgid "Cockpit"
 msgstr ""
 
+#: kz-cockpit.desktop:12 kz-webmin.desktop:12
 msgid "Manage Linux servers from a web browser"
 msgstr ""
 
 msgid "Spotify"
 msgstr ""
 
+#: kz-spotify.desktop:12
 msgid "Listen to music and podcasts via a web browser"
 msgstr ""
 
+#: kz-zoom.desktop:12
 msgid "Video call with others from a web browser"
 msgstr ""
 
 msgid "Teams"
 msgstr ""
 
+#: kz-teams.desktop:12
 msgid "Collaborate with others from a web browser"
 msgstr ""
 
+#: kz-whatsapp.desktop:12
 msgid "Send and receive messages, photos and videos via a web browser"
 msgstr ""
 
+#: kz-webmin.desktop:11
 msgid "Webmin"
 msgstr ""
 
-msgid "WhatsApp"
-msgstr ""
-
-msgid "Zoom"
-msgstr ""
-
+#: kz-install.desktop:12
 msgid "Install apps and changes system settings"
 msgstr ""
 
+#: kz-menu.desktop:12
 msgid "Execute the kz commands through a menu"
 msgstr ""
 
+#: kz-restore.desktop:12
 msgid "Restores a backup copy of the Home folder"
 msgstr ""
 
+#: kz-setup.desktop:12
 msgid "Set up apps and change user settings"
 msgstr ""
 
+#: kz-vm-hugowin732.desktop:11
 msgid "Start HugoWin732"
 msgstr ""
 
+#: kz-vm-hugowin732.desktop:12
 msgid "Start VirtualBox VM hugowin732"
 msgstr ""
 
@@ -1338,6 +1352,26 @@ msgstr ""
 
 #: kz-install.sh:1005 kz-install.sh:1006 kz-install.sh:1012
 msgid "guest"
+msgstr ""
+
+#: kz-spotify.desktop:11
+msgid "Spotify web app"
+msgstr ""
+
+#: kz-teams.desktop:11
+msgid "Teams web app"
+msgstr ""
+
+#: kz-whatsapp.desktop:11
+msgid "WhatsApp web app"
+msgstr ""
+
+#: kz-wifi.desktop:12
+msgid "Show WiFi details"
+msgstr ""
+
+#: kz-zoom.desktop:11
+msgid "Zoom web app"
 msgstr ""
 
 #: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263
