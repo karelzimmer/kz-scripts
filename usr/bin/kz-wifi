@@ -29,10 +29,14 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz-wifi'
 PROGRAM_DESC: str = _('Show WiFi information')
 
+# FIXME: WEL filenaam + regelnummer on .pot !!
 USAGE: str = _("Usage: kz wifi [-g|--gui] [-h|--help] [-m|--manual] "
                "[-u|--usage]\n"
                "               [-v|--version]")
 
+# FIXME: GEEN filenaam + regelnummer on .pot ??
+# FIXME: Komt door gebruik f-string, hele vetaling 'Usage: kz wifi [<options>]'ontbreekt !!
+# FIXME: Zie: gettext --language=Python --join-existing kz-wifi --output=messages.pot
 HELP: str = (f"{_('Usage: kz wifi [<options>]')}\n\n"
              f'{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
@@ -81,7 +85,8 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
                                        OPTIONS_LONG)
     except getopt.error as err:
         text = f'{program_name}: {err}\n'
-        text += f"{_('Usage:')} {USAGE}"
+        text += _('Usage:')
+        text += f" {USAGE}"
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -119,14 +124,16 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         else:
-            text = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
+            text = f"{PROGRAM_NAME}: getopt: "
+            text += _('internal error')
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
             kz.term(PROGRAM_NAME, 1)
 
     if args:
         text = f"{program_name}: {' '.join(args)}: "
-        text += f"{_('arguments are not allowed')}\n"
-        text += f"{_('Usage:')} {USAGE}"
+        text += _('arguments are not allowed')
+        text += '\n'
+        text += f"{USAGE}"
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -140,7 +147,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     command: str = 'pkexec /usr/bin/kz-wifi-pkexec'
     nmcli_output: bytes
-    text: str = f"{_('Use this data to connect to the wireless network.')}"
+    text: str = _('Use this data to connect to the wireless network.')
 
     if OPTION_GUI:
         try:
