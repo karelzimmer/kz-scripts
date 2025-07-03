@@ -276,7 +276,7 @@ sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 #------------------------------------------------------------------------------
 # Preserve dual monitor settings.
 #------------------------------------------------------------------------------
-if [[ -f $HOME/.config/monitors.xml ]]; then sudo cp --preserve --verbose "$HOME"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f $HOME/.config/monitors.xml ]]; then sudo cp --preserve --verbose "$HOME/.config/monitors.xml" ~gdm/.config/monitors.xml; fi
 if [[ -f  ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
 # remove dual-monitor from pc06

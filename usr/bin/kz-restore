@@ -188,7 +188,7 @@ $USAGE"
         source=$source_argument/$USER@$HOSTNAME
         SOURCE_MEDIUM=$source_argument
     else
-        medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
 
         if [[ -z $medium ]]; then
             text=$(gettext "No USB medium found.
@@ -198,7 +198,7 @@ Connect a USB medium.")
 
             $OPTION_GUI || kz.wait_for_enter
 
-            medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+            medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
 
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
@@ -206,7 +206,7 @@ Connect a USB medium.")
             fi
         fi
 
-        medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
 
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text="$(eval_gettext "Connect only one USB medium.
@@ -219,7 +219,7 @@ Disconnect media via Files.")"
 
             $OPTION_GUI || kz.wait_for_enter
 
-            medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+            medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
 
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 kz.errmsg "$text"
@@ -256,8 +256,8 @@ function restore_backup() {
                 --acls                  \
                 --xattrs                \
                 --verbose               \
-                "$source"/              \
-                "$HOME"/                \
+                "$source/"              \
+                "$HOME/"                \
                 2>> "$ERRORLOG"         |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
@@ -276,8 +276,8 @@ function restore_backup() {
                 --xattrs                \
                 --verbose               \
                 --human-readable        \
-                "$source"/              \
-                "$HOME"/                2>> "$ERRORLOG" || RESTORE_RC=$?
+                "$source/"              \
+                "$HOME/"                2>> "$ERRORLOG" || RESTORE_RC=$?
     fi
 }
 
