@@ -90,7 +90,7 @@ function process() {
     kz.become_check || exit 0
     sudo true
     build_website
-    generate_mo_file
+    generate_gettext_files
     kz.check_repos || OPTION_DEV=true
     build_deb_package
     build_rpm_package
@@ -209,12 +209,11 @@ function build_website() {
 }
 
 
-# This function generates the gettext binary Machine Object (.mo) file from the
-# readable Portable Object (.po) file.
-function generate_mo_file() {
-    local lc_messages_dir=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
-
-    msgfmt --output-file="$lc_messages_dir/kz.mo" "$lc_messages_dir/kz.po"
+# This function generates the gettext readable Portable Object (.po) file and
+# binary Machine Object (.mo) file.
+function generate_gettext_files() {
+    pogen
+    mogen
 }
 
 

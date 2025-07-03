@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-03 08:49+0200\n"
+"POT-Creation-Date: 2025-07-03 09:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -438,15 +438,15 @@ msgstr ""
 msgid "Build website"
 msgstr ""
 
-#: kz-build:227
+#: kz-build:227 kz-build:226
 msgid "Build Debian package"
 msgstr ""
 
-#: kz-build:295
+#: kz-build:295 kz-build:294
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:369 kz-deploy:251
+#: kz-build:369 kz-deploy:251 kz-build:368
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
@@ -539,7 +539,7 @@ msgstr ""
 msgid "Wait {} second for another package manager to finish"
 msgstr ""
 
-#: kz-build:391 kz-get:220
+#: kz-build:391 kz-get:220 kz-build:390
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -1376,6 +1376,6 @@ msgstr ""
 msgid "Zoom web app"
 msgstr ""
 
-#: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263
+#: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263 kz-build:394
 msgid "Complete!"
 msgstr ""

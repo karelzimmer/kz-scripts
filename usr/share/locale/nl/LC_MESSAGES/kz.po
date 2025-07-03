@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-03 08:49+0200\n"
+"POT-Creation-Date: 2025-07-03 09:04+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -472,15 +472,15 @@ msgstr "Controleer scripts (dit kan even duren)..."
 msgid "Build website"
 msgstr "Bouw website"
 
-#: kz-build:227
+#: kz-build:227 kz-build:226
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:295
+#: kz-build:295 kz-build:294
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:369 kz-deploy:251
+#: kz-build:369 kz-deploy:251 kz-build:368
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
@@ -575,7 +575,7 @@ msgstr "Wacht $sleep seconde totdat een andere pakketbeheerder klaar is"
 msgid "Wait {} second for another package manager to finish"
 msgstr "Wacht {} seconde totdat een andere pakketbeheerder klaar is"
 
-#: kz-build:391 kz-get:220
+#: kz-build:391 kz-get:220 kz-build:390
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -1516,6 +1516,6 @@ msgstr "WiFi-details weergeven"
 msgid "Zoom web app"
 msgstr "Zoom web-app"
 
-#: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263
+#: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263 kz-build:394
 msgid "Complete!"
 msgstr "Klaar!"
