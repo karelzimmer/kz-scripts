@@ -212,7 +212,9 @@ function build_website() {
 # This function generates the gettext binary Machine Object (.mo) file from the
 # readable Portable Object (.po) file.
 function generate_gettext_files() {
-    mogen
+    local lc_messages_dir=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+
+    msgfmt --output-file="$lc_messages_dir/kz.mo" "$lc_messages_dir/kz.po"
 }
 
 

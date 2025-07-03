@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-03 09:04+0200\n"
+"POT-Creation-Date: 2025-07-03 09:52+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -18,22 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: kz-backup:44 kz-build:42 kz-check:36 kz-deploy:42 kz-desktop:49
-#: kz-install:49 kz-menu:38 kz-restore:44 kz-setup:49
+#: kz-install:49 kz-menu:38 kz-restore:44 kz-setup:49 kz-wifi:50 kz-wifi:64
 msgid "  -h, --help     show this help text"
 msgstr "  -h, --help     toon deze hulptekst"
 
 #: kz-backup:45 kz-build:43 kz-check:37 kz-deploy:43 kz-desktop:50
-#: kz-install:50 kz-menu:39 kz-restore:45 kz-setup:50
+#: kz-install:50 kz-menu:39 kz-restore:45 kz-setup:50 kz-wifi:52 kz-wifi:65
 msgid "  -m, --manual   show manual page"
 msgstr "  -m, --manual   toon handleidingpagina"
 
 #: kz-backup:46 kz-build:44 kz-check:38 kz-deploy:44 kz-desktop:51
-#: kz-install:51 kz-menu:40 kz-restore:46 kz-setup:51
+#: kz-install:51 kz-menu:40 kz-restore:46 kz-setup:51 kz-wifi:54 kz-wifi:66
 msgid "  -u, --usage    show a short usage summary"
 msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
 
 #: kz-backup:47 kz-build:45 kz-check:39 kz-deploy:45 kz-desktop:52
-#: kz-install:52 kz-menu:41 kz-restore:47 kz-setup:52
+#: kz-install:52 kz-menu:41 kz-restore:47 kz-setup:52 kz-wifi:56 kz-wifi:67
 msgid "  -v, --version  show program version"
 msgstr "  -v, --version  toon de programmaversie"
 
@@ -69,6 +69,7 @@ msgstr "Programma $PROGRAM_NAME is onderbroken."
 
 #: kz-backup:152 kz-build:154 kz-check:199 kz-deploy:135 kz-desktop:196
 #: kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236 kz-wifi:128
+#: kz-wifi:129 kz-wifi:136 kz-wifi:149
 msgid "internal error"
 msgstr "interne fout"
 
@@ -146,7 +147,7 @@ msgstr "Typ '{} --manual' of 'man {}'{} "
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz-wifi:88
+#: kz-wifi:88 kz-wifi:89 kz-wifi:96 kz-wifi:109
 msgid "Usage:"
 msgstr "Gebruik:"
 
@@ -240,15 +241,17 @@ msgid "Usage: kz backup [<options>]"
 msgstr "Gebruik: kz backup [<opties>]"
 
 #: kz-backup:36 kz-build:40 kz-check:35 kz-deploy:40 kz-desktop:37 kz-get:33
-#: kz-install:37 kz-menu:35 kz-restore:36 kz-setup:37
+#: kz-install:37 kz-menu:35 kz-restore:36 kz-setup:37 kz-wifi:44 kz-wifi:61
 msgid "Options:"
 msgstr "Opties:"
 
-#: kz-backup:40 kz-install:46 kz-menu:36 kz-restore:40 kz-setup:46
+#: kz-backup:40 kz-install:46 kz-menu:36 kz-restore:40 kz-setup:46 kz-wifi:46
+#: kz-wifi:62
 msgid "  -g, --gui      run in graphical mode,"
 msgstr "  -g, --gui      draai in grafische modus,"
 
-#: kz-backup:41 kz-install:47 kz-menu:37 kz-restore:41 kz-setup:47
+#: kz-backup:41 kz-install:47 kz-menu:37 kz-restore:41 kz-setup:47 kz-wifi:48
+#: kz-wifi:63
 msgid "                 requires a desktop environment"
 msgstr "                 vereist een desktopomgeving"
 
@@ -270,7 +273,8 @@ msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
 #: kz-backup:160 kz-build:162 kz-check:207 kz-deploy:143 kz-desktop:204
-#: kz-get:106 kz-menu:183 kz-restore:161 kz-wifi:134
+#: kz-get:106 kz-menu:183 kz-restore:161 kz-wifi:134 kz-wifi:135 kz-wifi:142
+#: kz-wifi:155
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -472,15 +476,15 @@ msgstr "Controleer scripts (dit kan even duren)..."
 msgid "Build website"
 msgstr "Bouw website"
 
-#: kz-build:227 kz-build:226
+#: kz-build:227 kz-build:226 kz-build:225
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:295 kz-build:294
+#: kz-build:295 kz-build:294 kz-build:293
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:369 kz-deploy:251 kz-build:368
+#: kz-build:369 kz-deploy:251 kz-build:368 kz-build:367
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
@@ -575,7 +579,7 @@ msgstr "Wacht $sleep seconde totdat een andere pakketbeheerder klaar is"
 msgid "Wait {} second for another package manager to finish"
 msgstr "Wacht {} seconde totdat een andere pakketbeheerder klaar is"
 
-#: kz-build:391 kz-get:220 kz-build:390
+#: kz-build:391 kz-get:220 kz-build:390 kz-build:389
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -1347,15 +1351,17 @@ msgstr ""
 "Gebruik: kz wifi [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage]\n"
 "                 [-v|--version]"
 
+#: kz-wifi:40 kz-wifi:57
 msgid "Usage: kz wifi [<options>]"
 msgstr "Gebruik: kz wifi [<opties>]"
 
-#: kz-wifi:150
+#: kz-wifi:150 kz-wifi:151 kz-wifi:158 kz-wifi:171
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:153 kz-wifi:164 kz-wifi:160 kz-wifi:171
+#: kz-wifi:153 kz-wifi:164 kz-wifi:160 kz-wifi:171 kz-wifi:161 kz-wifi:172
+#: kz-wifi:168 kz-wifi:179 kz-wifi:181 kz-wifi:192
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
@@ -1517,5 +1523,6 @@ msgid "Zoom web app"
 msgstr "Zoom web-app"
 
 #: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263 kz-build:394
+#: kz-build:393
 msgid "Complete!"
 msgstr "Klaar!"
