@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-02 13:45+0200\n"
+"POT-Creation-Date: 2025-07-03 08:49+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -68,7 +68,7 @@ msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
 
 #: kz-backup:152 kz-build:154 kz-check:199 kz-deploy:135 kz-desktop:196
-#: kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236
+#: kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236 kz-wifi:128
 msgid "internal error"
 msgstr "interne fout"
 
@@ -146,6 +146,7 @@ msgstr "Typ '{} --manual' of 'man {}'{} "
 msgid "for more information."
 msgstr "voor meer informatie."
 
+#: kz-wifi:88
 msgid "Usage:"
 msgstr "Gebruik:"
 
@@ -269,7 +270,7 @@ msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
 #: kz-backup:160 kz-build:162 kz-check:207 kz-deploy:143 kz-desktop:204
-#: kz-get:106 kz-menu:183 kz-restore:161
+#: kz-get:106 kz-menu:183 kz-restore:161 kz-wifi:134
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -715,7 +716,8 @@ msgstr ""
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr "Gebruik \"gsettings set <wijziging>\" bij wijzigingen."
 
-#: kz-install:23 kz-install:420 kz-menu:76 kz-install.desktop:11 nl.karelzimmer.kz.policy:33
+#: kz-install:23 kz-install:420 kz-menu:76 kz-install.desktop:11
+#: nl.karelzimmer.kz.policy:33
 msgid "Install apps"
 msgstr "Apps installeren"
 
@@ -1337,7 +1339,7 @@ msgstr "UPGRADEN -- 2/3"
 msgid "CLEANUP -- 3/3"
 msgstr "OPRUIMEN -- 3/3"
 
-#: kz-wifi:32
+#: kz-wifi:32 kz-wifi:33
 msgid ""
 "Usage: kz wifi [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage]\n"
 "               [-v|--version]"
@@ -1348,11 +1350,12 @@ msgstr ""
 msgid "Usage: kz wifi [<options>]"
 msgstr "Gebruik: kz wifi [<opties>]"
 
+#: kz-wifi:150
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:153 kz-wifi:164
+#: kz-wifi:153 kz-wifi:164 kz-wifi:160 kz-wifi:171
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
