@@ -81,7 +81,7 @@ def process() -> None:
                 if not os.path.exists(exec):
                     text = f"kz: {sys.argv[arg_num]}: "
                     text += f"{_('command does not exist')}\n"
-                    text += f"{_('Usage:')} {USAGE}"
+                    text += f"{USAGE}"
                     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
                     kz.term(PROGRAM_NAME, 1)
         else:
@@ -90,7 +90,7 @@ def process() -> None:
 
     if exec == '/usr/bin/kz':
         text = f"{PROGRAM_NAME}: {_('command is required')}\n"
-        text += f"{_('Usage:')} {USAGE}"
+        text += f"{USAGE}"
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
     else:
@@ -127,8 +127,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
                                        OPTIONS_LONG)
     except getopt.error as err:
-        text = f'{program_name}: {err}\n'
-        text += f"{_('Usage:')} {USAGE}"
+        text = f'{program_name}: {err}\n{USAGE}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -162,12 +161,12 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         else:
-            text = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
+            text = PROGRAM_NAME + ': getopt: ' + _('internal error')
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
             kz.term(PROGRAM_NAME, 1)
 
     if args:
-        # Check for arguments N/A for this script, is handled earlier.
+        # Check for arguments n/a for this script, is handled earlier.
         None
 
 
