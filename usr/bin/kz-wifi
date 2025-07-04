@@ -157,7 +157,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
             text = _('No WiFi device found.')
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
         else:
-            text = str(nmcli_output.decode("utf-8")) + text
+            text = str(nmcli_output.decode('utf-8')) + text
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
     else:
         try:
