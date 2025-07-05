@@ -135,8 +135,8 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.term(PROGRAM_NAME, 1)
 
     if args:
-        text = program_name + ': ' + ' '.join(args) + ': '
-        text += _('arguments are not allowed') + '\n' + USAGE
+        text = program_name + ': ' + ' '.join(args) + ': ' + \
+            _('arguments are not allowed') + '\n' + USAGE
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
