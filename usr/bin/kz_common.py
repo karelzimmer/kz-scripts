@@ -109,8 +109,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
             break
         else:
             text = _('Wait {} second for another package manager to finish').\
-                format(sleep)
-            text += '...'
+                format(sleep) + '...'
             infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
             time.sleep(sleep)
 
@@ -132,8 +131,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
-        program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
-        title: str = f"{PROGRAM_DESC} {_('error message')}"
+        title: str = PROGRAM_DESC + ' ' + _('error message')
         command: str = f'zenity --error                 \
                                 --width     600         \
                                 --height    100         \
@@ -151,8 +149,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
-        program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
-        title: str = f"{PROGRAM_DESC} {_('information')}"
+        title: str = PROGRAM_DESC + ' ' + _('information')
         command: str = f'zenity --info                  \
                                 --width     600         \
                                 --height    100         \
@@ -173,18 +170,19 @@ def init(PROGRAM_NAME: str) -> None:
     if subprocess.run('type systemctl', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode != 0:
-        print(f"\033[1;31m{_('fatal: no systemd available')}\033[0m",
-              file=sys. stderr)
+        print('\033[1;31m' + _('fatal: no systemd available') + '\033[0m',
+              file=sys.stderr)
         sys.exit(1)
 
     # Check if os release is available.
     if not os.path.exists('/etc/os-release'):
-        print(f"\033[1;31m{_('fatal: no os release available')}\033[0m",
-              file=sys. stderr)
+        print('\033[1;31m' + _('fatal: no os release available') + '\033[0m',
+              file=sys.stderr)
         sys.exit(1)
 
     text = f'==== START logs for script {PROGRAM_NAME} ======================='
-    text += f"\nStarted ({' '.join(sys.argv)} as {os.getlogin()})."
+    logmsg(PROGRAM_NAME, text)
+    text = f"Started ({' '.join(sys.argv)} as {os.getlogin()})."
     logmsg(PROGRAM_NAME, text)
 
 
@@ -207,14 +205,14 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
-        yelp_man_url = f"{_(', or see the ')}"
-        yelp_man_url += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{program_name}(1)'
-        yelp_man_url += f" {_('man page')}\x1b]8;;\x1b\\"
+        yelp_man_url = _(', or see the ') + '\x1b]8;;man:' + PROGRAM_NAME + \
+            '(1)\x1b\\' + program_name + '(1) ' + _('man page') + \
+            '\x1b]8;;\x1b\\'
 
-    text = (f'{HELP}\n\n'
-            f'''{_("Type '{} --manual' or 'man {}'{} ").
-                 format(program_name, program_name, yelp_man_url)}'''
-            f"{_('for more information.')}")
+    text = HELP + '\n\n' + \
+        _("Type '{} --manual' or 'man {}'{} ").\
+        format(program_name, program_name, yelp_man_url) + \
+        _('for more information.')
     infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 
@@ -259,9 +257,8 @@ def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str = ''
 
-    text = (f"{USAGE}\n\n"
-            f'''{_("Type '{} --help' for more information.").
-                 format(program_name)}''')
+    text = USAGE + '\n\n' + _("Type '{} --help' for more information.").\
+        format(program_name)
     infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 
@@ -290,10 +287,10 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
         term(PROGRAM_NAME, 1)
     finally:
-        text = f"{_('kz version 4.2.1 (built {}).').format(build_id)}\n\n"
-        text += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
-        text += _('License CC0 1.0 \
-<https://creativecommons.org/publicdomain/zero/1.0>.')
+        text = _('kz version 4.2.1 (built {}).').format(build_id) + '\n\n' + \
+            _('Written by Karel Zimmer <info@karelzimmer.nl>.') + '\n' + \
+            _('License CC0 1.0 ' +
+                '<https://creativecommons.org/publicdomain/zero/1.0>.')
         infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 
@@ -307,8 +304,9 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
     if rc == 0:
         status = '0/SUCCESS'
 
-    text = f'Ended (code=exited, status={status}).\n'
-    text += f'==== END logs for script {PROGRAM_NAME} ========================'
+    text = f'Ended (code=exited, status={status}).'
+    logmsg(PROGRAM_NAME, text)
+    text = f'==== END logs for script {PROGRAM_NAME} ========================='
     logmsg(PROGRAM_NAME, text)
 
     if rc == 0:
@@ -325,7 +323,7 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     text: str = ''
 
     try:
-        text = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
+        text = '\n' + _('Press the Enter key to continue [Enter]: ') + '\n'
         debugmsg(PROGRAM_NAME, text)
         input(text)
     except KeyboardInterrupt:

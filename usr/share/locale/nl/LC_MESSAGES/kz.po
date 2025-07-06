@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-02 13:45+0200\n"
+"Report-Msgid-Bugs-To: info@karelzimmer.nl\n"
+"POT-Creation-Date: 2025-07-06 17:00+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -18,38 +18,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: kz-backup:44 kz-build:42 kz-check:36 kz-deploy:42 kz-desktop:49
-#: kz-install:49 kz-menu:38 kz-restore:44 kz-setup:49
+#: kz-install:49 kz-menu:38 kz-restore:44 kz-setup:49 kz-wifi:50 kz-wifi:64
+#: kz-wifi:44 kz-dev:43 kz-update:41 kz:43
 msgid "  -h, --help     show this help text"
 msgstr "  -h, --help     toon deze hulptekst"
 
 #: kz-backup:45 kz-build:43 kz-check:37 kz-deploy:43 kz-desktop:50
-#: kz-install:50 kz-menu:39 kz-restore:45 kz-setup:50
+#: kz-install:50 kz-menu:39 kz-restore:45 kz-setup:50 kz-wifi:52 kz-wifi:65
+#: kz-wifi:45 kz-dev:44 kz-update:42 kz:44
 msgid "  -m, --manual   show manual page"
 msgstr "  -m, --manual   toon handleidingpagina"
 
 #: kz-backup:46 kz-build:44 kz-check:38 kz-deploy:44 kz-desktop:51
-#: kz-install:51 kz-menu:40 kz-restore:46 kz-setup:51
+#: kz-install:51 kz-menu:40 kz-restore:46 kz-setup:51 kz-wifi:54 kz-wifi:66
+#: kz-wifi:46 kz-dev:45 kz-update:43 kz:45
 msgid "  -u, --usage    show a short usage summary"
 msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
 
 #: kz-backup:47 kz-build:45 kz-check:39 kz-deploy:45 kz-desktop:52
-#: kz-install:52 kz-menu:41 kz-restore:47 kz-setup:52
+#: kz-install:52 kz-menu:41 kz-restore:47 kz-setup:52 kz-wifi:56 kz-wifi:67
+#: kz-wifi:47 kz-dev:46 kz-update:44 kz:46
 msgid "  -v, --version  show program version"
 msgstr "  -v, --version  toon de programmaversie"
 
-#: kz_common.sh:183
+#: kz_common.sh:183 kz_common.py:174 kz_common.py:173
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.sh:190
+#: kz_common.sh:190 kz_common.py:180 kz_common.py:179
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz-get:72 kz-update:81
+#: kz-get:72 kz-update:81 kz-update:87
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
-#: kz_common.sh:402
+#: kz_common.sh:402 kz_common.py:325 kz_common.py:326 kz_common.sh:404
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -57,37 +61,32 @@ msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
-#: kz_common.sh:371
+#: kz_common.sh:371 kz_common.sh:372
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:390
+#: kz_common.sh:390 kz_common.sh:392
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
 
 #: kz-backup:152 kz-build:154 kz-check:199 kz-deploy:135 kz-desktop:196
-#: kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236
+#: kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236 kz-wifi:128
+#: kz-wifi:129 kz-wifi:136 kz-wifi:149 kz:164 kz-dev:142 kz-update:133
+#: kz-wifi:127 kz-dev:148 kz-update:139 kz:171 kz:170 kz-deploy:134
 msgid "internal error"
 msgstr "interne fout"
 
-msgid ""
-"If the package manager gives apt errors, launch a Terminal window and "
-"execute:"
-msgstr ""
-"Als de pakketbeheerder apt foutmeldingen geeft, start een Terminalvenster en "
-"voer uit:"
-
-#: kz_common.sh:227
+#: kz_common.sh:227 kz_common.py:208 kz_common.sh:228
 msgid ", or see the "
 msgstr ", of zie de "
 
-#: kz_common.sh:229
+#: kz_common.sh:229 kz_common.py:209 kz_common.sh:230
 msgid "man page"
 msgstr "man-pagina"
 
-#: kz_common.sh:232
+#: kz_common.sh:232 kz_common.sh:233
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
@@ -96,16 +95,16 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man_url voor meer "
 "informatie."
 
-#: kz_common.sh:259
+#: kz_common.sh:259 kz_common.sh:260
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:280
+#: kz_common.sh:280 kz_common.py:291 kz_common.sh:281
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:295 kz_common.sh:281
+#: kz_common.py:295 kz_common.sh:281 kz_common.py:292 kz_common.sh:282
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
@@ -118,11 +117,11 @@ msgstr "Wrapper-script voor kz_common"
 msgid "Execute the fuser command requiring root privileges"
 msgstr "Voer de opdracht fuser uit waarvoor root-rechten nodig zijn"
 
-#: kz_common.sh:164
+#: kz_common.sh:164 kz_common.py:153 kz_common.py:152
 msgid "information"
 msgstr "informatie"
 
-#: kz_common.sh:145
+#: kz_common.sh:145 kz_common.py:135 kz_common.py:134
 msgid "error message"
 msgstr "foutmelding"
 
@@ -130,37 +129,47 @@ msgstr "foutmelding"
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz:102 kz_common.py:56 kz_common.py:332 kz-dev:80
+#: kz:102 kz_common.py:56 kz_common.py:332 kz-dev:80 kz-dev:86 kz:109
+#: kz_common.py:329 kz:108 kz_common.py:330
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz:108 kz_common.py:62 kz_common.py:240 kz_common.py:249 kz_common.py:289
 #: kz_common.py:338 kz-dev:86 kz-dev:185 kz-dev:200 kz-dev:225 kz-dev:236
-#: kz-dev:249 kz-dev:267 kz-dev:285 kz-update:252
+#: kz-dev:249 kz-dev:267 kz-dev:285 kz-update:252 kz-dev:183 kz-dev:198
+#: kz-dev:223 kz-dev:234 kz-dev:247 kz-dev:265 kz-dev:283 kz-update:250
+#: kz-dev:92 kz-dev:189 kz-dev:204 kz-dev:229 kz-dev:240 kz-dev:253 kz-dev:271
+#: kz-dev:289 kz-update:256 kz:115 kz_common.py:238 kz_common.py:247
+#: kz_common.py:286 kz_common.py:335 kz:114 kz_common.py:336
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
+#: kz_common.py:213
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
+#: kz_common.py:215
 msgid "for more information."
 msgstr "voor meer informatie."
 
+#: kz-wifi:88 kz-wifi:89 kz-wifi:96 kz-wifi:109
 msgid "Usage:"
 msgstr "Gebruik:"
 
+#: kz_common.py:260
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:283 kz_common.sh:272
+#: kz_common.py:283 kz_common.sh:272 kz_common.py:280 kz_common.sh:273
 msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
-#: kz_common.sh:278
+#: kz_common.sh:278 kz_common.sh:279
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
+#: kz_common.py:290
 #, sh-format
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
@@ -177,42 +186,47 @@ msgstr ""
 "Gebruik: kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage]\n"
 "            [-v|--version] <opdracht> [<argumenten>]"
 
+#: kz:37
 msgid "Usage: kz [<options>] <command> [<arguments>]"
 msgstr "Gebruik: kz [<opties>] <opdracht> [<argumenten>]"
 
+#: kz:42
 msgid "  -l, --list     show available commands"
 msgstr "  -l, --list     toon beschikbare opdrachten"
 
-#: kz-install:54 kz-setup:54
+#: kz-install:54 kz-setup:54 kz:48
 msgid "Arguments:"
 msgstr "Argumenten:"
 
+#: kz:49
 msgid "  <command>      execute command"
 msgstr "  <opdracht>     voer opdracht uit"
 
+#: kz:50
 msgid "  <arguments>    arguments for command"
 msgstr "  <argumenten>   argumenten voor opdracht"
 
-msgid "invalid option"
-msgstr "ongeldige optie"
-
+#: kz:99 kz:98
 msgid "command is required"
 msgstr "opdracht is vereist"
 
+#: kz:90
 msgid "command does not exist"
 msgstr "opdracht bestaat niet"
 
+#: kz:186 kz:185
 msgid "The following commands are available:"
 msgstr "De volgende opdrachten zijn beschikbaar:"
 
+#: kz:187 kz:186
 msgid "NUM  COMMAND"
 msgstr "NUM  OPDRACHT"
 
-#: kz:201
+#: kz:201 kz:200 kz:207 kz:206
 msgid "Use \"man kz\" for available commands."
 msgstr "Gebruik \"man kz\" voor beschikbare opdrachten."
 
-#: kz:203
+#: kz:203 kz:202 kz:209 kz:208
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
@@ -239,15 +253,18 @@ msgid "Usage: kz backup [<options>]"
 msgstr "Gebruik: kz backup [<opties>]"
 
 #: kz-backup:36 kz-build:40 kz-check:35 kz-deploy:40 kz-desktop:37 kz-get:33
-#: kz-install:37 kz-menu:35 kz-restore:36 kz-setup:37
+#: kz-install:37 kz-menu:35 kz-restore:36 kz-setup:37 kz-wifi:44 kz-wifi:61
+#: kz-wifi:41 kz-dev:42 kz-update:40 kz:41
 msgid "Options:"
 msgstr "Opties:"
 
-#: kz-backup:40 kz-install:46 kz-menu:36 kz-restore:40 kz-setup:46
+#: kz-backup:40 kz-install:46 kz-menu:36 kz-restore:40 kz-setup:46 kz-wifi:46
+#: kz-wifi:62 kz-wifi:42
 msgid "  -g, --gui      run in graphical mode,"
 msgstr "  -g, --gui      draai in grafische modus,"
 
-#: kz-backup:41 kz-install:47 kz-menu:37 kz-restore:41 kz-setup:47
+#: kz-backup:41 kz-install:47 kz-menu:37 kz-restore:41 kz-setup:47 kz-wifi:48
+#: kz-wifi:63 kz-wifi:43
 msgid "                 requires a desktop environment"
 msgstr "                 vereist een desktopomgeving"
 
@@ -269,7 +286,9 @@ msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
 #: kz-backup:160 kz-build:162 kz-check:207 kz-deploy:143 kz-desktop:204
-#: kz-get:106 kz-menu:183 kz-restore:161
+#: kz-get:106 kz-menu:183 kz-restore:161 kz-wifi:134 kz-wifi:135 kz-wifi:142
+#: kz-wifi:155 kz-dev:148 kz-update:139 kz-wifi:133 kz-dev:154 kz-update:145
+#: kz-deploy:142
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -418,10 +437,6 @@ msgstr "De back-up is gemaakt."
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
 
-#: kz-deploy:155
-msgid "BUILD -- 1/3"
-msgstr "BOUWEN -- 1/3"
-
 #: kz-build:27 kz-deploy:157
 msgid "Build website including kz packages"
 msgstr "Website bouwen inclusief kz pakketten"
@@ -438,19 +453,19 @@ msgstr ""
 msgid "Usage: kz build [<options>]"
 msgstr "Gebruik: kz build [<opties>]"
 
-#: kz-build:86 kz-check:73 kz-deploy:70 kz-dev:69
+#: kz-build:86 kz-check:73 kz-deploy:70 kz-dev:69 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
-#: kz-check:489 kz-deploy:274
+#: kz-check:489 kz-deploy:274 kz-deploy:257
 msgid "Please check all the messages above and fix them if necessary."
 msgstr "Controleer alle meldingen hierboven en los ze op indien nodig."
 
-#: kz-deploy:171
-msgid "CHECK -- 2/3"
-msgstr "CONTROLEREN -- 2/3"
+#: kz-deploy:171 kz-deploy:154
+msgid "CHECK -- 1/2"
+msgstr "CONTROLEREN -- 1/2"
 
-#: kz-check:23 kz-deploy:196
+#: kz-check:23 kz-deploy:196 kz-deploy:179
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 
@@ -471,15 +486,22 @@ msgstr "Controleer scripts (dit kan even duren)..."
 msgid "Build website"
 msgstr "Bouw website"
 
-#: kz-build:227
+#: kz-build:226 kz-build:230
+msgid "Generate gettext files"
+msgstr "Genereer gettext-bestanden"
+
+#: kz-build:227 kz-build:226 kz-build:225 kz-build:290 kz-build:291
+#: kz-build:293 kz-build:303
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:295
+#: kz-build:295 kz-build:294 kz-build:293 kz-build:358 kz-build:359
+#: kz-build:361 kz-build:371
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:369 kz-deploy:251
+#: kz-build:369 kz-deploy:251 kz-build:368 kz-build:367 kz-build:432
+#: kz-build:433 kz-build:435 kz-build:445 kz-deploy:234
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
@@ -517,19 +539,19 @@ msgstr "Controleer of alle repo's schoon zijn"
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz-deploy:185
-msgid "DEPLOY -- 3/3"
-msgstr "DISTRIBUEREN -- 3/3"
+#: kz-deploy:185 kz-deploy:168
+msgid "DEPLOY -- 2/2"
+msgstr "DISTRIBUEREN -- 2/2"
 
-#: kz-deploy:219
+#: kz-deploy:219 kz-deploy:202
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:237
+#: kz-deploy:237 kz-deploy:220
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-#: kz-deploy:261
+#: kz-deploy:261 kz-deploy:244
 msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
@@ -574,7 +596,8 @@ msgstr "Wacht $sleep seconde totdat een andere pakketbeheerder klaar is"
 msgid "Wait {} second for another package manager to finish"
 msgstr "Wacht {} seconde totdat een andere pakketbeheerder klaar is"
 
-#: kz-build:391 kz-get:220
+#: kz-build:391 kz-get:220 kz-build:390 kz-build:389 kz-build:454 kz-build:455
+#: kz-build:457 kz-build:467
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -604,33 +627,31 @@ msgstr "Ontwikkelomgeving bouwen"
 msgid "Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr "Gebruik: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
+#: kz-dev:38 kz:37
 msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
 
-#: kz-dev:163
+#: kz-dev:163 kz-dev:161 kz-dev:167
 msgid "Check dependencies..."
 msgstr "Controleer afhankelijkheden..."
 
-#: kz-dev:215
+#: kz-dev:215 kz-dev:213 kz-dev:219
 msgid "Clone repos..."
 msgstr "Clone repo's..."
 
-#: kz-dev:255
+#: kz-dev:255 kz-dev:253 kz-dev:259
 msgid "Pull repos..."
 msgstr "Pull repo's..."
 
-#: kz-dev:273
+#: kz-dev:273 kz-dev:271 kz-dev:277
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-msgid "Download website"
-msgstr "Download website"
-
-#: kz-deploy:223
+#: kz-deploy:223 kz-dev:312 kz-deploy:206
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
-#: kz-dev:322
+#: kz-dev:322 kz-dev:320 kz-dev:325
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
@@ -715,7 +736,8 @@ msgstr ""
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr "Gebruik \"gsettings set <wijziging>\" bij wijzigingen."
 
-#: kz-install:23 kz-install:420 kz-menu:76 kz-install.desktop:11 nl.karelzimmer.kz.policy:33
+#: kz-install:23 kz-install:420 kz-menu:76 kz-install.desktop:11
+#: nl.karelzimmer.kz.policy:33
 msgid "Install apps"
 msgstr "Apps installeren"
 
@@ -758,9 +780,6 @@ msgstr ""
 #: kz-install:48
 msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
-
-msgid "Type 'kz install --apps' for available apps."
-msgstr "Typ 'kz install --apps' voor beschikbare apps."
 
 #: kz-install:55 kz-setup:55
 msgid "  <app>          process specified apps"
@@ -858,13 +877,6 @@ msgstr "Controleer de foutmeldingen hierna."
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-msgid ""
-"Log out of the computer to finish setting up the apps and changing user "
-"settings."
-msgstr ""
-"Meld u af bij de computer om het instellen van de apps en het wijzigen van "
-"de gebruikersinstellingen te voltooien."
-
 #: kz-install:594 kz-setup:567
 #, sh-format
 msgid "Apps $operation completed."
@@ -890,10 +902,6 @@ msgstr ""
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
-#, sh-format
-msgid "Apps install completed."
-msgstr "Apps installeren is voltooid."
-
 #: kz-install:599
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
@@ -910,9 +918,6 @@ msgstr "Onbekend script.  Functie check_code kan scriptcode niet controleren."
 #, sh-format
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr "Een regel is langer dan $max_line_length ($max_line_length_found)."
-
-msgid "Faulty line(s) found."
-msgstr "Foutieve regel(s) gevonden."
 
 #: kz-check:451
 msgid "Flagged annotation found."
@@ -1142,9 +1147,6 @@ msgstr "Nee"
 msgid "$prompt [Y/n]: "
 msgstr "$prompt [J/n]: "
 
-msgid "The following has been executed:"
-msgstr "Het volgende is uitgevoerd:"
-
 #: kz-restore:27
 msgid ""
 "Usage: kz restore [-g|--gui] [-s|--source <directory>] [-h|--help] [-m|--"
@@ -1181,9 +1183,6 @@ msgstr ""
 #: kz-restore:250
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
-
-msgid "Set user photo"
-msgstr "Gebruikersfoto instellen"
 
 #: kz-backup:428
 msgid ""
@@ -1305,9 +1304,6 @@ msgstr ""
 "Gebruik \"kz setup --browse\" om de inhoud van het standaard instelbestand "
 "te bekijken."
 
-msgid "Type 'kz setup --apps' for available apps."
-msgstr "Typ 'kz setup --apps' voor beschikbare apps."
-
 #: kz-setup:561
 msgid "set up"
 msgstr "instellen"
@@ -1325,19 +1321,23 @@ msgid "Usage: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 "Gebruik: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
+#: kz-update:36
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
+#: kz-update:150 kz-update:195 kz-update:156 kz-update:201
 msgid "UPDATE -- 1/3"
 msgstr "BIJWERKEN -- 1/3"
 
+#: kz-update:162 kz-update:207 kz-update:168 kz-update:213
 msgid "UPGRADE -- 2/3"
 msgstr "UPGRADEN -- 2/3"
 
+#: kz-update:181 kz-update:226 kz-update:187 kz-update:232
 msgid "CLEANUP -- 3/3"
 msgstr "OPRUIMEN -- 3/3"
 
-#: kz-wifi:32
+#: kz-wifi:32 kz-wifi:33
 msgid ""
 "Usage: kz wifi [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage]\n"
 "               [-v|--version]"
@@ -1345,14 +1345,17 @@ msgstr ""
 "Gebruik: kz wifi [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage]\n"
 "                 [-v|--version]"
 
+#: kz-wifi:40 kz-wifi:57 kz-wifi:37
 msgid "Usage: kz wifi [<options>]"
 msgstr "Gebruik: kz wifi [<opties>]"
 
+#: kz-wifi:150 kz-wifi:151 kz-wifi:158 kz-wifi:171 kz-wifi:147
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:153 kz-wifi:164
+#: kz-wifi:153 kz-wifi:164 kz-wifi:160 kz-wifi:171 kz-wifi:161 kz-wifi:172
+#: kz-wifi:168 kz-wifi:179 kz-wifi:181 kz-wifi:192 kz-wifi:157
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
@@ -1428,9 +1431,6 @@ msgstr "Cockpit"
 msgid "Manage Linux servers from a web browser"
 msgstr "Beheer Linux-servers vanuit een webbrowser"
 
-msgid "Spotify"
-msgstr "Spotify"
-
 #: kz-spotify.desktop:12
 msgid "Listen to music and podcasts via a web browser"
 msgstr "Luister naar muziek en podcasts via een webbrowser"
@@ -1438,9 +1438,6 @@ msgstr "Luister naar muziek en podcasts via een webbrowser"
 #: kz-zoom.desktop:12
 msgid "Video call with others from a web browser"
 msgstr "Videogesprek met anderen vanuit een webbrowser"
-
-msgid "Teams"
-msgstr "Teams"
 
 #: kz-teams.desktop:12
 msgid "Collaborate with others from a web browser"
@@ -1513,6 +1510,8 @@ msgstr "WiFi-details weergeven"
 msgid "Zoom web app"
 msgstr "Zoom web-app"
 
-#: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263
+#: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263 kz-build:394
+#: kz-build:393 kz-update:261 kz-build:458 kz-build:459 kz-build:461
+#: kz-build:471 kz-update:267 kz-deploy:262
 msgid "Complete!"
 msgstr "Klaar!"

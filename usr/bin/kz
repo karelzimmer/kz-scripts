@@ -33,17 +33,24 @@ PROGRAM_DESC: str = _('Execute the kz command')
 USAGE: str = _("Usage: kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage]\n"
                "          [-v|--version] <command> [<arguments>]")
 
-HELP: str = (f"{_('Usage: kz [<options>] <command> [<arguments>]')}\n\n"
-             f'{PROGRAM_DESC}.\n\n'
-             f"{_('Options:')}\n"
-             f"{_('  -l, --list     show available commands')}\n"
-             f"{_('  -h, --help     show this help text')}\n"
-             f"{_('  -m, --manual   show manual page')}\n"
-             f"{_('  -u, --usage    show a short usage summary')}\n"
-             f"{_('  -v, --version  show program version')}\n\n"
-             f"{_('Arguments:')}\n"
-             f"{_('  <command>      execute command')}\n"
-             f"{_('  <arguments>    arguments for command')}")
+HELP_LINES: list[str] = [
+    _('Usage: kz [<options>] <command> [<arguments>]'),
+    '',
+    PROGRAM_DESC + '.',
+    '',
+    _('Options:'),
+    _('  -l, --list     show available commands'),
+    _('  -h, --help     show this help text'),
+    _('  -m, --manual   show manual page'),
+    _('  -u, --usage    show a short usage summary'),
+    _('  -v, --version  show program version'),
+    '',
+    _('Arguments:'),
+    _('  <command>      execute command'),
+    _('  <arguments>    arguments for command')
+    ]
+HELP: str = '\n'.join(HELP_LINES)
+del HELP_LINES
 
 OPTIONS_SHORT: str = 'lhmuv'
 OPTIONS_LONG: list[str] = ['list', 'help', 'manual', 'usage', 'version']
@@ -79,9 +86,8 @@ def process() -> None:
                 # Build kz-<command> and check if kz-<command> exists.
                 exec += '-' + sys.argv[arg_num]
                 if not os.path.exists(exec):
-                    text = f"kz: {sys.argv[arg_num]}: "
-                    text += f"{_('command does not exist')}\n"
-                    text += f"{_('Usage:')} {USAGE}"
+                    text = 'kz: ' + sys.argv[arg_num] + ': ' + \
+                        _('command does not exist') + '\n' + USAGE
                     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
                     kz.term(PROGRAM_NAME, 1)
         else:
@@ -89,8 +95,8 @@ def process() -> None:
             exec += ' ' + sys.argv[arg_num]
 
     if exec == '/usr/bin/kz':
-        text = f"{PROGRAM_NAME}: {_('command is required')}\n"
-        text += f"{_('Usage:')} {USAGE}"
+        text = PROGRAM_NAME + ': ' + _('command is required') + '\n' + \
+               USAGE
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
     else:
@@ -127,8 +133,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
                                        OPTIONS_LONG)
     except getopt.error as err:
-        text = f'{program_name}: {err}\n'
-        text += f"{_('Usage:')} {USAGE}"
+        text = f'{program_name}: {err}\n{USAGE}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -162,12 +167,12 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         else:
-            text = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
+            text = PROGRAM_NAME + ': getopt: ' + _('internal error')
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
             kz.term(PROGRAM_NAME, 1)
 
     if args:
-        # Check for arguments N/A for this script, is handled earlier.
+        # Check for arguments n/a for this script, is handled earlier.
         None
 
 
@@ -177,8 +182,8 @@ def process_option_list() -> None:
     """
     text: str
 
-    text = f"{_('The following commands are available:')}\n\n"
-    text += f"{_('NUM  COMMAND')}\n"
+    text = _('The following commands are available:') + '\n\n' + \
+        _('NUM  COMMAND') + '\n'
     command: str = f"find   /usr/bin/kz-*               \
                             -maxdepth 1                 \
                             -type f                     \

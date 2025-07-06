@@ -90,7 +90,7 @@ function process() {
     kz.become_check || exit 0
     sudo true
     build_website
-    generate_mo_file
+    generate_gettext_files
     kz.check_repos || OPTION_DEV=true
     build_deb_package
     build_rpm_package
@@ -181,7 +181,7 @@ function build_website() {
     rsync   --archive               \
             --verbose               \
             --checksum              \
-            "$UPLOADS_REPO_SRCDIR"/ \
+            "$UPLOADS_REPO_SRCDIR/" \
             "$UPLOADS_REPO_DISTDIR" |& $PROGRAM_LOGS
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
@@ -209,10 +209,86 @@ function build_website() {
 }
 
 
-# This function generates the gettext binary Machine Object (.mo) file from the
-# readable Portable Object (.po) file.
-function generate_mo_file() {
+# This function generates the following gettext files:
+# 1. The readable Portable Object Template (.pot) file from the source code in
+#    repo kz-scripts,
+# 2. the readable Portable Object (.po) file from the .pot file, and
+# 3. the binary Machine Object (.mo) file from the .po file.
+function generate_gettext_files() {
+    local language=''
     local lc_messages_dir=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    local startdir=$PWD
+    local text=''
+    local gettext_dir=''
+    local gettext_dirs="\
+$HOME/kz-scripts/usr/bin \
+$HOME/kz-scripts/usr/share/applications \
+$HOME/kz-scripts/usr/share/polkit-1/actions
+"
+    local gettext_file=''
+
+    text=$(gettext 'Generate gettext files')...
+    kz.infomsg "$text"
+
+    for gettext_dir in $gettext_dirs; do
+
+        cd "$gettext_dir" || exit 1
+
+        for gettext_file in *; do
+            if [[ -d $gettext_file ]]; then
+                text="$gettext_dir/$gettext_file: is een map"
+                kz.infomsg "$text"
+                continue
+            elif ! [[ -f $gettext_file ]]; then
+                text="$gettext_dir/$gettext_file: is geen bestand"
+                kz.infomsg "$text"
+                continue
+            elif [[ $gettext_file =~ .*.gpg$ ]]; then
+                text="$gettext_dir/$gettext_file: is met GPG versleuteld"
+                kz.infomsg "$text"
+                continue
+            elif [[ $gettext_file =~ .*.policy$ ]]; then
+                text="$gettext_dir/$gettext_file: is een Polkit-bestand"
+                kz.infomsg "$text"
+                continue
+            elif [[ $gettext_file =~ .*.pot$ ]]; then
+                text="$gettext_dir/$gettext_file: is een gettext POT-bestand"
+                kz.infomsg "$text"
+                continue
+            fi
+
+            if grep --quiet '^# shellcheck ' "$gettext_file"; then
+                language='Shell'
+            elif grep --quiet '^import ' "$gettext_file"; then
+                language='Python'
+            elif grep --quiet 'Desktop Entry' "$gettext_file"; then
+                language='Desktop'
+            elif grep --quiet 'policyconfig' "$gettext_file"; then
+                language='Policy'
+            else
+                text="$gettext_dir/$gettext_file: kan de taal niet bepalen"
+                kz.infomsg "$text"
+                continue
+            fi
+
+            printf '%s' "$gettext_dir/$gettext_file: "
+
+            xgettext    --language="$language"                      \
+                        --join-existing                             \
+                        --package-name='kz'                         \
+                        --package-version='4.2.1'                   \
+                        --msgid-bugs-address='info@karelzimmer.nl'  \
+                        --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
+                        "$gettext_file"
+
+            msgmerge    --update                        \
+                        --backup=none                   \
+                        --previous                      \
+                        "$lc_messages_dir/kz.po"        \
+                        "$SCRIPTS_REPO/usr/bin/kz.pot"
+        done
+    done
+    cd "$startdir"
 
     msgfmt --output-file="$lc_messages_dir/kz.mo" "$lc_messages_dir/kz.po"
 }
@@ -231,18 +307,18 @@ function build_deb_package() {
     rsync   --archive           \
             --delete            \
             --verbose           \
-            "$DEB_REPO_SRCDIR"/ \
+            "$DEB_REPO_SRCDIR/" \
             "$DEB_REPO_DISTDIR" |& $PROGRAM_LOGS
 
     # Make sure the permissions are correct for the sync with repo kz-scripts.
     chmod   --verbose                   \
             'u=rwx,g=rx,o=rx'           \
             --                          \
-            "$SCRIPTS_REPO/usr/bin"/*   |& $PROGRAM_LOGS
+            "$SCRIPTS_REPO/usr/bin/"*   |& $PROGRAM_LOGS
     chmod   --verbose                   \
             'a-x'                       \
             --                          \
-            "$SCRIPTS_REPO/usr/bin"/*.* |& $PROGRAM_LOGS
+            "$SCRIPTS_REPO/usr/bin/"*.* |& $PROGRAM_LOGS
 
     # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive               \
@@ -254,16 +330,16 @@ function build_deb_package() {
             --exclude='.git*'       \
             --exclude='kz.po'       \
             --exclude='kz.pot'      \
-            "$SCRIPTS_REPO"/        \
+            "$SCRIPTS_REPO/"        \
             "$DEB_REPO_DISTDIR"     |& $PROGRAM_LOGS
 
     # Compress man pages.
     gzip    --best                                      \
             --force                                     \
-            "$DEB_REPO_DISTDIR/usr/share/man/man1"/*    \
-            "$DEB_REPO_DISTDIR/usr/share/man/man5"/*    \
-            "$DEB_REPO_DISTDIR/usr/share/man/nl/man1"/* \
-            "$DEB_REPO_DISTDIR/usr/share/man/nl/man5"/* |& $PROGRAM_LOGS
+            "$DEB_REPO_DISTDIR/usr/share/man/man1/"*    \
+            "$DEB_REPO_DISTDIR/usr/share/man/man5/"*    \
+            "$DEB_REPO_DISTDIR/usr/share/man/nl/man1/"* \
+            "$DEB_REPO_DISTDIR/usr/share/man/nl/man5/"* |& $PROGRAM_LOGS
 
     # Capture build id Debian package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     build_id=$(date '+%Y-%m-%dT%H:%M:%S')
@@ -299,18 +375,18 @@ function build_rpm_package() {
     rsync   --archive           \
             --delete            \
             --verbose           \
-            "$RPM_REPO_SRCDIR"/ \
+            "$RPM_REPO_SRCDIR/" \
             "$RPM_REPO_DISTDIR" |& $PROGRAM_LOGS
 
     # Make sure the permissions are correct for the sync with repo kz-scripts.
     chmod   --verbose                   \
             'u=rwx,g=rx,o=rx'           \
             --                          \
-            "$SCRIPTS_REPO/usr/bin"/*   |& $PROGRAM_LOGS
+            "$SCRIPTS_REPO/usr/bin/"*   |& $PROGRAM_LOGS
     chmod   --verbose                   \
             'a-x'                       \
             --                          \
-            "$SCRIPTS_REPO/usr/bin"/*.* |& $PROGRAM_LOGS
+            "$SCRIPTS_REPO/usr/bin/"*.* |& $PROGRAM_LOGS
 
     # Fill kz-rpm/dist/ with repo kz-scripts.
     rsync   --archive               \
@@ -322,16 +398,16 @@ function build_rpm_package() {
             --exclude='.git*'       \
             --exclude='kz.po'       \
             --exclude='kz.pot'      \
-            "$SCRIPTS_REPO"/        \
+            "$SCRIPTS_REPO/"        \
             "$RPM_REPO_DISTDIR"     |& $PROGRAM_LOGS
 
     # Compress man pages.
     gzip    --best                                      \
             --force                                     \
-            "$RPM_REPO_DISTDIR/usr/share/man/man1"/*    \
-            "$RPM_REPO_DISTDIR/usr/share/man/man5"/*    \
-            "$RPM_REPO_DISTDIR/usr/share/man/nl/man1"/* \
-            "$RPM_REPO_DISTDIR/usr/share/man/nl/man5"/* |& $PROGRAM_LOGS
+            "$RPM_REPO_DISTDIR/usr/share/man/man1/"*    \
+            "$RPM_REPO_DISTDIR/usr/share/man/man5/"*    \
+            "$RPM_REPO_DISTDIR/usr/share/man/nl/man1/"* \
+            "$RPM_REPO_DISTDIR/usr/share/man/nl/man5/"* |& $PROGRAM_LOGS
 
     # Capture build id RPM package (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     build_id=$(date '+%Y-%m-%dT%H:%M:%S')

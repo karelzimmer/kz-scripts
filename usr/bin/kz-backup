@@ -189,7 +189,7 @@ $USAGE"
         TARGET_MEDIUM=$target_argument
     else
 
-        medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
 
         if [[ -z $medium ]]; then
             text=$(gettext "No USB medium found.
@@ -198,7 +198,7 @@ Connect a USB medium.")
             kz.infomsg "$text"
 
             $OPTION_GUI || kz.wait_for_enter
-            medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+            medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
 
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
@@ -206,7 +206,7 @@ Connect a USB medium.")
             fi
         fi
 
-        medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
 
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text="$(eval_gettext "Connect only one USB medium.
@@ -219,7 +219,7 @@ Disconnect media via Files.")"
 
             $OPTION_GUI || kz.wait_for_enter
 
-            medium=$(ls --directory "$usb_mount_point"/* 2> /dev/null || true)
+            medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
 
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 kz.errmsg "$text"
@@ -524,8 +524,8 @@ EOF
                 --delete                        \
                 --exclude-from="$exclude_file"  \
                 --delete-excluded               \
-                "$HOME"/                        \
-                "$TARGET"/                      \
+                "$HOME/"                        \
+                "$TARGET/"                      \
                 2>> "$ERRORLOG"                 |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
@@ -547,8 +547,8 @@ EOF
                 --delete                        \
                 --exclude-from="$exclude_file"  \
                 --delete-excluded               \
-                "$HOME"/                        \
-                "$TARGET"/                      2>> "$ERRORLOG" || BACKUP_RC=$?
+                "$HOME/"                        \
+                "$TARGET/"                      2>> "$ERRORLOG" || BACKUP_RC=$?
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")

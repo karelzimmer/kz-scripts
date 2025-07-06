@@ -33,15 +33,21 @@ USAGE: str = _("Usage: kz wifi [-g|--gui] [-h|--help] [-m|--manual] "
                "[-u|--usage]\n"
                "               [-v|--version]")
 
-HELP: str = (f"{_('Usage: kz wifi [<options>]')}\n\n"
-             f'{PROGRAM_DESC}.\n\n'
-             f"{_('Options:')}\n"
-             f"{_('  -g, --gui      run in graphical mode,')}\n"
-             f"{_('                 requires a desktop environment')}\n"
-             f"{_('  -h, --help     show this help text')}\n"
-             f"{_('  -m, --manual   show manual page')}\n"
-             f"{_('  -u, --usage    show a short usage summary')}\n"
-             f"{_('  -v, --version  show program version')}")
+HELP_LINES: list[str] = [
+    _('Usage: kz wifi [<options>]'),
+    '',
+    PROGRAM_DESC + '.',
+    '',
+    _('Options:'),
+    _('  -g, --gui      run in graphical mode,'),
+    _('                 requires a desktop environment'),
+    _('  -h, --help     show this help text'),
+    _('  -m, --manual   show manual page'),
+    _('  -u, --usage    show a short usage summary'),
+    _('  -v, --version  show program version'),
+    ]
+HELP: str = '\n'.join(HELP_LINES)
+del HELP_LINES
 
 OPTIONS_SHORT: str = 'ghmuv'
 OPTIONS_LONG: list[str] = ['gui', 'help', 'manual', 'usage', 'version']
@@ -80,8 +86,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
                                        OPTIONS_LONG)
     except getopt.error as err:
-        text = f'{program_name}: {err}\n'
-        text += f"{_('Usage:')} {USAGE}"
+        text = f'{program_name}: {err}\n{USAGE}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -119,14 +124,13 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         else:
-            text = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
+            text = PROGRAM_NAME + ': getopt: ' + _('internal error')
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
             kz.term(PROGRAM_NAME, 1)
 
     if args:
-        text = f"{program_name}: {' '.join(args)}: "
-        text += f"{_('arguments are not allowed')}\n"
-        text += f"{_('Usage:')} {USAGE}"
+        text = program_name + ': ' + ' '.join(args) + ': ' + \
+            _('arguments are not allowed') + '\n' + USAGE
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -140,7 +144,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     command: str = 'pkexec /usr/bin/kz-wifi-pkexec'
     nmcli_output: bytes
-    text: str = f"{_('Use this data to connect to the wireless network.')}"
+    text: str = _('Use this data to connect to the wireless network.')
 
     if OPTION_GUI:
         try:
@@ -153,7 +157,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
             text = _('No WiFi device found.')
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
         else:
-            text = str(nmcli_output.decode("utf-8")) + text
+            text = str(nmcli_output.decode('utf-8')) + text
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
     else:
         try:

@@ -34,13 +34,19 @@ PROGRAM_DESC: str = _('Build development environment')
 USAGE: str = _("Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] "
                "[-v|--version]")
 
-HELP: str = (f"{_('Usage: kz dev [<options>]')}\n\n"
-             f'{PROGRAM_DESC}.\n\n'
-             f"{_('Options:')}\n"
-             f"{_('  -h, --help     show this help text')}\n"
-             f"{_('  -m, --manual   show manual page')}\n"
-             f"{_('  -u, --usage    show a short usage summary')}\n"
-             f"{_('  -v, --version  show program version')}")
+HELP_LINES: list[str] = [
+    _('Usage: kz dev [<options>]'),
+    '',
+    PROGRAM_DESC + '.',
+    '',
+    _('Options:'),
+    _('  -h, --help     show this help text'),
+    _('  -m, --manual   show manual page'),
+    _('  -u, --usage    show a short usage summary'),
+    _('  -v, --version  show program version'),
+    ]
+HELP: str = '\n'.join(HELP_LINES)
+del HELP_LINES
 
 OPTIONS_SHORT: str = 'hmuv'
 OPTIONS_LONG: list[str] = ['help', 'manual', 'usage', 'version']
@@ -107,8 +113,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         opts, args = getopt.gnu_getopt(sys.argv[1:], OPTIONS_SHORT,
                                        OPTIONS_LONG)
     except getopt.error as err:
-        text = f'{program_name}: {err}\n'
-        text += f"{_('Usage:')} {USAGE}"
+        text = f'{program_name}: {err}\n{USAGE}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -140,14 +145,13 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         else:
-            text = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
+            text = PROGRAM_NAME + ': getopt: ' + _('internal error')
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
             kz.term(PROGRAM_NAME, 1)
 
     if args:
-        text = f"{program_name}: {' '.join(args)}: "
-        text += f"{_('arguments are not allowed')}\n"
-        text += f"{_('Usage:')} {USAGE}"
+        text = program_name + ': ' + ' '.join(args) + ': ' + \
+            _('arguments are not allowed') + '\n' + USAGE
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -226,8 +230,8 @@ def pull_repos() -> None:
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
             kz.term(PROGRAM_NAME, 1)
     else:
-        command = 'git clone https://github.com/karelzimmer/bin.git '
-        command += f'{bin_repo}'
+        command = 'git clone https://github.com/karelzimmer/bin.git ' + \
+            bin_repo
         try:
             subprocess.run(command, executable='bash', shell=True, check=True)
         except Exception as exc:
@@ -305,7 +309,7 @@ def download_website() -> None:
     text: str
 
     if not os.path.exists(ftp_login):
-        text = f"{_('Password for')} ftp://{ftp_host}': "
+        text = _('Password for') + ' ftp://' + ftp_host + ': '
         with open(ftp_login, 'w') as file:
             file.write(getpass.getpass(text))
         os.chmod(ftp_login, 0o600)
@@ -317,8 +321,7 @@ def download_website() -> None:
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except Exception:
-        # Force entering the password next time.
-        os.remove(ftp_login)
+        os.remove(ftp_login)  # Force entering the password next time.
         text = _('Website download failed.')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
