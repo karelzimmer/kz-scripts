@@ -215,6 +215,7 @@ function build_website() {
 # 2. the readable Portable Object (.po) file from the .pot file, and
 # 3. the binary Machine Object (.mo) file from the .po file.
 function generate_gettext_files() {
+    local its_dir=$HOME/kz-scripts/usr/share/gettext/its
     local language=''
     local lc_messages_dir=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
     local startdir=$PWD
@@ -247,10 +248,6 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                 text="$gettext_dir/$gettext_file: is met GPG versleuteld"
                 kz.infomsg "$text"
                 continue
-            elif [[ $gettext_file =~ .*.policy$ ]]; then
-                text="$gettext_dir/$gettext_file: is een Polkit-bestand"
-                kz.infomsg "$text"
-                continue
             elif [[ $gettext_file =~ .*.pot$ ]]; then
                 text="$gettext_dir/$gettext_file: is een gettext POT-bestand"
                 kz.infomsg "$text"
@@ -273,14 +270,24 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
 
             printf '%s' "$gettext_dir/$gettext_file: "
 
-            xgettext    --language="$language"                      \
-                        --join-existing                             \
-                        --package-name='kz'                         \
-                        --package-version='4.2.1'                   \
-                        --msgid-bugs-address='info@karelzimmer.nl'  \
-                        --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
-                        "$gettext_file"
-
+            if [[ $language = 'Policy' ]]; then
+                xgettext    --its="$its_dir/kz-policy.its"              \
+                            --join-existing                             \
+                            --package-name='kz'                         \
+                            --package-version='4.2.1'                   \
+                            --msgid-bugs-address='info@karelzimmer.nl'  \
+                            --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
+                            "$gettext_file"
+            else
+                xgettext    --language="$language"                      \
+                            --join-existing                             \
+                            --package-name='kz'                         \
+                            --package-version='4.2.1'                   \
+                            --msgid-bugs-address='info@karelzimmer.nl'  \
+                            --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
+                            "$gettext_file"
+            fi
+    
             msgmerge    --update                        \
                         --backup=none                   \
                         --previous                      \

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!--
+###############################################################################
+# SPDX-FileComment: Internationalization Tag Set (ITS) file for Polkit action
+#                   definition files
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+-->
+
+<its:rules xmlns:its="http://www.w3.org/2005/11/its"
+           xmlns:gt="https://www.gnu.org/software/gettext"
+           version="2.0">
+
+  <its:translateRule selector="//vendor | //vendor_url | //icon_name" translate="no"/>
+  <its:translateRule selector="//description | //message" translate="yes"/>
+  <its:translateRule selector="//annotate | //allow_any | //allow_inactive | //allow_active" translate="no"/>
+
+</its:rules>
