@@ -152,7 +152,7 @@ function check() {
     local text=''
 
     text=$(gettext 'CHECK -- 1/2')
-    kz.infomsg "\n$text"
+    kz.infomsg "$text"
     if ! kz.check_repos; then
         OPTION_DEV=true
         ERR_FLAG=true
