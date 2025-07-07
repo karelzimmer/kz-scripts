@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: info@karelzimmer.nl\n"
-"POT-Creation-Date: 2025-07-07 09:28+0200\n"
+"POT-Creation-Date: 2025-07-07 10:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,6 +75,7 @@ msgstr ""
 #: kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236 kz-wifi:128
 #: kz-wifi:129 kz-wifi:136 kz-wifi:149 kz:164 kz-dev:142 kz-update:133
 #: kz-wifi:127 kz-dev:148 kz-update:139 kz:171 kz:170 kz-deploy:134
+#: kz-build:153
 msgid "internal error"
 msgstr ""
 
@@ -278,7 +279,7 @@ msgstr ""
 #: kz-backup:160 kz-build:162 kz-check:207 kz-deploy:143 kz-desktop:204
 #: kz-get:106 kz-menu:183 kz-restore:161 kz-wifi:134 kz-wifi:135 kz-wifi:142
 #: kz-wifi:155 kz-dev:148 kz-update:139 kz-wifi:133 kz-dev:154 kz-update:145
-#: kz-deploy:142
+#: kz-deploy:142 kz-build:161
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -450,7 +451,7 @@ msgstr ""
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
-#: kz-build:177
+#: kz-build:177 kz-build:176
 msgid "Build website"
 msgstr ""
 
@@ -460,19 +461,19 @@ msgstr ""
 
 #: kz-build:227 kz-build:226 kz-build:225 kz-build:290 kz-build:291
 #: kz-build:293 kz-build:303 kz-build:314 kz-build:308 kz-build:310
-#: kz-build:305 kz-build:306
+#: kz-build:305 kz-build:306 kz-build:217
 msgid "Build Debian package"
 msgstr ""
 
 #: kz-build:295 kz-build:294 kz-build:293 kz-build:358 kz-build:359
 #: kz-build:361 kz-build:371 kz-build:382 kz-build:376 kz-build:378
-#: kz-build:373 kz-build:374
+#: kz-build:373 kz-build:374 kz-build:285
 msgid "Build RPM package"
 msgstr ""
 
 #: kz-build:369 kz-deploy:251 kz-build:368 kz-build:367 kz-build:432
 #: kz-build:433 kz-build:435 kz-build:445 kz-deploy:234 kz-build:456
-#: kz-build:450 kz-build:452 kz-build:447 kz-build:448
+#: kz-build:450 kz-build:452 kz-build:447 kz-build:448 kz-build:359
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
@@ -567,7 +568,7 @@ msgstr ""
 
 #: kz-build:391 kz-get:220 kz-build:390 kz-build:389 kz-build:454 kz-build:455
 #: kz-build:457 kz-build:467 kz-build:478 kz-build:472 kz-build:474
-#: kz-build:469 kz-build:470
+#: kz-build:469 kz-build:470 kz-build:381
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -1381,6 +1382,6 @@ msgstr ""
 #: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263 kz-build:394
 #: kz-build:393 kz-update:261 kz-build:458 kz-build:459 kz-build:461
 #: kz-build:471 kz-update:267 kz-deploy:262 kz-build:482 kz-build:476
-#: kz-build:478 kz-build:473 kz-build:474
+#: kz-build:478 kz-build:473 kz-build:474 kz-build:385
 msgid "Complete!"
 msgstr ""
