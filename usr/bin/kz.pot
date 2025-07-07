@@ -1,7 +1,9 @@
-# Portable Object Template (POT) file for kz package.
-# Copyright (C) 2023 Karel Zimmer
-# This file is distributed under the same license as the kz package.
-# Karel Zimmer <info@karelzimmer.nl>, 2023.
+# ##############################################################################
+# SPDX-FileComment: Portable Object Template (POT) file for kz package
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# ##############################################################################
 #
 #, fuzzy
 msgid ""

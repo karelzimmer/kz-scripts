@@ -1,7 +1,12 @@
+###############################################################################
+# SPDX-FileComment: Portable Object (PO) file for kz package
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+#
 # Dutch translations for kz package.
-# Copyright (C) 2023 Karel Zimmer
 # This file is distributed under the same license as the kz package.
-# Karel Zimmer <info@karelzimmer.nl>, 2023.
 #
 msgid ""
 msgstr ""
