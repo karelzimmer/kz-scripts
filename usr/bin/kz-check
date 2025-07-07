@@ -214,15 +214,86 @@ $USAGE"
 
 # This function checks the website for missing or not used files.
 function check_website() {
+    local -i check=0
+    local file=''
     local text=''
+    local uploads_dist_assets=$HOME/kz-uploads/dist/assets
+    local uploads_dist_html=$HOME/kz-uploads/dist/html
+    local uploads_src_assets=$HOME/kz-uploads/src/assets
 
     text=$(gettext 'Check website...')
     kz.infomsg "$text"
 
-    # Call rchecklink.
-    kz.logmsg 'Calling rchecklink...'
-    rchecklink || ERR_FLAG=true
-    kz.logmsg 'Called rchecklink.'
+    # Perl script checklink (W3C® Link Checker) checks whether links are valid,
+    # i.e. whether each link can be followed/whether a file is present.
+    # This function does the opposite: are all files used?
+
+    # Check files which are not used on the html pages.
+    while read -r file; do
+        if grep --recursive --quiet "$(basename "$file")" "$uploads_dist_html"
+        then
+            # The file is used in the html pages.
+            continue
+        else
+            # The file is not used in the html pages.
+            # Check whether it is a file that can be deleted.
+            # If it is not a file that can be deleted, then it is an error.
+            case $file in
+                *.asc )
+                    # GPG keys.
+                    continue
+                    ;;
+                *icons/LF* )
+                    # Base files for website.
+                    continue
+                    ;;
+                *kz-dev*.deb | *kz-dev*.rpm )
+                    # Development versions.
+                    continue
+                    ;;
+                *)
+                    :
+                    ;;
+            esac
+            ((++check))
+            if [[ check -eq 1 ]]; then
+                text="Files not used in html, that probably can be deleted:"
+                kz.errmsg "$text"
+            fi
+            text="rm  $file"
+            kz.infomsg "$text"
+        fi
+    done < <(
+        find    "$uploads_src_assets"   \
+                "$uploads_dist_assets"  \
+                -type f                 \
+                -print                  |
+                sort
+            )
+
+    # Difference between src/ and dist/.
+    diff    --recursive                 \
+            "$HOME/kz-uploads/src/"     \
+            "$HOME/kz-uploads/dist/"    \
+            --exclude='documents'       \
+            --exclude='packages'        \
+            --exclude='scripts'         || ERR_FLAG=true
+
+    # Perl script checklink (W3C® Link Checker) checks whether links are valid.
+    # Check the validity of links of website https://karelzimmer.nl:
+    # sudo apt-get install w3c-linkchecker
+    # checklink --summary https://karelzimmer.nl/html/nl/start.html
+    # checklink --summary https://karelzimmer.nl/html/nl/linux.html
+    # checklink --summary https://karelzimmer.nl/html/nl/waarom-linux.html
+    # checklink --summary https://karelzimmer.nl/html/nl/contact.html
+    # checklink --summary https://karelzimmer.nl/html/nl/zoeken.html
+    # checklink --summary https://karelzimmer.nl/html/en/linux.html
+    # checklink --summary https://karelzimmer.nl/html/en/home.html
+    # checklink --summary https://karelzimmer.nl/html/en/linux.html
+    # checklink --summary https://karelzimmer.nl/html/en/why-linux.html
+    # checklink --summary https://karelzimmer.nl/html/en/contact.html
+    # checklink --summary https://karelzimmer.nl/html/en/search.html
+    # NOTE: add  2> /dev/null after every checklink if needed
 }
 
 
