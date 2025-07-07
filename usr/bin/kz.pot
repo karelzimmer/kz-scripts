@@ -1,20 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Karel Zimmer
+# Portable Object Template (POT) file for kz package.
+# Copyright (C) 2023 Karel Zimmer
 # This file is distributed under the same license as the kz package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Karel Zimmer <info@karelzimmer.nl>, 2023.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: info@karelzimmer.nl\n"
-"POT-Creation-Date: 2025-07-07 10:47+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: kz-backup:44 kz-build:42 kz-check:36 kz-deploy:42 kz-desktop:49

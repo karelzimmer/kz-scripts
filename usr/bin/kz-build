@@ -275,14 +275,16 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
 
             printf '%s' "$gettext_dir/$gettext_file: "
 
-            # Option omit-header is used to not update the POT-Creation-Date if
-            # nothing else is changed in the POT file.
+            # Option omit-header is used to omit the header in the
+            # Portable Object Template (POT) file and is used to not update the
+            # POT-Creation-Date if nothing else is changed in the POT file.
+            # The header is not needed in the Portable Object Template (POT)
+            # file, because it is generated from the source code.
+            # The header is needed in the Portable Object (PO) file, because it
+            # is used to provide information about the translation.
             xgettext    "$language_specification"                   \
                         --join-existing                             \
                         --omit-header                               \
-                        --package-name='kz'                         \
-                        --package-version='4.2.1'                   \
-                        --msgid-bugs-address='info@karelzimmer.nl'  \
                         --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
                         "$gettext_file"
 
