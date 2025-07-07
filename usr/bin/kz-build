@@ -90,6 +90,7 @@ function process() {
     kz.become_check || exit 0
     sudo true
     build_website
+    generate_gettext_files
     kz.check_repos || OPTION_DEV=true
     build_deb_package
     build_rpm_package
@@ -205,6 +206,96 @@ function build_website() {
         "$SCRIPTS_REPO/usr/bin/kz-get"          \
         "$UPLOADS_REPO_DISTDIR/assets/scripts"  |& $PROGRAM_LOGS
 
+}
+
+
+# This function generates the following gettext files:
+# 1. The readable Portable Object Template (POT) file from the source code in
+#    repo kz-scripts,
+# 2. the readable Portable Object (PO) file from the POT file, and
+# 3. the binary Machine Object (MO) file from the PO file.
+function generate_gettext_files() {
+    local its_dir=$HOME/kz-scripts/usr/share/gettext/its
+    local language=''
+    local language_specification=''
+    local lc_messages_dir=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    local startdir=$PWD
+    local text=''
+    local gettext_dir=''
+    local gettext_dirs="\
+$HOME/kz-scripts/usr/bin \
+$HOME/kz-scripts/usr/share/applications \
+$HOME/kz-scripts/usr/share/polkit-1/actions
+"
+    local gettext_file=''
+
+    text=$(gettext 'Generate gettext files')...
+    kz.infomsg "$text"
+
+    for gettext_dir in $gettext_dirs; do
+
+        cd "$gettext_dir" || exit 1
+
+        for gettext_file in *; do
+            if [[ -d $gettext_file ]]; then
+                text="$gettext_dir/$gettext_file: is een map"
+                kz.infomsg "$text"
+                continue
+            elif ! [[ -f $gettext_file ]]; then
+                text="$gettext_dir/$gettext_file: is geen bestand"
+                kz.infomsg "$text"
+                continue
+            elif [[ $gettext_file =~ .*.gpg$ ]]; then
+                text="$gettext_dir/$gettext_file: is met GPG versleuteld"
+                kz.infomsg "$text"
+                continue
+            elif [[ $gettext_file =~ .*.pot$ ]]; then
+                text="$gettext_dir/$gettext_file: is een gettext POT-bestand"
+                kz.infomsg "$text"
+                continue
+            fi
+
+            if grep --quiet '^# shellcheck ' "$gettext_file"; then
+                language='Shell'
+                language_specification="--language=$language"
+            elif grep --quiet '^import ' "$gettext_file"; then
+                language='Python'
+                language_specification="--language=$language"
+            elif grep --quiet 'Desktop Entry' "$gettext_file"; then
+                language='Desktop'
+                language_specification="--language=$language"
+            elif grep --quiet 'policyconfig' "$gettext_file"; then
+                language='Policy'
+                language_specification="--its=$its_dir/kz-policy.its"
+            else
+                text="$gettext_dir/$gettext_file: kan de taal niet bepalen"
+                kz.infomsg "$text"
+                continue
+            fi
+
+            printf '%s' "$gettext_dir/$gettext_file: "
+
+            # Option omit-header is used to not update the POT-Creation-Date if
+            # nothing else is changed in the POT file.
+            xgettext    "$language_specification"                   \
+                        --join-existing                             \
+                        --omit-header                               \
+                        --package-name='kz'                         \
+                        --package-version='4.2.1'                   \
+                        --msgid-bugs-address='info@karelzimmer.nl'  \
+                        --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
+                        "$gettext_file"
+
+            msgmerge    --update                        \
+                        --backup=none                   \
+                        --previous                      \
+                        "$lc_messages_dir/kz.po"        \
+                        "$SCRIPTS_REPO/usr/bin/kz.pot"
+        done
+    done
+    cd "$startdir"
+
+    msgfmt --output-file="$lc_messages_dir/kz.mo" "$lc_messages_dir/kz.po"
 }
 
 

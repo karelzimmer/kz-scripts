@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: info@karelzimmer.nl\n"
-"POT-Creation-Date: 2025-07-07 10:44+0200\n"
+"POT-Creation-Date: 2025-07-07 10:47+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -487,7 +487,7 @@ msgstr "Controleer scripts (dit kan even duren)..."
 msgid "Build website"
 msgstr "Bouw website"
 
-#: kz-build:226 kz-build:230 kz-build:231 kz-build:232
+#: kz-build:226 kz-build:230 kz-build:231 kz-build:232 kz-build:234
 msgid "Generate gettext files"
 msgstr "Genereer gettext-bestanden"
 

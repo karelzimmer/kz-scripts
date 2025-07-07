@@ -455,7 +455,7 @@ msgstr ""
 msgid "Build website"
 msgstr ""
 
-#: kz-build:226 kz-build:230 kz-build:231 kz-build:232
+#: kz-build:226 kz-build:230 kz-build:231 kz-build:232 kz-build:234
 msgid "Generate gettext files"
 msgstr ""
 
