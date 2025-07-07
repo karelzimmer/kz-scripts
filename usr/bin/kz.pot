@@ -427,7 +427,7 @@ msgstr ""
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
-#: kz-check:489 kz-deploy:274 kz-deploy:257 kz-check:560
+#: kz-check:489 kz-deploy:274 kz-deploy:257 kz-check:560 kz-check:561
 msgid "Please check all the messages above and fix them if necessary."
 msgstr ""
 
@@ -449,6 +449,10 @@ msgstr ""
 
 #: kz-check:80
 msgid "Check scripts (this may take a while)..."
+msgstr ""
+
+#: kz-check:261
+msgid "Files not used in html that can probably be removed:"
 msgstr ""
 
 #: kz-build:177 kz-build:176
@@ -846,20 +850,20 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-check:289 kz-check:360
+#: kz-check:289 kz-check:360 kz-check:361
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:402 kz-check:473
+#: kz-check:402 kz-check:473 kz-check:474
 #, sh-format
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr ""
 
-#: kz-check:451 kz-check:522
+#: kz-check:451 kz-check:522 kz-check:523
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:474 kz-check:545
+#: kz-check:474 kz-check:545 kz-check:546
 msgid "End spaces found."
 msgstr ""
 
@@ -1240,42 +1244,43 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-check:309 kz-check:380
+#: kz-check:309 kz-check:380 kz-check:381
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:239 kz-check:310
+#: kz-check:239 kz-check:310 kz-check:311
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr ""
 
-#: kz-check:251 kz-check:322
+#: kz-check:251 kz-check:322 kz-check:323
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr ""
 
-#: kz-check:262 kz-check:333
+#: kz-check:262 kz-check:333 kz-check:334
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:322 kz-check:393
+#: kz-check:322 kz-check:393 kz-check:394
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:333 kz-check:404
+#: kz-check:333 kz-check:404 kz-check:405
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:343 kz-check:351 kz-check:414 kz-check:422
+#: kz-check:343 kz-check:351 kz-check:414 kz-check:422 kz-check:415
+#: kz-check:423
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr ""
 
-#: kz-check:361 kz-check:432
+#: kz-check:361 kz-check:432 kz-check:433
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -1383,5 +1388,6 @@ msgstr ""
 #: kz-build:393 kz-update:261 kz-build:458 kz-build:459 kz-build:461
 #: kz-build:471 kz-update:267 kz-deploy:262 kz-build:482 kz-build:476
 #: kz-build:478 kz-build:473 kz-build:474 kz-build:385 kz-check:565
+#: kz-check:566
 msgid "Complete!"
 msgstr ""

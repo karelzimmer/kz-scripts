@@ -257,7 +257,8 @@ function check_website() {
             esac
             ((++check))
             if [[ check -eq 1 ]]; then
-                text="Files not used in html, that probably can be deleted:"
+                text=$(gettext \
+                "Files not used in html that can probably be removed:")
                 kz.errmsg "$text"
             fi
             text="rm  $file"
