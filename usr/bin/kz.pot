@@ -427,7 +427,7 @@ msgstr ""
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
-#: kz-check:489 kz-deploy:274 kz-deploy:257
+#: kz-check:489 kz-deploy:274 kz-deploy:257 kz-check:560
 msgid "Please check all the messages above and fix them if necessary."
 msgstr ""
 
@@ -846,20 +846,20 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-check:289
+#: kz-check:289 kz-check:360
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:402
+#: kz-check:402 kz-check:473
 #, sh-format
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr ""
 
-#: kz-check:451
+#: kz-check:451 kz-check:522
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:474
+#: kz-check:474 kz-check:545
 msgid "End spaces found."
 msgstr ""
 
@@ -1240,49 +1240,49 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-check:309
+#: kz-check:309 kz-check:380
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:239
+#: kz-check:239 kz-check:310
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr ""
 
-#: kz-check:251
+#: kz-check:251 kz-check:322
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr ""
 
-#: kz-check:262
+#: kz-check:262 kz-check:333
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:322
+#: kz-check:322 kz-check:393
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:333
+#: kz-check:333 kz-check:404
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:343 kz-check:351
+#: kz-check:343 kz-check:351 kz-check:414 kz-check:422
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr ""
 
-#: kz-check:361
+#: kz-check:361 kz-check:432
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:219
+#: kz-check:219 kz-check:224
 msgid "Check website..."
 msgstr ""
 
@@ -1382,6 +1382,6 @@ msgstr ""
 #: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263 kz-build:394
 #: kz-build:393 kz-update:261 kz-build:458 kz-build:459 kz-build:461
 #: kz-build:471 kz-update:267 kz-deploy:262 kz-build:482 kz-build:476
-#: kz-build:478 kz-build:473 kz-build:474 kz-build:385
+#: kz-build:478 kz-build:473 kz-build:474 kz-build:385 kz-check:565
 msgid "Complete!"
 msgstr ""
