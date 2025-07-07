@@ -90,8 +90,8 @@ function process() {
     kz.become_check || exit 0
     sudo true
     build_website
-    generate_gettext_files
     kz.check_repos || OPTION_DEV=true
+    generate_gettext_files
     build_deb_package
     build_rpm_package
     install_deb_package
