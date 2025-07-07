@@ -14,8 +14,8 @@
            xmlns:gt="https://www.gnu.org/software/gettext"
            version="2.0">
 
-  <its:translateRule selector="//vendor | //vendor_url | //icon_name" translate="no"/>
-  <its:translateRule selector="//description | //message" translate="yes"/>
-  <its:translateRule selector="//annotate | //allow_any | //allow_inactive | //allow_active" translate="no"/>
+    <its:translateRule selector="//vendor | //vendor_url | //icon_name" translate="no"/>
+    <its:translateRule selector="//description | //message" translate="yes"/>
+    <its:translateRule selector="//annotate | //allow_any | //allow_inactive | //allow_active" translate="no"/>
 
 </its:rules>
