@@ -92,7 +92,7 @@ function process() {
             *.gpg | *.png )
                 continue
                 ;;
-            *.json | *.policy )
+            *.json | *.policy | *.its | *.loc )
                 check_trailing_spaces
                 ;;
             *.1 | *.5 )
