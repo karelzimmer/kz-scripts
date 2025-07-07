@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: info@karelzimmer.nl\n"
-"POT-Creation-Date: 2025-07-06 21:39+0200\n"
+"POT-Creation-Date: 2025-07-07 07:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -454,23 +454,25 @@ msgstr ""
 msgid "Build website"
 msgstr ""
 
-#: kz-build:226 kz-build:230 kz-build:231
+#: kz-build:226 kz-build:230 kz-build:231 kz-build:232
 msgid "Generate gettext files"
 msgstr ""
 
 #: kz-build:227 kz-build:226 kz-build:225 kz-build:290 kz-build:291
 #: kz-build:293 kz-build:303 kz-build:314 kz-build:308 kz-build:310
+#: kz-build:305
 msgid "Build Debian package"
 msgstr ""
 
 #: kz-build:295 kz-build:294 kz-build:293 kz-build:358 kz-build:359
 #: kz-build:361 kz-build:371 kz-build:382 kz-build:376 kz-build:378
+#: kz-build:373
 msgid "Build RPM package"
 msgstr ""
 
 #: kz-build:369 kz-deploy:251 kz-build:368 kz-build:367 kz-build:432
 #: kz-build:433 kz-build:435 kz-build:445 kz-deploy:234 kz-build:456
-#: kz-build:450 kz-build:452
+#: kz-build:450 kz-build:452 kz-build:447
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
@@ -565,6 +567,7 @@ msgstr ""
 
 #: kz-build:391 kz-get:220 kz-build:390 kz-build:389 kz-build:454 kz-build:455
 #: kz-build:457 kz-build:467 kz-build:478 kz-build:472 kz-build:474
+#: kz-build:469
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -1378,6 +1381,6 @@ msgstr ""
 #: kz-build:395 kz-check:494 kz-deploy:279 kz-update:263 kz-build:394
 #: kz-build:393 kz-update:261 kz-build:458 kz-build:459 kz-build:461
 #: kz-build:471 kz-update:267 kz-deploy:262 kz-build:482 kz-build:476
-#: kz-build:478
+#: kz-build:478 kz-build:473
 msgid "Complete!"
 msgstr ""
