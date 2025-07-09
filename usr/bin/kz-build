@@ -234,24 +234,24 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
 
     for gettext_dir in $gettext_dirs; do
 
-        cd "$gettext_dir" || exit 1
+        cd "$gettext_dir"
 
         for gettext_file in *; do
             if [[ -d $gettext_file ]]; then
                 text="$gettext_dir/$gettext_file: is een map"
-                kz.infomsg "$text"
+                kz.logmsg "$text"
                 continue
             elif ! [[ -f $gettext_file ]]; then
                 text="$gettext_dir/$gettext_file: is geen bestand"
-                kz.infomsg "$text"
+                kz.logmsg "$text"
                 continue
             elif [[ $gettext_file =~ .*.gpg$ ]]; then
                 text="$gettext_dir/$gettext_file: is met GPG versleuteld"
-                kz.infomsg "$text"
+                kz.logmsg "$text"
                 continue
             elif [[ $gettext_file =~ .*.pot$ ]]; then
                 text="$gettext_dir/$gettext_file: is een gettext POT-bestand"
-                kz.infomsg "$text"
+                kz.logmsg "$text"
                 continue
             fi
 
@@ -269,11 +269,11 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                 language_specification="--its=$its_dir/kz-policy.its"
             else
                 text="$gettext_dir/$gettext_file: kan de taal niet bepalen"
-                kz.infomsg "$text"
+                kz.errmsg "$text"
                 continue
             fi
 
-            printf '%s' "$gettext_dir/$gettext_file: "
+            kz.logmsg "$gettext_dir/$gettext_file:"
 
             # Option omit-header is used to omit the header in the
             # Portable Object Template (POT) file and is used to not update the
@@ -286,18 +286,20 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                         --join-existing                             \
                         --omit-header                               \
                         --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
-                        "$gettext_file"
+                        "$gettext_file"                             \
+                        |& $PROGRAM_LOGS
 
             msgmerge    --update                        \
                         --backup=none                   \
                         --previous                      \
                         "$lc_messages_dir/kz.po"        \
-                        "$SCRIPTS_REPO/usr/bin/kz.pot"
+                        "$SCRIPTS_REPO/usr/bin/kz.pot"  |& $PROGRAM_LOGS
         done
     done
     cd "$startdir"
 
-    msgfmt --output-file="$lc_messages_dir/kz.mo" "$lc_messages_dir/kz.po"
+    msgfmt  --output-file="$lc_messages_dir/kz.mo"  \
+            "$lc_messages_dir/kz.po"                |& $PROGRAM_LOGS
 }
 
 
