@@ -218,7 +218,8 @@ function generate_gettext_files() {
     local its_dir=$HOME/kz-scripts/usr/share/gettext/its
     local language=''
     local language_specification=''
-    local lc_messages_dir=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    local lc_messages_dir=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES
+    local pot_dir=$SCRIPTS_REPO/usr/bin/
     local startdir=$PWD
     local text=''
     local gettext_dir=''
@@ -282,18 +283,19 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
             # file, because it is generated from the source code.
             # The header is needed in the Portable Object (PO) file, because it
             # is used to provide information about the translation.
-            xgettext    "$language_specification"                   \
-                        --join-existing                             \
-                        --omit-header                               \
-                        --output="$SCRIPTS_REPO/usr/bin/kz.pot"     \
-                        "$gettext_file"                             \
-                        |& $PROGRAM_LOGS
+            xgettext    "$language_specification"   \
+                        --join-existing             \
+                        --add-location=file         \
+                        --omit-header               \
+                        --output="$pot_dir/kz.pot"  \
+                        "$gettext_file"             |& $PROGRAM_LOGS
 
-            msgmerge    --update                        \
-                        --backup=none                   \
-                        --previous                      \
-                        "$lc_messages_dir/kz.po"        \
-                        "$SCRIPTS_REPO/usr/bin/kz.pot"  |& $PROGRAM_LOGS
+            msgmerge    --update                    \
+                        --backup=none               \
+                        --add-location=file         \
+                        --previous                  \
+                        "$lc_messages_dir/kz.po"    \
+                        "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
         done
     done
     cd "$startdir"
