@@ -11,6 +11,6 @@
 
 <locatingRules>
     <locatingRule name="kz-policy" pattern="*.policy">
-    <documentRule localName="kz-policy" target="kz-policy.its"/>
+    <documentRule localName="policyconfig" target="kz-policy.its"/>
     </locatingRule>
 </locatingRules>
