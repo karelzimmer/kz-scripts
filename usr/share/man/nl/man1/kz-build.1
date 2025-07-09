@@ -40,44 +40,59 @@ Opdracht \fBkz build\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
 .sp
 Pakket kz vult de volgende systeemmappen:
 .br
-/etc/
+/etc/firefox/policies/
+/etc/opt/chrome/policies/managed/
 .RS
-Beleidsreges-bestanden voor Firefox en Chrome, en build-id van pakket kz.
+Beleidsreges-bestanden voor Firefox en Chrome.
 .RE
 .sp
 /usr/bin/
 .RS
-Scripts (kz*)
+Scripts (kz-*)
 .RE
 .sp
 /usr/share/applications/
 .RS
-Bureaubladconfiguratiebestanden (kz*.desktop)
+Bureaubladconfiguratiebestanden (kz-*.desktop)
 .RE
 .sp
 /usr/share/bash-completion/completions/
 .RS
-Tabvoltooiingsscripts (kz*)
+Tabvoltooiingsscripts (kz-*)
 .RE
 .sp
-/usr/share/locale/nl/
+/usr/share/doc/kz
+.RS
+Build-id van pakket kz (build.id)
+.RE
+.sp
+/usr/share/gettext/its/
+.RS
+Internationalization Tag Set (ITS) en Regelbestanden lokaliseren (voor
+kz-build / gettext)
+(kz-*.its en kz-*.pol)
+.RE
+.sp
+/usr/share/locale/nl/LC_MESSAGES/
 .RS
 Nederlands vertaalbestand (kz.mo)
 .RE
 .sp
 /usr/share/man/man1/
+/usr/share/man/man5/
 .RS
-Man-pagina's (EN)
+Engelse man-pagina's (kz-*.1 en kz)
 .RE
 .sp
 /usr/share/man/nl/man1/
+/usr/share/man/nl/man5/
 .RS
-Man-pagina's (NL)
+Nederlandse man-pagina's (kz-*.1 en kz-*.5)
 .RE
 .sp
 /usr/share/polkit-1/actions/
 .RS
-Polkit actiedefinitiebestanden (nl.karelzimmer.kz*.policy)
+Polkit actiedefinitiebestanden (nl.karelzimmer.kz-*.policy)
 .RE
 .sp
 Opdracht \fBkz build\fR kan alleen worden uitgevoerd op een desktop.

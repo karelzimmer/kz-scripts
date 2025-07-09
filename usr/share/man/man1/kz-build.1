@@ -41,24 +41,37 @@ Command \fBkz build\fR is also called from \fBkz deploy\fR.
 .sp
 Package kz populates the following system directories:
 .br
-/etc/
+/etc/firefox/policies/
+/etc/opt/chrome/policies/managed/
 .RS
-Policy files for Firefox and Chrome, and package kz build ID.
+Policy files for Firefox and Chrome.
 .RE
 .sp
 /usr/bin/
 .RS
-Scripts (kz*)
+Scripts (kz-*)
 .RE
 .sp
 /usr/share/applications/
 .RS
-Desktop configuration files (kz*.desktop)
+Desktop configuration files (kz-*.desktop)
 .RE
 .sp
 /usr/share/bash-completion/completions/
 .RS
-Tab completion scripts (kz*)
+Tab completion scripts (kz-*)
+.RE
+.sp
+/usr/share/doc/kz
+.RS
+package kz build ID (build.id)
+.RE
+.sp
+/usr/share/gettext/its/
+.RS
+Internationalization Tag Set (ITS) and Locating rules files (kz-build /
+gettext)
+(kz-*.its and kz-*.pol)
 .RE
 .sp
 /usr/share/locale/nl/
@@ -67,18 +80,20 @@ Dutch translation file (kz.mo)
 .RE
 .sp
 /usr/share/man/man1/
+/usr/share/man/man5/
 .RS
-Manual pages (EN)
+Manual pages English (kz-*.1 and kz-*.5)
 .RE
 .sp
 /usr/share/man/nl/man1/
+/usr/share/man/nl/man5/
 .RS
-Manual pages (NL)
+Manual pages Dutch (kz-*.1 and kz-*.5)
 .RE
 .sp
 /usr/share/polkit-1/actions/
 .RS
-Polkit action definition files (nl.karelzimmer.kz*.policy)
+Polkit action definition files (nl.karelzimmer.kz-*.policy)
 .RE
 .sp
 Command \fBkz build\fR can only be run in a desktop environment.
