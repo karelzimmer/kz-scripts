@@ -14,8 +14,15 @@
            xmlns:gt="https://www.gnu.org/software/gettext"
            version="2.0">
 
-    <its:translateRule selector="//vendor | //vendor_url | //icon_name" translate="no"/>
-    <its:translateRule selector="//description | //message" translate="yes"/>
-    <its:translateRule selector="//annotate | //allow_any | //allow_inactive | //allow_active" translate="no"/>
+    <its:translateRule selector="/policyconfig/action/description   |
+                                 /policyconfig/action/message"      translate="yes"/>
+
+    <its:translateRule selector="/policyconfig/vendor                           |
+                                 /policyconfig/vendor_url                       |
+                                 /policyconfig/icon_name                        |
+                                 /policyconfig/action/annotate                  |
+                                 /policyconfig/action/defaults/allow_any        |
+                                 /policyconfig/action/defaults/allow_inactive   |
+                                 /policyconfig/action/defaults/allow_active"    translate="no"/>
 
 </its:rules>
