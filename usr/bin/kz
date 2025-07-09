@@ -189,6 +189,7 @@ def process_option_list() -> None:
                             -type f                     \
                             -executable                 \
                             -readable                   \
+                            -not -name '*-pkexec'       \
                             -not -name '*~'             \
                             -printf '%f\n'          |   \
                      sort                           |   \
