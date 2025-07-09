@@ -285,14 +285,14 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
             # is used to provide information about the translation.
             xgettext    "$language_specification"   \
                         --join-existing             \
-                        --add-location=file         \
+                        --no-location               \
                         --omit-header               \
                         --output="$pot_dir/kz.pot"  \
                         "$gettext_file"             |& $PROGRAM_LOGS
 
             msgmerge    --update                    \
                         --backup=none               \
-                        --add-location=file         \
+                        --no-location               \
                         --previous                  \
                         "$lc_messages_dir/kz.po"    \
                         "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
