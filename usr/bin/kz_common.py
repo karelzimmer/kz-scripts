@@ -108,7 +108,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
         except Exception:
             break
         else:
-            text = _('Wait 1 second for another package manager to finish').\
+            text = _('Wait for another package manager to finish').\
                 format(sleep) + '...'
             infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
             time.sleep(sleep)

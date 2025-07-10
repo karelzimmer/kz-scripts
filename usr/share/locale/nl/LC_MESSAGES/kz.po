@@ -560,7 +560,7 @@ msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
 #: kz_common.py kz_common.sh kz-get
-msgid "Wait 1 second for another package manager to finish"
+msgid "Wait for another package manager to finish"
 msgstr "Wacht 1 seconde totdat een andere pakketbeheerder klaar is"
 
 #: kz_common.py kz_common.sh
