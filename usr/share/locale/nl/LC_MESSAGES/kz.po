@@ -12,7 +12,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: info@karelzimmer.nl\n"
-"POT-Creation-Date: 2025-07-10 09:32+0200\n"
 "Last-Translator: Karel Zimmer <info@karelzimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
@@ -453,23 +452,23 @@ msgstr "Bouw website"
 msgid "Generate gettext files"
 msgstr "Genereer gettext-bestanden"
 
-#: kz-build:315
+#: kz-build:317
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:383
+#: kz-build:385
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:457 kz-deploy:234
+#: kz-build:459 kz-deploy:234
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:479 kz-get:218
+#: kz-build:481 kz-get:218
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:483 kz-check:566 kz-deploy:262 kz-update:267
+#: kz-build:485 kz-check:566 kz-deploy:262 kz-update:267
 msgid "Complete!"
 msgstr "Klaar!"
 

@@ -1,7 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Karel Zimmer
+# #############################################################################
+# SPDX-FileComment: Portable Object Template (POT) file for kz package
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# #############################################################################
+#
+# Extracted translatable strings for kz package.
 # This file is distributed under the same license as the kz package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
@@ -391,23 +396,23 @@ msgstr ""
 msgid "Generate gettext files"
 msgstr ""
 
-#: kz-build:315
+#: kz-build:317
 msgid "Build Debian package"
 msgstr ""
 
-#: kz-build:383
+#: kz-build:385
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:457 kz-deploy:234
+#: kz-build:459 kz-deploy:234
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:479 kz-get:218
+#: kz-build:481 kz-get:218
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:483 kz-check:566 kz-deploy:262 kz-update:267
+#: kz-build:485 kz-check:566 kz-deploy:262 kz-update:267
 msgid "Complete!"
 msgstr ""
 
