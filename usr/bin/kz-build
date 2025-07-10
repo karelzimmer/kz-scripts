@@ -233,6 +233,9 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
     text=$(gettext 'Generate gettext files')...
     kz.infomsg "$text"
 
+    # Delete '#: filename:line' lines.
+    sed --in-place '/^#: kz/d' "$pot_dir/kz.pot" "$lc_messages_dir/kz.po"
+
     for gettext_dir in $gettext_dirs; do
 
         cd "$gettext_dir"
@@ -285,14 +288,12 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
             # is used to provide information about the translation.
             xgettext    "$language_specification"   \
                         --join-existing             \
-                        --add-location=file         \
                         --omit-header               \
                         --output="$pot_dir/kz.pot"  \
                         "$gettext_file"             |& $PROGRAM_LOGS
 
             msgmerge    --update                    \
                         --backup=none               \
-                        --add-location=file         \
                         --previous                  \
                         "$lc_messages_dir/kz.po"    \
                         "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
