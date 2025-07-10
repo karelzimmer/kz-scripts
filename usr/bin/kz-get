@@ -171,7 +171,6 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
 # This function checks if a Debian package manager is already running and waits
 # for the next check if so.
 function check_debian_package_manager() {
-    local -i sleep=1
     local text=''
 
     while sudo  fuser                           \
@@ -180,7 +179,7 @@ function check_debian_package_manager() {
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
         text=$(gettext "Wait for another package manager to finish")
         printf '%s\n' "$text..."
-        sleep "$sleep"
+        sleep 1
     done
 }
 
