@@ -270,6 +270,10 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                 language_specification="--language=$language"
             elif grep --quiet 'policyconfig' "$gettext_file"; then
                 language='Policy'
+                # The language specification for the policy file is
+                # specified in the ITS file.
+                # Since the LOC file also exists, language_specification can
+                # also be empty.
                 language_specification="--its=$its_dir/kz-policy.its"
             else
                 text="$gettext_dir/$gettext_file: kan de taal niet bepalen"
