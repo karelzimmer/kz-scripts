@@ -396,23 +396,23 @@ msgstr ""
 msgid "Generate gettext files"
 msgstr ""
 
-#: kz-build:317
+#: kz-build:321
 msgid "Build Debian package"
 msgstr ""
 
-#: kz-build:385
+#: kz-build:389
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:459 kz-deploy:234
+#: kz-build:463 kz-deploy:234
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:481 kz-get:218
+#: kz-build:485 kz-get:218
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:485 kz-check:566 kz-deploy:262 kz-update:267
+#: kz-build:489 kz-check:566 kz-deploy:262 kz-update:267
 msgid "Complete!"
 msgstr ""
 
