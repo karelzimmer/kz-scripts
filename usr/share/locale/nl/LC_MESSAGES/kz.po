@@ -448,27 +448,27 @@ msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 msgid "Build website"
 msgstr "Bouw website"
 
-#: kz-build:233
+#: kz-build:232
 msgid "Generate gettext files"
 msgstr "Genereer gettext-bestanden"
 
-#: kz-build:321
+#: kz-build:316
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:389
+#: kz-build:384
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:463 kz-deploy:234
+#: kz-build:458 kz-deploy:234
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:485 kz-get:218
+#: kz-build:480 kz-get:218
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:489 kz-check:566 kz-deploy:262 kz-update:267
+#: kz-build:484 kz-check:566 kz-deploy:262 kz-update:267
 msgid "Complete!"
 msgstr "Klaar!"
 

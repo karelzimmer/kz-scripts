@@ -216,7 +216,6 @@ function build_website() {
 # 3. the binary Machine Object (MO) file from the PO file.
 function generate_gettext_files() {
     local its_dir=$HOME/kz-scripts/usr/share/gettext/its
-    local language=''
     local language_specification=''
     local lc_messages_dir=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES
     local pot_dir=$SCRIPTS_REPO/usr/bin/
@@ -260,16 +259,12 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
             fi
 
             if grep --quiet '^# shellcheck ' "$gettext_file"; then
-                language='Shell'
-                language_specification="--language=$language"
+                language_specification='--language=Shell'
             elif grep --quiet '^import ' "$gettext_file"; then
-                language='Python'
-                language_specification="--language=$language"
+                language_specification='--language=Python'
             elif grep --quiet 'Desktop Entry' "$gettext_file"; then
-                language='Desktop'
-                language_specification="--language=$language"
+                language_specification='--language=Desktop'
             elif grep --quiet 'policyconfig' "$gettext_file"; then
-                language='Policy'
                 # The language specification for the policy file is
                 # specified in the ITS file.
                 # Since the LOC file also exists, language_specification can
