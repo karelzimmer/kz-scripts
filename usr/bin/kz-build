@@ -239,6 +239,14 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
 
         cd "$gettext_dir"
 
+        #FIXME translate text msgs!!
+        #FIXME waarom werkt $gettext_file =~ .*.sh$ niet? gaat fout bij kz_common.sh !!
+        #FIXME waarom werkt $gettext_file =~ .*.py$ niet? gaat fout bij kz_common.py !!
+        #FIXME waarom werkt $gettext_file =~ .*.desktop$ niet? gaat fout bij kz_desktop !!
+        #FIXME zoeken naar text in fils is gevaarlijk, 'Desktop Entry' komt ook voor in dit script
+        # Determine the language specification for xgettext.
+        # The language specification is used to determine the type of file
+        # that is being processed by xgettext.
         for gettext_file in *; do
             if [[ -d $gettext_file ]]; then
                 text="$gettext_dir/$gettext_file: is een map"
@@ -252,23 +260,25 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                 text="$gettext_dir/$gettext_file: is met GPG versleuteld"
                 kz.logmsg "$text"
                 continue
+            elif [[ $gettext_file =~ .*.po$ ]]; then
+                text="$gettext_dir/$gettext_file: is een gettext PO-bestand"
+                kz.logmsg "$text"
+                continue
             elif [[ $gettext_file =~ .*.pot$ ]]; then
                 text="$gettext_dir/$gettext_file: is een gettext POT-bestand"
                 kz.logmsg "$text"
                 continue
-            fi
-
-            if grep --quiet '^# shellcheck ' "$gettext_file"; then
+            elif [[ $gettext_file =~ .*.mo$ ]]; then
+                text="$gettext_dir/$gettext_file: is een gettext MO-bestand"
+                kz.logmsg "$text"
+                continue
+            elif grep --quiet '^# shellcheck ' "$gettext_file"; then
                 language_specification='--language=Shell'
             elif grep --quiet '^import ' "$gettext_file"; then
                 language_specification='--language=Python'
             elif grep --quiet 'Desktop Entry' "$gettext_file"; then
                 language_specification='--language=Desktop'
             elif grep --quiet 'policyconfig' "$gettext_file"; then
-                # The language specification for the policy file is
-                # specified in the ITS file.
-                # Since the LOC file also exists, language_specification can
-                # also be empty.
                 language_specification="--its=$its_dir/kz-policy.its"
             else
                 text="$gettext_dir/$gettext_file: kan de taal niet bepalen"
