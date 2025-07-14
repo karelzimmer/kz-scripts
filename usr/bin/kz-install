@@ -71,7 +71,6 @@ declare -A FAILED_APPS=()
 declare ERRORLOG=''
 declare OPTION_GUI=false
 declare OPTION_REMOVE=false
-declare REBOOT=true
 
 
 ###############################################################################
@@ -248,7 +247,6 @@ environment available")"
 
     if [[ -n $* ]]; then
         argument_app=true
-        REBOOT=false
         while [[ -n $* ]]; do
             app_arguments[$1]=$1
             shift
@@ -591,23 +589,17 @@ $(gettext "Try installing the apps again.")"
         # shellcheck disable=SC2034
         operation=$(gettext 'remove')
     fi
-    text=$(eval_gettext "Apps \$operation completed.")
-
-    if $REBOOT; then
-        text+="
+    text="$(eval_gettext "Apps \$operation completed.")
 
 $(gettext "The computer will now reboot to finish installing the apps and \
 changing system settings.")"
-    fi
     kz.infomsg "$text"
 
-    if $REBOOT; then
-        if $OPTION_GUI; then
-            pkexec /usr/bin/kz-install-pkexec "$cmd"
-        else
-            kz.wait_for_enter
-            eval "$cmd"
-        fi
+    if $OPTION_GUI; then
+        pkexec /usr/bin/kz-install-pkexec "$cmd"
+    else
+        kz.wait_for_enter
+        eval "$cmd"
     fi
 
     exit 0

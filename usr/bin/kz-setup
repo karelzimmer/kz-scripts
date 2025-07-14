@@ -69,7 +69,6 @@ readonly on='on'
 
 declare -A FAILED_APPS=()
 declare ERRORLOG=''
-declare LOGOUT=true
 declare OPTION_GUI=false
 declare OPTION_RESET=false
 
@@ -242,7 +241,6 @@ environment available")"
 
     if [[ -n $* ]]; then
         argument_app=true
-        LOGOUT=false
         while [[ -n $* ]]; do
             app_arguments[$1]=$1
             shift
@@ -566,43 +564,38 @@ $(gettext "Try to set up the apps again.")"
     fi
     text=$(eval_gettext "Apps \$operation completed.")
 
-    if $LOGOUT; then
-
-        if [[ -n ${DISPLAY-} ]]; then
-            text+="
+    if [[ -n ${DISPLAY-} ]]; then
+        text+="
 
 $(gettext "You will now be logged out of the computer to finish setting up \
 the apps and changing user settings.")"
-        else
-            text+="
+    else
+        text+="
 
 $(gettext "Type 'logout' to log out of the computer to finish setting up the \
 apps and changing user settings.")"
-        fi
-        kz.infomsg "$text"
+    fi
+    kz.infomsg "$text"
 
-        if [[ -n ${DISPLAY-} ]]; then
-            $OPTION_GUI || kz.wait_for_enter
+    if [[ -n ${DISPLAY-} ]]; then
+        $OPTION_GUI || kz.wait_for_enter
 
-            if type gnome-session &> /dev/null; then
-                gnome-session-quit --logout --no-prompt
-            elif type ksmserver &> /dev/null; then
-                qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-            elif type lxqt-session &> /dev/null; then
-                lxqt-leave --logout
-            elif type mate-session &> /dev/null; then
-                mate-session-save --logout
-            elif type xfce4-session &> /dev/null; then
-                xfce4-session-logout --logout
-            else
-                text='No logout command available.'
-                kz.debugmsg "$text"
-                text=$(gettext 'Log out of the computer yourself.')
-                kz.infomsg "$text"
-            fi
+        if type gnome-session &> /dev/null; then
+            gnome-session-quit --logout --no-prompt
+        elif type ksmserver &> /dev/null; then
+            qdbus org.kde.ksmserver /KSMServer logout 0 0 0
+        elif type lxqt-session &> /dev/null; then
+            lxqt-leave --logout
+        elif type mate-session &> /dev/null; then
+            mate-session-save --logout
+        elif type xfce4-session &> /dev/null; then
+            xfce4-session-logout --logout
+        else
+            text='No logout command available.'
+            kz.debugmsg "$text"
+            text=$(gettext 'Log out of the computer yourself.')
+            kz.infomsg "$text"
         fi
-    else
-        kz.infomsg "$text"
     fi
 
     exit 0
