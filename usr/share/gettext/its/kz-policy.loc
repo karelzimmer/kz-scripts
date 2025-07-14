@@ -10,7 +10,7 @@
 -->
 
 <locatingRules>
-    <locatingRule name="kz-policy" pattern="*.policy">
+    <locatingRule name="kz-policy" pattern="nl.karelzimmer.kz*.policy">
     <documentRule localName="policyconfig" target="kz-policy.its"/>
     </locatingRule>
 </locatingRules>

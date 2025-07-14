@@ -36,64 +36,6 @@ Met opdracht \fBkz deploy\fR kan de website (inclusief pakket kz) geplaatst
 worden op het internet zodat de scripts en documenten beschikbaar zijn voor
 algemeen gebruik.
 .sp
-Opdracht \fBkz build\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
-.sp
-Pakket kz vult de volgende systeemmappen:
-.br
-/etc/firefox/policies/
-/etc/opt/chrome/policies/managed/
-.RS
-Beleidsreges-bestanden voor Firefox en Chrome.
-.RE
-.sp
-/usr/bin/
-.RS
-Scripts (kz-*)
-.RE
-.sp
-/usr/share/applications/
-.RS
-Bureaubladconfiguratiebestanden (kz-*.desktop)
-.RE
-.sp
-/usr/share/bash-completion/completions/
-.RS
-Tabvoltooiingsscripts (kz-*)
-.RE
-.sp
-/usr/share/doc/kz
-.RS
-Build-id van pakket kz (build.id)
-.RE
-.sp
-/usr/share/gettext/its/
-.RS
-Internationalization Tag Set (ITS) en Regelbestanden lokaliseren voor kz-build
-en gettext (kz-*.its en kz-*.loc)
-.RE
-.sp
-/usr/share/locale/nl/LC_MESSAGES/
-.RS
-Nederlands vertaalbestand (kz.mo)
-.RE
-.sp
-/usr/share/man/man1/
-/usr/share/man/man5/
-.RS
-Engelse man-pagina's (kz-*.1 en kz)
-.RE
-.sp
-/usr/share/man/nl/man1/
-/usr/share/man/nl/man5/
-.RS
-Nederlandse man-pagina's (kz-*.1 en kz-*.5)
-.RE
-.sp
-/usr/share/polkit-1/actions/
-.RS
-Polkit actiedefinitiebestanden (nl.karelzimmer.kz-*.policy)
-.RE
-.sp
 Opdracht \fBkz build\fR kan alleen worden uitgevoerd op een desktop.
 
 .SH OPTIES
@@ -147,13 +89,8 @@ Checklists (Git).
 .RS
 Scripts (Git).
 .br
-Inclusief man-pagina's (usr/share/man/man1/ en usr/share/man/nl/man1/),
-.br
-Tabvoltooiingsscript (usr/share/bash-completion/completions/),
-.br
-Bureaubladconfiguratiebestand (usr/share/applications/), en
-.br
-Polkit actiedefinitiebestanden (usr/share/policypolkit-1/actions/).
+Bevat bijvoorbeeld vertaalbestanden, handleidingen en
+Polkit-actiedefinitiebestanden.
 .RE
 .sp
 ~/kz-uploads/src/*

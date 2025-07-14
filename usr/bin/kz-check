@@ -558,8 +558,7 @@ function term() {
     local text=''
 
     if $ERR_FLAG; then
-        text=$(gettext "Please check all the messages above and fix them if \
-necessary.")
+        text=$(gettext 'Please check all the messages above and fix them.')
         kz.errmsg "$text"
         exit 1
     else

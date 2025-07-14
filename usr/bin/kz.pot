@@ -99,7 +99,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:170 kz-backup:152 kz-build:154 kz-check:199 kz-deploy:134 kz-desktop:196
+#: kz:170 kz-backup:152 kz-build:155 kz-check:199 kz-deploy:134 kz-desktop:196
 #: kz-dev:148 kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236
 #: kz-update:139 kz-wifi:127
 msgid "internal error"
@@ -164,7 +164,7 @@ msgstr ""
 msgid "too many options"
 msgstr ""
 
-#: kz-backup:160 kz-build:162 kz-check:207 kz-deploy:142 kz-desktop:204
+#: kz-backup:160 kz-build:163 kz-check:207 kz-deploy:142 kz-desktop:204
 #: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:145 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr ""
@@ -384,35 +384,35 @@ msgstr ""
 msgid "  -d, --dev      build the development version of package kz"
 msgstr ""
 
-#: kz-build:86 kz-check:73 kz-deploy:70 kz-dev:75
+#: kz-build:87 kz-check:73 kz-deploy:70 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
-#: kz-build:177
+#: kz-build:178
 msgid "Build website"
 msgstr ""
 
-#: kz-build:232
+#: kz-build:235
 msgid "Generate gettext files"
 msgstr ""
 
-#: kz-build:316
+#: kz-build:334
 msgid "Build Debian package"
 msgstr ""
 
-#: kz-build:384
+#: kz-build:402
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:458 kz-deploy:234
+#: kz-build:476 kz-deploy:234
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:480 kz-get:218
+#: kz-build:498 kz-get:218
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:484 kz-check:566 kz-deploy:262 kz-update:267
+#: kz-build:507 kz-check:565 kz-deploy:261 kz-update:267
 msgid "Complete!"
 msgstr ""
 
@@ -499,8 +499,8 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-check:561 kz-deploy:257
-msgid "Please check all the messages above and fix them if necessary."
+#: kz-build:503 kz-check:561 kz-deploy:257
+msgid "Please check all the messages above and fix them."
 msgstr ""
 
 #: kz_common.py:83 kz_common.sh:50 kz-get:130

@@ -37,64 +37,6 @@ With command \fBkz deploy\fR the website (including package kz) can be placed
 on the internet so that the scripts and documents are available for general
 use.
 .sp
-Command \fBkz build\fR is also called from \fBkz deploy\fR.
-.sp
-Package kz populates the following system directories:
-.br
-/etc/firefox/policies/
-/etc/opt/chrome/policies/managed/
-.RS
-Policy files for Firefox and Chrome.
-.RE
-.sp
-/usr/bin/
-.RS
-Scripts (kz-*)
-.RE
-.sp
-/usr/share/applications/
-.RS
-Desktop configuration files (kz-*.desktop)
-.RE
-.sp
-/usr/share/bash-completion/completions/
-.RS
-Tab completion scripts (kz-*)
-.RE
-.sp
-/usr/share/doc/kz
-.RS
-package kz build ID (build.id)
-.RE
-.sp
-/usr/share/gettext/its/
-.RS
-Internationalization Tag Set (ITS) and Locating rules files for kz-build and
-gettext (kz-*.its and kz-*.loc)
-.RE
-.sp
-/usr/share/locale/nl/
-.RS
-Dutch translation file (kz.mo)
-.RE
-.sp
-/usr/share/man/man1/
-/usr/share/man/man5/
-.RS
-Manual pages English (kz-*.1 and kz-*.5)
-.RE
-.sp
-/usr/share/man/nl/man1/
-/usr/share/man/nl/man5/
-.RS
-Manual pages Dutch (kz-*.1 and kz-*.5)
-.RE
-.sp
-/usr/share/polkit-1/actions/
-.RS
-Polkit action definition files (nl.karelzimmer.kz-*.policy)
-.RE
-.sp
 Command \fBkz build\fR can only be run in a desktop environment.
 
 .SH OPTIONS
@@ -148,13 +90,8 @@ Checklists (Git).
 .RS
 Scripts (Git).
 .br
-Includes manual pages (usr/share/man/man1/ and usr/share/man/nl/man1/),
-.br
-Tab completion scripts (usr/share/bash-completion/completions/),
-.br
-Desktop configuration files (usr/share/applications/), and
-.br
-Polkit action definition files (usr/share/policypolkit-1/actions/).
+Includes e.g. translation files, manual pages, and Polkit action definition
+files.
 .RE
 .sp
 ~/kz-uploads/src/*

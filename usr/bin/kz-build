@@ -71,6 +71,7 @@ readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 ###############################################################################
 
 declare OPTION_DEV=false
+declare ERR_FLAG=false
 
 
 ###############################################################################
@@ -215,10 +216,12 @@ function build_website() {
 # 2. the readable Portable Object (PO) file from the POT file, and
 # 3. the binary Machine Object (MO) file from the PO file.
 function generate_gettext_files() {
+    local bash_script='#!''/usr/bin/env bash'
+    local gettext_language=''
     local its_dir=$HOME/kz-scripts/usr/share/gettext/its
-    local language_specification=''
     local lc_messages_dir=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES
     local pot_dir=$SCRIPTS_REPO/usr/bin/
+    local python_script='#!''/usr/bin/env python3'
     local startdir=$PWD
     local text=''
     local gettext_dir=''
@@ -239,44 +242,59 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
 
         cd "$gettext_dir"
 
+        #FIXME translate text msgs!!
+
+        # CREATE POT FILE -- 1/3
+        # Check files and determine the language specification for xgettext.
+        # The language specification is used to determine the type of file
+        # that is being processed by xgettext.
         for gettext_file in *; do
+            text="$gettext_dir/$gettext_file: "
+            kz.logmsg "$text"
             if [[ -d $gettext_file ]]; then
-                text="$gettext_dir/$gettext_file: is een map"
+                text="is een map."
                 kz.logmsg "$text"
                 continue
             elif ! [[ -f $gettext_file ]]; then
-                text="$gettext_dir/$gettext_file: is geen bestand"
+                text="is geen bestand."
                 kz.logmsg "$text"
                 continue
-            elif [[ $gettext_file =~ .*.gpg$ ]]; then
-                text="$gettext_dir/$gettext_file: is met GPG versleuteld"
+            elif [[ $gettext_file == *.gpg ]]; then
+                text="is met GPG versleuteld."
                 kz.logmsg "$text"
                 continue
-            elif [[ $gettext_file =~ .*.pot$ ]]; then
-                text="$gettext_dir/$gettext_file: is een gettext POT-bestand"
+            elif [[ $gettext_file == *.pot ]]; then
+                text="is een gettext POT-bestand."
                 kz.logmsg "$text"
                 continue
-            fi
-
-            if grep --quiet '^# shellcheck ' "$gettext_file"; then
-                language_specification='--language=Shell'
-            elif grep --quiet '^import ' "$gettext_file"; then
-                language_specification='--language=Python'
-            elif grep --quiet 'Desktop Entry' "$gettext_file"; then
-                language_specification='--language=Desktop'
-            elif grep --quiet 'policyconfig' "$gettext_file"; then
-                # The language specification for the policy file is
-                # specified in the ITS file.
-                # Since the LOC file also exists, language_specification can
-                # also be empty.
-                language_specification="--its=$its_dir/kz-policy.its"
+            elif [[ $gettext_file == *.po ]]; then
+                text="is een gettext PO-bestand."
+                kz.logmsg "$text"
+                continue
+            elif [[ $gettext_file == *.mo ]]; then
+                text="is een gettext MO-bestand."
+                kz.logmsg "$text"
+                continue
+            elif [[ $gettext_file == *.desktop ]]; then
+                gettext_language='--language=Desktop'
+            elif [[ $gettext_file == *.policy ]]; then
+                gettext_language="--its=$its_dir/kz-policy.its"
+            elif [[ $gettext_file == *.py ]]; then
+                gettext_language='--language=Python'
+            elif grep --quiet --line-regexp "$python_script" "$gettext_file"
+            then
+                gettext_language='--language=Python'
+            elif [[ $gettext_file == *.sh ]]; then
+                gettext_language='--language=Shell'
+            elif grep --quiet --line-regexp "$bash_script" "$gettext_file"
+            then
+                gettext_language='--language=Shell'
             else
-                text="$gettext_dir/$gettext_file: kan de taal niet bepalen"
+                text+="kan de taal niet bepalen"
                 kz.errmsg "$text"
+                ERR_FLAG=true
                 continue
             fi
-
-            kz.logmsg "$gettext_dir/$gettext_file:"
 
             # Option omit-header is used to omit the header in the
             # Portable Object Template (POT) file and is used to not update the
@@ -285,14 +303,13 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
             # file, because it is generated from the source code.
             # The header is needed in the Portable Object (PO) file, because it
             # is used to provide information about the translation.
-            xgettext    "$language_specification"   \
+            xgettext    "$gettext_language"   \
                         --join-existing             \
                         --omit-header               \
                         --output="$pot_dir/kz.pot"  \
                         "$gettext_file"             |& $PROGRAM_LOGS
 
-            sed --in-place '/"POT-Creation-Date:/d' "$pot_dir/kz.pot"
-
+            # CREATE PO FILE -- 2/3
             msgmerge    --update                    \
                         --backup=none               \
                         --previous                  \
@@ -302,6 +319,7 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
     done
     cd "$startdir"
 
+    # CREATE MO FILE -- 3/3
     msgfmt  --output-file="$lc_messages_dir/kz.mo"  \
             "$lc_messages_dir/kz.po"                |& $PROGRAM_LOGS
 }
@@ -481,9 +499,15 @@ function term() {
 package is installed")
         kz.errmsg "$text"
     fi
+    if $ERR_FLAG; then
+        text=$(gettext 'Please check all the messages above and fix them.')
+        kz.errmsg "$text"
+        exit 1
+    else
     text=$(gettext 'Complete!')
     kz.infomsg "$text"
     exit 0
+    fi
 }
 
 
