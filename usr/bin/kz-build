@@ -242,8 +242,6 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
 
         cd "$gettext_dir"
 
-        #FIXME translate text msgs!!
-
         # CREATE POT FILE -- 1/3
         # Check files and determine the language specification for xgettext.
         # The language specification is used to determine the type of file
@@ -252,27 +250,27 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
             text="$gettext_dir/$gettext_file: "
             kz.logmsg "$text"
             if [[ -d $gettext_file ]]; then
-                text="is een map."
+                text=$(gettext 'skip, is a direcory.')
                 kz.logmsg "$text"
                 continue
             elif ! [[ -f $gettext_file ]]; then
-                text="is geen bestand."
+                text=$(gettext 'skip, is not a file.')
                 kz.logmsg "$text"
                 continue
             elif [[ $gettext_file == *.gpg ]]; then
-                text="is met GPG versleuteld."
+                text=$(gettext 'skip, is GPG encrypted.')
                 kz.logmsg "$text"
                 continue
             elif [[ $gettext_file == *.pot ]]; then
-                text="is een gettext POT-bestand."
+                text=$(gettext 'skip, is a gettext POT file.')
                 kz.logmsg "$text"
                 continue
             elif [[ $gettext_file == *.po ]]; then
-                text="is een gettext PO-bestand."
+                text=$(gettext 'skip, is a gettext PO file.')
                 kz.logmsg "$text"
                 continue
             elif [[ $gettext_file == *.mo ]]; then
-                text="is een gettext MO-bestand."
+                text=$(gettext 'skip, is a gettext MO file.')
                 kz.logmsg "$text"
                 continue
             elif [[ $gettext_file == *.desktop ]]; then
@@ -290,7 +288,7 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
             then
                 gettext_language='--language=Shell'
             else
-                text+="kan de taal niet bepalen"
+                text+=$(gettext "can't determine the language")
                 kz.errmsg "$text"
                 ERR_FLAG=true
                 continue
