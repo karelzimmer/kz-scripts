@@ -182,7 +182,7 @@ function check_scripts_and_website() {
 
     # Call kz-check.
     kz.logmsg 'Calling kz-check...'
-    if ! kz.check; then
+    if ! kz_check; then
         ERR_FLAG=true
         OPTION_DEV=true
     fi
