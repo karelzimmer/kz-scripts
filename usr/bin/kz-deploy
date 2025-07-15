@@ -154,8 +154,8 @@ function check() {
     text=$(gettext 'CHECK -- 1/2')
     kz.infomsg "$text"
     if ! kz.check_repos; then
-        OPTION_DEV=true
         ERR_FLAG=true
+        OPTION_DEV=true
     fi
     check_scripts_and_website
 }
@@ -182,8 +182,10 @@ function check_scripts_and_website() {
 
     # Call kz-check.
     kz.logmsg 'Calling kz-check...'
-    kz-check || ERR_FLAG=true
-    $ERR_FLAG || OPTION_DEV=true
+    if ! kz.check; then
+        ERR_FLAG=true
+        OPTION_DEV=true
+    fi
     kz.logmsg 'Called kz-check.'
 }
 

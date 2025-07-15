@@ -432,7 +432,7 @@ msgstr ""
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:474 kz-deploy:254
+#: kz-build:474 kz-deploy:256
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
@@ -440,7 +440,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:505 kz-check:565 kz-deploy:281 kz-update:267
+#: kz-build:505 kz-check:565 kz-deploy:283 kz-update:267
 msgid "Complete!"
 msgstr ""
 
@@ -527,7 +527,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:501 kz-check:561 kz-deploy:277
+#: kz-build:501 kz-check:561 kz-deploy:279
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -666,23 +666,23 @@ msgstr ""
 msgid "DEPLOY -- 2/2"
 msgstr ""
 
-#: kz-deploy:196
+#: kz-deploy:198
 msgid "Build packages and website"
 msgstr ""
 
-#: kz-deploy:222
+#: kz-deploy:224
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:226 kz-dev:312
+#: kz-deploy:228 kz-dev:312
 msgid "Password for"
 msgstr ""
 
-#: kz-deploy:240
+#: kz-deploy:242
 msgid "Website upload failed."
 msgstr ""
 
-#: kz-deploy:264
+#: kz-deploy:266
 msgid "Install Debian package failed."
 msgstr ""
 
