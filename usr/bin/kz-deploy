@@ -167,6 +167,7 @@ function deploy() {
 
     text=$(gettext 'DEPLOY -- 2/2')
     kz.infomsg "\n$text"
+    build_packages_and_website
     upload_website
     install_package
 }
@@ -183,6 +184,25 @@ function check_scripts_and_website() {
     kz.logmsg 'Calling kz-check...'
     kz-check || ERR_FLAG=true
     kz.logmsg 'Called kz-check.'
+}
+
+
+# This function builds the website and kz package.
+function build_packages_and_website() {
+    local parm=''
+    local text=''
+
+    text=$(gettext 'Build packages and website')...
+    kz.infomsg "$text"
+
+    if $OPTION_DEV; then
+        parm='--dev'
+    fi
+
+    # Call kz-build.
+    kz.logmsg 'Calling kz-build...'
+    kz-build "$parm" || ERR_FLAG=true
+    kz.logmsg 'Called kz-build.'
 }
 
 

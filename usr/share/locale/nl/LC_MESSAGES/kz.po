@@ -488,7 +488,7 @@ msgstr "Bouw Debian-pakket"
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:474 kz-deploy:234
+#: kz-build:474 kz-deploy:254
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
@@ -496,11 +496,11 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:505 kz-check:565 kz-deploy:261 kz-update:267
+#: kz-build:505 kz-check:565 kz-deploy:281 kz-update:267
 msgid "Complete!"
 msgstr "Klaar!"
 
-#: kz-check:23 kz-deploy:179
+#: kz-check:23 kz-deploy:180
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 
@@ -588,7 +588,7 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:501 kz-check:561 kz-deploy:257
+#: kz-build:501 kz-check:561 kz-deploy:277
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -732,19 +732,23 @@ msgstr "CONTROLEREN -- 1/2"
 msgid "DEPLOY -- 2/2"
 msgstr "DISTRIBUEREN -- 2/2"
 
-#: kz-deploy:202
+#: kz-deploy:195
+msgid "Build packages and website"
+msgstr "Bouw pakketten en Website"
+
+#: kz-deploy:222
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:206 kz-dev:312
+#: kz-deploy:226 kz-dev:312
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
-#: kz-deploy:220
+#: kz-deploy:240
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-#: kz-deploy:244
+#: kz-deploy:264
 msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
