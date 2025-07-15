@@ -59,6 +59,8 @@ readonly OPTIONS_SHORT='abcf:grhmuv'
 readonly OPTIONS_LONG="apps,browse,cat,file:,gui,remove,help,manual,usage,\
 version"
 
+readonly REBOOT_APPS='dash-to-dock force-x11 kvm'
+
 # Required for kz.become.
 readonly COMMANDLINE_ARGS=("$@")
 
@@ -71,6 +73,7 @@ declare -A FAILED_APPS=()
 declare ERRORLOG=''
 declare OPTION_GUI=false
 declare OPTION_REMOVE=false
+declare REBOOT=false
 
 
 ###############################################################################
@@ -249,8 +252,13 @@ environment available")"
         argument_app=true
         while [[ -n $* ]]; do
             app_arguments[$1]=$1
+            if [[ $REBOOT_APPS =~ $1 ]]; then
+                REBOOT=true
+            fi
             shift
         done
+    else
+        REBOOT=true
     fi
 }
 
@@ -589,17 +597,23 @@ $(gettext "Try installing the apps again.")"
         # shellcheck disable=SC2034
         operation=$(gettext 'remove')
     fi
-    text="$(eval_gettext "Apps \$operation completed.")
+    text=$(eval_gettext "Apps \$operation completed.")
+
+    if $REBOOT; then
+        text+="
 
 $(gettext "The computer will now reboot to finish installing the apps and \
 changing system settings.")"
+    fi
     kz.infomsg "$text"
 
-    if $OPTION_GUI; then
-        pkexec /usr/bin/kz-install-pkexec "$cmd"
-    else
-        kz.wait_for_enter
-        eval "$cmd"
+    if $REBOOT; then
+        if $OPTION_GUI; then
+            pkexec /usr/bin/kz-install-pkexec "$cmd"
+        else
+            kz.wait_for_enter
+            eval "$cmd"
+        fi
     fi
 
     exit 0
