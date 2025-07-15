@@ -196,12 +196,11 @@ function build_packages_and_website() {
     text=$(gettext 'Build packages and website')...
     kz.infomsg "$text"
 
+    # Call kz-build.
+    kz.logmsg 'Calling kz-build...'
     if $OPTION_DEV; then
         parm='--dev'
     fi
-
-    # Call kz-build.
-    kz.logmsg 'Calling kz-build...'
     kz-build "$parm" || ERR_FLAG=true
     kz.logmsg 'Called kz-build.'
 }
