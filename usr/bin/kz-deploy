@@ -183,6 +183,7 @@ function check_scripts_and_website() {
     # Call kz-check.
     kz.logmsg 'Calling kz-check...'
     kz-check || ERR_FLAG=true
+    $ERR_FLAG || OPTION_DEV=true
     kz.logmsg 'Called kz-check.'
 }
 
