@@ -734,7 +734,7 @@ msgstr "DISTRIBUEREN -- 2/2"
 
 #: kz-deploy:195
 msgid "Build packages and website"
-msgstr "Bouw pakketten en Website"
+msgstr "Bouw pakketten en website"
 
 #: kz-deploy:222
 msgid "Upload website"
