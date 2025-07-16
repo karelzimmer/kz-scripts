@@ -100,7 +100,7 @@ msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:170 kz-backup:152 kz-build:155 kz-check:199 kz-deploy:134 kz-desktop:196
-#: kz-dev:148 kz-install:244 kz-menu:175 kz-restore:153 kz-setup:236
+#: kz-dev:148 kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236
 #: kz-update:139 kz-wifi:127
 msgid "internal error"
 msgstr ""
@@ -155,7 +155,7 @@ msgid ""
 "                 place backup in specified directory"
 msgstr ""
 
-#: kz-backup:112 kz-desktop:211 kz-install:207 kz-menu:146 kz-restore:112
+#: kz-backup:112 kz-desktop:211 kz-install:205 kz-menu:146 kz-restore:112
 #: kz-setup:201
 msgid "no desktop environment available"
 msgstr ""
@@ -304,7 +304,7 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:514 kz-install:426 kz-restore:249 kz-setup:414
+#: kz-backup:514 kz-install:421 kz-restore:249 kz-setup:414
 msgid "progress"
 msgstr ""
 
@@ -316,7 +316,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:585 kz-install:563 kz-restore:320 kz-setup:532
+#: kz-backup:585 kz-install:558 kz-restore:320 kz-setup:532
 msgid "error messages"
 msgstr ""
 
@@ -341,11 +341,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:599 kz-install:574 kz-restore:334 kz-setup:542
+#: kz-backup:599 kz-install:569 kz-restore:334 kz-setup:542
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:600 kz-install:575 kz-restore:335 kz-setup:543
+#: kz-backup:600 kz-install:570 kz-restore:335 kz-setup:543
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -825,7 +825,7 @@ msgid "Type 'exit' to close this window."
 msgstr ""
 
 #: nl.karelzimmer.kz-install.policy:21 kz-install:23 kz-install:420 kz-menu:76
-#: kz-install:426 kz-install.desktop:11
+#: kz-install:421 kz-install.desktop:11
 msgid "Install apps"
 msgstr ""
 
@@ -867,96 +867,96 @@ msgstr ""
 msgid "  <app>          process specified apps"
 msgstr ""
 
-#: kz-install:122
+#: kz-install:120
 #, sh-format
 msgid "Installation file '$install_file' not found."
 msgstr ""
 
-#: kz-install:277 kz-setup:266
+#: kz-install:272 kz-setup:266
 msgid "The following apps are available:"
 msgstr ""
 
-#: kz-install:279 kz-setup:268
+#: kz-install:274 kz-setup:268
 msgid "NUM  APP"
 msgstr ""
 
-#: kz-install:298
+#: kz-install:293
 msgid "Use \"kz install <app>...\" to install the apps."
 msgstr ""
 
-#: kz-install:299
+#: kz-install:294
 msgid "Use \"kz install --cat\" to view the contents of the installation file."
 msgstr ""
 
-#: kz-install:301
+#: kz-install:296
 msgid ""
 "Use \"kz install --cat <app>...\" to view the contents of the apps "
 "installation file."
 msgstr ""
 
-#: kz-install:303
+#: kz-install:298
 msgid ""
 "Use \"kz install --browse\" to view the contents of the default installation "
 "file."
 msgstr ""
 
-#: kz-install:306 kz-setup:294
+#: kz-install:301 kz-setup:294
 msgid "  0  No apps found."
 msgstr ""
 
-#: kz-install:364 kz-setup:352
+#: kz-install:359 kz-setup:352
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:421 kz-setup:409
+#: kz-install:416 kz-setup:409
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:427 kz-menu:52
+#: kz-install:422 kz-menu:52
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:460 kz-setup:448
+#: kz-install:455 kz-setup:448
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:461 kz-setup:449
+#: kz-install:456 kz-setup:449
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:570
+#: kz-install:565
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:576
+#: kz-install:571
 msgid "Try installing the apps again."
 msgstr ""
 
-#: kz-install:594
+#: kz-install:589
 msgid "install"
 msgstr ""
 
-#: kz-install:598
+#: kz-install:593
 msgid "remove"
 msgstr ""
 
-#: kz-install:600 kz-setup:568
+#: kz-install:595 kz-setup:568
 #, sh-format
 msgid "Apps $operation completed."
 msgstr ""
 
-#: kz-install:605
+#: kz-install:600
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1005 kz-install.sh:1006 kz-install.sh:1012
+#: kz-install.sh:1011 kz-install.sh:1012 kz-install.sh:1018
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1005
+#: kz-install.sh:1011
 msgid "Guest user"
 msgstr ""
 

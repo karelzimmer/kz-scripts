@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=bash disable=SC2034
 ###############################################################################
 # SPDX-FileComment: Install file for use with kz-install script
 #
@@ -187,6 +187,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The c
 # Desktop dock.
 # Reboot required!
 #------------------------------------------------------------------------------
+REBOOT=true
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
@@ -196,6 +197,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf in
 # Desktop dock.
 # Reboot required!
 #------------------------------------------------------------------------------
+REBOOT=true
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
@@ -339,6 +341,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes fdupes;
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
 #------------------------------------------------------------------------------
+REBOOT=true
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
 #------------------------------------------------------------------------------
@@ -352,6 +355,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
 #------------------------------------------------------------------------------
+REBOOT=true
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
 #------------------------------------------------------------------------------
@@ -575,6 +579,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The k
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt
 # configuration files.
 #------------------------------------------------------------------------------
+REBOOT=true
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo usermod --append --groups libvirt,libvirt-qemu "$USER"; fi
 #------------------------------------------------------------------------------
@@ -606,6 +611,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo virsh 
 # Images are in: /var/lib/libvirt/images/
 # Reboot required!
 #------------------------------------------------------------------------------
+REBOOT=true
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo delgroup libvirtd-dnsmasq; fi
