@@ -241,8 +241,6 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
     for gettext_dir in $gettext_dirs; do
 
         cd "$gettext_dir"
-
-        # CREATE POT FILE -- 1/3
         for gettext_file in *; do
             text="$gettext_dir/$gettext_file: "
             kz.logmsg "$text"
@@ -291,6 +289,7 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                 continue
             fi
 
+            # CREATE POT FILE -- 1/3
             xgettext    "$gettext_language"         \
                         --join-existing             \
                         --omit-header               \
@@ -305,7 +304,6 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                         "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
         done
     done
-
     cd "$startdir"
 
     # CREATE MO FILE -- 3/3

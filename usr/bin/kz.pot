@@ -396,51 +396,51 @@ msgstr ""
 msgid "Generate gettext files"
 msgstr ""
 
-#: kz-build:250
+#: kz-build:248
 msgid "skip, is a direcory."
 msgstr ""
 
-#: kz-build:254
+#: kz-build:252
 msgid "skip, is not a file."
 msgstr ""
 
-#: kz-build:258
+#: kz-build:256
 msgid "skip, is GPG encrypted."
 msgstr ""
 
-#: kz-build:262
+#: kz-build:260
 msgid "skip, is a gettext POT file."
 msgstr ""
 
-#: kz-build:266
+#: kz-build:264
 msgid "skip, is a gettext PO file."
 msgstr ""
 
-#: kz-build:270
+#: kz-build:268
 msgid "skip, is a gettext MO file."
 msgstr ""
 
-#: kz-build:288
+#: kz-build:286
 msgid "can't determine the language"
 msgstr ""
 
-#: kz-build:323
+#: kz-build:321
 msgid "Build Debian package"
 msgstr ""
 
-#: kz-build:391
+#: kz-build:389
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:465 kz-deploy:237
+#: kz-build:463 kz-deploy:237
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:487 kz-get:218
+#: kz-build:485 kz-get:218
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:496 kz-check:565 kz-deploy:264 kz-update:267
+#: kz-build:494 kz-check:565 kz-deploy:264 kz-update:267
 msgid "Complete!"
 msgstr ""
 
@@ -527,7 +527,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:492 kz-check:561 kz-deploy:260
+#: kz-build:490 kz-check:561 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
