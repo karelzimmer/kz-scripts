@@ -62,10 +62,10 @@ if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes ansible; fi
 # Web app: https://my.anydesk.com/v2
 #------------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes anydesk; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo > /dev/null; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes anydesk; fi
 
 # remove anydesk from pc06 pc07
@@ -266,7 +266,7 @@ sudo systemctl start fwupd.service
 # Do nothing when the laptop lid is closed.
 #------------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 # remove disabled-lidswitch from #none
 #------------------------------------------------------------------------------
@@ -857,7 +857,7 @@ if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; 
 # Web app: https://open.spotify.com
 #------------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes spotify-client; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The spotify app is available as a web app.'; fi
@@ -1062,7 +1062,7 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get update
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes code; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo update-alternatives --set editor /usr/bin/code; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes code; fi
 
 # remove vscode from pc01 pc06 pc07
