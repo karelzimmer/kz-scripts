@@ -243,9 +243,6 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
         cd "$gettext_dir"
 
         # CREATE POT FILE -- 1/3
-        # Check files and determine the language specification for xgettext.
-        # The language specification is used to determine the type of file
-        # that is being processed by xgettext.
         for gettext_file in *; do
             text="$gettext_dir/$gettext_file: "
             kz.logmsg "$text"
@@ -294,13 +291,6 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                 continue
             fi
 
-            # Option omit-header is used to omit the header in the
-            # Portable Object Template (POT) file and is used to not update the
-            # POT-Creation-Date if nothing else is changed in the POT file.
-            # The header is not needed in the Portable Object Template (POT)
-            # file, because it is generated from the source code.
-            # The header is needed in the Portable Object (PO) file, because it
-            # is used to provide information about the translation.
             xgettext    "$gettext_language"   \
                         --join-existing             \
                         --omit-header               \
