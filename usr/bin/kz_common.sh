@@ -349,7 +349,7 @@ function kz.term() {
             rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
             ;;
         200 )
-            # Red Hat or Red Hat-based system.
+            # Red Hat-based system.
             rc_desc='There was a problem with acquiring or releasing of locks.'
             ;;
         255 )
