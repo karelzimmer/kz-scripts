@@ -291,7 +291,7 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                 continue
             fi
 
-            xgettext    "$gettext_language"   \
+            xgettext    "$gettext_language"         \
                         --join-existing             \
                         --omit-header               \
                         --output="$pot_dir/kz.pot"  \
@@ -305,6 +305,7 @@ $HOME/kz-scripts/usr/share/polkit-1/actions
                         "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
         done
     done
+
     cd "$startdir"
 
     # CREATE MO FILE -- 3/3
