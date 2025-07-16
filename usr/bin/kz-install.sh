@@ -14,17 +14,17 @@
 #------------------------------------------------------------------------------
 # Disable Ubuntu's automatic crash report generation.
 #------------------------------------------------------------------------------
-if systemctl cat apport &> /dev/null; then sudo systemctl stop apport.service; fi
-if systemctl cat apport &> /dev/null; then sudo systemctl disable apport.service; fi
-if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
-if systemctl cat apport &> /dev/null; then sudo rm --force --verbose /var/crash/*; fi
+if systemctl cat apport; then sudo systemctl stop apport.service; fi
+if systemctl cat apport; then sudo systemctl disable apport.service; fi
+if systemctl cat apport; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
+if systemctl cat apport; then sudo rm --force --verbose /var/crash/*; fi
 
 # remove disabled-apport from *
 #------------------------------------------------------------------------------
 # Enable Ubuntu's automatic crash report generation.
 #------------------------------------------------------------------------------
-if systemctl cat apport &> /dev/null; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
-if systemctl cat apport &> /dev/null; then sudo systemctl enable --now apport.service; fi
+if systemctl cat apport; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
+if systemctl cat apport; then sudo systemctl enable --now apport.service; fi
 
 # install 7zip on *
 #------------------------------------------------------------------------------
@@ -1008,14 +1008,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes usbutil
 #------------------------------------------------------------------------------
 # Add guest user.
 #------------------------------------------------------------------------------
-if ! id "$(gettext 'guest')" &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')"; fi
-if id "$(gettext 'guest')" &> /dev/null; then sudo passwd --delete "$(gettext 'guest')"; fi
+if ! id "$(gettext 'guest')"; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')"; fi
+if   id "$(gettext 'guest')"; then sudo passwd --delete "$(gettext 'guest')"; fi
 
 # remove user-guest from #none
 #------------------------------------------------------------------------------
 # Delete guest user.
 #------------------------------------------------------------------------------
-if id "$(gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext 'guest')"; fi
+if id "$(gettext 'guest')"; then sudo userdel --remove "$(gettext 'guest')"; fi
 
 # install virtualbox on #none
 #------------------------------------------------------------------------------
