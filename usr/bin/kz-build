@@ -365,7 +365,6 @@ function build_deb_package() {
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
     # Create Debian package in kz-uploads.
-    # Debian 11: .deb uses unknown compression ==> -Z=xz.
     if $OPTION_DEV; then
         to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME"
     else
@@ -373,7 +372,6 @@ function build_deb_package() {
     fi
     fakeroot    dpkg-deb            \
                 --build             \
-                -Z=xz               \
                 "$DEB_REPO_DISTDIR" \
                 "$to_build"         |& $PROGRAM_LOGS
 }
