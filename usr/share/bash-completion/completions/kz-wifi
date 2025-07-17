@@ -1,10 +1,10 @@
 # shellcheck shell=bash
-###############################################################################
+# #############################################################################
 # SPDX-FileComment: Tab-completion-script for kz-wifi
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
-###############################################################################
+# #############################################################################
 
 declare DASHOPTIONS='-g --gui -h --help -u --usage -m --manual -v --version'
 complete -o default -W "$DASHOPTIONS" kz-wifi

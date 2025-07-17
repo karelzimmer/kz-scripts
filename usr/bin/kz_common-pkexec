@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash
-###############################################################################
+# #############################################################################
 # SPDX-FileComment: Wrapper script for kz_common
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
-###############################################################################
+# #############################################################################
 
 fuser   --silent                        \
         /var/cache/debconf/config.dat   \

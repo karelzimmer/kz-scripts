@@ -1,10 +1,10 @@
 # shellcheck shell=bash
-###############################################################################
+# #############################################################################
 # SPDX-FileComment: Tab-completion-script for kz-update
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
-###############################################################################
+# #############################################################################
 
 declare DASHOPTIONS='-h --help -m --manual -u --usage -v --version'
 complete -o default -W "$DASHOPTIONS" kz-update

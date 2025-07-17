@@ -4,12 +4,12 @@
  "http://www.freedesktop.org/software/polkit/policyconfig-1.dtd">
 
 <!--
-###############################################################################
+# #############################################################################
 # SPDX-FileComment: Polkit action definition file for kz-wifi
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
-###############################################################################
+# #############################################################################
 -->
 
 <policyconfig>

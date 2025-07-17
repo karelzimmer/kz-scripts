@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 
 <!--
-###############################################################################
+# #############################################################################
 # SPDX-FileComment: Internationalization Tag Set (ITS) rules file for Polkit
 #                   action definition files
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
-###############################################################################
+# #############################################################################
 -->
 
 <its:rules xmlns:its="http://www.w3.org/2005/11/its"
