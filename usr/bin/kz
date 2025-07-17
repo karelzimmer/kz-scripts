@@ -199,7 +199,6 @@ def process_option_list() -> None:
                             --number-separator='  '     \
                             --body-numbering=a"
 
-    # Python 3.6.9 version on Ubuntu 18.04 does not have parameter 'text=True'.
     try:
         text += subprocess.run(command, stdout=subprocess.PIPE,
                                shell=True, check=True, text=True).stdout

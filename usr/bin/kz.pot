@@ -428,19 +428,19 @@ msgstr ""
 msgid "Build Debian package"
 msgstr ""
 
-#: kz-build:389
+#: kz-build:387
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:463 kz-deploy:237
+#: kz-build:461 kz-deploy:237
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:485 kz-get:218
+#: kz-build:483 kz-get:218
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:494 kz-check:565 kz-deploy:264 kz-update:267
+#: kz-build:492 kz-check:565 kz-deploy:264 kz-update:267
 msgid "Complete!"
 msgstr ""
 
@@ -527,7 +527,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:490 kz-check:561 kz-deploy:260
+#: kz-build:488 kz-check:561 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
