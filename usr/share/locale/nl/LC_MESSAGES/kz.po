@@ -114,11 +114,11 @@ msgstr "De volgende opdrachten zijn beschikbaar:"
 msgid "NUM  COMMAND"
 msgstr "NUM  OPDRACHT"
 
-#: kz:207
+#: kz:206
 msgid "Use \"man kz\" for available commands."
 msgstr "Gebruik \"man kz\" voor beschikbare opdrachten."
 
-#: kz:209
+#: kz:208
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."

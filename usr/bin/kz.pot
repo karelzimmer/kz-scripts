@@ -113,11 +113,11 @@ msgstr ""
 msgid "NUM  COMMAND"
 msgstr ""
 
-#: kz:207
+#: kz:206
 msgid "Use \"man kz\" for available commands."
 msgstr ""
 
-#: kz:209
+#: kz:208
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
