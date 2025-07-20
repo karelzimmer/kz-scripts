@@ -50,7 +50,7 @@ kz-desktop --addaft=kz-cockpit
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-cockpit
 
-# setup dash-to-dock on pc07
+# setup dash-to-dock on pc06new pc07
 # -----------------------------------------------------------------------------
 # Desktop dock.
 # -----------------------------------------------------------------------------
@@ -67,7 +67,7 @@ if grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmai
 if grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ; then gnome-extensions enable no-overview@fthx; fi
 
-# reset dash-to-dock on pc07
+# reset dash-to-dock on pc06new pc07
 # -----------------------------------------------------------------------------
 # Desktop dock.
 # -----------------------------------------------------------------------------
@@ -84,13 +84,13 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position     ; the
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height     ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed   ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
-# setup evolution on pc07
+# setup evolution on pc06new pc07
 # -----------------------------------------------------------------------------
 # E-mail and organizer.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Evolution
 
-# reset evolution on pc07
+# reset evolution on pc06new pc07
 # -----------------------------------------------------------------------------
 # E-mail and organizer.
 # -----------------------------------------------------------------------------
@@ -389,14 +389,14 @@ if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 # -----------------------------------------------------------------------------
 kz-desktop --delete=code
 
-# setup webmin on pc07
+# setup webmin on pc06new pc07
 # -----------------------------------------------------------------------------
 # Web console.
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-webmin
 
-# reset webmin on pc07
+# reset webmin on pc06new pc07
 # -----------------------------------------------------------------------------
 # Web console.
 # Web app: https://localhost:10000

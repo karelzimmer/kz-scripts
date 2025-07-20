@@ -182,7 +182,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The cups-back
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes cups-backend-bjnp; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The cups-backend-bjnp app is not available.'; fi
 
-# install dash-to-dock on pc07
+# install dash-to-dock on pc06new pc07
 # -----------------------------------------------------------------------------
 # Desktop dock.
 # Reboot required!
@@ -192,7 +192,7 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
 
-# remove dash-to-dock from pc07
+# remove dash-to-dock from pc06new pc07
 # -----------------------------------------------------------------------------
 # Desktop dock.
 # Reboot required!
@@ -648,13 +648,13 @@ sudo updatedb
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes locate; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes mlocate; fi
 
-# install log-access-for-user on pc07
+# install log-access-for-user on pc06new pc07
 # -----------------------------------------------------------------------------
 # Log access.
 # -----------------------------------------------------------------------------
 sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
-# remove log-access-for-user from pc07
+# remove log-access-for-user from pc06new pc07
 # -----------------------------------------------------------------------------
 # Log access.
 # -----------------------------------------------------------------------------
@@ -972,7 +972,7 @@ sudo ufw disable
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes gufw; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes gufw; fi
 
-# install usbutils on pc07
+# install usbutils on pc06new pc07
 # -----------------------------------------------------------------------------
 # USB utilities.
 # This package contains the lsusb utility.
@@ -980,7 +980,7 @@ if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes gufw; fi
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
 if grep rhel   /etc/os-release; then sudo dnf install --assumeyes usbutils; fi
 
-# remove usbutils from pc07
+# remove usbutils from pc06new pc07
 # -----------------------------------------------------------------------------
 # USB utilities.
 # This package contains the lsusb utility.
@@ -1060,7 +1060,7 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes code; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo*; fi
 
-# install webmin on pc07
+# install webmin on pc06new pc07
 # -----------------------------------------------------------------------------
 # Web console.
 # Web app: https://localhost:10000
@@ -1074,7 +1074,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sh /tmp/setup-
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes webmin; fi
 
-# remove webmin from pc07
+# remove webmin from pc06new pc07
 # -----------------------------------------------------------------------------
 # Web console.
 # Web app: https://localhost:10000
