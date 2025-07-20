@@ -327,7 +327,11 @@ function backup_setting_apps() {
     kz.logmsg 'Create a list of installed apps...(ignore WARNING).'
 
     printf '%s\n' "$header1" > "$output_file"
-    apt list --manual-installed 2> /dev/null >> "$output_file" || true
+    apt list                \
+        --manual-installed  \
+        2> /dev/null        |
+    cut --delimiter='/'     \
+        --fields=1          >> "$output_file" || true
     printf '%s\n' "$footer1" >> "$output_file"
 
     printf '\n%s\n' "$header2" >> "$output_file"
