@@ -224,8 +224,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --a
 # Express Advanced Error Reporting) to prevent the log gets flooded with
 # 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet pci=noaer"/' /etc/default/grub
-sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
+sudo sed --in-place 's/quiet/quiet pci=noaer/' /etc/default/grub
 if grep debian /etc/os-release; then sudo update-grub; fi
 if grep rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # Check for kernel config parameter pci=noaer.
@@ -238,8 +237,7 @@ grep 'pci=noaer' /etc/default/grub
 # Express Advanced Error Reporting) to "allow" the log gets flooded with
 # 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/' /etc/default/grub
-sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/' /etc/default/grub
+sudo sed --in-place 's/quiet pci=noaer/quiet/' /etc/default/grub
 if grep debian /etc/os-release; then sudo update-grub; fi
 if grep rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
