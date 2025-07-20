@@ -421,22 +421,6 @@ if grep rhel   /etc/os-release; then sudo sudo dnf install --assumeyes git; fi
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes git; fi
 if grep rhel   /etc/os-release; then sudo sudo dnf remove --assumeyes git; fi
 
-# install gnome-gmail on pc01 pc06 pc06new pc07
-# -----------------------------------------------------------------------------
-# Gmail for e-mail.
-# Web app: https://mail.google.com
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gnome-gmail; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The gnome-gmail app is not available.'; fi
-
-# remove gnome-gmail from pc01 pc06 pc06new pc07
-# -----------------------------------------------------------------------------
-# Gmail for e-mail.
-# Web app: https://mail.google.com
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes gnome-gmail; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The gnome-gmail app is not available.'; fi
-
 # install gnome-tweaks on pc01 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
