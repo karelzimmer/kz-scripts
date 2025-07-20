@@ -10,40 +10,40 @@
 # Use "man kz setup.sh" to learn more about the format of this file.
 # =============================================================================
 
-# setup anydesk on pc06 pc07
+# setup anydesk on pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=anydesk
 
-# reset anydesk on pc06 pc07
+# reset anydesk on pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
 # -----------------------------------------------------------------------------
 kz-desktop --delete=anydesk
 
-# setup calibre on pc06
+# setup calibre on pc06 pc06new
 # -----------------------------------------------------------------------------
 # E-book manager.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=calibre-gui
 
-# reset calibre on pc06
+# reset calibre on pc06 pc06new
 # -----------------------------------------------------------------------------
 # E-book manager.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=calibre-gui
 
-# setup cockpit on pc06
+# setup cockpit on pc06 pc06new
 # -----------------------------------------------------------------------------
 # Web console.
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-cockpit
 
-# reset cockpit on pc06
+# reset cockpit on pc06 pc06new
 # -----------------------------------------------------------------------------
 # Web console.
 # Web app: https://localhost:9090
@@ -96,7 +96,7 @@ kz-desktop --delete=org.gnome.Evolution
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=org.gnome.Evolution
 
-# setup firefox on pc01 pc02 pc06 pc07
+# setup firefox on pc01 pc02 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -104,7 +104,7 @@ kz-desktop --delete=firefox
 kz-desktop --delete=firefox-esr
 kz-desktop --delete=firefox_firefox
 
-# reset firefox on pc01 pc02 pc06 pc07
+# reset firefox on pc01 pc02 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -125,14 +125,14 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'App gdebi is 
 # -----------------------------------------------------------------------------
 if [[ -n ${DISPLAY-} ]]; then echo 'App gdebi cannot be reset.'; fi
 
-# setup git on pc06 pc07
+# setup git on pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Distributed revision control system.
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
-# reset git on pc06 pc07
+# reset git on pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Distributed revision control system.
 # Web app: https://github.com
@@ -232,13 +232,13 @@ if [[ -n ${DISPLAY-} ]]; then echo 'snap' > ~/.hidden; fi
 # -----------------------------------------------------------------------------
 if [[ -n ${DISPLAY-} ]]; then rm --force --verbose ~/.hidden; fi
 
-# setup kvm on pc06 pc07
+# setup kvm on pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=virt-manager
 
-# reset kvm on pc06 pc07
+# reset kvm on pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # -----------------------------------------------------------------------------
@@ -297,7 +297,7 @@ kz-desktop --addaft=org.gnome.SoundJuicer
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.SoundJuicer
 
-# setup spotify on pc01 pc02 pc06 pc07
+# setup spotify on pc01 pc02 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # Web app: https://open.spotify.com
@@ -305,7 +305,7 @@ kz-desktop --delete=org.gnome.SoundJuicer
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
 
-# reset spotify on pc01 pc02 pc06 pc07
+# reset spotify on pc01 pc02 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # Web app: https://open.spotify.com
@@ -313,21 +313,21 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --delete=kz-spotify; fi
 
-# setup teamviewer on pc06 pc07
+# setup teamviewer on pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=com.teamviewer.TeamViewer
 
-# reset teamviewer on pc06 pc07
+# reset teamviewer on pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.teamviewer.TeamViewer
 
-# setup terminal on pc01 pc06 pc07
+# setup terminal on pc01 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
@@ -342,7 +342,7 @@ sed --in-place 's/#alias/alias/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d'   ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
-# reset terminal on pc01 pc06 pc07
+# reset terminal on pc01 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
@@ -350,14 +350,14 @@ kz-desktop --delete=org.gnome.Terminal
 sed --in-place 's/alias/#alias/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d'   ~/.bashrc
 
-# setup thunderbird on pc01 pc02 pc06
+# setup thunderbird on pc01 pc02 pc06 pc06new
 # -----------------------------------------------------------------------------
 # E-mail and news.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=thunderbird
 kz-desktop --delete=thunderbird_thunderbird
 
-# reset thunderbird on pc01 pc02 pc06
+# reset thunderbird on pc01 pc02 pc06 pc06new
 # -----------------------------------------------------------------------------
 # E-mail and news.
 # -----------------------------------------------------------------------------
@@ -378,7 +378,7 @@ kz-desktop --addaft=kz-vm-hugowin732
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
 
-# setup vscode on pc01 pc06 pc07
+# setup vscode on pc01 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Editor.
 # Web app: https://vscode.dev
@@ -394,7 +394,7 @@ if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/plain; fi
 if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/troff; fi
 if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
-# reset vscode on pc01 pc06 pc07
+# reset vscode on pc01 pc06 pc06new pc07
 # -----------------------------------------------------------------------------
 # Editor.
 # Web app: https://vscode.dev
