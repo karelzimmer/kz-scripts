@@ -388,9 +388,9 @@ $groups"
 $(gettext "# Standard user:
 sudo useradd --create-home --comment '<user>' <username>
 # Administrator:
-# Debian-based:
+# Debian or Debian-based:
 sudo usermod --append --groups adm,sudo <username>
-# Red Hat-based:
+# Red Hat or Red Hat-based:
 sudo usermod --append --groups wheel <username>
 # User sets password on first login:
 sudo passwd --delete --expire <username>")

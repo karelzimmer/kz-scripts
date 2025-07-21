@@ -73,19 +73,19 @@ desktop environment is required.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone.
 .sp
-To uninstall a app, on a Debian-based system you can use:
+To uninstall a app, on a Debian or Debian-based system you can use:
     sudo apt-get remove --purge --assume-yes <app>
 .br
-On a Red Hat-based system use:
+On a Red Hat or Red Hat-based system use:
    sudo dnf remove --assumeyes <app>
 .sp
-If the installation of apps fails for some reason, on a Debian-based system you
-can try the following:
+If the installation of apps fails for some reason, on a Debian or Debian-based
+system you can try the following:
     sudo dpkg --configure --pending
     sudo apt-get update --fix-missing
     sudo apt-get install --fix-broken
 .br
-On a Red Hat-based system try the following:
+On a Red Hat or Red Hat-based system try the following:
     sudo dnf clean all
     sudo dnf makecache
 

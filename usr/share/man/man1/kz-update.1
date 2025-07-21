@@ -18,13 +18,13 @@ kz-update - update and cleanup system
 .SH DESCRIPTION
 \fBkz update\fR updates and cleanup the system.
 .sp
-If the update fails for some reason, on a Debian-based system you can try the
-following:
+If the update fails for some reason, on a Debian or Debian-based system you can
+try the following:
     sudo dpkg --configure --pending
     sudo apt-get update --fix-missing
     sudo apt-get install --fix-broken
 .br
-On a Red Hat-based system try the following:
+On a Red Hat or Red Hat-based system try the following:
     sudo dnf clean all
     sudo dnf makecache
 .sp

@@ -78,19 +78,19 @@ uitgevoerd. Een desktopomgeving is vereist.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .sp
-Om een app te verwijderen, op een Debian-gebaseerd systeem gebruik:
+Om een app te verwijderen, op een Debian systeem gebruik:
     sudo apt-get remove --purge --assume-yes <app>
 .br
-Op een Red Hat-gebaseerd systeem gebruik:
+Op een Red Hat systeem gebruik:
    sudo dnf remove --assumeyes <app>
 .sp
 Als om één of andere reden het installeren van apps mislukt, op een
-Debian-gebaseerd systeem kunt u het volgende proberen:
+Debian systeem kunt u het volgende proberen:
     sudo dpkg --configure --pending
     sudo apt-get update --fix-missing
     sudo apt-get install --fix-broken
 .br
-Op een Red Hat-gebaseerd systeem probeer het volgende:
+Op een Red Hat systeem probeer het volgende:
     sudo dnf clean all
     sudo dnf makecache
 

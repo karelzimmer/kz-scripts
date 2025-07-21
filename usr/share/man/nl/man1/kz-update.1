@@ -19,13 +19,13 @@ kz-update - systeem bijwerken en opschonen
 \fBkz update\fR werkt het systeem bij (updates) en schoont het systeem op
 (cleanup).
 .sp
-Als om één of andere reden het bijwerken mislukt, op een Debian-gebaseerd
-systeem kunt u het volgende proberen:
+Als om één of andere reden het bijwerken mislukt, op een Debian of
+Debian-gebaseerd systeem kunt u het volgende proberen:
     sudo dpkg --configure --pending
     sudo apt-get update --fix-missing
     sudo apt-get install --fix-broken
 .br
-Op een Red Hat-gebaseerd systeem probeer het volgende:
+Op een Red Hat of Red Hat-gebaseerd systeem probeer het volgende:
     sudo dnf clean all
     sudo dnf makecache
 .sp
