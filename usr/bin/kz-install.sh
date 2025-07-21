@@ -650,13 +650,13 @@ sudo updatedb
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes locate; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes mlocate; fi
 
-# install log-access-for-user on pc06 pc07
+# install log-access on *
 # -----------------------------------------------------------------------------
 # Log access.
 # -----------------------------------------------------------------------------
 sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
-# remove log-access-for-user from pc06 pc07
+# remove log-access from *
 # -----------------------------------------------------------------------------
 # Log access.
 # -----------------------------------------------------------------------------
