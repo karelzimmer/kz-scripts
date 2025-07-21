@@ -182,7 +182,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The cups-back
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes cups-backend-bjnp; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The cups-backend-bjnp app is not available.'; fi
 
-# install dash-to-dock on pc06 pc07
+# install dash-to-dock on *
 # -----------------------------------------------------------------------------
 # Desktop dock.
 # Reboot required!
@@ -192,7 +192,7 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
 
-# remove dash-to-dock from pc06 pc07
+# remove dash-to-dock from *
 # -----------------------------------------------------------------------------
 # Desktop dock.
 # Reboot required!

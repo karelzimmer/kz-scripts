@@ -50,7 +50,7 @@ kz-desktop --addaft=kz-cockpit
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-cockpit
 
-# setup dash-to-dock on pc06 pc07
+# setup dash-to-dock on *
 # -----------------------------------------------------------------------------
 # Desktop dock.
 # -----------------------------------------------------------------------------
@@ -67,7 +67,7 @@ if grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmai
 if grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ; then gnome-extensions enable no-overview@fthx; fi
 
-# reset dash-to-dock on pc06 pc07
+# reset dash-to-dock on *
 # -----------------------------------------------------------------------------
 # Desktop dock.
 # -----------------------------------------------------------------------------
