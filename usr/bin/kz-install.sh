@@ -76,7 +76,6 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 # Web app: https://my.anydesk.com/v2
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes anydesk; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk*.list* /etc/apt/sources.list.d/anydesk*.sources*; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes anydesk; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo*; fi
 
