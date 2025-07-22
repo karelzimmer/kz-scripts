@@ -1084,6 +1084,22 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --v
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes webmin; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
 
+# install wifi on pc01
+# -----------------------------------------------------------------------------
+# Run Windows applications.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-"$(uname -f)"; fi
+if grep debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
+if grep rhel   /etc/os-release; then echo 'The wifi app is not available.'; fi
+
+# remove wifi from pc01
+# -----------------------------------------------------------------------------
+# Run Windows applications.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes broadcom-sta-dkms; fi
+if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-"$(uname -f)"; fi
+if grep rhel   /etc/os-release; then echo 'The wifi app is not available.'; fi
+
 # install wine on #none
 # -----------------------------------------------------------------------------
 # Run Windows applications.
