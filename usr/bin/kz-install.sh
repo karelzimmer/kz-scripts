@@ -1057,7 +1057,6 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo update-alternatives --remove editor /usr/bin/code; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/vscode*.list* /etc/apt/sources.list.d/vscode*.sources*; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes code; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes code; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo*; fi
