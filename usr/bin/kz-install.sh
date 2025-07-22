@@ -77,7 +77,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes anydesk; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes anydesk; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo*; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo; fi
 
 # install apt on #none
 # -----------------------------------------------------------------------------
@@ -853,7 +853,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The spotify a
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes spotify-client; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify*.list* /etc/apt/sources.list.d/spotify*.sources*; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The spotify web app cannot be removed.'; fi
 
 # install ssh on pc01 pc06 pc07
@@ -1058,7 +1058,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo update-alternatives --remove editor /usr/bin/code; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes code; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes code; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo*; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
 # install webmin on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1080,9 +1080,9 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes webmin; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin*.list* /etc/apt/sources.list.d/webmin*.sources*; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list /etc/apt/sources.list.d/webmin*.sources*; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes webmin; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo*; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
 
 # install wine on #none
 # -----------------------------------------------------------------------------
