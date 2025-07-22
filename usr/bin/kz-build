@@ -365,6 +365,7 @@ function build_deb_package() {
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
     # Create Debian package in kz-uploads.
+    mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/packages" |& $PROGRAM_LOGS
     if $OPTION_DEV; then
         to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME"
     else
