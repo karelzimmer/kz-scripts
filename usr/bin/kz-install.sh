@@ -493,10 +493,10 @@ if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes groff; fi
 # -----------------------------------------------------------------------------
 REBOOT=true
 if grep debian /etc/os-release; then sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub; fi
-if grep debian /etc/os-release; then ssudo update-grub; fi
+if grep debian /etc/os-release; then sudo update-grub; fi
 if grep rhel   /etc/os-release; then echo 'The grub-timeout app is not available.'; fi
 
-# remove grub-timeout on *
+# remove grub-timeout from *
 # -----------------------------------------------------------------------------
 # Reset GRUB's timeout.
 # Reboot required!
