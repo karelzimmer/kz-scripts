@@ -989,14 +989,14 @@ if grep rhel   /etc/os-release; then sudo dnf install --assumeyes usbutils; fi
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes usbutils; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes usbutils; fi
 
-# install user-guest on #none
+# install user-guest on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Add guest user.
 # -----------------------------------------------------------------------------
 if ! id "$(gettext 'guest')"; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')"; fi
 if   id "$(gettext 'guest')"; then sudo passwd --delete "$(gettext 'guest')"; fi
 
-# remove user-guest from #none
+# remove user-guest from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Delete guest user.
 # -----------------------------------------------------------------------------
