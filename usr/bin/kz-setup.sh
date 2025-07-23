@@ -84,13 +84,13 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position     ; the
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height     ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed   ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
-# setup evolution on pc06 pc07
+# setup evolution on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # E-mail and organizer.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Evolution
 
-# reset evolution on pc06 pc07
+# reset evolution on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # E-mail and organizer.
 # -----------------------------------------------------------------------------
@@ -315,7 +315,7 @@ kz-desktop --addaft=com.teamviewer.TeamViewer
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.teamviewer.TeamViewer
 
-# setup terminal on pc01 pc06 pc07
+# setup terminal on pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
@@ -330,7 +330,7 @@ sed --in-place 's/#alias/alias/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d'   ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
-# reset terminal on pc01 pc06 pc07
+# reset terminal on pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
