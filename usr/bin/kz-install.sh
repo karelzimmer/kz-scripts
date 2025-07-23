@@ -79,20 +79,6 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes anydesk; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo; fi
 
-# install apt on #none
-# -----------------------------------------------------------------------------
-# Package manager.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release; then sudo apt-get install --assume-yes apt; fi
-if grep rhel   /etc/os-release; then sudo dnf install --assumeyes apt; fi
-
-# remove apt from #none
-# -----------------------------------------------------------------------------
-# Package manager.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release; then echo 'The apt app cannot be removed from an Debian or Debian-based system.'; fi
-if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes apt; fi
-
 # install backintime on #none
 # -----------------------------------------------------------------------------
 # Backups/snapshots.
