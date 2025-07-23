@@ -366,7 +366,7 @@ kz-desktop --addaft=kz-vm-hugowin732
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
 
-# setup vscode on pc01 pc06 pc07
+# setup vscode on pc06 pc07
 # -----------------------------------------------------------------------------
 # Editor.
 # Web app: https://vscode.dev
@@ -382,7 +382,7 @@ if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/plain; fi
 if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/troff; fi
 if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
-# reset vscode on pc01 pc06 pc07
+# reset vscode on pc06 pc07
 # -----------------------------------------------------------------------------
 # Editor.
 # Web app: https://vscode.dev
