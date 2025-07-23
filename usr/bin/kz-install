@@ -274,7 +274,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    "#.*$install.*$on"      \
+        grep    "#.* $install .* $on "  \
                 "${install_files[@]}"   |
         tr      --squeeze-repeats       \
                 '[:space:]'             |
