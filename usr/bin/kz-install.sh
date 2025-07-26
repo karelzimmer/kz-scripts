@@ -169,7 +169,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The cups-back
 
 # install dash-to-dock on *
 # -----------------------------------------------------------------------------
-# Desktop dock.
+# Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
 REBOOT=true
@@ -179,7 +179,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 
 # remove dash-to-dock from *
 # -----------------------------------------------------------------------------
-# Desktop dock.
+# Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
 REBOOT=true

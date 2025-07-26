@@ -52,7 +52,7 @@ kz-desktop --delete=kz-cockpit
 
 # setup dash-to-dock on *
 # -----------------------------------------------------------------------------
-# Desktop dock.
+# Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action      ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews; fi
@@ -69,7 +69,7 @@ if grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx        
 
 # reset dash-to-dock on *
 # -----------------------------------------------------------------------------
-# Desktop dock.
+# Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
