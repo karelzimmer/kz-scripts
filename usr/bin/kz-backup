@@ -487,9 +487,14 @@ function backup_setting_favs() {
     local output_file=$settings_dir/favs.txt
 
     kz.logmsg 'Save the favorite apps...'
-    gsettings get                           \
-              org.gnome.shell favorite-apps \
-              > "$output_file"              |& $PROGRAM_LOGS || true
+    gsettings   get                             \
+                org.gnome.shell favorite-apps   |
+                tr '[' ' '                      |
+                tr ']' ' '                      |
+                tr "'" ' '                      |
+                tr --delete '[:space:]'         |
+                tr ',' '\n'                     \
+                > "$output_file"                |& $PROGRAM_LOGS || true
 }
 
 
