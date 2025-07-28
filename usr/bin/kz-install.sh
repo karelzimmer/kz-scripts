@@ -1094,7 +1094,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --v
 # -----------------------------------------------------------------------------
 # Enable wifi adapter.
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-"$(uname -f)"; fi
+if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
 if grep rhel   /etc/os-release; then echo 'The wifi-adapter-bcm43228 app is not available.'; fi
 
@@ -1103,7 +1103,6 @@ if grep rhel   /etc/os-release; then echo 'The wifi-adapter-bcm43228 app is not 
 # Disable wifi adapter.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes broadcom-sta-dkms; fi
-if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-"$(uname -f)"; fi
 if grep rhel   /etc/os-release; then echo 'The wifi-adapter-bcm43228 app is not available.'; fi
 
 # install wine on #none
