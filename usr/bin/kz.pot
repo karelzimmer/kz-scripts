@@ -121,7 +121,7 @@ msgstr ""
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
-#: kz-backup:23 kz-backup:518 kz-menu:74 kz-backup.desktop:10
+#: kz-backup:23 kz-backup:523 kz-menu:74 kz-backup.desktop:10
 msgid "Backup home folder"
 msgstr ""
 
@@ -249,7 +249,7 @@ msgstr ""
 msgid "users.txt"
 msgstr ""
 
-#: kz-backup:355 kz-backup:624 kz-restore:360
+#: kz-backup:355 kz-backup:629 kz-restore:360
 msgid "USERNAME|USERID|USER"
 msgstr ""
 
@@ -304,65 +304,65 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:518 kz-install:421 kz-restore:249 kz-setup:414
+#: kz-backup:523 kz-install:421 kz-restore:249 kz-setup:414
 msgid "progress"
 msgstr ""
 
-#: kz-backup:519
+#: kz-backup:524
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:558
+#: kz-backup:563
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:589 kz-install:558 kz-restore:320 kz-setup:532
+#: kz-backup:594 kz-install:558 kz-restore:320 kz-setup:532
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:596
+#: kz-backup:601
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:598 kz-restore:329
+#: kz-backup:603 kz-restore:329
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:599
+#: kz-backup:604
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:600 kz-restore:331
+#: kz-backup:605 kz-restore:331
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:601
+#: kz-backup:606
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:603 kz-install:569 kz-restore:334 kz-setup:542
+#: kz-backup:608 kz-install:569 kz-restore:334 kz-setup:542
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:604 kz-install:570 kz-restore:335 kz-setup:543
+#: kz-backup:609 kz-install:570 kz-restore:335 kz-setup:543
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:605
+#: kz-backup:610
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:635
+#: kz-backup:640
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:637
+#: kz-backup:642
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
-#: kz-backup:645 kz-restore:376
+#: kz-backup:650 kz-restore:376
 msgid "Remember to SAFELY remove the USB media."
 msgstr ""
 
