@@ -1328,7 +1328,7 @@ msgstr "Gebruik \"kz setup <app>...\" om de apps in te stellen."
 #: kz-setup:288
 msgid "Use \"kz setup --cat\" to view the contents of the setup file."
 msgstr ""
-"Gberuik \"kz setup --cat\" om de inhoud van het instelbestand te bekijken."
+"Gebruik \"kz setup --cat\" om de inhoud van het instelbestand te bekijken."
 
 #: kz-setup:289
 msgid ""
