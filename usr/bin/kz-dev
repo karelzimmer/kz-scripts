@@ -242,17 +242,6 @@ def pull_repos() -> None:
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
             kz.term(PROGRAM_NAME, 1)
 
-    # Add $HOME/bin to PATH so scripts and imports are available.
-    command = f'source {os.getenv("HOME")}/.profile'
-    try:
-        subprocess.run(command, executable='bash', shell=True, check=True)
-    except Exception as exc:
-        text = str(exc)
-        kz.logmsg(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        kz.term(PROGRAM_NAME, 1)
-
     # Call gitclone.
     text = 'Calling gitclone...'
     kz.logmsg(PROGRAM_NAME, text)
