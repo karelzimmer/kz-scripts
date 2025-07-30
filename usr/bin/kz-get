@@ -168,6 +168,7 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
 
     # Install Zenity in a graphical environment if necessary.
     if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
+        check_debian_package_manager
         sudo apt-get install --assume-yes zenity
     fi
 }
