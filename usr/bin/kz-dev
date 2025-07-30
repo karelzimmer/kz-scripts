@@ -164,7 +164,7 @@ def check_dependencies() -> None:
     exc: str = ''
     text: str
 
-    text = _('Check dependencies...')
+    text = _('Install dependencies...')
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
     # Call kz-install.
@@ -309,6 +309,9 @@ def download_website() -> None:
     ftp_x_cmd: str = f'mirror {ftp_opts} {ftp_from} {ftp_to}; exit'
     text: str
 
+    text = _('Download website...')
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+
     if not os.path.exists(ftp_login):
         text = _('Password for') + ' ftp://' + ftp_host + ': '
         with open(ftp_login, 'w') as file:
@@ -332,6 +335,8 @@ def term() -> None:
     """
     This function controls the termination of the script.
     """
+    text = _('Complete!')
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     kz.term(PROGRAM_NAME, 0)
 
 

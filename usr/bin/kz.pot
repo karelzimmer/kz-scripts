@@ -440,7 +440,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:493 kz-check:565 kz-deploy:264 kz-update:267
+#: kz-build:493 kz-check:565 kz-deploy:264 kz-dev:338 kz-update:267
 msgid "Complete!"
 msgstr ""
 
@@ -670,7 +670,7 @@ msgstr ""
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:209 kz-dev:313
+#: kz-deploy:209 kz-dev:316
 msgid "Password for"
 msgstr ""
 
@@ -764,7 +764,7 @@ msgid "Usage: kz dev [<options>]"
 msgstr ""
 
 #: kz-dev:167
-msgid "Check dependencies..."
+msgid "Install dependencies..."
 msgstr ""
 
 #: kz-dev:219
@@ -779,7 +779,11 @@ msgstr ""
 msgid "Status repos..."
 msgstr ""
 
-#: kz-dev:326
+#: kz-dev:312
+msgid "Download website..."
+msgstr ""
+
+#: kz-dev:329
 msgid "Website download failed."
 msgstr ""
 

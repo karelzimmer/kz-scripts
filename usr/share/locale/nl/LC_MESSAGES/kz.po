@@ -496,7 +496,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:493 kz-check:565 kz-deploy:264 kz-update:267
+#: kz-build:493 kz-check:565 kz-deploy:264 kz-dev:338 kz-update:267
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -736,7 +736,7 @@ msgstr "DISTRIBUEREN -- 2/2"
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:209 kz-dev:313
+#: kz-deploy:209 kz-dev:316
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
@@ -842,8 +842,8 @@ msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
 
 #: kz-dev:167
-msgid "Check dependencies..."
-msgstr "Controleer afhankelijkheden..."
+msgid "Install dependencies..."
+msgstr "Installeer afhankelijkheden..."
 
 #: kz-dev:219
 msgid "Clone repos..."
@@ -857,7 +857,11 @@ msgstr "Pull repo's..."
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-#: kz-dev:326
+#: kz-dev:312
+msgid "Download website..."
+msgstr "Downloaden website"
+
+#: kz-dev:329
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
