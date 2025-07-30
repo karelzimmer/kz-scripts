@@ -252,13 +252,13 @@ environment available")"
 }
 
 
-# This function browses through the setup file.
+# This function browses through the setup files.
 function process_option_browse() {
-    less --no-init --quit-if-one-screen "${setup_files[@]}"
+    less --no-init --quit-if-one-screen < <(cat "${setup_files[@]}")
 }
 
 
-# This function shows the available apps from the setup file.
+# This function shows the available apps from the setup files.
 function process_option_apps() {
     local apps=''
     local text=''
