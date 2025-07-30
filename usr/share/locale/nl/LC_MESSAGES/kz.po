@@ -1302,7 +1302,7 @@ msgstr "Gebruik: kz setup [<opties>] [--] [<argumenten>]"
 
 #: kz-setup:42
 msgid "  -b, --browse   browse setup files"
-msgstr "  -b, --browse   blader door instelbestand"
+msgstr "  -b, --browse   blader door instelbestanden"
 
 #: kz-setup:44
 msgid ""
