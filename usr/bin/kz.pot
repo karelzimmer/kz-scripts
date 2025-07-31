@@ -440,7 +440,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:487 kz-get:232
+#: kz-build:487 kz-get:227
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -819,7 +819,7 @@ msgstr ""
 msgid "Type 'man kz get' for more information."
 msgstr ""
 
-#: kz-get:236
+#: kz-get:231
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -828,7 +828,7 @@ msgid ""
 "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-get:244
+#: kz-get:239
 msgid "Type 'exit' to close this window."
 msgstr ""
 

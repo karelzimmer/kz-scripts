@@ -213,11 +213,6 @@ https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
     fi
 
     sudo dnf "$mode" --assumeyes "$kz_rpm_site_file"
-
-    # Install Zenity in a graphical environment if necessary.
-    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
-        sudo dnf install --assumeyes zenity
-    fi
 }
 
 
