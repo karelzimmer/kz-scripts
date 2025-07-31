@@ -158,8 +158,8 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     # ...file '/tmp/kz-get-XXXXXXXXXX.deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
-    # Consider suggested packages as a dependency for installing in a graphical
-    # environment.
+    # In a graphical environment, consider the suggested packages as a
+    # dependency for the installation.
     if [[ -n ${DISPLAY-} ]]; then
         suggests='--install-suggests'
     fi
