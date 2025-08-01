@@ -948,6 +948,20 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes thunderbird; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes thunderbird; fi
 
+# install transmission on *
+# -----------------------------------------------------------------------------
+# BitTorrent client.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes transmission; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes transmission; fi
+
+# remove transmission from *
+# -----------------------------------------------------------------------------
+# BitTorrent client.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes transmission; fi
+if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes transmission; fi
+
 # install tree on pc06 pc07
 # -----------------------------------------------------------------------------
 # Display directory tree.
