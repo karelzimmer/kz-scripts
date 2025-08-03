@@ -960,11 +960,11 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1002 kz-install.sh:1003 kz-install.sh:1009
+#: kz-install.sh:1016 kz-install.sh:1017 kz-install.sh:1023
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1002
+#: kz-install.sh:1016
 msgid "Guest user"
 msgstr ""
 
