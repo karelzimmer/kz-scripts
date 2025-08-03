@@ -605,10 +605,10 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo virsh --connec
 REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo delgroup libvirtd-dnsmasq; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo deluser "${SUDO_USER:-$USER}" libvirt; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo deluser "${SUDO_USER:-$USER}" libvirtd-qemu; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo delgroup libvirtd; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo groupdel libvirtd-dnsmasq; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo gpasswd --delete "${SUDO_USER:-$USER}" libvirt; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo gpasswd --delete "${SUDO_USER:-$USER}" libvirtd-qemu; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo groupdel libvirtd; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo systemctl disable --now libvirtd; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf groupremove "Virtualization Host"; fi
 
@@ -665,8 +665,8 @@ sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 # -----------------------------------------------------------------------------
 # Log access.
 # -----------------------------------------------------------------------------
-sudo deluser "${SUDO_USER:-$USER}" adm
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
+sudo gpasswd --delete "${SUDO_USER:-$USER}" adm
+sudo gpasswd --delete "${SUDO_USER:-$USER}" systemd-journal
 
 # install mypy on pc06 pc07
 # -----------------------------------------------------------------------------
