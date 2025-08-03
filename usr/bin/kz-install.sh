@@ -607,8 +607,8 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo virsh --connec
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo groupdel libvirtd-dnsmasq; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo gpasswd --delete "${SUDO_USER:-$USER}" libvirt; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo gpasswd --delete "${SUDO_USER:-$USER}" libvirtd-qemu; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo groupdel libvirtd; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo gpasswd --delete "${SUDO_USER:-$USER}" libvirt-qemu; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo groupdel libvirt; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo systemctl disable --now libvirtd; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf groupremove "Virtualization Host"; fi
 
