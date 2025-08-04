@@ -470,7 +470,7 @@ if grep rhel   /etc/os-release; then sudo dnf install --assumeyes groff; fi
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes groff; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes groff; fi
 
-# install grub-timeout on pc01 pc06
+# install grub-timeout on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Reduce GRUB's timeout.
 # -----------------------------------------------------------------------------
@@ -478,7 +478,7 @@ sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 if grep debian /etc/os-release; then sudo update-grub; fi
 if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
-# remove grub-timeout from pc01 pc06
+# remove grub-timeout from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Reset GRUB's timeout.
 # -----------------------------------------------------------------------------
