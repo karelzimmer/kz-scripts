@@ -137,7 +137,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes cockpit; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes cockpit; fi
 
-# install cups on *
+# install cups on #none
 # -----------------------------------------------------------------------------
 # Common Unix Printing System.
 # Web app: http://localhost:631
@@ -145,7 +145,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --a
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
 if grep rhel   /etc/os-release; then sudo dnf install --assumeyes cups; fi
 
-# remove cups from *
+# remove cups from #none
 # -----------------------------------------------------------------------------
 # Common Unix Printing System.
 # Web app: http://localhost:631
@@ -187,20 +187,18 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
 
-# install desktop-backgrounds on *
+# install desktop-backgrounds on #none
 # -----------------------------------------------------------------------------
 # Desktop backgrounds.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes '*-backgrounds'; fi
-if grep ubuntu /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes ubuntu-wallpapers-* '*-backgrounds'; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes desktop-backgrounds-* gnome-backgrounds*; fi
 
-# remove desktop-backgrounds from *
+# remove desktop-backgrounds from #none
 # -----------------------------------------------------------------------------
 # Desktop backgrounds.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes '*-backgrounds'; fi
-if grep ubuntu /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes ubuntu-wallpapers-* '*-backgrounds'; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes desktop-backgrounds-* gnome-backgrounds*; fi
 
 # install disabled-aer on pc06
@@ -350,14 +348,14 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place
 # 'wayland'.
 # -----------------------------------------------------------------------------
 
-# install gdebi on *
+# install gdebi on #none
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gdebi; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The gdebi app is not available.'; fi
 
-# remove gdebi from *
+# remove gdebi from #none
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
@@ -472,22 +470,18 @@ if grep rhel   /etc/os-release; then sudo dnf install --assumeyes groff; fi
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes groff; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes groff; fi
 
-# install grub-timeout on *
+# install grub-timeout on pc01 pc06
 # -----------------------------------------------------------------------------
 # Reduce GRUB's timeout.
-# Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 if grep debian /etc/os-release; then sudo update-grub; fi
 if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
-# remove grub-timeout from *
+# remove grub-timeout from pc01 pc06
 # -----------------------------------------------------------------------------
 # Reset GRUB's timeout.
-# Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 sudo sed --in-place 's/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
 if grep debian /etc/os-release; then sudo update-grub; fi
 if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
@@ -630,14 +624,14 @@ if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes lftp; fi
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes libreoffice; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes libreoffice; fi
 
 # remove libreoffice from *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes libreoffice; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes libreoffice; fi
 
 # install locate on pc06 pc07
@@ -828,14 +822,14 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The sound-jui
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes sound-juicer; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The sound-juicer app is not available.'; fi
 
-# install spice-vdagent on *
+# install spice-vdagent on #none
 # -----------------------------------------------------------------------------
 # Spice agent.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
 if grep rhel   /etc/os-release; then sudo dnf install --assumeyes spice-vdagent; fi
 
-# remove spice-vdagent from *
+# remove spice-vdagent from #none
 # -----------------------------------------------------------------------------
 # Spice agent.
 # -----------------------------------------------------------------------------
@@ -902,14 +896,14 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes gnome-sushi; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes sushi; fi
 
-# install tab-completion on *
+# install tab-completion on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Bash completion.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
 if grep rhel   /etc/os-release; then sudo dnf install --assumeyes bash-completion; fi
 
-# remove tab-completion from *
+# remove tab-completion from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Bash completion.
 # -----------------------------------------------------------------------------
@@ -948,14 +942,14 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes thunderbird; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes thunderbird; fi
 
-# install transmission on *
+# install transmission on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # BitTorrent client.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes transmission; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes transmission; fi
 
-# remove transmission from *
+# remove transmission from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # BitTorrent client.
 # -----------------------------------------------------------------------------
