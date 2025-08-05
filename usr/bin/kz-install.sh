@@ -872,7 +872,6 @@ sudo systemctl restart ssh.service
 # -----------------------------------------------------------------------------
 # Secure SHell.
 # -----------------------------------------------------------------------------
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d' /etc/hosts; fi
 sudo sed --in-place 's/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes ssh; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes openssh; fi
