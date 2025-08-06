@@ -315,29 +315,42 @@ kz-desktop --addaft=com.teamviewer.TeamViewer
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.teamviewer.TeamViewer
 
+# setup terminal on *
+# -----------------------------------------------------------------------------
+# Terminal emulator.
+# -----------------------------------------------------------------------------
+# Enable aliases.
+# -----------------------------------------------------------------------------
+sed --in-place 's/#alias/alias/g'    ~/.bashrc
+sed --in-place 's/# alias/alias/g'   ~/.bashrc # For example, Debian user root.
+sed --in-place 's/# export/export/g' ~/.bashrc # For example, Debian user root.
+sed --in-place 's/# eval/eval/g'     ~/.bashrc # For example, Debian user root.
+# -----------------------------------------------------------------------------
+# Enable search forward in history (with Ctrl-S).
+# -----------------------------------------------------------------------------
+sed --in-place '/^stty -ixon/d'      ~/.bashrc
+echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
+
+# reset terminal on *
+# -----------------------------------------------------------------------------
+# Terminal emulator.
+# -----------------------------------------------------------------------------
+sed --in-place 's/alias/#alias/g'   ~/.bashrc
+sed --in-place 's/export/#export/g' ~/.bashrc # For example, Debian user root.
+sed --in-place 's/eval/#eval/g'     ~/.bashrc # For example, Debian user root.
+sed --in-place '/^stty -ixon/d'     ~/.bashrc
+
 # setup terminal on pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=org.gnome.Terminal
-# -----------------------------------------------------------------------------
-# Enable aliases.
-# -----------------------------------------------------------------------------
-sed --in-place 's/#alias/alias/g'  ~/.bashrc
-sed --in-place 's/# alias/alias/g' ~/.bashrc
-# -----------------------------------------------------------------------------
-# Enable search forward in history (with Ctrl-S).
-# -----------------------------------------------------------------------------
-sed --in-place '/^stty -ixon/d'    ~/.bashrc
-echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
 # reset terminal on pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Terminal
-sed --in-place 's/alias/#alias/g' ~/.bashrc
-sed --in-place '/^stty -ixon/d'   ~/.bashrc
 
 # setup thunderbird on pc01 pc02 pc06
 # -----------------------------------------------------------------------------
