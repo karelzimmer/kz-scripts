@@ -323,11 +323,12 @@ kz-desktop --addbef=org.gnome.Terminal
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place 's/#alias/alias/g' ~/.bashrc
+sed --in-place 's/#alias/alias/g'  ~/.bashrc
+sed --in-place 's/# alias/alias/g' ~/.bashrc
 # -----------------------------------------------------------------------------
 # Enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place '/^stty -ixon/d'   ~/.bashrc
+sed --in-place '/^stty -ixon/d'    ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
 # reset terminal on pc06 pc07
