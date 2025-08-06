@@ -567,6 +567,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The krita app
 REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo usermod --append --groups libvirt "${SUDO_USER:-$USER}"; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo usermod --append --groups libvirt-qemu "${SUDO_USER:-$USER}"; fi
 # -----------------------------------------------------------------------------
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
@@ -600,7 +601,7 @@ REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo groupdel libvirtd-dnsmasq; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo gpasswd --delete "${SUDO_USER:-$USER}" libvirt; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo gpasswd --delete "${SUDO_USER:-$USER}" libvirt,libvirt-qemu; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo groupdel libvirt; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo systemctl disable --now libvirtd; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf groupremove "Virtualization Host"; fi
