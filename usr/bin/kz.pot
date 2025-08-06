@@ -938,7 +938,7 @@ msgid "The installation of the following apps contains errors:"
 msgstr ""
 
 #: kz-install:571
-msgid "Try installing the apps again."
+msgid "Try installing/removing the apps again."
 msgstr ""
 
 #: kz-install:589
@@ -960,11 +960,11 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1009 kz-install.sh:1010 kz-install.sh:1016
+#: kz-install.sh:1010 kz-install.sh:1011 kz-install.sh:1017
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1009
+#: kz-install.sh:1010
 msgid "Guest user"
 msgstr ""
 
