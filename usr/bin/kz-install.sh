@@ -12,19 +12,19 @@
 
 # install disabled-apport on *
 # -----------------------------------------------------------------------------
-# Disable Ubuntu's automatic crash report generation.
+# Disable automatic crash report generation.
 # -----------------------------------------------------------------------------
-if systemctl cat apport; then sudo systemctl stop apport.service; fi
-if systemctl cat apport; then sudo systemctl disable apport.service; fi
-if systemctl cat apport; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
-if systemctl cat apport; then sudo rm --force --verbose /var/crash/*; fi
+if grep ubuntu /etc/os-release; then sudo systemctl stop apport.service; fi
+if grep ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
+if grep ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
+if grep ubuntu /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
 
 # remove disabled-apport from *
 # -----------------------------------------------------------------------------
-# Enable Ubuntu's automatic crash report generation.
+# Enable automatic crash report generation.
 # -----------------------------------------------------------------------------
-if systemctl cat apport; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
-if systemctl cat apport; then sudo systemctl enable --now apport.service; fi
+if grep ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
+if grep ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
 
 # install ansible on pc06 pc07
 # -----------------------------------------------------------------------------
