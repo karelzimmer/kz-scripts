@@ -26,20 +26,6 @@ if systemctl cat apport; then sudo rm --force --verbose /var/crash/*; fi
 if systemctl cat apport; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
 if systemctl cat apport; then sudo systemctl enable --now apport.service; fi
 
-# install 7zip on *
-# -----------------------------------------------------------------------------
-# File archiver.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release; then sudo apt-get install --assume-yes p7zip-full; fi
-if grep rhel   /etc/os-release; then sudo dnf install --assumeyes p7zip; fi
-
-# remove 7zip from *
-# -----------------------------------------------------------------------------
-# File archiver.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes p7zip-full; fi
-if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes p7zip; fi
-
 # install ansible on pc06 pc07
 # -----------------------------------------------------------------------------
 # Configuration management, deployment, and task execution.
