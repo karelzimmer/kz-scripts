@@ -456,19 +456,19 @@ if grep rhel   /etc/os-release; then sudo dnf install --assumeyes groff; fi
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes groff; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes groff; fi
 
-# install grub-timeout on pc01 pc06 pc07
+# install skip-grub-menu on *
 # -----------------------------------------------------------------------------
-# Reduce GRUB's timeout.
+# Skip GRUB menu.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
+sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
 if grep debian /etc/os-release; then sudo update-grub; fi
 if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
-# remove grub-timeout from pc01 pc06 pc07
+# remove skip-grub-menu from *
 # -----------------------------------------------------------------------------
-# Reset GRUB's timeout.
+# Skip GRUB menu.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
+sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
 if grep debian /etc/os-release; then sudo update-grub; fi
 if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
