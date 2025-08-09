@@ -93,6 +93,21 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes bleachbit; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes bleachbit; fi
 
+# install broadcom-sta-dkms on pc01
+# -----------------------------------------------------------------------------
+# Enable wifi adapter.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
+if grep debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
+if grep rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
+
+# remove broadcom-sta-dkms from pc01
+# -----------------------------------------------------------------------------
+# Disable wifi adapter.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes broadcom-sta-dkms; fi
+if grep rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
+
 # install calibre on pc06
 # -----------------------------------------------------------------------------
 # E-book manager.
@@ -1082,21 +1097,6 @@ if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes webmin; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
-
-# install wifi-adapter-bcm43228 on pc01
-# -----------------------------------------------------------------------------
-# Enable wifi adapter.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
-if grep debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
-if grep rhel   /etc/os-release; then echo 'The wifi-adapter-bcm43228 app is not available.'; fi
-
-# remove wifi-adapter-bcm43228 from pc01
-# -----------------------------------------------------------------------------
-# Disable wifi adapter.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes broadcom-sta-dkms; fi
-if grep rhel   /etc/os-release; then echo 'The wifi-adapter-bcm43228 app is not available.'; fi
 
 # install wine on #none
 # -----------------------------------------------------------------------------
