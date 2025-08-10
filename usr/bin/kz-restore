@@ -227,7 +227,7 @@ Disconnect media via Files.")"
             fi
         fi
 
-        source=$medium/Backups/$USER@$HOSTNAME
+        source=$mediums/$USER@$HOSTNAME
         SOURCE_MEDIUM=$medium
 
         if ! [[ -d $source ]]; then

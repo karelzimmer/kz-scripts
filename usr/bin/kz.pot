@@ -203,10 +203,9 @@ msgid ""
 "Please rename to:           <username>@<hostname>"
 msgstr ""
 
-#: kz-backup:254
 msgid ""
 "Backup found in wrong place: <medium>/<username>@<hostname>\n"
-"Please move to:              <medium>/Backups/"
+"Please move to:              <medium>s/"
 msgstr ""
 
 #: kz-backup:269 kz-restore:289
@@ -1395,4 +1394,10 @@ msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
+msgstr ""
+
+#: kz-backup:254
+msgid ""
+"Backup found in wrong place: <medium>/<username>@<hostname>\n"
+"Please move to:              <medium>/backups/"
 msgstr ""

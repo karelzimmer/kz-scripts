@@ -224,13 +224,12 @@ msgstr ""
 "Back-up gevonden met oude naam: kz-backup-<computernaam>-<gebruikersnaam>\n"
 "Hernoem de back-up naar:        <gebruikersnaam>@<computernaam>"
 
-#: kz-backup:254
 msgid ""
 "Backup found in wrong place: <medium>/<username>@<hostname>\n"
-"Please move to:              <medium>/Backups/"
+"Please move to:              <medium>s/"
 msgstr ""
 "Back-up gevonden op verkeerde plek: <medium>/<username>@<hostname>\n"
-"Verplaats de back-up naar           <medium>/Backups/"
+"Verplaats de back-up naar           <medium>s/"
 
 #: kz-backup:269 kz-restore:289
 msgid "Settings"
@@ -1533,3 +1532,15 @@ msgstr "Wrapper-script voor kz-wifi"
 #: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
+
+#: kz-backup:254
+#, fuzzy
+#| msgid ""
+#| "Backup found in wrong place: <medium>/<username>@<hostname>\n"
+#| "Please move to:              <medium>s/"
+msgid ""
+"Backup found in wrong place: <medium>/<username>@<hostname>\n"
+"Please move to:              <medium>/backups/"
+msgstr ""
+"Back-up gevonden op verkeerde plek: <medium>/<username>@<hostname>\n"
+"Verplaats de back-up naar           <medium>s/"
