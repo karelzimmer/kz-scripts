@@ -96,7 +96,9 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --a
 # install broadcom-sta-dkms on pc01
 # -----------------------------------------------------------------------------
 # Enable wifi adapter.
+# Reboot required!
 # -----------------------------------------------------------------------------
+REBOOT=true
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
 if grep rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
@@ -104,7 +106,9 @@ if grep rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not avai
 # remove broadcom-sta-dkms from pc01
 # -----------------------------------------------------------------------------
 # Disable wifi adapter.
+# Reboot required!
 # -----------------------------------------------------------------------------
+REBOOT=true
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes broadcom-sta-dkms; fi
 if grep rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
 
