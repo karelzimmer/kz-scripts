@@ -10,6 +10,22 @@
 # Use "man kz install.sh" to learn more about the format of this file.
 # =============================================================================
 
+# install add-components on *
+# -----------------------------------------------------------------------------
+# Add contrib and non-free components to the package sources for Debian.
+# Watch grep on Debian (Debian specific), not debian (Debian and Debian-based).
+# Might not work with sources.list moved to deb822 style debian.sources.
+# -----------------------------------------------------------------------------
+if grep Debian /etc/os-release; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
+if grep Debian /etc/os-release; then sudo apt-get update; fi
+
+# remove add-components from *
+# -----------------------------------------------------------------------------
+# Remove contrib and non-free components to the package sources for Debian.
+# -----------------------------------------------------------------------------
+if grep Debian /etc/os-release; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
+if grep Debian /etc/os-release; then sudo apt-get update; fi
+
 # install disabled-apport on *
 # -----------------------------------------------------------------------------
 # Disable automatic crash report generation.

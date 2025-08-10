@@ -518,6 +518,11 @@ function execute_command() {
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
             2>> "$ERRORLOG"     || FAILED_APPS[$app_name]=$app_name
+
+    # Some systems has GUI freeze due to the speed of the setup commands.
+    if $OPTION_GUI; then
+        sleep 0.1s
+    fi
 }
 
 

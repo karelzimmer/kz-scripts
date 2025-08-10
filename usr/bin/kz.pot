@@ -316,7 +316,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:594 kz-install:558 kz-restore:320 kz-setup:532
+#: kz-backup:594 kz-install:558 kz-restore:320 kz-setup:537
 msgid "error messages"
 msgstr ""
 
@@ -341,11 +341,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:608 kz-install:569 kz-restore:334 kz-setup:542
+#: kz-backup:608 kz-install:569 kz-restore:334 kz-setup:547
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:609 kz-install:570 kz-restore:335 kz-setup:543
+#: kz-backup:609 kz-install:570 kz-restore:335 kz-setup:548
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -949,7 +949,7 @@ msgstr ""
 msgid "remove"
 msgstr ""
 
-#: kz-install:595 kz-setup:568
+#: kz-install:595 kz-setup:573
 #, sh-format
 msgid "Apps $operation completed."
 msgstr ""
@@ -960,11 +960,11 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1014 kz-install.sh:1015 kz-install.sh:1021
+#: kz-install.sh:1030 kz-install.sh:1031 kz-install.sh:1037
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1014
+#: kz-install.sh:1030
 msgid "Guest user"
 msgstr ""
 
@@ -1227,35 +1227,35 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:539
+#: kz-setup:544
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:544
+#: kz-setup:549
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:562
+#: kz-setup:567
 msgid "set up"
 msgstr ""
 
-#: kz-setup:566
+#: kz-setup:571
 msgid "reset"
 msgstr ""
 
-#: kz-setup:575
+#: kz-setup:580
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:580
+#: kz-setup:585
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:601
+#: kz-setup:606
 msgid "Log out of the computer yourself."
 msgstr ""
 
