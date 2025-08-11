@@ -1051,7 +1051,7 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --a
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes apt-transport-https; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo -e "Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg" |sudo tee /etc/apt/sources.list.d/vscode.sources; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes code; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo update-alternatives --set editor /usr/bin/code; fi
