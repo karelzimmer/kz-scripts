@@ -56,31 +56,6 @@ if grep rhel   /etc/os-release; then sudo dnf install --assumeyes ansible; fi
 if grep debian /etc/os-release; then sudo apt-get remove --purge --assume-yes ansible; fi
 if grep rhel   /etc/os-release; then sudo dnf remove --assumeyes ansible; fi
 
-# install anydesk on pc06 pc07
-# -----------------------------------------------------------------------------
-# Remote desktop.
-# Only outgoing sessions are supported if using Wayland.
-# Incoming sessions are only possible when using Xorg/X11.
-# Web app: https://my.anydesk.com/v2
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get update; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes anydesk; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes anydesk; fi
-
-# remove anydesk from pc06 pc07
-# -----------------------------------------------------------------------------
-# Remote desktop.
-# Only outgoing sessions are supported if using Wayland.
-# Incoming sessions are only possible when using Xorg/X11.
-# Web app: https://my.anydesk.com/v2
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes anydesk; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes anydesk; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo; fi
-
 # install backintime on #none
 # -----------------------------------------------------------------------------
 # Backups/snapshots.
