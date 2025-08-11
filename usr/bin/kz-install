@@ -422,6 +422,7 @@ function install_apps() {
     text=$(gettext 'Prepare installation')
     kz.debugmsg "$title"...
     ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
+    chmod --verbose 775 "$ERRORLOG" |& $PROGRAM_LOGS
 
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -578,6 +579,7 @@ $(gettext "Try installing/removing the apps again.")"
                     --height    500         \
                     --title     "$title"    2> /dev/null || true
         else
+            kz.wait_for_enter
             kz.infomsg "$title $ERRORLOG:"
             less --no-init --quit-if-one-screen "$ERRORLOG"
         fi

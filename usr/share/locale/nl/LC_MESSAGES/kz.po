@@ -369,7 +369,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:594 kz-install:558 kz-restore:320 kz-setup:537
+#: kz-backup:594 kz-install:559 kz-restore:320 kz-setup:537
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -394,11 +394,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:608 kz-install:569 kz-restore:334 kz-setup:547
+#: kz-backup:608 kz-install:570 kz-restore:334 kz-setup:547
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:609 kz-install:570 kz-restore:335 kz-setup:548
+#: kz-backup:609 kz-install:571 kz-restore:335 kz-setup:548
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -1019,36 +1019,36 @@ msgstr "Geen opdrachten om uit te voeren."
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
-#: kz-install:455 kz-setup:448
+#: kz-install:456 kz-setup:448
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:456 kz-setup:449
+#: kz-install:457 kz-setup:449
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
-#: kz-install:565
+#: kz-install:566
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:571
+#: kz-install:572
 msgid "Try installing/removing the apps again."
 msgstr "Probeer de apps opnieuw te installeren/verwijderen."
 
-#: kz-install:589
+#: kz-install:591
 msgid "install"
 msgstr "installeren"
 
-#: kz-install:593
+#: kz-install:595
 msgid "remove"
 msgstr "verwijderen"
 
-#: kz-install:595 kz-setup:573
+#: kz-install:597 kz-setup:574
 #, sh-format
 msgid "Apps $operation completed."
 msgstr "Apps $operation is voltooid."
 
-#: kz-install:600
+#: kz-install:602
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1363,15 +1363,15 @@ msgstr "Het instellen van de volgende apps bevat fouten:"
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:567
+#: kz-setup:568
 msgid "set up"
 msgstr "instellen"
 
-#: kz-setup:571
+#: kz-setup:572
 msgid "reset"
 msgstr "resetten"
 
-#: kz-setup:580
+#: kz-setup:581
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1379,7 +1379,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:585
+#: kz-setup:586
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1387,7 +1387,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:606
+#: kz-setup:607
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
