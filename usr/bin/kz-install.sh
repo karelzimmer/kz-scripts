@@ -171,7 +171,8 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The c
 REBOOT=true
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] && dnf list gnome-shell-extension-dash-to-dock; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] && dnf list gnome-shell-extension-no-overview ; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
 
 # remove dash-to-dock from *
 # -----------------------------------------------------------------------------
@@ -181,7 +182,8 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf in
 REBOOT=true
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] && dnf list gnome-shell-extension-dash-to-dock; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] && dnf list gnome-shell-extension-no-overview ; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
 
 # install desktop-backgrounds on #none
 # -----------------------------------------------------------------------------
