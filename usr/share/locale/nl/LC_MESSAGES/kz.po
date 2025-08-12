@@ -369,7 +369,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:594 kz-install:559 kz-restore:320 kz-setup:537
+#: kz-backup:600 kz-install:565 kz-restore:326 kz-setup:543
 msgid "error messages"
 msgstr "foutmeldingen"
 

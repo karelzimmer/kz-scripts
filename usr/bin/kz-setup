@@ -533,14 +533,14 @@ function term() {
     local text=''
     local title=''
 
+    # Stderr also to the log.
+    kz.logmsg '==============================================================='
+    kz.logmsg "$title $ERRORLOG:"
+    printf "%s" "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
+    kz.logmsg '==========================================================='
+
     if [[ -n ${FAILED_APPS[*]} ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"
-        # Errors also to the log.
-        kz.logmsg '==========================================================='
-        kz.logmsg "$title $ERRORLOG:"
-        printf "%s" "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
-        kz.logmsg '==========================================================='
-
         text="$(gettext "The set up of the following apps contains errors:")
 ${FAILED_APPS[*]}
 

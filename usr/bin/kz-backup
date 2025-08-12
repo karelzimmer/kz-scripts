@@ -590,14 +590,14 @@ function term() {
     local title=''
     local users=''
 
+    # Stderr also to the log.
+    kz.logmsg '==============================================================='
+    kz.logmsg "$title ($ERRORLOG):"
+    printf '%s' "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
+    kz.logmsg '==============================================================='
+
     if [[ $BACKUP_RC -ne 0 ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"
-        # Errors also to the log.
-        kz.logmsg '==========================================================='
-        kz.logmsg "$title ($ERRORLOG):"
-        printf '%s' "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
-        kz.logmsg '==========================================================='
-
         text="$(gettext 'Backup ended with errors.')
 
 $(gettext 'Possible causes:')
