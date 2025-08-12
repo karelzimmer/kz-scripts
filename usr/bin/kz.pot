@@ -959,11 +959,9 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1010 kz-install.sh:1011 kz-install.sh:1017
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1010
 msgid "Guest user"
 msgstr ""
 
@@ -1400,4 +1398,8 @@ msgstr ""
 msgid ""
 "Backup found in wrong place: <medium>/<username>@<hostname>\n"
 "Please move to:              <medium>/backups/"
+msgstr ""
+
+#: kz-install.sh:1010 kz-install.sh:1011 kz-install.sh:1017
+msgid "--domain=kz"
 msgstr ""

@@ -1056,11 +1056,9 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:1010 kz-install.sh:1011 kz-install.sh:1017
 msgid "guest"
 msgstr "gast"
 
-#: kz-install.sh:1010
 msgid "Guest user"
 msgstr "Gastgebruiker"
 
@@ -1544,3 +1542,7 @@ msgid ""
 msgstr ""
 "Back-up gevonden op verkeerde plek: <medium>/<username>@<hostname>\n"
 "Verplaats de back-up naar           <medium>s/"
+
+#: kz-install.sh:1010 kz-install.sh:1011 kz-install.sh:1017
+msgid "--domain=kz"
+msgstr ""

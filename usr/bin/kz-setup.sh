@@ -40,10 +40,10 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ; then gnome-extensions enable no-overview@fthx; fi
+if grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ; then gnome-extensions enable no-overview@fthx; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme         ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action               ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size         ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
@@ -67,10 +67,10 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed             
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position              ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height              ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed            ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
-if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ; then gnome-extensions disable no-overview@fthx; fi
-if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ; then gnome-extensions disable no-overview@fthx; fi
+if grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 
 # setup evolution on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -104,8 +104,8 @@ kz-desktop --addbef=firefox_firefox
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'App gdebi is not available.'; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'App gdebi is not available.'; fi
 
 # reset gdebi on *
 # -----------------------------------------------------------------------------
@@ -290,16 +290,16 @@ kz-desktop --delete=org.gnome.SoundJuicer
 # Music and podcasts.
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft=spotify; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --addaft=kz-spotify; fi
 
 # reset spotify on pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --delete=kz-spotify; fi
+if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --delete=spotify; fi
+if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-desktop --delete=kz-spotify; fi
 
 # setup teamviewer on pc06 pc07
 # -----------------------------------------------------------------------------
