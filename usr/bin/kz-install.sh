@@ -169,8 +169,8 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The c
 # Reboot required!
 # -----------------------------------------------------------------------------
 REBOOT=true
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
 
 # remove dash-to-dock from *
@@ -179,8 +179,8 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf in
 # Reboot required!
 # -----------------------------------------------------------------------------
 REBOOT=true
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock &> /dev/null; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview &> /dev/null; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-no-overview; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock gnome-shell-extension-no-overview; fi
 
 # install desktop-backgrounds on #none
@@ -204,8 +204,8 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf re
 # 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
 if ! grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/quiet/quiet pci=noaer/' /etc/default/grub; fi
-if grep --quiet debian /etc/os-release; then sudo update-grub 2>&1; fi
-if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg 2>&1; fi
+if   grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -219,8 +219,8 @@ grep --quiet 'pci=noaer' /etc/default/grub
 # 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
 if grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/quiet pci=noaer/quiet/' /etc/default/grub; fi
-if grep --quiet debian /etc/os-release; then sudo update-grub 2>&1; fi
-if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg 2>&1; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -420,7 +420,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf re
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb 2>&1; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then rm --verbose /tmp/google-chrome.deb; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
@@ -438,7 +438,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf re
 # Explore the planet.
 # Web app: https://earth.google.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb 2>&1; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then rm --verbose /tmp/google-earth.deb; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
@@ -471,16 +471,16 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes groff; 
 # Skip GRUB menu.
 # -----------------------------------------------------------------------------
 sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub 2>&1; fi
-if grep --quiet rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg 2>&1; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
 # remove skip-grub-menu from *
 # -----------------------------------------------------------------------------
 # Skip GRUB menu.
 # -----------------------------------------------------------------------------
 sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub 2>&1; fi
-if grep --quiet rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg 2>&1; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
 # install handbrake on #none
 # -----------------------------------------------------------------------------
@@ -636,7 +636,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf re
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes locate; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes mlocate; fi
-sudo updatedb 2>&1
+sudo updatedb
 
 # remove locate from pc06 pc07
 # -----------------------------------------------------------------------------
@@ -837,7 +837,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes spice-v
 # Music and podcasts.
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg 2>&1 | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes spotify-client; fi
@@ -910,7 +910,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes bash-co
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb 2>&1; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then rm --verbose /tmp/teamviewer.deb; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
@@ -1002,14 +1002,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes usbutil
 # -----------------------------------------------------------------------------
 # Add guest user.
 # -----------------------------------------------------------------------------
-if ! id "$(gettext 'guest')" &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')"; fi
-if   id "$(gettext 'guest')" &> /dev/null; then sudo passwd --delete "$(gettext 'guest')"; fi
+if ! id "$(gettext 'guest')"; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')"; fi
+if   id "$(gettext 'guest')"; then sudo passwd --delete "$(gettext 'guest')"; fi
 
 # remove user-guest from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Delete guest user.
 # -----------------------------------------------------------------------------
-if id "$(gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext 'guest')"; fi
+if id "$(gettext 'guest')"; then sudo userdel --remove "$(gettext 'guest')"; fi
 
 # install virtualbox on #none
 # -----------------------------------------------------------------------------
@@ -1050,7 +1050,7 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf re
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc 2>&1 | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo -e "Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg" |sudo tee /etc/apt/sources.list.d/vscode.sources; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes apt-transport-https; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get update; fi
@@ -1075,11 +1075,11 @@ if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --f
 # Web console.
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh 2>&1; fi
+if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sh /tmp/setup-repos.sh --force; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes webmin; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh 2>&1; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sh /tmp/setup-repos.sh --force; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
 if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes webmin; fi
