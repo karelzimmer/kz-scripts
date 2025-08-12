@@ -51,14 +51,16 @@ if gsettings get org.gnome.shell disable-user-extensions                   ; the
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ; then gnome-extensions enable no-overview@fthx; fi
 
 # reset dash-to-dock on *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
+if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ; then gnome-extensions disable no-overview@fthx; fi
 if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if grep --quiet rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if gsettings get org.gnome.shell disable-user-extensions                   ; then gsettings reset org.gnome.shell disable-user-extensions; fi

@@ -623,14 +623,17 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes lftp; f
 # Office suite.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes libreoffice; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes libreoffice; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf list libreoffice; then sudo dnf install --assumeyes libreoffice; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] && ! dnf list libreoffice; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] && ! dnf list libreoffice; then sudo flatpak install app/org.libreoffice.LibreOffice; fi
 
 # remove libreoffice from *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --purge --assume-yes libreoffice; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes libreoffice; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf list libreoffice; then sudo dnf remove --assumeyes libreoffice; fi
+if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] && ! dnf list libreoffice; then sudo flatpak uninstall app/org.libreoffice.LibreOffice; fi
 
 # install locate on pc06 pc07
 # -----------------------------------------------------------------------------
