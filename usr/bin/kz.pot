@@ -95,13 +95,13 @@ msgstr ""
 
 #: kz:114 kz_common.py:62 kz_common.py:237 kz_common.py:246 kz_common.py:285
 #: kz_common.py:335 kz-dev:92 kz-dev:189 kz-dev:204 kz-dev:230 kz-dev:241
-#: kz-dev:254 kz-dev:272 kz-dev:290 kz-update:256
+#: kz-dev:254 kz-dev:272 kz-dev:290 kz-update:258
 msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:170 kz-backup:152 kz-build:155 kz-check:199 kz-deploy:134 kz-desktop:196
 #: kz-dev:148 kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236
-#: kz-update:139 kz-wifi:127
+#: kz-update:155 kz-wifi:127
 msgid "internal error"
 msgstr ""
 
@@ -165,7 +165,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:160 kz-build:163 kz-check:207 kz-deploy:142 kz-desktop:204
-#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:145 kz-wifi:133
+#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:161 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -443,7 +443,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:496 kz-check:565 kz-deploy:264 kz-dev:338 kz-update:267
+#: kz-build:496 kz-check:565 kz-deploy:264 kz-dev:338 kz-update:269
 msgid "Complete!"
 msgstr ""
 
@@ -806,7 +806,7 @@ msgstr ""
 msgid "  -d, --dev      download the development version of package kz"
 msgstr ""
 
-#: kz-get:72 kz-update:87
+#: kz-get:72 kz-update:103
 msgid "fatal: unknown os release"
 msgstr ""
 
@@ -1268,15 +1268,15 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr ""
 
-#: kz-update:156 kz-update:201
+#: kz-update:77 kz-update:91
 msgid "UPDATE -- 1/3"
 msgstr ""
 
-#: kz-update:168 kz-update:213
+#: kz-update:82 kz-update:96
 msgid "UPGRADE -- 2/3"
 msgstr ""
 
-#: kz-update:187 kz-update:232
+#: kz-update:85 kz-update:99
 msgid "CLEANUP -- 3/3"
 msgstr ""
 

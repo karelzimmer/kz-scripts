@@ -74,15 +74,31 @@ def process() -> None:
     if subprocess.run(command1, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
-        perform_deb_update()
-        perform_deb_upgrade()
-        perform_deb_cleanup()
+        text = _('UPDATE -- 1/3')
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        perform_update_debs()
+        perform_update_flatpaks()
+        perform_update_snaps()
+        text = '\n' + _('UPGRADE -- 2/3')
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        perform_upgrade_debs()
+        text = '\n' + _('CLEANUP -- 3/3')
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        perform_cleanup_debs()
     elif subprocess.run(command2, executable='bash',
                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                         shell=True).returncode == 0:
-        perform_rpm_update()
-        perform_rpm_upgrade()
-        perform_rpm_cleanup()
+        text = _('UPDATE -- 1/3')
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        perform_update_rpms()
+        perform_update_flatpaks()
+        perform_update_snaps()
+        text = '\n' + _('UPGRADE -- 2/3')
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        perform_upgrade_rpms()
+        text = '\n' + _('CLEANUP -- 3/3')
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        perform_cleanup_rpms()
     else:
         text = _('fatal: unknown os release')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
@@ -147,90 +163,76 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.term(PROGRAM_NAME, 1)
 
 
-def perform_deb_update() -> None:
+def perform_update_debs() -> None:
     """
     This function updates installed Debian packages.
     """
-    text: str
-
-    text = _('UPDATE -- 1/3')
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command: str = 'sudo apt-get update'
     perform_command(command)
 
 
-def perform_deb_upgrade() -> None:
+def perform_update_flatpaks() -> None:
     """
-    This function upgrades installed Debian packages and snaps if installed.
+    This function updates installed Flatpak packages.
     """
-    text: str
+    if subprocess.run('type flatpak', executable='bash',
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL,
+                      shell=True,).returncode == 0:
+        command: str = 'sudo flatpak --assumeyes update'
+        perform_command(command)
 
-    text = '\n' + _('UPGRADE -- 2/3')
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
-    command = 'sudo apt-get dist-upgrade --assume-yes'
-    perform_command(command)
 
+def perform_update_snaps() -> None:
+    """
+    This function updates installed Snap packages.
+    """
     if subprocess.run('type snap', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
-        command = 'sudo snap refresh'
+        command: str = 'sudo snap refresh'
         perform_command(command)
 
 
-def perform_deb_cleanup() -> None:
+def perform_update_rpms() -> None:
+    """
+    This function updates installed RPM packages.
+    """
+    command: str = 'sudo dnf check-update || true'
+    perform_command(command)
+
+
+def perform_upgrade_debs() -> None:
+    """
+    This function upgrades installed Debian packages.
+    """
+    command = 'sudo apt-get dist-upgrade --assume-yes'
+    perform_command(command)
+
+
+def perform_upgrade_rpms() -> None:
+    """
+    This function upgrades installed RPM packages.
+    """
+    command = 'sudo dnf upgrade --assumeyes --refresh'
+    perform_command(command)
+
+
+def perform_cleanup_debs() -> None:
     """
     This function performs a Debian packages cleanup.
     """
-    text: str
-
-    text = '\n' + _('CLEANUP -- 3/3')
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command: str = 'sudo apt-get autoclean'
     perform_command(command)
     command = 'sudo apt-get autoremove --assume-yes'
     perform_command(command)
 
 
-def perform_rpm_update() -> None:
-    """
-    This function updates installed RPM packages.
-    """
-    text: str
-
-    text = _('UPDATE -- 1/3')
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
-    command: str = 'sudo dnf check-update || true'
-    perform_command(command)
-
-
-def perform_rpm_upgrade() -> None:
-    """
-    This function upgrades installed RPM packages and snaps if installed.
-    """
-    text: str
-
-    text = '\n' + _('UPGRADE -- 2/3')
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
-    command = 'sudo dnf upgrade --assumeyes --refresh'
-    perform_command(command)
-
-    if subprocess.run('type snap', executable='bash',
-                      stdout=subprocess.DEVNULL,
-                      stderr=subprocess.DEVNULL,
-                      shell=True,).returncode == 0:
-        command = 'sudo snap refresh'
-        perform_command(command)
-
-
-def perform_rpm_cleanup() -> None:
+def perform_cleanup_rpms() -> None:
     """
     This function performs a RPM packages cleanup.
     """
-    text: str
-
-    text = '\n' + _('CLEANUP -- 3/3')
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     command: str = 'sudo dnf clean all'
     perform_command(command)
     command = 'sudo dnf autoremove --assumeyes'
