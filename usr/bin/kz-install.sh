@@ -26,22 +26,6 @@ if grep Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo se
 if grep Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
 if grep Debian /etc/os-release; then sudo apt-get update; fi
 
-# install disabled-apport on *
-# -----------------------------------------------------------------------------
-# Disable automatic crash report generation for Ubuntu.
-# -----------------------------------------------------------------------------
-if grep Ubuntu /etc/os-release; then sudo systemctl stop apport.service; fi
-if grep Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
-if grep Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
-if grep Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/crash/*; fi
-
-# remove disabled-apport from *
-# -----------------------------------------------------------------------------
-# Enable automatic crash report generation for Ubuntu.
-# -----------------------------------------------------------------------------
-if grep Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
-if grep Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
-
 # install ansible on pc06 pc07
 # -----------------------------------------------------------------------------
 # Configuration management, deployment, and task execution.
@@ -227,6 +211,22 @@ if grep rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
 ! grep 'pci=noaer' /etc/default/grub
+
+# install disabled-apport on #none
+# -----------------------------------------------------------------------------
+# Disable automatic crash report generation for Ubuntu.
+# -----------------------------------------------------------------------------
+if grep Ubuntu /etc/os-release; then sudo systemctl stop apport.service; fi
+if grep Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
+if grep Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
+if grep Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/crash/*; fi
+
+# remove disabled-apport from #none
+# -----------------------------------------------------------------------------
+# Enable automatic crash report generation for Ubuntu.
+# -----------------------------------------------------------------------------
+if grep Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
+if grep Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
 
 # install disabled-fwupd on #none
 # -----------------------------------------------------------------------------
@@ -467,22 +467,6 @@ if grep rhel   /etc/os-release; then sudo dnf     install --assumeyes  groff; fi
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release; then sudo apt-get purge --assume-yes groff; fi
 if grep rhel   /etc/os-release; then sudo dnf     remove --assumeyes groff; fi
-
-# install skip-grub-menu on *
-# -----------------------------------------------------------------------------
-# Skip GRUB menu.
-# -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
-if grep debian /etc/os-release; then sudo update-grub; fi
-if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-
-# remove skip-grub-menu from *
-# -----------------------------------------------------------------------------
-# Skip GRUB menu.
-# -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
-if grep debian /etc/os-release; then sudo update-grub; fi
-if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
 # install handbrake on #none
 # -----------------------------------------------------------------------------
@@ -793,6 +777,22 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The simplescr
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get purge --assume-yes simplescreenrecorder; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The simplescreenrecorder app is not available.'; fi
 
+# install skip-grub-menu on *
+# -----------------------------------------------------------------------------
+# Skip GRUB menu.
+# -----------------------------------------------------------------------------
+sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
+if grep debian /etc/os-release; then sudo update-grub; fi
+if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+
+# remove skip-grub-menu from *
+# -----------------------------------------------------------------------------
+# Skip GRUB menu.
+# -----------------------------------------------------------------------------
+sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
+if grep debian /etc/os-release; then sudo update-grub; fi
+if grep rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+
 # install shellcheck on pc06 pc07
 # -----------------------------------------------------------------------------
 # Shell script linter.
@@ -825,14 +825,14 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The sound-jui
 
 # install spice-vdagent on #none
 # -----------------------------------------------------------------------------
-# Spice agent.
+# Spice (Simple Protocol for Independent Computing Environments) agent for virtualized guest systems.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
 if grep rhel   /etc/os-release; then sudo dnf     install --assumeyes  spice-vdagent; fi
 
 # remove spice-vdagent from #none
 # -----------------------------------------------------------------------------
-# Spice agent.
+# Spice (Simple Protocol for Independent Computing Environments) agent for virtualized guest systems.
 # -----------------------------------------------------------------------------
 if grep debian /etc/os-release; then sudo apt-get purge --assume-yes spice-vdagent; fi
 if grep rhel   /etc/os-release; then sudo dnf     remove --assumeyes spice-vdagent; fi
