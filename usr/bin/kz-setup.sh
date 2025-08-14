@@ -49,7 +49,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock click-action           
 if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size         ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                 ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position              ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position LEFT; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position              ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height              ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed            ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 if gsettings get org.gnome.shell disable-user-extensions                            ; then gsettings set org.gnome.shell disable-user-extensions false; fi
