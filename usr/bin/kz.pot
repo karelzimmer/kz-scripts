@@ -89,12 +89,12 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:108 kz_common.py:56 kz_common.py:329 kz-dev:86
+#: kz:108 kz_common.py:56 kz_common.py:328 kz-dev:86
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz:114 kz_common.py:62 kz_common.py:237 kz_common.py:246 kz_common.py:285
-#: kz_common.py:335 kz-dev:92 kz-dev:189 kz-dev:204 kz-dev:230 kz-dev:241
+#: kz:114 kz_common.py:62 kz_common.py:236 kz_common.py:245 kz_common.py:284
+#: kz_common.py:334 kz-dev:92 kz-dev:189 kz-dev:204 kz-dev:230 kz-dev:241
 #: kz-dev:254 kz-dev:272 kz-dev:290 kz-update:258
 msgid "Program {} encountered an error."
 msgstr ""
@@ -538,63 +538,63 @@ msgstr ""
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:111 kz_common.sh:67 kz-get:180
+#: kz_common.py:110 kz_common.sh:67 kz-get:180
 msgid "Wait for another package manager to finish"
 msgstr ""
 
-#: kz_common.py:133 kz_common.sh:146
+#: kz_common.py:132 kz_common.sh:146
 msgid "error message"
 msgstr ""
 
-#: kz_common.py:151 kz_common.sh:165
+#: kz_common.py:150 kz_common.sh:165
 msgid "information"
 msgstr ""
 
-#: kz_common.py:172 kz_common.sh:184
+#: kz_common.py:171 kz_common.sh:184
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:178 kz_common.sh:191
+#: kz_common.py:177 kz_common.sh:191
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:207 kz_common.sh:229
+#: kz_common.py:206 kz_common.sh:229
 msgid ", or see the "
 msgstr ""
 
-#: kz_common.py:208 kz_common.sh:231
+#: kz_common.py:207 kz_common.sh:231
 msgid "man page"
 msgstr ""
 
-#: kz_common.py:212
+#: kz_common.py:211
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:214
+#: kz_common.py:213
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:259
+#: kz_common.py:258
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:279 kz_common.sh:274
+#: kz_common.py:278 kz_common.sh:274
 msgid "Build ID cannot be determined."
 msgstr ""
 
-#: kz_common.py:289
+#: kz_common.py:288
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:290 kz_common.sh:282
+#: kz_common.py:289 kz_common.sh:282
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:291 kz_common.sh:283
+#: kz_common.py:290 kz_common.sh:283
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:325 kz_common.sh:405
+#: kz_common.py:324 kz_common.sh:405
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
