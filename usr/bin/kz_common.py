@@ -94,7 +94,6 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     command1: str = 'grep --quiet rhel /etc/os-release'
     command2: str = 'pkexec /usr/bin/kz_common-pkexec'
-    sleep: int = 1
     text: str = ''
 
     if subprocess.run(command1, executable='bash',

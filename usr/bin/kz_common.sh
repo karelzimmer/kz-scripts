@@ -71,7 +71,7 @@ function kz.check_debian_package_manager() {
             printf '%s\n' "#$text"
             # Prevent 'zenity progress' from getting stuck due to the speed of
             # executing a command.
-            sleep 0.1s
+            sleep 0.1
         else
             kz.infomsg "$text..."
         fi
