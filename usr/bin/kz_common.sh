@@ -69,6 +69,9 @@ function kz.check_debian_package_manager() {
             kz.logmsg "$text..."
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$text"
+            # Prevent 'zenity progress' from getting stuck due to the speed of
+            # executing a command.
+            sleep 0.1s
         else
             kz.infomsg "$text..."
         fi

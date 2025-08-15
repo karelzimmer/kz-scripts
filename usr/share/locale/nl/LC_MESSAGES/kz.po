@@ -601,29 +601,29 @@ msgstr "Reeds uitgevoerd door de beheerder."
 
 #: kz_common.py:111 kz_common.sh:67 kz-get:180
 msgid "Wait for another package manager to finish"
-msgstr "Wacht 1 seconde totdat een andere pakketbeheerder klaar is"
+msgstr "Wacht tot een andere pakketbeheerder klaar is"
 
-#: kz_common.py:133 kz_common.sh:143
+#: kz_common.py:133 kz_common.sh:146
 msgid "error message"
 msgstr "foutmelding"
 
-#: kz_common.py:151 kz_common.sh:162
+#: kz_common.py:151 kz_common.sh:165
 msgid "information"
 msgstr "informatie"
 
-#: kz_common.py:172 kz_common.sh:181
+#: kz_common.py:172 kz_common.sh:184
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:178 kz_common.sh:188
+#: kz_common.py:178 kz_common.sh:191
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:207 kz_common.sh:226
+#: kz_common.py:207 kz_common.sh:229
 msgid ", or see the "
 msgstr ", of zie de "
 
-#: kz_common.py:208 kz_common.sh:228
+#: kz_common.py:208 kz_common.sh:231
 msgid "man page"
 msgstr "man-pagina"
 
@@ -639,7 +639,7 @@ msgstr "voor meer informatie."
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:279 kz_common.sh:271
+#: kz_common.py:279 kz_common.sh:274
 msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
@@ -647,38 +647,38 @@ msgstr "Build-ID kan niet worden bepaald."
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:290 kz_common.sh:279
+#: kz_common.py:290 kz_common.sh:282
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:291 kz_common.sh:280
+#: kz_common.py:291 kz_common.sh:283
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.py:325 kz_common.sh:402
+#: kz_common.py:325 kz_common.sh:405
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz_common.sh:88
+#: kz_common.sh:91
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
-#: kz_common.sh:94
+#: kz_common.sh:97
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-#: kz_common.sh:101
+#: kz_common.sh:104
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
-#: kz_common.sh:112
+#: kz_common.sh:115
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz_common.sh:231
+#: kz_common.sh:234
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
@@ -687,22 +687,22 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man_url voor meer "
 "informatie."
 
-#: kz_common.sh:258
+#: kz_common.sh:261
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:277
+#: kz_common.sh:280
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:370
+#: kz_common.sh:373
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:390
+#: kz_common.sh:393
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
