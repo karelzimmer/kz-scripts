@@ -496,6 +496,9 @@ function execute_command() {
             kz.debugmsg "$app_name_line"
         fi
         printf '%s\n' "#$app_name_line\n\n$cmd"
+        # Prevent 'zenity progress' from getting stuck due to the speed of
+        # executing a command.
+        sleep 0.1s
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
             kz.infomsg "$app_name_line"
@@ -518,11 +521,6 @@ function execute_command() {
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
             2>> "$ERRORLOG"     || FAILED_APPS[$app_name]=$app_name
-
-    # Some systems has GUI freeze due to the speed of the setup commands.
-    if $OPTION_GUI; then
-        sleep 0.1s
-    fi
 }
 
 
