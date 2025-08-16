@@ -384,20 +384,6 @@ if grep rhel   /etc/os-release; then sudo sudo dnf     install --assumeyes  git;
 if grep debian /etc/os-release; then sudo apt-get purge --assume-yes git; fi
 if grep rhel   /etc/os-release; then sudo sudo dnf     remove --assumeyes git; fi
 
-# install gnome-tweaks on pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# Adjust advanced settings.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]]; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]]; then sudo dnf     install --assumeyes  gnome-tweaks; fi
-
-# remove gnome-tweaks from pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# Adjust advanced settings.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]]; then sudo apt-get purge --assume-yes gnome-tweaks; fi
-if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]]; then sudo dnf     remove --assumeyes gnome-tweaks; fi
-
 # install google-chrome on *
 # -----------------------------------------------------------------------------
 # Web browser.
@@ -855,24 +841,6 @@ sudo systemctl restart ssh.service
 sudo sed --in-place 's/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if grep debian /etc/os-release; then sudo apt-get purge --assume-yes ssh; fi
 if grep rhel   /etc/os-release; then sudo dnf     remove --assumeyes openssh; fi
-
-# install sushi on pc06
-# -----------------------------------------------------------------------------
-# Quick preview.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gnome-sushi; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf     install --assumeyes  sushi; fi
-# -----------------------------------------------------------------------------
-# Usage:
-# Select a file, press the space bar, and a preview will appear.
-# -----------------------------------------------------------------------------
-
-# remove sushi from pc06
-# -----------------------------------------------------------------------------
-# Quick preview.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get purge --assume-yes gnome-sushi; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf     remove --assumeyes sushi; fi
 
 # install tab-completion on pc01 pc06 pc07
 # -----------------------------------------------------------------------------

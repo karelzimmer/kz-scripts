@@ -1543,6 +1543,6 @@ msgstr ""
 "Back-up gevonden op verkeerde plek: <medium>/<username>@<hostname>\n"
 "Verplaats de back-up naar           <medium>s/"
 
-#: kz-install.sh:988 kz-install.sh:989 kz-install.sh:995
+#: kz-install.sh:956 kz-install.sh:957 kz-install.sh:963
 msgid "--domain=kz"
 msgstr ""
