@@ -1400,6 +1400,6 @@ msgid ""
 "Please move to:              <medium>/backups/"
 msgstr ""
 
-#: kz-install.sh:1002 kz-install.sh:1003 kz-install.sh:1009
+#: kz-install.sh:988 kz-install.sh:989 kz-install.sh:995
 msgid "--domain=kz"
 msgstr ""
