@@ -21,7 +21,6 @@
         <description gettext-domain="kz">Wrapper script for kz_common</description>
         <message gettext-domain="kz">Execute the fuser command requiring root privileges</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz_common-pkexec</annotate>
-        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
             <allow_any>yes</allow_any>
             <allow_inactive>yes</allow_inactive>
