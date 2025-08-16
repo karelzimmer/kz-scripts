@@ -150,34 +150,20 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The cups-back
 # Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf       list gnome-shell-extension-no-overview ; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
+if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   dnf       list gnome-shell-extension-no-overview ; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
 
 # remove dash-to-dock from *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get purge --assume-yes gnome-shell-extension-dashtodock; fi
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get purge --assume-yes gnome-shell-extension-no-overview; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf       list gnome-shell-extension-no-overview ; then sudo dnf     remove --assumeyes gnome-shell-extension-no-overview; fi
-
-# install desktop-backgrounds on #none
-# -----------------------------------------------------------------------------
-# Desktop backgrounds.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes '*-backgrounds'; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf     install --assumeyes  desktop-backgrounds-* gnome-backgrounds*; fi
-
-# remove desktop-backgrounds from #none
-# -----------------------------------------------------------------------------
-# Desktop backgrounds.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get purge --assume-yes '*-backgrounds'; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf     remove --assumeyes desktop-backgrounds-* gnome-backgrounds*; fi
+if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get purge --assume-yes gnome-shell-extension-dashtodock; fi
+if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get purge --assume-yes gnome-shell-extension-no-overview; fi
+if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   dnf       list gnome-shell-extension-no-overview ; then sudo dnf     remove --assumeyes gnome-shell-extension-no-overview; fi
 
 # install disabled-aer on pc06
 # -----------------------------------------------------------------------------
@@ -402,15 +388,15 @@ if grep rhel   /etc/os-release; then sudo sudo dnf     remove --assumeyes git; f
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf     install --assumeyes  gnome-tweaks; fi
+if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]]; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]]; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
 # remove gnome-tweaks from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get purge --assume-yes gnome-tweaks; fi
-if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf     remove --assumeyes gnome-tweaks; fi
+if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]]; then sudo apt-get purge --assume-yes gnome-tweaks; fi
+if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]]; then sudo dnf     remove --assumeyes gnome-tweaks; fi
 
 # install google-chrome on *
 # -----------------------------------------------------------------------------
