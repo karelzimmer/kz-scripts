@@ -208,7 +208,7 @@ function kz.init() {
 
     text="==== START logs for script $PROGRAM_NAME ==========================="
     kz.logmsg "$text"
-    text="Started ($0 as $USER)."
+    text="Started ($0 $* as $USER)."
     kz.logmsg "$text"
 }
 
