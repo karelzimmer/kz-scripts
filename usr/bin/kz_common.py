@@ -26,46 +26,6 @@ _ = gettext.gettext
 # Functions
 # #############################################################################
 
-def become(PROGRAM_NAME: str, PROGRAM_DESC: str,
-           OPTION_GUI: bool = False) -> None:
-    """
-    This function checks if the script was started in the terminal as user root
-    and restarts the script as user root if not.
-    """
-    exc: str = ''
-    exec_sudo: str = 'exec sudo '
-    text: str = ''
-
-    if not become_check(PROGRAM_NAME, PROGRAM_DESC, OPTION_GUI):
-        term(PROGRAM_NAME, 0)
-
-    if not (OPTION_GUI is True or os.getuid() == 0):
-        # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
-        for arg_num in range(len(sys.argv)):
-            if arg_num == 0:
-                exec_sudo += str(sys.argv[arg_num])
-            else:
-                exec_sudo += ' ' + str(sys.argv[arg_num])
-        text = f'Restart ({exec_sudo})'
-        logmsg(PROGRAM_NAME, text)
-
-        try:
-            subprocess.run(exec_sudo, executable='bash',
-                           shell=True, check=True)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-            term(PROGRAM_NAME, 1)
-        except Exception as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-            term(PROGRAM_NAME, 1)
-        else:
-            term(PROGRAM_NAME, 0)
-
-
 def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
                  OPTION_GUI: bool = False) -> bool:
     """

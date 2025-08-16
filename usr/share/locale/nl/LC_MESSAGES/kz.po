@@ -90,19 +90,19 @@ msgstr "opdracht bestaat niet"
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:108 kz_common.py:56 kz_common.py:328 kz-dev:86
+#: kz:108 kz_common.py:288 kz-dev:86
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz:114 kz_common.py:62 kz_common.py:236 kz_common.py:245 kz_common.py:284
-#: kz_common.py:334 kz-dev:92 kz-dev:189 kz-dev:204 kz-dev:230 kz-dev:241
-#: kz-dev:254 kz-dev:272 kz-dev:290 kz-update:258
+#: kz:114 kz_common.py:196 kz_common.py:205 kz_common.py:244 kz_common.py:294
+#: kz-dev:92 kz-dev:189 kz-dev:204 kz-dev:230 kz-dev:241 kz-dev:254 kz-dev:272
+#: kz-dev:290 kz-update:80 kz-update:268
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:170 kz-backup:152 kz-build:155 kz-check:199 kz-deploy:134 kz-desktop:196
-#: kz-dev:148 kz-install:242 kz-menu:175 kz-restore:153 kz-setup:236
-#: kz-update:155 kz-wifi:127
+#: kz-dev:148 kz-install:240 kz-menu:175 kz-restore:153 kz-setup:236
+#: kz-update:165 kz-wifi:127
 msgid "internal error"
 msgstr "interne fout"
 
@@ -163,7 +163,7 @@ msgstr ""
 "  -t, --target <map>\n"
 "                 plaats de back-up in de opgegeven map"
 
-#: kz-backup:112 kz-desktop:211 kz-install:205 kz-menu:146 kz-restore:112
+#: kz-backup:112 kz-desktop:211 kz-install:203 kz-menu:146 kz-restore:112
 #: kz-setup:201
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
@@ -173,7 +173,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:160 kz-build:163 kz-check:207 kz-deploy:142 kz-desktop:204
-#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:161 kz-wifi:133
+#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:171 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -357,7 +357,7 @@ msgstr ""
 "3. Rechtsklik op de gewenste afbeelding en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:523 kz-install:421 kz-restore:249 kz-setup:414
+#: kz-backup:523 kz-install:419 kz-restore:249 kz-setup:414
 msgid "progress"
 msgstr "voortgang"
 
@@ -369,7 +369,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:600 kz-install:568 kz-restore:326 kz-setup:541
+#: kz-backup:600 kz-install:566 kz-restore:326 kz-setup:541
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -394,11 +394,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:608 kz-install:573 kz-restore:334 kz-setup:545
+#: kz-backup:608 kz-install:571 kz-restore:334 kz-setup:545
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:609 kz-install:574 kz-restore:335 kz-setup:546
+#: kz-backup:609 kz-install:572 kz-restore:335 kz-setup:546
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -499,7 +499,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:496 kz-check:565 kz-deploy:264 kz-dev:338 kz-update:269
+#: kz-build:496 kz-check:565 kz-deploy:264 kz-dev:338 kz-update:279
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -595,90 +595,90 @@ msgstr "Eindspaties gevonden."
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz_common.py:83 kz_common.sh:50 kz-get:130
+#: kz_common.py:43 kz_common.sh:33 kz-get:130
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
-#: kz_common.py:110 kz_common.sh:67 kz-get:180
+#: kz_common.py:70 kz_common.sh:50 kz-get:180
 msgid "Wait for another package manager to finish"
 msgstr "Wacht tot een andere pakketbeheerder klaar is"
 
-#: kz_common.py:132 kz_common.sh:146
+#: kz_common.py:92 kz_common.sh:130
 msgid "error message"
 msgstr "foutmelding"
 
-#: kz_common.py:150 kz_common.sh:165
+#: kz_common.py:110 kz_common.sh:149
 msgid "information"
 msgstr "informatie"
 
-#: kz_common.py:171 kz_common.sh:184
+#: kz_common.py:131 kz_common.sh:168
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:177 kz_common.sh:191
+#: kz_common.py:137 kz_common.sh:175
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:206 kz_common.sh:229
+#: kz_common.py:166 kz_common.sh:213
 msgid ", or see the "
 msgstr ", of zie de "
 
-#: kz_common.py:207 kz_common.sh:231
+#: kz_common.py:167 kz_common.sh:215
 msgid "man page"
 msgstr "man-pagina"
 
-#: kz_common.py:211
+#: kz_common.py:171
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:213
+#: kz_common.py:173
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:258
+#: kz_common.py:218
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:278 kz_common.sh:274
+#: kz_common.py:238 kz_common.sh:258
 msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
-#: kz_common.py:288
+#: kz_common.py:248
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:289 kz_common.sh:282
+#: kz_common.py:249 kz_common.sh:266
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:290 kz_common.sh:283
+#: kz_common.py:250 kz_common.sh:267
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.py:324 kz_common.sh:405
+#: kz_common.py:284 kz_common.sh:389
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz_common.sh:91
+#: kz_common.sh:74
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
-#: kz_common.sh:97
+#: kz_common.sh:80
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-#: kz_common.sh:104
+#: kz_common.sh:87
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
-#: kz_common.sh:115
+#: kz_common.sh:98
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz_common.sh:234
+#: kz_common.sh:218
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
@@ -687,22 +687,22 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man_url voor meer "
 "informatie."
 
-#: kz_common.sh:261
+#: kz_common.sh:245
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:280
+#: kz_common.sh:264
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:373
+#: kz_common.sh:357
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:393
+#: kz_common.sh:377
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -884,7 +884,7 @@ msgstr "         wget karelzimmer.nl/getkz; bash getkz [<opties>]"
 msgid "  -d, --dev      download the development version of package kz"
 msgstr "  -d, --dev      download de ontwikkelingsversie van pakket kz"
 
-#: kz-get:72 kz-update:103
+#: kz-get:72 kz-update:113
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
@@ -915,7 +915,7 @@ msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
 #: nl.karelzimmer.kz-install.policy:21 kz-install:23 kz-install:420 kz-menu:76
-#: kz-install:421 kz-install.desktop:10
+#: kz-install:419 kz-install.desktop:10
 msgid "Install apps"
 msgstr "Apps installeren"
 
@@ -963,30 +963,30 @@ msgstr "  -r, --remove   verwijder apps"
 msgid "  <app>          process specified apps"
 msgstr "  <app>          verwerk opgegeven apps"
 
-#: kz-install:120
+#: kz-install:117
 #, sh-format
 msgid "Installation file '$install_file' not found."
 msgstr "Installatiebestand '$install_file' niet gevonden."
 
-#: kz-install:272 kz-setup:266
+#: kz-install:270 kz-setup:266
 msgid "The following apps are available:"
 msgstr "De volgende apps zijn beschikbaar:"
 
-#: kz-install:274 kz-setup:268
+#: kz-install:272 kz-setup:268
 msgid "NUM  APP"
 msgstr "NUM  APP"
 
-#: kz-install:293
+#: kz-install:291
 msgid "Use \"kz install <app>...\" to install the apps."
 msgstr "Gebruik \"kz install <app>...\" om de apps te installeren."
 
-#: kz-install:294
+#: kz-install:292
 msgid "Use \"kz install --cat\" to view the contents of the installation file."
 msgstr ""
 "Gebruik \"kz install --cat\" om de inhoud van het installatiebestand te "
 "bekijken."
 
-#: kz-install:296
+#: kz-install:294
 msgid ""
 "Use \"kz install --cat <app>...\" to view the contents of the apps "
 "installation file."
@@ -994,7 +994,7 @@ msgstr ""
 "Gebruik \"kz install --cat <app>...\" om de inhoud van het "
 "installatiebestand voor apps te bekijken."
 
-#: kz-install:298
+#: kz-install:296
 msgid ""
 "Use \"kz install --browse\" to view the contents of the default installation "
 "file."
@@ -1002,53 +1002,53 @@ msgstr ""
 "Gebruik \"kz install --browse\" om de inhoud van het standaard "
 "installatiebestand te bekijken."
 
-#: kz-install:301 kz-setup:294
+#: kz-install:299 kz-setup:294
 msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
-#: kz-install:359 kz-setup:352
+#: kz-install:357 kz-setup:352
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr "App '$app_argument' niet gevonden."
 
-#: kz-install:416 kz-setup:409
+#: kz-install:414 kz-setup:409
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
-#: kz-install:422 kz-menu:52
+#: kz-install:420 kz-menu:52
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
-#: kz-install:456 kz-setup:448
+#: kz-install:454 kz-setup:448
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:457 kz-setup:449
+#: kz-install:455 kz-setup:449
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
-#: kz-install:569
+#: kz-install:567
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:575
+#: kz-install:573
 msgid "Try installing/removing the apps again."
 msgstr "Probeer de apps opnieuw te installeren/verwijderen."
 
-#: kz-install:594
+#: kz-install:592
 msgid "install"
 msgstr "installeren"
 
-#: kz-install:598
+#: kz-install:596
 msgid "remove"
 msgstr "verwijderen"
 
-#: kz-install:600 kz-setup:572
+#: kz-install:598 kz-setup:572
 #, sh-format
 msgid "Apps $operation completed."
 msgstr "Apps $operation is voltooid."
 
-#: kz-install:605
+#: kz-install:603
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1402,15 +1402,15 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-#: kz-update:77 kz-update:91
+#: kz-update:87 kz-update:101
 msgid "UPDATE -- 1/3"
 msgstr "BIJWERKEN -- 1/3"
 
-#: kz-update:82 kz-update:96
+#: kz-update:92 kz-update:106
 msgid "UPGRADE -- 2/3"
 msgstr "OPWAARDEREN -- 2/3"
 
-#: kz-update:85 kz-update:99
+#: kz-update:95 kz-update:109
 msgid "CLEANUP -- 3/3"
 msgstr "OPRUIMEN -- 3/3"
 

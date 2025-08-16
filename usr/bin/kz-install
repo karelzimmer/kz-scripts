@@ -59,9 +59,6 @@ readonly OPTIONS_SHORT='abcf:grhmuv'
 readonly OPTIONS_LONG="apps,browse,cat,file:,gui,remove,help,manual,usage,\
 version"
 
-# Required for kz.become.
-readonly COMMANDLINE_ARGS=("$@")
-
 
 # #############################################################################
 # Globals
@@ -150,7 +147,8 @@ found.")
         exit 0
     fi
 
-    kz.become
+    kz.become_check || exit 0
+    $OPTION_GUI     || sudo true
     install_apps
 }
 

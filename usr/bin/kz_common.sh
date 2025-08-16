@@ -20,23 +20,6 @@ source /usr/bin/gettext.sh
 # Functions
 # #############################################################################
 
-# This function checks if the script was started in the terminal as user root
-# and restarts the script as user root if not.
-function kz.become() {
-    local text=''
-
-    kz.become_check || exit 0
-
-    if ! ( ${OPTION_GUI:-false} || [[ $UID -eq 0 ]] ); then
-        # shellcheck disable=SC2153,SC2154
-        text="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
-        kz.logmsg "$text"
-        exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
-        exit
-    fi
-}
-
-
 # This function checks if the user is allowed to become root and returns 0 if
 # so, otherwise returns 1 with descriptive message.
 function kz.become_check() {
@@ -137,6 +120,7 @@ function kz.debugmsg() {
 
 # This function returns an error message.
 function kz.errmsg() {
+    # shellcheck disable=SC2153,SC215,SC2154
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
