@@ -73,7 +73,6 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf     remove
 # Enable wifi adapter.
 # Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
 if grep debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
 if grep rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
@@ -83,7 +82,6 @@ if grep rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not avai
 # Disable wifi adapter.
 # Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 if grep debian /etc/os-release; then sudo apt-get purge --assume-yes broadcom-sta-dkms; fi
 if grep rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
 
@@ -152,7 +150,6 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The cups-back
 # Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
@@ -163,7 +160,6 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf       list gnome
 # Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get purge --assume-yes gnome-shell-extension-dashtodock; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get purge --assume-yes gnome-shell-extension-no-overview; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
@@ -324,7 +320,6 @@ if grep rhel   /etc/os-release; then sudo dnf     remove --assumeyes fdupes; fi
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
 # -----------------------------------------------------------------------------
@@ -338,7 +333,6 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
 # Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
 # -----------------------------------------------------------------------------
@@ -546,7 +540,6 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The krita app
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt
 # configuration files.
 # -----------------------------------------------------------------------------
-REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"; fi
 # -----------------------------------------------------------------------------
@@ -578,7 +571,6 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo virsh --connec
 # Images are in: /var/lib/libvirt/images/
 # Reboot required!
 # -----------------------------------------------------------------------------
-REBOOT=true
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if grep debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo gpasswd --delete "${SUDO_USER:-$USER}" libvirt; fi
