@@ -1,4 +1,4 @@
-# shellcheck shell=bash disable=SC2034
+# shellcheck shell=bash
 # #############################################################################
 # SPDX-FileComment: Install file for use with kz-install script
 #
@@ -150,20 +150,20 @@ if grep rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The cups-back
 # Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
-if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   dnf       list gnome-shell-extension-no-overview ; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
+if grep debian /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} = 'GNOME' ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if grep debian /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} = 'GNOME' ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if grep rhel   /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} = 'GNOME' ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if grep rhel   /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} = 'GNOME' ]] &&   dnf       list gnome-shell-extension-no-overview ; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
 
 # remove dash-to-dock from *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
-if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get purge --assume-yes gnome-shell-extension-dashtodock; fi
-if grep debian /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get purge --assume-yes gnome-shell-extension-no-overview; fi
-if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
-if grep rhel   /etc/os-release && [[ $XDG_CURRENT_DESKTOP = 'GNOME' ]] &&   dnf       list gnome-shell-extension-no-overview ; then sudo dnf     remove --assumeyes gnome-shell-extension-no-overview; fi
+if grep debian /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} = 'GNOME' ]] && ! apt-cache show gnome-shell-extension-ubuntu-dock ; then sudo apt-get purge --assume-yes gnome-shell-extension-dashtodock; fi
+if grep debian /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} = 'GNOME' ]] &&   apt-cache show gnome-shell-extension-no-overview ; then sudo apt-get purge --assume-yes gnome-shell-extension-no-overview; fi
+if grep rhel   /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} = 'GNOME' ]] &&   dnf       list gnome-shell-extension-dash-to-dock; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep rhel   /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} = 'GNOME' ]] &&   dnf       list gnome-shell-extension-no-overview ; then sudo dnf     remove --assumeyes gnome-shell-extension-no-overview; fi
 
 # install disabled-aer on pc06
 # -----------------------------------------------------------------------------
