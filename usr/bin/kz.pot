@@ -89,11 +89,11 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:108 kz_common.py:288 kz-dev:86
+#: kz:108 kz_common.py:292 kz-dev:86
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz:114 kz_common.py:196 kz_common.py:205 kz_common.py:244 kz_common.py:294
+#: kz:114 kz_common.py:200 kz_common.py:209 kz_common.py:248 kz_common.py:298
 #: kz-dev:92 kz-dev:189 kz-dev:204 kz-dev:230 kz-dev:241 kz-dev:254 kz-dev:272
 #: kz-dev:290 kz-update:80 kz-update:268
 msgid "Program {} encountered an error."
@@ -203,9 +203,10 @@ msgid ""
 "Please rename to:           <username>@<hostname>"
 msgstr ""
 
+#: kz-backup:254
 msgid ""
 "Backup found in wrong place: <medium>/<username>@<hostname>\n"
-"Please move to:              <medium>s/"
+"Please move to:              <medium>/backups"
 msgstr ""
 
 #: kz-backup:269 kz-restore:289
@@ -315,7 +316,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:600 kz-install:566 kz-restore:326 kz-setup:541
+#: kz-backup:600 kz-install:563 kz-restore:326 kz-setup:538
 msgid "error messages"
 msgstr ""
 
@@ -340,11 +341,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:608 kz-install:571 kz-restore:334 kz-setup:545
+#: kz-backup:608 kz-install:568 kz-restore:334 kz-setup:542
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:609 kz-install:572 kz-restore:335 kz-setup:546
+#: kz-backup:609 kz-install:569 kz-restore:335 kz-setup:543
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -439,7 +440,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:487 kz-get:218
+#: kz-build:487 kz-get:220
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -534,111 +535,115 @@ msgstr ""
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
-#: kz_common.py:43 kz_common.sh:33 kz-get:130
+#: kz_common.py:41 kz_common.sh:31 kz-get:130
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:70 kz_common.sh:50 kz-get:180
+#: kz_common.py:68 kz_common.sh:48 kz-get:182
 msgid "Wait for another package manager to finish"
 msgstr ""
 
-#: kz_common.py:92 kz_common.sh:130
+#: kz_common.py:90 kz_common.sh:125
 msgid "error message"
 msgstr ""
 
-#: kz_common.py:110 kz_common.sh:149
+#: kz_common.py:108 kz_common.sh:144
 msgid "information"
 msgstr ""
 
-#: kz_common.py:131 kz_common.sh:168
+#: kz_common.py:129 kz_common.sh:163
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:137 kz_common.sh:175
+#: kz_common.py:135 kz_common.sh:170
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:166 kz_common.sh:213
+#: kz_common.py:141 kz_common.sh:177
+msgid "fatal: must not be run as root"
+msgstr ""
+
+#: kz_common.py:170 kz_common.sh:215
 msgid ", or see the "
 msgstr ""
 
-#: kz_common.py:167 kz_common.sh:215
+#: kz_common.py:171 kz_common.sh:217
 msgid "man page"
 msgstr ""
 
-#: kz_common.py:171
+#: kz_common.py:175
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:173
+#: kz_common.py:177
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:218
+#: kz_common.py:222
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:238 kz_common.sh:258
+#: kz_common.py:242 kz_common.sh:260
 msgid "Build ID cannot be determined."
 msgstr ""
 
-#: kz_common.py:248
+#: kz_common.py:252
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:249 kz_common.sh:266
+#: kz_common.py:253 kz_common.sh:268
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:250 kz_common.sh:267
+#: kz_common.py:254 kz_common.sh:269
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:284 kz_common.sh:389
+#: kz_common.py:288 kz_common.sh:391
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
-#: kz_common.sh:74
+#: kz_common.sh:69
 msgid "Check that all repos are on branch main"
 msgstr ""
 
-#: kz_common.sh:80
+#: kz_common.sh:75
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr ""
 
-#: kz_common.sh:87
+#: kz_common.sh:82
 msgid "Check that all repos are clean"
 msgstr ""
 
-#: kz_common.sh:98
+#: kz_common.sh:93
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:218
+#: kz_common.sh:220
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:245
+#: kz_common.sh:247
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:264
+#: kz_common.sh:266
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:357
+#: kz_common.sh:359
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:377
+#: kz_common.sh:379
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -818,7 +823,7 @@ msgstr ""
 msgid "Type 'man kz get' for more information."
 msgstr ""
 
-#: kz-get:222
+#: kz-get:224
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -827,7 +832,7 @@ msgid ""
 "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-get:230
+#: kz-get:232
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -932,37 +937,31 @@ msgstr ""
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:567
+#: kz-install:564
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:573
+#: kz-install:570
 msgid "Try installing/removing the apps again."
 msgstr ""
 
-#: kz-install:592
+#: kz-install:589
 msgid "install"
 msgstr ""
 
-#: kz-install:596
+#: kz-install:593
 msgid "remove"
 msgstr ""
 
-#: kz-install:598 kz-setup:572
+#: kz-install:595 kz-setup:569
 #, sh-format
 msgid "Apps $operation completed."
 msgstr ""
 
-#: kz-install:603
+#: kz-install:600
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
-msgstr ""
-
-msgid "guest"
-msgstr ""
-
-msgid "Guest user"
 msgstr ""
 
 #: kz-menu:22 kz-menu:48 kz-menu.desktop:10
@@ -1224,35 +1223,35 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:542
+#: kz-setup:539
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:547
+#: kz-setup:544
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:566
+#: kz-setup:563
 msgid "set up"
 msgstr ""
 
-#: kz-setup:570
+#: kz-setup:567
 msgid "reset"
 msgstr ""
 
-#: kz-setup:579
+#: kz-setup:576
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:584
+#: kz-setup:581
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:605
+#: kz-setup:602
 msgid "Log out of the computer yourself."
 msgstr ""
 
@@ -1392,14 +1391,4 @@ msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
-msgstr ""
-
-#: kz-backup:254
-msgid ""
-"Backup found in wrong place: <medium>/<username>@<hostname>\n"
-"Please move to:              <medium>/backups/"
-msgstr ""
-
-#: kz-install.sh:956 kz-install.sh:957 kz-install.sh:963
-msgid "--domain=kz"
 msgstr ""

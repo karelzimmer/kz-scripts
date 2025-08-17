@@ -35,8 +35,6 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
     command: str = 'groups $USER | grep --quiet --regexp=sudo --regexp=wheel'
     text: str = ''
 
-    if os.getuid() == 0:
-        return True
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except Exception:
@@ -135,6 +133,12 @@ def init(PROGRAM_NAME: str) -> None:
     # Check if os release is available.
     if not os.path.exists('/etc/os-release'):
         print('\033[1;31m' + _('fatal: no os release available') + '\033[0m',
+              file=sys.stderr)
+        sys.exit(1)
+
+    # Check if started as root.
+    if os.getuid() == 0:
+        print('\033[1;31m' + _('fatal: must not be run as root') + '\033[0m',
               file=sys.stderr)
         sys.exit(1)
 

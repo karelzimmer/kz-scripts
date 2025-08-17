@@ -25,9 +25,7 @@ source /usr/bin/gettext.sh
 function kz.become_check() {
     local text=''
 
-    if [[ $UID -eq 0 ]]; then
-        return 0
-    elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
+    if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
@@ -52,9 +50,6 @@ function kz.check_debian_package_manager() {
             kz.logmsg "$text..."
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$text"
-            # Prevent 'zenity progress' from getting stuck due to the speed of
-            # executing a command.
-            sleep 0.1
         else
             kz.infomsg "$text..."
         fi
@@ -173,6 +168,13 @@ function kz.init() {
     if ! [[ -f /etc/os-release ]]; then
         printf  '\033[1;31m%b\n\033[0m' \
                 "$(gettext 'fatal: no os release available')" >&2
+        exit 1
+    fi
+
+    # Check if started as root.
+    if [[ $UID -eq 0 ]]; then
+        printf  '\033[1;31m%b\n\033[0m' \
+                "$(gettext 'fatal: must not be run as root')" >&2
         exit 1
     fi
 

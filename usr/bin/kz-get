@@ -152,7 +152,9 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     fi
 
     sudo true
-    wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
+    wget    --no-verbose                            \
+            --output-document="$kz_deb_local_file"  \
+            "$kz_deb_site_file"
     # Prevent the message:
     # ...file '/tmp/kz-get-XXXXXXXXXX.deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"

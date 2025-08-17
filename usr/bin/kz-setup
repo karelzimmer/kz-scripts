@@ -496,9 +496,6 @@ function execute_command() {
             kz.debugmsg "$app_name_line"
         fi
         printf '%s\n' "#$app_name_line\n\n$cmd"
-        # Prevent 'zenity progress' from getting stuck due to the speed of
-        # executing a command.
-        sleep 0.1
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
             kz.infomsg "$app_name_line"
