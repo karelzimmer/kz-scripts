@@ -88,7 +88,7 @@ function process() {
         kz.infomsg "$text"
         exit 1
     fi
-    kz.become_check || exit 0
+    kz.become_check
     sudo true
     build_website
     generate_gettext_files

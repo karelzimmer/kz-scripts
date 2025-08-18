@@ -74,7 +74,7 @@ function process() {
         kz.infomsg "$text"
         exit 1
     fi
-    kz.become_check || exit 0
+    kz.become_check
     check_website
 
     text=$(gettext 'Check scripts (this may take a while)...')

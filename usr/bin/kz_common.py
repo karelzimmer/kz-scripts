@@ -27,22 +27,22 @@ _ = gettext.gettext
 # #############################################################################
 
 def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                 OPTION_GUI: bool = False) -> bool:
+                 OPTION_GUI: bool = False) -> int:
     """
     This function checks if the user is allowed to become root and returns 0 if
-    so, otherwise returns 1 with descriptive message.
+    so, otherwise exits 0 with descriptive message.
     """
     command: str = 'groups $USER | grep --quiet --regexp=sudo --regexp=wheel'
     text: str = ''
 
-    try:
-        subprocess.run(command, executable='bash', shell=True, check=True)
-    except Exception:
+    if subprocess.run(command, executable='bash',
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      shell=True).returncode == 0:
+        return 0
+    else:
         text = _('Already performed by the administrator.')
         infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
-        return False
-    else:
-        return True
+        sys.exit(0)
 
 
 def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:

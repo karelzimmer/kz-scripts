@@ -147,8 +147,8 @@ found.")
         exit 0
     fi
 
-    kz.become_check || exit 0
-    $OPTION_GUI     || sudo true
+    kz.become_check
+    $OPTION_GUI || sudo true
     install_apps
 }
 

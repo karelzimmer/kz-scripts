@@ -596,7 +596,7 @@ msgstr "Eindspaties gevonden."
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz_common.py:41 kz_common.sh:31 kz-get:130
+#: kz_common.py:43 kz_common.sh:31 kz-get:130
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
