@@ -991,14 +991,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes usb
 
 # install user-gast on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
-# Add gast user.
+# Add gast user (Dutch).
 # -----------------------------------------------------------------------------
 if ! id gast &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Gastgebruiker' gast; fi
 if   id gast &> /dev/null; then sudo passwd  --delete gast; fi
 
 # remove user-gast from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
-# Delete gast user.
+# Delete gast user (Dutch).
 # -----------------------------------------------------------------------------
 if id gast &> /dev/null; then sudo userdel --remove gast; fi
 
