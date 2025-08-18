@@ -994,6 +994,19 @@ if   id gast &> /dev/null; then sudo passwd  --delete gast; fi
 # -----------------------------------------------------------------------------
 if id gast &> /dev/null; then sudo userdel --remove gast; fi
 
+# install user-guest on #none
+# -----------------------------------------------------------------------------
+# Add guest user.
+# -----------------------------------------------------------------------------
+if ! id guest &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Guest user' guest; fi
+if   id guest &> /dev/null; then sudo passwd  --delete guest; fi
+
+# remove user-guest from #none
+# -----------------------------------------------------------------------------
+# Delete guest user.
+# -----------------------------------------------------------------------------
+if id guest &> /dev/null; then sudo userdel --remove guest; fi
+
 # install virtualbox on #none
 # -----------------------------------------------------------------------------
 # Virtualization.
