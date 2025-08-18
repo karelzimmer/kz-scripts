@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=bash disable=SC2034
 # #############################################################################
 # SPDX-FileComment: Install file for use with kz-install script
 #
@@ -76,6 +76,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
 if grep --quiet rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
+REBOOT=true
 
 # remove broadcom-sta-dkms from pc01
 # -----------------------------------------------------------------------------
@@ -84,6 +85,7 @@ if grep --quiet rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is 
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get purge --assume-yes broadcom-sta-dkms; fi
 if grep --quiet rhel   /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
+REBOOT=true
 
 # install calibre on pc06
 # -----------------------------------------------------------------------------
@@ -154,6 +156,7 @@ if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-
 if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel   /etc/os-release && type gnome-session &&   dnf       list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
 if (grep rhel   /etc/os-release && type gnome-session &&   dnf       list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
+REBOOT=true
 
 # remove dash-to-dock from *
 # -----------------------------------------------------------------------------
@@ -164,6 +167,7 @@ if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-
 if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get purge --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel   /etc/os-release && type gnome-session &&   dnf       list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel   /etc/os-release && type gnome-session &&   dnf       list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf     remove --assumeyes gnome-shell-extension-no-overview; fi
+REBOOT=true
 
 # install disabled-aer on pc06
 # -----------------------------------------------------------------------------
@@ -308,6 +312,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes fdu
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
+REBOOT=true
 # -----------------------------------------------------------------------------
 # To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
 # 'x11'.
@@ -321,6 +326,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo s
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
+REBOOT=true
 # -----------------------------------------------------------------------------
 # To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
 # 'wayland'.
@@ -550,6 +556,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo v
 # "sudo virsh --connect=qemu:///system net-info default", should output
 # 'Autostart: yes'.
 # -----------------------------------------------------------------------------
+REBOOT=true
 
 # remove kvm from pc06 pc07
 # -----------------------------------------------------------------------------
@@ -565,6 +572,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo g
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt-qemu; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo systemctl disable --now libvirtd; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf groupremove "Virtualization Host"; fi
+REBOOT=true
 
 # install lftp on pc06 pc07
 # -----------------------------------------------------------------------------
