@@ -18,7 +18,7 @@
 if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf check-update; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf check-update || true; fi
 
 # remove add-components from *
 # -----------------------------------------------------------------------------

@@ -599,7 +599,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:288 kz_common.sh:391
+#: kz_common.py:288 kz_common.sh:385
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -643,7 +643,7 @@ msgstr ""
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:379
+#: kz_common.sh:373
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
