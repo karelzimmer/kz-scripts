@@ -12,19 +12,23 @@
 
 # install add-components on *
 # -----------------------------------------------------------------------------
-# Add contrib and non-free components to the package sources for Debian.
+# Add contrib and non-free components to the package sources for Debian, and
+# update package lists for all.
 # -----------------------------------------------------------------------------
 if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet Debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf check-update; fi
 
 # remove add-components from *
 # -----------------------------------------------------------------------------
-# Remove contrib and non-free components to the package sources for Debian.
+# Remove contrib and non-free components to the package sources for Debian, and
+# update package lists for all.
 # -----------------------------------------------------------------------------
 if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet Debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf check-update; fi
 
 # install ansible on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -92,7 +96,7 @@ REBOOT=true
 # E-book manager.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes calibre; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo --validate && wget --no-verbose --no-verbose --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo --validate && wget --no-verbose --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
 
 # remove calibre from pc06
 # -----------------------------------------------------------------------------
@@ -408,7 +412,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/google-chrome.deb; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
@@ -426,7 +430,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Explore the planet.
 # Web app: https://earth.google.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/google-earth.deb; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
@@ -828,7 +832,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes spi
 # Music and podcasts.
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list 1> /dev/null; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get update; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes spotify-client; fi
@@ -901,7 +905,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes bas
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/teamviewer.deb; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
@@ -1054,7 +1058,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo -e "Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg" |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes apt-transport-https; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get update; fi
