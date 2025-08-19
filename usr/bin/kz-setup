@@ -414,7 +414,7 @@ function setup_apps() {
     title="$(gettext 'Set up apps') $(gettext 'progress')"
     text=$(gettext 'Preparing set up')
     kz.debugmsg "$title"...
-    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
+    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
 
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -556,8 +556,6 @@ $(gettext "Try to set up the apps again.")"
             less --no-init --quit-if-one-screen "$ERRORLOG"
         fi
         exit 1
-    else
-        rm --verbose "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     operation=$(gettext 'set up')

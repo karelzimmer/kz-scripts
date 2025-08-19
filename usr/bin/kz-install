@@ -419,7 +419,7 @@ function install_apps() {
     title="$(gettext 'Install apps') $(gettext 'progress')"
     text=$(gettext 'Prepare installation')
     kz.debugmsg "$title"...
-    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
+    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
     chmod --verbose 775 "$ERRORLOG" |& $PROGRAM_LOGS
 
     if $OPTION_GUI; then
@@ -582,8 +582,6 @@ $(gettext "Try installing/removing the apps again.")"
             less --no-init --quit-if-one-screen "$ERRORLOG"
         fi
         exit 1
-    else
-        rm --verbose "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     operation=$(gettext 'install')

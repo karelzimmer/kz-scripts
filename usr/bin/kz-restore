@@ -249,7 +249,7 @@ function restore_backup() {
     title="$(gettext 'Restore home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing restore (this can take a while)')
     kz.debugmsg "$title"...
-    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
+    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
 
     if $OPTION_GUI; then
         rsync   --archive               \
@@ -347,8 +347,6 @@ $(gettext 'Try restoring the back up again.')"
             less --no-init --quit-if-one-screen "$ERRORLOG"
         fi
         exit 1
-    else
-        rm --verbose "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     num_users=$(find /home/* -prune -print | wc --lines)

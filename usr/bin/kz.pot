@@ -249,7 +249,7 @@ msgstr ""
 msgid "users.txt"
 msgstr ""
 
-#: kz-backup:355 kz-backup:629 kz-restore:360
+#: kz-backup:355 kz-backup:627 kz-restore:358
 msgid "USERNAME|USERID|USER"
 msgstr ""
 
@@ -353,16 +353,16 @@ msgstr ""
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:640
+#: kz-backup:638
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:642
+#: kz-backup:640
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
-#: kz-backup:650 kz-restore:376
+#: kz-backup:648 kz-restore:374
 msgid "Remember to SAFELY remove the USB media."
 msgstr ""
 
@@ -945,20 +945,20 @@ msgstr ""
 msgid "Try installing/removing the apps again."
 msgstr ""
 
-#: kz-install:589
+#: kz-install:587
 msgid "install"
 msgstr ""
 
-#: kz-install:593
+#: kz-install:591
 msgid "remove"
 msgstr ""
 
-#: kz-install:595 kz-setup:569
+#: kz-install:593 kz-setup:567
 #, sh-format
 msgid "Apps $operation completed."
 msgstr ""
 
-#: kz-install:600
+#: kz-install:598
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1161,11 +1161,11 @@ msgstr ""
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:357
+#: kz-restore:355
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:368
+#: kz-restore:366
 #, sh-format
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr ""
@@ -1231,27 +1231,27 @@ msgstr ""
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:563
+#: kz-setup:561
 msgid "set up"
 msgstr ""
 
-#: kz-setup:567
+#: kz-setup:565
 msgid "reset"
 msgstr ""
 
-#: kz-setup:576
+#: kz-setup:574
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:581
+#: kz-setup:579
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:602
+#: kz-setup:600
 msgid "Log out of the computer yourself."
 msgstr ""
 

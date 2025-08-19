@@ -523,7 +523,7 @@ EOF
     title="$(gettext 'Backup home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing backup (this may take a while)')
     kz.debugmsg "$title"...
-    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-errorlog-XXXXXXXXXX")
+    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
 
     if $OPTION_GUI; then
         rsync   --archive                       \
@@ -621,8 +621,6 @@ $(gettext 'Try creating the back up again.')"
             less --no-init --quit-if-one-screen "$ERRORLOG"
         fi
         exit 1
-    else
-        rm --verbose "$ERRORLOG" |& $PROGRAM_LOGS
     fi
 
     users=$(
