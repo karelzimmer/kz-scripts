@@ -195,7 +195,7 @@ function process_menu1_gui() {
 
     # From zenity 3, the height of the list must be set to 420.
     if [[ $(zenity --version | cut --delimiter='.' --fields=1) -gt 3 ]]; then
-        height=420
+        height=450
     fi
 
     while true; do
