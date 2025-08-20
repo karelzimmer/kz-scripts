@@ -225,12 +225,14 @@ kz-desktop --delete=virt-manager
 # Office suite.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=libreoffice-writer
+kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
 # reset libreoffice on *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=libreoffice-writer
+kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
 # setup lynis on #none
 # -----------------------------------------------------------------------------
