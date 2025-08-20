@@ -167,7 +167,6 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --reinstall                     \
             --quiet                         \
             --quiet                         \
-            --assume-yes                    \
             "$kz_deb_local_file"
 }
 
