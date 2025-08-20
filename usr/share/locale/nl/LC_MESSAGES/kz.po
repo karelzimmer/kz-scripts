@@ -276,7 +276,7 @@ msgstr "snap is niet geïnstalleerd"
 msgid "users.txt"
 msgstr "gebruikers.txt"
 
-#: kz-backup:355 kz-backup:627 kz-restore:358
+#: kz-backup:355 kz-backup:628 kz-restore:358
 msgid "USERNAME|USERID|USER"
 msgstr "GEBRUIKERSNAAM|USERID|GEBRUIKER"
 
@@ -366,57 +366,57 @@ msgstr "voortgang"
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-#: kz-backup:563
+#: kz-backup:564
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:600 kz-install:563 kz-restore:326 kz-setup:538
+#: kz-backup:601 kz-install:563 kz-restore:326 kz-setup:538
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:601
+#: kz-backup:602
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:603 kz-restore:329
+#: kz-backup:604 kz-restore:329
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:604
+#: kz-backup:605
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:605 kz-restore:331
+#: kz-backup:606 kz-restore:331
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:606
+#: kz-backup:607
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:608 kz-install:568 kz-restore:334 kz-setup:542
+#: kz-backup:609 kz-install:568 kz-restore:334 kz-setup:542
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:609 kz-install:569 kz-restore:335 kz-setup:543
+#: kz-backup:610 kz-install:569 kz-restore:335 kz-setup:543
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:610
+#: kz-backup:611
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:638
+#: kz-backup:639
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:640
+#: kz-backup:641
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
 
-#: kz-backup:648 kz-restore:374
+#: kz-backup:649 kz-restore:374
 msgid "Remember to SAFELY remove the USB media."
 msgstr "Vergeet niet om het USB-medium VEILIG te verwijderen."
 
