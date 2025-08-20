@@ -384,7 +384,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
-if grep --quiet rhel   /etc/os-release; then sudo sudo dnf     install --assumeyes  git; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  git; fi
 
 # remove git from pc06 pc07
 # -----------------------------------------------------------------------------
@@ -392,7 +392,7 @@ if grep --quiet rhel   /etc/os-release; then sudo sudo dnf     install --assumey
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get purge --assume-yes git; fi
-if grep --quiet rhel   /etc/os-release; then sudo sudo dnf     remove --assumeyes git; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes git; fi
 
 # install gnome-tweaks on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -416,11 +416,11 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget -
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/google-chrome.deb; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes  https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
-# remove google-chrome from *
-# -----------------------------------------------------------------------------
+# remove google-chrome from *--------------------------------
 # Web browser.
+# ---------------------------------------------
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes google-chrome-stable; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes google-chrome-stable; fi
@@ -434,7 +434,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget -
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/google-earth.deb; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes  https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 
 # remove google-earth from #none
 # -----------------------------------------------------------------------------
@@ -606,7 +606,7 @@ if (grep rhel   /etc/os-release && type gnome-session && ! dnf list libreoffice)
 # Office suite.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes libreoffice; fi
-if (grep rhel   /etc/os-release && type gnome-session &&   dnf list libreoffice) &> /dev/null; then sudo dnf     remove --assumeyes libreoffice; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list libreoffice) &> /dev/null; then sudo dnf     remove    --assumeyes libreoffice; fi
 if (grep rhel   /etc/os-release && type gnome-session && ! dnf list libreoffice) &> /dev/null; then sudo flatpak uninstall --assumeyes  app/org.libreoffice.LibreOffice; fi
 
 # install locate on pc06 pc07
@@ -727,7 +727,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes poe
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  python3 python3-pycodestyle python3-pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-pip; fi
 
 # remove python from pc06 pc07
 # -----------------------------------------------------------------------------
@@ -735,7 +735,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  p
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get purge --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes python3 python3-pycodestyle python3-pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip; fi
 
 # install rpm on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -908,7 +908,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes bas
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/teamviewer.deb; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 # remove teamviewer from *
 # -----------------------------------------------------------------------------
@@ -1066,7 +1066,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --set editor /usr/bin/code; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  code; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes code; fi
 
 # remove vscode from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1090,7 +1090,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sh /tmp/setup-repos.sh --force; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  webmin; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes webmin; fi
 
 # remove webmin from pc07
 # -----------------------------------------------------------------------------
@@ -1099,7 +1099,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes webmin; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes webmin; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes webmin; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
 
 # install wine on #none
@@ -1116,7 +1116,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes wine winetricks playonlinux; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes wine playonlinux; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
 
 # install youtube-dl on #none
 # -----------------------------------------------------------------------------
