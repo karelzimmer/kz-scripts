@@ -416,7 +416,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget -
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/google-chrome.deb; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes  https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 # remove google-chrome from *--------------------------------
 # Web browser.
@@ -434,7 +434,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget -
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/google-earth.deb; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes  https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 
 # remove google-earth from #none
 # -----------------------------------------------------------------------------
