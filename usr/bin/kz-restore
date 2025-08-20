@@ -258,7 +258,7 @@ function restore_backup() {
                 --verbose               \
                 "$source/"              \
                 "$HOME/"                \
-                2>> "$ERROR_LOG"         |
+                2>> "$ERROR_LOG"        |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -316,8 +316,8 @@ function term() {
     local title=''
     local users=''
 
-    # Stderr also to the log.
-    kz.logmsg '==============================================================='
+    # Error-log (stderr) also to the log.
+    kz.logmsg '= kz-restore-errorlog ========================================='
     kz.logmsg "$title $ERROR_LOG:"
     printf "%s" "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
     kz.logmsg '==============================================================='
@@ -338,7 +338,7 @@ $(gettext 'Try restoring the back up again.')"
 
         if $OPTION_GUI; then
             zenity  --text-info             \
-                    --filename="$ERROR_LOG"  \
+                    --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
                     --title     "$title"    2> /dev/null || true

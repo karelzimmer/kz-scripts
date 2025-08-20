@@ -535,7 +535,7 @@ EOF
                 --delete-excluded               \
                 "$HOME/"                        \
                 "$TARGET/"                      \
-                2>> "$ERROR_LOG"                 |
+                2>> "$ERROR_LOG"                |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
                 --auto-close                    \
@@ -557,7 +557,8 @@ EOF
                 --exclude-from="$exclude_file"  \
                 --delete-excluded               \
                 "$HOME/"                        \
-                "$TARGET/"                      2>> "$ERROR_LOG" || BACKUP_RC=$?
+                "$TARGET/"                      2>> "$ERROR_LOG" ||
+                                                BACKUP_RC=$?
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")
@@ -590,8 +591,8 @@ function term() {
     local title=''
     local users=''
 
-    # Stderr also to the log.
-    kz.logmsg '==============================================================='
+    # Error-log (stderr) also to the log.
+    kz.logmsg '= kz-backup-errorlog =========================================='
     kz.logmsg "$title ($ERROR_LOG):"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
     kz.logmsg '==============================================================='
@@ -612,7 +613,7 @@ $(gettext 'Try creating the back up again.')"
 
         if $OPTION_GUI; then
             zenity  --text-info             \
-                    --filename="$ERROR_LOG"  \
+                    --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
                     --title     "$title"    2> /dev/null || true
