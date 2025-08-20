@@ -65,7 +65,7 @@ version"
 # #############################################################################
 
 declare -A FAILED_APPS=()
-declare ERRORLOG=''
+declare ERROR_LOG=''
 declare OPTION_GUI=false
 declare OPTION_REMOVE=false
 declare REBOOT=false
@@ -419,8 +419,8 @@ function install_apps() {
     title="$(gettext 'Install apps') $(gettext 'progress')"
     text=$(gettext 'Prepare installation')
     kz.debugmsg "$title"...
-    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
-    chmod --verbose 775 "$ERRORLOG" |& $PROGRAM_LOGS
+    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
+    chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
 
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -473,7 +473,7 @@ function process_command_file() {
                         "$app_tot_num"      \
                         "$app_name"
                 # To corrolate possible error messages with app name.
-                printf '%s\n' "-- App $app_name" >> "$ERRORLOG"
+                printf '%s\n' "-- App $app_name" >> "$ERROR_LOG"
                 ;;
             '' | '#'* )
                 # Empty or comment line.
@@ -527,7 +527,7 @@ function execute_command() {
         pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                      \
                 1> >($PROGRAM_LOGS)         \
-                2>> "$ERRORLOG"             || pkexec_rc=$?
+                2>> "$ERROR_LOG"            || pkexec_rc=$?
         if [[ $pkexec_rc -eq 126 || $pkexec_rc -eq 127 ]]; then
             # pkexec_rc = 126: The user dismissed the authentication dialog.
             # pkexec_rc = 127: The calling process is not authorized.
@@ -540,7 +540,7 @@ function execute_command() {
         kz.check_debian_package_manager
         eval    "$cmd"              \
                 1> >($PROGRAM_LOGS) \
-                2>> "$ERRORLOG"     || FAILED_APPS[$app_name]=$app_name
+                2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
     fi
 }
 
@@ -553,10 +553,10 @@ function term() {
     local text=''
     local title=''
 
-    # Stderr also to the log.
-    kz.logmsg '==============================================================='
-    kz.logmsg "$title $ERRORLOG:"
-    printf '%s' "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
+    # Error-log (stderr) also to the log.
+    kz.logmsg '= kz-install-errorlog ========================================='
+    kz.logmsg "$title $ERROR_LOG:"
+    printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
     kz.logmsg '==============================================================='
 
     if [[ -n ${FAILED_APPS[*]} ]]; then
@@ -572,14 +572,14 @@ $(gettext "Try installing/removing the apps again.")"
 
         if $OPTION_GUI; then
             zenity  --text-info             \
-                    --filename="$ERRORLOG"  \
+                    --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
                     --title     "$title"    2> /dev/null || true
         else
             kz.wait_for_enter
-            kz.infomsg "$title $ERRORLOG:"
-            less --no-init --quit-if-one-screen "$ERRORLOG"
+            kz.infomsg "$title $ERROR_LOG:"
+            less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
         exit 1
     fi

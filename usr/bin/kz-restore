@@ -56,7 +56,7 @@ readonly OPTIONS_LONG='gui,source:,help,manual,usage,version'
 # #############################################################################
 
 declare -i RESTORE_RC=0
-declare ERRORLOG=''
+declare ERROR_LOG=''
 declare OPTION_GUI=false
 declare SOURCE_MEDIUM=''
 
@@ -249,7 +249,7 @@ function restore_backup() {
     title="$(gettext 'Restore home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing restore (this can take a while)')
     kz.debugmsg "$title"...
-    ERRORLOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
+    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
 
     if $OPTION_GUI; then
         rsync   --archive               \
@@ -258,7 +258,7 @@ function restore_backup() {
                 --verbose               \
                 "$source/"              \
                 "$HOME/"                \
-                2>> "$ERRORLOG"         |
+                2>> "$ERROR_LOG"         |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -277,7 +277,7 @@ function restore_backup() {
                 --verbose               \
                 --human-readable        \
                 "$source/"              \
-                "$HOME/"                2>> "$ERRORLOG" || RESTORE_RC=$?
+                "$HOME/"                2>> "$ERROR_LOG" || RESTORE_RC=$?
     fi
 }
 
@@ -318,8 +318,8 @@ function term() {
 
     # Stderr also to the log.
     kz.logmsg '==============================================================='
-    kz.logmsg "$title $ERRORLOG:"
-    printf "%s" "$(<"$ERRORLOG")" |& $PROGRAM_LOGS
+    kz.logmsg "$title $ERROR_LOG:"
+    printf "%s" "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
     kz.logmsg '==============================================================='
 
     if [[ $RESTORE_RC -ne 0 ]]; then
@@ -338,13 +338,13 @@ $(gettext 'Try restoring the back up again.')"
 
         if $OPTION_GUI; then
             zenity  --text-info             \
-                    --filename="$ERRORLOG"  \
+                    --filename="$ERROR_LOG"  \
                     --width     700         \
                     --height    500         \
                     --title     "$title"    2> /dev/null || true
         else
-            kz.infomsg "$title $ERRORLOG:"
-            less --no-init --quit-if-one-screen "$ERRORLOG"
+            kz.infomsg "$title $ERROR_LOG:"
+            less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
         exit 1
     fi
