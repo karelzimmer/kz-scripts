@@ -316,8 +316,8 @@ function term() {
     local title=''
     local users=''
 
-    # Error-log (stderr) also to the log.
-    kz.logmsg '= kz-restore-errorlog ========================================='
+    # Error-log (stderr) also to the main log.
+    kz.logmsg '= kz-restore-XXXXXXXXXX-error.log (stderr) ===================='
     kz.logmsg "$title $ERROR_LOG:"
     printf "%s" "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
     kz.logmsg '==============================================================='
