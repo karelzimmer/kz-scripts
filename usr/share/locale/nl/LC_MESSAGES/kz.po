@@ -276,7 +276,7 @@ msgstr "snap is niet geïnstalleerd"
 msgid "users.txt"
 msgstr "gebruikers.txt"
 
-#: kz-backup:355 kz-backup:631 kz-restore:361
+#: kz-backup:355 kz-backup:630 kz-restore:360
 msgid "USERNAME|USERID|USER"
 msgstr "GEBRUIKERSNAAM|USERID|GEBRUIKER"
 
@@ -370,53 +370,53 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:604 kz-install:566 kz-restore:329 kz-setup:541
+#: kz-backup:603 kz-install:565 kz-restore:328 kz-setup:540
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:605
+#: kz-backup:604
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:607 kz-restore:332
+#: kz-backup:606 kz-restore:331
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:608
+#: kz-backup:607
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:609 kz-restore:334
+#: kz-backup:608 kz-restore:333
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:610
+#: kz-backup:609
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:612 kz-install:571 kz-restore:337 kz-setup:545
+#: kz-backup:611 kz-install:570 kz-restore:336 kz-setup:544
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:613 kz-install:572 kz-restore:338 kz-setup:546
+#: kz-backup:612 kz-install:571 kz-restore:337 kz-setup:545
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:614
+#: kz-backup:613
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:642
+#: kz-backup:641
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:644
+#: kz-backup:643
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
 
-#: kz-backup:652 kz-restore:377
+#: kz-backup:651 kz-restore:376
 msgid "Remember to SAFELY remove the USB media."
 msgstr "Vergeet niet om het USB-medium VEILIG te verwijderen."
 
@@ -1032,28 +1032,28 @@ msgstr "NUM/TOT  APP"
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
-#: kz-install:567
+#: kz-install:566
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:573
+#: kz-install:572
 msgid "Try installing/removing the apps again."
 msgstr "Probeer de apps opnieuw te installeren/verwijderen."
 
-#: kz-install:590
+#: kz-install:589
 msgid "install"
 msgstr "installeren"
 
-#: kz-install:594
+#: kz-install:593
 msgid "remove"
 msgstr "verwijderen"
 
-#: kz-install:596 kz-setup:570
+#: kz-install:595 kz-setup:569
 #, sh-format
 msgid "Apps $operation completed."
 msgstr "Apps $operation is voltooid."
 
-#: kz-install:601
+#: kz-install:600
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1260,30 +1260,30 @@ msgstr ""
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
 
-#: kz-restore:330
+#: kz-restore:329
 msgid "Restore ended with errors."
 msgstr "Back-up terugzetten is geëindigd met fouten."
 
-#: kz-restore:333
+#: kz-restore:332
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 "Zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up, of"
 
-#: kz-restore:335
+#: kz-restore:334
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr "is er te weinig ruimte op $HOME."
 
-#: kz-restore:339
+#: kz-restore:338
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:358
+#: kz-restore:357
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-restore:369
+#: kz-restore:368
 #, sh-format
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
@@ -1352,23 +1352,23 @@ msgstr ""
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:542
+#: kz-setup:541
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:547
+#: kz-setup:546
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:564
+#: kz-setup:563
 msgid "set up"
 msgstr "instellen"
 
-#: kz-setup:568
+#: kz-setup:567
 msgid "reset"
 msgstr "resetten"
 
-#: kz-setup:577
+#: kz-setup:576
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1376,7 +1376,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:582
+#: kz-setup:581
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1384,7 +1384,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:603
+#: kz-setup:602
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 

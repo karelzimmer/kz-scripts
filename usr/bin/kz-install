@@ -418,7 +418,7 @@ function install_apps() {
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
-    text='= kz-install-XXXXXXXXXX-error.log (stderr) ========================='
+    text='** kz-install-XXXXXXXXXX-error.log (stderr)'
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title="$(gettext 'Install apps') $(gettext 'progress')"
@@ -557,8 +557,7 @@ function term() {
     local title=''
 
     # Error-log (stderr) also to the main log.
-    kz.logmsg '= kz-install-XXXXXXXXXX-error.log (stderr) ===================='
-    kz.logmsg "$title $ERROR_LOG:"
+    kz.logmsg '==============================================================='
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
     kz.logmsg '==============================================================='
 

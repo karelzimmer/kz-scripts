@@ -521,7 +521,7 @@ $(
 EOF
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
-    text='= kz-backup-XXXXXXXXXX-error.log (stderr) =========================='
+    text='** kz-backup-XXXXXXXXXX-error.log (stderr)'
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title="$(gettext 'Backup home folder') $(gettext 'progress')"
@@ -595,8 +595,7 @@ function term() {
     local users=''
 
     # Error-log (stderr) also to the main log.
-    kz.logmsg '= kz-backup-XXXXXXXXXX-error.log (stderr) ====================='
-    kz.logmsg "$title ($ERROR_LOG):"
+    kz.logmsg '==============================================================='
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
     kz.logmsg '==============================================================='
 
