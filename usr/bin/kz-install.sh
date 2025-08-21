@@ -186,6 +186,7 @@ if   grep --quiet rhel        /etc/os-release  ; then sudo grub2-mkconfig -o /bo
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
 grep --quiet 'pci=noaer' /etc/default/grub
+REBOOT=true
 
 # remove disabled-aer from pc06
 # -----------------------------------------------------------------------------
@@ -201,6 +202,7 @@ if grep --quiet rhel        /etc/os-release  ; then sudo grub2-mkconfig -o /boot
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
 ! grep --quiet 'pci=noaer' /etc/default/grub
+REBOOT=true
 
 # install disabled-apport on #none
 # -----------------------------------------------------------------------------
@@ -253,12 +255,14 @@ sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 # -----------------------------------------------------------------------------
 if id gdm &> /dev/null && [[ -f /home/karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose "/home/karel/.config/monitors.xml" ~gdm/.config/monitors.xml; fi
 if id gdm &> /dev/null && [[ -f        ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
+REBOOT=true
 
 # remove dual-monitor from #none
 # -----------------------------------------------------------------------------
 # Remove dual monitor settings.
 # -----------------------------------------------------------------------------
 sudo rm --force --verbose ~gdm/.config/monitors.xml
+REBOOT=true
 
 # install exiftool on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -774,6 +778,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+REBOOT=true
 
 # remove skip-grub-menu from *
 # -----------------------------------------------------------------------------
@@ -782,6 +787,7 @@ if grep --quiet rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.
 sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel   /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+REBOOT=true
 
 # install shellcheck on pc06 pc07
 # -----------------------------------------------------------------------------
