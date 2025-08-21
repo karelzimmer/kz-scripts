@@ -520,10 +520,13 @@ $(
     )
 EOF
 
+    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
+    text='= kz-backup-XXXXXXXXXX-error.log (stderr) =========================='
+    printf '%s\n' "$text" > "$ERROR_LOG"
+
     title="$(gettext 'Backup home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing backup (this may take a while)')
     kz.debugmsg "$title"...
-    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
 
     if $OPTION_GUI; then
         rsync   --archive                       \

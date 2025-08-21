@@ -246,10 +246,13 @@ function restore_backup() {
     local text=''
     local title=''
 
+    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
+    text='= kz-restore-XXXXXXXXXX-error.log (stderr) ========================='
+    printf '%s\n' "$text" > "$ERROR_LOG"
+
     title="$(gettext 'Restore home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing restore (this can take a while)')
     kz.debugmsg "$title"...
-    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
 
     if $OPTION_GUI; then
         rsync   --archive               \

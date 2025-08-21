@@ -121,7 +121,7 @@ msgstr ""
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
-#: kz-backup:23 kz-backup:523 kz-menu:74 kz-backup.desktop:10
+#: kz-backup:23 kz-backup:527 kz-menu:74 kz-backup.desktop:10
 msgid "Backup home folder"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgid ""
 "Please move to:              <medium>/backups"
 msgstr ""
 
-#: kz-backup:269 kz-restore:289
+#: kz-backup:269 kz-restore:292
 msgid "Settings"
 msgstr ""
 
@@ -249,7 +249,7 @@ msgstr ""
 msgid "users.txt"
 msgstr ""
 
-#: kz-backup:355 kz-backup:628 kz-restore:358
+#: kz-backup:355 kz-backup:631 kz-restore:361
 msgid "USERNAME|USERID|USER"
 msgstr ""
 
@@ -304,65 +304,65 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:523 kz-install:419 kz-restore:249 kz-setup:414
+#: kz-backup:527 kz-install:424 kz-restore:253 kz-setup:418
 msgid "progress"
 msgstr ""
 
-#: kz-backup:524
+#: kz-backup:528
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:564
+#: kz-backup:567
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:601 kz-install:563 kz-restore:326 kz-setup:538
+#: kz-backup:604 kz-install:566 kz-restore:329 kz-setup:541
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:602
+#: kz-backup:605
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:604 kz-restore:329
+#: kz-backup:607 kz-restore:332
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:605
+#: kz-backup:608
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:606 kz-restore:331
+#: kz-backup:609 kz-restore:334
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:607
+#: kz-backup:610
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:609 kz-install:568 kz-restore:334 kz-setup:542
+#: kz-backup:612 kz-install:571 kz-restore:337 kz-setup:545
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:610 kz-install:569 kz-restore:335 kz-setup:543
+#: kz-backup:613 kz-install:572 kz-restore:338 kz-setup:546
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:611
+#: kz-backup:614
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:639
+#: kz-backup:642
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:641
+#: kz-backup:644
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
-#: kz-backup:649 kz-restore:374
+#: kz-backup:652 kz-restore:377
 msgid "Remember to SAFELY remove the USB media."
 msgstr ""
 
@@ -837,7 +837,7 @@ msgid "Type 'exit' to close this window."
 msgstr ""
 
 #: nl.karelzimmer.kz-install.policy:21 kz-install:23 kz-install:420 kz-menu:76
-#: kz-install:419 kz-install.desktop:10
+#: kz-install:424 kz-install.desktop:10
 msgid "Install apps"
 msgstr ""
 
@@ -925,40 +925,40 @@ msgstr ""
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:420 kz-menu:52
+#: kz-install:425 kz-menu:52
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:454 kz-setup:448
+#: kz-install:457 kz-setup:451
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:455 kz-setup:449
+#: kz-install:458 kz-setup:452
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:564
+#: kz-install:567
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:570
+#: kz-install:573
 msgid "Try installing/removing the apps again."
 msgstr ""
 
-#: kz-install:587
+#: kz-install:590
 msgid "install"
 msgstr ""
 
-#: kz-install:591
+#: kz-install:594
 msgid "remove"
 msgstr ""
 
-#: kz-install:593 kz-setup:567
+#: kz-install:596 kz-setup:570
 #, sh-format
 msgid "Apps $operation completed."
 msgstr ""
 
-#: kz-install:598
+#: kz-install:601
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1026,11 +1026,11 @@ msgstr ""
 msgid "Show WiFi information"
 msgstr ""
 
-#: kz-menu:77 kz-restore:23 kz-restore:249 kz-restore.desktop:10
+#: kz-menu:77 kz-restore:23 kz-restore:253 kz-restore.desktop:10
 msgid "Restore home folder"
 msgstr ""
 
-#: kz-menu:78 kz-setup:23 kz-setup:414 kz-setup.desktop:10
+#: kz-menu:78 kz-setup:23 kz-setup:418 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr ""
 
@@ -1140,32 +1140,32 @@ msgid ""
 "Connect a USB medium with the directory $USER@$HOSTNAME."
 msgstr ""
 
-#: kz-restore:250
+#: kz-restore:254
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:327
+#: kz-restore:330
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:330
+#: kz-restore:333
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:332
+#: kz-restore:335
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:336
+#: kz-restore:339
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:355
+#: kz-restore:358
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:366
+#: kz-restore:369
 #, sh-format
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr ""
@@ -1219,39 +1219,39 @@ msgid ""
 "Use \"kz setup --browse\" to view the contents of the default setup file."
 msgstr ""
 
-#: kz-setup:415
+#: kz-setup:419
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:539
+#: kz-setup:542
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:544
+#: kz-setup:547
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:561
+#: kz-setup:564
 msgid "set up"
 msgstr ""
 
-#: kz-setup:565
+#: kz-setup:568
 msgid "reset"
 msgstr ""
 
-#: kz-setup:574
+#: kz-setup:577
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:579
+#: kz-setup:582
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:600
+#: kz-setup:603
 msgid "Log out of the computer yourself."
 msgstr ""
 
