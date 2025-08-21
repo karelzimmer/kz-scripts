@@ -247,14 +247,14 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-# install dual-monitor on pc06
+# install dual-monitor on #none
 # -----------------------------------------------------------------------------
 # Preserve dual monitor settings.
 # -----------------------------------------------------------------------------
-if [[ -f $HOME/.config/monitors.xml ]]; then sudo cp --preserve --verbose "$HOME/.config/monitors.xml" ~gdm/.config/monitors.xml; fi
-if [[ -f  ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
+if id gdm &> /dev/null && [[ -f /home/karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose "/home/karel/.config/monitors.xml" ~gdm/.config/monitors.xml; fi
+if id gdm &> /dev/null && [[ -f        ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
-# remove dual-monitor from pc06
+# remove dual-monitor from #none
 # -----------------------------------------------------------------------------
 # Remove dual monitor settings.
 # -----------------------------------------------------------------------------
