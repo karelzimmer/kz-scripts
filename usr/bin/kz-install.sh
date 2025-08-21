@@ -711,7 +711,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes poe
 
 # install primary-monitor on pc06
 # -----------------------------------------------------------------------------
-# Set default GDM login monitor in a multi-monitor setup.
+# Set the default GDM login monitor after a multi-monitor setup.
 # -----------------------------------------------------------------------------
 if id gdm        &> /dev/null && [[ -f /home/karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/karel/.config/monitors.xml        ~gdm/.config/monitors.xml; fi
 if id gdm        &> /dev/null && [[ -f        ~gdm/.config/monitors.xml ]]; then sudo chown         --verbose gdm:gdm                                 ~gdm/.config/monitors.xml; fi
@@ -721,7 +721,7 @@ REBOOT=true
 
 # remove primary-monitor from pc06
 # -----------------------------------------------------------------------------
-# Reset default GDM login monitor in a multi-monitor setup.
+# Reset the default GDM login monitor in a multi-monitor setup.
 # -----------------------------------------------------------------------------
 sudo rm --force --verbose ~gdm/.config/monitors.xml ~Debian-gdm/.config/monitors.xml
 REBOOT=true
