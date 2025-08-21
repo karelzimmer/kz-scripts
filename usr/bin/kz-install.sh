@@ -723,7 +723,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Remove primary monitor settings.
 # -----------------------------------------------------------------------------
-sudo rm --force --verbose ~gdm/.config/monitors.xml
+sudo rm --force --verbose ~gdm/.config/monitors.xml ~Debian-gdm/.config/monitors.xml
 REBOOT=true
 
 # install python on pc06 pc07
