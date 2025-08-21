@@ -476,7 +476,7 @@ function process_command_file() {
                         "$app_tot_num"      \
                         "$app_name"
                 # To corrolate possible error messages with app name.
-                printf '\n%s\n' "-- App $app_name" >> "$ERROR_LOG"
+                printf ' \n%s\n' "-- App $app_name" >> "$ERROR_LOG"
                 ;;
             '' | '#'* )
                 # Empty or comment line.
