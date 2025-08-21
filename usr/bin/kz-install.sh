@@ -249,21 +249,6 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-# install dual-monitor on #none
-# -----------------------------------------------------------------------------
-# Preserve dual monitor settings.
-# -----------------------------------------------------------------------------
-if id gdm &> /dev/null && [[ -f /home/karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose "/home/karel/.config/monitors.xml" ~gdm/.config/monitors.xml; fi
-if id gdm &> /dev/null && [[ -f        ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
-REBOOT=true
-
-# remove dual-monitor from #none
-# -----------------------------------------------------------------------------
-# Remove dual monitor settings.
-# -----------------------------------------------------------------------------
-sudo rm --force --verbose ~gdm/.config/monitors.xml
-REBOOT=true
-
 # install exiftool on pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
@@ -723,6 +708,23 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  p
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get purge --assume-yes poedit; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes poedit; fi
+
+# install primary-monitor on pc06
+# -----------------------------------------------------------------------------
+# Preserve primary monitor settings.
+# -----------------------------------------------------------------------------
+if id gdm        &> /dev/null && [[ -f /home/karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/karel/.config/monitors.xml        ~gdm/.config/monitors.xml; fi
+if id gdm        &> /dev/null && [[ -f        ~gdm/.config/monitors.xml ]]; then sudo chown         --verbose gdm:gdm                                 ~gdm/.config/monitors.xml; fi
+if id Debian-gdm &> /dev/null && [[ -f /home/karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/karel/.config/monitors.xml ~Debian-gdm/.config/monitors.xml; fi
+if id Debian-gdm &> /dev/null && [[ -f ~Debian-gdm/.config/monitors.xml ]]; then sudo chown         --verbose Debian-gdm:Debian-gdm            ~Debian-gdm/.config/monitors.xml; fi
+REBOOT=true
+
+# remove primary-monitor from pc06
+# -----------------------------------------------------------------------------
+# Remove primary monitor settings.
+# -----------------------------------------------------------------------------
+sudo rm --force --verbose ~gdm/.config/monitors.xml
+REBOOT=true
 
 # install python on pc06 pc07
 # -----------------------------------------------------------------------------
