@@ -1005,8 +1005,8 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes 
 # -----------------------------------------------------------------------------
 # Add gast user (Dutch).
 # -----------------------------------------------------------------------------
-if ! id gast &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Gastgebruiker' gast ; fi
-if   id gast &> /dev/null; then sudo passwd --delete gast                                                       ; fi
+if !    id gast &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Gastgebruiker' gast ; fi
+if      id gast &> /dev/null; then sudo passwd --delete gast                                                       ; fi
 
 # remove user-gast from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1018,8 +1018,8 @@ if id gast &> /dev/null; then sudo userdel --remove gast; fi
 # -----------------------------------------------------------------------------
 # Add guest user.
 # -----------------------------------------------------------------------------
-if ! id guest &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Guest user' guest  ; fi
-if   id guest &> /dev/null; then sudo passwd  --delete guest                                                    ; fi
+if !    id guest &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Guest user' guest  ; fi
+if      id guest &> /dev/null; then sudo passwd  --delete guest                                                    ; fi
 
 # remove user-guest from #none
 # -----------------------------------------------------------------------------
