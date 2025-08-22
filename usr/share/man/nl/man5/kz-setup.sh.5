@@ -200,16 +200,16 @@ De app kan alsnog worden ingesteld met de opdracht 'kz setup google-earth'.
 # setup spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskto\
-p --addaft=spotify; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskto\
-p --addaft=kz-spotify; fi
+if grep --quiet debian  /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskt\
+op --addaft=spotify; fi
+if grep --quiet rhel    /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskt\
+op --addaft=kz-spotify; fi
 .sp
 .RS
-Met "if grep --quiet debian /etc/os-release" wordt gecontroleerd of het een De\
-bian of Debian-gebaseerd systeem is, zoals Ubuntu.
-Met "if grep --quiet rhel   /etc/os-release" wordt gecontroleerd of het een Re\
-d Hat of Red Hat-gebaseerd systeem is, zoals Rocky Linux.
+Met "if grep --quiet debian  /etc/os-release" wordt gecontroleerd of het een D\
+ebian of Debian-gebaseerd systeem is, zoals Ubuntu.
+Met "if grep --quiet rhel    /etc/os-release" wordt gecontroleerd of het een R\
+ed Hat of Red Hat-gebaseerd systeem is, zoals Rocky Linux.
 De "if [[ -n ${DISPLAY-} ]]" is om te controleren of er een grafische \
 omgeving is.
 .RE

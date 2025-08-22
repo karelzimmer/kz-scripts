@@ -202,16 +202,16 @@ h'.
 .EX
 # install gnome-tweaks on pc01 pc06 pc07
 # Adjust advanced settings.
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-\
-get install --assume-yes gnome-tweaks; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf \
-install --assumeyes gnome-tweaks; fi
+if grep --quiet debian  /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt\
+-get install --assume-yes gnome-tweaks; fi
+if grep --quiet rhel    /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf\
+ install --assumeyes gnome-tweaks; fi
 .sp
 .RS
-Met "if grep --quiet debian /etc/os-release" wordt gecontroleerd of het een De\
-bian of Debian-gebaseerd systeem is, zoals Ubuntu.
-Met "if grep --quiet rhel   /etc/os-release" wordt gecontroleerd of het een Re\
-d Hat of Red Hat-gebaseerd systeem is, zoals Rocky Linux.
+Met "if grep --quiet debian  /etc/os-release" wordt gecontroleerd of het een D\
+ebian of Debian-gebaseerd systeem is, zoals Ubuntu.
+Met "if grep --quiet rhel    /etc/os-release" wordt gecontroleerd of het een R\
+ed Hat of Red Hat-gebaseerd systeem is, zoals Rocky Linux.
 De "if [[ -n ${DISPLAY-} ]]" is om te controleren of er een grafische \
 omgeving is.
 .RE

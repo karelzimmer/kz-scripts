@@ -199,16 +199,16 @@ The app can still be installed with the command 'kz install google-earth'.
 .EX
 # install gnome-tweaks on pc01 pc06 pc07
 # Adjust advanced settings.
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-\
-get install --assume-yes gnome-tweaks; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf \
-install --assumeyes gnome-tweaks; fi
+if grep --quiet debian  /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt\
+-get install --assume-yes gnome-tweaks; fi
+if grep --quiet rhel    /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf\
+ install --assumeyes gnome-tweaks; fi
 .sp
 .RS
-The "if grep --quiet debian /etc/os-release" will check if it is a Debian or D\
-ebian-based system, such as Ubuntu.
-The "if grep --quiet rhel   /etc/os-release" will check if it is a Red Hat or \
-Red Hat-based system, such as Rocky Linux.
+The "if grep --quiet debian  /etc/os-release" will check if it is a Debian or \
+Debian-based system, such as Ubuntu.
+The "if grep --quiet rhel    /etc/os-release" will check if it is a Red Hat or\
+ Red Hat-based system, such as Rocky Linux.
 The "if [[ -n ${DISPLAY-} ]]" is to check if there is a graphical environment.
 .RE
 .EE

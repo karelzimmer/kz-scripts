@@ -199,16 +199,16 @@ The app can still be set up with the command 'kz setup google-earth'.
 # setup spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
 # Web app: https://open.spotify.com
-if grep --quiet debian /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskto\
-p --addaft=spotify; fi
-if grep --quiet rhel   /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskto\
-p --addaft=kz-spotify; fi
+if grep --quiet debian  /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskt\
+op --addaft=spotify; fi
+if grep --quiet rhel    /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskt\
+op --addaft=kz-spotify; fi
 .sp
 .RS
-The "if grep --quiet debian /etc/os-release" will check if it is a Debian or D\
-ebian-based system, such as Ubuntu.
-The "if grep --quiet rhel   /etc/os-release" will check if it is a Red Hat or \
-Red Hat-based system, such as Rocky Linux.
+The "if grep --quiet debian  /etc/os-release" will check if it is a Debian or \
+Debian-based system, such as Ubuntu.
+The "if grep --quiet rhel    /etc/os-release" will check if it is a Red Hat or\
+ Red Hat-based system, such as Rocky Linux.
 The "if [[ -n ${DISPLAY-} ]]" is to check if there is a graphical environment.
 .RE
 .EE
