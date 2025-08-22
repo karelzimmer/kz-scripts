@@ -40,10 +40,10 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                         ; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                         ; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ) &> /dev/null; then gnome-extensions enable no-overview@fthx                                      ; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                                 ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com                        ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                         ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                                 ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                      ) &> /dev/null; then gnome-extensions enable no-overview@fthx                                                              ; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme          true                ; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                            &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action                minimize-or-previews; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size          32                  ; fi
@@ -388,15 +388,15 @@ kz-desktop --delete=kz-vm-hugowin732
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=code
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/json; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-desktop; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/json         ; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-desktop    ; fi
 if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-shellscript; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/xml; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/html; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/markdown; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/plain; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/troff; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/x-python; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/xml          ; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/html                ; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/markdown            ; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/plain               ; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/troff               ; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/x-python            ; fi
 
 # reset vscode on pc06 pc07
 # -----------------------------------------------------------------------------
