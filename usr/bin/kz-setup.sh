@@ -131,57 +131,57 @@ git config --global --unset alias.logg
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
-if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
-if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
-if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
-if gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay 900; fi
-if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null; then gsettings set org.gnome.desktop.wm.preferences button-layout :minimize,maximize,close; fi
-if gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null; then gsettings set org.gnome.mutter center-new-windows true; fi
-if gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level large; fi
-if gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy single; fi
-if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails always; fi
-if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
-if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
+if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate                              true                    ; fi
+if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date                           true                    ; fi
+if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday                        true                    ; fi
+if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage                   true                    ; fi
+if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click                   true                    ; fi
+if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled                            false                   ; fi
+if gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay                                  900                     ; fi
+if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent                true                    ; fi
+if gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null; then gsettings set org.gnome.desktop.wm.preferences button-layout                        :minimize,maximize,close; fi
+if gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null; then gsettings set org.gnome.mutter center-new-windows                                   true                    ; fi
+if gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level                       large                   ; fi
+if gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy                           single                  ; fi
+if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover               true                    ; fi
+if gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link                       true                    ; fi
+if gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails                  always                  ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action           interactive             ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type        nothing                 ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type   nothing                 ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts                   true                    ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network           false                   ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted      true                    ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash                    false                   ; fi
+if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home                             false                   ; fi
 
 # reset gnome on *
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
-if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
-if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
-if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
-if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
-if gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null; then gsettings reset org.gnome.desktop.session idle-delay; fi
-if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
-if gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
-if gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null; then gsettings reset org.gnome.mutter center-new-windows; fi
-if gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
-if gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
-if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
-if gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
-if gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
+if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate                           ; fi
+if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date                        ; fi
+if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday                     ; fi
+if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage                ; fi
+if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click                ; fi
+if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled                         ; fi
+if gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null; then gsettings reset org.gnome.desktop.session idle-delay                               ; fi
+if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent             ; fi
+if gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null; then gsettings reset org.gnome.desktop.wm.preferences button-layout                     ; fi
+if gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null; then gsettings reset org.gnome.mutter center-new-windows                                ; fi
+if gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level                    ; fi
+if gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy                        ; fi
+if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover            ; fi
+if gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link                    ; fi
+if gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails               ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action        ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type     ; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
-if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts                ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network        ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted   ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash                 ; fi
+if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home                          ; fi
 
 # setup google-chrome on *
 # -----------------------------------------------------------------------------
