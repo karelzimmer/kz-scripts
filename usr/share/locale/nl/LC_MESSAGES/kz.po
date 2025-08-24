@@ -598,7 +598,7 @@ msgstr "Controleer alle meldingen hierboven en los ze op."
 
 #: kz_common.py:43 kz_common.sh:31 kz-get:130
 msgid "Already performed by the administrator."
-msgstr "Reeds uitgevoerd door de beheerder."
+msgstr "Reeds uitgevoerd door de systeembeheerder."
 
 #: kz_common.py:68 kz_common.sh:48 kz-get:183
 msgid "Wait for another package manager to finish"
