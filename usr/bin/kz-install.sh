@@ -15,20 +15,20 @@
 # Add contrib and non-free components to the package sources for Debian, and
 # update package lists for all.
 # -----------------------------------------------------------------------------
-if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet debian  /etc/os-release; then sudo apt-get update; fi
-if grep --quiet rhel    /etc/os-release; then sudo dnf check-update || true; fi
+if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/sources.list   ]] ; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list    ; fi
+if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/debian.sources ]] ; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources  ; fi
+if grep --quiet debian  /etc/os-release                                     ; then sudo apt-get update                                                                                              ; fi
+if grep --quiet rhel    /etc/os-release                                     ; then sudo dnf check-update || true                                                                                    ; fi
 
 # remove add-components from *
 # -----------------------------------------------------------------------------
 # Remove contrib and non-free components to the package sources for Debian, and
 # update package lists for all.
 # -----------------------------------------------------------------------------
-if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/sources.list   ]] ; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/debian.sources ]] ; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet debian  /etc/os-release                                     ; then sudo apt-get update; fi
-if grep --quiet rhel    /etc/os-release                                     ; then sudo dnf check-update; fi
+if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/sources.list   ]] ; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list    ; fi
+if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/debian.sources ]] ; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources  ; fi
+if grep --quiet debian  /etc/os-release                                     ; then sudo apt-get update                                                                                              ; fi
+if grep --quiet rhel    /etc/os-release                                     ; then sudo dnf check-update || true                                                                                    ; fi
 
 # install ansible on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -672,8 +672,8 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes 
 # -----------------------------------------------------------------------------
 # NTFS support.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get  install --assume-yes    ntfs-3g; fi
-if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes     ntfs-3g ntfsprogs; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get  install --assume-yes    ntfs-3g             ; fi
+if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes     ntfs-3g ntfsprogs   ; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ findmnt (or lsblk)
@@ -692,8 +692,8 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes 
 # -----------------------------------------------------------------------------
 # NTFS support.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get  purge   --assume-yes    ntfs-3g; fi
-if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes     ntfs-3g ntfsprogs; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get  purge   --assume-yes    ntfs-3g             ; fi
+if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes     ntfs-3g ntfsprogs   ; fi
 
 # install poedit on pc06 pc07
 # -----------------------------------------------------------------------------

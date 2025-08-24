@@ -104,8 +104,8 @@ kz-desktop --addbef=firefox_firefox
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'App gdebi is not available.'; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package  ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'App gdebi is not available.'                                    ; fi
 
 # reset gdebi on *
 # -----------------------------------------------------------------------------
@@ -292,7 +292,7 @@ kz-desktop --delete=org.gnome.SoundJuicer
 # Music and podcasts.
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=spotify; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=spotify   ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=kz-spotify; fi
 
 # reset spotify on pc01 pc02 pc06 pc07
@@ -300,7 +300,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-des
 # Music and podcasts.
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=spotify; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=spotify   ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=kz-spotify; fi
 
 # setup teamviewer on pc06 pc07
