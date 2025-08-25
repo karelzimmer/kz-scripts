@@ -914,7 +914,7 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes 
 # Web app: https://web.teamviewer.com
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb   ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    /tmp/teamviewer.deb                                                                     ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/teamviewer.deb                                                                         ; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/teamviewer.deb                                                                                              ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm                             ; fi
 
@@ -1105,7 +1105,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Web console.
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  purge   --assume-yes    webmin                                                                                              ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes webmin                                                                                                    ; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources   ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes webmin                                                                                                        ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo                                                                                    ; fi
