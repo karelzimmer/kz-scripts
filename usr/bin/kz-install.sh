@@ -557,14 +557,14 @@ REBOOT=true
 # Images are in: /var/lib/libvirt/images/
 # Reboot required!
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh --connect=qemu:///system net-autostart default --disable                                                                               ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  purge   --assume-yes    bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager   ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd --delete karel libvirt                                                                                                               ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd --delete karel libvirt-qemu                                                                                                          ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt                                                                                                                             ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt-qemu                                                                                                                        ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo systemctl disable --now libvirtd                                                                                                             ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf groupremove "Virtualization Host"                                                                                                        ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh    --connect=qemu:///system net-autostart default --disable                                                                    ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd  --delete karel libvirt                                                                                                      ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd  --delete karel libvirt-qemu                                                                                                 ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt                                                                                                                     ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt-qemu                                                                                                                ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo systemctl disable --now libvirtd                                                                                                     ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf groupremove "Virtualization Host"                                                                                                ; fi
 REBOOT=true
 
 # install lftp on pc06 pc07
@@ -730,18 +730,18 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Programming language.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3  ; fi
-if grep --quiet debian  /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8                                          ; fi
-if grep --quiet debian  /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip                                                  ; fi
-if grep --quiet rhel    /etc/os-release; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-pip                                              ; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get  install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3 ; fi
+if grep --quiet debian  /etc/os-release; then sudo ln       --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8                                    ; fi
+if grep --quiet debian  /etc/os-release; then sudo ln       --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip                                            ; fi
+if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes python3 python3-pycodestyle python3-pip                                         ; fi
 
 # remove python from pc06 pc07
 # -----------------------------------------------------------------------------
 # Programming language.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get purge --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
-if grep --quiet debian  /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip                                                          ; fi
-if grep --quiet rhel    /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip                                           ; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get  purge --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3   ; fi
+if grep --quiet debian  /etc/os-release; then sudo rm       --force --verbose /usr/bin/pep8 /usr/bin/pip                                                        ; fi
+if grep --quiet rhel    /etc/os-release; then sudo dnf      remove --assumeyes python3 python3-pycodestyle python3-pip                                          ; fi
 
 # install rpm on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -913,10 +913,10 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes 
 # Remote desktop.
 # Web app: https://web.teamviewer.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb   ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/teamviewer.deb                                                                         ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/teamviewer.deb                                                                                              ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm                             ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget  --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb  ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo  apt-get install --assume-yes /tmp/teamviewer.deb                                                                        ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm    --verbose /tmp/teamviewer.deb                                                                                           ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo  dnf install     --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm                        ; fi
 
 # remove teamviewer from *
 # -----------------------------------------------------------------------------
