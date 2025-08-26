@@ -87,7 +87,7 @@ REBOOT=true
 # Disable wifi adapter.
 # Reboot required!
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get purge --assume-yes broadcom-sta-dkms ; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get remove --assume-yes broadcom-sta-dkms; fi
 if grep --quiet rhel    /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
 REBOOT=true
 
@@ -102,7 +102,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo -
 # -----------------------------------------------------------------------------
 # E-book manager.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes calibre   ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes calibre  ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo calibre-uninstall                    ; fi
 
 # install cockpit on pc06
@@ -148,7 +148,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # -----------------------------------------------------------------------------
 # Printer backend.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes cups-backend-bjnp ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The cups-backend-bjnp app is not available.'; fi
 
 # install dash-to-dock on *
@@ -336,7 +336,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes gdebi ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The gdebi app is not available.'; fi
 
 # install gettext on pc06 pc07
@@ -458,7 +458,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes handbrake ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes handbrake; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The handbrake app is not available.'; fi
 
 # install htop on pc06 pc07
@@ -486,8 +486,8 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # -----------------------------------------------------------------------------
 # Slideshow maker.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes imagination   ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The imagination app is not available.'  ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes imagination; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The imagination app is not available.'; fi
 
 # install jq on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -514,7 +514,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # -----------------------------------------------------------------------------
 # Image manipulation.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes krita ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes krita; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The krita app is not available.'; fi
 
 # install kvm on pc06 pc07
@@ -594,7 +594,7 @@ if (grep rhel   /etc/os-release && type gnome-session && !  dnf list libreoffice
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session)                              &> /dev/null; then sudo apt-get purge       --assume-yes    libreoffice                     ; fi
+if (grep debian /etc/os-release && type gnome-session)                              &> /dev/null; then sudo apt-get remove      --assume-yes    libreoffice                     ; fi
 if (grep rhel   /etc/os-release && type gnome-session &&    dnf list libreoffice)   &> /dev/null; then sudo dnf     remove      --assumeyes     libreoffice                     ; fi
 if (grep rhel   /etc/os-release && type gnome-session && !  dnf list libreoffice)   &> /dev/null; then sudo flatpak uninstall   --assumeyes     app/org.libreoffice.LibreOffice ; fi
 
@@ -651,8 +651,8 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # -----------------------------------------------------------------------------
 # Administrative operations.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes nautilus-admin    ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The nautilus-admin app is not available.'   ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes nautilus-admin; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The nautilus-admin app is not available.'; fi
 
 # install nmap on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -770,8 +770,8 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # Screen recorder.
 # Required the use of Xorg/X11. Enable Wayland again?
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes simplescreenrecorder  ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The simplescreenrecorder app is not available.' ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The simplescreenrecorder app is not available.'; fi
 
 # install skip-grub-menu on *
 # -----------------------------------------------------------------------------
@@ -818,8 +818,8 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes sound-juicer  ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The sound-juicer app is not available.' ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes sound-juicer; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The sound-juicer app is not available.'; fi
 
 # install spice-vdagent on #none
 # -----------------------------------------------------------------------------
@@ -1069,12 +1069,12 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo "
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg                                                                                         ; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo -e "Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg" |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null ; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    apt-transport-https                                                                                                                                                                                             ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get update                                                                                                                                                                                                                                   ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  update                                                                                                                                                                                                                                   ; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    code                                                                                                                                                                                                            ; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --set editor /usr/bin/code                                                                                                                                                                                                   ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc                                                                                                                                                                                   ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null               ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes code                                                                                                                                                                                                                     ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      install --assumeyes     code                                                                                                                                                                                                                     ; fi
 
 # remove vscode from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1091,24 +1091,24 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo r
 # Web console.
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sh /tmp/setup-repos.sh --force                                                                                           ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /tmp/setup-repos.sh                                                                                 ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    webmin                                                                                  ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sh /tmp/setup-repos.sh --force                                                                                           ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /tmp/setup-repos.sh                                                                                 ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes webmin                                                                                           ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget          --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sh       /tmp/setup-repos.sh --force                                                                                             ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose /tmp/setup-repos.sh                                                                                   ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    webmin                                                                                          ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then wget          --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sh       /tmp/setup-repos.sh --force                                                                                             ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose /tmp/setup-repos.sh                                                                                   ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      install --assumeyes     webmin                                                                                          ; fi
 
 # remove webmin from pc07
 # -----------------------------------------------------------------------------
 # Web console.
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get purge --assume-yes webmin                                                                                                    ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources   ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes webmin                                                                                                        ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo                                                                                    ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  remove --assume-yes webmin                                                                                                          ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose   /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources   ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      remove --assumeyes  webmin                                                                                                          ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose /etc/yum.repos.d/webmin.repo                                                                                      ; fi
 
 # install wine on #none
 # -----------------------------------------------------------------------------
