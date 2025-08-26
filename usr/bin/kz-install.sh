@@ -167,10 +167,10 @@ REBOOT=true
 # Desktop dock like Ubuntu's dash.
 # Reboot required!
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session && !  apt-cache   show gnome-shell-extension-ubuntu-dock ) &> /dev/null; then sudo apt-get    purge   --assume-yes    gnome-shell-extension-dashtodock    ; fi
-if (grep debian /etc/os-release && type gnome-session &&    apt-cache   show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get    purge   --assume-yes    gnome-shell-extension-no-overview   ; fi
-if (grep rhel   /etc/os-release && type gnome-session &&    dnf         list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf        remove  --assumeyes     gnome-shell-extension-dash-to-dock  ; fi
-if (grep rhel   /etc/os-release && type gnome-session &&    dnf         list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf        remove  --assumeyes     gnome-shell-extension-no-overview   ; fi
+if (grep debian /etc/os-release && type gnome-session && !  apt-cache   show gnome-shell-extension-ubuntu-dock ) &> /dev/null; then sudo apt-get    remove --assume-yes gnome-shell-extension-dashtodock    ; fi
+if (grep debian /etc/os-release && type gnome-session &&    apt-cache   show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get    remove --assume-yes gnome-shell-extension-no-overview   ; fi
+if (grep rhel   /etc/os-release && type gnome-session &&    dnf         list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf        remove --assumeyes  gnome-shell-extension-dash-to-dock  ; fi
+if (grep rhel   /etc/os-release && type gnome-session &&    dnf         list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf        remove --assumeyes  gnome-shell-extension-no-overview   ; fi
 REBOOT=true
 
 # install disabled-aer on pc06
@@ -401,15 +401,15 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb   ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/google-chrome.deb                                                                                  ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/google-chrome.deb                                                                                                       ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub                                                                       ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm                                ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget  --no-verbose    --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb   ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo  apt-get install --assume-yes    /tmp/google-chrome.deb                                                                                  ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm    --verbose                       /tmp/google-chrome.deb                                                                                  ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo  rpm     --import                https://dl.google.com/linux/linux_signing_key.pub                                                       ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo  dnf     install --assumeyes     https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm                           ; fi
 
-# remove google-chrome from *--------------------------------
+# remove google-chrome from *
+# -----------------------------------------------------------------------------
 # Web browser.
-# ---------------------------------------------
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  remove --assume-yes google-chrome-stable; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      remove --assumeyes  google-chrome-stable; fi
@@ -419,11 +419,11 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Explore the planet.
 # Web app: https://earth.google.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes /tmp/google-earth.deb                                                                                   ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/google-earth.deb                                                                                                        ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub                                                                       ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm                             ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget  --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb    ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo  apt-get install --assume-yes    /tmp/google-earth.deb                                                                                   ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm    --verbose                       /tmp/google-earth.deb                                                                                   ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo  rpm     --import                https://dl.google.com/linux/linux_signing_key.pub                                                       ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo  dnf     install --assumeyes     https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm                        ; fi
 
 # remove google-earth from #none
 # -----------------------------------------------------------------------------
@@ -557,14 +557,14 @@ REBOOT=true
 # Images are in: /var/lib/libvirt/images/
 # Reboot required!
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh    --connect=qemu:///system net-autostart default --disable                                                                    ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  purge --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd  --delete karel libvirt                                                                                                      ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd  --delete karel libvirt-qemu                                                                                                 ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt                                                                                                                     ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt-qemu                                                                                                                ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo systemctl disable --now libvirtd                                                                                                     ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf groupremove "Virtualization Host"                                                                                                ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh        --connect=qemu:///system net-autostart default --disable                                                                            ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get      remove      --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager  ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd      --delete    karel libvirt                                                                                                           ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd      --delete    karel libvirt-qemu                                                                                                      ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel     libvirt                                                                                                                             ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel     libvirt-qemu                                                                                                                        ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo systemctl    disable     --now libvirtd                                                                                                          ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf          groupremove "Virtualization Host"                                                                                                   ; fi
 REBOOT=true
 
 # install lftp on pc06 pc07
@@ -739,9 +739,9 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes 
 # -----------------------------------------------------------------------------
 # Programming language.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get  purge --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3   ; fi
-if grep --quiet debian  /etc/os-release; then sudo rm       --force --verbose /usr/bin/pep8 /usr/bin/pip                                                        ; fi
-if grep --quiet rhel    /etc/os-release; then sudo dnf      remove --assumeyes python3 python3-pycodestyle python3-pip                                          ; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get  remove --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3  ; fi
+if grep --quiet debian  /etc/os-release; then sudo rm       --force --verbose   /usr/bin/pep8 /usr/bin/pip                                                      ; fi
+if grep --quiet rhel    /etc/os-release; then sudo dnf      remove --assumeyes  python3 python3-pycodestyle python3-pip                                         ; fi
 
 # install rpm on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -754,7 +754,7 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes 
 # -----------------------------------------------------------------------------
 # Package manager for RPM.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get  purge --assume-yes rpm  ; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get remove --assume-yes rpm  ; fi
 if grep --quiet rhel    /etc/os-release; then echo 'The rpm app cannot be removed.' ; fi
 
 # install simplescreenrecorder on #none
@@ -851,7 +851,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo '
 # Music and podcasts.
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  purge --assume-yes spotify-client                                                                                       ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes spotify-client                                                                                       ; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'The spotify web app cannot be removed.'                                                                                         ; fi
 
@@ -1065,26 +1065,26 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Editor.
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections                                                                                                                                                                        ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg                                                                                         ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo -e "Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg" |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    apt-transport-https                                                                                                                                                                                             ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  update                                                                                                                                                                                                                                   ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    code                                                                                                                                                                                                            ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --set editor /usr/bin/code                                                                                                                                                                                                   ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc                                                                                                                                                                                   ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null               ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      install --assumeyes     code                                                                                                                                                                                                                     ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo          "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections                                                                                                                                                                       ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget          --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg                                                                                        ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then printf '%s\n' 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null   ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    apt-transport-https                                                                                                                                                                                                     ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  update                                                                                                                                                                                                                                          ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  install --assume-yes    code                                                                                                                                                                                                                    ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --set editor /usr/bin/code                                                                                                                                                                                                           ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm      --import https://packages.microsoft.com/keys/microsoft.asc                                                                                                                                                                                      ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then printf '%s\n' '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null                 ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      install --assumeyes     code                                                                                                                                                                                                                    ; fi
 
 # remove vscode from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Editor.
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --remove editor /usr/bin/code; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  remove --assume-yes code            ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      remove --assumeyes  code            ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --remove editor /usr/bin/code        ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  remove --assume-yes code                        ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      remove --assumeyes  code                        ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose   /etc/yum.repos.d/vscode.repo; fi
 
 # install webmin on pc07
 # -----------------------------------------------------------------------------
