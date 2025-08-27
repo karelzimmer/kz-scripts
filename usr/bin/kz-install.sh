@@ -599,20 +599,21 @@ if (grep debian /etc/os-release && type gnome-session)                          
 if (grep rhel   /etc/os-release && type gnome-session &&    dnf list libreoffice)   &> /dev/null; then sudo dnf     remove      --assumeyes     libreoffice                     ; fi
 if (grep rhel   /etc/os-release && type gnome-session && !  dnf list libreoffice)   &> /dev/null; then sudo flatpak uninstall   --assumeyes     app/org.libreoffice.LibreOffice ; fi
 
+# TODO Hoe vind je dit?
 # install locate on pc06 pc07
 # -----------------------------------------------------------------------------
 # Find files.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get  install --assume-yes    locate; fi
-if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes     mlocate; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get  install --assume-yes    locate  ; fi
+if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes     mlocate ; fi
 sudo updatedb
 
 # remove locate from pc06 pc07
 # -----------------------------------------------------------------------------
 # Find files.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get  remove --assume-yes locate; fi
-if grep --quiet rhel    /etc/os-release; then sudo dnf      remove --assumeyes  mlocate; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get  remove  --assume-yes    locate  ; fi
+if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes     mlocate ; fi
 
 # install log-access on pc06 pc07
 # -----------------------------------------------------------------------------
