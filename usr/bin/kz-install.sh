@@ -30,7 +30,6 @@ if grep --quiet Debian  /etc/os-release && [[ -e /etc/apt/debian.sources ]] ; th
 if grep --quiet debian  /etc/os-release                                     ; then sudo apt-get update                                                                                                      ; fi
 if grep --quiet rhel    /etc/os-release                                     ; then sudo dnf     check-update    || true                                                                                     ; fi
 
-# TODO Tab voor iedere parameter, zie hierboven
 # install ansible on pc06 pc07
 # -----------------------------------------------------------------------------
 # Configuration management, deployment, and task execution.
@@ -599,7 +598,6 @@ if (grep debian /etc/os-release && type gnome-session)                          
 if (grep rhel   /etc/os-release && type gnome-session &&    dnf list libreoffice)   &> /dev/null; then sudo dnf     remove      --assumeyes     libreoffice                     ; fi
 if (grep rhel   /etc/os-release && type gnome-session && !  dnf list libreoffice)   &> /dev/null; then sudo flatpak uninstall   --assumeyes     app/org.libreoffice.LibreOffice ; fi
 
-# TODO Hoe vind je dit?
 # install locate on pc06 pc07
 # -----------------------------------------------------------------------------
 # Find files.
