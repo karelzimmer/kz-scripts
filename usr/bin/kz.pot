@@ -444,7 +444,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:496 kz-check:565 kz-deploy:264 kz-dev:338 kz-update:279
+#: kz-build:496 kz-check:563 kz-deploy:264 kz-dev:338 kz-update:279
 msgid "Complete!"
 msgstr ""
 
@@ -523,15 +523,15 @@ msgstr ""
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr ""
 
-#: kz-check:523
+#: kz-check:522
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:546
+#: kz-check:544
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:492 kz-check:561 kz-deploy:260
+#: kz-build:492 kz-check:559 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 

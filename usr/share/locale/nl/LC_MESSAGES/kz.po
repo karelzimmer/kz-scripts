@@ -500,7 +500,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:496 kz-check:565 kz-deploy:264 kz-dev:338 kz-update:279
+#: kz-build:496 kz-check:563 kz-deploy:264 kz-dev:338 kz-update:279
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -584,15 +584,15 @@ msgstr ""
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr "Een regel is langer dan $max_line_length ($max_line_length_found)."
 
-#: kz-check:523
+#: kz-check:522
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:546
+#: kz-check:544
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:492 kz-check:561 kz-deploy:260
+#: kz-build:492 kz-check:559 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
