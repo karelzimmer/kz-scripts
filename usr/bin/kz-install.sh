@@ -543,7 +543,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo s
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
 # -----------------------------------------------------------------------------
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh --connect=qemu:///system net-autostart default                                                                                                                                                                                                          ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh --connect=qemu:///system net-autostart default                                                                                                                                                                                                         ; fi
 # -----------------------------------------------------------------------------
 # Check network 'default' with
 # "sudo virsh --connect=qemu:///system net-info default", should output
