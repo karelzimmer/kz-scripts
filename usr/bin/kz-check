@@ -505,7 +505,6 @@ function check_shellcheck() {
     cd "$scripts_repo"
 }
 
-
 # This function checks the existence of tags.
 function check_tags() {
     local esc_bug='B''U''G'
@@ -520,7 +519,7 @@ function check_tags() {
             "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-    $(gettext 'Flagged annotation found.')
+$RED    $(gettext 'Flagged annotation found.')$NORMAL
 "
         kz.infomsg "$text"
         grep    --line-number           \
@@ -531,7 +530,6 @@ ${BOLD}In $scriptdir / $scriptname:$NORMAL
         nl      --number-width=4        \
                 --number-separator=''   \
                 --body-numbering=n
-        ERR_FLAG=true
     fi
 }
 
