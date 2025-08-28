@@ -40,37 +40,37 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          )   &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                                    ; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com )   &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com                           ; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          )   &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                                    ; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                       )   &> /dev/null; then gnome-extensions enable no-overview@fthx                                                                 ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme             true                ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                               &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action                   minimize-or-previews; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size             32                  ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                                &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup    true                ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                                 &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed                     true                ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                              &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position                  'LEFT'              ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                              &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height                  true                ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                            &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed                true                ; fi
-if gsettings get org.gnome.shell disable-user-extensions                                                            &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions                                false               ; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          )   &> /dev/null; then gnome-extensions enable  dash-to-dock@micxgx.gmail.com                                                           ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com )   &> /dev/null; then gnome-extensions enable  dash-to-dock@gnome-shell-extensions.gcampax.github.com                                  ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          )   &> /dev/null; then gnome-extensions enable  dash-to-dock@micxgx.gmail.com                                                           ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                       )   &> /dev/null; then gnome-extensions enable  no-overview@fthx                                                                        ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                         &> /dev/null; then gsettings        set     org.gnome.shell.extensions.dash-to-dock apply-custom-theme          true                ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                               &> /dev/null; then gsettings        set     org.gnome.shell.extensions.dash-to-dock click-action                minimize-or-previews; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                         &> /dev/null; then gsettings        set     org.gnome.shell.extensions.dash-to-dock dash-max-icon-size          32                  ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                                &> /dev/null; then gsettings        set     org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true                ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                                 &> /dev/null; then gsettings        set     org.gnome.shell.extensions.dash-to-dock dock-fixed                  true                ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                              &> /dev/null; then gsettings        set     org.gnome.shell.extensions.dash-to-dock dock-position               'LEFT'              ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                              &> /dev/null; then gsettings        set     org.gnome.shell.extensions.dash-to-dock extend-height               true                ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                            &> /dev/null; then gsettings        set     org.gnome.shell.extensions.dash-to-dock icon-size-fixed             true                ; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                            &> /dev/null; then gsettings        set     org.gnome.shell disable-user-extensions                             false               ; fi
 
 # reset dash-to-dock on *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if gsettings get org.gnome.shell disable-user-extensions                                                            &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions                              ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme           ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                               &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action                 ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size           ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                                &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup  ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                                 &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed                   ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                              &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position                ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                              &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height                ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                            &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed              ; fi
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          )   &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                               ; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                       )   &> /dev/null; then gnome-extensions disable no-overview@fthx                                            ; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com )   &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com      ; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          )   &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                               ; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                            &> /dev/null; then gsettings        reset   org.gnome.shell disable-user-extensions                             ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                         &> /dev/null; then gsettings        reset   org.gnome.shell.extensions.dash-to-dock apply-custom-theme          ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                               &> /dev/null; then gsettings        reset   org.gnome.shell.extensions.dash-to-dock click-action                ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                         &> /dev/null; then gsettings        reset   org.gnome.shell.extensions.dash-to-dock dash-max-icon-size          ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                                &> /dev/null; then gsettings        reset   org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                                 &> /dev/null; then gsettings        reset   org.gnome.shell.extensions.dash-to-dock dock-fixed                  ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                              &> /dev/null; then gsettings        reset   org.gnome.shell.extensions.dash-to-dock dock-position               ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                              &> /dev/null; then gsettings        reset   org.gnome.shell.extensions.dash-to-dock extend-height               ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                            &> /dev/null; then gsettings        reset   org.gnome.shell.extensions.dash-to-dock icon-size-fixed             ; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          )   &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                                       ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx                                       )   &> /dev/null; then gnome-extensions disable no-overview@fthx                                                    ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com )   &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com              ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          )   &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                                       ; fi
 
 # setup evolution on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -104,14 +104,14 @@ kz-desktop --addbef=firefox_firefox
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package  ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then echo 'App gdebi is not available.'                                    ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mime  default gdebi.desktop application/vnd.debian.binary-package ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then printf '%s\n'     'App gdebi is not available.'                       ; fi
 
 # reset gdebi on *
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if type gnome-session &> /dev/null; then echo 'App gdebi cannot be reset.'; fi
+if type gnome-session &> /dev/null; then printf '%s\n' 'App gdebi cannot be reset.'; fi
 
 # setup git on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -273,7 +273,7 @@ rm --force --recursive ~/.cache/thumbnails/
 # -----------------------------------------------------------------------------
 # Restore thumbnails.
 # -----------------------------------------------------------------------------
-echo 'App restore-thumbnails cannot be reset.'
+printf '%s\n' 'App restore-thumbnails cannot be reset.'
 
 # setup sound-juicer on #none
 # -----------------------------------------------------------------------------
@@ -330,8 +330,8 @@ sed --in-place 's/# eval/eval/g'        ~/.bashrc
 # -----------------------------------------------------------------------------
 # Enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place '/^stty -ixon/d'         ~/.bashrc
-echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
+sed --in-place  '/^stty -ixon/d'                                        ~/.bashrc
+printf '%s\n'   'stty -ixon # Enable fwd search history (i-search)' >>  ~/.bashrc
 
 # reset terminal on *
 # -----------------------------------------------------------------------------

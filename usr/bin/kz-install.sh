@@ -639,7 +639,7 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes 
 # -----------------------------------------------------------------------------
 # Python static typing.
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then sudo apt-get  remove  --assume-yes    mypy; fi
+if grep --quiet debian  /etc/os-release; then sudo apt-get  remove  --assume-yes    mypy        ; fi
 if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes     python3-mypy; fi
 
 # install nautilus-admin on pc06 pc07
@@ -742,7 +742,7 @@ if grep --quiet rhel    /etc/os-release; then sudo dnf      install --assumeyes 
 # Programming language.
 # -----------------------------------------------------------------------------
 if grep --quiet debian  /etc/os-release; then sudo apt-get  remove  --assume-yes    pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3  ; fi
-if grep --quiet debian  /etc/os-release; then sudo rm       --force --verbose   /usr/bin/pep8 /usr/bin/pip                                                      ; fi
+if grep --quiet debian  /etc/os-release; then sudo rm       --force --verbose       /usr/bin/pep8 /usr/bin/pip                                                      ; fi
 if grep --quiet rhel    /etc/os-release; then sudo dnf      remove  --assumeyes     python3 python3-pycodestyle python3-pip                                         ; fi
 
 # install rpm on pc06 pc07
@@ -1083,10 +1083,10 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Editor.
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --remove editor /usr/bin/code        ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  remove  --assume-yes    code                        ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      remove  --assumeyes     code                        ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose   /etc/yum.repos.d/vscode.repo; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives  --remove editor /usr/bin/code               ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  remove      --assume-yes    code                        ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      remove      --assumeyes     code                        ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force     --verbose       /etc/yum.repos.d/vscode.repo; fi
 
 # install webmin on pc07
 # -----------------------------------------------------------------------------
@@ -1108,9 +1108,9 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get  remove  --assume-yes    webmin                                                                                                          ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose   /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources   ; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose       /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources   ; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf      remove  --assumeyes     webmin                                                                                                          ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose /etc/yum.repos.d/webmin.repo                                                                                      ; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rm       --force --verbose       /etc/yum.repos.d/webmin.repo                                                                                    ; fi
 
 # install wine on #none
 # -----------------------------------------------------------------------------
