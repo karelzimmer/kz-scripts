@@ -317,7 +317,7 @@ kz-desktop --addaft=com.teamviewer.TeamViewer
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.teamviewer.TeamViewer
 
-# setup terminal on *
+# setup terminal on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
@@ -333,7 +333,7 @@ sed --in-place 's/# eval/eval/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d' ~/.bashrc
 printf '%s\n' 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
-# reset terminal on *
+# reset terminal on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
