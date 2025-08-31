@@ -208,17 +208,17 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Disable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop apport.service                                 ; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service                              ; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport   ; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/crash/*                            ; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop        apport.service                                  ; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable     apport.service                                  ; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo sed       --in-place  's/enabled=1/enabled=0/'    /etc/default/apport ; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo rm        --force     --verbose                   /var/crash/*        ; fi
 
 # remove disabled-apport from #none
 # -----------------------------------------------------------------------------
 # Enable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport   ; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service                         ; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo sed       --in-place  's/enabled=0/enabled=1/'    /etc/default/apport ; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable      --now                       apport.service      ; fi
 
 # install disabled-fwupd on #none
 # -----------------------------------------------------------------------------
