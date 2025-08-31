@@ -521,7 +521,7 @@ $(
 EOF
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
-    text='** kz-backup-XXXXXXXXXX-error.log (stderr)'
+    text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title="$(gettext 'Backup home folder') $(gettext 'progress')"
