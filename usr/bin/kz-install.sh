@@ -48,15 +48,15 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ansible; 
 # -----------------------------------------------------------------------------
 # Desktop backgrounds.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes -- *-backgrounds; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes -- *-backgrounds; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-backgrounds; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes gnome-backgrounds; fi
 
 # remove backgrounds from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Desktop backgrounds.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes -- *-backgrounds; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes -- *-backgrounds; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-backgrounds; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes gnome-backgrounds; fi
 
 # install backintime on #none
 # -----------------------------------------------------------------------------
