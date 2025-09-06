@@ -590,12 +590,12 @@ apps and changing user settings.")"
                 gnome-session-quit --logout --no-prompt
             elif type ksmserver &> /dev/null; then
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-            elif type lxqt-session &> /dev/null; then
-                lxqt-leave --logout
-            elif type mate-session &> /dev/null; then
-                mate-session-save --logout
+            elif type lx-session &> /dev/null; then
+                lxde-logout
             elif type xfce4-session &> /dev/null; then
                 xfce4-session-logout --logout
+            elif type mate-session &> /dev/null; then
+                mate-session-save --logout
             else
                 text='No logout command available.'
                 kz.debugmsg "$text"
