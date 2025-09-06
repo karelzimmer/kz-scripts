@@ -590,7 +590,7 @@ apps and changing user settings.")"
                 gnome-session-quit --logout --no-prompt
             elif type ksmserver &> /dev/null; then
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-            elif type lx-session &> /dev/null; then
+            elif type lxsession &> /dev/null; then
                 lxde-logout
             elif type xfce4-session &> /dev/null; then
                 xfce4-session-logout --logout
