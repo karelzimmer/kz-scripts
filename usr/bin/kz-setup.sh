@@ -431,6 +431,18 @@ kz-desktop --addaft=kz-whatsapp
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-whatsapp
 
+# setup xfce on #none
+# -----------------------------------------------------------------------------
+# Desktop environment.
+# -----------------------------------------------------------------------------
+if type lxsession &> /dev/null; then xfconf-query -c xfce4-desktop -v --create -p /desktop-icons/style -t int -s 0; fi
+
+# reset xfce on #none
+# -----------------------------------------------------------------------------
+# Desktop environment.
+# -----------------------------------------------------------------------------
+if type lxsession &> /dev/null; then xfconf-query -c xfce4-desktop -v --create -p /desktop-icons/style -t int -s 2; fi
+
 # setup youtube-dl on #none
 # -----------------------------------------------------------------------------
 # Download videos.

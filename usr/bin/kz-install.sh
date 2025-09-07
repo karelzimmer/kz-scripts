@@ -1140,6 +1140,20 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
 
+# install xfce4-goodies on #none
+# -----------------------------------------------------------------------------
+# Enhancements for the Xfce4 Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type lxsession) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
+if (grep rhel /etc/os-release && type lxsession) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
+
+# remove xfce4-goodies from #none
+# -----------------------------------------------------------------------------
+# Enhancements for the Xfce4 Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type lxsession) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
+if (grep rhel /etc/os-release && type lxsession) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
+
 # install youtube-dl on #none
 # -----------------------------------------------------------------------------
 # Download videos.
