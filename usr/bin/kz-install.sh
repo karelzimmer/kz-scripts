@@ -1140,25 +1140,27 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
 
-# install xfce4-goodies on #none
+# install xfce-goodies on #none
 # -----------------------------------------------------------------------------
-# Enhancements for the Xfce4 Desktop Environment.
+# Enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
 if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo systemctl restart lightdm; fi
 
-# remove xfce4-goodies from #none
+# remove xfce-goodies from #none
 # -----------------------------------------------------------------------------
-# Enhancements for the Xfce4 Desktop Environment.
+# Enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
 if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo systemctl restart lightdm; fi
 
 # install youtube-dl on #none
 # -----------------------------------------------------------------------------
