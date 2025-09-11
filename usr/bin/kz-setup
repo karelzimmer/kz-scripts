@@ -584,17 +584,23 @@ apps and changing user settings.")"
         kz.infomsg "$text"
 
         if [[ -n ${DISPLAY-} ]]; then
+            # A GUI is available
             $OPTION_GUI || kz.wait_for_enter
 
             if type gnome-session &> /dev/null; then
+                # GNOME.
                 gnome-session-quit --logout --no-prompt
             elif type ksmserver &> /dev/null; then
+                # KDE.
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0
             elif type lxsession &> /dev/null; then
+                # LXDE and LXQt.
                 lxde-logout
             elif type xfce4-session &> /dev/null; then
+                # Xfce.
                 xfce4-session-logout --logout
             elif type mate-session &> /dev/null; then
+                # MATE.
                 mate-session-save --logout
             else
                 text='No logout command available.'
