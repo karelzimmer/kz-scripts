@@ -435,13 +435,13 @@ kz-desktop --delete=kz-whatsapp
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then xfconf-query -c xfce4-desktop -v --create -p /desktop-icons/style -t int -s 0; fi
+if type xfce4-session &> /dev/null; then xfconf-query -c xfce4-desktop -v --create -p /desktop-icons/style -t int -s 0; fi
 
 # reset xfce on #none
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then xfconf-query -c xfce4-desktop -v --create -p /desktop-icons/style -t int -s 2; fi
+if type xfce4-session &> /dev/null; then xfconf-query -c xfce4-desktop -v --create -p /desktop-icons/style -t int -s 2; fi
 
 # setup youtube-dl on #none
 # -----------------------------------------------------------------------------

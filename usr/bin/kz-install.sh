@@ -1144,15 +1144,15 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 # Enhancements for the Xfce4 Desktop Environment.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type lxsession) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
-if (grep rhel /etc/os-release && type lxsession) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
+if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
+if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
 
 # remove xfce4-goodies from #none
 # -----------------------------------------------------------------------------
 # Enhancements for the Xfce4 Desktop Environment.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type lxsession) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
-if (grep rhel /etc/os-release && type lxsession) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
+if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
+if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
 
 # install youtube-dl on #none
 # -----------------------------------------------------------------------------
