@@ -257,6 +257,14 @@ Please move to:              <medium>/backups")"
         kz.errmsg "$text"
         exit 1
     fi
+
+    if [[ -e $medium/Backups ]]; then
+        text="$(gettext "Backup found in wrong place: \
+<medium>/Backups
+Please move to:              <medium>/backups")"
+        kz.errmsg "$text"
+        exit 1
+    fi
 }
 
 
