@@ -592,7 +592,11 @@ apps and changing user settings.")"
                 gnome-session-quit --logout --no-prompt
             elif type ksmserver &> /dev/null; then
                 # KDE.
-                qdbus org.kde.ksmserver /KSMServer logout 0 0 0
+                if type qdbus &> /dev/null; then
+                    qdbus org.kde.ksmserver /KSMServer logout
+                elif type qdbus6 &> /dev/null; then
+                    qdbus6 org.kde.ksmserver /KSMServer logout
+                fi
             elif type lxsession &> /dev/null; then
                 # LXDE and LXQt.
                 lxde-logout
