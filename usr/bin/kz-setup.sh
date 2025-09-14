@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=bash disable=SC2034
 # #############################################################################
 # SPDX-FileComment: Setup file for use with kz-setup script
 #
@@ -447,6 +447,7 @@ if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --chann
 # 5. Move Panel to bottom.
 # 6. Lock Panel.
 # 7. Position search entry on bottom (Whisker Menu).
+LOGOUT=true
 
 # reset xfce on #none
 # -----------------------------------------------------------------------------
@@ -456,6 +457,7 @@ if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --chann
 if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --channel xfce4-desktop --property /desktop-icons/style --type int --set 2; fi
 # Lock panel-1.
 if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --channel xfce4-panel --property /panels/panel-1/position-locked --type bool --set true; fi
+LOGOUT=true
 
 # setup youtube-dl on #none
 # -----------------------------------------------------------------------------
