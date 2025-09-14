@@ -532,9 +532,9 @@ function term() {
     local title=''
 
     # Error-log (stderr) also to the main log.
-    kz.logmsg '==============================================================='
+    kz.logmsg '---------------------------------------------------------------'
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
-    kz.logmsg '==============================================================='
+    kz.logmsg '---------------------------------------------------------------'
 
     if [[ -n ${FAILED_APPS[*]} ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"

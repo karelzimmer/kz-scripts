@@ -320,9 +320,9 @@ function term() {
     local users=''
 
     # Error-log (stderr) also to the main log.
-    kz.logmsg '==============================================================='
+    kz.logmsg '---------------------------------------------------------------'
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
-    kz.logmsg '==============================================================='
+    kz.logmsg '---------------------------------------------------------------'
 
     if [[ $RESTORE_RC -ne 0 ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"
