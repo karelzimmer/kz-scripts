@@ -192,7 +192,7 @@ function kz.init() {
     trap 'kz.term sigint  $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGINT
     trap 'kz.term sigterm $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGTERM
 
-    text="==== START logs for script $PROGRAM_NAME ==========================="
+    text="==== START logs for script $PROGRAM_NAME"
     kz.logmsg "$text"
     text="Started ($0 $* as $USER)."
     kz.logmsg "$text"
@@ -369,7 +369,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
                 "/tmp/$PROGRAM_NAME"-??????????*    |& $PROGRAM_LOGS
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"
-            text="==== END logs for script $PROGRAM_NAME ====================="
+            text="==== END logs for script $PROGRAM_NAME"
             kz.logmsg "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGTERM
             exit "$rc"

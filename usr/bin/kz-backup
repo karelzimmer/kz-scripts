@@ -323,14 +323,10 @@ function backup_setting_apps() {
     local output_file=$settings_dir/apps.txt
     local text=''
 
-    text=$(gettext 'START list of manual installed packages')
-    header1=$(gettext "==== $text ===========================================")
-    text=$(gettext 'END list of manual installed packages')
-    footer1=$(gettext "==== $text ===========================================")
-    text=$(gettext 'START list of installed snaps')
-    header2=$(gettext "==== $text ===========================================")
-    text=$(gettext 'END list of installed snaps')
-    footer2=$(gettext "==== $text ===========================================")
+    header1=$(gettext '==== START list of manual installed packages')
+    footer1=$(gettext '==== END list of manual installed packages')
+    header2=$(gettext '==== START list of installed snaps')
+    footer2=$(gettext '==== END list of installed snaps')
 
     kz.logmsg 'Create a list of installed apps...(ignore WARNING).'
 

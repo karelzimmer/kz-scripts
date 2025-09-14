@@ -142,7 +142,7 @@ https://karelzimmer.nl/assets/packages/kz-dev_4.2.1-1_all.deb"
 https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     local kz_deb_local_file=''
     local kz_deb_site_file=''
-    local suggests='--no-install-suggests'
+    local install_suggests='--install-suggests'
 
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
@@ -163,15 +163,15 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     # In a graphical environment, consider the suggested packages as a
     # dependency for the installation. Prevent installation of extraneous
     # graphics packages on a server with the --no-install-suggests option.
-    if [[ -n ${DISPLAY-} ]]; then
-        suggests='--install-suggests'
+    if [[ -z ${DISPLAY-} ]]; then
+        install_suggests='--no-install-suggests'
     fi
 
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
-            "$suggests"                     \
+            "$install_suggests"             \
             --allow-downgrades              \
             --reinstall                     \
             --quiet                         \
@@ -225,7 +225,7 @@ function term() {
     local normal='\033[0m'
     local text=''
 
-    text='\n==============================================================\n\n'
+    text='------------------------------------------------------------------\n'
     if $OPTION_DEV; then
         text+="$red$(gettext "Please note: the development version of the kz \
 package is installed")$normal\n"
