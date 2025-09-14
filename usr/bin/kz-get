@@ -142,6 +142,7 @@ https://karelzimmer.nl/assets/packages/kz-dev_4.2.1-1_all.deb"
 https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     local kz_deb_local_file=''
     local kz_deb_site_file=''
+    local suggests='--no-install-suggests'
 
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
@@ -159,10 +160,18 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
     # ...file '/tmp/kz-get-XXXXXXXXXX.deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
+    # In a graphical environment, consider the suggested packages as a
+    # dependency for the installation. Prevent installation of extraneous
+    # graphics packages on a server with the --no-install-suggests option.
+    if [[ -n ${DISPLAY-} ]]; then
+        suggests='--install-suggests'
+    fi
+
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
+            "$suggests"                     \
             --allow-downgrades              \
             --reinstall                     \
             --quiet                         \
