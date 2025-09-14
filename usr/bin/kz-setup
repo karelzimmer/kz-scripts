@@ -593,9 +593,9 @@ apps and changing user settings.")"
             elif type ksmserver &> /dev/null; then
                 # KDE.
                 if type qdbus &> /dev/null; then
-                    qdbus org.kde.ksmserver /KSMServer logout
+                    qdbus org.kde.ksmserver /KSMServer logout 0 0 0
                 elif type qdbus6 &> /dev/null; then
-                    qdbus6 org.kde.ksmserver /KSMServer logout
+                    qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout
                 fi
             elif type lxsession &> /dev/null; then
                 # LXDE and LXQt.
