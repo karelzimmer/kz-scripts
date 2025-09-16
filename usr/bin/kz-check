@@ -61,10 +61,6 @@ declare ERR_FLAG=false
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    local file=''
-    local script=''
-    local scriptdir=''
-    local scriptname=''
     local scripts_repo=$HOME/kz-scripts
     local text=''
 
@@ -76,74 +72,8 @@ function process() {
     fi
     kz.become_check
     check_website
-
-    text=$(gettext 'Check scripts (this may take a while)...')
-    kz.infomsg "$text"
-
     check_gettext
-
-    cd "$scripts_repo"
-    while read -r script; do
-        scriptdir=$(dirname "$(realpath "$script")")
-        scriptname=$(basename "$script")
-        file=$scriptdir/$scriptname
-        kz.debugmsg "Process $script..."
-        case $scriptname in
-            *.gpg | *.png )
-                continue
-                ;;
-            *.json | *.policy | *.its | *.loc )
-                check_trailing_spaces
-                ;;
-            *.1 | *.5 )
-                check_trailing_spaces
-                check_record_length
-                ;;
-            *.desktop )
-                check_trailing_spaces
-                check_record_length
-                check_desktop_file_validation
-                ;;
-            kz_common.py )
-                check_trailing_spaces
-                check_tags
-                check_pycodestyle
-                check_mypy
-                ;;
-            kz_common.sh | kz-get | *-pkexec )
-                # This includes polkit wrapper scripts.
-                check_trailing_spaces
-                check_tags
-                check_record_length
-                check_shellcheck
-                ;;
-            *.sh )
-                check_trailing_spaces
-                check_tags
-                check_shellcheck
-                ;;
-            * )
-                check_trailing_spaces
-                check_tags
-                check_record_length
-                check_code
-                ;;
-        esac
-    done < <(
-            find    .                           \
-                    -type f                     \
-                    -not -path './.git*'        \
-                    -not -path '*/.mypy_cache*' \
-                    -not -path '*/__pycache__*' \
-                    -not -name kz.mo            \
-                    -not -name kz.po            \
-                    -not -name kz.pot           \
-                    -not -name LICENSE          \
-                    -not -name README.md        \
-                    -print                      |
-            sort
-            )
-    cd "$HOME"
+    check_scripts
 }
 
 
@@ -248,7 +178,7 @@ function check_website() {
                     continue
                     ;;
                 *kz-dev*.deb | *kz-dev*.rpm )
-                    # Development versions.
+                    # Development versions of kz packages.
                     continue
                     ;;
                 *)
@@ -335,6 +265,82 @@ found.")
         kz.errmsg "    $text"
         ERR_FLAG=true
     fi
+}
+
+
+# This function checks for gettext required files.
+function check_scripts() {
+    local file=''
+    local script=''
+    local scriptdir=''
+    local scriptname=''
+    local text=''
+
+    text=$(gettext 'Check scripts (this may take a while)...')
+    kz.infomsg "$text"
+
+    cd "$scripts_repo"
+    while read -r script; do
+        scriptdir=$(dirname "$(realpath "$script")")
+        scriptname=$(basename "$script")
+        file=$scriptdir/$scriptname
+        kz.debugmsg "Process $script..."
+        case $scriptname in
+            *.policy | *.its | *.loc )
+                check_trailing_spaces
+                ;;
+            *.1 | *.5 )
+                check_trailing_spaces
+                check_record_length
+                ;;
+            *.desktop )
+                check_trailing_spaces
+                check_record_length
+                check_desktop_file_validation
+                ;;
+            kz_common.py )
+                check_trailing_spaces
+                check_tags
+                check_pycodestyle
+                check_mypy
+                ;;
+            kz_common.sh | kz-get | *-pkexec )
+                # This includes polkit wrapper scripts.
+                check_trailing_spaces
+                check_tags
+                check_record_length
+                check_shellcheck
+                ;;
+            *.sh )
+                check_trailing_spaces
+                check_tags
+                check_shellcheck
+                ;;
+            * )
+                check_trailing_spaces
+                check_tags
+                check_record_length
+                check_code
+                ;;
+        esac
+    done < <(
+            find    .                                               \
+                    -type f                                         \
+                    -not -name LICENSE                              \
+                    -not -name README.md                            \
+                    -not -path './.git*'                            \
+                    -not -path './etc/*'                            \
+                    -not -path './usr/bin/__pycache__/*'            \
+                    -not -path './usr/bin/.mypy_cache/*'            \
+                    -not -path './usr/share/kz*'                    \
+                    -not -path './usr/share/locale/nl/LC_MESSAGES*' \
+                    -not -path './usr/share/pixmaps*'               \
+                    -not -wholename './usr/bin/kz-*.sh.gpg'         \
+                    -not -wholename './usr/bin/kz.pot'              \
+                    -print                                          |
+            sort
+            )
+    cd "$HOME"
 }
 
 
