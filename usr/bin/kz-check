@@ -326,6 +326,9 @@ function check_scripts() {
     done < <(
             find    .                                               \
                     -type f                                         \
+                    -not -name kz-install.sh.gpg                    \
+                    -not -name kz-setup.sh.gpg                      \
+                    -not -name kz.pot                               \
                     -not -name LICENSE                              \
                     -not -name README.md                            \
                     -not -path './.git*'                            \
@@ -335,8 +338,6 @@ function check_scripts() {
                     -not -path './usr/share/kz*'                    \
                     -not -path './usr/share/locale/nl/LC_MESSAGES*' \
                     -not -path './usr/share/pixmaps*'               \
-                    -not -wholename './usr/bin/kz-*.sh.gpg'         \
-                    -not -wholename './usr/bin/kz.pot'              \
                     -print                                          |
             sort
             )
