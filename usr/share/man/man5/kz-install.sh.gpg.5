@@ -22,14 +22,14 @@ encrypted installation file.
 .sp
 It is created with e.g. commands:
 .br
-gpg --import /usr/share/kz/keys/kz-public-key.gpg
+gpg --import /usr/share/kz/kz-public-key.gpg
 .br
 gpg --sign --output ~/kz-scripts/usr/bin/kz-install.sh.gpg /tmp/kz-install.sh
 .sp
 This encrypted file is decrypted before the commands are used in script
 kz-install with e.g. commands:
 .br
-gpg --import /usr/share/kz/keys/kz-public-key.gpg
+gpg --import /usr/share/kz/kz-public-key.gpg
 .br
 gpg --decrypt --output /tmp/kz-install.sh
 ~/kz-scripts/usr/bin/kz-install.sh.gpg

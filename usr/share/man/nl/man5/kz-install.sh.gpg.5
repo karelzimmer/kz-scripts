@@ -23,14 +23,14 @@ in dit versleuteld installatiebestand.
 .sp
 Dit bestand is aangemaakt met de volgende voorbeeld opdrachten:
 .br
-gpg --import /usr/share/kz/keys/kz-public-key.gpg
+gpg --import /usr/share/kz/kz-public-key.gpg
 .br
 gpg --sign --output ~/kz-scripts/usr/bin/kz-install.sh.gpg /tmp/kz-install.sh
 .sp
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
 kz-install met bijvoorbeeld de opdrachten:
 .br
-gpg --import /usr/share/kz/keys/kz-public-key.gpg
+gpg --import /usr/share/kz/kz-public-key.gpg
 .br
 gpg --decrypt --output /tmp/kz-install.sh
 ~/kz-scripts/usr/bin/kz-install.sh.gpg

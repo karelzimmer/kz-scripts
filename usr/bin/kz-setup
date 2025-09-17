@@ -104,12 +104,12 @@ function process() {
         # Setup commands in gpg file.
         setup_file_default_gpg=\
 $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
-        gpg --import                                \
-            /usr/share/kz/keys/kz-public-key.gpg    \
+        gpg --import                        \
+            /usr/share/kz/kz-public-key.gpg \
             2> >($PROGRAM_LOGS)
-        gpg --decrypt                               \
-            /usr/bin/kz-setup.sh.gpg                \
-            2> >($PROGRAM_LOGS)                     \
+        gpg --decrypt                       \
+            /usr/bin/kz-setup.sh.gpg        \
+            2> >($PROGRAM_LOGS)             \
             > "$setup_file_default_gpg"
         setup_files[++setup_file_num]=$setup_file_default_gpg
     fi
