@@ -437,17 +437,13 @@ kz-desktop --delete=kz-whatsapp
 # -----------------------------------------------------------------------------
 # Remove desktop icons.
 if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --channel xfce4-desktop --property /desktop-icons/style --type int --set 0; fi
-# Unlock panel-1.
-if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --channel xfce4-panel --property /panels/panel-1/position-locked --type bool --set false; fi
 # Setup Panel and Whisker Menu.
 # 1. Remove Panel 2.
 # 2. Remove Applications from Panel.
 # 3. Add Whisker Menu to Panel.
 # 4. Move Whisker Menu to far left.
 # 5. Move Panel to bottom.
-# 6. Lock Panel.
-# 7. Position search entry on bottom (Whisker Menu).
-LOGOUT=true
+# 6. Position search entry on bottom (Whisker Menu).
 
 # reset xfce on #none
 # -----------------------------------------------------------------------------
@@ -455,9 +451,6 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Reinstate icons on the desktop.
 if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --channel xfce4-desktop --property /desktop-icons/style --type int --set 2; fi
-# Lock panel-1.
-if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --channel xfce4-panel --property /panels/panel-1/position-locked --type bool --set true; fi
-LOGOUT=true
 
 # setup youtube-dl on #none
 # -----------------------------------------------------------------------------
