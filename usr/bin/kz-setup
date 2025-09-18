@@ -209,8 +209,8 @@ environment available")"
                 ;;
             -r | --reset )
                 OPTION_RESET=true
-                setup='Reset'
-                reset='Setup'
+                setup='reset'
+                reset='setup'
                 shift
                 ;;
             -h | --help )
