@@ -439,7 +439,7 @@ function build_rpm_package() {
     rpmbuild    -ba                                         \
                 --build-in-place                            \
                 --define                                    \
-                "_topdir $RPM_REPO_DISTDIR/rpmbuild"        \
+                _topdir "$RPM_REPO_DISTDIR/rpmbuild"        \
                 "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"  |& $PROGRAM_LOGS
     cd "$startdir"
 
