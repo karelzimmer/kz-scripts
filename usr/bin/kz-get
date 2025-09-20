@@ -136,20 +136,17 @@ function become_check() {
 
 # This function downloads and installs Debian package kz.
 function install_deb_package() {
-    local kz_deb_prd_site_file="\
-https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
-    local kz_deb_dev_site_file="\
-https://karelzimmer.nl/assets/packages/kz-dev_4.2.1-1_all.deb"
     local kz_deb_local_file=''
     local kz_deb_site_file=''
+    local packages_url='https://karelzimmer.nl/assets/packages'
     local reinstall=''
 
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
     if $OPTION_DEV; then
-        kz_deb_site_file=$kz_deb_dev_site_file
+        kz_deb_site_file=$packages_url/kz-dev_4.2.1-1_all.deb
     else
-        kz_deb_site_file=$kz_deb_prd_site_file
+        kz_deb_site_file=$packages_url/kz_4.2.1-1_all.deb
     fi
 
     if type kz &> /dev/null; then
@@ -195,17 +192,14 @@ function check_debian_package_manager() {
 
 # This function installs RPM package kz.
 function install_rpm_package() {
-    local kz_rpm_prd_site_file="\
-https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
-    local kz_rpm_dev_site_file="\
-https://karelzimmer.nl/assets/packages/kz-dev-4.2.1-1.noarch.rpm"
-    local kz_rpm_site_file=''
     local install=''
+    local kz_rpm_site_file=''
+    local packages_url='https://karelzimmer.nl/assets/packages'
 
     if $OPTION_DEV; then
-        kz_rpm_site_file=$kz_rpm_dev_site_file
+        kz_rpm_site_file=$packages_url/kz-dev-4.2.1-1.noarch.rpm
     else
-        kz_rpm_site_file=$kz_rpm_prd_site_file
+        kz_rpm_site_file=$packages_url/kz-4.2.1-1.noarch.rpm
     fi
 
     if type kz &> /dev/null; then

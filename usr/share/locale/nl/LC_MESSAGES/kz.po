@@ -500,15 +500,15 @@ msgstr " ONTWIKKELINGSVERSIE"
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:465 kz-deploy:237
+#: kz-build:466 kz-deploy:237
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:487 kz-get:229
+#: kz-build:488 kz-get:223
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:496 kz-check:570 kz-deploy:264 kz-dev:338 kz-update:279
+#: kz-build:497 kz-check:570 kz-deploy:264 kz-dev:338 kz-update:279
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -600,7 +600,7 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:492 kz-check:566 kz-deploy:260
+#: kz-build:493 kz-check:566 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -608,7 +608,7 @@ msgstr "Controleer alle meldingen hierboven en los ze op."
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:68 kz_common.sh:48 kz-get:189
+#: kz_common.py:68 kz_common.sh:48 kz-get:186
 msgid "Wait for another package manager to finish"
 msgstr "Wacht tot een andere pakketbeheerder klaar is"
 
@@ -909,7 +909,7 @@ msgstr "onbekende optie"
 msgid "Type 'man kz get' for more information."
 msgstr "Typ 'man kz get' voor meer informatie."
 
-#: kz-get:233
+#: kz-get:227
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -923,7 +923,7 @@ msgstr ""
 "\n"
 "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
-#: kz-get:241
+#: kz-get:235
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 

@@ -435,11 +435,12 @@ function build_rpm_package() {
     printf '%s' "$build_id" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
     # Create RPM package in kz-rpm/dist/.
+    # NOTE: rpmbuild requires the _topdir to be in double quotes.
     cd "$HOME"
     rpmbuild    -ba                                         \
                 --build-in-place                            \
                 --define                                    \
-                _topdir "$RPM_REPO_DISTDIR/rpmbuild"        \
+                "_topdir $RPM_REPO_DISTDIR/rpmbuild"        \
                 "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"  |& $PROGRAM_LOGS
     cd "$startdir"
 

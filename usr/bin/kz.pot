@@ -442,15 +442,15 @@ msgstr ""
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:465 kz-deploy:237
+#: kz-build:466 kz-deploy:237
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:487 kz-get:229
+#: kz-build:488 kz-get:223
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:496 kz-check:570 kz-deploy:264 kz-dev:338 kz-update:279
+#: kz-build:497 kz-check:570 kz-deploy:264 kz-dev:338 kz-update:279
 msgid "Complete!"
 msgstr ""
 
@@ -537,7 +537,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:492 kz-check:566 kz-deploy:260
+#: kz-build:493 kz-check:566 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -545,7 +545,7 @@ msgstr ""
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:68 kz_common.sh:48 kz-get:189
+#: kz_common.py:68 kz_common.sh:48 kz-get:186
 msgid "Wait for another package manager to finish"
 msgstr ""
 
@@ -829,7 +829,7 @@ msgstr ""
 msgid "Type 'man kz get' for more information."
 msgstr ""
 
-#: kz-get:233
+#: kz-get:227
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -838,7 +838,7 @@ msgid ""
 "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-get:241
+#: kz-get:235
 msgid "Type 'exit' to close this window."
 msgstr ""
 
