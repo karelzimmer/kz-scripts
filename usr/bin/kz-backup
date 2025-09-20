@@ -169,10 +169,10 @@ $USAGE"
 function check_target() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
-    local usb_mount_point="/media/$USER"
+    local usb_mount_point=/media/$USER
 
     if grep --quiet rhel /etc/os-release; then
-        usb_mount_point="/run/media/$USER"
+        usb_mount_point=/run/media/$USER
     fi
 
     if $option_target; then

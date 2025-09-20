@@ -168,11 +168,11 @@ $USAGE"
 
 # This function checks if the source is available.
 function check_source() {
-    local usb_mount_point="/media/$USER"
+    local usb_mount_point=/media/$USER
     local text=''
 
     if grep --quiet rhel /etc/os-release; then
-        usb_mount_point="/run/media/$USER"
+        usb_mount_point=/run/media/$USER
     fi
 
     if $option_source; then

@@ -225,11 +225,9 @@ function generate_gettext_files() {
     local startdir=$PWD
     local text=''
     local gettext_dir=''
-    local gettext_dirs="\
-$HOME/kz-scripts/usr/bin \
+    local gettext_dirs="$HOME/kz-scripts/usr/bin \
 $HOME/kz-scripts/usr/share/applications \
-$HOME/kz-scripts/usr/share/polkit-1/actions
-"
+$HOME/kz-scripts/usr/share/polkit-1/actions"
     local gettext_file=''
 
     text=$(gettext 'Generate gettext files')...
