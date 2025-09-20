@@ -105,19 +105,19 @@ msgstr ""
 msgid "internal error"
 msgstr ""
 
-#: kz:185
+#: kz:181
 msgid "The following commands are available:"
 msgstr ""
 
-#: kz:186
+#: kz:182
 msgid "NUM  COMMAND"
 msgstr ""
 
-#: kz:206
+#: kz:202
 msgid "Use \"man kz\" for available commands."
 msgstr ""
 
-#: kz:208
+#: kz:204
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 

@@ -251,7 +251,7 @@ $(eval_gettext "Type '\$program_name --help' for more information.")"
 
 # This function displays version, author, and license information.
 function kz.process_option_version() {
-    local build_id='' # ISO 8601 YYYY-MM-DDTHH:MM:SS
+    local build_id=''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
     if [[ -f /usr/share/doc/kz/build.id ]]; then

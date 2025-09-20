@@ -106,19 +106,19 @@ msgstr "In programma {} is een fout opgetreden."
 msgid "internal error"
 msgstr "interne fout"
 
-#: kz:185
+#: kz:181
 msgid "The following commands are available:"
 msgstr "De volgende opdrachten zijn beschikbaar:"
 
-#: kz:186
+#: kz:182
 msgid "NUM  COMMAND"
 msgstr "NUM  OPDRACHT"
 
-#: kz:206
+#: kz:202
 msgid "Use \"man kz\" for available commands."
 msgstr "Gebruik \"man kz\" voor beschikbare opdrachten."
 
-#: kz:208
+#: kz:204
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."

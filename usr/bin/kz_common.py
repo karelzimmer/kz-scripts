@@ -184,7 +184,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     command1: str = f'yelp man:{PROGRAM_NAME}'
     command2: str = f'man --pager=cat {PROGRAM_NAME}'
-    exc: str = ''
+    exc: BaseException
     text: str = ''
 
     if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
@@ -229,8 +229,8 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function displays version, author, and license information.
     """
     build_id: str = ''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
-    fnf: str = ''
-    exc: str = ''
+    fnf: BaseException
+    exc: BaseException
     text: str = ''
 
     try:
@@ -281,7 +281,7 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function waits for the user to press Enter.
     """
-    exc: str = ''
+    exc: BaseException
     text: str = ''
 
     try:

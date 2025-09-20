@@ -121,7 +121,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     This function checks the script input.
     """
     args: list[str] = []
-    err: str = ''
+    err: BaseException
     opts: list[tuple[str, str]] = []
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
@@ -253,7 +253,7 @@ def perform_command(command: str = '') -> None:
     """
     This function executes a Bash command.
     """
-    exc: str = ''
+    exc: BaseException
     text: str
 
     text = f'\n{command}...'
