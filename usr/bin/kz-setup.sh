@@ -443,7 +443,8 @@ if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --chann
 # 3. Add Whisker Menu to Panel.
 # 4. Move Whisker Menu to far left.
 # 5. Move Panel to bottom.
-# 6. Position search entry on bottom (Whisker Menu).
+# 6. Position categories to the left (Whisker Menu).
+# 7. Position search entry on bottom (Whisker Menu).
 
 # reset xfce on #none
 # -----------------------------------------------------------------------------
