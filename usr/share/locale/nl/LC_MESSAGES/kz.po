@@ -1392,7 +1392,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:606
+#: kz-setup:613
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
