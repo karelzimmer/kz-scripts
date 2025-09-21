@@ -330,7 +330,7 @@ Further reading:")
 
     if type xfce4-session &> /dev/null; then
         output_file=$settings_dir/xfce.txt
-        text="$(gettext "To setup the Panel and Whisker Menu:
+        text="$(gettext "To setup the Xfce Panel and Whisker Menu:
 
 1. Remove Panel 2.
 2. Remove Applications Menu from Panel.
