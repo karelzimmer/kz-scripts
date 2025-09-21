@@ -435,7 +435,6 @@ kz-desktop --delete=kz-whatsapp
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-# Remove desktop icons.
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/style --type int --set 0; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set true; fi
@@ -445,7 +444,9 @@ if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar
 # Desktop environment.
 # -----------------------------------------------------------------------------
 # Reinstate icons on the desktop.
-if type xfce4-session &> /dev/null; then xfconf-query --create --verbose --channel xfce4-desktop --property /desktop-icons/style --type int --set 2; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/style --type int --set 2; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set false; fi
 
 # setup youtube-dl on #none
 # -----------------------------------------------------------------------------
