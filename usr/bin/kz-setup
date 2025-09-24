@@ -645,8 +645,11 @@ apps and changing user settings.")"
                     qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout
                 fi
             elif type lxsession &> /dev/null; then
-                # LXDE and LXQt.
+                # LXDE.
                 lxde-logout
+            elif type lxqt-session &> /dev/null; then
+                # LXQt.
+                lxqt-leave --logout
             elif type mate-session &> /dev/null; then
                 # MATE.
                 mate-session-save --logout
