@@ -631,7 +631,10 @@ apps and changing user settings.")"
             # A GUI is available
             $OPTION_GUI || kz.wait_for_enter
 
-            if type gnome-session &> /dev/null; then
+            if type cinnamon-session &> /dev/null; then
+                # Cinnamon.
+                cinnamon-session-quit --logout --force
+            elif type gnome-session &> /dev/null; then
                 # GNOME.
                 gnome-session-quit --logout --no-prompt
             elif type ksmserver &> /dev/null; then
@@ -644,12 +647,12 @@ apps and changing user settings.")"
             elif type lxsession &> /dev/null; then
                 # LXDE and LXQt.
                 lxde-logout
-            elif type xfce4-session &> /dev/null; then
-                # Xfce.
-                xfce4-session-logout --logout
             elif type mate-session &> /dev/null; then
                 # MATE.
                 mate-session-save --logout
+            elif type xfce4-session &> /dev/null; then
+                # Xfce.
+                xfce4-session-logout --logout
             else
                 text='No logout command available.'
                 kz.debugmsg "$text"
@@ -660,7 +663,6 @@ apps and changing user settings.")"
     else
         kz.infomsg "$text"
     fi
-
     exit 0
 }
 
