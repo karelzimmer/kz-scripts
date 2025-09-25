@@ -930,14 +930,14 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 # E-mail and news.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes thunderbird; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes thunderbird; fi
 
 # remove thunderbird from *
 # -----------------------------------------------------------------------------
 # E-mail and news.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes thunderbird; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-nl; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes thunderbird; fi
 
 # install transmission on pc01 pc06 pc07
@@ -1132,6 +1132,10 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
 if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
 
 # remove xfce-goodies from #none
 # -----------------------------------------------------------------------------
@@ -1139,6 +1143,10 @@ if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
 if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
 
 # install youtube-dl on #none
 # -----------------------------------------------------------------------------
