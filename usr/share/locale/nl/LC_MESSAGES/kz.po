@@ -277,11 +277,11 @@ msgid "==== END list of installed snaps"
 msgstr "==== EINDE overzicht van geïnstalleerde snaps"
 
 #: kz-backup:332
-msgid "==== START list of installed flatpak apps"
+msgid "==== START list of installed Flatpak apps"
 msgstr "==== BEGIN overzicht van geïnstalleerde flatpak-apps"
 
 #: kz-backup:333
-msgid "==== END list of installed flatpak apps"
+msgid "==== END list of installed Flatpak apps"
 msgstr "==== EINDE overzicht van geïnstalleerde flatpak-apps"
 
 #: kz-backup:371

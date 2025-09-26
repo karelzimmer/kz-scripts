@@ -329,8 +329,8 @@ function backup_setting_apps() {
     footer1=$(gettext '==== END list of manual installed packages')
     header2=$(gettext '==== START list of installed snaps')
     footer2=$(gettext '==== END list of installed snaps')
-    header3=$(gettext '==== START list of installed flatpak apps')
-    footer3=$(gettext '==== END list of installed flatpak apps')
+    header3=$(gettext '==== START list of installed Flatpak apps')
+    footer3=$(gettext '==== END list of installed Flatpak apps')
 
     kz.logmsg 'Create a list of installed apps...(ignore WARNING).'
 
