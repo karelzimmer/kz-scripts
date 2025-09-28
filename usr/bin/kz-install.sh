@@ -79,7 +79,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
-if grep --quiet rhel /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
 REBOOT=true
 
 # remove broadcom-sta-dkms from pc01
@@ -88,7 +87,6 @@ REBOOT=true
 # Reboot required!
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes broadcom-sta-dkms; fi
-if grep --quiet rhel /etc/os-release; then echo 'The broadcom-sta-dkms app is not available.'; fi
 REBOOT=true
 
 # install calibre on pc06
@@ -142,14 +140,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes cups; fi
 # Printer backend.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The cups-backend-bjnp app is not available.'; fi
 
 # remove cups-backend-bjnp from #none
 # -----------------------------------------------------------------------------
 # Printer backend.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The cups-backend-bjnp app is not available.'; fi
 
 # install dash-to-dock on *
 # -----------------------------------------------------------------------------
@@ -330,14 +326,12 @@ REBOOT=true
 # View and install deb files.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The gdebi app is not available.'; fi
 
 # remove gdebi from #none
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The gdebi app is not available.'; fi
 
 # install gettext on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -452,14 +446,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes groff; fi
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes handbrake; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The handbrake app is not available.'; fi
 
 # remove handbrake from #none
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes handbrake; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The handbrake app is not available.'; fi
 
 # install htop on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -480,14 +472,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes htop; fi
 # Slideshow maker.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes imagination; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The imagination app is not available.'; fi
 
 # remove imagination from pc06 pc07
 # -----------------------------------------------------------------------------
 # Slideshow maker.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes imagination; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The imagination app is not available.'; fi
 
 # install jq on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -508,14 +498,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes jq; fi
 # Image manipulation.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes krita; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The krita app is not available.'; fi
 
 # remove krita from pc06
 # -----------------------------------------------------------------------------
 # Image manipulation.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes krita; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The krita app is not available.'; fi
 
 # install kvm on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -626,6 +614,18 @@ sudo usermod --append --groups adm,systemd-journal karel
 sudo gpasswd --delete karel adm
 sudo gpasswd --delete karel systemd-journal
 
+# install mint-meta-codecs on #none
+# -----------------------------------------------------------------------------
+# Enhancements for the Linux Mint Cinnamon Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
+
+# remove mint-meta-codecs from #none
+# -----------------------------------------------------------------------------
+# Enhancements for the Linux Mint Cinnamon Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
+
 # install mypy on pc06 pc07
 # -----------------------------------------------------------------------------
 # Python static typing.
@@ -645,14 +645,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3-m
 # Administrative operations.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The nautilus-admin app is not available.'; fi
 
 # remove nautilus-admin from pc06 pc07
 # -----------------------------------------------------------------------------
 # Administrative operations.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes nautilus-admin; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The nautilus-admin app is not available.'; fi
 
 # install nmap on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -755,7 +753,6 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes rpm; fi
 # Package manager for RPM.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
-if grep --quiet rhel /etc/os-release; then echo 'The rpm app cannot be removed.'; fi
 
 # install simplescreenrecorder on #none
 # -----------------------------------------------------------------------------
@@ -763,7 +760,6 @@ if grep --quiet rhel /etc/os-release; then echo 'The rpm app cannot be removed.'
 # Requires the use of Xorg/X11.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes simplescreenrecorder; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The simplescreenrecorder app is not available.'; fi
 
 # remove simplescreenrecorder from #none
 # -----------------------------------------------------------------------------
@@ -771,7 +767,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'Th
 # Required the use of Xorg/X11. Enable Wayland again?
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The simplescreenrecorder app is not available.'; fi
 
 # install skip-grub-menu on *
 # -----------------------------------------------------------------------------
@@ -812,14 +807,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes shellchec
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes sound-juicer; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The sound-juicer app is not available.'; fi
 
 # remove sound-juicer from #none
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes sound-juicer; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The sound-juicer app is not available.'; fi
 
 # install spice-vdagent on #none
 # -----------------------------------------------------------------------------
@@ -853,7 +846,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'Th
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes spotify-client; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo 'The spotify web app cannot be removed.'; fi
 
 # install ssh on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1067,13 +1059,13 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then printf '%s\n' 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes apt-transport-https; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get update; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes code; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --set editor /usr/bin/code; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then printf '%s\n' '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes code; fi
 
 # remove vscode from pc01 pc06 pc07

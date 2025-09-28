@@ -203,7 +203,7 @@ function install_rpm_package() {
     fi
 
     if type kz &> /dev/null; then
-        install='install'
+        install='reinstall'
     else
         install='install'
     fi

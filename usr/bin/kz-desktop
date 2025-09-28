@@ -78,11 +78,11 @@ function process() {
     local text=''
 
     check_input "$@"
-    if ! gsettings list-keys org.gnome.shell |& $PROGRAM_LOGS; then
-        text=$(gettext "No such schema 'org.gnome.shell'.")
+    if ! gsettings list-keys org.gnome.yelp |& $PROGRAM_LOGS; then
+        text=$(gettext "GNOME desktop environment required.")
         kz.infomsg "$text"
         exit 0
-    else
+    elif gsettings list-keys org.gnome.shell |& $PROGRAM_LOGS; then
         favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
         desktopfile=$favorite_argument.desktop
     fi

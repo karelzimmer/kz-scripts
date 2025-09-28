@@ -742,7 +742,7 @@ msgid "  -r, --reset    set favorites on default values"
 msgstr ""
 
 #: kz-desktop:82
-msgid "No such schema 'org.gnome.shell'."
+msgid "GNOME desktop environment required."
 msgstr ""
 
 #: kz-desktop:265

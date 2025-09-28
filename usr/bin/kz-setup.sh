@@ -22,6 +22,18 @@ kz-desktop --addaft=calibre-gui
 # -----------------------------------------------------------------------------
 kz-desktop --delete=calibre-gui
 
+# setup cinnamon on #none
+# -----------------------------------------------------------------------------
+# Cinnamon desktop environment.
+# -----------------------------------------------------------------------------
+if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
+
+# reset cinnamon on #none
+# -----------------------------------------------------------------------------
+# Cinnamon desktop environment.
+# -----------------------------------------------------------------------------
+if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
+
 # setup cockpit on pc06
 # -----------------------------------------------------------------------------
 # Web console.
@@ -45,7 +57,7 @@ if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-
 if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if (grep rhel /etc/os-release && gnome-extensions info no-overview@fthx ) &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action minimize-or-previews; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
@@ -105,13 +117,12 @@ kz-desktop --addbef=firefox_firefox
 # View and install deb files.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then printf '%s\n' 'App gdebi is not available.'; fi
 
 # reset gdebi on *
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if type gnome-session &> /dev/null; then printf '%s\n' 'App gdebi cannot be reset.'; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo 'App gdebi cannot be reset.'; fi
 
 # setup git on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -129,7 +140,7 @@ git config --global --unset alias.logg
 
 # setup gnome on *
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# GNOME desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
@@ -139,13 +150,13 @@ if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click &> /dev/nul
 if gsettings get org.gnome.desktop.screensaver lock-enabled &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
 if gsettings get org.gnome.desktop.session idle-delay &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay 900; fi
 if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent &> /dev/null; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if gsettings get org.gnome.desktop.wm.preferences button-layout &> /dev/null; then gsettings set org.gnome.desktop.wm.preferences button-layout :minimize,maximize,close; fi
+if gsettings get org.gnome.desktop.wm.preferences button-layout &> /dev/null; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
 if gsettings get org.gnome.mutter center-new-windows &> /dev/null; then gsettings set org.gnome.mutter center-new-windows true; fi
 if gsettings get org.gnome.nautilus.icon-view default-zoom-level &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level large; fi
-if gsettings get org.gnome.nautilus.preferences click-policy &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy single; fi
+if gsettings get org.gnome.nautilus.preferences click-policy &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
 if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
 if gsettings get org.gnome.nautilus.preferences show-create-link &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if gsettings get org.gnome.nautilus.preferences show-image-thumbnails &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails always; fi
+if gsettings get org.gnome.nautilus.preferences show-image-thumbnails &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
 if gsettings get org.gnome.settings-daemon.plugins.power power-button-action &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing; fi
@@ -157,7 +168,7 @@ if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gs
 
 # reset gnome on *
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# GNOME desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
@@ -273,7 +284,7 @@ rm --force --recursive ~/.cache/thumbnails/
 # -----------------------------------------------------------------------------
 # Restore thumbnails.
 # -----------------------------------------------------------------------------
-printf '%s\n' 'App restore-thumbnails cannot be reset.'
+echo 'App restore-thumbnails cannot be reset.'
 
 # setup sound-juicer on #none
 # -----------------------------------------------------------------------------
@@ -331,7 +342,7 @@ sed --in-place 's/# eval/eval/g' ~/.bashrc
 # Enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
 sed --in-place '/^stty -ixon/d' ~/.bashrc
-printf '%s\n' 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
+echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
 # reset terminal on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -433,14 +444,14 @@ kz-desktop --delete=kz-whatsapp
 
 # setup xfce on #none
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# Xfce desktop environment.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set true; fi
 
 # reset xfce on #none
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# Xfce desktop environment.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set false; fi

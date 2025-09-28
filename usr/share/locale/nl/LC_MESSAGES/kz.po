@@ -819,8 +819,8 @@ msgid "  -r, --reset    set favorites on default values"
 msgstr "  -r, --reset    stel favorieten in op standaardwaarden"
 
 #: kz-desktop:82
-msgid "No such schema 'org.gnome.shell'."
-msgstr "Geen schema 'org.gnome.shell'."
+msgid "GNOME desktop environment required."
+msgstr "GNOME-desktopomgeving vereist."
 
 #: kz-desktop:265
 msgid "Favorite apps:"
