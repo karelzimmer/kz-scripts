@@ -30,52 +30,9 @@ if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf check-update || true; fi
 
-# install ansible on pc06 pc07
-# -----------------------------------------------------------------------------
-# Configuration management, deployment, and task execution.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ansible; fi
-
-# remove ansible from pc06 pc07
-# -----------------------------------------------------------------------------
-# Configuration management, deployment, and task execution.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ansible; fi
-
-# install backintime on #none
-# -----------------------------------------------------------------------------
-# Backups/snapshots.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes backintime-qt; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes backintime-qt; fi
-
-# remove backintime from #none
-# -----------------------------------------------------------------------------
-# Backups/snapshots.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes backintime-qt; fi
-
-# install bleachbit on #none
-# -----------------------------------------------------------------------------
-# Delete files.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes bleachbit; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes bleachbit; fi
-
-# remove bleachbit from #none
-# -----------------------------------------------------------------------------
-# Delete files.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes bleachbit; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes bleachbit; fi
-
 # install broadcom-sta-dkms on pc01
 # -----------------------------------------------------------------------------
 # Enable wifi adapter.
-# Reboot required!
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
@@ -84,7 +41,6 @@ REBOOT=true
 # remove broadcom-sta-dkms from pc01
 # -----------------------------------------------------------------------------
 # Disable wifi adapter.
-# Reboot required!
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes broadcom-sta-dkms; fi
 REBOOT=true
@@ -135,43 +91,226 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes cups; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes cups; fi
 
-# install cups-backend-bjnp on #none
-# -----------------------------------------------------------------------------
-# Printer backend.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
-
-# remove cups-backend-bjnp from #none
-# -----------------------------------------------------------------------------
-# Printer backend.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
-
-# install dash-to-dock on *
+# install desktop on *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
-# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock ) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
+# -----------------------------------------------------------------------------
+# Administrative operations.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
+# -----------------------------------------------------------------------------
+# Enhancements for the Linux Mint Cinnamon Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
+# -----------------------------------------------------------------------------
+# Enhancements for the Xfce Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
+if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
+# -----------------------------------------------------------------------------
+# Skip GRUB menu.
+# -----------------------------------------------------------------------------
+sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
-# remove dash-to-dock from *
+# remove desktop from *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
-# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock ) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
+# -----------------------------------------------------------------------------
+# Administrative operations.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes nautilus-admin; fi
+# -----------------------------------------------------------------------------
+# Enhancements for the Linux Mint Cinnamon Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
+# -----------------------------------------------------------------------------
+# Enhancements for the Xfce Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
+if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
+# -----------------------------------------------------------------------------
+# Show GRUB menu.
+# -----------------------------------------------------------------------------
+sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
+
+# install development on pc06 pc07
+# -----------------------------------------------------------------------------
+# Configuration management, deployment, and task execution.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ansible; fi
+# -----------------------------------------------------------------------------
+# Simulate superuser privileges.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes fakeroot; fi
+# -----------------------------------------------------------------------------
+# GNU Internationalization.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gettext; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes gettext; fi
+# -----------------------------------------------------------------------------
+# Distributed revision control system.
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes git; fi
+# -----------------------------------------------------------------------------
+# JSON processor.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes jq; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes jq; fi
+# -----------------------------------------------------------------------------
+# FTP/HTTP/BitTorrent client.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes lftp; fi
+# -----------------------------------------------------------------------------
+# Network MAPper.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes nmap; fi
+# -----------------------------------------------------------------------------
+# Python static typing.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes mypy; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes python3-mypy; fi
+# -----------------------------------------------------------------------------
+# Programming language.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
+if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
+if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-pip; fi
+# -----------------------------------------------------------------------------
+# Gettext catalogs editor.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes poedit; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes poedit; fi
+# -----------------------------------------------------------------------------
+# Package manager.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes rpm; fi
+# -----------------------------------------------------------------------------
+# Shell script linter.
+# Web app: https://www.shellcheck.net
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
+# -----------------------------------------------------------------------------
+# Editor.
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes apt-transport-https; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get update; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes code; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --set editor /usr/bin/code; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes code; fi
+
+# remove development from pc06 pc07
+# -----------------------------------------------------------------------------
+# Configuration management, deployment, and task execution.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ansible; fi
+# -----------------------------------------------------------------------------
+# Simulate superuser privileges.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fakeroot; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fakeroot; fi
+# -----------------------------------------------------------------------------
+# GNU Internationalization.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gettext; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes gettext; fi
+# -----------------------------------------------------------------------------
+# Distributed revision control system.
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes git; fi
+# -----------------------------------------------------------------------------
+# JSON processor.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes jq; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes jq; fi
+# -----------------------------------------------------------------------------
+# FTP/HTTP/BitTorrent client.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lftp; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes lftp; fi
+# -----------------------------------------------------------------------------
+# Network MAPper.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
+# -----------------------------------------------------------------------------
+# Python static typing.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes mypy; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3-mypy; fi
+# -----------------------------------------------------------------------------
+# Programming language.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
+if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip; fi
+# -----------------------------------------------------------------------------
+# Gettext catalogs editor.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes poedit; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes poedit; fi
+# -----------------------------------------------------------------------------
+# Package manager for RPM.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
+# -----------------------------------------------------------------------------
+# Shell script linter.
+# Web app: https://www.shellcheck.net
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
+# -----------------------------------------------------------------------------
+# Editor.
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --remove editor /usr/bin/code; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes code; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes code; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
 # install disabled-aer on pc06
 # -----------------------------------------------------------------------------
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
+# -----------------------------------------------------------------------------
 # Express Advanced Error Reporting) to prevent the log gets flooded with
 # 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
@@ -187,6 +326,7 @@ REBOOT=true
 # remove disabled-aer from pc06
 # -----------------------------------------------------------------------------
 # Enable kernel config parameter PCIEAER.
+# -----------------------------------------------------------------------------
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) to "allow" the log gets flooded with
 # 'AER: Corrected errors received'. App disabled-aer is usually needed for HP hardware.
@@ -226,24 +366,11 @@ sudo systemctl mask fwupd.service
 
 # remove disabled-fwupd from #none
 # -----------------------------------------------------------------------------
-# Disable FirmWare UPdate Daemon.
+# Enable FirmWare UPdate Daemon.
 # -----------------------------------------------------------------------------
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
-
-# install disabled-lidswitch on #none
-# -----------------------------------------------------------------------------
-# Do nothing when the laptop lid is closed.
-# -----------------------------------------------------------------------------
-sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
-
-# remove disabled-lidswitch from #none
-# -----------------------------------------------------------------------------
-# Restore the default action when the laptop lid is closed.
-# -----------------------------------------------------------------------------
-sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # install exiftool on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -258,20 +385,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes perl-Image-ExifTool; fi
-
-# install fakeroot on pc06 pc07
-# -----------------------------------------------------------------------------
-# Simulate superuser privileges.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes fakeroot; fi
-
-# remove fakeroot from pc06 pc07
-# -----------------------------------------------------------------------------
-# Simulate superuser privileges.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fakeroot; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fakeroot; fi
 
 # install fdupes on #none
 # -----------------------------------------------------------------------------
@@ -297,7 +410,6 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; f
 # -----------------------------------------------------------------------------
 # Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
-# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
@@ -311,7 +423,6 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Enable choice on user login screen for Xorg/X11 or Wayland.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
-# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
@@ -333,20 +444,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 
-# install gettext on pc06 pc07
-# -----------------------------------------------------------------------------
-# GNU Internationalization.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gettext; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes gettext; fi
-
-# remove gettext from pc06 pc07
-# -----------------------------------------------------------------------------
-# GNU Internationalization.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gettext; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes gettext; fi
-
 # install gimp on pc06
 # -----------------------------------------------------------------------------
 # GNU Image Manipulation Program.
@@ -360,22 +457,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-nl; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes gimp; fi
-
-# install git on pc06 pc07
-# -----------------------------------------------------------------------------
-# Distributed revision control system.
-# Web app: https://github.com
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes git; fi
-
-# remove git from pc06 pc07
-# -----------------------------------------------------------------------------
-# Distributed revision control system.
-# Web app: https://github.com
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes git; fi
 
 # install gnome-tweaks on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -479,20 +560,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes imagination; fi
 
-# install jq on pc06 pc07
-# -----------------------------------------------------------------------------
-# JSON processor.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes jq; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes jq; fi
-
-# remove jq from pc06 pc07
-# -----------------------------------------------------------------------------
-# JSON processor.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes jq; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes jq; fi
-
 # install krita on pc06
 # -----------------------------------------------------------------------------
 # Image manipulation.
@@ -507,9 +574,10 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 
 # install kvm on pc06 pc07
 # -----------------------------------------------------------------------------
+# Virtualization.
+# -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
-# Reboot required!
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt
 # configuration files.
 # -----------------------------------------------------------------------------
@@ -541,9 +609,10 @@ REBOOT=true
 
 # remove kvm from pc06 pc07
 # -----------------------------------------------------------------------------
+# Virtualization.
+# -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
-# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
@@ -554,20 +623,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo g
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo systemctl disable --now libvirtd; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf groupremove "Virtualization Host"; fi
 REBOOT=true
-
-# install lftp on pc06 pc07
-# -----------------------------------------------------------------------------
-# FTP/HTTP/BitTorrent client.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes lftp; fi
-
-# remove lftp from pc06 pc07
-# -----------------------------------------------------------------------------
-# FTP/HTTP/BitTorrent client.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lftp; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes lftp; fi
 
 # install libreoffice on *
 # -----------------------------------------------------------------------------
@@ -600,72 +655,6 @@ sudo updatedb
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes mlocate; fi
-
-# install log-access on pc06 pc07
-# -----------------------------------------------------------------------------
-# Log access.
-# -----------------------------------------------------------------------------
-sudo usermod --append --groups adm,systemd-journal karel
-
-# remove log-access from pc06 pc07
-# -----------------------------------------------------------------------------
-# Log access.
-# -----------------------------------------------------------------------------
-sudo gpasswd --delete karel adm
-sudo gpasswd --delete karel systemd-journal
-
-# install mint-meta-codecs on #none
-# -----------------------------------------------------------------------------
-# Enhancements for the Linux Mint Cinnamon Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
-
-# remove mint-meta-codecs from #none
-# -----------------------------------------------------------------------------
-# Enhancements for the Linux Mint Cinnamon Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
-
-# install mypy on pc06 pc07
-# -----------------------------------------------------------------------------
-# Python static typing.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes mypy; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes python3-mypy; fi
-
-# remove mypy from pc06 pc07
-# -----------------------------------------------------------------------------
-# Python static typing.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes mypy; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3-mypy; fi
-
-# install nautilus-admin on pc06 pc07
-# -----------------------------------------------------------------------------
-# Administrative operations.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
-
-# remove nautilus-admin from pc06 pc07
-# -----------------------------------------------------------------------------
-# Administrative operations.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes nautilus-admin; fi
-
-# install nmap on pc06 pc07
-# -----------------------------------------------------------------------------
-# Network MAPper.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes nmap; fi
-
-# remove nmap from pc06 pc07
-# -----------------------------------------------------------------------------
-# Network MAPper.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
-
 # install ntfs on #none
 # -----------------------------------------------------------------------------
 # NTFS support.
@@ -693,20 +682,6 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ntfs-3g 
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
-# install poedit on pc06 pc07
-# -----------------------------------------------------------------------------
-# Gettext catalogs editor.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes poedit; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes poedit; fi
-
-# remove poedit from pc06 pc07
-# -----------------------------------------------------------------------------
-# Gettext catalogs editor.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes poedit; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes poedit; fi
-
 # install primary-monitor on pc06
 # -----------------------------------------------------------------------------
 # Set the default GDM login monitor after a multi-monitor setup (saved in /home/karel/.config/monitors.xml).
@@ -724,36 +699,6 @@ REBOOT=true
 sudo rm --force --verbose ~gdm/.config/monitors.xml ~Debian-gdm/.config/monitors.xml
 REBOOT=true
 
-# install python on pc06 pc07
-# -----------------------------------------------------------------------------
-# Programming language.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
-if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
-if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-pip; fi
-
-# remove python from pc06 pc07
-# -----------------------------------------------------------------------------
-# Programming language.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
-if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip; fi
-
-# install rpm on pc06 pc07
-# -----------------------------------------------------------------------------
-# Package manager.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes rpm; fi
-
-# remove rpm from pc06 pc07
-# -----------------------------------------------------------------------------
-# Package manager for RPM.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
-
 # install simplescreenrecorder on #none
 # -----------------------------------------------------------------------------
 # Screen recorder.
@@ -767,40 +712,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # Required the use of Xorg/X11. Enable Wayland again?
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
-
-# install skip-grub-menu on *
-# -----------------------------------------------------------------------------
-# Skip GRUB menu.
-# -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-REBOOT=true
-
-# remove skip-grub-menu from *
-# -----------------------------------------------------------------------------
-# Skip GRUB menu.
-# -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-REBOOT=true
-
-# install shellcheck on pc06 pc07
-# -----------------------------------------------------------------------------
-# Shell script linter.
-# Web app: https://www.shellcheck.net
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
-
-# remove shellcheck from pc06 pc07
-# -----------------------------------------------------------------------------
-# Shell script linter.
-# Web app: https://www.shellcheck.net
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
 
 # install sound-juicer on #none
 # -----------------------------------------------------------------------------
@@ -886,20 +797,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes sushi; fi
 
-# install tab-completion on pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# Bash completion.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes bash-completion; fi
-
-# remove tab-completion from pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# Bash completion.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes bash-completion; fi
-
 # install teamviewer on *
 # -----------------------------------------------------------------------------
 # Remote desktop.
@@ -917,6 +814,43 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes teamviewer; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes teamviewer; fi
+
+# install terminal on pc01 pc06 pc07
+# -----------------------------------------------------------------------------
+# Bash completion.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes bash-completion; fi
+
+# install terminal on pc06 pc07
+# -----------------------------------------------------------------------------
+# Grant log access.
+# -----------------------------------------------------------------------------
+sudo usermod --append --groups adm,systemd-journal karel
+# -----------------------------------------------------------------------------
+# Display directory tree.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes tree; fi
+
+# remove terminal from pc01 pc06 pc07
+# -----------------------------------------------------------------------------
+# Bash completion.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes bash-completion; fi
+
+# remove terminal from pc06 pc07
+# -----------------------------------------------------------------------------
+# Revoke log access.
+# -----------------------------------------------------------------------------
+sudo gpasswd --delete karel adm
+sudo gpasswd --delete karel systemd-journal
+# -----------------------------------------------------------------------------
+# Display directory tree.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes tree; fi
 
 # install thunderbird on *
 # -----------------------------------------------------------------------------
@@ -945,20 +879,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes transmission; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes transmission; fi
-
-# install tree on pc06 pc07
-# -----------------------------------------------------------------------------
-# Display directory tree.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes tree; fi
-
-# remove tree from pc06 pc07
-# -----------------------------------------------------------------------------
-# Display directory tree.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes tree; fi
 
 # install ufw on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1052,32 +972,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes vlc; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes vlc; fi
 
-# install vscode on pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# Editor.
-# Web app: https://vscode.dev
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes apt-transport-https; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get update; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes code; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --set editor /usr/bin/code; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes code; fi
-
-# remove vscode from pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# Editor.
-# Web app: https://vscode.dev
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo update-alternatives --remove editor /usr/bin/code; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes code; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes code; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
-
 # install webmin on pc07
 # -----------------------------------------------------------------------------
 # Web console.
@@ -1117,28 +1011,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
-
-# install xfce-goodies on #none
-# -----------------------------------------------------------------------------
-# Enhancements for the Xfce Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
-if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
-
-# remove xfce-goodies from #none
-# -----------------------------------------------------------------------------
-# Enhancements for the Xfce Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
-if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
 
 # install youtube-dl on #none
 # -----------------------------------------------------------------------------

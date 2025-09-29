@@ -22,18 +22,6 @@ kz-desktop --addaft=calibre-gui
 # -----------------------------------------------------------------------------
 kz-desktop --delete=calibre-gui
 
-# setup cinnamon on #none
-# -----------------------------------------------------------------------------
-# Cinnamon desktop environment.
-# -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
-
-# reset cinnamon on #none
-# -----------------------------------------------------------------------------
-# Cinnamon desktop environment.
-# -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
-
 # setup cockpit on pc06
 # -----------------------------------------------------------------------------
 # Web console.
@@ -48,7 +36,11 @@ kz-desktop --addaft=kz-cockpit
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-cockpit
 
-# setup dash-to-dock on *
+# setup desktop on *
+# -----------------------------------------------------------------------------
+# Cinnamon desktop environment.
+# -----------------------------------------------------------------------------
+if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
@@ -65,8 +57,43 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position &> /dev/n
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+# -----------------------------------------------------------------------------
+# GNOME desktop environment.
+# -----------------------------------------------------------------------------
+if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
+if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
+if gsettings get org.gnome.desktop.interface clock-show-weekday &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
+if gsettings get org.gnome.desktop.interface show-battery-percentage &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
+if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
+if gsettings get org.gnome.desktop.screensaver lock-enabled &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
+if gsettings get org.gnome.desktop.session idle-delay &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay 900; fi
+if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent &> /dev/null; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
+if gsettings get org.gnome.desktop.wm.preferences button-layout &> /dev/null; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
+if gsettings get org.gnome.mutter center-new-windows &> /dev/null; then gsettings set org.gnome.mutter center-new-windows true; fi
+if gsettings get org.gnome.nautilus.icon-view default-zoom-level &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level large; fi
+if gsettings get org.gnome.nautilus.preferences click-policy &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
+if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
+if gsettings get org.gnome.nautilus.preferences show-create-link &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
+if gsettings get org.gnome.nautilus.preferences show-image-thumbnails &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
+if gsettings get org.gnome.settings-daemon.plugins.power power-button-action &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
+if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
+# -----------------------------------------------------------------------------
+# Xfce desktop environment.
+# -----------------------------------------------------------------------------
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set true; fi
 
-# reset dash-to-dock on *
+# reset desktop on *
+# -----------------------------------------------------------------------------
+# Cinnamon desktop environment.
+# -----------------------------------------------------------------------------
+if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
@@ -83,6 +110,70 @@ if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gma
 if (grep rhel /etc/os-release && gnome-extensions info no-overview@fthx ) &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
 if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+# -----------------------------------------------------------------------------
+# GNOME desktop environment.
+# -----------------------------------------------------------------------------
+if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
+if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
+if gsettings get org.gnome.desktop.interface clock-show-weekday &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
+if gsettings get org.gnome.desktop.interface show-battery-percentage &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
+if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
+if gsettings get org.gnome.desktop.screensaver lock-enabled &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
+if gsettings get org.gnome.desktop.session idle-delay &> /dev/null; then gsettings reset org.gnome.desktop.session idle-delay; fi
+if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent &> /dev/null; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
+if gsettings get org.gnome.desktop.wm.preferences button-layout &> /dev/null; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
+if gsettings get org.gnome.mutter center-new-windows &> /dev/null; then gsettings reset org.gnome.mutter center-new-windows; fi
+if gsettings get org.gnome.nautilus.icon-view default-zoom-level &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
+if gsettings get org.gnome.nautilus.preferences click-policy &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
+if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
+if gsettings get org.gnome.nautilus.preferences show-create-link &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
+if gsettings get org.gnome.nautilus.preferences show-image-thumbnails &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
+if gsettings get org.gnome.settings-daemon.plugins.power power-button-action &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
+if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
+# -----------------------------------------------------------------------------
+# Xfce desktop environment.
+# -----------------------------------------------------------------------------
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set false; fi
+
+# setup development on pc06 pc07
+# -----------------------------------------------------------------------------
+# Editor.
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
+kz-desktop --addbef=code
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/json; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-desktop; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-shellscript; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/xml; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/html; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/markdown; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/plain; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/troff; fi
+if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/x-python; fi
+# -----------------------------------------------------------------------------
+# Distributed revision control system.
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
+git config --global alias.logg 'log --decorate --graph --oneline --all'
+
+# reset git on pc06 pc07
+# -----------------------------------------------------------------------------
+# Distributed revision control system.
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
+git config --global --unset alias.logg
+# -----------------------------------------------------------------------------
+# Editor.
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
+kz-desktop --delete=code
 
 # setup evolution on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -123,76 +214,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mi
 # View and install deb files.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo 'App gdebi cannot be reset.'; fi
-
-# setup git on pc06 pc07
-# -----------------------------------------------------------------------------
-# Distributed revision control system.
-# Web app: https://github.com
-# -----------------------------------------------------------------------------
-git config --global alias.logg 'log --decorate --graph --oneline --all'
-
-# reset git on pc06 pc07
-# -----------------------------------------------------------------------------
-# Distributed revision control system.
-# Web app: https://github.com
-# -----------------------------------------------------------------------------
-git config --global --unset alias.logg
-
-# setup gnome on *
-# -----------------------------------------------------------------------------
-# GNOME desktop environment.
-# -----------------------------------------------------------------------------
-if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
-if gsettings get org.gnome.desktop.interface clock-show-weekday &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if gsettings get org.gnome.desktop.interface show-battery-percentage &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
-if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
-if gsettings get org.gnome.desktop.screensaver lock-enabled &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
-if gsettings get org.gnome.desktop.session idle-delay &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay 900; fi
-if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent &> /dev/null; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if gsettings get org.gnome.desktop.wm.preferences button-layout &> /dev/null; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
-if gsettings get org.gnome.mutter center-new-windows &> /dev/null; then gsettings set org.gnome.mutter center-new-windows true; fi
-if gsettings get org.gnome.nautilus.icon-view default-zoom-level &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level large; fi
-if gsettings get org.gnome.nautilus.preferences click-policy &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
-if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if gsettings get org.gnome.nautilus.preferences show-create-link &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if gsettings get org.gnome.nautilus.preferences show-image-thumbnails &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if gsettings get org.gnome.settings-daemon.plugins.power power-button-action &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
-if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-
-# reset gnome on *
-# -----------------------------------------------------------------------------
-# GNOME desktop environment.
-# -----------------------------------------------------------------------------
-if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
-if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
-if gsettings get org.gnome.desktop.interface clock-show-weekday &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if gsettings get org.gnome.desktop.interface show-battery-percentage &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
-if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
-if gsettings get org.gnome.desktop.screensaver lock-enabled &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
-if gsettings get org.gnome.desktop.session idle-delay &> /dev/null; then gsettings reset org.gnome.desktop.session idle-delay; fi
-if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent &> /dev/null; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
-if gsettings get org.gnome.desktop.wm.preferences button-layout &> /dev/null; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
-if gsettings get org.gnome.mutter center-new-windows &> /dev/null; then gsettings reset org.gnome.mutter center-new-windows; fi
-if gsettings get org.gnome.nautilus.icon-view default-zoom-level &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
-if gsettings get org.gnome.nautilus.preferences click-policy &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
-if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
-if gsettings get org.gnome.nautilus.preferences show-create-link &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
-if gsettings get org.gnome.nautilus.preferences show-image-thumbnails &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if gsettings get org.gnome.settings-daemon.plugins.power power-button-action &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
-if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 
 # setup google-chrome on *
 # -----------------------------------------------------------------------------
@@ -393,29 +414,6 @@ kz-desktop --addaft=kz-vm-hugowin732
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
 
-# setup vscode on pc06 pc07
-# -----------------------------------------------------------------------------
-# Editor.
-# Web app: https://vscode.dev
-# -----------------------------------------------------------------------------
-kz-desktop --addbef=code
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/json; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-desktop; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-shellscript; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/xml; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/html; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/markdown; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/plain; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/troff; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/x-python; fi
-
-# reset vscode on pc06 pc07
-# -----------------------------------------------------------------------------
-# Editor.
-# Web app: https://vscode.dev
-# -----------------------------------------------------------------------------
-kz-desktop --delete=code
-
 # setup webmin on pc07
 # -----------------------------------------------------------------------------
 # Web console.
@@ -441,20 +439,6 @@ kz-desktop --addaft=kz-whatsapp
 # Instant messaging (IM) and voice-over-IP (VoIP).
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-whatsapp
-
-# setup xfce on #none
-# -----------------------------------------------------------------------------
-# Xfce desktop environment.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set true; fi
-
-# reset xfce on #none
-# -----------------------------------------------------------------------------
-# Xfce desktop environment.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set false; fi
 
 # setup youtube-dl on #none
 # -----------------------------------------------------------------------------

@@ -160,7 +160,6 @@ def check_dependencies() -> None:
     """
     This function checks and installs dependencies.
     """
-    esc_gettext: str = 'gettext'
     exc: BaseException
     text: str
 
@@ -170,17 +169,7 @@ def check_dependencies() -> None:
     # Call kz-install.
     text = 'Calling kz-install...'
     kz.logmsg(PROGRAM_NAME, text)
-    command: str = f'kz-install         \
-                        fakeroot        \
-                        {esc_gettext}   \
-                        git             \
-                        jq              \
-                        lftp            \
-                        nmap            \
-                        python          \
-                        rpm             \
-                        shellcheck      \
-                        vscode'
+    command: str = f'kz-install development'
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except Exception as exc:
@@ -193,9 +182,9 @@ def check_dependencies() -> None:
     kz.logmsg(PROGRAM_NAME, text)
 
     # Call kz-setup.
-    text = 'Calling kz-install...'
+    text = 'Calling kz-setup...'
     kz.logmsg(PROGRAM_NAME, text)
-    command = 'kz-setup vscode'
+    command = 'kz-setup terminal'
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except Exception as exc:

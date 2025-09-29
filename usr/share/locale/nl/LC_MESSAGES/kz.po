@@ -95,8 +95,8 @@ msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz:114 kz_common.py:200 kz_common.py:209 kz_common.py:248 kz_common.py:298
-#: kz-dev:92 kz-dev:189 kz-dev:204 kz-dev:230 kz-dev:241 kz-dev:254 kz-dev:272
-#: kz-dev:290 kz-update:80 kz-update:268
+#: kz-dev:92 kz-dev:178 kz-dev:193 kz-dev:219 kz-dev:230 kz-dev:243 kz-dev:261
+#: kz-dev:279 kz-update:80 kz-update:268
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
@@ -512,7 +512,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:495 kz-check:570 kz-deploy:264 kz-dev:338 kz-update:279
+#: kz-build:495 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:279
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -756,7 +756,7 @@ msgstr "DISTRIBUEREN -- 2/2"
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:209 kz-dev:316
+#: kz-deploy:209 kz-dev:305
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
@@ -861,27 +861,27 @@ msgstr "Gebruik: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
 
-#: kz-dev:167
+#: kz-dev:166
 msgid "Install dependencies..."
 msgstr "Installeer afhankelijkheden..."
 
-#: kz-dev:219
+#: kz-dev:208
 msgid "Clone repos..."
 msgstr "Clone repo's..."
 
-#: kz-dev:260
+#: kz-dev:249
 msgid "Pull repos..."
 msgstr "Pull repo's..."
 
-#: kz-dev:278
+#: kz-dev:267
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-#: kz-dev:312
+#: kz-dev:301
 msgid "Download website..."
 msgstr "Downloaden website"
 
-#: kz-dev:329
+#: kz-dev:318
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
