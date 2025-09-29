@@ -72,17 +72,19 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes bleachbit; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes bleachbit; fi
 
-# install wifi on pc01
+# install broadcom-sta-dkms on pc01
 # -----------------------------------------------------------------------------
 # Enable wifi adapter.
+# Reboot required!
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
 REBOOT=true
 
-# remove wifi from pc01
+# remove broadcom-sta-dkms from pc01
 # -----------------------------------------------------------------------------
 # Disable wifi adapter.
+# Reboot required!
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes broadcom-sta-dkms; fi
 REBOOT=true
@@ -133,69 +135,39 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes cups; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes cups; fi
 
-# install desktop on *
+# install cups-backend-bjnp on #none
+# -----------------------------------------------------------------------------
+# Printer backend.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
+
+# remove cups-backend-bjnp from #none
+# -----------------------------------------------------------------------------
+# Printer backend.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
+
+# install dash-to-dock on *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
+# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock ) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
-# -----------------------------------------------------------------------------
-# Enhancements for the Linux Mint Cinnamon Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
-# -----------------------------------------------------------------------------
-# Enhancements for the Xfce Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
-if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
-# remove desktop from *
+# remove dash-to-dock from *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
+# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock ) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
-# -----------------------------------------------------------------------------
-# Enhancements for the Linux Mint Cinnamon Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
-# -----------------------------------------------------------------------------
-# Enhancements for the Xfce Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
-if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
-
-
-# install skip-grub-menu on *
-# -----------------------------------------------------------------------------
-# Skip GRUB menu.
-# -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-REBOOT=true
-
-# remove skip-grub-menu from *
-# -----------------------------------------------------------------------------
-# Skip GRUB menu.
-# -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-REBOOT=true
-# TODO
 
 # install disabled-aer on pc06
 # -----------------------------------------------------------------------------
@@ -260,6 +232,19 @@ sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
+# install disabled-lidswitch on #none
+# -----------------------------------------------------------------------------
+# Do nothing when the laptop lid is closed.
+# -----------------------------------------------------------------------------
+sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
+
+# remove disabled-lidswitch from #none
+# -----------------------------------------------------------------------------
+# Restore the default action when the laptop lid is closed.
+# -----------------------------------------------------------------------------
+sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+
 # install exiftool on pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
@@ -312,6 +297,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; f
 # -----------------------------------------------------------------------------
 # Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
+# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
@@ -325,6 +311,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Enable choice on user login screen for Xorg/X11 or Wayland.
 # Force means no choice on user login screen for Xorg/X11 or Wayland!
+# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
@@ -520,10 +507,9 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 
 # install kvm on pc06 pc07
 # -----------------------------------------------------------------------------
-# Virtualization.
-# -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
+# Reboot required!
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt
 # configuration files.
 # -----------------------------------------------------------------------------
@@ -555,10 +541,9 @@ REBOOT=true
 
 # remove kvm from pc06 pc07
 # -----------------------------------------------------------------------------
-# Virtualization.
-# -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
+# Reboot required!
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
@@ -628,6 +613,18 @@ sudo usermod --append --groups adm,systemd-journal karel
 # -----------------------------------------------------------------------------
 sudo gpasswd --delete karel adm
 sudo gpasswd --delete karel systemd-journal
+
+# install mint-meta-codecs on #none
+# -----------------------------------------------------------------------------
+# Enhancements for the Linux Mint Cinnamon Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
+
+# remove mint-meta-codecs from #none
+# -----------------------------------------------------------------------------
+# Enhancements for the Linux Mint Cinnamon Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
 
 # install mypy on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -770,6 +767,24 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # Required the use of Xorg/X11. Enable Wayland again?
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
+
+# install skip-grub-menu on *
+# -----------------------------------------------------------------------------
+# Skip GRUB menu.
+# -----------------------------------------------------------------------------
+sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+REBOOT=true
+
+# remove skip-grub-menu from *
+# -----------------------------------------------------------------------------
+# Skip GRUB menu.
+# -----------------------------------------------------------------------------
+sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+REBOOT=true
 
 # install shellcheck on pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1102,6 +1117,28 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
+
+# install xfce-goodies on #none
+# -----------------------------------------------------------------------------
+# Enhancements for the Xfce Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
+if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
+
+# remove xfce-goodies from #none
+# -----------------------------------------------------------------------------
+# Enhancements for the Xfce Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
+if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
 
 # install youtube-dl on #none
 # -----------------------------------------------------------------------------
