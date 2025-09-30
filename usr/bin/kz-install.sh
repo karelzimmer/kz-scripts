@@ -30,6 +30,20 @@ if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf check-update || true; fi
 
+# install bleachbit on #gpg
+# -----------------------------------------------------------------------------
+# Delete files.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes bleachbit; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes bleachbit; fi
+
+# remove bleachbit from #gpg
+# -----------------------------------------------------------------------------
+# Delete files.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes bleachbit; fi
+if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes bleachbit; fi
+
 # install broadcom-sta-dkms on pc01
 # -----------------------------------------------------------------------------
 # Enable wifi adapter.
@@ -74,6 +88,18 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes cockpit; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes cockpit; fi
+
+# install cups-backend-bjnp on #gpg
+# -----------------------------------------------------------------------------
+# Printer backend.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
+
+# remove cups-backend-bjnp from #gpg
+# -----------------------------------------------------------------------------
+# Printer backend.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
 
 # install desktop on *
 # -----------------------------------------------------------------------------
@@ -333,6 +359,19 @@ if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/gr
 # -----------------------------------------------------------------------------
 ! grep --quiet 'pci=noaer' /etc/default/grub
 REBOOT=true
+
+# install disabled-lidswitch on #gpg
+# -----------------------------------------------------------------------------
+# Do nothing when the laptop lid is closed.
+# -----------------------------------------------------------------------------
+sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
+
+# remove disabled-lidswitch from #gpg
+# -----------------------------------------------------------------------------
+# Restore the default action when the laptop lid is closed.
+# -----------------------------------------------------------------------------
+sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # install exiftool on pc06 pc07
 # -----------------------------------------------------------------------------
