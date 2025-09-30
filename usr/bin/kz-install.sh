@@ -213,17 +213,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes lftp; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes nmap; fi
 # -----------------------------------------------------------------------------
-# Python static typing.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes mypy; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes python3-mypy; fi
-# -----------------------------------------------------------------------------
 # Programming language.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes python3 mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-pip; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Gettext catalogs editor.
 # -----------------------------------------------------------------------------
@@ -293,16 +288,11 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes lftp; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
 # -----------------------------------------------------------------------------
-# Python static typing.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes mypy; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3-mypy; fi
-# -----------------------------------------------------------------------------
 # Programming language.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes python mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Gettext catalogs editor.
 # -----------------------------------------------------------------------------
