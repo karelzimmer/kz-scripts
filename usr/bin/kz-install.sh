@@ -697,20 +697,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes tree; fi
 
-# install thunderbird on *
-# -----------------------------------------------------------------------------
-# E-mail and news.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes thunderbird; fi
-
-# remove thunderbird from *
-# -----------------------------------------------------------------------------
-# E-mail and news.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-nl; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes thunderbird; fi
-
 # install transmission on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # BitTorrent client.
