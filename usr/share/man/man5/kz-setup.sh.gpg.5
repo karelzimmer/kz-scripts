@@ -24,14 +24,14 @@ It is created with e.g. commands:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
-gpg --sign --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg /tmp/kz-setup.sh
+gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg --sign ~/kz-setup.sh
 .sp
 This encrypted file is decrypted before the commands are used in script
 kz-setup with e.g. commands:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
-gpg --decrypt --output /tmp/kz-setup.sh ~/kz-scripts/usr/bin/kz-setup.sh.gpg
+gpg --output ~/kz-setup.sh --decrypt ~/kz-scripts/usr/bin/kz-setup.sh.gpg
 .sp
 For the format of the records in this install file please use
 \fBman kz setup.sh\fR.
