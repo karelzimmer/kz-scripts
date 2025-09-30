@@ -75,22 +75,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes cockpit; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes cockpit; fi
 
-# install cups on #none
-# -----------------------------------------------------------------------------
-# Common Unix Printing System.
-# Web app: http://localhost:631
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes cups; fi
-
-# remove cups from #none
-# -----------------------------------------------------------------------------
-# Common Unix Printing System.
-# Web app: http://localhost:631
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes cups; fi
-
 # install desktop on *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
@@ -121,6 +105,11 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=kar
 sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+# -----------------------------------------------------------------------------
+# Spice (Simple Protocol for Independent Computing Environments) agent for virtualized guest systems.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes spice-vdagent; fi
 REBOOT=true
 
 # remove desktop from *
@@ -153,6 +142,11 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=kar
 sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+# -----------------------------------------------------------------------------
+# Spice (Simple Protocol for Independent Computing Environments) agent for virtualized guest systems.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; fi
 REBOOT=true
 
 # install development on pc06 pc07
@@ -340,38 +334,6 @@ if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/gr
 ! grep --quiet 'pci=noaer' /etc/default/grub
 REBOOT=true
 
-# install disabled-apport on #none
-# -----------------------------------------------------------------------------
-# Disable automatic crash report generation for Ubuntu.
-# -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop apport.service; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
-
-# remove disabled-apport from #none
-# -----------------------------------------------------------------------------
-# Enable automatic crash report generation for Ubuntu.
-# -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
-
-# install disabled-fwupd on #none
-# -----------------------------------------------------------------------------
-# Disable FirmWare UPdate Daemon.
-# -----------------------------------------------------------------------------
-sudo systemctl stop fwupd.service
-sudo systemctl disable fwupd.service
-sudo systemctl mask fwupd.service
-
-# remove disabled-fwupd from #none
-# -----------------------------------------------------------------------------
-# Enable FirmWare UPdate Daemon.
-# -----------------------------------------------------------------------------
-sudo systemctl unmask fwupd.service
-sudo systemctl enable fwupd.service
-sudo systemctl start fwupd.service
-
 # install exiftool on pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
@@ -385,64 +347,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes perl-Image-ExifTool; fi
-
-# install fdupes on #none
-# -----------------------------------------------------------------------------
-# Find duplicate files.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fdupes; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes fdupes; fi
-# -----------------------------------------------------------------------------
-# Usage:
-# $ fdupes -r /path/to/folder # Report recursively from /path/to/folder
-# $ fdupes -rd /path/to/folder # Delete, interactively, from /path/to/folder
-# $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
-# -----------------------------------------------------------------------------
-
-# remove fdupes from #none
-# -----------------------------------------------------------------------------
-# Find duplicate files.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
-
-# install force-x11 on #none
-# -----------------------------------------------------------------------------
-# Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
-# Force means no choice on user login screen for Xorg/X11 or Wayland!
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
-REBOOT=true
-# -----------------------------------------------------------------------------
-# To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
-# 'x11'.
-# -----------------------------------------------------------------------------
-
-# remove force-x11 from #none
-# -----------------------------------------------------------------------------
-# Enable choice on user login screen for Xorg/X11 or Wayland.
-# Force means no choice on user login screen for Xorg/X11 or Wayland!
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
-REBOOT=true
-# -----------------------------------------------------------------------------
-# To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
-# 'wayland'.
-# -----------------------------------------------------------------------------
-
-# install gdebi on #none
-# -----------------------------------------------------------------------------
-# View and install deb files.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
-
-# remove gdebi from #none
-# -----------------------------------------------------------------------------
-# View and install deb files.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 
 # install gimp on pc06
 # -----------------------------------------------------------------------------
@@ -489,7 +393,7 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes google-chrome-stable; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes google-chrome-stable; fi
 
-# install google-earth on #none
+# install google-earth on pc04
 # -----------------------------------------------------------------------------
 # Explore the planet.
 # Web app: https://earth.google.com
@@ -500,7 +404,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --v
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 
-# remove google-earth from #none
+# remove google-earth from pc04
 # -----------------------------------------------------------------------------
 # Explore the planet.
 # Web app: https://earth.google.com
@@ -522,13 +426,13 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes groff; f
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes groff; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes groff; fi
 
-# install handbrake on #none
+# install handbrake on #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes handbrake; fi
 
-# remove handbrake from #none
+# remove handbrake from #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
@@ -655,32 +559,6 @@ sudo updatedb
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes mlocate; fi
-# install ntfs on #none
-# -----------------------------------------------------------------------------
-# NTFS support.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ntfs-3g ntfsprogs; fi
-# -----------------------------------------------------------------------------
-# Usage:
-# $ findmnt (or lsblk)
-# TARGET SOURCE FSTYPE OPTIONS
-# /media/... /dev/sda1 ntfs3 rw,nosuid,nodev,relatime,uid=...
-# $ lsblk
-# NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
-# sda 8:0 0 931,5G 0 disk
-# +-sda1 8:1 0 931,5G 0 part /media/...
-# $ sudo ntfsfix /dev/sdba1 # Fix an NTFS partition
-# $ sudo -b ntfsfix /dev/sdba1 # Clear the bad sector list
-# $ sudo -d ntfsfix /dev/sdba1 # Clear the volume dirty flag
-# -----------------------------------------------------------------------------
-
-# remove ntfs from #none
-# -----------------------------------------------------------------------------
-# NTFS support.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
 # install primary-monitor on pc06
 # -----------------------------------------------------------------------------
@@ -699,45 +577,17 @@ REBOOT=true
 sudo rm --force --verbose ~gdm/.config/monitors.xml ~Debian-gdm/.config/monitors.xml
 REBOOT=true
 
-# install simplescreenrecorder on #none
-# -----------------------------------------------------------------------------
-# Screen recorder.
-# Requires the use of Xorg/X11.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes simplescreenrecorder; fi
-
-# remove simplescreenrecorder from #none
-# -----------------------------------------------------------------------------
-# Screen recorder.
-# Required the use of Xorg/X11. Enable Wayland again?
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
-
-# install sound-juicer on #none
+# install sound-juicer on #gp
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes sound-juicer; fi
 
-# remove sound-juicer from #none
+# remove sound-juicer from #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes sound-juicer; fi
-
-# install spice-vdagent on #none
-# -----------------------------------------------------------------------------
-# Spice (Simple Protocol for Independent Computing Environments) agent for virtualized guest systems.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes spice-vdagent; fi
-
-# remove spice-vdagent from #none
-# -----------------------------------------------------------------------------
-# Spice (Simple Protocol for Independent Computing Environments) agent for virtualized guest systems.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; fi
 
 # install spotify on pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -821,12 +671,10 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes bash-completion; fi
-
-# install terminal on pc06 pc07
 # -----------------------------------------------------------------------------
-# Grant log access.
+# View and install deb files.
 # -----------------------------------------------------------------------------
-sudo usermod --append --groups adm,systemd-journal karel
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 # -----------------------------------------------------------------------------
 # Display directory tree.
 # -----------------------------------------------------------------------------
@@ -839,13 +687,10 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes tree; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes bash-completion; fi
-
-# remove terminal from pc06 pc07
 # -----------------------------------------------------------------------------
-# Revoke log access.
+# View and install deb files.
 # -----------------------------------------------------------------------------
-sudo gpasswd --delete karel adm
-sudo gpasswd --delete karel systemd-journal
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 # -----------------------------------------------------------------------------
 # Display directory tree.
 # -----------------------------------------------------------------------------
@@ -926,7 +771,7 @@ if id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo passwd --delete "
 # -----------------------------------------------------------------------------
 if id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext --domain=kz 'guest')"; fi
 
-# install virtualbox on #none
+# install virtualbox on #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
@@ -937,7 +782,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then echo '
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes VirtualBox; fi
 
-# remove virtualbox from #none
+# remove virtualbox from #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
@@ -983,30 +828,14 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo r
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes webmin; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
 
-# install wine on #none
-# -----------------------------------------------------------------------------
-# Run Windows applications.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --add-architecture i386; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes wine playonlinux; fi
-
-# remove wine from #none
-# -----------------------------------------------------------------------------
-# Run Windows applications.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
-
-# install youtube-dl on #none
+# install youtube-dl on #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes youtubedl-gui; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes youtube-dl; fi
 
-# remove youtube-dl from #none
+# remove youtube-dl from #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
