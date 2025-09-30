@@ -974,6 +974,16 @@ msgid ""
 "system settings."
 msgstr ""
 
+#: kz-install.sh:920 kz-install.sh:921 kz-install.sh:927
+msgid "--domain=kz"
+msgstr ""
+
+msgid "guest"
+msgstr ""
+
+msgid "Guest_user"
+msgstr ""
+
 #: kz-menu:22 kz-menu:48 kz-menu.desktop:10
 msgid "Installation menu"
 msgstr ""

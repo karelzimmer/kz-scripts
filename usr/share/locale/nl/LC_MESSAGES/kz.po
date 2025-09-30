@@ -1073,6 +1073,16 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
+#: kz-install.sh:920 kz-install.sh:921 kz-install.sh:927
+msgid "--domain=kz"
+msgstr "--domain=kz"
+
+msgid "guest"
+msgstr "gast"
+
+msgid "Guest_user"
+msgstr "Gastgebruiker"
+
 #: kz-menu:22 kz-menu:48 kz-menu.desktop:10
 msgid "Installation menu"
 msgstr "Installatiemenu"

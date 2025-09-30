@@ -913,31 +913,18 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes usbutils
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes usbutils; fi
 
-# install user-gast on pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# Add gast user (Dutch).
-# -----------------------------------------------------------------------------
-if ! id gast &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Gastgebruiker' gast; fi
-if id gast &> /dev/null; then sudo passwd --delete gast; fi
-
-# remove user-gast from pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# Delete gast user (Dutch).
-# -----------------------------------------------------------------------------
-if id gast &> /dev/null; then sudo userdel --remove gast; fi
-
-# install user-guest on #none
+# install user-guest on pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Add guest user.
 # -----------------------------------------------------------------------------
-if ! id guest &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Guest user' guest; fi
-if id guest &> /dev/null; then sudo passwd --delete guest; fi
+if ! id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest_user')" "$(gettext --domain=kz 'guest')"; fi
+if id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo passwd --delete "$(gettext --domain=kz 'guest')"; fi
 
-# remove user-guest from #none
+# remove user-guest from pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Delete guest user.
 # -----------------------------------------------------------------------------
-if id guest &> /dev/null; then sudo userdel --remove guest; fi
+if id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext --domain=kz 'guest')"; fi
 
 # install virtualbox on #none
 # -----------------------------------------------------------------------------
