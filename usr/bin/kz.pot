@@ -974,7 +974,7 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:765 kz-install.sh:766 kz-install.sh:772
+#: kz-install.sh:751 kz-install.sh:752 kz-install.sh:758
 msgid "--domain=kz"
 msgstr ""
 
