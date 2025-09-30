@@ -25,14 +25,16 @@ Dit bestand is aangemaakt met de volgende voorbeeld opdrachten:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
-gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg --sign ~/kz-install.sh
+gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg --sign
+~/kz-install.sh.gpg.bash
 .sp
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
 kz-install met bijvoorbeeld de opdrachten:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
-gpg --output ~/kz-install.sh --decrypt ~/kz-scripts/usr/bin/kz-install.sh.gpg
+gpg --output ~/kz-install.sh.gpg.bash --decrypt
+~/kz-scripts/usr/bin/kz-install.sh.gpg
 .sp
 Gebruik voor de opmaak van de records in dit installatiebestand
 \fBman kz install.sh\fR.

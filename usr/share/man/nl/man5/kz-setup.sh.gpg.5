@@ -24,14 +24,15 @@ Dit bestand is aangemaakt met de volgende voorbeeld opdrachten:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
-gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg --sign ~/kz-setup.sh
+gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg --sign ~/kz-setup.sh.gpg.bash
 .sp
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
 kz-setup met bijvoorbeeld de opdrachten:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
-gpg --output ~/kz-setup.sh --decrypt ~/kz-scripts/usr/bin/kz-setup.sh.gpg
+gpg --output ~/kz-setup.sh.gpg.bash --decrypt
+~/kz-scripts/usr/bin/kz-setup.sh.gpg
 .sp
 Gebruik voor de opmaak van de records in dit instelbestand
 \fBman kz setup.sh\fR.
