@@ -515,6 +515,9 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # configuration files.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
+# -----------------------------------------------------------------------------
+# If necessary, run this usermod again after a reboot.
+# -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo usermod --append --groups libvirt,libvirt-qemu karel; fi
 # -----------------------------------------------------------------------------
 # Prevent "Error starting domain: Requested operation is not valid: network
@@ -549,10 +552,6 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd --delete karel libvirt; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo gpasswd --delete karel libvirt-qemu; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo groupdel libvirt-qemu; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo systemctl disable --now libvirtd; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf groupremove "Virtualization Host"; fi
 REBOOT=true

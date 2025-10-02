@@ -273,10 +273,8 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    "#.* $install .* $on "  \
+        grep    "# $install .* $on "    \
                 "${install_files[@]}"   |
-        tr      --squeeze-repeats       \
-                '[:space:]'             |
         cut     --delimiter=' '         \
                 --fields=3              |
         sort    --unique                |
@@ -324,30 +322,30 @@ function process_argument_app() {
 # filters by <app>.
 function process_install_file_by_app_argument() {
     local app_match=false
-    local input_record=''
+    local install_record=''
     local no_app_match=true
     local text=''
 
-    while read -r input_record; do
-        case $input_record in
+    while read -r install_record; do
+        case $install_record in
             '' )
                 # Skip empty line.
                 continue
                 ;;
-            '#'*$install*[[:space:]]"$app_argument"[[:space:]]*$on* )
+            '# '$install' '$app_argument' '$on' '* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
-                printf '\n%s\n' "$input_record" >> "$command_file"
+                printf '\n%s\n' "$install_record" >> "$command_file"
                 ;;
-            '#'*$install*$on* | '#'*$remove*$from* )
+            '# '$install' '*' '$on' '* | '# '$remove' '*' '$from' '* )
                 # Skip mismatched app record.
                 app_match=false
                 ;;
             * )
                 if $app_match; then
                     # Add record to command file.
-                    printf '%s\n' "$input_record" >> "$command_file"
+                    printf '%s\n' "$install_record" >> "$command_file"
                 fi
                 ;;
         esac
@@ -368,27 +366,27 @@ function process_install_file_by_app_argument() {
 # filters by host.
 function process_install_file_by_hostname() {
     local host_match=false
-    local input_record=''
+    local install_record=''
 
-    while read -r input_record; do
-        case $input_record in
+    while read -r install_record; do
+        case $install_record in
             '' )
                 # Skip empty line.
                 continue
                 ;;
-            '#'*$install*$on*'*' | '#'*$install*$on*$HOSTNAME* )
+            '# '$install' '*' '$on' *' | '# '$install' '*' '$on' '*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
-                printf '\n%s\n' "$input_record" >> "$command_file"
+                printf '\n%s\n' "$install_record" >> "$command_file"
                 ;;
-            '#'*$install*$on* | '#'*$remove*$from* )
+            '# '$install' '*' '$on' '* | '# '$remove' '*' '$from' '* )
                 # Skip mismatched app record.
                 host_match=false
                 ;;
             * )
                 if $host_match; then
                     # Add record to command file.
-                    printf '%s\n' "$input_record" >> "$command_file"
+                    printf '%s\n' "$install_record" >> "$command_file"
                 fi
                 ;;
         esac
@@ -410,7 +408,7 @@ function install_apps() {
     local text=''
     local title=''
 
-    app_tot_num=$(grep --count "#.*$install.*$on" "$command_file" || true)
+    app_tot_num=$(grep --count "# $install .* $on " "$command_file" || true)
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
         kz.infomsg "$text"
@@ -462,11 +460,10 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '#'*$install*$on* )
+            '# '$install' '*' '$on' '* )
                 # App record.
                 app_name=$(
-                    printf '%s\n' "$command_record"     |
-                    tr --squeeze-repeats '[:space:]'    |
+                    printf '%s\n' "$command_record" |
                     cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))

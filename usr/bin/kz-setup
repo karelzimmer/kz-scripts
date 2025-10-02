@@ -271,10 +271,8 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    "#.* $setup .* $on "    \
+        grep    "# $setup .* $on "      \
                 "${setup_files[@]}"     |
-        tr      --squeeze-repeats       \
-                '[:space:]'             |
         cut     --delimiter=' '         \
                 --fields=3              |
         sort    --unique                |
@@ -362,30 +360,30 @@ function process_argument_app() {
 # <app>.
 function process_setup_file_by_app_argument() {
     local app_match=false
-    local input_record=''
+    local setup_record=''
     local no_app_match=true
     local text=''
 
-    while read -r input_record; do
-        case $input_record in
+    while read -r setup_record; do
+        case $setup_record in
             '' )
                 # Skip empty line.
                 continue
                 ;;
-            '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*$on* )
+            '# '$setup' '$app_argument' '$on' '* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
-                printf '\n%s\n' "$input_record" >> "$command_file"
+                printf '\n%s\n' "$setup_record" >> "$command_file"
                 ;;
-            '#'*$setup*$on* | '#'*$reset*$on* )
+            '# '$setup' '*' '$on' '* | '# '$reset' '*' '$on' '* )
                 # Skip mismatched app record.
                 app_match=false
                 ;;
             * )
                 if $app_match; then
                     # Add record to command file.
-                    printf '%s\n' "$input_record" >> "$command_file"
+                    printf '%s\n' "$setup_record" >> "$command_file"
                 fi
                 ;;
         esac
@@ -406,27 +404,27 @@ function process_setup_file_by_app_argument() {
 # host.
 function process_setup_file_by_hostname() {
     local host_match=false
-    local input_record=''
+    local setup_record=''
 
-    while read -r input_record; do
-        case $input_record in
+    while read -r setup_record; do
+        case $setup_record in
             '' )
                 # Skip empty line.
                 continue
                 ;;
-            '#'*$setup*$on*'*' | '#'*$setup*$on*$HOSTNAME* )
+            '# '$setup' '*' '$on' *' | '# '$setup' '*' '$on' '*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
-                printf '\n%s\n' "$input_record" >> "$command_file"
+                printf '\n%s\n' "$setup_record" >> "$command_file"
                 ;;
-            '#'*$setup*$on* | '#'*$reset*$on* )
+            '# '$setup' '*' '$on' '* | '# '$reset' '*' '$on' '* )
                 # Skip mismatched app record.
                 host_match=false
                 ;;
             * )
                 if $host_match; then
                     # Add record to command file.
-                    printf '%s\n' "$input_record" >> "$command_file"
+                    printf '%s\n' "$setup_record" >> "$command_file"
                 fi
                 ;;
         esac
@@ -448,7 +446,7 @@ function setup_apps() {
     local text=''
     local title=''
 
-    app_tot_num=$(grep --count "#.*$setup.*$on" "$command_file" || true)
+    app_tot_num=$(grep --count "# $setup .* $on " "$command_file" || true)
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
         kz.infomsg "$text"
@@ -499,11 +497,10 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '#'*$setup*$on* )
+            '# '$setup' '*' '$on' '* )
                 # App record.
                 app_name=$(
-                    printf '%s\n' "$command_record"     |
-                    tr --squeeze-repeats '[:space:]'    |
+                    printf '%s\n' "$command_record" |
                     cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))

@@ -313,6 +313,7 @@ function check_scripts() {
                 ;;
             *.sh )
                 check_trailing_spaces
+                check_multiple_spaces
                 check_tags
                 check_shellcheck
                 ;;
@@ -552,6 +553,23 @@ $RED    $(gettext 'End spaces found.')$NORMAL
 "
         kz.infomsg "$text"
         grep    --line-number ' ''$' "$script" |
+        nl      --number-width=4 --number-separator='' --body-numbering=n
+        ERR_FLAG=true
+    fi
+}
+
+
+# This function checks the existence of multiple spaces.
+function check_multiple_spaces() {
+    local text=''
+
+    if grep --quiet '  ' "$script"; then
+        text="
+${BOLD}In $scriptdir / $scriptname:$NORMAL
+$RED    $(gettext 'Multiple spaces found.')$NORMAL
+"
+        kz.infomsg "$text"
+        grep    --line-number '  ' "$script" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
         ERR_FLAG=true
     fi
