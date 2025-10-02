@@ -126,16 +126,16 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-use
 if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
 # -----------------------------------------------------------------------------
-# Skip GRUB menu.
-# -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-# -----------------------------------------------------------------------------
 # Spice (Simple Protocol for Independent Computing Environments) agent for virtualized guest systems.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes spice-vdagent; fi
+# -----------------------------------------------------------------------------
+# Skip GRUB menu.
+# -----------------------------------------------------------------------------
+sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 # remove desktop from *
@@ -163,16 +163,16 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-use
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
 # -----------------------------------------------------------------------------
-# Show GRUB menu.
-# -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel /etc/os-release; then grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-# -----------------------------------------------------------------------------
 # Spice (Simple Protocol for Independent Computing Environments) agent for virtualized guest systems.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; fi
+# -----------------------------------------------------------------------------
+# Show GRUB menu.
+# -----------------------------------------------------------------------------
+sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 # install development on pc06 pc07
