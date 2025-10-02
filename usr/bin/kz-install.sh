@@ -518,7 +518,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo D
 # -----------------------------------------------------------------------------
 # If necessary, run this usermod again after a reboot.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo usermod --append --groups libvirt,libvirt-qemu karel; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"; fi
 # -----------------------------------------------------------------------------
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
