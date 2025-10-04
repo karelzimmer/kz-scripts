@@ -59,9 +59,6 @@ readonly OPTIONS_SHORT='abcf:grhmuv'
 readonly OPTIONS_LONG="apps,browse,cat,file:,gui,reset,help,manual,usage,\
 version"
 
-# To be like kz-install; there it is a global (install on, remove from).
-readonly on='on'
-
 
 # #############################################################################
 # Globals
@@ -90,8 +87,8 @@ function process() {
     local option_browse=false
     local option_cat=false
     local option_file=false
-    local reset='reset'
-    local setup='setup'
+    local reset='RESET'
+    local setup='SETUP'
     local setup_file_default_gpg=''
     local setup_file_default=/usr/bin/$PROGRAM_NAME.sh
     local setup_file=''
@@ -211,8 +208,8 @@ environment available")"
                 ;;
             -r | --reset )
                 OPTION_RESET=true
-                setup='reset'
-                reset='setup'
+                setup='RESET'
+                reset='SETUP'
                 shift
                 ;;
             -h | --help )
@@ -271,15 +268,17 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    "# $setup .* $on "      \
-                "${setup_files[@]}"     |
-        cut     --delimiter=' '         \
-                --fields=3              |
-        sort    --unique                |
-        nl      --number-width=3        \
-                --number-format=rn      \
-                --number-separator='  ' \
-                --body-numbering=a      || true
+        grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
+                "${setup_files[@]}"                     |
+        tr      --squeeze-repeats                       \
+                '[:space:]'                             |
+        cut     --delimiter=' '                         \
+                --fields=3                              |
+        sort    --unique                                |
+        nl      --number-width=3                        \
+                --number-format=rn                      \
+                --number-separator='  '                 \
+                --body-numbering=a                      || true
         )
 
     if [[ -n $apps ]]; then
@@ -364,19 +363,22 @@ function process_setup_file_by_app_argument() {
     local no_app_match=true
     local text=''
 
+#   ChatGPT: *[[:space:]]*${variable1}[[:space:]]*${variable2}[[:space:]]*
+#   Case → use [[:space:]]* and accept that it means “zero or more”.
     while read -r setup_record; do
         case $setup_record in
             '' )
                 # Skip empty line.
                 continue
                 ;;
-            '# '$setup' '$app_argument' '$on' '* )
+            '#'[[:space:]]*${setup}[[:space:]]*${app_argument}[[:space:]]* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
                 printf '\n%s\n' "$setup_record" >> "$command_file"
                 ;;
-            '# '$setup' '*' '$on' '* | '# '$reset' '*' '$on' '* )
+            '#'[[:space:]]*${setup}[[:space:]]* | \
+            '#'[[:space:]]*${reset}[[:space:]]* )
                 # Skip mismatched app record.
                 app_match=false
                 ;;
@@ -412,12 +414,14 @@ function process_setup_file_by_hostname() {
                 # Skip empty line.
                 continue
                 ;;
-            '# '$setup' '*' '$on' *' | '# '$setup' '*' '$on' '*$HOSTNAME* )
+            '#'[[:space:]]*${setup}[[:space:]]*'*' | \
+            '#'[[:space:]]*${setup}[[:space:]]*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
                 printf '\n%s\n' "$setup_record" >> "$command_file"
                 ;;
-            '# '$setup' '*' '$on' '* | '# '$reset' '*' '$on' '* )
+            '#'[[:space:]]*${setup}[[:space:]]* | \
+            '#'[[:space:]]*${reset}[[:space:]]* )
                 # Skip mismatched app record.
                 host_match=false
                 ;;
@@ -446,7 +450,11 @@ function setup_apps() {
     local text=''
     local title=''
 
-    app_tot_num=$(grep --count "# $setup .* $on " "$command_file" || true)
+    app_tot_num=$(
+        grep    --count                                 \
+                "#[[:space:]]\+${setup}[[:space:]]\+"   \
+                "$command_file"                         || true
+                )
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
         kz.infomsg "$text"
@@ -497,10 +505,11 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '# '$setup' '*' '$on' '* )
+            '#'[[:space:]]*${setup}[[:space:]]* )
                 # App record.
                 app_name=$(
-                    printf '%s\n' "$command_record" |
+                    printf '%s\n' "$command_record"     |
+                    tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))

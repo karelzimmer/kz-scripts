@@ -25,18 +25,16 @@ The setup file contains so-called \fBapp record\fRs and \fBcommand record\fRs.
 The \fBapp record\fR indicates where the commands should be executed and is
 followed by one or more lines of commands (\fBcommand record\fRs).
 .sp
-An \fBapp record\fR consists of five parts, each part separated by one space,
-like '# setup <app> on <hosts>' and '# reset <app> on <hosts>'.
+An \fBapp record\fR consists of four parts, each part separated by at least one
+space, like '# SETUP <app> <host>' and '# RESET <app> <host>'.
 .br
 1. #        (comment symbol)
 .br
-2. <action> (setup or reset)
+2. <action> (SETUP or RESET)
 .br
 3. <app>    (the name of the app)
 .br
-4. on
-.br
-5. <hosts>  (the name of the computer or computers)
+4. <host>   (the name of the computer or computers)
 .br
 This is followed by one or more \fBcommand record\fRs containing commands for
 <app>.
@@ -62,9 +60,9 @@ T}
 l | l
 l | l.
 T{
-# setup \fI<app>\fR on <hosts>
+# SETUP <app> <host>
 T}:T{
-Set up \fI<app>\fR on <hosts> (\fBapp record\fR)
+Set up <app> on <host> (\fBapp record\fR)
 T}
 T{
 # Comment...
@@ -81,9 +79,9 @@ T}:T{
 Empty line (none, one or more)
 T}
 T{
-# reset \fI<app>\fR on <hosts>
+# RESET <app> <host>
 T}:T{
-Reset the app \fI<app>\fR on <hosts> (\fBapp record\fR for option
+Reset the app <app> on <host> (\fBapp record\fR for option
 \fB-r\fR, \fB--remove\fR)
 T}
 T{
@@ -107,7 +105,7 @@ T}
 l | l
 l | l.
 T{
-# setup google-chrome on *
+# SETUP google-chrome *
 T}:T{
 Set up google-chrome on any computer, see [1]
 T}
@@ -119,7 +117,7 @@ T{
 T}:T{
 T}
 T{
-# reset google-chrome on *
+# RESET google-chrome *
 T}:T{
 Reset app google-chrome on any computer, see [1]
 T}
@@ -131,7 +129,7 @@ T{
 T}:T{
 T}
 T{
-# setup gnome on pc01
+# SETUP gnome pc01
 T}:T{
 Set up gnome only on pc01, see [2]
 T}
@@ -143,7 +141,7 @@ T{
 T}:T{
 T}
 T{
-# setup kvm on pc01 pc02
+# SETUP kvm pc01 pc02
 T}:T{
 Set up kvm on pc01 and pc02, see [3]
 T}
@@ -155,7 +153,7 @@ T{
 T}:T{
 T}
 T{
-# setup google-earth on #gpg
+# SETUP google-earth #gpg
 T}:T{
 Do not set up Google Earth by default, see [4]
 T}

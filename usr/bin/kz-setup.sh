@@ -10,33 +10,35 @@
 # Use "man kz setup.sh" to learn more about the format of this file.
 # =============================================================================
 
-# setup calibre on pc06
+# SETUP calibre pc06
 # -----------------------------------------------------------------------------
 # E-book manager.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=calibre-gui
 
-# reset calibre on pc06
+# RESET calibre pc06
 # -----------------------------------------------------------------------------
 # E-book manager.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=calibre-gui
 
-# setup cockpit on pc06
+# SETUP cockpit pc06
 # -----------------------------------------------------------------------------
 # Web console.
+# -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-cockpit
 
-# reset cockpit on pc06
+# RESET cockpit pc06
 # -----------------------------------------------------------------------------
 # Web console.
+# -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-cockpit
 
-# setup desktop on *
+# SETUP desktop on *
 # -----------------------------------------------------------------------------
 # Cinnamon desktop environment.
 # -----------------------------------------------------------------------------
@@ -90,7 +92,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set true; fi
 
-# reset desktop on *
+# RESET desktop on *
 # -----------------------------------------------------------------------------
 # Cinnamon desktop environment.
 # -----------------------------------------------------------------------------
@@ -143,9 +145,10 @@ if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gs
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set false; fi
 
-# setup development on pc06 pc07
+# SETUP development pc06 pc07
 # -----------------------------------------------------------------------------
 # Editor.
+# -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=code
@@ -160,35 +163,38 @@ if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/trof
 if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/x-python; fi
 # -----------------------------------------------------------------------------
 # Distributed revision control system.
+# -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
-# reset git on pc06 pc07
+# RESET development pc06 pc07
 # -----------------------------------------------------------------------------
 # Distributed revision control system.
+# -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 git config --global --unset alias.logg
 # -----------------------------------------------------------------------------
 # Editor.
+# -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 kz-desktop --delete=code
 
-# setup evolution on pc01 pc06 pc07
+# SETUP evolution pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # E-mail and organizer.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Evolution
 
-# reset evolution on pc01 pc06 pc07
+# RESET evolution pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # E-mail and organizer.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=org.gnome.Evolution
 
-# setup firefox on pc01 pc02 pc06 pc07
+# SETUP firefox pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -196,7 +202,7 @@ kz-desktop --delete=firefox
 kz-desktop --delete=firefox-esr
 kz-desktop --delete=firefox_firefox
 
-# reset firefox on pc01 pc02 pc06 pc07
+# RESET firefox pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -204,112 +210,116 @@ kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
 kz-desktop --addbef=firefox_firefox
 
-# setup google-chrome on *
+# SETUP google-chrome on *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
 if type gnome-session &> /dev/null; then xdg-mime default google-chrome.desktop application/pdf; fi
 
-# reset google-chrome on *
+# RESET google-chrome on *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=google-chrome
 
-# setup handbrake on #gpg
+# SETUP handbrake on #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=fr.handbrake.ghb
 
-# reset handbrake on #gpg
+# RESET handbrake on #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=fr.handbrake.ghb
 
-# setup kvm on pc06 pc07
+# SETUP kvm pc06 pc07
 # -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=virt-manager
 
-# reset kvm on pc06 pc07
+# RESET kvm pc06 pc07
 # -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=virt-manager
 
-# setup libreoffice on *
+# SETUP libreoffice on *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=libreoffice-writer
 kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
-# reset libreoffice on *
+# RESET libreoffice on *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
-# setup private-home on *
+# SETUP private-home on *
 # -----------------------------------------------------------------------------
 # Private home.
 # -----------------------------------------------------------------------------
 chmod 750 ~
 
-# reset private-home on *
+# RESET private-home on *
 # -----------------------------------------------------------------------------
 # Private home.
 # -----------------------------------------------------------------------------
 chmod 755 ~
 
-# setup sound-juicer on #gpg
+# SETUP sound-juicer on #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=org.gnome.SoundJuicer
 
-# reset sound-juicer on #gpg
+# RESET sound-juicer on #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.SoundJuicer
 
-# setup spotify on pc01 pc02 pc06 pc07
+# SETUP spotify pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
 # Music and podcasts.
+# -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=spotify; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=kz-spotify; fi
 
-# reset spotify on pc01 pc02 pc06 pc07
+# RESET spotify pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
 # Music and podcasts.
+# -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=spotify; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=kz-spotify; fi
 
-# setup teamviewer on pc06 pc07
+# SETUP teamviewer pc06 pc07
 # -----------------------------------------------------------------------------
 # Remote desktop.
+# -----------------------------------------------------------------------------
 # Web app: https://web.teamviewer.com
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=com.teamviewer.TeamViewer
 
-# reset teamviewer on pc06 pc07
+# RESET teamviewer pc06 pc07
 # -----------------------------------------------------------------------------
 # Remote desktop.
+# -----------------------------------------------------------------------------
 # Web app: https://web.teamviewer.com
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.teamviewer.TeamViewer
 
-# setup terminal on pc01 pc06 pc07
+# SETUP terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
@@ -325,7 +335,7 @@ sed --in-place 's/# eval/eval/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d' ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
-# reset terminal on pc01 pc06 pc07
+# RESET terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
@@ -334,91 +344,93 @@ sed --in-place 's/export/#export/g' ~/.bashrc
 sed --in-place 's/eval/#eval/g' ~/.bashrc
 sed --in-place '/^stty -ixon/d' ~/.bashrc
 
-# setup terminal on pc06 pc07
+# SETUP terminal pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=org.gnome.Terminal
 
-# reset terminal on pc06 pc07
+# RESET terminal pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Terminal
 
-# setup thunderbird on pc01 pc02 pc06
+# SETUP thunderbird pc01 pc02 pc06
 # -----------------------------------------------------------------------------
 # E-mail and news.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=thunderbird
 kz-desktop --delete=thunderbird_thunderbird
 
-# reset thunderbird on pc01 pc02 pc06
+# RESET thunderbird pc01 pc02 pc06
 # -----------------------------------------------------------------------------
 # E-mail and news.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=thunderbird
 kz-desktop --addbef=thunderbird_thunderbird
 
-# setup virtualbox on #gpg
+# SETUP virtualbox on #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=virtualbox
 kz-desktop --addaft=kz-vm-hugowin732
 
-# reset virtualbox on #gpg
+# RESET virtualbox on #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
 
-# setup webmin on pc07
+# SETUP webmin pc07
 # -----------------------------------------------------------------------------
 # Web console.
+# -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-webmin
 
-# reset webmin on pc07
+# RESET webmin pc07
 # -----------------------------------------------------------------------------
 # Web console.
+# -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-webmin
 
-# setup whatsapp on #gpg
+# SETUP whatsapp on #gpg
 # -----------------------------------------------------------------------------
 # Instant messaging (IM) and voice-over-IP (VoIP).
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-whatsapp
 
-# reset whatsapp on #gpg
+# RESET whatsapp on #gpg
 # -----------------------------------------------------------------------------
 # Instant messaging (IM) and voice-over-IP (VoIP).
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-whatsapp
 
-# setup youtube-dl on #gpg
+# SETUP youtube-dl on #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=youtubedl-gui
 
-# reset youtube-dl on #gpg
+# RESET youtube-dl on #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=youtubedl-gui
 
-# setup zoom on pc01
+# SETUP zoom pc01
 # -----------------------------------------------------------------------------
 # Videoconferencing.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-zoom
 
-# reset zoom on pc01
+# RESET zoom pc01
 # -----------------------------------------------------------------------------
 # Videoconferencing.
 # -----------------------------------------------------------------------------

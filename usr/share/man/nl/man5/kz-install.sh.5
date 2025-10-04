@@ -27,19 +27,16 @@ In het installatiebestand staan zogenaamde \fBapp-regel\fRs en
 De \fBapp-regel\fR geeft aan waar de opdrachten uitgevoerd moeten worden en
 wordt gevolgd door één of meer regels met opdrachten (\fBopdracht-regel\fRs).
 .sp
-Een \fBapp-regel\fR bestaat uit vijf delen, elk deel gescheiden door één
-spatie, zoals '# install <app> on <hosts>' en '# remove <app> from
-<hosts>'.
+Een \fBapp-regel\fR bestaat uit vier delen, elk deel gescheiden door minstens
+één spatie, zoals '# INSTALL <app> <host>' en '# REMOVE <app> <host>'.
 .br
 1. #        (commentaarsymbool)
 .br
-2. <actie>  (install of remove)
+2. <actie>  (INSTALL of REMOVE)
 .br
 3. <app>    (de naam van de app)
 .br
-4. on       (from als <actie> remove is)
-.br
-5. <hosts>  (de naam van de computer of computers)
+4. <host>   (de naam van de computer of computers)
 .br
 Hierna volgen één of meer \fBopdracht-regel\fRs met opdrachten voor <app>.
 .sp
@@ -64,9 +61,9 @@ T}
 l | l
 l | l.
 T{
-# install \fI<app>\fR on <hosts>
+# INSTALL <app> <host>
 T}:T{
-De app \fI<app>\fR installeren op <hosts> (\fBapp-regel\fR)
+De app <app> installeren op <host> (\fBapp-regel\fR)
 T}
 T{
 # Commentaar...
@@ -83,9 +80,9 @@ T}:T{
 Lege regel (geen, één of meer)
 T}
 T{
-# remove \fI<app>\fR from <hosts>
+# REMOVE <app> <host>
 T}:T{
-De app \fI<app>\fR verwijderen van <hosts> (\fBapp-regel\fR voor optie
+De app <app> verwijderen van <host> (\fBapp-regel\fR voor optie
 \fB-r\fR, \fB--remove\fR)
 T}
 T{
@@ -109,7 +106,7 @@ T}
 l | l
 l | l.
 T{
-# install libreoffice on *
+# INSTALL libreoffice *
 T}:T{
 Installeer app libreoffice op iedere computer, zie [1]
 T}
@@ -121,7 +118,7 @@ T{
 T}:T{
 T}
 T{
-# remove libreoffice from *
+# REMOVE libreoffice *
 T}:T{
 Verwijder app libreoffice van iedere computer, zie [1]
 T}
@@ -133,7 +130,7 @@ T{
 T}:T{
 T}
 T{
-# install ufw on pc01
+# INSTALL ufw pc01
 T}:T{
 Installeer app ufw alleen op pc01, zie [2]
 T}
@@ -145,7 +142,7 @@ T{
 T}:T{
 T}
 T{
-# install kvm on pc01 pc02
+# INSTALL kvm pc01 pc02
 T}:T{
 Installeer app kvm op pc01 en pc02, zie [3]
 T}
@@ -157,7 +154,7 @@ T{
 T}:T{
 T}
 T{
-# install google-earth on #gpg
+# INSTALL google-earth #gpg
 T}:T{
 Standaard niet app google-earth installeren, zie [4]
 T}

@@ -26,18 +26,16 @@ In het instelbestand staan zogenaamde \fBapp-regel\fRs en
 De \fBapp-regel\fR geeft aan waar de opdrachten uitgevoerd moeten worden en
 wordt gevolgd door één of meer regels met opdrachten (\fBopdracht-regel\fRs).
 .sp
-Een \fBapp-regel\fR bestaat uit vijf delen, elk deel gescheiden één spatie,
-zoals '# setup <app> on <hosts>' en '# reset <app> on <hosts>'.
+Een \fBapp-regel\fR bestaat uit vier delen, elk deel gescheiden door minstens
+één spatie, zoals '# SETUP <app> <host>' en '# RESET <app> <host>'.
 .br
 1. #        (commentaarsymbool)
 .br
-2. <actie>  (setup of reset)
+2. <actie>  (SETUP of RESET)
 .br
 3. <app>    (de naam van de app)
 .br
-4. on
-.br
-5. <hosts>  (de naam van de computer of computers)
+4. <host>   (de naam van de computer of computers)
 .br
 Hierna volgen één of meer \fBopdracht-regel\fRs met opdrachten voor <app>.
 .sp
@@ -62,9 +60,9 @@ T}
 l | l
 l | l.
 T{
-# setup \fI<app>\fR on <hosts>
+# SETUP <app> <host>
 T}:T{
-De app \fI<app>\fR instellen op <hosts> (\fBapp-regel\fR)
+De app <app> instellen op <host> (\fBapp-regel\fR)
 T}
 T{
 # Commentaar...
@@ -81,9 +79,9 @@ T}:T{
 Lege regel (geen, één of meer)
 T}
 T{
-# reset \fI<app>\fR on <hosts>
+# RESET <app> <host>
 T}:T{
-De app \fI<app>\fR resetten op <hosts> (\fBapp-regel\fR voor optie
+De app <app> resetten op <host> (\fBapp-regel\fR voor optie
 \fB-r\fR, \fB--reset\fR)
 T}
 T{
@@ -107,7 +105,7 @@ T}
 l | l
 l | l.
 T{
-# setup google-chrome on *
+# SETUP google-chrome *
 T}:T{
 Stel app google-chrome in op iedere computer, zie [1]
 T}
@@ -119,7 +117,7 @@ T{
 T}:T{
 T}
 T{
-# reset google-chrome on *
+# RESET google-chrome *
 T}:T{
 Reset app google-chrome op iedere computer, zie [1]
 T}
@@ -131,7 +129,7 @@ T{
 T}:T{
 T}
 T{
-# setup gnome on pc01
+# SETUP gnome pc01
 T}:T{
 Stel app gnome in alleen op pc01, zie [2]
 T}
@@ -143,7 +141,7 @@ T{
 T}:T{
 T}
 T{
-# setup kvm on pc01 pc02
+# SETUP kvm pc01 pc02
 T}:T{
 Stel app kvm in op pc01 en pc02, zie [3]
 T}
@@ -155,7 +153,7 @@ T{
 T}:T{
 T}
 T{
-# setup google-earth on #gpg
+# SETUP google-earth #gpg
 T}:T{
 Standaard niet app google-earth instellen, zie [4]
 T}

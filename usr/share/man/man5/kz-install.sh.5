@@ -26,18 +26,16 @@ The installation file contains so-called \fBapp record\fRs and
 The \fBapp record\fR indicates where the commands should be executed and is
 followed by one or more lines of commands (\fBcommand record\fRs).
 .sp
-An \fBapp record\fR consists of five parts, each part separated by one space,
-like '# install <app> on <hosts>' and '# remove <app> from <hosts>'.
+An \fBapp record\fR consists of four parts, each part separated by at least one
+space, like '# INSTALL <app> <host>' and '# REMOVE <app> <host>'.
 .br
 1. #        (comment symbol)
 .br
-2. <action> (install or remove)
+2. <action> (INSTALL or REMOVE)
 .br
 3. <app>    (the name of the app)
 .br
-4. on       (from if <action> is remove)
-.br
-5. <hosts>  (the name of the computer or computers)
+4. <host>   (the name of the computer or computers)
 .br
 This is followed by one or more \fBcommand record\fRs containing commands for
 <app>.
@@ -63,9 +61,9 @@ T}
 l | l
 l | l.
 T{
-# install \fI<app>\fR on <hosts>
+# INSTALL <app> <host>
 T}:T{
-Install the app \fI<app>\fR on <hosts> (\fBapp record\fR)
+Install the app <app> on <host> (\fBapp record\fR)
 T}
 T{
 # Comment...
@@ -82,10 +80,10 @@ T}:T{
 Empty line (none, one or more)
 T}
 T{
-# remove \fI<app>\fR from <hosts>
+# REMOVE <app> <host>
 T}:T{
-Remove the app \fI<app>\fR from <hosts> (\fBapp record\fR for option
-\fB-r\fR, \fB--remove\fR)
+Remove the app <app> from <host> (\fBapp record\fR for option \fB-r\fR,
+\fB--remove\fR)
 T}
 T{
 Command
@@ -108,7 +106,7 @@ T}
 l | l
 l | l.
 T{
-# install libreoffice on *
+# INSTALL libreoffice *
 T}:T{
 Install app libreoffice on any computer, see [1].
 T}
@@ -120,7 +118,7 @@ T{
 T}:T{
 T}
 T{
-# remove libreoffice from *
+# REMOVE libreoffice *
 T}:T{
 Remove app libreoffice from any computer, see [1].
 T}
@@ -132,7 +130,7 @@ T{
 T}:T{
 T}
 T{
-# install ufw on pc01
+# INSTALL ufw pc01
 T}:T{
 Install app ufw only on pc01, see [2].
 T}
@@ -144,7 +142,7 @@ T{
 T}:T{
 T}
 T{
-# install kvm on pc01 pc02
+# INSTALL kvm pc01 pc02
 T}:T{
 Install app kvm on pc01 and pc02, see [3].
 T}
@@ -156,7 +154,7 @@ T{
 T}:T{
 T}
 T{
-# install google-earth on #gpg
+# INSTALL google-earth #gpg
 T}:T{
 Do not install Google Earth by default, see [4].
 T}

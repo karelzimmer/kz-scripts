@@ -83,17 +83,15 @@ function process() {
     local argument_app=false
     local command_file=''
     local err_flag=false
-    local from='from'
-    local install='install'
+    local install='INSTALL'
     local install_file_default_gpg=''
     local install_file_default=/usr/bin/$PROGRAM_NAME.sh
     local install_file=''
-    local on='on'
     local option_apps=false
     local option_browse=false
     local option_cat=false
     local option_file=false
-    local remove='remove'
+    local remove='REMOVE'
     local text=''
 
     check_input "$@"
@@ -211,10 +209,8 @@ environment available")"
                 ;;
             -r | --remove )
                 OPTION_REMOVE=true
-                install='remove'
-                on='from'
-                remove='install'
-                from='on'
+                install='REMOVE'
+                remove='INSTALL'
                 shift
                 ;;
             -h | --help )
@@ -273,15 +269,17 @@ function process_option_apps() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    "# $install .* $on "    \
-                "${install_files[@]}"   |
-        cut     --delimiter=' '         \
-                --fields=3              |
-        sort    --unique                |
-        nl      --number-width=3        \
-                --number-format=rn      \
-                --number-separator='  ' \
-                --body-numbering=a      || true
+        grep    "#[[:space:]]\+${install}[[:space:]]\+" \
+                "${install_files[@]}"                   |
+        tr      --squeeze-repeats                       \
+                '[:space:]'                             |
+        cut     --delimiter=' '                         \
+                --fields=3                              |
+        sort    --unique                                |
+        nl      --number-width=3                        \
+                --number-format=rn                      \
+                --number-separator='  '                 \
+                --body-numbering=a                      || true
         )
 
     if [[ -n $apps ]]; then
@@ -332,13 +330,14 @@ function process_install_file_by_app_argument() {
                 # Skip empty line.
                 continue
                 ;;
-            '# '$install' '$app_argument' '$on' '* )
+            '#'[[:space:]]*${install}[[:space:]]*${app_argument}[[:space:]]* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
                 printf '\n%s\n' "$install_record" >> "$command_file"
                 ;;
-            '# '$install' '*' '$on' '* | '# '$remove' '*' '$from' '* )
+            '#'[[:space:]]*${install}[[:space:]]* | \
+            '#'[[:space:]]*${remove}[[:space:]]* )
                 # Skip mismatched app record.
                 app_match=false
                 ;;
@@ -374,12 +373,14 @@ function process_install_file_by_hostname() {
                 # Skip empty line.
                 continue
                 ;;
-            '# '$install' '*' '$on' *' | '# '$install' '*' '$on' '*$HOSTNAME* )
+            '#'[[:space:]]*${install}[[:space:]]*'*' | \
+            '#'[[:space:]]*${install}[[:space:]]*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
                 printf '\n%s\n' "$install_record" >> "$command_file"
                 ;;
-            '# '$install' '*' '$on' '* | '# '$remove' '*' '$from' '* )
+            '#'[[:space:]]*${install}[[:space:]]* | \
+            '#'[[:space:]]*${remove}[[:space:]]* )
                 # Skip mismatched app record.
                 host_match=false
                 ;;
@@ -408,7 +409,11 @@ function install_apps() {
     local text=''
     local title=''
 
-    app_tot_num=$(grep --count "# $install .* $on " "$command_file" || true)
+    app_tot_num=$(
+        grep    --count                                 \
+                "#[[:space:]]\+${install}[[:space:]]\+" \
+                "$command_file"                         || true
+                )
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
         kz.infomsg "$text"
@@ -460,10 +465,11 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
-            '# '$install' '*' '$on' '* )
+            '#'[[:space:]]*${install}[[:space:]]* )
                 # App record.
                 app_name=$(
-                    printf '%s\n' "$command_record" |
+                    printf '%s\n' "$command_record"     |
+                    tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))
