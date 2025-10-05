@@ -429,8 +429,8 @@ msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
 
 #: kz-backup:670 kz-restore:376
-msgid "Remember to SAFELY remove the USB media."
-msgstr "Vergeet niet om het USB-medium VEILIG te verwijderen."
+msgid "*** Remember to SAFELY remove the USB media ***"
+msgstr "*** Vergeet niet om het USB-medium VEILIG te verwijderen ***"
 
 #: kz-build:27
 msgid "Build website including kz packages"
