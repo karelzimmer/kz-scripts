@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-declare DASHOPTIONS='backup build check deploy desktop dev get install
-    install-cmd menu restore setup update wifi -l --list -h --help -m --manual
-    -u --usage -v --version'
+declare DASHOPTIONS='backup build check deploy desktop dev get install menu
+    restore setup update wifi -l --list -h --help -m --manual -u --usage -v
+    --version'
 complete -o default -W "$DASHOPTIONS" kz
