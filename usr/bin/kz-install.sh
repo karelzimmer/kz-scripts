@@ -114,7 +114,12 @@ if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-exte
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
 # -----------------------------------------------------------------------------
-# Mint-meta-codecs - enhancements for the Linux Mint Cinnamon Desktop Environment.
+# Multimedia support.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ffmpeg*; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ffmpeg*; fi
+# -----------------------------------------------------------------------------
+# Enhancements for the Linux Mint Cinnamon Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
 # -----------------------------------------------------------------------------
@@ -154,7 +159,12 @@ if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-exte
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes nautilus-admin; fi
 # -----------------------------------------------------------------------------
-# Mint-meta-codecs - enhancements for the Linux Mint Cinnamon Desktop Environment.
+# Multimedia support.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ffmpeg*; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ffmpeg*; fi
+# -----------------------------------------------------------------------------
+# Enhancements for the Linux Mint Cinnamon Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
 # -----------------------------------------------------------------------------
