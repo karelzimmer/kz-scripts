@@ -10,7 +10,7 @@
 # Use "man kz install.sh" to learn more about the format of this file.
 # =============================================================================
 
-# INSTALL add-components *
+# INSTALL components *
 # -----------------------------------------------------------------------------
 # Add Debian components to package sources & update package lists for all.
 # -----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf check-update || true; fi
 
-# REMOVE add-components from *
+# REMOVE components from *
 # -----------------------------------------------------------------------------
 # Remove Debian components package sources & update package lists for all.
 # -----------------------------------------------------------------------------
@@ -103,22 +103,22 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 
 # INSTALL desktop *
 # -----------------------------------------------------------------------------
-# Desktop dock like Ubuntu's dash.
+# Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock ) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
 # -----------------------------------------------------------------------------
-# Administrative operations.
+# Nautilus-admin - administrative operations.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
 # -----------------------------------------------------------------------------
-# Enhancements for the Linux Mint Cinnamon Desktop Environment.
+# Mint-meta-codecs - enhancements for the Linux Mint Cinnamon Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
 # -----------------------------------------------------------------------------
-# Enhancements for the Xfce Desktop Environment.
+# Xfce4-goodies - enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
 if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf install --assumeyes xfce4-goodies; fi
@@ -126,7 +126,7 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-use
 if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
 # -----------------------------------------------------------------------------
-# Enhancements for virtualized guest systems.
+# Spice-vdagent - enhancements for virtualized guest systems.
 # -----------------------------------------------------------------------------
 # Spice (Simple Protocol for Independent Computing Environments) agent for
 # virtualized guest systems.
@@ -134,7 +134,7 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=kar
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes spice-vdagent; fi
 # -----------------------------------------------------------------------------
-# Skip GRUB menu.
+# Update-grub - skip GRUB menu.
 # -----------------------------------------------------------------------------
 sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
@@ -143,22 +143,22 @@ REBOOT=true
 
 # REMOVE desktop from *
 # -----------------------------------------------------------------------------
-# Desktop dock like Ubuntu's dash.
+# Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock ) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview ) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
 # -----------------------------------------------------------------------------
-# Administrative operations.
+# Nautilus-admin - administrative operations.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes nautilus-admin; fi
 # -----------------------------------------------------------------------------
-# Enhancements for the Linux Mint Cinnamon Desktop Environment.
+# Mint-meta-codecs - enhancements for the Linux Mint Cinnamon Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
 # -----------------------------------------------------------------------------
-# Enhancements for the Xfce Desktop Environment.
+# Xfce4-goodies - enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
 if (grep rhel /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf remove --assumeyes xfce4-goodies; fi
@@ -166,7 +166,7 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-use
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
 # -----------------------------------------------------------------------------
-# Enhancements for virtualized guest systems.
+# Spice-vdagent - enhancements for virtualized guest systems.
 # -----------------------------------------------------------------------------
 # Spice (Simple Protocol for Independent Computing Environments) agent for
 # virtualized guest systems.
@@ -174,7 +174,7 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=kar
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; fi
 # -----------------------------------------------------------------------------
-# Show GRUB menu.
+# Update-grub - show GRUB menu.
 # -----------------------------------------------------------------------------
 sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
@@ -183,68 +183,68 @@ REBOOT=true
 
 # INSTALL development pc06 pc07
 # -----------------------------------------------------------------------------
-# Configuration management, deployment, and task execution.
+# Ansible - configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ansible; fi
 # -----------------------------------------------------------------------------
-# Simulate superuser privileges.
+# Fakeroot - simulate superuser privileges.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes fakeroot; fi
 # -----------------------------------------------------------------------------
-# GNU Internationalization.
+# Gettext - GNU Internationalization.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gettext; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes gettext; fi
 # -----------------------------------------------------------------------------
-# Distributed revision control system.
+# Git - distributed revision control system.
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes git; fi
 # -----------------------------------------------------------------------------
-# JSON processor.
+# Jq - JSON processor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes jq; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes jq; fi
 # -----------------------------------------------------------------------------
-# FTP/HTTP/BitTorrent client.
+# Lftp - FTP/HTTP/BitTorrent client.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes lftp; fi
 # -----------------------------------------------------------------------------
-# Network MAPper.
+# Nmap - Network MAPper.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes nmap; fi
 # -----------------------------------------------------------------------------
-# Programming language.
+# Python - programming language.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes python3 mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
-# Gettext catalogs editor.
+# Poedit - gettext catalogs editor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes poedit; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes poedit; fi
 # -----------------------------------------------------------------------------
-# Package manager.
+# RPM - package manager.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes rpm; fi
 # -----------------------------------------------------------------------------
-# Shell script linter.
+# Shellcheck - shell script linter.
 # -----------------------------------------------------------------------------
 # Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
 # -----------------------------------------------------------------------------
-# Editor.
+# Vscode - editor.
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
@@ -261,66 +261,66 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 
 # REMOVE development pc06 pc07
 # -----------------------------------------------------------------------------
-# Configuration management, deployment, and task execution.
+# Ansible - configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ansible; fi
 # -----------------------------------------------------------------------------
-# Simulate superuser privileges.
+# Fakeroot - simulate superuser privileges.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fakeroot; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fakeroot; fi
 # -----------------------------------------------------------------------------
-# GNU Internationalization.
+# Gettext - GNU Internationalization.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gettext; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes gettext; fi
 # -----------------------------------------------------------------------------
-# Distributed revision control system.
+# Git - distributed revision control system.
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes git; fi
 # -----------------------------------------------------------------------------
-# JSON processor.
+# Jq - JSON processor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes jq; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes jq; fi
 # -----------------------------------------------------------------------------
-# FTP/HTTP/BitTorrent client.
+# Lftp - FTP/HTTP/BitTorrent client.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lftp; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes lftp; fi
 # -----------------------------------------------------------------------------
-# Network MAPper.
+# Nmap - Network MAPper.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
 # -----------------------------------------------------------------------------
-# Programming language.
+# Python - programming language.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes python mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
-# Gettext catalogs editor.
+# Poedit - Gettext catalogs editor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes poedit; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes poedit; fi
 # -----------------------------------------------------------------------------
-# Package manager for RPM.
+# RPM - package manager for RPM.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
 # -----------------------------------------------------------------------------
-# Shell script linter.
+# Shellcheck - shell script linter.
 # -----------------------------------------------------------------------------
 # Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
 # -----------------------------------------------------------------------------
-# Editor.
+# Vscode - editor.
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------

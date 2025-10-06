@@ -40,11 +40,11 @@ kz-desktop --delete=kz-cockpit
 
 # SETUP desktop on *
 # -----------------------------------------------------------------------------
-# Cinnamon desktop environment.
+# Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
 # -----------------------------------------------------------------------------
-# Desktop dock like Ubuntu's dash.
+# Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
@@ -60,7 +60,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height &> /dev/n
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 # -----------------------------------------------------------------------------
-# GNOME desktop environment.
+# GNOME - desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
@@ -87,18 +87,18 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null
 if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 # -----------------------------------------------------------------------------
-# Xfce desktop environment.
+# Xfce - desktop environment.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set true; fi
 
 # RESET desktop on *
 # -----------------------------------------------------------------------------
-# Cinnamon desktop environment.
+# Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
 # -----------------------------------------------------------------------------
-# Desktop dock like Ubuntu's dash.
+# Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
@@ -114,7 +114,7 @@ if (grep rhel /etc/os-release && gnome-extensions info no-overview@fthx ) &> /de
 if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 # -----------------------------------------------------------------------------
-# GNOME desktop environment.
+# GNOME - desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
@@ -140,14 +140,20 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounte
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 # -----------------------------------------------------------------------------
-# Xfce desktop environment.
+# Xfce - desktop environment.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set false; fi
 
 # SETUP development pc06 pc07
 # -----------------------------------------------------------------------------
-# Editor.
+# Git - distributed revision control system.
+# -----------------------------------------------------------------------------
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
+git config --global alias.logg 'log --decorate --graph --oneline --all'
+# -----------------------------------------------------------------------------
+# Vscode - editor.
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
@@ -161,22 +167,16 @@ if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/mark
 if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/plain; fi
 if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/troff; fi
 if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/x-python; fi
-# -----------------------------------------------------------------------------
-# Distributed revision control system.
-# -----------------------------------------------------------------------------
-# Web app: https://github.com
-# -----------------------------------------------------------------------------
-git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 # RESET development pc06 pc07
 # -----------------------------------------------------------------------------
-# Distributed revision control system.
+# Git - distributed revision control system.
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 git config --global --unset alias.logg
 # -----------------------------------------------------------------------------
-# Editor.
+# Vscode - editor.
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
