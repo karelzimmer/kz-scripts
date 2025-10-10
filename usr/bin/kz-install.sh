@@ -540,9 +540,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # configuration files.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
-# -----------------------------------------------------------------------------
-# If necessary, run this usermod again after a reboot.
-# -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo usermod --append --groups kvm,libvirt,libvirt-qemu "${SUDO_USER:-$USER}"; fi
 # -----------------------------------------------------------------------------
 # Prevent "Error starting domain: Requested operation is not valid: network
