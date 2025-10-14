@@ -512,7 +512,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:495 kz-check:588 kz-deploy:264 kz-dev:327 kz-update:279
+#: kz-build:495 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:279
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -558,31 +558,31 @@ msgstr "Gettext berichtencatalogus $file niet gevonden."
 msgid "Message catalog $file not found."
 msgstr "Berichtencatalogus $file niet gevonden."
 
-#: kz-check:369
+#: kz-check:368
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr "Onbekend script.  Functie check_code kan scriptcode niet controleren."
 
-#: kz-check:389
+#: kz-check:388
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr "Script $scriptname --usage gaf een fout."
 
-#: kz-check:402
+#: kz-check:401
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
-#: kz-check:413
+#: kz-check:412
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
-#: kz-check:423 kz-check:431
+#: kz-check:422 kz-check:430
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr "Man-pagina $dir/$scriptname.1 niet gevonden."
 
-#: kz-check:441
+#: kz-check:440
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -591,20 +591,20 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:482
+#: kz-check:481
 #, sh-format
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr "Een regel is langer dan $max_line_length ($max_line_length_found)."
 
-#: kz-check:530
+#: kz-check:529
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:552
+#: kz-check:551
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:491 kz-check:584 kz-deploy:260
+#: kz-build:491 kz-check:566 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -1573,9 +1573,3 @@ msgstr "Wrapper-script voor kz-wifi"
 #: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
-
-#: kz-check:569
-#, fuzzy
-#| msgid "End spaces found."
-msgid "Multiple spaces found."
-msgstr "Eindspaties gevonden."
