@@ -303,22 +303,6 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-des
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=spotify; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=kz-spotify; fi
 
-# SETUP teamviewer pc06 pc07
-# -----------------------------------------------------------------------------
-# Remote desktop.
-# -----------------------------------------------------------------------------
-# Web app: https://web.teamviewer.com
-# -----------------------------------------------------------------------------
-kz-desktop --addaft=com.teamviewer.TeamViewer
-
-# RESET teamviewer pc06 pc07
-# -----------------------------------------------------------------------------
-# Remote desktop.
-# -----------------------------------------------------------------------------
-# Web app: https://web.teamviewer.com
-# -----------------------------------------------------------------------------
-kz-desktop --delete=com.teamviewer.TeamViewer
-
 # SETUP terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator.

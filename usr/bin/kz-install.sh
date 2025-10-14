@@ -216,6 +216,11 @@ REBOOT=true
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes ansible; fi
 # -----------------------------------------------------------------------------
+# Exiftool - read and write meta information.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes perl-Image-ExifTool; fi
+# -----------------------------------------------------------------------------
 # Fakeroot - simulate superuser privileges.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
@@ -282,6 +287,13 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes rpm; f
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
 # -----------------------------------------------------------------------------
+# Usbutils - USB utilities.
+# -----------------------------------------------------------------------------
+# This package contains the lsusb utility.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes usbutils; fi
+# -----------------------------------------------------------------------------
 # Vscode - editor.
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
@@ -303,6 +315,11 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes ansible; fi
+# -----------------------------------------------------------------------------
+# Exiftool - read and write meta information.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes perl-Image-ExifTool; fi
 # -----------------------------------------------------------------------------
 # Fakeroot - simulate superuser privileges.
 # -----------------------------------------------------------------------------
@@ -368,6 +385,13 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rp
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
 # -----------------------------------------------------------------------------
+# Usbutils - USB utilities.
+# -----------------------------------------------------------------------------
+# This package contains the lsusb utility.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes usbutils; fi
+# -----------------------------------------------------------------------------
 # Vscode - editor.
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
@@ -423,20 +447,6 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # Restore the default action when the laptop lid is closed.
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-
-# INSTALL exiftool pc06 pc07
-# -----------------------------------------------------------------------------
-# Read and write meta information.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes perl-Image-ExifTool; fi
-
-# REMOVE exiftool pc06 pc07
-# -----------------------------------------------------------------------------
-# Read and write meta information.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes perl-Image-ExifTool; fi
 
 # INSTALL gimp pc06
 # -----------------------------------------------------------------------------
@@ -775,23 +785,6 @@ sudo ufw disable
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gufw; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes gufw; fi
 
-# INSTALL usbutils pc06 pc07
-# -----------------------------------------------------------------------------
-# USB utilities.
-# This package contains the lsusb utility.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes usbutils; fi
-
-# REMOVE usbutils pc06 pc07
-# -----------------------------------------------------------------------------
-# USB utilities.
-# This package contains the lsusb utility.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes usbutils; fi
-
-# INSTALL user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Add guest user.
 # -----------------------------------------------------------------------------
