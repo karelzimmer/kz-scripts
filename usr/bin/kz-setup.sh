@@ -47,9 +47,9 @@ if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings 
 # Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel /etc/os-release && gnome-extensions info no-overview@fthx ) &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx ) &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
@@ -110,9 +110,9 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position &> /dev/n
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel /etc/os-release && gnome-extensions info no-overview@fthx ) &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
-if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx ) &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 # -----------------------------------------------------------------------------
 # GNOME - desktop environment.
 # -----------------------------------------------------------------------------
@@ -292,7 +292,7 @@ kz-desktop --delete=org.gnome.SoundJuicer
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=spotify; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=kz-spotify; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=kz-spotify; fi
 
 # RESET spotify pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -301,7 +301,7 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then kz-deskt
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=spotify; fi
-if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=kz-spotify; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=kz-spotify; fi
 
 # SETUP teamviewer pc06 pc07
 # -----------------------------------------------------------------------------
