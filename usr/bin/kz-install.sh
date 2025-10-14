@@ -210,6 +210,16 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes gettext;
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes git; fi
 # -----------------------------------------------------------------------------
+# Groff - compose manual pages with GNU roff.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes groff; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes groff; fi
+# -----------------------------------------------------------------------------
+# Htop - process viewer.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes htop; fi
+# -----------------------------------------------------------------------------
 # Jq - JSON processor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes jq; fi
@@ -288,6 +298,16 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes gettext; 
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes git; fi
 # -----------------------------------------------------------------------------
+# Groff - compose manual pages with GNU roff.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes groff; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes groff; fi
+# -----------------------------------------------------------------------------
+# Htop - process viewer.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes htop; fi
+# -----------------------------------------------------------------------------
 # Jq - JSON processor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes jq; fi
@@ -336,7 +356,7 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo rm 
 
 # INSTALL disabled-aer pc06
 # -----------------------------------------------------------------------------
-# Disable Advanced Error Reporting
+# Disable Advanced Error Reporting.
 # -----------------------------------------------------------------------------
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) prevents the log gets flooded with
@@ -353,7 +373,7 @@ REBOOT=true
 
 # REMOVE disabled-aer pc06
 # -----------------------------------------------------------------------------
-# Enable Advanced Error Reporting
+# Enable Advanced Error Reporting.
 # -----------------------------------------------------------------------------
 # Enable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) to "allow" the log gets flooded with
@@ -461,20 +481,6 @@ if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if (grep rhel /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
 
-# INSTALL groff pc06 pc07
-# -----------------------------------------------------------------------------
-# Compose manual pages with GNU roff.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes groff; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes groff; fi
-
-# REMOVE groff pc06 pc07
-# -----------------------------------------------------------------------------
-# Compose manual pages with GNU roff.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes groff; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes groff; fi
-
 # INSTALL handbrake #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
@@ -486,20 +492,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes handbrake; fi
-
-# INSTALL htop pc06 pc07
-# -----------------------------------------------------------------------------
-# Process viewer.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes htop; fi
-
-# REMOVE htop pc06 pc07
-# -----------------------------------------------------------------------------
-# Process viewer.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes htop; fi
 
 # INSTALL imagination pc06 pc07
 # -----------------------------------------------------------------------------
