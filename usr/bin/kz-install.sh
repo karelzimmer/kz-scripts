@@ -143,6 +143,14 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=kar
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes spice-vdagent; fi
 # -----------------------------------------------------------------------------
+# Sushi - quick preview.
+# -----------------------------------------------------------------------------
+# Usage:
+# Select a file, press the space bar, and a preview will appear.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes sushi; fi
+# -----------------------------------------------------------------------------
 # Update-grub - skip GRUB menu.
 # -----------------------------------------------------------------------------
 sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=0/" /etc/default/grub
@@ -188,6 +196,11 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=kar
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; fi
+# -----------------------------------------------------------------------------
+# Sushi - quick preview.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes sushi; fi
 # -----------------------------------------------------------------------------
 # Update-grub - show GRUB menu.
 # -----------------------------------------------------------------------------
@@ -678,24 +691,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes openssh
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d' /etc/hosts; fi
-
-# INSTALL sushi pc06
-# -----------------------------------------------------------------------------
-# Quick preview.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes sushi; fi
-# -----------------------------------------------------------------------------
-# Usage:
-# Select a file, press the space bar, and a preview will appear.
-# -----------------------------------------------------------------------------
-
-# REMOVE sushi pc06
-# -----------------------------------------------------------------------------
-# Quick preview.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes sushi; fi
 
 # INSTALL teamviewer *
 # -----------------------------------------------------------------------------
