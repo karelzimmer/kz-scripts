@@ -137,7 +137,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes spice-vd
 # -----------------------------------------------------------------------------
 # Update-grub - skip GRUB menu.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
+sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=0/" /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
@@ -178,7 +178,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes spice-vda
 # -----------------------------------------------------------------------------
 # Update-grub - show GRUB menu.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=0/GRUB_TIMEOUT=5/' /etc/default/grub
+sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/" /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
