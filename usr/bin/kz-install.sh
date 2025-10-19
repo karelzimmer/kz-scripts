@@ -19,7 +19,7 @@ if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf check-update || true; fi
 
-# REMOVE components from *
+# REMOVE components *
 # -----------------------------------------------------------------------------
 # Remove Debian components package sources & update package lists for all.
 # -----------------------------------------------------------------------------
@@ -158,7 +158,7 @@ if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
-# REMOVE desktop from *
+# REMOVE desktop *
 # -----------------------------------------------------------------------------
 # Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
@@ -472,7 +472,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --v
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
-# REMOVE google-chrome from *
+# REMOVE google-chrome *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -593,7 +593,7 @@ if (grep rhel   /etc/os-release && type gnome-session && dnf list libreoffice) &
 if (grep rhel   /etc/os-release && type gnome-session && ! dnf list libreoffice) &> /dev/null; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if (grep rhel   /etc/os-release && type gnome-session && ! dnf list libreoffice) &> /dev/null; then sudo flatpak install --assumeyes app/org.libreoffice.LibreOffice; fi
 
-# REMOVE libreoffice from *
+# REMOVE libreoffice *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
@@ -713,7 +713,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then rm --verbose /tmp/teamviewer.deb; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
-# REMOVE teamviewer from *
+# REMOVE teamviewer *
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # -----------------------------------------------------------------------------
@@ -825,7 +825,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes vlc; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes vlc; fi
 
-# REMOVE vlc from *
+# REMOVE vlc *
 # -----------------------------------------------------------------------------
 # Multimedia player.
 # -----------------------------------------------------------------------------

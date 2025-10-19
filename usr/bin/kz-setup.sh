@@ -38,7 +38,7 @@ kz-desktop --addaft=kz-cockpit
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-cockpit
 
-# SETUP desktop on *
+# SETUP desktop *
 # -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
@@ -92,7 +92,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set true; fi
 
-# RESET desktop on *
+# RESET desktop *
 # -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
@@ -210,14 +210,14 @@ kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
 kz-desktop --addbef=firefox_firefox
 
-# SETUP google-chrome on *
+# SETUP google-chrome *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
 if type gnome-session &> /dev/null; then xdg-mime default google-chrome.desktop application/pdf; fi
 
-# RESET google-chrome on *
+# RESET google-chrome *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -247,27 +247,27 @@ kz-desktop --addaft=virt-manager
 # -----------------------------------------------------------------------------
 kz-desktop --delete=virt-manager
 
-# SETUP libreoffice on *
+# SETUP libreoffice *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=libreoffice-writer
 kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
-# RESET libreoffice on *
+# RESET libreoffice *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
-# SETUP private-home on *
+# SETUP private-home *
 # -----------------------------------------------------------------------------
 # Private home.
 # -----------------------------------------------------------------------------
 chmod 750 ~
 
-# RESET private-home on *
+# RESET private-home *
 # -----------------------------------------------------------------------------
 # Private home.
 # -----------------------------------------------------------------------------
