@@ -133,14 +133,6 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=kar
 if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
-# -----------------------------------------------------------------------------
-# Sushi - quick preview.
-# -----------------------------------------------------------------------------
-# Usage:
-# Select a file, press the space bar, and a preview will appear.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes sushi; fi
 
 # REMOVE desktop *
 # -----------------------------------------------------------------------------
@@ -171,11 +163,6 @@ if (grep rhel   /etc/os-release && type xfce4-session) &> /dev/null; then sudo d
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
-# -----------------------------------------------------------------------------
-# GNOME Sushi - quick preview.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes sushi; fi
 
 # INSTALL development pc06 pc07
 # -----------------------------------------------------------------------------
