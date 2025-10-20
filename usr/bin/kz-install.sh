@@ -110,6 +110,10 @@ if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-
 if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf     install --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview) &> /dev/null; then sudo dnf     install --assumeyes gnome-shell-extension-no-overview; fi
 # -----------------------------------------------------------------------------
+# View and install deb files.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gdebi; fi
+# -----------------------------------------------------------------------------
 # GNOME Nautilus-admin - administrative operations.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
@@ -146,6 +150,10 @@ if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-
 if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview) &> /dev/null; then sudo dnf     remove --assumeyes gnome-shell-extension-no-overview; fi
+# -----------------------------------------------------------------------------
+# View and install deb files.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gdebi; fi
 # -----------------------------------------------------------------------------
 # GNOME Nautilus-admin - administrative operations.
 # -----------------------------------------------------------------------------
@@ -705,10 +713,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes tea
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes bash-completion; fi
 # -----------------------------------------------------------------------------
-# View and install deb files.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gdebi; fi
-# -----------------------------------------------------------------------------
 # Display directory tree.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
@@ -720,10 +724,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes tr
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes bash-completion; fi
-# -----------------------------------------------------------------------------
-# View and install deb files.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gdebi; fi
 # -----------------------------------------------------------------------------
 # Display directory tree.
 # -----------------------------------------------------------------------------
