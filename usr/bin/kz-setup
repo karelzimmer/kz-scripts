@@ -607,7 +607,6 @@ $(gettext "Try to set up the apps again.")"
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
-        exit 1
     fi
 
     operation=$(gettext 'set up')
