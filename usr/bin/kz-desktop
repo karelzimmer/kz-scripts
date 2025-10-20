@@ -78,7 +78,7 @@ function process() {
     local text=''
 
     check_input "$@"
-    if ! gsettings list-keys org.gnome.yelp |& $PROGRAM_LOGS; then
+    if ! type gnome-session |& $PROGRAM_LOGS; then
         text=$(gettext "GNOME desktop environment required.")
         kz.infomsg "$text"
         exit 0

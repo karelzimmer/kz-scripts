@@ -44,12 +44,12 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
 # -----------------------------------------------------------------------------
-# Dash-to-dock - desktop dock like Ubuntu's dash.
+# GNOME Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx ) &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com) &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx) &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
@@ -85,12 +85,12 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network &> 
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if grep --quiet debian /etc/os-release; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 # -----------------------------------------------------------------------------
 # Xfce - desktop environment.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set true; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set true; fi
 
 # RESET desktop *
 # -----------------------------------------------------------------------------
@@ -98,7 +98,7 @@ if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
 # -----------------------------------------------------------------------------
-# Dash-to-dock - desktop dock like Ubuntu's dash.
+# GNOME Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
@@ -109,10 +109,10 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed &> /dev/null
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx ) &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com ) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx) &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 # -----------------------------------------------------------------------------
 # GNOME - desktop environment.
 # -----------------------------------------------------------------------------
@@ -143,7 +143,7 @@ if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gs
 # Xfce - desktop environment.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar --property /misc-single-click --type bool --set false; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set false; fi
 
 # SETUP development pc06 pc07
 # -----------------------------------------------------------------------------
@@ -158,15 +158,15 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=code
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/json; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-desktop; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/x-shellscript; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop application/xml; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/html; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/markdown; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/plain; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/troff; fi
-if type gnome-session &> /dev/null; then xdg-mime default code.desktop text/x-python; fi
+xdg-mime default code.desktop application/json
+xdg-mime default code.desktop application/x-desktop
+xdg-mime default code.desktop application/x-shellscript
+xdg-mime default code.desktop application/xml
+xdg-mime default code.desktop text/html
+xdg-mime default code.desktop text/markdown
+xdg-mime default code.desktop text/plain
+xdg-mime default code.desktop text/troff
+xdg-mime default code.desktop text/x-python
 
 # RESET development pc06 pc07
 # -----------------------------------------------------------------------------
@@ -215,7 +215,7 @@ kz-desktop --addbef=firefox_firefox
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
-if type gnome-session &> /dev/null; then xdg-mime default google-chrome.desktop application/pdf; fi
+xdg-mime default google-chrome.desktop application/pdf
 
 # RESET google-chrome *
 # -----------------------------------------------------------------------------
@@ -291,8 +291,8 @@ kz-desktop --delete=org.gnome.SoundJuicer
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=spotify; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --addaft=kz-spotify; fi
+if grep --quiet debian /etc/os-release; then kz-desktop --addaft=spotify; fi
+if grep --quiet rhel   /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
 # RESET spotify pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -300,8 +300,8 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-des
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=spotify; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-desktop --delete=kz-spotify; fi
+if grep --quiet debian /etc/os-release; then kz-desktop --delete=spotify; fi
+if grep --quiet rhel   /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 # SETUP terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -309,10 +309,10 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then kz-des
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place 's/#alias/alias/g' ~/.bashrc
-sed --in-place 's/# alias/alias/g' ~/.bashrc
+sed --in-place 's/#alias/alias/g'    ~/.bashrc
+sed --in-place 's/# alias/alias/g'   ~/.bashrc
 sed --in-place 's/# export/export/g' ~/.bashrc
-sed --in-place 's/# eval/eval/g' ~/.bashrc
+sed --in-place 's/# eval/eval/g'     ~/.bashrc
 # -----------------------------------------------------------------------------
 # Enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
@@ -323,10 +323,10 @@ echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
-sed --in-place 's/alias/#alias/g' ~/.bashrc
+sed --in-place 's/alias/#alias/g'   ~/.bashrc
 sed --in-place 's/export/#export/g' ~/.bashrc
-sed --in-place 's/eval/#eval/g' ~/.bashrc
-sed --in-place '/^stty -ixon/d' ~/.bashrc
+sed --in-place 's/eval/#eval/g'     ~/.bashrc
+sed --in-place '/^stty -ixon/d'     ~/.bashrc
 
 # SETUP terminal pc06 pc07
 # -----------------------------------------------------------------------------
