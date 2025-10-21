@@ -87,10 +87,15 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null
 if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 if grep --quiet debian /etc/os-release; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 # -----------------------------------------------------------------------------
+# LXQt - desktop environment.
+# -----------------------------------------------------------------------------
+sed --in-place 's/Alt%2BF1/Super_L/g' ~/.config/lxqt/globalkeyshortcuts.conf
+# -----------------------------------------------------------------------------
 # Xfce - desktop environment.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set true; fi
+LOGOUT=true
 
 # RESET desktop *
 # -----------------------------------------------------------------------------
@@ -140,10 +145,15 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounte
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 # -----------------------------------------------------------------------------
+# LXQt - desktop environment.
+# -----------------------------------------------------------------------------
+sed --in-place 's/Super_L/Alt%2BF1/g' ~/.config/lxqt/globalkeyshortcuts.conf
+# -----------------------------------------------------------------------------
 # Xfce - desktop environment.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
 if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set false; fi
+LOGOUT=true
 
 # SETUP development pc06 pc07
 # -----------------------------------------------------------------------------

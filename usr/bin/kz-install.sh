@@ -133,6 +133,7 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=kar
 if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '6auser-session=karel' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
 
 # REMOVE desktop *
 # -----------------------------------------------------------------------------
@@ -163,6 +164,7 @@ if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo d
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
 
 # INSTALL development pc06 pc07
 # -----------------------------------------------------------------------------
