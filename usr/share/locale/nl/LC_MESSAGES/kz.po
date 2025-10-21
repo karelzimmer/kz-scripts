@@ -1052,20 +1052,20 @@ msgstr "De installatie van de volgende apps bevat fouten:"
 msgid "Try installing/removing the apps again."
 msgstr "Probeer de apps opnieuw te installeren/verwijderen."
 
-#: kz-install:593
+#: kz-install:592
 msgid "install"
 msgstr "installeren"
 
-#: kz-install:597
+#: kz-install:596
 msgid "remove"
 msgstr "verwijderen"
 
-#: kz-install:599 kz-setup:619
+#: kz-install:598 kz-setup:618
 #, sh-format
 msgid "Apps $operation completed."
 msgstr "Apps $operation is voltooid."
 
-#: kz-install:604
+#: kz-install:603
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1073,7 +1073,7 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:785 kz-install.sh:786 kz-install.sh:792
+#: kz-install.sh:776 kz-install.sh:777 kz-install.sh:783
 msgid "--domain=kz"
 msgstr "--domain=kz"
 
@@ -1404,15 +1404,15 @@ msgstr "Het instellen van de volgende apps bevat fouten:"
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:613
+#: kz-setup:612
 msgid "set up"
 msgstr "instellen"
 
-#: kz-setup:617
+#: kz-setup:616
 msgid "reset"
 msgstr "resetten"
 
-#: kz-setup:626
+#: kz-setup:625
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1420,7 +1420,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:631
+#: kz-setup:630
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1428,7 +1428,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:668
+#: kz-setup:667
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 

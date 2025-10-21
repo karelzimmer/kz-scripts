@@ -171,11 +171,6 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=kar
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes ansible; fi
 # -----------------------------------------------------------------------------
-# Exiftool - read and write meta information.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes perl-Image-ExifTool; fi
-# -----------------------------------------------------------------------------
 # Fakeroot - simulate superuser privileges.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
@@ -197,11 +192,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes gi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes groff; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes groff; fi
-# -----------------------------------------------------------------------------
-# Htop - process viewer.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes htop; fi
 # -----------------------------------------------------------------------------
 # Jq - JSON processor.
 # -----------------------------------------------------------------------------
@@ -279,11 +269,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; 
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes ansible; fi
 # -----------------------------------------------------------------------------
-# Exiftool - read and write meta information.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes perl-Image-ExifTool; fi
-# -----------------------------------------------------------------------------
 # Fakeroot - simulate superuser privileges.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fakeroot; fi
@@ -305,11 +290,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes git
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes groff; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes groff; fi
-# -----------------------------------------------------------------------------
-# Htop - process viewer.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes htop; fi
 # -----------------------------------------------------------------------------
 # Jq - JSON processor.
 # -----------------------------------------------------------------------------
@@ -418,6 +398,20 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # Restore the default action when the laptop lid is closed.
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+
+# INSTALL exiftool pc06 pc07
+# -----------------------------------------------------------------------------
+# Read and write meta information.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes perl-Image-ExifTool; fi
+
+# REMOVE exiftool pc06 pc07
+# -----------------------------------------------------------------------------
+# Read and write meta information.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes perl-Image-ExifTool; fi
 
 # INSTALL gimp pc06
 # -----------------------------------------------------------------------------
@@ -700,6 +694,11 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes tea
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes bash-completion; fi
 # -----------------------------------------------------------------------------
+# Htop - process viewer.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes htop; fi
+# -----------------------------------------------------------------------------
 # Display directory tree.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
@@ -711,6 +710,11 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes tr
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes bash-completion; fi
+# -----------------------------------------------------------------------------
+# Htop - process viewer.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes htop; fi
 # -----------------------------------------------------------------------------
 # Display directory tree.
 # -----------------------------------------------------------------------------
