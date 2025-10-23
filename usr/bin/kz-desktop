@@ -87,8 +87,6 @@ function process() {
         favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
         desktopfile=$favorite_argument.desktop
         gnome_shell=true
-    else
-        gnome_shell=false
     fi
 
     if $option_addaft; then
