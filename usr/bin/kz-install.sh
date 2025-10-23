@@ -133,10 +133,6 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=kar
 if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "6auser-session=${SUDO_USER:-$USER}" /etc/lightdm/lightdm.conf; fi
-# -----------------------------------------------------------------------------
-# View and install deb files.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gdebi; fi
 REBOOT=true
 
 # REMOVE desktop *
@@ -168,10 +164,6 @@ if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo d
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
-# -----------------------------------------------------------------------------
-# View and install deb files.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gdebi; fi
 REBOOT=true
 
 # INSTALL development pc06 pc07

@@ -69,7 +69,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network &> 
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-if grep --quiet debian /etc/os-release; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 # -----------------------------------------------------------------------------
 # GNOME Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
