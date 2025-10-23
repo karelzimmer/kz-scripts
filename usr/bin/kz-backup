@@ -391,13 +391,12 @@ function backup_setting_users() {
     if [[ -n ${DISPLAY-} ]]; then
         text="$(gettext 'Additional users can be added manually:')
 
-$(gettext "1. Type 'user' on the activities overview[1] and click behind \
-Settings on Users.
+$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
+on Users.
 2. Click on Unlock and then Add User.
 3. Enter Name <user> and Username <username>.")
 
-$(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
-click on Activities at the top left.")
+$(gettext "[1] Windows, command, or magnifying glass key.")
 
 $users
 $groups"
@@ -450,14 +449,12 @@ function backup_setting_avatar() {
     kz.logmsg 'Save instructions for restoring the avatar...'
     text="$(gettext "To set the users avatar:
 
-1. Type 'user' on the activities overview[1] and click behind Settings on \
-Users.
+1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
 4. Select avatar in Personal folder / Settings, or another picture file.")
 
-$(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
-click on Activities at the top left.")"
+$(gettext '[1] Windows, command, or magnifying glass key.')"
 
     printf '%s\n' "$text" > "$output_file_2"
 }
@@ -490,12 +487,11 @@ function backup_setting_desktop() {
 
     text="$(gettext "To set the desktop background:
 
-1. Type 'file' on the activities overview[1] and click on Files.
+1. Press the Super key[1], type 'file' and click on Files.
 2. Open the folder containing the desired image.
 3. Right-click on the desired image and choose Set as Background.")
 
-$(gettext "[1] Press the Super key (Windows, Command, or Magnifier key) or \
-click on Activities at the top left.")"
+$(gettext '[1] Windows, command, or magnifying glass key.')"
 
     printf '%s\n' "$text" > "$output_file_2"
 }

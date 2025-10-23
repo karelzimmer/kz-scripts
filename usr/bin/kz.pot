@@ -121,7 +121,7 @@ msgstr ""
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
-#: kz-backup:23 kz-backup:546 kz-menu:74 kz-backup.desktop:10
+#: kz-backup:23 kz-backup:542 kz-menu:74 kz-backup.desktop:10
 msgid "Backup home folder"
 msgstr ""
 
@@ -259,29 +259,26 @@ msgstr ""
 msgid "users.txt"
 msgstr ""
 
-#: kz-backup:374 kz-backup:649 kz-restore:360
+#: kz-backup:374 kz-backup:645 kz-restore:360
 msgid "USERNAME|USERID|USER"
 msgstr ""
 
-#: kz-backup:392 kz-backup:405
+#: kz-backup:392 kz-backup:404
 msgid "Additional users can be added manually:"
 msgstr ""
 
 #: kz-backup:394
 msgid ""
-"1. Type 'user' on the activities overview[1] and click behind Settings on "
-"Users.\n"
+"1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
 "3. Enter Name <user> and Username <username>."
 msgstr ""
 
-#: kz-backup:399 kz-backup:459 kz-backup:497
-msgid ""
-"[1] Press the Super key (Windows, Command, or Magnifier key) or click on "
-"Activities at the top left."
+#: kz-backup:399 kz-backup:457 kz-backup:494
+msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:407
+#: kz-backup:406
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -294,85 +291,84 @@ msgid ""
 "sudo passwd --delete --expire <username>"
 msgstr ""
 
-#: kz-backup:451
+#: kz-backup:450
 msgid ""
 "To set the users avatar:\n"
 "\n"
-"1. Type 'user' on the activities overview[1] and click behind Settings on "
-"Users.\n"
+"1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Change avatar (pencil icon).\n"
 "3. Click Select a file.\n"
 "4. Select avatar in Personal folder / Settings, or another picture file."
 msgstr ""
 
-#: kz-backup:491
+#: kz-backup:488
 msgid ""
 "To set the desktop background:\n"
 "\n"
-"1. Type 'file' on the activities overview[1] and click on Files.\n"
+"1. Press the Super key[1], type 'file' and click on Files.\n"
 "2. Open the folder containing the desired image.\n"
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:546 kz-install:428 kz-restore:253 kz-setup:468
+#: kz-backup:542 kz-install:428 kz-restore:253 kz-setup:468
 msgid "progress"
 msgstr ""
 
-#: kz-backup:547
+#: kz-backup:543
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:586
+#: kz-backup:582
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:622 kz-install:569 kz-restore:328 kz-setup:590
+#: kz-backup:618 kz-install:569 kz-restore:328 kz-setup:590
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:623
+#: kz-backup:619
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:625 kz-restore:331
+#: kz-backup:621 kz-restore:331
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:626
+#: kz-backup:622
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:627 kz-restore:333
+#: kz-backup:623 kz-restore:333
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:628
+#: kz-backup:624
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:630 kz-install:574 kz-restore:336 kz-setup:594
+#: kz-backup:626 kz-install:574 kz-restore:336 kz-setup:594
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:631 kz-install:575 kz-restore:337 kz-setup:595
+#: kz-backup:627 kz-install:575 kz-restore:337 kz-setup:595
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:632
+#: kz-backup:628
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:660
+#: kz-backup:656
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:662
+#: kz-backup:658
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
-#: kz-backup:670 kz-restore:376
+#: kz-backup:666 kz-restore:376
 msgid "*** Remember to SAFELY remove the USB media ***"
 msgstr ""
 
