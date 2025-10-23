@@ -103,6 +103,10 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cu
 
 # INSTALL desktop *
 # -----------------------------------------------------------------------------
+# Cinnamon - desktop environment.
+# -----------------------------------------------------------------------------
+if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place 's/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+# -----------------------------------------------------------------------------
 # GNOME Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
@@ -136,6 +140,10 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes g
 REBOOT=true
 
 # REMOVE desktop *
+# -----------------------------------------------------------------------------
+# Cinnamon - desktop environment.
+# -----------------------------------------------------------------------------
+if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place 's/greeter-hide-users=false/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
 # -----------------------------------------------------------------------------
 # GNOME Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------

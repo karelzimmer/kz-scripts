@@ -75,16 +75,20 @@ function process() {
     local option_delete=false
     local option_list=false
     local option_reset=false
+    local gnome_shell=false
     local text=''
 
     check_input "$@"
-    if ! type gnome-session |& $PROGRAM_LOGS; then
-        text=$(gettext "GNOME desktop environment required.")
+    if ! gsettings list-keys org.gnome.yelp |& $PROGRAM_LOGS; then
+        text=$(gettext "No such schema 'org.gnome.shell.yelp'.")
         kz.infomsg "$text"
         exit 0
     elif gsettings list-keys org.gnome.shell |& $PROGRAM_LOGS; then
         favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
         desktopfile=$favorite_argument.desktop
+        gnome_shell=true
+    else
+        gnome_shell=false
     fi
 
     if $option_addaft; then
@@ -215,8 +219,19 @@ $USAGE"
 }
 
 
+# This function checks if GNOME shell is available.
+function check_shell () {
+    if ! $gnome_shell; then
+        text=$(gettext "No such schema 'org.gnome.shell'.")
+        kz.infomsg "$text"
+        exit 0
+    fi
+}
+
+
 # This function adds a favorite to the end of the dash/dock.
 function process_option_addaft () {
+    check_shell
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
     elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"
@@ -231,6 +246,7 @@ function process_option_addaft () {
 
 # This function adds a favorite to the beginning of the dash/dock.
 function process_option_addbef () {
+    check_shell
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
     elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"
@@ -244,6 +260,7 @@ function process_option_addbef () {
 
 # This function removes a favorite from the dash/dock.
 function process_option_delete () {
+    check_shell
     if [[ $favorite_apps = '@as []' ]]; then
         :
     elif [[ $favorite_apps = [$desktopfile] ]]; then
@@ -260,6 +277,7 @@ function process_option_delete () {
 
 # This feature lists the favorite apps in the dash/dock.
 function process_option_list () {
+    check_shell
     local text=''
 
     text="$(gettext 'Favorite apps:')
@@ -270,6 +288,7 @@ $(gsettings get org.gnome.shell favorite-apps)"
 
 # This function resets the favorites to the factory settings.
 function process_option_reset () {
+    check_shell
     gsettings reset org.gnome.shell favorite-apps
 }
 

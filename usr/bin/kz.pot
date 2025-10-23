@@ -99,7 +99,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:170 kz-backup:152 kz-build:155 kz-check:129 kz-deploy:134 kz-desktop:196
+#: kz:170 kz-backup:152 kz-build:155 kz-check:129 kz-deploy:134 kz-desktop:200
 #: kz-dev:148 kz-install:237 kz-menu:175 kz-restore:153 kz-setup:236
 #: kz-update:165 kz-wifi:127
 msgid "internal error"
@@ -155,16 +155,16 @@ msgid ""
 "                 place backup in specified directory"
 msgstr ""
 
-#: kz-backup:112 kz-desktop:211 kz-install:202 kz-menu:146 kz-restore:112
+#: kz-backup:112 kz-desktop:215 kz-install:202 kz-menu:146 kz-restore:112
 #: kz-setup:201
 msgid "no desktop environment available"
 msgstr ""
 
-#: kz-backup:122 kz-desktop:136 kz-desktop:147 kz-desktop:158 kz-restore:123
+#: kz-backup:122 kz-desktop:140 kz-desktop:151 kz-desktop:162 kz-restore:123
 msgid "too many options"
 msgstr ""
 
-#: kz-backup:160 kz-build:163 kz-check:137 kz-deploy:142 kz-desktop:204
+#: kz-backup:160 kz-build:163 kz-check:137 kz-deploy:142 kz-desktop:208
 #: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:171 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr ""
@@ -737,31 +737,35 @@ msgstr ""
 msgid "  -r, --reset    set favorites on default values"
 msgstr ""
 
-#: kz-desktop:82
-msgid "GNOME desktop environment required."
+#: kz-desktop:83
+msgid "No such schema 'org.gnome.shell.yelp'."
 msgstr ""
 
-#: kz-desktop:265
+#: kz-desktop:225
+msgid "No such schema 'org.gnome.shell'."
+msgstr ""
+
+#: kz-desktop:283
 msgid "Favorite apps:"
 msgstr ""
 
-#: kz-desktop:287
+#: kz-desktop:306
 msgid "Now make the change in the desktop environment."
 msgstr ""
 
-#: kz-desktop:309
+#: kz-desktop:328
 #, sh-format
 msgid "Config database content captured ($fase)."
 msgstr ""
 
-#: kz-desktop:321
+#: kz-desktop:340
 msgid ""
 "Changes in the configuration database,\n"
 "< is the old setting (A),\n"
 "> is the new setting (B):"
 msgstr ""
 
-#: kz-desktop:326
+#: kz-desktop:345
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr ""
 
@@ -970,7 +974,7 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:778 kz-install.sh:779 kz-install.sh:785
+#: kz-install.sh:786 kz-install.sh:787 kz-install.sh:793
 msgid "--domain=kz"
 msgstr ""
 
