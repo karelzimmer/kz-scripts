@@ -470,9 +470,9 @@ function backup_setting_desktop() {
 
     input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
-        sed 's|%20| |g'                                         |
-        sed "s/'//g"                                            |
-        sed 's|file://||'                                       || true
+        sed --expression='s|%20| |g'                            |
+        sed --expression="s/'//g"                               |
+        sed --expression='s|file://||'                          || true
         )
 
     # By default, the Debian input_file retrieved with gsettings results in
