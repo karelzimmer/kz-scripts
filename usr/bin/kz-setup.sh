@@ -87,6 +87,11 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height &> /dev/n
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 # -----------------------------------------------------------------------------
+# KDE - desktop environment.
+# -----------------------------------------------------------------------------
+if type ksmserver &> /dev/null && ! grep --quiet '[KDE]' ~/.config/kdeglobals; then echo -e '\n[KDE]' >> ~/.config/kdeglobals; fi
+if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kdeglobals; then sed --in-place '/[KDE]/aSingleClick=true' ~/.config/kdeglobals; fi
+# -----------------------------------------------------------------------------
 # LXQt - desktop environment.
 # -----------------------------------------------------------------------------
 if type lxqt-session &> /dev/null; then sed --in-place 's/Alt%2BF1/Super_L/g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
@@ -144,6 +149,10 @@ if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gma
 if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx) &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
 if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com) &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+# -----------------------------------------------------------------------------
+# KDE - desktop environment.
+# -----------------------------------------------------------------------------
+if type ksmserver &> /dev/null; then sed --in-place '/SingleClick=true/d' ~/.config/kdeglobals; fi
 # -----------------------------------------------------------------------------
 # LXQt - desktop environment.
 # -----------------------------------------------------------------------------
