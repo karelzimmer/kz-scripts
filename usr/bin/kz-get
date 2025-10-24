@@ -64,9 +64,9 @@ function process() {
 
     check_input_process_options "$@"
     become_check || exit 0
-    if grep --quiet --regexp=debian /etc/os-release; then
+    if grep --quiet debian /etc/os-release; then
         install_deb_package
-    elif grep --quiet --regexp=rhel /etc/os-release; then
+    elif grep --quiet rhel /etc/os-release; then
         install_rpm_package
     else
         text="$(gettext 'fatal: unknown os release')"

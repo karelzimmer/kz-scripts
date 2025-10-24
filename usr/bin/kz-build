@@ -83,7 +83,7 @@ function process() {
     local text=''
 
     check_input "$@"
-    if ! grep --quiet --regexp=debian /etc/os-release; then
+    if ! grep --quiet debian /etc/os-release; then
         text=$(gettext 'Must run on a Debian or Debian-based system.')
         kz.infomsg "$text"
         exit 1
@@ -234,10 +234,7 @@ $HOME/kz-scripts/usr/share/polkit-1/actions"
     kz.infomsg "$text"
 
     # Remove '#:filename:line' lines, these are generated again by xgettext.
-    sed --in-place                  \
-        --expression='/^#: kz/d'    \
-        "$pot_dir/kz.pot"           \
-        "$lc_messages_dir/kz.po"
+    sed --in-place '/^#: kz/d' "$pot_dir/kz.pot" "$lc_messages_dir/kz.po"
 
     for gettext_dir in $gettext_dirs; do
 
@@ -275,17 +272,13 @@ $HOME/kz-scripts/usr/share/polkit-1/actions"
                 gettext_language="--its=$its_dir/kz-policy.its"
             elif [[ $gettext_file == *.py ]]; then
                 gettext_language='--language=Python'
-            elif grep   --quiet                     \
-                        --line-regexp               \
-                        --regexp="$python_script"   \
-                        "$gettext_file"; then
+            elif grep --quiet --line-regexp "$python_script" "$gettext_file"
+            then
                 gettext_language='--language=Python'
             elif [[ $gettext_file == *.sh ]]; then
                 gettext_language='--language=Shell'
-            elif grep   --quiet                 \
-                        --line-regexp           \
-                        --regexp="$bash_script" \
-                        "$gettext_file"; then
+            elif grep --quiet --line-regexp "$bash_script" "$gettext_file"
+            then
                 gettext_language='--language=Shell'
             else
                 text+=$(gettext "can't determine the language")

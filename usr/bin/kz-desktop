@@ -232,7 +232,7 @@ function process_option_addaft () {
     check_shell
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$desktopfile"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"
     then
         gsettings set org.gnome.shell favorite-apps "$(
             printf '%s' "$favorite_apps" |
@@ -247,7 +247,7 @@ function process_option_addbef () {
     check_shell
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$desktopfile"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"
     then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile', $(
                 printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
@@ -338,7 +338,7 @@ function report_database_changes() {
 $(gettext "Changes in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
-$(diff "$output_file_1" "$output_file_2" | grep --regexp='[>|<]' || true)
+$(diff "$output_file_1" "$output_file_2" | grep '[>|<]' || true)
 
 $(gettext 'Use "gsettings set <change>" for changes.')"
     kz.infomsg "$text"

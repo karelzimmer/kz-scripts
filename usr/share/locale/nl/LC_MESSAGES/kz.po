@@ -458,55 +458,55 @@ msgstr "Bouw website"
 msgid "Generate gettext files"
 msgstr "Genereer gettext-bestanden"
 
-#: kz-build:249
+#: kz-build:246
 msgid "skip, is a direcory."
 msgstr "overslaan, is een map."
 
-#: kz-build:253
+#: kz-build:250
 msgid "skip, is not a file."
 msgstr "overslaan, is geen bestand."
 
-#: kz-build:257
+#: kz-build:254
 msgid "skip, is GPG encrypted."
 msgstr "overslaan, is met GPG versleuteld."
 
-#: kz-build:261
+#: kz-build:258
 msgid "skip, is a gettext POT file."
 msgstr "overslaan, is een gettext POT-bestand."
 
-#: kz-build:265
+#: kz-build:262
 msgid "skip, is a gettext PO file."
 msgstr "overslaan, is een gettext PO-bestand."
 
-#: kz-build:269
+#: kz-build:266
 msgid "skip, is a gettext MO file."
 msgstr "overslaan, is een gettext MO-bestand."
 
-#: kz-build:291
+#: kz-build:284
 msgid "can't determine the language"
 msgstr "kan de taal niet bepalen"
 
-#: kz-build:326
+#: kz-build:319
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:370
+#: kz-build:363
 msgid " DEVELOPMENT VERSION"
 msgstr " ONTWIKKELINGSVERSIE"
 
-#: kz-build:396
+#: kz-build:389
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:471 kz-deploy:237
+#: kz-build:464 kz-deploy:237
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:493 kz-get:223
+#: kz-build:486 kz-get:223
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:502 kz-check:572 kz-deploy:264 kz-dev:327 kz-update:279
+#: kz-build:495 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:279
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -523,7 +523,7 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr "Gebruik: kz check [<opties>]"
 
-#: kz-check:281
+#: kz-check:279
 msgid "Check scripts (this may take a while)..."
 msgstr "Controleer scripts (dit kan even duren)..."
 
@@ -531,52 +531,52 @@ msgstr "Controleer scripts (dit kan even duren)..."
 msgid "Check website..."
 msgstr "Controleer website..."
 
-#: kz-check:193
+#: kz-check:191
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 "Bestanden die niet in html worden gebruikt en waarschijnlijk wel verwijderd "
 "kunnen worden:"
 
-#: kz-check:243
+#: kz-check:241
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr "Gettext berichtencatalogus-sjabloon $file niet gevonden."
 
-#: kz-check:255
+#: kz-check:253
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr "Gettext berichtencatalogus $file niet gevonden."
 
-#: kz-check:266
+#: kz-check:264
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr "Berichtencatalogus $file niet gevonden."
 
-#: kz-check:370
+#: kz-check:368
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr "Onbekend script.  Functie check_code kan scriptcode niet controleren."
 
-#: kz-check:390
+#: kz-check:388
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr "Script $scriptname --usage gaf een fout."
 
-#: kz-check:403
+#: kz-check:401
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
-#: kz-check:414
+#: kz-check:412
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
-#: kz-check:424 kz-check:432
+#: kz-check:422 kz-check:430
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr "Man-pagina $dir/$scriptname.1 niet gevonden."
 
-#: kz-check:442
+#: kz-check:440
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -585,20 +585,20 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:483
+#: kz-check:481
 #, sh-format
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr "Een regel is langer dan $max_line_length ($max_line_length_found)."
 
-#: kz-check:531
+#: kz-check:529
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:553
+#: kz-check:551
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:498 kz-check:568 kz-deploy:260
+#: kz-build:491 kz-check:566 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
