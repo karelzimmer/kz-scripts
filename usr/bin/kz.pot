@@ -426,31 +426,31 @@ msgstr ""
 msgid "skip, is a gettext MO file."
 msgstr ""
 
-#: kz-build:284
+#: kz-build:288
 msgid "can't determine the language"
 msgstr ""
 
-#: kz-build:319
+#: kz-build:323
 msgid "Build Debian package"
 msgstr ""
 
-#: kz-build:363
+#: kz-build:367
 msgid " DEVELOPMENT VERSION"
 msgstr ""
 
-#: kz-build:389
+#: kz-build:393
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:464 kz-deploy:237
+#: kz-build:468 kz-deploy:237
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:486 kz-get:223
+#: kz-build:490 kz-get:223
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:495 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:279
+#: kz-build:499 kz-check:572 kz-deploy:264 kz-dev:327 kz-update:279
 msgid "Complete!"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr ""
 
-#: kz-check:279
+#: kz-check:281
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
@@ -474,70 +474,70 @@ msgstr ""
 msgid "Check website..."
 msgstr ""
 
-#: kz-check:191
+#: kz-check:193
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 
-#: kz-check:241
+#: kz-check:243
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr ""
 
-#: kz-check:253
+#: kz-check:255
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr ""
 
-#: kz-check:264
+#: kz-check:266
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:368
+#: kz-check:370
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:388
+#: kz-check:390
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:401
+#: kz-check:403
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:412
+#: kz-check:414
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:422 kz-check:430
+#: kz-check:424 kz-check:432
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr ""
 
-#: kz-check:440
+#: kz-check:442
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:481
+#: kz-check:483
 #, sh-format
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr ""
 
-#: kz-check:529
+#: kz-check:531
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:551
+#: kz-check:553
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:491 kz-check:566 kz-deploy:260
+#: kz-build:495 kz-check:568 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 

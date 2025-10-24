@@ -65,7 +65,7 @@ function process() {
     local text=''
 
     check_input "$@"
-    if ! grep --quiet debian /etc/os-release; then
+    if ! grep --quiet --regexp=debian /etc/os-release; then
         text=$(gettext 'Must run on a Debian or Debian-based system.')
         kz.infomsg "$text"
         exit 1
@@ -160,8 +160,10 @@ function check_website() {
 
     # Check files which are not used on the html pages.
     while read -r file; do
-        if grep --recursive --quiet "$(basename "$file")" "$uploads_dist_html"
-        then
+        if grep --recursive                     \
+                --quiet                         \
+                --regexp="$(basename "$file")"  \
+                "$uploads_dist_html"; then
             # The file is used in the html pages.
             continue
         else
@@ -545,13 +547,13 @@ $RED    $(gettext 'Flagged annotation found.')$NORMAL
 function check_trailing_spaces() {
     local text=''
 
-    if grep --quiet ' ''$' "$script"; then
+    if grep --quiet --regexp=' ''$' "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(gettext 'End spaces found.')$NORMAL
 "
         kz.infomsg "$text"
-        grep    --line-number ' ''$' "$script" |
+        grep    --line-number --regexp=' ''$' "$script" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
         ERR_FLAG=true
     fi

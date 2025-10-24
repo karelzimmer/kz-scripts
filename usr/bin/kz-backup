@@ -171,7 +171,7 @@ function check_target() {
     local text=''
     local usb_mount_point=/media/$USER
 
-    if grep --quiet rhel /etc/os-release; then
+    if grep --quiet --regexp=rhel /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 
@@ -373,8 +373,8 @@ function backup_setting_users() {
     users=$(
         gettext 'USERNAME|USERID|USER'
         printf  '\n'
-        grep    /bin/bash /etc/passwd           |
-        grep    root --invert-match             |
+        grep    --regexp=/bin/bash /etc/passwd  |
+        grep    --invert-match --regexp=root    |
         cut     --delimiter=':' --fields=1,3,5  |
         tr      ',,,' '   '                     |
         tr      ':' '|'
@@ -644,8 +644,8 @@ $(gettext 'Try creating the back up again.')"
     users=$(
         gettext 'USERNAME|USERID|USER'
         printf  '\n'
-        grep    /bin/bash /etc/passwd           |
-        grep    root --invert-match             |
+        grep    --regexp=/bin/bash /etc/passwd  |
+        grep    --invert-match --regexp=root    |
         cut     --delimiter=':' --fields=1,3,5  |
         tr      ',,,' '   '                     |
         tr      ':' '|'

@@ -171,7 +171,7 @@ function check_source() {
     local usb_mount_point=/media/$USER
     local text=''
 
-    if grep --quiet rhel /etc/os-release; then
+    if grep --quiet --regexp=rhel /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 
@@ -359,8 +359,8 @@ $(gettext 'Try restoring the back up again.')"
         users=$(
             gettext 'USERNAME|USERID|USER'
             printf  '\n'
-            grep    /bin/bash /etc/passwd           |
-            grep    root --invert-match             |
+            grep    --regexp=/bin/bash /etc/passwd  |
+            grep    --invert-match --regexp=root    |
             cut     --delimiter=':' --fields=1,3,5  |
             tr      ',,,' '   '                     |
             tr      ':' '|'
