@@ -154,7 +154,7 @@ T{
 T}:T{
 T}
 T{
-# INSTALL google-earth #gpg
+# INSTALL google-earth #none
 T}:T{
 Do not install Google Earth by default, see [4].
 T}
@@ -187,11 +187,15 @@ l kvm'.
 .sp
 [4]
 .br
-The line with '#gpg' ensures that the associated commands are not executed on
-a computer by default (NOTE: '#gpg' is not a valid computername and will
+The line with '#none' ensures that the associated commands are not executed on
+a computer by default (NOTE: '#none' is not a valid computername and will
 therefore never be selected by default).
 .br
 The app can still be installed with the command 'kz install google-earth'.
+.br
+If '#none' is followed by '#gpg', it indicates that the command in question is
+executed in kz-install.sh.gpg, the encrypted version of kz-install.sh with
+personal information such as a username.
 
 .SH EXAMPLES
 .EX
