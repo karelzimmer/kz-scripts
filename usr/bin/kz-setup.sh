@@ -94,6 +94,8 @@ if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kd
 # -----------------------------------------------------------------------------
 # LXQt - desktop environment.
 # -----------------------------------------------------------------------------
+if type lxqt-session &> /dev/null && ! grep --quiet 'single_click_activate=' ~/.config/lxqt/lxqt.conf; then sed --in-place '/__userfile__=true/asingle_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place 's/single_click_activate=.*$/single_click_activate=true/g' ~/.config/lxqt/lxqt.conf; fi
 if type lxqt-session &> /dev/null; then sed --in-place 's/Alt%2BF1/Super_L/g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
 # -----------------------------------------------------------------------------
 # Xfce - desktop environment.
@@ -156,6 +158,7 @@ if type ksmserver &> /dev/null; then sed --in-place '/SingleClick=true/d' ~/.con
 # -----------------------------------------------------------------------------
 # LXQt - desktop environment.
 # -----------------------------------------------------------------------------
+if type lxqt-session &> /dev/null; then sed --in-place '/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
 if type lxqt-session &> /dev/null; then sed --in-place 's/Super_L/Alt%2BF1/g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
 # -----------------------------------------------------------------------------
 # Xfce - desktop environment.
