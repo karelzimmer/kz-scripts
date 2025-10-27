@@ -142,6 +142,10 @@ if (type gnome-session && grep debian /etc/os-release &&   apt-cache show gnome-
 if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf     install --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf     install --assumeyes gnome-shell-extension-no-overview; fi
 # -----------------------------------------------------------------------------
+# GNOME Gdebi - view and install deb files.
+# -----------------------------------------------------------------------------
+if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
+# -----------------------------------------------------------------------------
 # GNOME Nautilus-admin - administrative operations.
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
@@ -153,11 +157,6 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
-# -----------------------------------------------------------------------------
-# GNOME Sushi - quick preview.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes sushi; fi
 # -----------------------------------------------------------------------------
 # GNOME Tweaks - adjust advanced settings.
 # -----------------------------------------------------------------------------
@@ -178,10 +177,6 @@ if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${S
 if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "6auser-session=${SUDO_USER:-$USER}" /etc/lightdm/lightdm.conf; fi
-# -----------------------------------------------------------------------------
-# View and install deb files.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gdebi; fi
 REBOOT=true
 
 # REMOVE desktop *
@@ -196,6 +191,10 @@ if (type gnome-session && grep debian /etc/os-release && ! apt-cache show gnome-
 if (type gnome-session && grep debian /etc/os-release &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview) &> /dev/null; then sudo dnf     remove --assumeyes gnome-shell-extension-no-overview; fi
+# -----------------------------------------------------------------------------
+# GNOME Gdebi - view and install deb files.
+# -----------------------------------------------------------------------------
+if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 # -----------------------------------------------------------------------------
 # GNOME Nautilus-admin - administrative operations.
 # -----------------------------------------------------------------------------
@@ -222,10 +221,6 @@ if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo d
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
-# -----------------------------------------------------------------------------
-# View and install deb files.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gdebi; fi
 REBOOT=true
 
 # INSTALL development pc06 pc07
