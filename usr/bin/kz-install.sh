@@ -484,6 +484,23 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
+# INSTALL edge #none
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/edge.list 1> /dev/null; fi
+if grep --quiet debian /etc/os-release; then sudo apt update; fi 
+if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes microsoft-edge-stable; fi
+
+# REMOVE edge #none
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes microsoft-edge-stable; fi
+if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /etc/apt/sources.list.d/edge.list; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+
 # INSTALL exiftool pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
@@ -806,6 +823,7 @@ if grep --quiet rhel   /etc/os-release; then echo 'The spotify app is available 
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spotify-client; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL ssh pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1041,8 +1059,10 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes webmin
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes webmin; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes webmin; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes webmin; fi
 if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf update; fi
 
 # INSTALL wine #none
 # -----------------------------------------------------------------------------
