@@ -262,6 +262,21 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes jq
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes lftp; fi
 # -----------------------------------------------------------------------------
+# Microsoft vscode - editor.
+# -----------------------------------------------------------------------------
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
+if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/microsoft-vscode.sources 1> /dev/null; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes apt-transport-https; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes code; fi
+if grep --quiet debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
+if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
+if grep --quiet rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
+# -----------------------------------------------------------------------------
 # Nmap - Network MAPper.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
@@ -305,21 +320,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes sp
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes usbutils; fi
-# -----------------------------------------------------------------------------
-# Vscode - editor.
-# -----------------------------------------------------------------------------
-# Web app: https://vscode.dev
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
-if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes apt-transport-https; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes code; fi
-if grep --quiet debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
-if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if grep --quiet rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
 
 # REMOVE development pc06 pc07
 # -----------------------------------------------------------------------------
@@ -357,6 +357,13 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes jq;
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lftp; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes lftp; fi
+# -----------------------------------------------------------------------------
+# Microsoft vscode - editor.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes code; fi
+if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 # -----------------------------------------------------------------------------
 # Nmap - Network MAPper.
 # -----------------------------------------------------------------------------
@@ -397,13 +404,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes spi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes usbutils; fi
-# -----------------------------------------------------------------------------
-# Vscode - editor.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes code; fi
-if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
 # INSTALL disabled-aer pc06
 # -----------------------------------------------------------------------------
@@ -484,21 +484,21 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-# INSTALL edge #none
+# INSTALL microsoft-edge #none
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/edge.list 1> /dev/null; fi
+if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
 if grep --quiet debian /etc/os-release; then sudo apt update; fi
 if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes microsoft-edge-stable; fi
 
-# REMOVE edge #none
+# REMOVE microsoft-edge #none
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes microsoft-edge-stable; fi
-if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /etc/apt/sources.list.d/edge.list; fi
+if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL exiftool pc06 pc07
