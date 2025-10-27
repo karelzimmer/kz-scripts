@@ -490,7 +490,7 @@ sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/edge.list 1> /dev/null; fi
-if grep --quiet debian /etc/os-release; then sudo apt update; fi 
+if grep --quiet debian /etc/os-release; then sudo apt update; fi
 if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes microsoft-edge-stable; fi
 
 # REMOVE edge #none
