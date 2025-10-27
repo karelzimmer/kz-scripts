@@ -242,13 +242,13 @@ xdg-mime default google-chrome.desktop application/pdf || true
 # -----------------------------------------------------------------------------
 kz-desktop --delete=google-chrome
 
-# SETUP handbrake on #gpg
+# SETUP handbrake #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=fr.handbrake.ghb
 
-# RESET handbrake on #gpg
+# RESET handbrake #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
@@ -280,6 +280,23 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
+# SETUP lynis #none
+# -----------------------------------------------------------------------------
+# Security auditing.
+# -----------------------------------------------------------------------------
+if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; fi
+# -----------------------------------------------------------------------------
+# Usage:
+# $ cd ~/lynis
+# $ [sudo] ./lynis audit system
+# -----------------------------------------------------------------------------
+
+# RESET lynis #none
+# -----------------------------------------------------------------------------
+# Security auditing.
+# -----------------------------------------------------------------------------
+rm --force --recursive ~/lynis
+
 # SETUP private-home *
 # -----------------------------------------------------------------------------
 # Private home.
@@ -292,13 +309,25 @@ chmod 750 ~
 # -----------------------------------------------------------------------------
 chmod 755 ~
 
-# SETUP sound-juicer on #gpg
+# SETUP restore-thumbnails #none
+# -----------------------------------------------------------------------------
+# Restore thumbnails.
+# -----------------------------------------------------------------------------
+rm --force --recursive ~/.cache/thumbnails/
+
+# RESET restore-thumbnails #none
+# -----------------------------------------------------------------------------
+# Restore thumbnails.
+# -----------------------------------------------------------------------------
+echo 'App restore-thumbnails cannot be reset.'
+
+# SETUP sound-juicer #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=org.gnome.SoundJuicer
 
-# RESET sound-juicer on #gpg
+# RESET sound-juicer #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
@@ -373,14 +402,14 @@ kz-desktop --delete=thunderbird_thunderbird
 kz-desktop --addbef=thunderbird
 kz-desktop --addbef=thunderbird_thunderbird
 
-# SETUP virtualbox on #gpg
+# SETUP virtualbox #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=virtualbox
 kz-desktop --addaft=kz-vm-hugowin732
 
-# RESET virtualbox on #gpg
+# RESET virtualbox #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
@@ -403,25 +432,25 @@ kz-desktop --addaft=kz-webmin
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-webmin
 
-# SETUP whatsapp on #gpg
+# SETUP whatsapp #gpg
 # -----------------------------------------------------------------------------
 # Instant messaging (IM) and voice-over-IP (VoIP).
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-whatsapp
 
-# RESET whatsapp on #gpg
+# RESET whatsapp #gpg
 # -----------------------------------------------------------------------------
 # Instant messaging (IM) and voice-over-IP (VoIP).
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-whatsapp
 
-# SETUP youtube-dl on #gpg
+# SETUP youtube-dl #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=youtubedl-gui
 
-# RESET youtube-dl on #gpg
+# RESET youtube-dl #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------

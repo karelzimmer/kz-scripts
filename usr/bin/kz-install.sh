@@ -28,14 +28,28 @@ if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
 
-# INSTALL bleachbit #gpg
+# INSTALL backintime #none
+# -----------------------------------------------------------------------------
+# Backups/snapshots.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes backintime-qt; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes backintime-qt; fi
+
+# REMOVE backintime #none
+# -----------------------------------------------------------------------------
+# Backups/snapshots.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes backintime-qt; fi
+
+# INSTALL bleachbit #none #gpg
 # -----------------------------------------------------------------------------
 # Delete files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bleachbit; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes bleachbit; fi
 
-# REMOVE bleachbit #gpg
+# REMOVE bleachbit #none #gpg
 # -----------------------------------------------------------------------------
 # Delete files.
 # -----------------------------------------------------------------------------
@@ -84,18 +98,32 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes co
 # -----------------------------------------------------------------------------
 # Web console.
 # -----------------------------------------------------------------------------
-# Web app: https://localhost:9090
-# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cockpit; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes cockpit; fi
 
-# INSTALL cups-backend-bjnp #gpg
+# INSTALL cups #none
+# -----------------------------------------------------------------------------
+# Common Unix Printing System.
+# -----------------------------------------------------------------------------
+# Web app: http://localhost:631
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes cups; fi
+
+# REMOVE cups #none
+# -----------------------------------------------------------------------------
+# Common Unix Printing System.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes cups; fi
+
+# INSTALL cups-backend-bjnp #none #gpg
 # -----------------------------------------------------------------------------
 # Printer backend.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
 
-# REMOVE cups-backend-bjnp #gpg
+# REMOVE cups-backend-bjnp #none #gpg
 # -----------------------------------------------------------------------------
 # Printer backend.
 # -----------------------------------------------------------------------------
@@ -118,10 +146,27 @@ if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
 # -----------------------------------------------------------------------------
+# GNOME Sushi - quick preview.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes sushi; fi
+# -----------------------------------------------------------------------------
+# Usage:
+# Select a file, press the space bar, and a preview will appear.
+# -----------------------------------------------------------------------------
+# GNOME Sushi - quick preview.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes sushi; fi
+# -----------------------------------------------------------------------------
 # GNOME Tweaks - adjust advanced settings.
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if (type gnome-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes gnome-tweaks; fi
+# -----------------------------------------------------------------------------
+# Mint Codecs - enhancements for the Linux Mint Cinnamon Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
 # -----------------------------------------------------------------------------
 # Xfce4 Goodies - enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
@@ -129,7 +174,7 @@ if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo a
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes xfce4-goodies; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^user-session=karel/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "6auser-session=${SUDO_USER:-$USER}" /etc/lightdm/lightdm.conf; fi
@@ -156,10 +201,19 @@ if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes nautilus-admin; fi
 # -----------------------------------------------------------------------------
+# GNOME Sushi - quick preview.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes sushi; fi
+# -----------------------------------------------------------------------------
 # GNOME Tweaks - adjust advanced settings.
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if (type gnome-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes gnome-tweaks; fi
+# -----------------------------------------------------------------------------
+# Mint Codecs - enhancements for the Linux Mint Cinnamon Desktop Environment.
+# -----------------------------------------------------------------------------
+if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
 # -----------------------------------------------------------------------------
 # Xfce4 Goodies - enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
@@ -291,8 +345,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes get
 # -----------------------------------------------------------------------------
 # Git - distributed revision control system.
 # -----------------------------------------------------------------------------
-# Web app: https://github.com
-# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes git; fi
 # -----------------------------------------------------------------------------
@@ -333,8 +385,6 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rp
 # -----------------------------------------------------------------------------
 # Shellcheck - shell script linter.
 # -----------------------------------------------------------------------------
-# Web app: https://www.shellcheck.net
-# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes shellcheck; fi
 # -----------------------------------------------------------------------------
@@ -354,8 +404,6 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes us
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes usbutils; fi
 # -----------------------------------------------------------------------------
 # Vscode - editor.
-# -----------------------------------------------------------------------------
-# Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
@@ -396,14 +444,46 @@ if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/
 ! grep --quiet 'pci=noaer' /etc/default/grub
 REBOOT=true
 
-# INSTALL disabled-lidswitch #gpg
+# INSTALL disabled-apport #none
+# -----------------------------------------------------------------------------
+# Disable automatic crash report generation for Ubuntu.
+# -----------------------------------------------------------------------------
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop apport.service; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
+
+# REMOVE disabled-apport #none
+# -----------------------------------------------------------------------------
+# Enable automatic crash report generation for Ubuntu.
+# -----------------------------------------------------------------------------
+if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
+
+# INSTALL disabled-fwupd #none
+# -----------------------------------------------------------------------------
+# Disable FirmWare UPdate Daemon.
+# -----------------------------------------------------------------------------
+sudo systemctl stop fwupd.service
+sudo systemctl disable fwupd.service
+sudo systemctl mask fwupd.service
+
+# REMOVE disabled-fwupd #none
+# -----------------------------------------------------------------------------
+# Enable FirmWare UPdate Daemon.
+# -----------------------------------------------------------------------------
+sudo systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start fwupd.service
+
+# INSTALL disabled-lidswitch #none #gpg
 # -----------------------------------------------------------------------------
 # Do nothing when the laptop lid is closed.
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
 
-# REMOVE disabled-lidswitch #gpg
+# REMOVE disabled-lidswitch #none #gpg
 # -----------------------------------------------------------------------------
 # Restore the default action when the laptop lid is closed.
 # -----------------------------------------------------------------------------
@@ -422,6 +502,54 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes pe
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes perl-Image-ExifTool; fi
+
+# INSTALL fdupes #none
+# -----------------------------------------------------------------------------
+# Find duplicate files.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fdupes; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes fdupes; fi
+# -----------------------------------------------------------------------------
+# Usage:
+# $ fdupes -r /path/to/folder # Report recursively from /path/to/folder
+# $ fdupes -rd /path/to/folder # Delete, interactively, from /path/to/folder
+# $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
+# -----------------------------------------------------------------------------
+
+# REMOVE fdupes #none
+# -----------------------------------------------------------------------------
+# Find duplicate files.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
+
+# INSTALL force-x11 #none
+# -----------------------------------------------------------------------------
+# Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
+# -----------------------------------------------------------------------------
+# Force means no choice on user login screen for Xorg/X11 or Wayland!
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
+REBOOT=true
+# -----------------------------------------------------------------------------
+# To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
+# 'x11'.
+# -----------------------------------------------------------------------------
+
+# REMOVE force-x11 #none
+# -----------------------------------------------------------------------------
+# Enable choice on user login screen for Xorg/X11 or Wayland.
+# -----------------------------------------------------------------------------
+# Force means no choice on user login screen for Xorg/X11 or Wayland!
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
+REBOOT=true
+# -----------------------------------------------------------------------------
+# To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
+# 'wayland'.
+# -----------------------------------------------------------------------------
 
 # INSTALL gimp pc06
 # -----------------------------------------------------------------------------
@@ -470,18 +598,16 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 # -----------------------------------------------------------------------------
 # Explore the planet.
 # -----------------------------------------------------------------------------
-# Web app: https://earth.google.com
-# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes google-earth-pro-stable; fi
 
-# INSTALL handbrake #gpg
+# INSTALL handbrake #none #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes handbrake; fi
 
-# REMOVE handbrake #gpg
+# REMOVE handbrake #none #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
@@ -591,15 +717,42 @@ sudo updatedb
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes mlocate; fi
 
+# INSTALL ntfs #none
+# -----------------------------------------------------------------------------
+# NTFS support.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ntfs-3g ntfsprogs; fi
+# -----------------------------------------------------------------------------
+# Usage:
+# $ findmnt (or lsblk)
+# TARGET SOURCE FSTYPE OPTIONS
+# /media/... /dev/sda1 ntfs3 rw,nosuid,nodev,relatime,uid=...
+# $ lsblk
+# NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+# sda 8:0 0 931,5G 0 disk
+# +-sda1 8:1 0 931,5G 0 part /media/...
+# $ sudo ntfsfix /dev/sdba1 # Fix an NTFS partition
+# $ sudo -b ntfsfix /dev/sdba1 # Clear the bad sector list
+# $ sudo -d ntfsfix /dev/sdba1 # Clear the volume dirty flag
+# -----------------------------------------------------------------------------
+
+# REMOVE ntfs #none
+# -----------------------------------------------------------------------------
+# NTFS support.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
+
 # INSTALL primary-monitor pc06
 # -----------------------------------------------------------------------------
 # Set the default GDM login monitor in a multi-monitor setup.
 # -----------------------------------------------------------------------------
-# Saved in: /home/karel/.config/monitors.xml
+# Saved in: /home/${SUDO_USER:-$USER}/.config/monitors.xml
 # -----------------------------------------------------------------------------
-if id gdm &> /dev/null && [[ -f /home/karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if id gdm &> /dev/null && [[ -f /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if id gdm &> /dev/null && [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
-if id Debian-gdm &> /dev/null && [[ -f /home/karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/karel/.config/monitors.xml ~Debian-gdm/.config/monitors.xml; fi
+if id Debian-gdm &> /dev/null && [[ -f /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~Debian-gdm/.config/monitors.xml; fi
 if id Debian-gdm &> /dev/null && [[ -f ~Debian-gdm/.config/monitors.xml ]]; then sudo chown --verbose Debian-gdm:Debian-gdm ~Debian-gdm/.config/monitors.xml; fi
 REBOOT=true
 
@@ -607,18 +760,34 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Reset the default GDM login monitor in a multi-monitor setup.
 # -----------------------------------------------------------------------------
-# Saved in: /home/karel/.config/monitors.xml
+# Saved in: /home/${SUDO_USER:-$USER}/.config/monitors.xml
 # -----------------------------------------------------------------------------
 sudo rm --force --verbose ~gdm/.config/monitors.xml ~Debian-gdm/.config/monitors.xml
 REBOOT=true
 
-# INSTALL sound-juicer on #gp
+# INSTALL simplescreenrecorder #none
+# -----------------------------------------------------------------------------
+# Screen recorder.
+# -----------------------------------------------------------------------------
+# Requires the use of Xorg/X11.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes simplescreenrecorder; fi
+
+# REMOVE simplescreenrecorder #none
+# -----------------------------------------------------------------------------
+# Screen recorder.
+# -----------------------------------------------------------------------------
+# Required the use of Xorg/X11. Enable Wayland again?
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
+
+# INSTALL sound-juicer #gp
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes sound-juicer; fi
 
-# REMOVE sound-juicer #gpg
+# REMOVE sound-juicer #none #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
@@ -639,8 +808,6 @@ if grep --quiet rhel   /etc/os-release; then echo 'The spotify app is available 
 # REMOVE spotify pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
 # Music and podcasts.
-# -----------------------------------------------------------------------------
-# Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spotify-client; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
@@ -692,14 +859,12 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # -----------------------------------------------------------------------------
-# Web app: https://web.teamviewer.com
-# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes teamviewer; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes teamviewer; fi
 
 # INSTALL terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
-# Bash completion.
+# Bash completion - tab-completion.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes bash-completion; fi
@@ -709,14 +874,18 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes ba
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes htop; fi
 # -----------------------------------------------------------------------------
-# Display directory tree.
+# Tree - display directory tree.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes tree; fi
+# -----------------------------------------------------------------------------
+# Usermod - log access.
+# -----------------------------------------------------------------------------
+sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
 # REMOVE terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
-# Bash completion.
+# Bash completion - tab-completion.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes bash-completion; fi
@@ -726,10 +895,29 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes bas
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes htop; fi
 # -----------------------------------------------------------------------------
-# Display directory tree.
+# Tree - display directory tree.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes tree; fi
+# -----------------------------------------------------------------------------
+# Usermod - log access.
+# -----------------------------------------------------------------------------
+sudo gpasswd --delete "${SUDO_USER:-$USER}" adm
+sudo gpasswd --delete "${SUDO_USER:-$USER}" systemd-journal
+
+# INSTALL thunderbird *
+# -----------------------------------------------------------------------------
+# E-mail and news.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes thunderbird; fi
+
+# REMOVE thunderbird *
+# -----------------------------------------------------------------------------
+# E-mail and news.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-nl; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes thunderbird; fi
 
 # INSTALL transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -792,7 +980,7 @@ if   id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo passwd  --delet
 # -----------------------------------------------------------------------------
 if id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext --domain=kz 'guest')"; fi
 
-# INSTALL virtualbox #gpg
+# INSTALL virtualbox #none #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
@@ -804,7 +992,7 @@ if grep --quiet debian /etc/os-release; then echo 'virtualbox-ext-pack virtualbo
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes VirtualBox; fi
 
-# REMOVE virtualbox #gpg
+# REMOVE virtualbox #none #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
@@ -856,21 +1044,35 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes webmin
 # -----------------------------------------------------------------------------
 # Web console.
 # -----------------------------------------------------------------------------
-# Web app: https://localhost:10000
-# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes webmin; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes webmin; fi
 if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
 
-# INSTALL youtube-dl #gpg
+# INSTALL wine #none
+# -----------------------------------------------------------------------------
+# Run Windows applications.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --add-architecture i386; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes wine playonlinux; fi
+
+# REMOVE wine #none
+# -----------------------------------------------------------------------------
+# Run Windows applications.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
+
+# INSTALL youtube-dl #none #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes youtubedl-gui; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes youtube-dl; fi
 
-# REMOVE youtube-dl #gpg
+# REMOVE youtube-dl #none #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
