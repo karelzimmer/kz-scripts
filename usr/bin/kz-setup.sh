@@ -89,7 +89,7 @@ if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gset
 # -----------------------------------------------------------------------------
 # KDE - desktop environment.
 # -----------------------------------------------------------------------------
-if type ksmserver &> /dev/null && ! grep --quiet '[KDE]' ~/.config/kdeglobals; then echo -e '\n[KDE]' >> ~/.config/kdeglobals; fi
+if type ksmserver &> /dev/null && ! grep --quiet '\[KDE\]' ~/.config/kdeglobals; then echo -e '\n[KDE]' >> ~/.config/kdeglobals; fi
 if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kdeglobals; then sed --in-place '/[KDE]/aSingleClick=true' ~/.config/kdeglobals; fi
 # -----------------------------------------------------------------------------
 # LXQt - desktop environment.
