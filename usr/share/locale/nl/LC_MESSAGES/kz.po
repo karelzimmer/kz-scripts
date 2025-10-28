@@ -1397,7 +1397,7 @@ msgstr "Instellen voorbereiden"
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-install:576
+#: kz-install:576 kz-setup:596
 msgid "Try to set up or reset the apps again."
 msgstr "Probeer de apps opnieuw in te stellen of te resetten."
 
@@ -1570,9 +1570,3 @@ msgstr "Wrapper-script voor kz-wifi"
 #: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
-
-#: kz-setup:596
-#, fuzzy
-#| msgid "Try to set up or reset the apps again."
-msgid "Try to set up the apps again."
-msgstr "Probeer de apps opnieuw in te stellen of te resetten."
