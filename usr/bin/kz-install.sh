@@ -47,14 +47,14 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Delete files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bleachbit; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes bleachbit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  bleachbit; fi
 
 # REMOVE bleachbit #none #gpg
 # -----------------------------------------------------------------------------
 # Delete files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bleachbit; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes bleachbit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  bleachbit; fi
 
 # INSTALL broadcom-sta-dkms pc01
 # -----------------------------------------------------------------------------
@@ -92,14 +92,14 @@ if grep --quiet rhel   /etc/os-release; then sudo calibre-uninstall; fi
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cockpit cockpit-pcp; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes cockpit cockpit-pcp; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  cockpit cockpit-pcp; fi
 
 # REMOVE cockpit pc06
 # -----------------------------------------------------------------------------
 # Web console.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cockpit; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes cockpit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cockpit; fi
 
 # INSTALL cups #none
 # -----------------------------------------------------------------------------
@@ -139,8 +139,8 @@ if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f 
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if (type gnome-session && grep debian /etc/os-release &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf     install --assumeyes gnome-shell-extension-dash-to-dock; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf     install --assumeyes gnome-shell-extension-no-overview; fi
+if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf install --assumeyes  gnome-shell-extension-no-overview; fi
 # -----------------------------------------------------------------------------
 # GNOME Gdebi - view and install deb files.
 # -----------------------------------------------------------------------------
@@ -161,7 +161,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # GNOME Tweaks - adjust advanced settings.
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if (type gnome-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes gnome-tweaks; fi
+if (type gnome-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 # -----------------------------------------------------------------------------
 # Mint Codecs - enhancements for the Linux Mint Cinnamon Desktop Environment.
 # -----------------------------------------------------------------------------
@@ -170,7 +170,7 @@ if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then 
 # Xfce4 Goodies - enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
 if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
-if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes xfce4-goodies; fi
+if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
@@ -189,8 +189,8 @@ if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f 
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if (type gnome-session && grep debian /etc/os-release &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf     remove --assumeyes gnome-shell-extension-dash-to-dock; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview) &> /dev/null; then sudo dnf     remove --assumeyes gnome-shell-extension-no-overview; fi
+if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview)      &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-no-overview; fi
 # -----------------------------------------------------------------------------
 # GNOME Gdebi - view and install deb files.
 # -----------------------------------------------------------------------------
@@ -208,7 +208,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # GNOME Tweaks - adjust advanced settings.
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if (type gnome-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes gnome-tweaks; fi
+if (type gnome-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 # -----------------------------------------------------------------------------
 # Mint Codecs - enhancements for the Linux Mint Cinnamon Desktop Environment.
 # -----------------------------------------------------------------------------
@@ -217,7 +217,7 @@ if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then 
 # Xfce4 Goodies - enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
 if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
-if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     remove --assumeyes xfce4-goodies; fi
+if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     remove --assumeyes  xfce4-goodies; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
@@ -228,39 +228,39 @@ REBOOT=true
 # Ansible - configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes ansible; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  ansible; fi
 # -----------------------------------------------------------------------------
 # Fakeroot - simulate superuser privileges.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes fakeroot; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  fakeroot; fi
 # -----------------------------------------------------------------------------
 # Gettext - GNU Internationalization.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gettext; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes gettext; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  gettext; fi
 # -----------------------------------------------------------------------------
 # Git - distributed revision control system.
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes git; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  git; fi
 # -----------------------------------------------------------------------------
 # Groff - compose manual pages with GNU roff.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes groff; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes groff; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  groff; fi
 # -----------------------------------------------------------------------------
 # Jq - JSON processor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes jq; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes jq; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  jq; fi
 # -----------------------------------------------------------------------------
 # Lftp - FTP/HTTP/BitTorrent client.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes lftp; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  lftp; fi
 # -----------------------------------------------------------------------------
 # Microsoft vscode - editor.
 # -----------------------------------------------------------------------------
@@ -280,7 +280,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; 
 # Nmap - Network MAPper.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes nmap; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  nmap; fi
 # -----------------------------------------------------------------------------
 # Python - programming language.
 # -----------------------------------------------------------------------------
@@ -292,19 +292,19 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes python
 # Poedit - gettext catalogs editor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes poedit; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes poedit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  poedit; fi
 # -----------------------------------------------------------------------------
 # RPM - package manager.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes rpm; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  rpm; fi
 # -----------------------------------------------------------------------------
 # Shellcheck - shell script linter.
 # -----------------------------------------------------------------------------
 # Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes shellcheck; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  shellcheck; fi
 # -----------------------------------------------------------------------------
 # Spice-vdagent - enhancements for virtualized guest systems.
 # -----------------------------------------------------------------------------
@@ -312,74 +312,74 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes sh
 # virtualized guest systems.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes spice-vdagent; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  spice-vdagent; fi
 # -----------------------------------------------------------------------------
 # Usbutils - USB utilities.
 # -----------------------------------------------------------------------------
 # This package contains the lsusb utility.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes usbutils; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  usbutils; fi
 
 # REMOVE development pc06 pc07
 # -----------------------------------------------------------------------------
 # Ansible - configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes ansible; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ansible; fi
 # -----------------------------------------------------------------------------
 # Fakeroot - simulate superuser privileges.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fakeroot; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes fakeroot; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fakeroot; fi
 # -----------------------------------------------------------------------------
 # Gettext - GNU Internationalization.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gettext; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes gettext; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gettext; fi
 # -----------------------------------------------------------------------------
 # Git - distributed revision control system.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes git; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  git; fi
 # -----------------------------------------------------------------------------
 # Groff - compose manual pages with GNU roff.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes groff; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes groff; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  groff; fi
 # -----------------------------------------------------------------------------
 # Jq - JSON processor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes jq; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes jq; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  jq; fi
 # -----------------------------------------------------------------------------
 # Lftp - FTP/HTTP/BitTorrent client.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lftp; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes lftp; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lftp; fi
 # -----------------------------------------------------------------------------
 # Microsoft vscode - editor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes code; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
 if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 # -----------------------------------------------------------------------------
 # Nmap - Network MAPper.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes nmap; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nmap; fi
 # -----------------------------------------------------------------------------
 # Python - programming language.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes python mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Poedit - Gettext catalogs editor.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes poedit; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes poedit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  poedit; fi
 # -----------------------------------------------------------------------------
 # RPM - package manager for RPM.
 # -----------------------------------------------------------------------------
@@ -388,7 +388,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rp
 # Shellcheck - shell script linter.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes shellcheck; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  shellcheck; fi
 # -----------------------------------------------------------------------------
 # Spice-vdagent - enhancements for virtualized guest systems.
 # -----------------------------------------------------------------------------
@@ -396,14 +396,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes she
 # virtualized guest systems.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes spice-vdagent; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  spice-vdagent; fi
 # -----------------------------------------------------------------------------
 # Usbutils - USB utilities.
 # -----------------------------------------------------------------------------
 # This package contains the lsusb utility.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes usbutils; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
 
 # INSTALL disabled-aer pc06
 # -----------------------------------------------------------------------------
@@ -488,15 +488,15 @@ sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes evolution; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes evolution; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes flathub org.gnome.Evolution; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes  flathub org.gnome.Evolution; fi
 
 # REMOVE evolution #none
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes evolution; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes evolution; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes flathub org.gnome.Evolution; fi
 
 # INSTALL exiftool pc06 pc07
@@ -504,14 +504,14 @@ if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes 
 # Read and write meta information.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes perl-Image-ExifTool; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  perl-Image-ExifTool; fi
 
 # REMOVE exiftool pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes perl-Image-ExifTool; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  perl-Image-ExifTool; fi
 
 # INSTALL fdupes #none
 # -----------------------------------------------------------------------------
@@ -566,14 +566,14 @@ REBOOT=true
 # GNU Image Manipulation Program.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-nl; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes gimp; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  gimp; fi
 
 # REMOVE gimp pc06
 # -----------------------------------------------------------------------------
 # GNU Image Manipulation Program.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-nl; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes gimp; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gimp; fi
 
 # INSTALL google-chrome *
 # -----------------------------------------------------------------------------
@@ -590,7 +590,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 # Web browser.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes google-chrome-stable; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes google-chrome-stable; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-chrome-stable; fi
 
 # INSTALL google-earth pc04
 # -----------------------------------------------------------------------------
@@ -609,7 +609,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 # Explore the planet.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes google-earth-pro-stable; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-earth-pro-stable; fi
 
 # INSTALL handbrake #none #gpg
 # -----------------------------------------------------------------------------
@@ -700,24 +700,22 @@ REBOOT=true
 # Office suite.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libreoffice; fi
-if grep --quiet rhel   /etc/os-release &&   dnf list libreoffice &> /dev/null; then sudo dnf     install --assumeyes libreoffice; fi
-if grep --quiet rhel   /etc/os-release && ! dnf list libreoffice &> /dev/null; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet rhel   /etc/os-release && ! dnf list libreoffice &> /dev/null; then sudo flatpak install --assumeyes app/org.libreoffice.LibreOffice; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes  app/org.libreoffice.LibreOffice; fi
 
 # REMOVE libreoffice *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libreoffice; fi
-if grep --quiet rhel   /etc/os-release &&   dnf list libreoffice &> /dev/null; then sudo dnf     remove --assumeyes libreoffice; fi
-if grep --quiet rhel   /etc/os-release && ! dnf list libreoffice &> /dev/null; then sudo flatpak uninstall --assumeyes app/org.libreoffice.LibreOffice; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes libreoffice; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  app/org.libreoffice.LibreOffice; fi
 
 # INSTALL locate pc06 pc07
 # -----------------------------------------------------------------------------
 # Find files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes locate; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes mlocate; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  mlocate; fi
 sudo updatedb
 
 # REMOVE locate pc06 pc07
@@ -725,7 +723,7 @@ sudo updatedb
 # Find files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes mlocate; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  mlocate; fi
 
 # INSTALL microsoft-edge #none
 # -----------------------------------------------------------------------------
@@ -733,19 +731,19 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes mlo
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
-if grep --quiet debian /etc/os-release; then sudo apt update; fi
-if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes microsoft-edge-stable; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes microsoft-edge-stable; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes flathub com.microsoft.Edge; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes  flathub com.microsoft.Edge; fi
 
 # REMOVE microsoft-edge #none
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes microsoft-edge-stable; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes microsoft-edge-stable; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes flathub com.microsoft.Edge; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  flathub com.microsoft.Edge; fi
 
 # INSTALL ntfs #none
 # -----------------------------------------------------------------------------
@@ -848,7 +846,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 # Secure SHell.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ssh; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes openssh; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  openssh; fi
 sudo sed --in-place 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 # -----------------------------------------------------------------------------
 # Check for remote root access.
@@ -869,7 +867,7 @@ if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '4a192.168.1.21
 # -----------------------------------------------------------------------------
 sudo sed --in-place 's/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ssh; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes openssh; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  openssh; fi
 # -----------------------------------------------------------------------------
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
@@ -891,24 +889,24 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 # Remote desktop.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes teamviewer; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes teamviewer; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  teamviewer; fi
 
 # INSTALL terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Bash completion - tab-completion.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes bash-completion; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  bash-completion; fi
 # -----------------------------------------------------------------------------
 # Htop - process viewer.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes htop; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  htop; fi
 # -----------------------------------------------------------------------------
 # Tree - display directory tree.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes tree; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  tree; fi
 # -----------------------------------------------------------------------------
 # Usermod - log access.
 # -----------------------------------------------------------------------------
@@ -919,17 +917,17 @@ sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 # Bash completion - tab-completion.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes bash-completion; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  bash-completion; fi
 # -----------------------------------------------------------------------------
 # Htop - process viewer.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes htop; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  htop; fi
 # -----------------------------------------------------------------------------
 # Tree - display directory tree.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes tree; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  tree; fi
 # -----------------------------------------------------------------------------
 # Usermod - log access.
 # -----------------------------------------------------------------------------
@@ -941,35 +939,35 @@ sudo gpasswd --delete "${SUDO_USER:-$USER}" systemd-journal
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes thunderbird; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
 
 # REMOVE thunderbird *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-nl; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes thunderbird; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  thunderbird; fi
 
 # INSTALL transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # BitTorrent client.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes transmission; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes transmission; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  transmission; fi
 
 # REMOVE transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # BitTorrent client.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes transmission; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes transmission; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  transmission; fi
 
 # INSTALL ufw pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Uncomplicated FireWall.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gufw; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes gufw; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  gufw; fi
 sudo ufw allow ssh
 sudo ufw enable
 
@@ -979,7 +977,7 @@ sudo ufw enable
 # -----------------------------------------------------------------------------
 sudo ufw disable
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gufw; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes gufw; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gufw; fi
 
 # INSTALL update-grub *
 # -----------------------------------------------------------------------------
@@ -1021,7 +1019,7 @@ if id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo userdel --remove 
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes VirtualBox; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  VirtualBox; fi
 
 # REMOVE virtualbox #none #gpg
 # -----------------------------------------------------------------------------
@@ -1030,31 +1028,31 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes Vi
 # VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes VirtualBox; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  VirtualBox; fi
 
 # INSTALL vlc *
 # -----------------------------------------------------------------------------
 # Multimedia player.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes vlc; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes vlc; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  vlc; fi
 # -----------------------------------------------------------------------------
 # Ffmpeg - multimedia support.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ffmpeg*; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes ffmpeg*; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  ffmpeg*; fi
 
 # REMOVE vlc *
 # -----------------------------------------------------------------------------
 # Multimedia player.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes vlc; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes vlc; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  vlc; fi
 # -----------------------------------------------------------------------------
 # Ffmpeg - multimedia support.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ffmpeg*; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes ffmpeg*; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ffmpeg*; fi
 
 # INSTALL webmin pc07
 # -----------------------------------------------------------------------------
@@ -1103,11 +1101,11 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Download videos.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes youtubedl-gui; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes youtube-dl; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  youtube-dl; fi
 
 # REMOVE youtube-dl #none #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes youtubedl-gui; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes youtube-dl; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  youtube-dl; fi
