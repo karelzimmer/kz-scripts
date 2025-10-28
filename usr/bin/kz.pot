@@ -951,8 +951,7 @@ msgstr ""
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:576
-msgid "Try installing/removing the apps again."
+msgid "Try to install or remove the apps again."
 msgstr ""
 
 #: kz-install:592
@@ -1260,8 +1259,8 @@ msgstr ""
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:596
-msgid "Try to set up the apps again."
+#: kz-install:576
+msgid "Try to set up or reset the apps again."
 msgstr ""
 
 #: kz-setup:612
@@ -1424,4 +1423,8 @@ msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
+msgstr ""
+
+#: kz-setup:596
+msgid "Try to set up the apps again."
 msgstr ""
