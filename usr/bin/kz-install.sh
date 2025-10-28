@@ -490,7 +490,7 @@ sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes evolution; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes flathub flatpak install flathub org.gnome.Evolution; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes flatpak install flathub org.gnome.Evolution; fi
 
 # REMOVE evolution #none
 # -----------------------------------------------------------------------------
