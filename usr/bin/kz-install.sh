@@ -484,23 +484,6 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-# INSTALL microsoft-edge #none
-# -----------------------------------------------------------------------------
-# Web browser.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
-if grep --quiet debian /etc/os-release; then sudo apt update; fi
-if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes microsoft-edge-stable; fi
-
-# REMOVE microsoft-edge #none
-# -----------------------------------------------------------------------------
-# Web browser.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes microsoft-edge-stable; fi
-if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-
 # INSTALL exiftool pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
@@ -728,6 +711,26 @@ sudo updatedb
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes mlocate; fi
+
+# INSTALL microsoft-edge #none
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
+if grep --quiet debian /etc/os-release; then sudo apt update; fi
+if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes microsoft-edge-stable; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes flathub com.microsoft.Edge; fi
+
+# REMOVE microsoft-edge #none
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes microsoft-edge-stable; fi
+if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes flathub com.microsoft.Edge; fi
 
 # INSTALL ntfs #none
 # -----------------------------------------------------------------------------
