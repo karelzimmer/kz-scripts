@@ -940,15 +940,15 @@ sudo gpasswd --delete "${SUDO_USER:-$USER}" systemd-journal
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes thunderbird; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes thunderbird; fi
 
 # REMOVE thunderbird *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-nl; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes thunderbird; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-nl; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes thunderbird; fi
 
 # INSTALL transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
