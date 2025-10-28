@@ -484,6 +484,21 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
+# INSTALL evolution #none
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt install --assume-yes evolution; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes flathub flatpak install flathub org.gnome.Evolution; fi
+
+# REMOVE evolution #none
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes evolution; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes flathub org.gnome.Evolution; fi
+
 # INSTALL exiftool pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
@@ -923,14 +938,14 @@ sudo gpasswd --delete "${SUDO_USER:-$USER}" systemd-journal
 
 # INSTALL thunderbird *
 # -----------------------------------------------------------------------------
-# E-mail and news.
+# E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes thunderbird; fi
 
 # REMOVE thunderbird *
 # -----------------------------------------------------------------------------
-# E-mail and news.
+# E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-nl; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes thunderbird; fi

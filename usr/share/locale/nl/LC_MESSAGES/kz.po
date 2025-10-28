@@ -1071,7 +1071,7 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:990 kz-install.sh:991 kz-install.sh:997
+#: kz-install.sh:1005 kz-install.sh:1006 kz-install.sh:1012
 msgid "--domain=kz"
 msgstr "--domain=kz"
 
