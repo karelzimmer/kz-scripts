@@ -255,7 +255,6 @@ environment available")"
 
 # This function browses through the installation files.
 function process_option_browse() {
-    OPTION_GUI=false
     less --no-init --quit-if-one-screen < <(cat "${install_files[@]}")
 }
 
@@ -401,7 +400,6 @@ function process_install_file_by_hostname() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    OPTION_GUI=false
     less --no-init --quit-if-one-screen "$command_file"
 }
 

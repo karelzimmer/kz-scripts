@@ -219,6 +219,7 @@ function kz.process_option_help() {
 
     text="$(eval_gettext "Type '\$program_name --manual' or 'man \
 \$program_name'\$yelp_man_url for more information.")"
+    OPTION_GUI=false
     # shellcheck disable=SC2154
     kz.infomsg "$HELP
 
@@ -245,6 +246,7 @@ function kz.process_option_usage() {
     text="$USAGE
 
 $(eval_gettext "Type '\$program_name --help' for more information.")"
+    OPTION_GUI=false
     kz.infomsg "$text"
 }
 
@@ -268,6 +270,7 @@ function kz.process_option_version() {
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.")"
+    OPTION_GUI=false
     kz.infomsg "$text"
 }
 
