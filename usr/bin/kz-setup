@@ -132,8 +132,6 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         exit 0
     fi
 
-    create_settings
-
     command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-commands.sh")
 
     if $argument_app; then
@@ -147,6 +145,7 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         exit 0
     fi
 
+    create_settings
     setup_apps
 }
 
