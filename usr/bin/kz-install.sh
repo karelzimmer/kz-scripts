@@ -14,7 +14,7 @@
 # -----------------------------------------------------------------------------
 # Add Debian components to package sources & update package lists for all.
 # -----------------------------------------------------------------------------
-if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
@@ -23,7 +23,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; 
 # -----------------------------------------------------------------------------
 # Remove Debian components package sources & update package lists for all.
 # -----------------------------------------------------------------------------
-if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
@@ -33,14 +33,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; 
 # Backups/snapshots.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes backintime-qt; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes backintime-qt; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  backintime-qt; fi
 
 # REMOVE backintime #none
 # -----------------------------------------------------------------------------
 # Backups/snapshots.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes backintime-qt; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  backintime-qt; fi
 
 # INSTALL bleachbit #none #gpg
 # -----------------------------------------------------------------------------
@@ -108,14 +108,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  co
 # Web app: http://localhost:631
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes cups; fi
+if grep --quiet rhel /etc/os-release  ; then sudo dnf     install --assumeyes  cups; fi
 
 # REMOVE cups #none
 # -----------------------------------------------------------------------------
 # Common Unix Printing System.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes cups; fi
+if grep --quiet rhel /etc/os-release  ; then sudo dnf     remove --assumeyes  cups; fi
 
 # INSTALL cups-backend-bjnp #none #gpg
 # -----------------------------------------------------------------------------
@@ -139,8 +139,8 @@ if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f 
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if (type gnome-session && grep debian /etc/os-release &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview ) &> /dev/null; then sudo dnf install --assumeyes  gnome-shell-extension-no-overview; fi
+if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview )     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
 # -----------------------------------------------------------------------------
 # GNOME Gdebi - view and install deb files.
 # -----------------------------------------------------------------------------
@@ -153,7 +153,7 @@ if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo a
 # GNOME Sushi - quick preview.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  sushi; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
@@ -172,11 +172,11 @@ if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then 
 if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d'  /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place "6auser-session=${SUDO_USER:-$USER}" /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false'           /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false'    /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place "6auser-session=${SUDO_USER:-$USER}"   /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # REMOVE desktop *
@@ -203,7 +203,7 @@ if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo a
 # GNOME Sushi - quick preview.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  sushi; fi
 # -----------------------------------------------------------------------------
 # GNOME Tweaks - adjust advanced settings.
 # -----------------------------------------------------------------------------
@@ -218,8 +218,8 @@ if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then 
 # -----------------------------------------------------------------------------
 if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     remove --assumeyes  xfce4-goodies; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d'         /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d'  /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
@@ -270,9 +270,9 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  n
 # Python - programming language.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes python3 mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
-if grep --quiet debian /etc/os-release; then sudo ln  --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
-if grep --quiet debian /etc/os-release; then sudo ln  --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
+if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
+if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Poedit - gettext catalogs editor.
 # -----------------------------------------------------------------------------
@@ -352,7 +352,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nm
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes python mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  python3 python3-mypy python3-pycodestyle python3-pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Poedit - Gettext catalogs editor.
 # -----------------------------------------------------------------------------
@@ -421,7 +421,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Disable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop apport.service; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop    apport.service; fi
 if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
 if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
 if grep --quiet Ubuntu /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
@@ -437,9 +437,9 @@ if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.
 # -----------------------------------------------------------------------------
 # Disable FirmWare UPdate Daemon.
 # -----------------------------------------------------------------------------
-sudo systemctl stop fwupd.service
+sudo systemctl stop    fwupd.service
 sudo systemctl disable fwupd.service
-sudo systemctl mask fwupd.service
+sudo systemctl mask    fwupd.service
 
 # REMOVE disabled-fwupd #none
 # -----------------------------------------------------------------------------
@@ -447,7 +447,7 @@ sudo systemctl mask fwupd.service
 # -----------------------------------------------------------------------------
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
-sudo systemctl start fwupd.service
+sudo systemctl start  fwupd.service
 
 # INSTALL disabled-lidswitch #none #gpg
 # -----------------------------------------------------------------------------
@@ -466,9 +466,9 @@ sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes evolution; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-yes    evolution; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes  flathub org.gnome.Evolution; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub org.gnome.Evolution; fi
 
 # REMOVE evolution #none
 # -----------------------------------------------------------------------------
@@ -496,7 +496,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  pe
 # Find duplicate files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fdupes; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes fdupes; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  fdupes; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ fdupes -r /path/to/folder # Report recursively from /path/to/folder
@@ -509,7 +509,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes fdupes; 
 # Find duplicate files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fdupes; fi
 
 # INSTALL force-x11 #none
 # -----------------------------------------------------------------------------
@@ -677,9 +677,9 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libreoffice; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-yes    libreoffice; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes  app/org.libreoffice.LibreOffice; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     app/org.libreoffice.LibreOffice; fi
 
 # REMOVE libreoffice *
 # -----------------------------------------------------------------------------
@@ -710,9 +710,9 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ml
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes microsoft-edge-stable; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-yes    microsoft-edge-stable; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet rhel   /etc/os-release; then sudo flatpak install --assumeyes  flathub com.microsoft.Edge; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub com.microsoft.Edge; fi
 
 # REMOVE microsoft-edge #none
 # -----------------------------------------------------------------------------
@@ -738,7 +738,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes c
 if grep --quiet debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
 if grep --quiet rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  code; fi
 
 # REMOVE microsoft-vscode pc06 pc07
 # -----------------------------------------------------------------------------
@@ -754,7 +754,7 @@ if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.
 # NTFS support.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ntfs-3g ntfsprogs; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  ntfs-3g ntfsprogs; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ findmnt (or lsblk)
@@ -774,7 +774,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes ntfs-3g 
 # NTFS support.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ntfs-3g ntfsprogs; fi
 
 # INSTALL primary-monitor pc06
 # -----------------------------------------------------------------------------
@@ -860,9 +860,9 @@ sudo systemctl restart ssh.service
 # -----------------------------------------------------------------------------
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d' /etc/hosts; fi
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d'       /etc/hosts; fi
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '2a192.168.1.100 pc01' /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '3a192.168.1.2 pc06' /etc/hosts; fi
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '3a192.168.1.2 pc06'   /etc/hosts; fi
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '4a192.168.1.219 pc07' /etc/hosts; fi
 
 # REMOVE ssh pc01 pc06 pc07
