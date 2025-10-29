@@ -171,7 +171,7 @@ if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then 
 # -----------------------------------------------------------------------------
 if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d'         /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d'  /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
 if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false'           /etc/lightdm/lightdm.conf; fi
@@ -272,7 +272,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  n
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes python3 mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  python3 python3-mypy python3-pycodestyle python3-pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Poedit - gettext catalogs editor.
 # -----------------------------------------------------------------------------
@@ -738,7 +738,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes c
 if grep --quiet debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
 if grep --quiet rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  code; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
 
 # REMOVE microsoft-vscode pc06 pc07
 # -----------------------------------------------------------------------------
