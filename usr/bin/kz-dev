@@ -169,7 +169,7 @@ def check_dependencies() -> None:
     # Call kz-install.
     text = 'Calling kz-install...'
     kz.logmsg(PROGRAM_NAME, text)
-    command: str = f'kz-install development'
+    command: str = f'kz-install development microsoft-vscode'
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except Exception as exc:
