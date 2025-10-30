@@ -1070,13 +1070,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:1007 kz-install.sh:1008 kz-install.sh:1014
-msgid "--domain=kz"
-msgstr "--domain=kz"
-
+#: kz-install.sh:1008 kz-install.sh:1009 kz-install.sh:1015
 msgid "guest"
 msgstr "gast"
 
+#: kz-install.sh:1008
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 

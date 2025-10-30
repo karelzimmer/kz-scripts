@@ -1001,17 +1001,18 @@ if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
+# INSTALL user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Add guest user.
 # -----------------------------------------------------------------------------
-if ! id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest_user')" "$(gettext --domain=kz 'guest')"; fi
-if   id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo passwd  --delete "$(gettext --domain=kz 'guest')"; fi
+if ! id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(TEXTDOMAIN=kz gettext 'Guest_user')" "$(TEXTDOMAIN=kz gettext 'guest')"; fi
+if   id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo passwd  --delete "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 # REMOVE user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Delete guest user.
 # -----------------------------------------------------------------------------
-if id "$(gettext --domain=kz 'guest')" &> /dev/null; then sudo userdel --remove "$(gettext --domain=kz 'guest')"; fi
+if id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 # INSTALL virtualbox #none #gpg
 # -----------------------------------------------------------------------------
