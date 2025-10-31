@@ -335,6 +335,13 @@ function build_deb_package() {
             'a-x'                       \
             --                          \
             "$SCRIPTS_REPO/usr/bin/"*.* |& $PROGRAM_LOGS
+    find    "$SCRIPTS_REPO/etc"         \
+            -name '*.json'              \
+            -type f                     \
+            -exec                       \
+            chmod                       \
+            --verbose                   \
+            'u=rw,g=rw,o=r' {} \;       |& $PROGRAM_LOGS
 
     # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive               \

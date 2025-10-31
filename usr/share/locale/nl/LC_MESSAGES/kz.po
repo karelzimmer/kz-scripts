@@ -490,23 +490,23 @@ msgstr "kan de taal niet bepalen"
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:363
+#: kz-build:370
 msgid " DEVELOPMENT VERSION"
 msgstr " ONTWIKKELINGSVERSIE"
 
-#: kz-build:389
+#: kz-build:396
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:464 kz-deploy:237
+#: kz-build:471 kz-deploy:237
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:486 kz-get:223
+#: kz-build:493 kz-get:223
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:495 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:279
+#: kz-build:502 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:279
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -598,7 +598,7 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:491 kz-check:566 kz-deploy:260
+#: kz-build:498 kz-check:566 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
