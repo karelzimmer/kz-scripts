@@ -69,7 +69,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network    
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-if grep --quiet debian /etc/os-release; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package || true; fi
 # -----------------------------------------------------------------------------
 # GNOME Dash-to-dock - desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
@@ -180,15 +179,15 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=code
-xdg-mime default code.desktop application/json          || true
-xdg-mime default code.desktop application/x-desktop     || true
-xdg-mime default code.desktop application/x-shellscript || true
-xdg-mime default code.desktop application/xml           || true
-xdg-mime default code.desktop text/html                 || true
-xdg-mime default code.desktop text/markdown             || true
-xdg-mime default code.desktop text/plain                || true
-xdg-mime default code.desktop text/troff                || true
-xdg-mime default code.desktop text/x-python             || true
+xdg-mime default code.desktop application/json
+xdg-mime default code.desktop application/x-desktop
+xdg-mime default code.desktop application/x-shellscript
+xdg-mime default code.desktop application/xml
+xdg-mime default code.desktop text/html
+xdg-mime default code.desktop text/markdown
+xdg-mime default code.desktop text/plain
+xdg-mime default code.desktop text/troff
+xdg-mime default code.desktop text/x-python
 
 # RESET development pc06 pc07
 # -----------------------------------------------------------------------------
@@ -237,7 +236,6 @@ kz-desktop --addbef=firefox_firefox
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
-xdg-mime default google-chrome.desktop application/pdf || true
 
 # RESET google-chrome *
 # -----------------------------------------------------------------------------
