@@ -231,13 +231,13 @@ kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
 kz-desktop --addbef=firefox_firefox
 
-# SETUP google-chrome *
+# SETUP google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
 
-# RESET google-chrome *
+# RESET google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------

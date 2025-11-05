@@ -553,7 +553,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  g
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-nl; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gimp; fi
 
-# INSTALL google-chrome *
+# INSTALL google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -563,7 +563,7 @@ if grep --quiet debian /etc/os-release; then rm --verbose /tmp/google-chrome.deb
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
-# REMOVE google-chrome *
+# REMOVE google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
