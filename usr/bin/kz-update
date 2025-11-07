@@ -74,6 +74,10 @@ def process() -> None:
 
     try:
         subprocess.run(command1, executable='bash', shell=True, check=True)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.term(PROGRAM_NAME, 1)
     except Exception as exc:
         text = str(exc)
         kz.logmsg(PROGRAM_NAME, text)
