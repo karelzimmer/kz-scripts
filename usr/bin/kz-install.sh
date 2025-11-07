@@ -845,7 +845,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes sp
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 
-# INSTALL ssh pc01 pc06 pc07
+# INSTALL ssh pc01 pc06 pc07 #gpg
 # -----------------------------------------------------------------------------
 # Secure SHell.
 # -----------------------------------------------------------------------------
@@ -857,25 +857,14 @@ sudo sed --in-place 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /e
 # -----------------------------------------------------------------------------
 grep 'PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
-# -----------------------------------------------------------------------------
-# Configure static table lookup for hostnames and IP addresses.
-# -----------------------------------------------------------------------------
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d'       /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '2a192.168.1.100 pc01' /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '3a192.168.1.2 pc06'   /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '4a192.168.1.219 pc07' /etc/hosts; fi
 
-# REMOVE ssh pc01 pc06 pc07
+# REMOVE ssh pc01 pc06 pc07 #gpg
 # -----------------------------------------------------------------------------
 # Secure SHell.
 # -----------------------------------------------------------------------------
 sudo sed --in-place 's/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ssh; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  openssh; fi
-# -----------------------------------------------------------------------------
-# Configure static table lookup for hostnames and IP addresses.
-# -----------------------------------------------------------------------------
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d' /etc/hosts; fi
 
 # INSTALL teamviewer *
 # -----------------------------------------------------------------------------
