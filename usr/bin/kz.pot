@@ -450,7 +450,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:502 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:283
+#: kz-build:502 kz-check:574 kz-deploy:264 kz-dev:327 kz-update:283
 msgid "Complete!"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr ""
 
-#: kz-check:279
+#: kz-check:283
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
@@ -474,70 +474,70 @@ msgstr ""
 msgid "Check website..."
 msgstr ""
 
-#: kz-check:191
+#: kz-check:195
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 
-#: kz-check:241
+#: kz-check:245
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr ""
 
-#: kz-check:253
+#: kz-check:257
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr ""
 
-#: kz-check:264
+#: kz-check:268
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:368
+#: kz-check:372
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:388
+#: kz-check:392
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:401
+#: kz-check:405
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:412
+#: kz-check:416
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:422 kz-check:430
+#: kz-check:426 kz-check:434
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr ""
 
-#: kz-check:440
+#: kz-check:444
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:481
+#: kz-check:485
 #, sh-format
 msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr ""
 
-#: kz-check:529
+#: kz-check:533
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:551
+#: kz-check:555
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:498 kz-check:566 kz-deploy:260
+#: kz-build:498 kz-check:570 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 

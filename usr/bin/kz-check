@@ -181,6 +181,10 @@ function check_website() {
                     # Development versions of kz packages.
                     continue
                     ;;
+                *sources.list | *wallpapers.tar )
+                    # Extra files
+                    continue
+                    ;;
                 *)
                     :
                     ;;
