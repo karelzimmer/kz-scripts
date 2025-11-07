@@ -90,19 +90,19 @@ msgstr "opdracht bestaat niet"
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:108 kz_common.py:292 kz-dev:86
+#: kz:108 kz_common.py:292 kz-dev:86 kz-update:78
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz:114 kz_common.py:200 kz_common.py:209 kz_common.py:248 kz_common.py:298
 #: kz-dev:92 kz-dev:178 kz-dev:193 kz-dev:219 kz-dev:230 kz-dev:243 kz-dev:261
-#: kz-dev:279 kz-update:80 kz-update:268
+#: kz-dev:279 kz-update:84 kz-update:272
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:170 kz-backup:152 kz-build:155 kz-check:129 kz-deploy:134 kz-desktop:198
 #: kz-dev:148 kz-install:237 kz-menu:175 kz-restore:153 kz-setup:235
-#: kz-update:165 kz-wifi:127
+#: kz-update:169 kz-wifi:127
 msgid "internal error"
 msgstr "interne fout"
 
@@ -173,7 +173,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:160 kz-build:163 kz-check:137 kz-deploy:142 kz-desktop:206
-#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:171 kz-wifi:133
+#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:175 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -506,7 +506,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:502 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:279
+#: kz-build:502 kz-check:570 kz-deploy:264 kz-dev:327 kz-update:283
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -899,7 +899,7 @@ msgstr "         wget karelzimmer.nl/getkz; bash getkz [<opties>]"
 msgid "  -d, --dev      download the development version of package kz"
 msgstr "  -d, --dev      download de ontwikkelingsversie van pakket kz"
 
-#: kz-get:72 kz-update:113
+#: kz-get:72 kz-update:117
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
@@ -1440,15 +1440,15 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-#: kz-update:87 kz-update:101
+#: kz-update:91 kz-update:105
 msgid "UPDATE -- 1/3"
 msgstr "BIJWERKEN -- 1/3"
 
-#: kz-update:92 kz-update:106
+#: kz-update:96 kz-update:110
 msgid "UPGRADE -- 2/3"
 msgstr "OPWAARDEREN -- 2/3"
 
-#: kz-update:95 kz-update:109
+#: kz-update:99 kz-update:113
 msgid "CLEANUP -- 3/3"
 msgstr "OPRUIMEN -- 3/3"
 
