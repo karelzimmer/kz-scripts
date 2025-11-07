@@ -369,7 +369,7 @@ msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
 #: kz-backup:666 kz-restore:376
-msgid "*** Remember to SAFELY remove the USB media ***"
+msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 
 #: kz-build:27

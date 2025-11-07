@@ -663,7 +663,7 @@ $users"
     if [[ $TARGET_MEDIUM == /media/$USER* ]]; then
         text+="
 
-$(gettext '*** Remember to SAFELY remove the USB media ***')"
+$(gettext '*** Remember to safely(!) remove the USB media ***')"
     fi
     kz.infomsg "$text"
 
