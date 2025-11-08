@@ -1,3 +1,32 @@
 {
+  "ExtensionSettings": {
+    "*": {
+      "installation_mode": "allowed"
+    },
+    "bgnkhhnnamicmpeenaelnjfhikgbkllg": {
+      "installation_mode": "normal_installed",
+      "toolbar_state": "force_shown",
+      "update_url":
+        "https://clients2.google.com/service/update2/crx"
+    },
+    "gphhapmejobijbbhgpjhcjognlahblep": {
+      "installation_mode": "normal_installed",
+      "toolbar_state": "force_shown",
+      "update_url":
+        "https://clients2.google.com/service/update2/crx"
+    },
+    "nngceckbapebfimnlniiiahkandclblb": {
+      "installation_mode": "normal_installed",
+      "toolbar_state": "force_shown",
+      "update_url":
+        "https://clients2.google.com/service/update2/crx"
+    },
+    "fihnjjcciajhdojfnbdddfaoknhalnja": {
+      "installation_mode": "normal_installed",
+      "toolbar_state": "force_shown",
+      "update_url":
+        "https://clients2.google.com/service/update2/crx"
+    }
+  },
   "PasswordManagerEnabled": false
 }
