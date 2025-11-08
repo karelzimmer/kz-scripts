@@ -3,28 +3,28 @@
     "*": {
       "installation_mode": "allowed"
     },
-    "bgnkhhnnamicmpeenaelnjfhikgbkllg": {
+    "pdffkfellgipmhklpdmokmckkkfcopbh": {
       "installation_mode": "force_installed",
       "toolbar_state": "force_shown",
       "update_url":
-        "https://clients2.google.com/service/update2/crx"
+        "https://edge.microsoft.com/extensionwebstorebase/v1/crx"
     },
-    "nngceckbapebfimnlniiiahkandclblb": {
+    "jbkfoedolllekgbhcbcoahefnbanhhlh": {
       "installation_mode": "force_installed",
       "toolbar_state": "force_shown",
       "update_url":
-        "https://clients2.google.com/service/update2/crx"
+        "https://edge.microsoft.com/extensionwebstorebase/v1/crx"
     },
     "gphhapmejobijbbhgpjhcjognlahblep": {
       "installation_mode": "force_installed",
       "update_url":
         "https://clients2.google.com/service/update2/crx"
     },
-    "fihnjjcciajhdojfnbdddfaoknhalnja": {
+    "oholpbloipjbbhlhohaebmieiiieioal": {
       "installation_mode": "force_installed",
       "toolbar_state": "force_shown",
       "update_url":
-        "https://clients2.google.com/service/update2/crx"
+        "https://edge.microsoft.com/extensionwebstorebase/v1/crx"
     }
   },
   "PasswordManagerEnabled": false
