@@ -749,18 +749,34 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes co
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
 if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
+# INSTALL mozilla-firefox *
+# -----------------------------------------------------------------------------
+# Web browser (ESR=Extended Support Release).
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get install --assume-yes firefox; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
+
+# REMOVE mozilla-firefox *
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get remove --assume-yes firefox; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
+
 # INSTALL mozilla-thunderbird *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
 
 # REMOVE mozilla-thunderbird *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-nl; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  thunderbird; fi
 
 # INSTALL ntfs #none
