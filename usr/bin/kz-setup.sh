@@ -310,18 +310,6 @@ kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
 kz-desktop --addbef=firefox_firefox
 
-# SETUP mozilla-firefox pc06 pc07
-# -----------------------------------------------------------------------------
-# Web browser.
-# -----------------------------------------------------------------------------
-kz-desktop --addaft=firefox-esr
-
-# RESET mozilla-firefox pc06 pc07
-# -----------------------------------------------------------------------------
-# Web browser.
-# -----------------------------------------------------------------------------
-kz-desktop --delete=firefox-esr
-
 # SETUP mozilla-thunderbird pc01 pc02 pc06
 # -----------------------------------------------------------------------------
 # E-mail and news.
