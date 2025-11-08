@@ -203,18 +203,6 @@ git config --global --unset alias.logg
 # -----------------------------------------------------------------------------
 kz-desktop --delete=code
 
-# SETUP evolution pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# E-mail and organizer.
-# -----------------------------------------------------------------------------
-kz-desktop --delete=org.gnome.Evolution
-
-# RESET evolution pc01 pc06 pc07
-# -----------------------------------------------------------------------------
-# E-mail and organizer.
-# -----------------------------------------------------------------------------
-kz-desktop --addbef=org.gnome.Evolution
-
 # SETUP google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
@@ -293,36 +281,6 @@ kz-desktop --addaft=microsoft-edge
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=microsoft-edge
-
-# SETUP mozilla-firefox pc01 pc02 pc06 pc07
-# -----------------------------------------------------------------------------
-# Web browser (ESR=Extended Support Release).
-# -----------------------------------------------------------------------------
-kz-desktop --delete=firefox
-kz-desktop --delete=firefox-esr
-kz-desktop --delete=firefox_firefox
-
-# RESET mozilla-firefox pc01 pc02 pc06 pc07
-# -----------------------------------------------------------------------------
-# Web browser.
-# -----------------------------------------------------------------------------
-kz-desktop --addbef=firefox
-kz-desktop --addbef=firefox-esr
-kz-desktop --addbef=firefox_firefox
-
-# SETUP mozilla-thunderbird pc01 pc02 pc06
-# -----------------------------------------------------------------------------
-# E-mail and news.
-# -----------------------------------------------------------------------------
-kz-desktop --delete=thunderbird
-kz-desktop --delete=thunderbird_thunderbird
-
-# RESET mozilla-thunderbird pc01 pc02 pc06
-# -----------------------------------------------------------------------------
-# E-mail and news.
-# -----------------------------------------------------------------------------
-kz-desktop --addbef=thunderbird
-kz-desktop --addbef=thunderbird_thunderbird
 
 # SETUP private-home *
 # -----------------------------------------------------------------------------
