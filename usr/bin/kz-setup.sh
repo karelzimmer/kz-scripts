@@ -217,7 +217,7 @@ kz-desktop --addbef=org.gnome.Evolution
 
 # SETUP firefox pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
-# Web browser.
+# Web browser (ESR=Extended Support Release).
 # -----------------------------------------------------------------------------
 kz-desktop --delete=firefox
 kz-desktop --delete=firefox-esr
@@ -230,6 +230,18 @@ kz-desktop --delete=firefox_firefox
 kz-desktop --addbef=firefox
 kz-desktop --addbef=firefox-esr
 kz-desktop --addbef=firefox_firefox
+
+# SETUP firefox pc06 pc07
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+kz-desktop --addaft=firefox-esr
+
+# RESET firefox pc06 pc07
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=firefox-esr
 
 # SETUP google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -297,6 +309,18 @@ if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; f
 # Security auditing.
 # -----------------------------------------------------------------------------
 rm --force --recursive ~/lynis
+
+# SETUP microsoft-edge pc06 pc07
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+kz-desktop --addaft=microsoft-edge
+
+# RESET microsoft-edge pc06 pc07
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=microsoft-edge
 
 # SETUP private-home *
 # -----------------------------------------------------------------------------
