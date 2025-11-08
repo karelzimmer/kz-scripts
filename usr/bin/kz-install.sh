@@ -272,7 +272,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  n
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes python3 mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Poedit - gettext catalogs editor.
 # -----------------------------------------------------------------------------
@@ -352,7 +352,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nm
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes python mypy python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes python3 python3-mypy python3-pycodestyle python3-pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  python3 python3-mypy python3-pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Poedit - Gettext catalogs editor.
 # -----------------------------------------------------------------------------
