@@ -749,7 +749,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes co
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
 if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
-# INSTALL mozilla-firefox *
+# INSTALL mozilla-firefox #none
 # -----------------------------------------------------------------------------
 # Web browser (ESR=Extended Support Release).
 # -----------------------------------------------------------------------------
@@ -757,7 +757,7 @@ if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^fi
 if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
-# REMOVE mozilla-firefox *
+# REMOVE mozilla-firefox #none
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
@@ -765,14 +765,14 @@ if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^fi
 if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
 
-# INSTALL mozilla-thunderbird *
+# INSTALL mozilla-thunderbird #none
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
 
-# REMOVE mozilla-thunderbird *
+# REMOVE mozilla-thunderbird #none
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
