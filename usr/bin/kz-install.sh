@@ -543,14 +543,14 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # GNU Image Manipulation Program.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-nl; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  gimp; fi
 
 # REMOVE gimp pc06
 # -----------------------------------------------------------------------------
 # GNU Image Manipulation Program.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-nl; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gimp; fi
 
 # INSTALL google-chrome pc01 pc06 pc07
