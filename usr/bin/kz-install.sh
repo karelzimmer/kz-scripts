@@ -499,8 +499,8 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes f
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  fdupes; fi
 # -----------------------------------------------------------------------------
 # Usage:
-# $ fdupes -r /path/to/folder # Report recursively from /path/to/folder
-# $ fdupes -rd /path/to/folder # Delete, interactively, from /path/to/folder
+# $ fdupes -r   /path/to/folder # Report recursively from /path/to/folder
+# $ fdupes -rd  /path/to/folder # Delete, interactively, from /path/to/folder
 # $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
 # -----------------------------------------------------------------------------
 
@@ -787,16 +787,18 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes n
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  ntfs-3g ntfsprogs; fi
 # -----------------------------------------------------------------------------
 # Usage:
-# $ findmnt (or lsblk)
+# $ findmnt # or lsblk
 # TARGET SOURCE FSTYPE OPTIONS
 # /media/... /dev/sda1 ntfs3 rw,nosuid,nodev,relatime,uid=...
-# $ lsblk
+# 
+# $ lsblk   # or findmnt
 # NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
 # sda 8:0 0 931,5G 0 disk
 # +-sda1 8:1 0 931,5G 0 part /media/...
-# $ sudo ntfsfix /dev/sdba1 # Fix an NTFS partition
-# $ sudo -b ntfsfix /dev/sdba1 # Clear the bad sector list
-# $ sudo -d ntfsfix /dev/sdba1 # Clear the volume dirty flag
+#
+# $ sudo    ntfsfix /dev/sda1 # Fix an NTFS partition
+# $ sudo -b ntfsfix /dev/sda1 # Clear the bad sector list
+# $ sudo -d ntfsfix /dev/sda1 # Clear the volume dirty flag
 # -----------------------------------------------------------------------------
 
 # REMOVE ntfs #none
@@ -810,19 +812,19 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nt
 # -----------------------------------------------------------------------------
 # Set the default GDM login monitor in a multi-monitor setup.
 # -----------------------------------------------------------------------------
-# Saved in: /home/${SUDO_USER:-$USER}/.config/monitors.xml
+# Saved in: ~/.config/monitors.xml
 # -----------------------------------------------------------------------------
-if id gdm &> /dev/null && [[ -f /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
-if id gdm &> /dev/null && [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
-if id Debian-gdm &> /dev/null && [[ -f /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~Debian-gdm/.config/monitors.xml; fi
-if id Debian-gdm &> /dev/null && [[ -f ~Debian-gdm/.config/monitors.xml ]]; then sudo chown --verbose Debian-gdm:Debian-gdm ~Debian-gdm/.config/monitors.xml; fi
+if id gdm        &> /dev/null && [[ -f ~"${SUDO_USER:-$USER}"/.config/monitors.xml ]]; then sudo cp    --preserve --verbose ~"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if id gdm        &> /dev/null && [[ -f ~gdm/.config/monitors.xml ]]                  ; then sudo chown --verbose  gdm:gdm ~gdm/.config/monitors.xml; fi
+if id Debian-gdm &> /dev/null && [[ -f ~"${SUDO_USER:-$USER}"/.config/monitors.xml ]]; then sudo cp    --preserve --verbose ~"${SUDO_USER:-$USER}"/.config/monitors.xml ~Debian-gdm/.config/monitors.xml; fi
+if id Debian-gdm &> /dev/null && [[ -f ~Debian-gdm/.config/monitors.xml ]]           ; then sudo chown --verbose  Debian-gdm:Debian-gdm ~Debian-gdm/.config/monitors.xml; fi
 REBOOT=true
 
 # REMOVE primary-monitor pc06
 # -----------------------------------------------------------------------------
 # Reset the default GDM login monitor in a multi-monitor setup.
 # -----------------------------------------------------------------------------
-# Saved in: /home/${SUDO_USER:-$USER}/.config/monitors.xml
+# Saved in: ~/.config/monitors.xml
 # -----------------------------------------------------------------------------
 sudo rm --force --verbose ~gdm/.config/monitors.xml ~Debian-gdm/.config/monitors.xml
 REBOOT=true
