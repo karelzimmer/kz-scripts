@@ -462,6 +462,20 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /d
 # -----------------------------------------------------------------------------
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
+# INSTALL dos2unix #none
+# -----------------------------------------------------------------------------
+# Convert text file line endings between CRLF and LF.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes dos2unix; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  dos2unix; fi
+
+# REMOVE dos2unix #none
+# -----------------------------------------------------------------------------
+# Convert text file line endings between CRLF and LF.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes dos2unix; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  dos2unix; fi
+
 # INSTALL evolution #none
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
@@ -475,7 +489,7 @@ if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes evolution; fi
-if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes flathub org.gnome.Evolution; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  flathub org.gnome.Evolution; fi
 
 # INSTALL exiftool pc06 pc07
 # -----------------------------------------------------------------------------
