@@ -1006,16 +1006,16 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gu
 
 # INSTALL update-grub *
 # -----------------------------------------------------------------------------
-# Skip GRUB menu.
+# Reduce GRUB menu display time.
 # -----------------------------------------------------------------------------
-sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=0/" /etc/default/grub
+sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=1/" /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 # REMOVE update-grub *
 # -----------------------------------------------------------------------------
-# Show GRUB menu.
+# Restore default GRUB menu display time.
 # -----------------------------------------------------------------------------
 sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/" /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
