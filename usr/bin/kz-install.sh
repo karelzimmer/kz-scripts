@@ -603,6 +603,24 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-earth-pro-stable; fi
 
+# INSTALL grub-timeout *
+# -----------------------------------------------------------------------------
+# Reduce GRUB menu display time.
+# -----------------------------------------------------------------------------
+sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=1/" /etc/default/grub
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+REBOOT=true
+
+# REMOVE grub-timeout *
+# -----------------------------------------------------------------------------
+# Restore default GRUB menu display time.
+# -----------------------------------------------------------------------------
+sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/" /etc/default/grub
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+REBOOT=true
+
 # INSTALL handbrake #none #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
@@ -1003,24 +1021,6 @@ sudo ufw enable
 sudo ufw disable
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gufw; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gufw; fi
-
-# INSTALL update-grub *
-# -----------------------------------------------------------------------------
-# Reduce GRUB menu display time.
-# -----------------------------------------------------------------------------
-sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=1/" /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-REBOOT=true
-
-# REMOVE update-grub *
-# -----------------------------------------------------------------------------
-# Restore default GRUB menu display time.
-# -----------------------------------------------------------------------------
-sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/" /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-REBOOT=true
 
 # INSTALL user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
