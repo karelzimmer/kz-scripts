@@ -560,15 +560,14 @@ $prompt"
 # This function executes the commands.
 function execute_command() {
     local cmd=${command/kz /kz-}
-    local gui_option=''
-
-    if $OPTION_GUI; then
-        gui_option='--gui'
-    fi
 
     # Use e.g. 'kz-install' instead of 'kz install'.
     # Rocky Linux 8 gives Python 'TypeError' if 'kz install' is used.
-    "$cmd" "$gui_option" || rc=$?
+    if $OPTION_GUI; then
+        "$cmd" --gui || rc=$?
+    else
+        "$cmd" || rc=$?
+    fi
     kz.logmsg "$command: rc=$rc"
 }
 
