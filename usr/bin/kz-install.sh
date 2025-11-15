@@ -171,12 +171,6 @@ if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then 
 # -----------------------------------------------------------------------------
 if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d'         /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d'  /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '4agreeter-hide-users=false'           /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '5agreeter-show-manual-login=false'    /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place "6auser-session=${SUDO_USER:-$USER}"   /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # REMOVE desktop *
@@ -218,9 +212,6 @@ if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then 
 # -----------------------------------------------------------------------------
 if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     remove --assumeyes  xfce4-goodies; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-hide-users=false/d'         /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place '/^greeter-show-manual-login=false/d'  /etc/lightdm/lightdm.conf; fi
-if type xfce4-session &> /dev/null; then sudo sed --in-place "/^user-session=${SUDO_USER:-$USER}/d" /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # INSTALL development pc06 pc07
@@ -382,40 +373,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  sp
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
-
-# INSTALL disabled-aer pc06
-# -----------------------------------------------------------------------------
-# Disable Advanced Error Reporting.
-# -----------------------------------------------------------------------------
-# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
-# Express Advanced Error Reporting) prevents the log gets flooded with
-# 'AER: Corrected errors received'. This is usually needed for HP hardware.
-# -----------------------------------------------------------------------------
-if ! grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/quiet/quiet pci=noaer/' /etc/default/grub; fi
-if   grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-# -----------------------------------------------------------------------------
-# Check for kernel config parameter pci=noaer.
-# -----------------------------------------------------------------------------
-grep --quiet 'pci=noaer' /etc/default/grub
-REBOOT=true
-
-# REMOVE disabled-aer pc06
-# -----------------------------------------------------------------------------
-# Enable Advanced Error Reporting.
-# -----------------------------------------------------------------------------
-# Enable kernel config parameter PCIEAER (Peripheral Component Interconnect
-# Express Advanced Error Reporting) to "allow" the log gets flooded with
-# 'AER: Corrected errors received'. This is usually needed for HP hardware.
-# -----------------------------------------------------------------------------
-if grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/quiet pci=noaer/quiet/' /etc/default/grub; fi
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-# -----------------------------------------------------------------------------
-# Check for kernel config parameter pci=noaer.
-# -----------------------------------------------------------------------------
-! grep --quiet 'pci=noaer' /etc/default/grub
-REBOOT=true
 
 # INSTALL disabled-apport #none
 # -----------------------------------------------------------------------------
@@ -667,7 +624,6 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes kr
 # configuration files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
-if grep --quiet debian /etc/os-release; then sudo usermod --append --groups kvm,libvirt,libvirt-qemu "${SUDO_USER:-$USER}"; fi
 # -----------------------------------------------------------------------------
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
@@ -840,27 +796,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  n
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ntfs-3g ntfsprogs; fi
 
-# INSTALL primary-monitor pc06
-# -----------------------------------------------------------------------------
-# Set the default GDM login monitor in a multi-monitor setup.
-# -----------------------------------------------------------------------------
-# Saved in: ~/.config/monitors.xml
-# -----------------------------------------------------------------------------
-if id gdm        &> /dev/null && [[ -f ~"${SUDO_USER:-$USER}"/.config/monitors.xml ]]; then sudo cp    --preserve --verbose ~"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
-if id gdm        &> /dev/null && [[ -f ~gdm/.config/monitors.xml ]]                  ; then sudo chown --verbose  gdm:gdm ~gdm/.config/monitors.xml; fi
-if id Debian-gdm &> /dev/null && [[ -f ~"${SUDO_USER:-$USER}"/.config/monitors.xml ]]; then sudo cp    --preserve --verbose ~"${SUDO_USER:-$USER}"/.config/monitors.xml ~Debian-gdm/.config/monitors.xml; fi
-if id Debian-gdm &> /dev/null && [[ -f ~Debian-gdm/.config/monitors.xml ]]           ; then sudo chown --verbose  Debian-gdm:Debian-gdm ~Debian-gdm/.config/monitors.xml; fi
-REBOOT=true
-
-# REMOVE primary-monitor pc06
-# -----------------------------------------------------------------------------
-# Reset the default GDM login monitor in a multi-monitor setup.
-# -----------------------------------------------------------------------------
-# Saved in: ~/.config/monitors.xml
-# -----------------------------------------------------------------------------
-sudo rm --force --verbose ~gdm/.config/monitors.xml ~Debian-gdm/.config/monitors.xml
-REBOOT=true
-
 # INSTALL simplescreenrecorder #none
 # -----------------------------------------------------------------------------
 # Screen recorder.
@@ -964,10 +899,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  h
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  tree; fi
-# -----------------------------------------------------------------------------
-# Usermod - log access.
-# -----------------------------------------------------------------------------
-sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
 # REMOVE terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -985,11 +916,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ht
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  tree; fi
-# -----------------------------------------------------------------------------
-# Usermod - log access.
-# -----------------------------------------------------------------------------
-sudo gpasswd --delete "${SUDO_USER:-$USER}" adm
-sudo gpasswd --delete "${SUDO_USER:-$USER}" systemd-journal
 
 # INSTALL transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
