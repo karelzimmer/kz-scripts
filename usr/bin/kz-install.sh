@@ -10,7 +10,58 @@
 # Use "man kz install.sh" to learn more about the format of this file.
 # =============================================================================
 
-# INSTALL components *
+# INSTALL aer-settings #none
+# -----------------------------------------------------------------------------
+# Disable Advanced Error Reporting.
+# -----------------------------------------------------------------------------
+# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
+# Express Advanced Error Reporting) prevents the log gets flooded with
+# 'AER: Corrected errors received'. This is usually needed for HP hardware.
+# -----------------------------------------------------------------------------
+if ! grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if   grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+# -----------------------------------------------------------------------------
+# Check for kernel config parameter pci=noaer.
+# -----------------------------------------------------------------------------
+grep --quiet 'pci=noaer' /etc/default/grub
+REBOOT=true
+
+# REMOVE aer-settings #none
+# -----------------------------------------------------------------------------
+# Enable Advanced Error Reporting.
+# -----------------------------------------------------------------------------
+# Enable kernel config parameter PCIEAER (Peripheral Component Interconnect
+# Express Advanced Error Reporting) to "allow" the log gets flooded with
+# 'AER: Corrected errors received'. This is usually needed for HP hardware.
+# -----------------------------------------------------------------------------
+if grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/ pci=noaer//' /etc/default/grub; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+# -----------------------------------------------------------------------------
+# Check for kernel config parameter pci=noaer.
+# -----------------------------------------------------------------------------
+! grep --quiet 'pci=noaer' /etc/default/grub
+REBOOT=true
+
+# INSTALL apport-settings #none
+# -----------------------------------------------------------------------------
+# Disable automatic crash report generation for Ubuntu.
+# -----------------------------------------------------------------------------
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop    apport.service; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
+
+# REMOVE apport-settings #none
+# -----------------------------------------------------------------------------
+# Enable automatic crash report generation for Ubuntu.
+# -----------------------------------------------------------------------------
+if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
+
+# INSTALL apt-sources *
 # -----------------------------------------------------------------------------
 # Add Debian components to package sources & update package lists for all.
 # -----------------------------------------------------------------------------
@@ -19,7 +70,7 @@ if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
 
-# REMOVE components *
+# REMOVE apt-sources *
 # -----------------------------------------------------------------------------
 # Remove Debian components package sources & update package lists for all.
 # -----------------------------------------------------------------------------
@@ -129,7 +180,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes c
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
 
-# INSTALL desktop *
+# INSTALL desktop-apps *
 # -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
@@ -173,7 +224,7 @@ if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo a
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
 REBOOT=true
 
-# REMOVE desktop *
+# REMOVE desktop-apps *
 # -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
@@ -214,7 +265,7 @@ if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo a
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     remove --assumeyes  xfce4-goodies; fi
 REBOOT=true
 
-# INSTALL development pc06 pc07
+# INSTALL development-apps pc06 pc07
 # -----------------------------------------------------------------------------
 # Ansible - configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
@@ -297,7 +348,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  s
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  usbutils; fi
 
-# REMOVE development pc06 pc07
+# REMOVE development-apps pc06 pc07
 # -----------------------------------------------------------------------------
 # Ansible - configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
@@ -374,87 +425,6 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  sp
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
 
-
-# INSTALL disabled-aer #none
-# -----------------------------------------------------------------------------
-# Disable Advanced Error Reporting.
-# -----------------------------------------------------------------------------
-# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
-# Express Advanced Error Reporting) prevents the log gets flooded with
-# 'AER: Corrected errors received'. This is usually needed for HP hardware.
-# -----------------------------------------------------------------------------
-if ! grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
-if ! grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/quiet/quiet pci=noaer/' /etc/default/grub; fi
-if   grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-# -----------------------------------------------------------------------------
-# Check for kernel config parameter pci=noaer.
-# -----------------------------------------------------------------------------
-grep --quiet 'pci=noaer' /etc/default/grub
-REBOOT=true
-
-# REMOVE disabled-aer #none
-# -----------------------------------------------------------------------------
-# Enable Advanced Error Reporting.
-# -----------------------------------------------------------------------------
-# Enable kernel config parameter PCIEAER (Peripheral Component Interconnect
-# Express Advanced Error Reporting) to "allow" the log gets flooded with
-# 'AER: Corrected errors received'. This is usually needed for HP hardware.
-# -----------------------------------------------------------------------------
-if grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/ pci=noaer//' /etc/default/grub; fi
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-# -----------------------------------------------------------------------------
-# Check for kernel config parameter pci=noaer.
-# -----------------------------------------------------------------------------
-! grep --quiet 'pci=noaer' /etc/default/grub
-REBOOT=true
-
-# INSTALL disabled-apport #none
-# -----------------------------------------------------------------------------
-# Disable automatic crash report generation for Ubuntu.
-# -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop    apport.service; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
-
-# REMOVE disabled-apport #none
-# -----------------------------------------------------------------------------
-# Enable automatic crash report generation for Ubuntu.
-# -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
-
-# INSTALL disabled-fwupd #none
-# -----------------------------------------------------------------------------
-# Disable FirmWare UPdate Daemon.
-# -----------------------------------------------------------------------------
-sudo systemctl stop    fwupd.service
-sudo systemctl disable fwupd.service
-sudo systemctl mask    fwupd.service
-
-# REMOVE disabled-fwupd #none
-# -----------------------------------------------------------------------------
-# Enable FirmWare UPdate Daemon.
-# -----------------------------------------------------------------------------
-sudo systemctl unmask fwupd.service
-sudo systemctl enable fwupd.service
-sudo systemctl start  fwupd.service
-
-# INSTALL disabled-lidswitch #none #gpg
-# -----------------------------------------------------------------------------
-# Do nothing when the laptop lid is closed.
-# -----------------------------------------------------------------------------
-sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
-
-# REMOVE disabled-lidswitch #none #gpg
-# -----------------------------------------------------------------------------
-# Restore the default action when the laptop lid is closed.
-# -----------------------------------------------------------------------------
-sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-
 # INSTALL dos2unix #none
 # -----------------------------------------------------------------------------
 # Convert text file line endings between CRLF and LF.
@@ -518,33 +488,37 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  f
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fdupes; fi
 
-# INSTALL force-x11 #none
+# INSTALL firefox #none
 # -----------------------------------------------------------------------------
-# Disable choice on user login screen for Xorg/X11 or Wayland, and force X11.
+# Web browser (ESR=Extended Support Release).
 # -----------------------------------------------------------------------------
-# Force means no choice on user login screen for Xorg/X11 or Wayland!
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
-REBOOT=true
-# -----------------------------------------------------------------------------
-# To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
-# 'x11'.
-# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get install --assume-yes firefox; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
-# REMOVE force-x11 #none
+# REMOVE firefox #none
 # -----------------------------------------------------------------------------
-# Enable choice on user login screen for Xorg/X11 or Wayland.
+# E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-# Force means no choice on user login screen for Xorg/X11 or Wayland!
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get remove --assume-yes firefox; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
+
+# INSTALL fwupd-settings #none
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo sed --in-place 's/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
-REBOOT=true
+# Disable FirmWare UPdate Daemon.
 # -----------------------------------------------------------------------------
-# To check, after reboot!, execute "echo $XDG_SESSION_TYPE", should output
-# 'wayland'.
+sudo systemctl stop    fwupd.service
+sudo systemctl disable fwupd.service
+sudo systemctl mask    fwupd.service
+
+# REMOVE fwupd-settings #none
 # -----------------------------------------------------------------------------
+# Enable FirmWare UPdate Daemon.
+# -----------------------------------------------------------------------------
+sudo systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start  fwupd.service
 
 # INSTALL gimp pc06
 # -----------------------------------------------------------------------------
@@ -720,6 +694,19 @@ if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes
 if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes libreoffice; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  app/org.libreoffice.LibreOffice; fi
 
+# INSTALL lidswitch-settings #none #gpg
+# -----------------------------------------------------------------------------
+# Do nothing when the laptop lid is closed.
+# -----------------------------------------------------------------------------
+sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
+
+# REMOVE lidswitch-settings #none #gpg
+# -----------------------------------------------------------------------------
+# Restore the default action when the laptop lid is closed.
+# -----------------------------------------------------------------------------
+sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+
 # INSTALL locate pc06 pc07
 # -----------------------------------------------------------------------------
 # Find files.
@@ -735,7 +722,7 @@ sudo updatedb
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  mlocate; fi
 
-# INSTALL microsoft-edge #none
+# INSTALL microsoft-edge pc06 pc06
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -746,7 +733,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-ye
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub com.microsoft.Edge; fi
 
-# REMOVE microsoft-edge #none
+# REMOVE microsoft-edge pc06 pc06
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -754,62 +741,6 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  flathub com.microsoft.Edge; fi
-
-# INSTALL microsoft-vscode pc06 pc07
-# -----------------------------------------------------------------------------
-# Editor.
-# -----------------------------------------------------------------------------
-# Web app: https://vscode.dev
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
-if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes apt-transport-https; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes code; fi
-if grep --quiet debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
-if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if grep --quiet rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
-
-# REMOVE microsoft-vscode pc06 pc07
-# -----------------------------------------------------------------------------
-# Editor.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
-if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
-
-# INSTALL mozilla-firefox #none
-# -----------------------------------------------------------------------------
-# Web browser (ESR=Extended Support Release).
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get install --assume-yes firefox; fi
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
-
-# REMOVE mozilla-firefox #none
-# -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get remove --assume-yes firefox; fi
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
-
-# INSTALL mozilla-thunderbird #none
-# -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
-
-# REMOVE mozilla-thunderbird #none
-# -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  thunderbird; fi
 
 # INSTALL ntfs #none
 # -----------------------------------------------------------------------------
@@ -927,7 +858,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes teamviewer; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  teamviewer; fi
 
-# INSTALL terminal pc01 pc06 pc07
+# INSTALL terminal-apps pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Bash completion - tab-completion.
 # -----------------------------------------------------------------------------
@@ -944,7 +875,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  h
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  tree; fi
 
-# REMOVE terminal pc01 pc06 pc07
+# REMOVE terminal-apps pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Bash completion - tab-completion.
 # -----------------------------------------------------------------------------
@@ -960,6 +891,20 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ht
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  tree; fi
+
+# INSTALL thunderbird #none
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
+
+# REMOVE thunderbird #none
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  thunderbird; fi
 
 # INSTALL transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1049,6 +994,32 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  vl
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ffmpeg*; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ffmpeg*; fi
+
+# INSTALL vscode pc06 pc07
+# -----------------------------------------------------------------------------
+# Editor.
+# -----------------------------------------------------------------------------
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
+if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes apt-transport-https; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes code; fi
+if grep --quiet debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
+if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
+if grep --quiet rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
+
+# REMOVE vscode pc06 pc07
+# -----------------------------------------------------------------------------
+# Editor.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
+if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
 # INSTALL webmin pc07
 # -----------------------------------------------------------------------------
