@@ -370,7 +370,7 @@ $(gettext 'Try restoring the back up again.')"
 
 $users"
     fi
-    if [[ $SOURCE_MEDIUM == /media/* ]]; then
+    if [[ $SOURCE_MEDIUM == /media/$USER* ]]; then
         text+="
 
 $(gettext '*** Remember to safely(!) remove the USB media ***')"

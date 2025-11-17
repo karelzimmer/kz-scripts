@@ -233,38 +233,6 @@ Disconnect media via Files.")"
             mkdir --mode=a=rwx --verbose "$medium/backups" |& $PROGRAM_LOGS
         TARGET_MEDIUM=$medium
     fi
-
-    if [[ -e $TARGET_MEDIUM/backup-$HOSTNAME-$USER ]]; then
-        text="$(gettext "Backup found with old name: \
-backup-<hostname>-<username>
-Please rename to:           <username>@<hostname>")"
-        kz.errmsg "$text"
-        exit 1
-    fi
-
-    if [[ -e $TARGET_MEDIUM/$PROGRAM_NAME-$HOSTNAME-$USER ]]; then
-        text="$(gettext "Backup found with old name: \
-kz-backup-<hostname>-<username>
-Please rename to:           <username>@<hostname>")"
-        kz.errmsg "$text"
-        exit 1
-    fi
-
-    if [[ -e $medium/$USER@$HOSTNAME ]]; then
-        text="$(gettext "Backup found in wrong place: \
-<medium>/<username>@<hostname>
-Please move to:              <medium>/backups")"
-        kz.errmsg "$text"
-        exit 1
-    fi
-
-    if [[ -e $medium/Backups ]]; then
-        text="$(gettext "Backup found in wrong place: \
-<medium>/Backups
-Please move to:              <medium>/backups")"
-        kz.errmsg "$text"
-        exit 1
-    fi
 }
 
 
