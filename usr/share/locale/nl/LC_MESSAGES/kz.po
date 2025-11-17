@@ -1187,23 +1187,23 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: kz-menu:505
+#: kz-menu:508
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
-#: kz-menu:520
+#: kz-menu:523
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:532
+#: kz-menu:535
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:533
+#: kz-menu:536
 msgid "No"
 msgstr "Nee"
 
-#: kz-menu:541
+#: kz-menu:544
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr "$prompt [J/n]: "
