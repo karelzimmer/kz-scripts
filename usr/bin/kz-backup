@@ -58,7 +58,6 @@ readonly OPTIONS_LONG='gui,target:,help,manual,usage,version'
 declare -i BACKUP_RC=0
 declare ERROR_LOG=''
 declare OPTION_GUI=false
-declare TARGET_MEDIUM=''
 declare TARGET=''
 
 
@@ -176,7 +175,6 @@ function check_target() {
     fi
 
     if $option_target; then
-
         if ! [[ -d $target_argument ]]; then
             text="$program_name: $target_argument: \
 $(gettext 'directory does not exist')
@@ -184,13 +182,9 @@ $USAGE"
             kz.infomsg "$text"
             exit 1
         fi
-
         TARGET=$target_argument/$USER@$HOSTNAME
-        TARGET_MEDIUM=$target_argument
     else
-
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-
         if [[ -z $medium ]]; then
             text=$(gettext "No USB medium found.
 
@@ -205,9 +199,7 @@ Connect a USB medium.")
                 exit 1
             fi
         fi
-
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text="$(eval_gettext "Connect only one USB medium.
 
@@ -216,22 +208,14 @@ Now connected:
 
 Disconnect media via Files.")"
             kz.infomsg "$text"
-
             $OPTION_GUI || kz.wait_for_enter
-
             medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 kz.errmsg "$text"
                 exit 1
             fi
         fi
-
-        TARGET=$medium/backups/$USER@$HOSTNAME
-
-        [[ -d $medium/backups ]] ||
-            mkdir --mode=a=rwx --verbose "$medium/backups" |& $PROGRAM_LOGS
-        TARGET_MEDIUM=$medium
+        TARGET=$medium/$USER@$HOSTNAME
     fi
 }
 
@@ -628,7 +612,7 @@ are \$num_users users).")
 
 $users"
     fi
-    if [[ $TARGET_MEDIUM == /media/$USER* ]]; then
+    if [[ $TARGET == /media/$USER* ]]; then
         text+="
 
 $(gettext '*** Remember to safely(!) remove the USB media ***')"

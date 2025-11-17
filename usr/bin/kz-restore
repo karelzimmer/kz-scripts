@@ -58,7 +58,7 @@ readonly OPTIONS_LONG='gui,source:,help,manual,usage,version'
 declare -i RESTORE_RC=0
 declare ERROR_LOG=''
 declare OPTION_GUI=false
-declare SOURCE_MEDIUM=''
+declare SOURCE=''
 
 
 # #############################################################################
@@ -70,7 +70,6 @@ function process() {
     local medium=''
     local option_source=false
     local source_argument=''
-    local source=''
 
     check_input "$@"
     check_source
@@ -176,7 +175,6 @@ function check_source() {
     fi
 
     if $option_source; then
-
         if ! [[ -d $source_argument ]]; then
             text="$program_name: $source_argument: \
 $(gettext 'directory does not exist')
@@ -184,30 +182,22 @@ $USAGE"
             kz.infomsg "$text"
             exit 1
         fi
-
-        source=$source_argument/$USER@$HOSTNAME
-        SOURCE_MEDIUM=$source_argument
+        SOURCE=$source_argument/$USER@$HOSTNAME
     else
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-
         if [[ -z $medium ]]; then
             text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
             kz.infomsg "$text"
-
             $OPTION_GUI || kz.wait_for_enter
-
             medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
                 exit 1
             fi
         fi
-
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text="$(eval_gettext "Connect only one USB medium.
 
@@ -216,21 +206,15 @@ Now connected:
 
 Disconnect media via Files.")"
             kz.infomsg "$text"
-
             $OPTION_GUI || kz.wait_for_enter
-
             medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 kz.errmsg "$text"
                 exit 1
             fi
         fi
-
-        source=$medium/backups/$USER@$HOSTNAME
-        SOURCE_MEDIUM=$medium
-
-        if ! [[ -d $source ]]; then
+        SOURCE=$medium/$USER@$HOSTNAME
+        if ! [[ -d $SOURCE ]]; then
             text=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
@@ -259,7 +243,7 @@ function restore_backup() {
                 --acls                  \
                 --xattrs                \
                 --verbose               \
-                "$source/"              \
+                "$SOURCE/"              \
                 "$HOME/"                \
                 2>> "$ERROR_LOG"        |
         sed     --expression='s/^/#/'   |
@@ -279,7 +263,7 @@ function restore_backup() {
                 --xattrs                \
                 --verbose               \
                 --human-readable        \
-                "$source/"              \
+                "$SOURCE/"              \
                 "$HOME/"                2>> "$ERROR_LOG" || RESTORE_RC=$?
     fi
 }
@@ -370,7 +354,7 @@ $(gettext 'Try restoring the back up again.')"
 
 $users"
     fi
-    if [[ $SOURCE_MEDIUM == /media/$USER* ]]; then
+    if [[ $SOURCE == /media/$USER* ]]; then
         text+="
 
 $(gettext '*** Remember to safely(!) remove the USB media ***')"
