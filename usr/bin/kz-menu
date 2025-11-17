@@ -489,6 +489,9 @@ function process_commands() {
                 )
             title="$description ($command)"
             execute_command
+            if [[ $rc -ne 0 ]]; then
+                break
+            fi
         done
     fi
 }
