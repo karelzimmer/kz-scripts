@@ -100,8 +100,8 @@ msgstr "Programma {} is onderbroken."
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:170 kz-backup:152 kz-build:155 kz-check:129 kz-deploy:134 kz-desktop:198
-#: kz-dev:148 kz-install:237 kz-menu:175 kz-restore:153 kz-setup:235
+#: kz:170 kz-backup:151 kz-build:155 kz-check:129 kz-deploy:134 kz-desktop:198
+#: kz-dev:148 kz-install:237 kz-menu:175 kz-restore:152 kz-setup:235
 #: kz-update:169 kz-wifi:127
 msgid "internal error"
 msgstr "interne fout"
@@ -123,7 +123,7 @@ msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
 
-#: kz-backup:23 kz-backup:510 kz-menu:74 kz-backup.desktop:10
+#: kz-backup:23 kz-backup:494 kz-menu:74 kz-backup.desktop:10
 msgid "Backup home folder"
 msgstr "Back-up persoonlijke map"
 
@@ -163,25 +163,25 @@ msgstr ""
 "  -t, --target <map>\n"
 "                 plaats de back-up in de opgegeven map"
 
-#: kz-backup:112 kz-desktop:213 kz-install:202 kz-menu:146 kz-restore:112
+#: kz-backup:111 kz-desktop:213 kz-install:202 kz-menu:146 kz-restore:111
 #: kz-setup:200
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
-#: kz-backup:122 kz-desktop:138 kz-desktop:149 kz-desktop:160 kz-restore:123
+#: kz-backup:121 kz-desktop:138 kz-desktop:149 kz-desktop:160 kz-restore:122
 msgid "too many options"
 msgstr "te veel opties"
 
-#: kz-backup:160 kz-build:163 kz-check:137 kz-deploy:142 kz-desktop:206
-#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:161 kz-update:175 kz-wifi:133
+#: kz-backup:159 kz-build:163 kz-check:137 kz-deploy:142 kz-desktop:206
+#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:160 kz-update:175 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
-#: kz-backup:182 kz-restore:182
+#: kz-backup:180 kz-restore:180
 msgid "directory does not exist"
 msgstr "map bestaat niet"
 
-#: kz-backup:195 kz-restore:194
+#: kz-backup:189 kz-restore:189
 msgid ""
 "No USB medium found.\n"
 "\n"
@@ -191,7 +191,7 @@ msgstr ""
 "\n"
 "Koppel een usb-medium aan."
 
-#: kz-backup:212 kz-restore:212
+#: kz-backup:204 kz-restore:202
 #, sh-format
 msgid ""
 "Connect only one USB medium.\n"
@@ -208,15 +208,15 @@ msgstr ""
 "\n"
 "Koppel media af via Bestanden."
 
-#: kz-backup:245 kz-restore:292 kz-setup:309
+#: kz-backup:229 kz-restore:276 kz-setup:309
 msgid "Settings"
 msgstr "Instellingen"
 
-#: kz-backup:273 kz-setup:316
+#: kz-backup:257 kz-setup:316
 msgid "README"
 msgstr "LEESMIJ"
 
-#: kz-backup:275 kz-setup:318
+#: kz-backup:259 kz-setup:318
 msgid ""
 "This folder contains files created by kz-backup and kz-setup.\n"
 "These files are used by kz-restore and others.\n"
@@ -228,43 +228,43 @@ msgstr ""
 "\n"
 "Verder lezen:"
 
-#: kz-backup:296
+#: kz-backup:280
 msgid "==== START list of manual installed packages"
 msgstr "==== BEGIN overzicht van handmatig geïnstalleerde pakketten"
 
-#: kz-backup:297
+#: kz-backup:281
 msgid "==== END list of manual installed packages"
 msgstr "==== EINDE overzicht van handmatig geïnstalleerde pakketten"
 
-#: kz-backup:298
+#: kz-backup:282
 msgid "==== START list of installed snaps"
 msgstr "==== BEGIN overzicht van geïnstalleerde snaps"
 
-#: kz-backup:299
+#: kz-backup:283
 msgid "==== END list of installed snaps"
 msgstr "==== EINDE overzicht van geïnstalleerde snaps"
 
-#: kz-backup:300
+#: kz-backup:284
 msgid "==== START list of installed Flatpak apps"
 msgstr "==== BEGIN overzicht van geïnstalleerde flatpak-apps"
 
-#: kz-backup:301
+#: kz-backup:285
 msgid "==== END list of installed Flatpak apps"
 msgstr "==== EINDE overzicht van geïnstalleerde flatpak-apps"
 
-#: kz-backup:339
+#: kz-backup:323
 msgid "users.txt"
 msgstr "gebruikers.txt"
 
-#: kz-backup:342 kz-backup:613 kz-restore:360
+#: kz-backup:326 kz-backup:597 kz-restore:344
 msgid "USERNAME|USERID|USER"
 msgstr "GEBRUIKERSNAAM|USERID|GEBRUIKER"
 
-#: kz-backup:360 kz-backup:372
+#: kz-backup:344 kz-backup:356
 msgid "Additional users can be added manually:"
 msgstr "Extra gebruikers kunnen handmatig worden toegevoegd:"
 
-#: kz-backup:362
+#: kz-backup:346
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
@@ -275,11 +275,11 @@ msgstr ""
 "2. Klik op Ontgrendelen en vervolgens op Gebruiker toevoegen.\n"
 "3. Vul in Naam <gebruiker> en Gebruikersnaam <gebruikersnaam>."
 
-#: kz-backup:367 kz-backup:425 kz-backup:462
+#: kz-backup:351 kz-backup:409 kz-backup:446
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr "[1] Windows-, command- of vergrootglastoets."
 
-#: kz-backup:374
+#: kz-backup:358
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -301,7 +301,7 @@ msgstr ""
 "# Gebruiker kan wachtwoord instellen bij de eerste keer aanmelden:\n"
 "sudo passwd --delete --expire <gebruikersnaam>"
 
-#: kz-backup:418
+#: kz-backup:402
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -317,7 +317,7 @@ msgstr ""
 "2. Klik op Avatar veranderen (potloodpictogram).\n"
 "3. Klik op Selecteer een bestand."
 
-#: kz-backup:456
+#: kz-backup:440
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -332,65 +332,65 @@ msgstr ""
 "3. Rechtsklik op de gewenste afbeelding en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:510 kz-install:429 kz-restore:253 kz-setup:468
+#: kz-backup:494 kz-install:429 kz-restore:237 kz-setup:468
 msgid "progress"
 msgstr "voortgang"
 
-#: kz-backup:511
+#: kz-backup:495
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-#: kz-backup:550
+#: kz-backup:534
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:586 kz-install:570 kz-restore:328 kz-setup:590
+#: kz-backup:570 kz-install:570 kz-restore:312 kz-setup:590
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:587
+#: kz-backup:571
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:589 kz-restore:331
+#: kz-backup:573 kz-restore:315
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:590
+#: kz-backup:574
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:591 kz-restore:333
+#: kz-backup:575 kz-restore:317
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:592
+#: kz-backup:576
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:594 kz-install:575 kz-restore:336 kz-setup:594
+#: kz-backup:578 kz-install:575 kz-restore:320 kz-setup:594
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:595 kz-install:576 kz-restore:337 kz-setup:595
+#: kz-backup:579 kz-install:576 kz-restore:321 kz-setup:595
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:596
+#: kz-backup:580
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:624
+#: kz-backup:608
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:626
+#: kz-backup:610
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
 
-#: kz-backup:634 kz-restore:376
+#: kz-backup:618 kz-restore:360
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -1110,7 +1110,7 @@ msgstr "Menu verlaten"
 msgid "Show WiFi information"
 msgstr "Wifi-informatie weergeven"
 
-#: kz-menu:77 kz-restore:23 kz-restore:253 kz-restore.desktop:10
+#: kz-menu:77 kz-restore:23 kz-restore:237 kz-restore.desktop:10
 msgid "Restore home folder"
 msgstr "Herstel persoonlijke map"
 
@@ -1230,7 +1230,7 @@ msgstr ""
 "  -t, --source <map>\n"
 "                 gebruik de back-up in de opgegeven map"
 
-#: kz-restore:234
+#: kz-restore:218
 #, sh-format
 msgid ""
 "No backup found on connected USB medium.\n"
@@ -1241,34 +1241,34 @@ msgstr ""
 "\n"
 "Koppel een usb-medium aan met hierop de map $USER@$HOSTNAME."
 
-#: kz-restore:254
+#: kz-restore:238
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
 
-#: kz-restore:329
+#: kz-restore:313
 msgid "Restore ended with errors."
 msgstr "Back-up terugzetten is geëindigd met fouten."
 
-#: kz-restore:332
+#: kz-restore:316
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 "Zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up of"
 
-#: kz-restore:334
+#: kz-restore:318
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr "is er te weinig ruimte op $HOME."
 
-#: kz-restore:338
+#: kz-restore:322
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:357
+#: kz-restore:341
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-restore:368
+#: kz-restore:352
 #, sh-format
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
