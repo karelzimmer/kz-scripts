@@ -67,7 +67,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
         else:
             text = _('Wait for another package manager to finish') + '...'
             infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
-            time.sleep(1)
+            time.sleep(2)
 
     return 0
 

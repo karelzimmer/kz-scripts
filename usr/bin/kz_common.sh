@@ -53,7 +53,7 @@ function kz.check_debian_package_manager() {
         else
             kz.infomsg "$text..."
         fi
-        sleep 1
+        sleep 2
     done
 }
 

@@ -374,6 +374,42 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  sp
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
 
+
+# INSTALL disabled-aer #none
+# -----------------------------------------------------------------------------
+# Disable Advanced Error Reporting.
+# -----------------------------------------------------------------------------
+# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
+# Express Advanced Error Reporting) prevents the log gets flooded with
+# 'AER: Corrected errors received'. This is usually needed for HP hardware.
+# -----------------------------------------------------------------------------
+if ! grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if   grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+# -----------------------------------------------------------------------------
+# Check for kernel config parameter pci=noaer.
+# -----------------------------------------------------------------------------
+grep --quiet 'pci=noaer' /etc/default/grub
+REBOOT=true
+
+# REMOVE disabled-aer #none
+# -----------------------------------------------------------------------------
+# Enable Advanced Error Reporting.
+# -----------------------------------------------------------------------------
+# Enable kernel config parameter PCIEAER (Peripheral Component Interconnect
+# Express Advanced Error Reporting) to "allow" the log gets flooded with
+# 'AER: Corrected errors received'. This is usually needed for HP hardware.
+# -----------------------------------------------------------------------------
+if grep --quiet 'pci=noaer' /etc/default/grub; then sudo sed --in-place 's/ pci=noaer//' /etc/default/grub; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+# -----------------------------------------------------------------------------
+# Check for kernel config parameter pci=noaer.
+# -----------------------------------------------------------------------------
+! grep --quiet 'pci=noaer' /etc/default/grub
+REBOOT=true
+
 # INSTALL disabled-apport #none
 # -----------------------------------------------------------------------------
 # Disable automatic crash report generation for Ubuntu.
@@ -560,20 +596,28 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-earth-pro-stable; fi
 
-# INSTALL grub-timeout *
+# INSTALL grub-settings *
 # -----------------------------------------------------------------------------
 # Reduce GRUB menu display time.
 # -----------------------------------------------------------------------------
-sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=1/" /etc/default/grub
-if grep --quiet debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/" /etc/default/grub
+# -----------------------------------------------------------------------------
+# Suppress warnings.
+# -----------------------------------------------------------------------------
+if ! grep --quiet 'loglevel=3' /etc/default/grub; then sudo sed --in-place 's/quiet/quiet loglevel=3/' /etc/default/grub; fi
+if   grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
-# REMOVE grub-timeout *
+# REMOVE grub-settings *
 # -----------------------------------------------------------------------------
 # Restore default GRUB menu display time.
 # -----------------------------------------------------------------------------
 sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/" /etc/default/grub
+# -----------------------------------------------------------------------------
+# Enable warnings.
+# -----------------------------------------------------------------------------
+sudo sed  --in-place 's/ loglevel=3//' /etc/default/grub
 if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
