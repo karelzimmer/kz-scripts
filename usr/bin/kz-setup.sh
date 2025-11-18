@@ -167,6 +167,7 @@ if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar
 LOGOUT=true
 
 # SETUP development pc06 pc07
+kz-dev
 # -----------------------------------------------------------------------------
 # Git - distributed revision control system.
 # -----------------------------------------------------------------------------

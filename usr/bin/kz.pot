@@ -89,18 +89,18 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:108 kz_common.py:292 kz-dev:86 kz-update:78
+#: kz:108 kz_common.py:292 kz-update:78
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz:114 kz_common.py:200 kz_common.py:209 kz_common.py:248 kz_common.py:298
-#: kz-dev:92 kz-dev:178 kz-dev:193 kz-dev:219 kz-dev:230 kz-dev:243 kz-dev:261
-#: kz-dev:279 kz-update:84 kz-update:272
+#: kz-dev:162 kz-dev:173 kz-dev:186 kz-dev:204 kz-dev:222 kz-update:84
+#: kz-update:272
 msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:170 kz-backup:151 kz-build:155 kz-check:129 kz-deploy:134 kz-desktop:198
-#: kz-dev:148 kz-install:237 kz-menu:175 kz-restore:152 kz-setup:235
+#: kz-dev:131 kz-install:237 kz-menu:175 kz-restore:152 kz-setup:235
 #: kz-update:169 kz-wifi:127
 msgid "internal error"
 msgstr ""
@@ -165,7 +165,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:159 kz-build:163 kz-check:137 kz-deploy:142 kz-desktop:206
-#: kz-dev:154 kz-get:106 kz-menu:183 kz-restore:160 kz-update:175 kz-wifi:133
+#: kz-dev:137 kz-get:106 kz-menu:183 kz-restore:160 kz-update:175 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -366,7 +366,7 @@ msgstr ""
 msgid "  -d, --dev      build the development version of package kz"
 msgstr ""
 
-#: kz-build:87 kz-check:69 kz-deploy:70 kz-dev:75
+#: kz-build:87 kz-check:69 kz-deploy:70 kz-dev:74
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
@@ -426,7 +426,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:502 kz-check:574 kz-deploy:264 kz-dev:327 kz-update:283
+#: kz-build:502 kz-check:574 kz-deploy:264 kz-dev:270 kz-update:283
 msgid "Complete!"
 msgstr ""
 
@@ -660,7 +660,7 @@ msgstr ""
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:209 kz-dev:305
+#: kz-deploy:209 kz-dev:248
 msgid "Password for"
 msgstr ""
 
@@ -746,7 +746,7 @@ msgid "Use \"gsettings set <change>\" for changes."
 msgstr ""
 
 #: kz-dev:32
-msgid "Build development environment"
+msgid "Set up development environment"
 msgstr ""
 
 #: kz-dev:34
@@ -757,27 +757,23 @@ msgstr ""
 msgid "Usage: kz dev [<options>]"
 msgstr ""
 
-#: kz-dev:166
-msgid "Install dependencies..."
-msgstr ""
-
-#: kz-dev:208
+#: kz-dev:151
 msgid "Clone repos..."
 msgstr ""
 
-#: kz-dev:249
+#: kz-dev:192
 msgid "Pull repos..."
 msgstr ""
 
-#: kz-dev:267
+#: kz-dev:210
 msgid "Status repos..."
 msgstr ""
 
-#: kz-dev:301
+#: kz-dev:244
 msgid "Download website..."
 msgstr ""
 
-#: kz-dev:318
+#: kz-dev:261
 msgid "Website download failed."
 msgstr ""
 

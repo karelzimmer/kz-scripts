@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # #############################################################################
-# SPDX-FileComment: Build development environment
+# SPDX-FileComment: Set up development environment
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -29,7 +29,7 @@ _ = gettext.gettext
 # #############################################################################
 
 PROGRAM_NAME: str = 'kz-dev'
-PROGRAM_DESC: str = _('Build development environment')
+PROGRAM_DESC: str = _('Set up development environment')
 
 USAGE: str = _("Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] "
                "[-v|--version]")
@@ -65,11 +65,10 @@ def process() -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    command1: str = 'grep --quiet debian /etc/os-release'
-    command2: str = 'sudo true'
+    command: str = 'grep --quiet debian /etc/os-release'
     text: str
 
-    if subprocess.run(command1, executable='bash',
+    if subprocess.run(command, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode != 0:
         text = _('Must run on a Debian or Debian-based system.')
@@ -78,22 +77,6 @@ def process() -> None:
 
     check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
-    kz.become_check(PROGRAM_NAME, PROGRAM_DESC)
-
-    try:
-        subprocess.run(command2, executable='bash', shell=True, check=True)
-    except KeyboardInterrupt:
-        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        kz.term(PROGRAM_NAME, 1)
-    except Exception as exc:
-        text = str(exc)
-        kz.logmsg(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        kz.term(PROGRAM_NAME, 1)
-
-    check_dependencies()
     pull_repos()
     download_website()
 
@@ -155,46 +138,6 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
-
-def check_dependencies() -> None:
-    """
-    This function checks and installs dependencies.
-    """
-    exc: BaseException
-    text: str
-
-    text = _('Install dependencies...')
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
-
-    # Call kz-install.
-    text = 'Calling kz-install...'
-    kz.logmsg(PROGRAM_NAME, text)
-    command: str = f'kz-install development microsoft-vscode'
-    try:
-        subprocess.run(command, executable='bash', shell=True, check=True)
-    except Exception as exc:
-        text = str(exc)
-        kz.logmsg(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        kz.term(PROGRAM_NAME, 1)
-    text = 'Called kz-install.'
-    kz.logmsg(PROGRAM_NAME, text)
-
-    # Call kz-setup.
-    text = 'Calling kz-setup...'
-    kz.logmsg(PROGRAM_NAME, text)
-    command = 'kz-setup terminal'
-    try:
-        subprocess.run(command, executable='bash', shell=True, check=True)
-    except Exception as exc:
-        text = str(exc)
-        kz.logmsg(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        kz.term(PROGRAM_NAME, 1)
-    text = 'Called kz-setup.'
-    kz.logmsg(PROGRAM_NAME, text)
 
 
 def pull_repos() -> None:
