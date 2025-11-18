@@ -1231,11 +1231,11 @@ msgstr ""
 msgid ""
 "No backup found on connected USB medium.\n"
 "\n"
-"Connect a USB medium with the directory $USER@$HOSTNAME."
+"Connect a USB medium with the directory backup-$USER@$HOSTNAME."
 msgstr ""
 "Geen back-up gevonden op aangekoppeld usb-medium.\n"
 "\n"
-"Koppel een usb-medium aan met hierop de map $USER@$HOSTNAME."
+"Koppel een usb-medium aan met hierop de map backup-$USER@$HOSTNAME."
 
 #: kz-restore:238
 msgid "Preparing restore (this can take a while)"
