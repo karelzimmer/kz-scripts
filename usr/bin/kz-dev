@@ -139,7 +139,6 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.term(PROGRAM_NAME, 1)
 
 
-
 def pull_repos() -> None:
     """
     This function retrieves the public repos.
