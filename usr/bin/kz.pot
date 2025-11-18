@@ -94,7 +94,7 @@ msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz:114 kz_common.py:200 kz_common.py:209 kz_common.py:248 kz_common.py:298
-#: kz-dev:162 kz-dev:173 kz-dev:186 kz-dev:204 kz-dev:222 kz-update:84
+#: kz-dev:161 kz-dev:172 kz-dev:185 kz-dev:203 kz-dev:221 kz-update:84
 #: kz-update:272
 msgid "Program {} encountered an error."
 msgstr ""
@@ -426,7 +426,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:502 kz-check:574 kz-deploy:264 kz-dev:270 kz-update:283
+#: kz-build:502 kz-check:574 kz-deploy:264 kz-dev:269 kz-update:283
 msgid "Complete!"
 msgstr ""
 
@@ -660,7 +660,7 @@ msgstr ""
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:209 kz-dev:248
+#: kz-deploy:209 kz-dev:247
 msgid "Password for"
 msgstr ""
 
@@ -757,23 +757,23 @@ msgstr ""
 msgid "Usage: kz dev [<options>]"
 msgstr ""
 
-#: kz-dev:151
+#: kz-dev:150
 msgid "Clone repos..."
 msgstr ""
 
-#: kz-dev:192
+#: kz-dev:191
 msgid "Pull repos..."
 msgstr ""
 
-#: kz-dev:210
+#: kz-dev:209
 msgid "Status repos..."
 msgstr ""
 
-#: kz-dev:244
+#: kz-dev:243
 msgid "Download website..."
 msgstr ""
 
-#: kz-dev:261
+#: kz-dev:260
 msgid "Website download failed."
 msgstr ""
 
