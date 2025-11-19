@@ -294,7 +294,7 @@ function backup_setting_apps() {
         --fields=1          >> "$output_file" || true
     printf '%s\n' "$footer1" >> "$output_file"
 
-    if snap 2> /dev/null; then
+    if type snap &> /dev/null; then
         {
             printf '\n%s\n' "$header2"
             snap list
@@ -302,7 +302,7 @@ function backup_setting_apps() {
         } >> "$output_file"
     fi
 
-    if flatpak 2> /dev/null; then
+    if type flatpak &> /dev/null; then
         {
             printf '\n%s\n' "$header3"
             flatpak list
