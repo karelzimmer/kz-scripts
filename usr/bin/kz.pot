@@ -235,7 +235,7 @@ msgstr ""
 msgid "users.txt"
 msgstr ""
 
-#: kz-backup:326 kz-backup:597 kz-restore:344
+#: kz-backup:326 kz-backup:593 kz-restore:344
 msgid "USERNAME|USERID|USER"
 msgstr ""
 
@@ -294,57 +294,57 @@ msgstr ""
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:534
+#: kz-backup:530
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:570 kz-install:570 kz-restore:312 kz-setup:590
+#: kz-backup:566 kz-install:570 kz-restore:312 kz-setup:590
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:571
+#: kz-backup:567
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:573 kz-restore:315
+#: kz-backup:569 kz-restore:315
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:574
+#: kz-backup:570
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:575 kz-restore:317
+#: kz-backup:571 kz-restore:317
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:576
+#: kz-backup:572
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:578 kz-install:575 kz-restore:320 kz-setup:594
+#: kz-backup:574 kz-install:575 kz-restore:320 kz-setup:594
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:579 kz-install:576 kz-restore:321 kz-setup:595
+#: kz-backup:575 kz-install:576 kz-restore:321 kz-setup:595
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:580
+#: kz-backup:576
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:608
+#: kz-backup:604
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:610
+#: kz-backup:606
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
-#: kz-backup:618 kz-restore:360
+#: kz-backup:614 kz-restore:360
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 

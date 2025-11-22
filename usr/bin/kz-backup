@@ -497,8 +497,6 @@ EOF
 
     if $OPTION_GUI; then
         rsync   --archive                       \
-                --acls                          \
-                --xattrs                        \
                 --verbose                       \
                 --delete                        \
                 --exclude-from="$exclude_file"  \
@@ -519,8 +517,6 @@ EOF
         text+='...'
         kz.infomsg "$text"
         rsync   --archive                       \
-                --acls                          \
-                --xattrs                        \
                 --verbose                       \
                 --human-readable                \
                 --delete                        \
