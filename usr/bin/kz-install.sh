@@ -425,14 +425,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  sp
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
 
-# INSTALL dos2unix #none
+# INSTALL dos2unix pc06 pc07
 # -----------------------------------------------------------------------------
 # Convert text file line endings between CRLF and LF.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes dos2unix; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  dos2unix; fi
 
-# REMOVE dos2unix #none
+# REMOVE dos2unix pc06 pc07
 # -----------------------------------------------------------------------------
 # Convert text file line endings between CRLF and LF.
 # -----------------------------------------------------------------------------
@@ -706,6 +706,20 @@ sudo updatedb
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  mlocate; fi
+
+# INSTALL lshw pc06 pc07
+# -----------------------------------------------------------------------------
+# Hardware lister.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lshw; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  lshw; fi
+
+# REMOVE lshw pc06 pc07
+# -----------------------------------------------------------------------------
+# Hardware lister.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lshw; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lshw; fi
 
 # INSTALL microsoft-edge pc06 pc06
 # -----------------------------------------------------------------------------
