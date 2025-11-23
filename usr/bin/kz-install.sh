@@ -477,16 +477,16 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fd
 # -----------------------------------------------------------------------------
 # Web browser (ESR=Extended Support Release).
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get install --assume-yes firefox; fi
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get install --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
 # REMOVE firefox pc06 pc07
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get remove --assume-yes firefox; fi
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get remove --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
 
 # INSTALL fwupd-settings #none
@@ -895,14 +895,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  tr
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
 
 # REMOVE thunderbird pc06 pc07
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  thunderbird; fi
 
 # INSTALL transmission pc01 pc06 pc07
