@@ -770,6 +770,28 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  n
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ntfs-3g ntfsprogs; fi
 
+# INSTALL pst-utils pc06 pc07
+# -----------------------------------------------------------------------------
+# Tools based on libpst to read data from Microsoft Outlook PST files.
+# -----------------------------------------------------------------------------
+# * readpst - export data from PST files to a variety of formats, including
+#   mbox, MH and KMail. Other packages like mb2md are available for subsequent
+#   conversions to Maildir and other formats.
+# * lspst - list data in PST files.
+# * pst2ldif - extract contacts from a PST file and prepare them for input in
+#   LDAP
+# * pst2dii - export data from PST files to Summation dii load file format
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pst-utils; fi
+if grep --quiet rhel   /etc/os-release; then echo 'Download pst-utils.rpm from https://www.rpmfind.net/ and install with "sudo dnf install ./pst-utils-0.5.2-6.x86_64.rpm".'; fi
+
+# REMOVE pst-utils pc06 pc07
+# -----------------------------------------------------------------------------
+# Tools based on libpst to read data from Microsoft Outlook PST files.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes pst-utils; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  pst-utils; fi
+
 # INSTALL simplescreenrecorder #none
 # -----------------------------------------------------------------------------
 # Screen recorder.
