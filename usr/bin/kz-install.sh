@@ -93,6 +93,22 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  backintime-qt; fi
 
+# INSTALL bitwarden pc06 pc07
+# -----------------------------------------------------------------------------
+# Password manager.
+# -----------------------------------------------------------------------------
+sudo apt-get install    --assume-yes    flatpak
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak install    --assumeyes     com.bitwarden.desktop
+REBOOT=true
+
+# REMOVE bitwarden pc06 pc07
+# -----------------------------------------------------------------------------
+# Password manager.
+# -----------------------------------------------------------------------------
+sudo flatpak uninstall --assumeyes com.bitwarden.desktop
+REBOOT=true
+
 # INSTALL bleachbit #none #gpg
 # -----------------------------------------------------------------------------
 # Delete files.
