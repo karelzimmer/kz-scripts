@@ -182,7 +182,7 @@ $USAGE"
             kz.infomsg "$text"
             exit 1
         fi
-        TARGET=$target_argument/backup-$USER@$HOSTNAME
+        TARGET=$target_argument/BACKUP-$USER@$HOSTNAME
     else
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ -z $medium ]]; then
@@ -215,7 +215,7 @@ Disconnect media via Files.")"
                 exit 1
             fi
         fi
-        TARGET=$medium/backup-$USER@$HOSTNAME
+        TARGET=$medium/BACKUP-$USER@$HOSTNAME
     fi
 }
 

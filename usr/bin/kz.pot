@@ -1126,7 +1126,7 @@ msgstr ""
 msgid ""
 "No backup found on connected USB medium.\n"
 "\n"
-"Connect a USB medium with the directory backup-$USER@$HOSTNAME."
+"Connect a USB medium with the directory BACKUP-$USER@$HOSTNAME."
 msgstr ""
 
 #: kz-restore:238
