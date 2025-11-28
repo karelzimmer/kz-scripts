@@ -220,7 +220,7 @@ Disconnect media via Files.")"
 BACKUP-\$USER@\$HOSTNAME on \$medium.")"
         kz.errmsg "$text"
         exit 1
-    fi 
+    fi
     if ! [[ -d $SOURCE ]]; then
         text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
         kz.errmsg "$text"

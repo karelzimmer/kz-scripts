@@ -222,7 +222,7 @@ Disconnect media via Files.")"
 BACKUP-\$USER@\$HOSTNAME on \$medium.")"
         kz.errmsg "$text"
         exit 1
-    fi 
+    fi
 }
 
 
