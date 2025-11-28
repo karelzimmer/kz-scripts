@@ -182,7 +182,7 @@ $USAGE"
             kz.infomsg "$text"
             exit 1
         fi
-        TARGET=$target_argument/BACKUP-$USER@$HOSTNAME
+        medium=$target_argument
     else
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ -z $medium ]]; then
@@ -215,8 +215,14 @@ Disconnect media via Files.")"
                 exit 1
             fi
         fi
-        TARGET=$medium/BACKUP-$USER@$HOSTNAME
     fi
+    TARGET=$medium/BACKUP-$USER@$HOSTNAME
+    if [[ -d $medium/backup-$USER@$HOSTNAME ]]; then
+        text="$(eval_gettext "Rename backup-\$USER@\$HOSTNAME to \
+BACKUP-\$USER@\$HOSTNAME on \$medium.")"
+        kz.errmsg "$text"
+        exit 1
+    fi 
 }
 
 

@@ -182,7 +182,7 @@ $USAGE"
             kz.infomsg "$text"
             exit 1
         fi
-        SOURCE=$source_argument/BACKUP-$USER@$HOSTNAME
+        medium=$source_argument
     else
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ -z $medium ]]; then
@@ -213,14 +213,18 @@ Disconnect media via Files.")"
                 exit 1
             fi
         fi
-        SOURCE=$medium/BACKUP-$USER@$HOSTNAME
-        if ! [[ -d $SOURCE ]]; then
-            text=$(eval_gettext "No backup found on connected USB medium.
-
-Connect a USB medium with the directory BACKUP-\$USER@\$HOSTNAME.")
-            kz.errmsg "$text"
-            exit 1
-        fi
+    fi
+    SOURCE=$medium/BACKUP-$USER@$HOSTNAME
+    if [[ -d $medium/backup-$USER@$HOSTNAME ]]; then
+        text="$(eval_gettext "Rename backup-\$USER@\$HOSTNAME to \
+BACKUP-\$USER@\$HOSTNAME on \$medium.")"
+        kz.errmsg "$text"
+        exit 1
+    fi 
+    if ! [[ -d $SOURCE ]]; then
+        text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
+        kz.errmsg "$text"
+        exit 1
     fi
 }
 
