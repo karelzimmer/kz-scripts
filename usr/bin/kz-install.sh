@@ -123,7 +123,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  b
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bleachbit; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  bleachbit; fi
 
-# INSTALL broadcom-sta-dkms pc01
+# INSTALL broadcom-sta-dkms pc01 #gpg
 # -----------------------------------------------------------------------------
 # Enable wifi adapter.
 # -----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes l
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
 REBOOT=true
 
-# REMOVE broadcom-sta-dkms pc01
+# REMOVE broadcom-sta-dkms pc01 #gpg
 # -----------------------------------------------------------------------------
 # Disable wifi adapter.
 # -----------------------------------------------------------------------------
