@@ -216,10 +216,9 @@ Disconnect media via Files.")"
     fi
     SOURCE=$medium/BACKUP-$USER@$HOSTNAME
     if [[ -d $medium/backup-$USER@$HOSTNAME ]]; then
-        text="$(eval_gettext "Rename backup-\$USER@\$HOSTNAME to \
-BACKUP-\$USER@\$HOSTNAME on \$medium.")"
-        kz.errmsg "$text"
-        exit 1
+        mv  --verbose                           \
+            "$medium/backup-$USER@$HOSTNAME"    \
+            "$SOURCE"                           |& $PROGRAM_LOGS
     fi
     if ! [[ -d $SOURCE ]]; then
         text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
