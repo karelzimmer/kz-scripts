@@ -175,6 +175,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  co
 # Web app: http://localhost:631
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libcupsimage2; fi
 if grep --quiet rhel /etc/os-release  ; then sudo dnf     install --assumeyes  cups; fi
 
 # REMOVE cups #none
@@ -182,6 +183,7 @@ if grep --quiet rhel /etc/os-release  ; then sudo dnf     install --assumeyes  c
 # Common Unix Printing System.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libcupsimage2; fi
 if grep --quiet rhel /etc/os-release  ; then sudo dnf     remove --assumeyes  cups; fi
 
 # INSTALL cups-backend-bjnp #none #gpg
