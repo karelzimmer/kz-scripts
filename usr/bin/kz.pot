@@ -191,7 +191,7 @@ msgid ""
 "Disconnect media via Files."
 msgstr ""
 
-#: kz-backup:234 kz-restore:279 kz-setup:309
+#: kz-backup:234 kz-restore:275 kz-setup:309
 msgid "Settings"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgstr ""
 msgid "users.txt"
 msgstr ""
 
-#: kz-backup:331 kz-backup:598 kz-restore:347
+#: kz-backup:331 kz-backup:598 kz-restore:343
 msgid "USERNAME|USERID|USER"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:571 kz-install:570 kz-restore:315 kz-setup:590
+#: kz-backup:571 kz-install:570 kz-restore:311 kz-setup:590
 msgid "error messages"
 msgstr ""
 
@@ -306,7 +306,7 @@ msgstr ""
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:574 kz-restore:318
+#: kz-backup:574 kz-restore:314
 msgid "Possible causes:"
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:576 kz-restore:320
+#: kz-backup:576 kz-restore:316
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
@@ -323,11 +323,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:579 kz-install:575 kz-restore:323 kz-setup:594
+#: kz-backup:579 kz-install:575 kz-restore:319 kz-setup:594
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:580 kz-install:576 kz-restore:324 kz-setup:595
+#: kz-backup:580 kz-install:576 kz-restore:320 kz-setup:595
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -344,7 +344,7 @@ msgstr ""
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
-#: kz-backup:619 kz-restore:363
+#: kz-backup:619 kz-restore:359
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 
@@ -1130,28 +1130,28 @@ msgstr ""
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:316
+#: kz-restore:312
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:319
+#: kz-restore:315
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:321
+#: kz-restore:317
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:325
+#: kz-restore:321
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:344
+#: kz-restore:340
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:355
+#: kz-restore:351
 #, sh-format
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr ""
