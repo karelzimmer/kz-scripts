@@ -356,9 +356,7 @@ function process_menu1_choice4() {
     local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
 
     process_commands
-
-    # User must type 'logout' to log out.
-    $OPTION_GUI || exit 0
+    $OPTION_GUI || kz.wait_for_enter
 }
 
 
@@ -489,9 +487,6 @@ function process_commands() {
                 )
             title="$description ($command)"
             execute_command
-            if [[ $rc -ne 0 ]]; then
-                break
-            fi
         done
     fi
 }

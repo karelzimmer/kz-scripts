@@ -1118,31 +1118,31 @@ msgstr "Apps instellen"
 msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
-#: kz-menu:87 kz-menu:388
+#: kz-menu:87 kz-menu:386
 msgid "Back"
 msgstr "Terug"
 
-#: kz-menu:208 kz-menu:386
+#: kz-menu:208 kz-menu:384
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
-#: kz-menu:209 kz-menu:387
+#: kz-menu:209 kz-menu:385
 msgid "Continue"
 msgstr "Verder"
 
-#: kz-menu:211 kz-menu:389
+#: kz-menu:211 kz-menu:387
 msgid "CHOICE"
 msgstr "KEUZE"
 
-#: kz-menu:212 kz-menu:235 kz-menu:390 kz-menu:413
+#: kz-menu:212 kz-menu:235 kz-menu:388 kz-menu:411
 msgid "NUM"
 msgstr "NUM"
 
-#: kz-menu:213 kz-menu:236 kz-menu:391 kz-menu:414
+#: kz-menu:213 kz-menu:236 kz-menu:389 kz-menu:412
 msgid "ACTION"
 msgstr "ACTIE"
 
-#: kz-menu:214 kz-menu:237 kz-menu:392 kz-menu:415
+#: kz-menu:214 kz-menu:237 kz-menu:390 kz-menu:413
 msgid "DESCRIPTION"
 msgstr "BESCHRIJVING"
 
@@ -1151,7 +1151,7 @@ msgstr "BESCHRIJVING"
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr "Voer uit nummer [1-$MENU1_LINES]: "
 
-#: kz-menu:290 kz-menu:465
+#: kz-menu:290 kz-menu:463
 #, sh-format
 msgid "Cannot handle this choice ($REPLY)."
 msgstr "Kan deze keuze niet afhandelen ($REPLY)."
@@ -1178,28 +1178,28 @@ msgstr ""
 "3. Start de computer op vanaf deze USB-stick.\n"
 "4. Installeer Linux."
 
-#: kz-menu:424
+#: kz-menu:422
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: kz-menu:508
+#: kz-menu:503
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
-#: kz-menu:523
+#: kz-menu:518
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:535
+#: kz-menu:530
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:536
+#: kz-menu:531
 msgid "No"
 msgstr "Nee"
 
-#: kz-menu:544
+#: kz-menu:539
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr "$prompt [J/n]: "

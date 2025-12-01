@@ -1027,31 +1027,31 @@ msgstr ""
 msgid "Go to installation menu"
 msgstr ""
 
-#: kz-menu:87 kz-menu:388
+#: kz-menu:87 kz-menu:386
 msgid "Back"
 msgstr ""
 
-#: kz-menu:208 kz-menu:386
+#: kz-menu:208 kz-menu:384
 msgid "Select a choice:"
 msgstr ""
 
-#: kz-menu:209 kz-menu:387
+#: kz-menu:209 kz-menu:385
 msgid "Continue"
 msgstr ""
 
-#: kz-menu:211 kz-menu:389
+#: kz-menu:211 kz-menu:387
 msgid "CHOICE"
 msgstr ""
 
-#: kz-menu:212 kz-menu:235 kz-menu:390 kz-menu:413
+#: kz-menu:212 kz-menu:235 kz-menu:388 kz-menu:411
 msgid "NUM"
 msgstr ""
 
-#: kz-menu:213 kz-menu:236 kz-menu:391 kz-menu:414
+#: kz-menu:213 kz-menu:236 kz-menu:389 kz-menu:412
 msgid "ACTION"
 msgstr ""
 
-#: kz-menu:214 kz-menu:237 kz-menu:392 kz-menu:415
+#: kz-menu:214 kz-menu:237 kz-menu:390 kz-menu:413
 msgid "DESCRIPTION"
 msgstr ""
 
@@ -1060,7 +1060,7 @@ msgstr ""
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr ""
 
-#: kz-menu:290 kz-menu:465
+#: kz-menu:290 kz-menu:463
 #, sh-format
 msgid "Cannot handle this choice ($REPLY)."
 msgstr ""
@@ -1078,28 +1078,28 @@ msgid ""
 "4. Install Linux."
 msgstr ""
 
-#: kz-menu:424
+#: kz-menu:422
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: kz-menu:508
+#: kz-menu:503
 msgid "The following will be executed:"
 msgstr ""
 
-#: kz-menu:523
+#: kz-menu:518
 msgid "Proceed?"
 msgstr ""
 
-#: kz-menu:535
+#: kz-menu:530
 msgid "Yes"
 msgstr ""
 
-#: kz-menu:536
+#: kz-menu:531
 msgid "No"
 msgstr ""
 
-#: kz-menu:544
+#: kz-menu:539
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr ""
