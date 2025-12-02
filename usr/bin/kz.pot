@@ -37,7 +37,7 @@ msgstr ""
 
 #: kz:41 kz-backup:36 kz-build:40 kz-check:35 kz-deploy:40 kz-desktop:37
 #: kz-dev:42 kz-get:33 kz-install:37 kz-menu:35 kz-restore:36 kz-setup:37
-#: kz-update:40 kz-wifi:41
+#: kz-update:41 kz-wifi:41
 msgid "Options:"
 msgstr ""
 
@@ -46,25 +46,25 @@ msgid "  -l, --list     show available commands"
 msgstr ""
 
 #: kz:43 kz-backup:44 kz-build:42 kz-check:36 kz-deploy:42 kz-desktop:49
-#: kz-dev:43 kz-install:49 kz-menu:38 kz-restore:44 kz-setup:49 kz-update:41
+#: kz-dev:43 kz-install:49 kz-menu:38 kz-restore:44 kz-setup:49 kz-update:42
 #: kz-wifi:44
 msgid "  -h, --help     show this help text"
 msgstr ""
 
 #: kz:44 kz-backup:45 kz-build:43 kz-check:37 kz-deploy:43 kz-desktop:50
-#: kz-dev:44 kz-install:50 kz-menu:39 kz-restore:45 kz-setup:50 kz-update:42
+#: kz-dev:44 kz-install:50 kz-menu:39 kz-restore:45 kz-setup:50 kz-update:43
 #: kz-wifi:45
 msgid "  -m, --manual   show manual page"
 msgstr ""
 
 #: kz:45 kz-backup:46 kz-build:44 kz-check:38 kz-deploy:44 kz-desktop:51
-#: kz-dev:45 kz-install:51 kz-menu:40 kz-restore:46 kz-setup:51 kz-update:43
+#: kz-dev:45 kz-install:51 kz-menu:40 kz-restore:46 kz-setup:51 kz-update:44
 #: kz-wifi:46
 msgid "  -u, --usage    show a short usage summary"
 msgstr ""
 
 #: kz:46 kz-backup:47 kz-build:45 kz-check:39 kz-deploy:45 kz-desktop:52
-#: kz-dev:46 kz-install:52 kz-menu:41 kz-restore:47 kz-setup:52 kz-update:44
+#: kz-dev:46 kz-install:52 kz-menu:41 kz-restore:47 kz-setup:52 kz-update:45
 #: kz-wifi:47
 msgid "  -v, --version  show program version"
 msgstr ""
@@ -89,19 +89,19 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:108 kz_common.py:292 kz-update:78
+#: kz:108 kz_common.py:292 kz-update:79
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz:114 kz_common.py:200 kz_common.py:209 kz_common.py:248 kz_common.py:298
-#: kz-dev:161 kz-dev:172 kz-dev:185 kz-dev:203 kz-dev:221 kz-update:84
-#: kz-update:272
+#: kz-dev:161 kz-dev:172 kz-dev:185 kz-dev:203 kz-dev:221 kz-update:85
+#: kz-update:98 kz-update:286
 msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:170 kz-backup:151 kz-build:155 kz-check:129 kz-deploy:134 kz-desktop:198
 #: kz-dev:131 kz-install:237 kz-menu:175 kz-restore:152 kz-setup:235
-#: kz-update:169 kz-wifi:127
+#: kz-update:183 kz-wifi:127
 msgid "internal error"
 msgstr ""
 
@@ -165,7 +165,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:159 kz-build:163 kz-check:137 kz-deploy:142 kz-desktop:206
-#: kz-dev:137 kz-get:106 kz-menu:183 kz-restore:160 kz-update:175 kz-wifi:133
+#: kz-dev:137 kz-get:106 kz-menu:183 kz-restore:160 kz-update:189 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -426,7 +426,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:502 kz-check:574 kz-deploy:264 kz-dev:269 kz-update:283
+#: kz-build:502 kz-check:574 kz-deploy:264 kz-dev:269 kz-update:297
 msgid "Complete!"
 msgstr ""
 
@@ -793,7 +793,7 @@ msgstr ""
 msgid "  -d, --dev      download the development version of package kz"
 msgstr ""
 
-#: kz-get:72 kz-update:117
+#: kz-get:72 kz-update:131
 msgid "fatal: unknown os release"
 msgstr ""
 
@@ -1254,27 +1254,27 @@ msgstr ""
 msgid "Log out of the computer yourself."
 msgstr ""
 
-#: kz-update:30
+#: kz-update:31
 msgid "Update and cleanup system"
 msgstr ""
 
-#: kz-update:32
+#: kz-update:33
 msgid "Usage: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
-#: kz-update:36
+#: kz-update:37
 msgid "Usage: kz update [<options>]"
 msgstr ""
 
-#: kz-update:91 kz-update:105
+#: kz-update:105 kz-update:119
 msgid "UPDATE -- 1/3"
 msgstr ""
 
-#: kz-update:96 kz-update:110
+#: kz-update:110 kz-update:124
 msgid "UPGRADE -- 2/3"
 msgstr ""
 
-#: kz-update:99 kz-update:113
+#: kz-update:113 kz-update:127
 msgid "CLEANUP -- 3/3"
 msgstr ""
 
@@ -1390,4 +1390,8 @@ msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
+msgstr ""
+
+#: kz-update:91
+msgid "GITPULL -- 0/3"
 msgstr ""

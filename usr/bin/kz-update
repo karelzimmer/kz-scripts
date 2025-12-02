@@ -13,6 +13,7 @@
 
 import getopt
 import gettext
+import os
 import kz_common as kz
 import subprocess
 import sys
@@ -84,6 +85,19 @@ def process() -> None:
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
+
+    gitpull: str = f'{os.getenv("HOME")}/bin/gitpull'
+    if os.path.exists(gitpull):
+        text = _('GITPULL -- 0/3')
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        try:
+            subprocess.run(gitpull, executable='bash', shell=True, check=True)
+        except Exception as exc:
+            text = str(exc)
+            kz.logmsg(PROGRAM_NAME, text)
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+            kz.term(PROGRAM_NAME, 1)
 
     if subprocess.run(command2, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
