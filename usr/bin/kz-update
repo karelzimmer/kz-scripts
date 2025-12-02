@@ -86,6 +86,7 @@ def process() -> None:
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
+    # Undocumented feature, gitpull.
     gitpull: str = f'{os.getenv("HOME")}/bin/gitpull'
     if os.path.exists(gitpull):
         text = _('GITPULL -- 0/3')
