@@ -13,8 +13,8 @@
 
 import getopt
 import gettext
-import os
 import kz_common as kz
+import os
 import subprocess
 import sys
 
