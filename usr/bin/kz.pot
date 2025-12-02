@@ -1392,6 +1392,6 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-update:92
+#: kz-update:91
 msgid "GITPULL -- 0/3"
 msgstr ""

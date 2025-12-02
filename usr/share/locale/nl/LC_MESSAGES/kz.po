@@ -1527,6 +1527,6 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-update:92
+#: kz-update:91
 msgid "GITPULL -- 0/3"
 msgstr ""

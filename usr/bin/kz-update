@@ -87,12 +87,12 @@ def process() -> None:
         kz.term(PROGRAM_NAME, 1)
 
     # Undocumented feature, gitpull.
-    gitpull: str = f'{os.getenv("HOME")}/bin/gitpull'
-    if os.path.exists(gitpull):
+    if os.path.exists(f'{os.getenv("HOME")}/bin/gitpull'):
         text = _('GITPULL -- 0/3')
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         try:
-            subprocess.run(gitpull, executable='bash', shell=True, check=True)
+            subprocess.run('gitpull', executable='bash', shell=True,
+                           check=True)
         except Exception as exc:
             text = str(exc)
             kz.logmsg(PROGRAM_NAME, text)
