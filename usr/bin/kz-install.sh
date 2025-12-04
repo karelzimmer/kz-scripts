@@ -215,10 +215,6 @@ if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 # -----------------------------------------------------------------------------
-# GNOME Nautilus-admin - administrative operations.
-# -----------------------------------------------------------------------------
-if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes nautilus-admin; fi
-# -----------------------------------------------------------------------------
 # GNOME Sushi - quick preview.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
@@ -258,10 +254,6 @@ if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell
 # GNOME Gdebi - view and install deb files.
 # -----------------------------------------------------------------------------
 if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
-# -----------------------------------------------------------------------------
-# GNOME Nautilus-admin - administrative operations.
-# -----------------------------------------------------------------------------
-if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes nautilus-admin; fi
 # -----------------------------------------------------------------------------
 # GNOME Sushi - quick preview.
 # -----------------------------------------------------------------------------
