@@ -175,6 +175,7 @@ function check_target() {
     fi
 
     if $option_target; then
+        OPTION_GUI=false
         if ! [[ -d $target_argument ]]; then
             text="$program_name: $target_argument: \
 $(gettext 'directory does not exist')

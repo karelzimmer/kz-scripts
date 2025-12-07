@@ -175,6 +175,7 @@ function check_source() {
     fi
 
     if $option_source; then
+        OPTION_GUI=false
         if ! [[ -d $source_argument ]]; then
             text="$program_name: $source_argument: \
 $(gettext 'directory does not exist')
