@@ -215,6 +215,20 @@ Disconnect media via Files.")"
         fi
     fi
     SOURCE=$medium/BACKUP-$USER@$HOSTNAME
+    # Fix old backup locations and old namings.
+    # <medium>/<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
+    if [[ -d $medium/$USER@$HOSTNAME ]]; then
+        mv  --verbose                           \
+            "$medium/$USER@$HOSTNAME"           \
+            "$SOURCE"                           |& $PROGRAM_LOGS
+    fi
+    # <medium>/backups/<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
+    if [[ -d $medium/backups/$USER@$HOSTNAME ]]; then
+        mv  --verbose                           \
+            "$medium/backups/$USER@$HOSTNAME"   \
+            "$SOURCE"                           |& $PROGRAM_LOGS
+    fi
+    # <medium>/backup-<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
     if [[ -d $medium/backup-$USER@$HOSTNAME ]]; then
         mv  --verbose                           \
             "$medium/backup-$USER@$HOSTNAME"    \
