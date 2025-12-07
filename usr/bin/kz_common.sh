@@ -211,6 +211,7 @@ function kz.process_option_help() {
     local text=''
     local yelp_man_url=''
 
+    OPTION_GUI=false
     if [[ -n ${DISPLAY-} ]]; then
         yelp_man_url="$(gettext ', or see the ')"
         yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
@@ -219,7 +220,6 @@ function kz.process_option_help() {
 
     text="$(eval_gettext "Type '\$program_name --manual' or 'man \
 \$program_name'\$yelp_man_url for more information.")"
-    OPTION_GUI=false
     # shellcheck disable=SC2154
     kz.infomsg "$HELP
 
@@ -242,11 +242,11 @@ function kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
+    OPTION_GUI=false
     # shellcheck disable=SC2154
     text="$USAGE
 
 $(eval_gettext "Type '\$program_name --help' for more information.")"
-    OPTION_GUI=false
     kz.infomsg "$text"
 }
 
@@ -256,6 +256,7 @@ function kz.process_option_version() {
     local build_id=''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
+    OPTION_GUI=false
     if [[ -f /usr/share/doc/kz/build.id ]]; then
         build_id=$(cat /usr/share/doc/kz/build.id)
     else
@@ -270,7 +271,6 @@ function kz.process_option_version() {
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.")"
-    OPTION_GUI=false
     kz.infomsg "$text"
 }
 
