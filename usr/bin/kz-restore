@@ -219,21 +219,24 @@ Disconnect media via Files.")"
     # Fix old backup locations and old namings.
     # <medium>/<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
     if [[ -d $medium/$USER@$HOSTNAME ]]; then
-        mv  --verbose                           \
-            "$medium/$USER@$HOSTNAME"           \
-            "$SOURCE"                           |& $PROGRAM_LOGS
+        mv      --verbose                           \
+                "$medium/$USER@$HOSTNAME"           \
+                "$SOURCE"                           |& $PROGRAM_LOGS
     fi
     # <medium>/backups/<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
     if [[ -d $medium/backups/$USER@$HOSTNAME ]]; then
-        mv  --verbose                           \
-            "$medium/backups/$USER@$HOSTNAME"   \
-            "$SOURCE"                           |& $PROGRAM_LOGS
+        mv      --verbose                           \
+                "$medium/backups/$USER@$HOSTNAME"   \
+                "$SOURCE"                           |& $PROGRAM_LOGS
+        rmdir   --ignore-fail-on-non-empty          \
+                --verbose                           \
+                "$medium/backups"                   |& $PROGRAM_LOGS 
     fi
     # <medium>/backup-<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
     if [[ -d $medium/backup-$USER@$HOSTNAME ]]; then
-        mv  --verbose                           \
-            "$medium/backup-$USER@$HOSTNAME"    \
-            "$SOURCE"                           |& $PROGRAM_LOGS
+        mv      --verbose                           \
+                "$medium/backup-$USER@$HOSTNAME"    \
+                "$SOURCE"                           |& $PROGRAM_LOGS
     fi
     if ! [[ -d $SOURCE ]]; then
         text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
