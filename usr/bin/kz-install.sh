@@ -28,7 +28,7 @@ if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub
 grep --quiet 'pci=noaer' /etc/default/grub
 REBOOT=true
 
-# REMOVE  aer-settings #none
+# REMOVE aer-settings #none
 # -----------------------------------------------------------------------------
 # Enable Advanced Error Reporting.
 # -----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.servi
 if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
 if grep --quiet Ubuntu /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
 
-# REMOVE  apport-settings #none
+# REMOVE apport-settings #none
 # -----------------------------------------------------------------------------
 # Enable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
@@ -70,7 +70,7 @@ if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
 
-# REMOVE  apt-sources *
+# REMOVE apt-sources *
 # -----------------------------------------------------------------------------
 # Remove Debian components package sources & update package lists for all.
 # -----------------------------------------------------------------------------
@@ -86,7 +86,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; 
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes backintime-qt; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  backintime-qt; fi
 
-# REMOVE  backintime #none
+# REMOVE backintime #none
 # -----------------------------------------------------------------------------
 # Backups/snapshots.
 # -----------------------------------------------------------------------------
@@ -102,7 +102,7 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 sudo flatpak install    --assumeyes     com.bitwarden.desktop
 REBOOT=true
 
-# REMOVE  bitwarden pc06 pc07
+# REMOVE bitwarden pc06 pc07
 # -----------------------------------------------------------------------------
 # Password manager.
 # -----------------------------------------------------------------------------
@@ -116,7 +116,7 @@ REBOOT=true
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bleachbit; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  bleachbit; fi
 
-# REMOVE  bleachbit #none #gpg
+# REMOVE bleachbit #none #gpg
 # -----------------------------------------------------------------------------
 # Delete files.
 # -----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes l
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
 REBOOT=true
 
-# REMOVE  broadcom-sta-dkms pc01 #gpg
+# REMOVE broadcom-sta-dkms pc01 #gpg
 # -----------------------------------------------------------------------------
 # Disable wifi adapter.
 # -----------------------------------------------------------------------------
@@ -145,7 +145,7 @@ REBOOT=true
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes calibre; fi
 if grep --quiet rhel   /etc/os-release; then sudo --validate && wget --no-verbose --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
 
-# REMOVE  calibre pc06
+# REMOVE calibre pc06
 # -----------------------------------------------------------------------------
 # E-book manager.
 # -----------------------------------------------------------------------------
@@ -161,7 +161,7 @@ if grep --quiet rhel   /etc/os-release; then sudo calibre-uninstall; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cockpit cockpit-pcp; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  cockpit cockpit-pcp; fi
 
-# REMOVE  cockpit pc06
+# REMOVE cockpit pc06
 # -----------------------------------------------------------------------------
 # Web console.
 # -----------------------------------------------------------------------------
@@ -178,7 +178,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes c
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libcupsimage2; fi
 if grep --quiet rhel /etc/os-release  ; then sudo dnf     install --assumeyes  cups; fi
 
-# REMOVE  cups #none
+# REMOVE cups #none
 # -----------------------------------------------------------------------------
 # Common Unix Printing System.
 # -----------------------------------------------------------------------------
@@ -192,7 +192,7 @@ if grep --quiet rhel /etc/os-release  ; then sudo dnf     remove --assumeyes  cu
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
 
-# REMOVE  cups-backend-bjnp #none #gpg
+# REMOVE cups-backend-bjnp #none #gpg
 # -----------------------------------------------------------------------------
 # Printer backend.
 # -----------------------------------------------------------------------------
@@ -238,7 +238,7 @@ if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo a
 if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
 REBOOT=true
 
-# REMOVE  desktop-apps *
+# REMOVE desktop-apps *
 # -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
@@ -358,7 +358,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  s
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  usbutils; fi
 
-# REMOVE  development-apps pc06 pc07
+# REMOVE development-apps pc06 pc07
 # -----------------------------------------------------------------------------
 # Ansible - configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
@@ -442,7 +442,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  us
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes dos2unix; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  dos2unix; fi
 
-# REMOVE  dos2unix pc06 pc07
+# REMOVE dos2unix pc06 pc07
 # -----------------------------------------------------------------------------
 # Convert text file line endings between CRLF and LF.
 # -----------------------------------------------------------------------------
@@ -456,7 +456,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  do
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  perl-Image-ExifTool; fi
 
-# REMOVE  exiftool pc06 pc07
+# REMOVE exiftool pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
 # -----------------------------------------------------------------------------
@@ -476,7 +476,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  f
 # $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
 # -----------------------------------------------------------------------------
 
-# REMOVE  fdupes #none
+# REMOVE fdupes #none
 # -----------------------------------------------------------------------------
 # Find duplicate files.
 # -----------------------------------------------------------------------------
@@ -491,7 +491,7 @@ if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^fi
 if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
-# REMOVE  firefox pc06 pc07
+# REMOVE firefox pc06 pc07
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
@@ -507,7 +507,7 @@ sudo systemctl stop    fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask    fwupd.service
 
-# REMOVE  fwupd-settings #none
+# REMOVE fwupd-settings #none
 # -----------------------------------------------------------------------------
 # Enable FirmWare UPdate Daemon.
 # -----------------------------------------------------------------------------
@@ -522,7 +522,7 @@ sudo systemctl start  fwupd.service
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  gimp; fi
 
-# REMOVE  gimp pc06
+# REMOVE gimp pc06
 # -----------------------------------------------------------------------------
 # GNU Image Manipulation Program.
 # -----------------------------------------------------------------------------
@@ -539,7 +539,7 @@ if grep --quiet debian /etc/os-release; then rm --verbose /tmp/google-chrome.deb
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
-# REMOVE  google-chrome pc01 pc06 pc07
+# REMOVE google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -558,7 +558,7 @@ if grep --quiet debian /etc/os-release; then rm --verbose /tmp/google-earth.deb;
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 
-# REMOVE  google-earth pc04
+# REMOVE google-earth pc04
 # -----------------------------------------------------------------------------
 # Explore the planet.
 # -----------------------------------------------------------------------------
@@ -578,7 +578,7 @@ if   grep --quiet debian /etc/os-release; then sudo update-grub; fi
 if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
-# REMOVE  grub-settings *
+# REMOVE grub-settings *
 # -----------------------------------------------------------------------------
 # Restore default GRUB menu display time.
 # -----------------------------------------------------------------------------
@@ -597,7 +597,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes handbrake; fi
 
-# REMOVE  handbrake #none #gpg
+# REMOVE handbrake #none #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
@@ -609,7 +609,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ha
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes imagination; fi
 
-# REMOVE  imagination pc06 pc07
+# REMOVE imagination pc06 pc07
 # -----------------------------------------------------------------------------
 # Slideshow maker.
 # -----------------------------------------------------------------------------
@@ -621,7 +621,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes im
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes krita; fi
 
-# REMOVE  krita pc06
+# REMOVE krita pc06
 # -----------------------------------------------------------------------------
 # Image manipulation.
 # -----------------------------------------------------------------------------
@@ -661,7 +661,7 @@ if grep --quiet rhel   /etc/os-release; then sudo virsh --connect=qemu:///system
 # -----------------------------------------------------------------------------
 REBOOT=true
 
-# REMOVE  kvm pc06 pc07
+# REMOVE kvm pc06 pc07
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
@@ -682,7 +682,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-ye
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     app/org.libreoffice.LibreOffice; fi
 
-# REMOVE  libreoffice *
+# REMOVE libreoffice *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
@@ -696,7 +696,7 @@ if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes 
 sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
 
-# REMOVE  lidswitch-settings #none #gpg
+# REMOVE lidswitch-settings #none #gpg
 # -----------------------------------------------------------------------------
 # Restore the default action when the laptop lid is closed.
 # -----------------------------------------------------------------------------
@@ -710,7 +710,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes l
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  mlocate; fi
 sudo updatedb
 
-# REMOVE  locate pc06 pc07
+# REMOVE locate pc06 pc07
 # -----------------------------------------------------------------------------
 # Find files.
 # -----------------------------------------------------------------------------
@@ -724,7 +724,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ml
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lshw; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  lshw; fi
 
-# REMOVE  lshw pc06 pc07
+# REMOVE lshw pc06 pc07
 # -----------------------------------------------------------------------------
 # Hardware lister.
 # -----------------------------------------------------------------------------
@@ -742,7 +742,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-ye
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub com.microsoft.Edge; fi
 
-# REMOVE  microsoft-edge pc06 pc06
+# REMOVE microsoft-edge pc06 pc06
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -773,7 +773,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  n
 # $ sudo -d ntfsfix /dev/sda1 # Clear the volume dirty flag
 # -----------------------------------------------------------------------------
 
-# REMOVE  ntfs #none
+# REMOVE ntfs #none
 # -----------------------------------------------------------------------------
 # NTFS support.
 # -----------------------------------------------------------------------------
@@ -795,7 +795,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nt
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pst-utils; fi
 if grep --quiet rhel   /etc/os-release; then echo 'Download pst-utils.rpm from https://www.rpmfind.net/ and install with "sudo dnf install ./pst-utils-0.5.2-6.x86_64.rpm".'; fi
 
-# REMOVE  pst-utils pc06 pc07
+# REMOVE pst-utils pc06 pc07
 # -----------------------------------------------------------------------------
 # Tools based on libpst to read data from Microsoft Outlook PST files.
 # -----------------------------------------------------------------------------
@@ -810,7 +810,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ps
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes simplescreenrecorder; fi
 
-# REMOVE  simplescreenrecorder #none
+# REMOVE simplescreenrecorder #none
 # -----------------------------------------------------------------------------
 # Screen recorder.
 # -----------------------------------------------------------------------------
@@ -824,7 +824,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes sound-juicer; fi
 
-# REMOVE  sound-juicer #none #gpg
+# REMOVE sound-juicer #none #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
@@ -842,7 +842,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spotify-client; fi
 if grep --quiet rhel   /etc/os-release; then echo 'The spotify app is available as a web app.'; fi
 
-# REMOVE  spotify pc01 pc02 pc06 pc07
+# REMOVE spotify pc01 pc02 pc06 pc07
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # -----------------------------------------------------------------------------
@@ -863,7 +863,7 @@ sudo sed --in-place 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /e
 grep 'PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
-# REMOVE  ssh pc01 pc06 pc07 #gpg
+# REMOVE ssh pc01 pc06 pc07 #gpg
 # -----------------------------------------------------------------------------
 # Secure SHell.
 # -----------------------------------------------------------------------------
@@ -882,7 +882,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes /
 if grep --quiet debian /etc/os-release; then rm --verbose /tmp/teamviewer.deb; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
-# REMOVE  teamviewer *
+# REMOVE teamviewer *
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # -----------------------------------------------------------------------------
@@ -906,7 +906,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  h
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  tree; fi
 
-# REMOVE  terminal-apps pc01 pc06 pc07
+# REMOVE terminal-apps pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Bash completion - tab-completion.
 # -----------------------------------------------------------------------------
@@ -930,7 +930,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  tr
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
 
-# REMOVE  thunderbird pc06 pc07
+# REMOVE thunderbird pc06 pc07
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
@@ -944,7 +944,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  th
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes transmission; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  transmission; fi
 
-# REMOVE  transmission pc01 pc06 pc07
+# REMOVE transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # BitTorrent client.
 # -----------------------------------------------------------------------------
@@ -960,7 +960,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  g
 sudo ufw allow ssh
 sudo ufw enable
 
-# REMOVE  ufw pc01 pc06 pc07
+# REMOVE ufw pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Uncomplicated FireWall.
 # -----------------------------------------------------------------------------
@@ -975,7 +975,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gu
 if ! id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(TEXTDOMAIN=kz gettext 'Guest_user')" "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 if   id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo passwd  --delete "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
-# REMOVE  user-guest pc01 pc06 pc07
+# REMOVE user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Delete guest user.
 # -----------------------------------------------------------------------------
@@ -993,7 +993,7 @@ if grep --quiet debian /etc/os-release; then echo 'virtualbox-ext-pack virtualbo
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  VirtualBox; fi
 
-# REMOVE  virtualbox #none #gpg
+# REMOVE virtualbox #none #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
@@ -1014,7 +1014,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  v
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ffmpeg*; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  ffmpeg*; fi
 
-# REMOVE  vlc *
+# REMOVE vlc *
 # -----------------------------------------------------------------------------
 # Multimedia player.
 # -----------------------------------------------------------------------------
@@ -1043,7 +1043,7 @@ if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://packages.
 if grep --quiet rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
 
-# REMOVE  vscode pc06 pc07
+# REMOVE vscode pc06 pc07
 # -----------------------------------------------------------------------------
 # Editor.
 # -----------------------------------------------------------------------------
@@ -1067,7 +1067,7 @@ if grep --quiet rhel   /etc/os-release; then sudo sh /tmp/setup-repos.sh --force
 if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes webmin; fi
 
-# REMOVE  webmin pc07
+# REMOVE webmin pc07
 # -----------------------------------------------------------------------------
 # Web console.
 # -----------------------------------------------------------------------------
@@ -1086,7 +1086,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes wine playonlinux; fi
 
-# REMOVE  wine #none
+# REMOVE wine #none
 # -----------------------------------------------------------------------------
 # Run Windows applications.
 # -----------------------------------------------------------------------------
@@ -1101,7 +1101,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes youtubedl-gui; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  youtube-dl; fi
 
-# REMOVE  youtube-dl #none #gpg
+# REMOVE youtube-dl #none #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
