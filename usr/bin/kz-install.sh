@@ -52,7 +52,7 @@ REBOOT=true
 if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop    apport.service; fi
 if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
 if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/crash/*; fi
 
 # REMOVE apport-settings #none
 # -----------------------------------------------------------------------------
@@ -403,7 +403,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nm
 # Python - programming language.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes python mypy pycodestyle python3-autopep8 python3-pip python-is-python3; fi
-if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
+if grep --quiet debian /etc/os-release; then sudo rm     --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  python3 python3-mypy pycodestyle python3-pip; fi
 # -----------------------------------------------------------------------------
 # Poedit - Gettext catalogs editor.
@@ -535,7 +535,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
-if grep --quiet debian /etc/os-release; then rm --verbose /tmp/google-chrome.deb; fi
+if grep --quiet debian /etc/os-release; then rm   --verbose /tmp/google-chrome.deb; fi
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
@@ -554,7 +554,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  go
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
-if grep --quiet debian /etc/os-release; then rm --verbose /tmp/google-earth.deb; fi
+if grep --quiet debian /etc/os-release; then rm   --verbose /tmp/google-earth.deb; fi
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 
@@ -747,7 +747,7 @@ if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes
 # Web browser.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes microsoft-edge-stable; fi
-if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
+if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  flathub com.microsoft.Edge; fi
 
@@ -847,7 +847,7 @@ if grep --quiet rhel   /etc/os-release; then echo 'The spotify app is available 
 # Music and podcasts.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spotify-client; fi
-if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
+if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL ssh pc01 pc06 pc07 #gpg
@@ -879,7 +879,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  op
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
-if grep --quiet debian /etc/os-release; then rm --verbose /tmp/teamviewer.deb; fi
+if grep --quiet debian /etc/os-release; then rm   --verbose /tmp/teamviewer.deb; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 # REMOVE teamviewer *
@@ -1050,7 +1050,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; 
 if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
-if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
+if grep --quiet rhel   /etc/os-release; then sudo rm      --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
 # INSTALL webmin pc07
 # -----------------------------------------------------------------------------
@@ -1060,11 +1060,11 @@ if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if grep --quiet debian /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
-if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
+if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /tmp/setup-repos.sh; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes webmin; fi
 if grep --quiet rhel   /etc/os-release; then wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if grep --quiet rhel   /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
-if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
+if grep --quiet rhel   /etc/os-release; then sudo rm  --force --verbose /tmp/setup-repos.sh; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes webmin; fi
 
 # REMOVE webmin pc07
@@ -1072,10 +1072,10 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes webmin
 # Web console.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes webmin; fi
-if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
+if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes webmin; fi
-if grep --quiet rhel   /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
+if grep --quiet rhel   /etc/os-release; then sudo rm  --force --verbose /etc/yum.repos.d/webmin.repo; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf update; fi
 
 # INSTALL wine #none
