@@ -463,6 +463,20 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  p
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  perl-Image-ExifTool; fi
 
+# INSTALL fastfetch pc06 pc07
+# -----------------------------------------------------------------------------
+# A neofetch like system information tool.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fastfetch; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  fastfetch; fi
+
+# REMOVE fastfetch pc06 pc07
+# -----------------------------------------------------------------------------
+# A neofetch like system information tool.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fastfetch; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fastfetch; fi
+
 # INSTALL fdupes #none
 # -----------------------------------------------------------------------------
 # Find duplicate files.
