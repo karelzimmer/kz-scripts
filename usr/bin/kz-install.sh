@@ -45,6 +45,20 @@ if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/
 ! grep --quiet 'pci=noaer' /etc/default/grub
 REBOOT=true
 
+# INSTALL angryipscan pc06 pc07
+# -----------------------------------------------------------------------------
+# Fast and friendly network scanner.
+# -----------------------------------------------------------------------------
+sudo apt-get install    --assume-yes    flatpak
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak install    --assumeyes     org.angryip.ipscan
+
+# REMOVE angryipscan pc06 pc07
+# -----------------------------------------------------------------------------
+# Fast and friendly network scanner.
+# -----------------------------------------------------------------------------
+sudo flatpak uninstall --assumeyes org.angryip.ipscan
+
 # INSTALL apport-settings #none
 # -----------------------------------------------------------------------------
 # Disable automatic crash report generation for Ubuntu.
