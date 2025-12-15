@@ -7,6 +7,5 @@
 # #############################################################################
 
 declare DASHOPTIONS='backup build check deploy desktop dev get install menu
-    restore setup update wifi -l --list -h --help -m --manual -u --usage -v
-    --version'
+    restore setup update wifi'
 complete -o default -W "$DASHOPTIONS" kz
