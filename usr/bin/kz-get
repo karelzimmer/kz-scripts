@@ -156,9 +156,7 @@ function install_deb_package() {
     fi
 
     sudo true
-    wget    --no-verbose                            \
-            --output-document="$kz_deb_local_file"  \
-            "$kz_deb_site_file"
+    wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
     # Prevent the message:
     # ...file '/tmp/kz-get-XXXXXXXXXX.deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
@@ -168,8 +166,6 @@ function install_deb_package() {
             apt-get                         \
             install                         \
             "$reinstall"                    \
-            --quiet                         \
-            --quiet                         \
             "$kz_deb_local_file"
 }
 
