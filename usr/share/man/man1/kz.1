@@ -44,36 +44,8 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
-.SH EXIT STATUS
-Normally exit value 0 is returned; if an error occurs, the exit value is not
-equal to 0.
 
-.SH EXAMPLES
-.EX
-\fBkz update\fR
-.RS
-Update and cleanup system.
-.RE
-.sp
-\fBkz install google-chrome\fR
-.RS
-Install Google Chrome.
-.RE
-.sp
-\fBkz setup --cat google-chrome\fR
-.RS
-Show set up commands for Google Chrome.
-.RE
-.EE
-
-.SH SEE ALSO
-\fBkz-menu\fR(1)
-
-.SH KZ
-Part of the \fBkz\fR(1) package.
-
-.SH NOTES
-.sp
+.SH COMMAND
 \fBkz\fR's commands are divided into high-level commands ("porcelain") and
 low-level commands ("plumbing").
 
@@ -147,6 +119,36 @@ Git pull (or git clone) of all public remote repos in the home directory.
 \fBgitstatus\fR
 Git status of all local branches in the home directory.
 
+
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value is not
+equal to 0.
+
+.SH EXAMPLES
+.EX
+\fBkz update\fR
+.RS
+Update and cleanup system.
+.RE
+.sp
+\fBkz install google-chrome\fR
+.RS
+Install Google Chrome.
+.RE
+.sp
+\fBkz setup --cat google-chrome\fR
+.RS
+Show set up commands for Google Chrome.
+.RE
+.EE
+
+.SH SEE ALSO
+\fBkz-menu\fR(1)
+
+.SH KZ
+Part of the \fBkz\fR(1) package.
+
+.SH NOTES
 
 .SS Modern
 Package \fBkz\fR implements and with the documents and scripts supports for:
