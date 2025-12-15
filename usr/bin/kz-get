@@ -212,12 +212,11 @@ function install_rpm_package() {
 function term() {
     local red='\033[1;31m'
     local normal='\033[0m'
-    local text=''
-
-    text='
+    local text='
 ===============================================================================
 
 '
+
     if $OPTION_DEV; then
         text+="$red$(gettext "Please note: the development version of the kz \
 package is installed")$normal\n"
