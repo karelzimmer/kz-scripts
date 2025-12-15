@@ -214,7 +214,10 @@ function term() {
     local normal='\033[0m'
     local text=''
 
-    text='------------------------------------------------------------------\n'
+    text='
+===============================================================================
+
+'
     if $OPTION_DEV; then
         text+="$red$(gettext "Please note: the development version of the kz \
 package is installed")$normal\n"
