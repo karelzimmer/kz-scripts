@@ -214,6 +214,11 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cu
 
 # INSTALL desktop-apps *
 # -----------------------------------------------------------------------------
+# Network Time Protocol (NTP) service.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release &> /dev/null; then sudo apt-get install --assume-yes systemd-timesyncd; fi
+if grep rhel   /etc/os-release &> /dev/null; then sudo dnf     install --assumeyes  systemd-timesyncd; fi
+# -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
 if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place 's/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
@@ -253,6 +258,11 @@ if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo d
 REBOOT=true
 
 # REMOVE desktop-apps *
+# -----------------------------------------------------------------------------
+# Network Time Protocol (NTP) service.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release &> /dev/null; then sudo apt-get remove --assume-yes systemd-timesyncd; fi
+if grep rhel   /etc/os-release &> /dev/null; then sudo dnf     remove --assumeyes  systemd-timesyncd; fi
 # -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
