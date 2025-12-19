@@ -214,11 +214,6 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cu
 
 # INSTALL desktop-apps *
 # -----------------------------------------------------------------------------
-# Network Time Protocol (NTP) service.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release &> /dev/null; then sudo apt-get install --assume-yes systemd-timesyncd; fi
-if grep rhel   /etc/os-release &> /dev/null; then sudo dnf     install --assumeyes  systemd-timesyncd; fi
-# -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
 if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place 's/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
@@ -258,11 +253,6 @@ if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo d
 REBOOT=true
 
 # REMOVE desktop-apps *
-# -----------------------------------------------------------------------------
-# Network Time Protocol (NTP) service.
-# -----------------------------------------------------------------------------
-if grep debian /etc/os-release &> /dev/null; then sudo apt-get remove --assume-yes systemd-timesyncd; fi
-if grep rhel   /etc/os-release &> /dev/null; then sudo dnf     remove --assumeyes  systemd-timesyncd; fi
 # -----------------------------------------------------------------------------
 # Cinnamon - desktop environment.
 # -----------------------------------------------------------------------------
@@ -818,17 +808,31 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  n
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ntfs-3g ntfsprogs; fi
 
+# INSTALL ntp *
+# -----------------------------------------------------------------------------
+# Network Time Protocol (NTP) service.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release &> /dev/null; then sudo apt-get install --assume-yes systemd-timesyncd; fi
+if grep rhel   /etc/os-release &> /dev/null; then sudo dnf     install --assumeyes  systemd-timesyncd; fi
+
+# REMOVE ntp *
+# -----------------------------------------------------------------------------
+# Network Time Protocol (NTP) service.
+# -----------------------------------------------------------------------------
+if grep debian /etc/os-release &> /dev/null; then sudo apt-get remove --assume-yes systemd-timesyncd; fi
+if grep rhel   /etc/os-release &> /dev/null; then sudo dnf     remove --assumeyes  systemd-timesyncd; fi
+
 # INSTALL pst-utils pc06 pc07
 # -----------------------------------------------------------------------------
 # Tools based on libpst to read data from Microsoft Outlook PST files.
 # -----------------------------------------------------------------------------
-# * readpst - export data from PST files to a variety of formats, including
+# - readpst - export data from PST files to a variety of formats, including
 #   mbox, MH and KMail. Other packages like mb2md are available for subsequent
 #   conversions to Maildir and other formats.
-# * lspst - list data in PST files.
-# * pst2ldif - extract contacts from a PST file and prepare them for input in
+# - lspst - list data in PST files.
+# - pst2ldif - extract contacts from a PST file and prepare them for input in
 #   LDAP
-# * pst2dii - export data from PST files to Summation dii load file format
+# - pst2dii - export data from PST files to Summation dii load file format
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pst-utils; fi
 if grep --quiet rhel   /etc/os-release; then echo 'Download pst-utils.rpm from https://www.rpmfind.net/ and install with "sudo dnf install ./pst-utils-0.5.2-6.x86_64.rpm".'; fi
