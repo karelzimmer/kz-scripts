@@ -511,7 +511,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  f
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fdupes; fi
 
-# INSTALL firefox pc06 pc07
+# INSTALL firefox *
 # -----------------------------------------------------------------------------
 # Web browser (ESR=Extended Support Release).
 # -----------------------------------------------------------------------------
@@ -519,7 +519,7 @@ if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^fi
 if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
-# REMOVE firefox pc06 pc07
+# REMOVE firefox *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
