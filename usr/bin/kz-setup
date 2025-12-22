@@ -283,12 +283,23 @@ $(gettext 'NUM  APP')
         )
 
     if [[ -n $apps ]]; then
-        text+="$apps
+        if [[ $setup = 'SETUP' ]]; then
+            text+="$apps
 
 $(gettext 'Use "kz setup <app>..." to set up the apps.')
 $(gettext 'Use "kz setup --cat" to view the contents of the setup file.')
 $(gettext "Use \"kz setup --cat <app>...\" to view the contents of the apps \
-setup file.")
+setup file.")"
+        else
+            text+="$apps
+
+$(gettext 'Use "kz setup --reset <app>..." to reset the apps.')
+$(gettext "Use \"kz setup --cat --reset\" to view the contents of the setup \
+file.")
+$(gettext "Use \"kz setup --cat --reset <app>...\" to view the contents of \
+the apps reset file.")"
+        fi
+            text+="
 $(gettext "Use \"kz setup --browse\" to view the contents of the default \
 setup file.")"
     else

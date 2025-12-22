@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # #############################################################################
-# SPDX-FileComment: Set up development environment
+# SPDX-FileComment: Set op development environment
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -29,7 +29,7 @@ _ = gettext.gettext
 # #############################################################################
 
 PROGRAM_NAME: str = 'kz-dev'
-PROGRAM_DESC: str = _('Set up development environment')
+PROGRAM_DESC: str = _('Set op development environment')
 
 USAGE: str = _("Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] "
                "[-v|--version]")
@@ -266,8 +266,16 @@ def term() -> None:
     """
     This function controls the termination of the script.
     """
+    text = '\n' + _('To complete the set up of the development environment, ' +
+                    'please run:')
+
+    text += '\nkz-install ansible fakeroot git groff jq lftp nmap python'
+    text += ' poedit rpm shellcheck spice-vdagent usbutils\n'
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+
     text = _('Complete!')
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+
     kz.term(PROGRAM_NAME, 0)
 
 

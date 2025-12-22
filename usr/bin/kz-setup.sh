@@ -22,6 +22,18 @@ kz-desktop --addaft=calibre-gui
 # -----------------------------------------------------------------------------
 kz-desktop --delete=calibre-gui
 
+# SETUP cinnamon-settings *
+# -----------------------------------------------------------------------------
+#  Desktop environment.
+# -----------------------------------------------------------------------------
+if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
+
+# RESET cinnamon-settings *
+# -----------------------------------------------------------------------------
+#  Desktop environment.
+# -----------------------------------------------------------------------------
+if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
+
 # SETUP cockpit pc06
 # -----------------------------------------------------------------------------
 # Web console.
@@ -38,13 +50,61 @@ kz-desktop --addaft=kz-cockpit
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-cockpit
 
-# SETUP desktop *
+# SETUP dash-to-dock *
 # -----------------------------------------------------------------------------
-# Cinnamon - desktop environment.
+# Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                            &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                             &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                              &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
+if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+
+# RESET dash-to-dock *
 # -----------------------------------------------------------------------------
-# GNOME - desktop environment.
+# Desktop dock like Ubuntu's dash.
+# -----------------------------------------------------------------------------
+if gsettings get org.gnome.shell disable-user-extensions                                                         &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                            &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                             &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                              &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+
+# SETUP git pc06 pc07
+# -----------------------------------------------------------------------------
+# Distributed revision control system.
+# -----------------------------------------------------------------------------
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
+git config --global alias.logg 'log --decorate --graph --oneline --all'
+
+# RESET git pc06 pc07
+# -----------------------------------------------------------------------------
+# Distributed revision control system.
+# -----------------------------------------------------------------------------
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
+git config --global --unset alias.logg
+
+# SETUP gnome-settings *
+# -----------------------------------------------------------------------------
+# Desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
@@ -70,47 +130,10 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounte
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 if gsettings set org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed "s/('ibus', 'mozc-jp'), //")"; fi
-# -----------------------------------------------------------------------------
-# GNOME Dash-to-dock - desktop dock like Ubuntu's dash.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                            &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                             &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                              &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
-if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
-# -----------------------------------------------------------------------------
-# KDE - desktop environment.
-# -----------------------------------------------------------------------------
-if type ksmserver &> /dev/null && ! grep --quiet '\[KDE\]' ~/.config/kdeglobals; then echo -e '\n[KDE]' >> ~/.config/kdeglobals; fi
-if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kdeglobals; then sed --in-place '/[KDE]/aSingleClick=true' ~/.config/kdeglobals; fi
-# -----------------------------------------------------------------------------
-# LXQt - desktop environment.
-# -----------------------------------------------------------------------------
-if type lxqt-session &> /dev/null && ! grep --quiet 'single_click_activate=' ~/.config/lxqt/lxqt.conf; then sed --in-place '/__userfile__=true/asingle_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place 's/single_click_activate=.*$/single_click_activate=true/g' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place 's/Alt%2BF1/Super_L/g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
-# -----------------------------------------------------------------------------
-# Xfce - desktop environment.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set true; fi
-LOGOUT=true
 
-# RESET desktop *
+# RESET gnome-settings *
 # -----------------------------------------------------------------------------
-# Cinnamon - desktop environment.
-# -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
-# -----------------------------------------------------------------------------
-# GNOME - desktop environment.
+#  Desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
@@ -136,75 +159,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounte
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 if gsettings set org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings reset org.gnome.desktop.input-sources sources; fi
-# -----------------------------------------------------------------------------
-# GNOME Dash-to-dock - desktop dock like Ubuntu's dash.
-# -----------------------------------------------------------------------------
-if gsettings get org.gnome.shell disable-user-extensions                                                         &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                            &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                             &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                              &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-# -----------------------------------------------------------------------------
-# KDE - desktop environment.
-# -----------------------------------------------------------------------------
-if type ksmserver &> /dev/null; then sed --in-place '/SingleClick=true/d' ~/.config/kdeglobals; fi
-# -----------------------------------------------------------------------------
-# LXQt - desktop environment.
-# -----------------------------------------------------------------------------
-if type lxqt-session &> /dev/null; then sed --in-place '/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place 's/Super_L/Alt%2BF1/g'         ~/.config/lxqt/globalkeyshortcuts.conf; fi
-# -----------------------------------------------------------------------------
-# Xfce - desktop environment.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set false; fi
-LOGOUT=true
-
-# SETUP development pc06 pc07
-kz-dev
-# -----------------------------------------------------------------------------
-# Git - distributed revision control system.
-# -----------------------------------------------------------------------------
-# Web app: https://github.com
-# -----------------------------------------------------------------------------
-git config --global alias.logg 'log --decorate --graph --oneline --all'
-# -----------------------------------------------------------------------------
-# Vscode - editor.
-# -----------------------------------------------------------------------------
-# Web app: https://vscode.dev
-# -----------------------------------------------------------------------------
-kz-desktop --addbef=code
-xdg-mime default code.desktop application/json
-xdg-mime default code.desktop application/x-desktop
-xdg-mime default code.desktop application/x-shellscript
-xdg-mime default code.desktop application/xml
-xdg-mime default code.desktop text/html
-xdg-mime default code.desktop text/markdown
-xdg-mime default code.desktop text/plain
-xdg-mime default code.desktop text/troff
-xdg-mime default code.desktop text/x-python
-
-# RESET development pc06 pc07
-# -----------------------------------------------------------------------------
-# Git - distributed revision control system.
-# -----------------------------------------------------------------------------
-# Web app: https://github.com
-# -----------------------------------------------------------------------------
-git config --global --unset alias.logg
-# -----------------------------------------------------------------------------
-# Vscode - editor.
-# -----------------------------------------------------------------------------
-# Web app: https://vscode.dev
-# -----------------------------------------------------------------------------
-kz-desktop --delete=code
 
 # SETUP google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -229,6 +183,19 @@ kz-desktop --addaft=fr.handbrake.ghb
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=fr.handbrake.ghb
+
+# SETUP kde-settings *
+# -----------------------------------------------------------------------------
+# Desktop environment.
+# -----------------------------------------------------------------------------
+if type ksmserver &> /dev/null && ! grep --quiet '\[KDE\]' ~/.config/kdeglobals; then echo -e '\n[KDE]' >> ~/.config/kdeglobals; fi
+if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kdeglobals; then sed --in-place '/[KDE]/aSingleClick=true' ~/.config/kdeglobals; fi
+
+# RESET kde-settings *
+# -----------------------------------------------------------------------------
+# Desktop environment.
+# -----------------------------------------------------------------------------
+if type ksmserver &> /dev/null; then sed --in-place '/SingleClick=true/d' ~/.config/kdeglobals; fi
 
 # SETUP kvm pc06 pc07
 # -----------------------------------------------------------------------------
@@ -255,6 +222,21 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 # -----------------------------------------------------------------------------
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
+
+# SETUP lxqt-settings *
+# -----------------------------------------------------------------------------
+#  Desktop environment.
+# -----------------------------------------------------------------------------
+if type lxqt-session &> /dev/null && ! grep --quiet 'single_click_activate=' ~/.config/lxqt/lxqt.conf; then sed --in-place '/__userfile__=true/asingle_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place 's/single_click_activate=.*$/single_click_activate=true/g' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place 's/Alt%2BF1/Super_L/g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
+
+# RESET lxqt-settings *
+# -----------------------------------------------------------------------------
+# Desktop environment.
+# -----------------------------------------------------------------------------
+if type lxqt-session &> /dev/null; then sed --in-place '/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place 's/Super_L/Alt%2BF1/g'         ~/.config/lxqt/globalkeyshortcuts.conf; fi
 
 # SETUP lynis #none
 # -----------------------------------------------------------------------------
@@ -307,7 +289,7 @@ rm --force --recursive ~/.cache/thumbnails/
 # -----------------------------------------------------------------------------
 # Restore thumbnails.
 # -----------------------------------------------------------------------------
-echo 'App restore-thumbnails cannot be reset.'
+# No reset actions defined.
 
 # SETUP sound-juicer #gpg
 # -----------------------------------------------------------------------------
@@ -390,6 +372,31 @@ kz-desktop --addaft=kz-vm-hugowin732
 kz-desktop --delete=virtualbox
 kz-desktop --delete=kz-vm-hugowin732
 
+# SETUP vscode pc06 pc07
+# -----------------------------------------------------------------------------
+# Editor.
+# -----------------------------------------------------------------------------
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
+kz-desktop --addbef=code
+xdg-mime default code.desktop application/json
+xdg-mime default code.desktop application/x-desktop
+xdg-mime default code.desktop application/x-shellscript
+xdg-mime default code.desktop application/xml
+xdg-mime default code.desktop text/html
+xdg-mime default code.desktop text/markdown
+xdg-mime default code.desktop text/plain
+xdg-mime default code.desktop text/troff
+xdg-mime default code.desktop text/x-python
+
+# RESET vscode pc06 pc07
+# -----------------------------------------------------------------------------
+# Editor.
+# -----------------------------------------------------------------------------
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
+kz-desktop --delete=code
+
 # SETUP webmin pc07
 # -----------------------------------------------------------------------------
 # Web console.
@@ -417,6 +424,20 @@ kz-desktop --addaft=kz-whatsapp
 # Instant messaging (IM) and voice-over-IP (VoIP).
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-whatsapp
+
+# SETUP xfce-settings *
+# -----------------------------------------------------------------------------
+# Desktop environment.
+# -----------------------------------------------------------------------------
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set true; fi
+
+# RESET xfce-settings *
+# -----------------------------------------------------------------------------
+# Desktop environment.
+# -----------------------------------------------------------------------------
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
+if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set false; fi
 
 # SETUP youtube-dl #gpg
 # -----------------------------------------------------------------------------

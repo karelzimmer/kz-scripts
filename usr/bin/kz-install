@@ -285,13 +285,24 @@ $(gettext 'NUM  APP')
         )
 
     if [[ -n $apps ]]; then
-        text+="$apps
+        if [[ $install = 'INSTALL' ]]; then
+            text+="$apps
 
 $(gettext 'Use "kz install <app>..." to install the apps.')
 $(gettext "Use \"kz install --cat\" to view the contents of the installation \
 file.")
 $(gettext "Use \"kz install --cat <app>...\" to view the contents of the apps \
-installation file.")
+installation file.")"
+        else
+            text+="$apps
+
+$(gettext 'Use "kz install --remove <app>..." to remove the apps.')
+$(gettext "Use \"kz install --cat --remove\" to view the contents of the \
+removal file.")
+$(gettext "Use \"kz install --cat --remove <app>...\" to view the contents of \
+the apps removal file.")"
+        fi
+        text+="
 $(gettext "Use \"kz install --browse\" to view the contents of the default \
 installation file.")"
     else
