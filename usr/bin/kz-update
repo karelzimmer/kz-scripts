@@ -30,8 +30,9 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz-update'
 PROGRAM_DESC: str = _('Update and cleanup system')
 
-USAGE: str = _("Usage: kz update [-h|--help] [-m|--manual] [-u|--usage] "
-               "[-v|--version]")
+USAGE: str = _(
+    "Usage: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
+    )
 
 HELP_LINES: list[str] = [
     _('Usage: kz update [<options>]'),

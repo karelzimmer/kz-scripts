@@ -30,8 +30,11 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Execute the kz command')
 
-USAGE: str = _("Usage: kz [-l|--list] [-h|--help] [-m|--manual] [-u|--usage]\n"
-               "          [-v|--version] <command> [<arguments>]")
+USAGE: str = _(
+    "Usage: kz [-l|--list]\n"
+    "          [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
+    "          <command> [<arguments>]"
+    )
 
 HELP_LINES: list[str] = [
     _('Usage: kz [<options>] <command> [<arguments>]'),

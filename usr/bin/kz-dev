@@ -31,8 +31,9 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz-dev'
 PROGRAM_DESC: str = _('Set op development environment')
 
-USAGE: str = _("Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] "
-               "[-v|--version]")
+USAGE: str = _(
+    "Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
+    )
 
 HELP_LINES: list[str] = [
     _('Usage: kz dev [<options>]'),

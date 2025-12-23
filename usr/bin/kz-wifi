@@ -29,9 +29,10 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz-wifi'
 PROGRAM_DESC: str = _('Show WiFi information')
 
-USAGE: str = _("Usage: kz wifi [-g|--gui] [-h|--help] [-m|--manual] "
-               "[-u|--usage]\n"
-               "               [-v|--version]")
+USAGE: str = _(
+    "Usage: kz wifi [-g|--gui]\n"
+    "               [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
+    )
 
 HELP_LINES: list[str] = [
     _('Usage: kz wifi [<options>]'),

@@ -24,10 +24,11 @@ PROGRAM_DESC=$(gettext 'Change desktop environment')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz desktop [-a|--addaft <favorite>] \
-[-b|--addbef <favorite>]
+USAGE=$(
+gettext "Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]
                   [-d|--delete <favorite>] [-l|--list] [-r|--reset]
-                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]")
+                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
+    )
 readonly USAGE
 
 HELP="$(gettext "Usage: kz desktop [<options>]")
