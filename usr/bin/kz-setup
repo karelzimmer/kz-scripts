@@ -24,10 +24,12 @@ PROGRAM_DESC=$(gettext 'Set up apps')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
-                [-f|--file <file>]... [-g|--gui] [-r|--reset]
+USAGE=$(
+gettext "Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file <file>]...
+                [-g|--gui] [-l|--list] [-r|--reset]
                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [--] [<app>...]")
+                [--] [<app>...]"
+    )
 readonly USAGE
 
 HELP="$(gettext "Usage: kz setup [<options>] [--] [<arguments>]")
@@ -38,13 +40,13 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -a, --apps     show list of apps')
 $(gettext '  -b, --browse   browse setup files')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
                  process specified setup files")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
+$(gettext '  -l, --list     show available apps')
 $(gettext '  -r, --reset    set apps on default values')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
@@ -55,8 +57,8 @@ $(gettext 'Arguments:')
 $(gettext '  <app>          process specified apps')"
 readonly HELP
 
-readonly OPTIONS_SHORT='abcf:grhmuv'
-readonly OPTIONS_LONG="apps,browse,cat,file:,gui,reset,help,manual,usage,\
+readonly OPTIONS_SHORT='bcf:glrhmuv'
+readonly OPTIONS_LONG="browse,cat,file:,gui,list,reset,help,manual,usage,\
 version"
 
 
@@ -83,15 +85,15 @@ function process() {
     local argument_app=false
     local command_file=''
     local err_flag=false
-    local option_apps=false
     local option_browse=false
     local option_cat=false
     local option_file=false
+    local option_list=false
     local reset='RESET'
-    local setup='SETUP'
     local setup_file_default_gpg=''
     local setup_file_default=/usr/bin/$PROGRAM_NAME.sh
     local setup_file=''
+    local setup='SETUP'
     local text=''
 
     check_input "$@"
@@ -127,8 +129,8 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         exit 0
     fi
 
-    if $option_apps; then
-        process_option_apps
+    if $option_list; then
+        process_option_list
         exit 0
     fi
 
@@ -178,10 +180,6 @@ function process_options() {
 
     while true; do
         case $1 in
-            -a | --apps )
-                option_apps=true
-                shift
-                ;;
             -b | --browse )
                 option_browse=true
                 shift
@@ -203,6 +201,10 @@ environment available")"
                     exit 1
                 fi
                 OPTION_GUI=true
+                shift
+                ;;
+            -l | --list )
+                option_list=true
                 shift
                 ;;
             -r | --reset )
@@ -259,7 +261,7 @@ function process_option_browse() {
 
 
 # This function shows the available apps from the setup files.
-function process_option_apps() {
+function process_option_list() {
     local apps=''
     local text=''
 

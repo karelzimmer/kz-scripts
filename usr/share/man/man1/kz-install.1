@@ -52,8 +52,6 @@ If errors are found, an overview of these messages is given.
 For the format of the install files see \fBman kz-install.sh\fR and
 \fBman kz-install.sh.gpg\fR.
 .sp
-Option \fB-a\fR, \fB--apps\fR lists all apps available in the install files.
-.sp
 Optionally, apps to be processed can be specified with argument \fI<app>\fR.
 .br
 Per specified app, the commands are selected from the install file and are
@@ -68,6 +66,8 @@ be specified. This option can be used repeatedly.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz install\fR is run in graphical mode. A
 desktop environment is required.
+.sp
+Option \fB-l\fR, \fB--list\fR lists all apps available in the install files.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone.
 .sp
@@ -90,9 +90,6 @@ On a Red Hat or Red Hat-based system try the following:
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\fB-a\fR, \fB--apps\fR
-Show a list of apps to install.
-.TP
 \fB-b\fR, \fB--browse\fR
 Browse through the install file.
 .TP
@@ -105,6 +102,9 @@ Process the specified file. This option can be used repeatedly.
 \fB-g\fR, \fB--gui\fR
 Run in graphical mode (gui=graphical user interface). A desktop environment is
 required.
+.TP
+\fB-l\fR, \fB--list\fR
+Show a list of apps to install.
 .TP
 \fB-r\fR, \fB--remove\fR
 Remove the apps.

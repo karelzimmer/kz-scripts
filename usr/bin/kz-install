@@ -24,10 +24,12 @@ PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]
-                  [-f|--file <file>]... [-g|--gui] [-r|--remove]
+USAGE=$(
+gettext "Usage: kz install [-b|--browse] [-c|--cat] [-f|--file <file>]...
+                  [-g|--gui] [-l|--list] [-r|--remove]
                   [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                  [--] [<app>...]")
+                  [--] [<app>...]"
+    )
 readonly USAGE
 
 HELP="$(gettext "Usage: kz install [<options>] [--] [<arguments>]")
@@ -38,13 +40,13 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -a, --apps     show list of apps')
 $(gettext '  -b, --browse   browse install files')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
                  process specified install files")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
+$(gettext '  -l, --list     show available apps')
 $(gettext '  -r, --remove   delete apps')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
@@ -55,8 +57,8 @@ $(gettext 'Arguments:')
 $(gettext '  <app>          process specified apps')"
 readonly HELP
 
-readonly OPTIONS_SHORT='abcf:grhmuv'
-readonly OPTIONS_LONG="apps,browse,cat,file:,gui,remove,help,manual,usage,\
+readonly OPTIONS_SHORT='bcf:glrhmuv'
+readonly OPTIONS_LONG="browse,cat,file:,gui,list,remove,help,manual,usage,\
 version"
 
 
@@ -87,10 +89,10 @@ function process() {
     local install_file_default_gpg=''
     local install_file_default=/usr/bin/$PROGRAM_NAME.sh
     local install_file=''
-    local option_apps=false
     local option_browse=false
     local option_cat=false
     local option_file=false
+    local option_list=false
     local remove='REMOVE'
     local text=''
 
@@ -127,8 +129,8 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         exit 0
     fi
 
-    if $option_apps; then
-        process_option_apps
+    if $option_list; then
+        process_option_list
         exit 0
     fi
 
@@ -179,10 +181,6 @@ function process_options() {
 
     while true; do
         case $1 in
-            -a | --apps )
-                option_apps=true
-                shift
-                ;;
             -b | --browse )
                 option_browse=true
                 shift
@@ -204,6 +202,10 @@ environment available")"
                     exit 1
                 fi
                 OPTION_GUI=true
+                shift
+                ;;
+            -l | --list )
+                option_list=true
                 shift
                 ;;
             -r | --remove )
@@ -260,7 +262,7 @@ function process_option_browse() {
 
 
 # This function shows the available apps from the install files.
-function process_option_apps() {
+function process_option_list() {
     local apps=''
     local text=''
 

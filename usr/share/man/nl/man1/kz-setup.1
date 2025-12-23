@@ -51,9 +51,6 @@ meldingen.
 Voor de indeling van de instelbestanden zie \fBman kz-setup.sh\fR en
 \fBman kz-setup.sh.gpg\fR.
 .sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst alle van apps die beschikbaar zijn
-in de instelbestanden.
-.sp
 Naar keuze kunnen te verwerken apps opgegeven worden met argument \fI<app>\fR.
 .br
 Per opgegeven app worden de opdrachten geselecteerd uit de instelbestanden en
@@ -70,13 +67,13 @@ opgegeven worden. Deze optie kan herhaaldelijk gebruikt worden.
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz setup\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
 .sp
+Optie \fB-l\fR, \fB--list\fR geeft een lijst alle van apps die beschikbaar zijn
+in de instelbestanden.
+.sp
 Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
 
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
-.TP
-\fB-a\fR, \fB--apps\fR
-Toon een lijst van in te stellen apps.
 .TP
 \fB-b\fR, \fB--browse\fR
 Blader door het instelbestand.
@@ -85,11 +82,14 @@ Blader door het instelbestand.
 Toon de inhoud van het opdrachtbestand.
 .TP
 \fB-f\fR, \fB--file\fR \fI<bestand>\fR
-Verwerk de opgegeven bestand. Deze optie kan herhaaldelijk gebruikt worden.
+Verwerk het opgegeven bestand. Deze optie kan herhaaldelijk gebruikt worden.
 .TP
 \fB-g\fR, \fB--gui\fR
 Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
+.TP
+\fB-l\fR, \fB--list\fR
+Toon een lijst van in te stellen apps.
 .TP
 \fB-r\fR, \fB--reset\fR
 Stel de apps in op standaardwaarden

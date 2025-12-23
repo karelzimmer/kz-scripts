@@ -233,8 +233,8 @@ $HOME/kz-scripts/usr/share/polkit-1/actions"
     text=$(gettext 'Generate gettext files')...
     kz.infomsg "$text"
 
-    # Remove '#:filename:line' lines, these are generated again by xgettext.
-    sed --in-place '/^#: kz/d' "$pot_dir/kz.pot" "$lc_messages_dir/kz.po"
+    # Remove '#: filename:line' lines, these are generated again by xgettext.
+    sed --in-place '/^#: /d' "$pot_dir/kz.pot" "$lc_messages_dir/kz.po"
 
     for gettext_dir in $gettext_dirs; do
 

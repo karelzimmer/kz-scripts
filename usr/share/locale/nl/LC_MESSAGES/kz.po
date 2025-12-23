@@ -37,7 +37,7 @@ msgid "Usage: kz [<options>] <command> [<arguments>]"
 msgstr "Gebruik: kz [<opties>] <opdracht> [<argumenten>]"
 
 #: kz:41 kz-backup:36 kz-build:40 kz-check:35 kz-deploy:40 kz-desktop:37
-#: kz-dev:42 kz-get:33 kz-install:37 kz-menu:35 kz-restore:36 kz-setup:37
+#: kz-dev:42 kz-get:33 kz-install:39 kz-menu:35 kz-restore:36 kz-setup:39
 #: kz-update:41 kz-wifi:41
 msgid "Options:"
 msgstr "Opties:"
@@ -47,30 +47,30 @@ msgid "  -l, --list     show available commands"
 msgstr "  -l, --list     toon beschikbare opdrachten"
 
 #: kz:43 kz-backup:44 kz-build:42 kz-check:36 kz-deploy:42 kz-desktop:49
-#: kz-dev:43 kz-install:49 kz-menu:38 kz-restore:44 kz-setup:49 kz-update:42
+#: kz-dev:43 kz-install:51 kz-menu:38 kz-restore:44 kz-setup:51 kz-update:42
 #: kz-wifi:44
 msgid "  -h, --help     show this help text"
 msgstr "  -h, --help     toon deze hulptekst"
 
 #: kz:44 kz-backup:45 kz-build:43 kz-check:37 kz-deploy:43 kz-desktop:50
-#: kz-dev:44 kz-install:50 kz-menu:39 kz-restore:45 kz-setup:50 kz-update:43
+#: kz-dev:44 kz-install:52 kz-menu:39 kz-restore:45 kz-setup:52 kz-update:43
 #: kz-wifi:45
 msgid "  -m, --manual   show manual page"
 msgstr "  -m, --manual   toon handleidingpagina"
 
 #: kz:45 kz-backup:46 kz-build:44 kz-check:38 kz-deploy:44 kz-desktop:51
-#: kz-dev:45 kz-install:51 kz-menu:40 kz-restore:46 kz-setup:51 kz-update:44
+#: kz-dev:45 kz-install:53 kz-menu:40 kz-restore:46 kz-setup:53 kz-update:44
 #: kz-wifi:46
 msgid "  -u, --usage    show a short usage summary"
 msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
 
 #: kz:46 kz-backup:47 kz-build:45 kz-check:39 kz-deploy:45 kz-desktop:52
-#: kz-dev:46 kz-install:52 kz-menu:41 kz-restore:47 kz-setup:52 kz-update:45
+#: kz-dev:46 kz-install:54 kz-menu:41 kz-restore:47 kz-setup:54 kz-update:45
 #: kz-wifi:47
 msgid "  -v, --version  show program version"
 msgstr "  -v, --version  toon de programmaversie"
 
-#: kz:48 kz-install:54 kz-setup:54
+#: kz:48 kz-install:56 kz-setup:56
 msgid "Arguments:"
 msgstr "Argumenten:"
 
@@ -101,7 +101,7 @@ msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:170 kz-backup:151 kz-build:155 kz-check:129 kz-deploy:134 kz-desktop:198
-#: kz-dev:131 kz-install:236 kz-menu:175 kz-restore:152 kz-setup:235
+#: kz-dev:131 kz-install:238 kz-menu:175 kz-restore:152 kz-setup:237
 #: kz-update:184 kz-wifi:127
 msgid "internal error"
 msgstr "interne fout"
@@ -140,18 +140,18 @@ msgstr ""
 msgid "Usage: kz backup [<options>]"
 msgstr "Gebruik: kz backup [<opties>]"
 
-#: kz-backup:37 kz-desktop:38 kz-install:38 kz-restore:37 kz-setup:38
+#: kz-backup:37 kz-desktop:38 kz-install:40 kz-restore:37 kz-setup:40
 msgid ""
 "  Mandatory arguments to long options are mandatory for short options too."
 msgstr ""
 "  Verplichte argumenten voor lange opties zijn ook verplicht voor korte "
 "opties."
 
-#: kz-backup:40 kz-install:46 kz-menu:36 kz-restore:40 kz-setup:46 kz-wifi:42
+#: kz-backup:40 kz-install:47 kz-menu:36 kz-restore:40 kz-setup:47 kz-wifi:42
 msgid "  -g, --gui      run in graphical mode,"
 msgstr "  -g, --gui      draai in grafische modus,"
 
-#: kz-backup:41 kz-install:47 kz-menu:37 kz-restore:41 kz-setup:47 kz-wifi:43
+#: kz-backup:41 kz-install:48 kz-menu:37 kz-restore:41 kz-setup:48 kz-wifi:43
 msgid "                 requires a desktop environment"
 msgstr "                 vereist een desktopomgeving"
 
@@ -163,8 +163,8 @@ msgstr ""
 "  -t, --target <map>\n"
 "                 plaats de back-up in de opgegeven map"
 
-#: kz-backup:111 kz-desktop:213 kz-install:201 kz-menu:146 kz-restore:111
-#: kz-setup:200
+#: kz-backup:111 kz-desktop:213 kz-install:199 kz-menu:146 kz-restore:111
+#: kz-setup:198
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
@@ -208,15 +208,15 @@ msgstr ""
 "\n"
 "Koppel media af via Bestanden."
 
-#: kz-backup:252 kz-restore:293 kz-setup:321
+#: kz-backup:252 kz-restore:293 kz-setup:323
 msgid "Settings"
 msgstr "Instellingen"
 
-#: kz-backup:280 kz-setup:328
+#: kz-backup:280 kz-setup:330
 msgid "README"
 msgstr "LEESMIJ"
 
-#: kz-backup:282 kz-setup:330
+#: kz-backup:282 kz-setup:332
 msgid ""
 "This folder contains files created by kz-backup and kz-setup.\n"
 "These files are used by kz-restore and others.\n"
@@ -332,7 +332,7 @@ msgstr ""
 "3. Rechtsklik op de gewenste afbeelding en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:517 kz-install:440 kz-restore:258 kz-setup:481
+#: kz-backup:517 kz-install:442 kz-restore:258 kz-setup:483
 msgid "progress"
 msgstr "voortgang"
 
@@ -344,7 +344,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:589 kz-install:581 kz-restore:329 kz-setup:603
+#: kz-backup:589 kz-install:583 kz-restore:329 kz-setup:605
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -369,11 +369,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:597 kz-install:586 kz-restore:337 kz-setup:607
+#: kz-backup:597 kz-install:588 kz-restore:337 kz-setup:609
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:598 kz-install:587 kz-restore:338 kz-setup:608
+#: kz-backup:598 kz-install:589 kz-restore:338 kz-setup:610
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -899,40 +899,36 @@ msgstr ""
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: nl.karelzimmer.kz-install.policy:21 kz-install:23 kz-install:420 kz-menu:76
-#: kz-install:440 kz-install.desktop:10
+#: kz-install:23 kz-install:442 kz-menu:76 kz-install.desktop:10
+#: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr "Apps installeren"
 
-#: kz-install:27
+#: kz-install:28
 msgid ""
-"Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <file>]... [-g|--gui] [-r|--remove]\n"
+"Usage: kz install [-b|--browse] [-c|--cat] [-f|--file <file>]...\n"
+"                  [-g|--gui] [-l|--list] [-r|--remove]\n"
 "                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                  [--] [<app>...]"
 msgstr ""
-"Gebruik: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                    [-f|--file <bestand>]... [-g|--gui] [-r|--remove]\n"
+"Gebruik: kz install [-b|--browse] [-c|--cat] [-f|--file <bestand>]...\n"
+"                    [-g|--gui] [-l|--list] [-r|--remove]\n"
 "                    [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                    [--] [<app>...]"
 
-#: kz-install:33
+#: kz-install:35
 msgid "Usage: kz install [<options>] [--] [<arguments>]"
 msgstr "Gebruik: kz install [<opties>] [--] [<argumenten>]"
 
-#: kz-install:41 kz-setup:41
-msgid "  -a, --apps     show list of apps"
-msgstr "  -a, --apps     toon lijst van apps"
-
-#: kz-install:42
+#: kz-install:43
 msgid "  -b, --browse   browse install files"
 msgstr "  -b, --browse   blader door installatiebestanden"
 
-#: kz-install:43 kz-setup:43
+#: kz-install:44 kz-setup:44
 msgid "  -c, --cat      show contents of command file"
 msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
 
-#: kz-install:44
+#: kz-install:45
 msgid ""
 "  -f, --file <file>\n"
 "                 process specified install files"
@@ -940,38 +936,42 @@ msgstr ""
 "  -f, --file <bestand>\n"
 "                 verwerk opgegeven installatiebestanden"
 
-#: kz-install:48
+#: kz-install:49 kz-setup:49
+msgid "  -l, --list     show available apps"
+msgstr "  -l, --list     toon beschikbare apps"
+
+#: kz-install:50
 msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
 
-#: kz-install:55 kz-setup:55
+#: kz-install:57 kz-setup:57
 msgid "  <app>          process specified apps"
 msgstr "  <app>          verwerk opgegeven apps"
 
-#: kz-install:116
+#: kz-install:118
 #, sh-format
 msgid "install file '$install_file' not found."
 msgstr "Installatiebestand '$install_file' niet gevonden."
 
-#: kz-install:268 kz-setup:267
+#: kz-install:270 kz-setup:269
 msgid "The following apps are available:"
 msgstr "De volgende apps zijn beschikbaar:"
 
-#: kz-install:270 kz-setup:269
+#: kz-install:272 kz-setup:271
 msgid "NUM  APP"
 msgstr "NUM  APP"
 
-#: kz-install:290
+#: kz-install:292
 msgid "Use \"kz install <app>...\" to install the apps."
 msgstr "Gebruik \"kz install <app>...\" om de apps te installeren."
 
-#: kz-install:291
+#: kz-install:293
 msgid "Use \"kz install --cat\" to view the contents of the command file."
 msgstr ""
 "Gebruik \"kz install --cat\" om de inhoud van het opdrachtbestand te "
 "bekijken."
 
-#: kz-install:292
+#: kz-install:294
 msgid ""
 "Use \"kz install --cat <app>...\" to view the contents of the apps command "
 "file."
@@ -979,18 +979,18 @@ msgstr ""
 "Gebruik \"kz install --cat <app>...\" om de inhoud van het opdrachtbestand "
 "voor apps te bekijken."
 
-#: kz-install:297
+#: kz-install:299
 msgid "Use \"kz install --remove <app>...\" to remove the apps."
 msgstr "Gebruik \"kz install --remove <app>...\" om de apps te verwijderen."
 
-#: kz-install:298
+#: kz-install:300
 msgid ""
 "Use \"kz install --cat --remove\" to view the contents of the command file."
 msgstr ""
 "Gebruik \"kz install --cat --remove\" om de inhoud van het opdrachtbestand "
 "te bekijken."
 
-#: kz-install:300
+#: kz-install:302
 msgid ""
 "Use \"kz install --cat --remove <app>...\" to view the contents of the apps "
 "command file."
@@ -998,7 +998,7 @@ msgstr ""
 "Gebruik \"kz install --cat --remove <app>...\" om de inhoud van het "
 "opdrachtbestand voor apps te bekijken."
 
-#: kz-install:304
+#: kz-install:306
 msgid ""
 "Use \"kz install --browse\" to view the contents of the default install "
 "files."
@@ -1006,52 +1006,52 @@ msgstr ""
 "Gebruik \"kz install --browse\" om de inhoud van de standaard "
 "installatiebestanden te bekijken."
 
-#: kz-install:307 kz-setup:306
+#: kz-install:309 kz-setup:308
 msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
-#: kz-install:366 kz-setup:408
+#: kz-install:368 kz-setup:410
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr "App '$app_argument' niet gevonden."
 
-#: kz-install:430 kz-setup:472
+#: kz-install:432 kz-setup:474
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
-#: kz-install:441 kz-menu:52
+#: kz-install:443 kz-menu:52
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
-#: kz-install:473 kz-setup:514
+#: kz-install:475 kz-setup:516
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:474 kz-setup:515
+#: kz-install:476 kz-setup:517
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
-#: kz-install:582
+#: kz-install:584
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
 msgid "Try to install or remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
-#: kz-install:604
+#: kz-install:606
 msgid "install"
 msgstr "installeren"
 
-#: kz-install:608
+#: kz-install:610
 msgid "remove"
 msgstr "verwijderen"
 
-#: kz-install:610 kz-setup:631
+#: kz-install:612 kz-setup:633
 #, sh-format
 msgid "Apps $operation completed."
 msgstr "Apps $operation is voltooid."
 
-#: kz-install:615
+#: kz-install:617
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1135,7 +1135,7 @@ msgstr "Wifi-informatie weergeven"
 msgid "Restore home folder"
 msgstr "Herstel persoonlijke map"
 
-#: kz-menu:78 kz-setup:23 kz-setup:481 kz-setup.desktop:10
+#: kz-menu:78 kz-setup:23 kz-setup:483 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr "Apps instellen"
 
@@ -1288,27 +1288,27 @@ msgstr "De back-up is teruggezet."
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
 
-#: kz-setup:27
+#: kz-setup:28
 msgid ""
-"Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                [-f|--file <file>]... [-g|--gui] [-r|--reset]\n"
+"Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file <file>]...\n"
+"                [-g|--gui] [-l|--list] [-r|--reset]\n"
 "                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                [--] [<app>...]"
 msgstr ""
-"Gebruik: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
-"                  [-f|--file <bestand>]... [-g|--gui] [-r|--reset]\n"
+"Gebruik: kz setup [-b|--browse] [-c|--cat] [-f|--file <bestand>]...\n"
+"                  [-g|--gui] [-l|--list] [-r|--reset]\n"
 "                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
 "                  [--] [<app>...]"
 
-#: kz-setup:33
+#: kz-setup:35
 msgid "Usage: kz setup [<options>] [--] [<arguments>]"
 msgstr "Gebruik: kz setup [<opties>] [--] [<argumenten>]"
 
-#: kz-setup:42
+#: kz-setup:43
 msgid "  -b, --browse   browse setup files"
 msgstr "  -b, --browse   blader door instelbestanden"
 
-#: kz-setup:44
+#: kz-setup:45
 msgid ""
 "  -f, --file <file>\n"
 "                 process specified setup files"
@@ -1316,36 +1316,36 @@ msgstr ""
 "  -f, --file <bestand>\n"
 "                 verwerk opgegeven instelbestanden"
 
-#: kz-setup:48
+#: kz-setup:50
 msgid "  -r, --reset    set apps on default values"
 msgstr "  -r, --reset    stel apps in op standaardwaarden"
 
-#: kz-setup:116
+#: kz-setup:118
 #, sh-format
 msgid "Setup file '$setup_file' not found."
 msgstr "Instelbestand '$setup_file' niet gevonden."
 
-#: kz-setup:289
+#: kz-setup:291
 msgid "Use \"kz setup <app>...\" to set up the apps."
 msgstr "Gebruik \"kz setup <app>...\" om de apps in te stellen."
 
-#: kz-setup:296
+#: kz-setup:298
 msgid "Use \"kz setup --reset <app>...\" to reset the apps."
 msgstr "Gebruik \"kz setup --reset <app>...\" om de apps te resetten."
 
-#: kz-setup:297
+#: kz-setup:299
 msgid ""
 "Use \"kz setup --cat --reset\" to view the contents of the command file."
 msgstr ""
 "Gebruik \"kz setup --cat --reset\" om de inhoud van het opdrachtbestand te "
 "bekijken."
 
-#: kz-setup:290
+#: kz-setup:292
 msgid "Use \"kz setup --cat\" to view the contents of the command file."
 msgstr ""
 "Gebruik \"kz setup --cat\" om de inhoud van het opdrachtbestand te bekijken."
 
-#: kz-setup:291
+#: kz-setup:293
 msgid ""
 "Use \"kz setup --cat <app>...\" to view the contents of the apps command "
 "file."
@@ -1353,7 +1353,7 @@ msgstr ""
 "Gebruik \"kz setup --cat <app>...\" om de inhoud van het opdrachtbestand "
 "voor apps te bekijken."
 
-#: kz-setup:299
+#: kz-setup:301
 msgid ""
 "Use \"kz setup --cat --reset <app>...\" to view the contents of the apps "
 "command file."
@@ -1361,14 +1361,14 @@ msgstr ""
 "Gebruik \"kz setup --cat --reset <app>...\" om de inhoud van het "
 "opdrachtbestand voor apps te bekijken."
 
-#: kz-setup:303
+#: kz-setup:305
 msgid ""
 "Use \"kz setup --browse\" to view the contents of the default setup files."
 msgstr ""
 "Gebruik \"kz setup --browse\" om de inhoud van de standaard instelbestanden "
 "te bekijken."
 
-#: kz-setup:342
+#: kz-setup:344
 msgid ""
 "To setup the Xfce Panel and Whisker Menu:\n"
 "\n"
@@ -1390,27 +1390,27 @@ msgstr ""
 "6. Plaats categorieën aan de linkerkant (Whiskermenu).\n"
 "7. Plaats zoekveld onderaan (Whiskermenu)."
 
-#: kz-setup:482
+#: kz-setup:484
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:604
+#: kz-setup:606
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-install:588 kz-setup:609
+#: kz-install:590 kz-setup:611
 msgid "Try to set up or reset the apps again."
 msgstr "Probeer de apps opnieuw in te stellen of te resetten."
 
-#: kz-setup:625
+#: kz-setup:627
 msgid "set up"
 msgstr "instellen"
 
-#: kz-setup:629
+#: kz-setup:631
 msgid "reset"
 msgstr "resetten"
 
-#: kz-setup:638
+#: kz-setup:640
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1418,7 +1418,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:643
+#: kz-setup:645
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1426,7 +1426,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:680
+#: kz-setup:682
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
@@ -1556,22 +1556,22 @@ msgstr "Zoom web-app"
 msgid "Video call with others from a web browser"
 msgstr "Videogesprek met anderen vanuit een webbrowser"
 
-#: nl.karelzimmer.kz_common.policy nl.karelzimmer.kz_common.policy:21
+#: nl.karelzimmer.kz_common.policy:21
 msgid "Wrapper script for kz_common"
 msgstr "Wrapper-script voor kz_common"
 
-#: nl.karelzimmer.kz_common.policy nl.karelzimmer.kz_common.policy:22
+#: nl.karelzimmer.kz_common.policy:22
 msgid "Execute the fuser command requiring root privileges"
 msgstr "Voer de opdracht fuser uit waarvoor root-rechten nodig zijn"
 
-#: nl.karelzimmer.kz-install.policy nl.karelzimmer.kz-install.policy:22
+#: nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps"
 msgstr "Authenticatie is vereist om apps te installeren"
 
-#: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:21
+#: nl.karelzimmer.kz-wifi.policy:21
 msgid "Wrapper script for kz-wifi"
 msgstr "Wrapper-script voor kz-wifi"
 
-#: nl.karelzimmer.kz-wifi.policy nl.karelzimmer.kz-wifi.policy:22
+#: nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"

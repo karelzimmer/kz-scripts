@@ -6,6 +6,6 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-declare DASHOPTIONS='-a --apps -b --browse -c --cat -f --file -g --gui -r
+declare DASHOPTIONS='-b --browse -c --cat -f --file -g --gui -l --list -r
     --remove -h --help -m --manual -u --usage -v --version'
 complete -o default -W "$DASHOPTIONS" kz-install

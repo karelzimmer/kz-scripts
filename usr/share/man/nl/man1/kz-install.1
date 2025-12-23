@@ -56,9 +56,6 @@ Voor de indeling van de installatiebestanden zie \fBman kz-install.sh\fR en
 Voor instructies over het toevoegen van extra gebruikers, zie de sectie
 \fBBESTANDEN\fR hieronder.
 .sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst van alle apps die beschikbaar zijn
-in de installatiebestanden.
-.sp
 Naar keuze kunnen te verwerken apps opgegeven worden met argument \fI<app>\fR.
 .br
 Per opgegeven app worden de opdrachten geselecteerd uit de installatiebestanden
@@ -75,6 +72,9 @@ worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz install\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
+.sp
+Optie \fB-l\fR, \fB--list\fR geeft een lijst van alle apps die beschikbaar zijn
+in de installatiebestanden.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .sp
@@ -97,9 +97,6 @@ Op een Red Hat systeem probeer het volgende:
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
-\fB-a\fR, \fB--apps\fR
-Toon een lijst van te installeren apps.
-.TP
 \fB-b\fR, \fB--browse\fR
 Blader door het installatiebestand.
 .TP
@@ -107,11 +104,14 @@ Blader door het installatiebestand.
 Toon de inhoud van het opdrachtbestand.
 .TP
 \fB-f\fR, \fB--file\fR \fI<bestand>\fR
-Verwerk de opgegeven bestand. Deze optie kan herhaaldelijk gebruikt worden.
+Verwerk het opgegeven bestand. Deze optie kan herhaaldelijk gebruikt worden.
 .TP
 \fB-g\fR, \fB--gui\fR
 Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
+.TP
+\fB-l\fR, \fB--list\fR
+Toon een lijst van te installeren apps.
 .TP
 \fB-r\fR, \fB--remove\fR
 Verwijder de apps.

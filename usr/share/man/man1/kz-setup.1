@@ -50,8 +50,6 @@ If warnings or errors are found, an overview of these messages is given.
 For the format of the setup files see \fBman kz-setup.sh\fR and
 \fBman kz-setup.sh.gpg\fR.
 .sp
-Option \fB-a\fR, \fB--apps\fR lists all apps available in the setup files.
-.sp
 Optionally, apps to be processed can be specified with argument \fI<app>\fR.
 .br
 Per specified app, the commands are selected from the setup file and are copied
@@ -67,13 +65,12 @@ specified. This option can be used repeatedly.
 With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode. A
 desktop environment is required.
 .sp
+Option \fB-l\fR, \fB--list\fR lists all apps available in the setup files.
+.sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
-.TP
-\fB-a\fR, \fB--apps\fR
-Show a list of apps to set up.
 .TP
 \fB-b\fR, \fB--browse\fR
 Browse through the setup file.
@@ -87,6 +84,9 @@ Process the specified file. This option can be used repeatedly.
 \fB-g\fR, \fB--gui\fR
 Run in graphical mode (gui=graphical user interface). A desktop environment is
 required.
+.TP
+\fB-l\fR, \fB--list\fR
+Show a list of apps to set up.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset the apps.
