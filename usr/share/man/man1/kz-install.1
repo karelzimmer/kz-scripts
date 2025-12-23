@@ -26,21 +26,21 @@ First install Linux, \fBkz install\fR is a post install script.
 Use \fBkz setup\fR (after \fBkz install\fR) to set up apps and change user
 settings.
 .sp
-\fBkz install\fR processes installation files that contains commands for
+\fBkz install\fR processes install files that contains commands for
 installing apps and changing system settings.
 .sp
-By default, \fBkz install\fR processes the installation files
+By default, \fBkz install\fR processes the install files
 /usr/bin/kz-install.sh and /usr/bin/kz-install.sh.gpg, which contains commands
 for all computers included in it.
 .br
 Commands with personal information such as a username are included in encrypted
-installation file /usr/bin/kz-install.sh.gpg.
+install file /usr/bin/kz-install.sh.gpg.
 This file is decrypted before the commands are used.
 .sp
 The commands that \fBkz install\fR provides are arranged in such a way that the
 result remains the same even if they are executed repeatedly (idempotent).
 .sp
-When processing the installation files, the commands for any and the current
+When processing the install files, the commands for any and the current
 computer are selected and copied to a command file.
 .br
 The commands in the command file are executed.
@@ -49,23 +49,21 @@ Upon successful completion the computer will restart.
 .sp
 If errors are found, an overview of these messages is given.
 .sp
-For the format of the installation files see \fBman kz-install.sh\fR and
+For the format of the install files see \fBman kz-install.sh\fR and
 \fBman kz-install.sh.gpg\fR.
 .sp
-Option \fB-a\fR, \fB--apps\fR lists all apps available in the installation
-file.
+Option \fB-a\fR, \fB--apps\fR lists all apps available in the install files.
 .sp
 Optionally, apps to be processed can be specified with argument \fI<app>\fR.
 .br
-Per specified app, the commands are selected from the installation file and are
+Per specified app, the commands are selected from the install file and are
 copied to the command file.
 .sp
-With option \fB-b\fR, \fB--browse\fR you can browse through the installation
-files.
+With option \fB-b\fR, \fB--browse\fR you can browse through the install files.
 .sp
 Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 .sp
-With option \fB-f\fR, \fB--file\fR \fI<file>\fR another installation file can
+With option \fB-f\fR, \fB--file\fR \fI<file>\fR another install file can
 be specified. This option can be used repeatedly.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz install\fR is run in graphical mode. A
@@ -96,7 +94,7 @@ Mandatory arguments to long options are mandatory for short options too.
 Show a list of apps to install.
 .TP
 \fB-b\fR, \fB--browse\fR
-Browse through the installation file.
+Browse through the install file.
 .TP
 \fB-c\fR, \fB--cat\fR
 Display the contents of the command file.
@@ -135,7 +133,7 @@ Install file.
 .sp
 /usr/bin/kz-install.sh.gpg
 .RS
-Encrypted installation file.
+Encrypted install file.
 .RE
 .sp
 /usr/share/kz/kz-public-key.gpg
@@ -169,7 +167,7 @@ Instructions for adding additional users.
 .sp
 \fBkz install\fR
 .RS
-Install everything in the default installation file.
+Install everything in the default install file.
 Starter \fBApps install\fR is also available for this in a desktop environment.
 .RE
 .sp

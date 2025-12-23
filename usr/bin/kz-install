@@ -39,10 +39,10 @@ $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
 $(gettext '  -a, --apps     show list of apps')
-$(gettext '  -b, --browse   browse installation files')
+$(gettext '  -b, --browse   browse install files')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
-                 process specified installation files")
+                 process specified install files")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --remove   delete apps')
@@ -113,8 +113,7 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
 
     for install_file in "${install_files[@]}"; do
         if [[ ! -f $install_file ]]; then
-            text=$(eval_gettext "Installation file '\$install_file' not \
-found.")
+            text=$(eval_gettext "install file '\$install_file' not found.")
             kz.errmsg "$text"
             err_flag=true
         fi
@@ -253,14 +252,14 @@ environment available")"
 }
 
 
-# This function browses through the installation files.
+# This function browses through the install files.
 function process_option_browse() {
     OPTION_GUI=false
     less --no-init --quit-if-one-screen < <(cat "${install_files[@]}" || true)
 }
 
 
-# This function shows the available apps from the installation files.
+# This function shows the available apps from the install files.
 function process_option_apps() {
     local apps=''
     local text=''
@@ -289,22 +288,21 @@ $(gettext 'NUM  APP')
             text+="$apps
 
 $(gettext 'Use "kz install <app>..." to install the apps.')
-$(gettext "Use \"kz install --cat\" to view the contents of the installation \
-file.")
+$(gettext 'Use "kz install --cat" to view the contents of the command file.')
 $(gettext "Use \"kz install --cat <app>...\" to view the contents of the apps \
-installation file.")"
+command file.")"
         else
             text+="$apps
 
 $(gettext 'Use "kz install --remove <app>..." to remove the apps.')
 $(gettext "Use \"kz install --cat --remove\" to view the contents of the \
-removal file.")
+command file.")
 $(gettext "Use \"kz install --cat --remove <app>...\" to view the contents of \
-the apps removal file.")"
+the apps command file.")"
         fi
         text+="
 $(gettext "Use \"kz install --browse\" to view the contents of the default \
-installation file.")"
+install files.")"
     else
         text+="$(gettext '  0  No apps found.')
 
@@ -329,7 +327,7 @@ function process_argument_app() {
 }
 
 
-# This function generates the command file from the installation file and
+# This function generates the command file from the install file and
 # filters by <app>.
 function process_install_file_by_app_argument() {
     local app_match=false
@@ -374,7 +372,7 @@ function process_install_file_by_app_argument() {
 }
 
 
-# This function generates the command file from the installation file and
+# This function generates the command file from the install file and
 # filters by host.
 function process_install_file_by_hostname() {
     local host_match=false
