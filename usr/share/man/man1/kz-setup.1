@@ -19,27 +19,27 @@ kz-setup - set up apps
 \fBkz setup\fR sets up apps and changes user settings.
 .sp
 In a desktop environment command \fBkz setup\fR can be executed by searching
-for \fBapps\fR, click on \fBSet up apps\fR pictogram.
+for \fBapps\fR, click on \fBKZ Set up apps\fR pictogram.
 .sp
 Use (first) \fBkz install\fR to install apps and changes system settings,
 \fBkz setup\fR is a post install setup script.
 .sp
-\fBkz setup\fR processes setup files that contains commands for setting up apps
-and changing user settings.
+\fBkz setup\fR processes settings files that contains commands for setting up
+apps and changing user settings.
 .sp
-By default, \fBkz setup\fR processes the setup files /usr/bin/kz-setup.sh and
-/usr/bin/kz-setup.sh.gpg, which contains commands for all computers included in
-it.
+By default, \fBkz setup\fR processes the settings files /usr/bin/kz-setup.sh
+and /usr/bin/kz-setup.sh.gpg, which contains commands for all computers
+included in it.
 .br
 Commands with personal information such as a username are included in encrypted
-setup file /usr/bin/kz-setup.sh.gpg.
+settings file /usr/bin/kz-setup.sh.gpg.
 This file is decrypted before the commands are used.
 .sp
 The commands supplied by with \fBkz setup\fR are arranged in such a way that
 the result remains the same when executed repeatedly (idempotent).
 .sp
-When processing the setup files, the commands for any and the current computer
-are selected and copied to a command file.
+When processing the settings files, the commands for any and the current
+computer are selected and copied to a command file.
 .br
 The commands in the command file are executed.
 .br
@@ -47,25 +47,25 @@ Upon successful completion the user will be logged out.
 .sp
 If warnings or errors are found, an overview of these messages is given.
 .sp
-For the format of the setup files see \fBman kz-setup.sh\fR and
-\fBman kz-setup.sh.gpg\fR.
+For the format of the settings files see \fBman kz setup.sh\fR and
+\fBman kz setup.sh.gpg\fR.
 .sp
 Optionally, apps to be processed can be specified with argument \fI<app>\fR.
 .br
-Per specified app, the commands are selected from the setup file and are copied
-to the command file.
+Per specified app, the commands are selected from the settings file and are
+copied to the command file.
 .sp
-With option \fB-b\fR, \fB--browse\fR you can browse through the setup files.
+With option \fB-b\fR, \fB--browse\fR you can browse through the settings files.
 .sp
 Option \fB-c\fR, \fB--cat\fR gives the contents of the command file.
 .sp
-With option \fB-f\fR, \fB--file\fR \fI<file>\fR another setup file can be
+With option \fB-f\fR, \fB--file\fR \fI<file>\fR another settings file can be
 specified. This option can be used repeatedly.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode. A
 desktop environment is required.
 .sp
-Option \fB-l\fR, \fB--list\fR lists all apps available in the setup files.
+Option \fB-l\fR, \fB--list\fR lists all apps available in the settings files.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 
@@ -73,7 +73,7 @@ With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 Mandatory arguments to long options are mandatory for short options too.
 .TP
 \fB-b\fR, \fB--browse\fR
-Browse through the setup file.
+Browse through the settings file.
 .TP
 \fB-c\fR, \fB--cat\fR
 Display the contents of the command file.
@@ -110,12 +110,12 @@ equal to 0.
 .SH FILES
 /usr/bin/kz-setup.sh
 .RS
-Setup file.
+Settings file.
 .RE
 .sp
 /usr/bin/kz-setup.sh.gpg
 .RS
-Encrypted setup file.
+GPG-encrypted settings file.
 .RE
 .sp
 /usr/share/kz/kz-public-key.gpg
@@ -125,13 +125,13 @@ OpenPGP public key for package kz. Needed to decrypt kz-install.sh.gpg.
 .sp
 /tmp/kz-setup-XXXXXXXXXX-decryptd.sh.gpg
 .RS
-Decrypted file containing additional commands that are added to the command
-file, for example kz-setup-SkQLswclj3-decryptd.sh.gpg.
+Decrypted settings file containing additional commands that are added to the
+command file, for example kz-setup-SkQLswclj3-decryptd.sh.gpg.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX-commands.sh.
 .RS
-Command file, e.g. kz-setup-SYpGEKVWZI-commands.
+Temporary command file, e.g. kz-setup-SYpGEKVWZI-commands.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX-error.log
@@ -159,8 +159,9 @@ Instructions to setup the Xfce Panel and Whisker Menu.
 .sp
 \fBkz setup\fR
 .RS
-Set up everything in the default setup file.
-Starter \fBSetup apps\fR is also available for this in a desktop environment.
+Set up everything in the default settings file.
+Starter \fBKZ Setup apps\fR is also available for this in a desktop \
+environment.
 .RE
 .sp
 \fBkz setup google-chrome\fR

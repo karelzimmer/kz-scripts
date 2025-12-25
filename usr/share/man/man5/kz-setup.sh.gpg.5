@@ -8,17 +8,17 @@
 .TH "KZ-SETUP.SH.GPG" "5" "4.2.1" "kz" "File format"
 
 .SH NAME
-kz-setup.sh.gpg - setup file for use with kz setup (gpg)
+kz-setup.sh.gpg - GPG-encrypted settings file for use with kz setup
 
 .SH SYNOPSIS
 .SY kz-setup.sh.gpg
 .YS
 
 .SH DESCRIPTION
-This file contains commands to process as an setup file with kz setup.
+This file contains commands to process as an settings file with kz setup.
 .sp
 Commands with personal information such as a username are included in this
-encrypted setup file.
+GPG-encrypted settings file.
 .sp
 It is created with e.g. commands:
 .br
@@ -34,7 +34,7 @@ gpg --import /usr/share/kz/kz-public-key.gpg
 gpg --output ~/kz-setup.sh.gpg.bash --decrypt
 ~/kz-scripts/usr/bin/kz-setup.sh.gpg
 .sp
-For the format of the records in this install file please use
+For the format of the records in this installation file please use
 \fBman kz setup.sh\fR.
 
 .SH SEE ALSO

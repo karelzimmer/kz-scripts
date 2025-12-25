@@ -8,19 +8,20 @@
 .TH "KZ-SETUP.SH" "5" "4.2.1" "kz" "File format"
 
 .SH NAME
-kz-setup.sh - setup file for use with kz setup
+kz-setup.sh - settings file for use with kz setup
 
 .SH SYNOPSIS
 .SY kz-setup.sh
 .YS
 
 .SH DESCRIPTION
-This file contains commands to process as an setup file with kz setup.
+This file contains commands to process as an settings file with kz setup.
 .br
 Commands containing personal information, such as a username, are included in
-an encrypted setup file, kz-setup.sh.gpg.
+an GPG-encrypted settings file, kz-setup.sh.gpg.
 .sp
-The setup file contains so-called \fBapp record\fRs and \fBcommand record\fRs.
+The settings file contains so-called \fBapp record\fRs and
+\fBcommand record\fRs.
 .sp
 The \fBapp record\fR indicates where the commands should be executed and is
 followed by one or more lines of commands (\fBcommand record\fRs).
@@ -44,6 +45,7 @@ are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in file
 kz-setup.sh.
+.br
 More examples can be seen through the \fBkz setup --browse\fR and
 \fBkz setup --cat\fR commands.
 .LP
@@ -193,30 +195,20 @@ be selected by default).
 The app can still be set up with the command 'kz setup google-earth'.
 .br
 A line with '#gpg' indicates that the command in question is executed in
-kz-install.sh.gpg, the encrypted version of kz-install.sh with personal
+kz-setup.sh.gpg, the GPG-encrypted version of kz-setup.sh with personal
 information such as a username.
 
 .SH EXAMPLES
 .EX
-# setup spotify on pc01 pc02 pc06 pc07
+# SETUP spotify pc01 pc02 pc06 pc07
+# -----------------------------------------------------------------------------
 # Music and podcasts.
+# -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
-if grep --quiet debian  /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskt\
-op --addaft=spotify; fi
-if grep --quiet rhel /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskt\
-op --addaft=kz-spotify; fi
-.sp
-.RS
-The "if grep --quiet debian  /etc/os-release" will check if it is a Debian or \
-Debian-based system, such as Ubuntu.
-.br
-Grep on Debian for Debian-only, likewise for ubuntu (Ubuntu or Ubuntu-based) a\
-nd Ubuntu (Ubuntu-only).
-.sp
-The "if grep --quiet rhel /etc/os-release" will check if it is a Red Hat or\
- Red Hat-based system, such as Rocky Linux.
-The "if [[ -n ${DISPLAY-} ]]" is to check if there is a graphical environment.
-.RE
+# -----------------------------------------------------------------------------
+if grep --quiet debian  /etc/os-release; then kz-desktop --addaft=spotify; fi
+if grep --quiet rhel    /etc/os-release; then kz-desktop --addaft=kz-spotify; \
+fi
 .EE
 
 .SH SEE ALSO

@@ -8,19 +8,19 @@
 .TH "KZ-INSTALL.SH" "5" "4.2.1" "kz" "File format"
 
 .SH NAME
-kz-install.sh - install file for use with kz install
+kz-install.sh - installation file for use with kz install
 
 .SH SYNOPSIS
 .SY kz-install.sh
 .YS
 
 .SH DESCRIPTION
-This file contains commands to process as an install file with kz install.
+This file contains commands to process as an installation file with kz install.
 .br
 Commands containing personal information, such as a username, are included in
-an encrypted install file, kz-install.sh.gpg.
+an GPG-encrypted installation file, kz-install.sh.gpg.
 .sp
-The install file contains so-called \fBapp record\fRs and
+The installation file contains so-called \fBapp record\fRs and
 \fBcommand record\fRs.
 .sp
 The \fBapp record\fR indicates where the commands should be executed and is
@@ -45,6 +45,7 @@ are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records and how these records
 are processed.
+.br
 More examples can be seen through the \fBkz install --browse\fR and
 \fBkz install --cat\fR commands.
 .LP
@@ -194,29 +195,19 @@ therefore never be selected by default).
 The app can still be installed with the command 'kz install google-earth'.
 .br
 A line with '#gpg' indicates that the command in question is executed in
-kz-install.sh.gpg, the encrypted version of kz-install.sh with personal
+kz-install.sh.gpg, the GPG-encrypted version of kz-install.sh with personal
 information such as a username.
 
 .SH EXAMPLES
 .EX
-# install gnome-tweaks on pc01 pc06 pc07
+# INSTALL gnome-tweaks *
+# -----------------------------------------------------------------------------
 # Adjust advanced settings.
-if grep --quiet debian  /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt\
--get install --assume-yes gnome-tweaks; fi
-if grep --quiet rhel /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf\
- install --assumeyes gnome-tweaks; fi
-.sp
-.RS
-The "if grep --quiet debian  /etc/os-release" will check if it is a Debian or \
-Debian-based system, such as Ubuntu.
-.br
-Grep on Debian for Debian-only, likewise for ubuntu (Ubuntu or Ubuntu-based) a\
-nd Ubuntu (Ubuntu-only).
-.sp
-The "if grep --quiet rhel /etc/os-release" will check if it is a Red Hat or\
- Red Hat-based system, such as Rocky Linux.
-The "if [[ -n ${DISPLAY-} ]]" is to check if there is a graphical environment.
-.RE
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes\
+ gnome-tweaks; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes \
+ gnome-tweaks; fi
 .EE
 
 .SH SEE ALSO

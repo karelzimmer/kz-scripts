@@ -45,6 +45,7 @@ verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels en hoe deze regels
 verwerkt worden.
+.br
 Meer voorbeelden zijn te zien met de opdrachten \fBkz install --browse\fR en
 \fBkz install --cat\fR.
 .LP
@@ -196,30 +197,19 @@ De app kan alsnog worden geïnstalleerd met de opdracht 'kz install google-eart\
 h'.
 .br
 Een regel met '#gpg' geeft dit aan dat de betreffende opdracht wordt uitgevoerd
-in kz-install.sh.gpg, de versleutelde versie van kz-install.sh met persoonlijke
-informatie persoonlijke informatie zoals een gebruikersnaam.
+in kz-install.sh.gpg, de GPG-versleutelde versie van kz-install.sh met
+persoonlijke informatie persoonlijke informatie zoals een gebruikersnaam.
 
 .SH VOORBEELDEN
 .EX
-# install gnome-tweaks on pc01 pc06 pc07
+# INSTALL gnome-tweaks *
+# -----------------------------------------------------------------------------
 # Adjust advanced settings.
-if grep --quiet debian  /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt\
--get install --assume-yes gnome-tweaks; fi
-if grep --quiet rhel /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf\
- install --assumeyes gnome-tweaks; fi
-.sp
-.RS
-Met "if grep --quiet debian  /etc/os-release" wordt gecontroleerd of het een D\
-ebian of Debian-gebaseerd systeem is, zoals Ubuntu.
-.br
-Grep op Debian voor alleen Debian en ook voor ubuntu (Ubuntu of Ubuntu-gebase\
-erd) en Ubuntu (alleen Ubuntu).
-.sp
-Met "if grep --quiet rhel /etc/os-release" wordt gecontroleerd of het een R\
-ed Hat of Red Hat-gebaseerd systeem is, zoals Rocky Linux.
-De "if [[ -n ${DISPLAY-} ]]" is om te controleren of er een grafische \
-omgeving is.
-.RE
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes\
+ gnome-tweaks; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes \
+ gnome-tweaks; fi
 .EE
 
 .SH ZIE OOK

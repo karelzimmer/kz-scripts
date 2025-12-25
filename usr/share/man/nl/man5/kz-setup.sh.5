@@ -8,19 +8,20 @@
 .TH "KZ-SETUP.SH" "5" "4.2.1" "kz" "Bestandsindeling"
 
 .SH NAAM
-kz-setup.sh - instelbestand voor gebruik met kz setup
+kz-setup.sh - instellingenbestand voor gebruik met kz setup
 
 .SH SAMENVATTING
 .SY kz-setup.sh
 .YS
 
 .SH BESCHRIJVING
-Dit bestand bevat opdrachten om te verwerken als instelbestand met kz setup.
+Dit bestand bevat opdrachten om te verwerken als instellingenbestand met kz
+setup.
 .br
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
-in een versleuteld instelbestand, kz-setup.sh.gpg.
+in een versleuteld instellingenbestand, kz-setup.sh.gpg.
 .sp
-In het instelbestand staan zogenaamde \fBapp-regel\fRs en
+In het instellingenbestand staan zogenaamde \fBapp-regel\fRs en
 \fBopdracht-regel\fRs.
 .sp
 De \fBapp-regel\fR geeft aan waar de opdrachten uitgevoerd moeten worden en
@@ -44,6 +45,7 @@ verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze deze regels en hoe deze
 regels verwerkt worden.
+.br
 Meer voorbeelden zijn te zien met de opdrachten \fBkz setup --browse\fR en
 \fBkz setup --cat\fR.
 .LP
@@ -194,18 +196,19 @@ wordt daarom nooit standaard geselecteerd).
 De app kan alsnog worden ingesteld met de opdracht 'kz setup google-earth'.
 .br
 Een regel met '#gpg' geeft dit aan dat de betreffende opdracht wordt uitgevoerd
-in kz-setup.sh.gpg, de versleutelde versie van kz-setup.sh met persoonlijke
+in kz-setup.sh.gpg, de GPG-versleutelde versie van kz-setup.sh met persoonlijke
 informatie zoals een gebruikersnaam.
 
 .SH VOORBEELDEN
 .EX
-# setup spotify on pc01 pc02 pc06 pc07
+# SETUP spotify pc01 pc02 pc06 pc07
+# -----------------------------------------------------------------------------
 # Music and podcasts.
+# -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
-if grep --quiet debian  /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskt\
-op --addaft=spotify; fi
-if grep --quiet rhel /etc/os-release && [[ -n ${DISPLAY-} ]]; then kz-deskt\
-op --addaft=kz-spotify; fi
+# -----------------------------------------------------------------------------
+if grep --quiet debian  /etc/os-release; then kz-desktop --addaft=spotify; fi
+if grep --quiet rhel    /etc/os-release; then kz-desktop --addaft=kz-spotify; \
 .sp
 .RS
 Met "if grep --quiet debian  /etc/os-release" wordt gecontroleerd of het een D\

@@ -1,13 +1,14 @@
 # shellcheck shell=bash disable=SC2034
 # #############################################################################
-# SPDX-FileComment: Install file for use with kz-install script
+# SPDX-FileComment: Installation file for use with kz install
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
 # =============================================================================
-# Use "man kz install.sh" to learn more about the format of this file.
+# Use "man kz install.sh" and "man kz install.sh.gpg" to learn more about the
+# format of this file.
 # =============================================================================
 
 # INSTALL aer-settings #none

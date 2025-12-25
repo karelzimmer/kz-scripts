@@ -1,13 +1,14 @@
 # shellcheck shell=bash disable=SC2034
 # #############################################################################
-# SPDX-FileComment: Setup file for use with kz-setup script
+# SPDX-FileComment: Settings file for use with kz setup
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
 # =============================================================================
-# Use "man kz setup.sh" to learn more about the format of this file.
+# Use "man kz setup.sh" and "man kz setup.sh.gpg" to learn more about the
+# format of this file.
 # =============================================================================
 
 # SETUP calibre pc06

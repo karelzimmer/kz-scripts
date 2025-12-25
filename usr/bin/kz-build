@@ -250,7 +250,7 @@ $HOME/kz-scripts/usr/share/polkit-1/actions"
                 kz.logmsg "$text"
                 continue
             elif [[ $gettext_file == *.gpg ]]; then
-                text=$(gettext 'skip, is GPG encrypted.')
+                text=$(gettext 'skip, is GPG-encrypted.')
                 kz.logmsg "$text"
                 continue
             elif [[ $gettext_file == *.pot ]]; then

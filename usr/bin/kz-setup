@@ -40,10 +40,10 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -b, --browse   browse setup files')
+$(gettext '  -b, --browse   browse settings files')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
-                 process specified setup files")
+                 process specified settings files")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -l, --list     show available apps')
@@ -80,8 +80,8 @@ declare OPTION_RESET=false
 # This function performs the script actions, such as checking the input.
 function process() {
     local -A app_arguments=()
-    local -a setup_files=()
-    local -i setup_file_num=0
+    local -a settings_files=()
+    local -i settings_file_num=0
     local argument_app=false
     local command_file=''
     local err_flag=false
@@ -90,18 +90,18 @@ function process() {
     local option_file=false
     local option_list=false
     local reset='RESET'
-    local setup_file_default_gpg=''
-    local setup_file_default=/usr/bin/$PROGRAM_NAME.sh
-    local setup_file=''
+    local settings_file_default_gpg=''
+    local settings_file_default=/usr/bin/$PROGRAM_NAME.sh
+    local settings_file=''
     local setup='SETUP'
     local text=''
 
     check_input "$@"
 
     if ! $option_file; then
-        setup_files[++setup_file_num]=$setup_file_default
+        settings_files[++settings_file_num]=$settings_file_default
         # Setup commands in gpg file.
-        setup_file_default_gpg=\
+        settings_file_default_gpg=\
 $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         gpg --import                        \
             /usr/share/kz/kz-public-key.gpg \
@@ -109,13 +109,13 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         gpg --decrypt                       \
             /usr/bin/kz-setup.sh.gpg        \
             2> >($PROGRAM_LOGS)             \
-            > "$setup_file_default_gpg"
-        setup_files[++setup_file_num]=$setup_file_default_gpg
+            > "$settings_file_default_gpg"
+        settings_files[++settings_file_num]=$settings_file_default_gpg
     fi
 
-    for setup_file in "${setup_files[@]}"; do
-        if [[ ! -f $setup_file ]]; then
-            text=$(eval_gettext "Setup file '\$setup_file' not found.")
+    for settings_file in "${settings_files[@]}"; do
+        if [[ ! -f $settings_file ]]; then
+            text=$(eval_gettext "Settings file '\$settings_file' not found.")
             kz.errmsg "$text"
             err_flag=true
         fi
@@ -139,7 +139,7 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
     if $argument_app; then
         process_argument_app
     else
-        process_setup_file_by_hostname
+        process_settings_files_by_hostname
     fi
 
     if $option_cat; then
@@ -190,7 +190,7 @@ function process_options() {
                 ;;
             -f | --file )
                 option_file=true
-                setup_files[++setup_file_num]=$2
+                settings_files[++settings_file_num]=$2
                 shift 2
                 ;;
             -g | --gui )
@@ -253,14 +253,14 @@ environment available")"
 }
 
 
-# This function browses through the setup files.
+# This function browses through the settings files.
 function process_option_browse() {
     OPTION_GUI=false
-    less --no-init --quit-if-one-screen < <(cat "${setup_files[@]}" || true)
+    less --no-init --quit-if-one-screen < <(cat "${settings_files[@]}" || true)
 }
 
 
-# This function shows the available apps from the setup files.
+# This function shows the available apps from the settings files.
 function process_option_list() {
     local apps=''
     local text=''
@@ -272,7 +272,7 @@ $(gettext 'NUM  APP')
 "
     apps=$(
         grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
-                "${setup_files[@]}"                     |
+                "${settings_files[@]}"                  |
         tr      --squeeze-repeats                       \
                 '[:space:]'                             |
         cut     --delimiter=' '                         \
@@ -303,7 +303,7 @@ the apps command file.")"
         fi
             text+="
 $(gettext "Use \"kz setup --browse\" to view the contents of the default \
-setup files.")"
+settings files.")"
     else
         text+="$(gettext '  0  No apps found.')
 
@@ -360,7 +360,7 @@ function process_argument_app() {
     local err_flag=false
 
     for app_argument in "${app_arguments[@]}"; do
-        process_setup_file_by_app_argument
+        process_settings_files_by_app_argument
     done
 
     if $err_flag; then
@@ -369,9 +369,9 @@ function process_argument_app() {
 }
 
 
-# This function generates the command file from the setup file and filters by
-# <app>.
-function process_setup_file_by_app_argument() {
+# This function generates the command file from the settings file and filters
+# by <app>.
+function process_settings_files_by_app_argument() {
     local app_match=false
     local setup_record=''
     local no_app_match=true
@@ -403,7 +403,7 @@ function process_setup_file_by_app_argument() {
                 fi
                 ;;
         esac
-    done < <(cat "${setup_files[@]}")
+    done < <(cat "${settings_files[@]}")
 
     if $no_app_match; then
         err_flag=true
@@ -416,9 +416,9 @@ function process_setup_file_by_app_argument() {
 }
 
 
-# This function generates the command file from the setup file and filters by
-# host.
-function process_setup_file_by_hostname() {
+# This function generates the command file from the settings file and filters
+# by host.
+function process_settings_files_by_hostname() {
     local host_match=false
     local setup_record=''
 
@@ -446,7 +446,7 @@ function process_setup_file_by_hostname() {
                 fi
                 ;;
         esac
-    done < <(cat "${setup_files[@]}")
+    done < <(cat "${settings_files[@]}")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 }

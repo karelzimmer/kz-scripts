@@ -19,28 +19,28 @@ kz-install - install apps
 \fBkz install\fR installs apps and changes system settings.
 .sp
 In a desktop environment command \fBkz install\fR can be executed by searching
-for \fBapps\fR, click on \fBApps install\fR pictogram.
+for \fBapps\fR, click on \fBKZ Install apps\fR pictogram.
 .sp
 First install Linux, \fBkz install\fR is a post install script.
 .sp
 Use \fBkz setup\fR (after \fBkz install\fR) to set up apps and change user
 settings.
 .sp
-\fBkz install\fR processes install files that contains commands for
+\fBkz install\fR processes installation files that contains commands for
 installing apps and changing system settings.
 .sp
-By default, \fBkz install\fR processes the install files
+By default, \fBkz install\fR processes the installation files
 /usr/bin/kz-install.sh and /usr/bin/kz-install.sh.gpg, which contains commands
 for all computers included in it.
 .br
 Commands with personal information such as a username are included in encrypted
-install file /usr/bin/kz-install.sh.gpg.
+installation file /usr/bin/kz-install.sh.gpg.
 This file is decrypted before the commands are used.
 .sp
 The commands that \fBkz install\fR provides are arranged in such a way that the
 result remains the same even if they are executed repeatedly (idempotent).
 .sp
-When processing the install files, the commands for any and the current
+When processing the installation files, the commands for any and the current
 computer are selected and copied to a command file.
 .br
 The commands in the command file are executed.
@@ -49,25 +49,27 @@ Upon successful completion the computer will restart.
 .sp
 If errors are found, an overview of these messages is given.
 .sp
-For the format of the install files see \fBman kz-install.sh\fR and
-\fBman kz-install.sh.gpg\fR.
+For the format of the installation files see \fBman kz install.sh\fR and
+\fBman kz install.sh.gpg\fR.
 .sp
 Optionally, apps to be processed can be specified with argument \fI<app>\fR.
 .br
-Per specified app, the commands are selected from the install file and are
+Per specified app, the commands are selected from the installation file and are
 copied to the command file.
 .sp
-With option \fB-b\fR, \fB--browse\fR you can browse through the install files.
+With option \fB-b\fR, \fB--browse\fR you can browse through the installation
+files.
 .sp
 Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 .sp
-With option \fB-f\fR, \fB--file\fR \fI<file>\fR another install file can
+With option \fB-f\fR, \fB--file\fR \fI<file>\fR another installation file can
 be specified. This option can be used repeatedly.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz install\fR is run in graphical mode. A
 desktop environment is required.
 .sp
-Option \fB-l\fR, \fB--list\fR lists all apps available in the install files.
+Option \fB-l\fR, \fB--list\fR lists all apps available in the installation
+files.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone.
 .sp
@@ -91,7 +93,7 @@ On a Red Hat or Red Hat-based system try the following:
 Mandatory arguments to long options are mandatory for short options too.
 .TP
 \fB-b\fR, \fB--browse\fR
-Browse through the install file.
+Browse through the installation files.
 .TP
 \fB-c\fR, \fB--cat\fR
 Display the contents of the command file.
@@ -104,7 +106,7 @@ Run in graphical mode (gui=graphical user interface). A desktop environment is
 required.
 .TP
 \fB-l\fR, \fB--list\fR
-Show a list of apps to install.
+Show a list of available apps to install or remove.
 .TP
 \fB-r\fR, \fB--remove\fR
 Remove the apps.
@@ -128,12 +130,12 @@ equal to 0.
 .SH FILES
 /usr/bin/kz-install.sh
 .RS
-Install file.
+Installation file.
 .RE
 .sp
 /usr/bin/kz-install.sh.gpg
 .RS
-Encrypted install file.
+GPG-encrypted installation file.
 .RE
 .sp
 /usr/share/kz/kz-public-key.gpg
@@ -143,8 +145,8 @@ OpenPGP public key for package kz. Needed to decrypt kz-install.sh.gpg.
 .sp
 /tmp/kz-install-XXXXXXXXXX-decryptd.sh.gpg
 .RS
-Decrypted file containing additional commands that are added to the command
-file, for example kz-install-SkQLswclj3-decryptd.sh.gpg.
+Decrypted installation file containing additional commands that are added to
+the command file, for example kz-install-SkQLswclj3-decryptd.sh.gpg.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX-commands.sh.
@@ -167,8 +169,9 @@ Instructions for adding additional users.
 .sp
 \fBkz install\fR
 .RS
-Install everything in the default install file.
-Starter \fBApps install\fR is also available for this in a desktop environment.
+Install everything in the default installation file.
+Starter \fBKZ Install apps\fR is also available for this in a desktop \
+environment.
 .RE
 .sp
 \fBkz install google-chrome\fR

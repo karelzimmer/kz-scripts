@@ -40,10 +40,10 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -b, --browse   browse install files')
+$(gettext '  -b, --browse   browse installation files')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
-                 process specified install files")
+                 process specified installation files")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -l, --list     show available apps')
@@ -80,15 +80,15 @@ declare REBOOT=false
 # This function performs the script actions, such as checking the input.
 function process() {
     local -A app_arguments=()
-    local -a install_files=()
-    local -i install_file_num=0
+    local -a installation_files=()
+    local -i installation_file_num=0
     local argument_app=false
     local command_file=''
     local err_flag=false
     local install='INSTALL'
-    local install_file_default_gpg=''
-    local install_file_default=/usr/bin/$PROGRAM_NAME.sh
-    local install_file=''
+    local installation_file_default_gpg=''
+    local installation_file_default=/usr/bin/$PROGRAM_NAME.sh
+    local installation_file=''
     local option_browse=false
     local option_cat=false
     local option_file=false
@@ -99,9 +99,9 @@ function process() {
     check_input "$@"
 
     if ! $option_file; then
-        install_files[++install_file_num]=$install_file_default
+        installation_files[++installation_file_num]=$installation_file_default
         # Install commands in gpg file.
-        install_file_default_gpg=\
+        installation_file_default_gpg=\
 $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         gpg --import                        \
             /usr/share/kz/kz-public-key.gpg \
@@ -109,13 +109,15 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         gpg --decrypt                       \
             /usr/bin/kz-install.sh.gpg      \
             2> >($PROGRAM_LOGS)             \
-            > "$install_file_default_gpg"
-        install_files[++install_file_num]=$install_file_default_gpg
+            > "$installation_file_default_gpg"
+        installation_files[++installation_file_num]=\
+$installation_file_default_gpg
     fi
 
-    for install_file in "${install_files[@]}"; do
-        if [[ ! -f $install_file ]]; then
-            text=$(eval_gettext "install file '\$install_file' not found.")
+    for installation_file in "${installation_files[@]}"; do
+        if [[ ! -f $installation_file ]]; then
+            text=$(eval_gettext "Installation file '\$installation_file' not \
+found.")
             kz.errmsg "$text"
             err_flag=true
         fi
@@ -139,7 +141,7 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
     if $argument_app; then
         process_argument_app
     else
-        process_install_file_by_hostname
+        process_installation_files_by_hostname
     fi
 
     if $option_cat; then
@@ -191,7 +193,7 @@ function process_options() {
                 ;;
             -f | --file )
                 option_file=true
-                install_files[++install_file_num]=$2
+                installation_files[++installation_file_num]=$2
                 shift 2
                 ;;
             -g | --gui )
@@ -254,14 +256,16 @@ environment available")"
 }
 
 
-# This function browses through the install files.
+# This function browses through the installation files.
 function process_option_browse() {
     OPTION_GUI=false
-    less --no-init --quit-if-one-screen < <(cat "${install_files[@]}" || true)
+    less --no-init --quit-if-one-screen < <(
+        cat "${installation_files[@]}" || true
+        )
 }
 
 
-# This function shows the available apps from the install files.
+# This function shows the available apps from the installation files.
 function process_option_list() {
     local apps=''
     local text=''
@@ -273,7 +277,7 @@ $(gettext 'NUM  APP')
 "
     apps=$(
         grep    "#[[:space:]]\+${install}[[:space:]]\+" \
-                "${install_files[@]}"                   |
+                "${installation_files[@]}"              |
         tr      --squeeze-repeats                       \
                 '[:space:]'                             |
         cut     --delimiter=' '                         \
@@ -304,7 +308,7 @@ the apps command file.")"
         fi
         text+="
 $(gettext "Use \"kz install --browse\" to view the contents of the default \
-install files.")"
+installation files.")"
     else
         text+="$(gettext '  0  No apps found.')
 
@@ -320,7 +324,7 @@ function process_argument_app() {
     local err_flag=false
 
     for app_argument in "${app_arguments[@]}"; do
-        process_install_file_by_app_argument
+        process_installation_files_by_app_argument
     done
 
     if $err_flag; then
@@ -329,9 +333,9 @@ function process_argument_app() {
 }
 
 
-# This function generates the command file from the install file and
+# This function generates the command file from the installation file and
 # filters by <app>.
-function process_install_file_by_app_argument() {
+function process_installation_files_by_app_argument() {
     local app_match=false
     local install_record=''
     local no_app_match=true
@@ -361,7 +365,7 @@ function process_install_file_by_app_argument() {
                 fi
                 ;;
         esac
-    done < <(cat "${install_files[@]}")
+    done < <(cat "${installation_files[@]}")
 
     if $no_app_match; then
         err_flag=true
@@ -374,9 +378,9 @@ function process_install_file_by_app_argument() {
 }
 
 
-# This function generates the command file from the install file and
+# This function generates the command file from the installation file and
 # filters by host.
-function process_install_file_by_hostname() {
+function process_installation_files_by_hostname() {
     local host_match=false
     local install_record=''
 
@@ -404,7 +408,7 @@ function process_install_file_by_hostname() {
                 fi
                 ;;
         esac
-    done < <(cat "${install_files[@]}")
+    done < <(cat "${installation_files[@]}")
     # Add extra empty line  to command file.
     printf '\n' >> "$command_file"
 }

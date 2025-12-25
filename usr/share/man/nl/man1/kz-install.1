@@ -19,19 +19,19 @@ kz-install - apps installeren
 \fBkz install\fR installeert apps en wijzigt systeeminstellingen.
 .sp
 In een desktopomgeving kan opdracht \fBkz install\fR worden uitgevoerd door te
-zoeken naar \fBapps\fR, klik op \fBApps installeren\fR-pictogram.
+zoeken naar \fBapps\fR, klik op \fBKZ Apps installeren\fR-pictogram.
 .sp
 Installeer eerst Linux, \fBkz install\fR is een post-installatie-script.
 .sp
 Gebruik \fBkz setup\fR (na \fBkz install\fR) voor het instellen van apps en het
 wijzigen van gebruikersinstellingen.
 .sp
-\fBkz install\fR verwerkt installatiebestanden die opdrachten bevat voor het
+\fBkz install\fR verwerkt installatiebestanden die opdrachten bevatten voor het
 installeren van apps en het wijzigen van systeeminstellingen.
 .sp
 Standaard verwerkt \fBkz install\fR de installatiebestanden
-/usr/bin/kz-install.sh en /usr/bin/kz-install.sh.gpg, dat opdrachten bevat voor
-alle hierin opgenomen computers.
+/usr/bin/kz-install.sh en /usr/bin/kz-install.sh.gpg, die opdrachten bevatten
+voor alle hierin opgenomen computers.
 .br
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in versleuteld installatiebestand /usr/bin/kz-install.sh.gpg.
@@ -41,7 +41,7 @@ De opdrachten meegeleverd bij \fBkz install\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
 Bij het verwerken van de installatiebestanden worden de opdrachten voor iedere
-en de huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
+en de huidige computer geselecteerd en gekopieerd naar een opdrachtbestand.
 .br
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 .br
@@ -50,8 +50,8 @@ Na succesvolle voltooiing wordt de computer opnieuw opgestart.
 Als er fouten zijn geconstateerd wordt een overzicht gegeven van deze
 meldingen.
 .sp
-Voor de indeling van de installatiebestanden zie \fBman kz-install.sh\fR en
-\fBman kz-install.sh.gpg\fR.
+Voor de indeling van de installatiebestanden zie \fBman kz install.sh\fR en
+\fBman kz install.sh.gpg\fR.
 .sp
 Voor instructies over het toevoegen van extra gebruikers, zie de sectie
 \fBBESTANDEN\fR hieronder.
@@ -98,7 +98,7 @@ Op een Red Hat systeem probeer het volgende:
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
 \fB-b\fR, \fB--browse\fR
-Blader door het installatiebestand.
+Blader door de installatiebestanden.
 .TP
 \fB-c\fR, \fB--cat\fR
 Toon de inhoud van het opdrachtbestand.
@@ -111,7 +111,7 @@ Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
 .TP
 \fB-l\fR, \fB--list\fR
-Toon een lijst van te installeren apps.
+Toon een lijst van beschikbare apps om te installeren of verwijderen.
 .TP
 \fB-r\fR, \fB--remove\fR
 Verwijder de apps.
@@ -140,7 +140,7 @@ Installatiebestand.
 .sp
 /usr/bin/kz-install.sh.gpg
 .RS
-Versleuteld installatiebestand.
+GPG-versleuteld installatiebestand.
 .RE
 .sp
 /usr/share/kz/kz-public-key.gpg
@@ -151,8 +151,8 @@ ontsleutelen.
 .sp
 /tmp/kz-install-XXXXXXXXXX-decryptd.sh.gpg
 .RS
-Onsleuteld bestand met aanvullende opdrachten die worden toegevoegd aan het
-opdrachtbestand, bijvoorbeeld kz-install-SkQLswclj3-decryptd.sh.gpg.
+Ontsleuteld installatiebestand met aanvullende opdrachten die worden toegevoegd
+aan het opdrachtbestand, bijvoorbeeld kz-install-SkQLswclj3-decryptd.sh.gpg.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX-commands.sh.
@@ -164,7 +164,7 @@ Opdrachtbestand, bijvoorbeeld kz-install-SYpGEKVWZI-commands.
 .RS
 Foutlogbestand, e.g. kz-install-agr1ZErXoI-error.log.
 .RE
-sp
+.sp
 ~/Instellingen/users.txt
 .RS
 Instructies voor het toevoegen van extra gebruikers.
@@ -175,8 +175,9 @@ Instructies voor het toevoegen van extra gebruikers.
 .sp
 \fBkz install\fR
 .RS
-Installeer alles wat in het standaard installatiebestand staat. Hiervoor is in
-een desktopomgeving ook starter \fBApps installeren\fR beschikbaar.
+Installeer alles wat in het standaard installatiebestand staat.
+Hiervoor is in een desktopomgeving ook starter \fBKZ Apps installeren\fR \
+beschikbaar.
 .RE
 .sp
 \fBkz install google-chrome\fR
@@ -186,7 +187,7 @@ Installeer Google Chrome.
 .sp
 \fBkz install --remove google-chrome\fR
 .RS
-Verwijder Google Chrome..RE
+Verwijder Google Chrome.
 .RE
 .sp
 \fBkz install --cat google-chrome\fR

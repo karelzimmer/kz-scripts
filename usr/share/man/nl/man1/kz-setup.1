@@ -19,27 +19,28 @@ kz-setup - apps instellen
 \fBkz setup\fR stelt apps in en wijzigt gebruikersinstellingen.
 .sp
 In een desktopomgeving kan opdracht \fBkz setup\fR worden uitgevoerd door te
-zoeken naar \fBapps\fR, klik op \fBApps instellen\fR-pictogram.
+zoeken naar \fBapps\fR, klik op \fBKZ Apps instellen\fR-pictogram.
 .sp
 Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het wijzigen
 van systeeminstellingen, \fBkz setup\fR is een post-installatie-instelscript.
 .sp
-\fBkz setup\fR verwerkt instelbestanden die opdrachten bevat voor het
+\fBkz setup\fR verwerkt instellingenbestanden die opdrachten bevatten voor het
 instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
-Standaard verwerkt \fBkz setup\fR de instelbestanden /usr/bin/kz-setup.sh en
-/usr/bin/kz-setup.sh.gpg dat opdrachten bevat voor alle hierin opgenomen
+Standaard verwerkt \fBkz setup\fR de instellingenbestanden /usr/bin/kz-setup.sh
+en /usr/bin/kz-setup.sh.gpg die opdrachten bevatten voor alle hierin opgenomen
 computers.
 .br
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
-in versleuteld instelbestand /usr/bin/kz-setup.sh.gpg.
+in versleuteld instellingenbestand /usr/bin/kz-setup.sh.gpg.
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt.
 .sp
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
-Bij het verwerken van de instelbestanden worden de opdrachten voor voor iedere
-en de huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
+Bij het verwerken van de instellingenbestanden worden de opdrachten voor voor
+iedere en de huidige computer geselecteerd en gekopieerd naar een
+opdrachtbestand.
 .br
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 .sp
@@ -48,27 +49,28 @@ Na succesvolle voltooiing wordt de gebruiker uitgelogd.
 Als er fouten zijn geconstateerd wordt een overzicht gegeven van deze
 meldingen.
 .sp
-Voor de indeling van de instelbestanden zie \fBman kz-setup.sh\fR en
-\fBman kz-setup.sh.gpg\fR.
+Voor de indeling van de instellingenbestanden zie \fBman kz setup.sh\fR en
+\fBman kz setup.sh.gpg\fR.
 .sp
 Naar keuze kunnen te verwerken apps opgegeven worden met argument \fI<app>\fR.
 .br
-Per opgegeven app worden de opdrachten geselecteerd uit de instelbestanden en
-gekopieerd naar het opdrachtbestand.
+Per opgegeven app worden de opdrachten geselecteerd uit de
+instellingenbestanden en gekopieerd naar het opdrachtbestand.
 .sp
 Met optie \fB-b\fR, \fB--browse\fR kan gebladerd worden door de
-instelbestanden.
+instellingenbestanden.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een andere instelbestand
-opgegeven worden. Deze optie kan herhaaldelijk gebruikt worden.
+Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een andere
+instellingenbestand opgegeven worden. Deze optie kan herhaaldelijk gebruikt
+worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz setup\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
 .sp
 Optie \fB-l\fR, \fB--list\fR geeft een lijst alle van apps die beschikbaar zijn
-in de instelbestanden.
+in de instellingenbestanden.
 .sp
 Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
 
@@ -76,7 +78,7 @@ Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
 \fB-b\fR, \fB--browse\fR
-Blader door het instelbestand.
+Blader door het instellingenbestand.
 .TP
 \fB-c\fR, \fB--cat\fR
 Toon de inhoud van het opdrachtbestand.
@@ -113,12 +115,12 @@ afsluitwaarde ongelijk 0.
 .SH FILES
 /usr/bin/kz-setup.sh
 .RS
-Instelbestand.
+Instellingenbestand.
 .RE
 .sp
 /usr/bin/kz-setup.sh.gpg
 .RS
-Versleuteld instelbestand.
+GPG-versleuteld instellingenbestand.
 .RE
 .sp
 /usr/share/kz/kz-public-key.gpg
@@ -129,8 +131,8 @@ ontsleutelen.
 .sp
 /tmp/kz-setup-XXXXXXXXXX-decryptd.sh.gpg
 .RS
-Onsleuteld instelbestand met aanvullende opdrachten die worden toegevoegd aan
-het opdrachtbestand, bijvoorbeeld kz-setup-SkQLswclj3-decryptd.sh.gpg.
+Ontsleuteld instellingenbestand met aanvullende opdrachten die worden toegevoegd
+aan het opdrachtbestand, bijvoorbeeld kz-setup-SkQLswclj3-decryptd.sh.gpg.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX-commands.sh.
@@ -163,8 +165,9 @@ Instructies voor het instellen van Xfce werkbalk en Whiskermenu.
 .sp
 \fBkz setup\fR
 .RS
-Stel alles in wat in het standaard instelbestand staat. Hiervoor is in een
-desktopomgeving ook starter \fBApps instellen\fR beschikbaar.
+Stel alles in wat in het standaard instellingenbestand staat.
+Hiervoor is in een desktopomgeving ook starter \fBKZ Apps instellen\fR \
+beschikbaar.
 .RE
 .sp
 \fBkz setup google-chrome\fR
