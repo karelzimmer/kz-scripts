@@ -426,7 +426,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:501 kz-check:575 kz-deploy:264 kz-dev:277 kz-update:299
+#: kz-build:501 kz-check:571 kz-deploy:264 kz-dev:277 kz-update:299
 msgid "Complete!"
 msgstr ""
 
@@ -500,20 +500,20 @@ msgid ""
 "found."
 msgstr ""
 
-#: kz-check:486
+#: kz-check:482
 #, sh-format
-msgid "A line is longer than $max_line_length ($max_line_length_found)."
+msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:534
+#: kz-check:530
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:556
+#: kz-check:552
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:497 kz-check:571 kz-deploy:260
+#: kz-build:497 kz-check:567 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -907,8 +907,9 @@ msgid ""
 "command file."
 msgstr ""
 
+#: kz-install:310
 msgid ""
-"Use \"kz install --browse\" to view the contents of the default install "
+"Use \"kz install --browse\" to view the contents of the default installation "
 "files."
 msgstr ""
 
@@ -1427,10 +1428,4 @@ msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
-msgstr ""
-
-#: kz-install:310
-msgid ""
-"Use \"kz install --browse\" to view the contents of the default installation "
-"files."
 msgstr ""

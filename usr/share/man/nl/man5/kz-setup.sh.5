@@ -209,19 +209,7 @@ informatie zoals een gebruikersnaam.
 # -----------------------------------------------------------------------------
 if grep --quiet debian  /etc/os-release; then kz-desktop --addaft=spotify; fi
 if grep --quiet rhel    /etc/os-release; then kz-desktop --addaft=kz-spotify; \
-.sp
-.RS
-Met "if grep --quiet debian  /etc/os-release" wordt gecontroleerd of het een D\
-ebian of Debian-gebaseerd systeem is, zoals Ubuntu.
-.br
-Grep op Debian voor alleen Debian en ook voor ubuntu (Ubuntu of Ubuntu-gebase\
-erd) en Ubuntu (alleen Ubuntu).
-.sp
-Met "if grep --quiet rhel /etc/os-release" wordt gecontroleerd of het een R\
-ed Hat of Red Hat-gebaseerd systeem is, zoals Rocky Linux.
-De "if [[ -n ${DISPLAY-} ]]" is om te controleren of er een grafische \
-omgeving is.
-.RE
+fi
 .EE
 
 .SH ZIE OOK

@@ -468,8 +468,6 @@ function check_mypy() {
 
 # This function checks on record length.
 function check_record_length() {
-    local -i max_line_length_found=0
-    local -i max_line_length=79
     local python_script='#!''/usr/bin/python3'
     local text=''
 
@@ -478,14 +476,12 @@ function check_record_length() {
         return 0
     fi
 
-    max_line_length_found=$(wc --max-line-length < "$script")
-
-    if [[ $max_line_length_found -gt $max_line_length ]]; then
+    if grep '.\{80\}' "$script" > /dev/null; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED    $(eval_gettext "A line is longer than \$max_line_length \
-(\$max_line_length_found).")$NORMAL"
+$RED    $(eval_gettext "One or more lines are too long (>79):") $NORMAL"
         kz.infomsg "$text"
+        grep '.\{80\}' "$script" || true
         ERR_FLAG=true
     fi
 }

@@ -475,7 +475,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:501 kz-check:575 kz-deploy:264 kz-dev:277 kz-update:299
+#: kz-build:501 kz-check:571 kz-deploy:264 kz-dev:277 kz-update:299
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -554,20 +554,20 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:486
+#: kz-check:482
 #, sh-format
-msgid "A line is longer than $max_line_length ($max_line_length_found)."
-msgstr "Een regel is langer dan $max_line_length ($max_line_length_found)."
+msgid "One or more lines are too long (>79):"
+msgstr "Een of meer regels zijn te lang (>79):"
 
-#: kz-check:534
+#: kz-check:530
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:556
+#: kz-check:552
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:497 kz-check:571 kz-deploy:260
+#: kz-build:497 kz-check:567 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -999,8 +999,9 @@ msgstr ""
 "Gebruik \"kz install --cat --remove <app>...\" om de inhoud van het "
 "opdrachtbestand voor apps te bekijken."
 
+#: kz-install:310
 msgid ""
-"Use \"kz install --browse\" to view the contents of the default install "
+"Use \"kz install --browse\" to view the contents of the default installation "
 "files."
 msgstr ""
 "Gebruik \"kz install --browse\" om de inhoud van de standaard "
@@ -1573,15 +1574,3 @@ msgstr "Wrapper-script voor kz-wifi"
 #: nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
-
-#: kz-install:310
-#, fuzzy
-#| msgid ""
-#| "Use \"kz install --browse\" to view the contents of the default install "
-#| "files."
-msgid ""
-"Use \"kz install --browse\" to view the contents of the default installation "
-"files."
-msgstr ""
-"Gebruik \"kz install --browse\" om de inhoud van de standaard "
-"installatiebestanden te bekijken."
