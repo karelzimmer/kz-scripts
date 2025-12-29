@@ -1224,22 +1224,6 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
 
-# INSTALL xfce4-goodies *
-# -----------------------------------------------------------------------------
-# Enhancements for the Xfce Desktop Environment, like Whisker Menu.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
-if (grep rhel   /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
-REBOOT=true
-
-# REMOVE xfce4-goodies *
-# -----------------------------------------------------------------------------
-# Enhancements for the Xfce Desktop Environment, like Whisker Menu.
-# -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
-if (grep rhel   /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf     remove --assumeyes  xfce4-goodies; fi
-REBOOT=true
-
 # INSTALL xfce4-settings *
 # -----------------------------------------------------------------------------
 # Enable Xfce user greeter.

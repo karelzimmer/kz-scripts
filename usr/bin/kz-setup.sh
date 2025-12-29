@@ -429,20 +429,6 @@ kz-desktop --addaft=kz-whatsapp
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-whatsapp
 
-# SETUP xfce-settings *
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set true; fi
-
-# RESET xfce-settings *
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set false; fi
-
 # SETUP youtube-dl #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
