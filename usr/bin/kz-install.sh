@@ -1224,14 +1224,14 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
 
-# INSTALL xfce4-settings *
+# INSTALL xfce-settings *
 # -----------------------------------------------------------------------------
 # Enable Xfce user greeter.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then sudo sed --in-place 's/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
-# REMOVE xfce4-settings *
+# REMOVE xfce-settings *
 # -----------------------------------------------------------------------------
 # Disable Xfce user greeter.
 # -----------------------------------------------------------------------------
