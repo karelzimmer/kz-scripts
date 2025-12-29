@@ -199,14 +199,14 @@ if grep --quiet rhel   /etc/os-release; then sudo calibre-uninstall; fi
 # -----------------------------------------------------------------------------
 # Enable Cinnamon user greeter.
 # -----------------------------------------------------------------------------
-if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place 's/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+if type cinnamon-session &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # REMOVE cinnamon-settings *
 # -----------------------------------------------------------------------------
 # Disable Cinnamon user greeter.
 # -----------------------------------------------------------------------------
-if (type cinnamon-session && grep debian /etc/os-release) &> /dev/null && [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place 's/greeter-hide-users=false/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
+if type cinnamon-session &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=false/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # INSTALL cockpit pc06
@@ -259,20 +259,20 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cu
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if (type gnome-session && grep debian /etc/os-release && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if (type gnome-session && grep debian /etc/os-release &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview )     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
+if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview )     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
 REBOOT=true
 
 # REMOVE dash-to-dock *
 # -----------------------------------------------------------------------------
 # Desktop dock like Ubuntu's dash.
 # -----------------------------------------------------------------------------
-if (type gnome-session && grep debian /etc/os-release && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
-if (type gnome-session && grep debian /etc/os-release &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if (type gnome-session && grep rhel   /etc/os-release &&   dnf list  gnome-shell-extension-no-overview)      &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-no-overview; fi
+if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview)      &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-no-overview; fi
 REBOOT=true
 
 # INSTALL dos2unix pc06 pc07
@@ -387,13 +387,13 @@ sudo systemctl start  fwupd.service
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 
 # REMOVE gdebi *
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 
 # INSTALL gettext pc06 pc07
 # -----------------------------------------------------------------------------
@@ -443,15 +443,15 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gi
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if (type gnome-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
 # REMOVE gnome-tweaks *
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if (type gnome-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if (type gnome-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
 # INSTALL google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -710,6 +710,20 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  l
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lshw; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lshw; fi
+
+# INSTALL lxde-settings *
+# -----------------------------------------------------------------------------
+# Enable LXDE user greeter.
+# -----------------------------------------------------------------------------
+if type lxsession &> /dev/null; then sudo sed --in-place 's/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
+
+# REMOVE lxde-settings *
+# -----------------------------------------------------------------------------
+# Disable LXDE user greeter.
+# -----------------------------------------------------------------------------
+if type lxsession &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
 
 # INSTALL microsoft-edge pc06 pc06
 # -----------------------------------------------------------------------------
@@ -1210,20 +1224,34 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
 
-# INSTALL xfce4-goodies * #gpg
+# INSTALL xfce4-goodies *
 # -----------------------------------------------------------------------------
 # Enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
-if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
-if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
+if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get install --assume-yes xfce4-goodies; fi
+if (grep rhel   /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf     install --assumeyes  xfce4-goodies; fi
 REBOOT=true
 
-# REMOVE xfce4-goodies * #gpg
+# REMOVE xfce4-goodies *
 # -----------------------------------------------------------------------------
 # Enhancements for the Xfce Desktop Environment.
 # -----------------------------------------------------------------------------
-if (type xfce4-session && grep debian /etc/os-release) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
-if (type xfce4-session && grep rhel   /etc/os-release) &> /dev/null; then sudo dnf     remove --assumeyes  xfce4-goodies; fi
+if (grep debian /etc/os-release && type xfce4-session) &> /dev/null; then sudo apt-get remove --assume-yes xfce4-goodies; fi
+if (grep rhel   /etc/os-release && type xfce4-session) &> /dev/null; then sudo dnf     remove --assumeyes  xfce4-goodies; fi
+REBOOT=true
+
+# INSTALL xfce4-settings *
+# -----------------------------------------------------------------------------
+# Enable Xfce user greeter.
+# -----------------------------------------------------------------------------
+if type xfce4-session &> /dev/null; then sudo sed --in-place 's/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
+
+# REMOVE xfce4-settings *
+# -----------------------------------------------------------------------------
+# Disable Xfce user greeter.
+# -----------------------------------------------------------------------------
+if type xfce4-session &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # INSTALL youtube-dl #none #gpg
