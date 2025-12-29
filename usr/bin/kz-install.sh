@@ -195,14 +195,14 @@ if grep --quiet rhel   /etc/os-release; then sudo --validate && wget --no-verbos
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes calibre; fi
 if grep --quiet rhel   /etc/os-release; then sudo calibre-uninstall; fi
 
-# INSTALL cinnamon-settings *
+# INSTALL cinnamon-settings #none
 # -----------------------------------------------------------------------------
 # Enable Cinnamon user greeter.
 # -----------------------------------------------------------------------------
 if type cinnamon-session &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
-# REMOVE cinnamon-settings *
+# REMOVE cinnamon-settings #none
 # -----------------------------------------------------------------------------
 # Disable Cinnamon user greeter.
 # -----------------------------------------------------------------------------
@@ -711,14 +711,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  l
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lshw; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lshw; fi
 
-# INSTALL lxde-settings *
+# INSTALL lxde-settings #none
 # -----------------------------------------------------------------------------
 # Enable LXDE user greeter.
 # -----------------------------------------------------------------------------
 if type lxsession &> /dev/null; then sudo sed --in-place 's/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
-# REMOVE lxde-settings *
+# REMOVE lxde-settings #none
 # -----------------------------------------------------------------------------
 # Disable LXDE user greeter.
 # -----------------------------------------------------------------------------
@@ -1224,14 +1224,14 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
 
-# INSTALL xfce-settings *
+# INSTALL xfce-settings #none
 # -----------------------------------------------------------------------------
 # Enable Xfce user greeter.
 # -----------------------------------------------------------------------------
 if type xfce4-session &> /dev/null; then sudo sed --in-place 's/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
-# REMOVE xfce-settings *
+# REMOVE xfce-settings #none
 # -----------------------------------------------------------------------------
 # Disable Xfce user greeter.
 # -----------------------------------------------------------------------------
