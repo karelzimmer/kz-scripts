@@ -147,7 +147,6 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         exit 0
     fi
 
-    create_settings
     setup_apps
 }
 
@@ -310,48 +309,6 @@ settings files.")"
 $USAGE"
     fi
     kz.infomsg "$text"
-}
-
-# This function creates a README and saves instructions for setting up xfce.
-function create_settings() {
-    local output_file=''
-    local text=''
-    local settings_dir=''
-
-    kz.logmsg 'Setup settings...'
-
-    settings_dir=$HOME/$(gettext 'Settings')
-    if ! [[ -d $settings_dir ]]; then
-        mkdir --verbose "$settings_dir" |& $PROGRAM_LOGS
-    fi
-
-    kz.logmsg 'Create settings README...'
-
-    output_file=$settings_dir/$(gettext 'README')
-
-    text="$(gettext "This folder contains files created by kz-backup and \
-kz-setup.
-These files are used by kz-restore and others.
-
-Further reading:")
-    man kz backup
-    man kz restore
-    man kz setup"
-    printf '%s\n' "$text" > "$output_file"
-
-    if type xfce4-session &> /dev/null; then
-        output_file=$settings_dir/xfce.txt
-        text="$(gettext "To setup the Xfce Panel and Whisker Menu:
-
-1. Remove Panel 2.
-2. Remove Applications Menu from Panel.
-3. Add Whisker Menu to Panel.
-4. Move Whisker Menu to far left.
-5. Move Panel to bottom.
-6. Position categories on left (Whisker Menu).
-7. Position search entry on bottom (Whisker Menu).")"
-        printf '%s\n' "$text" > "$output_file"
-    fi
 }
 
 # This function processes argument <app>.
