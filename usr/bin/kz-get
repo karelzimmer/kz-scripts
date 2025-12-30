@@ -165,6 +165,7 @@ function install_deb_package() {
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
+            --assume-yes                    \
             "$reinstall"                    \
             "$kz_deb_local_file"
 }
