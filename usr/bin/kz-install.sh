@@ -383,13 +383,13 @@ sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start  fwupd.service
 
-# INSTALL gdebi #none
+# INSTALL gdebi *
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 
-# REMOVE gdebi #none
+# REMOVE gdebi *
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
