@@ -1100,7 +1100,7 @@ msgstr "Gebruiker inrichten"
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
-#: kz-menu:57 kz-menu:210
+#: kz-menu:57 kz-menu:204
 msgid "Exit"
 msgstr "Afsluiten"
 
@@ -1144,45 +1144,45 @@ msgstr "Apps instellen"
 msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
-#: kz-menu:87 kz-menu:386
+#: kz-menu:87 kz-menu:380
 msgid "Back"
 msgstr "Terug"
 
-#: kz-menu:208 kz-menu:384
+#: kz-menu:202 kz-menu:378
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
-#: kz-menu:209 kz-menu:385
+#: kz-menu:203 kz-menu:379
 msgid "Continue"
 msgstr "Verder"
 
-#: kz-menu:211 kz-menu:387
+#: kz-menu:205 kz-menu:381
 msgid "CHOICE"
 msgstr "KEUZE"
 
-#: kz-menu:212 kz-menu:235 kz-menu:388 kz-menu:411
+#: kz-menu:206 kz-menu:229 kz-menu:382 kz-menu:405
 msgid "NUM"
 msgstr "NUM"
 
-#: kz-menu:213 kz-menu:236 kz-menu:389 kz-menu:412
+#: kz-menu:207 kz-menu:230 kz-menu:383 kz-menu:406
 msgid "ACTION"
 msgstr "ACTIE"
 
-#: kz-menu:214 kz-menu:237 kz-menu:390 kz-menu:413
+#: kz-menu:208 kz-menu:231 kz-menu:384 kz-menu:407
 msgid "DESCRIPTION"
 msgstr "BESCHRIJVING"
 
-#: kz-menu:246
+#: kz-menu:240
 #, sh-format
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr "Voer uit nummer [1-$MENU1_LINES]: "
 
-#: kz-menu:290 kz-menu:463
+#: kz-menu:284 kz-menu:457
 #, sh-format
 msgid "Cannot handle this choice ($REPLY)."
 msgstr "Kan deze keuze niet afhandelen ($REPLY)."
 
-#: kz-menu:316
+#: kz-menu:310
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1204,28 +1204,28 @@ msgstr ""
 "3. Start de computer op vanaf deze USB-stick.\n"
 "4. Installeer Linux."
 
-#: kz-menu:422
+#: kz-menu:416
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: kz-menu:503
+#: kz-menu:497
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
-#: kz-menu:518
+#: kz-menu:512
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:530
+#: kz-menu:524
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:531
+#: kz-menu:525
 msgid "No"
 msgstr "Nee"
 
-#: kz-menu:539
+#: kz-menu:533
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr "$prompt [J/n]: "

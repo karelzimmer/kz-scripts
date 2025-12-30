@@ -191,19 +191,13 @@ $USAGE"
 # This function shows and processes menu 1 in GUI mode.
 function process_menu1_gui() {
     local title=$MENU1_TITLE
-    local -i height=260
-
-    # From zenity 3, the height of the list must be set to 420.
-    if [[ $(zenity --version | cut --delimiter='.' --fields=1) -gt 3 ]]; then
-        height=450
-    fi
 
     while true; do
         REPLY=$(
             zenity  --list                                              \
                     --radiolist                                         \
                     --width         520                                 \
-                    --height        "$height"                           \
+                    --height        380                                 \
                     --title         "$title"                            \
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \
@@ -379,7 +373,7 @@ function process_menu2_gui() {
             zenity  --list                                              \
                     --radiolist                                         \
                     --width         520                                 \
-                    --height        "$height"                           \
+                    --height        380                                 \
                     --title         "$title"                            \
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \
