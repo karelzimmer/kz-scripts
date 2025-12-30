@@ -23,13 +23,13 @@ kz-desktop --addaft=calibre-gui
 # -----------------------------------------------------------------------------
 kz-desktop --delete=calibre-gui
 
-# SETUP cinnamon-settings *
+# SETUP cinnamon-settings #none
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
 
-# RESET cinnamon-settings *
+# RESET cinnamon-settings #none
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
@@ -185,14 +185,14 @@ kz-desktop --addaft=fr.handbrake.ghb
 # -----------------------------------------------------------------------------
 kz-desktop --delete=fr.handbrake.ghb
 
-# SETUP kde-settings *
+# SETUP kde-settings #none
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
 if type ksmserver &> /dev/null && ! grep --quiet '\[KDE\]' ~/.config/kdeglobals; then echo -e '\n[KDE]' >> ~/.config/kdeglobals; fi
 if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kdeglobals; then sed --in-place '/[KDE]/aSingleClick=true' ~/.config/kdeglobals; fi
 
-# RESET kde-settings *
+# RESET kde-settings #none
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
