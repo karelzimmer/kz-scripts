@@ -131,6 +131,20 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounte
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 if gsettings set org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed "s/('ibus', 'mozc-jp'), //")"; fi
+# -----------------------------------------------------------------------------
+# Terminal emulator.
+# -----------------------------------------------------------------------------
+# Enable aliases.
+# -----------------------------------------------------------------------------
+sed --in-place 's/#alias/alias/g'    ~/.bashrc
+sed --in-place 's/# alias/alias/g'   ~/.bashrc
+sed --in-place 's/# export/export/g' ~/.bashrc
+sed --in-place 's/# eval/eval/g'     ~/.bashrc
+# -----------------------------------------------------------------------------
+# Enable search forward in history (with Ctrl-S).
+# -----------------------------------------------------------------------------
+sed --in-place '/^stty -ixon/d' ~/.bashrc
+echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
 # RESET gnome-settings *
 # -----------------------------------------------------------------------------
@@ -160,6 +174,13 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounte
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 if gsettings set org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings reset org.gnome.desktop.input-sources sources; fi
+# -----------------------------------------------------------------------------
+# Terminal emulator.
+# -----------------------------------------------------------------------------
+sed --in-place 's/alias/#alias/g'   ~/.bashrc
+sed --in-place 's/export/#export/g' ~/.bashrc
+sed --in-place 's/eval/#eval/g'     ~/.bashrc
+sed --in-place '/^stty -ixon/d'     ~/.bashrc
 
 # SETUP google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -224,7 +245,7 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
-# SETUP lxqt-settings *
+# SETUP lxqt-settings #none
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
@@ -234,7 +255,7 @@ if type lxqt-session &> /dev/null; then sed --in-place '/__userfile__=true/asing
 if type lxqt-session &> /dev/null; then sed --in-place 's/single_click_activate=.*$/single_click_activate=true/g' ~/.config/lxqt/lxqt.conf; fi
 if type lxqt-session &> /dev/null; then sed --in-place 's/categoriesAtRight=.*$/categoriesAtRight=false/g'        ~/.config/lxqt/panel.conf; fi
 
-# RESET lxqt-settings *
+# RESET lxqt-settings #none
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
@@ -324,31 +345,6 @@ if grep --quiet rhel   /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then kz-desktop --delete=spotify; fi
 if grep --quiet rhel   /etc/os-release; then kz-desktop --delete=kz-spotify; fi
-
-# SETUP terminal *
-# -----------------------------------------------------------------------------
-# Terminal emulator.
-# -----------------------------------------------------------------------------
-# Enable aliases.
-# -----------------------------------------------------------------------------
-sed --in-place 's/#alias/alias/g'    ~/.bashrc
-sed --in-place 's/# alias/alias/g'   ~/.bashrc
-sed --in-place 's/# export/export/g' ~/.bashrc
-sed --in-place 's/# eval/eval/g'     ~/.bashrc
-# -----------------------------------------------------------------------------
-# Enable search forward in history (with Ctrl-S).
-# -----------------------------------------------------------------------------
-sed --in-place '/^stty -ixon/d' ~/.bashrc
-echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
-
-# RESET terminal *
-# -----------------------------------------------------------------------------
-# Terminal emulator.
-# -----------------------------------------------------------------------------
-sed --in-place 's/alias/#alias/g'   ~/.bashrc
-sed --in-place 's/export/#export/g' ~/.bashrc
-sed --in-place 's/eval/#eval/g'     ~/.bashrc
-sed --in-place '/^stty -ixon/d'     ~/.bashrc
 
 # SETUP terminal pc06 pc07
 # -----------------------------------------------------------------------------

@@ -383,13 +383,13 @@ sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start  fwupd.service
 
-# INSTALL gdebi *
+# INSTALL gdebi #none
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 
-# REMOVE gdebi *
+# REMOVE gdebi #none
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
@@ -439,14 +439,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  g
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  git; fi
 
-# INSTALL gnome-tweaks *
+# INSTALL gnome-tweaks #none
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
-# REMOVE gnome-tweaks *
+# REMOVE gnome-tweaks #none
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
@@ -745,13 +745,13 @@ if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /etc/apt
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  flathub com.microsoft.Edge; fi
 
-# INSTALL mint-codecs *
+# INSTALL mint-codecs #none
 # -----------------------------------------------------------------------------
 # Enhancements for the Linux Mint Cinnamon Desktop Environment.
 # -----------------------------------------------------------------------------
 if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
 
-# REMOVE mint-codecs *
+# REMOVE mint-codecs #none
 # -----------------------------------------------------------------------------
 # Enhancements for the Linux Mint Cinnamon Desktop Environment.
 # -----------------------------------------------------------------------------
@@ -985,7 +985,7 @@ sudo sed --in-place 's/PermitRootLogin no/PermitRootLogin prohibit-password/' /e
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ssh; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  openssh; fi
 
-# INSTALL sushi *
+# INSTALL sushi #none
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
@@ -996,7 +996,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # Select a file, press the space bar, and a preview will appear.
 # -----------------------------------------------------------------------------
 
-# REMOVE sushi *
+# REMOVE sushi #none
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
