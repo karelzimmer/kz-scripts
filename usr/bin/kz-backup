@@ -278,8 +278,7 @@ function backup_setting_readme() {
 
     output_file=$settings_dir/$(gettext 'README')
 
-    text="$(gettext "This folder contains files created by kz-backup and \
-kz-setup.
+    text="$(gettext "This folder contains files created by kz-backup.
 These files are used by kz-restore and others.
 
 Further reading:")
