@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Backup home folder
+# SPDX-FileComment: Backup Home folder
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -20,7 +20,7 @@ source kz_common.sh as kz
 # #############################################################################
 
 readonly PROGRAM_NAME='kz-backup'
-PROGRAM_DESC=$(gettext 'Backup home folder')
+PROGRAM_DESC=$(gettext 'Backup Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
@@ -512,7 +512,7 @@ EOF
     text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
-    title="$(gettext 'Backup home folder') $(gettext 'progress')"
+    title="$(gettext 'Backup Home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing backup (this may take a while)')
     kz.debugmsg "$title"...
 

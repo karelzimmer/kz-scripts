@@ -123,7 +123,7 @@ msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
 #: kz-backup:23 kz-backup:515 kz-menu:74 kz-backup.desktop:10
-msgid "Backup home folder"
+msgid "Backup Home folder"
 msgstr ""
 
 #: kz-backup:27
@@ -1035,7 +1035,7 @@ msgid "Show WiFi information"
 msgstr ""
 
 #: kz-menu:77 kz-restore:23 kz-restore:257 kz-restore.desktop:10
-msgid "Restore home folder"
+msgid "Restore Home folder"
 msgstr ""
 
 #: kz-menu:78 kz-setup:23 kz-setup:440 kz-setup.desktop:10

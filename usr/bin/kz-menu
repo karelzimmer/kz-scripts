@@ -71,10 +71,10 @@ MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
 readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
 readonly -a  MENU2_ACTIONS=(
-            [1]="$(gettext 'Backup home folder')"
+            [1]="$(gettext 'Backup Home folder')"
                 "$(gettext 'Show WiFi information')"
                 "$(gettext 'Install apps')"
-                "$(gettext 'Restore home folder')"
+                "$(gettext 'Restore Home folder')"
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Go to installation menu')"
             )

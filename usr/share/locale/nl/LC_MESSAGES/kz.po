@@ -126,8 +126,8 @@ msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
 
 #: kz-backup:23 kz-backup:515 kz-menu:74 kz-backup.desktop:10
-msgid "Backup home folder"
-msgstr "Back-up persoonlijke map"
+msgid "Backup Home folder"
+msgstr "Back-up Persoonlijke map"
 
 #: kz-backup:27
 msgid ""
@@ -1133,8 +1133,8 @@ msgid "Show WiFi information"
 msgstr "Wifi-informatie weergeven"
 
 #: kz-menu:77 kz-restore:23 kz-restore:257 kz-restore.desktop:10
-msgid "Restore home folder"
-msgstr "Herstel persoonlijke map"
+msgid "Restore Home folder"
+msgstr "Herstel Persoonlijke map"
 
 #: kz-menu:78 kz-setup:23 kz-setup:440 kz-setup.desktop:10
 msgid "Set up apps"
