@@ -11,6 +11,38 @@
 # format of this file.
 # =============================================================================
 
+# INSTALL apt-sources *
+# -----------------------------------------------------------------------------
+# Add Debian components to package sources and update package lists.
+# -----------------------------------------------------------------------------
+if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+
+# REMOVE apt-sources *
+# -----------------------------------------------------------------------------
+# Remove Debian components from package sources and update package lists.
+# -----------------------------------------------------------------------------
+if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+
+# INSTALL updates *
+# -----------------------------------------------------------------------------
+# Update package lists and upgrade all packages.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get upgrade --assume-yes; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     upgrade --assumeyes --refresh; fi
+
+# REMOVE updates *
+# -----------------------------------------------------------------------------
+# Update package lists and upgrade all packages.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
+
 # INSTALL aer-settings #none
 # -----------------------------------------------------------------------------
 # Disable Advanced Error Reporting.
@@ -89,24 +121,6 @@ if grep --quiet Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/cra
 # -----------------------------------------------------------------------------
 if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
 if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
-
-# INSTALL apt-sources *
-# -----------------------------------------------------------------------------
-# Add Debian components to package sources & update package lists for all.
-# -----------------------------------------------------------------------------
-if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
-
-# REMOVE apt-sources *
-# -----------------------------------------------------------------------------
-# Remove Debian components package sources & update package lists for all.
-# -----------------------------------------------------------------------------
-if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
 
 # INSTALL backintime #none
 # -----------------------------------------------------------------------------
