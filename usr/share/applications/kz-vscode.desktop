@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name=VS Code web app
+Name=Visual Studio Code web app
 Comment=Visual Studio Code from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox

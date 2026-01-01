@@ -1542,8 +1542,8 @@ msgid "Manage computers from a web browser"
 msgstr "Beheer computers vanuit een webbrowser"
 
 #: kz-vscode.desktop:10
-msgid "VS Code web app"
-msgstr "VS Code web-app"
+msgid "Visual Studio Code web app"
+msgstr "Visual Studio Code web-app"
 
 #: kz-vscode.desktop:11
 msgid "Visual Studio Code from a web browser"
