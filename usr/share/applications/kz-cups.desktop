@@ -1,0 +1,17 @@
+# #############################################################################
+# SPDX-FileComment: Desktop configuration file for CUPS web app
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# #############################################################################
+
+[Desktop Entry]
+Type=Application
+Name= CUPS web app
+Comment=The standards-based, open source printing system
+Categories=Utility;X-GNOME-Utilities;
+TryExec=firefox
+Exec=firefox http://localhost:631
+Icon=kz-cups
+X-GNOME-Gettext-Domain=kz
+X-Ubuntu-Gettext-Domain=kz

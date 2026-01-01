@@ -1469,6 +1469,14 @@ msgstr "Cockpit"
 msgid "Manage Linux servers from a web browser"
 msgstr "Beheer Linux-servers vanuit een webbrowser"
 
+#: kz-cups.desktop:10
+msgid "CUPS web app"
+msgstr "CUPS web-app"
+
+#: kz-cups.desktop:11
+msgid "The standards-based, open source printing system"
+msgstr "Het op standaarden gebaseerde, open-source printsysteem"
+
 #: kz-install.desktop:11
 msgid "Install apps and changes system settings"
 msgstr "Installeer apps en wijzig systeeminstellingen"
@@ -1500,6 +1508,14 @@ msgstr "Teams web-app"
 #: kz-teams.desktop:11
 msgid "Collaborate with others from a web browser"
 msgstr "Werk samen met anderen vanuit een webbrowser"
+
+#: kz-vscode.desktop:10
+msgid "VS Code web app"
+msgstr "VS Code web-app"
+
+#: kz-vscode.desktop:11
+msgid "Visual Studio Code for the Web"
+msgstr "Visual Studio Code voor het web"
 
 #: kz-vm-hugowin732.desktop:10
 msgid "Start HugoWin732"
