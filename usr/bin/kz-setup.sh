@@ -11,6 +11,18 @@
 # format of this file.
 # =============================================================================
 
+# SETUP bitwarden *
+# -----------------------------------------------------------------------------
+# Password manager.
+# -----------------------------------------------------------------------------
+kz-desktop --addbef=com.bitwarden.desktop
+
+# RESET bitwarden *
+# -----------------------------------------------------------------------------
+# Password manager.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=com.bitwarden.desktop
+
 # SETUP calibre pc06
 # -----------------------------------------------------------------------------
 # E-book manager.
@@ -86,6 +98,18 @@ if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gma
 if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
 if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+
+# SETUP evolution *
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=org.gnome.Evolution
+
+# RESET evolution *
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+kz-desktop --addbef=org.gnome.Evolution
 
 # SETUP git pc06 pc07
 # -----------------------------------------------------------------------------
@@ -183,13 +207,13 @@ sed --in-place 's/export/#export/g' ~/.bashrc
 sed --in-place 's/eval/#eval/g'     ~/.bashrc
 sed --in-place '/^stty -ixon/d'     ~/.bashrc
 
-# SETUP google-chrome pc01 pc06 pc07
+# SETUP google-chrome *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
 
-# RESET google-chrome pc01 pc06 pc07
+# RESET google-chrome *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -281,13 +305,13 @@ if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; f
 # -----------------------------------------------------------------------------
 rm --force --recursive ~/lynis
 
-# SETUP microsoft-edge pc06 pc07
+# SETUP microsoft-edge *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=microsoft-edge
 
-# RESET microsoft-edge pc06 pc07
+# RESET microsoft-edge *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -329,7 +353,7 @@ kz-desktop --addaft=org.gnome.SoundJuicer
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.SoundJuicer
 
-# SETUP spotify pc01 pc02 pc06 pc07
+# SETUP spotify *
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # -----------------------------------------------------------------------------
@@ -338,7 +362,7 @@ kz-desktop --delete=org.gnome.SoundJuicer
 if grep --quiet debian /etc/os-release; then kz-desktop --addaft=spotify; fi
 if grep --quiet rhel   /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
-# RESET spotify pc01 pc02 pc06 pc07
+# RESET spotify *
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # -----------------------------------------------------------------------------
@@ -358,6 +382,30 @@ kz-desktop --addbef=org.gnome.Terminal
 # Terminal emulator.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Terminal
+
+# SETUP terminal pc06 pc07
+# -----------------------------------------------------------------------------
+# Terminal emulator.
+# -----------------------------------------------------------------------------
+kz-desktop --addbef=org.gnome.Terminal
+
+# RESET terminal pc06 pc07
+# -----------------------------------------------------------------------------
+# Terminal emulator.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=org.gnome.Terminal
+
+# SETUP thunderbird *
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+kz-desktop --addbef=thunderbird
+
+# RESET thunderbird *
+# -----------------------------------------------------------------------------
+# Web browser.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=thunderbird
 
 # SETUP virtualbox #gpg
 # -----------------------------------------------------------------------------

@@ -150,7 +150,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  b
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  bash-completion; fi
 
-# INSTALL bitwarden pc06 pc07
+# INSTALL bitwarden *
 # -----------------------------------------------------------------------------
 # Password manager.
 # -----------------------------------------------------------------------------
@@ -159,7 +159,7 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 sudo flatpak install    --assumeyes     com.bitwarden.desktop
 REBOOT=true
 
-# REMOVE bitwarden pc06 pc07
+# REMOVE bitwarden *
 # -----------------------------------------------------------------------------
 # Password manager.
 # -----------------------------------------------------------------------------
@@ -471,7 +471,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
-# INSTALL google-chrome pc01 pc06 pc07
+# INSTALL google-chrome *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -481,7 +481,7 @@ if grep --quiet debian /etc/os-release; then rm   --verbose /tmp/google-chrome.d
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
-# REMOVE google-chrome pc01 pc06 pc07
+# REMOVE google-chrome *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -745,7 +745,7 @@ REBOOT=true
 if type lxsession &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
-# INSTALL microsoft-edge pc06 pc06
+# INSTALL microsoft-edge *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -756,7 +756,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-ye
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub com.microsoft.Edge; fi
 
-# REMOVE microsoft-edge pc06 pc06
+# REMOVE microsoft-edge *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -966,7 +966,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  s
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  spice-vdagent; fi
 
-# INSTALL spotify pc01 pc02 pc06 pc07
+# INSTALL spotify *
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # -----------------------------------------------------------------------------
@@ -978,7 +978,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spotify-client; fi
 if grep --quiet rhel   /etc/os-release; then echo 'The spotify app is available as a web app.'; fi
 
-# REMOVE spotify pc01 pc02 pc06 pc07
+# REMOVE spotify *
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # -----------------------------------------------------------------------------
@@ -1061,14 +1061,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  t
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  tree; fi
 
-# INSTALL thunderbird pc06 pc07
+# INSTALL thunderbird *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
 
-# REMOVE thunderbird pc06 pc07
+# REMOVE thunderbird *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
