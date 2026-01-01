@@ -428,7 +428,7 @@ function backup_setting_avatar() {
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
-4. Select avatar in Personal folder / Settings, or another picture file.")
+4. Select avatar.ico in Personal folder / Settings, or another picture file.")
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"
 

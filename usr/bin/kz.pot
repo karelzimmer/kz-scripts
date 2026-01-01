@@ -274,7 +274,7 @@ msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Change avatar (pencil icon).\n"
 "3. Click Select a file.\n"
-"4. Select avatar in Personal folder / Settings, or another picture file."
+"4. Select avatar.ico in Personal folder / Settings, or another picture file."
 msgstr ""
 
 #: kz-backup:467
