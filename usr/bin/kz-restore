@@ -300,7 +300,7 @@ function restore_settings() {
 
 # This function restores the desktop background, if possible.
 function restore_setting_desktop() {
-    local input_file=$settings_dir/desktop
+    local input_file=$settings_dir/desktop.ico
 
     if [[ -f $input_file ]]; then
         kz.logmsg 'Restore the desktop background...'

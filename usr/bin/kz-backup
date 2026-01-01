@@ -411,7 +411,7 @@ function backup_setting_wifi() {
 # possible.
 function backup_setting_avatar() {
     local input_file=/var/lib/AccountsService/icons/$USER
-    local output_file_1=$settings_dir/avatar
+    local output_file_1=$settings_dir/avatar.ico
     local output_file_2=$settings_dir/avatar.txt
     local text=''
 
@@ -437,7 +437,7 @@ $(gettext '[1] Windows, command, or magnifying glass key.')"
 # instructions for setting desktop background.
 function backup_setting_desktop() {
     local input_file
-    local output_file_1=$settings_dir/desktop
+    local output_file_1=$settings_dir/desktop.ico
     local output_file_2=$settings_dir/desktop.txt
     local text=''
 
