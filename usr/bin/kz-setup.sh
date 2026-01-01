@@ -270,7 +270,7 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
-# SETUP lxqt-settings #none
+# SETUP lxqt-settings *
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
@@ -280,7 +280,7 @@ if type lxqt-session &> /dev/null; then sed --in-place '/__userfile__=true/asing
 if type lxqt-session &> /dev/null; then sed --in-place 's/single_click_activate=.*$/single_click_activate=true/g' ~/.config/lxqt/lxqt.conf; fi
 if type lxqt-session &> /dev/null; then sed --in-place 's/categoriesAtRight=.*$/categoriesAtRight=false/g'        ~/.config/lxqt/panel.conf; fi
 
-# RESET lxqt-settings #none
+# RESET lxqt-settings *
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
