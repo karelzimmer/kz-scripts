@@ -964,11 +964,11 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1119 kz-install.sh:1120 kz-install.sh:1126
+#: kz-install.sh:1131 kz-install.sh:1132 kz-install.sh:1138
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1119
+#: kz-install.sh:1131
 msgid "Guest_user"
 msgstr ""
 
@@ -1338,7 +1338,23 @@ msgid "CUPS web app"
 msgstr ""
 
 #: kz-cups.desktop:11
-msgid "The standards-based, open source printing system"
+msgid "Manage printers from a web browser"
+msgstr ""
+
+#: kz-github.desktop:10
+msgid "GitHub web app"
+msgstr ""
+
+#: kz-github.desktop:11
+msgid "Developer platform"
+msgstr ""
+
+#: kz-google-earth.desktop:10
+msgid "Google Earth web app"
+msgstr ""
+
+#: kz-google-earth.desktop:11
+msgid "Exploring the Earth from a web browser"
 msgstr ""
 
 #: kz-install.desktop:11
@@ -1357,6 +1373,14 @@ msgstr ""
 msgid "Set up apps and change user settings"
 msgstr ""
 
+#: kz-shellcheck.desktop:10
+msgid "ShellCheck web app"
+msgstr ""
+
+#: kz-shellcheck.desktop:11
+msgid "Check shell scripts from a web browser"
+msgstr ""
+
 #: kz-spotify.desktop:10
 msgid "Spotify web app"
 msgstr ""
@@ -1373,12 +1397,20 @@ msgstr ""
 msgid "Collaborate with others from a web browser"
 msgstr ""
 
+#: kz-teamviewer.desktop:10
+msgid "TeamViewer web app"
+msgstr ""
+
+#: kz-teamviewer.desktop:11
+msgid "Manage computers from a web browser"
+msgstr ""
+
 #: kz-vscode.desktop:10
 msgid "VS Code web app"
 msgstr ""
 
 #: kz-vscode.desktop:11
-msgid "Visual Studio Code for the Web"
+msgid "Visual Studio Code from a web browser"
 msgstr ""
 
 #: kz-vm-hugowin732.desktop:10

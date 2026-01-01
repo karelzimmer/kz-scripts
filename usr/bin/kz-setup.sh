@@ -47,6 +47,8 @@ kz-desktop --addaft=kz-cockpit
 # -----------------------------------------------------------------------------
 # Web console.
 # -----------------------------------------------------------------------------
+# Web app: https://localhost:9090
+# -----------------------------------------------------------------------------
 kz-desktop --delete=kz-cockpit
 
 # SETUP dash-to-dock *
@@ -96,6 +98,8 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 # RESET git pc06 pc07
 # -----------------------------------------------------------------------------
 # Distributed revision control system.
+# -----------------------------------------------------------------------------
+# Web app: https://github.com
 # -----------------------------------------------------------------------------
 git config --global --unset alias.logg
 
@@ -338,6 +342,8 @@ if grep --quiet rhel   /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # -----------------------------------------------------------------------------
+# Web app: https://open.spotify.com
+# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then kz-desktop --delete=spotify; fi
 if grep --quiet rhel   /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
@@ -388,6 +394,8 @@ xdg-mime default code.desktop text/x-python
 # -----------------------------------------------------------------------------
 # Editor.
 # -----------------------------------------------------------------------------
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
 kz-desktop --delete=code
 
 # SETUP webmin pc07
@@ -401,6 +409,8 @@ kz-desktop --addaft=kz-webmin
 # RESET webmin pc07
 # -----------------------------------------------------------------------------
 # Web console.
+# -----------------------------------------------------------------------------
+# Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-webmin
 

@@ -236,6 +236,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  c
 # -----------------------------------------------------------------------------
 # Web console.
 # -----------------------------------------------------------------------------
+# Web app: https://localhost:9090
+# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cockpit; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cockpit; fi
 
@@ -450,6 +452,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  g
 # -----------------------------------------------------------------------------
 # Distributed revision control system.
 # -----------------------------------------------------------------------------
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  git; fi
 
@@ -499,6 +503,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 # REMOVE google-earth pc04
 # -----------------------------------------------------------------------------
 # Explore the planet.
+# -----------------------------------------------------------------------------
+# Web app: https://earth.google.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-earth-pro-stable; fi
@@ -907,6 +913,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  s
 # -----------------------------------------------------------------------------
 # Shell script linter.
 # -----------------------------------------------------------------------------
+# Web app: https://www.shellcheck.net
+# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  shellcheck; fi
 
@@ -974,6 +982,8 @@ if grep --quiet rhel   /etc/os-release; then echo 'The spotify app is available 
 # -----------------------------------------------------------------------------
 # Music and podcasts.
 # -----------------------------------------------------------------------------
+# Web app: https://open.spotify.com
+# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spotify-client; fi
 if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
@@ -1021,7 +1031,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # -----------------------------------------------------------------------------
-# Web app: https://web.teamviewer.com
+# Web app: https://start.teamviewer.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
@@ -1031,6 +1041,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https:
 # REMOVE teamviewer *
 # -----------------------------------------------------------------------------
 # Remote desktop.
+# -----------------------------------------------------------------------------
+# Web app: https://start.teamviewer.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes teamviewer; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  teamviewer; fi
@@ -1191,6 +1203,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; 
 # -----------------------------------------------------------------------------
 # Editor.
 # -----------------------------------------------------------------------------
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
@@ -1214,6 +1228,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes webmin
 # REMOVE webmin pc07
 # -----------------------------------------------------------------------------
 # Web console.
+# -----------------------------------------------------------------------------
+# Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes webmin; fi
 if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi

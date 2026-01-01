@@ -1060,11 +1060,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:1119 kz-install.sh:1120 kz-install.sh:1126
+#: kz-install.sh:1131 kz-install.sh:1132 kz-install.sh:1138
 msgid "guest"
 msgstr "gast"
 
-#: kz-install.sh:1119
+#: kz-install.sh:1131
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
@@ -1474,8 +1474,24 @@ msgid "CUPS web app"
 msgstr "CUPS web-app"
 
 #: kz-cups.desktop:11
-msgid "The standards-based, open source printing system"
-msgstr "Het op standaarden gebaseerde, open-source printsysteem"
+msgid "Manage printers from a web browser"
+msgstr "Beheer printers vanuit een webbrowser"
+
+#: kz-github.desktop:10
+msgid "GitHub web app"
+msgstr "GitHub web-app"
+
+#: kz-github.desktop:11
+msgid "Developer platform"
+msgstr "Ontwikkelaarsplatform"
+
+#: kz-google-earth.desktop:10
+msgid "Google Earth web app"
+msgstr "Google Earth web-app"
+
+#: kz-google-earth.desktop:11
+msgid "Exploring the Earth from a web browser"
+msgstr "De aarde verkennen vanuit een webbrowser"
 
 #: kz-install.desktop:11
 msgid "Install apps and changes system settings"
@@ -1493,6 +1509,14 @@ msgstr "Zet back-up (reservekopie) van de Persoonlijke map terug"
 msgid "Set up apps and change user settings"
 msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
+#: kz-shellcheck.desktop:10
+msgid "ShellCheck web app"
+msgstr "ShellCheck web-app"
+
+#: kz-shellcheck.desktop:11
+msgid "Check shell scripts from a web browser"
+msgstr "Controleer shell-scripts vanuit een webbrowser"
+
 #: kz-spotify.desktop:10
 msgid "Spotify web app"
 msgstr "Spotify web-app"
@@ -1509,13 +1533,21 @@ msgstr "Teams web-app"
 msgid "Collaborate with others from a web browser"
 msgstr "Werk samen met anderen vanuit een webbrowser"
 
+#: kz-teamviewer.desktop:10
+msgid "TeamViewer web app"
+msgstr "TeamViewer web-app"
+
+#: kz-teamviewer.desktop:11
+msgid "Manage computers from a web browser"
+msgstr "Beheer computers vanuit een webbrowser"
+
 #: kz-vscode.desktop:10
 msgid "VS Code web app"
 msgstr "VS Code web-app"
 
 #: kz-vscode.desktop:11
-msgid "Visual Studio Code for the Web"
-msgstr "Visual Studio Code voor het web"
+msgid "Visual Studio Code from a web browser"
+msgstr "Visual Studio Code vanuit een webbrowser"
 
 #: kz-vm-hugowin732.desktop:10
 msgid "Start HugoWin732"

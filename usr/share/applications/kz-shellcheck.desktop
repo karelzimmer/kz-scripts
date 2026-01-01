@@ -1,5 +1,5 @@
 # #############################################################################
-# SPDX-FileComment: Desktop configuration file for Visual Studio Code web app
+# SPDX-FileComment: Desktop configuration file for ShellCheck web app
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -7,11 +7,11 @@
 
 [Desktop Entry]
 Type=Application
-Name=VS Code web app
-Comment=Visual Studio Code from a web browser
+Name= ShellCheck web app
+Comment=Check shell scripts from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox
-Exec=firefox https://vscode.dev
-Icon=kz-vscode
+Exec=firefox https://www.shellcheck.net
+Icon=kz-shellcheck
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

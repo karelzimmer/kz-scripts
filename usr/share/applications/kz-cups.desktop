@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name= CUPS web app
-Comment=The standards-based, open source printing system
+Comment=Manage printers from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox
 Exec=firefox http://localhost:631
