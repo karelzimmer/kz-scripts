@@ -122,7 +122,7 @@ msgstr ""
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
-#: kz-backup:23 kz-backup:515 kz-menu:74 kz-backup.desktop:10
+#: kz-backup:23 kz-backup:521 kz-menu:74 kz-backup.desktop:10
 msgid "Backup Home folder"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgstr ""
 msgid "users.txt"
 msgstr ""
 
-#: kz-backup:347 kz-backup:614 kz-restore:360
+#: kz-backup:347 kz-backup:620 kz-restore:360
 msgid "USERNAME|USERID|USER"
 msgstr ""
 
@@ -250,7 +250,7 @@ msgid ""
 "3. Enter Name <user> and Username <username>."
 msgstr ""
 
-#: kz-backup:372 kz-backup:430 kz-backup:467
+#: kz-backup:372 kz-backup:433 kz-backup:473
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
@@ -267,7 +267,7 @@ msgid ""
 "sudo passwd --delete --expire <username>"
 msgstr ""
 
-#: kz-backup:423
+#: kz-backup:426
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -277,7 +277,7 @@ msgid ""
 "4. Select avatar in Personal folder / Settings, or another picture file."
 msgstr ""
 
-#: kz-backup:461
+#: kz-backup:467
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -286,65 +286,65 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:515 kz-install:446 kz-restore:257 kz-setup:440
+#: kz-backup:521 kz-install:446 kz-restore:257 kz-setup:440
 msgid "progress"
 msgstr ""
 
-#: kz-backup:516
+#: kz-backup:522
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:551
+#: kz-backup:557
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:587 kz-install:587 kz-restore:328 kz-setup:562
+#: kz-backup:593 kz-install:587 kz-restore:328 kz-setup:562
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:588
+#: kz-backup:594
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:590 kz-restore:331
+#: kz-backup:596 kz-restore:331
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:591
+#: kz-backup:597
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:592 kz-restore:333
+#: kz-backup:598 kz-restore:333
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:593
+#: kz-backup:599
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:595 kz-install:592 kz-restore:336 kz-setup:566
+#: kz-backup:601 kz-install:592 kz-restore:336 kz-setup:566
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:596 kz-install:593 kz-restore:337 kz-setup:567
+#: kz-backup:602 kz-install:593 kz-restore:337 kz-setup:567
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:597
+#: kz-backup:603
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:625
+#: kz-backup:631
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:627
+#: kz-backup:633
 #, sh-format
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
-#: kz-backup:635 kz-restore:376
+#: kz-backup:641 kz-restore:376
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 

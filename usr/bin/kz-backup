@@ -415,6 +415,9 @@ function backup_setting_avatar() {
     local output_file_2=$settings_dir/avatar.txt
     local text=''
 
+    kz.logmsg 'Remove old naming of the avatar backup file...'
+    rm --force --verbose "$settings_dir/avatar" |& $PROGRAM_LOGS
+
     if [[ -f $input_file ]]; then
         kz.logmsg 'Copy the user avatar...'
         cp --verbose "$input_file" "$output_file_1" |& $PROGRAM_LOGS
@@ -440,6 +443,9 @@ function backup_setting_desktop() {
     local output_file_1=$settings_dir/desktop.ico
     local output_file_2=$settings_dir/desktop.txt
     local text=''
+
+    kz.logmsg 'Remove old naming of the desktop background backup file...'
+    rm --force --verbose "$settings_dir/desktop" |& $PROGRAM_LOGS
 
     input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
