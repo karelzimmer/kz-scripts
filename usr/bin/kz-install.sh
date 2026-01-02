@@ -527,7 +527,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gr
 # -----------------------------------------------------------------------------
 # Reduce GRUB menu display time.
 # -----------------------------------------------------------------------------
-sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/" /etc/default/grub
+sudo sed --in-place 's/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/' /etc/default/grub
 # -----------------------------------------------------------------------------
 # Suppress warnings.
 # -----------------------------------------------------------------------------
@@ -540,7 +540,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Restore default GRUB menu display time.
 # -----------------------------------------------------------------------------
-sudo sed --in-place --regexp-extended "s/^.?GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/" /etc/default/grub
+sudo sed --in-place 's/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/' /etc/default/grub
 # -----------------------------------------------------------------------------
 # Enable warnings.
 # -----------------------------------------------------------------------------
