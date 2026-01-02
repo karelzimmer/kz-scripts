@@ -207,9 +207,10 @@ informatie zoals een gebruikersnaam.
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian  /etc/os-release; then kz-desktop --addaft=spotify; fi
-if grep --quiet rhel    /etc/os-release; then kz-desktop --addaft=kz-spotify; \
-fi
+if grep --quiet --regexp=debian  /etc/os-release; then kz-desktop --addaft=spo\
+tify; fi
+if grep --quiet --regexp=rhel    /etc/os-release; then kz-desktop --addaft=kz-\
+spotify; fi
 .EE
 
 .SH ZIE OOK

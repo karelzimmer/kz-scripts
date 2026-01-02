@@ -233,7 +233,7 @@ function process_option_addaft () {
     check_shell
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$desktopfile"
     then
         gsettings set org.gnome.shell favorite-apps "$(
             printf '%s' "$favorite_apps" |
@@ -248,7 +248,7 @@ function process_option_addbef () {
     check_shell
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$desktopfile"
     then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile', $(
                 printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2

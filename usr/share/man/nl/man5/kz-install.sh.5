@@ -206,10 +206,10 @@ persoonlijke informatie persoonlijke informatie zoals een gebruikersnaam.
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes\
- gnome-tweaks; fi
-if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes \
- gnome-tweaks; fi
+if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --a\
+ssume-yes gnome-tweaks; fi
+if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --a\
+ssumeyes  gnome-tweaks; fi
 .EE
 
 .SH ZIE OOK

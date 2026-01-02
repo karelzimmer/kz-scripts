@@ -359,8 +359,8 @@ kz-desktop --delete=org.gnome.SoundJuicer
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then kz-desktop --addaft=spotify; fi
-if grep --quiet rhel   /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
+if grep --quiet --regexp=debian /etc/os-release; then kz-desktop --addaft=spotify; fi
+if grep --quiet --regexp=rhel   /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
 # RESET spotify *
 # -----------------------------------------------------------------------------
@@ -368,8 +368,8 @@ if grep --quiet rhel   /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then kz-desktop --delete=spotify; fi
-if grep --quiet rhel   /etc/os-release; then kz-desktop --delete=kz-spotify; fi
+if grep --quiet --regexp=debian /etc/os-release; then kz-desktop --delete=spotify; fi
+if grep --quiet --regexp=rhel   /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 # SETUP terminal pc06 pc07
 # -----------------------------------------------------------------------------

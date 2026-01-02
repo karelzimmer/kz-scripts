@@ -50,7 +50,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     This function checks if a Debian package manager is already running and
     waits for the next check if so.
     """
-    command1: str = 'grep --quiet rhel /etc/os-release'
+    command1: str = 'grep --quiet --regexp=rhel /etc/os-release'
     command2: str = 'pkexec /usr/bin/kz_common-pkexec'
     text: str = ''
 

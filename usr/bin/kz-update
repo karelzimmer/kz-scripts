@@ -66,8 +66,8 @@ def process() -> None:
     This function performs the script actions, such as checking the input.
     """
     command1: str = 'sudo true'
-    command2: str = "grep --quiet debian /etc/os-release"
-    command3: str = "grep --quiet rhel   /etc/os-release"
+    command2: str = "grep --quiet --regexp=debian /etc/os-release"
+    command3: str = "grep --quiet --regexp=rhel   /etc/os-release"
     text: str
 
     check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
