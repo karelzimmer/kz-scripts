@@ -1591,8 +1591,10 @@ msgid "Execute the fuser command requiring root privileges"
 msgstr "Voer de opdracht fuser uit waarvoor root-rechten nodig zijn"
 
 #: nl.karelzimmer.kz-install.policy:22
-msgid "Authentication is required to install apps"
-msgstr "Authenticatie is vereist om apps te installeren"
+msgid "Authentication is required to install apps and change system settings"
+msgstr ""
+"Authenticatie is vereist om apps te installeren en systeeminstellingen te "
+"wijzigen"
 
 #: nl.karelzimmer.kz-wifi.policy:21
 msgid "Wrapper script for kz-wifi"

@@ -1454,7 +1454,7 @@ msgid "Execute the fuser command requiring root privileges"
 msgstr ""
 
 #: nl.karelzimmer.kz-install.policy:22
-msgid "Authentication is required to install apps"
+msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy:21

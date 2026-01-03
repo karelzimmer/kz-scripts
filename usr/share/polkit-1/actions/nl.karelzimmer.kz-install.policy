@@ -19,7 +19,7 @@
 
     <action id="nl.karelzimmer.kz-install">
         <description gettext-domain="kz">Install apps</description>
-        <message gettext-domain="kz">Authentication is required to install apps</message>
+        <message gettext-domain="kz">Authentication is required to install apps and change system settings</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install-pkexec</annotate>
         <defaults>
             <allow_any>auth_self_keep</allow_any>
