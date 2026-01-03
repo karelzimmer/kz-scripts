@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Install apps
-Comment=Install apps and changes system settings
+Comment=Install apps and change system settings
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-install --gui

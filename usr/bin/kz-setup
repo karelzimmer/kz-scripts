@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Set up apps
+# SPDX-FileComment: Set up apps and change user settings.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -20,7 +20,7 @@ source kz_common.sh as kz
 # #############################################################################
 
 readonly PROGRAM_NAME='kz-setup'
-PROGRAM_DESC=$(gettext 'Set up apps')
+PROGRAM_DESC=$(gettext 'Set up apps and change user settings')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 

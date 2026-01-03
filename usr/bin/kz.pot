@@ -822,9 +822,8 @@ msgstr ""
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz-install:23 kz-install:446 kz-menu:76 kz-install.desktop:10
-#: nl.karelzimmer.kz-install.policy:21
-msgid "Install apps"
+#: kz-install:23 kz-install.desktop:11
+msgid "Install apps and change system settings"
 msgstr ""
 
 #: kz-install:28
@@ -924,6 +923,11 @@ msgstr ""
 
 #: kz-install:436 kz-setup:431
 msgid "No commands to execute."
+msgstr ""
+
+#: kz-install:446 kz-menu:76 kz-install.desktop:10
+#: nl.karelzimmer.kz-install.policy:21
+msgid "Install apps"
 msgstr ""
 
 #: kz-install:447 kz-menu:52
@@ -1038,7 +1042,7 @@ msgstr ""
 msgid "Restore Home folder"
 msgstr ""
 
-#: kz-menu:78 kz-setup:23 kz-setup:440 kz-setup.desktop:10
+#: kz-menu:78 kz-setup:440 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr ""
 
@@ -1172,6 +1176,10 @@ msgstr ""
 #: kz-restore:368
 #, sh-format
 msgid "The backup has restored for $USER (there are $num_users users)."
+msgstr ""
+
+#: kz-setup:23 kz-setup.desktop:11
+msgid "Set up apps and change user settings"
 msgstr ""
 
 #: kz-setup:28
@@ -1357,20 +1365,12 @@ msgstr ""
 msgid "Exploring the Earth from a web browser"
 msgstr ""
 
-#: kz-install.desktop:11
-msgid "Install apps and changes system settings"
-msgstr ""
-
 #: kz-menu.desktop:11
 msgid "Execute the kz commands through a menu"
 msgstr ""
 
 #: kz-restore.desktop:11
 msgid "Restores a backup copy of the Home folder"
-msgstr ""
-
-#: kz-setup.desktop:11
-msgid "Set up apps and change user settings"
 msgstr ""
 
 #: kz-shellcheck.desktop:10

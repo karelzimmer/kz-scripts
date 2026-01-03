@@ -901,10 +901,9 @@ msgstr ""
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz-install:23 kz-install:446 kz-menu:76 kz-install.desktop:10
-#: nl.karelzimmer.kz-install.policy:21
-msgid "Install apps"
-msgstr "Apps installeren"
+#: kz-install:23 kz-install.desktop:11
+msgid "Install apps and change system settings"
+msgstr "Installeer apps en wijzig systeeminstellingen"
 
 #: kz-install:28
 msgid ""
@@ -1020,6 +1019,11 @@ msgstr "App '$app_argument' niet gevonden."
 #: kz-install:436 kz-setup:431
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
+
+#: kz-install:446 kz-menu:76 kz-install.desktop:10
+#: nl.karelzimmer.kz-install.policy:21
+msgid "Install apps"
+msgstr "Apps installeren"
 
 #: kz-install:447 kz-menu:52
 msgid "Prepare installation"
@@ -1137,7 +1141,7 @@ msgstr "Wifi-informatie weergeven"
 msgid "Restore Home folder"
 msgstr "Herstel Persoonlijke map"
 
-#: kz-menu:78 kz-setup:23 kz-setup:440 kz-setup.desktop:10
+#: kz-menu:78 kz-setup:440 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr "Apps instellen"
 
@@ -1287,6 +1291,10 @@ msgstr "De back-up is teruggezet."
 #, sh-format
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
+
+#: kz-setup:23 kz-setup.desktop:11
+msgid "Set up apps and change user settings"
+msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
 #: kz-setup:28
 msgid ""
@@ -1494,10 +1502,6 @@ msgstr "Google Earth web-app"
 msgid "Exploring the Earth from a web browser"
 msgstr "De aarde verkennen vanuit een webbrowser"
 
-#: kz-install.desktop:11
-msgid "Install apps and changes system settings"
-msgstr "Installeer apps en wijzig systeeminstellingen"
-
 #: kz-menu.desktop:11
 msgid "Execute the kz commands through a menu"
 msgstr "Voer kz-opdrachten uit via een menu"
@@ -1505,10 +1509,6 @@ msgstr "Voer kz-opdrachten uit via een menu"
 #: kz-restore.desktop:11
 msgid "Restores a backup copy of the Home folder"
 msgstr "Zet back-up (reservekopie) van de Persoonlijke map terug"
-
-#: kz-setup.desktop:11
-msgid "Set up apps and change user settings"
-msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
 #: kz-shellcheck.desktop:10
 msgid "ShellCheck web app"
