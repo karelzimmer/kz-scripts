@@ -15,16 +15,16 @@
 # -----------------------------------------------------------------------------
 # Add Debian components to package sources and update package lists.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
 
 # REMOVE apt-sources *
 # -----------------------------------------------------------------------------
 # Remove Debian components from package sources and update package lists.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL updates *
@@ -51,8 +51,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     check-update 
 # Express Advanced Error Reporting) prevents the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place 's/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
-if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place 's/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
 if   grep --quiet --regexp=debian      /etc/os-release; then sudo update-grub; fi
 if   grep --quiet --regexp=rhel        /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
@@ -69,7 +69,7 @@ REBOOT=true
 # Express Advanced Error Reporting) to "allow" the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place 's/ pci=noaer//' /etc/default/grub; fi
+if grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
 if grep --quiet --regexp=debian      /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp=rhel        /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
@@ -112,14 +112,14 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo systemctl stop    apport.service; fi
 if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
-if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=1/enabled=0/' /etc/default/apport; fi
+if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
 if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/crash/*; fi
 
 # REMOVE apport-settings #none
 # -----------------------------------------------------------------------------
 # Enable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo sed --in-place 's/enabled=0/enabled=1/' /etc/default/apport; fi
+if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
 if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
 
 # INSTALL backintime #none
@@ -213,14 +213,14 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo calibre-uninstall; fi
 # -----------------------------------------------------------------------------
 # Enable Cinnamon user greeter.
 # -----------------------------------------------------------------------------
-if type cinnamon-session &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+if type cinnamon-session &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # REMOVE cinnamon-settings #none
 # -----------------------------------------------------------------------------
 # Disable Cinnamon user greeter.
 # -----------------------------------------------------------------------------
-if type cinnamon-session &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=false/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
+if type cinnamon-session &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=false/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # INSTALL cockpit pc06
@@ -527,11 +527,11 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 # Reduce GRUB menu display time.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/' /etc/default/grub
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/' /etc/default/grub
 # -----------------------------------------------------------------------------
 # Suppress warnings.
 # -----------------------------------------------------------------------------
-if ! grep --quiet 'loglevel=3' /etc/default/grub; then sudo sed --in-place 's/quiet/quiet loglevel=3/' /etc/default/grub; fi
+if ! grep --quiet 'loglevel=3' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
 if   grep --quiet --regexp=debian /etc/os-release; then sudo update-grub; fi
 if   grep --quiet --regexp=rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
@@ -540,11 +540,11 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Restore default GRUB menu display time.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/' /etc/default/grub
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/' /etc/default/grub
 # -----------------------------------------------------------------------------
 # Enable warnings.
 # -----------------------------------------------------------------------------
-sudo sed  --in-place 's/ loglevel=3//' /etc/default/grub
+sudo sed  --in-place --expression='s/ loglevel=3//' /etc/default/grub
 if grep --quiet --regexp=debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
@@ -693,14 +693,14 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak uninstall --a
 # -----------------------------------------------------------------------------
 # Do nothing when the laptop lid is closed.
 # -----------------------------------------------------------------------------
-sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
 
 # REMOVE lidswitch-settings #none #gpg
 # -----------------------------------------------------------------------------
 # Restore the default action when the laptop lid is closed.
 # -----------------------------------------------------------------------------
-sudo sed --in-place '/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # INSTALL locate pc06 pc07
 # -----------------------------------------------------------------------------
@@ -735,14 +735,14 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 # Enable LXDE user greeter.
 # -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then sudo sed --in-place 's/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+if type lxsession &> /dev/null; then sudo sed --in-place --expression='s/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # REMOVE lxde-settings #none
 # -----------------------------------------------------------------------------
 # Disable LXDE user greeter.
 # -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+if type lxsession &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # INSTALL microsoft-edge *
@@ -994,7 +994,7 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes ssh; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  openssh; fi
-sudo sed --in-place 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 # -----------------------------------------------------------------------------
 # Check for remote root access.
 # -----------------------------------------------------------------------------
@@ -1005,7 +1005,7 @@ sudo systemctl restart ssh.service
 # -----------------------------------------------------------------------------
 # Secure SHell.
 # -----------------------------------------------------------------------------
-sudo sed --in-place 's/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes ssh; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  openssh; fi
 
@@ -1258,14 +1258,14 @@ if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 # Enable Xfce user greeter.
 # -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then sudo sed --in-place 's/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place --expression='s/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # REMOVE xfce-settings #none
 # -----------------------------------------------------------------------------
 # Disable Xfce user greeter.
 # -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then sudo sed --in-place 's/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+if type xfce4-session &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # INSTALL youtube-dl #none #gpg

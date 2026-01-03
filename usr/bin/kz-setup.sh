@@ -154,21 +154,21 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network    
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-if gsettings get org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed "s/, ('ibus', 'mozc-jp')//")"; fi
-if gsettings get org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed "s/('ibus', 'mozc-jp'), //")"; fi
+if gsettings get org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
+if gsettings get org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place 's/#alias/alias/g'    ~/.bashrc
-sed --in-place 's/# alias/alias/g'   ~/.bashrc
-sed --in-place 's/# export/export/g' ~/.bashrc
-sed --in-place 's/# eval/eval/g'     ~/.bashrc
+sed --in-place --expression='s/#alias/alias/g'    ~/.bashrc
+sed --in-place --expression='s/# alias/alias/g'   ~/.bashrc
+sed --in-place --expression='s/# export/export/g' ~/.bashrc
+sed --in-place --expression='s/# eval/eval/g'     ~/.bashrc
 # -----------------------------------------------------------------------------
 # Enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place '/^stty -ixon/d' ~/.bashrc
+sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 
 # RESET gnome-settings *
@@ -202,10 +202,10 @@ if gsettings set org.gnome.desktop.input-sources sources                        
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
-sed --in-place 's/alias/#alias/g'   ~/.bashrc
-sed --in-place 's/export/#export/g' ~/.bashrc
-sed --in-place 's/eval/#eval/g'     ~/.bashrc
-sed --in-place '/^stty -ixon/d'     ~/.bashrc
+sed --in-place --expression='s/alias/#alias/g'   ~/.bashrc
+sed --in-place --expression='s/export/#export/g' ~/.bashrc
+sed --in-place --expression='s/eval/#eval/g'     ~/.bashrc
+sed --in-place --expression='/^stty -ixon/d'     ~/.bashrc
 
 # SETUP google-chrome *
 # -----------------------------------------------------------------------------
@@ -236,13 +236,13 @@ kz-desktop --delete=fr.handbrake.ghb
 # Desktop environment.
 # -----------------------------------------------------------------------------
 if type ksmserver &> /dev/null && ! grep --quiet '\[KDE\]' ~/.config/kdeglobals; then echo -e '\n[KDE]' >> ~/.config/kdeglobals; fi
-if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kdeglobals; then sed --in-place '/[KDE]/aSingleClick=true' ~/.config/kdeglobals; fi
+if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kdeglobals; then sed --in-place --expression='/[KDE]/aSingleClick=true' ~/.config/kdeglobals; fi
 
 # RESET kde-settings #none
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if type ksmserver &> /dev/null; then sed --in-place '/SingleClick=true/d' ~/.config/kdeglobals; fi
+if type ksmserver &> /dev/null; then sed --in-place --expression='/SingleClick=true/d' ~/.config/kdeglobals; fi
 
 # SETUP kvm pc06 pc07
 # -----------------------------------------------------------------------------
@@ -274,19 +274,19 @@ kz-desktop --delete=org.libreoffice.LibreOffice.writer
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
-if type lxqt-session &> /dev/null; then sed --in-place 's/Alt%2BF1/Super_L/g'                           ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place '/single_click_activate=.*$/d'                   ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place '/__userfile__=true/asingle_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place '/categoriesAtRight=.*$/d'                       ~/.config/lxqt/panel.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place '/\[mainmenu\]/acategoriesAtRight=false'         ~/.config/lxqt/panel.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Alt%2BF1/Super_L/g'                           ~/.config/lxqt/globalkeyshortcuts.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/single_click_activate=.*$/d'                   ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/__userfile__=true/asingle_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/categoriesAtRight=.*$/d'                       ~/.config/lxqt/panel.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/\[mainmenu\]/acategoriesAtRight=false'         ~/.config/lxqt/panel.conf; fi
 
 # RESET lxqt-settings *
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if type lxqt-session &> /dev/null; then sed --in-place 's/Super_L/Alt%2BF1/g'         ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place '/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place '/categoriesAtRight=.*$/d'     ~/.config/lxqt/panel.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Super_L/Alt%2BF1/g'         ~/.config/lxqt/globalkeyshortcuts.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/categoriesAtRight=.*$/d'     ~/.config/lxqt/panel.conf; fi
 
 # SETUP lynis #none
 # -----------------------------------------------------------------------------
