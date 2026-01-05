@@ -1508,7 +1508,7 @@ msgstr "Voer kz-opdrachten uit via een menu"
 
 #: kz-restore:23 kz-restore.desktop:11
 msgid "Restore a backup copy of the Home folder"
-msgstr "Zet back-up (reservekopie) van de Persoonlijke map terug"
+msgstr "Zet een back-up (reservekopie) van de Persoonlijke map terug"
 
 #: kz-shellcheck.desktop:10
 msgid "ShellCheck web app"
@@ -1567,7 +1567,7 @@ msgid "WhatsApp web app"
 msgstr "WhatsApp web-app"
 
 #: kz-whatsapp.desktop:11
-msgid "Send and receive messages, photos and videos via a web browser"
+msgid "Send and receive messages, photos and videos from a web browser"
 msgstr "Berichten, foto's en video's verzenden en ontvangen via een webbrowser"
 
 #: kz-zoom.desktop:10
