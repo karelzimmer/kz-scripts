@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name=Show WiFi information
+Name=Show WiFi details
 Comment=Show WiFi details
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz

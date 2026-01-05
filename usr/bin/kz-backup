@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Backup Home folder
+# SPDX-FileComment: Make a backup copy of the Home folder
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -20,7 +20,7 @@ source kz_common.sh as kz
 # #############################################################################
 
 readonly PROGRAM_NAME='kz-backup'
-PROGRAM_DESC=$(gettext 'Backup Home folder')
+PROGRAM_DESC=$(gettext 'Make a backup copy of the Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 

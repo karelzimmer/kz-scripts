@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # #############################################################################
-# SPDX-FileComment: Show WiFi information
+# SPDX-FileComment: Show WiFi details
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -27,7 +27,7 @@ _ = gettext.gettext
 # #############################################################################
 
 PROGRAM_NAME: str = 'kz-wifi'
-PROGRAM_DESC: str = _('Show WiFi information')
+PROGRAM_DESC: str = _('Show WiFi details')
 
 USAGE: str = _(
     "Usage: kz wifi [-g|--gui]\n"

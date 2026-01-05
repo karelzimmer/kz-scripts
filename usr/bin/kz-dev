@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # #############################################################################
-# SPDX-FileComment: Set op development environment
+# SPDX-FileComment: Set up a development environment
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -29,7 +29,7 @@ _ = gettext.gettext
 # #############################################################################
 
 PROGRAM_NAME: str = 'kz-dev'
-PROGRAM_DESC: str = _('Set op development environment')
+PROGRAM_DESC: str = _('Set up a development environment')
 
 USAGE: str = _(
     "Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"

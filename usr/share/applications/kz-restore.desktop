@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Restore Home folder
-Comment=Restores a backup copy of the Home folder
+Comment=Restore a backup copy of the Home folder
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-restore --gui

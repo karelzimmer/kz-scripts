@@ -17,7 +17,7 @@
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet --regexp=Debian /etc/os-release; then sudo apt-get update; fi
 
 # REMOVE apt-sources *
 # -----------------------------------------------------------------------------
@@ -25,7 +25,7 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet --regexp=Debian /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL updates *
 # -----------------------------------------------------------------------------

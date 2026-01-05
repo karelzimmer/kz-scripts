@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Set up apps and change user settings.
+# SPDX-FileComment: Set up apps and change user settings
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

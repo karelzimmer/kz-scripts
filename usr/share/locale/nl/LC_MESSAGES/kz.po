@@ -125,7 +125,7 @@ msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
 
-#: kz-backup:23 kz-backup:521 kz-menu:74 kz-backup.desktop:10
+#: kz-backup:521 kz-menu:74 kz-backup.desktop:10
 msgid "Backup Home folder"
 msgstr "Back-up Persoonlijke map"
 
@@ -733,7 +733,7 @@ msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
 #: kz-desktop:23
-msgid "Change desktop environment"
+msgid "Change the desktop environment"
 msgstr "Desktopomgeving wijzigen"
 
 #: kz-desktop:28
@@ -818,8 +818,8 @@ msgid "Use \"gsettings set <change>\" for changes."
 msgstr "Gebruik \"gsettings set <wijziging>\" bij wijzigingen."
 
 #: kz-dev:32
-msgid "Set op development environment"
-msgstr "Ontwikkelomgeving instellen"
+msgid "Set up a development environment"
+msgstr "Zet een ontwikkelomgeving op"
 
 #: kz-dev:35
 msgid "Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
@@ -1073,7 +1073,7 @@ msgstr "gast"
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
-#: kz-menu:22 kz-menu:48 kz-menu.desktop:10
+#: kz-menu:48 kz-menu.desktop:10
 msgid "Installation menu"
 msgstr "Installatiemenu"
 
@@ -1133,11 +1133,11 @@ msgstr "Opdrachtmenu weergeven"
 msgid "Exit menu"
 msgstr "Menu verlaten"
 
-#: kz-menu:75 kz-wifi:30 kz-wifi.desktop:10
-msgid "Show WiFi information"
-msgstr "Wifi-informatie weergeven"
+#: kz-menu:75 kz-wifi:30 kz-wifi.desktop:10 kz-wifi.desktop:11
+msgid "Show WiFi details"
+msgstr "WiFi-details weergeven"
 
-#: kz-menu:77 kz-restore:23 kz-restore:257 kz-restore.desktop:10
+#: kz-menu:77 kz-restore:257 kz-restore.desktop:10
 msgid "Restore Home folder"
 msgstr "Herstel Persoonlijke map"
 
@@ -1466,7 +1466,7 @@ msgstr ""
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
-#: kz-backup.desktop:11
+#: kz-backup:23 kz-backup.desktop:11
 msgid "Make a backup copy of the Home folder"
 msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 
@@ -1502,12 +1502,12 @@ msgstr "Google Earth web-app"
 msgid "Exploring the Earth from a web browser"
 msgstr "De aarde verkennen vanuit een webbrowser"
 
-#: kz-menu.desktop:11
+#: kz-menu:22 kz-menu.desktop:11
 msgid "Execute the kz commands through a menu"
 msgstr "Voer kz-opdrachten uit via een menu"
 
-#: kz-restore.desktop:11
-msgid "Restores a backup copy of the Home folder"
+#: kz-restore:23 kz-restore.desktop:11
+msgid "Restore a backup copy of the Home folder"
 msgstr "Zet back-up (reservekopie) van de Persoonlijke map terug"
 
 #: kz-shellcheck.desktop:10
@@ -1569,10 +1569,6 @@ msgstr "WhatsApp web-app"
 #: kz-whatsapp.desktop:11
 msgid "Send and receive messages, photos and videos via a web browser"
 msgstr "Berichten, foto's en video's verzenden en ontvangen via een webbrowser"
-
-#: kz-wifi.desktop:11
-msgid "Show WiFi details"
-msgstr "WiFi-details weergeven"
 
 #: kz-zoom.desktop:10
 msgid "Zoom web app"

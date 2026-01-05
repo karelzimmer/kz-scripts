@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Installation menu
+# SPDX-FileComment: Execute the kz commands through a menu
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -19,7 +19,7 @@ source kz_common.sh as kz
 # #############################################################################
 
 readonly PROGRAM_NAME='kz-menu'
-PROGRAM_DESC=$(gettext 'Installation menu')
+PROGRAM_DESC=$(gettext 'Execute the kz commands through a menu')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
@@ -72,7 +72,7 @@ readonly MENU2_TITLE
 readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
 readonly -a  MENU2_ACTIONS=(
             [1]="$(gettext 'Backup Home folder')"
-                "$(gettext 'Show WiFi information')"
+                "$(gettext 'Show WiFi details')"
                 "$(gettext 'Install apps')"
                 "$(gettext 'Restore Home folder')"
                 "$(gettext 'Set up apps')"

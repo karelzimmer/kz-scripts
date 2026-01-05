@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Restore Home folder
+# SPDX-FileComment: Restore a backup copy of the Home folder
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -20,7 +20,7 @@ source kz_common.sh as kz
 # #############################################################################
 
 readonly PROGRAM_NAME='kz-restore'
-PROGRAM_DESC=$(gettext 'Restore Home folder')
+PROGRAM_DESC=$(gettext 'Restore a backup copy of the Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
