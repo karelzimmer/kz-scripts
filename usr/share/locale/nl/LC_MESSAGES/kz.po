@@ -1135,7 +1135,7 @@ msgstr "Menu verlaten"
 
 #: kz-menu:75 kz-wifi:30 kz-wifi.desktop:10 kz-wifi.desktop:11
 msgid "Show WiFi details"
-msgstr "WiFi-details weergeven"
+msgstr "Toon WiFi-details"
 
 #: kz-menu:77 kz-restore:257 kz-restore.desktop:10
 msgid "Restore Home folder"
