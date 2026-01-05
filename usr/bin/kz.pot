@@ -349,7 +349,7 @@ msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 
 #: kz-build:27
-msgid "Build website including kz packages"
+msgid "Build website and kz packages"
 msgstr ""
 
 #: kz-build:31
@@ -631,7 +631,7 @@ msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
 
 #: kz-deploy:27
-msgid "Distribute website including kz packages"
+msgid "Distribute website and kz packages"
 msgstr ""
 
 #: kz-deploy:32

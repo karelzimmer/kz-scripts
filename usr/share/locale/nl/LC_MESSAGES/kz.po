@@ -397,8 +397,8 @@ msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
 #: kz-build:27
-msgid "Build website including kz packages"
-msgstr "Website bouwen inclusief kz pakketten"
+msgid "Build website and kz packages"
+msgstr "Bouw website en kz-pakketten"
 
 #: kz-build:31
 msgid ""
@@ -689,8 +689,8 @@ msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
 
 #: kz-deploy:27
-msgid "Distribute website including kz packages"
-msgstr "Website distribueren inclusief kz pakketten"
+msgid "Distribute website and kz packages"
+msgstr "Distribueer website en kz-pakketten"
 
 #: kz-deploy:32
 msgid ""
@@ -734,7 +734,7 @@ msgstr "Installatie van Debian-pakket is mislukt."
 
 #: kz-desktop:23
 msgid "Change the desktop environment"
-msgstr "Desktopomgeving wijzigen"
+msgstr "Wijzig de desktopomgeving"
 
 #: kz-desktop:28
 msgid ""

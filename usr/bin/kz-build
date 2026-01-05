@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Build website including kz packages
+# SPDX-FileComment: Build website and kz packages
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -24,7 +24,7 @@ fi
 # #############################################################################
 
 readonly PROGRAM_NAME='kz-build'
-PROGRAM_DESC=$(gettext 'Build website including kz packages')
+PROGRAM_DESC=$(gettext 'Build website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
