@@ -1,11 +1,11 @@
 # #############################################################################
-# SPDX-FileComment: Portable Object Template (POT) file for kz package
+# SPDX-FileComment: Portable Object Template (POT) file for kz the package
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 #
-# Extracted translatable strings for kz package.
+# Extracted translatable strings for kz the package.
 # This file is distributed under the same license as the kz package.
 #
 #, fuzzy
@@ -122,8 +122,8 @@ msgstr ""
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
-#: kz-backup:521 kz-menu:74 kz-backup.desktop:10
-msgid "Backup Home folder"
+#: kz-backup:23 kz-backup.desktop:11
+msgid "Make a backup copy of the Home folder"
 msgstr ""
 
 #: kz-backup:27
@@ -284,6 +284,10 @@ msgid ""
 "1. Press the Super key[1], type 'file' and click on Files.\n"
 "2. Open the folder containing the desired image.\n"
 "3. Right-click on the desired image and choose Set as Background."
+msgstr ""
+
+#: kz-backup:521 kz-menu:74 kz-backup.desktop:10
+msgid "Backup Home folder"
 msgstr ""
 
 #: kz-backup:521 kz-install:446 kz-restore:257 kz-setup:440
@@ -946,7 +950,8 @@ msgstr ""
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-msgid "Try to install or remove the apps again."
+#: kz-install:594
+msgid "Try to install/remove the apps again."
 msgstr ""
 
 #: kz-install:610
@@ -1255,8 +1260,8 @@ msgstr ""
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:594 kz-setup:568
-msgid "Try to set up or reset the apps again."
+#: kz-setup:568
+msgid "Try to set up/reset the apps again."
 msgstr ""
 
 #: kz-setup:584
@@ -1284,7 +1289,7 @@ msgid "Log out of the computer yourself."
 msgstr ""
 
 #: kz-update:31
-msgid "Update and cleanup system"
+msgid "Update and cleanup the system"
 msgstr ""
 
 #: kz-update:34
@@ -1327,10 +1332,6 @@ msgstr ""
 
 #: kz-wifi:158 kz-wifi:169
 msgid "No WiFi device found."
-msgstr ""
-
-#: kz-backup:23 kz-backup.desktop:11
-msgid "Make a backup copy of the Home folder"
 msgstr ""
 
 #: kz-cockpit.desktop:10

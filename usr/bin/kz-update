@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # #############################################################################
-# SPDX-FileComment: Update and cleanup system
+# SPDX-FileComment: Update and cleanup the system
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -28,7 +28,7 @@ _ = gettext.gettext
 # #############################################################################
 
 PROGRAM_NAME: str = 'kz-update'
-PROGRAM_DESC: str = _('Update and cleanup system')
+PROGRAM_DESC: str = _('Update and cleanup the system')
 
 USAGE: str = _(
     "Usage: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"

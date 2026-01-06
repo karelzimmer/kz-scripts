@@ -77,10 +77,7 @@ Show WiFi details.
 .SS Low-level commands (plumbing)
 .br
 These commands can only be run in the Terminal window and are supporting the
-management and use of kz and Linux.
-.TP
-\fBkz_common-pkexec\fR(1)
-Wrapper script for kz_common.
+management and use of the website, the kz package, and Linux.
 .TP
 \fBkz-build\fR(1)
 Build website and kz packages.
@@ -100,11 +97,14 @@ Set up a development environment.
 \fBkz-get\fR(1)
 Download and install Debian or RPM package kz.
 .TP
+\fBkz-update\fR(1)
+Update and cleanup the system.
+.TP
+\fBkz_common-pkexec\fR(1)
+Wrapper script for kz_common.
+.TP
 \fBkz-install-pkexec\fR(1)
 Wrapper script for kz-install.
-.TP
-\fBkz-update\fR(1)
-Update and cleanup system.
 .TP
 \fBkz-wifi-pkexec\fR(1)
 Wrapper script for kz-wifi.
@@ -130,7 +130,7 @@ equal to 0.
 .EX
 \fBkz update\fR
 .RS
-Update and cleanup system.
+Update and cleanup the system.
 .RE
 .sp
 \fBkz install google-chrome\fR

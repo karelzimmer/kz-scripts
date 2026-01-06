@@ -591,7 +591,7 @@ ${FAILED_APPS[*]}
 
 $(gettext 'Actions to take:')
 $(gettext 'Check the error messages after this.')
-$(gettext 'Try to set up or reset the apps again.')"
+$(gettext 'Try to install/remove the apps again.')"
         kz.errmsg "$text"
 
         if $OPTION_GUI; then

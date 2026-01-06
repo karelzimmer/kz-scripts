@@ -1,11 +1,11 @@
 # #############################################################################
-# SPDX-FileComment: Portable Object (PO) file for kz package
+# SPDX-FileComment: Portable Object (PO) file for kz the package
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 #
-# Dutch translations for kz package.
+# Dutch translations for kz the package.
 # This file is distributed under the same license as the kz package.
 #
 msgid ""
@@ -125,9 +125,9 @@ msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
 
-#: kz-backup:521 kz-menu:74 kz-backup.desktop:10
-msgid "Backup Home folder"
-msgstr "Back-up Persoonlijke map"
+#: kz-backup:23 kz-backup.desktop:11
+msgid "Make a backup copy of the Home folder"
+msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 
 #: kz-backup:27
 msgid ""
@@ -333,6 +333,10 @@ msgstr ""
 "2. Open de map met de gewenste afbeelding.\n"
 "3. Rechtsklik op de gewenste afbeelding en kies Instellen als "
 "bureaubladachtergrond."
+
+#: kz-backup:521 kz-menu:74 kz-backup.desktop:10
+msgid "Backup Home folder"
+msgstr "Back-up Persoonlijke map"
 
 #: kz-backup:521 kz-install:446 kz-restore:257 kz-setup:440
 msgid "progress"
@@ -1041,7 +1045,8 @@ msgstr "OPDRACHT"
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-msgid "Try to install or remove the apps again."
+#: kz-install:594
+msgid "Try to install/remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
 #: kz-install:610
@@ -1384,8 +1389,8 @@ msgstr "Instellen voorbereiden"
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-install:594 kz-setup:568
-msgid "Try to set up or reset the apps again."
+#: kz-setup:568
+msgid "Try to set up/reset the apps again."
 msgstr "Probeer de apps opnieuw in te stellen of te resetten."
 
 #: kz-setup:584
@@ -1417,8 +1422,8 @@ msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
 #: kz-update:31
-msgid "Update and cleanup system"
-msgstr "Systeem bijwerken en opschonen"
+msgid "Update and cleanup the system"
+msgstr "Het systeem bijwerken en opschonen"
 
 #: kz-update:34
 msgid "Usage: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
@@ -1465,10 +1470,6 @@ msgstr ""
 #: kz-wifi:158 kz-wifi:169
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
-
-#: kz-backup:23 kz-backup.desktop:11
-msgid "Make a backup copy of the Home folder"
-msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 
 #: kz-cockpit.desktop:10
 msgid "Cockpit"
