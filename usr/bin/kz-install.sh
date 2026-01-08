@@ -166,14 +166,14 @@ REBOOT=true
 sudo flatpak uninstall --assumeyes com.bitwarden.desktop
 REBOOT=true
 
-# INSTALL bleachbit #none #gpg
+# INSTALL bleachbit #gpg
 # -----------------------------------------------------------------------------
 # Delete files.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes bleachbit; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  bleachbit; fi
 
-# REMOVE bleachbit #none #gpg
+# REMOVE bleachbit #gpg
 # -----------------------------------------------------------------------------
 # Delete files.
 # -----------------------------------------------------------------------------
@@ -259,13 +259,13 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assu
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes libcupsimage2; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cups; fi
 
-# INSTALL cups-backend-bjnp #none #gpg
+# INSTALL cups-backend-bjnp #gpg
 # -----------------------------------------------------------------------------
 # Printer backend for Canon BJNP protocol.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
 
-# REMOVE cups-backend-bjnp #none #gpg
+# REMOVE cups-backend-bjnp #gpg
 # -----------------------------------------------------------------------------
 # Printer backend for Canon BJNP protocol.
 # -----------------------------------------------------------------------------
@@ -549,13 +549,13 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
-# INSTALL handbrake #none #gpg
+# INSTALL handbrake #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes handbrake; fi
 
-# REMOVE handbrake #none #gpg
+# REMOVE handbrake #gpg
 # -----------------------------------------------------------------------------
 # Video-dvd ripper and transcoder.
 # -----------------------------------------------------------------------------
@@ -689,14 +689,14 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak install    --
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove    --assume-yes libreoffice; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  app/org.libreoffice.LibreOffice; fi
 
-# INSTALL lidswitch-settings #none #gpg
+# INSTALL lidswitch-settings #gpg
 # -----------------------------------------------------------------------------
 # Do nothing when the laptop lid is closed.
 # -----------------------------------------------------------------------------
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
 
-# REMOVE lidswitch-settings #none #gpg
+# REMOVE lidswitch-settings #gpg
 # -----------------------------------------------------------------------------
 # Restore the default action when the laptop lid is closed.
 # -----------------------------------------------------------------------------
@@ -934,13 +934,13 @@ if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
 
-# INSTALL sound-juicer #none #gpg
+# INSTALL sound-juicer #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes sound-juicer; fi
 
-# REMOVE sound-juicer #none #gpg
+# REMOVE sound-juicer #gpg
 # -----------------------------------------------------------------------------
 # Audio-cd ripper and player.
 # -----------------------------------------------------------------------------
@@ -1137,7 +1137,7 @@ if   id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo passwd  --del
 # -----------------------------------------------------------------------------
 if id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
-# INSTALL virtualbox #none #gpg
+# INSTALL virtualbox #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
@@ -1149,7 +1149,7 @@ if grep --quiet --regexp=debian /etc/os-release; then echo 'virtualbox-ext-pack 
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  VirtualBox; fi
 
-# REMOVE virtualbox #none #gpg
+# REMOVE virtualbox #gpg
 # -----------------------------------------------------------------------------
 # Virtualization.
 # -----------------------------------------------------------------------------
@@ -1268,14 +1268,14 @@ REBOOT=true
 if type xfce4-session &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
-# INSTALL youtube-dl #none #gpg
+# INSTALL youtube-dl #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes youtubedl-gui; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  youtube-dl; fi
 
-# REMOVE youtube-dl #none #gpg
+# REMOVE youtube-dl #gpg
 # -----------------------------------------------------------------------------
 # Download videos.
 # -----------------------------------------------------------------------------
