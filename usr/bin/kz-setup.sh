@@ -65,7 +65,7 @@ kz-desktop --delete=kz-cockpit
 
 # SETUP dash-to-dock *
 # -----------------------------------------------------------------------------
-# Desktop dock like Ubuntu's dash.
+# Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
 if (grep --regexp=debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if (grep --regexp=rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
@@ -83,7 +83,7 @@ if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gset
 
 # RESET dash-to-dock *
 # -----------------------------------------------------------------------------
-# Desktop dock like Ubuntu's dash.
+# Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell disable-user-extensions                                                         &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi

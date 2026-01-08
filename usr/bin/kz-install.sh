@@ -273,7 +273,7 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assu
 
 # INSTALL dash-to-dock *
 # -----------------------------------------------------------------------------
-# Desktop dock like Ubuntu's dash.
+# Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
 if (grep --regexp=debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if (grep --regexp=debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
@@ -283,7 +283,7 @@ REBOOT=true
 
 # REMOVE dash-to-dock *
 # -----------------------------------------------------------------------------
-# Desktop dock like Ubuntu's dash.
+# Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
 if (grep --regexp=debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if (grep --regexp=debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
