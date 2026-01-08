@@ -457,14 +457,14 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  git; fi
 
-# INSTALL gnome-tweaks #none
+# INSTALL gnome-tweaks pc06 pc07
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
 if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
-# REMOVE gnome-tweaks #none
+# REMOVE gnome-tweaks pc06 pc07
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
