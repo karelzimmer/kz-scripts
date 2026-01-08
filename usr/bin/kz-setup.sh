@@ -111,6 +111,18 @@ kz-desktop --delete=org.gnome.Evolution
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=org.gnome.Evolution
 
+# SETUP evolution pc06 pc07
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+kz-desktop --addaft=org.gnome.Evolution
+
+# RESET evolution pc06 pc07
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=org.gnome.Evolution
+
 # SETUP git pc06 pc07
 # -----------------------------------------------------------------------------
 # Distributed revision control system.
