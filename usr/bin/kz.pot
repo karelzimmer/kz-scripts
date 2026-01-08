@@ -677,7 +677,7 @@ msgid "Install Debian package failed."
 msgstr ""
 
 #: kz-desktop:23
-msgid "Change the desktop environment"
+msgid "Change the GNOME-based desktop"
 msgstr ""
 
 #: kz-desktop:28
