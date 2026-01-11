@@ -213,14 +213,14 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo calibre-uninstall; fi
 # -----------------------------------------------------------------------------
 # Enable Cinnamon user greeter.
 # -----------------------------------------------------------------------------
-if type cinnamon-session &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+if type cinnamon-session &> /dev/null; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # REMOVE cinnamon-settings #none
 # -----------------------------------------------------------------------------
 # Disable Cinnamon user greeter.
 # -----------------------------------------------------------------------------
-if type cinnamon-session &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=false/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
+if type cinnamon-session &> /dev/null; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 # INSTALL cockpit pc06
