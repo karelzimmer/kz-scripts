@@ -15,16 +15,16 @@
 # -----------------------------------------------------------------------------
 # Add Debian components to package sources and update package lists.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet --regexp=Debian /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet --regexp=Debian /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet --regexp=Debian /etc/os-release; then sudo apt-get update; fi
 
 # REMOVE apt-sources *
 # -----------------------------------------------------------------------------
 # Remove Debian components from package sources and update package lists.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp=Debian /etc/os-release && [[ -e /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet --regexp=Debian /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet --regexp=Debian /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet --regexp=Debian /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL updates *
@@ -208,20 +208,6 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo --validate && wget --
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes calibre; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo calibre-uninstall; fi
-
-# INSTALL cinnamon-settings #none
-# -----------------------------------------------------------------------------
-# Enable Cinnamon user greeter.
-# -----------------------------------------------------------------------------
-if type cinnamon-session &> /dev/null; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
-
-# REMOVE cinnamon-settings #none
-# -----------------------------------------------------------------------------
-# Disable Cinnamon user greeter.
-# -----------------------------------------------------------------------------
-if type cinnamon-session &> /dev/null; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
 
 # INSTALL cockpit pc06
 # -----------------------------------------------------------------------------
@@ -731,20 +717,6 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes lshw; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lshw; fi
 
-# INSTALL lxde-settings #none
-# -----------------------------------------------------------------------------
-# Enable LXDE user greeter.
-# -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then sudo sed --in-place --expression='s/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
-
-# REMOVE lxde-settings #none
-# -----------------------------------------------------------------------------
-# Disable LXDE user greeter.
-# -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
-
 # INSTALL microsoft-edge *
 # -----------------------------------------------------------------------------
 # Web browser.
@@ -1124,6 +1096,20 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
 
+# INSTALL user-greeter *
+# -----------------------------------------------------------------------------
+# Enable user greeter.
+# -----------------------------------------------------------------------------
+if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
+
+# REMOVE user-greeter *
+# -----------------------------------------------------------------------------
+# Disable user greeter.
+# -----------------------------------------------------------------------------
+if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
+
 # INSTALL user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Add guest user.
@@ -1253,20 +1239,6 @@ if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; th
 if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
 if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
-
-# INSTALL xfce-settings #none
-# -----------------------------------------------------------------------------
-# Enable Xfce user greeter.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then sudo sed --in-place --expression='s/#greeter-hide-users=false/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
-
-# REMOVE xfce-settings #none
-# -----------------------------------------------------------------------------
-# Disable Xfce user greeter.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then sudo sed --in-place --expression='s/greeter-hide-users=false/#greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
 
 # INSTALL youtube-dl #gpg
 # -----------------------------------------------------------------------------
