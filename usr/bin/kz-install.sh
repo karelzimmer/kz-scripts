@@ -495,6 +495,20 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumey
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-earth-pro-stable; fi
 
+# INSTALL greeter *
+# -----------------------------------------------------------------------------
+# Enable LightDM display manager user greeter.
+# -----------------------------------------------------------------------------
+if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
+
+# REMOVE greeter *
+# -----------------------------------------------------------------------------
+# Disable LightDM display manager user greeter.
+# -----------------------------------------------------------------------------
+if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
+REBOOT=true
+
 # INSTALL groff pc06 pc07
 # -----------------------------------------------------------------------------
 # Compose manual pages with GNU roff.
@@ -1095,20 +1109,6 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
-
-# INSTALL user-greeter *
-# -----------------------------------------------------------------------------
-# Enable user greeter.
-# -----------------------------------------------------------------------------
-if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
-
-# REMOVE user-greeter *
-# -----------------------------------------------------------------------------
-# Disable user greeter.
-# -----------------------------------------------------------------------------
-if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
-REBOOT=true
 
 # INSTALL user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
