@@ -282,24 +282,6 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
-# SETUP lxqt-settings *
-# -----------------------------------------------------------------------------
-#  Desktop environment.
-# -----------------------------------------------------------------------------
-if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Alt%2BF1/Super_L/g'                           ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/single_click_activate=.*$/d'                   ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/__userfile__=true/asingle_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/categoriesAtRight=.*$/d'                       ~/.config/lxqt/panel.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/\[mainmenu\]/acategoriesAtRight=false'         ~/.config/lxqt/panel.conf; fi
-
-# RESET lxqt-settings *
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Super_L/Alt%2BF1/g'         ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/categoriesAtRight=.*$/d'     ~/.config/lxqt/panel.conf; fi
-
 # SETUP lynis #none
 # -----------------------------------------------------------------------------
 # Security auditing.
