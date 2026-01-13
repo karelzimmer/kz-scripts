@@ -751,18 +751,6 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo rm  --force --verbose
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  flathub com.microsoft.Edge; fi
 
-# INSTALL mint-codecs #none
-# -----------------------------------------------------------------------------
-# Enhancements for the Linux Mint Cinnamon Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get install --assume-yes mint-meta-codecs; fi
-
-# REMOVE mint-codecs #none
-# -----------------------------------------------------------------------------
-# Enhancements for the Linux Mint Cinnamon Desktop Environment.
-# -----------------------------------------------------------------------------
-if (grep linuxmint /etc/os-release && type cinnamon-session) &> /dev/null; then sudo apt-get remove --assume-yes mint-meta-codecs; fi
-
 # INSTALL nmap pc06 pc07
 # -----------------------------------------------------------------------------
 # Network MAPper.
