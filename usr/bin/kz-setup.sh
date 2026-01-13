@@ -282,36 +282,6 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
-# SETUP lxde-settings *
-# -----------------------------------------------------------------------------
-#  Desktop environment.
-# -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
-
-# RESET lxde-settings *
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=1/single_click=0/g' ~/.config/libfm/libfm.conf; fi
-
-# SETUP lxqt-settings #none
-# -----------------------------------------------------------------------------
-#  Desktop environment.
-# -----------------------------------------------------------------------------
-if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Alt%2BF1/Super_L/g'                           ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/single_click_activate=.*$/d'                   ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/__userfile__=true/asingle_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/categoriesAtRight=.*$/d'                       ~/.config/lxqt/panel.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/\[mainmenu\]/acategoriesAtRight=false'         ~/.config/lxqt/panel.conf; fi
-
-# RESET lxqt-settings #none
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Super_L/Alt%2BF1/g'         ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session &> /dev/null; then sed --in-place --expression='/categoriesAtRight=.*$/d'     ~/.config/lxqt/panel.conf; fi
-
 # SETUP lynis #none
 # -----------------------------------------------------------------------------
 # Security auditing.
@@ -497,20 +467,6 @@ kz-desktop --addaft=kz-whatsapp
 # Instant messaging (IM) and voice-over-IP (VoIP).
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-whatsapp
-
-# SETUP xfce-settings *
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set true; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set true; fi
-
-# RESET xfce-settings *
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel xfce4-desktop --property /desktop-icons/single-click --type bool --set false; fi
-if type xfce4-session &> /dev/null; then xfconf-query --verbose --channel thunar        --property /misc-single-click          --type bool --set false; fi
 
 # SETUP youtube-dl #gpg
 # -----------------------------------------------------------------------------
