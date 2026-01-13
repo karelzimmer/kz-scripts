@@ -196,7 +196,7 @@ function check_website() {
                 "Files not used in html that can probably be removed:")
                 kz.errmsg "$text"
             fi
-            text="rm  $file"
+            text="rm $file"
             kz.infomsg "$text"
         fi
     done < <(
