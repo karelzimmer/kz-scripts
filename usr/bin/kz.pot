@@ -439,7 +439,7 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
 #: ckhtml:123 gitbranch:61 gitclone:77 gitfetch:61 gitinit:44 gitpull:61
-#: gitsquash:54 gitstatus:61 kz-build:513 kz-check:571 kz-deploy:264 kz-dev:277
+#: gitsquash:56 gitstatus:61 kz-build:513 kz-check:571 kz-deploy:264 kz-dev:277
 #: kz-update:299
 msgid "Complete!"
 msgstr ""
@@ -1121,7 +1121,11 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: kz-menu:497
+#: gitsquash:41
+msgid "*** git squash merge in 8 steps ***"
+msgstr ""
+
+#: gitsquash:43 kz-menu:497
 msgid "The following will be executed:"
 msgstr ""
 
@@ -1470,8 +1474,4 @@ msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
-msgstr ""
-
-#: gitsquash:41
-msgid "Git squash merge in 8 steps:"
 msgstr ""
