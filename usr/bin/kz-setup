@@ -114,7 +114,7 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
     fi
 
     for settings_file in "${settings_files[@]}"; do
-        if [[ ! -f $settings_file ]]; then
+        if ! [[ -f $settings_file ]]; then
             text=$(eval_gettext "Settings file '\$settings_file' not found.")
             kz.errmsg "$text"
             err_flag=true

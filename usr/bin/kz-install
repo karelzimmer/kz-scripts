@@ -115,7 +115,7 @@ $installation_file_default_gpg
     fi
 
     for installation_file in "${installation_files[@]}"; do
-        if [[ ! -f $installation_file ]]; then
+        if ! [[ -f $installation_file ]]; then
             text=$(eval_gettext "Installation file '\$installation_file' not \
 found.")
             kz.errmsg "$text"

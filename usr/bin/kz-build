@@ -224,7 +224,8 @@ function generate_gettext_files() {
     local startdir=$PWD
     local text=''
     local gettext_dir=''
-    local gettext_dirs="$HOME/kz-scripts/usr/bin \
+    local gettext_dirs="$HOME/bin \
+/$HOME/kz-scripts/usr/bin \
 $HOME/kz-scripts/usr/share/applications \
 $HOME/kz-scripts/usr/share/polkit-1/actions"
     local gettext_file=''
@@ -250,6 +251,14 @@ $HOME/kz-scripts/usr/share/polkit-1/actions"
                 continue
             elif ! [[ -f $gettext_file ]]; then
                 text=$(gettext 'skip, is not a file.')
+                kz.logmsg "$text"
+                continue
+            elif [[ $gettext_file == LICENSE ]]; then
+                text=$(gettext 'skip, is a LICENSE file.')
+                kz.logmsg "$text"
+                continue
+            elif [[ $gettext_file == README.md ]]; then
+                text=$(gettext 'skip, is a README file.')
                 kz.logmsg "$text"
                 continue
             elif [[ $gettext_file == *.gpg ]]; then

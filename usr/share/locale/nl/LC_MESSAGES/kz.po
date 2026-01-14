@@ -428,59 +428,69 @@ msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 msgid "Build website"
 msgstr "Bouw website"
 
-#: kz-build:232
+#: kz-build:233
 msgid "Generate gettext files"
 msgstr "Genereer gettext-bestanden"
 
-#: kz-build:248
+#: kz-build:249
 msgid "skip, is a direcory."
 msgstr "overslaan, is een map."
 
-#: kz-build:252
+#: kz-build:253
 msgid "skip, is not a file."
 msgstr "overslaan, is geen bestand."
 
-#: kz-build:256
+#: kz-build:257
+msgid "skip, is a LICENSE file."
+msgstr "overslaan, is een LICENSE bestand."
+
+#: kz-build:261
+msgid "skip, is a README file."
+msgstr "overslaan, is een README bestand."
+
+#: kz-build:265
 msgid "skip, is GPG-encrypted."
 msgstr "overslaan, is met GPG versleuteld."
 
-#: kz-build:260
+#: kz-build:269
 msgid "skip, is a gettext POT file."
 msgstr "overslaan, is een gettext POT-bestand."
 
-#: kz-build:264
+#: kz-build:273
 msgid "skip, is a gettext PO file."
 msgstr "overslaan, is een gettext PO-bestand."
 
-#: kz-build:268
+#: kz-build:277
 msgid "skip, is a gettext MO file."
 msgstr "overslaan, is een gettext MO-bestand."
 
-#: kz-build:286
+#: kz-build:295
 msgid "can't determine the language"
 msgstr "kan de taal niet bepalen"
 
-#: kz-build:321
+#: kz-build:330
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:372
+#: kz-build:381
 msgid " DEVELOPMENT VERSION"
 msgstr " ONTWIKKELINGSVERSIE"
 
-#: kz-build:398
+#: kz-build:407
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:473 kz-deploy:237
+#: kz-build:482 kz-deploy:237
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:495 kz-get:223
+#: kz-build:504 kz-get:223
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:504 kz-check:571 kz-deploy:264 kz-dev:277 kz-update:299
+#: ckhtml:123 gitbranch:61 gitclone:77 gitfetch:61 gitinit:44 gitpull:61
+#: gitsquash:54 gitstatus:61 kz-build:513 kz-check:571 kz-deploy:264 kz-dev:277
+#: kz-update:299
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -572,7 +582,7 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:500 kz-check:567 kz-deploy:260
+#: kz-build:509 kz-check:567 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -1600,3 +1610,7 @@ msgstr "Wrapper-script voor kz-wifi"
 #: nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
+
+#: gitsquash:41
+msgid "Git squash merge in 8 steps:"
+msgstr "Git squash merge in 8 stappen:"
