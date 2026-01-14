@@ -243,19 +243,6 @@ kz-desktop --addaft=fr.handbrake.ghb
 # -----------------------------------------------------------------------------
 kz-desktop --delete=fr.handbrake.ghb
 
-# SETUP kde-settings #none
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type ksmserver &> /dev/null && ! grep --quiet '\[KDE\]' ~/.config/kdeglobals; then echo -e '\n[KDE]' >> ~/.config/kdeglobals; fi
-if type ksmserver &> /dev/null && ! grep --quiet 'SingleClick=true' ~/.config/kdeglobals; then sed --in-place --expression='/[KDE]/aSingleClick=true' ~/.config/kdeglobals; fi
-
-# RESET kde-settings #none
-# -----------------------------------------------------------------------------
-# Desktop environment.
-# -----------------------------------------------------------------------------
-if type ksmserver &> /dev/null; then sed --in-place --expression='/SingleClick=true/d' ~/.config/kdeglobals; fi
-
 # SETUP kvm pc06 pc07
 # -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
@@ -281,6 +268,18 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 # -----------------------------------------------------------------------------
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
+
+# SETUP lxde-settings *
+# -----------------------------------------------------------------------------
+#  Desktop environment.
+# -----------------------------------------------------------------------------
+if type lxsession &> /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
+
+# RESET lxde-settings *
+# -----------------------------------------------------------------------------
+# Desktop environment.
+# -----------------------------------------------------------------------------
+if type lxsession &> /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=1/single_click=0/g' ~/.config/libfm/libfm.conf; fi
 
 # SETUP lynis #none
 # -----------------------------------------------------------------------------
