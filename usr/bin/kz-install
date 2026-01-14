@@ -250,8 +250,6 @@ environment available")"
             app_arguments[$1]=$1
             shift
         done
-    else
-        REBOOT=true
     fi
 }
 

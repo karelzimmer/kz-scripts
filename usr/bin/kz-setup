@@ -246,8 +246,6 @@ environment available")"
             app_arguments[$1]=$1
             shift
         done
-    else
-        LOGOUT=true
     fi
 }
 
