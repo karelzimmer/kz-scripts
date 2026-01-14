@@ -35,13 +35,13 @@ kz-desktop --addaft=calibre-gui
 # -----------------------------------------------------------------------------
 kz-desktop --delete=calibre-gui
 
-# SETUP cinnamon-settings #none
+# SETUP cinnamon-settings *
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
 
-# RESET cinnamon-settings #none
+# RESET cinnamon-settings *
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
@@ -278,7 +278,7 @@ kz-desktop --delete=org.libreoffice.LibreOffice.writer
 #  Desktop environment.
 # -----------------------------------------------------------------------------
 if type lxsession &> /dev/null && [[ ! -f ~/.config/libfm/libfm.conf ]]; then pcmanfm; fi
-if type lxsession &> /dev/null && [[   -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
+if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
 LOGOUT=true
 
 # RESET lxde-settings *
@@ -286,7 +286,7 @@ LOGOUT=true
 # Desktop environment.
 # -----------------------------------------------------------------------------
 if type lxsession &> /dev/null && [[ ! -f ~/.config/libfm/libfm.conf ]]; then pcmanfm; fi
-if type lxsession &> /dev/null && [[   -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=1/single_click=0/g' ~/.config/libfm/libfm.conf; fi
+if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=1/single_click=0/g' ~/.config/libfm/libfm.conf; fi
 LOGOUT=true
 
 # SETUP lynis #none
