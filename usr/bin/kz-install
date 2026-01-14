@@ -204,6 +204,7 @@ environment available")"
                     exit 1
                 fi
                 OPTION_GUI=true
+                REBOOT=true
                 shift
                 ;;
             -l | --list )
