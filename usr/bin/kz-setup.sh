@@ -80,6 +80,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position          
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+LOGOUT=true
 
 # RESET dash-to-dock *
 # -----------------------------------------------------------------------------
@@ -98,6 +99,7 @@ if (grep --regexp=debian /etc/os-release && gnome-extensions info dash-to-dock@m
 if (grep --regexp=rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
 if (grep --regexp=rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if (grep --regexp=rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+LOGOUT=true
 
 # SETUP evolution *
 # -----------------------------------------------------------------------------
@@ -182,6 +184,7 @@ sed --in-place --expression='s/# eval/eval/g'     ~/.bashrc
 # -----------------------------------------------------------------------------
 sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
+LOGOUT=true
 
 # RESET gnome-settings *
 # -----------------------------------------------------------------------------
@@ -218,6 +221,7 @@ sed --in-place --expression='s/alias/#alias/g'   ~/.bashrc
 sed --in-place --expression='s/export/#export/g' ~/.bashrc
 sed --in-place --expression='s/eval/#eval/g'     ~/.bashrc
 sed --in-place --expression='/^stty -ixon/d'     ~/.bashrc
+LOGOUT=true
 
 # SETUP google-chrome *
 # -----------------------------------------------------------------------------
@@ -273,13 +277,17 @@ kz-desktop --delete=org.libreoffice.LibreOffice.writer
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
-if type lxsession &> /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
+if type lxsession &> /dev/null && [[ ! -f ~/.config/libfm/libfm.conf ]]; then pcmanfm; fi
+if type lxsession &> /dev/null && [[   -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
+LOGOUT=true
 
 # RESET lxde-settings *
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if type lxsession &> /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=1/single_click=0/g' ~/.config/libfm/libfm.conf; fi
+if type lxsession &> /dev/null && [[ ! -f ~/.config/libfm/libfm.conf ]]; then pcmanfm; fi
+if type lxsession &> /dev/null && [[   -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=1/single_click=0/g' ~/.config/libfm/libfm.conf; fi
+LOGOUT=true
 
 # SETUP lynis #none
 # -----------------------------------------------------------------------------
