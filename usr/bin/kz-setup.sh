@@ -278,7 +278,7 @@ kz-desktop --delete=org.libreoffice.LibreOffice.writer
 #  Desktop environment.
 # -----------------------------------------------------------------------------
 if type lxsession &> /dev/null && ! [[ -f ~/.config/libfm/libfm.conf ]]; then pcmanfm; fi
-if type lxsession &> /dev/null; then until [ -f ~/.config/libfm/libfm.conf ]; do sleep 1; done; fi
+if type lxsession &> /dev/null; then until [[ -f ~/.config/libfm/libfm.conf ]]; do sleep 1; done; fi
 if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
 LOGOUT=true
 
