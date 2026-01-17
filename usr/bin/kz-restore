@@ -306,7 +306,7 @@ function restore_settings() {
 function restore_setting_desktop() {
     local input_file=$settings_dir/desktop.ico
 
-    if [[ -f $input_file ]]; then
+    if type gsettings &> /dev/null && [[ -f $input_file ]]; then
         kz.logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
