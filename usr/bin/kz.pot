@@ -191,7 +191,7 @@ msgid ""
 "Disconnect media via Files."
 msgstr ""
 
-#: kz-backup:251 kz-restore:292
+#: kz-backup:251 kz-restore:296
 msgid "Settings"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgstr ""
 msgid "users.txt"
 msgstr ""
 
-#: kz-backup:347 kz-backup:620 kz-restore:360
+#: kz-backup:347 kz-backup:620 kz-restore:364
 msgid "USERNAME|USERID|USER"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgstr ""
 msgid "Backup Home folder"
 msgstr ""
 
-#: kz-backup:521 kz-install:445 kz-restore:257 kz-setup:439
+#: kz-backup:521 kz-install:445 kz-restore:261 kz-setup:439
 msgid "progress"
 msgstr ""
 
@@ -302,7 +302,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:593 kz-install:586 kz-restore:328 kz-setup:561
+#: kz-backup:593 kz-install:586 kz-restore:332 kz-setup:561
 msgid "error messages"
 msgstr ""
 
@@ -310,7 +310,7 @@ msgstr ""
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:596 kz-restore:331
+#: kz-backup:596 kz-restore:335
 msgid "Possible causes:"
 msgstr ""
 
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:598 kz-restore:333
+#: kz-backup:598 kz-restore:337
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
@@ -327,11 +327,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:601 kz-install:591 kz-restore:336 kz-setup:565
+#: kz-backup:601 kz-install:591 kz-restore:340 kz-setup:565
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:602 kz-install:592 kz-restore:337 kz-setup:566
+#: kz-backup:602 kz-install:592 kz-restore:341 kz-setup:566
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -348,7 +348,7 @@ msgstr ""
 msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
-#: kz-backup:641 kz-restore:376
+#: kz-backup:641 kz-restore:380
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 
@@ -1053,7 +1053,7 @@ msgstr ""
 msgid "Show WiFi details"
 msgstr ""
 
-#: kz-menu:77 kz-restore:257 kz-restore.desktop:10
+#: kz-menu:77 kz-restore:261 kz-restore.desktop:10
 msgid "Restore Home folder"
 msgstr ""
 
@@ -1166,32 +1166,32 @@ msgstr ""
 msgid "No BACKUP-$USER@$HOSTNAME found in $medium."
 msgstr ""
 
-#: kz-restore:258
+#: kz-restore:262
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:329
+#: kz-restore:333
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:332
+#: kz-restore:336
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:334
+#: kz-restore:338
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:338
+#: kz-restore:342
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:357
+#: kz-restore:361
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:368
+#: kz-restore:372
 #, sh-format
 msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr ""

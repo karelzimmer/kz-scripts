@@ -239,8 +239,12 @@ Disconnect media via Files.")"
     fi
     if ! [[ -d $SOURCE ]]; then
         text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
-        kz.errmsg "$text"
-        exit 1
+        kz.infomsg "$text"
+        $OPTION_GUI || kz.wait_for_enter
+        if ! [[ -d $SOURCE ]]; then
+            kz.errmsg "$text"
+            exit 1
+        fi
     fi
 }
 
