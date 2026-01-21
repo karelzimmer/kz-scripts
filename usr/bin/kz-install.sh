@@ -136,14 +136,14 @@ if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; th
 if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
 if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  backintime-qt; fi
 
-# INSTALL bash-completion pc01 pc06 pc07
+# INSTALL bash-completion *
 # -----------------------------------------------------------------------------
 # Tab-completion.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  bash-completion; fi
 
-# REMOVE bash-completion pc01 pc06 pc07
+# REMOVE bash-completion *
 # -----------------------------------------------------------------------------
 # Tab-completion.
 # -----------------------------------------------------------------------------
