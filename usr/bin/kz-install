@@ -204,7 +204,6 @@ environment available")"
                     exit 1
                 fi
                 OPTION_GUI=true
-                REBOOT=true
                 shift
                 ;;
             -l | --list )
@@ -552,6 +551,9 @@ function execute_command() {
                 "$cmd"                      \
                 1> >($PROGRAM_LOGS)         \
                 2>> "$ERROR_LOG"            || pkexec_rc=$?
+        if [[ $cmd = 'REBOOT=true' ]]; then
+            REBOOT=true
+        fi
         if [[ $pkexec_rc -eq 126 || $pkexec_rc -eq 127 ]]; then
             # pkexec_rc = 126: The user dismissed the authentication dialog.
             # pkexec_rc = 127: The calling process is not authorized.
