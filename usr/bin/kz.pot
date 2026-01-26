@@ -983,11 +983,11 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1119 kz-install.sh:1120 kz-install.sh:1126
+#: kz-install.sh:992 kz-install.sh:993 kz-install.sh:999
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1119
+#: kz-install.sh:992
 msgid "Guest_user"
 msgstr ""
 

@@ -166,49 +166,6 @@ REBOOT=true
 sudo flatpak uninstall --assumeyes com.bitwarden.desktop
 REBOOT=true
 
-# INSTALL bleachbit #gpg
-# -----------------------------------------------------------------------------
-# Delete files.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes bleachbit; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  bleachbit; fi
-
-# REMOVE bleachbit #gpg
-# -----------------------------------------------------------------------------
-# Delete files.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes bleachbit; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  bleachbit; fi
-
-# INSTALL broadcom-sta-dkms pc01 #gpg
-# -----------------------------------------------------------------------------
-# Enable wifi adapter.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes linux-headers-generic; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes broadcom-sta-dkms; fi
-REBOOT=true
-
-# REMOVE broadcom-sta-dkms pc01 #gpg
-# -----------------------------------------------------------------------------
-# Disable wifi adapter.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes broadcom-sta-dkms; fi
-REBOOT=true
-
-# INSTALL calibre pc06
-# -----------------------------------------------------------------------------
-# E-book manager.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes calibre; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo --validate && wget --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
-
-# REMOVE calibre pc06
-# -----------------------------------------------------------------------------
-# E-book manager.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes calibre; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo calibre-uninstall; fi
-
 # INSTALL cockpit pc06
 # -----------------------------------------------------------------------------
 # Web console.
@@ -244,18 +201,6 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes libcupsimage2; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cups; fi
-
-# INSTALL cups-backend-bjnp #gpg
-# -----------------------------------------------------------------------------
-# Printer backend for Canon BJNP protocol.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
-
-# REMOVE cups-backend-bjnp #gpg
-# -----------------------------------------------------------------------------
-# Printer backend for Canon BJNP protocol.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
 
 # INSTALL dash-to-dock *
 # -----------------------------------------------------------------------------
@@ -411,20 +356,6 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes gettext; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gettext; fi
 
-# INSTALL gimp pc06
-# -----------------------------------------------------------------------------
-# GNU Image Manipulation Program.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-"${LANG:0:2}"; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  gimp; fi
-
-# REMOVE gimp pc06
-# -----------------------------------------------------------------------------
-# GNU Image Manipulation Program.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-"${LANG:0:2}"; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gimp; fi
-
 # INSTALL git pc06 pc07
 # -----------------------------------------------------------------------------
 # Distributed revision control system.
@@ -548,18 +479,6 @@ sudo sed  --in-place --expression='s/ loglevel=3//' /etc/default/grub
 if grep --quiet --regexp=debian /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
-
-# INSTALL handbrake #gpg
-# -----------------------------------------------------------------------------
-# Video-dvd ripper and transcoder.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes handbrake; fi
-
-# REMOVE handbrake #gpg
-# -----------------------------------------------------------------------------
-# Video-dvd ripper and transcoder.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes handbrake; fi
 
 # INSTALL htop pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -688,19 +607,6 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak install    --
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove    --assume-yes libreoffice; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  app/org.libreoffice.LibreOffice; fi
-
-# INSTALL lidswitch-settings #gpg
-# -----------------------------------------------------------------------------
-# Do nothing when the laptop lid is closed.
-# -----------------------------------------------------------------------------
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf 1> /dev/null
-
-# REMOVE lidswitch-settings #gpg
-# -----------------------------------------------------------------------------
-# Restore the default action when the laptop lid is closed.
-# -----------------------------------------------------------------------------
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # INSTALL locate pc06 pc07
 # -----------------------------------------------------------------------------
@@ -922,18 +828,6 @@ if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
 
-# INSTALL sound-juicer #gpg
-# -----------------------------------------------------------------------------
-# Audio-cd ripper and player.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes sound-juicer; fi
-
-# REMOVE sound-juicer #gpg
-# -----------------------------------------------------------------------------
-# Audio-cd ripper and player.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes sound-juicer; fi
-
 # INSTALL spice-vdagent pc06 pc07
 # -----------------------------------------------------------------------------
 # Enhancements for virtualized guest systems.
@@ -975,27 +869,6 @@ if grep --quiet --regexp=rhel   /etc/os-release; then echo 'The spotify app is a
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes spotify-client; fi
 if grep --quiet --regexp=debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
-
-# INSTALL ssh pc01 pc06 pc07 #gpg
-# -----------------------------------------------------------------------------
-# Secure SHell.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes ssh; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  openssh; fi
-sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-# -----------------------------------------------------------------------------
-# Check for remote root access.
-# -----------------------------------------------------------------------------
-grep 'PermitRootLogin no' /etc/ssh/sshd_config
-sudo systemctl restart ssh.service
-
-# REMOVE ssh pc01 pc06 pc07 #gpg
-# -----------------------------------------------------------------------------
-# Secure SHell.
-# -----------------------------------------------------------------------------
-sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes ssh; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  openssh; fi
 
 # INSTALL sushi #none
 # -----------------------------------------------------------------------------
@@ -1125,27 +998,6 @@ if   id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo passwd  --del
 # -----------------------------------------------------------------------------
 if id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
-# INSTALL virtualbox #gpg
-# -----------------------------------------------------------------------------
-# Virtualization.
-# -----------------------------------------------------------------------------
-# VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
-# If the installation hangs or VBox does not work, check the virtualization
-# settings in the BIOS/UEFI.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  VirtualBox; fi
-
-# REMOVE virtualbox #gpg
-# -----------------------------------------------------------------------------
-# Virtualization.
-# -----------------------------------------------------------------------------
-# VirtualBox Guest user Additions ISO are in '/usr/share/virtualbox/'.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  VirtualBox; fi
-
 # INSTALL vlc *
 # -----------------------------------------------------------------------------
 # Multimedia player.
@@ -1241,17 +1093,3 @@ if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; th
 if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
 if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
 if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
-
-# INSTALL youtube-dl #gpg
-# -----------------------------------------------------------------------------
-# Download videos.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes youtubedl-gui; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  youtube-dl; fi
-
-# REMOVE youtube-dl #gpg
-# -----------------------------------------------------------------------------
-# Download videos.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes youtubedl-gui; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  youtube-dl; fi
