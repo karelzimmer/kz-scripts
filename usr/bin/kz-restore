@@ -361,11 +361,11 @@ $(gettext 'Try restoring the back up again.')"
         text=$(gettext 'The backup has been restored.')
     else
         users=$(
-            gettext 'USERNAME|USERID|USER'
+            gettext 'USERNAME|UID|GID|USER'
             printf  '\n'
             grep    --regexp=/bin/bash /etc/passwd  |
             grep    --regexp=root --invert-match    |
-            cut     --delimiter=':' --fields=1,3,5  |
+            cut     --delimiter=':' --fields=1,3-5  |
             tr      ',,,' '   '                     |
             tr      ':' '|'
             )

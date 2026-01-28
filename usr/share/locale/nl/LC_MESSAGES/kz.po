@@ -258,8 +258,8 @@ msgid "users.txt"
 msgstr "gebruikers.txt"
 
 #: kz-backup:347 kz-backup:620 kz-restore:364
-msgid "USERNAME|USERID|USER"
-msgstr "GEBRUIKERSNAAM|USERID|GEBRUIKER"
+msgid "USERNAME|UID|GID|USER"
+msgstr "GEBR.NAAM|UID|GID|GEBR."
 
 #: kz-backup:365 kz-backup:377
 msgid "Additional users can be added manually:"

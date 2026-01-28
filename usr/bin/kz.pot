@@ -236,7 +236,7 @@ msgid "users.txt"
 msgstr ""
 
 #: kz-backup:347 kz-backup:620 kz-restore:364
-msgid "USERNAME|USERID|USER"
+msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
 #: kz-backup:365 kz-backup:377
