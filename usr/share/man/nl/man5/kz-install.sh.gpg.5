@@ -24,19 +24,19 @@ in dit versleuteld installatiebestand.
 .br
 Deze opdrachten zijn aangegeven met '#gpg' aan het einde van de regel.
 .sp
-Dit bestand is aangemaakt met de volgende voorbeeld opdrachten:
+Dit bestand is aangemaakt met de volgende voorbeeldopdrachten:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
 gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg --sign
-~/kz-install.sh.gpg.bash
+~/kz-install.sh.gpg.sh
 .sp
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
 kz-install met bijvoorbeeld de opdrachten:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
-gpg --output ~/kz-install.sh.gpg.bash --decrypt
+gpg --output ~/kz-install.sh.gpg.sh --decrypt
 ~/kz-scripts/usr/bin/kz-install.sh.gpg
 .sp
 Gebruik voor de opmaak van de records in dit installatiebestand
