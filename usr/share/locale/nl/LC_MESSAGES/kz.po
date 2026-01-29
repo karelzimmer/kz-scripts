@@ -257,9 +257,9 @@ msgstr "==== EINDE overzicht van geïnstalleerde flatpak-apps"
 msgid "users.txt"
 msgstr "gebruikers.txt"
 
-#: kz-backup:347 kz-backup:620 kz-restore:364
+#: kz-backup:347
 msgid "USERNAME|UID|GID|USER"
-msgstr "GEBR.NAAM|UID|GID|GEBR."
+msgstr "GEBRUIKERSNAAM|UID|GID|GEBRUIKER"
 
 #: kz-backup:365 kz-backup:377
 msgid "Additional users can be added manually:"
@@ -350,53 +350,54 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:593 kz-install:588 kz-restore:332 kz-setup:560
+#: kz-backup:594 kz-install:588 kz-restore:333 kz-setup:560
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:594
+#: kz-backup:595
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:596 kz-restore:335
+#: kz-backup:597 kz-restore:336
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:597
+#: kz-backup:598
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:598 kz-restore:337
+#: kz-backup:599 kz-restore:338
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:599
+#: kz-backup:600
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:601 kz-install:593 kz-restore:340 kz-setup:564
+#: kz-backup:602 kz-install:593 kz-restore:341 kz-setup:564
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:602 kz-install:594 kz-restore:341 kz-setup:565
+#: kz-backup:603 kz-install:594 kz-restore:342 kz-setup:565
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:603
+#: kz-backup:604
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:631
+#: kz-backup:623
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:633
-#, sh-format
-msgid "The backup has been made for $USER (there are $num_users users)."
-msgstr "De back-up is gemaakt voor $USER (er zijn $num_users gebruikers)."
+#: kz-backup:634
+#, fuzzy, sh-format
+#| msgid "The backup has been made for $user, there are $num_users users:"
+msgid "The backup has been made for $user, there are $num_users users:"
+msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:641 kz-restore:380
+#: kz-backup:641 kz-restore:381
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -1229,8 +1230,10 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
+#, fuzzy
+#| msgid "*** git squash merge in 9 steps ***"
 msgid "*** git squash merge in 8 steps ***"
-msgstr "*** git squash merge in 8 stappen ***"
+msgstr "*** git squash merge in 9 stappen ***"
 
 #: gitsquash:43 kz-menu:497
 msgid "The following will be executed:"
@@ -1282,33 +1285,33 @@ msgstr "Geen BACKUP-$USER@$HOSTNAME gevonden in $medium."
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
 
-#: kz-restore:333
+#: kz-restore:334
 msgid "Restore ended with errors."
 msgstr "Back-up terugzetten is geëindigd met fouten."
 
-#: kz-restore:336
+#: kz-restore:337
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 "Zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up of"
 
-#: kz-restore:338
+#: kz-restore:339
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr "is er te weinig ruimte op $HOME."
 
-#: kz-restore:342
+#: kz-restore:343
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:361
+#: kz-restore:362
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-restore:372
+#: kz-restore:374
 #, sh-format
-msgid "The backup has restored for $USER (there are $num_users users)."
-msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
+msgid "The backup has restored for $user, there are $num_users users:"
+msgstr "De back-up is teruggezet voor $user, er zijn $num_users gebruikers:"
 
 #: kz-setup:23 kz-setup.desktop:11
 msgid "Set up apps and change user settings"
@@ -1615,7 +1618,5 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
 #: gitsquash:41
-#, fuzzy
-#| msgid "*** git squash merge in 8 steps ***"
 msgid "*** git squash merge in 9 steps ***"
-msgstr "*** git squash merge in 8 stappen ***"
+msgstr "*** git squash merge in 9 stappen ***"

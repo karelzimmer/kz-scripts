@@ -582,6 +582,7 @@ function term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
     local title=''
+    local user=''
     local users=''
 
     # Error-log (stderr) also to the main log.
@@ -616,23 +617,22 @@ $(gettext 'Try creating the back up again.')"
         exit 1
     fi
 
-    users=$(
-        gettext 'USERNAME|UID|GID|USER'
-        printf  '\n'
-        grep    --regexp=/bin/bash /etc/passwd  |
-        grep    --regexp=root --invert-match    |
-        cut     --delimiter=':' --fields=1,3-5  |
-        tr      ',,,' '   '                     |
-        tr      ':' '|'
-        )
     num_users=$(find /home/* -prune -print | wc --lines)
 
     if [[ $num_users -eq 1 ]]; then
         text=$(gettext "The backup has been made.")
     else
-        text="$(eval_gettext "The backup has been made for \$USER (there \
-are \$num_users users).")
-
+        user=$(
+            grep    --regexp="$USER" /etc/passwd    |
+            cut     --delimiter=':' --fields=5
+            )
+        users=$(
+            grep    --regexp=/bin/bash /etc/passwd  |
+            grep    --regexp=root --invert-match    |
+            cut     --delimiter=':' --fields=5
+            )
+        text="$(eval_gettext "The backup has been made for \$user, there are \
+\$num_users users:")
 $users"
     fi
     if [[ $TARGET == /media/$USER* ]]; then
