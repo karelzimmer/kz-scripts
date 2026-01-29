@@ -33,8 +33,7 @@ HELP="$(gettext "Usage: kz menu [<options>]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -g, --gui      run in graphical mode,')
-$(gettext '                 requires a desktop environment')
+$(gettext '  -g, --gui      run in graphical mode if possible')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')

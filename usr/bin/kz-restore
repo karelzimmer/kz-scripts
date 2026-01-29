@@ -36,8 +36,7 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
-$(gettext '  -g, --gui      run in graphical mode,')
-$(gettext '                 requires a desktop environment')
+$(gettext '  -g, --gui      run in graphical mode if possible')
 $(gettext '  -s, --source <directory>
                  use backup in specified directory')
 $(gettext '  -h, --help     show this help text')
