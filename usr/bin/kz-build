@@ -79,6 +79,7 @@ declare ERR_FLAG=false
 
 # This function performs the script actions, such as checking the input.
 function process() {
+    local build_id=''
     local text=''
 
     check_input "$@"
@@ -92,6 +93,8 @@ function process() {
     build_website
     generate_gettext_files
     kz.check_repos || OPTION_DEV=true
+    # Capture build id Debian package (ISO 8601 YYYY-MM-DDTHH:MM:SS.SSS CET).
+    build_id=$(date '+%Y-%m-%dT%H:%M:%S.%3N CET')
     build_deb_package
     build_rpm_package
     install_deb_package
@@ -323,7 +326,6 @@ $HOME/kz-scripts/usr/share/polkit-1/actions"
 
 # This function builds Debian package kz.
 function build_deb_package() {
-    local build_id=''
     local text=''
     local to_build=''
 
@@ -375,10 +377,8 @@ function build_deb_package() {
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man1/"* \
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man5/"* |& $PROGRAM_LOGS
 
-    # Capture build id Debian package (ISO 8601 YYYY-MM-DDTHH:MM).
-    build_id=$(date '+%Y-%m-%dT%H:%M')
     if $OPTION_DEV; then
-        build_id+=$(gettext ' DEVELOPMENT VERSION')
+        build_id+=$(gettext ' *** DEVELOPMENT VERSION ***')
     fi
     mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
@@ -399,7 +399,6 @@ function build_deb_package() {
 
 # This function builds RPM package kz.
 function build_rpm_package() {
-    local build_id=''
     local startdir=$PWD
     local text=''
     local to_copy=''
@@ -445,8 +444,6 @@ function build_rpm_package() {
             "$RPM_REPO_DISTDIR/usr/share/man/nl/man1/"* \
             "$RPM_REPO_DISTDIR/usr/share/man/nl/man5/"* |& $PROGRAM_LOGS
 
-    # Capture build id RPM package (ISO 8601 YYYY-MM-DDTHH:MM).
-    build_id=$(date '+%Y-%m-%dT%H:%M')
     mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
