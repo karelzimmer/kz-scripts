@@ -184,7 +184,7 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes cockpit; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cockpit; fi
 
-# INSTALL cups pc06 pc07
+# INSTALL cups *
 # -----------------------------------------------------------------------------
 # Common Unix Printing System.
 # -----------------------------------------------------------------------------
@@ -194,7 +194,7 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --ass
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes libcupsimage2; fi
 if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  cups; fi
 
-# REMOVE cups pc06 pc07
+# REMOVE cups *
 # -----------------------------------------------------------------------------
 # Common Unix Printing System.
 # -----------------------------------------------------------------------------
