@@ -196,16 +196,17 @@ The app can still be set up with the command 'kz setup calibre'.
 
 .SH EXAMPLES
 .EX
-# SETUP spotify pc01 pc02 pc06 pc07
+# SETUP calibre pc01
 # -----------------------------------------------------------------------------
-# Music and podcasts.
+# E-book manager.
 # -----------------------------------------------------------------------------
-# Web app: https://open.spotify.com
+kz-desktop --addaft=calibre-gui
+
+# RESET calibre pc01
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian  /etc/os-release; then kz-desktop --addaft=spo\
-tify; fi
-if grep --quiet --regexp=rhel    /etc/os-release; then kz-desktop --addaft=kz-\
-spotify; fi
+# E-book manager.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=calibre-gui
 .EE
 
 .SH SEE ALSO

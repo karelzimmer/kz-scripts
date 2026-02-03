@@ -177,7 +177,7 @@ De regel met 'pc01' zorgt ervoor dat de bijbehorende opdrachten standaard
 alleen op pc01 worden uitgevoerd.
 .br
 De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
-'kz install gnome'.
+'kz install calibre'.
 .sp
 [3]
 .br
@@ -197,14 +197,24 @@ De app kan alsnog worden geïnstalleerd met de opdracht 'kz install calibre'.
 
 .SH VOORBEELDEN
 .EX
-# INSTALL gnome-tweaks *
+# INSTALL calibre pc01
 # -----------------------------------------------------------------------------
-# Adjust advanced settings.
+# E-book manager.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --a\
-ssume-yes gnome-tweaks; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --a\
-ssumeyes  gnome-tweaks; fi
+ssume-yes calibre; fi
+if grep --quiet --regexp=rhel   /etc/os-release; then sudo --validate && wget \
+--output-document=- https://download.calibre-ebook.com/linux-installer.sh | su\
+do sh; fi
+
+# REMOVE calibre pc01
+# -----------------------------------------------------------------------------
+# E-book manager.
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --as\
+sume-yes calibre; fi
+if grep --quiet --regexp=rhel   /etc/os-release; then sudo calibre-uninstall; \
+fi
 .EE
 
 .SH ZIE OOK
