@@ -107,60 +107,60 @@ T}
 l | l
 l | l.
 T{
-# SETUP google-chrome *
+# SETUP calibre *
 T}:T{
-Stel app google-chrome in op iedere computer, zie [1]
+Stel calibre in op iedere computer, zie [1]
 T}
 T{
-kz-desktop --addbef=google-chrome
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# RESET google-chrome *
-T}:T{
-Reset app google-chrome op iedere computer, zie [1]
-T}
-T{
-kz-desktop --delete=google-chrome
+kz-desktop --addbef=calibre
 T}:T{
 T}
 T{
 T}:T{
 T}
 T{
-# SETUP gnome pc01
+# RESET calibre *
 T}:T{
-Stel app gnome in alleen op pc01, zie [2]
+Reset calibre op iedere computer, zie [1]
 T}
 T{
-gsettings set org.gnome.shell...
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# SETUP kvm pc01 pc02
-T}:T{
-Stel app kvm in op pc01 en pc02, zie [3]
-T}
-T{
-kz-desktop --addaft=virt-manager
+kz-desktop --delete=calibre
 T}:T{
 T}
 T{
 T}:T{
 T}
 T{
-# SETUP google-earth #none
+# SETUP calibre pc01
 T}:T{
-Standaard niet app google-earth instellen, zie [4]
+Stel calibre in alleen op pc01, zie [2]
 T}
 T{
-kz-desktop --addaft=google-earth
+kz-desktop --addbef=calibre
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# SETUP calibre pc01 pc02
+T}:T{
+Stel calibre in op pc01 en pc02, zie [3]
+T}
+T{
+kz-desktop --addbef=calibre
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# SETUP calibre #none
+T}:T{
+Stel calibre niet standaard in, zie [4]
+T}
+T{
+kz-desktop --addbef=calibre
 T}:T{
 T}
 .TE
@@ -185,7 +185,7 @@ De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
 alleen op pc01 en pc02 worden uitgevoerd.
 .br
 De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
-setup kvm'.
+setup calibre'.
 .sp
 [4]
 .br
@@ -193,7 +193,7 @@ De regel met '#none' zorgt ervoor dat de bijbehorende opdrachten standaard
 niet worden uitgevoerd (OPMERKING: '#none' is geen geldige computernaam en
 wordt daarom nooit standaard geselecteerd).
 .br
-De app kan alsnog worden ingesteld met de opdracht 'kz setup google-earth'.
+De app kan alsnog worden ingesteld met de opdracht 'kz setup calibre'.
 
 .SH VOORBEELDEN
 .EX

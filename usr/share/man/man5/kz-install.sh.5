@@ -107,60 +107,60 @@ T}
 l | l
 l | l.
 T{
-# INSTALL libreoffice *
+# INSTALL calibre *
 T}:T{
-Install app libreoffice on any computer, see [1].
+Install calibre on any computer, see [1].
 T}
 T{
-sudo apt-get install --assume-yes libreoffice
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# REMOVE libreoffice *
-T}:T{
-Remove app libreoffice from any computer, see [1].
-T}
-T{
-sudo apt-get remove --purge --assume-yes libreoffice
+sudo apt-get install --assume-yes calibre
 T}:T{
 T}
 T{
 T}:T{
 T}
 T{
-# INSTALL ufw pc01
+# REMOVE calibre *
 T}:T{
-Install app ufw only on pc01, see [2].
+Remove calibre from any computer, see [1].
 T}
 T{
-sudo apt-get install --assume-yes gufw
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# INSTALL kvm pc01 pc02
-T}:T{
-Install app kvm on pc01 and pc02, see [3].
-T}
-T{
-sudo apt-get install --assume-yes qemu-kvm
+sudo apt-get remove --assume-yes calibre
 T}:T{
 T}
 T{
 T}:T{
 T}
 T{
-# INSTALL google-earth #none
+# INSTALL calibre pc01
 T}:T{
-Do not install Google Earth by default, see [4].
+Install calibre only on pc01, see [2].
 T}
 T{
-sudo apt-get install --assume-yes google-earth
+sudo apt-get install --assume-yes calibre
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# INSTALL calibre pc01 pc02
+T}:T{
+Install calibre on pc01 and pc02, see [3].
+T}
+T{
+sudo apt-get install --assume-yes calibre
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# INSTALL calibre #none
+T}:T{
+Do not install calibre by default, see [4].
+T}
+T{
+sudo apt-get install --assume-yes calibre
 T}:T{
 T}
 .TE
@@ -176,7 +176,7 @@ The line with 'pc01' ensures that the associated commands are executed only on
 host pc01 by default.
 .br
 The app can still be installed on another computer with the command 'kz instal\
-l google-earth'.
+l calibre'.
 .sp
 [3]
 .br
@@ -184,7 +184,7 @@ The line with 'pc01 pc02' ensures that the associated commands are executed
 only on pc01 and pc02 by default.
 .br
 The app can still be installed on another computer with the command 'kz instal\
-l kvm'.
+l calibre'.
 .sp
 [4]
 .br
@@ -192,7 +192,7 @@ The line with '#none' ensures that the associated commands are not executed on
 a computer by default (NOTE: '#none' is not a valid computername and will
 therefore never be selected by default).
 .br
-The app can still be installed with the command 'kz install google-earth'.
+The app can still be installed with the command 'kz install calibre'.
 
 .SH EXAMPLES
 .EX

@@ -107,60 +107,60 @@ T}
 l | l
 l | l.
 T{
-# INSTALL libreoffice *
+# INSTALL calibre *
 T}:T{
-Installeer app libreoffice op iedere computer, zie [1]
+Installeer calibre op iedere computer, zie [1]
 T}
 T{
-sudo apt-get install --assume-yes libreoffice
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# REMOVE libreoffice *
-T}:T{
-Verwijder app libreoffice van iedere computer, zie [1]
-T}
-T{
-sudo apt-get remove --purge --assume-yes libreoffice
+sudo apt-get install --assume-yes calibre
 T}:T{
 T}
 T{
 T}:T{
 T}
 T{
-# INSTALL ufw pc01
+# REMOVE calibre *
 T}:T{
-Installeer app ufw alleen op pc01, zie [2]
+Verwijder calibre van iedere computer, zie [1]
 T}
 T{
-sudo apt-get install --assume-yes gufw
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# INSTALL kvm pc01 pc02
-T}:T{
-Installeer app kvm op pc01 en pc02, zie [3]
-T}
-T{
-sudo apt-get install --assume-yes qemu-kvm
+sudo apt-get remove --assume-yes calibre
 T}:T{
 T}
 T{
 T}:T{
 T}
 T{
-# INSTALL google-earth #none
+# INSTALL calibre pc01
 T}:T{
-Standaard niet app google-earth installeren, zie [4]
+Installeer calibre alleen op pc01, zie [2]
 T}
 T{
-sudo apt-get install --assume-yes google-earth
+sudo apt-get install --assume-yes calibre
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# INSTALL calibre pc01 pc02
+T}:T{
+Installeer calibre op pc01 en pc02, zie [3]
+T}
+T{
+sudo apt-get install --assume-yes calibre
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# INSTALL calibre #none
+T}:T{
+Installeer calibre niet standaard, zie [4]
+T}
+T{
+sudo apt-get install --assume-yes calibre
 T}:T{
 T}
 .TE
@@ -185,7 +185,7 @@ De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
 alleen op pc01 en pc02 worden uitgevoerd.
 .br
 De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
-'kz install kvm'.
+'kz install calibre'.
 .sp
 [4]
 .br

@@ -107,60 +107,60 @@ T}
 l | l
 l | l.
 T{
-# SETUP google-chrome *
+# SETUP calibre *
 T}:T{
-Set up google-chrome on any computer, see [1]
+Set up calibre on any computer, see [1]
 T}
 T{
-kz-desktop --addbef=google-chrome
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# RESET google-chrome *
-T}:T{
-Reset app google-chrome on any computer, see [1]
-T}
-T{
-kz-desktop --delete=google-chrome
+kz-desktop --addbef=calibre
 T}:T{
 T}
 T{
 T}:T{
 T}
 T{
-# SETUP gnome pc01
+# RESET calibre *
 T}:T{
-Set up gnome only on pc01, see [2]
+Reset calibre on any computer, see [1]
 T}
 T{
-gsettings set org.gnome.shell...
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# SETUP kvm pc01 pc02
-T}:T{
-Set up kvm on pc01 and pc02, see [3]
-T}
-T{
-kz-desktop --addaft=virt-manager
+kz-desktop --delete=calibre
 T}:T{
 T}
 T{
 T}:T{
 T}
 T{
-# SETUP google-earth #none
+# SETUP calibre pc01
 T}:T{
-Do not set up Google Earth by default, see [4]
+Set up calibre only on pc01, see [2]
 T}
 T{
-kz-desktop --addaft=google-earth
+kz-desktop --addbef=calibre
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# SETUP calibre pc01 pc02
+T}:T{
+Set up calibre on pc01 and pc02, see [3]
+T}
+T{
+kz-desktop --addbef=calibre
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# SETUP calibre #none
+T}:T{
+Do not set up calibre by default, see [4]
+T}
+T{
+kz-desktop --addaft=calibre
 T}:T{
 T}
 .TE
@@ -183,7 +183,7 @@ gle-earth'.
 The line with 'pc01 pc02' ensures that the associated commands are executed
 only on pc01 and pc02 by default.
 .br
-The app can still be set up on another computer with the command 'kz setup kvm\
+The app can still be set up on another computer with the command 'kz setup calibre\
 '.
 .sp
 [4]
@@ -192,7 +192,7 @@ The line with '#none' ensures that the associated commands are not executed by
 default (NOTE: '#none' is not a valid computername and will therefore never
 be selected by default).
 .br
-The app can still be set up with the command 'kz setup google-earth'.
+The app can still be set up with the command 'kz setup calibre'.
 
 .SH EXAMPLES
 .EX
