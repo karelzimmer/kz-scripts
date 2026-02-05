@@ -20,15 +20,15 @@ This file contains commands to process as an installation file with kz install.
 Commands with personal information such as a username are included in this
 GPG-encrypted installation file.
 .sp
-It is created with e.g. commands:
+This file was created using the following sample commands:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
 gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg --sign
 ~/kz-install-decrypted.sh
 .sp
-This encrypted file is decrypted before the commands are used in script
-kz-install with e.g. commands:
+This file is decrypted before the commands are used in the kz-install script,
+and as an example with the commands:
 .br
 gpg --import /usr/share/kz/kz-public-key.gpg
 .br
