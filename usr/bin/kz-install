@@ -85,7 +85,7 @@ function process() {
     local command_file=''
     local err_flag=false
     local install='INSTALL'
-    local installation_file_default_gpg=''
+    local installation_file_decrypted=''
     local installation_file_default=/usr/bin/$PROGRAM_NAME.sh
     local installation_file=''
     local option_browse=false
@@ -99,18 +99,18 @@ function process() {
 
     if ! $option_file; then
         installation_files[++installation_file_num]=$installation_file_default
-        # Install commands in gpg file.
-        installation_file_default_gpg=\
-$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
+        # Decrypt GPG-encrypted installation file.
+        installation_file_decrypted=\
+$(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
         gpg --import                        \
             /usr/share/kz/kz-public-key.gpg \
             2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-install.sh.gpg      \
             2> >($PROGRAM_LOGS)             \
-            > "$installation_file_default_gpg"
+            > "$installation_file_decrypted"
         installation_files[++installation_file_num]=\
-$installation_file_default_gpg
+$installation_file_decrypted
     fi
 
     for installation_file in "${installation_files[@]}"; do
@@ -135,7 +135,7 @@ found.")
         exit 0
     fi
 
-    command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-commands.sh")
+    command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
 
     if $argument_app; then
         process_argument_app
@@ -435,7 +435,7 @@ function install_apps() {
         exit 0
     fi
 
-    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
+    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
     text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
@@ -514,7 +514,6 @@ function process_command_file() {
 function execute_command() {
     local -i cmd_dis_len=0
     local -i cmd_dis_max=0
-    local -i pkexec_rc=0
     local cmd_dis=''
     local cmd=${1:-unknown}
 
@@ -549,17 +548,9 @@ function execute_command() {
         pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                      \
                 1> >($PROGRAM_LOGS)         \
-                2>> "$ERROR_LOG"            || pkexec_rc=$?
+                2>> "$ERROR_LOG"            || FAILED_APPS[$app_name]=$app_name
         if [[ $cmd = 'REBOOT=true' ]]; then
             REBOOT=true
-        fi
-        if [[ $pkexec_rc -eq 126 || $pkexec_rc -eq 127 ]]; then
-            # pkexec_rc = 126: The user dismissed the authentication dialog.
-            # pkexec_rc = 127: The calling process is not authorized.
-            exit "$pkexec_rc"
-        elif [[ $pkexec_rc -gt 0 ]]; then
-            # pkexec_rc > 0: The command failed.
-            FAILED_APPS[$app_name]=$app_name
         fi
     else
         kz.check_debian_package_manager
@@ -572,9 +563,9 @@ function execute_command() {
 
 # This function controls the termination of the script.
 function term() {
-    local cmd='sudo systemctl reboot'
     local operation=''
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local reboot='sudo systemctl reboot'
     local text=''
     local title=''
 
@@ -625,10 +616,10 @@ changing system settings.")"
 
     if $REBOOT; then
         if $OPTION_GUI; then
-            pkexec /usr/bin/kz-install-pkexec "$cmd"
+            pkexec /usr/bin/kz-install-pkexec "$reboot"
         else
             kz.wait_for_enter
-            eval "$cmd"
+            eval "$reboot"
         fi
     fi
 

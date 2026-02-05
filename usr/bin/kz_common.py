@@ -32,10 +32,11 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise exits 0 with descriptive message.
     """
-    command: str = 'groups $USER | grep --quiet --regexp=sudo --regexp=wheel'
+    check_become_root: str = 'groups $USER | grep --quiet --regexp=sudo' + \
+        ' --regexp=wheel'
     text: str = ''
 
-    if subprocess.run(command, executable='bash',
+    if subprocess.run(check_become_root, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         return 0
@@ -50,18 +51,19 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     This function checks if a Debian package manager is already running and
     waits for the next check if so.
     """
-    command1: str = 'grep --quiet --regexp=rhel /etc/os-release'
-    command2: str = 'pkexec /usr/bin/kz_common-pkexec'
+    check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
+    check_rhel: str = 'grep --quiet --regexp=rhel /etc/os-release'
     text: str = ''
 
-    if subprocess.run(command1, executable='bash',
+    if subprocess.run(check_rhel, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         return 0
 
     while True:
         try:
-            subprocess.run(command2, executable='bash', shell=True, check=True)
+            subprocess.run(check_debian_package_manager, executable='bash',
+                           shell=True, check=True)
         except Exception:
             break
         else:
@@ -88,12 +90,12 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC + ' ' + _('error message')
-        command: str = f'zenity --error                 \
+        zenity: str = f'zenity --error                 \
                                 --width     600         \
                                 --height    100         \
                                 --title     "{title}"   \
                                 --text      "{TEXT}"'
-        subprocess.run(command, executable='bash', shell=True)
+        subprocess.run(zenity, executable='bash', shell=True)
     else:
         print(f'\033[1;31m{TEXT}\033[0m')
 
@@ -106,12 +108,12 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC + ' ' + _('information')
-        command: str = f'zenity --info                  \
+        zenity: str = f'zenity --info                  \
                                 --width     600         \
                                 --height    100         \
                                 --title     "{title}"   \
                                 --text      "{TEXT}"'
-        subprocess.run(command, executable='bash', shell=True)
+        subprocess.run(zenity, executable='bash', shell=True)
     else:
         print(TEXT)
 
@@ -182,16 +184,16 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function displays the manual page..
     """
-    command1: str = f'yelp man:{PROGRAM_NAME}'
-    command2: str = f'man --pager=cat {PROGRAM_NAME}'
     exc: BaseException
+    man: str = f'man --pager=cat {PROGRAM_NAME}'
     text: str = ''
+    yelp: str = f'yelp man:{PROGRAM_NAME}'
 
     if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         try:
-            subprocess.run(command1, executable='bash',
+            subprocess.run(yelp, executable='bash',
                            stderr=subprocess.DEVNULL,
                            shell=True, check=True,)
         except Exception as exc:
@@ -202,7 +204,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
             term(PROGRAM_NAME, 1)
     else:
         try:
-            subprocess.run(command2, executable='bash', shell=True, check=True)
+            subprocess.run(man, executable='bash', shell=True, check=True)
         except Exception as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)

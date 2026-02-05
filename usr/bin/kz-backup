@@ -497,7 +497,7 @@ function create_backup() {
     local text=''
     local title=''
 
-    exclude_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.exclude")
+    exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX.list")
 
     cat <<EOF > "$exclude_file"
 # Exclude Git-managed directories.
@@ -513,7 +513,7 @@ $(
     )
 EOF
 
-    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
+    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
     text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 

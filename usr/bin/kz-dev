@@ -66,10 +66,10 @@ def process() -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    command: str = 'grep --quiet --regexp=debian /etc/os-release'
+    check_debian: str = 'grep --quiet --regexp=debian /etc/os-release'
     text: str
 
-    if subprocess.run(command, executable='bash',
+    if subprocess.run(check_debian, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode != 0:
         text = _('Must run on a Debian or Debian-based system.')
@@ -145,6 +145,7 @@ def pull_repos() -> None:
     This function retrieves the public repos.
     """
     bin_repo: str = f'{os.getenv("HOME")}/bin'
+    command: str
     exc: BaseException
     text: str
 
@@ -250,12 +251,12 @@ def download_website() -> None:
             file.write(getpass.getpass(text))
         os.chmod(ftp_login, 0o600)
 
-    command: str = f"lftp   --user      {ftp_user}                  \
-                            --password  $(cat {ftp_login})          \
-                            -e          '{ftp_set}; {ftp_x_cmd}'    \
-                            {ftp_host}"
+    lftp: str = f"lftp  --user      {ftp_user}                  \
+                        --password  $(cat {ftp_login})          \
+                        -e          '{ftp_set}; {ftp_x_cmd}'    \
+                        {ftp_host}"
     try:
-        subprocess.run(command, executable='bash', shell=True, check=True)
+        subprocess.run(lftp, executable='bash', shell=True, check=True)
     except Exception:
         os.remove(ftp_login)  # Force entering the password next time.
         text = _('Website download failed.')

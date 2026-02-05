@@ -92,13 +92,13 @@ msgstr "opdracht bestaat niet"
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:111 kz_common.py:292 kz-update:80
+#: kz:111 kz_common.py:294 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz:117 kz_common.py:200 kz_common.py:209 kz_common.py:248 kz_common.py:298
-#: kz-dev:162 kz-dev:173 kz-dev:186 kz-dev:204 kz-dev:222 kz-update:86
-#: kz-update:100 kz-update:288
+#: kz:117 kz_common.py:202 kz_common.py:211 kz_common.py:250 kz_common.py:300
+#: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
+#: kz-update:100 kz-update:306
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
@@ -346,7 +346,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:593 kz-install:587 kz-restore:332 kz-setup:559
+#: kz-backup:593 kz-install:578 kz-restore:332 kz-setup:559
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -371,11 +371,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:601 kz-install:592 kz-restore:340 kz-setup:563
+#: kz-backup:601 kz-install:583 kz-restore:340 kz-setup:563
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:602 kz-install:593 kz-restore:341 kz-setup:564
+#: kz-backup:602 kz-install:584 kz-restore:341 kz-setup:564
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -485,8 +485,8 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
 #: ckhtml:123 gitbranch:61 gitclone:77 gitfetch:61 gitinit:44 gitpull:61
-#: gitsquash:57 gitstatus:61 kz-build:510 kz-check:571 kz-deploy:264 kz-dev:277
-#: kz-update:299
+#: gitsquash:57 gitstatus:61 kz-build:510 kz-check:571 kz-deploy:264 kz-dev:278
+#: kz-update:317
 msgid "Complete!"
 msgstr "Klaar!"
 
@@ -582,72 +582,72 @@ msgstr "Eindspaties gevonden."
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz_common.py:43 kz_common.sh:31 kz-get:130
+#: kz_common.py:44 kz_common.sh:31 kz-get:130
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:68 kz_common.sh:48 kz-get:184
+#: kz_common.py:70 kz_common.sh:48 kz-get:184
 msgid "Wait for another package manager to finish"
 msgstr "Wacht tot een andere pakketbeheerder klaar is"
 
-#: kz_common.py:90 kz_common.sh:125
+#: kz_common.py:92 kz_common.sh:125
 msgid "error message"
 msgstr "foutmelding"
 
-#: kz_common.py:108 kz_common.sh:144
+#: kz_common.py:110 kz_common.sh:144
 msgid "information"
 msgstr "informatie"
 
-#: kz_common.py:129 kz_common.sh:163
+#: kz_common.py:131 kz_common.sh:163
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:135 kz_common.sh:170
+#: kz_common.py:137 kz_common.sh:170
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:141 kz_common.sh:177
+#: kz_common.py:143 kz_common.sh:177
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:170 kz_common.sh:216
+#: kz_common.py:172 kz_common.sh:216
 msgid ", or see the "
 msgstr ", of zie de "
 
-#: kz_common.py:171 kz_common.sh:218
+#: kz_common.py:173 kz_common.sh:218
 msgid "man page"
 msgstr "man-pagina"
 
-#: kz_common.py:175
+#: kz_common.py:177
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:177
+#: kz_common.py:179
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:222
+#: kz_common.py:224
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:242 kz_common.sh:263
+#: kz_common.py:244 kz_common.sh:263
 msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
-#: kz_common.py:252
+#: kz_common.py:254
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:253 kz_common.sh:271
+#: kz_common.py:255 kz_common.sh:271
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:254 kz_common.sh:272
+#: kz_common.py:256 kz_common.sh:272
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.py:288 kz_common.sh:394
+#: kz_common.py:290 kz_common.sh:392
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -693,7 +693,7 @@ msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:382
+#: kz_common.sh:380
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -730,7 +730,7 @@ msgstr "DISTRIBUEREN -- 2/2"
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:209 kz-dev:248
+#: kz-deploy:209 kz-dev:249
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
@@ -839,27 +839,27 @@ msgstr "Gebruik: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
 
-#: kz-dev:151
+#: kz-dev:152
 msgid "Clone repos..."
 msgstr "Clone repo's..."
 
-#: kz-dev:192
+#: kz-dev:193
 msgid "Pull repos..."
 msgstr "Pull repo's..."
 
-#: kz-dev:210
+#: kz-dev:211
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-#: kz-dev:244
+#: kz-dev:245
 msgid "Download website..."
 msgstr "Downloaden website"
 
-#: kz-dev:261
+#: kz-dev:262
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-#: kz-dev:270
+#: kz-dev:271
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
@@ -1047,28 +1047,28 @@ msgstr "NUM/TOT  APP"
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
-#: kz-install:588
+#: kz-install:579
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:594
+#: kz-install:585
 msgid "Try to install/remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
-#: kz-install:610
+#: kz-install:601
 msgid "install"
 msgstr "installeren"
 
-#: kz-install:614
+#: kz-install:605
 msgid "remove"
 msgstr "verwijderen"
 
-#: kz-install:616 kz-setup:587
+#: kz-install:607 kz-setup:587
 #, sh-format
 msgid "Apps $operation completed."
 msgstr "Apps $operation is voltooid."
 
-#: kz-install:621
+#: kz-install:612
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."

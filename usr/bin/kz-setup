@@ -89,7 +89,7 @@ function process() {
     local option_file=false
     local option_list=false
     local reset='RESET'
-    local settings_file_default_gpg=''
+    local settings_file_decrypted=''
     local settings_file_default=/usr/bin/$PROGRAM_NAME.sh
     local settings_file=''
     local setup='SETUP'
@@ -99,17 +99,17 @@ function process() {
 
     if ! $option_file; then
         settings_files[++settings_file_num]=$settings_file_default
-        # Setup commands in gpg file.
-        settings_file_default_gpg=\
-$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
+        # Decrypt GPG-encrypted settings file.
+        settings_file_decrypted=\
+$(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
         gpg --import                        \
             /usr/share/kz/kz-public-key.gpg \
             2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-setup.sh.gpg        \
             2> >($PROGRAM_LOGS)             \
-            > "$settings_file_default_gpg"
-        settings_files[++settings_file_num]=$settings_file_default_gpg
+            > "$settings_file_decrypted"
+        settings_files[++settings_file_num]=$settings_file_decrypted
     fi
 
     for settings_file in "${settings_files[@]}"; do
@@ -133,7 +133,7 @@ $(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-decryptd.sh.gpg")
         exit 0
     fi
 
-    command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-commands.sh")
+    command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
 
     if $argument_app; then
         process_argument_app
@@ -430,7 +430,7 @@ function setup_apps() {
         exit 0
     fi
 
-    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX-error.log")
+    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
     text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
