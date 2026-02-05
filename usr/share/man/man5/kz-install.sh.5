@@ -200,20 +200,19 @@ The app can still be installed with the command 'kz install calibre'.
 # -----------------------------------------------------------------------------
 # E-book manager.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --a\
-ssume-yes calibre; fi
-if grep --quiet rhel   /etc/os-release; then sudo --validate && wget \
---output-document=- https://download.calibre-ebook.com/linux-installer.sh | su\
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes\
+ calibre; fi
+if grep --quiet rhel   /etc/os-release; then sudo --validate && wget --output\
+-document=- https://download.calibre-ebook.com/linux-installer.sh | su\
 do sh; fi
 
 # REMOVE calibre pc01
 # -----------------------------------------------------------------------------
 # E-book manager.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --as\
-sume-yes calibre; fi
-if grep --quiet rhel   /etc/os-release; then sudo calibre-uninstall; \
-fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes \
+calibre; fi
+if grep --quiet rhel   /etc/os-release; then sudo calibre-uninstall; fi
 .EE
 
 .SH SEE ALSO

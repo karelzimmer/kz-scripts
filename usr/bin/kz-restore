@@ -361,13 +361,10 @@ $(gettext 'Try restoring the back up again.')"
         text=$(gettext 'The backup has been restored.')
     else
         # shellcheck disable=SC2034
-        user=$(
-            grep    --regexp="$USER" /etc/passwd    |
-            cut     --delimiter=':' --fields=5
-            )
+        user=$(grep "$USER" /etc/passwd | cut --delimiter=':' --fields=5)
         users=$(
-            grep    --regexp=/bin/bash /etc/passwd  |
-            grep    --regexp=root --invert-match    |
+            grep    /bin/bash /etc/passwd   |
+            grep    root --invert-match     |
             cut     --delimiter=':' --fields=5
             )
         text="$(eval_gettext "The backup has restored for \$user, there are \

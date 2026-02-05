@@ -273,17 +273,17 @@ function process_option_list() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
-                "${installation_files[@]}"                          |
-        tr      --squeeze-repeats                                   \
-                '[:space:]'                                         |
-        cut     --delimiter=' '                                     \
-                --fields=3                                          |
-        sort    --unique                                            |
-        nl      --number-width=3                                    \
-                --number-format=rn                                  \
-                --number-separator='  '                             \
-                --body-numbering=a                                  || true
+        grep    "#[[:space:]]\+${install}[[:space:]]\+" \
+                "${installation_files[@]}"              |
+        tr      --squeeze-repeats                       \
+                '[:space:]'                             |
+        cut     --delimiter=' '                         \
+                --fields=3                              |
+        sort    --unique                                |
+        nl      --number-width=3                        \
+                --number-format=rn                      \
+                --number-separator='  '                 \
+                --body-numbering=a                      || true
         )
 
     if [[ -n $apps ]]; then
@@ -425,9 +425,9 @@ function install_apps() {
     local title=''
 
     app_tot_num=$(
-        grep    --count                                             \
-                --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
-                "$command_file"                                     || true
+        grep    --count                                 \
+                "#[[:space:]]\+${install}[[:space:]]\+" \
+                "$command_file"                         || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
