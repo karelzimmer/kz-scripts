@@ -168,7 +168,7 @@ function check_target() {
     local text=''
     local usb_mount_point=/media/$USER
 
-    if grep --quiet --regexp=rhel /etc/os-release; then
+    if grep --quiet rhel /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 

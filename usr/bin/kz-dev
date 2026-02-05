@@ -66,7 +66,7 @@ def process() -> None:
     """
     This function performs the script actions, such as checking the input.
     """
-    check_debian: str = 'grep --quiet --regexp=debian /etc/os-release'
+    check_debian: str = 'grep --quiet debian /etc/os-release'
     text: str
 
     if subprocess.run(check_debian, executable='bash',

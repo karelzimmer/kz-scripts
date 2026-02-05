@@ -15,33 +15,33 @@
 # -----------------------------------------------------------------------------
 # Add Debian components to package sources and update package lists.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Debian /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp=Debian /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet --regexp=Debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet debian /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 
 # REMOVE apt-sources *
 # -----------------------------------------------------------------------------
 # Remove Debian components from package sources and update package lists.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Debian /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp=Debian /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet --regexp=Debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet debian /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL updates *
 # -----------------------------------------------------------------------------
 # Update package lists and upgrade all packages.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get upgrade --assume-yes; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     check-update || true; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     upgrade --assumeyes --refresh; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get upgrade --assume-yes; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     upgrade --assumeyes --refresh; fi
 
 # REMOVE updates *
 # -----------------------------------------------------------------------------
 # Update package lists and upgrade all packages.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     check-update || true; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; fi
 
 # INSTALL aer-settings #none
 # -----------------------------------------------------------------------------
@@ -53,8 +53,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     check-update 
 # -----------------------------------------------------------------------------
 if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
 if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
-if   grep --quiet --regexp=debian      /etc/os-release; then sudo update-grub; fi
-if   grep --quiet --regexp=rhel        /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if   grep --quiet debian      /etc/os-release; then sudo update-grub; fi
+if   grep --quiet rhel        /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -70,8 +70,8 @@ REBOOT=true
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
-if grep --quiet --regexp=debian      /etc/os-release; then sudo update-grub; fi
-if grep --quiet --regexp=rhel        /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet debian      /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel        /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -96,15 +96,15 @@ sudo flatpak uninstall --assumeyes org.angryip.ipscan
 # -----------------------------------------------------------------------------
 # Configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  ansible; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  ansible; fi
 
 # REMOVE ansible pc06 pc07
 # -----------------------------------------------------------------------------
 # Configuration management, deployment, and task execution.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ansible; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ansible; fi
 
 # INSTALL apport-settings #none
 # -----------------------------------------------------------------------------
@@ -140,15 +140,15 @@ if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 # Tab-completion.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  bash-completion; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  bash-completion; fi
 
 # REMOVE bash-completion *
 # -----------------------------------------------------------------------------
 # Tab-completion.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  bash-completion; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  bash-completion; fi
 
 # INSTALL bitwarden *
 # -----------------------------------------------------------------------------
@@ -172,8 +172,8 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes cockpit cockpit-pcp; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  cockpit cockpit-pcp; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cockpit cockpit-pcp; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  cockpit cockpit-pcp; fi
 
 # REMOVE cockpit pc06
 # -----------------------------------------------------------------------------
@@ -181,8 +181,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes cockpit; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cockpit; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cockpit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cockpit; fi
 
 # INSTALL cups *
 # -----------------------------------------------------------------------------
@@ -190,17 +190,17 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 # Web app: http://localhost:631
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes libcupsimage2; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  cups; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes cups; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libcupsimage2; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  cups; fi
 
 # REMOVE cups *
 # -----------------------------------------------------------------------------
 # Common Unix Printing System.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes libcupsimage2; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cups; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libcupsimage2; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cups; fi
 
 # INSTALL dash-to-dock *
 # -----------------------------------------------------------------------------
@@ -226,64 +226,64 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Convert text file line endings between CRLF and LF.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes dos2unix; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  dos2unix; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes dos2unix; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  dos2unix; fi
 
 # REMOVE dos2unix pc06 pc07
 # -----------------------------------------------------------------------------
 # Convert text file line endings between CRLF and LF.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes dos2unix; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  dos2unix; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes dos2unix; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  dos2unix; fi
 
 # INSTALL exiftool pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  perl-Image-ExifTool; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  perl-Image-ExifTool; fi
 
 # REMOVE exiftool pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  perl-Image-ExifTool; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  perl-Image-ExifTool; fi
 
 # INSTALL fakeroot pc06 pc07
 # -----------------------------------------------------------------------------
 # Simulate superuser privileges.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  fakeroot; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  fakeroot; fi
 
 # REMOVE fakeroot pc06 pc07
 # -----------------------------------------------------------------------------
 # Simulate superuser privileges.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes fakeroot; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fakeroot; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fakeroot; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fakeroot; fi
 
 # INSTALL fastfetch pc06 pc07
 # -----------------------------------------------------------------------------
 # A neofetch like system information tool.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes fastfetch; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  fastfetch; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fastfetch; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  fastfetch; fi
 
 # REMOVE fastfetch pc06 pc07
 # -----------------------------------------------------------------------------
 # A neofetch like system information tool.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes fastfetch; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fastfetch; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fastfetch; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fastfetch; fi
 
 # INSTALL fdupes #none
 # -----------------------------------------------------------------------------
 # Find duplicate files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes fdupes; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  fdupes; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes fdupes; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  fdupes; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ fdupes -r   /path/to/folder # Report recursively from /path/to/folder
@@ -295,24 +295,24 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 # -----------------------------------------------------------------------------
 # Find duplicate files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fdupes; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  fdupes; fi
 
 # INSTALL firefox *
 # -----------------------------------------------------------------------------
 # Web browser (ESR=Extended Support Release).
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get install --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
-if grep --quiet --regexp=debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get install --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
 # REMOVE firefox *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get remove --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
-if grep --quiet --regexp=debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'    ; then sudo apt-get remove --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
 
 # INSTALL fwupd-settings #none
 # -----------------------------------------------------------------------------
@@ -346,15 +346,15 @@ if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 # GNU Internationalization.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes gettext; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  gettext; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gettext; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  gettext; fi
 
 # REMOVE gettext pc06 pc07
 # -----------------------------------------------------------------------------
 # GNU Internationalization.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes gettext; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gettext; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gettext; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gettext; fi
 
 # INSTALL git pc06 pc07
 # -----------------------------------------------------------------------------
@@ -362,8 +362,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  git; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes git; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  git; fi
 
 # REMOVE git pc06 pc07
 # -----------------------------------------------------------------------------
@@ -371,8 +371,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  git; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes git; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  git; fi
 
 # INSTALL gnome-tweaks pc06 pc07
 # -----------------------------------------------------------------------------
@@ -392,18 +392,18 @@ if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then wget --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
-if grep --quiet --regexp=debian /etc/os-release; then rm   --verbose /tmp/google-chrome.deb; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if grep --quiet debian /etc/os-release; then wget --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
+if grep --quiet debian /etc/os-release; then rm   --verbose /tmp/google-chrome.deb; fi
+if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 # REMOVE google-chrome *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes google-chrome-stable; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-chrome-stable; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes google-chrome-stable; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-chrome-stable; fi
 
 # INSTALL google-earth pc04
 # -----------------------------------------------------------------------------
@@ -411,11 +411,11 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 # Web app: https://earth.google.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then wget --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
-if grep --quiet --regexp=debian /etc/os-release; then rm   --verbose /tmp/google-earth.deb; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
+if grep --quiet debian /etc/os-release; then wget --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
+if grep --quiet debian /etc/os-release; then rm   --verbose /tmp/google-earth.deb; fi
+if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 
 # REMOVE google-earth pc04
 # -----------------------------------------------------------------------------
@@ -423,8 +423,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumey
 # -----------------------------------------------------------------------------
 # Web app: https://earth.google.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-earth-pro-stable; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  google-earth-pro-stable; fi
 
 # INSTALL greeter *
 # -----------------------------------------------------------------------------
@@ -444,15 +444,15 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Compose manual pages with GNU roff.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes groff; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  groff; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes groff; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  groff; fi
 
 # REMOVE groff pc06 pc07
 # -----------------------------------------------------------------------------
 # Compose manual pages with GNU roff.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes groff; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  groff; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes groff; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  groff; fi
 
 # INSTALL grub-settings *
 # -----------------------------------------------------------------------------
@@ -463,8 +463,8 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/' /etc/defau
 # Suppress warnings.
 # -----------------------------------------------------------------------------
 if ! grep --quiet 'loglevel=3' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
-if   grep --quiet --regexp=debian /etc/os-release; then sudo update-grub; fi
-if   grep --quiet --regexp=rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if   grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if   grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 # REMOVE grub-settings *
@@ -476,61 +476,61 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/' /etc/defau
 # Enable warnings.
 # -----------------------------------------------------------------------------
 sudo sed  --in-place --expression='s/ loglevel=3//' /etc/default/grub
-if grep --quiet --regexp=debian /etc/os-release; then sudo update-grub; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 # INSTALL htop pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Process viewer.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  htop; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes htop; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  htop; fi
 
 # REMOVE htop pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Process viewer.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  htop; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  htop; fi
 
 # INSTALL imagination pc06 pc07
 # -----------------------------------------------------------------------------
 # Slideshow maker.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes imagination; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes imagination; fi
 
 # REMOVE imagination pc06 pc07
 # -----------------------------------------------------------------------------
 # Slideshow maker.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes imagination; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes imagination; fi
 
 # INSTALL jq pc06 pc07
 # -----------------------------------------------------------------------------
 # JSON processor.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes jq; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  jq; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes jq; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  jq; fi
 
 # REMOVE jq pc06 pc07
 # -----------------------------------------------------------------------------
 # JSON processor.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes jq; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  jq; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes jq; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  jq; fi
 
 # INSTALL krita pc06
 # -----------------------------------------------------------------------------
 # Image manipulation.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes krita; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes krita; fi
 
 # REMOVE krita pc06
 # -----------------------------------------------------------------------------
 # Image manipulation.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes krita; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes krita; fi
 
 # INSTALL kvm pc06 pc07
 # -----------------------------------------------------------------------------
@@ -541,24 +541,24 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assu
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt
 # configuration files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
+if grep --quiet debian /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 # -----------------------------------------------------------------------------
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default; fi
+if grep --quiet debian /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default; fi
 # -----------------------------------------------------------------------------
 # Check network 'default' with
 # "sudo virsh --connect=qemu:///system net-info default", should output
 # 'Autostart: yes'.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf groupinstall "Virtualization Host"; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo systemctl enable --now libvirtd; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf groupinstall "Virtualization Host"; fi
+if grep --quiet rhel   /etc/os-release; then sudo systemctl enable --now libvirtd; fi
 # -----------------------------------------------------------------------------
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default; fi
+if grep --quiet rhel   /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default; fi
 # -----------------------------------------------------------------------------
 # Check network 'default' with
 # "sudo virsh --connect=qemu:///system net-info default", should output
@@ -573,124 +573,124 @@ REBOOT=true
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo systemctl disable --now libvirtd; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf groupremove "Virtualization Host"; fi
+if grep --quiet debian /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
+if grep --quiet rhel   /etc/os-release; then sudo systemctl disable --now libvirtd; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf groupremove "Virtualization Host"; fi
 REBOOT=true
 
 # INSTALL lftp pc06 pc07
 # -----------------------------------------------------------------------------
 # FTP/HTTP/BitTorrent client.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  lftp; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  lftp; fi
 
 # REMOVE lftp pc06 pc07
 # -----------------------------------------------------------------------------
 # FTP/HTTP/BitTorrent client.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes lftp; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lftp; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lftp; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lftp; fi
 
 # INSTALL libreoffice *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install    --assume-yes    libreoffice; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak install    --assumeyes     app/org.libreoffice.LibreOffice; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-yes    libreoffice; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     app/org.libreoffice.LibreOffice; fi
 
 # REMOVE libreoffice *
 # -----------------------------------------------------------------------------
 # Office suite.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove    --assume-yes libreoffice; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  app/org.libreoffice.LibreOffice; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes libreoffice; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  app/org.libreoffice.LibreOffice; fi
 
 # INSTALL locate pc06 pc07
 # -----------------------------------------------------------------------------
 # Find files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes locate; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  mlocate; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes locate; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  mlocate; fi
 sudo updatedb
 
 # REMOVE locate pc06 pc07
 # -----------------------------------------------------------------------------
 # Find files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  mlocate; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  mlocate; fi
 
 # INSTALL lshw pc06 pc07
 # -----------------------------------------------------------------------------
 # Hardware lister.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes lshw; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  lshw; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes lshw; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  lshw; fi
 
 # REMOVE lshw pc06 pc07
 # -----------------------------------------------------------------------------
 # Hardware lister.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes lshw; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lshw; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lshw; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lshw; fi
 
 # INSTALL microsoft-edge *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet --regexp=debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install    --assume-yes    microsoft-edge-stable; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub com.microsoft.Edge; fi
+if grep --quiet debian /etc/os-release; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-yes    microsoft-edge-stable; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub com.microsoft.Edge; fi
 
 # REMOVE microsoft-edge *
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove    --assume-yes microsoft-edge-stable; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo rm  --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  flathub com.microsoft.Edge; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove    --assume-yes microsoft-edge-stable; fi
+if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo flatpak uninstall --assumeyes  flathub com.microsoft.Edge; fi
 
 # INSTALL needrestart pc06 pc07
 # -----------------------------------------------------------------------------
 # Check which daemons need to be restarted after library upgrades.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes needrestart; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  needrestart; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes needrestart; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  needrestart; fi
 
 # REMOVE needrestart pc06 pc07
 # -----------------------------------------------------------------------------
 # Check which daemons need to be restarted after library upgrades.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes needrestart; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  needrestart; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes needrestart; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  needrestart; fi
 
 # INSTALL nmap pc06 pc07
 # -----------------------------------------------------------------------------
 # Network MAPper.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  nmap; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  nmap; fi
 
 # REMOVE nmap pc06 pc07
 # -----------------------------------------------------------------------------
 # Network MAPper.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nmap; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nmap; fi
 
 # INSTALL ntfs #none
 # -----------------------------------------------------------------------------
 # NTFS support.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  ntfs-3g ntfsprogs; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  ntfs-3g ntfsprogs; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ findmnt # or lsblk
@@ -711,8 +711,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 # -----------------------------------------------------------------------------
 # NTFS support.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ntfs-3g ntfsprogs; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ntfs-3g ntfsprogs; fi
 
 # INSTALL ntp *
 # -----------------------------------------------------------------------------
@@ -732,15 +732,15 @@ if grep --regexp=rhel   /etc/os-release &> /dev/null; then sudo dnf     remove -
 # -----------------------------------------------------------------------------
 # Gettext catalogs editor.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes poedit; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  poedit; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes poedit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  poedit; fi
 
 # REMOVE poedit pc06 pc07
 # -----------------------------------------------------------------------------
 # Gettext catalogs editor.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes poedit; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  poedit; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes poedit; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  poedit; fi
 
 # INSTALL pst-utils pc06 pc07
 # -----------------------------------------------------------------------------
@@ -754,45 +754,45 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 #   LDAP
 # - pst2dii - export data from PST files to Summation dii load file format
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes pst-utils; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then echo 'Download pst-utils.rpm from https://www.rpmfind.net/ and install with "sudo dnf install ./pst-utils-0.5.2-6.x86_64.rpm".'; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pst-utils; fi
+if grep --quiet rhel   /etc/os-release; then echo 'Download pst-utils.rpm from https://www.rpmfind.net/ and install with "sudo dnf install ./pst-utils-0.5.2-6.x86_64.rpm".'; fi
 
 # REMOVE pst-utils pc06 pc07
 # -----------------------------------------------------------------------------
 # Tools based on libpst to read data from Microsoft Outlook PST files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes pst-utils; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  pst-utils; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes pst-utils; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  pst-utils; fi
 
 # INSTALL python pc06 pc07
 # -----------------------------------------------------------------------------
 # Programming language.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes python3 mypy pycodestyle python3-autopep8 python3-pip python-is-python3; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  python3 python3-mypy pycodestyle python3-pip; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes python3 mypy pycodestyle python3-autopep8 python3-pip python-is-python3; fi
+if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
+if grep --quiet debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  python3 python3-mypy pycodestyle python3-pip; fi
 
 # REMOVE python pc06 pc07
 # -----------------------------------------------------------------------------
 # Programming language.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes python mypy pycodestyle python3-autopep8 python3-pip python-is-python3; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo rm     --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  python3 python3-mypy pycodestyle python3-pip; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes python mypy pycodestyle python3-autopep8 python3-pip python-is-python3; fi
+if grep --quiet debian /etc/os-release; then sudo rm     --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  python3 python3-mypy pycodestyle python3-pip; fi
 
 # INSTALL rpm pc06 pc07
 # -----------------------------------------------------------------------------
 # Package manager.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  rpm; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  rpm; fi
 
 # REMOVE rpm pc06 pc07
 # -----------------------------------------------------------------------------
 # Package manager.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
 
 # INSTALL shellcheck pc06 pc07
 # -----------------------------------------------------------------------------
@@ -800,8 +800,8 @@ if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assu
 # -----------------------------------------------------------------------------
 # Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  shellcheck; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  shellcheck; fi
 
 # REMOVE shellcheck pc06 pc07
 # -----------------------------------------------------------------------------
@@ -809,8 +809,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 # -----------------------------------------------------------------------------
 # Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  shellcheck; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  shellcheck; fi
 
 # INSTALL simplescreenrecorder #none
 # -----------------------------------------------------------------------------
@@ -835,8 +835,8 @@ if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; th
 # Spice (Simple Protocol for Independent Computing Environments) agent for
 # virtualized guest systems.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  spice-vdagent; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  spice-vdagent; fi
 
 # REMOVE spice-vdagent pc06 pc07
 # -----------------------------------------------------------------------------
@@ -845,8 +845,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 # Spice (Simple Protocol for Independent Computing Environments) agent for
 # virtualized guest systems.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  spice-vdagent; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  spice-vdagent; fi
 
 # INSTALL spotify *
 # -----------------------------------------------------------------------------
@@ -854,11 +854,11 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then wget --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
-if grep --quiet --regexp=debian /etc/os-release; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list 1> /dev/null; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes spotify-client; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then echo 'The spotify app is available as a web app.'; fi
+if grep --quiet debian /etc/os-release; then wget --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
+if grep --quiet debian /etc/os-release; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list 1> /dev/null; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spotify-client; fi
+if grep --quiet rhel   /etc/os-release; then echo 'The spotify app is available as a web app.'; fi
 
 # REMOVE spotify *
 # -----------------------------------------------------------------------------
@@ -866,9 +866,9 @@ if grep --quiet --regexp=rhel   /etc/os-release; then echo 'The spotify app is a
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes spotify-client; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes spotify-client; fi
+if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL sushi #none
 # -----------------------------------------------------------------------------
@@ -894,10 +894,10 @@ if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 # Web app: https://start.teamviewer.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then wget --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
-if grep --quiet --regexp=debian /etc/os-release; then rm   --verbose /tmp/teamviewer.deb; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if grep --quiet debian /etc/os-release; then wget --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
+if grep --quiet debian /etc/os-release; then rm   --verbose /tmp/teamviewer.deb; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 # REMOVE teamviewer *
 # -----------------------------------------------------------------------------
@@ -905,57 +905,57 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumey
 # -----------------------------------------------------------------------------
 # Web app: https://start.teamviewer.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes teamviewer; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  teamviewer; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes teamviewer; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  teamviewer; fi
 
 # INSTALL tree pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Display directory tree.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  tree; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes tree; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  tree; fi
 
 # REMOVE tree pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Display directory tree.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  tree; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  tree; fi
 
 # INSTALL thunderbird *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  thunderbird; fi
 
 # REMOVE thunderbird *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  thunderbird; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  thunderbird; fi
 
 # INSTALL transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # BitTorrent client.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes transmission; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  transmission; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes transmission; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  transmission; fi
 
 # REMOVE transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # BitTorrent client.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes transmission; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  transmission; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes transmission; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  transmission; fi
 
 # INSTALL ufw pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Uncomplicated FireWall.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes gufw; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  gufw; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gufw; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  gufw; fi
 sudo ufw allow ssh
 sudo ufw enable
 
@@ -964,8 +964,8 @@ sudo ufw enable
 # Uncomplicated FireWall.
 # -----------------------------------------------------------------------------
 sudo ufw disable
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes gufw; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gufw; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gufw; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gufw; fi
 
 # INSTALL usbutils pc06 pc07
 # -----------------------------------------------------------------------------
@@ -973,8 +973,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 # This package contains the lsusb utility.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  usbutils; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes usbutils; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  usbutils; fi
 
 # REMOVE usbutils pc06 pc07
 # -----------------------------------------------------------------------------
@@ -982,8 +982,8 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --ass
 # -----------------------------------------------------------------------------
 # This package contains the lsusb utility.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes usbutils; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  usbutils; fi
 
 # INSTALL user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1002,25 +1002,25 @@ if id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo userdel --remov
 # -----------------------------------------------------------------------------
 # Multimedia player.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes vlc; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  vlc; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes vlc; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  vlc; fi
 # -----------------------------------------------------------------------------
 # Ffmpeg - multimedia support.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes ffmpeg*; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     install --assumeyes  ffmpeg*; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes ffmpeg*; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  ffmpeg*; fi
 
 # REMOVE vlc *
 # -----------------------------------------------------------------------------
 # Multimedia player.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes vlc; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  vlc; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes vlc; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  vlc; fi
 # -----------------------------------------------------------------------------
 # Ffmpeg - multimedia support.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes ffmpeg*; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ffmpeg*; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ffmpeg*; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ffmpeg*; fi
 
 # INSTALL vscode pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1028,16 +1028,16 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assu
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
-if grep --quiet --regexp=debian /etc/os-release; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet --regexp=debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes apt-transport-https; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes code; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
+if grep --quiet debian /etc/os-release; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
+if grep --quiet debian /etc/os-release; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes apt-transport-https; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes code; fi
+if grep --quiet debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
+if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
+if grep --quiet rhel   /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo 1> /dev/null; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes code; fi
 
 # REMOVE vscode pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1045,10 +1045,10 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumey
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo rm      --force --verbose /etc/yum.repos.d/vscode.repo; fi
+if grep --quiet debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes code; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  code; fi
+if grep --quiet rhel   /etc/os-release; then sudo rm      --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
 # INSTALL webmin pc07
 # -----------------------------------------------------------------------------
@@ -1056,14 +1056,14 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo rm      --force --ver
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo rm  --force --verbose /tmp/setup-repos.sh; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get install --assume-yes webmin; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo rm  --force --verbose /tmp/setup-repos.sh; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumeyes webmin; fi
+if grep --quiet debian /etc/os-release; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
+if grep --quiet debian /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
+if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /tmp/setup-repos.sh; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes webmin; fi
+if grep --quiet rhel   /etc/os-release; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
+if grep --quiet rhel   /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
+if grep --quiet rhel   /etc/os-release; then sudo rm  --force --verbose /tmp/setup-repos.sh; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes webmin; fi
 
 # REMOVE webmin pc07
 # -----------------------------------------------------------------------------
@@ -1071,12 +1071,12 @@ if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf install --assumey
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get remove --assume-yes webmin; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
-if grep --quiet --regexp=debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf remove --assumeyes webmin; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo rm  --force --verbose /etc/yum.repos.d/webmin.repo; fi
-if grep --quiet --regexp=rhel   /etc/os-release; then sudo dnf update; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes webmin; fi
+if grep --quiet debian /etc/os-release; then sudo rm  --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf remove --assumeyes webmin; fi
+if grep --quiet rhel   /etc/os-release; then sudo rm  --force --verbose /etc/yum.repos.d/webmin.repo; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf update; fi
 
 # INSTALL wine #none
 # -----------------------------------------------------------------------------

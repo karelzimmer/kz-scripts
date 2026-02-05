@@ -52,7 +52,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     waits for the next check if so.
     """
     check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
-    check_rhel: str = 'grep --quiet --regexp=rhel /etc/os-release'
+    check_rhel: str = 'grep --quiet rhel /etc/os-release'
     text: str = ''
 
     if subprocess.run(check_rhel, executable='bash',
