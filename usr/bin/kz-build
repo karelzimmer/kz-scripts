@@ -93,8 +93,8 @@ function process() {
     build_website
     generate_gettext_files
     kz.check_repos || OPTION_DEV=true
-    # Capture build id Debian package (ISO 8601 YYYY-MM-DDTHH:MM:SS.SSS CET).
-    build_id=$(date '+%Y-%m-%dT%H:%M:%S.%3N CET')
+    # Capture build id Debian package (ISO 8601 UTC YYYY-MM-DDTHH:MM:SSZ).
+    build_id=$(date --utc '+%Y-%m-%dT%H:%M:%SZ')
     build_deb_package
     build_rpm_package
     install_deb_package
