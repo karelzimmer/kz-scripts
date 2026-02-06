@@ -51,14 +51,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     check-update || true; 
 # Express Advanced Error Reporting) prevents the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
-if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
-if   grep --quiet debian      /etc/os-release; then sudo update-grub; fi
-if   grep --quiet rhel        /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if ! grep --quiet pci=noaer /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet pci=noaer /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if   grep --quiet debian    /etc/os-release; then sudo update-grub; fi
+if   grep --quiet rhel      /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
-grep --quiet --regexp='pci=noaer' /etc/default/grub
+grep --quiet pci=noaer /etc/default/grub
 REBOOT=true
 
 # REMOVE aer-settings #none
@@ -69,13 +69,13 @@ REBOOT=true
 # Express Advanced Error Reporting) to "allow" the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
-if grep --quiet debian      /etc/os-release; then sudo update-grub; fi
-if grep --quiet rhel        /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet pci=noaer /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
+if grep --quiet debian    /etc/os-release; then sudo update-grub; fi
+if grep --quiet rhel      /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
-! grep --quiet --regexp='pci=noaer' /etc/default/grub
+! grep --quiet pci=noaer /etc/default/grub
 REBOOT=true
 
 # INSTALL angryipscan pc06 pc07
@@ -110,31 +110,31 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  an
 # -----------------------------------------------------------------------------
 # Disable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo systemctl stop    apport.service; fi
-if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
-if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
-if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/crash/*; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop    apport.service; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/crash/*; fi
 
 # REMOVE apport-settings #none
 # -----------------------------------------------------------------------------
 # Enable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
-if grep --quiet --regexp=Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
 
 # INSTALL backintime #none
 # -----------------------------------------------------------------------------
 # Backups/snapshots.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes backintime-qt; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  backintime-qt; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes backintime-qt; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  backintime-qt; fi
 
 # REMOVE backintime #none
 # -----------------------------------------------------------------------------
 # Backups/snapshots.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  backintime-qt; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  backintime-qt; fi
 
 # INSTALL bash-completion *
 # -----------------------------------------------------------------------------
@@ -206,20 +206,20 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  cu
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if (grep --regexp=debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview )     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
+if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview )     &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview; fi
 REBOOT=true
 
 # REMOVE dash-to-dock *
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
-if (grep --regexp=debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview)      &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-no-overview; fi
+if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock)     &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview)      &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-no-overview; fi
 REBOOT=true
 
 # INSTALL dos2unix pc06 pc07
@@ -334,13 +334,13 @@ sudo systemctl start  fwupd.service
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 
 # REMOVE gdebi #none
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 
 # INSTALL gettext pc06 pc07
 # -----------------------------------------------------------------------------
@@ -378,15 +378,15 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  gi
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
 # REMOVE gnome-tweaks pc06 pc07
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
 # INSTALL google-chrome *
 # -----------------------------------------------------------------------------
@@ -718,15 +718,15 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  nt
 # -----------------------------------------------------------------------------
 # Network Time Protocol (NTP) service.
 # -----------------------------------------------------------------------------
-if grep --regexp=debian /etc/os-release &> /dev/null; then sudo apt-get install --assume-yes systemd-timesyncd; fi
-if grep --regexp=rhel   /etc/os-release &> /dev/null; then sudo dnf     install --assumeyes  systemd-timesyncd; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes systemd-timesyncd; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  systemd-timesyncd; fi
 
 # REMOVE ntp *
 # -----------------------------------------------------------------------------
 # Network Time Protocol (NTP) service.
 # -----------------------------------------------------------------------------
-if grep --regexp=debian /etc/os-release &> /dev/null; then sudo apt-get remove --assume-yes systemd-timesyncd; fi
-if grep --regexp=rhel   /etc/os-release &> /dev/null; then sudo dnf     remove --assumeyes  systemd-timesyncd; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes systemd-timesyncd; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  systemd-timesyncd; fi
 
 # INSTALL poedit pc06 pc07
 # -----------------------------------------------------------------------------
@@ -818,7 +818,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  sh
 # -----------------------------------------------------------------------------
 # Requires the use of Xorg/X11.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes simplescreenrecorder; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes simplescreenrecorder; fi
 
 # REMOVE simplescreenrecorder #none
 # -----------------------------------------------------------------------------
@@ -826,7 +826,7 @@ if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 # Required the use of Xorg/X11. Enable Wayland again?
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
 
 # INSTALL spice-vdagent pc06 pc07
 # -----------------------------------------------------------------------------
@@ -874,8 +874,8 @@ if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  sushi; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  sushi; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
@@ -885,8 +885,8 @@ if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; th
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  sushi; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  sushi; fi
 
 # INSTALL teamviewer *
 # -----------------------------------------------------------------------------
@@ -1082,14 +1082,14 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf update; fi
 # -----------------------------------------------------------------------------
 # Run Windows applications.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --add-architecture i386; fi
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes wine playonlinux; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --add-architecture i386; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf install --assumeyes wine playonlinux; fi
 
 # REMOVE wine #none
 # -----------------------------------------------------------------------------
 # Run Windows applications.
 # -----------------------------------------------------------------------------
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
-if (grep --regexp=debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
-if (grep --regexp=rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
+if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg --remove-architecture i386; fi
+if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
