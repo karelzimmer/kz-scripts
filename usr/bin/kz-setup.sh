@@ -217,13 +217,13 @@ sed --in-place --expression='s/eval/#eval/g'     ~/.bashrc
 sed --in-place --expression='/^stty -ixon/d'     ~/.bashrc
 LOGOUT=true
 
-# SETUP google-chrome *
+# SETUP google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
 
-# RESET google-chrome *
+# RESET google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -288,13 +288,13 @@ if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; f
 # -----------------------------------------------------------------------------
 rm --force --recursive ~/lynis
 
-# SETUP microsoft-edge *
+# SETUP microsoft-edge pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=microsoft-edge
 
-# RESET microsoft-edge *
+# RESET microsoft-edge pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------

@@ -388,7 +388,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
-# INSTALL google-chrome *
+# INSTALL google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -398,7 +398,7 @@ if grep --quiet debian /etc/os-release; then rm   --verbose /tmp/google-chrome.d
 if grep --quiet rhel   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
-# REMOVE google-chrome *
+# REMOVE google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -637,7 +637,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  l
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes lshw; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lshw; fi
 
-# INSTALL microsoft-edge *
+# INSTALL microsoft-edge pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
@@ -648,7 +648,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-ye
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub com.microsoft.Edge; fi
 
-# REMOVE microsoft-edge *
+# REMOVE microsoft-edge pc06 pc07
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
