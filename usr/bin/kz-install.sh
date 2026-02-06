@@ -236,6 +236,20 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  d
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes dos2unix; fi
 if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  dos2unix; fi
 
+# INSTALL evolution pc06 pc07
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes evolution; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  evolution; fi
+
+# REMOVE evolution pc06 pc07
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes evolution; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  evolution; fi
+
 # INSTALL exiftool pc06 pc07
 # -----------------------------------------------------------------------------
 # Read and write meta information.
