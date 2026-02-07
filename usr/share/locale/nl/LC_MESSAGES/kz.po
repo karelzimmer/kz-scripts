@@ -102,7 +102,7 @@ msgstr "Programma {} is onderbroken."
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:173 kz-backup:149 kz-build:157 kz-check:130 kz-deploy:134 kz-desktop:199
+#: kz:173 kz-backup:149 kz-build:157 kz-check:130 kz-deploy:134 kz-desktop:197
 #: kz-dev:132 kz-install:239 kz-menu:174 kz-restore:150 kz-setup:235
 #: kz-update:185 kz-wifi:127
 msgid "internal error"
@@ -160,16 +160,16 @@ msgstr ""
 "  -t, --target <map>\n"
 "                 plaats de back-up in de opgegeven map"
 
-#: kz-backup:109 kz-desktop:214 kz-install:200 kz-menu:145 kz-restore:109
+#: kz-backup:109 kz-desktop:212 kz-install:200 kz-menu:145 kz-restore:109
 #: kz-setup:196
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
-#: kz-backup:119 kz-desktop:139 kz-desktop:150 kz-desktop:161 kz-restore:120
+#: kz-backup:119 kz-desktop:137 kz-desktop:148 kz-desktop:159 kz-restore:120
 msgid "too many options"
 msgstr "te veel opties"
 
-#: kz-backup:157 kz-build:165 kz-check:138 kz-deploy:142 kz-desktop:207
+#: kz-backup:157 kz-build:165 kz-check:138 kz-deploy:142 kz-desktop:205
 #: kz-dev:138 kz-get:106 kz-menu:182 kz-restore:158 kz-update:191 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
@@ -792,28 +792,24 @@ msgstr "  -l, --list     toon favorieten"
 msgid "  -r, --reset    set favorites on default values"
 msgstr "  -r, --reset    stel favorieten in op standaardwaarden"
 
-#: kz-desktop:84
-msgid "No such schema 'org.gnome.shell.yelp'."
-msgstr "Geen schema 'org.gnome.shell.yelp'."
+#: kz-desktop:86
+msgid "No GNOME session found."
+msgstr "Geen GNOME-sessie gevonden."
 
-#: kz-desktop:224
-msgid "No such schema 'org.gnome.shell'."
-msgstr "Geen schema 'org.gnome.shell'."
-
-#: kz-desktop:282
+#: kz-desktop:266
 msgid "Favorite apps:"
 msgstr "Favorieten:"
 
-#: kz-desktop:305
+#: kz-desktop:288
 msgid "Now make the change in the desktop environment."
 msgstr "Voer nu de wijziging uit in de desktopomgeving."
 
-#: kz-desktop:327
+#: kz-desktop:310
 #, sh-format
 msgid "Config database content captured ($fase)."
 msgstr "Inhoud configuratiedatabase vastgelegd ($fase)."
 
-#: kz-desktop:339
+#: kz-desktop:322
 msgid ""
 "Changes in the configuration database,\n"
 "< is the old setting (A),\n"
@@ -823,7 +819,7 @@ msgstr ""
 "< is de oude   instelling (A),\n"
 "> is de nieuwe instelling (B):"
 
-#: kz-desktop:344
+#: kz-desktop:327
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr "Gebruik \"gsettings set <wijziging>\" bij wijzigingen."
 

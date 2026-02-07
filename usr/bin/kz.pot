@@ -100,7 +100,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:173 kz-backup:149 kz-build:157 kz-check:130 kz-deploy:134 kz-desktop:199
+#: kz:173 kz-backup:149 kz-build:157 kz-check:130 kz-deploy:134 kz-desktop:197
 #: kz-dev:132 kz-install:239 kz-menu:174 kz-restore:150 kz-setup:235
 #: kz-update:185 kz-wifi:127
 msgid "internal error"
@@ -151,16 +151,16 @@ msgid ""
 "                 place backup in specified directory"
 msgstr ""
 
-#: kz-backup:109 kz-desktop:214 kz-install:200 kz-menu:145 kz-restore:109
+#: kz-backup:109 kz-desktop:212 kz-install:200 kz-menu:145 kz-restore:109
 #: kz-setup:196
 msgid "no desktop environment available"
 msgstr ""
 
-#: kz-backup:119 kz-desktop:139 kz-desktop:150 kz-desktop:161 kz-restore:120
+#: kz-backup:119 kz-desktop:137 kz-desktop:148 kz-desktop:159 kz-restore:120
 msgid "too many options"
 msgstr ""
 
-#: kz-backup:157 kz-build:165 kz-check:138 kz-deploy:142 kz-desktop:207
+#: kz-backup:157 kz-build:165 kz-check:138 kz-deploy:142 kz-desktop:205
 #: kz-dev:138 kz-get:106 kz-menu:182 kz-restore:158 kz-update:191 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr ""
@@ -723,35 +723,31 @@ msgstr ""
 msgid "  -r, --reset    set favorites on default values"
 msgstr ""
 
-#: kz-desktop:84
-msgid "No such schema 'org.gnome.shell.yelp'."
+#: kz-desktop:86
+msgid "No GNOME session found."
 msgstr ""
 
-#: kz-desktop:224
-msgid "No such schema 'org.gnome.shell'."
-msgstr ""
-
-#: kz-desktop:282
+#: kz-desktop:266
 msgid "Favorite apps:"
 msgstr ""
 
-#: kz-desktop:305
+#: kz-desktop:288
 msgid "Now make the change in the desktop environment."
 msgstr ""
 
-#: kz-desktop:327
+#: kz-desktop:310
 #, sh-format
 msgid "Config database content captured ($fase)."
 msgstr ""
 
-#: kz-desktop:339
+#: kz-desktop:322
 msgid ""
 "Changes in the configuration database,\n"
 "< is the old setting (A),\n"
 "> is the new setting (B):"
 msgstr ""
 
-#: kz-desktop:344
+#: kz-desktop:327
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr ""
 
