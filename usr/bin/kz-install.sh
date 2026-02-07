@@ -82,9 +82,18 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Fast and friendly network scanner.
 # -----------------------------------------------------------------------------
-sudo apt-get install    --assume-yes    flatpak
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes flatpak; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  flatpak; fi
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install    --assumeyes     org.angryip.ipscan
+
+
+# REMOVE bash-completion *
+# -----------------------------------------------------------------------------
+# Tab-completion.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  bash-completion; fi
 
 # REMOVE angryipscan pc06 pc07
 # -----------------------------------------------------------------------------
@@ -154,7 +163,8 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  ba
 # -----------------------------------------------------------------------------
 # Password manager.
 # -----------------------------------------------------------------------------
-sudo apt-get install    --assume-yes    flatpak
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes flatpak; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install --assumeyes  flatpak; fi
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install    --assumeyes     com.bitwarden.desktop
 REBOOT=true
@@ -612,6 +622,7 @@ if grep --quiet rhel   /etc/os-release; then sudo dnf     remove --assumeyes  lf
 # Office suite.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-yes    libreoffice; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install    --assumeyes     flatpak; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     app/org.libreoffice.LibreOffice; fi
 
@@ -659,6 +670,7 @@ if grep --quiet debian /etc/os-release; then wget --no-verbose --output-document
 if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install    --assume-yes    microsoft-edge-stable; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf     install    --assumeyes     flatpak; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet rhel   /etc/os-release; then sudo flatpak install    --assumeyes     flathub com.microsoft.Edge; fi
 
