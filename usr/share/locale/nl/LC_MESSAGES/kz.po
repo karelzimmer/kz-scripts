@@ -387,12 +387,12 @@ msgstr "Probeer de back-up opnieuw te maken."
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:634
+#: kz-backup:644
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:641 kz-restore:381
+#: kz-backup:651 kz-restore:391
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -1294,7 +1294,7 @@ msgstr "Probeer de back-up opnieuw terug te zetten."
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-restore:374
+#: kz-restore:384
 #, sh-format
 msgid "The backup has restored for $user, there are $num_users users:"
 msgstr "De back-up is teruggezet voor $user, er zijn $num_users gebruikers:"

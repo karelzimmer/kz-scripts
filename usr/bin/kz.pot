@@ -339,12 +339,12 @@ msgstr ""
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:634
+#: kz-backup:644
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:641 kz-restore:381
+#: kz-backup:651 kz-restore:391
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 
@@ -1180,7 +1180,7 @@ msgstr ""
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:374
+#: kz-restore:384
 #, sh-format
 msgid "The backup has restored for $user, there are $num_users users:"
 msgstr ""
