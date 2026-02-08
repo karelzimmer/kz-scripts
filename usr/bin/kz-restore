@@ -369,7 +369,7 @@ $(gettext 'Try restoring the back up again.')"
             nl      --number-width=2            \
                     --number-format=rn          \
                     --number-separator='  '     \
-                    --body-numbering=a 
+                    --body-numbering=a
             )
         text="$(eval_gettext "The backup has restored for \$user, there are \
 \$num_users users:")
