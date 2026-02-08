@@ -368,7 +368,7 @@ $(gettext 'Try restoring the back up again.')"
             cut     --delimiter=':' --fields=5  |
             nl      --number-width=2            \
                     --number-format=rn          \
-                    --number-separator='  '     \
+                    --number-separator=' '      \
                     --body-numbering=a
             )
         text="$(eval_gettext "The backup has restored for \$user, there are \
