@@ -363,9 +363,13 @@ $(gettext 'Try restoring the back up again.')"
         # shellcheck disable=SC2034
         user=$(grep "$USER" /etc/passwd | cut --delimiter=':' --fields=5)
         users=$(
-            grep    /bin/bash /etc/passwd   |
-            grep    root --invert-match     |
-            cut     --delimiter=':' --fields=5
+            grep    /bin/bash /etc/passwd       |
+            grep    root --invert-match         |
+            cut     --delimiter=':' --fields=5  |
+            nl      --number-width=2            \
+                    --number-format=rn          \
+                    --number-separator='  '     \
+                    --body-numbering=a 
             )
         text="$(eval_gettext "The backup has restored for \$user, there are \
 \$num_users users:")
