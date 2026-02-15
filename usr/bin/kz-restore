@@ -168,7 +168,7 @@ function check_source() {
     local usb_mount_point=/media/$USER
     local text=''
 
-    if grep --quiet rhel /etc/os-release; then
+    if grep --quiet --regexp=rhel /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 
@@ -362,16 +362,16 @@ $(gettext 'Try restoring the back up again.')"
     else
         # shellcheck disable=SC2034
         user=$(
-            grep    "$USER"         \
-                    /etc/passwd     |
-            cut     --delimiter=':' \
-                    --fields=5      |
+            grep    --regexp="$USER"    \
+                    /etc/passwd         |
+            cut     --delimiter=':'     \
+                    --fields=5          |
             sed     --expression='s/,//g'
             )
         users=$(
-            grep    /bin/bash               \
+            grep    --regexp=/bin/bash      \
                     /etc/passwd             |
-            grep    root                    \
+            grep    --regexp=root           \
                     --invert-match          |
             cut     --delimiter=':'         \
                     --fields=5              |

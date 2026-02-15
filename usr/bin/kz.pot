@@ -235,22 +235,22 @@ msgstr ""
 msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
-#: kz-backup:364 kz-backup:376
+#: kz-backup:371 kz-backup:383
 msgid "Additional users can be added manually:"
 msgstr ""
 
-#: kz-backup:366
+#: kz-backup:373
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
 "3. Enter Name <user> and Username <username>."
 msgstr ""
 
-#: kz-backup:371 kz-backup:432 kz-backup:472
+#: kz-backup:378 kz-backup:439 kz-backup:479
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:378
+#: kz-backup:385
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -263,7 +263,7 @@ msgid ""
 "sudo passwd --delete --expire <username>"
 msgstr ""
 
-#: kz-backup:425
+#: kz-backup:432
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -273,7 +273,7 @@ msgid ""
 "4. Select avatar.ico in Personal folder / Settings, or another picture file."
 msgstr ""
 
-#: kz-backup:466
+#: kz-backup:473
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -282,69 +282,69 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:520 kz-menu:73 kz-backup.desktop:10
+#: kz-backup:527 kz-menu:73 kz-backup.desktop:10
 msgid "Backup Home folder"
 msgstr ""
 
-#: kz-backup:520 kz-install:443 kz-restore:260 kz-setup:437
+#: kz-backup:527 kz-install:443 kz-restore:260 kz-setup:437
 msgid "progress"
 msgstr ""
 
-#: kz-backup:521
+#: kz-backup:528
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:556
+#: kz-backup:563
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:593 kz-install:578 kz-restore:332 kz-setup:559
+#: kz-backup:600 kz-install:578 kz-restore:332 kz-setup:559
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:594
+#: kz-backup:601
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:596 kz-restore:335
+#: kz-backup:603 kz-restore:335
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:597
+#: kz-backup:604
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:598 kz-restore:337
+#: kz-backup:605 kz-restore:337
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:599
+#: kz-backup:606
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:601 kz-install:583 kz-restore:340 kz-setup:563
+#: kz-backup:608 kz-install:583 kz-restore:340 kz-setup:563
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:602 kz-install:584 kz-restore:341 kz-setup:564
+#: kz-backup:609 kz-install:584 kz-restore:341 kz-setup:564
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:603
+#: kz-backup:610
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:622
+#: kz-backup:629
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:644
+#: kz-backup:651
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:651 kz-restore:391
+#: kz-backup:658 kz-restore:391
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 
@@ -435,7 +435,7 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
 #: ckhtml:123 gitbranch:61 gitclone:77 gitfetch:61 gitinit:44 gitpull:61
-#: gitsquash:57 gitstatus:61 kz-build:510 kz-check:571 kz-deploy:264 kz-dev:278
+#: gitsquash:57 gitstatus:61 kz-build:510 kz-check:577 kz-deploy:264 kz-dev:278
 #: kz-update:317
 msgid "Complete!"
 msgstr ""
@@ -452,7 +452,7 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr ""
 
-#: kz-check:284
+#: kz-check:286
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
@@ -460,70 +460,70 @@ msgstr ""
 msgid "Check website..."
 msgstr ""
 
-#: kz-check:196
+#: kz-check:198
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 
-#: kz-check:246
+#: kz-check:248
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr ""
 
-#: kz-check:258
+#: kz-check:260
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr ""
 
-#: kz-check:269
+#: kz-check:271
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:373
+#: kz-check:375
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:393
+#: kz-check:395
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:406
+#: kz-check:408
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:417
+#: kz-check:419
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:427 kz-check:435
+#: kz-check:429 kz-check:437
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr ""
 
-#: kz-check:445
+#: kz-check:447
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:482
+#: kz-check:484
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:530
+#: kz-check:532
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:552
+#: kz-check:554
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:506 kz-check:567 kz-deploy:260
+#: kz-build:506 kz-check:573 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 

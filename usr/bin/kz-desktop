@@ -322,7 +322,7 @@ function report_database_changes() {
 $(gettext "Changes in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
-$(diff "$output_file_1" "$output_file_2" | grep '[>|<]' || true)
+$(diff "$output_file_1" "$output_file_2" | grep --regexp='[>|<]' || true)
 
 $(gettext 'Use "gsettings set <change>" for changes.')"
     kz.infomsg "$text"

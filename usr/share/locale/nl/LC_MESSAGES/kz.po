@@ -257,11 +257,11 @@ msgstr "gebruikers.txt"
 msgid "USERNAME|UID|GID|USER"
 msgstr "GEBRUIKERSNAAM|UID|GID|GEBRUIKER"
 
-#: kz-backup:364 kz-backup:376
+#: kz-backup:371 kz-backup:383
 msgid "Additional users can be added manually:"
 msgstr "Extra gebruikers kunnen handmatig worden toegevoegd:"
 
-#: kz-backup:366
+#: kz-backup:373
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
@@ -272,11 +272,11 @@ msgstr ""
 "2. Klik op Ontgrendelen en vervolgens op Gebruiker toevoegen.\n"
 "3. Vul in Naam <gebruiker> en Gebruikersnaam <gebruikersnaam>."
 
-#: kz-backup:371 kz-backup:432 kz-backup:472
+#: kz-backup:378 kz-backup:439 kz-backup:479
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr "[1] Windows-, command- of vergrootglastoets."
 
-#: kz-backup:378
+#: kz-backup:385
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -298,7 +298,7 @@ msgstr ""
 "# Gebruiker kan wachtwoord instellen bij de eerste keer aanmelden:\n"
 "sudo passwd --delete --expire <gebruikersnaam>"
 
-#: kz-backup:425
+#: kz-backup:432
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -315,7 +315,7 @@ msgstr ""
 "3. Klik op Selecteer een bestand.4. Selecteer avatar.ico in Persoonlijke "
 "map / Instellingen, of een ander afbeeldingsbestand."
 
-#: kz-backup:466
+#: kz-backup:473
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -330,69 +330,69 @@ msgstr ""
 "3. Rechtsklik op de gewenste afbeelding en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:520 kz-menu:73 kz-backup.desktop:10
+#: kz-backup:527 kz-menu:73 kz-backup.desktop:10
 msgid "Backup Home folder"
 msgstr "Back-up Persoonlijke map"
 
-#: kz-backup:520 kz-install:443 kz-restore:260 kz-setup:437
+#: kz-backup:527 kz-install:443 kz-restore:260 kz-setup:437
 msgid "progress"
 msgstr "voortgang"
 
-#: kz-backup:521
+#: kz-backup:528
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-#: kz-backup:556
+#: kz-backup:563
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:593 kz-install:578 kz-restore:332 kz-setup:559
+#: kz-backup:600 kz-install:578 kz-restore:332 kz-setup:559
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:594
+#: kz-backup:601
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:596 kz-restore:335
+#: kz-backup:603 kz-restore:335
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:597
+#: kz-backup:604
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:598 kz-restore:337
+#: kz-backup:605 kz-restore:337
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:599
+#: kz-backup:606
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:601 kz-install:583 kz-restore:340 kz-setup:563
+#: kz-backup:608 kz-install:583 kz-restore:340 kz-setup:563
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:602 kz-install:584 kz-restore:341 kz-setup:564
+#: kz-backup:609 kz-install:584 kz-restore:341 kz-setup:564
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:603
+#: kz-backup:610
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:622
+#: kz-backup:629
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:644
+#: kz-backup:651
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:651 kz-restore:391
+#: kz-backup:658 kz-restore:391
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -485,7 +485,7 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
 #: ckhtml:123 gitbranch:61 gitclone:77 gitfetch:61 gitinit:44 gitpull:61
-#: gitsquash:57 gitstatus:61 kz-build:510 kz-check:571 kz-deploy:264 kz-dev:278
+#: gitsquash:57 gitstatus:61 kz-build:510 kz-check:577 kz-deploy:264 kz-dev:278
 #: kz-update:317
 msgid "Complete!"
 msgstr "Klaar!"
@@ -503,7 +503,7 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr "Gebruik: kz check [<opties>]"
 
-#: kz-check:284
+#: kz-check:286
 msgid "Check scripts (this may take a while)..."
 msgstr "Controleer scripts (dit kan even duren)..."
 
@@ -511,52 +511,52 @@ msgstr "Controleer scripts (dit kan even duren)..."
 msgid "Check website..."
 msgstr "Controleer website..."
 
-#: kz-check:196
+#: kz-check:198
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 "Bestanden die niet in html worden gebruikt en waarschijnlijk wel verwijderd "
 "kunnen worden:"
 
-#: kz-check:246
+#: kz-check:248
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr "Gettext berichtencatalogus-sjabloon $file niet gevonden."
 
-#: kz-check:258
+#: kz-check:260
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr "Gettext berichtencatalogus $file niet gevonden."
 
-#: kz-check:269
+#: kz-check:271
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr "Berichtencatalogus $file niet gevonden."
 
-#: kz-check:373
+#: kz-check:375
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr "Onbekend script.  Functie check_code kan scriptcode niet controleren."
 
-#: kz-check:393
+#: kz-check:395
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr "Script $scriptname --usage gaf een fout."
 
-#: kz-check:406
+#: kz-check:408
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
-#: kz-check:417
+#: kz-check:419
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
-#: kz-check:427 kz-check:435
+#: kz-check:429 kz-check:437
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr "Man-pagina $dir/$scriptname.1 niet gevonden."
 
-#: kz-check:445
+#: kz-check:447
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -565,20 +565,20 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:482
+#: kz-check:484
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr "Een of meer regels zijn te lang (>79):"
 
-#: kz-check:530
+#: kz-check:532
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:552
+#: kz-check:554
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:506 kz-check:567 kz-deploy:260
+#: kz-build:506 kz-check:573 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
