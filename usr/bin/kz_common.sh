@@ -40,7 +40,7 @@ function kz.become_check() {
 function kz.check_debian_package_manager() {
     local text=''
 
-    if grep --quiet --regexp=rhel /etc/os-release; then
+    if grep --quiet --regexp='rhel' /etc/os-release; then
         return 0
     fi
 
