@@ -300,9 +300,9 @@ function kz.term() {
             rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
             ;;
         100 )
-            if grep --quiet debian /etc/os-release; then
+            if grep --quiet --regexp='debian' /etc/os-release; then
                 rc_desc='apt/dpkg exited with error'
-            elif grep --quiet rhel /etc/os-release; then
+            elif grep --quiet --regexp='rhel' /etc/os-release; then
                 rc_desc='there are updates available'
             else
                 rc_desc="previous errors/it didn't work"
