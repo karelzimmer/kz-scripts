@@ -15,16 +15,16 @@
 # -----------------------------------------------------------------------------
 # Add Debian components to package sources and update package lists.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 
 # REMOVE apt-sources *
 # -----------------------------------------------------------------------------
 # Remove Debian components from package sources and update package lists.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
+if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 
 # INSTALL updates *
@@ -51,14 +51,14 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     check-updat
 # Express Advanced Error Reporting) prevents the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if ! grep --quiet pci=noaer /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
-if ! grep --quiet pci=noaer /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
-if   grep --quiet --regexp='debian'    /etc/os-release; then sudo update-grub; fi
-if   grep --quiet --regexp='rhel'      /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if ! grep --quiet --regexp='noaer'  /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet --regexp='noaer'  /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if   grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
+if   grep --quiet --regexp='rhel'   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
-grep --quiet pci=noaer /etc/default/grub
+grep --quiet --regexp='noaer' /etc/default/grub
 REBOOT=true
 
 # REMOVE aer-settings #none
@@ -69,13 +69,13 @@ REBOOT=true
 # Express Advanced Error Reporting) to "allow" the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if grep --quiet pci=noaer /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
-if grep --quiet --regexp='debian'    /etc/os-release; then sudo update-grub; fi
-if grep --quiet --regexp='rhel'      /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet --regexp='noaer'  /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
+if grep --quiet --regexp='rhel'   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
-! grep --quiet pci=noaer /etc/default/grub
+! grep --quiet --regexp='noaer' /etc/default/grub
 REBOOT=true
 
 # INSTALL angryipscan pc06 pc07
@@ -119,17 +119,17 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Disable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl stop    apport.service; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl disable apport.service; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo rm  --force --verbose /var/crash/*; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl stop    apport.service; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl disable apport.service; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo rm  --force --verbose /var/crash/*; fi
 
 # REMOVE apport-settings #none
 # -----------------------------------------------------------------------------
 # Enable automatic crash report generation for Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet Ubuntu /etc/os-release; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
-if grep --quiet Ubuntu /etc/os-release; then sudo systemctl enable --now apport.service; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl enable --now apport.service; fi
 
 # INSTALL backintime #none
 # -----------------------------------------------------------------------------
@@ -486,9 +486,9 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/' /etc/defau
 # -----------------------------------------------------------------------------
 # Suppress warnings.
 # -----------------------------------------------------------------------------
-if ! grep --quiet 'loglevel=3' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
-if   grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
-if   grep --quiet --regexp='rhel'   /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if ! grep --quiet --regexp='loglevel=3' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
+if   grep --quiet --regexp='debian'     /etc/os-release  ; then sudo update-grub; fi
+if   grep --quiet --regexp='rhel'       /etc/os-release  ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 # REMOVE grub-settings *
