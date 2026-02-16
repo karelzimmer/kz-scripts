@@ -215,10 +215,9 @@ function install_rpm_package() {
 function term() {
     local red='\033[1;31m'
     local normal='\033[0m'
-    local text='
--------------------------------------------------------------------------------
+    local text=''
 
-'
+    text='\n'$(eval printf -- '-%.0s' "{1..$COLUMNS}")'\n\n'
 
     if $OPTION_DEV; then
         text+="$red$(gettext "Please note: the development version of the kz \
