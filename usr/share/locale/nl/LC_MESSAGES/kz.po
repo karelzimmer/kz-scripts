@@ -480,7 +480,7 @@ msgstr "Bouw RPM-pakket"
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:501 kz-get:223
+#: kz-build:501 kz-get:226
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -891,7 +891,7 @@ msgstr "onbekende optie"
 msgid "Type 'man kz get' for more information."
 msgstr "Typ 'man kz get' voor meer informatie."
 
-#: kz-get:227
+#: kz-get:230
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -905,7 +905,7 @@ msgstr ""
 "\n"
 "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
-#: kz-get:235
+#: kz-get:238
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
