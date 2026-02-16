@@ -106,15 +106,16 @@ function check_input() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local parsed=''
 
-    parsed=$(getopt --alternative                       \
-                    --options       "$OPTIONS_SHORT"    \
-                    --longoptions   "$OPTIONS_LONG"     \
-                    --name          "$program_name"     \
-                    --              "$@")               ||
-                    {
-                        kz.infomsg "$USAGE"
-                        exit 1
-                    }
+    parsed=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$program_name"     \
+                --              "$@"
+        ) || {
+            kz.infomsg "$USAGE"
+            exit 1
+        }
     eval set -- "$parsed"
     unset parsed
 
