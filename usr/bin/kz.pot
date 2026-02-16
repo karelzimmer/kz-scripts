@@ -161,7 +161,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:157 kz-build:165 kz-check:138 kz-deploy:142 kz-desktop:205
-#: kz-dev:138 kz-get:106 kz-menu:182 kz-restore:158 kz-update:191 kz-wifi:133
+#: kz-dev:138 kz-get:107 kz-menu:182 kz-restore:158 kz-update:191 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -430,7 +430,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:501 kz-get:223
+#: kz-build:501 kz-get:224
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -527,11 +527,11 @@ msgstr ""
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
-#: kz_common.py:44 kz_common.sh:31 kz-get:130
+#: kz_common.py:44 kz_common.sh:31 kz-get:131
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:70 kz_common.sh:48 kz-get:184
+#: kz_common.py:70 kz_common.sh:48 kz-get:185
 msgid "Wait for another package manager to finish"
 msgstr ""
 
@@ -800,22 +800,23 @@ msgid "       wget karelzimmer.nl/getkz; bash getkz [<options>]"
 msgstr ""
 
 #: kz-get:34
-msgid "  -d, --dev      download the development version of package kz"
+msgid ""
+"  -d, --dev      download and install the development version of package kz"
 msgstr ""
 
-#: kz-get:72 kz-update:133
+#: kz-get:73 kz-update:133
 msgid "fatal: unknown os release"
 msgstr ""
 
-#: kz-get:95
+#: kz-get:96
 msgid "unknown option"
 msgstr ""
 
-#: kz-get:100 kz-get:111
+#: kz-get:101 kz-get:112
 msgid "Type 'man kz get' for more information."
 msgstr ""
 
-#: kz-get:227
+#: kz-get:228
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -824,7 +825,7 @@ msgid ""
 "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-get:235
+#: kz-get:236
 msgid "Type 'exit' to close this window."
 msgstr ""
 

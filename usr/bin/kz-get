@@ -12,8 +12,8 @@
 # Imports
 # #############################################################################
 
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
+export TEXTDOMAIN='kz'
+export TEXTDOMAINDIR='/usr/share/locale'
 source /usr/bin/gettext.sh
 
 
@@ -31,7 +31,8 @@ $(gettext "       wget karelzimmer.nl/getkz; bash getkz [<options>]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -d, --dev      download the development version of package kz')"
+$(gettext """  -d, --dev      download and install the development version of \
+package kz""")"
 readonly HELP_USAGE
 
 # #############################################################################

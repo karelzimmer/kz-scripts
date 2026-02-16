@@ -11,8 +11,8 @@
 # Imports
 # #############################################################################
 
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
+export TEXTDOMAIN='kz'
+export TEXTDOMAINDIR='/usr/share/locale'
 source /usr/bin/gettext.sh
 
 

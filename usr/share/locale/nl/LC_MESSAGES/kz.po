@@ -170,7 +170,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:157 kz-build:165 kz-check:138 kz-deploy:142 kz-desktop:205
-#: kz-dev:138 kz-get:106 kz-menu:182 kz-restore:158 kz-update:191 kz-wifi:133
+#: kz-dev:138 kz-get:107 kz-menu:182 kz-restore:158 kz-update:191 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -480,7 +480,7 @@ msgstr "Bouw RPM-pakket"
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:501 kz-get:223
+#: kz-build:501 kz-get:224
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -582,11 +582,11 @@ msgstr "Eindspaties gevonden."
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz_common.py:44 kz_common.sh:31 kz-get:130
+#: kz_common.py:44 kz_common.sh:31 kz-get:131
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:70 kz_common.sh:48 kz-get:184
+#: kz_common.py:70 kz_common.sh:48 kz-get:185
 msgid "Wait for another package manager to finish"
 msgstr "Wacht tot een andere pakketbeheerder klaar is"
 
@@ -874,22 +874,24 @@ msgid "       wget karelzimmer.nl/getkz; bash getkz [<options>]"
 msgstr "         wget karelzimmer.nl/getkz; bash getkz [<opties>]"
 
 #: kz-get:34
-msgid "  -d, --dev      download the development version of package kz"
-msgstr "  -d, --dev      download de ontwikkelingsversie van pakket kz"
+msgid ""
+"  -d, --dev      download and install the development version of package kz"
+msgstr ""
+"  -d, --dev      download en installeer de ontwikkelingsversie van pakket kz"
 
-#: kz-get:72 kz-update:133
+#: kz-get:73 kz-update:133
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
-#: kz-get:95
+#: kz-get:96
 msgid "unknown option"
 msgstr "onbekende optie"
 
-#: kz-get:100 kz-get:111
+#: kz-get:101 kz-get:112
 msgid "Type 'man kz get' for more information."
 msgstr "Typ 'man kz get' voor meer informatie."
 
-#: kz-get:227
+#: kz-get:228
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -903,7 +905,7 @@ msgstr ""
 "\n"
 "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
-#: kz-get:235
+#: kz-get:236
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
