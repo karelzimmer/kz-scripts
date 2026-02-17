@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name= GitHub web app
+Name=GitHub web app
 Comment=Developer platform
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox

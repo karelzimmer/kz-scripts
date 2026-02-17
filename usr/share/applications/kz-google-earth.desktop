@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name= Google Earth web app
+Name=Google Earth web app
 Comment=Exploring the Earth from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox

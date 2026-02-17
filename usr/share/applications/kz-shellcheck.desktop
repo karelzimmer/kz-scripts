@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name= ShellCheck web app
+Name=ShellCheck web app
 Comment=Check shell scripts from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox
