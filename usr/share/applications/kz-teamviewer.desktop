@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name= TeamViewer web app
+Name=TeamViewer web app
 Comment=Manage computers from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox
