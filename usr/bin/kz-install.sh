@@ -670,7 +670,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then wget --no-verbose --outp
 if grep --quiet --regexp='debian' /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install    --assume-yes    microsoft-edge-stable; fi
-# Undo /opt/microsoft/msedge/cron/microsoft-edge action which replaces microsoft-edge sources with google-chrome w/microsoft-edge-stable_145.0.3800.58-1_amd64/DEBIAN/postinst shell script:
+# Undo action which replaces microsoft-edge sources with google-chrome:
 if grep --quiet --regexp='debian' /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     install    --assumeyes     flatpak; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
