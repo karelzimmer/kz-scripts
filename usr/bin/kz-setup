@@ -332,19 +332,13 @@ function process_settings_files_by_app_argument() {
     local no_app_match=true
     local text=''
 
-#   ChatGPT: *[[:space:]]*${variable1}[[:space:]]*${variable2}[[:space:]]*
-#   Case → use [[:space:]]* and accept that it means “zero or more”.
     while read -r setup_record; do
         case $setup_record in
-            '' )
-                # Skip empty line.
-                continue
-                ;;
             '#'[[:space:]]*${setup}[[:space:]]*${app_argument}[[:space:]]* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
-                printf '\n%s\n' "$setup_record" >> "$command_file"
+                printf '%s\n' "$setup_record" >> "$command_file"
                 ;;
             '#'[[:space:]]*${setup}[[:space:]]* | \
             '#'[[:space:]]*${reset}[[:space:]]* )
@@ -364,9 +358,6 @@ function process_settings_files_by_app_argument() {
         err_flag=true
         text=$(eval_gettext "App '\$app_argument' not found.")
         kz.errmsg "$text"
-    else
-        # Add extra empty line  to command file.
-        printf '\n' >> "$command_file"
     fi
 }
 
@@ -379,15 +370,11 @@ function process_settings_files_by_hostname() {
 
     while read -r setup_record; do
         case $setup_record in
-            '' )
-                # Skip empty line.
-                continue
-                ;;
             '#'[[:space:]]*${setup}[[:space:]]*'*' | \
             '#'[[:space:]]*${setup}[[:space:]]*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
-                printf '\n%s\n' "$setup_record" >> "$command_file"
+                printf '%s\n' "$setup_record" >> "$command_file"
                 ;;
             '#'[[:space:]]*${setup}[[:space:]]* | \
             '#'[[:space:]]*${reset}[[:space:]]* )
@@ -402,8 +389,6 @@ function process_settings_files_by_hostname() {
                 ;;
         esac
     done < <(cat "${settings_files[@]}")
-    # Add extra empty line  to command file.
-    printf '\n' >> "$command_file"
 }
 
 
@@ -475,6 +460,10 @@ function process_command_file() {
 
     while read -r command_record; do
         case $command_record in
+            '' )
+                # Empty line.
+                continue
+                ;;
             '#'[[:space:]]*${setup}[[:space:]]* )
                 # App record.
                 app_name=$(
@@ -492,10 +481,6 @@ function process_command_file() {
                 # To corrolate possible error messages with app name.
                 printf ' \n%s\n' "-- App $app_name" >> "$ERROR_LOG"
                 ;;
-            '' | '#'* )
-                # Empty or comment line.
-                continue
-                ;;
             * )
                 # Process command record.
                 execute_command "$command_record"
@@ -510,7 +495,7 @@ function execute_command() {
     local -i cmd_dis_len=0
     local -i cmd_dis_max=0
     local cmd_dis=''
-    local cmd=${1:-unknown}
+    local cmd=$1
 
     (( ++cmd_seq_num ))
 
