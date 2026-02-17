@@ -524,6 +524,7 @@ function check_tags() {
     local text=''
 
     if grep --quiet                 \
+            --word-regexp           \
             --regexp="$esc_bug"     \
             --regexp="$esc_fixme"   \
             --regexp="$esc_todo"    \
@@ -534,6 +535,7 @@ $RED    $(gettext 'Flagged annotation found.')$NORMAL
 "
         kz.infomsg "$text"
         grep    --line-number           \
+                --word-regexp           \
                 --regexp="$esc_bug"     \
                 --regexp="$esc_fixme"   \
                 --regexp="$esc_todo"    \

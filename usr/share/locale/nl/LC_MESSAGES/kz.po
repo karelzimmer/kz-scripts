@@ -485,7 +485,7 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
 #: ckhtml:123 gitbranch:61 gitclone:77 gitfetch:61 gitinit:44 gitpull:61
-#: gitsquash:57 gitstatus:61 kz-build:511 kz-check:578 kz-deploy:265 kz-dev:278
+#: gitsquash:57 gitstatus:61 kz-build:511 kz-check:580 kz-deploy:265 kz-dev:278
 #: kz-update:317
 msgid "Complete!"
 msgstr "Klaar!"
@@ -570,15 +570,15 @@ msgstr ""
 msgid "One or more lines are too long (>79):"
 msgstr "Een of meer regels zijn te lang (>79):"
 
-#: kz-check:533
+#: kz-check:534
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:555
+#: kz-check:557
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:507 kz-check:574 kz-deploy:261
+#: kz-build:507 kz-check:576 kz-deploy:261
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
