@@ -1074,11 +1074,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:1016 kz-install.sh:1017 kz-install.sh:1023
+#: kz-install.sh:1020 kz-install.sh:1021 kz-install.sh:1027
 msgid "guest"
 msgstr "gast"
 
-#: kz-install.sh:1016
+#: kz-install.sh:1020
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
@@ -1538,6 +1538,14 @@ msgstr "Teams web-app"
 #: kz-teams.desktop:11
 msgid "Collaborate with others from a web browser"
 msgstr "Werk samen met anderen vanuit een webbrowser"
+
+#: kz-teamviewer.desktop:10
+msgid "TeamViewer web app"
+msgstr "TeamViewer web-app"
+
+#: kz-teamviewer.desktop:11
+msgid "Manage computers from a web browser"
+msgstr "Beheer computers vanuit een webbrowser"
 
 #: kz-vscode.desktop:10
 msgid "Visual Studio Code web app"
