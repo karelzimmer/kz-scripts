@@ -976,11 +976,11 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1020 kz-install.sh:1021 kz-install.sh:1027
+#: kz-install.sh:1016 kz-install.sh:1017 kz-install.sh:1023
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1020
+#: kz-install.sh:1016
 msgid "Guest_user"
 msgstr ""
 
@@ -1399,14 +1399,6 @@ msgstr ""
 
 #: kz-teams.desktop:11
 msgid "Collaborate with others from a web browser"
-msgstr ""
-
-#: kz-teamviewer.desktop:10
-msgid "TeamViewer web app"
-msgstr ""
-
-#: kz-teamviewer.desktop:11
-msgid "Manage computers from a web browser"
 msgstr ""
 
 #: kz-vscode.desktop:10

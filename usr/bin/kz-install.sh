@@ -920,8 +920,6 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 # Remote desktop.
 # -----------------------------------------------------------------------------
-# Web app: https://start.teamviewer.com
-# -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then rm   --verbose /tmp/teamviewer.deb; fi
@@ -930,8 +928,6 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf install --assum
 # REMOVE teamviewer *
 # -----------------------------------------------------------------------------
 # Remote desktop.
-# -----------------------------------------------------------------------------
-# Web app: https://start.teamviewer.com
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes teamviewer; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --assumeyes  teamviewer; fi
