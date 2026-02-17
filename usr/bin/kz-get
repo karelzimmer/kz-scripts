@@ -219,8 +219,8 @@ function term() {
     local seperator_line=''
     local -i seperator_line_len=${COLUMNS:-79}
 
-    seperator_line=$(eval printf -- '-%.0s' "{1..$seperator_line_len}")
-    text="\n$seperator_line\n\n"
+    seperator_line=$(eval printf -- '_%.0s' "{1..$seperator_line_len}")
+    text="$seperator_line\n\n"
 
     if $OPTION_DEV; then
         text+="$red$(gettext "Please note: the development version of the kz \
