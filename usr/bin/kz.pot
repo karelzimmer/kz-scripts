@@ -438,7 +438,7 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
 #: ckhtml:123 gitbranch:61 gitclone:77 gitfetch:61 gitinit:44 gitpull:61
-#: gitsquash:57 gitstatus:61 kz-build:520 kz-check:589 kz-deploy:274 kz-dev:278
+#: gitsquash:62 gitstatus:61 kz-build:520 kz-check:589 kz-deploy:274 kz-dev:278
 #: kz-update:317
 msgid "Complete!"
 msgstr ""
@@ -1096,7 +1096,7 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: gitsquash:43 kz-menu:505
+#: gitsquash:45 kz-menu:505
 msgid "The following will be executed:"
 msgstr ""
 
@@ -1448,6 +1448,6 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: gitsquash:41
+#: gitsquash:43
 msgid "*** git squash merge in 9 steps ***"
 msgstr ""
