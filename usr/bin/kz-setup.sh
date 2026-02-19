@@ -68,14 +68,14 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed             
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
-if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                         &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 LOGOUT=true
 
 # RESET dash-to-dock *
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                         &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                            &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                     &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock custom-theme-shrink; fi

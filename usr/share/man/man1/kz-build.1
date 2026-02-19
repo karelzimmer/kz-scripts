@@ -21,8 +21,7 @@ kz.
 .sp
 The built Debian package, kz, will then be installed locally.
 .sp
-With option \fB-d\fR, \fB--dev\fR the development version of the kz package is
-created.
+With option \fB--dev\fR the development version of the kz package is created.
 .sp
 If the development repositories are not on main or not clean, also a
 development version will be created (kz-dev-....).
@@ -41,7 +40,7 @@ Command \fBkz build\fR can only be run in a desktop environment.
 
 .SH OPTIONS
 .TP
-\fB-d\fR, \fB--dev\fR
+\fB--dev\fR
 Build the development version of package kz.
 .TP
 \fB-h\fR, \fB--help\fR
@@ -55,6 +54,9 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
+.TP
+\fB--debug\fR
+Run in debugging mode, print diagnostic messages and keep temporary files.
 
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not

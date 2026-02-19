@@ -28,7 +28,7 @@ USAGE=$(
 gettext "Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file <file>]...
                 [-g|--gui] [-l|--list] [-r|--reset]
                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [--] [<app>...]"
+                [--debug] [--] [<app>...]"
     )
 readonly USAGE
 
@@ -51,6 +51,7 @@ $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')
+$(gettext '      --debug    enable debug messages')
 
 $(gettext 'Arguments:')
 $(gettext '  <app>          process specified apps')"
@@ -58,7 +59,7 @@ readonly HELP
 
 readonly OPTIONS_SHORT='bcf:glrhmuv'
 readonly OPTIONS_LONG="browse,cat,file:,gui,list,reset,help,manual,usage,\
-version"
+version,debug"
 
 
 # #############################################################################
@@ -68,6 +69,7 @@ version"
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
 declare LOGOUT=false
+declare OPTION_DEBUG=false
 declare OPTION_GUI=false
 declare OPTION_RESET=false
 
@@ -227,6 +229,12 @@ environment available")"
             -v | --version )
                 kz.process_option_version
                 exit 0
+                ;;
+            --debug )
+                OPTION_DEBUG=true
+                set -o verbose
+                set -o xtrace
+                shift
                 ;;
             -- )
                 shift

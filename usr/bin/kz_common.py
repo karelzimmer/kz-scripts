@@ -60,6 +60,8 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
                       shell=True).returncode == 0:
         return 0
 
+    text = _('Wait for another package manager to finish...')
+
     while True:
         try:
             subprocess.run(check_debian_package_manager, executable='bash',
@@ -67,7 +69,6 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
         except Exception:
             break
         else:
-            text = _('Wait for another package manager to finish') + '...'
             infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
             time.sleep(2)
 
@@ -185,7 +186,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function displays the manual page..
     """
     exc: BaseException
-    man: str = f'man --pager=cat {PROGRAM_NAME}'
+    man: str = f'man {PROGRAM_NAME}'
     text: str = ''
     yelp: str = f'yelp man:{PROGRAM_NAME}'
 

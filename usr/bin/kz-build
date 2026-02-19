@@ -28,8 +28,9 @@ PROGRAM_DESC=$(gettext 'Build website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz build [-d|--dev]
-                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]")
+USAGE=$(gettext "Usage: kz build [--dev]
+                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+                [--debug]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz build [<options>]")
@@ -37,15 +38,16 @@ HELP="$(gettext "Usage: kz build [<options>]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -d, --dev      build the development version of package kz')
+$(gettext '      --dev      build the development version of package kz')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '  -v, --version  show program version')
+$(gettext '      --debug    enable debug messages')"
 readonly HELP
 
-readonly OPTIONS_SHORT='dhmuv'
-readonly OPTIONS_LONG='dev,help,manual,usage,version'
+readonly OPTIONS_SHORT='hmuv'
+readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
 
 # The following directories are used to build the website and packages.
 readonly DOCS_REPO=$HOME/kz-docs
@@ -70,6 +72,7 @@ readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 # #############################################################################
 
 declare OPTION_DEV=false
+declare OPTION_DEBUG=false
 declare ERR_FLAG=false
 
 
@@ -93,7 +96,7 @@ function process() {
     build_website
     generate_gettext_files
     kz.check_repos || OPTION_DEV=true
-    # Capture build id kz packages (ISO 8601: YYYY-MM-DDTHH:MM:SS).
+    # Capture build id kz packages (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     build_id=$(date '+%FT%T')
     build_deb_package
     build_rpm_package
@@ -130,7 +133,7 @@ function process_options() {
 
     while true; do
         case $1 in
-            -d | --dev )
+            --dev )
                 OPTION_DEV=true
                 shift
                 ;;
@@ -149,6 +152,12 @@ function process_options() {
             -v | --version )
                 kz.process_option_version
                 exit 0
+                ;;
+            --debug )
+                OPTION_DEBUG=true
+                set -o verbose
+                set -o xtrace
+                shift
                 ;;
             -- )
                 shift
@@ -379,7 +388,7 @@ function build_deb_package() {
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man5/"* |& $PROGRAM_LOGS
 
     if $OPTION_DEV; then
-        build_id+=$(gettext ' *** DEVELOPMENT VERSION ***')
+        build_id+=' *** DEV ***'
     fi
     mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"

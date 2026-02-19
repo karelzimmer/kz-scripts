@@ -22,19 +22,19 @@ Met opdracht \fBkz deploy\fR wordt pakket kz en de website gebouwd en geplaatst
 op internet zodat de scripts en documenten beschikbaar zijn voor algemeen
 gebruik.
 .sp
-Met optie \fB-d\fR, \fB--dev\fR wordt de ontwikkelingsversie van het kz-pakket
+Met optie \fB--dev\fR wordt de ontwikkelingsversie van het kz-pakket
 gedistribueerd.
 .sp
 Met opdracht \fBkz get\fR kan pakket kz geïnstalleerd worden op de locale
 computer.
-Met opdracht \fBkz dev\fR kan de onwikkelomgeving (website plus pakket kz)
+Met opdracht \fBkz dev\fR kan de ontwikkelomgeving (website plus pakket kz)
 geplaatst worden op de locale computer.
 .sp
 Opdracht \fBkz deploy\fR kan alleen worden uitgevoerd op een desktop.
 
 .SH OPTIES
 .TP
-\fB-d\fR, \fB--dev\fR
+\fB--dev\fR
 Distribueer de ontwikkelingsversie van pakket kz.
 .TP
 \fB-h\fR, \fB--help\fR
@@ -48,6 +48,10 @@ Toon de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur en het auteursrecht.
+.TP
+\fB--debug\fR
+Voer uit in debugmodus, geef diagnostische berichten weer en bewaar tijdelijke
+bestanden.
 
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de

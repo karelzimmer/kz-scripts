@@ -22,24 +22,28 @@ source /usr/bin/gettext.sh
 # #############################################################################
 
 readonly PROGRAM_NAME='kz-get'
-PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
-readonly PROGRAM_DESC
 
-HELP_USAGE="$(gettext "Usage: kz get [-d|--dev]")
-$(gettext "       wget karelzimmer.nl/getkz; bash getkz [<options>]")
+readonly USAGE='kz get [--dev]
+       [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+       [--debug]
 
-$PROGRAM_DESC.
+wget karelzimmer.nl/getkz
+bash getkz [--dev]
+           [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+           [--debug]'
 
-$(gettext 'Options:')
-$(gettext """  -d, --dev      download and install the development version of \
-package kz""")"
-readonly HELP_USAGE
+readonly HELP=$USAGE
+
+readonly OPTIONS_SHORT='hmuv'
+readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
+
 
 # #############################################################################
 # Globals
 # #############################################################################
 
 declare OPTION_DEV=false
+declare OPTION_DEBUG=false
 
 
 # #############################################################################
@@ -53,83 +57,115 @@ function init() {
     set -o errtrace
     set -o nounset
     set -o pipefail
-
-    # Trap exit signal to clean up temporary files.
-    trap 'rm --force getkz getkz.{1..99} /tmp/kz-get-??????????.deb' EXIT
 }
 
 
 # This function performs the script actions, such as checking the input.
 function process() {
-    local text=''
+    check_input "$@"
 
-    check_input_process_options "$@"
+    if $OPTION_DEBUG; then
+        # Trap exit signal to clean up only getkz files if in debug mode.
+        trap 'rm --force getkz getkz.{1..99}' EXIT
+    else
+        # Clean up temporary files if not in debug mode.
+        trap 'rm --force getkz getkz.{1..99} /tmp/kz-get-*' EXIT
+    fi
+
     become_check || exit 0
     if grep --quiet --regexp='debian' /etc/os-release; then
         install_deb_package
     elif grep --quiet --regexp='rhel' /etc/os-release; then
         install_rpm_package
     else
-        text="$(gettext 'fatal: unknown os release')"
-        printf '%s\n' "$text" >&2
+        printf '%s\n' 'fatal: unknown os release' >&2
         exit 1
     fi
 }
 
 
-# This function checks the script input, and handles the script options and
-# arguments.
-function check_input_process_options() {
-    local option=${1:-''}
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local text=''
 
-    case $option in
-        '' )
-            return 0
-            ;;
-        -d | -de | -dev | --d | --de | --dev )
-            OPTION_DEV=true
-            return 0
-            ;;
-        -* )
-            text="$program_name: $(gettext 'unknown option') '$*'
-$HELP_USAGE"
-            if man kz get &> /dev/null; then
-                text+="
+# This function checks the script input.
+function check_input() {
+    local parsed=''
 
-$(gettext "Type 'man kz get' for more information.")"
-            fi
-            printf '%s\n' "$text"
+    parsed=$(
+        getopt  --alternative                   \
+                --options       "$OPTIONS_SHORT"              \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME" \
+                --              "$@"
+        ) || {
+            printf '%s\n' "$USAGE" >&2
             exit 1
-            ;;
-        * )
-            text="$program_name: $*: $(gettext 'arguments are not allowed')
-$HELP_USAGE"
-            if man kz get &> /dev/null; then
-                text+="
+        }
+    eval set -- "$parsed"
+    unset parsed
 
-$(gettext "Type 'man kz get' for more information.")"
-            fi
-            printf '%s\n' "$text"
-            exit 1
+    process_options "$@"
+}
+
+# This function handles the script options and arguments.
+function process_options() {
+    while true; do
+        case $1 in
+            --dev )
+                OPTION_DEV=true
+                shift
+                ;;
+            -h | --help )
+                printf '%s\n' "$HELP"
+                exit 0
+                ;;
+            -m | --manual )
+                if [[ -n ${DISPLAY-} ]]; then
+                    yelp man:"$PROGRAM_NAME" 2> /dev/null
+                else
+                    man "$PROGRAM_NAME"
+                fi
+                exit 0
+                ;;
+            -u | --usage )
+                printf '%s\n' "$USAGE"
+                exit 0
+                ;;
+            -v | --version )
+                printf '%s\n' "$PROGRAM_NAME 4.2.1"
+                exit 0
+                ;;
+            --debug )
+                OPTION_DEBUG=true
+                set -o verbose
+                set -o xtrace
+                shift
+                ;;
+            -- )
+                shift
+                break
+                ;;
+            * )
+                printf '%s\n' "$PROGRAM_NAME: getopt: internal error" >&2
+                exit 1
             ;;
-    esac
+        esac
+    done
+
+    if [[ -n $* ]]; then
+        printf '%s\n' "$USAGE" >&2
+        exit 1
+    fi
 }
 
 
 # This function checks if the user is allowed to become root and returns 0 if
 # so, otherwise returns 1 with descriptive message.
 function become_check() {
-    local text=''
-
     if [[ $UID -eq 0 ]]; then
         return 0
     elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
-        text=$(gettext 'Already performed by the administrator.')
-        printf '%s\n' "$text" >&2
+        printf '%s\n' 'Already performed by the administrator.' >&2
         return 1
     fi
 }
@@ -142,12 +178,12 @@ function install_deb_package() {
     local packages_url='https://karelzimmer.nl/assets/packages'
     local reinstall=''
 
-    kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-
     if $OPTION_DEV; then
         kz_deb_site_file=$packages_url/kz-dev_4.2.1-1_all.deb
+        kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-dev-XXXXXXXXXX.deb")
     else
         kz_deb_site_file=$packages_url/kz_4.2.1-1_all.deb
+        kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     fi
 
     if type kz &> /dev/null; then
@@ -159,7 +195,7 @@ function install_deb_package() {
     sudo true
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
     # Prevent the message:
-    # ...file '/tmp/kz-get-XXXXXXXXXX.deb' couldn't be accessed by user '_apt'.
+    # ...file '/tmp/kz-get-....deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
     check_debian_package_manager
@@ -178,12 +214,13 @@ function install_deb_package() {
 function check_debian_package_manager() {
     local text=''
 
+    text=$(gettext 'Wait for another package manager to finish...')
+
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        text=$(gettext "Wait for another package manager to finish")
-        printf '%s\n' "$text..."
+        printf '%s\n' "$text"
         sleep 2
     done
 }

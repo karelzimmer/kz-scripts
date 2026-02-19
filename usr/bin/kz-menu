@@ -25,7 +25,7 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] \
 [-u|--usage]
-               [-v|--version]")
+               [-v|--version] [--debug]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz menu [<options>]")
@@ -37,11 +37,12 @@ $(gettext '  -g, --gui      run in graphical mode if possible')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '  -v, --version  show program version')
+$(gettext '      --debug    enable debug messages')"
 readonly HELP
 
 readonly OPTIONS_SHORT='ghmuv'
-readonly OPTIONS_LONG='gui,help,manual,usage,version'
+readonly OPTIONS_LONG='gui,help,manual,usage,version,debug'
 
 # Define the menu1 options.
 MENU1_TITLE=$(gettext 'Installation menu')
@@ -92,6 +93,7 @@ readonly MENU2_LINES=${#MENU2_DESCS[@]}
 # Globals
 # #############################################################################
 
+declare OPTION_DEBUG=false
 declare OPTION_GUI=false
 
 
@@ -166,6 +168,12 @@ environment available")"
             -v | --version )
                 kz.process_option_version
                 exit 0
+                ;;
+            --debug )
+                OPTION_DEBUG=true
+                set -o verbose
+                set -o xtrace
+                shift
                 ;;
             -- )
                 shift

@@ -44,14 +44,15 @@ function kz.check_debian_package_manager() {
         return 0
     fi
 
+    text=$(gettext 'Wait for another package manager to finish...')
+
     while pkexec /usr/bin/kz_common-pkexec; do
-        text=$(gettext "Wait for another package manager to finish")
         if ${OPTION_GUI:-false}; then
             kz.logmsg "$text..."
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$text"
         else
-            kz.infomsg "$text..."
+            kz.infomsg "$text"
         fi
         sleep 2
     done
@@ -232,7 +233,7 @@ function kz.process_option_manual() {
     if [[ -n ${DISPLAY-} ]]; then
         yelp man:"$PROGRAM_NAME" 2> /dev/null
     else
-        man --pager=cat "$PROGRAM_NAME"
+        man "$PROGRAM_NAME"
     fi
 }
 
@@ -364,10 +365,12 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit )
-            # Clean up temporary files.
-            text='Cleaning up temporary files...'
-            kz.logmsg "$text"
-            rm  --verbose --force /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
+            if ! ${OPTION_DEBUG:-false}; then
+                # Clean up temporary files if not in debug mode.
+                text='Cleaning up temporary files...'
+                kz.logmsg "$text"
+                rm  --verbose --force /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
+            fi
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"
             text="==== END logs for script $PROGRAM_NAME"
