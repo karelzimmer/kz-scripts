@@ -23,18 +23,18 @@ source /usr/bin/gettext.sh
 
 readonly PROGRAM_NAME='kz-get'
 
-readonly USAGE='kz get [--dev]
+readonly USAGE='kz get [-d|--dev]
        [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-       [--debug]
+       [-D|--debug]
 
 wget karelzimmer.nl/getkz
-bash getkz [--dev]
+bash getkz [-d|--dev]
            [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-           [--debug]'
+           [-D|--debug]'
 
 readonly HELP=$USAGE
 
-readonly OPTIONS_SHORT='hmuv'
+readonly OPTIONS_SHORT='dhmuvD'
 readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
 
 
@@ -84,7 +84,6 @@ function process() {
 }
 
 
-
 # This function checks the script input.
 function check_input() {
     local parsed=''
@@ -109,7 +108,7 @@ function check_input() {
 function process_options() {
     while true; do
         case $1 in
-            --dev )
+            -d | --dev )
                 OPTION_DEV=true
                 shift
                 ;;
@@ -133,7 +132,7 @@ function process_options() {
                 printf '%s\n' "$PROGRAM_NAME 4.2.1"
                 exit 0
                 ;;
-            --debug )
+            -D | --debug )
                 OPTION_DEBUG=true
                 set -o verbose
                 set -o xtrace
