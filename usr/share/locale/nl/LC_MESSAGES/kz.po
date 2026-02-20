@@ -133,11 +133,11 @@ msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 msgid ""
 "Usage: kz backup [-g|--gui] [-t|--target <directory>]\n"
 "                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                 [--debug]"
+"                 [-D|--debug]"
 msgstr ""
 "Gebruik: kz backup [-g|--gui] [-t|--target <directory>]\n"
 "                   [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                   [--debug]"
+"                   [-D|--debug]"
 
 #: kz-backup:32
 msgid "Usage: kz backup [<options>]"
@@ -164,8 +164,8 @@ msgstr ""
 
 #: kz-backup:47 kz-build:46 kz-check:42 kz-deploy:47 kz-desktop:55
 #: kz-install:54 kz-menu:41 kz-restore:47 kz-setup:54
-msgid "      --debug    enable debug messages"
-msgstr "      --debug    debugberichten inschakelen"
+msgid "  -D, --debug    show debug information"
+msgstr "  -D, --debug    toon foutopsporingsinformatie"
 
 #: kz-backup:113 kz-desktop:223 kz-install:203 kz-menu:148 kz-restore:113
 #: kz-setup:199

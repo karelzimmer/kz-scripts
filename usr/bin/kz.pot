@@ -130,7 +130,7 @@ msgstr ""
 msgid ""
 "Usage: kz backup [-g|--gui] [-t|--target <directory>]\n"
 "                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                 [--debug]"
+"                 [-D|--debug]"
 msgstr ""
 
 #: kz-backup:32
@@ -154,7 +154,7 @@ msgstr ""
 
 #: kz-backup:47 kz-build:46 kz-check:42 kz-deploy:47 kz-desktop:55
 #: kz-install:54 kz-menu:41 kz-restore:47 kz-setup:54
-msgid "      --debug    enable debug messages"
+msgid "  -D, --debug    show debug information"
 msgstr ""
 
 #: kz-backup:113 kz-desktop:223 kz-install:203 kz-menu:148 kz-restore:113
