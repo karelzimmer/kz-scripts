@@ -28,9 +28,9 @@ PROGRAM_DESC=$(gettext 'Build website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz build [--dev]
+USAGE=$(gettext "Usage: kz build [-d|--dev]
                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [--debug]")
+                [-D|--debug]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz build [<options>]")
@@ -38,7 +38,7 @@ HELP="$(gettext "Usage: kz build [<options>]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '      --dev      build the development version of package kz')
+$(gettext '  -d, --dev      build the development version of package kz')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
@@ -46,7 +46,7 @@ $(gettext '  -v, --version  show program version')
 $(gettext '  -D, --debug    show debug information')"
 readonly HELP
 
-readonly OPTIONS_SHORT='hmuv'
+readonly OPTIONS_SHORT='dhmuvD'
 readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
 
 # The following directories are used to build the website and packages.
@@ -133,7 +133,7 @@ function process_options() {
 
     while true; do
         case $1 in
-            --dev )
+            -d | --dev )
                 OPTION_DEV=true
                 shift
                 ;;
@@ -153,7 +153,7 @@ function process_options() {
                 kz.process_option_version
                 exit 0
                 ;;
-            --debug )
+            -D | --debug )
                 OPTION_DEBUG=true
                 set -o verbose
                 set -o xtrace

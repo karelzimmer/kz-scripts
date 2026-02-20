@@ -409,21 +409,21 @@ msgstr "Bouw website en kz-pakketten"
 
 #: kz-build:31
 msgid ""
-"Usage: kz build [--dev]\n"
+"Usage: kz build [-d|--dev]\n"
 "                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                [--debug]"
+"                [-D|--debug]"
 msgstr ""
 "Gebruik: kz build [-d|--dev]\n"
 "                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                  [--debug]"
+"                  [-D|--debug]"
 
 #: kz-build:36
 msgid "Usage: kz build [<options>]"
 msgstr "Gebruik: kz build [<opties>]"
 
 #: kz-build:41
-msgid "      --dev      build the development version of package kz"
-msgstr "      --dev      bouw de ontwikkelingsversie van pakket kz"
+msgid "  -d, --dev      build the development version of package kz"
+msgstr "  -d, --dev      bouw de ontwikkelingsversie van pakket kz"
 
 #: kz-build:90 kz-check:73 kz-deploy:73 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."

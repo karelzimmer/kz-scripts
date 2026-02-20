@@ -360,9 +360,9 @@ msgstr ""
 
 #: kz-build:31
 msgid ""
-"Usage: kz build [--dev]\n"
+"Usage: kz build [-d|--dev]\n"
 "                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                [--debug]"
+"                [-D|--debug]"
 msgstr ""
 
 #: kz-build:36
@@ -370,7 +370,7 @@ msgid "Usage: kz build [<options>]"
 msgstr ""
 
 #: kz-build:41
-msgid "      --dev      build the development version of package kz"
+msgid "  -d, --dev      build the development version of package kz"
 msgstr ""
 
 #: kz-build:90 kz-check:73 kz-deploy:73 kz-dev:75
