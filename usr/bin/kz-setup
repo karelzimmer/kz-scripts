@@ -28,7 +28,7 @@ USAGE=$(
 gettext "Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file <file>]...
                 [-g|--gui] [-l|--list] [-r|--reset]
                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [--debug] [--] [<app>...]"
+                [-D|--debug] [--] [<app>...]"
     )
 readonly USAGE
 
@@ -57,7 +57,7 @@ $(gettext 'Arguments:')
 $(gettext '  <app>          process specified apps')"
 readonly HELP
 
-readonly OPTIONS_SHORT='bcf:glrhmuv'
+readonly OPTIONS_SHORT='bcf:glrhmuvD'
 readonly OPTIONS_LONG="browse,cat,file:,gui,list,reset,help,manual,usage,\
 version,debug"
 
@@ -230,7 +230,7 @@ environment available")"
                 kz.process_option_version
                 exit 0
                 ;;
-            --debug )
+            -D | --debug )
                 OPTION_DEBUG=true
                 set -o verbose
                 set -o xtrace

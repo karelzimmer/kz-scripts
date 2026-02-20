@@ -1178,7 +1178,7 @@ msgid ""
 "Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file <file>]...\n"
 "                [-g|--gui] [-l|--list] [-r|--reset]\n"
 "                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                [--debug] [--] [<app>...]"
+"                [-D|--debug] [--] [<app>...]"
 msgstr ""
 
 #: kz-setup:35
