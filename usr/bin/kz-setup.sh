@@ -140,6 +140,7 @@ if gsettings get org.gnome.desktop.input-sources sources                        
 if gsettings get org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
 if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
+if gsettings get org.gnome.desktop.interface font-antialiasing                       &> /dev/null; then gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'; fi
 if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
 if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
 if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
@@ -185,6 +186,7 @@ LOGOUT=true
 if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
 if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
+if gsettings get org.gnome.desktop.interface font-antialiasing                       &> /dev/null; then gsettings reset org.gnome.desktop.interface font-antialiasing; fi
 if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
 if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
 if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
