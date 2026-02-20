@@ -519,6 +519,7 @@ function execute_command() {
         if [[ $cmd_seq_num -eq 1 ]]; then
             kz.debugmsg "$app_name_line"
         fi
+        kz.debugmsg "$cmd"
         printf '%s\n' "#$app_name_line"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
@@ -543,7 +544,6 @@ function execute_command() {
         return
     fi
 
-    kz.debugmsg "$cmd"
     if $OPTION_GUI; then
         kz.check_debian_package_manager
         pkexec  /usr/bin/kz-install-pkexec  \

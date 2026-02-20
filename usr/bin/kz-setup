@@ -511,6 +511,7 @@ function execute_command() {
         if [[ $cmd_seq_num -eq 1 ]]; then
             kz.debugmsg "$app_name_line"
         fi
+        kz.debugmsg "$cmd"
         printf '%s\n' "#$app_name_line"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
@@ -535,7 +536,6 @@ function execute_command() {
         return
     fi
 
-    kz.debugmsg "$cmd"
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
             2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
