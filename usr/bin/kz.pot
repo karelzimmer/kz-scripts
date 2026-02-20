@@ -952,7 +952,7 @@ msgstr ""
 msgid "Apps $operation completed."
 msgstr ""
 
-#: kz-install:614
+#: kz-install:613
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
