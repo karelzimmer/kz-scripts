@@ -530,6 +530,12 @@ function execute_command() {
         kz.infomsg "         $cmd_dis"
     fi
 
+    # Do not evaluate comment lines in the command file.
+    if [[ $cmd == \#* ]]; then
+        echo "SKIP: $cmd"
+        return
+    fi
+
     kz.debugmsg "$cmd"
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \

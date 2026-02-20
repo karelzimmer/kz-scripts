@@ -538,6 +538,11 @@ function execute_command() {
         kz.infomsg "         $cmd_dis"
     fi
 
+    # Do not evaluate comment lines in the command file.
+    if [[ $cmd == \#* ]]; then
+        return
+    fi
+
     kz.debugmsg "$cmd"
     if $OPTION_GUI; then
         kz.check_debian_package_manager
@@ -601,7 +606,8 @@ $(gettext 'Try to install/remove the apps again.')"
         operation=$(gettext 'remove')
     fi
     text=$(eval_gettext "Apps \$operation completed.")
-
+#FIXME
+exit 0
     if $REBOOT; then
         text+="
 
