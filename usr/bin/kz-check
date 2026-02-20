@@ -26,7 +26,7 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(
 gettext "Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [--debug]"
+                [-D|--debug]"
     )
 readonly USAGE
 
@@ -42,7 +42,7 @@ $(gettext '  -v, --version  show program version')
 $(gettext '  -D, --debug    show debug information')"
 readonly HELP
 
-readonly OPTIONS_SHORT='hmuv'
+readonly OPTIONS_SHORT='hmuvD'
 readonly OPTIONS_LONG='help,manual,usage,version,debug'
 
 # List NORMAL last here so that -x doesn't bork the display.
@@ -126,7 +126,7 @@ function process_options() {
                 kz.process_option_version
                 exit 0
                 ;;
-            --debug )
+            -D | --debug )
                 OPTION_DEBUG=true
                 set -o verbose
                 set -o xtrace

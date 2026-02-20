@@ -7,5 +7,5 @@
 # #############################################################################
 
 declare DASHOPTIONS='-a --addaft -b --addbef -d --delete -l --list -r --reset
-    -h --help -m --manual -u --usage -v --version'
+    -h --help -m --manual -u --usage -v --version -D --debug'
 complete -o default -W "$DASHOPTIONS" kz-desktop

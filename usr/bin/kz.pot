@@ -450,7 +450,7 @@ msgstr ""
 #: kz-check:28
 msgid ""
 "Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                [--debug]"
+"                [-D|--debug]"
 msgstr ""
 
 #: kz-check:33
@@ -653,7 +653,7 @@ msgstr ""
 msgid ""
 "Usage: kz deploy [-d|--dev]\n"
 "                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                 [--debug]"
+"                 [-D|--debug]"
 msgstr ""
 
 #: kz-deploy:37
@@ -697,7 +697,7 @@ msgid ""
 "Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
 "                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]\n"
 "                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                  [--debug]"
+"                  [-D|--debug]"
 msgstr ""
 
 #: kz-desktop:35
