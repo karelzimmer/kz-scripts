@@ -532,7 +532,6 @@ function execute_command() {
 
     # Do not evaluate comment lines in the command file.
     if [[ $cmd == \#* ]]; then
-        echo "SKIP: $cmd"
         return
     fi
 
