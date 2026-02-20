@@ -606,8 +606,7 @@ $(gettext 'Try to install/remove the apps again.')"
         operation=$(gettext 'remove')
     fi
     text=$(eval_gettext "Apps \$operation completed.")
-#FIXME
-exit 0
+
     if $REBOOT; then
         text+="
 
