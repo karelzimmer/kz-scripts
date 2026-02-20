@@ -882,7 +882,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
+if grep --quiet --regexp='debian' /etc/os-release; then wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
 if grep --quiet --regexp='debian' /etc/os-release; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list 1> /dev/null; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes spotify-client; fi
