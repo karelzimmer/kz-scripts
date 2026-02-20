@@ -820,7 +820,7 @@ msgid ""
 "Usage: kz install [-b|--browse] [-c|--cat] [-f|--file <file>]...\n"
 "                  [-g|--gui] [-l|--list] [-r|--remove]\n"
 "                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                  [--debug] [--] [<app>...]"
+"                  [-D|--debug] [--] [<app>...]"
 msgstr ""
 
 #: kz-install:35
@@ -973,7 +973,7 @@ msgstr ""
 #: kz-menu:26
 msgid ""
 "Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] [-u|--usage]\n"
-"               [-v|--version] [--debug]"
+"               [-v|--version] [-D|--debug]"
 msgstr ""
 
 #: kz-menu:31
@@ -1121,7 +1121,7 @@ msgstr ""
 msgid ""
 "Usage: kz restore [-g|--gui] [-s|--source <directory>]\n"
 "                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                  [--debug]"
+"                  [-D|--debug]"
 msgstr ""
 
 #: kz-restore:32

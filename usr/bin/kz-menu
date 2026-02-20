@@ -25,7 +25,7 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] \
 [-u|--usage]
-               [-v|--version] [--debug]")
+               [-v|--version] [-D|--debug]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz menu [<options>]")
@@ -41,7 +41,7 @@ $(gettext '  -v, --version  show program version')
 $(gettext '  -D, --debug    show debug information')"
 readonly HELP
 
-readonly OPTIONS_SHORT='ghmuv'
+readonly OPTIONS_SHORT='ghmuvD'
 readonly OPTIONS_LONG='gui,help,manual,usage,version,debug'
 
 # Define the menu1 options.
@@ -169,7 +169,7 @@ environment available")"
                 kz.process_option_version
                 exit 0
                 ;;
-            --debug )
+            -D | --debug )
                 OPTION_DEBUG=true
                 set -o verbose
                 set -o xtrace

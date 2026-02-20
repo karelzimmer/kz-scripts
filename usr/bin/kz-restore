@@ -26,7 +26,7 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "Usage: kz restore [-g|--gui] [-s|--source <directory>]
                   [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                  [--debug]")
+                  [-D|--debug]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz restore [<options>]")
@@ -47,7 +47,7 @@ $(gettext '  -v, --version  show program version')
 $(gettext '  -D, --debug    show debug information')"
 readonly HELP
 
-readonly OPTIONS_SHORT='gs:hmuv'
+readonly OPTIONS_SHORT='gs:hmuvD'
 readonly OPTIONS_LONG='gui,source:,help,manual,usage,version,debug'
 
 
@@ -146,7 +146,7 @@ $USAGE"
                 kz.process_option_version
                 exit 0
                 ;;
-            --debug )
+            -D | --debug )
                 OPTION_DEBUG=true
                 set -o verbose
                 set -o xtrace
