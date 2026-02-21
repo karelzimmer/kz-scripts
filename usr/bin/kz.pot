@@ -193,7 +193,7 @@ msgid ""
 "Disconnect media via Files."
 msgstr ""
 
-#: kz-backup:260 kz-restore:304
+#: kz-backup:260 kz-restore:305
 msgid "Settings"
 msgstr ""
 
@@ -300,57 +300,57 @@ msgstr ""
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:572
+#: kz-backup:573
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:608 kz-install:578 kz-restore:341 kz-setup:557
+#: kz-backup:610 kz-install:578 kz-restore:342 kz-setup:557
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:609
+#: kz-backup:611
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:611 kz-restore:344
+#: kz-backup:613 kz-restore:345
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:612
+#: kz-backup:614
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:613 kz-restore:346
+#: kz-backup:615 kz-restore:347
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:614
+#: kz-backup:616
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:616 kz-install:583 kz-restore:349 kz-setup:561
+#: kz-backup:618 kz-install:583 kz-restore:350 kz-setup:561
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:617 kz-install:584 kz-restore:350 kz-setup:562
+#: kz-backup:619 kz-install:584 kz-restore:351 kz-setup:562
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:618
+#: kz-backup:620
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:637
+#: kz-backup:639
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:659
+#: kz-backup:661
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:666 kz-restore:400
+#: kz-backup:668 kz-restore:401
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 
@@ -1040,31 +1040,31 @@ msgstr ""
 msgid "Go to installation menu"
 msgstr ""
 
-#: kz-menu:87 kz-menu:387
+#: kz-menu:87 kz-menu:388
 msgid "Back"
 msgstr ""
 
-#: kz-menu:210 kz-menu:385
+#: kz-menu:210 kz-menu:386
 msgid "Select a choice:"
 msgstr ""
 
-#: kz-menu:211 kz-menu:386
+#: kz-menu:211 kz-menu:387
 msgid "Continue"
 msgstr ""
 
-#: kz-menu:213 kz-menu:388
+#: kz-menu:213 kz-menu:389
 msgid "CHOICE"
 msgstr ""
 
-#: kz-menu:214 kz-menu:237 kz-menu:389 kz-menu:412
+#: kz-menu:214 kz-menu:237 kz-menu:390 kz-menu:413
 msgid "NUM"
 msgstr ""
 
-#: kz-menu:215 kz-menu:238 kz-menu:390 kz-menu:413
+#: kz-menu:215 kz-menu:238 kz-menu:391 kz-menu:414
 msgid "ACTION"
 msgstr ""
 
-#: kz-menu:216 kz-menu:239 kz-menu:391 kz-menu:414
+#: kz-menu:216 kz-menu:239 kz-menu:392 kz-menu:415
 msgid "DESCRIPTION"
 msgstr ""
 
@@ -1073,12 +1073,12 @@ msgstr ""
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr ""
 
-#: kz-menu:291 kz-menu:463
+#: kz-menu:292 kz-menu:465
 #, sh-format
 msgid "Cannot handle this choice ($REPLY)."
 msgstr ""
 
-#: kz-menu:317
+#: kz-menu:318
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1091,28 +1091,28 @@ msgid ""
 "4. Install Linux."
 msgstr ""
 
-#: kz-menu:423
+#: kz-menu:424
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: gitsquash:45 kz-menu:503
+#: gitsquash:45 kz-menu:505
 msgid "The following will be executed:"
 msgstr ""
 
-#: kz-menu:518
+#: kz-menu:520
 msgid "Proceed?"
 msgstr ""
 
-#: kz-menu:528
+#: kz-menu:531
 msgid "Yes"
 msgstr ""
 
-#: kz-menu:529
+#: kz-menu:532
 msgid "No"
 msgstr ""
 
-#: kz-menu:537
+#: kz-menu:540
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr ""
@@ -1143,28 +1143,28 @@ msgstr ""
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:342
+#: kz-restore:343
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:345
+#: kz-restore:346
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:347
+#: kz-restore:348
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:351
+#: kz-restore:352
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:370
+#: kz-restore:371
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:393
+#: kz-restore:394
 #, sh-format
 msgid "The backup has restored for $user, there are $num_users users:"
 msgstr ""
