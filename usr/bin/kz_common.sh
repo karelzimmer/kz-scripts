@@ -114,6 +114,7 @@ function kz.errmsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
+    kz.logmsg "$*"
     if ${OPTION_GUI:-false}; then
         # shellcheck disable=SC2154
         title="$PROGRAM_DESC $(gettext 'error message')"
@@ -133,6 +134,7 @@ function kz.infomsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
+    kz.logmsg "$*"
     if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'information')"
         zenity  --info                  \

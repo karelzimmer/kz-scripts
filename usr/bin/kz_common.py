@@ -75,11 +75,19 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     return 0
 
 
+def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
+    """
+    This function records a informational message to the log.
+    """
+    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
+
+
 def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
            OPTION_GUI: bool = False) -> None:
     """
     This function returns an error message.
     """
+    logmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC + ' ' + _('error message')
         zenity: str = f'zenity --error                 \
@@ -97,6 +105,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     This function returns an informational message.
     """
+    logmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC + ' ' + _('information')
         zenity: str = f'zenity --info                  \
@@ -139,13 +148,6 @@ def init(PROGRAM_NAME: str) -> None:
     logmsg(PROGRAM_NAME, text)
     text = f"Started ({' '.join(sys.argv)} as {os.getlogin()})."
     logmsg(PROGRAM_NAME, text)
-
-
-def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
-    """
-    This function records a informational message to the log.
-    """
-    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,

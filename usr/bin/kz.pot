@@ -90,11 +90,11 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:111 kz_common.py:284 kz-update:80
+#: kz:111 kz_common.py:286 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz:117 kz_common.py:193 kz_common.py:202 kz_common.py:241 kz_common.py:290
+#: kz:117 kz_common.py:195 kz_common.py:204 kz_common.py:243 kz_common.py:292
 #: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
 #: kz-update:100 kz-update:306
 msgid "Program {} encountered an error."
@@ -540,63 +540,63 @@ msgstr ""
 msgid "Wait for another package manager to finish..."
 msgstr ""
 
-#: kz_common.py:84 kz_common.sh:119
+#: kz_common.py:92 kz_common.sh:120
 msgid "error message"
 msgstr ""
 
-#: kz_common.py:101 kz_common.sh:137
+#: kz_common.py:110 kz_common.sh:139
 msgid "information"
 msgstr ""
 
-#: kz_common.py:122 kz_common.sh:156
+#: kz_common.py:131 kz_common.sh:158
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:128 kz_common.sh:163
+#: kz_common.py:137 kz_common.sh:165
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:134 kz_common.sh:170
+#: kz_common.py:143 kz_common.sh:172
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:163 kz_common.sh:209
+#: kz_common.py:165 kz_common.sh:211
 msgid ", or see the "
 msgstr ""
 
-#: kz_common.py:164 kz_common.sh:211
+#: kz_common.py:166 kz_common.sh:213
 msgid "man page"
 msgstr ""
 
-#: kz_common.py:168
+#: kz_common.py:170
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:170
+#: kz_common.py:172
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:215
+#: kz_common.py:217
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:235 kz_common.sh:256
+#: kz_common.py:237 kz_common.sh:258
 msgid "Build ID cannot be determined."
 msgstr ""
 
-#: kz_common.py:245
+#: kz_common.py:247
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:246 kz_common.sh:264
+#: kz_common.py:248 kz_common.sh:266
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:247 kz_common.sh:265
+#: kz_common.py:249 kz_common.sh:267
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:281 kz_common.sh:387
+#: kz_common.py:283 kz_common.sh:389
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -618,29 +618,29 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:214
+#: kz_common.sh:216
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:242
+#: kz_common.sh:244
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:262
+#: kz_common.sh:264
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:355
+#: kz_common.sh:357
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:375
+#: kz_common.sh:377
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
