@@ -301,7 +301,7 @@ function check_scripts() {
         scriptdir=$(dirname "$(realpath "$script")")
         scriptname=$(basename "$script")
         file=$scriptdir/$scriptname
-        kz.loggmsg "Process $script..."
+        kz.logmsg "Process $script..."
         case $scriptname in
             *.policy | *.its | *.loc )
                 check_trailing_spaces
