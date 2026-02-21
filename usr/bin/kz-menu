@@ -246,6 +246,7 @@ function process_menu1_tui() {
 
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
+        kz.logmsg "$prompt"
         read -rp "$prompt"
 
         case $REPLY in
@@ -421,6 +422,7 @@ function process_menu2_tui() {
 
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
+        kz.logmsg "$prompt"
         read -rp "$prompt"
 
         case $REPLY in
@@ -516,6 +518,7 @@ $description ($command)"
     text+="
 "
     prompt="$(gettext 'Proceed?')"
+    kz.logmsg "$prompt"
     if $OPTION_GUI; then
         text+="
 $prompt"
