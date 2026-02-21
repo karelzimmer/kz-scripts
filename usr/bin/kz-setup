@@ -430,7 +430,6 @@ function setup_apps() {
 
     title="$(gettext 'Set up apps') $(gettext 'progress')"
     text=$(gettext 'Preparing set up')
-    kz.debugmsg "$title"...
 
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -509,9 +508,9 @@ function execute_command() {
 
     if $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            kz.debugmsg "$app_name_line"
+            kz.logmsg "$app_name_line"
         fi
-        kz.debugmsg "$cmd"
+        kz.logmsg "$cmd"
         printf '%s\n' "#$app_name_line"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
@@ -614,8 +613,6 @@ apps and changing user settings.")"
                 # LXDE.
                 lxde-logout
             else
-                text='No logout command available.'
-                kz.debugmsg "$text"
                 text=$(gettext 'Log out of the computer yourself.')
                 kz.infomsg "$text"
             fi

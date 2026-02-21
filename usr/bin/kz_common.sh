@@ -108,19 +108,12 @@ function kz.check_repos() {
 }
 
 
-# This function records a debugging message to the log.
-function kz.debugmsg() {
-    printf '%b\n' "$*" |& $PROGRAM_LOGS --priority=debug
-}
-
-
 # This function returns an error message.
 function kz.errmsg() {
     # shellcheck disable=SC2153,SC215,SC2154
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
-    kz.debugmsg "$*"
     if ${OPTION_GUI:-false}; then
         # shellcheck disable=SC2154
         title="$PROGRAM_DESC $(gettext 'error message')"
@@ -140,7 +133,6 @@ function kz.infomsg() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local title=''
 
-    kz.debugmsg "$*"
     if ${OPTION_GUI:-false}; then
         title="$PROGRAM_DESC $(gettext 'information')"
         zenity  --info                  \
@@ -393,7 +385,7 @@ function kz.wait_for_enter() {
     local prompt=''
 
     prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    kz.debugmsg "$prompt"
+    kz.logmsg "$prompt"
     printf '\n'
     read -rp "$prompt" < /dev/tty
     printf '\n'

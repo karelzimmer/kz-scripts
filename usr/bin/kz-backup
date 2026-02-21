@@ -536,7 +536,6 @@ EOF
 
     title="$(gettext 'Backup Home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing backup (this may take a while)')
-    kz.debugmsg "$title"...
 
     if $OPTION_GUI; then
         rsync   --archive                       \
@@ -572,7 +571,6 @@ EOF
 
     text=$(gettext "Writing data from memory (this may take a while)")
     if $OPTION_GUI; then
-        kz.debugmsg "$text..."
         sync                            |
         zenity  --progress              \
                 --pulsate               \

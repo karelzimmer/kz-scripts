@@ -438,7 +438,6 @@ function install_apps() {
 
     title="$(gettext 'Install apps') $(gettext 'progress')"
     text=$(gettext 'Prepare installation')
-    kz.debugmsg "$title"...
 
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -517,9 +516,9 @@ function execute_command() {
 
     if $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            kz.debugmsg "$app_name_line"
+            kz.logmsg "$app_name_line"
         fi
-        kz.debugmsg "$cmd"
+        kz.logmsg "$cmd"
         printf '%s\n' "#$app_name_line"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then

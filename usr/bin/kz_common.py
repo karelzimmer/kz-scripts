@@ -75,20 +75,11 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     return 0
 
 
-def debugmsg(PROGRAM_NAME: str, TEXT: str) -> None:
-    """
-    This function records a debugging message to the log.
-    """
-    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}',
-                  f'PRIORITY=7')
-
-
 def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
            OPTION_GUI: bool = False) -> None:
     """
     This function returns an error message.
     """
-    debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC + ' ' + _('error message')
         zenity: str = f'zenity --error                 \
@@ -106,7 +97,6 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     This function returns an informational message.
     """
-    debugmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC + ' ' + _('information')
         zenity: str = f'zenity --info                  \
@@ -289,7 +279,6 @@ def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
 
     try:
         text = '\n' + _('Press the Enter key to continue [Enter]: ') + '\n'
-        debugmsg(PROGRAM_NAME, text)
         input(text)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)

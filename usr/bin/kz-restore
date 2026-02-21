@@ -269,7 +269,6 @@ function restore_backup() {
 
     title="$(gettext 'Restore Home folder') $(gettext 'progress')"
     text=$(gettext 'Preparing restore (this can take a while)')
-    kz.debugmsg "$title"...
 
     if $OPTION_GUI; then
         rsync   --archive               \
