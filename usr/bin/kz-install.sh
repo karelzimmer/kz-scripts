@@ -416,7 +416,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then wget --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then rm   --verbose /tmp/google-chrome.deb; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
@@ -435,7 +435,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Web app: https://earth.google.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then wget --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then rm   --verbose /tmp/google-earth.deb; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
@@ -666,7 +666,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Web browser.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet --regexp='debian' /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list 1> /dev/null; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install    --assume-yes    microsoft-edge-stable; fi
@@ -882,7 +882,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then wget --output-document=- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
 if grep --quiet --regexp='debian' /etc/os-release; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list 1> /dev/null; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes spotify-client; fi
@@ -922,7 +922,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 # Web app: https://start.teamviewer.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then wget --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then rm   --verbose /tmp/teamviewer.deb; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
@@ -1057,7 +1057,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
-if grep --quiet --regexp='debian' /etc/os-release; then wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet --regexp='debian' /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources 1> /dev/null; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes apt-transport-https; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
@@ -1084,11 +1084,11 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo rm      --force --v
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo rm  --force --verbose /tmp/setup-repos.sh; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes webmin; fi
-if grep --quiet --regexp='rhel'   /etc/os-release; then wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
+if grep --quiet --regexp='rhel'   /etc/os-release; then sudo wget --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo rm  --force --verbose /tmp/setup-repos.sh; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf install --assumeyes webmin; fi
