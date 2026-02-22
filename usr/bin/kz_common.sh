@@ -363,7 +363,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
                 # Clean up temporary files if not in debug mode.
                 text='Cleaning up temporary files...'
                 kz.logmsg "$text"
-                rm  --verbose --force /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
+                rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
             fi
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"

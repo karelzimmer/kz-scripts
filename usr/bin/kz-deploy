@@ -229,7 +229,7 @@ function upload_website() {
                 -e          "$ftp_set; $ftp_x_cmd"  \
                 "$ftp_host"; then
         # Force entering the password next time.
-        rm --verbose "$ftp_login"*
+        rm --force --verbose "$ftp_login"*
         text=$(gettext 'Website upload failed.')
         kz.errmsg "$text"
         ERR_FLAG=true

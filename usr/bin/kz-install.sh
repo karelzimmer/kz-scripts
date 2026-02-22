@@ -418,7 +418,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
-if grep --quiet --regexp='debian' /etc/os-release; then rm   --verbose /tmp/google-chrome.deb; fi
+if grep --quiet --regexp='debian' /etc/os-release; then rm   --force --verbose /tmp/google-chrome.deb; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
@@ -437,7 +437,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
-if grep --quiet --regexp='debian' /etc/os-release; then rm   --verbose /tmp/google-earth.deb; fi
+if grep --quiet --regexp='debian' /etc/os-release; then rm   --force --verbose /tmp/google-earth.deb; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 
@@ -924,7 +924,7 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo wget --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
-if grep --quiet --regexp='debian' /etc/os-release; then rm   --verbose /tmp/teamviewer.deb; fi
+if grep --quiet --regexp='debian' /etc/os-release; then rm   --force --verbose /tmp/teamviewer.deb; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 # REMOVE teamviewer *
