@@ -429,7 +429,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:511 kz-get:262
+#: kz-build:511 kz-get:264
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -532,7 +532,7 @@ msgstr ""
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:63 kz_common.sh:47 kz-get:216
+#: kz_common.py:63 kz_common.sh:47 kz-get:218
 msgid "Wait for another package manager to finish..."
 msgstr ""
 
@@ -786,7 +786,7 @@ msgstr ""
 msgid "fatal: unknown os release"
 msgstr ""
 
-#: kz-get:266
+#: kz-get:268
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -795,7 +795,7 @@ msgid ""
 "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-get:274
+#: kz-get:276
 msgid "Type 'exit' to close this window."
 msgstr ""
 
