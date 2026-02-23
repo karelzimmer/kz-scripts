@@ -540,14 +540,6 @@ msgstr ""
 msgid "Wait for another package manager to finish..."
 msgstr ""
 
-#: kz_common.py:92 kz_common.sh:120
-msgid "error message"
-msgstr ""
-
-#: kz_common.py:110 kz_common.sh:139
-msgid "information"
-msgstr ""
-
 #: kz_common.py:131 kz_common.sh:158
 msgid "fatal: no systemd available"
 msgstr ""

@@ -117,7 +117,7 @@ function kz.errmsg() {
     kz.logmsg "$*"
     if ${OPTION_GUI:-false}; then
         # shellcheck disable=SC2154
-        title="$PROGRAM_DESC $(gettext 'error message')"
+        title=$PROGRAM_DESC
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
@@ -136,7 +136,7 @@ function kz.infomsg() {
 
     kz.logmsg "$*"
     if ${OPTION_GUI:-false}; then
-        title="$PROGRAM_DESC $(gettext 'information')"
+        title=$PROGRAM_DESC
         zenity  --info                  \
                 --width     600         \
                 --height    100         \

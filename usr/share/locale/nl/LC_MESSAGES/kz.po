@@ -598,14 +598,6 @@ msgstr "Reeds uitgevoerd door de systeembeheerder."
 msgid "Wait for another package manager to finish..."
 msgstr "Wacht tot een andere pakketbeheerder klaar is..."
 
-#: kz_common.py:92 kz_common.sh:120
-msgid "error message"
-msgstr "foutmelding"
-
-#: kz_common.py:110 kz_common.sh:139
-msgid "information"
-msgstr "informatie"
-
 #: kz_common.py:131 kz_common.sh:158
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
