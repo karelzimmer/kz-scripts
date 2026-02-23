@@ -90,7 +90,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     logmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC + ' ' + _('error message')
-        zenity: str = f'zenity --error                 \
+        zenity: str = f'zenity --error                  \
                                 --width     600         \
                                 --height    100         \
                                 --title     "{title}"   \
@@ -108,7 +108,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     logmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC + ' ' + _('information')
-        zenity: str = f'zenity --info                  \
+        zenity: str = f'zenity --info                   \
                                 --width     600         \
                                 --height    100         \
                                 --title     "{title}"   \
