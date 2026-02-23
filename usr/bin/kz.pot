@@ -289,7 +289,7 @@ msgid ""
 msgstr ""
 
 #: kz-backup:537 kz-menu:74 kz-backup.desktop:10
-msgid "Backup Home folder"
+msgid "Make backup"
 msgstr ""
 
 #: kz-backup:537 kz-install:439 kz-restore:270 kz-setup:431
@@ -1029,7 +1029,7 @@ msgid "Show WiFi details"
 msgstr ""
 
 #: kz-menu:77 kz-restore:270 kz-restore.desktop:10
-msgid "Restore Home folder"
+msgid "Restore backup"
 msgstr ""
 
 #: kz-menu:78 kz-setup:431 kz-setup.desktop:10

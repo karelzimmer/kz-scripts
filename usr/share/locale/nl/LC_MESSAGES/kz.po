@@ -338,8 +338,8 @@ msgstr ""
 "bureaubladachtergrond."
 
 #: kz-backup:537 kz-menu:74 kz-backup.desktop:10
-msgid "Backup Home folder"
-msgstr "Back-up Persoonlijke map"
+msgid "Make backup"
+msgstr "Back-up maken"
 
 #: kz-backup:537 kz-install:439 kz-restore:270 kz-setup:431
 msgid "progress"
@@ -1130,11 +1130,11 @@ msgstr "Menu verlaten"
 
 #: kz-menu:75 kz-wifi:30 kz-wifi.desktop:10 kz-wifi.desktop:11
 msgid "Show WiFi details"
-msgstr "Toon WiFi-details"
+msgstr "WiFi-details tonen"
 
 #: kz-menu:77 kz-restore:270 kz-restore.desktop:10
-msgid "Restore Home folder"
-msgstr "Herstel Persoonlijke map"
+msgid "Restore backup"
+msgstr "Back-up terugzetten"
 
 #: kz-menu:78 kz-setup:431 kz-setup.desktop:10
 msgid "Set up apps"

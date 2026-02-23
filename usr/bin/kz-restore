@@ -267,7 +267,7 @@ function restore_backup() {
     text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
-    title="$(gettext 'Restore Home folder') $(gettext 'progress')"
+    title="$(gettext 'Restore backup') $(gettext 'progress')"
     text=$(gettext 'Preparing restore (this can take a while)')
     kz.logmsg "$title"...
 
