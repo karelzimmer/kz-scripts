@@ -428,7 +428,7 @@ function setup_apps() {
     text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
-    title="$(gettext 'Set up apps') $(gettext 'progress')"
+    title=$(gettext 'Set up apps')
     text=$(gettext 'Preparing set up')
 
     if $OPTION_GUI; then

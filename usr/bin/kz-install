@@ -436,7 +436,7 @@ function install_apps() {
     text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
-    title="$(gettext 'Install apps') $(gettext 'progress')"
+    title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
 
     if $OPTION_GUI; then

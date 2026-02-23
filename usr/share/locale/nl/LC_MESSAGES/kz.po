@@ -341,10 +341,6 @@ msgstr ""
 msgid "Make backup"
 msgstr "Back-up maken"
 
-#: kz-backup:537 kz-install:439 kz-restore:270 kz-setup:431
-msgid "progress"
-msgstr "voortgang"
-
 #: kz-backup:538
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"

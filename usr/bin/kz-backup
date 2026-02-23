@@ -534,7 +534,7 @@ EOF
     text="** $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
-    title="$(gettext 'Make backup') $(gettext 'progress')"
+    title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     kz.logmsg "$title"...
 
