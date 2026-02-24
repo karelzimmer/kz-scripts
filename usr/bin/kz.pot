@@ -1309,7 +1309,7 @@ msgid "No WiFi device found."
 msgstr ""
 
 #: kz-cockpit.desktop:10
-msgid "Cockpit"
+msgid "Cockpit web app"
 msgstr ""
 
 #: kz-cockpit.desktop:11 kz-webmin.desktop:11
@@ -1397,7 +1397,7 @@ msgid "Start VirtualBox VM hugowin732"
 msgstr ""
 
 #: kz-webmin.desktop:10
-msgid "Webmin"
+msgid "Webmin web app"
 msgstr ""
 
 #: kz-whatsapp.desktop:10

@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name=Cockpit
+Name=Cockpit web app
 Comment=Manage Linux servers from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=cockpit-bridge
