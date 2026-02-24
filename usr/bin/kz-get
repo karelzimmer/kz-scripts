@@ -200,8 +200,8 @@ function install_deb_package() {
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
     check_debian_package_manager
-    sudo    apt-get                         \
-            update
+    sudo apt-get update
+    printf '\n'
 
     # Install kz package.
     check_debian_package_manager
