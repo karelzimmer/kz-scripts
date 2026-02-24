@@ -197,9 +197,13 @@ function install_deb_package() {
     # ...file '/tmp/kz-get-....deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
+    # Refresh package lists before installing apps, to minimize the risk of
+    # errors due to outdated package lists.
     check_debian_package_manager
     sudo    apt-get                         \
             update
+
+    # Install kz package.
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -246,7 +250,11 @@ function install_rpm_package() {
         install='install'
     fi
 
+    # Refresh package lists before installing apps, to minimize the risk of
+    # errors due to outdated package lists.
     sudo dnf check-update || true
+
+    # Install kz package.
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
 }
 

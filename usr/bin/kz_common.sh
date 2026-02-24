@@ -124,7 +124,7 @@ function kz.errmsg() {
                 --title     "$title"    \
                 --text      "$*"        2> /dev/null || true
     else
-        printf "\033[1;31m%b\033[0m\n" "$*" >&2
+        printf "%b\n" "$*" >&2
     fi
 }
 
@@ -154,22 +154,19 @@ function kz.init() {
 
     # Check if systemd is available.
     if ! type systemctl &> /dev/null; then
-        printf  '\033[1;31m%b\n\033[0m' \
-                "$(gettext 'fatal: no systemd available')" >&2
+        printf '%b\n' "$(gettext 'fatal: no systemd available')" >&2
         exit 1
     fi
 
     # Check if os release is available.
     if ! [[ -f /etc/os-release ]]; then
-        printf  '\033[1;31m%b\n\033[0m' \
-                "$(gettext 'fatal: no os release available')" >&2
+        printf '%b\n' "$(gettext 'fatal: no os release available')" >&2
         exit 1
     fi
 
     # Check if started as root.
     if [[ $UID -eq 0 ]]; then
-        printf  '\033[1;31m%b\n\033[0m' \
-                "$(gettext 'fatal: must not be run as root')" >&2
+        printf '%b\n' "$(gettext 'fatal: must not be run as root')" >&2
         exit 1
     fi
 

@@ -97,7 +97,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
                                 --text      "{TEXT}"'
         subprocess.run(zenity, executable='bash', shell=True)
     else:
-        print(f'\033[1;31m{TEXT}\033[0m')
+        print(f'{TEXT}')
 
 
 def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
@@ -128,20 +128,17 @@ def init(PROGRAM_NAME: str) -> None:
     if subprocess.run('type systemctl', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode != 0:
-        print('\033[1;31m' + _('fatal: no systemd available') + '\033[0m',
-              file=sys.stderr)
+        print(_('fatal: no systemd available'), file=sys.stderr)
         sys.exit(1)
 
     # Check if os release is available.
     if not os.path.exists('/etc/os-release'):
-        print('\033[1;31m' + _('fatal: no os release available') + '\033[0m',
-              file=sys.stderr)
+        print(_('fatal: no os release available'), file=sys.stderr)
         sys.exit(1)
 
     # Check if started as root.
     if os.getuid() == 0:
-        print('\033[1;31m' + _('fatal: must not be run as root') + '\033[0m',
-              file=sys.stderr)
+        print(_('fatal: must not be run as root'), file=sys.stderr)
         sys.exit(1)
 
     text = f'==== START logs for script {PROGRAM_NAME}'
