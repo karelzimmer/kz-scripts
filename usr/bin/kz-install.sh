@@ -11,23 +11,12 @@
 # format of this file.
 # =============================================================================
 
-# INSTALL apt-sources *
+# INSTALL updates *
 # -----------------------------------------------------------------------------
-# Add Debian components to package sources and update package lists.
+# Add Debian components to package sources.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
-
-# REMOVE apt-sources *
-# -----------------------------------------------------------------------------
-# Remove Debian components from package sources and update package lists.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
-
-# INSTALL updates *
 # -----------------------------------------------------------------------------
 # Update package lists and upgrade all packages.
 # -----------------------------------------------------------------------------
@@ -37,6 +26,11 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     check-updat
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     upgrade --assumeyes --refresh; fi
 
 # REMOVE updates *
+# -----------------------------------------------------------------------------
+# Remove Debian components from package sources.
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list   ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
+if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
 # -----------------------------------------------------------------------------
 # Update package lists and upgrade all packages.
 # -----------------------------------------------------------------------------
