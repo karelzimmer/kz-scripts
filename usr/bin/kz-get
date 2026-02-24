@@ -198,6 +198,9 @@ function install_deb_package() {
     chmod o+r "$kz_deb_local_file"
 
     check_debian_package_manager
+    sudo    apt-get                         \
+            update
+    check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
@@ -243,6 +246,7 @@ function install_rpm_package() {
         install='install'
     fi
 
+    sudo dnf check-update || true
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
 }
 
