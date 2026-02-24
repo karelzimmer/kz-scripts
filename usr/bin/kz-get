@@ -199,11 +199,13 @@ function install_deb_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
+    printf '%s\n' "UPDATE -- 1/2"
     check_debian_package_manager
     sudo apt-get update
     printf '\n'
 
     # Install kz package.
+    printf '%s\n' "INSTALL -- 2/2"
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -252,9 +254,12 @@ function install_rpm_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
+    printf '%s\n' "UPDATE -- 1/2"
     sudo dnf check-update || true
+    printf '\n'
 
     # Install kz package.
+    printf '%s\n' "INSTALL -- 2/2"
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
 }
 

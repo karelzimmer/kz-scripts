@@ -481,7 +481,7 @@ msgstr "Bouw RPM-pakket"
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:511 kz-get:274
+#: kz-build:511 kz-get:279
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -590,7 +590,7 @@ msgstr "Controleer alle meldingen hierboven en los ze op."
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:63 kz_common.sh:47 kz-get:223
+#: kz_common.py:63 kz_common.sh:47 kz-get:225
 msgid "Wait for another package manager to finish..."
 msgstr "Wacht tot een andere pakketbeheerder klaar is..."
 
@@ -865,7 +865,7 @@ msgstr ""
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
-#: kz-get:278
+#: kz-get:283
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -879,7 +879,7 @@ msgstr ""
 "\n"
 "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
-#: kz-get:286
+#: kz-get:291
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
