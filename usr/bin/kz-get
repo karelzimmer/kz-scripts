@@ -37,6 +37,11 @@ readonly HELP=$USAGE
 readonly OPTIONS_SHORT='dhmuvD'
 readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
 
+# List NORMAL last here so that -x doesn't bork the display.
+readonly BOLD='\033[1m'
+readonly RED='\033[1;31m'
+readonly NORMAL='\033[0m'
+
 
 # #############################################################################
 # Globals
@@ -78,7 +83,7 @@ function process() {
     elif grep --quiet --regexp='rhel' /etc/os-release; then
         install_rpm_package
     else
-        printf '%s\n' 'fatal: unknown os release' >&2
+        printf "$RED%b$NORMAL\n" "$(gettext 'fatal: unknown os release')" >&2
         exit 1
     fi
 }
@@ -164,7 +169,8 @@ function become_check() {
     elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
-        printf '%s\n' 'Already performed by the administrator.' >&2
+        printf  "$BOLD%b$NORMAL\n"  \
+                "$(gettext 'Already performed by the administrator.')" >&2
         return 1
     fi
 }

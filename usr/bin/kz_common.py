@@ -23,6 +23,16 @@ _ = gettext.gettext
 
 
 # #############################################################################
+# Constants
+# #############################################################################
+
+# List NORMAL last here so that debugging doesn't bork the display.
+BOLD: str = '\033[1m'
+RED: str = '\033[1;31m'
+NORMAL: str = '\033[0m'
+
+
+# #############################################################################
 # Functions
 # #############################################################################
 
@@ -41,7 +51,7 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
                       shell=True).returncode == 0:
         return 0
     else:
-        text = _('Already performed by the administrator.')
+        text = BOLD + _('Already performed by the administrator.') + NORMAL
         infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
         sys.exit(0)
 
@@ -60,7 +70,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
                       shell=True).returncode == 0:
         return 0
 
-    text = _('Wait for another package manager to finish...')
+    text = BOLD + _('Wait for another package manager to finish...') + NORMAL
 
     while True:
         try:
@@ -97,7 +107,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
                                 --text      "{TEXT}"'
         subprocess.run(zenity, executable='bash', shell=True)
     else:
-        print(f'{TEXT}')
+        print(f'{RED}{TEXT}{NORMAL}')
 
 
 def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
@@ -128,17 +138,20 @@ def init(PROGRAM_NAME: str) -> None:
     if subprocess.run('type systemctl', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode != 0:
-        print(_('fatal: no systemd available'), file=sys.stderr)
+        text = _('fatal: no systemd available')
+        print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
 
     # Check if os release is available.
     if not os.path.exists('/etc/os-release'):
-        print(_('fatal: no os release available'), file=sys.stderr)
+        text = _('fatal: no os release available')
+        print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
 
     # Check if started as root.
     if os.getuid() == 0:
-        print(_('fatal: must not be run as root'), file=sys.stderr)
+        text = _('fatal: must not be run as root')
+        print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
 
     text = f'==== START logs for script {PROGRAM_NAME}'

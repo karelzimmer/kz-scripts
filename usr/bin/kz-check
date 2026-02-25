@@ -45,11 +45,6 @@ readonly HELP
 readonly OPTIONS_SHORT='hmuvD'
 readonly OPTIONS_LONG='help,manual,usage,version,debug'
 
-# List NORMAL last here so that -x doesn't bork the display.
-readonly BOLD='\033[1m'
-readonly RED='\033[1;31m'
-readonly NORMAL='\033[0m'
-
 
 # #############################################################################
 # Globals

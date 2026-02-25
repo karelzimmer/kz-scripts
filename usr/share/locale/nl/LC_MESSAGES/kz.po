@@ -92,17 +92,17 @@ msgstr "opdracht bestaat niet"
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:111 kz_common.py:283 kz-update:80
+#: kz:111 kz_common.py:297 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz:117 kz_common.py:192 kz_common.py:201 kz_common.py:240 kz_common.py:289
+#: kz:117 kz_common.py:206 kz_common.py:215 kz_common.py:254 kz_common.py:303
 #: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
 #: kz-update:100 kz-update:306
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:173 kz-backup:159 kz-build:167 kz-check:140 kz-deploy:144 kz-desktop:208
+#: kz:173 kz-backup:159 kz-build:167 kz-check:135 kz-deploy:144 kz-desktop:208
 #: kz-dev:132 kz-install:248 kz-menu:183 kz-restore:160 kz-setup:244
 #: kz-update:185 kz-wifi:127
 msgid "internal error"
@@ -176,7 +176,7 @@ msgstr "geen desktopomgeving beschikbaar"
 msgid "too many options"
 msgstr "te veel opties"
 
-#: kz-backup:167 kz-build:175 kz-check:148 kz-deploy:152 kz-desktop:216
+#: kz-backup:167 kz-build:175 kz-check:143 kz-deploy:152 kz-desktop:216
 #: kz-dev:138 kz-menu:191 kz-restore:168 kz-update:191 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
@@ -421,7 +421,7 @@ msgstr "Gebruik: kz build [<opties>]"
 msgid "  -d, --dev      build the development version of package kz"
 msgstr "  -d, --dev      bouw de ontwikkelingsversie van pakket kz"
 
-#: kz-build:90 kz-check:73 kz-deploy:73 kz-dev:75
+#: kz-build:90 kz-check:68 kz-deploy:73 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
@@ -481,12 +481,12 @@ msgstr "Bouw RPM-pakket"
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:511 kz-get:280
+#: kz-build:511 kz-get:286
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
 #: ckhtml:123 gitbranch:61 gitclone:77 gitfetch:61 gitinit:44 gitpull:61
-#: gitsquash:62 gitstatus:61 kz-build:520 kz-check:589 kz-deploy:274 kz-dev:278
+#: gitsquash:62 gitstatus:61 kz-build:520 kz-check:584 kz-deploy:274 kz-dev:278
 #: kz-update:317
 msgid "Complete!"
 msgstr "Klaar!"
@@ -507,60 +507,60 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr "Gebruik: kz check [<opties>]"
 
-#: kz-check:296
+#: kz-check:291
 msgid "Check scripts (this may take a while)..."
 msgstr "Controleer scripts (dit kan even duren)..."
 
-#: kz-check:165
+#: kz-check:160
 msgid "Check website..."
 msgstr "Controleer website..."
 
-#: kz-check:208
+#: kz-check:203
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 "Bestanden die niet in html worden gebruikt en waarschijnlijk wel verwijderd "
 "kunnen worden:"
 
-#: kz-check:258
+#: kz-check:253
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr "Gettext berichtencatalogus-sjabloon $file niet gevonden."
 
-#: kz-check:270
+#: kz-check:265
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr "Gettext berichtencatalogus $file niet gevonden."
 
-#: kz-check:281
+#: kz-check:276
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr "Berichtencatalogus $file niet gevonden."
 
-#: kz-check:385
+#: kz-check:380
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr "Onbekend script.  Functie check_code kan scriptcode niet controleren."
 
-#: kz-check:405
+#: kz-check:400
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr "Script $scriptname --usage gaf een fout."
 
-#: kz-check:418
+#: kz-check:413
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
-#: kz-check:429
+#: kz-check:424
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
-#: kz-check:439 kz-check:447
+#: kz-check:434 kz-check:442
 #, sh-format
 msgid "Manual $dir/$scriptname.1 not found."
 msgstr "Man-pagina $dir/$scriptname.1 niet gevonden."
 
-#: kz-check:457
+#: kz-check:452
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -569,103 +569,103 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:494
+#: kz-check:489
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr "Een of meer regels zijn te lang (>79):"
 
-#: kz-check:543
+#: kz-check:538
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:566
+#: kz-check:561
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-build:516 kz-check:585 kz-deploy:270
+#: kz-build:516 kz-check:580 kz-deploy:270
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz_common.py:44 kz_common.sh:31
+#: kz_common.py:54 kz_common.sh:41 kz-get:173
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:63 kz_common.sh:47 kz-get:226
+#: kz_common.py:73 kz_common.sh:57 kz-get:232
 msgid "Wait for another package manager to finish..."
 msgstr "Wacht tot een andere pakketbeheerder klaar is..."
 
-#: kz_common.py:131 kz_common.sh:157
+#: kz_common.py:142 kz_common.sh:167
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:136 kz_common.sh:163
+#: kz_common.py:148 kz_common.sh:174
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:141 kz_common.sh:169
+#: kz_common.py:154 kz_common.sh:181
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:162 kz_common.sh:208
+#: kz_common.py:176 kz_common.sh:220
 msgid ", or see the "
 msgstr ", of zie de "
 
-#: kz_common.py:163 kz_common.sh:210
+#: kz_common.py:177 kz_common.sh:222
 msgid "man page"
 msgstr "man-pagina"
 
-#: kz_common.py:167
+#: kz_common.py:181
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:169
+#: kz_common.py:183
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:214
+#: kz_common.py:228
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:234 kz_common.sh:255
+#: kz_common.py:248 kz_common.sh:267
 msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
-#: kz_common.py:244
+#: kz_common.py:258
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:245 kz_common.sh:263
+#: kz_common.py:259 kz_common.sh:275
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:246 kz_common.sh:264
+#: kz_common.py:260 kz_common.sh:276
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.py:280 kz_common.sh:386
+#: kz_common.py:294 kz_common.sh:398
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz_common.sh:70
+#: kz_common.sh:80
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
-#: kz_common.sh:76
+#: kz_common.sh:86
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-#: kz_common.sh:83
+#: kz_common.sh:93
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
-#: kz_common.sh:94
+#: kz_common.sh:104
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz_common.sh:213
+#: kz_common.sh:225
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
@@ -674,22 +674,22 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man_url voor meer "
 "informatie."
 
-#: kz_common.sh:241
+#: kz_common.sh:253
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:261
+#: kz_common.sh:273
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:354
+#: kz_common.sh:366
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:374
+#: kz_common.sh:386
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -865,19 +865,19 @@ msgstr ""
 msgid "GITPULL"
 msgstr "GITPULL"
 
-#: kz-update:133
+#: kz-get:86 kz-update:133
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
-#: kz-get:195
+#: kz-get:201
 msgid "DOWNLOAD"
 msgstr "DOWNLOAD"
 
-#: kz-get:209 kz-get:263
+#: kz-get:215 kz-get:269
 msgid "INSTALL"
 msgstr "INSTALLEREN"
 
-#: kz-get:284
+#: kz-get:290
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -891,7 +891,7 @@ msgstr ""
 "\n"
 "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
-#: kz-get:292
+#: kz-get:298
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
@@ -1434,7 +1434,7 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-#: kz-get:203 kz-get:258 kz-update:107 kz-update:121
+#: kz-get:209 kz-get:264 kz-update:107 kz-update:121
 msgid "UPDATE"
 msgstr "BIJWERKEN"
 

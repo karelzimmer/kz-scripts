@@ -17,6 +17,16 @@ source /usr/bin/gettext.sh
 
 
 # #############################################################################
+# Constants
+# #############################################################################
+
+# List NORMAL last here so that -x doesn't bork the display.
+readonly BOLD='\033[1m'
+readonly RED='\033[1;31m'
+readonly NORMAL='\033[0m'
+
+
+# #############################################################################
 # Functions
 # #############################################################################
 
@@ -28,7 +38,7 @@ function kz.become_check() {
     if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
-        text=$(gettext 'Already performed by the administrator.')
+        text=$BOLD$(gettext 'Already performed by the administrator.')$NORMAL
         kz.infomsg "$text"
         exit 0
     fi
@@ -44,7 +54,7 @@ function kz.check_debian_package_manager() {
         return 0
     fi
 
-    text=$(gettext 'Wait for another package manager to finish...')
+    text=$BOLD$(gettext 'Wait for another package manager to finish...')$NORMAL
 
     while pkexec /usr/bin/kz_common-pkexec; do
         if ${OPTION_GUI:-false}; then
@@ -124,7 +134,7 @@ function kz.errmsg() {
                 --title     "$title"    \
                 --text      "$*"        2> /dev/null || true
     else
-        printf "%b\n" "$*" >&2
+        printf "$RED%b$NORMAL\n" "$*" >&2
     fi
 }
 
@@ -154,19 +164,21 @@ function kz.init() {
 
     # Check if systemd is available.
     if ! type systemctl &> /dev/null; then
-        printf '%b\n' "$(gettext 'fatal: no systemd available')" >&2
+        printf "$RED%b$NORMAL\n" "$(gettext 'fatal: no systemd available')" >&2
         exit 1
     fi
 
     # Check if os release is available.
     if ! [[ -f /etc/os-release ]]; then
-        printf '%b\n' "$(gettext 'fatal: no os release available')" >&2
+        printf  "$RED%b$NORMAL\n"   \
+                "$(gettext 'fatal: no os release available')" >&2
         exit 1
     fi
 
     # Check if started as root.
     if [[ $UID -eq 0 ]]; then
-        printf '%b\n' "$(gettext 'fatal: must not be run as root')" >&2
+        printf  "$RED%b$NORMAL\n"   \
+                "$(gettext 'fatal: must not be run as root')" >&2
         exit 1
     fi
 
@@ -191,7 +203,7 @@ function kz.init() {
 }
 
 
-# This function records a informational message to the log.
+# This function records an informational message to the log.
 function kz.logmsg() {
     printf '%b\n' "$*" |& $PROGRAM_LOGS
 }
