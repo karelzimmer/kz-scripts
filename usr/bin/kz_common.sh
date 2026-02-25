@@ -164,7 +164,8 @@ function kz.init() {
 
     # Check if systemd is available.
     if ! type systemctl &> /dev/null; then
-        printf "$RED%b$NORMAL\n" "$(gettext 'fatal: no systemd available')" >&2
+        printf  "$RED%b$NORMAL\n"   \
+                "$(gettext 'fatal: no systemd available')" >&2
         exit 1
     fi
 

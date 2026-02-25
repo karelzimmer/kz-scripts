@@ -536,23 +536,23 @@ msgstr ""
 msgid "Wait for another package manager to finish..."
 msgstr ""
 
-#: kz_common.py:141 kz_common.sh:167
+#: kz_common.py:141 kz_common.sh:168
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:147 kz_common.sh:174
+#: kz_common.py:147 kz_common.sh:175
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:153 kz_common.sh:181
+#: kz_common.py:153 kz_common.sh:182
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:175 kz_common.sh:220
+#: kz_common.py:175 kz_common.sh:221
 msgid ", or see the "
 msgstr ""
 
-#: kz_common.py:176 kz_common.sh:222
+#: kz_common.py:176 kz_common.sh:223
 msgid "man page"
 msgstr ""
 
@@ -568,7 +568,7 @@ msgstr ""
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:247 kz_common.sh:267
+#: kz_common.py:247 kz_common.sh:268
 msgid "Build ID cannot be determined."
 msgstr ""
 
@@ -576,15 +576,15 @@ msgstr ""
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:258 kz_common.sh:275
+#: kz_common.py:258 kz_common.sh:276
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:259 kz_common.sh:276
+#: kz_common.py:259 kz_common.sh:277
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:293 kz_common.sh:398
+#: kz_common.py:293 kz_common.sh:399
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -606,29 +606,29 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:225
+#: kz_common.sh:226
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man_url for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:253
+#: kz_common.sh:254
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:273
+#: kz_common.sh:274
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:366
+#: kz_common.sh:367
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:386
+#: kz_common.sh:387
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""

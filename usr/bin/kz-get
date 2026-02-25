@@ -229,7 +229,7 @@ function install_deb_package() {
 function check_debian_package_manager() {
     local text=''
 
-    text=$(gettext 'Wait for another package manager to finish...')
+    text=$BOLD$(gettext 'Wait for another package manager to finish...')$NORMAL
 
     while sudo  fuser                           \
                 --silent                        \
