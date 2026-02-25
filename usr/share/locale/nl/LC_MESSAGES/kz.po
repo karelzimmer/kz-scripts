@@ -92,11 +92,11 @@ msgstr "opdracht bestaat niet"
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:111 kz_common.py:297 kz-update:80
+#: kz:111 kz_common.py:296 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz:117 kz_common.py:206 kz_common.py:215 kz_common.py:254 kz_common.py:303
+#: kz:117 kz_common.py:205 kz_common.py:214 kz_common.py:253 kz_common.py:302
 #: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
 #: kz-update:100 kz-update:306
 msgid "Program {} encountered an error."
@@ -594,56 +594,56 @@ msgstr "Reeds uitgevoerd door de systeembeheerder."
 msgid "Wait for another package manager to finish..."
 msgstr "Wacht tot een andere pakketbeheerder klaar is..."
 
-#: kz_common.py:142 kz_common.sh:167
+#: kz_common.py:141 kz_common.sh:167
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:148 kz_common.sh:174
+#: kz_common.py:147 kz_common.sh:174
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:154 kz_common.sh:181
+#: kz_common.py:153 kz_common.sh:181
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:176 kz_common.sh:220
+#: kz_common.py:175 kz_common.sh:220
 msgid ", or see the "
 msgstr ", of zie de "
 
-#: kz_common.py:177 kz_common.sh:222
+#: kz_common.py:176 kz_common.sh:222
 msgid "man page"
 msgstr "man-pagina"
 
-#: kz_common.py:181
+#: kz_common.py:180
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:183
+#: kz_common.py:182
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:228
+#: kz_common.py:227
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:248 kz_common.sh:267
+#: kz_common.py:247 kz_common.sh:267
 msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
-#: kz_common.py:258
+#: kz_common.py:257
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:259 kz_common.sh:275
+#: kz_common.py:258 kz_common.sh:275
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:260 kz_common.sh:276
+#: kz_common.py:259 kz_common.sh:276
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.py:294 kz_common.sh:398
+#: kz_common.py:293 kz_common.sh:398
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
