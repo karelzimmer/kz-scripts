@@ -873,7 +873,7 @@ msgstr "fataal: onbekende os release"
 msgid "DOWNLOAD"
 msgstr "DOWNLOAD"
 
-#: kz-get:209 kz-get:263 kz-install:335
+#: kz-get:209 kz-get:263
 msgid "INSTALL"
 msgstr "INSTALLEREN"
 

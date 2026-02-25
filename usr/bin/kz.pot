@@ -794,7 +794,7 @@ msgstr ""
 msgid "DOWNLOAD"
 msgstr ""
 
-#: kz-get:209 kz-get:263 kz-install:335
+#: kz-get:209 kz-get:263
 msgid "INSTALL"
 msgstr ""
 
