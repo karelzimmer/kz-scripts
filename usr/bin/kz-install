@@ -332,9 +332,9 @@ function process_argument_app() {
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
     printf '%s\n' "\
-# INSTALL automatically-added-update
+# $(gettext 'INSTALL') $(gettext 'automatically-added-update')
 # -----------------------------------------------------------------------------
-# Update package lists before installing apps.
+# $(gettext 'Update package lists before installing apps.')
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     check-upd\

@@ -717,12 +717,12 @@ msgid "  -d, --dev      deploy the development version of package kz"
 msgstr "  -d, --dev      distribueer de ontwikkelingsversie van pakket kz"
 
 #: kz-deploy:164
-msgid "CHECK -- 1/2"
-msgstr "CONTROLEREN -- 1/2"
+msgid "CHECK"
+msgstr "CONTROLEREN"
 
 #: kz-deploy:178
-msgid "DEPLOY -- 2/2"
-msgstr "DISTRIBUEREN -- 2/2"
+msgid "DEPLOY"
+msgstr "DISTRIBUEREN"
 
 #: kz-deploy:215
 msgid "Upload website"
@@ -861,9 +861,21 @@ msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
 "commando uit:"
 
+#: kz-update:92
+msgid "GITPULL"
+msgstr "GITPULL"
+
 #: kz-update:133
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
+
+#: kz-get:195
+msgid "DOWNLOAD"
+msgstr "DOWNLOAD"
+
+#: kz-get:209 kz-get:263 kz-install:335
+msgid "INSTALL"
+msgstr "INSTALLEREN"
 
 #: kz-get:284
 msgid ""
@@ -992,6 +1004,14 @@ msgstr ""
 #: kz-install:319 kz-setup:313
 msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
+
+#: kz-install:335
+msgid "automatically-added-update"
+msgstr "automatisch-toegevoegde-update"
+
+#: kz-install:337
+msgid "Update package lists before installing apps."
+msgstr "Werk de pakketlijsten bij alvorens apps te installeren."
 
 #: kz-install:386 kz-setup:367
 #, sh-format
@@ -1414,21 +1434,17 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-#: kz-update:92
-msgid "GITPULL -- 0/3"
-msgstr "GITPULL -- 0/3"
-
-#: kz-update:107 kz-update:121
-msgid "UPDATE -- 1/3"
-msgstr "BIJWERKEN -- 1/3"
+#: kz-get:203 kz-get:258 kz-update:107 kz-update:121
+msgid "UPDATE"
+msgstr "BIJWERKEN"
 
 #: kz-update:112 kz-update:126
-msgid "UPGRADE -- 2/3"
-msgstr "OPWAARDEREN -- 2/3"
+msgid "UPGRADE"
+msgstr "OPWAARDEREN"
 
 #: kz-update:115 kz-update:129
-msgid "CLEANUP -- 3/3"
-msgstr "OPRUIMEN -- 3/3"
+msgid "CLEANUP"
+msgstr "OPRUIMEN"
 
 #: kz-wifi:33
 msgid ""

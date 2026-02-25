@@ -653,11 +653,11 @@ msgid "  -d, --dev      deploy the development version of package kz"
 msgstr ""
 
 #: kz-deploy:164
-msgid "CHECK -- 1/2"
+msgid "CHECK"
 msgstr ""
 
 #: kz-deploy:178
-msgid "DEPLOY -- 2/2"
+msgid "DEPLOY"
 msgstr ""
 
 #: kz-deploy:215
@@ -782,8 +782,20 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
+#: kz-update:92
+msgid "GITPULL"
+msgstr ""
+
 #: kz-update:133
 msgid "fatal: unknown os release"
+msgstr ""
+
+#: kz-get:195
+msgid "DOWNLOAD"
+msgstr ""
+
+#: kz-get:209 kz-get:263 kz-install:335
+msgid "INSTALL"
 msgstr ""
 
 #: kz-get:284
@@ -891,6 +903,14 @@ msgstr ""
 
 #: kz-install:319 kz-setup:313
 msgid "  0  No apps found."
+msgstr ""
+
+#: kz-install:335
+msgid "automatically-added-update"
+msgstr ""
+
+#: kz-install:337
+msgid "Update package lists before installing apps."
 msgstr ""
 
 #: kz-install:386 kz-setup:367
@@ -1274,20 +1294,16 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr ""
 
-#: kz-update:92
-msgid "GITPULL -- 0/3"
-msgstr ""
-
-#: kz-update:107 kz-update:121
-msgid "UPDATE -- 1/3"
+#: kz-get:203 kz-get:258 kz-update:107 kz-update:121
+msgid "UPDATE"
 msgstr ""
 
 #: kz-update:112 kz-update:126
-msgid "UPGRADE -- 2/3"
+msgid "UPGRADE"
 msgstr ""
 
 #: kz-update:115 kz-update:129
-msgid "CLEANUP -- 3/3"
+msgid "CLEANUP"
 msgstr ""
 
 #: kz-wifi:33
