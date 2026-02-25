@@ -148,7 +148,8 @@ function process_options() {
                 break
                 ;;
             * )
-                printf '%s\n' "$PROGRAM_NAME: getopt: internal error" >&2
+                printf  "$RED%s$NORMAL\n"   \
+                        "$PROGRAM_NAME: getopt: internal error" >&2
                 exit 1
             ;;
         esac
