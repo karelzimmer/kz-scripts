@@ -161,7 +161,7 @@ $USAGE"
 function check() {
     local text=''
 
-    text="$(gettext 'CHECK') -- 1/2"
+    text="$BOLD$(gettext 'CHECK') -- 1/2$NORMAL"
     kz.infomsg "$text"
     if ! kz.check_repos; then
         ERR_FLAG=true
@@ -175,7 +175,7 @@ function check() {
 function deploy() {
     local text=''
 
-    text="$(gettext 'DEPLOY') -- 2/2"
+    text="$BOLD$(gettext 'DEPLOY') -- 2/2$NORMAL"
     kz.infomsg "\n$text"
     upload_website
     install_package

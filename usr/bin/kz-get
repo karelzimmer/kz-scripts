@@ -200,7 +200,7 @@ function install_deb_package() {
     fi
 
     sudo true
-    printf '%s\n' "$(gettext 'DOWNLOAD') -- 1/3"
+    printf '%s\n' "$BOLD$(gettext 'DOWNLOAD') -- 1/3$NORMAL"
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
     # Prevent the message:
     # ...file '/tmp/kz-get-....deb' couldn't be accessed by user '_apt'.
@@ -208,13 +208,13 @@ function install_deb_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf '%s\n' "$(gettext 'UPDATE') -- 2/3"
+    printf '%s\n' "$BOLD$(gettext 'UPDATE') -- 2/3$NORMAL"
     check_debian_package_manager
     sudo apt-get update
     printf '\n'
 
     # Install kz package.
-    printf '%s\n' "$(gettext 'INSTALL') -- 3/3"
+    printf '%s\n' "$BOLD$(gettext 'INSTALL') -- 3/3$NORMAL"
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -263,20 +263,18 @@ function install_rpm_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf '%s\n' "$(gettext 'UPDATE') -- 1/2"
+    printf '%s\n' "$BOLD$(gettext 'UPDATE') -- 1/2$NORMAL"
     sudo dnf check-update || true
     printf '\n'
 
     # Install kz package.
-    printf '%s\n' "$(gettext 'INSTALL') -- 2/2"
+    printf '%s\n' "$BOLD$(gettext 'INSTALL') -- 2/2$NORMAL"
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
 }
 
 
 # This function controls the termination of the script.
 function term() {
-    local red='\033[1;31m'
-    local normal='\033[0m'
     local text=''
     local seperator_line=''
     local -i seperator_line_len=${COLUMNS:-79}
@@ -285,8 +283,8 @@ function term() {
     text="$seperator_line\n\n"
 
     if $OPTION_DEV; then
-        text+="$red$(gettext "Please note: the development version of the kz \
-package is installed")$normal\n"
+        text+="$RED$(gettext "Please note: the development version of the kz \
+package is installed")$NORMAL\n"
     fi
 
     text+="$(gettext "Package kz has been successfully installed.
