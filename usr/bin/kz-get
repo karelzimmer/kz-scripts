@@ -39,6 +39,7 @@ readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
+readonly GREEN='\033[1;32m'
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
@@ -170,7 +171,7 @@ function become_check() {
     elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
-        printf  "$BOLD%b$NORMAL\n"  \
+        printf  "$GREEN%b$NORMAL\n"  \
                 "$(gettext 'Already performed by the administrator.')" >&2
         return 1
     fi

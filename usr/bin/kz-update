@@ -314,7 +314,7 @@ def term() -> None:
     """
     text: str
 
-    text = _('Complete!')
+    text = kz.GREEN + _('Complete!') + kz.NORMAL
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
     kz.term(PROGRAM_NAME, 0)
 

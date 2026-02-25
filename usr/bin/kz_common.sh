@@ -22,6 +22,7 @@ source /usr/bin/gettext.sh
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
+readonly GREEN='\033[1;32m'
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
@@ -38,7 +39,7 @@ function kz.become_check() {
     if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
-        text=$BOLD$(gettext 'Already performed by the administrator.')$NORMAL
+        text=$GREEN$(gettext 'Already performed by the administrator.')$NORMAL
         kz.infomsg "$text"
         exit 0
     fi

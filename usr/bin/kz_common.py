@@ -28,6 +28,7 @@ _ = gettext.gettext
 
 # List NORMAL last here so that debugging doesn't bork the display.
 BOLD: str = '\033[1m'
+GREEN: str = '\033[1;32m'
 RED: str = '\033[1;31m'
 NORMAL: str = '\033[0m'
 
@@ -51,7 +52,7 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
                       shell=True).returncode == 0:
         return 0
     else:
-        text = BOLD + _('Already performed by the administrator.') + NORMAL
+        text = GREEN + _('Already performed by the administrator.') + NORMAL
         infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
         sys.exit(0)
 
