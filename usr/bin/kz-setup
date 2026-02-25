@@ -294,17 +294,18 @@ $(gettext 'NUM  APP')
             text+="$apps
 
 $(gettext 'Use "kz setup <app>..." to set up the apps.')
-$(gettext 'Use "kz setup --cat" to view the contents of the command file.')
 $(gettext "Use \"kz setup --cat <app>...\" to view the contents of the apps \
-command file.")"
+command file.")
+$(gettext "Use  \"kz setup --cat\" to view the contents of the whole command \
+file.")"
         else
             text+="$apps
 
 $(gettext 'Use "kz setup --reset <app>..." to reset the apps.')
-$(gettext "Use \"kz setup --cat --reset\" to view the contents of the command \
-file.")
 $(gettext "Use \"kz setup --cat --reset <app>...\" to view the contents of \
-the apps command file.")"
+the apps command file.")
+$(gettext "Use \"kz setup --cat --reset\" to view the contents of the whole \
+command file.")"
         fi
             text+="
 $(gettext "Use \"kz setup --browse\" to view the contents of the default \

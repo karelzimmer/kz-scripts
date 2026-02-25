@@ -300,17 +300,18 @@ $(gettext 'NUM  APP')
             text+="$apps
 
 $(gettext 'Use "kz install <app>..." to install the apps.')
-$(gettext 'Use "kz install --cat" to view the contents of the command file.')
 $(gettext "Use \"kz install --cat <app>...\" to view the contents of the apps \
-command file.")"
+command file.")
+$(gettext "Use \"kz install --cat\" to view the contents of the whole command \
+file.")"
         else
             text+="$apps
 
 $(gettext 'Use "kz install --remove <app>..." to remove the apps.')
-$(gettext "Use \"kz install --cat --remove\" to view the contents of the \
-command file.")
 $(gettext "Use \"kz install --cat --remove <app>...\" to view the contents of \
-the apps command file.")"
+the apps command file.")
+$(gettext "Use \"kz install --cat --remove\" to view the contents of the \
+whole command file.")"
         fi
         text+="
 $(gettext "Use \"kz install --browse\" to view the contents of the default \
