@@ -434,7 +434,7 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
 #: ckhtml:128 gitbranch:63 gitclone:80 gitfetch:63 gitinit:54 gitpull:63
-#: gitsquash:67 gitstatus:63 kz-build:520 kz-check:584 kz-deploy:274 kz-dev:278
+#: gitsquash:68 gitstatus:63 kz-build:520 kz-check:584 kz-deploy:274 kz-dev:278
 #: kz-update:318
 msgid "Complete!"
 msgstr ""
