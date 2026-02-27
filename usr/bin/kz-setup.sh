@@ -55,40 +55,40 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                            &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                     &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                             &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                              &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
-if gsettings get org.gnome.shell disable-user-extensions                                                         &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                    ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com           ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com                                    ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions enable no-overview@fthx                                                 ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                   &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true            ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock click-action                                         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true           ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                   &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32              ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                          &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true   ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock dock-fixed                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true                    ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock dock-position                                        &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'             ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock extend-height                                        &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true                 ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true               ; fi
+if gsettings    get org.gnome.shell disable-user-extensions                                                      &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false                              ; fi
 LOGOUT=true
 
 # RESET dash-to-dock *
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if gsettings get org.gnome.shell disable-user-extensions                                                         &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                            &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                     &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock custom-theme-shrink; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                             &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                              &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
-if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if gsettings    get org.gnome.shell disable-user-extensions                                                      &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions                            ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                   &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme         ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock click-action                                         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action               ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock custom-theme-shrink        ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                   &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size         ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                          &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock dock-fixed                                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed                 ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock dock-position                                        &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position              ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock extend-height                                        &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height              ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed            ; fi
+if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                             ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions disable no-overview@fthx                                          ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com    ; fi
+if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                             ; fi
 LOGOUT=true
 
 # SETUP evolution *
@@ -135,47 +135,47 @@ git config --global --unset alias.logg
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
+if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true                                                                                                    ; fi
 if gsettings get org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
 if gsettings get org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
-if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
-if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if gsettings get org.gnome.desktop.interface font-antialiasing                       &> /dev/null; then gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'; fi
-if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
-if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
-if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
-if gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay 900; fi
-if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
-if gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null; then gsettings set org.gnome.mutter center-new-windows true; fi
-if gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level large; fi
-if gsettings get org.gnome.nautilus.list-view use-tree-view                          &> /dev/null; then gsettings set org.gnome.nautilus.list-view use-tree-view true; fi
-if gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
-if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
-if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first            &> /dev/null; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true; fi
+if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true                                                                                                 ; fi
+if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true                                                                                              ; fi
+if gsettings get org.gnome.desktop.interface font-antialiasing                       &> /dev/null; then gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'                                                                                             ; fi
+if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage true                                                                                         ; fi
+if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true                                                                                         ; fi
+if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false                                                                                                 ; fi
+if gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay 900                                                                                                         ; fi
+if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true                                                                                      ; fi
+if gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'                                                                        ; fi
+if gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null; then gsettings set org.gnome.mutter center-new-windows true                                                                                                         ; fi
+if gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level large                                                                                            ; fi
+if gsettings get org.gnome.nautilus.list-view use-tree-view                          &> /dev/null; then gsettings set org.gnome.nautilus.list-view use-tree-view true                                                                                                  ; fi
+if gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'                                                                                             ; fi
+if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true                                                                                     ; fi
+if gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true                                                                                             ; fi
+if gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'                                                                                    ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive                                                                          ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing                                                                           ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing                                                                      ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true                                                                                         ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false                                                                                ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true                                                                            ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false                                                                                         ; fi
+if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false                                                                                                  ; fi
+if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first            &> /dev/null; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true                                                                                    ; fi
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place --expression='s/#alias/alias/g'    ~/.bashrc
-sed --in-place --expression='s/# alias/alias/g'   ~/.bashrc
-sed --in-place --expression='s/# export/export/g' ~/.bashrc
-sed --in-place --expression='s/# eval/eval/g'     ~/.bashrc
+sed --in-place --expression='s/#alias/alias/g'              ~/.bashrc
+sed --in-place --expression='s/# alias/alias/g'             ~/.bashrc
+sed --in-place --expression='s/# export/export/g'           ~/.bashrc
+sed --in-place --expression='s/# eval/eval/g'               ~/.bashrc
 # -----------------------------------------------------------------------------
 # Enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
+sed --in-place --expression='/^stty -ixon/d'                ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 LOGOUT=true
 
@@ -183,33 +183,33 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
-if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
-if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
-if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if gsettings get org.gnome.desktop.interface font-antialiasing                       &> /dev/null; then gsettings reset org.gnome.desktop.interface font-antialiasing; fi
-if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
-if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
-if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
-if gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null; then gsettings reset org.gnome.desktop.session idle-delay; fi
-if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
-if gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
-if gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null; then gsettings reset org.gnome.mutter center-new-windows; fi
-if gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
-if gsettings get org.gnome.nautilus.list-view use-tree-view                          &> /dev/null; then gsettings reset org.gnome.nautilus.list-view use-tree-view; fi
-if gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
-if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
-if gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
-if gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
+if gsettings get org.gnome.desktop.calendar show-weekdate                            &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate                           ; fi
+if gsettings get org.gnome.desktop.interface clock-show-date                         &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date                        ; fi
+if gsettings get org.gnome.desktop.interface clock-show-weekday                      &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday                     ; fi
+if gsettings get org.gnome.desktop.interface font-antialiasing                       &> /dev/null; then gsettings reset org.gnome.desktop.interface font-antialiasing                      ; fi
+if gsettings get org.gnome.desktop.interface show-battery-percentage                 &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage                ; fi
+if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                 &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click                ; fi
+if gsettings get org.gnome.desktop.screensaver lock-enabled                          &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled                         ; fi
+if gsettings get org.gnome.desktop.session idle-delay                                &> /dev/null; then gsettings reset org.gnome.desktop.session idle-delay                               ; fi
+if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent              &> /dev/null; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent             ; fi
+if gsettings get org.gnome.desktop.wm.preferences button-layout                      &> /dev/null; then gsettings reset org.gnome.desktop.wm.preferences button-layout                     ; fi
+if gsettings get org.gnome.mutter center-new-windows                                 &> /dev/null; then gsettings reset org.gnome.mutter center-new-windows                                ; fi
+if gsettings get org.gnome.nautilus.icon-view default-zoom-level                     &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level                    ; fi
+if gsettings get org.gnome.nautilus.list-view use-tree-view                          &> /dev/null; then gsettings reset org.gnome.nautilus.list-view use-tree-view                         ; fi
+if gsettings get org.gnome.nautilus.preferences click-policy                         &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy                        ; fi
+if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover             &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover            ; fi
+if gsettings get org.gnome.nautilus.preferences show-create-link                     &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link                    ; fi
+if gsettings get org.gnome.nautilus.preferences show-image-thumbnails                &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails               ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action        ; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type     ; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
-if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
-if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first            &> /dev/null; then gsettings reset org.gtk.gtk4.Settings.FileChooser sort-directories-first; fi
-if gsettings set org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings reset org.gnome.desktop.input-sources sources; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts                ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network        ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted   ; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash                 ; fi
+if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home                          ; fi
+if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first            &> /dev/null; then gsettings reset org.gtk.gtk4.Settings.FileChooser sort-directories-first           ; fi
+if gsettings set org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings reset org.gnome.desktop.input-sources sources                            ; fi
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
@@ -261,8 +261,8 @@ kz-desktop --delete=org.libreoffice.LibreOffice.writer
 # -----------------------------------------------------------------------------
 #  Desktop environment.
 # -----------------------------------------------------------------------------
-if type lxsession &> /dev/null && ! [[ -f ~/.config/libfm/libfm.conf ]]; then pcmanfm; fi
-if type lxsession &> /dev/null; then until [[ -f ~/.config/libfm/libfm.conf ]]; do sleep 1; done; fi
+if type lxsession &> /dev/null && ! [[ -f ~/.config/libfm/libfm.conf ]]; then pcmanfm                                          ; fi
+if type lxsession &> /dev/null; then until [[ -f ~/.config/libfm/libfm.conf ]]; do sleep 1; done                               ; fi
 if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
 LOGOUT=true
 
@@ -332,7 +332,7 @@ rm --force --recursive ~/.cache/thumbnails/
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spotify; fi
+if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spotify   ; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
 # RESET spotify *
@@ -341,7 +341,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then kz-desktop --addaft=kz-s
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify; fi
+if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify   ; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 # SETUP terminal pc06 pc07
