@@ -1456,5 +1456,5 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
 #: gitsquash:48
-msgid "*** git squash merge in 9 steps ***"
+msgid "*** git squash merge in 10 steps ***"
 msgstr ""
