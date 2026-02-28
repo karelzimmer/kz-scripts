@@ -79,7 +79,6 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if gsettings    get org.gnome.shell disable-user-extensions                                                      &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions                            ; fi
 if gsettings    get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                   &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme         ; fi
 if gsettings    get org.gnome.shell.extensions.dash-to-dock click-action                                         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action               ; fi
 if gsettings    get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock custom-theme-shrink        ; fi
