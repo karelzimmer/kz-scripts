@@ -68,6 +68,10 @@ if gsettings    get org.gnome.shell.extensions.dash-to-dock dock-fixed          
 if gsettings    get org.gnome.shell.extensions.dash-to-dock dock-position                                        &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'             ; fi
 if gsettings    get org.gnome.shell.extensions.dash-to-dock extend-height                                        &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true                 ; fi
 if gsettings    get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                      &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true               ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock show-mounts                                          &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true                   ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock show-mounts-network                                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false          ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted                             &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true      ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock show-trash                                           &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false                   ; fi
 if gsettings    get org.gnome.shell disable-user-extensions                                                      &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false                              ; fi
 LOGOUT=true
 
@@ -85,6 +89,10 @@ if gsettings    get org.gnome.shell.extensions.dash-to-dock dock-fixed          
 if gsettings    get org.gnome.shell.extensions.dash-to-dock dock-position                                        &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position              ; fi
 if gsettings    get org.gnome.shell.extensions.dash-to-dock extend-height                                        &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height              ; fi
 if gsettings    get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                      &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed            ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock show-mounts                                          &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts                ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock show-mounts-network                                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network        ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted                             &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted   ; fi
+if gsettings    get org.gnome.shell.extensions.dash-to-dock show-trash                                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash                 ; fi
 if (grep debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com)                          &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com                             ; fi
 if (grep rhel   /etc/os-release && gnome-extensions info no-overview@fthx)                                       &> /dev/null; then gnome-extensions disable no-overview@fthx                                          ; fi
 if (grep rhel   /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com) &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com    ; fi
@@ -157,27 +165,8 @@ if gsettings get org.gnome.nautilus.preferences show-image-thumbnails           
 if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive                                                                          ; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing                                                                           ; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing                                                                      ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true                                                                                         ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false                                                                                ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true                                                                            ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false                                                                                         ; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false                                                                                                  ; fi
 if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first            &> /dev/null; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true                                                                                    ; fi
-# -----------------------------------------------------------------------------
-# Terminal emulator.
-# -----------------------------------------------------------------------------
-# Enable aliases.
-# -----------------------------------------------------------------------------
-sed --in-place --expression='s/#alias/alias/g'              ~/.bashrc
-sed --in-place --expression='s/# alias/alias/g'             ~/.bashrc
-sed --in-place --expression='s/# export/export/g'           ~/.bashrc
-sed --in-place --expression='s/# eval/eval/g'               ~/.bashrc
-# -----------------------------------------------------------------------------
-# Enable search forward in history (with Ctrl-S).
-# -----------------------------------------------------------------------------
-sed --in-place --expression='/^stty -ixon/d'                ~/.bashrc
-echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
-LOGOUT=true
 
 # RESET gnome-settings *
 # -----------------------------------------------------------------------------
@@ -203,20 +192,9 @@ if gsettings get org.gnome.nautilus.preferences show-image-thumbnails           
 if gsettings get org.gnome.settings-daemon.plugins.power power-button-action         &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action        ; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type      &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type     ; fi
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                 &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts                ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network         &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network        ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted   ; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                  &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash                 ; fi
 if gsettings get org.gnome.shell.extensions.ding show-home                           &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home                          ; fi
 if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first            &> /dev/null; then gsettings reset org.gtk.gtk4.Settings.FileChooser sort-directories-first           ; fi
 if gsettings set org.gnome.desktop.input-sources sources                             &> /dev/null; then gsettings reset org.gnome.desktop.input-sources sources                            ; fi
-# -----------------------------------------------------------------------------
-# Terminal emulator.
-# -----------------------------------------------------------------------------
-sed --in-place --expression='s/alias/#alias/g'   ~/.bashrc
-sed --in-place --expression='s/export/#export/g' ~/.bashrc
-sed --in-place --expression='s/eval/#eval/g'     ~/.bashrc
-sed --in-place --expression='/^stty -ixon/d'     ~/.bashrc
 LOGOUT=true
 
 # SETUP google-chrome pc01 pc06 pc07
@@ -344,17 +322,36 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then kz-desktop --addaft=kz-s
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify   ; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
-# SETUP terminal pc06 pc07
+# SETUP terminal *
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
-kz-desktop --addbef=org.gnome.Terminal
+# Enable aliases.
+# -----------------------------------------------------------------------------
+sed --in-place --expression='s/#alias/alias/g'              ~/.bashrc
+sed --in-place --expression='s/# alias/alias/g'             ~/.bashrc
+sed --in-place --expression='s/# export/export/g'           ~/.bashrc
+sed --in-place --expression='s/# eval/eval/g'               ~/.bashrc
+# -----------------------------------------------------------------------------
+# Enable search forward in history (with Ctrl-S).
+# -----------------------------------------------------------------------------
+sed --in-place --expression='/^stty -ixon/d'                ~/.bashrc
+echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
+LOGOUT=true
 
-# RESET terminal pc06 pc07
+# RESET terminal *
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
-kz-desktop --delete=org.gnome.Terminal
+# Disable aliases.
+# -----------------------------------------------------------------------------
+sed --in-place --expression='s/alias/#alias/g'   ~/.bashrc
+sed --in-place --expression='s/export/#export/g' ~/.bashrc
+sed --in-place --expression='s/eval/#eval/g'     ~/.bashrc
+# -----------------------------------------------------------------------------
+# Disable search forward in history (with Ctrl-S).
+# -----------------------------------------------------------------------------
+sed --in-place --expression='/^stty -ixon/d'     ~/.bashrc
 
 # SETUP terminal pc06 pc07
 # -----------------------------------------------------------------------------
