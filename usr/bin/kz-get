@@ -70,12 +70,9 @@ function init() {
 function process() {
     check_input "$@"
 
-    if $OPTION_DEBUG; then
-        # Trap exit signal to clean up only getkz files if in debug mode.
-        trap 'rm --force getkz getkz.{1..99}' EXIT
-    else
-        # Clean up temporary and getkz files if not in debug mode.
-        trap 'rm --force getkz getkz.{1..99} /tmp/kz-*.deb' EXIT
+    if ! $OPTION_DEBUG; then
+        # Clean up temporary files if not in debug mode.
+        trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
     fi
 
     become_check || exit 0
