@@ -274,9 +274,8 @@ function install_rpm_package() {
 function term() {
     local text=''
     local seperator_line=''
-    local -i seperator_line_len=${COLUMNS:-79}
 
-    seperator_line=$(eval printf -- '-%.0s' "{1..$seperator_line_len}")
+    seperator_line=$(eval printf -- '-%.0s' '{1..80}')
     text="\n$seperator_line\n\n"
 
     if $OPTION_DEV; then

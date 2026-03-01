@@ -429,12 +429,12 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:511 kz-get:283
+#: kz-build:511 kz-get:282
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
 #: ckhtml:128 gitbranch:63 gitclone:80 gitfetch:63 gitinit:54 gitpull:63
-#: gitsquash:72 gitstatus:63 kz-build:520 kz-check:584 kz-deploy:274 kz-dev:278
+#: gitsquash:71 gitstatus:63 kz-build:520 kz-check:584 kz-deploy:274 kz-dev:278
 #: kz-update:318
 msgid "Complete!"
 msgstr ""
@@ -798,7 +798,7 @@ msgstr ""
 msgid "INSTALL"
 msgstr ""
 
-#: kz-get:287
+#: kz-get:286
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -807,7 +807,7 @@ msgid ""
 "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-get:295
+#: kz-get:294
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -1106,7 +1106,7 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: gitsquash:54 kz-menu:505
+#: gitsquash:53 kz-menu:505
 msgid "The following will be executed:"
 msgstr ""
 
@@ -1455,6 +1455,6 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: gitsquash:52
+#: gitsquash:51
 msgid "*** git squash merge in 10 steps ***"
 msgstr ""
