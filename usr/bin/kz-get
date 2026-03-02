@@ -275,7 +275,7 @@ function term() {
     local text=''
     local separator_line=''
 
-    separator_line=$(eval printf -- '-%.0s' '{1..80}')
+    separator_line=$(eval printf '=%.0s' '{1..80}')
     text="\n$separator_line\n\n"
 
     if $OPTION_DEV; then
