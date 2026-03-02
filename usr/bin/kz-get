@@ -273,10 +273,10 @@ function install_rpm_package() {
 # This function controls the termination of the script.
 function term() {
     local text=''
-    local seperator_line=''
+    local separator_line=''
 
-    seperator_line=$(eval printf -- '-%.0s' '{1..80}')
-    text="\n$seperator_line\n\n"
+    separator_line=$(eval printf -- '-%.0s' '{1..80}')
+    text="\n$separator_line\n\n"
 
     if $OPTION_DEV; then
         text+="$RED$(gettext "Please note: the development version of the kz \
