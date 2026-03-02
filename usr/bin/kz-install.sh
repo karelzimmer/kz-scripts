@@ -703,7 +703,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 # -----------------------------------------------------------------------------
-# For Red Hat-based systems go to https://extensions.gnome.org/extension/1007/window-is-ready-notification-remover/ and enable the extension.
+# For Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 # -----------------------------------------------------------------------------
 REBOOT=true
 
@@ -713,7 +713,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 # -----------------------------------------------------------------------------
-# For Red Hat-based systems go to https://extensions.gnome.org/extension/1007/window-is-ready-notification-remover/ and disable the extension.
+# For Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 # -----------------------------------------------------------------------------
 REBOOT=true
 
