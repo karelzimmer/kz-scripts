@@ -702,6 +702,9 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # Disable the “Window Is Ready” notification.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+# -----------------------------------------------------------------------------
+# For Red Hat-based systems go to https://extensions.gnome.org/extension/1007/window-is-ready-notification-remover/ and enable the extension.
+# -----------------------------------------------------------------------------
 REBOOT=true
 
 # REMOVE no-annoyance *
@@ -709,6 +712,9 @@ REBOOT=true
 # Enable the “Window Is Ready” notification.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+# -----------------------------------------------------------------------------
+# For Red Hat-based systems go to https://extensions.gnome.org/extension/1007/window-is-ready-notification-remover/ and disable the extension.
+# -----------------------------------------------------------------------------
 REBOOT=true
 
 # INSTALL ntfs #none
