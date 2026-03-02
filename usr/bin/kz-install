@@ -330,9 +330,10 @@ function process_argument_app() {
     local app_argument=''
     local err_flag=false
 
-    # Refresh package lists before installing apps, to minimize the risk of
-    # errors due to outdated package lists.
-    printf '%s\n' "\
+    if [[ $install = 'INSTALL' ]]; then
+        # Refresh package lists before installing apps, to minimize the risk of
+        # errors due to outdated package lists.
+        printf '%s\n' "\
 # INSTALL $(gettext 'automatically-added-update')
 # -----------------------------------------------------------------------------
 # $(gettext 'Update package lists before installing apps.')
@@ -340,7 +341,8 @@ function process_argument_app() {
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     check-upd\
 ate || true; fi
-"   > "$command_file"
+"       > "$command_file"
+    fi
 
     for app_argument in "${app_arguments[@]}"; do
         process_installation_files_by_app_argument

@@ -697,6 +697,20 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     install --a
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --assumeyes  nmap; fi
 
+# INSTALL no-annoyance *
+# -----------------------------------------------------------------------------
+# Disable the “Window Is Ready” notification.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+REBOOT=true
+
+# REMOVE no-annoyance *
+# -----------------------------------------------------------------------------
+# Enable the “Window Is Ready” notification.
+# -----------------------------------------------------------------------------
+if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+REBOOT=true
+
 # INSTALL ntfs #none
 # -----------------------------------------------------------------------------
 # NTFS support.

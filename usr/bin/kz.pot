@@ -300,7 +300,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:610 kz-install:591 kz-restore:342 kz-setup:558
+#: kz-backup:610 kz-install:593 kz-restore:342 kz-setup:558
 msgid "error messages"
 msgstr ""
 
@@ -325,11 +325,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:618 kz-install:596 kz-restore:350 kz-setup:562
+#: kz-backup:618 kz-install:598 kz-restore:350 kz-setup:562
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:619 kz-install:597 kz-restore:351 kz-setup:563
+#: kz-backup:619 kz-install:599 kz-restore:351 kz-setup:563
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -907,72 +907,72 @@ msgstr ""
 msgid "  0  No apps found."
 msgstr ""
 
-#: kz-install:336
+#: kz-install:337
 msgid "automatically-added-update"
 msgstr ""
 
-#: kz-install:338
+#: kz-install:339
 msgid "Update package lists before installing apps."
 msgstr ""
 
-#: kz-install:387 kz-setup:368
+#: kz-install:389 kz-setup:368
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:442 kz-setup:423
+#: kz-install:444 kz-setup:423
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:452 kz-menu:76 kz-install.desktop:10
+#: kz-install:454 kz-menu:76 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
 
-#: kz-install:453 kz-menu:52
+#: kz-install:455 kz-menu:52
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:484 kz-setup:464
+#: kz-install:486 kz-setup:464
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:485 kz-setup:465
+#: kz-install:487 kz-setup:465
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:592
+#: kz-install:594
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:598
+#: kz-install:600
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:614
+#: kz-install:616
 msgid "install"
 msgstr ""
 
-#: kz-install:618
+#: kz-install:620
 msgid "remove"
 msgstr ""
 
-#: kz-install:620 kz-setup:586
+#: kz-install:622 kz-setup:586
 #, sh-format
 msgid "Apps $operation completed."
 msgstr ""
 
-#: kz-install:625
+#: kz-install:627
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1005 kz-install.sh:1006 kz-install.sh:1012
+#: kz-install.sh:1019 kz-install.sh:1020 kz-install.sh:1026
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1005
+#: kz-install.sh:1019
 msgid "Guest_user"
 msgstr ""
 
