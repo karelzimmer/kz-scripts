@@ -61,11 +61,6 @@ function init() {
 function process() {
     check_input "$@"
 
-    if ! [[ -o xtrace ]]; then
-        # Clean up temporary files if not in debug mode.
-        trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
-    fi
-
     become_check || exit 0
     if grep --quiet --regexp='debian' /etc/os-release; then
         process_deb_package
@@ -126,6 +121,11 @@ function process_options() {
                 ;;
         esac
     done
+
+    if ! [[ -o xtrace ]]; then
+        # Clean up temporary files if not in debug mode.
+        trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
+    fi
 
     if [[ -n $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
