@@ -78,7 +78,7 @@ function init() {
     set -o pipefail
 
     # Trap exit signal.
-    trap 'term_cleanup' EXIT
+    trap term_cleanup EXIT
 }
 
 
@@ -317,13 +317,12 @@ $(gettext "Type 'exit' to close this window.")"
     fi
     printf '%b\n' "$text"
 
-    term_cleanup
-
     exit 0
 }
 
 
-# This function cleans up temporary files on termination.
+# This function cleans up temporary files on exit signal.
+# shellcheck disable=SC2329
 function term_cleanup() {
     if ! [[ -o xtrace ]]; then
         # Clean up temporary files if not in debug mode.

@@ -388,7 +388,7 @@ $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
 }
 
 
-# This function cleans up temporary files on termination.
+# This function cleans up temporary files on exit signal.
 function kz.term_cleanup() {
     local text=''
 
