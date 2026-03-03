@@ -330,6 +330,7 @@ function term_cleanup() {
         # Clean up temporary files if not in debug mode.
         rm --force getkz* /tmp/kz-*.deb
     fi
+    trap - EXIT
 }
 
 
