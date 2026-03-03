@@ -699,7 +699,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 
 # INSTALL no-annoyance *
 # -----------------------------------------------------------------------------
-# Disable the “Window Is Ready” notification.
+# Disable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 # -----------------------------------------------------------------------------
@@ -709,7 +709,7 @@ REBOOT=true
 
 # REMOVE no-annoyance *
 # -----------------------------------------------------------------------------
-# Enable the “Window Is Ready” notification.
+# Enable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
 if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 # -----------------------------------------------------------------------------
