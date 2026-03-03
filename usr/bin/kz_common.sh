@@ -55,7 +55,7 @@ function kz.check_debian_package_manager() {
         return 0
     fi
 
-    text=$BOLD$(gettext 'Wait for another package manager to finish...')$NORMAL
+    text=$(gettext 'Wait for another package manager to finish...')
 
     while pkexec /usr/bin/kz_common-pkexec; do
         if ${OPTION_GUI:-false}; then
@@ -63,7 +63,7 @@ function kz.check_debian_package_manager() {
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$text"
         else
-            kz.infomsg "$text"
+            kz.infomsg "$BOLD$text$NORMAL"
         fi
         sleep 2
     done

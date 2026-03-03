@@ -178,20 +178,22 @@ function process_deb_package() {
     fi
 
     sudo true
-    printf '%b\n' "$BOLD$(gettext 'DOWNLOAD') -- 1/3$NORMAL"
+
+    # Download kz package.
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'DOWNLOAD') -- 1/3"
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf '%b\n' "$BOLD$(gettext 'UPDATE') -- 2/3$NORMAL"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'UPDATE') -- 2/3"
     check_debian_package_manager
     sudo apt-get update
     printf '\n'
 
     # Install kz package.
-    printf '%b\n' "$BOLD$(gettext 'INSTALL') -- 3/3$NORMAL"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'INSTALL') -- 3/3"
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -208,13 +210,13 @@ function process_deb_package() {
 function check_debian_package_manager() {
     local text=''
 
-    text=$BOLD$(gettext 'Wait for another package manager to finish...')$NORMAL
+    text=$(gettext 'Wait for another package manager to finish...')
 
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        printf '%s\n' "$text"
+        printf "$BOLD%s\n$NORMAL" "$text"
         sleep 2
     done
 }
@@ -240,12 +242,12 @@ function process_rpm_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf '%b\n' "$BOLD$(gettext 'UPDATE') -- 1/2$NORMAL"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'UPDATE') -- 1/2"
     sudo dnf check-update || true
     printf '\n'
 
     # Install kz package.
-    printf '%b\n' "$BOLD$(gettext 'INSTALL') -- 2/2$NORMAL"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'INSTALL') -- 2/2"
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
 }
 
