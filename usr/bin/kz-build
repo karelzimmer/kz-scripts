@@ -114,10 +114,10 @@ function check_input() {
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$program_name"     \
                 --              "$@"
-        ) || {
-            kz.infomsg "$USAGE"
-            exit 1
-        }
+        )   ||  {
+                    kz.infomsg "$USAGE"
+                    exit 1
+                }
     eval set -- "$parsed"
     unset parsed
 
