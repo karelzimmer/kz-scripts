@@ -21,13 +21,35 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-readonly PROGRAM_NAME='kz-backup'
-USAGE=$(gettext 'Usage: kz get [-d|--dev] [-D|--debug]
-       wget karelzimmer.nl/getkz; bash getkz [-d|--dev] [-D|--debug]')
+readonly PROGRAM_NAME='kz-get'
+PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
+readonly PROGRAM_DESC
+USAGE=$(gettext 'Usage: kz get [-d|--dev]
+              [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+              [-D|--debug]
+
+       wget karelzimmer.nl/getkz
+       bash getkz [-d|--dev]
+                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+                  [-D|--debug]')
 readonly USAGE
 
-readonly OPTIONS_SHORT='dD'
-readonly OPTIONS_LONG='dev,debug'
+HELP="$(gettext "Usage: kz get [<options>]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$(gettext "  -d, --dev      download and install the development version of \
+package kz")
+$(gettext '  -h, --help     show this help text')
+$(gettext '  -m, --manual   show manual page')
+$(gettext '  -u, --usage    show a short usage summary')
+$(gettext '  -v, --version  show program version')
+$(gettext '  -D, --debug    show debug information')"
+readonly HELP
+
+readonly OPTIONS_SHORT='dhmuvD'
+readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
@@ -108,6 +130,26 @@ function process_options() {
             -d | --dev )
                 OPTION_DEV=true
                 shift
+                ;;
+            -h | --help )
+                printf '%s\n' "$HELP"
+                exit 0
+                ;;
+            -m | --manual )
+                if [[ -n ${DISPLAY-} ]]; then
+                    yelp man:"$PROGRAM_NAME" 2> /dev/null
+                else
+                    man "$PROGRAM_NAME"
+                fi
+                exit 0
+                ;;
+            -u | --usage )
+                printf '%s\n' "$USAGE"
+                exit 0
+                ;;
+            -v | --version )
+                printf '%s\n' "$PROGRAM_NAME 4.2.1"
+                exit 0
                 ;;
             -D | --debug )
                 set -o xtrace
