@@ -327,7 +327,7 @@ $(gettext "Type 'exit' to close this window.")"
 function term_cleanup() {
     if ! [[ -o xtrace ]]; then
         # Clean up temporary files if not in debug mode.
-        trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
+        rm --force getkz* /tmp/kz-*.deb
     fi
 }
 
