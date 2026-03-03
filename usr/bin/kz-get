@@ -76,6 +76,9 @@ function init() {
     set -o errtrace
     set -o nounset
     set -o pipefail
+
+    # Trap exit signal.
+    trap 'term_cleanup' EXIT
 }
 
 
@@ -166,11 +169,6 @@ function process_options() {
                 ;;
         esac
     done
-
-    if ! [[ -o xtrace ]]; then
-        # Clean up temporary files if not in debug mode.
-        trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
-    fi
 
     if [[ -n $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
@@ -319,7 +317,18 @@ $(gettext "Type 'exit' to close this window.")"
     fi
     printf '%b\n' "$text"
 
+    term_cleanup
+
     exit 0
+}
+
+
+# This function cleans up temporary files on termination.
+function term_cleanup() {
+    if ! [[ -o xtrace ]]; then
+        # Clean up temporary files if not in debug mode.
+        trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
+    fi
 }
 
 

@@ -370,12 +370,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit )
-            if ! [[ -o xtrace ]]; then
-                # Clean up temporary files if not in debug mode.
-                text='Cleaning up temporary files...'
-                kz.logmsg "$text"
-                rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
-            fi
+            kz.term_cleanup
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"
             text="==== END logs for script $PROGRAM_NAME"
@@ -390,6 +385,19 @@ $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;
     esac
+}
+
+
+# This function cleans up temporary files on termination.
+function kz.term_cleanup() {
+    local text=''
+
+    if ! [[ -o xtrace ]]; then
+        # Clean up temporary files if not in debug mode.
+        text='Cleaning up temporary files...'
+        kz.logmsg "$text"
+        rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
+    fi
 }
 
 
