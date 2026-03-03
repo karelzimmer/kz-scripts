@@ -322,9 +322,10 @@ $(gettext "Type 'exit' to close this window.")"
 
 
 # This function cleans up temporary files on exit signal.
-# shellcheck disable=SC2329
+# ShellCheck is currently bad at figuring out functions that are invoked via
+# trap. In such cases, please ignore the message with a directive.
+# shellcheck disable=SC2329,SC2317
 function term_cleanup() {
-    # shellcheck disable=SC2317
     if ! [[ -o xtrace ]]; then
         # Clean up temporary files if not in debug mode.
         rm --force getkz* /tmp/kz-*.deb
