@@ -370,7 +370,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit )
-            if ! ${OPTION_DEBUG:-false}; then
+            if ! [[ -o xtrace ]]; then
                 # Clean up temporary files if not in debug mode.
                 text='Cleaning up temporary files...'
                 kz.logmsg "$text"

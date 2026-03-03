@@ -24,12 +24,12 @@ PROGRAM_DESC=$(gettext 'Restore a backup copy of the Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz restore [-g|--gui] [-s|--source <directory>]
+USAGE=$(gettext 'Usage: kz restore [-g|--gui] [-s|--source <directory>]
                   [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                  [-D|--debug]")
+                  [-D|--debug]')
 readonly USAGE
 
-HELP="$(gettext "Usage: kz restore [<options>]")
+HELP="$(gettext 'Usage: kz restore [<options>]')
 
 $PROGRAM_DESC.
 
@@ -57,7 +57,6 @@ readonly OPTIONS_LONG='gui,source:,help,manual,usage,version,debug'
 
 declare -i RESTORE_RC=0
 declare ERROR_LOG=''
-declare OPTION_DEBUG=false
 declare OPTION_GUI=false
 declare SOURCE=''
 
@@ -147,8 +146,6 @@ $USAGE"
                 exit 0
                 ;;
             -D | --debug )
-                OPTION_DEBUG=true
-                set -o verbose
                 set -o xtrace
                 shift
                 ;;

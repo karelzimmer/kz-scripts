@@ -28,9 +28,9 @@ PROGRAM_DESC=$(gettext 'Build website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz build [-d|--dev]
+USAGE=$(gettext 'Usage: kz build [-d|--dev]
                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [-D|--debug]")
+                [-D|--debug]')
 readonly USAGE
 
 HELP="$(gettext "Usage: kz build [<options>]")
@@ -72,7 +72,6 @@ readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 # #############################################################################
 
 declare OPTION_DEV=false
-declare OPTION_DEBUG=false
 declare ERR_FLAG=false
 
 
@@ -154,8 +153,6 @@ function process_options() {
                 exit 0
                 ;;
             -D | --debug )
-                OPTION_DEBUG=true
-                set -o verbose
                 set -o xtrace
                 shift
                 ;;

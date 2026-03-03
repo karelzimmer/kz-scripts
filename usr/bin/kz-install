@@ -25,14 +25,15 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(
-gettext "Usage: kz install [-b|--browse] [-c|--cat] [-f|--file <file>]...
+gettext 'Usage: kz install [-b|--browse] [-c|--cat] [-f|--file <file>]...
                   [-g|--gui] [-l|--list] [-r|--remove]
                   [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                  [-D|--debug] [--] [<app>...]"
+                  [-D|--debug] [--] [<app>...]'
     )
 readonly USAGE
 
-HELP="$(gettext "Usage: kz install [<options>] [--] [<arguments>]")
+HELP="$(gettext 'Usage: kz install [<options>] [--] [<arguments>]')
+
 
 $PROGRAM_DESC.
 
@@ -68,7 +69,6 @@ version,debug"
 
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
-declare OPTION_DEBUG=false
 declare OPTION_GUI=false
 declare OPTION_REMOVE=false
 declare REBOOT=false
@@ -235,8 +235,6 @@ environment available")"
                 exit 0
                 ;;
             -D | --debug )
-                OPTION_DEBUG=true
-                set -o verbose
                 set -o xtrace
                 shift
                 ;;

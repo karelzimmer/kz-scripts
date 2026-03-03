@@ -25,12 +25,12 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(
-gettext "Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [-D|--debug]"
+gettext 'Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+                [-D|--debug]'
     )
 readonly USAGE
 
-HELP="$(gettext "Usage: kz check [<options>]")
+HELP="$(gettext 'Usage: kz check [<options>]')
 
 $PROGRAM_DESC.
 
@@ -51,7 +51,6 @@ readonly OPTIONS_LONG='help,manual,usage,version,debug'
 # #############################################################################
 
 declare ERR_FLAG=false
-declare OPTION_DEBUG=false
 
 
 # #############################################################################
@@ -122,8 +121,6 @@ function process_options() {
                 exit 0
                 ;;
             -D | --debug )
-                OPTION_DEBUG=true
-                set -o verbose
                 set -o xtrace
                 shift
                 ;;

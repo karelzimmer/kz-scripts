@@ -25,14 +25,14 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(
-gettext "Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]
+gettext 'Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]
                   [-d|--delete <favorite>] [-l|--list] [-r|--reset]
                   [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                  [-D|--debug]"
+                  [-D|--debug]'
     )
 readonly USAGE
 
-HELP="$(gettext "Usage: kz desktop [<options>]")
+HELP="$(gettext 'Usage: kz desktop [<options>]')
 
 $PROGRAM_DESC.
 
@@ -63,7 +63,6 @@ version,debug"
 # Globals
 # #############################################################################
 
-declare OPTION_DEBUG=false
 
 
 # #############################################################################
@@ -195,8 +194,6 @@ $USAGE"
                 exit 0
                 ;;
             -D | --debug )
-                OPTION_DEBUG=true
-                set -o verbose
                 set -o xtrace
                 shift
                 ;;

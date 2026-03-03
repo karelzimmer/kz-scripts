@@ -24,9 +24,9 @@ PROGRAM_DESC=$(gettext 'Make a backup copy of the Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz backup [-g|--gui] [-t|--target <directory>]
+USAGE=$(gettext 'Usage: kz backup [-g|--gui] [-t|--target <directory>]
                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                 [-D|--debug]")
+                 [-D|--debug]')
 readonly USAGE
 
 HELP="$(gettext "Usage: kz backup [<options>]")
@@ -58,7 +58,6 @@ readonly OPTIONS_LONG='gui,target:,help,manual,usage,version,debug'
 declare -i BACKUP_RC=0
 declare ERROR_LOG=''
 declare OPTION_GUI=false
-declare OPTION_DEBUG=false
 declare TARGET=''
 
 
@@ -146,8 +145,6 @@ $USAGE"
                 exit 0
                 ;;
             -D | --debug )
-                OPTION_DEBUG=true
-                set -o verbose
                 set -o xtrace
                 shift
                 ;;

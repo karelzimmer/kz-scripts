@@ -21,21 +21,13 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-readonly PROGRAM_NAME='kz-get'
+readonly PROGRAM_NAME='kz-backup'
+USAGE=$(gettext 'Usage: kz get [-d|--dev] [-D|--debug]
+       wget karelzimmer.nl/getkz; bash getkz [-d|--dev] [-D|--debug]')
+readonly USAGE
 
-readonly USAGE='kz get [-d|--dev]
-       [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-       [-D|--debug]
-
-wget karelzimmer.nl/getkz
-bash getkz [-d|--dev]
-           [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-           [-D|--debug]'
-
-readonly HELP=$USAGE
-
-readonly OPTIONS_SHORT='dhmuvD'
-readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
+readonly OPTIONS_SHORT='dD'
+readonly OPTIONS_LONG='dev,debug'
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
@@ -49,7 +41,6 @@ readonly NORMAL='\033[0m'
 # #############################################################################
 
 declare OPTION_DEV=false
-declare OPTION_DEBUG=false
 
 
 # #############################################################################
@@ -70,16 +61,16 @@ function init() {
 function process() {
     check_input "$@"
 
-    if ! $OPTION_DEBUG; then
+    if ! [[ -o xtrace ]]; then
         # Clean up temporary files if not in debug mode.
         trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
     fi
 
     become_check || exit 0
     if grep --quiet --regexp='debian' /etc/os-release; then
-        install_deb_package
+        process_deb_package
     elif grep --quiet --regexp='rhel' /etc/os-release; then
-        install_rpm_package
+        process_rpm_package
     else
         printf "$RED%b$NORMAL\n" "$(gettext 'fatal: unknown os release')" >&2
         exit 1
@@ -89,16 +80,17 @@ function process() {
 
 # This function checks the script input.
 function check_input() {
+    local program_name=${PROGRAM_NAME/kz-/kz }
     local parsed=''
 
     parsed=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+                --name          "$program_name"     \
                 --              "$@"
         ) || {
-            printf '%s\n' "$USAGE" >&2
+            printf '%s\n' "$USAGE"
             exit 1
         }
     eval set -- "$parsed"
@@ -107,37 +99,19 @@ function check_input() {
     process_options "$@"
 }
 
+
 # This function handles the script options and arguments.
 function process_options() {
+    local program_name=${PROGRAM_NAME/kz-/kz }
+    local text=''
+
     while true; do
         case $1 in
             -d | --dev )
                 OPTION_DEV=true
                 shift
                 ;;
-            -h | --help )
-                printf '%s\n' "$HELP"
-                exit 0
-                ;;
-            -m | --manual )
-                if [[ -n ${DISPLAY-} ]]; then
-                    yelp man:"$PROGRAM_NAME" 2> /dev/null
-                else
-                    man "$PROGRAM_NAME"
-                fi
-                exit 0
-                ;;
-            -u | --usage )
-                printf '%s\n' "$USAGE"
-                exit 0
-                ;;
-            -v | --version )
-                printf '%s\n' "$PROGRAM_NAME 4.2.1"
-                exit 0
-                ;;
             -D | --debug )
-                OPTION_DEBUG=true
-                set -o verbose
                 set -o xtrace
                 shift
                 ;;
@@ -146,15 +120,17 @@ function process_options() {
                 break
                 ;;
             * )
-                printf  "$RED%s$NORMAL\n"   \
-                        "$PROGRAM_NAME: getopt: internal error" >&2
+                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                kz.errmsg "$text"
                 exit 1
-            ;;
+                ;;
         esac
     done
 
     if [[ -n $* ]]; then
-        printf '%s\n' "$USAGE" >&2
+        text="$program_name: $*: $(gettext 'arguments are not allowed')
+$USAGE"
+        printf '%s\n' "$text"
         exit 1
     fi
 }
@@ -176,7 +152,7 @@ function become_check() {
 
 
 # This function downloads and installs Debian package kz.
-function install_deb_package() {
+function process_deb_package() {
     local kz_deb_local_file=''
     local kz_deb_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'
@@ -199,8 +175,7 @@ function install_deb_package() {
     sudo true
     printf '%b\n' "$BOLD$(gettext 'DOWNLOAD') -- 1/3$NORMAL"
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
-    # Prevent the message:
-    # ...file '/tmp/kz-get-....deb' couldn't be accessed by user '_apt'.
+    # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
     # Refresh package lists before installing apps, to minimize the risk of
@@ -241,7 +216,7 @@ function check_debian_package_manager() {
 
 
 # This function installs RPM package kz.
-function install_rpm_package() {
+function process_rpm_package() {
     local install=''
     local kz_rpm_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'

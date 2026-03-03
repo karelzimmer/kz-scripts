@@ -28,7 +28,7 @@ USAGE=$(gettext "Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] \
                [-v|--version] [-D|--debug]")
 readonly USAGE
 
-HELP="$(gettext "Usage: kz menu [<options>]")
+HELP="$(gettext 'Usage: kz menu [<options>]')
 
 $PROGRAM_DESC.
 
@@ -93,7 +93,6 @@ readonly MENU2_LINES=${#MENU2_DESCS[@]}
 # Globals
 # #############################################################################
 
-declare OPTION_DEBUG=false
 declare OPTION_GUI=false
 
 
@@ -170,8 +169,6 @@ environment available")"
                 exit 0
                 ;;
             -D | --debug )
-                OPTION_DEBUG=true
-                set -o verbose
                 set -o xtrace
                 shift
                 ;;
