@@ -103,7 +103,7 @@ msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:173 kz-backup:156 kz-build:164 kz-check:132 kz-deploy:142 kz-desktop:205
-#: kz-dev:132 kz-get:123 kz-install:246 kz-menu:180 kz-restore:157 kz-setup:241
+#: kz-dev:132 kz-get:118 kz-install:246 kz-menu:180 kz-restore:157 kz-setup:241
 #: kz-update:185 kz-wifi:127
 msgid "internal error"
 msgstr "interne fout"
@@ -873,7 +873,7 @@ msgstr ""
 "Gebruik: kz get [-d|--dev] [-D|--debug]\n"
 "         wget karelzimmer.nl/getkz; bash getkz [-d|--dev] [-D|--debug]"
 
-#: kz-get:75 kz-update:133
+#: kz-get:70 kz-update:133
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
