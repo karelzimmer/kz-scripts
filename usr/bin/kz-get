@@ -125,6 +125,7 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_options() {
+    local build=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -151,7 +152,17 @@ function process_options() {
                 exit 0
                 ;;
             -v | --version )
-                printf '%s\n' "$PROGRAM_NAME 4.2.1"
+                if [[ -f /usr/share/doc/kz/build.id ]]; then
+                    # shellcheck disable=SC2034
+                    build=" ($(gettext 'built')"
+                    build+=" $(cat /usr/share/doc/kz/build.id))"
+                fi
+                text="$(eval_gettext "kz version 4.2.1\$build.")"
+                text+="\n\n$(gettext 'Written by Karel Zimmer')"
+                text+=' <info@karelzimmer.nl>.'
+                text+="\n$(gettext 'License CC0 1.0')"
+                text+=' <https://creativecommons.org/publicdomain/zero/1.0>.'
+                printf '%b\n' "$text"
                 exit 0
                 ;;
             -D | --debug )

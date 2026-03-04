@@ -241,13 +241,10 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
 
     try:
         with open('/usr/share/doc/kz/build.id') as fh:
-            build_id = f'{fh.read()}'
+            build_id = ' (' + _('built') + ' ' + f'{fh.read()}' + ')'
     except FileNotFoundError as fnf:
         text = str(fnf)
         logmsg(PROGRAM_NAME, text)
-        text = _('Build ID cannot be determined.')
-        logmsg(PROGRAM_NAME, text)
-        build_id = text
     except Exception as exc:
         text = str(exc)
         logmsg(PROGRAM_NAME, text)
@@ -255,10 +252,10 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
         term(PROGRAM_NAME, 1)
     finally:
-        text = _('kz version 4.2.1 (built {}).').format(build_id) + '\n\n' + \
-            _('Written by Karel Zimmer <info@karelzimmer.nl>.') + '\n' + \
-            _('License CC0 1.0 ' +
-                '<https://creativecommons.org/publicdomain/zero/1.0>.')
+        text = _('kz version 4.2.1{}.').format(build_id) + '\n\n'
+        text += _('Written by Karel Zimmer') + ' <info@karelzimmer.nl>.\n'
+        text += _('License CC0 1.0')
+        text += ' <https://creativecommons.org/publicdomain/zero/1.0>.'
         infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 

@@ -259,24 +259,18 @@ $(eval_gettext "Type '\$program_name --help' for more information.")"
 
 # This function displays version, author, and license information.
 function kz.process_option_version() {
-    local build_id=''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
+    local build=''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
     OPTION_GUI=false
     if [[ -f /usr/share/doc/kz/build.id ]]; then
-        build_id=$(cat /usr/share/doc/kz/build.id)
-    else
-        text=$(gettext 'Build ID cannot be determined.')
-        kz.logmsg "$text"
         # shellcheck disable=SC2034
-        build_id=$text
+        build=" ($(gettext 'built') $(cat /usr/share/doc/kz/build.id))"
     fi
-
-    text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
-
-$(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
-$(gettext "License CC0 1.0 \
-<https://creativecommons.org/publicdomain/zero/1.0>.")"
+    text="$(eval_gettext "kz version 4.2.1\$build.")"
+    text+="\n\n$(gettext 'Written by Karel Zimmer') <info@karelzimmer.nl>."
+    text+="\n$(gettext 'License CC0 1.0')"
+    text+=' <https://creativecommons.org/publicdomain/zero/1.0>.'
     kz.infomsg "$text"
 }
 

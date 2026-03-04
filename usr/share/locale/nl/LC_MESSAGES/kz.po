@@ -92,18 +92,18 @@ msgstr "opdracht bestaat niet"
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:111 kz_common.py:297 kz-update:80
+#: kz:111 kz_common.py:294 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz:117 kz_common.py:206 kz_common.py:215 kz_common.py:254 kz_common.py:303
+#: kz:117 kz_common.py:206 kz_common.py:215 kz_common.py:251 kz_common.py:300
 #: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
 #: kz-update:100 kz-update:306
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:173 kz-backup:156 kz-build:164 kz-check:132 kz-deploy:142 kz-desktop:205
-#: kz-dev:132 kz-get:166 kz-install:246 kz-menu:180 kz-restore:157 kz-setup:241
+#: kz-dev:132 kz-get:177 kz-install:246 kz-menu:180 kz-restore:157 kz-setup:241
 #: kz-update:185 kz-wifi:127
 msgid "internal error"
 msgstr "interne fout"
@@ -177,7 +177,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:164 kz-build:172 kz-check:140 kz-deploy:150 kz-desktop:213
-#: kz-dev:138 kz-get:174 kz-menu:188 kz-restore:165 kz-update:191 kz-wifi:133
+#: kz-dev:138 kz-get:185 kz-menu:188 kz-restore:165 kz-update:191 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -481,7 +481,7 @@ msgstr "Bouw RPM-pakket"
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:508 kz-get:304
+#: kz-build:508 kz-get:315
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -586,11 +586,11 @@ msgstr "Eindspaties gevonden."
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz_common.py:55 kz_common.sh:42 kz-get:192
+#: kz_common.py:55 kz_common.sh:42 kz-get:203
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:74 kz_common.sh:58 kz-get:253
+#: kz_common.py:74 kz_common.sh:58 kz-get:264
 msgid "Wait for another package manager to finish..."
 msgstr "Wacht tot een andere pakketbeheerder klaar is..."
 
@@ -626,24 +626,23 @@ msgstr "voor meer informatie."
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:248 kz_common.sh:269
-msgid "Build ID cannot be determined."
-msgstr "Build-ID kan niet worden bepaald."
+#: kz_common.py:244 kz_common.sh:268 kz-get:157
+msgid "built"
+msgstr "gebouwd"
 
-#: kz_common.py:258
-msgid "kz version 4.2.1 (built {})."
-msgstr "kz versie 4.2.1 (gebouwd {})."
+#: kz_common.py:255
+msgid "kz version 4.2.1{}."
+msgstr "kz versie 4.2.1{}."
 
-#: kz_common.py:259 kz_common.sh:277
-msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
-msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
+#: kz_common.py:256 kz_common.sh:271 kz-get:161
+msgid "Written by Karel Zimmer"
+msgstr "Geschreven door Karel Zimmer"
 
-#: kz_common.py:260 kz_common.sh:278
-msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
-msgstr ""
-"Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
+#: kz_common.py:257 kz_common.sh:272 kz-get:163
+msgid "License CC0 1.0"
+msgstr "Licentie CC0 1.0"
 
-#: kz_common.py:294 kz_common.sh:408
+#: kz_common.py:291 kz_common.sh:402
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -679,17 +678,17 @@ msgstr ""
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:275
+#: kz_common.sh:270 kz-get:160
 #, sh-format
-msgid "kz version 4.2.1 (built $build_id)."
-msgstr "kz versie 4.2.1 (gebouwd $build_id)."
+msgid "kz version 4.2.1$build."
+msgstr "kz versie 4.2.1$build."
 
-#: kz_common.sh:368
+#: kz_common.sh:362
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:383
+#: kz_common.sh:377
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -903,15 +902,15 @@ msgstr ""
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
-#: kz-get:223
+#: kz-get:234
 msgid "DOWNLOAD"
 msgstr "DOWNLOADEN"
 
-#: kz-get:236 kz-get:290
+#: kz-get:247 kz-get:301
 msgid "INSTALL"
 msgstr "INSTALLEREN"
 
-#: kz-get:308
+#: kz-get:319
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -925,7 +924,7 @@ msgstr ""
 "\n"
 "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
-#: kz-get:316
+#: kz-get:327
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
@@ -1472,7 +1471,7 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-#: kz-get:230 kz-get:285 kz-update:107 kz-update:121
+#: kz-get:241 kz-get:296 kz-update:107 kz-update:121
 msgid "UPDATE"
 msgstr "BIJWERKEN"
 
