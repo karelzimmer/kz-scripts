@@ -24,14 +24,17 @@ source /usr/bin/gettext.sh
 readonly PROGRAM_NAME='kz-get'
 PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
-USAGE=$(gettext 'Usage: kz get [-d|--dev]
-              [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-              [-D|--debug]
 
-       wget karelzimmer.nl/getkz
-       bash getkz [-d|--dev]
-                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                  [-D|--debug]')
+USAGE="$(gettext 'Usage: kz get [-d|--dev]')
+$(gettext "              [-h|--help] [-m|--manual] [-u|--usage] \
+[-v|--version]")
+$(gettext '              [-D|--debug]')
+
+$(gettext '       wget karelzimmer.nl/getkz')
+$(gettext '       bash getkz [-d|--dev]')
+$(gettext "                  [-h|--help] [-m|--manual] [-u|--usage] \
+[-v|--version]")
+$(gettext '                  [-D|--debug]')"
 readonly USAGE
 
 HELP="$(gettext "Usage: kz get [<options>]")
@@ -125,7 +128,7 @@ function check_input() {
 
 # This function handles the script options and arguments.
 function process_options() {
-    local build=''
+    local build_id=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -154,14 +157,13 @@ function process_options() {
             -v | --version )
                 if [[ -f /usr/share/doc/kz/build.id ]]; then
                     # shellcheck disable=SC2034
-                    build=" ($(gettext 'built')"
-                    build+=" $(cat /usr/share/doc/kz/build.id))"
+                    build_id="$(cat /usr/share/doc/kz/build.id)"
                 fi
-                text="$(eval_gettext "kz version 4.2.1\$build.")"
-                text+="\n\n$(gettext 'Written by Karel Zimmer')"
-                text+=' <info@karelzimmer.nl>.'
-                text+="\n$(gettext 'License CC0 1.0')"
-                text+=' <https://creativecommons.org/publicdomain/zero/1.0>.'
+                text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
+
+$(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
+$(gettext "License CC0 1.0 \
+<https://creativecommons.org/publicdomain/zero/1.0>.")"
                 printf '%b\n' "$text"
                 exit 0
                 ;;
@@ -231,20 +233,20 @@ function process_deb_package() {
     sudo true
 
     # Download kz package.
-    printf "$BOLD%s\n$NORMAL" "$(gettext 'DOWNLOAD') -- 1/3"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'DOWNLOAD KZ -- 1/3')"
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf "$BOLD%s\n$NORMAL" "$(gettext 'UPDATE') -- 2/3"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'UPDATE PACKAGE LISTS -- 2/3')"
     check_debian_package_manager
     sudo apt-get update
     printf '\n'
 
     # Install kz package.
-    printf "$BOLD%s\n$NORMAL" "$(gettext 'INSTALL') -- 3/3"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'INSTALL KZ -- 3/3')"
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -293,12 +295,12 @@ function process_rpm_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf "$BOLD%s\n$NORMAL" "$(gettext 'UPDATE') -- 1/2"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'UPDATE PACKAGE LISTS -- 1/2')"
     sudo dnf check-update || true
     printf '\n'
 
     # Install kz package.
-    printf "$BOLD%s\n$NORMAL" "$(gettext 'INSTALL') -- 2/2"
+    printf "$BOLD%s\n$NORMAL" "$(gettext 'INSTALL KZ -- 2/2')"
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
 }
 

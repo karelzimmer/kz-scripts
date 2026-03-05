@@ -24,9 +24,10 @@ PROGRAM_DESC=$(gettext 'Make a backup copy of the Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext 'Usage: kz backup [-g|--gui] [-t|--target <directory>]
-                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                 [-D|--debug]')
+USAGE="$(gettext 'Usage: kz backup [-g|--gui] [-t|--target <directory>]')
+$(gettext "                 [-h|--help] [-m|--manual] [-u|--usage] \
+[-v|--version]")
+$(gettext '                 [-D|--debug]')"
 readonly USAGE
 
 HELP="$(gettext "Usage: kz backup [<options>]")
@@ -192,9 +193,9 @@ $USAGE"
     else
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ -z $medium ]]; then
-            text=$(gettext "No USB medium found.
+            text="$(gettext 'No USB medium found.')
 
-Connect a USB medium.")
+$(gettext 'Connect a USB medium.')"
             kz.infomsg "$text"
 
             $OPTION_GUI || kz.wait_for_enter
@@ -207,12 +208,12 @@ Connect a USB medium.")
         fi
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            text="$(eval_gettext "Connect only one USB medium.
+            text="$(gettext 'Connect only one USB medium.')
 
-Now connected:
-\$medium
+$(gettext 'Now connected:')
+$medium
 
-Disconnect media via Files.")"
+$(gettext 'Disconnect media via Files.')"
             kz.infomsg "$text"
             $OPTION_GUI || kz.wait_for_enter
             medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
@@ -285,9 +286,9 @@ function backup_setting_readme() {
     output_file=$settings_dir/$(gettext 'README')
 
     text="$(gettext "This folder contains files created by kz-backup.
-These files are used by kz-restore and others.
+These files are used by kz-restore and others.")
 
-Further reading:")
+$(gettext 'Further reading:')
     man kz backup
     man kz restore
     man kz setup"

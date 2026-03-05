@@ -23,9 +23,9 @@ PROGRAM_DESC=$(gettext 'Execute the kz commands through a menu')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] \
-[-u|--usage]
-               [-v|--version] [-D|--debug]")
+USAGE="$(gettext "Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] \
+[-u|--usage]")
+$(gettext '               [-v|--version] [-D|--debug]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz menu [<options>]')

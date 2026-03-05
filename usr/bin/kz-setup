@@ -24,12 +24,12 @@ PROGRAM_DESC=$(gettext 'Set up apps and change user settings')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(
-gettext 'Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file <file>]...
-                [-g|--gui] [-l|--list] [-r|--reset]
-                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [-D|--debug] [--] [<app>...]'
-    )
+USAGE="$(gettext "Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file \
+<file>]...")
+$(gettext '                [-g|--gui] [-l|--list] [-r|--reset]')
+$(gettext "                [-h|--help] [-m|--manual] [-u|--usage] \
+[-v|--version]")
+$(gettext '                [-D|--debug] [--] [<app>...]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz setup [<options>] [--] [<arguments>]')
@@ -541,7 +541,6 @@ function execute_command() {
 
 # This function controls the termination of the script.
 function term() {
-    local operation=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
     local title=''
@@ -574,13 +573,10 @@ $(gettext 'Try to set up/reset the apps again.')"
         fi
     fi
 
-    operation=$(gettext 'set up')
-
+    text=$(gettext 'Apps set up completed.')
     if $OPTION_RESET; then
-        # shellcheck disable=SC2034
-        operation=$(gettext 'reset')
+        text=$(gettext 'Apps reset completed.')
     fi
-    text=$(eval_gettext "Apps \$operation completed.")
 
     if $LOGOUT; then
 

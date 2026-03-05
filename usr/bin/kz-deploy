@@ -28,11 +28,10 @@ PROGRAM_DESC=$(gettext 'Distribute website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(
-gettext 'Usage: kz deploy [-d|--dev]
-                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                 [-D|--debug]'
-    )
+USAGE="$(gettext 'Usage: kz deploy [-d|--dev]')
+$(gettext "                 [-h|--help] [-m|--manual] [-u|--usage] \
+[-v|--version]")
+$(gettext '                 [-D|--debug]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz deploy [<options>]')
@@ -159,7 +158,7 @@ $USAGE"
 function check() {
     local text=''
 
-    text="$BOLD$(gettext 'CHECK') -- 1/2$NORMAL"
+    text="$BOLD$(gettext 'CHECK -- 1/2')$NORMAL"
     kz.infomsg "$text"
     if ! kz.check_repos; then
         ERR_FLAG=true
@@ -173,7 +172,7 @@ function check() {
 function deploy() {
     local text=''
 
-    text="$BOLD$(gettext 'DEPLOY') -- 2/2$NORMAL"
+    text="$BOLD$(gettext 'DEPLOY -- 2/2')$NORMAL"
     kz.infomsg "\n$text"
     upload_website
     install_package
