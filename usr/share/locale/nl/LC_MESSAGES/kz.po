@@ -486,7 +486,7 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
 #: ckhtml:128 gitbranch:63 gitclone:80 gitfetch:63 gitinit:54 gitpull:63
-#: gitsquash:71 gitstatus:63 kz-build:517 kz-check:581 kz-deploy:272 kz-dev:278
+#: gitsquash:76 gitstatus:63 kz-build:517 kz-check:581 kz-deploy:272 kz-dev:278
 #: kz-update:318
 msgid "Complete!"
 msgstr "Klaar!"
@@ -1637,3 +1637,25 @@ msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 #: gitsquash:51
 msgid "*** git squash merge in 10 steps ***"
 msgstr "*** git squash merge in 10 stappen ***"
+
+#: gitsquash:55
+msgid "PREPARE:"
+msgstr ""
+
+#: gitsquash:59
+msgid "MERGE:"
+msgstr ""
+
+#: gitsquash:63
+msgid "COMMIT:"
+msgstr ""
+
+#: gitsquash:67
+#, fuzzy
+#| msgid "CLEANUP"
+msgid "CLEANUP:"
+msgstr "OPRUIMEN"
+
+#: gitsquash:71
+msgid "MAINTENANCE:"
+msgstr ""
