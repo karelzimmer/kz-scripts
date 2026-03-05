@@ -24,12 +24,12 @@ PROGRAM_DESC=$(gettext 'Install apps and change system settings')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE="$(gettext "Usage: kz install [-b|--browse] [-c|--cat] [-f|--file \
-<file>]...")
-$(gettext '                  [-g|--gui] [-l|--list] [-r|--remove]')
-$(gettext "                  [-h|--help] [-m|--manual] [-u|--usage] \
-[-v|--version]")
-$(gettext '                  [-D|--debug] [--] [<app>...]')"
+USAGE=$(
+gettext 'Usage: kz install [-b|--browse] [-c|--cat] [-f|--file <file>]...
+                  [-g|--gui] [-l|--list] [-r|--remove]
+                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+                  [-D|--debug] [--] [<app>...]'
+    )
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz install [<options>] [--] [<arguments>]')
@@ -576,6 +576,7 @@ function execute_command() {
 
 # This function controls the termination of the script.
 function term() {
+    local operation=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local reboot='sudo systemctl reboot'
     local text=''
@@ -610,10 +611,13 @@ $(gettext 'Try to install/remove the apps again.')"
         fi
     fi
 
-    text=$(gettext 'Apps install completed.')
+    operation=$(gettext 'install')
+
     if $OPTION_REMOVE; then
-        text=$(gettext 'Apps remove completed.')
+        # shellcheck disable=SC2034
+        operation=$(gettext 'remove')
     fi
+    text=$(eval_gettext "Apps \$operation completed.")
 
     if $REBOOT; then
         text+="

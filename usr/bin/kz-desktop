@@ -24,13 +24,12 @@ PROGRAM_DESC=$(gettext 'Change the GNOME-based desktop')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE="$(gettext "Usage: kz desktop [-a|--addaft <favorite>] \
-[-b|--addbef <favorite>]")
-$(gettext "                  [-d|--delete <favorite>] [-l|--list] \
-[-r|--reset]")
-$(gettext "                  [-h|--help] [-m|--manual] [-u|--usage] \
-[-v|--version]")
-$(gettext '                  [-D|--debug]')"
+USAGE=$(
+gettext 'Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]
+                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]
+                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+                  [-D|--debug]'
+    )
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz desktop [<options>]')

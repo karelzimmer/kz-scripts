@@ -28,10 +28,9 @@ PROGRAM_DESC=$(gettext 'Build website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE="$(gettext 'Usage: kz build [-d|--dev]')
-$(gettext "                [-h|--help] [-m|--manual] [-u|--usage] \
-[-v|--version]")
-$(gettext '                [-D|--debug]')"
+USAGE=$(gettext 'Usage: kz build [-d|--dev]
+                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
+                [-D|--debug]')
 readonly USAGE
 
 HELP="$(gettext "Usage: kz build [<options>]")
