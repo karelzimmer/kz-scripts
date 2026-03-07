@@ -889,24 +889,16 @@ msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os release"
 
 #: kz-get:233
-msgid "DOWNLOAD KZ -- 1/3"
-msgstr "KZ DOWNLOADEN -- 1/3"
+msgid "DOWNLOAD -- 1/2"
+msgstr "DOWNLOADEN -- 1/2"
 
-#: kz-get:240
-msgid "UPDATE PACKAGE LISTS -- 2/3"
-msgstr "PAKKETLIJSTEN BIJWERKEN -- 2/3"
+#: kz-get:238
+msgid "INSTALL -- 2/2"
+msgstr "INSTALLEREN -- 2/2"
 
-#: kz-get:246
-msgid "INSTALL KZ -- 3/3"
-msgstr "KZ INSTALLEREN -- 3/3"
-
-#: kz-get:295
-msgid "UPDATE PACKAGE LISTS -- 1/2"
-msgstr "PAKKETLIJSTEN BIJWERKEN -- 1/2"
-
-#: kz-get:300
-msgid "INSTALL KZ -- 2/2"
-msgstr "KZ INSTALLEREN -- 2/2"
+#: kz-get:293
+msgid "INSTALL"
+msgstr "INSTALLEREN"
 
 #: kz-get:318
 msgid ""
