@@ -230,12 +230,9 @@ function process_deb_package() {
     sudo true
 
     # Download kz package.
-    printf "$BOLD%s\n$NORMAL" "$(gettext 'DOWNLOAD -- 1/2')"
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
-
-    printf "$BOLD%s\n$NORMAL" "$(gettext 'INSTALL -- 2/2')"
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
@@ -289,8 +286,6 @@ function process_rpm_package() {
     else
         install='install'
     fi
-
-    printf "$BOLD%s\n$NORMAL" "$(gettext 'INSTALL')"
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
