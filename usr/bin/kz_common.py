@@ -167,19 +167,24 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     This function shows the available help.
     """
     yelp_man_url: str = ''
+    yelp_man: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str = ''
 
     if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
-        yelp_man_url = _(', or see the ') + '\x1b]8;;man:' + PROGRAM_NAME + \
-            '(1)\x1b\\' + program_name + '(1) ' + _('man page') + \
-            '\x1b]8;;\x1b\\'
+        # yelp_man_url = _(', or see the ') + '\x1b]8;;man:' + PROGRAM_NAME + \
+        #     '(1)\x1b\\' + program_name + '(1) ' + _('man page') + \
+        #     '\x1b]8;;\x1b\\'
+        yelp_man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + \
+            program_name + '(1)'
+        yelp_man = _(", or see the {} man page").format(yelp_man_url)
+        yelp_man += '\x1b]8;;\x1b\\'
 
     text = HELP + '\n\n' + \
         _("Type '{} --manual' or 'man {}'{} ").\
-        format(program_name, program_name, yelp_man_url) + \
+        format(program_name, program_name, yelp_man) + \
         _('for more information.')
     infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
@@ -234,14 +239,14 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function displays version, author, and license information.
     """
-    build_id: str = ''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
+    build_id: str = 'n/a'  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     fnf: BaseException
     exc: BaseException
     text: str = ''
 
     try:
         with open('/usr/share/doc/kz/build.id') as fh:
-            build_id = ' (' + _('built') + ' ' + f'{fh.read()}' + ')'
+            build_id = f'{fh.read()}'
     except FileNotFoundError as fnf:
         text = str(fnf)
         logmsg(PROGRAM_NAME, text)
@@ -252,10 +257,10 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
         term(PROGRAM_NAME, 1)
     finally:
-        text = _('kz version 4.2.1{}.').format(build_id) + '\n\n'
-        text += _('Written by Karel Zimmer') + ' <info@karelzimmer.nl>.\n'
-        text += _('License CC0 1.0')
-        text += ' <https://creativecommons.org/publicdomain/zero/1.0>.'
+        text = _('kz version 4.2.1 (built {}).').format(build_id) + '\n\n' + \
+            _('Written by Karel Zimmer <info@karelzimmer.nl>.') + '\n' + \
+            _('License CC0 1.0 ' +
+                '<https://creativecommons.org/publicdomain/zero/1.0>.')
         infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 

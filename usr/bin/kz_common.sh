@@ -215,17 +215,23 @@ function kz.logmsg() {
 function kz.process_option_help() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
+    local yelp_man=''
     local yelp_man_url=''
 
     OPTION_GUI=false
     if [[ -n ${DISPLAY-} ]]; then
-        yelp_man_url="$(gettext ', or see the ')"
-        yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
-        yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
+        # yelp_man_url="$(gettext ', or see the ')"
+        # yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
+        # yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
+
+        # shellcheck disable=SC2034
+        yelp_man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1)"
+        yelp_man=$(eval_gettext ", or see the \$yelp_man_url man page")
+        yelp_man+="\033]8;;\033\\"
     fi
 
     text="$(eval_gettext "Type '\$program_name --manual' or 'man \
-\$program_name'\$yelp_man_url for more information.")"
+\$program_name'\$yelp_man for more information.")"
     # shellcheck disable=SC2154
     kz.infomsg "$HELP
 
@@ -259,18 +265,19 @@ $(eval_gettext "Type '\$program_name --help' for more information.")"
 
 # This function displays version, author, and license information.
 function kz.process_option_version() {
-    local build=''  # ISO 8601 YYYY-MM-DDTHH:MM:SS
+    local build_id='n/a'  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
     OPTION_GUI=false
     if [[ -f /usr/share/doc/kz/build.id ]]; then
         # shellcheck disable=SC2034
-        build=" ($(gettext 'built') $(cat /usr/share/doc/kz/build.id))"
+        build_id=$(cat /usr/share/doc/kz/build.id)
     fi
-    text="$(eval_gettext "kz version 4.2.1\$build.")"
-    text+="\n\n$(gettext 'Written by Karel Zimmer') <info@karelzimmer.nl>."
-    text+="\n$(gettext 'License CC0 1.0')"
-    text+=' <https://creativecommons.org/publicdomain/zero/1.0>.'
+    text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
+
+$(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
+$(gettext "License CC0 1.0 \
+<https://creativecommons.org/publicdomain/zero/1.0>.")"
     kz.infomsg "$text"
 }
 

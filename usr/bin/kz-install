@@ -576,7 +576,6 @@ function execute_command() {
 
 # This function controls the termination of the script.
 function term() {
-    local operation=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local reboot='sudo systemctl reboot'
     local text=''
@@ -611,13 +610,10 @@ $(gettext 'Try to install/remove the apps again.')"
         fi
     fi
 
-    operation=$(gettext 'install')
-
+    text=$(gettext "Apps install completed.")
     if $OPTION_REMOVE; then
-        # shellcheck disable=SC2034
-        operation=$(gettext 'remove')
+       text=$(gettext "Apps remove completed.")
     fi
-    text=$(eval_gettext "Apps \$operation completed.")
 
     if $REBOOT; then
         text+="

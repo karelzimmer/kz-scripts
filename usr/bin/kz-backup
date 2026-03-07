@@ -254,7 +254,14 @@ function backup_settings() {
 
     kz.logmsg 'Backup settings...'
 
-    settings_dir=$HOME/$(gettext 'Settings')
+    kz.logmsg 'Remove previous version of settings folders...'
+    rm  --force             \
+        --recursive             \
+        --verbose               \
+        "$HOME/kz-backup"       \
+        "$HOME/Instellingen"    |& $PROGRAM_LOGS
+
+    settings_dir=$HOME/Settings
     if ! [[ -d $settings_dir ]]; then
         mkdir --verbose "$settings_dir" |& $PROGRAM_LOGS
     fi
@@ -269,20 +276,15 @@ function backup_settings() {
         backup_setting_desktop
         backup_setting_favs
     fi
-
-    # Remove previous version of settings folder.
-    rm --force --recursive --verbose "$HOME/kz-backup" |& $PROGRAM_LOGS
 }
 
 
 # This function creates a README.
 function backup_setting_readme() {
-    local output_file=''
+    local output_file=$settings_dir/README
     local text=''
 
     kz.logmsg 'Create settings README...'
-
-    output_file=$settings_dir/$(gettext 'README')
 
     text="$(gettext "This folder contains files created by kz-backup.
 These files are used by kz-restore and others.
@@ -346,8 +348,6 @@ function backup_setting_users() {
     local text=''
     local user=''
     local users=''
-
-    output_file=$settings_dir/$(gettext 'users.txt')
 
     users=$(
         gettext 'USERNAME|UID|GID|USER'

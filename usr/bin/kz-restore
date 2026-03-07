@@ -297,9 +297,7 @@ function restore_backup() {
 
 # This function restores the user settings.
 function restore_settings() {
-    local settings_dir=''
-
-    settings_dir=$HOME/$(gettext 'Settings')
+    local settings_dir=$HOME/Settings
 
     if [[ -n ${DISPLAY-} ]]; then
         kz.logmsg 'Restore settings...'
