@@ -341,7 +341,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then kz-desktop --addaft=kz-s
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify   ; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
-# SETUP terminal pc01 pc06 pc07
+# SETUP terminal *
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------
@@ -358,7 +358,7 @@ sed --in-place --expression='/^stty -ixon/d'                ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 LOGOUT=true
 
-# RESET terminal pc01 pc06 pc07
+# RESET terminal *
 # -----------------------------------------------------------------------------
 # Terminal emulator.
 # -----------------------------------------------------------------------------

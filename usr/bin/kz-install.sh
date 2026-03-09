@@ -634,14 +634,14 @@ sudo updatedb
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes locate ; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --assumeyes  mlocate; fi
 
-# INSTALL lshw pc06 pc07
+# INSTALL lshw *
 # -----------------------------------------------------------------------------
 # Hardware lister.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes lshw; fi
 if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     install --assumeyes  lshw; fi
 
-# REMOVE lshw pc06 pc07
+# REMOVE lshw *
 # -----------------------------------------------------------------------------
 # Hardware lister.
 # -----------------------------------------------------------------------------
