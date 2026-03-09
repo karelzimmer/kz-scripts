@@ -193,7 +193,7 @@ msgid ""
 "Disconnect media via Files."
 msgstr ""
 
-#: kz-backup:289
+#: kz-backup:293
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
@@ -201,50 +201,50 @@ msgid ""
 "Further reading:"
 msgstr ""
 
-#: kz-backup:309
+#: kz-backup:313
 msgid "==== START list of manual installed packages"
 msgstr ""
 
-#: kz-backup:310
+#: kz-backup:314
 msgid "==== END list of manual installed packages"
 msgstr ""
 
-#: kz-backup:311
+#: kz-backup:315
 msgid "==== START list of installed snaps"
 msgstr ""
 
-#: kz-backup:312
+#: kz-backup:316
 msgid "==== END list of installed snaps"
 msgstr ""
 
-#: kz-backup:313
+#: kz-backup:317
 msgid "==== START list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:314
+#: kz-backup:318
 msgid "==== END list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:353
+#: kz-backup:357
 msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
-#: kz-backup:378 kz-backup:390
+#: kz-backup:382 kz-backup:394
 msgid "Additional users can be added manually:"
 msgstr ""
 
-#: kz-backup:380
+#: kz-backup:384
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
 "3. Enter Name <user> and Username <username>."
 msgstr ""
 
-#: kz-backup:385 kz-backup:446 kz-backup:486
+#: kz-backup:389 kz-backup:449 kz-backup:486
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:392
+#: kz-backup:396
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -257,7 +257,7 @@ msgid ""
 "sudo passwd --delete --expire <username>"
 msgstr ""
 
-#: kz-backup:439
+#: kz-backup:442
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -276,65 +276,65 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:534 kz-menu:74 kz-backup.desktop:10
+#: kz-backup:535 kz-menu:74 kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
-#: kz-backup:535
+#: kz-backup:536
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:570
+#: kz-backup:571
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:607 kz-install:588 kz-restore:337 kz-setup:552
+#: kz-backup:608 kz-install:588 kz-restore:337 kz-setup:552
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:608
+#: kz-backup:609
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:610 kz-restore:340
+#: kz-backup:611 kz-restore:340
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:611
+#: kz-backup:612
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:612 kz-restore:342
+#: kz-backup:613 kz-restore:342
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:613
+#: kz-backup:614
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:615 kz-install:593 kz-restore:345 kz-setup:556
+#: kz-backup:616 kz-install:593 kz-restore:345 kz-setup:556
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:616 kz-install:594 kz-restore:346 kz-setup:557
+#: kz-backup:617 kz-install:594 kz-restore:346 kz-setup:557
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:617
+#: kz-backup:618
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:636
+#: kz-backup:637
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:658
+#: kz-backup:659
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:665 kz-restore:396
+#: kz-backup:666 kz-restore:396
 msgid "*** Remember to safely(!) remove the USB media ***"
 msgstr ""
 
