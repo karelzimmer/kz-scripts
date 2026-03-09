@@ -12,6 +12,6 @@ Comment=Send and receive messages, photos and videos from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox
 Exec=firefox https://web.whatsapp.com
-Icon=kz-whatsapp
+Icon=kz-firefox
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

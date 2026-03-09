@@ -12,6 +12,6 @@ Comment=Visual Studio Code from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=firefox
 Exec=firefox https://vscode.dev
-Icon=kz-vscode
+Icon=kz-firefox
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
