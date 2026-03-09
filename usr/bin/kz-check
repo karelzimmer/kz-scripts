@@ -312,23 +312,27 @@ function check_scripts() {
                 check_tags
                 check_pycodestyle
                 check_mypy
+                check_man_page
                 ;;
-            kz_common.sh | kz-get | *-pkexec )
-                # This includes polkit wrapper scripts.
+            kz_common.sh | *-migrate | *-pkexec )
+                # This includes migration and polkit wrapper scripts.
                 check_trailing_spaces
                 check_tags
                 check_record_length
                 check_shellcheck
+                check_man_page
                 ;;
             *.sh )
                 check_trailing_spaces
                 check_tags
                 check_shellcheck
+                check_man_page
                 ;;
             * )
                 check_trailing_spaces
                 check_tags
                 check_record_length
+                check_man_page
                 check_code
                 ;;
         esac
@@ -363,7 +367,6 @@ function check_code() {
 
     if grep --quiet --line-regexp "$bash_script" "$script"; then
         check_shellcheck
-        check_script
     elif grep --quiet --line-regexp "$tab_completion_script" "$script"
         then
         check_shellcheck
@@ -400,7 +403,7 @@ error.")
         ERR_FLAG=true
     fi
 
-    # Desktop file (Only with so-called GUI scripts).
+    # Desktop file (only with so-called GUI scripts).
     if grep --quiet --regexp="$gui_option" "$file"; then
         dir=$scripts_repo/usr/share/applications
 
@@ -414,7 +417,7 @@ error.")
         fi
     fi
 
-    # Tab-completion script (Only with so-called root scripts).
+    # Tab-completion script.
     dir=$scripts_repo/usr/share/bash-completion/completions
 
     if ! [[ -f $dir/$scriptname ]]; then
@@ -424,24 +427,7 @@ not found.")
         ERR_FLAG=true
     fi
 
-    # Manual page (EN + NL).
-    dir=$scripts_repo/usr/share/man/man1
-
-    if ! [[ -f $dir/$scriptname.1 ]]; then
-        text='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
-        kz.errmsg "$text"
-        ERR_FLAG=true
-    fi
-
-    dir=$scripts_repo/usr/share/man/nl/man1
-
-    if ! [[ -f $dir/$scriptname.1 ]]; then
-        text='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
-        kz.errmsg "$text"
-        ERR_FLAG=true
-    fi
-
-    # Polkit action definition file (Only with so-called root scripts).
+    # Polkit action definition file (only with so-called root scripts).
     if grep --quiet --regexp="$root_script" "$file"; then
         dir=$scripts_repo/usr/share/polkit-1/actions
 
@@ -451,6 +437,36 @@ not found.")
             kz.errmsg "$text"
             ERR_FLAG=true
         fi
+    fi
+}
+
+
+# This function checks the existence of man pages.
+function check_man_page() {
+    local dir=''
+    local text=''
+
+    # Manual page (EN + NL).
+    dir=$scripts_repo/usr/share/man/man
+    dir1=$scripts_repo/usr/share/man/man1
+    dir5=$scripts_repo/usr/share/man/man5
+
+    if ! [[ -f $dir1/$scriptname.1 || -f $dir5/$scriptname.5 ]]; then
+        text='    '$(eval_gettext "Manual \$dir{1,5}/\$scriptname.{1,5} not \
+found.")
+        kz.errmsg "$text"
+        ERR_FLAG=true
+    fi
+
+    dir=$scripts_repo/usr/share/man/nl/man
+    dir1=$scripts_repo/usr/share/man/nl/man1
+    dir5=$scripts_repo/usr/share/man/nl/man5
+
+    if ! [[ -f $dir1/$scriptname.1 || -f $dir5/$scriptname.5 ]]; then
+        text='    '$(eval_gettext "Manual \$dir{1,5}/\$scriptname.{1,5} not \
+found.")
+        kz.errmsg "$text"
+        ERR_FLAG=true
     fi
 }
 

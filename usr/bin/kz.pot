@@ -422,7 +422,7 @@ msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
 #: ckhtml:128 gitbranch:63 gitclone:80 gitfetch:63 gitinit:54 gitpull:63
-#: gitsquash:76 gitstatus:63 kz-build:517 kz-check:581 kz-deploy:272 kz-dev:278
+#: gitsquash:76 gitstatus:63 kz-build:517 kz-check:597 kz-deploy:272 kz-dev:278
 #: kz-update:314
 msgid "Complete!"
 msgstr ""
@@ -468,51 +468,51 @@ msgstr ""
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:377
+#: kz-check:380
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:397
+#: kz-check:400
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:410
+#: kz-check:413
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:421
+#: kz-check:424
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:431 kz-check:439
+#: kz-check:455 kz-check:466
 #, sh-format
-msgid "Manual $dir/$scriptname.1 not found."
+msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr ""
 
-#: kz-check:449
+#: kz-check:435
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:486
+#: kz-check:502
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:535
+#: kz-check:551
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:558
+#: kz-check:574
 msgid "End spaces found."
 msgstr ""
 
-#: kz-build:513 kz-check:577 kz-deploy:268
+#: kz-build:513 kz-check:593 kz-deploy:268
 msgid "Please check all the messages above and fix them."
 msgstr ""
 

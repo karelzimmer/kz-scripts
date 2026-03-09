@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+# #############################################################################
+# SPDX-FileComment: Post-migration script
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+# #############################################################################
+
+# =============================================================================
+# Remove Windows-specific files after migrating to Linux.
+# =============================================================================
+find .  -type f -iname '*.bat'     -delete \
+    -or -type f -iname '*.exe'     -delete \
+    -or -type f -iname '*.lnk'     -delete \
+    -or -type f  -name '~*'        -delete \
+    -or -type f -iname desktop.ini -delete \
+    -or -type f -iname thumbs.db   -delete
