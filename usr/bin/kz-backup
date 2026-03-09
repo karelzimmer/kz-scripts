@@ -254,13 +254,6 @@ function backup_settings() {
 
     kz.logmsg 'Backup settings...'
 
-    kz.logmsg 'Remove previous version of settings folders...'
-    rm  --force             \
-        --recursive             \
-        --verbose               \
-        "$HOME/kz-backup"       \
-        "$HOME/Instellingen"    |& $PROGRAM_LOGS
-
     settings_dir=$HOME/Settings
     if ! [[ -d $settings_dir ]]; then
         mkdir --verbose "$settings_dir" |& $PROGRAM_LOGS
@@ -276,6 +269,17 @@ function backup_settings() {
         backup_setting_desktop
         backup_setting_favs
     fi
+
+    # Remove old naming of folders/files.
+    rm  --force                 \
+        --recursive             \
+        --verbose               \
+        "$HOME/kz-backup"       \
+        "$HOME/Instellingen"    |& $PROGRAM_LOGS
+    rm  --force                 \
+        --verbose               \
+        "$settings_dir/desktop" \
+        "$settings_dir/avatar"  |& $PROGRAM_LOGS
 }
 
 
@@ -428,14 +432,13 @@ function backup_setting_avatar() {
     local output_file_2=$settings_dir/avatar.txt
     local text=''
 
-    kz.logmsg 'Remove old naming of the avatar backup file...'
-    rm --force --verbose "$settings_dir/avatar" |& $PROGRAM_LOGS
-
     if [[ -f $input_file ]]; then
         kz.logmsg 'Copy the user avatar...'
         cp --verbose "$input_file" "$output_file_1" |& $PROGRAM_LOGS
     fi
+
     kz.logmsg 'Save instructions for restoring the avatar...'
+
     text="$(gettext "To set the users avatar:
 
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
@@ -456,9 +459,6 @@ function backup_setting_desktop() {
     local output_file_1=$settings_dir/desktop.ico
     local output_file_2=$settings_dir/desktop.txt
     local text=''
-
-    kz.logmsg 'Remove old naming of the desktop background backup file...'
-    rm --force --verbose "$settings_dir/desktop" |& $PROGRAM_LOGS
 
     input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
@@ -494,6 +494,7 @@ function backup_setting_favs() {
     local output_file=$settings_dir/favs.txt
 
     kz.logmsg 'Save the favorite apps...'
+
     gsettings   get                             \
                 org.gnome.shell favorite-apps   |
                 tr '[' ' '                      |
