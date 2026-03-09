@@ -474,7 +474,7 @@ function install_apps() {
 # This function reads commands from the command file for further processing.
 function process_command_file() {
     local -i app_seq_num=0
-    local -i cmd_seq_num=0
+    local app_line=false
     local app_name_line=''
     local app_name=''
     local command_record=''
@@ -489,7 +489,7 @@ function process_command_file() {
     while read -r command_record; do
         case $command_record in
             '' )
-                # Empty line.
+                # Skip empty line.
                 continue
                 ;;
             '#'[[:space:]]*${install}[[:space:]]* )
@@ -500,7 +500,7 @@ function process_command_file() {
                     cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))
-                cmd_seq_num=0
+                app_line=true
                 printf  -v app_name_line    \
                         "%3d/%-3d  %s"      \
                         "$app_seq_num"      \
@@ -509,9 +509,14 @@ function process_command_file() {
                 # To corrolate possible error messages with app name.
                 printf ' \n%s\n' "-- App $app_name" >> "$ERROR_LOG"
                 ;;
+            '#'* )
+                # Skip comment record.
+                continue
+                ;;
             * )
                 # Process command record.
                 execute_command "$command_record"
+                app_line=false
                 ;;
         esac
     done < "$command_file"
@@ -525,16 +530,14 @@ function execute_command() {
     local cmd_dis=''
     local cmd=$1
 
-    (( ++cmd_seq_num ))
-
     if $OPTION_GUI; then
-        if [[ $cmd_seq_num -eq 1 ]]; then
+        if $app_line; then
             kz.logmsg "$app_name_line"
         fi
         kz.logmsg "$cmd"
-        printf '%s\n' "#$app_name_line"
+        printf '%s\n' "#$app_name_line\n\n$cmd"
     else
-        if [[ $cmd_seq_num -eq 1 ]]; then
+        if $app_line; then
             kz.infomsg "$app_name_line"
         fi
         # Ellipsize terminal output.
@@ -549,11 +552,6 @@ function execute_command() {
             cmd_dis=$cmd
         fi
         kz.infomsg "         $cmd_dis"
-    fi
-
-    # Do not evaluate comment lines in the command file.
-    if [[ $cmd == \#* ]]; then
-        return
     fi
 
     if $OPTION_GUI; then
