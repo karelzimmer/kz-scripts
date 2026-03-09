@@ -8,7 +8,8 @@
 # #############################################################################
 
 # =============================================================================
-# Remove Windows-specific files after migrating to Linux.
+# Search for Windows-specific files and delete them after migrating to Linux.
+# The search starts in the current directory and includes all subdirectories.
 # =============================================================================
 find .  -type f -iname '*.bat'     -delete \
     -or -type f -iname '*.exe'     -delete \
