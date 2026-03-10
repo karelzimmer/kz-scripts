@@ -50,7 +50,8 @@ function find_files() {
 declare prompt=''
 declare text=''
 
-text=$(eval_gettext "Searching Windows-specific files in '\$PWD' and lower...")
+text=$(eval_gettext "Searching Windows-specific files in '\$PWD' and \
+subfolders...")
 printf '%s\n' "$text"
 find_files 'print'
 
@@ -58,7 +59,8 @@ prompt=$(gettext "Press the Enter key to delete the Windows-specific files, \
 or Ctrl-C to stop [Enter/Ctrl-C]: ")
 read -rsp "$prompt"
 
-text=$(eval_gettext "Deleting Windows-specific files in '\$PWD' and lower...")
+text=$(eval_gettext "Deleting Windows-specific files in '\$PWD' and \
+subfolders...")
 printf '\n%s\n' "$text"
 find_files 'delete'
 
