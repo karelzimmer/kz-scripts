@@ -33,7 +33,6 @@ source /usr/bin/gettext.sh
 
 # This function searches for Windows-specific files.
 function find_files() {
-    # The search starts in the current directory and includes all subdirs.
     find .  -type f  -name '~*'        -"$1" \
         -or -type f -iname '*.bat'     -"$1" \
         -or -type f -iname '*.exe'     -"$1" \
