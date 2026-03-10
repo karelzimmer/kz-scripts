@@ -423,7 +423,7 @@ msgstr ""
 
 #: ckhtml:128 gitbranch:63 gitclone:80 gitfetch:63 gitinit:54 gitpull:63
 #: gitsquash:76 gitstatus:63 kz-build:517 kz-check:597 kz-deploy:272 kz-dev:278
-#: kz-update:314
+#: kz-post-migrate:65 kz-update:314
 msgid "Complete!"
 msgstr ""
 
@@ -971,6 +971,20 @@ msgstr ""
 
 #: kz-install.sh:1025
 msgid "Guest_user"
+msgstr ""
+
+#: kz-post-migrate:53
+#, sh-format
+msgid "Searching Windows-specific files in '$PWD' and lower..."
+msgstr ""
+
+#: kz-post-migrate:57
+msgid "Press the Enter key to delete the Windows-specific files [Enter]: "
+msgstr ""
+
+#: kz-post-migrate:61
+#, sh-format
+msgid "Deleting Windows-specific files in '$PWD' and lower..."
 msgstr ""
 
 #: kz-menu:48 kz-menu.desktop:10

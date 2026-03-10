@@ -7,11 +7,33 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-# =============================================================================
-# Search for Windows-specific files and delete them after migrating to Linux.
-# The search starts in the current directory and includes all subdirectories.
-# =============================================================================
+
+# #############################################################################
+# Imports
+# #############################################################################
+
+export TEXTDOMAIN='kz'
+export TEXTDOMAINDIR='/usr/share/locale'
+source /usr/bin/gettext.sh
+
+
+# #############################################################################
+# Constants
+# #############################################################################
+
+
+# #############################################################################
+# Globals
+# #############################################################################
+
+
+# #############################################################################
+# Functions
+# #############################################################################
+
+# This function searches for Windows-specific files.
 function find_files() {
+    # The search starts in the current directory and includes all subdirs.
     find .  -type f  -name '~*'        -"$1" \
         -or -type f -iname '*.bat'     -"$1" \
         -or -type f -iname '*.exe'     -"$1" \
@@ -20,12 +42,25 @@ function find_files() {
         -or -type f -iname thumbs.db   -"$1"
 }
 
-printf '%s\n' "Searching for Windows-specific files in '$PWD' and lower..."
+
+# #############################################################################
+# Main
+# #############################################################################
+
+declare prompt=''
+declare text=''
+
+text=$(eval_gettext "Searching Windows-specific files in '\$PWD' and lower...")
+printf '%s\n' "$text"
 find_files 'print'
 
-read -rsp 'Press the Enter key to delete the Windows-specific files [Enter]: '
+prompt=$(gettext "Press the Enter key to delete the Windows-specific files \
+[Enter]: ")
+read -rsp "$prompt"
 
-printf '\n%s\n' "Deleting Windows-specific files in '$PWD' and lower..."
+text=$(eval_gettext "Deleting Windows-specific files in '\$PWD' and lower...")
+printf '\n%s\n' "$text"
 find_files 'delete'
 
-printf '%s\n' 'Done.'
+text=$(gettext 'Complete!')
+printf '%s\n' "$text"
