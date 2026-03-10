@@ -23,7 +23,7 @@ function find_files() {
 printf '%s\n' "Searching for Windows-specific files in '$PWD' and lower..."
 find_files 'print'
 
-read -rsp 'Press the Enter key to delete these Windows-specific files [Enter]: '
+read -rsp 'Press the Enter key to delete the Windows-specific files [Enter]: '
 
 printf '\n%s\n' "Deleting Windows-specific files in '$PWD' and lower..."
 find_files 'delete'
