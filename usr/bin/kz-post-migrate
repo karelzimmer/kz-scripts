@@ -54,8 +54,8 @@ text=$(eval_gettext "Searching Windows-specific files in '\$PWD' and lower...")
 printf '%s\n' "$text"
 find_files 'print'
 
-prompt=$(gettext "Press the Enter key to delete the Windows-specific files \
-[Enter]: ")
+prompt=$(gettext "Press the Enter key to delete the Windows-specific files, \
+or Ctrl-C to stop [Enter/Ctrl-C]: ")
 read -rsp "$prompt"
 
 text=$(eval_gettext "Deleting Windows-specific files in '\$PWD' and lower...")

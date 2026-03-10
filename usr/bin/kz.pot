@@ -979,7 +979,9 @@ msgid "Searching Windows-specific files in '$PWD' and lower..."
 msgstr ""
 
 #: kz-post-migrate:57
-msgid "Press the Enter key to delete the Windows-specific files [Enter]: "
+msgid ""
+"Press the Enter key to delete the Windows-specific files, or Ctrl-C to stop "
+"[Enter/Ctrl-C]: "
 msgstr ""
 
 #: kz-post-migrate:61

@@ -1090,10 +1090,12 @@ msgid "Searching Windows-specific files in '$PWD' and lower..."
 msgstr "Windows-specifieke bestanden zoeken in '$PWD' en lager..."
 
 #: kz-post-migrate:57
-msgid "Press the Enter key to delete the Windows-specific files [Enter]: "
+msgid ""
+"Press the Enter key to delete the Windows-specific files, or Ctrl-C to stop "
+"[Enter/Ctrl-C]: "
 msgstr ""
-"Druk op de Enter-toets om de Windows-specifieke bestanden te verwijderen "
-"[Enter]: "
+"Druk op de Enter-toets om de Windows-specifieke bestanden te verwijderen, of "
+"Ctrl-C om te stoppen [Enter/Ctrl-C]: "
 
 #: kz-post-migrate:61
 #, sh-format
@@ -1642,3 +1644,8 @@ msgstr "OPRUIMEN:"
 #: gitsquash:71
 msgid "MAINTENANCE:"
 msgstr "ONDERHOUD:"
+
+#~ msgid "Press the Enter key to delete the Windows-specific files [Enter]: "
+#~ msgstr ""
+#~ "Druk op de Enter-toets om de Windows-specifieke bestanden te verwijderen "
+#~ "[Enter]: "
