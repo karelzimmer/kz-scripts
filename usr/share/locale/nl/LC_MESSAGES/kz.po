@@ -1542,8 +1542,8 @@ msgid "TeamViewer web app"
 msgstr "TeamViewer web-app"
 
 #: kz-teamviewer.desktop:11
-msgid "Manage computers from a web browser"
-msgstr "Beheer computers vanuit een webbrowser"
+msgid "Remotely control a computer from a web browser"
+msgstr "Computer op afstand bedienen vanuit een webbrowser"
 
 #: kz-vscode.desktop:10
 msgid "Visual Studio Code web app"

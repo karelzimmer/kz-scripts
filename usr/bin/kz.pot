@@ -1389,7 +1389,7 @@ msgid "TeamViewer web app"
 msgstr ""
 
 #: kz-teamviewer.desktop:11
-msgid "Manage computers from a web browser"
+msgid "Remotely control a computer from a web browser"
 msgstr ""
 
 #: kz-vscode.desktop:10
