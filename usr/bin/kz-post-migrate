@@ -20,12 +20,12 @@ function find_files() {
         -or -type f -iname thumbs.db   -"$1"
 }
 
-printf '%s\n' 'Searching for Windows-specific files...'
+printf '%s\n' "Searching for Windows-specific files in '$PWD' and lower..."
 find_files 'print'
 
-read -rsp 'Press the Enter key to delete Windows-specific files [Enter]: '
+read -rsp 'Press the Enter key to delete these Windows-specific files [Enter]: '
 
-printf '\n%s\n' 'Searching for Windows-specific files and deleting them...'
+printf '\n%s\n' "Deleting Windows-specific files in '$PWD' and lower..."
 find_files 'delete'
 
 printf '%s\n' 'Done.'
