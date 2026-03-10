@@ -11,11 +11,21 @@
 # Search for Windows-specific files and delete them after migrating to Linux.
 # The search starts in the current directory and includes all subdirectories.
 # =============================================================================
-printf '%s\n' "Searching for Windows-specific files and deleting them..."
-find .  -type f  -name '~*'        -print -delete \
-    -or -type f -iname '*.bat'     -print -delete \
-    -or -type f -iname '*.exe'     -print -delete \
-    -or -type f -iname '*.lnk'     -print -delete \
-    -or -type f -iname desktop.ini -print -delete \
-    -or -type f -iname thumbs.db   -print -delete
-printf '%s\n' "Done."
+function find_files() {
+    find .  -type f  -name '~*'        -"$1" \
+        -or -type f -iname '*.bat'     -"$1" \
+        -or -type f -iname '*.exe'     -"$1" \
+        -or -type f -iname '*.lnk'     -"$1" \
+        -or -type f -iname desktop.ini -"$1" \
+        -or -type f -iname thumbs.db   -"$1"
+}
+
+printf '%s\n' 'Searching for Windows-specific files...'
+find_files 'print'
+
+read -rsp 'Press the Enter key to delete Windows-specific files [Enter]: '
+
+printf '\n%s\n' 'Searching for Windows-specific files and deleting them...'
+find_files 'delete'
+
+printf '%s\n' 'Done.'
