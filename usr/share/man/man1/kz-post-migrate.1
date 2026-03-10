@@ -15,12 +15,29 @@ kz-post-migrate - post-migration script
 .YS
 
 .SH DESCRIPTION
-After migrating to Linux, look for Windows-specific files and delete them.
+After migrating to Linux, look for Windows-specific files [1] and delete them.
 .br
 The search starts in the current directory and includes all subdirectories.
 .br
 First the files are searched for and displayed, then there is the option to
 delete them.
+
+[1]
+Files with names matching the following patterns are considered
+Windows-specific:
+.br
+    ~*
+.br
+    *.bat
+.br
+    *.exe
+.br
+    *.lnk
+.br
+    desktop.ini
+.br
+    thumbs.db
+
 
 .SH KZ
 Part of the \fBkz\fR(1) package.

@@ -15,13 +15,29 @@ kz-post-migrate - post-migratie script
 .YS
 
 .SH BESCHRIJVING
-Na de migratie naar Linux, zoek naar Windows-specifieke bestanden en verwijder
-deze.
+Na de migratie naar Linux, zoek naar Windows-specifieke bestanden [1] en
+verwijder deze.
 .br
 De zoekopdracht begint in de huidige map en omvat alle submappen.
 .br
 Eerst worden de bestanden opgezocht en getoond, daarna is er de keuze om deze
 te verwijderen.
+
+[1]
+Bestanden met namen die overeenkomen met de volgende patronen worden beschouwd
+als Windows-specifiek:
+.br
+    ~*
+.br
+    *.bat
+.br
+    *.exe
+.br
+    *.lnk
+.br
+    desktop.ini
+.br
+    thumbs.db
 
 .SH KZ
 Onderdeel van het \fBkz\fR(1)-pakket.
