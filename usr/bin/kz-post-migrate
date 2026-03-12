@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash
 # #############################################################################
-# SPDX-FileComment: Post-migration Linux help script
+# SPDX-FileComment: Delete Windows-specific files after migrating to Linux
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
