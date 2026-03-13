@@ -63,7 +63,7 @@ OPTIONS_LONG: list[str] = ['help', 'manual', 'usage', 'version']
 
 def process() -> None:
     """
-    This function performs the script actions, such as checking the input.
+    This function performs the script actions.
     """
     check_sudo: str = 'sudo true'
     check_debian: str = "grep --quiet --regexp='debian' /etc/os-release"

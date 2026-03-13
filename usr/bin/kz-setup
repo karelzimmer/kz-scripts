@@ -77,7 +77,7 @@ declare OPTION_RESET=false
 # Functions
 # #############################################################################
 
-# This function performs the script actions, such as checking the input.
+# This function performs the script actions.
 function process() {
     local -A app_arguments=()
     local -a settings_files=()

@@ -21,42 +21,6 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-readonly PROGRAM_NAME='kz-get'
-PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
-readonly PROGRAM_DESC
-USAGE=$(gettext 'Usage: kz get [-d|--dev]
-              [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-              [-D|--debug]
-
-       wget karelzimmer.nl/getkz
-       bash getkz [-d|--dev]
-                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                  [-D|--debug]')
-readonly USAGE
-
-HELP="$(gettext "Usage: kz get [<options>]")
-
-$PROGRAM_DESC.
-
-$(gettext 'Options:')
-$(gettext "  -d, --dev      download and install the development version of \
-package kz")
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')
-$(gettext '  -D, --debug    show debug information')"
-readonly HELP
-
-readonly OPTIONS_SHORT='dhmuvD'
-readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
-
-# List NORMAL last here so that -x doesn't bork the display.
-readonly BOLD='\033[1m'
-readonly GREEN=$BOLD'\033[32m'
-readonly RED=$BOLD'\033[31m'
-readonly NORMAL='\033[0m'
-
 
 # #############################################################################
 # Globals
@@ -71,137 +35,23 @@ declare OPTION_DEV=false
 
 # This function performs initial actions.
 function init() {
-    # Script-hardening.
-    set -o errexit
-    set -o errtrace
-    set -o nounset
-    set -o pipefail
-
-    # Trap exit signal.
-    trap term_cleanup EXIT
+    if [[ $* = '-d' || $* = '--dev' ]]; then
+        OPTION_DEV=true
+    elif [[ -n $* ]]; then
+        printf '%b\n' 'kz get [-d | --dev]'
+        exit 0
+    fi
 }
 
-
-# This function performs the script actions, such as checking the input.
+# This function performs the script actions.
 function process() {
-    local text=''
-
-    check_input "$@"
-
-    become_check || exit 0
     if grep --quiet --regexp='debian' /etc/os-release; then
         process_deb_package
     elif grep --quiet --regexp='rhel' /etc/os-release; then
         process_rpm_package
     else
-        text=$(gettext 'fatal: unknown os release')
-        printf "$RED%b$NORMAL\n" "$text" >&2
+        printf "%b\n" 'fatal: unknown os release' >&2
         exit 1
-    fi
-}
-
-
-# This function checks the script input.
-function check_input() {
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local parsed=''
-
-    parsed=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$program_name"     \
-                --              "$@"
-        )   ||  {
-                    printf '%s\n' "$USAGE"
-                    exit 1
-                }
-    eval set -- "$parsed"
-    unset parsed
-
-    process_options "$@"
-}
-
-
-# This function handles the script options and arguments.
-function process_options() {
-    local build_id='n/a'    # ISO 8601 YYYY-MM-DDTHH:MM:SS
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local text=''
-
-    while true; do
-        case $1 in
-            -d | --dev )
-                OPTION_DEV=true
-                shift
-                ;;
-            -h | --help )
-                printf '%s\n' "$HELP"
-                exit 0
-                ;;
-            -m | --manual )
-                if [[ -n ${DISPLAY-} ]]; then
-                    yelp man:"$PROGRAM_NAME" 2> /dev/null
-                else
-                    man "$PROGRAM_NAME"
-                fi
-                exit 0
-                ;;
-            -u | --usage )
-                printf '%s\n' "$USAGE"
-                exit 0
-                ;;
-            -v | --version )
-                if [[ -f /usr/share/doc/kz/build.id ]]; then
-                    # shellcheck disable=SC2034
-                    build_id=$(cat /usr/share/doc/kz/build.id)
-                fi
-                text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
-
-$(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
-$(gettext "License CC0 1.0 \
-<https://creativecommons.org/publicdomain/zero/1.0>.")"
-                printf '%b\n' "$text"
-                exit 0
-                ;;
-            -D | --debug )
-                set -o xtrace
-                shift
-                ;;
-            -- )
-                shift
-                break
-                ;;
-            * )
-                text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
-                printf "$RED%b$NORMAL\n" "$text" >&2
-                exit 1
-                ;;
-        esac
-    done
-
-    if [[ -n $* ]]; then
-        text="$program_name: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        printf '%b\n' "$text" >&2
-        exit 1
-    fi
-}
-
-
-# This function checks if the user is allowed to become root and returns 0 if
-# so, otherwise returns 1 with descriptive message.
-function become_check() {
-    local text=''
-
-    if [[ $UID -eq 0 ]]; then
-        return 0
-    elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
-        return 0
-    else
-        text=$(gettext 'Already performed by the administrator.')
-        printf "$GREEN%b$NORMAL\n" "$text" >&2
-        return 1
     fi
 }
 
@@ -227,8 +77,6 @@ function process_deb_package() {
         reinstall=''
     fi
 
-    sudo true
-
     # Download kz package.
     wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
@@ -236,6 +84,7 @@ function process_deb_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
+    sudo true
     check_debian_package_manager
     sudo apt-get update
     printf '\n'
@@ -257,14 +106,11 @@ function process_deb_package() {
 function check_debian_package_manager() {
     local text=''
 
-    text=$(gettext 'Wait for another package manager to finish...')
-
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        printf "$BOLD%s\n$NORMAL" "$text"
-        sleep 2
+        sleep 1
     done
 }
 
@@ -306,8 +152,8 @@ function term() {
     text="\n$separator_line\n\n"
 
     if $OPTION_DEV; then
-        text+="$RED$(gettext "Please note: the development version of the kz \
-package is installed")$NORMAL\n"
+        text+="\033[1;31m$(gettext "Please note: the development version of \
+the kz package is installed")\033[0m\n\n"
     fi
 
     text+="$(gettext "Package kz has been successfully installed.
@@ -322,31 +168,15 @@ $(gettext "Type 'exit' to close this window.")"
     fi
     printf '%b\n' "$text"
 
+    rm --force getkz* /tmp/kz-*.deb
+
     exit 0
 }
-
-
-# This function cleans up temporary files on exit signal.
-# ShellCheck is currently bad at figuring out functions that are invoked via
-# trap. In such cases, please ignore the message with a directive.
-# shellcheck disable=SC2329,SC2317
-function term_cleanup() {
-    if ! [[ -o xtrace ]]; then
-        # Clean up temporary files if not in debug mode.
-        rm --force getkz* /tmp/kz-*.deb
-    fi
-    trap - EXIT
-}
-
 
 # #############################################################################
 # Main
 # #############################################################################
 
-function main() {
-    init    "$@"
-    process "$@"
-    term
-}
-
-main "$@"
+init "$@"
+process "$@"
+term

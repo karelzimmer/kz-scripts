@@ -37,8 +37,8 @@ msgid "Usage: kz [<options>] <command> [<arguments>]"
 msgstr ""
 
 #: kz:44 kz-backup:36 kz-build:40 kz-check:37 kz-deploy:42 kz-desktop:39
-#: kz-dev:43 kz-get:41 kz-install:40 kz-menu:35 kz-restore:36 kz-setup:39
-#: kz-update:42 kz-wifi:42
+#: kz-dev:43 kz-install:40 kz-menu:35 kz-restore:36 kz-setup:39 kz-update:42
+#: kz-wifi:42
 msgid "Options:"
 msgstr ""
 
@@ -47,26 +47,26 @@ msgid "  -l, --list     show available commands"
 msgstr ""
 
 #: kz:46 kz-backup:43 kz-build:42 kz-check:38 kz-deploy:44 kz-desktop:51
-#: kz-dev:44 kz-get:44 kz-install:51 kz-menu:37 kz-restore:43 kz-setup:50
-#: kz-update:43 kz-wifi:44
+#: kz-dev:44 kz-install:51 kz-menu:37 kz-restore:43 kz-setup:50 kz-update:43
+#: kz-wifi:44
 msgid "  -h, --help     show this help text"
 msgstr ""
 
 #: kz:47 kz-backup:44 kz-build:43 kz-check:39 kz-deploy:45 kz-desktop:52
-#: kz-dev:45 kz-get:45 kz-install:52 kz-menu:38 kz-restore:44 kz-setup:51
-#: kz-update:44 kz-wifi:45
+#: kz-dev:45 kz-install:52 kz-menu:38 kz-restore:44 kz-setup:51 kz-update:44
+#: kz-wifi:45
 msgid "  -m, --manual   show manual page"
 msgstr ""
 
 #: kz:48 kz-backup:45 kz-build:44 kz-check:40 kz-deploy:46 kz-desktop:53
-#: kz-dev:46 kz-get:46 kz-install:53 kz-menu:39 kz-restore:45 kz-setup:52
-#: kz-update:45 kz-wifi:46
+#: kz-dev:46 kz-install:53 kz-menu:39 kz-restore:45 kz-setup:52 kz-update:45
+#: kz-wifi:46
 msgid "  -u, --usage    show a short usage summary"
 msgstr ""
 
 #: kz:49 kz-backup:46 kz-build:45 kz-check:41 kz-deploy:47 kz-desktop:54
-#: kz-dev:47 kz-get:47 kz-install:54 kz-menu:40 kz-restore:46 kz-setup:53
-#: kz-update:46 kz-wifi:47
+#: kz-dev:47 kz-install:54 kz-menu:40 kz-restore:46 kz-setup:53 kz-update:46
+#: kz-wifi:47
 msgid "  -v, --version  show program version"
 msgstr ""
 
@@ -90,18 +90,18 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:111 kz_common.py:299 kz-update:80
+#: kz:111 kz_common.py:297 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz:117 kz_common.py:211 kz_common.py:220 kz_common.py:256 kz_common.py:305
+#: kz:117 kz_common.py:209 kz_common.py:218 kz_common.py:254 kz_common.py:303
 #: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
 #: kz-update:100 kz-update:302
 msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:173 kz-backup:156 kz-build:164 kz-check:132 kz-deploy:142 kz-desktop:205
-#: kz-dev:132 kz-get:176 kz-install:246 kz-menu:180 kz-restore:157 kz-setup:241
+#: kz-dev:132 kz-install:246 kz-menu:180 kz-restore:157 kz-setup:241
 #: kz-update:181 kz-wifi:127
 msgid "internal error"
 msgstr ""
@@ -152,7 +152,7 @@ msgid ""
 "                 place backup in specified directory"
 msgstr ""
 
-#: kz-backup:47 kz-build:46 kz-check:42 kz-deploy:48 kz-desktop:55 kz-get:48
+#: kz-backup:47 kz-build:46 kz-check:42 kz-deploy:48 kz-desktop:55
 #: kz-install:55 kz-menu:41 kz-restore:47 kz-setup:54
 msgid "  -D, --debug    show debug information"
 msgstr ""
@@ -167,7 +167,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:164 kz-build:172 kz-check:140 kz-deploy:150 kz-desktop:213
-#: kz-dev:138 kz-get:184 kz-menu:188 kz-restore:165 kz-update:187 kz-wifi:133
+#: kz-dev:138 kz-menu:188 kz-restore:165 kz-update:187 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -417,14 +417,8 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:508 kz-get:309
+#: kz-build:508 kz-get:155
 msgid "Please note: the development version of the kz package is installed"
-msgstr ""
-
-#: ckhtml:128 gitbranch:63 gitclone:80 gitfetch:63 gitinit:54 gitpull:63
-#: gitsquash:76 gitstatus:63 kz-build:517 kz-check:597 kz-deploy:272 kz-dev:278
-#: kz-post-migrate:66 kz-update:314
-msgid "Complete!"
 msgstr ""
 
 #: kz-check:23 kz-deploy:187
@@ -516,104 +510,100 @@ msgstr ""
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
-#: kz_common.py:55 kz_common.sh:42 kz-get:202
+#: kz_common.py:55 kz_common.sh:42
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:74 kz_common.sh:58 kz-get:260
-msgid "Wait for another package manager to finish..."
-msgstr ""
-
-#: kz_common.py:142 kz_common.sh:169
+#: kz_common.py:133 kz_common.sh:161
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:148 kz_common.sh:176
+#: kz_common.py:139 kz_common.sh:168
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:154 kz_common.sh:183
+#: kz_common.py:145 kz_common.sh:175
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:182
+#: kz_common.py:180
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:186
+#: kz_common.py:184
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:188
+#: kz_common.py:186
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:233
+#: kz_common.py:231
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:260
+#: kz_common.py:258
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:261 kz_common.sh:278 kz-get:161
+#: kz_common.py:259 kz_common.sh:270
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:262 kz_common.sh:279 kz-get:162
+#: kz_common.py:260 kz_common.sh:271
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:296 kz_common.sh:409
+#: kz_common.py:294 kz_common.sh:401
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
-#: kz_common.sh:81
+#: kz_common.sh:73
 msgid "Check that all repos are on branch main"
 msgstr ""
 
-#: kz_common.sh:87
+#: kz_common.sh:79
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr ""
 
-#: kz_common.sh:94
+#: kz_common.sh:86
 msgid "Check that all repos are clean"
 msgstr ""
 
-#: kz_common.sh:105
+#: kz_common.sh:97
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:229
+#: kz_common.sh:221
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:233
+#: kz_common.sh:225
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:261
+#: kz_common.sh:253
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:276 kz-get:159
+#: kz_common.sh:268
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:369
+#: kz_common.sh:361
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:384
+#: kz_common.sh:376
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -771,36 +761,7 @@ msgstr ""
 msgid "GITPULL -- 0/2"
 msgstr ""
 
-#: kz-get:25
-msgid "Download and install Debian or RPM package kz"
-msgstr ""
-
-#: kz-get:27
-msgid ""
-"Usage: kz get [-d|--dev]\n"
-"              [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"              [-D|--debug]\n"
-"\n"
-"       wget karelzimmer.nl/getkz\n"
-"       bash getkz [-d|--dev]\n"
-"                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-"                  [-D|--debug]"
-msgstr ""
-
-#: kz-get:37
-msgid "Usage: kz get [<options>]"
-msgstr ""
-
-#: kz-get:42
-msgid ""
-"  -d, --dev      download and install the development version of package kz"
-msgstr ""
-
-#: kz-get:97 kz-update:129
-msgid "fatal: unknown os release"
-msgstr ""
-
-#: kz-get:313
+#: kz-get:159
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -809,7 +770,7 @@ msgid ""
 "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-get:321
+#: kz-get:167
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -973,18 +934,18 @@ msgstr ""
 msgid "Guest_user"
 msgstr ""
 
-#: kz-post-migrate:52
+#: kz-post-migrate:56
 #, sh-format
 msgid "Searching Windows-specific files in '$PWD' and subfolders..."
 msgstr ""
 
-#: kz-post-migrate:57
+#: kz-post-migrate:61
 msgid ""
 "Press the Enter key to delete the Windows-specific files, or Ctrl-C to stop "
 "[Enter/Ctrl-C]: "
 msgstr ""
 
-#: kz-post-migrate:61
+#: kz-post-migrate:65
 #, sh-format
 msgid "Deleting Windows-specific files in '$PWD' and subfolders..."
 msgstr ""
@@ -1119,7 +1080,7 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: gitsquash:53 kz-menu:502
+#: gitsquash:52 kz-menu:502
 msgid "The following will be executed:"
 msgstr ""
 
@@ -1318,6 +1279,10 @@ msgstr ""
 msgid "CLEANUP -- 2/2"
 msgstr ""
 
+#: kz-update:129
+msgid "fatal: unknown os release"
+msgstr ""
+
 #: kz-wifi:33
 msgid ""
 "Usage: kz wifi [-g|--gui]\n"
@@ -1445,7 +1410,7 @@ msgid "Video call with others from a web browser"
 msgstr ""
 
 #: nl.karelzimmer.kz_common.policy:21
-msgid "Wrapper script for kz_common"
+msgid "Polkit wrapper script for kz_common"
 msgstr ""
 
 #: nl.karelzimmer.kz_common.policy:22
@@ -1457,33 +1422,39 @@ msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy:21
-msgid "Wrapper script for kz-wifi"
+msgid "Polkit wrapper script for kz-wifi"
 msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: gitsquash:51
+#: gitsquash:50
 msgid "*** git squash merge in 10 steps ***"
 msgstr ""
 
-#: gitsquash:55
+#: gitsquash:54
 msgid "PREPARE:"
 msgstr ""
 
-#: gitsquash:59
+#: gitsquash:58
 msgid "MERGE:"
 msgstr ""
 
-#: gitsquash:63
+#: gitsquash:62
 msgid "COMMIT:"
 msgstr ""
 
-#: gitsquash:67
+#: gitsquash:66
 msgid "CLEANUP:"
 msgstr ""
 
-#: gitsquash:71
+#: gitsquash:70
 msgid "MAINTENANCE:"
+msgstr ""
+
+#: ckhtml:127 gitbranch:63 gitclone:80 gitfetch:63 gitinit:53 gitpull:63
+#: gitsquash:75 gitstatus:63 kz-build:517 kz-check:597 kz-deploy:272 kz-dev:278
+#: kz-post-migrate:70 kz-update:314
+msgid "Complete!"
 msgstr ""

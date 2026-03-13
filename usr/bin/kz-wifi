@@ -64,7 +64,7 @@ OPTIONS_LONG: list[str] = ['gui', 'help', 'manual', 'usage', 'version']
 
 def process(OPTION_GUI: bool = False) -> None:
     """
-    This function performs the script actions, such as checking the input.
+    This function performs the script actions.
     """
     OPTION_GUI = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 

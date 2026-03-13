@@ -21,6 +21,10 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
+# List NORMAL last here so that -x doesn't bork the display.
+readonly GREEN='\033[1;32m'
+readonly NORMAL='\033[0m'
+
 
 # #############################################################################
 # Globals
@@ -64,4 +68,4 @@ printf '\n%s\n' "$text"
 find_files 'delete'
 
 text=$(gettext 'Complete!')
-printf '%s\n' "$text"
+printf "$GREEN%s\n$NORMAL" "$text"

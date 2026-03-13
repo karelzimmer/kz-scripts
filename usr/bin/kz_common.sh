@@ -49,23 +49,15 @@ function kz.become_check() {
 # This function checks if a Debian package manager is already running and waits
 # for the next check if so.
 function kz.check_debian_package_manager() {
-    local text=''
+    local text='Wait for another package manager to finish...'
 
     if grep --quiet --regexp='rhel' /etc/os-release; then
         return 0
     fi
 
-    text=$(gettext 'Wait for another package manager to finish...')
-
     while pkexec /usr/bin/kz_common-pkexec; do
-        if ${OPTION_GUI:-false}; then
-            kz.logmsg "$text..."
-            # Inform the user in 'zenity --progress' why there is a wait.
-            printf '%s\n' "#$text"
-        else
-            kz.infomsg "$BOLD$text$NORMAL"
-        fi
-        sleep 2
+        kz.logmsg "$text"
+        sleep 1
     done
 }
 

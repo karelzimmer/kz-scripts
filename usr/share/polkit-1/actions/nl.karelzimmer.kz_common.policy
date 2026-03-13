@@ -18,7 +18,7 @@
     <icon_name>kz</icon_name>
 
     <action id="nl.karelzimmer.kz_common">
-        <description gettext-domain="kz">Wrapper script for kz_common</description>
+        <description gettext-domain="kz">Polkit wrapper script for kz_common</description>
         <message gettext-domain="kz">Execute the fuser command requiring root privileges</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz_common-pkexec</annotate>
         <defaults>

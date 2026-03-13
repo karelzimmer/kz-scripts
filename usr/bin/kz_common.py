@@ -64,14 +64,12 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
     check_rhel: str = "grep --quiet --regexp='rhel' /etc/os-release"
-    text: str = ''
+    text: str = 'Wait for another package manager to finish...'
 
     if subprocess.run(check_rhel, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         return 0
-
-    text = BOLD + _('Wait for another package manager to finish...') + NORMAL
 
     while True:
         try:
@@ -80,17 +78,10 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
         except Exception:
             break
         else:
-            infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
-            time.sleep(2)
+            logmsg(PROGRAM_NAME, text)
+            time.sleep(1)
 
     return 0
-
-
-def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
-    """
-    This function records a informational message to the log.
-    """
-    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
 def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
@@ -159,6 +150,13 @@ def init(PROGRAM_NAME: str) -> None:
     logmsg(PROGRAM_NAME, text)
     text = f"Started ({' '.join(sys.argv)} as {os.getlogin()})."
     logmsg(PROGRAM_NAME, text)
+
+
+def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
+    """
+    This function records a informational message to the log.
+    """
+    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,

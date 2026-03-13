@@ -69,7 +69,7 @@ version,debug"
 # Functions
 # #############################################################################
 
-# This function performs the script actions, such as checking the input.
+# This function performs the script actions.
 function process() {
     local desktopfile=''
     local favorite_apps=''

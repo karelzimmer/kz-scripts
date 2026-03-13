@@ -79,7 +79,7 @@ declare ERR_FLAG=false
 # Functions
 # #############################################################################
 
-# This function performs the script actions, such as checking the input.
+# This function performs the script actions.
 function process() {
     local build_id=''
     local text=''

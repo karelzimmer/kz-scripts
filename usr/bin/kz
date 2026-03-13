@@ -70,7 +70,7 @@ OPTIONS_LONG: list[str] = ['list', 'help', 'manual', 'usage', 'version']
 
 def process() -> None:
     """
-    This function performs the script actions, such as checking the input.
+    This function performs the script actions.
     """
     arg_num: int = 0
     exc: BaseException
@@ -177,7 +177,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
 
 def process_option_list() -> None:
     """
-    This function performs the script actions, such as checking the input.
+    This function shows the available commands.
     """
     text: str
 

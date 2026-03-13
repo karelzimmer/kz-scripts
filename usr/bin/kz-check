@@ -57,7 +57,7 @@ declare ERR_FLAG=false
 # Functions
 # #############################################################################
 
-# This function performs the script actions, such as checking the input.
+# This function performs the script actions.
 function process() {
     local scripts_repo=$HOME/kz-scripts
     local text=''
@@ -315,7 +315,7 @@ function check_scripts() {
                 check_man_page
                 ;;
             kz_common.sh | *-migrate | *-pkexec )
-                # This includes migration and polkit wrapper scripts.
+                # This includes migration and polkit Polkit wrapper scripts.
                 check_trailing_spaces
                 check_tags
                 check_record_length

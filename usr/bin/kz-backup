@@ -65,7 +65,7 @@ declare TARGET=''
 # Functions
 # #############################################################################
 
-# This function performs the script actions, such as checking the input.
+# This function performs the script actions.
 function process() {
     local medium=''
     local option_target=false
