@@ -58,6 +58,7 @@ subfolders...")
 printf '%s\n' "$text"
 find_files 'print'
 
+printf '\n'
 prompt=$(gettext "Press the Enter key to delete the Windows-specific files, \
 or Ctrl-C to stop [Enter/Ctrl-C]: ")
 read -rsp "$prompt"

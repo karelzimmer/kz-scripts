@@ -939,13 +939,13 @@ msgstr ""
 msgid "Searching Windows-specific files in '$PWD' and subfolders..."
 msgstr ""
 
-#: kz-post-migrate:61
+#: kz-post-migrate:62
 msgid ""
 "Press the Enter key to delete the Windows-specific files, or Ctrl-C to stop "
 "[Enter/Ctrl-C]: "
 msgstr ""
 
-#: kz-post-migrate:65
+#: kz-post-migrate:66
 #, sh-format
 msgid "Deleting Windows-specific files in '$PWD' and subfolders..."
 msgstr ""
@@ -1455,6 +1455,6 @@ msgstr ""
 
 #: ckhtml:127 gitbranch:63 gitclone:80 gitfetch:63 gitinit:53 gitpull:63
 #: gitsquash:75 gitstatus:63 kz-build:517 kz-check:597 kz-deploy:272 kz-dev:278
-#: kz-post-migrate:70 kz-update:314
+#: kz-post-migrate:71 kz-update:314
 msgid "Complete!"
 msgstr ""
