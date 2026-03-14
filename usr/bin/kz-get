@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash
 # #############################################################################
-# SPDX-FileComment: Download and install Debian or RPM package kz
+# SPDX-FileComment: Download and install package kz
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
