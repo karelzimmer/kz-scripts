@@ -39,7 +39,7 @@ function init() {
         OPTION_DEV=true
     elif [[ -n $* ]]; then
         printf '%b\n' 'kz get [-d | --dev]'
-        # exit 0
+        exit 0
     fi
 }
 
