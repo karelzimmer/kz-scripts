@@ -35,7 +35,7 @@ declare OPTION_DEV=false
 
 # This function performs initial actions.
 function init() {
-    if [[ -n $* && '--dev' == *"$*"* ]]; then
+    if [[ $* = -* && '--dev' == *"$*"* ]]; then
         OPTION_DEV=true
     elif [[ -n $* ]]; then
         printf '%b\n' 'kz get [-d | --dev]'
@@ -84,7 +84,7 @@ function process_deb_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    sudo true
+    sudo true || exit 1
     check_debian_package_manager
     sudo apt-get update
     printf '\n'
