@@ -178,5 +178,5 @@ $(gettext "Type 'exit' to close this window.")"
 # #############################################################################
 
 init "$@"
-process "$@"
+process
 term
