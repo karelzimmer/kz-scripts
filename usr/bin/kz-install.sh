@@ -121,15 +121,15 @@ if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl enable   
 # -----------------------------------------------------------------------------
 # Backups/snapshots.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes backintime-qt; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  backintime-qt; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes backintime-qt; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  backintime-qt; fi
 
 # REMOVE backintime #none
 # -----------------------------------------------------------------------------
 # Backups/snapshots.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  backintime-qt; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes backintime-qt; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  backintime-qt; fi
 
 # INSTALL bash-completion *
 # -----------------------------------------------------------------------------
@@ -202,20 +202,20 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock  ; fi
-if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
-if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock    ) &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview     ) &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock  ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview ; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock    ) &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview     ) &> /dev/null; then sudo dnf     install --assumeyes  gnome-shell-extension-no-overview ; fi
 REBOOT=true
 
 # REMOVE dash-to-dock *
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock  ; fi
-if (grep debian /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview ; fi
-if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock    ) &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-dash-to-dock; fi
-if (grep rhel   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview     ) &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-no-overview ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock  ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session &&   apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview ; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-dash-to-dock    ) &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-dash-to-dock; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session &&   dnf list  gnome-shell-extension-no-overview     ) &> /dev/null; then sudo dnf     remove --assumeyes  gnome-shell-extension-no-overview ; fi
 REBOOT=true
 
 # INSTALL dos2unix pc06 pc07
@@ -344,13 +344,13 @@ sudo systemctl start  fwupd.service
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 
 # REMOVE gdebi #none
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 
 # INSTALL gettext pc06 pc07
 # -----------------------------------------------------------------------------
@@ -388,15 +388,15 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
 # REMOVE gnome-tweaks pc06 pc07
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gnome-tweaks; fi
 
 # INSTALL google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -701,7 +701,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Disable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 # -----------------------------------------------------------------------------
 # For Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 # -----------------------------------------------------------------------------
@@ -711,7 +711,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Enable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 # -----------------------------------------------------------------------------
 # For Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 # -----------------------------------------------------------------------------
@@ -851,7 +851,7 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Requires the use of Xorg/X11.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes simplescreenrecorder; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes simplescreenrecorder; fi
 
 # REMOVE simplescreenrecorder #none
 # -----------------------------------------------------------------------------
@@ -859,7 +859,7 @@ if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo a
 # -----------------------------------------------------------------------------
 # Required the use of Xorg/X11. Enable Wayland again?
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
 
 # INSTALL spice-vdagent pc06 pc07
 # -----------------------------------------------------------------------------
@@ -907,8 +907,8 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update     
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  sushi      ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  sushi      ; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
@@ -918,8 +918,8 @@ if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo d
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  sushi      ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes  sushi      ; fi
 
 # INSTALL teamviewer *
 # -----------------------------------------------------------------------------
@@ -987,8 +987,8 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Uncomplicated FireWall.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes gufw; fi
-if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     install --assumeyes  gufw; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session)  &> /dev/null; then sudo apt-get install --assume-yes gufw; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session)  &> /dev/null; then sudo dnf     install --assumeyes  gufw; fi
 sudo ufw allow ssh
 sudo ufw enable
 
@@ -1115,14 +1115,14 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     update     
 # -----------------------------------------------------------------------------
 # Run Windows applications.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg    --add-architecture   i386                       ; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  wine playonlinux           ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg    --add-architecture   i386                       ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  wine playonlinux           ; fi
 
 # REMOVE wine #none
 # -----------------------------------------------------------------------------
 # Run Windows applications.
 # -----------------------------------------------------------------------------
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes   wine winetricks playonlinux; fi
-if (grep debian /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg    --remove-architecture i386                       ; fi
-if (grep rhel   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes    wine playonlinux           ; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get remove --assume-yes   wine winetricks playonlinux; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo dpkg    --remove-architecture i386                       ; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     remove --assumeyes    wine playonlinux           ; fi
