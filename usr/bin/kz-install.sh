@@ -987,8 +987,8 @@ if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     remove --as
 # -----------------------------------------------------------------------------
 # Uncomplicated FireWall.
 # -----------------------------------------------------------------------------
-if (grep --regexp='debian' /etc/os-release && type gnome-session)  &> /dev/null; then sudo apt-get install --assume-yes gufw; fi
-if (grep --regexp='rhel'   /etc/os-release && type gnome-session)  &> /dev/null; then sudo dnf     install --assumeyes  gufw; fi
+if (grep --regexp='debian' /etc/os-release && type gnome-session) &> /dev/null; then sudo apt-get install --assume-yes gufw; fi
+if (grep --regexp='rhel'   /etc/os-release && type gnome-session) &> /dev/null; then sudo dnf     install --assumeyes  gufw; fi
 sudo ufw allow ssh
 sudo ufw enable
 
