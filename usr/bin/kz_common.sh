@@ -36,7 +36,7 @@ readonly NORMAL='\033[0m'
 function kz.become_check() {
     local text=''
 
-    if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
+    if groups "$USER" | grep --quiet --regexp=sudo --regexp=wheel; then
         return 0
     else
         text=$GREEN$(gettext 'Already performed by the administrator.')$NORMAL
@@ -51,13 +51,13 @@ function kz.become_check() {
 function kz.check_debian_package_manager() {
     local text='Wait for another package manager to finish...'
 
-    if grep --quiet --regexp='rhel' /etc/os-release; then
+    if grep --quiet rhel /etc/os-release; then
         return 0
     fi
 
     while pkexec /usr/bin/kz_common-pkexec; do
         kz.logmsg "$text"
-        sleep 1
+        sleep 2
     done
 }
 
@@ -125,7 +125,7 @@ function kz.errmsg() {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$*"        2> /dev/null || true
+                --text      "$*"        || true
     else
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
@@ -144,7 +144,7 @@ function kz.infomsg() {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$*"        2> /dev/null || true
+                --text      "$*"        || true
     else
         printf '%b\n' "$*"
     fi
@@ -155,23 +155,23 @@ function kz.infomsg() {
 function kz.init() {
     local text=''
 
-    # Check if systemd is available.
-    if ! type systemctl &> /dev/null; then
-        printf  "$RED%b$NORMAL\n"   \
+    # Check if systemd is available .
+    if ! type systemctl > /dev/null; then
+        printf  "$RED%s$NORMAL\n"   \
                 "$(gettext 'fatal: no systemd available')" >&2
         exit 1
     fi
 
     # Check if os release is available.
     if ! [[ -f /etc/os-release ]]; then
-        printf  "$RED%b$NORMAL\n"   \
+        printf  "$RED%s$NORMAL\n"   \
                 "$(gettext 'fatal: no os release available')" >&2
         exit 1
     fi
 
     # Check if started as root.
     if [[ $UID -eq 0 ]]; then
-        printf  "$RED%b$NORMAL\n"   \
+        printf  "$RED%s$NORMAL\n"   \
                 "$(gettext 'fatal: must not be run as root')" >&2
         exit 1
     fi
@@ -299,9 +299,9 @@ function kz.term() {
             rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
             ;;
         100 )
-            if grep --quiet --regexp='debian' /etc/os-release; then
+            if grep --quiet debian /etc/os-release; then
                 rc_desc='apt/dpkg exited with error'
-            elif grep --quiet --regexp='rhel' /etc/os-release; then
+            elif grep --quiet rhel /etc/os-release; then
                 rc_desc='there are updates available'
             else
                 rc_desc="previous errors/it didn't work"

@@ -90,11 +90,11 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:111 kz_common.py:297 kz-update:80
+#: kz:111 kz_common.py:296 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz:117 kz_common.py:209 kz_common.py:218 kz_common.py:254 kz_common.py:303
+#: kz:117 kz_common.py:208 kz_common.py:217 kz_common.py:253 kz_common.py:302
 #: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
 #: kz-update:100 kz-update:302
 msgid "Program {} encountered an error."
@@ -288,7 +288,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:608 kz-install:588 kz-restore:337 kz-setup:552
+#: kz-backup:608 kz-install:587 kz-restore:337 kz-setup:552
 msgid "error messages"
 msgstr ""
 
@@ -313,11 +313,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:616 kz-install:593 kz-restore:345 kz-setup:556
+#: kz-backup:616 kz-install:592 kz-restore:345 kz-setup:556
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:617 kz-install:594 kz-restore:346 kz-setup:557
+#: kz-backup:617 kz-install:593 kz-restore:346 kz-setup:557
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -417,7 +417,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:508 kz-get:155
+#: kz-build:508 kz-get:175
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -514,47 +514,47 @@ msgstr ""
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:133 kz_common.sh:161
+#: kz_common.py:132 kz_common.sh:161
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:139 kz_common.sh:168
+#: kz_common.py:138 kz_common.sh:168
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:145 kz_common.sh:175
+#: kz_common.py:144 kz_common.sh:175
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:180
+#: kz_common.py:179
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:184
+#: kz_common.py:183
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:186
+#: kz_common.py:185
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:231
+#: kz_common.py:230
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:258
+#: kz_common.py:257
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:259 kz_common.sh:270
+#: kz_common.py:258 kz_common.sh:270
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:260 kz_common.sh:271
+#: kz_common.py:259 kz_common.sh:271
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:294 kz_common.sh:401
+#: kz_common.py:293 kz_common.sh:401
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -697,27 +697,27 @@ msgstr ""
 msgid "No GNOME session found."
 msgstr ""
 
-#: kz-desktop:274
+#: kz-desktop:272
 msgid "Favorite apps:"
 msgstr ""
 
-#: kz-desktop:296
+#: kz-desktop:294
 msgid "Now make the change in the desktop environment."
 msgstr ""
 
-#: kz-desktop:318
+#: kz-desktop:316
 #, sh-format
 msgid "Config database content captured ($fase)."
 msgstr ""
 
-#: kz-desktop:330
+#: kz-desktop:328
 msgid ""
 "Changes in the configuration database,\n"
 "< is the old setting (A),\n"
 "> is the new setting (B):"
 msgstr ""
 
-#: kz-desktop:335
+#: kz-desktop:333
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr ""
 
@@ -761,7 +761,7 @@ msgstr ""
 msgid "GITPULL -- 0/2"
 msgstr ""
 
-#: kz-get:159
+#: kz-get:179
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -770,7 +770,7 @@ msgid ""
 "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-get:167
+#: kz-get:187
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -878,59 +878,59 @@ msgstr ""
 msgid "Update package lists before installing apps."
 msgstr ""
 
-#: kz-install:387 kz-setup:365
+#: kz-install:386 kz-setup:365
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:442 kz-setup:420
+#: kz-install:441 kz-setup:420
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:452 kz-menu:76 kz-install.desktop:10
+#: kz-install:451 kz-menu:76 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
 
-#: kz-install:453 kz-menu:52
+#: kz-install:452 kz-menu:52
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:484 kz-setup:461
+#: kz-install:483 kz-setup:461
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:485 kz-setup:462
+#: kz-install:484 kz-setup:462
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:589
+#: kz-install:588
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:595
+#: kz-install:594
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:611
+#: kz-install:610
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:613
+#: kz-install:612
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:619
+#: kz-install:618
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1025 kz-install.sh:1026 kz-install.sh:1032
+#: kz-install.sh:1096 kz-install.sh:1097 kz-install.sh:1103
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1025
+#: kz-install.sh:1096
 msgid "Guest_user"
 msgstr ""
 
@@ -1024,45 +1024,45 @@ msgstr ""
 msgid "Go to installation menu"
 msgstr ""
 
-#: kz-menu:87 kz-menu:385
+#: kz-menu:87 kz-menu:384
 msgid "Back"
 msgstr ""
 
-#: kz-menu:207 kz-menu:383
+#: kz-menu:207 kz-menu:382
 msgid "Select a choice:"
 msgstr ""
 
-#: kz-menu:208 kz-menu:384
+#: kz-menu:208 kz-menu:383
 msgid "Continue"
 msgstr ""
 
-#: kz-menu:210 kz-menu:386
+#: kz-menu:210 kz-menu:385
 msgid "CHOICE"
 msgstr ""
 
-#: kz-menu:211 kz-menu:234 kz-menu:387 kz-menu:410
+#: kz-menu:211 kz-menu:233 kz-menu:386 kz-menu:408
 msgid "NUM"
 msgstr ""
 
-#: kz-menu:212 kz-menu:235 kz-menu:388 kz-menu:411
+#: kz-menu:212 kz-menu:234 kz-menu:387 kz-menu:409
 msgid "ACTION"
 msgstr ""
 
-#: kz-menu:213 kz-menu:236 kz-menu:389 kz-menu:412
+#: kz-menu:213 kz-menu:235 kz-menu:388 kz-menu:410
 msgid "DESCRIPTION"
 msgstr ""
 
-#: kz-menu:245
+#: kz-menu:244
 #, sh-format
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr ""
 
-#: kz-menu:289 kz-menu:462
+#: kz-menu:288 kz-menu:460
 #, sh-format
 msgid "Cannot handle this choice ($REPLY)."
 msgstr ""
 
-#: kz-menu:315
+#: kz-menu:314
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1075,28 +1075,28 @@ msgid ""
 "4. Install Linux."
 msgstr ""
 
-#: kz-menu:421
+#: kz-menu:419
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: gitsquash:52 kz-menu:502
+#: gitsquash:52 kz-menu:500
 msgid "The following will be executed:"
 msgstr ""
 
-#: kz-menu:517
+#: kz-menu:515
 msgid "Proceed?"
 msgstr ""
 
-#: kz-menu:528
+#: kz-menu:526
 msgid "Yes"
 msgstr ""
 
-#: kz-menu:529
+#: kz-menu:527
 msgid "No"
 msgstr ""
 
-#: kz-menu:537
+#: kz-menu:535
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr ""

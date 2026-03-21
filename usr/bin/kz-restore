@@ -175,7 +175,7 @@ function check_source() {
     local usb_mount_point=/media/$USER
     local text=''
 
-    if grep --quiet --regexp='rhel' /etc/os-release; then
+    if grep --quiet rhel /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 
@@ -310,7 +310,7 @@ function restore_settings() {
 function restore_setting_desktop() {
     local input_file=$settings_dir/desktop.ico
 
-    if type gsettings &> /dev/null && [[ -f $input_file ]]; then
+    if type gsettings |& $PROGRAM_LOGS && [[ -f $input_file ]]; then
         kz.logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
@@ -367,16 +367,16 @@ $(gettext 'Try restoring the back up again.')"
     else
         # shellcheck disable=SC2034
         user=$(
-            grep    --regexp="$USER"    \
-                    /etc/passwd         |
-            cut     --delimiter=':'     \
-                    --fields=5          |
+            grep    "$USER"         \
+                    /etc/passwd     |
+            cut     --delimiter=':' \
+                    --fields=5      |
             sed     --expression='s/,//g'
             )
         users=$(
-            grep    --regexp='/bin/bash'    \
+            grep    /bin/bash               \
                     /etc/passwd             |
-            grep    --regexp='root'         \
+            grep    root                    \
                     --invert-match          |
             cut     --delimiter=':'         \
                     --fields=5              |

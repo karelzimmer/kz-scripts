@@ -43,8 +43,8 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise exits 0 with descriptive message.
     """
-    check_become_root: str = "groups $USER | grep --quiet --regexp='sudo'" + \
-        " --regexp='wheel'"
+    check_become_root: str = "groups $USER | grep --quiet --regexp=sudo" + \
+        " --regexp=wheel"
     text: str = ''
 
     if subprocess.run(check_become_root, executable='bash',
@@ -63,7 +63,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     waits for the next check if so.
     """
     check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
-    check_rhel: str = "grep --quiet --regexp='rhel' /etc/os-release"
+    check_rhel: str = "grep --quiet rhel /etc/os-release"
     text: str = 'Wait for another package manager to finish...'
 
     if subprocess.run(check_rhel, executable='bash',
@@ -128,8 +128,7 @@ def init(PROGRAM_NAME: str) -> None:
 
     # Check if systemd is available.
     if subprocess.run('type systemctl', executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode != 0:
+                      stdout=subprocess.DEVNULL, shell=True).returncode != 0:
         text = _('fatal: no systemd available')
         print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)

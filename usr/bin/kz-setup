@@ -273,17 +273,17 @@ function process_option_list() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    --regexp="#[[:space:]]\+${setup}[[:space:]]\+"  \
-                "${settings_files[@]}"                          |
-        tr      --squeeze-repeats                               \
-                '[:space:]'                                     |
-        cut     --delimiter=' '                                 \
-                --fields=3                                      |
-        sort    --unique                                        |
-        nl      --number-width=3                                \
-                --number-format=rn                              \
-                --number-separator='  '                         \
-                --body-numbering=a                              || true
+        grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
+                "${settings_files[@]}"                  |
+        tr      --squeeze-repeats                       \
+                '[:space:]'                             |
+        cut     --delimiter=' '                         \
+                --fields=3                              |
+        sort    --unique                                |
+        nl      --number-width=3                        \
+                --number-format=rn                      \
+                --number-separator='  '                 \
+                --body-numbering=a                      || true
         )
 
     if [[ -n $apps ]]; then
@@ -412,9 +412,9 @@ function setup_apps() {
     local title=''
 
     app_tot_num=$(
-        grep    --count                                         \
-                --regexp="#[[:space:]]\+${setup}[[:space:]]\+"  \
-                "$command_file"                                 || true
+        grep    --count                                 \
+                "#[[:space:]]\+${setup}[[:space:]]\+"   \
+                "$command_file"                         || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
@@ -440,7 +440,7 @@ function setup_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"     2> /dev/null
+                    --text      "$text"
             )
     else
         process_command_file
@@ -512,7 +512,7 @@ function execute_command() {
             kz.logmsg "$app_name_line"
         fi
         kz.logmsg "$cmd"
-        printf '%s\n' "#$app_name_line\n\n$cmd"
+        printf '%b\n' "#$app_name_line\n\n$cmd"
     else
         if $app_line; then
             kz.infomsg "$app_name_line"
@@ -563,7 +563,7 @@ $(gettext 'Try to set up/reset the apps again.')"
                     --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
-                    --title     "$title"    2> /dev/null || true
+                    --title     "$title"    || true
         else
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
@@ -595,13 +595,13 @@ apps and changing user settings.")"
             # A GUI is available
             $OPTION_GUI || kz.wait_for_enter
 
-            if type cinnamon-session &> /dev/null; then
+            if type cinnamon-session |& $PROGRAM_LOGS; then
                 # Cinnamon.
                 cinnamon-session-quit --logout --force
-            elif type gnome-session &> /dev/null; then
+            elif type gnome-session |& $PROGRAM_LOGS; then
                 # GNOME.
                 gnome-session-quit --logout --no-prompt
-            elif type lxsession &> /dev/null; then
+            elif type lxsession |& $PROGRAM_LOGS; then
                 # LXDE.
                 lxde-logout
             else

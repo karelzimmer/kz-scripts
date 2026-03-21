@@ -280,17 +280,17 @@ function process_option_list() {
 $(gettext 'NUM  APP')
 "
     apps=$(
-        grep    --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
-                "${installation_files[@]}"                          |
-        tr      --squeeze-repeats                                   \
-                '[:space:]'                                         |
-        cut     --delimiter=' '                                     \
-                --fields=3                                          |
-        sort    --unique                                            |
-        nl      --number-width=3                                    \
-                --number-format=rn                                  \
-                --number-separator='  '                             \
-                --body-numbering=a                                  || true
+        grep    "#[[:space:]]\+${install}[[:space:]]\+" \
+                "${installation_files[@]}"              |
+        tr      --squeeze-repeats                       \
+                '[:space:]'                             |
+        cut     --delimiter=' '                         \
+                --fields=3                              |
+        sort    --unique                                |
+        nl      --number-width=3                        \
+                --number-format=rn                      \
+                --number-separator='  '                 \
+                --body-numbering=a                      || true
         )
 
     if [[ -n $apps ]]; then
@@ -336,9 +336,8 @@ function process_argument_app() {
 # -----------------------------------------------------------------------------
 # $(gettext 'Update package lists before installing apps.')
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
-if grep --quiet --regexp='rhel'   /etc/os-release; then sudo dnf     check-upd\
-ate || true; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
+if grep --quiet rhel   /etc/os-release; then sudo dnf check-update || true; fi
 "       > "$command_file"
     fi
 
@@ -434,9 +433,9 @@ function install_apps() {
     local title=''
 
     app_tot_num=$(
-        grep    --count                                             \
-                --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
-                "$command_file"                                     || true
+        grep    --count                                 \
+                "#[[:space:]]\+${install}[[:space:]]\+" \
+                "$command_file"                         || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
@@ -463,7 +462,7 @@ function install_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"     2> /dev/null
+                    --text      "$text"
             )
     else
         process_command_file
@@ -535,7 +534,7 @@ function execute_command() {
             kz.logmsg "$app_name_line"
         fi
         kz.logmsg "$cmd"
-        printf '%s\n' "#$app_name_line\n\n$cmd"
+        printf '%b\n' "#$app_name_line\n\n$cmd"
     else
         if $app_line; then
             kz.infomsg "$app_name_line"
@@ -600,7 +599,7 @@ $(gettext 'Try to install/remove the apps again.')"
                     --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
-                    --title     "$title"    2> /dev/null || true
+                    --title     "$title"    || true
         else
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"

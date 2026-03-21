@@ -82,7 +82,7 @@ function process() {
     local text=''
 
     check_input "$@"
-    if type gnome-session &> /dev/null; then
+    if type gnome-session |& $PROGRAM_LOGS; then
         favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
         desktopfile=$favorite_argument.desktop
     else
@@ -228,8 +228,7 @@ $USAGE"
 function process_option_addaft () {
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$desktopfile"
-    then
+    elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"; then
         gsettings set org.gnome.shell favorite-apps "$(
             printf '%s' "$favorite_apps" |
             cut --delimiter=']' --fields=1
@@ -242,8 +241,7 @@ function process_option_addaft () {
 function process_option_addbef () {
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$desktopfile"
-    then
+    elif ! printf '%s' "$favorite_apps" | grep --quiet "$desktopfile"; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile', $(
                 printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
                 )"
@@ -330,7 +328,7 @@ function report_database_changes() {
 $(gettext "Changes in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
-$(diff "$output_file_1" "$output_file_2" | grep --regexp='[>|<]' || true)
+$(diff "$output_file_1" "$output_file_2" | grep '[>|<]' || true)
 
 $(gettext 'Use "gsettings set <change>" for changes.')"
     kz.infomsg "$text"

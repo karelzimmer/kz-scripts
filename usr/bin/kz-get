@@ -21,6 +21,10 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
+# List NORMAL last here so that -x doesn't bork the display.
+readonly RED='\033[1;31m'
+readonly NORMAL='\033[0m'
+
 
 # #############################################################################
 # Globals
@@ -38,19 +42,37 @@ function init() {
     if [[ $* = -* && '--dev' == *"$*"* ]]; then
         OPTION_DEV=true
     elif [[ -n $* ]]; then
-        printf '%b\n' 'kz get [-d | --dev]'
+        printf '%s\n' 'kz get [-d | --dev]'
         exit 0
+    fi
+
+    # Check if systemd is available.
+    if ! type systemctl > /dev/null; then
+        printf "$RED%s$NORMAL\n" 'fatal: no systemd available' >&2
+        exit 1
+    fi
+
+    # Check if os release is available.
+    if ! [[ -f /etc/os-release ]]; then
+        printf "$RED%s$NORMAL\n" 'fatal: no os release available' >&2
+        exit 1
+    fi
+
+    # Check if started as root.
+    if [[ $UID -eq 0 ]]; then
+        printf "$RED%s$NORMAL\n" 'fatal: must not be run as root' >&2
+        exit 1
     fi
 }
 
 # This function performs the script actions.
 function process() {
-    if grep --quiet --regexp='debian' /etc/os-release; then
+    if grep --quiet debian /etc/os-release; then
         process_deb_package
-    elif grep --quiet --regexp='rhel' /etc/os-release; then
+    elif grep --quiet rhel /etc/os-release; then
         process_rpm_package
     else
-        printf "%b\n" 'fatal: unknown os release' >&2
+        printf '%s\n' 'fatal: unknown os release' >&2
         exit 1
     fi
 }
@@ -71,10 +93,8 @@ function process_deb_package() {
         kz_deb_local_file=$(mktemp -t "kz-XXXXXXXXXX.deb")
     fi
 
-    if type kz &> /dev/null; then
+    if type kz > /dev/null; then
         reinstall='--reinstall'
-    else
-        reinstall=''
     fi
 
     # Download kz package.
@@ -110,7 +130,7 @@ function check_debian_package_manager() {
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        sleep 1
+        sleep 2
     done
 }
 
@@ -127,7 +147,7 @@ function process_rpm_package() {
         kz_rpm_site_file=$packages_url/kz-4.2.1-1.noarch.rpm
     fi
 
-    if type kz &> /dev/null; then
+    if type kz > /dev/null; then
         install='reinstall'
     else
         install='install'
@@ -152,8 +172,8 @@ function term() {
     text="\n$separator_line\n\n"
 
     if $OPTION_DEV; then
-        text+="\033[1;31m$(gettext "Please note: the development version of \
-the kz package is installed")\033[0m\n\n"
+        text+="$RED$(gettext "Please note: the development version of \
+the kz package is installed")$NORMAL\n\n"
     fi
 
     text+="$(gettext "Package kz has been successfully installed.
