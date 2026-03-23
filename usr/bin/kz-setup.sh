@@ -172,6 +172,8 @@ if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 
 if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing; fi
 if gsettings get org.gnome.shell.extensions.ding show-home ; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first ; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true; fi
+#
+LOGOUT=true
 
 # RESET gnome-settings *
 # -----------------------------------------------------------------------------
@@ -200,6 +202,7 @@ if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-
 if gsettings get org.gnome.shell.extensions.ding show-home ; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first ; then gsettings reset org.gtk.gtk4.Settings.FileChooser sort-directories-first; fi
 if gsettings get org.gnome.desktop.input-sources sources ; then gsettings reset org.gnome.desktop.input-sources sources; fi
+#
 LOGOUT=true
 
 # SETUP google-chrome pc01 pc06 pc07

@@ -390,7 +390,7 @@ sudo systemctl start fwupd.service
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gdebi; fi
 #
-# App gdebi is not avalable on RedHat and RedHat-based system.
+# App gdebi is not available on RedHat and RedHat-based system.
 
 # REMOVE gdebi #none
 # -----------------------------------------------------------------------------
@@ -398,7 +398,7 @@ if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get 
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes gdebi; fi
 #
-# App gdebi is not avalable on RedHat and RedHat-based system.
+# App gdebi is not available on RedHat and RedHat-based system.
 
 # INSTALL gettext pc06 pc07
 # -----------------------------------------------------------------------------
@@ -638,7 +638,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes htop; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes imagination; fi
 #
-# App imagination is not avalable on RedHat and RedHat-based system.
+# App imagination is not available on RedHat and RedHat-based system.
 
 # REMOVE imagination pc06 pc07
 # -----------------------------------------------------------------------------
@@ -646,7 +646,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes i
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes imagination; fi
 #
-# App imagination is not avalable on RedHat and RedHat-based system.
+# App imagination is not available on RedHat and RedHat-based system.
 
 # INSTALL jq pc06 pc07
 # -----------------------------------------------------------------------------
@@ -670,7 +670,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes jq; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes krita; fi
 #
-# App krita is not avalable on RedHat and RedHat-based system.
+# App krita is not available on RedHat and RedHat-based system.
 
 # REMOVE krita pc06
 # -----------------------------------------------------------------------------
@@ -678,7 +678,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes k
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes krita; fi
 #
-# App krita is not avalable on RedHat and RedHat-based system.
+# App krita is not available on RedHat and RedHat-based system.
 
 # INSTALL kvm pc06 pc07
 # -----------------------------------------------------------------------------
@@ -940,11 +940,11 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes poedit; f
 # Tools based on libpst to read data from Microsoft Outlook PST files.
 # -----------------------------------------------------------------------------
 # - readpst - export data from PST files to a variety of formats, including
-# mbox, MH and KMail. Other packages like mb2md are available for subsequent
-# conversions to Maildir and other formats.
+#   mbox, MH and KMail. Other packages like mb2md are available for subsequent
+#   conversions to Maildir and other formats.
 # - lspst - list data in PST files.
 # - pst2ldif - extract contacts from a PST file and prepare them for input in
-# LDAP
+#   LDAP
 # - pst2dii - export data from PST files to Summation dii load file format
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes pst-utils; fi
@@ -1023,7 +1023,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes shellchec
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes simplescreenrecorder; fi
 #
-# App simplescreenrecorder is not avalable on RedHat and RedHat-based system.
+# App simplescreenrecorder is not available on RedHat and RedHat-based system.
 
 # REMOVE simplescreenrecorder #none
 # -----------------------------------------------------------------------------
@@ -1033,7 +1033,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes s
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
 #
-# App simplescreenrecorder is not avalable on RedHat and RedHat-based system.
+# App simplescreenrecorder is not available on RedHat and RedHat-based system.
 
 # INSTALL spice-vdagent pc06 pc07
 # -----------------------------------------------------------------------------
