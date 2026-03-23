@@ -296,7 +296,7 @@ kz-desktop --delete=microsoft-edge
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
 #
-# For Red Hat and RedHat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 #
 LOGOUT=true
 
@@ -306,7 +306,7 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
 #
-# For Red Hat and RedHat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 #
 LOGOUT=true
 

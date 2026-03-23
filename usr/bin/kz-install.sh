@@ -390,7 +390,7 @@ sudo systemctl start fwupd.service
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gdebi; fi
 #
-# App gdebi is not available on RedHat and RedHat-based system.
+# App gdebi is not available on Red Hat and Red Hat-based system.
 
 # REMOVE gdebi #none
 # -----------------------------------------------------------------------------
@@ -398,7 +398,7 @@ if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get 
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes gdebi; fi
 #
-# App gdebi is not available on RedHat and RedHat-based system.
+# App gdebi is not available on Red Hat and Red Hat-based system.
 
 # INSTALL gettext pc06 pc07
 # -----------------------------------------------------------------------------
@@ -564,7 +564,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-gsconnect; then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
 #
-# For Red Hat and RedHat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 #
 if systemctl status ufw; then sudo ufw allow 1714:1764/udp; fi
 if systemctl status ufw; then sudo ufw allow 1714:1764/tcp; fi
@@ -576,7 +576,7 @@ if systemctl status ufw; then sudo ufw reload; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-gsconnect; then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
 #
-# For Red Hat and RedHat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 #
 if systemctl status ufw; then sudo ufw delete allow 1714:1764/udp; fi
 if systemctl status ufw; then sudo ufw delete allow 1714:1764/tcp; fi
@@ -638,7 +638,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes htop; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes imagination; fi
 #
-# App imagination is not available on RedHat and RedHat-based system.
+# App imagination is not available on Red Hat and Red Hat-based system.
 
 # REMOVE imagination pc06 pc07
 # -----------------------------------------------------------------------------
@@ -646,7 +646,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes i
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes imagination; fi
 #
-# App imagination is not available on RedHat and RedHat-based system.
+# App imagination is not available on Red Hat and Red Hat-based system.
 
 # INSTALL jq pc06 pc07
 # -----------------------------------------------------------------------------
@@ -670,7 +670,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes jq; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes krita; fi
 #
-# App krita is not available on RedHat and RedHat-based system.
+# App krita is not available on Red Hat and Red Hat-based system.
 
 # REMOVE krita pc06
 # -----------------------------------------------------------------------------
@@ -678,7 +678,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes k
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes krita; fi
 #
-# App krita is not available on RedHat and RedHat-based system.
+# App krita is not available on Red Hat and Red Hat-based system.
 
 # INSTALL kvm pc06 pc07
 # -----------------------------------------------------------------------------
@@ -858,7 +858,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 #
-# For Red Hat and RedHat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 #
 REBOOT=true
 
@@ -868,7 +868,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 #
-# For Red Hat and RedHat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 #
 REBOOT=true
 
@@ -993,7 +993,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes rpm; fi
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
 #
-# App rpm cannot be removed from RedHat and RedHat-based system.
+# App rpm cannot be removed from Red Hat and Red Hat-based system.
 
 # INSTALL shellcheck pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1023,7 +1023,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes shellchec
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes simplescreenrecorder; fi
 #
-# App simplescreenrecorder is not available on RedHat and RedHat-based system.
+# App simplescreenrecorder is not available on Red Hat and Red Hat-based system.
 
 # REMOVE simplescreenrecorder #none
 # -----------------------------------------------------------------------------
@@ -1033,7 +1033,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes s
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
 #
-# App simplescreenrecorder is not available on RedHat and RedHat-based system.
+# App simplescreenrecorder is not available on Red Hat and Red Hat-based system.
 
 # INSTALL spice-vdagent pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1080,7 +1080,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes sp
 if grep --quiet debian /etc/os-release; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 #
-# App spotify cannot be removed from RedHat and RedHat-based system.
+# App spotify cannot be removed from Red Hat and Red Hat-based system.
 
 # INSTALL ssh pc01 pc06 pc07
 # -----------------------------------------------------------------------------
