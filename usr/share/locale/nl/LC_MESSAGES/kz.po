@@ -1195,7 +1195,7 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: gitsquash:52 kz-menu:500
+#: gitsquash:54 kz-menu:500
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
@@ -1577,32 +1577,36 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: gitsquash:50
+#: gitsquash:49
 msgid "*** git squash merge in 10 steps ***"
 msgstr "*** git squash merge in 10 stappen ***"
 
-#: gitsquash:54
+#: gitsquash:51
+msgid "Works best in two separate terminals by copying and pasting."
+msgstr "Werkt het beste in twee aparte terminals door te kopiëren en plakken."
+
+#: gitsquash:56
 msgid "PREPARE:"
 msgstr "VOORBEREIDEN:"
 
-#: gitsquash:58
+#: gitsquash:60
 msgid "MERGE:"
 msgstr "SAMENVOEGEN:"
 
-#: gitsquash:62
+#: gitsquash:64
 msgid "COMMIT:"
 msgstr "BEVESTIGEN:"
 
-#: gitsquash:66
+#: gitsquash:69
 msgid "CLEANUP:"
 msgstr "OPRUIMEN:"
 
-#: gitsquash:70
+#: gitsquash:73
 msgid "MAINTENANCE:"
 msgstr "ONDERHOUD:"
 
 #: ckhtml:127 gitbranch:63 gitclone:80 gitfetch:63 gitinit:53 gitpull:63
-#: gitsquash:75 gitstatus:63 kz-build:517 kz-check:597 kz-deploy:272 kz-dev:278
+#: gitsquash:77 gitstatus:63 kz-build:517 kz-check:597 kz-deploy:272 kz-dev:278
 #: kz-post-migrate:71 kz-update:314
 msgid "Complete!"
 msgstr "Klaar!"
