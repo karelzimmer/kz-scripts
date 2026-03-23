@@ -288,7 +288,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:608 kz-install:587 kz-restore:337 kz-setup:552
+#: kz-backup:608 kz-install:588 kz-restore:337 kz-setup:552
 msgid "error messages"
 msgstr ""
 
@@ -313,11 +313,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:616 kz-install:592 kz-restore:345 kz-setup:556
+#: kz-backup:616 kz-install:593 kz-restore:345 kz-setup:556
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:617 kz-install:593 kz-restore:346 kz-setup:557
+#: kz-backup:617 kz-install:594 kz-restore:346 kz-setup:557
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -878,59 +878,59 @@ msgstr ""
 msgid "Update package lists before installing apps."
 msgstr ""
 
-#: kz-install:386 kz-setup:365
+#: kz-install:387 kz-setup:365
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:441 kz-setup:420
+#: kz-install:442 kz-setup:420
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:451 kz-menu:76 kz-install.desktop:10
+#: kz-install:452 kz-menu:76 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
 
-#: kz-install:452 kz-menu:52
+#: kz-install:453 kz-menu:52
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:483 kz-setup:461
+#: kz-install:484 kz-setup:461
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:484 kz-setup:462
+#: kz-install:485 kz-setup:462
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:588
+#: kz-install:589
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:594
+#: kz-install:595
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:610
+#: kz-install:611
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:612
+#: kz-install:613
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:618
+#: kz-install:619
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1096 kz-install.sh:1097 kz-install.sh:1103
+#: kz-install.sh:1242 kz-install.sh:1244 kz-install.sh:1250
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1096
+#: kz-install.sh:1242
 msgid "Guest_user"
 msgstr ""
 

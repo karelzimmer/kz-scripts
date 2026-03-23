@@ -337,7 +337,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:608 kz-install:587 kz-restore:337 kz-setup:552
+#: kz-backup:608 kz-install:588 kz-restore:337 kz-setup:552
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -362,11 +362,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:616 kz-install:592 kz-restore:345 kz-setup:556
+#: kz-backup:616 kz-install:593 kz-restore:345 kz-setup:556
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:617 kz-install:593 kz-restore:346 kz-setup:557
+#: kz-backup:617 kz-install:594 kz-restore:346 kz-setup:557
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -978,49 +978,49 @@ msgstr "automatisch-toegevoegde-update"
 msgid "Update package lists before installing apps."
 msgstr "Werk de pakketlijsten bij alvorens apps te installeren."
 
-#: kz-install:386 kz-setup:365
+#: kz-install:387 kz-setup:365
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr "App '$app_argument' niet gevonden."
 
-#: kz-install:441 kz-setup:420
+#: kz-install:442 kz-setup:420
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
-#: kz-install:451 kz-menu:76 kz-install.desktop:10
+#: kz-install:452 kz-menu:76 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr "Apps installeren"
 
-#: kz-install:452 kz-menu:52
+#: kz-install:453 kz-menu:52
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
-#: kz-install:483 kz-setup:461
+#: kz-install:484 kz-setup:461
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:484 kz-setup:462
+#: kz-install:485 kz-setup:462
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
-#: kz-install:588
+#: kz-install:589
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:594
+#: kz-install:595
 msgid "Try to install/remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
-#: kz-install:610
+#: kz-install:611
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:612
+#: kz-install:613
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:618
+#: kz-install:619
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1028,11 +1028,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:1096 kz-install.sh:1097 kz-install.sh:1103
+#: kz-install.sh:1242 kz-install.sh:1244 kz-install.sh:1250
 msgid "guest"
 msgstr "gast"
 
-#: kz-install.sh:1096
+#: kz-install.sh:1242
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
