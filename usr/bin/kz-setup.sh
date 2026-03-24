@@ -217,6 +217,22 @@ kz-desktop --addbef=google-chrome
 # -----------------------------------------------------------------------------
 kz-desktop --delete=google-chrome
 
+# SETUP gsconnect pc06 pc07
+# -----------------------------------------------------------------------------
+# Securely connect to mobile devices and other desktops.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
+
+# RESET gsconnect pc06 pc07
+# -----------------------------------------------------------------------------
+# Securely connect to mobile devices and other desktops.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
+
 # SETUP kvm pc06 pc07
 # -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
@@ -297,8 +313,6 @@ kz-desktop --delete=microsoft-edge
 if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
-#
-LOGOUT=true
 
 # RESET no-annoyance *
 # -----------------------------------------------------------------------------
@@ -307,8 +321,6 @@ LOGOUT=true
 if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
-#
-LOGOUT=true
 
 # SETUP private-home *
 # -----------------------------------------------------------------------------
