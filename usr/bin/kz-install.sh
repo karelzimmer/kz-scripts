@@ -52,9 +52,9 @@ if grep --quiet rhel /etc/os-release; then sudo dnf upgrade --assumeyes --refres
 if ! grep --quiet noaer /etc/default/grub; then sudo sed --in-place 's/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
 if ! grep --quiet noaer /etc/default/grub; then sudo sed --in-place 's/quiet/quiet pci=noaer/' /etc/default/grub; fi
 #
-if grep --quiet debian /etc/os-release ; then sudo update-grub; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 #
-if grep --quiet rhel /etc/os-release ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -72,9 +72,9 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 if grep --quiet noaer /etc/default/grub; then sudo sed --in-place 's/ pci=noaer//' /etc/default/grub; fi
 #
-if grep --quiet debian /etc/os-release ; then sudo update-grub; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 #
-if grep --quiet rhel /etc/os-release ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -354,19 +354,19 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; f
 # -----------------------------------------------------------------------------
 # Web browser (ESR=Extended Support Release).
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$' ; then sudo apt-get install --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'; then sudo apt-get install --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
 if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
 #
-if grep --quiet rhel /etc/os-release ; then sudo dnf install --assumeyes firefox; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
 # REMOVE firefox *
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$' ; then sudo apt-get remove --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
+if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox$'; then sudo apt-get remove --assume-yes firefox firefox-l10n-"${LANG:0:2}"; fi
 if grep --quiet debian /etc/os-release && apt-cache pkgnames | grep --quiet '^firefox-esr$'; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
 #
-if grep --quiet rhel /etc/os-release ; then sudo dnf remove --assumeyes firefox; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
 
 # INSTALL fwupd-settings #none
 # -----------------------------------------------------------------------------
@@ -536,9 +536,9 @@ sudo sed --in-place 's/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/' /etc/default/grub
 # -----------------------------------------------------------------------------
 if ! grep --quiet loglevel=3 /etc/default/grub; then sudo sed --in-place 's/quiet/quiet loglevel=3/' /etc/default/grub; fi
 #
-if grep --quiet debian /etc/os-release ; then sudo update-grub; fi
+if grep --quiet debian /etc/os-release; then sudo update-grub; fi
 #
-if grep --quiet rhel /etc/os-release ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet rhel /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 #
 REBOOT=true
 
@@ -586,9 +586,9 @@ if systemctl status ufw; then sudo ufw reload; fi
 # -----------------------------------------------------------------------------
 # Gui for Uncomplicated FireWall.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release ; then sudo apt-get install --assume-yes gufw; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes gufw; fi
 #
-if grep --quiet rhel /etc/os-release ; then sudo dnf install --assumeyes gufw; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes gufw; fi
 #
 sudo ufw enable
 #
@@ -605,9 +605,9 @@ if type ssh; then sudo ufw reload; fi
 # -----------------------------------------------------------------------------
 sudo ufw disable
 #
-if grep --quiet debian /etc/os-release ; then sudo apt-get remove --assume-yes gufw; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gufw; fi
 #
-if grep --quiet rhel /etc/os-release ; then sudo dnf remove --assumeyes gufw; fi
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes gufw; fi
 #
 if dpkg --status gnome-shell-extension-gsconnect; then sudo ufw delete allow 1714:1764/udp; fi
 if dpkg --status gnome-shell-extension-gsconnect; then sudo ufw delete allow 1714:1764/tcp; fi
