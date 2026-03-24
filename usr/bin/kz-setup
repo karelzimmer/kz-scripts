@@ -440,7 +440,7 @@ function setup_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"
+                    --text      "$text"     2> /dev/null
             )
     else
         process_command_file
@@ -512,7 +512,7 @@ function execute_command() {
             kz.logmsg "$app_name_line"
         fi
         kz.logmsg "$cmd"
-        printf '%b\n' "#$app_name_line\n\n$cmd"
+        printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if $app_line; then
             kz.infomsg "$app_name_line"
@@ -563,7 +563,7 @@ $(gettext 'Try to set up/reset the apps again.')"
                     --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
-                    --title     "$title"    || true
+                    --title     "$title"    2> /dev/null || true
         else
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"

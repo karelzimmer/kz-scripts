@@ -1024,45 +1024,45 @@ msgstr ""
 msgid "Go to installation menu"
 msgstr ""
 
-#: kz-menu:87 kz-menu:384
+#: kz-menu:87 kz-menu:385
 msgid "Back"
 msgstr ""
 
-#: kz-menu:207 kz-menu:382
+#: kz-menu:207 kz-menu:383
 msgid "Select a choice:"
 msgstr ""
 
-#: kz-menu:208 kz-menu:383
+#: kz-menu:208 kz-menu:384
 msgid "Continue"
 msgstr ""
 
-#: kz-menu:210 kz-menu:385
+#: kz-menu:210 kz-menu:386
 msgid "CHOICE"
 msgstr ""
 
-#: kz-menu:211 kz-menu:233 kz-menu:386 kz-menu:408
+#: kz-menu:211 kz-menu:234 kz-menu:387 kz-menu:410
 msgid "NUM"
 msgstr ""
 
-#: kz-menu:212 kz-menu:234 kz-menu:387 kz-menu:409
+#: kz-menu:212 kz-menu:235 kz-menu:388 kz-menu:411
 msgid "ACTION"
 msgstr ""
 
-#: kz-menu:213 kz-menu:235 kz-menu:388 kz-menu:410
+#: kz-menu:213 kz-menu:236 kz-menu:389 kz-menu:412
 msgid "DESCRIPTION"
 msgstr ""
 
-#: kz-menu:244
+#: kz-menu:245
 #, sh-format
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr ""
 
-#: kz-menu:288 kz-menu:460
+#: kz-menu:289 kz-menu:462
 #, sh-format
 msgid "Cannot handle this choice ($REPLY)."
 msgstr ""
 
-#: kz-menu:314
+#: kz-menu:315
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1075,28 +1075,28 @@ msgid ""
 "4. Install Linux."
 msgstr ""
 
-#: kz-menu:419
+#: kz-menu:421
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: gitsquash:54 kz-menu:500
+#: gitsquash:54 kz-menu:502
 msgid "The following will be executed:"
 msgstr ""
 
-#: kz-menu:515
+#: kz-menu:517
 msgid "Proceed?"
 msgstr ""
 
-#: kz-menu:526
+#: kz-menu:528
 msgid "Yes"
 msgstr ""
 
-#: kz-menu:527
+#: kz-menu:529
 msgid "No"
 msgstr ""
 
-#: kz-menu:535
+#: kz-menu:537
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr ""

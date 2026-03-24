@@ -125,7 +125,7 @@ function kz.errmsg() {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$*"        || true
+                --text      "$*"        2> /dev/null || true
     else
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
@@ -144,7 +144,7 @@ function kz.infomsg() {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$*"        || true
+                --text      "$*"        2> /dev/null || true
     else
         printf '%b\n' "$*"
     fi

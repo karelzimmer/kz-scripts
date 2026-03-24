@@ -215,7 +215,8 @@ function process_menu1_gui() {
                     FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_DESCS[2]}"   \
                     FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}"   \
                     FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
-                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"
+                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
+                    2> /dev/null
             ) || exit 0
         process_menu1_choice
     done
@@ -325,7 +326,7 @@ Roughly boils down to:
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$text"
+                --text      "$text"     2> /dev/null
     else
         printf '%s\n' "$text"
         kz.wait_for_enter
@@ -390,7 +391,8 @@ function process_menu2_gui() {
                     FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_DESCS[2]}"   \
                     FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_DESCS[3]}"   \
                     FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
-                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"
+                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
+                    2> /dev/null
             ) || break
         process_menu2_choice
     done
@@ -524,7 +526,7 @@ $prompt"
                     --title         "$title"            \
                     --text          "$text"             \
                     --ok-label      "$(gettext 'Yes')"  \
-                    --cancel-label  "$(gettext 'No')"   ; then
+                    --cancel-label  "$(gettext 'No')"   2> /dev/null; then
             execute_command=true
         else
             execute_command=false
