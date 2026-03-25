@@ -288,7 +288,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:608 kz-install:588 kz-restore:337 kz-setup:552
+#: kz-backup:608 kz-install:591 kz-restore:337 kz-setup:554
 msgid "error messages"
 msgstr ""
 
@@ -313,11 +313,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:616 kz-install:593 kz-restore:345 kz-setup:556
+#: kz-backup:616 kz-install:596 kz-restore:345 kz-setup:558
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:617 kz-install:594 kz-restore:346 kz-setup:557
+#: kz-backup:617 kz-install:597 kz-restore:346 kz-setup:559
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -904,23 +904,23 @@ msgstr ""
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:589
+#: kz-install:592
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:595
+#: kz-install:598
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:611
+#: kz-install:614
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:613
+#: kz-install:616
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:619
+#: kz-install:622
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1227,35 +1227,35 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:553
+#: kz-setup:555
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:558
+#: kz-setup:560
 msgid "Try to set up/reset the apps again."
 msgstr ""
 
-#: kz-setup:574
+#: kz-setup:576
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:576
+#: kz-setup:578
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:584
+#: kz-setup:586
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:589
+#: kz-setup:591
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:608
+#: kz-setup:610
 msgid "Log out of the computer yourself."
 msgstr ""
 
