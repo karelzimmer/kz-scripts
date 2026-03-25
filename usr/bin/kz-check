@@ -163,8 +163,8 @@ function check_website() {
 
     # Check files which are not used on the html pages.
     while read -r file; do
-        if grep --recursive             \
-                --quiet                 \
+        if grep --quiet                 \
+                --recursive             \
                 "$(basename "$file")"   \
                 "$uploads_dist_html"    ; then
             # The file is used in the html pages.

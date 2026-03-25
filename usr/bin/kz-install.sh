@@ -228,11 +228,11 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes cups; fi
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet debian /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) > /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) > /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 #
-if grep --quiet rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
-if grep --quiet rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-no-overview; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
+if grep --quiet rhel /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) > /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet rhel /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-no-overview) > /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
 #
 REBOOT=true
 
@@ -240,11 +240,11 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet debian /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) > /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) > /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 #
-if grep --quiet rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
-if grep --quiet rhel /etc/os-release && type gnome-session && dnf list gnome-shell-extension-no-overview; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
+if grep --quiet rhel /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) > /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet rhel /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-no-overview) > /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
 #
 REBOOT=true
 
@@ -388,7 +388,7 @@ sudo systemctl start fwupd.service
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gdebi; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 #
 # App gdebi is not available on Red Hat and Red Hat-based system.
 
@@ -396,7 +396,7 @@ if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get 
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes gdebi; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 #
 # App gdebi is not available on Red Hat and Red Hat-based system.
 
@@ -440,17 +440,17 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes git; fi
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
 #
-if grep --quiet rhel /etc/os-release && type gnome-session; then sudo dnf install --assumeyes gnome-tweaks; fi
+if grep --quiet rhel /etc/os-release && type gnome-session > /dev/null; then sudo dnf install --assumeyes gnome-tweaks; fi
 
 # REMOVE gnome-tweaks pc06 pc07
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get remove --assume-yes gnome-tweaks; fi
 #
-if grep --quiet rhel /etc/os-release && type gnome-session; then sudo dnf install --assumeyes gnome-tweaks; fi
+if grep --quiet rhel /etc/os-release && type gnome-session > /dev/null; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
 # INSTALL google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -562,25 +562,25 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-gsconnect; then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
+if grep --quiet debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) > /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 #
-if systemctl status ufw; then sudo ufw allow 1714:1764/udp; fi
-if systemctl status ufw; then sudo ufw allow 1714:1764/tcp; fi
-if systemctl status ufw; then sudo ufw reload; fi
+if systemctl status ufw > /dev/null; then sudo ufw allow 1714:1764/udp; fi
+if systemctl status ufw > /dev/null; then sudo ufw allow 1714:1764/tcp; fi
+if systemctl status ufw > /dev/null; then sudo ufw reload; fi
 
 # REMOVE gsconnect pc06 pc07
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-gsconnect; then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
+if grep --quiet debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) > /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 #
-if systemctl status ufw; then sudo ufw delete allow 1714:1764/udp; fi
-if systemctl status ufw; then sudo ufw delete allow 1714:1764/tcp; fi
-if systemctl status ufw; then sudo ufw reload; fi
+if systemctl status ufw > /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
+if systemctl status ufw > /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
+if systemctl status ufw > /dev/null; then sudo ufw reload; fi
 
 # INSTALL gufw *
 # -----------------------------------------------------------------------------
@@ -592,12 +592,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes gufw; fi
 #
 sudo ufw enable
 #
-if dpkg --status gnome-shell-extension-gsconnect; then sudo ufw allow 1714:1764/udp; fi
-if dpkg --status gnome-shell-extension-gsconnect; then sudo ufw allow 1714:1764/tcp; fi
-if dpkg --status gnome-shell-extension-gsconnect; then sudo ufw reload; fi
+if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw allow 1714:1764/udp; fi
+if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw allow 1714:1764/tcp; fi
+if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw reload; fi
 #
-if type ssh; then sudo ufw allow ssh; fi
-if type ssh; then sudo ufw reload; fi
+if type ssh > /dev/null; then sudo ufw allow ssh; fi
+if type ssh > /dev/null; then sudo ufw reload; fi
 
 # REMOVE gufw *
 # -----------------------------------------------------------------------------
@@ -609,12 +609,12 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes gu
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes gufw; fi
 #
-if dpkg --status gnome-shell-extension-gsconnect; then sudo ufw delete allow 1714:1764/udp; fi
-if dpkg --status gnome-shell-extension-gsconnect; then sudo ufw delete allow 1714:1764/tcp; fi
-if dpkg --status gnome-shell-extension-gsconnect; then sudo ufw reload; fi
+if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
+if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
+if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw reload; fi
 #
-if type ssh; then sudo ufw delete allow ssh; fi
-if type ssh; then sudo ufw reload; fi
+if type ssh > /dev/null; then sudo ufw delete allow ssh; fi
+if type ssh > /dev/null; then sudo ufw reload; fi
 
 # INSTALL htop pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -802,7 +802,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes lshw; fi
 # Web browser.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list; fi
+if grep --quiet debian /etc/os-release; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list > /dev/null; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes microsoft-edge-stable; fi
 #
@@ -856,7 +856,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
 # -----------------------------------------------------------------------------
 # Disable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) > /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 #
@@ -866,7 +866,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Enable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) > /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 #
@@ -1064,7 +1064,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes spice-vda
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
-if grep --quiet debian /etc/os-release; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list; fi
+if grep --quiet debian /etc/os-release; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes spotify-client; fi
 #
@@ -1092,12 +1092,12 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes openssh;
 #
 sudo sed --in-place 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 #
-if systemctl status ufw; then sudo ufw allow ssh; fi
-if systemctl status ufw; then sudo ufw reload; fi
+if systemctl status ufw > /dev/null; then sudo ufw allow ssh; fi
+if systemctl status ufw > /dev/null; then sudo ufw reload; fi
 # -----------------------------------------------------------------------------
 # Check for remote root access.
 # -----------------------------------------------------------------------------
-grep 'PermitRootLogin no' /etc/ssh/sshd_config
+grep --quiet 'PermitRootLogin no' /etc/ssh/sshd_config
 #
 sudo systemctl restart ssh.service
 # -----------------------------------------------------------------------------
@@ -1118,8 +1118,8 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes ss
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes openssh; fi
 #
-if systemctl status ufw; then sudo ufw delete allow ssh; fi
-if systemctl status ufw; then sudo ufw reload; fi
+if systemctl status ufw > /dev/null; then sudo ufw delete allow ssh; fi
+if systemctl status ufw > /dev/null; then sudo ufw reload; fi
 # -----------------------------------------------------------------------------
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
@@ -1129,9 +1129,9 @@ if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place '/^192.168.1./d
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gnome-sushi; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
 #
-if grep --quiet rhel /etc/os-release && type gnome-session; then sudo dnf install --assumeyes sushi; fi
+if grep --quiet rhel /etc/os-release && type gnome-session > /dev/null; then sudo dnf install --assumeyes sushi; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
@@ -1141,9 +1141,9 @@ if grep --quiet rhel /etc/os-release && type gnome-session; then sudo dnf instal
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes gnome-sushi; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
 #
-if grep --quiet rhel /etc/os-release && type gnome-session; then sudo dnf remove --assumeyes sushi; fi
+if grep --quiet rhel /etc/os-release && type gnome-session > /dev/null; then sudo dnf remove --assumeyes sushi; fi
 
 # INSTALL teamviewer *
 # -----------------------------------------------------------------------------
@@ -1239,15 +1239,15 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes usbutils;
 # -----------------------------------------------------------------------------
 # Add guest user.
 # -----------------------------------------------------------------------------
-if ! id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(TEXTDOMAIN=kz gettext 'Guest_user')" "$(TEXTDOMAIN=kz gettext 'guest')"; fi
+if ! id "$(TEXTDOMAIN=kz gettext 'guest')" > /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(TEXTDOMAIN=kz gettext 'Guest_user')" "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 #
-if id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo passwd --delete "$(TEXTDOMAIN=kz gettext 'guest')"; fi
+if id "$(TEXTDOMAIN=kz gettext 'guest')" > /dev/null; then sudo passwd --delete "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 # REMOVE user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Delete guest user.
 # -----------------------------------------------------------------------------
-if id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
+if id "$(TEXTDOMAIN=kz gettext 'guest')" > /dev/null; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 # INSTALL vlc *
 # -----------------------------------------------------------------------------
@@ -1285,14 +1285,14 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes ffmpeg*; 
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
 if grep --quiet debian /etc/os-release; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources; fi
+if grep --quiet debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources > /dev/null; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes apt-transport-https; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes code; fi
 if grep --quiet debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if grep --quiet rhel /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo; fi
+if grep --quiet rhel /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes code; fi
 
 # REMOVE vscode pc06 pc07
@@ -1341,16 +1341,16 @@ if grep --quiet rhel /etc/os-release; then sudo dnf update; fi
 # -----------------------------------------------------------------------------
 # Run Windows applications.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo dpkg --add-architecture i386; fi
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo dpkg --add-architecture i386; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
 #
-if grep --quiet rhel /etc/os-release && type gnome-session; then sudo dnf install --assumeyes wine playonlinux; fi
+if grep --quiet rhel /etc/os-release && type gnome-session > /dev/null; then sudo dnf install --assumeyes wine playonlinux; fi
 
 # REMOVE wine #none
 # -----------------------------------------------------------------------------
 # Run Windows applications.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
-if grep --quiet debian /etc/os-release && type gnome-session; then sudo dpkg --remove-architecture i386; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
+if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo dpkg --remove-architecture i386; fi
 #
-if grep --quiet rhel /etc/os-release && type gnome-session; then sudo dnf remove --assumeyes wine playonlinux; fi
+if grep --quiet rhel /etc/os-release && type gnome-session > /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi
