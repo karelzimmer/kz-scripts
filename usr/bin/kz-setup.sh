@@ -55,6 +55,8 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
+if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+#
 if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 #
 if grep --quiet rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
@@ -70,11 +72,11 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed > /dev/null;
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-apps-at-top > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
-if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 LOGOUT=true
 
@@ -91,6 +93,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed > /dev/null;
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-apps-at-top > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-apps-at-top; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
@@ -221,6 +224,8 @@ kz-desktop --delete=google-chrome
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
+if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+#
 if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
@@ -310,6 +315,8 @@ kz-desktop --delete=microsoft-edge
 # -----------------------------------------------------------------------------
 # Disable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
+if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+#
 if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
