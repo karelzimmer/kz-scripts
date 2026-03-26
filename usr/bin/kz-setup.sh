@@ -227,6 +227,8 @@ if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsett
 if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
+#
+LOGOUT=true
 
 # RESET gsconnect pc06 pc07
 # -----------------------------------------------------------------------------
