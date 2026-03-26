@@ -72,7 +72,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed > /dev/null;
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-apps-at-top > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
@@ -93,7 +92,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed > /dev/null;
 if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-apps-at-top > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-apps-at-top; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
