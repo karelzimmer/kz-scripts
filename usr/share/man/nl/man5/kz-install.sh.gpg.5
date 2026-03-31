@@ -22,17 +22,13 @@ install.
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in dit versleuteld installatiebestand.
 .sp
-Dit bestand is aangemaakt met de volgende voorbeeldopdrachten:
-.br
-gpg --import /usr/share/kz/kz-public-key.gpg
+Dit bestand is aangemaakt met de volgende voorbeeldopdracht:
 .br
 gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg --sign
 ~/kz-install-decrypted.sh
 .sp
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
-kz-install, en als voorbeeld met de opdrachten:
-.br
-gpg --import /usr/share/kz/kz-public-key.gpg
+kz-install, en als voorbeeld met de opdracht:
 .br
 gpg --output ~/kz-install-decrypted.sh --decrypt
 ~/kz-scripts/usr/bin/kz-install.sh.gpg

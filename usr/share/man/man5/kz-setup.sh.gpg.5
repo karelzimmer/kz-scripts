@@ -20,17 +20,13 @@ This file contains commands to process as an settings file with kz setup.
 Commands with personal information such as a username are included in this
 GPG-encrypted settings file.
 .sp
-This file was created using the following sample commands:
-.br
-gpg --import /usr/share/kz/kz-public-key.gpg
+This file was created using the following sample command:
 .br
 gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg --sign
 ~/kz-setup-decrypted.sh
 .sp
 This file is decrypted before the commands are used in the kz-setup script,
-and as an example with the commands:
-.br
-gpg --import /usr/share/kz/kz-public-key.gpg
+and as an example with the command:
 .br
 gpg --output ~/kz-setup-decrypted.sh --decrypt
 ~/kz-scripts/usr/bin/kz-setup.sh.gpg

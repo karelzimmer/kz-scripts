@@ -168,6 +168,8 @@ function term() {
     local text=''
     local separator_line=''
 
+    gpg --import /usr/share/kz/kz-public-key.gpg
+
     separator_line=$(eval printf '=%.0s' '{1..80}')
     text="\n$separator_line\n\n"
 

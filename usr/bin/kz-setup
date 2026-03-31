@@ -103,9 +103,6 @@ function process() {
         # Decrypt GPG-encrypted settings file.
         settings_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        gpg --import                        \
-            /usr/share/kz/kz-public-key.gpg \
-            2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-setup.sh.gpg        \
             2> >($PROGRAM_LOGS)             \

@@ -21,17 +21,13 @@ setup.
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in dit versleuteld instellingenbestand.
 .sp
-Dit bestand is aangemaakt met de volgende voorbeeldopdrachten:
-.br
-gpg --import /usr/share/kz/kz-public-key.gpg
+Dit bestand is aangemaakt met de volgende voorbeeldopdracht:
 .br
 gpg --output ~/kz-scripts/usr/bin/kz-setup.sh.gpg --sign
 ~/kz-setup-decrypted.sh
 .sp
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
-kz-setup, en als voorbeeld met de opdrachten:
-.br
-gpg --import /usr/share/kz/kz-public-key.gpg
+kz-setup, en als voorbeeld met de opdracht:
 .br
 gpg --output ~/kz-setup-decrypted.sh --decrypt
 ~/kz-scripts/usr/bin/kz-setup.sh.gpg

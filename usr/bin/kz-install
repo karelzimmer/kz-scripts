@@ -104,9 +104,6 @@ function process() {
         # Decrypt GPG-encrypted installation file.
         installation_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        gpg --import                        \
-            /usr/share/kz/kz-public-key.gpg \
-            2> >($PROGRAM_LOGS)
         gpg --decrypt                       \
             /usr/bin/kz-install.sh.gpg      \
             2> >($PROGRAM_LOGS)             \
