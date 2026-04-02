@@ -557,9 +557,7 @@ $RED    $(gettext 'Flagged annotation found.')$NORMAL
                 --regexp="$esc_fixme"   \
                 --regexp="$esc_todo"    \
                 "$script"               |
-        nl      --number-width=4        \
-                --number-separator=''   \
-                --body-numbering=n
+        sed     --expression='s/^/    /'
     fi
 }
 
@@ -574,12 +572,10 @@ ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(gettext 'End spaces found.')$NORMAL
 "
         kz.infomsg "$text"
-        grep    --line-number           \
-                ' ''$'                  \
-                "$script"               |
-        nl      --number-width=4        \
-                --number-separator=''   \
-                --body-numbering=n
+        grep    --line-number   \
+                ' ''$'          \
+                "$script"       |
+        sed     --expression='s/^/    /'
         ERR_FLAG=true
     fi
 }

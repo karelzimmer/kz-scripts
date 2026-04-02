@@ -184,6 +184,27 @@ sudo flatpak uninstall --assumeyes com.bitwarden.desktop
 #
 REBOOT=true
 
+# INSTALL bottles pc06 pc07
+# -----------------------------------------------------------------------------
+# Run Windows software on Linux.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes flatpak; fi
+#
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes flatpak; fi
+#
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak install --assumeyes com.usebottles.bottles
+#
+REBOOT=true
+
+# REMOVE bottles pc06 pc07
+# -----------------------------------------------------------------------------
+# Run Windows software on Linux.
+# -----------------------------------------------------------------------------
+sudo flatpak uninstall --assumeyes com.usebottles.bottles
+#
+REBOOT=true
+
 # INSTALL cockpit pc06
 # -----------------------------------------------------------------------------
 # Web console.
@@ -1336,21 +1357,3 @@ if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes webmin; fi
 if grep --quiet rhel /etc/os-release; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf update; fi
-
-# INSTALL wine #none
-# -----------------------------------------------------------------------------
-# Run Windows applications.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo dpkg --add-architecture i386; fi
-if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
-#
-if grep --quiet rhel /etc/os-release && type gnome-session > /dev/null; then sudo dnf install --assumeyes wine playonlinux; fi
-
-# REMOVE wine #none
-# -----------------------------------------------------------------------------
-# Run Windows applications.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
-if grep --quiet debian /etc/os-release && type gnome-session > /dev/null; then sudo dpkg --remove-architecture i386; fi
-#
-if grep --quiet rhel /etc/os-release && type gnome-session > /dev/null; then sudo dnf remove --assumeyes wine playonlinux; fi

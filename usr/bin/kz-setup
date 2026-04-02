@@ -281,10 +281,7 @@ function process_option_list() {
     local text=''
 
     OPTION_GUI=false
-    text="$(gettext 'The following apps are available:')
-
-$(gettext 'NUM  APP')
-"
+    text=$(gettext 'The following apps are available:')
     apps=$(
         grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
                 "${settings_files[@]}"                  |
@@ -293,15 +290,13 @@ $(gettext 'NUM  APP')
         cut     --delimiter=' '                         \
                 --fields=3                              |
         sort    --unique                                |
-        nl      --number-width=3                        \
-                --number-format=rn                      \
-                --number-separator='  '                 \
-                --body-numbering=a                      || true
+        sed     --expression='s/^/    /'                || true
         )
-
     if [[ -n $apps ]]; then
+        text+="
+$apps"
         if [[ $setup = 'SETUP' ]]; then
-            text+="$apps
+            text+="
 
 $(gettext 'Use "kz setup <app>..." to set up the apps.')
 $(gettext "Use \"kz setup --cat <app>...\" to view the contents of the apps \
@@ -309,7 +304,7 @@ command file.")
 $(gettext "Use  \"kz setup --cat\" to view the contents of the whole command \
 file.")"
         else
-            text+="$apps
+            text+="
 
 $(gettext 'Use "kz setup --reset <app>..." to reset the apps.')
 $(gettext "Use \"kz setup --cat --reset <app>...\" to view the contents of \
@@ -317,7 +312,7 @@ the apps command file.")
 $(gettext "Use \"kz setup --cat --reset\" to view the contents of the whole \
 command file.")"
         fi
-            text+="
+        text+="
 $(gettext "Use \"kz setup --browse\" to view the contents of the default \
 settings files.")"
     else
@@ -332,8 +327,6 @@ $USAGE"
 # This function processes apps selected via the graphical user interface (GUI).
 function process_option_select() {
     local all_apps=''
-    local select_apps=''
-    local selected_app=''
     local selected_apps=''
 
     OPTION_GUI=true
@@ -344,13 +337,10 @@ function process_option_select() {
                 '[:space:]'                             |
         cut     --delimiter=' '                         \
                 --fields=3                              |
-        sort    --unique
+        sort    --unique                                |
+        sed     --expression='s/^/false /'
         )
-    select_apps=$(
-        for app in $all_apps; do
-            printf 'false %s\n' "$app"
-        done
-        )
+
     title=$(gettext 'Set up apps')
     text=$(gettext 'Select apps to set up:')
     # shellcheck disable=SC2086
@@ -363,7 +353,7 @@ function process_option_select() {
                 --text      "$text"             \
                 --column    "$(gettext 'SEL')"  \
                 --column    "$(gettext 'APP')"  \
-                $select_apps                    || true
+                $all_apps                       || true
             )
     if [[ -z $selected_apps ]]; then
         text=$(gettext 'No apps selected.')

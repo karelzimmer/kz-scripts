@@ -181,8 +181,7 @@ def process_option_list() -> None:
     """
     text: str
 
-    text = _('The following commands are available:') + '\n\n' + \
-        _('NUM  COMMAND') + '\n'
+    text = _('The following commands are available:') + '\n'
     command: str = f"find   /usr/bin/kz-*               \
                             -maxdepth 1                 \
                             -type f                     \
@@ -193,11 +192,7 @@ def process_option_list() -> None:
                             -printf '%f\n'          |   \
                      sort                           |   \
                      sed    --expression='s/kz-//'  |   \
-                     nl     --number-width=3            \
-                            --number-format=rn          \
-                            --number-separator='  '     \
-                            --body-numbering=a"
-
+                     sed    --expression='s/^/    /'"
     try:
         text += subprocess.run(command, stdout=subprocess.PIPE,
                                shell=True, check=True, text=True).stdout
