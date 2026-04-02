@@ -18,9 +18,6 @@ kz-setup - apps instellen
 .SH BESCHRIJVING
 \fBkz setup\fR stelt apps in en wijzigt gebruikersinstellingen.
 .sp
-In een desktopomgeving kan opdracht \fBkz setup\fR worden uitgevoerd door te
-zoeken naar \fBapps\fR, klik op \fBKZ Apps instellen\fR-pictogram.
-.sp
 Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het wijzigen
 van systeeminstellingen, \fBkz setup\fR is een post-installatie-instelscript.
 .sp
@@ -52,9 +49,11 @@ De gebruiker wordt indien nodig uitgelogd.
 Voor de indeling van de instellingenbestanden zie \fBman kz setup.sh\fR en
 \fBman kz setup.sh.gpg\fR.
 .sp
-Naar keuze kunnen te verwerken apps opgegeven worden met argument \fI<app>\fR.
+Naar keuze kunnen te verwerken apps opgegeven worden met argument \fI<app>\fR,
+of in een desktopomgeving door te zoeken naar \fBapps\fR, klik op
+\fBKZ Apps instellen\fR-pictogram en selecteer de gewenste apps.
 .br
-Per opgegeven app worden de opdrachten geselecteerd uit de
+Per te verwerken app worden de opdrachten geselecteerd uit de
 instellingenbestanden en gekopieerd naar het opdrachtbestand.
 .sp
 Met optie \fB-b\fR, \fB--browse\fR kan gebladerd worden door de
@@ -62,17 +61,20 @@ instellingenbestanden.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een andere
+Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander
 instellingenbestand opgegeven worden. Deze optie kan herhaaldelijk gebruikt
 worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz setup\fR in grafische modus
-uitgevoerd indien mogelijk. Een desktopomgeving is vereist.
+uitgevoerd. Een desktopomgeving is vereist.
 .sp
 Optie \fB-l\fR, \fB--list\fR geeft een lijst alle van apps die beschikbaar zijn
 in de instellingenbestanden.
 .sp
 Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
+.sp
+Optie \fB-s\fR, \fB--select\fR wordt gebruikt om apps te selecteren in
+grafische modus. Een desktopomgeving is vereist.
 
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
@@ -95,6 +97,9 @@ Toon een lijst van in te stellen apps.
 .TP
 \fB-r\fR, \fB--reset\fR
 Stel de apps in op standaardwaarden
+.TP
+\fB-s\fR, \fB--select\fR
+Selecteer apps in grafische modus. Een desktopomgeving is vereist.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.

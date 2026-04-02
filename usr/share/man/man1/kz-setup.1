@@ -18,9 +18,6 @@ kz-setup - set up apps
 .SH DESCRIPTION
 \fBkz setup\fR sets up apps and changes user settings.
 .sp
-In a desktop environment command \fBkz setup\fR can be executed by searching
-for \fBapps\fR, click on \fBKZ Set up apps\fR pictogram.
-.sp
 Use (first) \fBkz install\fR to install apps and change system settings,
 \fBkz setup\fR is a post install setup script.
 .sp
@@ -50,10 +47,12 @@ The user will be logged out if necessary.
 For the format of the settings files see \fBman kz setup.sh\fR and
 \fBman kz setup.sh.gpg\fR.
 .sp
-Optionally, apps to be processed can be specified with argument \fI<app>\fR.
+Optionally, apps to be processed can be specified with argument \fI<app>\fR, or
+in a desktop environment by searching for \fBapps\fR, click on
+\fBKZ Set up apps\fR pictogram and select the desired apps.
 .br
-Per specified app, the commands are selected from the settings file and are
-copied to the command file.
+Per app to be processed, the commands are selected from the settings files and
+are copied to the command file.
 .sp
 With option \fB-b\fR, \fB--browse\fR you can browse through the settings files.
 .sp
@@ -68,6 +67,9 @@ possible. A desktop environment is required.
 Option \fB-l\fR, \fB--list\fR lists all apps available in the settings files.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
+.sp
+Option \fB-s\fR, \fB--select\fR is used to select apps in graphical mode. A
+desktop environment is required.
 
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
@@ -82,7 +84,7 @@ Display the contents of the command file.
 Process the specified file. This option can be used repeatedly.
 .TP
 \fB-g\fR, \fB--gui\fR
-Run in graphical mode if possible (gui=graphical user interface). A desktop
+Run in graphical mode (gui=graphical user interface). A desktop
 environment is required.
 .TP
 \fB-l\fR, \fB--list\fR
@@ -90,6 +92,9 @@ Show a list of apps to set up.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset the apps.
+.TP
+\fB-s\fR, \fB--select\fR
+Select apps in graphical mode. A desktop environment is required.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.

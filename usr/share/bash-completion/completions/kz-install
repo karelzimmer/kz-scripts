@@ -7,5 +7,6 @@
 # #############################################################################
 
 declare DASHOPTIONS='-b --browse -c --cat -f --file -g --gui -l --list -r
-    --remove -h --help -m --manual -u --usage -v --version -D --debug'
+    --remove -s --select -h --help -m --manual -u --usage -v --version -D
+    --debug'
 complete -o default -W "$DASHOPTIONS" kz-install

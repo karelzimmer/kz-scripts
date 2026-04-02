@@ -26,7 +26,7 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(
 gettext 'Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file <file>]...
-                [-g|--gui] [-l|--list] [-r|--reset]
+                [-g|--gui] [-l|--list] [-r|--reset] [-s|--select]
                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
                 [-D|--debug] [--] [<app>...]'
     )
@@ -44,9 +44,10 @@ $(gettext '  -b, --browse   browse settings files')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
                  process specified settings files")
-$(gettext '  -g, --gui      run in graphical mode if possible')
+$(gettext '  -g, --gui      run in graphical mode')
 $(gettext '  -l, --list     show available apps')
 $(gettext '  -r, --reset    set apps on default values')
+$(gettext '  -s, --select   select apps in graphical mode')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
@@ -57,9 +58,9 @@ $(gettext 'Arguments:')
 $(gettext '  <app>          process specified apps')"
 readonly HELP
 
-readonly OPTIONS_SHORT='bcf:glrhmuvD'
-readonly OPTIONS_LONG="browse,cat,file:,gui,list,reset,help,manual,usage,\
-version,debug"
+readonly OPTIONS_SHORT='bcf:glrshmuvD'
+readonly OPTIONS_LONG="browse,cat,file:,gui,list,reset,select,help,manual,\
+usage,version,debug"
 
 
 # #############################################################################
@@ -71,6 +72,7 @@ declare ERROR_LOG=''
 declare LOGOUT=false
 declare OPTION_GUI=false
 declare OPTION_RESET=false
+declare OPTION_SELECT=false
 
 
 # #############################################################################
@@ -132,6 +134,10 @@ $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
+
+    if $OPTION_SELECT; then
+        process_option_select
+    fi
 
     if $argument_app; then
         process_argument_app
@@ -208,6 +214,16 @@ environment available")"
                 OPTION_RESET=true
                 setup='RESET'
                 reset='SETUP'
+                shift
+                ;;
+            -s | --select )
+                if [[ -z ${DISPLAY-} ]]; then
+                    text="$program_name: $1: $(gettext "no desktop \
+environment available")"
+                    kz.infomsg "$text"
+                    exit 1
+                fi
+                OPTION_SELECT=true
                 shift
                 ;;
             -h | --help )
@@ -311,6 +327,55 @@ $USAGE"
     fi
     kz.infomsg "$text"
 }
+
+
+# This function processes apps selected via the graphical user interface (GUI).
+function process_option_select() {
+    local all_apps=''
+    local select_apps=''
+    local selected_app=''
+    local selected_apps=''
+
+    OPTION_GUI=true
+    all_apps=$(
+        grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
+                "${settings_files[@]}"                  |
+        tr      --squeeze-repeats                       \
+                '[:space:]'                             |
+        cut     --delimiter=' '                         \
+                --fields=3                              |
+        sort    --unique
+        )
+    select_apps=$(
+        for app in $all_apps; do
+            printf 'false %s\n' "$app"
+        done
+        )
+    title=$(gettext 'Set up apps')
+    text=$(gettext 'Select apps to set up:')
+    # shellcheck disable=SC2086
+    selected_apps=$(
+        zenity  --list                          \
+                --checklist                     \
+                --separator ' '                 \
+                --height    400                 \
+                --title     "$title"            \
+                --text      "$text"             \
+                --column    "$(gettext 'SEL')"  \
+                --column    "$(gettext 'APP')"  \
+                $select_apps                    || true
+            )
+    if [[ -z $selected_apps ]]; then
+        text=$(gettext 'No apps selected.')
+        kz.infomsg "$text"
+        exit 0
+    fi
+    argument_app=true
+    for selected_app in $selected_apps; do
+        app_arguments[$selected_app]=$selected_app
+    done
+}
+
 
 # This function processes argument <app>.
 function process_argument_app() {

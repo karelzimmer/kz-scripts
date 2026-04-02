@@ -18,9 +18,6 @@ kz-install - installeer apps
 .SH BESCHRIJVING
 \fBkz install\fR installeert apps en wijzigt systeeminstellingen.
 .sp
-In een desktopomgeving kan opdracht \fBkz install\fR worden uitgevoerd door te
-zoeken naar \fBapps\fR, klik op \fBKZ Apps installeren\fR-pictogram.
-.sp
 Installeer eerst Linux, \fBkz install\fR is een post-installatie-script.
 .sp
 Gebruik \fBkz setup\fR (na \fBkz install\fR) voor het instellen van apps en het
@@ -56,10 +53,12 @@ Voor de indeling van de installatiebestanden zie \fBman kz install.sh\fR en
 Voor instructies over het toevoegen van extra gebruikers, zie de sectie
 \fBBESTANDEN\fR hieronder.
 .sp
-Naar keuze kunnen te verwerken apps opgegeven worden met argument \fI<app>\fR.
+Naar keuze kunnen te verwerken apps opgegeven worden met argument \fI<app>\fR,
+of in een desktopomgeving door te zoeken naar \fBapps\fR, klik op
+\fBKZ Apps installeren\fR-pictogram en selecteer de gewenste apps.
 .br
-Per opgegeven app worden de opdrachten geselecteerd uit de installatiebestanden
-en gekopieerd naar het opdrachtbestand.
+Per te verwerken app worden de opdrachten geselecteerd uit de
+installatiebestanden en gekopieerd naar het opdrachtbestand.
 .sp
 Met optie \fB-b\fR, \fB--browse\fR kan gebladerd worden door de
 installatiebestanden.
@@ -71,12 +70,15 @@ installatiebestand opgegeven worden. Deze optie kan herhaaldelijk gebruikt
 worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz install\fR in grafische modus
-uitgevoerd indien mogelijk. Een desktopomgeving is vereist.
+uitgevoerd. Een desktopomgeving is vereist.
 .sp
 Optie \fB-l\fR, \fB--list\fR geeft een lijst van alle apps die beschikbaar zijn
 in de installatiebestanden.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
+.sp
+Optie \fB-s\fR, \fB--select\fR wordt gebruikt om apps te selecteren in
+grafische modus. Een desktopomgeving is vereist.
 .sp
 Om een app te verwijderen, op een Debian systeem gebruik:
     sudo apt-get remove --assume-yes <app>
@@ -115,6 +117,9 @@ Toon een lijst van beschikbare apps om te installeren of verwijderen.
 .TP
 \fB-r\fR, \fB--remove\fR
 Verwijder de apps.
+.TP
+\fB-s\fR, \fB--select\fR
+Selecteer apps in grafische modus. Een desktopomgeving is vereist.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.

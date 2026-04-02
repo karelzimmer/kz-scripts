@@ -37,7 +37,7 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -g, --gui      run in graphical mode if possible')
+$(gettext '  -g, --gui      run in graphical mode')
 $(gettext '  -t, --target <directory>
                  place backup in specified directory')
 $(gettext '  -h, --help     show this help text')
@@ -192,9 +192,9 @@ $USAGE"
     else
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ -z $medium ]]; then
-            text=$(gettext "No USB medium found.
+            text=$(gettext "No usb medium found.
 
-Connect a USB medium.")
+Connect a usb medium.")
             kz.infomsg "$text"
 
             $OPTION_GUI || kz.wait_for_enter
@@ -205,24 +205,40 @@ Connect a USB medium.")
                 exit 1
             fi
         fi
+
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            text="$(eval_gettext "Connect only one USB medium.
+            text="$(gettext 'More than one USB medium is connected:')
+$medium"
+            if $OPTION_GUI; then
+                text+="
 
-Now connected:
-\$medium
+$(gettext "Choose the desired USB medium on the next screen.")"
+                kz.infomsg "$text"
+                title=$(gettext 'Choose USB medium')
+                medium=$(
+                    zenity  --file-selection                \
+                            --directory                     \
+                            --filename  "$usb_mount_point/" \
+                            --title     "$title"            || true
+                    )
+                if [[ -z $medium ]]; then
+                    text=$(gettext 'No USB medium selected.')
+                    kz.infomsg "$text"
+                    exit 0
+                fi
+            else
+                text+="
 
-Disconnect media via Files.")"
-            kz.infomsg "$text"
-            $OPTION_GUI || kz.wait_for_enter
-            medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                kz.errmsg "$text"
-                exit 1
+$(gettext "Use \"kz backup --target <usb medium>\" to select the desired USB \
+medium.")"
+                kz.infomsg "$text"
+                exit 0
             fi
         fi
     fi
     TARGET=$medium/BACKUP-$USER@$HOSTNAME
+
     # Fix old backup locations and old namings.
     # <medium>/<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
     if [[ -d $medium/$USER@$HOSTNAME ]]; then
@@ -598,6 +614,11 @@ function term() {
     local title=''
     local user=''
     local users=''
+    local usb_mount_point=/media/$USER
+
+    if grep --quiet rhel /etc/os-release; then
+        usb_mount_point=/run/media/$USER
+    fi
 
     # Error-log (stderr) also to the main log.
     kz.logmsg '---------------------------------------------------------------'
@@ -632,9 +653,8 @@ $(gettext 'Try creating the back up again.')"
     fi
 
     num_users=$(find /home/* -prune -print | wc --lines)
-
     if [[ $num_users -eq 1 ]]; then
-        text=$(gettext "The backup has been made.")
+        text=$(gettext 'The backup has been made.')
     else
         user=$(
             grep    "$USER"         \
@@ -650,20 +670,25 @@ $(gettext 'Try creating the back up again.')"
                     --invert-match          |
             cut     --delimiter=':'         \
                     --fields=5              |
-            sed     --expression='s/,//g'   |
-            nl      --number-width=2        \
-                    --number-format=rn      \
-                    --number-separator=' '  \
-                    --body-numbering=a
+            sed     --expression='s/,//g'
             )
         text="$(eval_gettext "The backup has been made for \$user, there are \
 \$num_users users:")
 $users"
     fi
-    if [[ $TARGET == /media/$USER* ]]; then
+
+    if [[ $TARGET == $usb_mount_point* ]]; then
+        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+            text+="
+
+$(eval_gettext "The backup \$TARGET has been made, more than one USB medium \
+is connected:")
+$medium"
+        fi
         text+="
 
-$(gettext '*** Remember to safely(!) remove the USB media ***')"
+$(gettext '*** Remember to safely(!) remove the USB medium ***')"
     fi
     kz.infomsg "$text"
 

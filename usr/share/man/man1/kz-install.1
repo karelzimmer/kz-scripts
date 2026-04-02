@@ -18,9 +18,6 @@ kz-install - install apps
 .SH DESCRIPTION
 \fBkz install\fR installs apps and changes system settings.
 .sp
-In a desktop environment command \fBkz install\fR can be executed by searching
-for \fBapps\fR, click on \fBKZ Install apps\fR pictogram.
-.sp
 First install Linux, \fBkz install\fR is a post install script.
 .sp
 Use \fBkz setup\fR (after \fBkz install\fR) to set up apps and change user
@@ -52,10 +49,12 @@ The computer will restart if necessary.
 For the format of the installation files see \fBman kz install.sh\fR and
 \fBman kz install.sh.gpg\fR.
 .sp
-Optionally, apps to be processed can be specified with argument \fI<app>\fR.
+Optionally, apps to be processed can be specified with argument \fI<app>\fR, or
+in a desktop environment by searching for \fBapps\fR, click on
+\fBKZ Install apps\fR pictogram and select the desired apps.
 .br
-Per specified app, the commands are selected from the installation file and are
-copied to the command file.
+Per app to be processed, the commands are selected from the installation file
+and are copied to the command file.
 .sp
 With option \fB-b\fR, \fB--browse\fR you can browse through the installation
 files.
@@ -72,6 +71,9 @@ Option \fB-l\fR, \fB--list\fR lists all apps available in the installation
 files.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone.
+.sp
+Option \fB-s\fR, \fB--select\fR is used to select apps in graphical mode. A
+desktop environment is required.
 .sp
 To uninstall a app, on a Debian or Debian-based system you can use:
     sudo apt-get remove --assume-yes <app>
@@ -102,7 +104,7 @@ Display the contents of the command file.
 Process the specified file. This option can be used repeatedly.
 .TP
 \fB-g\fR, \fB--gui\fR
-Run in graphical mode if possible (gui=graphical user interface). A desktop
+Run in graphical mode (gui=graphical user interface). A desktop
 environment is required.
 .TP
 \fB-l\fR, \fB--list\fR
@@ -110,6 +112,9 @@ Show a list of available apps to install/remove.
 .TP
 \fB-r\fR, \fB--remove\fR
 Remove the apps.
+.TP
+\fB-s\fR, \fB--select\fR
+Select apps in graphical mode. A desktop environment is required.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.

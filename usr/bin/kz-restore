@@ -37,7 +37,7 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
-$(gettext '  -g, --gui      run in graphical mode if possible')
+$(gettext '  -g, --gui      run in graphical mode')
 $(gettext '  -s, --source <directory>
                  use backup in specified directory')
 $(gettext '  -h, --help     show this help text')
@@ -192,9 +192,9 @@ $USAGE"
     else
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ -z $medium ]]; then
-            text=$(gettext "No USB medium found.
+            text=$(gettext "No usb medium found.
 
-Connect a USB medium.")
+Connect a usb medium.")
             kz.infomsg "$text"
             $OPTION_GUI || kz.wait_for_enter
             medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
@@ -203,24 +203,40 @@ Connect a USB medium.")
                 exit 1
             fi
         fi
+
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            text="$(eval_gettext "Connect only one USB medium.
+            text="$(gettext 'More than one USB medium is connected:')
+$medium"
+            if $OPTION_GUI; then
+                text+="
 
-Now connected:
-\$medium
+$(gettext "Choose the desired USB medium on the next screen.")"
+                kz.infomsg "$text"
+                title=$(gettext 'Choose USB medium')
+                medium=$(
+                    zenity  --file-selection                \
+                            --directory                     \
+                            --filename  "$usb_mount_point/" \
+                            --title     "$title"            || true
+                    )
+                if [[ -z $medium ]]; then
+                    text=$(gettext 'No USB medium selected.')
+                    kz.infomsg "$text"
+                    exit 0
+                fi
+            else
+                text+="
 
-Disconnect media via Files.")"
-            kz.infomsg "$text"
-            $OPTION_GUI || kz.wait_for_enter
-            medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
-            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                kz.errmsg "$text"
-                exit 1
+$(gettext "Use \"kz restore --source <usb medium>\" to select the desired USB \
+medium.")"
+                kz.infomsg "$text"
+                exit 0
             fi
         fi
     fi
     SOURCE=$medium/BACKUP-$USER@$HOSTNAME
+
     # Fix old backup locations and old namings.
     # <medium>/<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
     if [[ -d $medium/$USER@$HOSTNAME ]]; then
@@ -306,7 +322,7 @@ function restore_settings() {
 }
 
 
-# This function restores the desktop background, if possible.
+# This function restores the desktop background,.
 function restore_setting_desktop() {
     local input_file=$settings_dir/desktop.ico
 
@@ -327,6 +343,11 @@ function term() {
     local title=''
     local user=''
     local users=''
+    local usb_mount_point=/media/$USER
+
+    if grep --quiet rhel /etc/os-release; then
+        usb_mount_point=/run/media/$USER
+    fi
 
     # Error-log (stderr) also to the main log.
     kz.logmsg '---------------------------------------------------------------'
@@ -361,9 +382,8 @@ $(gettext 'Try restoring the back up again.')"
     fi
 
     num_users=$(find /home/* -prune -print | wc --lines)
-
     if [[ $num_users -eq 1 ]]; then
-        text=$(gettext 'The backup has been restored.')
+        text=$(eval_gettext "The backup has been restored.")
     else
         # shellcheck disable=SC2034
         user=$(
@@ -380,20 +400,25 @@ $(gettext 'Try restoring the back up again.')"
                     --invert-match          |
             cut     --delimiter=':'         \
                     --fields=5              |
-            sed     --expression='s/,//g'   |
-            nl      --number-width=2        \
-                    --number-format=rn      \
-                    --number-separator=' '  \
-                    --body-numbering=a
+            sed     --expression='s/,//g'
             )
-        text="$(eval_gettext "The backup has restored for \$user, there are \
-\$num_users users:")
+        text="$(eval_gettext "The backup has been restored for \$user, there \
+are \$num_users users:")
 $users"
     fi
-    if [[ $SOURCE == /media/$USER* ]]; then
+
+    if [[ $SOURCE == $usb_mount_point* ]]; then
+        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+            text+="
+
+$(eval_gettext "The backup \$SOURCE has been restored, more than one USB \
+medium is connected:")
+$medium"
+        fi
         text+="
 
-$(gettext '*** Remember to safely(!) remove the USB media ***')"
+$(gettext '*** Remember to safely(!) remove the USB medium ***')"
     fi
     kz.infomsg "$text"
 
