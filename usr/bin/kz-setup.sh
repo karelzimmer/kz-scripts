@@ -23,6 +23,18 @@ kz-desktop --addaft=com.bitwarden.desktop
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.bitwarden.desktop
 
+# SETUP bottles pc06 pc07
+# -----------------------------------------------------------------------------
+# Run Windows software on Linux.
+# -----------------------------------------------------------------------------
+kz-desktop --addaft=com.usebottles.bottles
+
+# RESET bottles pc06 pc07
+# -----------------------------------------------------------------------------
+# Run Windows software on Linux.
+# -----------------------------------------------------------------------------
+kz-desktop --delete=com.usebottles.bottles
+
 # SETUP cinnamon-settings *
 # -----------------------------------------------------------------------------
 # Desktop environment.
