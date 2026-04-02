@@ -101,7 +101,7 @@ msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:173 kz-backup:156 kz-build:164 kz-check:132 kz-deploy:142 kz-desktop:205
-#: kz-dev:132 kz-install:258 kz-menu:180 kz-restore:157 kz-setup:254
+#: kz-dev:132 kz-install:259 kz-menu:180 kz-restore:157 kz-setup:255
 #: kz-update:181 kz-wifi:127
 msgid "internal error"
 msgstr ""
@@ -833,48 +833,48 @@ msgstr ""
 msgid "Installation file '$installation_file' not found."
 msgstr ""
 
-#: kz-install:290 kz-setup:284
+#: kz-install:291 kz-setup:285
 msgid "The following apps are available:"
 msgstr ""
 
-#: kz-install:307
+#: kz-install:308
 msgid "Use \"kz install <app>...\" to install the apps."
 msgstr ""
 
-#: kz-install:308
+#: kz-install:309
 msgid ""
 "Use \"kz install --cat <app>...\" to view the contents of the apps command "
 "file."
 msgstr ""
 
-#: kz-install:310
+#: kz-install:311
 msgid ""
 "Use \"kz install --cat\" to view the contents of the whole command file."
 msgstr ""
 
-#: kz-install:315
+#: kz-install:316
 msgid "Use \"kz install --remove <app>...\" to remove the apps."
 msgstr ""
 
-#: kz-install:318
+#: kz-install:319
 msgid ""
 "Use \"kz install --cat --remove\" to view the contents of the whole command "
 "file."
 msgstr ""
 
-#: kz-install:316
+#: kz-install:317
 msgid ""
 "Use \"kz install --cat --remove <app>...\" to view the contents of the apps "
 "command file."
 msgstr ""
 
-#: kz-install:322
+#: kz-install:323
 msgid ""
 "Use \"kz install --browse\" to view the contents of the default installation "
 "files."
 msgstr ""
 
-#: kz-install:325 kz-setup:319
+#: kz-install:326 kz-setup:320
 msgid "  0  No apps found."
 msgstr ""
 
@@ -1228,37 +1228,37 @@ msgstr ""
 msgid "Settings file '$settings_file' not found."
 msgstr ""
 
-#: kz-setup:301
+#: kz-setup:302
 msgid "Use \"kz setup <app>...\" to set up the apps."
 msgstr ""
 
-#: kz-setup:302
+#: kz-setup:303
 msgid ""
 "Use \"kz setup --cat <app>...\" to view the contents of the apps command "
 "file."
 msgstr ""
 
-#: kz-setup:304
+#: kz-setup:305
 msgid "Use  \"kz setup --cat\" to view the contents of the whole command file."
 msgstr ""
 
-#: kz-setup:309
+#: kz-setup:310
 msgid "Use \"kz setup --reset <app>...\" to reset the apps."
 msgstr ""
 
-#: kz-setup:310
+#: kz-setup:311
 msgid ""
 "Use \"kz setup --cat --reset <app>...\" to view the contents of the apps "
 "command file."
 msgstr ""
 
-#: kz-setup:312
+#: kz-setup:313
 msgid ""
 "Use \"kz setup --cat --reset\" to view the contents of the whole command "
 "file."
 msgstr ""
 
-#: kz-setup:316
+#: kz-setup:317
 msgid ""
 "Use \"kz setup --browse\" to view the contents of the default settings files."
 msgstr ""

@@ -223,6 +223,7 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
+                OPTION_GUI=true
                 OPTION_SELECT=true
                 shift
                 ;;
@@ -329,7 +330,6 @@ function process_option_select() {
     local all_apps=''
     local selected_apps=''
 
-    OPTION_GUI=true
     all_apps=$(
         grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
                 "${settings_files[@]}"                  |
