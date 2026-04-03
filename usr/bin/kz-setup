@@ -217,12 +217,6 @@ environment available")"
                 shift
                 ;;
             -s | --select )
-                if [[ -z ${DISPLAY-} ]]; then
-                    text="$program_name: $1: $(gettext "no desktop \
-environment available")"
-                    kz.infomsg "$text"
-                    exit 1
-                fi
                 OPTION_SELECT=true
                 shift
                 ;;
@@ -328,6 +322,17 @@ $USAGE"
 function process_option_select() {
     local all_apps=''
     local selected_apps=''
+
+    if [[ -z ${DISPLAY-} ]]; then
+        if [[ $setup = 'SETUP' ]]; then
+            text=$(gettext 'Use "kz setup <app>..." to set up the apps.')
+        else
+            text=$(gettext "Use \"kz setup --reset <app>...\" to reset the \
+apps.")
+        fi
+        kz.infomsg "$text"
+        exit 0
+    fi
 
     all_apps=$(
         grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \

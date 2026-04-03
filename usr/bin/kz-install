@@ -221,12 +221,6 @@ environment available")"
                 shift
                 ;;
             -s | --select )
-                if [[ -z ${DISPLAY-} ]]; then
-                    text="$program_name: $1: $(gettext "no desktop \
-environment available")"
-                    kz.infomsg "$text"
-                    exit 1
-                fi
                 OPTION_SELECT=true
                 shift
                 ;;
@@ -334,6 +328,17 @@ $USAGE"
 function process_option_select() {
     local all_apps=''
     local selected_apps=''
+
+    if [[ -z ${DISPLAY-} ]]; then
+        if [[ $install = 'INSTALL' ]]; then
+            text=$(gettext 'Use "kz install <app>..." to install the apps.')
+        else
+            text=$(gettext "Use \"kz install --remove <app>...\" to remove \
+the apps.")
+        fi
+        kz.infomsg "$text"
+        exit 0
+    fi
 
     all_apps=$(
         grep    "#[[:space:]]\+${install}[[:space:]]\+" \
