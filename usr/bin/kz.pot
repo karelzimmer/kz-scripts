@@ -821,7 +821,7 @@ msgid "  -r, --remove   delete apps"
 msgstr ""
 
 #: kz-install:50 kz-setup:50
-msgid "  -s, --select   select apps in graphical mode"
+msgid "  -s, --select   select apps"
 msgstr ""
 
 #: kz-install:58 kz-setup:58

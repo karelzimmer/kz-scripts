@@ -908,8 +908,8 @@ msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
 
 #: kz-install:50 kz-setup:50
-msgid "  -s, --select   select apps in graphical mode"
-msgstr "  -s, --select   selecteer apps in grafische modus"
+msgid "  -s, --select   select apps"
+msgstr "  -s, --select   selecteer apps"
 
 #: kz-install:58 kz-setup:58
 msgid "  <app>          process specified apps"

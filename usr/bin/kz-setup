@@ -47,7 +47,7 @@ $(gettext "  -f, --file <file>
 $(gettext '  -g, --gui      run in graphical mode')
 $(gettext '  -l, --list     show available apps')
 $(gettext '  -r, --reset    set apps on default values')
-$(gettext '  -s, --select   select apps in graphical mode')
+$(gettext '  -s, --select   select apps')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
