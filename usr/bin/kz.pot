@@ -1455,27 +1455,27 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: gitsquash:50
+#: gitsquash:51
 msgid "*** git squash merge in 10 steps ***"
 msgstr ""
 
-#: gitsquash:52
+#: gitsquash:53
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr ""
 
-#: gitsquash:55 kz-menu:503
+#: gitsquash:56 kz-menu:503
 msgid "The following will be executed:"
 msgstr ""
 
-#: gitsquash:57
+#: gitsquash:58
 msgid "PREPARE:"
 msgstr ""
 
-#: gitsquash:61
+#: gitsquash:62
 msgid "MERGE:"
 msgstr ""
 
-#: gitsquash:65
+#: gitsquash:66
 msgid "COMMIT:"
 msgstr ""
 
