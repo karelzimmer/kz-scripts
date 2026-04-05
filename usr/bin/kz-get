@@ -68,9 +68,9 @@ function init() {
 # This function performs the script actions.
 function process() {
     if grep --quiet debian /etc/os-release; then
-        process_deb_package
+        process_deb_packages
     elif grep --quiet rhel /etc/os-release; then
-        process_rpm_package
+        process_rpm_packages
     else
         printf '%s\n' 'fatal: unknown os release' >&2
         exit 1
@@ -79,7 +79,7 @@ function process() {
 
 
 # This function downloads and installs Debian package kz.
-function process_deb_package() {
+function process_deb_packages() {
     local kz_deb_local_file=''
     local kz_deb_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'
@@ -93,7 +93,7 @@ function process_deb_package() {
         kz_deb_local_file=$(mktemp -t "kz-XXXXXXXXXX.deb")
     fi
 
-    if type kz > /dev/null; then
+    if type kz &> /dev/null; then
         reinstall='--reinstall'
     fi
 
@@ -111,13 +111,7 @@ function process_deb_package() {
 
     # Install kz package.
     check_debian_package_manager
-    sudo    DEBIAN_FRONTEND=noninteractive  \
-            apt-get                         \
-            install                         \
-            --quiet                         \
-            --quiet                         \
-            "$reinstall"                    \
-            "$kz_deb_local_file"
+    yes | sudo apt-get install "$reinstall" "$kz_deb_local_file"
 }
 
 
@@ -136,7 +130,7 @@ function check_debian_package_manager() {
 
 
 # This function installs RPM package kz.
-function process_rpm_package() {
+function process_rpm_packages() {
     local install=''
     local kz_rpm_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'

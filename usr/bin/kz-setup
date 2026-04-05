@@ -318,47 +318,65 @@ $USAGE"
 }
 
 
-# This function processes apps selected via the graphical user interface (GUI).
+# This function processes apps selected via the graphical user interface (GUI)
+# or text user interface (TUI).
 function process_option_select() {
     local all_apps=''
     local selected_apps=''
-
-    if [[ -z ${DISPLAY-} ]]; then
-        if [[ $setup = 'SETUP' ]]; then
-            text=$(gettext 'Use "kz setup <app>..." to set up the apps.')
-        else
-            text=$(gettext "Use \"kz setup --reset <app>...\" to reset the \
-apps.")
-        fi
-        kz.infomsg "$text"
-        exit 0
-    fi
-
-    all_apps=$(
-        grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
-                "${settings_files[@]}"                  |
-        tr      --squeeze-repeats                       \
-                '[:space:]'                             |
-        cut     --delimiter=' '                         \
-                --fields=3                              |
-        sort    --unique                                |
-        sed     --expression='s/^/false /'
-        )
+    local text=''
+    local title=''
 
     title=$(gettext 'Set up apps')
     text=$(gettext 'Select apps to set up:')
-    # shellcheck disable=SC2086
-    selected_apps=$(
-        zenity  --list                          \
-                --checklist                     \
-                --separator ' '                 \
-                --height    400                 \
-                --title     "$title"            \
-                --text      "$text"             \
-                --column    "$(gettext 'SEL')"  \
-                --column    "$(gettext 'APP')"  \
-                $all_apps                       || true
+
+    if $OPTION_GUI; then
+        all_apps=$(
+            grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
+                    "${settings_files[@]}"                  |
+            tr      --squeeze-repeats                       \
+                    '[:space:]'                             |
+            cut     --delimiter=' '                         \
+                    --fields=3                              |
+            sort    --unique                                |
+            sed     --expression='s/^/false /'
             )
+
+        # shellcheck disable=SC2086
+        selected_apps=$(
+            zenity  --list                          \
+                    --checklist                     \
+                    --separator ' '                 \
+                    --height    400                 \
+                    --title     "$title"            \
+                    --text      "$text"             \
+                    --column    "$(gettext 'SEL')"  \
+                    --column    "$(gettext 'APP')"  \
+                    $all_apps                       || true
+            )
+    else
+        all_apps=$(
+            grep    "#[[:space:]]\+${setup}[[:space:]]\+" \
+                    "${settings_files[@]}"              |
+            tr      --squeeze-repeats                       \
+                    '[:space:]'                             |
+            cut     --delimiter=' '                         \
+                    --fields=3                              |
+            sort    --unique                                |
+            sed     --expression='s/$/ off/'
+            )
+
+        # shellcheck disable=SC2086
+        selected_apps=$(
+            whiptail    --noitem                \
+                        --backtitle "$title"    \
+                        --checklist "$text"     \
+                        20 40 12                \
+                        $all_apps               \
+                        2>&1 >/dev/tty          |
+            sed         's/"//g'                || true
+            )
+    fi
+
     if [[ -z $selected_apps ]]; then
         text=$(gettext 'No apps selected.')
         kz.infomsg "$text"
@@ -623,7 +641,8 @@ $(gettext 'Try to set up/reset the apps again.')"
                     --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
-                    --title     "$title"    2> /dev/null || true
+                    --title     "$title"    \
+                    2> /dev/null            || true
         else
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"

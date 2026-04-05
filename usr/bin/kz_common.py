@@ -92,12 +92,13 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     logmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC
-        zenity: str = f'zenity --error                  \
+        zenity: str = f'zenity  --error                 \
                                 --width     600         \
                                 --height    100         \
                                 --title     "{title}"   \
-                                --text      "{TEXT}"'
-        subprocess.run(zenity, executable='bash', shell=True)
+                                --text      "{TEXT}"    || true'
+        subprocess.run(zenity, executable='bash', shell=True,
+                       stderr=subprocess.DEVNULL)
     else:
         print(f'{RED}{TEXT}{NORMAL}')
 
@@ -110,12 +111,13 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     logmsg(PROGRAM_NAME, TEXT)
     if OPTION_GUI:
         title: str = PROGRAM_DESC
-        zenity: str = f'zenity --info                   \
+        zenity: str = f'zenity  --info                  \
                                 --width     600         \
                                 --height    100         \
                                 --title     "{title}"   \
-                                --text      "{TEXT}"'
-        subprocess.run(zenity, executable='bash', shell=True)
+                                --text      "{TEXT}"    || true'
+        subprocess.run(zenity, executable='bash', shell=True,
+                       stderr=subprocess.DEVNULL)
     else:
         print(TEXT)
 

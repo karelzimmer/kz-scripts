@@ -119,8 +119,7 @@ environment available")"
                 ;;
             -s | --source )
                 if $option_source; then
-                    text="$program_name: $1 $2: \
-$(gettext 'too many options')
+                    text="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
                     kz.infomsg "$text"
                     exit 1
@@ -172,8 +171,12 @@ $USAGE"
 
 # This function checks if the source is available.
 function check_source() {
-    local usb_mount_point=/media/$USER
+    local all_media=''
+    local program_name=${PROGRAM_NAME/kz-/kz }
+    local selected_medium=''
     local text=''
+    local title=''
+    local usb_mount_point=/media/$USER
 
     if grep --quiet rhel /etc/os-release; then
         usb_mount_point=/run/media/$USER
@@ -206,33 +209,55 @@ Connect a usb medium.")
 
         medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            text="$(gettext 'More than one USB medium is connected:')
-$medium"
+
+            title=$(gettext 'Restore backup')
+            text=$(gettext 'Choose USB medium:')
+
             if $OPTION_GUI; then
-                text+="
-
-$(gettext "Choose the desired USB medium on the next screen.")"
-                kz.infomsg "$text"
-                title=$(gettext 'Choose USB medium')
-                medium=$(
-                    zenity  --file-selection                \
-                            --directory                     \
-                            --filename  "$usb_mount_point/" \
-                            --title     "$title"            || true
+                # shellcheck disable=SC2012
+                all_media=$(
+                    ls      --directory             \
+                            "$usb_mount_point/"*    |
+                    sed     --expression='s/^/false /'
                     )
-                if [[ -z $medium ]]; then
-                    text=$(gettext 'No USB medium selected.')
-                    kz.infomsg "$text"
-                    exit 0
-                fi
+                # shellcheck disable=SC2086
+                selected_medium=$(
+                    zenity  --list                              \
+                            --radiolist                         \
+                            --separator ' '                     \
+                            --height    400                     \
+                            --title     "$title"                \
+                            --text      "$text"                 \
+                            --column    "$(gettext 'SEL')"      \
+                            --column    "$(gettext 'MEDIUM')"   \
+                            $all_media                          \
+                            2> /dev/null                        || true
+                    )
             else
-                text+="
+                # shellcheck disable=SC2012
+                all_media=$(
+                    ls      --directory             \
+                            "$usb_mount_point/"*    |
+                    sed     --expression='s/$/ off/'
+                    )
+                # shellcheck disable=SC2086
+                selected_medium=$(
+                    whiptail    --noitem                \
+                                --backtitle "$title"    \
+                                --radiolist "$text"     \
+                                20 40 12                \
+                                $all_media              \
+                                2>&1 >/dev/tty          |
+                    sed         's/"//g'                || true
+                    )
+            fi
 
-$(gettext "Use \"kz restore --source <usb medium>\" to select the desired USB \
-medium.")"
+            if [[ -z $selected_medium ]]; then
+                text=$(gettext 'No USB medium selected.')
                 kz.infomsg "$text"
                 exit 0
             fi
+            medium=$selected_medium
         fi
     fi
     SOURCE=$medium/BACKUP-$USER@$HOSTNAME
@@ -298,7 +323,8 @@ function restore_backup() {
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$text"     2> /dev/null || RESTORE_RC=$?
+                --text      "$text"     \
+                2> /dev/null            || RESTORE_RC=$?
     else
         text+='...'
         kz.infomsg "$text"
@@ -306,7 +332,8 @@ function restore_backup() {
                 --verbose               \
                 --human-readable        \
                 "$SOURCE/"              \
-                "$HOME/"                2>> "$ERROR_LOG" || RESTORE_RC=$?
+                "$HOME/"                \
+                2>> "$ERROR_LOG"        || RESTORE_RC=$?
     fi
 }
 
@@ -373,7 +400,8 @@ $(gettext 'Try restoring the back up again.')"
                     --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
-                    --title     "$title"    2> /dev/null || true
+                    --title     "$title"    \
+                    2> /dev/null            || true
         else
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"

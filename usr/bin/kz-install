@@ -324,47 +324,66 @@ $USAGE"
 }
 
 
-# This function processes apps selected via the graphical user interface (GUI).
+# This function processes apps selected via the graphical user interface (GUI)
+# or text user interface (TUI).
 function process_option_select() {
     local all_apps=''
     local selected_apps=''
-
-    if [[ -z ${DISPLAY-} ]]; then
-        if [[ $install = 'INSTALL' ]]; then
-            text=$(gettext 'Use "kz install <app>..." to install the apps.')
-        else
-            text=$(gettext "Use \"kz install --remove <app>...\" to remove \
-the apps.")
-        fi
-        kz.infomsg "$text"
-        exit 0
-    fi
-
-    all_apps=$(
-        grep    "#[[:space:]]\+${install}[[:space:]]\+" \
-                "${installation_files[@]}"              |
-        tr      --squeeze-repeats                       \
-                '[:space:]'                             |
-        cut     --delimiter=' '                         \
-                --fields=3                              |
-        sort    --unique                                |
-        sed     --expression='s/^/false /'
-        )
+    local text=''
+    local title=''
 
     title=$(gettext 'Install apps')
     text=$(gettext 'Select apps to install:')
-    # shellcheck disable=SC2086
-    selected_apps=$(
-        zenity  --list                          \
-                --checklist                     \
-                --separator ' '                 \
-                --height    400                 \
-                --title     "$title"            \
-                --text      "$text"             \
-                --column    "$(gettext 'SEL')"  \
-                --column    "$(gettext 'APP')"  \
-                $all_apps                       || true
-        )
+
+    if $OPTION_GUI; then
+        all_apps=$(
+            grep    "#[[:space:]]\+${install}[[:space:]]\+" \
+                    "${installation_files[@]}"              |
+            tr      --squeeze-repeats                       \
+                    '[:space:]'                             |
+            cut     --delimiter=' '                         \
+                    --fields=3                              |
+            sort    --unique                                |
+            sed     --expression='s/^/false /'
+            )
+
+        # shellcheck disable=SC2086
+        selected_apps=$(
+            zenity  --list                          \
+                    --checklist                     \
+                    --separator ' '                 \
+                    --height    400                 \
+                    --title     "$title"            \
+                    --text      "$text"             \
+                    --column    "$(gettext 'SEL')"  \
+                    --column    "$(gettext 'APP')"  \
+                    $all_apps                       \
+                    2> /dev/null                    || true
+            )
+    else
+        all_apps=$(
+            grep    "#[[:space:]]\+${install}[[:space:]]\+" \
+                    "${installation_files[@]}"              |
+            tr      --squeeze-repeats                       \
+                    '[:space:]'                             |
+            cut     --delimiter=' '                         \
+                    --fields=3                              |
+            sort    --unique                                |
+            sed     --expression='s/$/ off/'
+            )
+
+        # shellcheck disable=SC2086
+        selected_apps=$(
+            whiptail    --noitem                \
+                        --backtitle "$title"    \
+                        --checklist "$text"     \
+                        20 40 12                \
+                        $all_apps               \
+                        2>&1 >/dev/tty          |
+            sed         's/"//g'                || true
+            )
+    fi
+
     if [[ -z $selected_apps ]]; then
         text=$(gettext 'No apps selected.')
         kz.infomsg "$text"
@@ -517,7 +536,8 @@ function install_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"     2> /dev/null
+                    --text      "$text"     \
+                    2> /dev/null
             )
     else
         process_command_file
@@ -659,7 +679,8 @@ $(gettext 'Try to install/remove the apps again.')"
                     --filename="$ERROR_LOG" \
                     --width     700         \
                     --height    500         \
-                    --title     "$title"    2> /dev/null || true
+                    --title     "$title"    \
+                    2> /dev/null            || true
         else
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
