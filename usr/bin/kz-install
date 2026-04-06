@@ -599,10 +599,10 @@ function process_command_file() {
 
 # This function reports and executes a command from the command file.
 function execute_command() {
+    local cmd=$1
     local -i cmd_dis_len=0
     local -i cmd_dis_max=0
     local cmd_dis=''
-    local cmd=$1
 
     if $OPTION_GUI; then
         if $app_line; then
