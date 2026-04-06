@@ -69,7 +69,7 @@ readonly -a  MENU1_DESCS=(
 # Define the menu2 options.
 MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
-readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
+# readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
 readonly -a  MENU2_ACTIONS=(
             [1]="$(gettext 'Make backup')"
                 "$(gettext 'Show WiFi details')"
