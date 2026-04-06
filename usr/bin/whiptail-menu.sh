@@ -19,10 +19,10 @@ source /usr/bin/gettext.sh
 readonly -a  MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
-                "$(gettext 'Finish installation') "
-                "$(gettext 'Set up user')         "
-                "$(gettext 'Command menu')        "
-                "$(gettext 'Exit')                "
+                "$(gettext 'Finish installation')"
+                "$(gettext 'Set up user')"
+                "$(gettext 'Command menu')"
+                "$(gettext 'Exit')"
             )
 readonly -a  MENU1_DESCS=(
             [1]="$(gettext 'Checklist chapter 1')"
@@ -39,11 +39,11 @@ REPLY=$(
     whiptail    --title "$title"                            \
                 --menu  "$text"                             \
                 25 60 10                                    \
-                1 "${MENU1_ACTIONS[1]} ${MENU1_DESCS[1]}"   \
-                2 "${MENU1_ACTIONS[2]} ${MENU1_DESCS[2]}"   \
-                3 "${MENU1_ACTIONS[3]} ${MENU1_DESCS[3]}"   \
-                4 "${MENU1_ACTIONS[4]} ${MENU1_DESCS[4]}"   \
-                5 "${MENU1_ACTIONS[5]} ${MENU1_DESCS[5]}"   \
+                1 "$(printf '%-25s' "${MENU1_ACTIONS[1]}" "${MENU1_DESCS[1]}")"   \
+                2 "$(printf '%-25s' "${MENU1_ACTIONS[2]}" "${MENU1_DESCS[2]}")"   \
+                3 "$(printf '%-25s' "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}")"   \
+                4 "$(printf '%-25s' "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}")"   \
+                5 "$(printf '%-25s' "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}")"   \
                 2>&1 >/dev/tty 
     )
 echo "You selected: $REPLY"
