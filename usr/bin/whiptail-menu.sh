@@ -75,33 +75,36 @@ REPLY=$(
                 "${MENU1_ACTIONS[5]}"                   \
                 "${MENU1_DESCS[5]}")"                   \
                 2>&1 >/dev/tty 
-    )
+    )  || exit 0
 echo "You selected: $REPLY"
 
 title=$(gettext 'Command menu')
 text=$(gettext 'Select a choice:')
 
-REPLY=$(
-    whiptail    --ok-button     "$(gettext 'Continue')" \
-                --cancel-button "$(gettext 'Back')"     \
-                --title         "$title"                \
-                --menu          "$text"                 \
-                25 60 10                                \
-                1 " $(printf '%-26s'                    \
-                "${MENU2_ACTIONS[1]}"                   \
-                "${MENU2_DESCS[1]}")"                   \
-                2 " $(printf '%-26s'                    \
-                "${MENU2_ACTIONS[2]}"                   \
-                "${MENU2_DESCS[2]}")"                   \
-                3 " $(printf '%-26s'                    \
-                "${MENU2_ACTIONS[3]}"                   \
-                "${MENU2_DESCS[3]}")"                   \
-                4 " $(printf '%-26s'                    \
-                "${MENU2_ACTIONS[4]}"                   \
-                "${MENU2_DESCS[4]}")"                   \
-                5 " $(printf '%-26s'                    \
-                "${MENU2_ACTIONS[5]}"                   \
-                "${MENU2_DESCS[5]}")"                   \
-                2>&1 >/dev/tty 
-    )
+    while true; do
+    REPLY=$(
+        whiptail    --ok-button     "$(gettext 'Continue')" \
+                    --cancel-button "$(gettext 'Back')"     \
+                    --title         "$title"                \
+                    --menu          "$text"                 \
+                    25 60 10                                \
+                    1 " $(printf '%-26s'                    \
+                    "${MENU2_ACTIONS[1]}"                   \
+                    "${MENU2_DESCS[1]}")"                   \
+                    2 " $(printf '%-26s'                    \
+                    "${MENU2_ACTIONS[2]}"                   \
+                    "${MENU2_DESCS[2]}")"                   \
+                    3 " $(printf '%-26s'                    \
+                    "${MENU2_ACTIONS[3]}"                   \
+                    "${MENU2_DESCS[3]}")"                   \
+                    4 " $(printf '%-26s'                    \
+                    "${MENU2_ACTIONS[4]}"                   \
+                    "${MENU2_DESCS[4]}")"                   \
+                    5 " $(printf '%-26s'                    \
+                    "${MENU2_ACTIONS[5]}"                   \
+                    "${MENU2_DESCS[5]}")"                   \
+                    2>&1 >/dev/tty 
+        ) || break
+    done
+
 echo "You selected: $REPLY"
