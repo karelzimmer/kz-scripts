@@ -197,7 +197,7 @@ $USAGE"
 function process_menu1_gui() {
     local title=$MENU1_TITLE
 
-    while true; do
+    # while true; do
         REPLY=$(
             zenity  --list                                              \
                     --radiolist                                         \
@@ -219,7 +219,7 @@ function process_menu1_gui() {
                     2> /dev/null                                        || true
             ) || exit 0
         process_menu1_choice
-    done
+    # done
 }
 
 
@@ -257,41 +257,6 @@ function process_menu1_tui() {
             ) || exit 0
         process_menu1_choice
     done
-
-    # local menu1_action=''
-    # local prompt=''
-
-    # while true; do
-    #     printf  '\n%s\n\n%3s  %-24s  %s\n'  \
-    #             "$MENU1_HEAD"               \
-    #             "$(gettext 'NUM')"          \
-    #             "$(gettext 'ACTION')"       \
-    #             "$(gettext 'DESCRIPTION')"
-    #     for menu1_action in "${!MENU1_ACTIONS[@]}"; do
-    #         printf  '%3s  %-24s  %s\n'                  \
-    #                 "$menu1_action"                     \
-    #                 "${MENU1_ACTIONS[$menu1_action]}"   \
-    #                 "${MENU1_DESCS[$menu1_action]}"
-    #     done
-
-    #     printf '\n'
-    #     prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
-    #     kz.logmsg "$prompt"
-    #     read -rp "$prompt"
-
-    #     case $REPLY in
-    #         *[^[:digit:]]* )
-    #             continue
-    #             ;;
-    #         * )
-    #             if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
-    #                 process_menu1_choice
-    #             else
-    #                 continue
-    #             fi
-    #             ;;
-    #     esac
-    # done
 }
 
 
@@ -319,9 +284,7 @@ function process_menu1_choice() {
             exit 0
             ;;
         * )
-            text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-            kz.errmsg "$text"
-            exit 1
+            exit 0
             ;;
     esac
 }
@@ -356,14 +319,13 @@ Roughly boils down to:
 4. Install Linux.")"
     if $OPTION_GUI; then
         zenity  --info                  \
-                --width     600         \
+                --width     520         \
                 --height    100         \
                 --title     "$title"    \
                 --text      "$text"     \
                 2> /dev/null            || true
     else
-        printf '%s\n' "$text"
-        kz.wait_for_enter
+        whiptail --title "$title" --msgbox "$text" 25 60
     fi
 }
 
@@ -442,93 +404,50 @@ function process_menu2_tui() {
     text=$(gettext 'Select a choice:')
 
     while true; do
-    REPLY=$(
-        whiptail    --ok-button     "$(gettext 'Continue')" \
-                    --cancel-button "$(gettext 'Back')"     \
-                    --title         "$title"                \
-                    --menu          "$text"                 \
-                    25 60 10                                \
-                    1 " $(printf '%-26s'                    \
-                    "${MENU2_ACTIONS[1]}"                   \
-                    "${MENU2_DESCS[1]}")"                   \
-                    2 " $(printf '%-26s'                    \
-                    "${MENU2_ACTIONS[2]}"                   \
-                    "${MENU2_DESCS[2]}")"                   \
-                    3 " $(printf '%-26s'                    \
-                    "${MENU2_ACTIONS[3]}"                   \
-                    "${MENU2_DESCS[3]}")"                   \
-                    4 " $(printf '%-26s'                    \
-                    "${MENU2_ACTIONS[4]}"                   \
-                    "${MENU2_DESCS[4]}")"                   \
-                    5 " $(printf '%-26s'                    \
-                    "${MENU2_ACTIONS[5]}"                   \
-                    "${MENU2_DESCS[5]}")"                   \
-                    2>&1 >/dev/tty 
-        ) || break
+        REPLY=$(
+            whiptail    --ok-button     "$(gettext 'Continue')" \
+                        --cancel-button "$(gettext 'Back')"     \
+                        --title         "$title"                \
+                        --menu          "$text"                 \
+                        25 60 10                                \
+                        1 " $(printf '%-26s'                    \
+                        "${MENU2_ACTIONS[1]}"                   \
+                        "${MENU2_DESCS[1]}")"                   \
+                        2 " $(printf '%-26s'                    \
+                        "${MENU2_ACTIONS[2]}"                   \
+                        "${MENU2_DESCS[2]}")"                   \
+                        3 " $(printf '%-26s'                    \
+                        "${MENU2_ACTIONS[3]}"                   \
+                        "${MENU2_DESCS[3]}")"                   \
+                        4 " $(printf '%-26s'                    \
+                        "${MENU2_ACTIONS[4]}"                   \
+                        "${MENU2_DESCS[4]}")"                   \
+                        5 " $(printf '%-26s'                    \
+                        "${MENU2_ACTIONS[5]}"                   \
+                        "${MENU2_DESCS[5]}")"                   \
+                        2>&1 >/dev/tty 
+            ) || break
         process_menu2_choice
     done
-
-    # local menu2_action=''
-    # local prompt=''
-
-    # while true; do
-    #     printf  '\n%s\n\n%3s  %-25s  %s\n'  \
-    #             "$MENU2_HEAD"               \
-    #             "$(gettext 'NUM')"          \
-    #             "$(gettext 'ACTION')"       \
-    #             "$(gettext 'DESCRIPTION')"
-    #     for menu2_action in "${!MENU2_ACTIONS[@]}"; do
-    #         printf  '%3s  %-25s  %s\n'                  \
-    #                 "$menu2_action"                     \
-    #                 "${MENU2_ACTIONS[$menu2_action]}"   \
-    #                 "${MENU2_DESCS[$menu2_action]}"
-    #     done
-
-    #     printf '\n'
-    #     prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
-    #     kz.logmsg "$prompt"
-    #     read -rp "$prompt"
-
-    #     case $REPLY in
-    #         *[^[:digit:]]* )
-    #             continue
-    #             ;;
-    #         * )
-    #             if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
-    #                 process_menu2_choice
-    #             else
-    #                 continue
-    #             fi
-    #             ;;
-    #     esac
-    # done
 }
 
 
 # This function processes menu 2 choice.
 function process_menu2_choice() {
     local text=''
-
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
-        )
-    local -i reply_save=''
-    local title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
+    local -a rows=()
+    local title=''
 
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        reply_save=$REPLY
+        rows[1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
+        title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
         process_commands
-        # Setup apps on a server means manual logout.
-        if [[ $reply_save -eq 5 ]] && [[ -z ${DISPLAY-} ]]; then
-            exit "$rc"
-        fi
-        $OPTION_GUI || kz.wait_for_enter
-    elif [[ $REPLY -eq $MENU2_LINES ]]; then
-        process_menu1_tui
     else
-        text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-        kz.errmsg "$text"
-        exit 1
+        if $OPTION_GUI; then
+            process_menu1_gui
+        else
+            process_menu1_tui
+        fi
     fi
 }
 
@@ -554,6 +473,7 @@ function process_commands() {
             title="$description ($command)"
             execute_command
         done
+        term
     fi
 }
 
@@ -588,7 +508,7 @@ $description ($command)"
 $prompt"
         if zenity   --question                          \
                     --no-markup                         \
-                    --width         600                 \
+                    --width         520                 \
                     --height        100                 \
                     --title         "$title"            \
                     --text          "$text"             \
@@ -600,23 +520,11 @@ $prompt"
             execute_command=false
         fi
     else
-        printf '\n%s\n' "$text"
-        while true; do
-            read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
-            case $REPLY in
-                [YyJj]* | '' )
-                    execute_command=true
-                    break
-                    ;;
-                [Nn]* )
-                    execute_command=false
-                    break
-                    ;;
-                * )
-                    continue
-                    ;;
-            esac
-        done
+        if whiptail --title "$title" --yesno "$text" 25 60; then
+            execute_command=true
+        else
+            execute_command=false
+        fi
     fi
 }
 

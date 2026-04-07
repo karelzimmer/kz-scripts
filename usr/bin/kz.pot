@@ -996,7 +996,7 @@ msgstr ""
 msgid "Set up user"
 msgstr ""
 
-#: kz-menu:56 kz-menu:70 kz-menu:441 whiptail-menu.sh:24 whiptail-menu.sh:81
+#: kz-menu:56 kz-menu:70 kz-menu:403 whiptail-menu.sh:24 whiptail-menu.sh:81
 msgid "Command menu"
 msgstr ""
 
@@ -1046,34 +1046,34 @@ msgstr ""
 msgid "Go to installation menu"
 msgstr ""
 
-#: kz-menu:87 kz-menu:419 kz-menu:447 whiptail-menu.sh:50 whiptail-menu.sh:87
+#: kz-menu:87 kz-menu:381 kz-menu:409 whiptail-menu.sh:50 whiptail-menu.sh:87
 msgid "Back"
 msgstr ""
 
-#: kz-menu:207 kz-menu:232 kz-menu:417 kz-menu:442 whiptail-menu.sh:54
+#: kz-menu:207 kz-menu:232 kz-menu:379 kz-menu:404 whiptail-menu.sh:54
 #: whiptail-menu.sh:82
 msgid "Select a choice:"
 msgstr ""
 
 #: kz-backup:231 kz-backup:246 kz-install:358 kz-install:378 kz-menu:208
-#: kz-menu:236 kz-menu:418 kz-menu:446 kz-restore:231 kz-restore:246
+#: kz-menu:236 kz-menu:380 kz-menu:408 kz-restore:231 kz-restore:246
 #: kz-setup:352 kz-setup:372 whiptail-menu.sh:57 whiptail-menu.sh:86
 msgid "Continue"
 msgstr ""
 
-#: kz-menu:210 kz-menu:420
+#: kz-menu:210 kz-menu:382
 msgid "CHOICE"
 msgstr ""
 
-#: kz-menu:211 kz-menu:421
+#: kz-menu:211 kz-menu:383
 msgid "NUM"
 msgstr ""
 
-#: kz-menu:212 kz-menu:422
+#: kz-menu:212 kz-menu:384
 msgid "ACTION"
 msgstr ""
 
-#: kz-menu:213 kz-menu:423
+#: kz-menu:213 kz-menu:385
 msgid "DESCRIPTION"
 msgstr ""
 
@@ -1081,12 +1081,7 @@ msgstr ""
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr ""
 
-#: kz-menu:322 kz-menu:529
-#, sh-format
-msgid "Cannot handle this choice ($REPLY)."
-msgstr ""
-
-#: kz-menu:348
+#: kz-menu:311
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1103,19 +1098,18 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: kz-menu:584
+#: kz-menu:504
 msgid "Proceed?"
 msgstr ""
 
-#: kz-menu:595
+#: kz-menu:515
 msgid "Yes"
 msgstr ""
 
-#: kz-menu:596
+#: kz-menu:516
 msgid "No"
 msgstr ""
 
-#: kz-menu:605
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr ""
@@ -1467,7 +1461,7 @@ msgstr ""
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr ""
 
-#: gitsquash:56 kz-menu:569
+#: gitsquash:56 kz-menu:489
 msgid "The following will be executed:"
 msgstr ""
 

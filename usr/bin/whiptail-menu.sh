@@ -75,7 +75,7 @@ REPLY=$(
                 "${MENU1_ACTIONS[5]}"                   \
                 "${MENU1_DESCS[5]}")"                   \
                 2>&1 >/dev/tty 
-    )  || exit 0
+    )  || true
 echo "You selected: $REPLY"
 
 title=$(gettext 'Command menu')
