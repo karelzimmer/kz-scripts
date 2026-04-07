@@ -456,6 +456,7 @@ function process_commands() {
     local execute_command=false
     local title=''
 
+    title=$(gettext 'Install')
     show_commands_before_execution
 
     if $execute_command; then
