@@ -228,6 +228,7 @@ Connect a usb medium.")
                             --height    400                     \
                             --title     "$title"                \
                             --text      "$text"                 \
+                            --ok-label  "$(gettext 'Continue')" \
                             --column    "$(gettext 'SEL')"      \
                             --column    "$(gettext 'MEDIUM')"   \
                             $all_media                          \
@@ -242,12 +243,13 @@ Connect a usb medium.")
                     )
                 # shellcheck disable=SC2086
                 selected_medium=$(
-                    whiptail    --noitem                \
-                                --backtitle "$title"    \
-                                --radiolist "$text"     \
-                                20 40 12                \
-                                $all_media              \
-                                2>&1 >/dev/tty          |
+                    whiptail    --ok-button "$(gettext 'Continue')" \
+                                --noitem                            \
+                                --backtitle "$title"                \
+                                --radiolist "$text"                 \
+                                20 40 12                            \
+                                $all_media                          \
+                                2>&1 >/dev/tty                      |
                     sed         's/"//g'                || true
                     )
             fi

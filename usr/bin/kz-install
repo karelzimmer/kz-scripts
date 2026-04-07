@@ -349,16 +349,17 @@ function process_option_select() {
 
         # shellcheck disable=SC2086
         selected_apps=$(
-            zenity  --list                          \
-                    --checklist                     \
-                    --separator ' '                 \
-                    --height    400                 \
-                    --title     "$title"            \
-                    --text      "$text"             \
-                    --column    "$(gettext 'SEL')"  \
-                    --column    "$(gettext 'APP')"  \
-                    $all_apps                       \
-                    2> /dev/null                    || true
+            zenity  --list                              \
+                    --checklist                         \
+                    --separator ' '                     \
+                    --height    400                     \
+                    --title     "$title"                \
+                    --text      "$text"                 \
+                    --ok-label  "$(gettext 'Continue')" \
+                    --column    "$(gettext 'SEL')"      \
+                    --column    "$(gettext 'APP')"      \
+                    $all_apps                           \
+                    2> /dev/null                        || true
             )
     else
         all_apps=$(
@@ -374,13 +375,14 @@ function process_option_select() {
 
         # shellcheck disable=SC2086
         selected_apps=$(
-            whiptail    --noitem                \
-                        --backtitle "$title"    \
-                        --checklist "$text"     \
-                        20 40 12                \
-                        $all_apps               \
-                        2>&1 >/dev/tty          |
-            sed         's/"//g'                || true
+            whiptail    --ok-button "$(gettext 'Continue')" \
+                        --noitem                            \
+                        --backtitle "$title"                \
+                        --checklist "$text"                 \
+                        20 40 12                            \
+                        $all_apps                           \
+                        2>&1 >/dev/tty                      |
+            sed         's/"//g'                            || true
             )
     fi
 
