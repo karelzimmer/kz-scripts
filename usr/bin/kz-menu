@@ -86,7 +86,6 @@ readonly -a  MENU2_DESCS=(
                 'kz setup'
                 "$(gettext 'Back')"
             )
-readonly MENU2_LINES=${#MENU2_DESCS[@]}
 
 
 # #############################################################################
@@ -298,7 +297,6 @@ function process_menu1_choice1() {
     local title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
 
     process_commands
-    $OPTION_GUI || kz.wait_for_enter
 }
 
 
@@ -338,7 +336,6 @@ function process_menu1_choice3() {
     local title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
 
     process_commands
-    $OPTION_GUI || kz.wait_for_enter
 }
 
 
@@ -351,7 +348,6 @@ function process_menu1_choice4() {
     local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
 
     process_commands
-    $OPTION_GUI || kz.wait_for_enter
 }
 
 
@@ -438,7 +434,7 @@ function process_menu2_choice() {
     local -a rows=()
     local title=''
 
-    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
+    if [[ $REPLY -ge 1 && $REPLY -le 5 ]]; then
         rows[1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
         title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
         process_commands

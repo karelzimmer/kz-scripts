@@ -103,7 +103,7 @@ msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:173 kz-backup:156 kz-build:164 kz-check:132 kz-deploy:142 kz-desktop:205
-#: kz-dev:132 kz-install:252 kz-menu:180 kz-restore:156 kz-setup:248
+#: kz-dev:132 kz-install:252 kz-menu:179 kz-restore:156 kz-setup:248
 #: kz-update:181 kz-wifi:127
 msgid "internal error"
 msgstr "interne fout"
@@ -163,7 +163,7 @@ msgstr ""
 msgid "  -D, --debug    show debug information"
 msgstr "  -D, --debug    toon foutopsporingsinformatie"
 
-#: kz-backup:112 kz-desktop:220 kz-install:205 kz-menu:147 kz-restore:112
+#: kz-backup:112 kz-desktop:220 kz-install:205 kz-menu:146 kz-restore:112
 #: kz-setup:201
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
@@ -173,7 +173,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:164 kz-build:172 kz-check:140 kz-deploy:150 kz-desktop:213
-#: kz-dev:138 kz-menu:188 kz-restore:164 kz-update:187 kz-wifi:133
+#: kz-dev:138 kz-menu:187 kz-restore:164 kz-update:187 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -1081,7 +1081,7 @@ msgstr ""
 msgid "Usage: kz menu [<options>]"
 msgstr "Gebruik: kz menu [<opties>]"
 
-#: kz-menu:48 kz-menu:231 whiptail-menu.sh:53 kz-menu.desktop:10
+#: kz-menu:48 kz-menu:230 whiptail-menu.sh:53 kz-menu.desktop:10
 msgid "Installation menu"
 msgstr "Installatiemenu"
 
@@ -1097,11 +1097,11 @@ msgstr "Installatie afronden"
 msgid "Set up user"
 msgstr "Gebruiker inrichten"
 
-#: kz-menu:56 kz-menu:70 kz-menu:403 whiptail-menu.sh:24 whiptail-menu.sh:81
+#: kz-menu:56 kz-menu:70 kz-menu:399 whiptail-menu.sh:24 whiptail-menu.sh:81
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
-#: kz-menu:57 kz-menu:209 kz-menu:237 whiptail-menu.sh:25 whiptail-menu.sh:58
+#: kz-menu:57 kz-menu:208 kz-menu:236 whiptail-menu.sh:25 whiptail-menu.sh:58
 msgid "Exit"
 msgstr "Afsluiten"
 
@@ -1147,34 +1147,34 @@ msgstr "Apps instellen"
 msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
-#: kz-menu:87 kz-menu:381 kz-menu:409 whiptail-menu.sh:50 whiptail-menu.sh:87
+#: kz-menu:87 kz-menu:377 kz-menu:405 whiptail-menu.sh:50 whiptail-menu.sh:87
 msgid "Back"
 msgstr "Terug"
 
-#: kz-menu:207 kz-menu:232 kz-menu:379 kz-menu:404 whiptail-menu.sh:54
+#: kz-menu:206 kz-menu:231 kz-menu:375 kz-menu:400 whiptail-menu.sh:54
 #: whiptail-menu.sh:82
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
-#: kz-backup:231 kz-backup:246 kz-install:358 kz-install:378 kz-menu:208
-#: kz-menu:236 kz-menu:380 kz-menu:408 kz-restore:231 kz-restore:246
+#: kz-backup:231 kz-backup:246 kz-install:358 kz-install:378 kz-menu:207
+#: kz-menu:235 kz-menu:376 kz-menu:404 kz-restore:231 kz-restore:246
 #: kz-setup:352 kz-setup:372 whiptail-menu.sh:57 whiptail-menu.sh:86
 msgid "Continue"
 msgstr "Verder"
 
-#: kz-menu:210 kz-menu:382
+#: kz-menu:209 kz-menu:378
 msgid "CHOICE"
 msgstr "KEUZE"
 
-#: kz-menu:211 kz-menu:383
+#: kz-menu:210 kz-menu:379
 msgid "NUM"
 msgstr "NUM"
 
-#: kz-menu:212 kz-menu:384
+#: kz-menu:211 kz-menu:380
 msgid "ACTION"
 msgstr "ACTIE"
 
-#: kz-menu:213 kz-menu:385
+#: kz-menu:212 kz-menu:381
 msgid "DESCRIPTION"
 msgstr "BESCHRIJVING"
 
@@ -1182,7 +1182,7 @@ msgstr "BESCHRIJVING"
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr "Voer uit nummer [1-$MENU1_LINES]: "
 
-#: kz-menu:311
+#: kz-menu:309
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1208,15 +1208,15 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: kz-menu:504
+#: kz-menu:500
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:515
+#: kz-menu:511
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:516
+#: kz-menu:512
 msgid "No"
 msgstr "Nee"
 
@@ -1606,7 +1606,7 @@ msgstr "*** git squash merge in 10 stappen ***"
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr "Werkt het beste in twee aparte terminals door te kopiëren en plakken."
 
-#: gitsquash:56 kz-menu:489
+#: gitsquash:56 kz-menu:485
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
