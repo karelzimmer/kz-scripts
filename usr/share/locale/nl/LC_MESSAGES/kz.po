@@ -320,8 +320,7 @@ msgstr ""
 "3. Rechtsklik op de gewenste afbeelding en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:213 kz-backup:577 kz-menu:74 whiptail-menu.sh:37
-#: kz-backup.desktop:10
+#: kz-backup:213 kz-backup:577 kz-menu:74 kz-backup.desktop:10
 msgid "Make backup"
 msgstr "Back-up maken"
 
@@ -969,8 +968,8 @@ msgstr ""
 msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
-#: kz-install:335 kz-install:528 kz-menu:76 whiptail-menu.sh:39
-#: kz-install.desktop:10 nl.karelzimmer.kz-install.policy:21
+#: kz-install:335 kz-install:528 kz-menu:76 kz-install.desktop:10
+#: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr "Apps installeren"
 
@@ -1003,7 +1002,7 @@ msgstr "App '$app_argument' niet gevonden."
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
-#: kz-install:529 kz-menu:52 whiptail-menu.sh:20
+#: kz-install:529 kz-menu:52
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
@@ -1081,84 +1080,81 @@ msgstr ""
 msgid "Usage: kz menu [<options>]"
 msgstr "Gebruik: kz menu [<opties>]"
 
-#: kz-menu:48 kz-menu:230 whiptail-menu.sh:53 kz-menu.desktop:10
+#: kz-menu:48 kz-menu:230 kz-menu.desktop:10
 msgid "Installation menu"
 msgstr "Installatiemenu"
 
-#: kz-menu:53 whiptail-menu.sh:21
+#: kz-menu:53
 msgid "Perform installation"
 msgstr "Installatie uitvoeren"
 
-#: kz-menu:54 whiptail-menu.sh:22
+#: kz-menu:54
 msgid "Finish installation"
 msgstr "Installatie afronden"
 
-#: kz-menu:55 whiptail-menu.sh:23
+#: kz-menu:55
 msgid "Set up user"
 msgstr "Gebruiker inrichten"
 
-#: kz-menu:56 kz-menu:70 kz-menu:403 whiptail-menu.sh:24 whiptail-menu.sh:81
+#: kz-menu:56 kz-menu:70 kz-menu:403
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
-#: kz-menu:57 kz-menu:208 kz-menu:236 whiptail-menu.sh:25 whiptail-menu.sh:58
+#: kz-menu:57 kz-menu:208 kz-menu:236
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: kz-menu:60 whiptail-menu.sh:28
+#: kz-menu:60
 msgid "Checklist chapter 1"
 msgstr "Checklist hoofdstuk 1"
 
-#: kz-menu:61 whiptail-menu.sh:29
+#: kz-menu:61
 msgid "Checklist chapter 2"
 msgstr "Checklist hoofdstuk 2"
 
-#: kz-menu:62 whiptail-menu.sh:30
+#: kz-menu:62
 msgid "Checklist chapter 3"
 msgstr "Checklist hoofdstuk 3"
 
-#: kz-menu:63 whiptail-menu.sh:31
+#: kz-menu:63
 msgid "Checklist chapter 4"
 msgstr "Checklist hoofdstuk 4"
 
-#: kz-menu:64 whiptail-menu.sh:32
+#: kz-menu:64
 msgid "Show command menu"
 msgstr "Opdrachtmenu weergeven"
 
-#: kz-menu:65 whiptail-menu.sh:33
+#: kz-menu:65
 msgid "Exit menu"
 msgstr "Menu verlaten"
 
-#: kz-menu:75 kz-wifi:30 whiptail-menu.sh:38 kz-wifi.desktop:10
-#: kz-wifi.desktop:11
+#: kz-menu:75 kz-wifi:30 kz-wifi.desktop:10 kz-wifi.desktop:11
 msgid "Show WiFi details"
 msgstr "WiFi-details tonen"
 
-#: kz-menu:77 kz-restore:213 kz-restore:311 whiptail-menu.sh:40
-#: kz-restore.desktop:10
+#: kz-menu:77 kz-restore:213 kz-restore:311 kz-restore.desktop:10
 msgid "Restore backup"
 msgstr "Back-up terugzetten"
 
-#: kz-menu:78 kz-setup:329 kz-setup:507 whiptail-menu.sh:41 kz-setup.desktop:10
+#: kz-menu:78 kz-setup:329 kz-setup:507 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr "Apps instellen"
 
-#: kz-menu:79 whiptail-menu.sh:42
+#: kz-menu:79
 msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
-#: kz-menu:87 kz-menu:381 kz-menu:409 whiptail-menu.sh:50 whiptail-menu.sh:87
+#: kz-menu:87 kz-menu:381 kz-menu:409
 msgid "Back"
 msgstr "Terug"
 
-#: kz-menu:206 kz-menu:231 kz-menu:379 kz-menu:404 whiptail-menu.sh:54
-#: whiptail-menu.sh:82
+#: kz-menu:206 kz-menu:231 kz-menu:379 kz-menu:404
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
 #: kz-backup:231 kz-backup:246 kz-install:358 kz-install:378 kz-menu:207
 #: kz-menu:235 kz-menu:380 kz-menu:408 kz-restore:231 kz-restore:246
-#: kz-setup:352 kz-setup:372 whiptail-menu.sh:57 whiptail-menu.sh:86
+#: kz-setup:352 kz-setup:372
 msgid "Continue"
 msgstr "Verder"
 

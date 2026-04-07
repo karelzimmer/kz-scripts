@@ -253,7 +253,7 @@ function process_menu1_tui() {
                         5 " $(printf '%-26s'                    \
                         "${MENU1_ACTIONS[5]}"                   \
                         "${MENU1_DESCS[5]}")"                   \
-                        2>&1 >/dev/tty 
+                        2>&1 >/dev/tty
             ) || exit 0
         process_menu1_choice
     done
@@ -426,7 +426,7 @@ function process_menu2_tui() {
                         5 " $(printf '%-26s'                    \
                         "${MENU2_ACTIONS[5]}"                   \
                         "${MENU2_DESCS[5]}")"                   \
-                        2>&1 >/dev/tty 
+                        2>&1 >/dev/tty
             ) || break
         process_menu2_choice
     done
