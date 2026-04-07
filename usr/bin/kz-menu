@@ -234,6 +234,7 @@ function process_menu1_tui() {
         REPLY=$(
             whiptail    --ok-button     "$(gettext 'Continue')" \
                         --cancel-button "$(gettext 'Exit')"     \
+                        --backtitle     "$PROGRAM_NAME"         \
                         --title         "$title"                \
                         --menu          "$text"                 \
                         25 60 10                                \
@@ -323,7 +324,10 @@ Roughly boils down to:
                 --text      "$text"     \
                 2> /dev/null            || true
     else
-        whiptail --title "$title" --msgbox "$text" 25 60
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title "$title"            \
+                    --msgbox "$text"            \
+                    25 60
     fi
 }
 
@@ -403,6 +407,7 @@ function process_menu2_tui() {
         REPLY=$(
             whiptail    --ok-button     "$(gettext 'Continue')" \
                         --cancel-button "$(gettext 'Back')"     \
+                        --backtitle     "$PROGRAM_NAME"         \
                         --title         "$title"                \
                         --menu          "$text"                 \
                         25 60 10                                \
@@ -512,7 +517,10 @@ $(gettext 'Proceed?')"
             execute_command=false
         fi
     else
-        if whiptail --title "$title" --yesno "$text" 25 60; then
+        if whiptail --backtitle "$PROGRAM_NAME" \
+                    --title     "$title"        \
+                    --yesno     "$text"         \
+                    25 60; then
             execute_command=true
         else
             execute_command=false

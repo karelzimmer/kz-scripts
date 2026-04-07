@@ -371,7 +371,8 @@ function process_option_select() {
         selected_apps=$(
             whiptail    --ok-button "$(gettext 'Continue')" \
                         --noitem                            \
-                        --backtitle "$title"                \
+                        --backtitle "$PROGRAM_NAME"         \
+                        --title     "$title"                \
                         --checklist "$text"                 \
                         20 40 12                            \
                         $all_apps                           \
