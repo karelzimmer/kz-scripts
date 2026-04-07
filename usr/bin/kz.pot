@@ -1098,15 +1098,15 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: kz-menu:501
+#: kz-menu:499
 msgid "Proceed?"
 msgstr ""
 
-#: kz-menu:512
+#: kz-menu:507
 msgid "Yes"
 msgstr ""
 
-#: kz-menu:513
+#: kz-menu:508
 msgid "No"
 msgstr ""
 
@@ -1461,7 +1461,7 @@ msgstr ""
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr ""
 
-#: gitsquash:56 kz-menu:486
+#: gitsquash:56 kz-menu:484
 msgid "The following will be executed:"
 msgstr ""
 
@@ -1491,6 +1491,5 @@ msgstr ""
 msgid "Complete!"
 msgstr ""
 
-#: kz-menu:459
 msgid "Install"
 msgstr ""

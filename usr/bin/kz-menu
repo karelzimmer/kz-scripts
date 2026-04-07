@@ -454,9 +454,7 @@ function process_commands() {
     local command=''
     local description=''
     local execute_command=false
-    local title=''
 
-    title=$(gettext 'Install')
     show_commands_before_execution
 
     if $execute_command; then
@@ -497,12 +495,9 @@ $description ($command)"
     done
 
     text+="
-"
-    prompt="$(gettext 'Proceed?')"
-    kz.logmsg "$prompt"
+
+$(gettext 'Proceed?')"
     if $OPTION_GUI; then
-        text+="
-$prompt"
         if zenity   --question                          \
                     --no-markup                         \
                     --width         520                 \
