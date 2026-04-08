@@ -230,6 +230,7 @@ function process_menu1_tui() {
     title=$(gettext 'Installation menu')
     text=$(gettext 'Select a choice:')
 
+    # FIXME: kan het vullen van het menu niet wat anders? arrays?
     while true; do
         REPLY=$(
             whiptail    --ok-button     "$(gettext 'Continue')" \
