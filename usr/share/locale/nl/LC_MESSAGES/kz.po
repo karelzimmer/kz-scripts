@@ -103,7 +103,7 @@ msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:173 kz-backup:156 kz-build:164 kz-check:132 kz-deploy:142 kz-desktop:205
-#: kz-dev:132 kz-install:252 kz-menu:179 kz-restore:156 kz-setup:248
+#: kz-dev:132 kz-install:252 kz-menu:176 kz-restore:156 kz-setup:248
 #: kz-update:181 kz-wifi:127
 msgid "internal error"
 msgstr "interne fout"
@@ -163,7 +163,7 @@ msgstr ""
 msgid "  -D, --debug    show debug information"
 msgstr "  -D, --debug    toon foutopsporingsinformatie"
 
-#: kz-backup:112 kz-desktop:220 kz-install:205 kz-menu:146 kz-restore:112
+#: kz-backup:112 kz-desktop:220 kz-install:205 kz-menu:143 kz-restore:112
 #: kz-setup:201
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
@@ -173,7 +173,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:164 kz-build:172 kz-check:140 kz-deploy:150 kz-desktop:213
-#: kz-dev:138 kz-menu:187 kz-restore:164 kz-update:187 kz-wifi:133
+#: kz-dev:138 kz-menu:184 kz-restore:164 kz-update:187 kz-wifi:133
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -191,23 +191,23 @@ msgstr ""
 "\n"
 "Koppel een usb-medium aan."
 
-#: kz-backup:214 kz-restore:214
+#: kz-backup:217 kz-restore:214
 msgid "Choose USB medium:"
 msgstr "Kies USB-medium:"
 
-#: kz-backup:232 kz-install:359 kz-restore:232 kz-setup:353
+#: kz-backup:236 kz-install:359 kz-restore:232 kz-setup:353
 msgid "SEL"
 msgstr "SEL"
 
-#: kz-backup:233 kz-restore:233
+#: kz-backup:237 kz-restore:233
 msgid "MEDIUM"
 msgstr "MEDIUM"
 
-#: kz-backup:259 kz-restore:259
+#: kz-backup:264 kz-restore:259
 msgid "No USB medium selected."
 msgstr "Geen USB-medium geselecteerd."
 
-#: kz-backup:335
+#: kz-backup:340
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
@@ -219,39 +219,39 @@ msgstr ""
 "\n"
 "Verder lezen:"
 
-#: kz-backup:355
+#: kz-backup:360
 msgid "==== START list of manual installed packages"
 msgstr "==== BEGIN overzicht van handmatig geïnstalleerde pakketten"
 
-#: kz-backup:356
+#: kz-backup:361
 msgid "==== END list of manual installed packages"
 msgstr "==== EINDE overzicht van handmatig geïnstalleerde pakketten"
 
-#: kz-backup:357
+#: kz-backup:362
 msgid "==== START list of installed snaps"
 msgstr "==== BEGIN overzicht van geïnstalleerde snaps"
 
-#: kz-backup:358
+#: kz-backup:363
 msgid "==== END list of installed snaps"
 msgstr "==== EINDE overzicht van geïnstalleerde snaps"
 
-#: kz-backup:359
+#: kz-backup:364
 msgid "==== START list of installed Flatpak apps"
 msgstr "==== BEGIN overzicht van geïnstalleerde flatpak-apps"
 
-#: kz-backup:360
+#: kz-backup:365
 msgid "==== END list of installed Flatpak apps"
 msgstr "==== EINDE overzicht van geïnstalleerde flatpak-apps"
 
-#: kz-backup:399
+#: kz-backup:404
 msgid "USERNAME|UID|GID|USER"
 msgstr "GEBRUIKERSNAAM|UID|GID|GEBRUIKER"
 
-#: kz-backup:424 kz-backup:436
+#: kz-backup:429 kz-backup:441
 msgid "Additional users can be added manually:"
 msgstr "Extra gebruikers kunnen handmatig worden toegevoegd:"
 
-#: kz-backup:426
+#: kz-backup:431
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
@@ -262,11 +262,11 @@ msgstr ""
 "2. Klik op Ontgrendelen en vervolgens op Gebruiker toevoegen.\n"
 "3. Vul in Naam <gebruiker> en Gebruikersnaam <gebruikersnaam>."
 
-#: kz-backup:431 kz-backup:491 kz-backup:528
+#: kz-backup:436 kz-backup:496 kz-backup:533
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr "[1] Windows-, command- of vergrootglastoets."
 
-#: kz-backup:438
+#: kz-backup:443
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -288,7 +288,7 @@ msgstr ""
 "# Gebruiker kan wachtwoord instellen bij de eerste keer aanmelden:\n"
 "sudo passwd --delete --expire <gebruikersnaam>"
 
-#: kz-backup:484
+#: kz-backup:489
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -305,7 +305,7 @@ msgstr ""
 "3. Klik op Selecteer een bestand.4. Selecteer avatar.ico in Persoonlijke "
 "map / Instellingen, of een ander afbeeldingsbestand."
 
-#: kz-backup:522
+#: kz-backup:527
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -320,72 +320,72 @@ msgstr ""
 "3. Rechtsklik op de gewenste afbeelding en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:213 kz-backup:577 kz-menu:74 kz-backup.desktop:10
+#: kz-backup:216 kz-backup:582 kz-menu:71 kz-backup.desktop:10
 msgid "Make backup"
 msgstr "Back-up maken"
 
-#: kz-backup:578
+#: kz-backup:583
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-#: kz-backup:614
+#: kz-backup:619
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:656 kz-install:670 kz-restore:388 kz-setup:634
+#: kz-backup:661 kz-install:670 kz-restore:388 kz-setup:634
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:657
+#: kz-backup:662
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:659 kz-restore:391
+#: kz-backup:664 kz-restore:391
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:660
+#: kz-backup:665
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:661 kz-restore:393
+#: kz-backup:666 kz-restore:393
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:662
+#: kz-backup:667
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:664 kz-install:675 kz-restore:396 kz-setup:638
+#: kz-backup:669 kz-install:675 kz-restore:396 kz-setup:638
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:665 kz-install:676 kz-restore:397 kz-setup:639
+#: kz-backup:670 kz-install:676 kz-restore:397 kz-setup:639
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:666
+#: kz-backup:671
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:685
+#: kz-backup:690
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:703
+#: kz-backup:708
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:713
+#: kz-backup:718
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 "De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
 
-#: kz-backup:719 kz-restore:452
+#: kz-backup:724 kz-restore:452
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -968,7 +968,7 @@ msgstr ""
 msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
-#: kz-install:335 kz-install:528 kz-menu:76 kz-install.desktop:10
+#: kz-install:335 kz-install:528 kz-menu:73 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr "Apps installeren"
@@ -1002,7 +1002,7 @@ msgstr "App '$app_argument' niet gevonden."
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
-#: kz-install:529 kz-menu:52
+#: kz-install:529 kz-menu:51
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
@@ -1080,97 +1080,97 @@ msgstr ""
 msgid "Usage: kz menu [<options>]"
 msgstr "Gebruik: kz menu [<opties>]"
 
-#: kz-menu:48 kz-menu:230 kz-menu.desktop:10
+#: kz-menu:48 kz-menu:234 kz-menu.desktop:10
 msgid "Installation menu"
 msgstr "Installatiemenu"
 
-#: kz-menu:53
+#: kz-menu:52
 msgid "Perform installation"
 msgstr "Installatie uitvoeren"
 
-#: kz-menu:54
+#: kz-menu:53
 msgid "Finish installation"
 msgstr "Installatie afronden"
 
-#: kz-menu:55
+#: kz-menu:54
 msgid "Set up user"
 msgstr "Gebruiker inrichten"
 
-#: kz-menu:56 kz-menu:70 kz-menu:403
+#: kz-menu:55 kz-menu:68 kz-menu:404
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
-#: kz-menu:57 kz-menu:208 kz-menu:236
+#: kz-menu:56 kz-menu:205 kz-menu:240
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: kz-menu:60
+#: kz-menu:59
 msgid "Checklist chapter 1"
 msgstr "Checklist hoofdstuk 1"
 
-#: kz-menu:61
+#: kz-menu:60
 msgid "Checklist chapter 2"
 msgstr "Checklist hoofdstuk 2"
 
-#: kz-menu:62
+#: kz-menu:61
 msgid "Checklist chapter 3"
 msgstr "Checklist hoofdstuk 3"
 
-#: kz-menu:63
+#: kz-menu:62
 msgid "Checklist chapter 4"
 msgstr "Checklist hoofdstuk 4"
 
-#: kz-menu:64
+#: kz-menu:63
 msgid "Show command menu"
 msgstr "Opdrachtmenu weergeven"
 
-#: kz-menu:65
+#: kz-menu:64
 msgid "Exit menu"
 msgstr "Menu verlaten"
 
-#: kz-menu:75 kz-wifi:30 kz-wifi.desktop:10 kz-wifi.desktop:11
+#: kz-menu:72 kz-wifi:30 kz-wifi.desktop:10 kz-wifi.desktop:11
 msgid "Show WiFi details"
 msgstr "WiFi-details tonen"
 
-#: kz-menu:77 kz-restore:213 kz-restore:311 kz-restore.desktop:10
+#: kz-menu:74 kz-restore:213 kz-restore:311 kz-restore.desktop:10
 msgid "Restore backup"
 msgstr "Back-up terugzetten"
 
-#: kz-menu:78 kz-setup:329 kz-setup:507 kz-setup.desktop:10
+#: kz-menu:75 kz-setup:329 kz-setup:507 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr "Apps instellen"
 
-#: kz-menu:79
+#: kz-menu:76
 msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
-#: kz-menu:87 kz-menu:381 kz-menu:409
+#: kz-menu:84 kz-menu:375 kz-menu:410
 msgid "Back"
 msgstr "Terug"
 
-#: kz-menu:206 kz-menu:231 kz-menu:379 kz-menu:404
+#: kz-menu:203 kz-menu:235 kz-menu:373 kz-menu:405
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
-#: kz-backup:231 kz-backup:246 kz-install:358 kz-install:378 kz-menu:207
-#: kz-menu:235 kz-menu:380 kz-menu:408 kz-restore:231 kz-restore:246
+#: kz-backup:235 kz-backup:251 kz-install:358 kz-install:378 kz-menu:204
+#: kz-menu:239 kz-menu:374 kz-menu:409 kz-restore:231 kz-restore:246
 #: kz-setup:352 kz-setup:372
 msgid "Continue"
 msgstr "Verder"
 
-#: kz-menu:209 kz-menu:382
+#: kz-menu:206 kz-menu:376
 msgid "CHOICE"
 msgstr "KEUZE"
 
-#: kz-menu:210 kz-menu:383
+#: kz-menu:207 kz-menu:377
 msgid "NUM"
 msgstr "NUM"
 
-#: kz-menu:211 kz-menu:384
+#: kz-menu:208 kz-menu:378
 msgid "ACTION"
 msgstr "ACTIE"
 
-#: kz-menu:212 kz-menu:385
+#: kz-menu:209 kz-menu:379
 msgid "DESCRIPTION"
 msgstr "BESCHRIJVING"
 
@@ -1178,7 +1178,7 @@ msgstr "BESCHRIJVING"
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr "Voer uit nummer [1-$MENU1_LINES]: "
 
-#: kz-menu:310
+#: kz-menu:304
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1204,15 +1204,15 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: kz-menu:504
+#: kz-menu:495
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:512
+#: kz-menu:503
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:513
+#: kz-menu:504
 msgid "No"
 msgstr "Nee"
 
@@ -1602,7 +1602,7 @@ msgstr "*** git squash merge in 10 stappen ***"
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr "Werkt het beste in twee aparte terminals door te kopiëren en plakken."
 
-#: gitsquash:56 kz-menu:489
+#: gitsquash:56 kz-menu:480
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 

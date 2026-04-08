@@ -47,45 +47,42 @@ readonly OPTIONS_LONG='gui,help,manual,usage,version,debug'
 # Define the menu1 options.
 MENU1_TITLE=$(gettext 'Installation menu')
 readonly MENU1_TITLE
-# readonly MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
 readonly -a  MENU1_ACTIONS=(
-            [1]="$(gettext 'Prepare installation')"
-                "$(gettext 'Perform installation')"
-                "$(gettext 'Finish installation')"
-                "$(gettext 'Set up user')"
-                "$(gettext 'Command menu')"
-                "$(gettext 'Exit')"
-            )
+    [1]="$(gettext 'Prepare installation')"
+    [2]="$(gettext 'Perform installation')"
+    [3]="$(gettext 'Finish installation')"
+    [4]="$(gettext 'Set up user')"
+    [5]="$(gettext 'Command menu')"
+    [6]="$(gettext 'Exit')"
+    )
 readonly -a  MENU1_DESCS=(
-            [1]="$(gettext 'Checklist chapter 1')"
-                "$(gettext 'Checklist chapter 2')"
-                "$(gettext 'Checklist chapter 3')"
-                "$(gettext 'Checklist chapter 4')"
-                "$(gettext 'Show command menu')"
-                "$(gettext 'Exit menu')"
-            )
-# readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
+    [1]="$(gettext 'Checklist chapter 1')"
+    [2]="$(gettext 'Checklist chapter 2')"
+    [3]="$(gettext 'Checklist chapter 3')"
+    [4]="$(gettext 'Checklist chapter 4')"
+    [5]="$(gettext 'Show command menu')"
+    [6]="$(gettext 'Exit menu')"
+    )
 
 # Define the menu2 options.
 MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
-# readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
 readonly -a  MENU2_ACTIONS=(
-            [1]="$(gettext 'Make backup')"
-                "$(gettext 'Show WiFi details')"
-                "$(gettext 'Install apps')"
-                "$(gettext 'Restore backup')"
-                "$(gettext 'Set up apps')"
-                "$(gettext 'Go to installation menu')"
+    [1]="$(gettext 'Make backup')"
+    [2]="$(gettext 'Show WiFi details')"
+    [3]="$(gettext 'Install apps')"
+    [4]="$(gettext 'Restore backup')"
+    [5]="$(gettext 'Set up apps')"
+    [6]="$(gettext 'Go to installation menu')"
             )
 readonly -a  MENU2_DESCS=(
-            [1]='kz backup'
-                'kz wifi'
-                'kz install'
-                'kz restore'
-                'kz setup'
-                "$(gettext 'Back')"
-            )
+    [1]='kz backup'
+    [2]='kz wifi'
+    [3]='kz install'
+    [4]='kz restore'
+    [5]='kz setup'
+    [6]="$(gettext 'Back')"
+    )
 
 
 # #############################################################################
@@ -224,13 +221,19 @@ function process_menu1_gui() {
 
 # This function shows and processes menu 1 in TUI mode.
 function process_menu1_tui() {
+    local -a items=(
+        [1]="$(printf '%-26s' "${MENU1_ACTIONS[1]}") ${MENU1_DESCS[1]}"
+        [2]="$(printf '%-26s' "${MENU1_ACTIONS[2]}") ${MENU1_DESCS[2]}"
+        [3]="$(printf '%-26s' "${MENU1_ACTIONS[3]}") ${MENU1_DESCS[3]}"
+        [4]="$(printf '%-26s' "${MENU1_ACTIONS[4]}") ${MENU1_DESCS[4]}"
+        [5]="$(printf '%-26s' "${MENU1_ACTIONS[5]}") ${MENU1_DESCS[5]}"
+        )
     local text=''
     local title=''
 
     title=$(gettext 'Installation menu')
     text=$(gettext 'Select a choice:')
 
-    # FIXME: kan het vullen van het menu niet wat anders? arrays?
     while true; do
         REPLY=$(
             whiptail    --ok-button     "$(gettext 'Continue')" \
@@ -239,21 +242,11 @@ function process_menu1_tui() {
                         --title         "$title"                \
                         --menu          "$text"                 \
                         25 60 10                                \
-                        1 " $(printf '%-26s'                    \
-                        "${MENU1_ACTIONS[1]}"                   \
-                        "${MENU1_DESCS[1]}")"                   \
-                        2 " $(printf '%-26s'                    \
-                        "${MENU1_ACTIONS[2]}"                   \
-                        "${MENU1_DESCS[2]}")"                   \
-                        3 " $(printf '%-26s'                    \
-                        "${MENU1_ACTIONS[3]}"                   \
-                        "${MENU1_DESCS[3]}")"                   \
-                        4 " $(printf '%-26s'                    \
-                        "${MENU1_ACTIONS[4]}"                   \
-                        "${MENU1_DESCS[4]}")"                   \
-                        5 " $(printf '%-26s'                    \
-                        "${MENU1_ACTIONS[5]}"                   \
-                        "${MENU1_DESCS[5]}")"                   \
+                        1 "${items[1]}"                         \
+                        2 "${items[2]}"                         \
+                        3 "${items[3]}"                         \
+                        4 "${items[4]}"                         \
+                        5 "${items[5]}"                         \
                         2>&1 >/dev/tty
             ) || exit 0
         process_menu1_choice
@@ -348,7 +341,7 @@ function process_menu1_choice3() {
 function process_menu1_choice4() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
-            "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
+        [2]="${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
         )
     local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
 
@@ -398,6 +391,13 @@ function process_menu2_gui() {
 
 # This function shows and processes menu 2 in TUI mode.
 function process_menu2_tui() {
+    local -a items=(
+        [1]="$(printf '%-26s' "${MENU2_ACTIONS[1]}") ${MENU2_DESCS[1]}"
+        [2]="$(printf '%-26s' "${MENU2_ACTIONS[2]}") ${MENU2_DESCS[2]}"
+        [3]="$(printf '%-26s' "${MENU2_ACTIONS[3]}") ${MENU2_DESCS[3]}"
+        [4]="$(printf '%-26s' "${MENU2_ACTIONS[4]}") ${MENU2_DESCS[4]}"
+        [5]="$(printf '%-26s' "${MENU2_ACTIONS[5]}") ${MENU2_DESCS[5]}"
+        )
     local text=''
     local title=''
 
@@ -412,21 +412,11 @@ function process_menu2_tui() {
                         --title         "$title"                \
                         --menu          "$text"                 \
                         25 60 10                                \
-                        1 " $(printf '%-26s'                    \
-                        "${MENU2_ACTIONS[1]}"                   \
-                        "${MENU2_DESCS[1]}")"                   \
-                        2 " $(printf '%-26s'                    \
-                        "${MENU2_ACTIONS[2]}"                   \
-                        "${MENU2_DESCS[2]}")"                   \
-                        3 " $(printf '%-26s'                    \
-                        "${MENU2_ACTIONS[3]}"                   \
-                        "${MENU2_DESCS[3]}")"                   \
-                        4 " $(printf '%-26s'                    \
-                        "${MENU2_ACTIONS[4]}"                   \
-                        "${MENU2_DESCS[4]}")"                   \
-                        5 " $(printf '%-26s'                    \
-                        "${MENU2_ACTIONS[5]}"                   \
-                        "${MENU2_DESCS[5]}")"                   \
+                        1 "${items[1]}"                         \
+                        2 "${items[2]}"                         \
+                        3 "${items[3]}"                         \
+                        4 "${items[4]}"                         \
+                        5 "${items[5]}"                         \
                         2>&1 >/dev/tty
             ) || break
         process_menu2_choice

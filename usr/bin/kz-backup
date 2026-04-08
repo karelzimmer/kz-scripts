@@ -200,20 +200,17 @@ $USAGE"
 Connect a usb medium.")
             kz.infomsg "$text"
             $OPTION_GUI || kz.wait_for_enter
-            medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+            # medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+            medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
                 exit 1
             fi
         fi
 
-        # FIXME gebruik find ipv ls (overal)
-        # AI maakt er dit van:
-        medium=$(find "$usb_mount_point/"* -maxdepth 0 -type d 2> /dev/null || true)
-        # Volgens mij is find "$usb_mount_point/"* -prune beter!
+        # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
+        medium=$(find "$usb_mount_point/"* -prune -type d 2> /dev/null || true)
         # FIXME gaat fout als er een medium is met een spatie in de naam,
-        # maar dat is lastig te fixen ivm zenity/whiptail. Arrays?
-        # OOK kz-restore!
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
 
             title=$(gettext 'Make backup')
@@ -221,6 +218,7 @@ Connect a usb medium.")
 
             if $OPTION_GUI; then
                 # shellcheck disable=SC2012
+                # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
                 all_media=$(
                     ls      --directory             \
                             "$usb_mount_point/"*    |
@@ -242,6 +240,7 @@ Connect a usb medium.")
                     )
             else
                 # shellcheck disable=SC2012
+                # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
                 all_media=$(
                     ls      --directory             \
                             "$usb_mount_point/"*    |
