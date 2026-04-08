@@ -207,7 +207,7 @@ function process_menu1_gui() {
                     --column        "$(gettext 'NUM')"                  \
                     --column        "$(gettext 'ACTION')"               \
                     --column        "$(gettext 'DESCRIPTION')"          \
-                    TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_DESCS[1]}"   \
+                    FALSE 1 "${MENU1_ACTIONS[1]}" "${MENU1_DESCS[1]}"   \
                     FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_DESCS[2]}"   \
                     FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}"   \
                     FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
@@ -377,7 +377,7 @@ function process_menu2_gui() {
                     --column        "$(gettext 'NUM')"                  \
                     --column        "$(gettext 'ACTION')"               \
                     --column        "$(gettext 'DESCRIPTION')"          \
-                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_DESCS[1]}"   \
+                    FALSE 1 "${MENU2_ACTIONS[1]}" "${MENU2_DESCS[1]}"   \
                     FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_DESCS[2]}"   \
                     FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_DESCS[3]}"   \
                     FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
