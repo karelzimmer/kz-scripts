@@ -213,7 +213,7 @@ function process_menu1_gui() {
                     FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
                     FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
                     2> /dev/null                                        || true
-            ) || exit 0
+            )   || exit 0
         process_menu1_choice
     # done
 }
@@ -248,7 +248,7 @@ function process_menu1_tui() {
                         4 "${items[4]}"                         \
                         5 "${items[5]}"                         \
                         2>&1 >/dev/tty
-            ) || exit 0
+            )   || exit 0
         process_menu1_choice
     done
 }
@@ -383,7 +383,7 @@ function process_menu2_gui() {
                     FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
                     FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
                     2> /dev/null                                        || true
-            ) || break
+            )   || break
         process_menu2_choice
     done
 }
@@ -418,7 +418,7 @@ function process_menu2_tui() {
                         4 "${items[4]}"                         \
                         5 "${items[5]}"                         \
                         2>&1 >/dev/tty
-            ) || break
+            )   || break
         process_menu2_choice
     done
 }
