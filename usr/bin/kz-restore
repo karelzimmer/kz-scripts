@@ -208,7 +208,7 @@ Connect a usb medium.")
             fi
         fi
 
-        medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
+        medium=$(find "$usb_mount_point/"* -prune || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
 
             title=$(gettext 'Restore backup')
@@ -412,7 +412,7 @@ $users"
     fi
 
     if [[ $SOURCE == $usb_mount_point* ]]; then
-        medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
+        medium=$(find "$usb_mount_point/"* -prune || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text+="
 
