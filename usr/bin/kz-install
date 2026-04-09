@@ -327,7 +327,9 @@ $USAGE"
 # This function processes apps selected via the graphical user interface (GUI)
 # or text user interface (TUI).
 function process_option_select() {
-    local all_apps=''
+    local -a all_apps=()
+    local -a arg=()
+    local app=''
     local selected_apps=''
     local text=''
     local title=''
@@ -336,20 +338,18 @@ function process_option_select() {
     text=$(gettext 'Select apps to install:')
 
     if $OPTION_GUI; then
-        # FIXME all_apps een array worden? ..
-        all_apps=$(
+        readarray -t all_apps < <(
             grep    "#[[:space:]]\+${install}[[:space:]]\+" \
                     "${installation_files[@]}"              |
             tr      --squeeze-repeats                       \
                     '[:space:]'                             |
             cut     --delimiter=' '                         \
                     --fields=3                              |
-            sort    --unique                                |
-            sed     --expression='s/^/false /'
+            sort    --unique
             )
-
-        # FIXME ... zodat hier "${all_apps[@]}" gebruikt kan worden? Ook kz-setup!
-        # shellcheck disable=SC2086
+        for app in "${all_apps[@]}"; do
+            arg+=('false' "$app")
+        done
         selected_apps=$(
             zenity  --list                              \
                     --checklist                         \
@@ -360,24 +360,22 @@ function process_option_select() {
                     --ok-label  "$(gettext 'Continue')" \
                     --column    "$(gettext 'SEL')"      \
                     --column    "$(gettext 'APP')"      \
-                    $all_apps                           \
+                    "${arg[@]}"                         \
                     2> /dev/null                        || true
             )
     else
-        # FIXME all_apps een array worden? ..
-        all_apps=$(
+        readarray -t all_apps < <(
             grep    "#[[:space:]]\+${install}[[:space:]]\+" \
                     "${installation_files[@]}"              |
             tr      --squeeze-repeats                       \
                     '[:space:]'                             |
             cut     --delimiter=' '                         \
                     --fields=3                              |
-            sort    --unique                                |
-            sed     --expression='s/$/ off/'
+            sort    --unique
             )
-
-        # FIXME ... zodat hier "${all_apps[@]}" gebruikt kan worden? Ook kz-setup!
-        # shellcheck disable=SC2086
+        for app in "${all_apps[@]}"; do
+            arg+=("$app" 'off')
+        done
         selected_apps=$(
             whiptail    --ok-button "$(gettext 'Continue')" \
                         --noitem                            \
@@ -385,7 +383,7 @@ function process_option_select() {
                         --title     "$title"                \
                         --checklist "$text"                 \
                         20 40 12                            \
-                        $all_apps                           \
+                        "${arg[@]}"                         \
                         2>&1 >/dev/tty                      |
             sed         's/"//g'                            || true
             )
