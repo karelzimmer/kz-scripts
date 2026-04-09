@@ -194,7 +194,7 @@ $USAGE"
         fi
         medium=$target_argument
     else
-        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+        medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
         if [[ -z $medium ]]; then
             text=$(gettext "No usb medium found.
 
@@ -208,20 +208,14 @@ Connect a usb medium.")
             fi
         fi
 
-        #TODO: if there are multiple media, ask the user to choose one, also in kz-restore!
-        #TODO: use find instead of ls (everywhere) in combination with arrays, also in kz-restore!
-        medium=$(find "$usb_mount_point/"* -prune -type d 2> /dev/null || true)
+        medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
 
             title=$(gettext 'Make backup')
             text=$(gettext 'Choose USB medium:')
 
             if $OPTION_GUI; then
-                readarray -t all_media < <(
-                    find    "$usb_mount_point/"*    \
-                            -prune                  \
-                            -type d
-                    )
+                readarray -t all_media < <(find "$usb_mount_point/"* -prune)
                 for medium in "${all_media[@]}"; do
                     arg+=('false' "$medium")
                 done
@@ -239,12 +233,7 @@ Connect a usb medium.")
                             2> /dev/null                        || true
                     )
             else
-                # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
-                readarray -t all_media < <(
-                    find    "$usb_mount_point/"*    \
-                            -prune                  \
-                            -type d
-                    )
+                readarray -t all_media < <(find "$usb_mount_point/"* -prune)
                 for medium in "${all_media[@]}"; do
                     arg+=("$medium" 'off')
                 done
@@ -712,7 +701,7 @@ $users"
     fi
 
     if [[ $TARGET == $usb_mount_point* ]]; then
-        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+        medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text+="
 
