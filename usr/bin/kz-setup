@@ -582,32 +582,21 @@ function process_command_file() {
 # This function reports and executes a command from the command file.
 function execute_command() {
     local cmd=$1
-    local -i cmd_dis_len=0
-    local -i cmd_dis_max=0
-    local cmd_dis=''
+
+    if $app_line; then
+        kz.logmsg "$app_name_line"
+    fi
+    kz.logmsg "$cmd"
 
     if $OPTION_GUI; then
-        if $app_line; then
-            kz.logmsg "$app_name_line"
-        fi
-        kz.logmsg "$cmd"
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
-        if $app_line; then
-            kz.infomsg "$app_name_line"
-        fi
-        # Ellipsize terminal output.
-        # Width 9 characters less, 9 for leading spaces.
-        cmd_dis_max=$(( $(tput cols) - 9 ))
-        if [[ ${#cmd} -gt $cmd_dis_max ]]; then
-            # Width 12 characters less, 9 for leading spaces and 3 for trailing
-            # ellipsis.
-            cmd_dis_len=$(( $(tput cols) - 12 ))
-            cmd_dis=${cmd:0:cmd_dis_len}...
-        else
-            cmd_dis=$cmd
-        fi
-        kz.infomsg "         $cmd_dis"
+        # TODO Dit werkt, nu nog verder met whiptailen :-), ook kz-install
+        TERM=ansi                                               \
+        whiptail    --backtitle "$PROGRAM_NAME"                 \
+                    --title     "$title"                        \
+                    --infobox "$app_name_line\n         $cmd"   \
+                    8 78
     fi
 
     eval    "$cmd"              \
