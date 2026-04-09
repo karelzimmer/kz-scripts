@@ -222,11 +222,11 @@ function process_menu1_gui() {
 # This function shows and processes menu 1 in TUI mode.
 function process_menu1_tui() {
     local -a items=(
-        [1]="$(printf '%-26s' "${MENU1_ACTIONS[1]}") ${MENU1_DESCS[1]}"
-        [2]="$(printf '%-26s' "${MENU1_ACTIONS[2]}") ${MENU1_DESCS[2]}"
-        [3]="$(printf '%-26s' "${MENU1_ACTIONS[3]}") ${MENU1_DESCS[3]}"
-        [4]="$(printf '%-26s' "${MENU1_ACTIONS[4]}") ${MENU1_DESCS[4]}"
-        [5]="$(printf '%-26s' "${MENU1_ACTIONS[5]}") ${MENU1_DESCS[5]}"
+        [1]="$(printf '%-24s' "${MENU1_ACTIONS[1]}") ${MENU1_DESCS[1]}"
+        [2]="$(printf '%-24s' "${MENU1_ACTIONS[2]}") ${MENU1_DESCS[2]}"
+        [3]="$(printf '%-24s' "${MENU1_ACTIONS[3]}") ${MENU1_DESCS[3]}"
+        [4]="$(printf '%-24s' "${MENU1_ACTIONS[4]}") ${MENU1_DESCS[4]}"
+        [5]="$(printf '%-24s' "${MENU1_ACTIONS[5]}") ${MENU1_DESCS[5]}"
         )
     local text=''
     local title=''
@@ -392,11 +392,11 @@ function process_menu2_gui() {
 # This function shows and processes menu 2 in TUI mode.
 function process_menu2_tui() {
     local -a items=(
-        [1]="$(printf '%-26s' "${MENU2_ACTIONS[1]}") ${MENU2_DESCS[1]}"
-        [2]="$(printf '%-26s' "${MENU2_ACTIONS[2]}") ${MENU2_DESCS[2]}"
-        [3]="$(printf '%-26s' "${MENU2_ACTIONS[3]}") ${MENU2_DESCS[3]}"
-        [4]="$(printf '%-26s' "${MENU2_ACTIONS[4]}") ${MENU2_DESCS[4]}"
-        [5]="$(printf '%-26s' "${MENU2_ACTIONS[5]}") ${MENU2_DESCS[5]}"
+        [1]="$(printf '%-24s' "${MENU2_ACTIONS[1]}") ${MENU2_DESCS[1]}"
+        [2]="$(printf '%-24s' "${MENU2_ACTIONS[2]}") ${MENU2_DESCS[2]}"
+        [3]="$(printf '%-24s' "${MENU2_ACTIONS[3]}") ${MENU2_DESCS[3]}"
+        [4]="$(printf '%-24s' "${MENU2_ACTIONS[4]}") ${MENU2_DESCS[4]}"
+        [5]="$(printf '%-24s' "${MENU2_ACTIONS[5]}") ${MENU2_DESCS[5]}"
         )
     local text=''
     local title=''

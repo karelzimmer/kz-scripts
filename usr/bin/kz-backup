@@ -217,8 +217,8 @@ Connect a usb medium.")
             text=$(gettext 'Choose USB medium:')
 
             if $OPTION_GUI; then
-                # shellcheck disable=SC2012
                 # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
+                # shellcheck disable=SC2012
                 all_media=$(
                     ls      --directory             \
                             "$usb_mount_point/"*    |
@@ -239,8 +239,8 @@ Connect a usb medium.")
                             2> /dev/null                        || true
                     )
             else
-                # shellcheck disable=SC2012
                 # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
+                # shellcheck disable=SC2012
                 all_media=$(
                     ls      --directory             \
                             "$usb_mount_point/"*    |

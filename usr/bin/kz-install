@@ -336,6 +336,7 @@ function process_option_select() {
     text=$(gettext 'Select apps to install:')
 
     if $OPTION_GUI; then
+        # FIXME all_apps een array worden? ..
         all_apps=$(
             grep    "#[[:space:]]\+${install}[[:space:]]\+" \
                     "${installation_files[@]}"              |
@@ -347,6 +348,7 @@ function process_option_select() {
             sed     --expression='s/^/false /'
             )
 
+        # FIXME ... zodat hier "${all_apps[@]}" gebruikt kan worden? Ook kz-setup!
         # shellcheck disable=SC2086
         selected_apps=$(
             zenity  --list                              \
@@ -362,6 +364,7 @@ function process_option_select() {
                     2> /dev/null                        || true
             )
     else
+        # FIXME all_apps een array worden? ..
         all_apps=$(
             grep    "#[[:space:]]\+${install}[[:space:]]\+" \
                     "${installation_files[@]}"              |
@@ -373,6 +376,7 @@ function process_option_select() {
             sed     --expression='s/$/ off/'
             )
 
+        # FIXME ... zodat hier "${all_apps[@]}" gebruikt kan worden? Ook kz-setup!
         # shellcheck disable=SC2086
         selected_apps=$(
             whiptail    --ok-button "$(gettext 'Continue')" \
