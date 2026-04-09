@@ -171,7 +171,8 @@ $USAGE"
 
 # This function checks if the target is available.
 function check_target() {
-    local all_media=''
+    local -a all_media=()
+    local -a arg=()
     local program_name=${PROGRAM_NAME/kz-/kz }
     local selected_medium=''
     local text=''
@@ -200,7 +201,6 @@ $USAGE"
 Connect a usb medium.")
             kz.infomsg "$text"
             $OPTION_GUI || kz.wait_for_enter
-            # medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
             medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
@@ -208,25 +208,23 @@ Connect a usb medium.")
             fi
         fi
 
-        # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
+        #TODO: if there are multiple media, ask the user to choose one, also in kz-restore!
+        #TODO: use find instead of ls (everywhere) in combination with arrays, also in kz-restore!
         medium=$(find "$usb_mount_point/"* -prune -type d 2> /dev/null || true)
-        # FIXME gaat fout als er een medium is met een spatie in de naam,
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
 
             title=$(gettext 'Make backup')
             text=$(gettext 'Choose USB medium:')
 
             if $OPTION_GUI; then
-                # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
-                # Dan is "# shellcheck disable=SC2086" niet meer nodig.
-                # shellcheck disable=SC2012
-                all_media=$(
-                    ls      --directory             \
-                            "$usb_mount_point/"*    |
-                    sed     --expression='s/^/false /'
+                readarray -t all_media < <(
+                    find    "$usb_mount_point/"*    \
+                            -prune                  \
+                            -type d
                     )
-                # Dan is "# shellcheck disable=SC2086" niet meer nodig.
-                # shellcheck disable=SC2086
+                for medium in "${all_media[@]}"; do
+                    arg+=('false ' "$medium")
+                done
                 selected_medium=$(
                     zenity  --list                              \
                             --radiolist                         \
@@ -237,15 +235,16 @@ Connect a usb medium.")
                             --ok-label  "$(gettext 'Continue')" \
                             --column    "$(gettext 'SEL')"      \
                             --column    "$(gettext 'MEDIUM')"   \
-                            $all_media                          \
+                            "${arg[@]}"                         \
                             2> /dev/null                        || true
                     )
             else
                 # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
                 # shellcheck disable=SC2012
-                all_media=$(
-                    ls      --directory             \
-                            "$usb_mount_point/"*    |
+                readarray -t all_media < <(
+                    find    "$usb_mount_point/"*    \
+                            -prune                  \
+                            -type d                 |
                     sed     --expression='s/$/ off/'
                     )
                 # shellcheck disable=SC2086
@@ -256,7 +255,7 @@ Connect a usb medium.")
                                 --title     "$title"                \
                                 --radiolist "$text"                 \
                                 20 40 12                            \
-                                $all_media                          \
+                                "${all_media[@]}"                   \
                                 2>&1 >/dev/tty                      |
                     sed         's/"//g'                            || true
                     )
