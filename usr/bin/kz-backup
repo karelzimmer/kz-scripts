@@ -223,7 +223,7 @@ Connect a usb medium.")
                             -type d
                     )
                 for medium in "${all_media[@]}"; do
-                    arg+=('false ' "$medium")
+                    arg+=('false' "$medium")
                 done
                 selected_medium=$(
                     zenity  --list                              \
@@ -240,14 +240,14 @@ Connect a usb medium.")
                     )
             else
                 # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
-                # shellcheck disable=SC2012
                 readarray -t all_media < <(
                     find    "$usb_mount_point/"*    \
                             -prune                  \
-                            -type d                 |
-                    sed     --expression='s/$/ off/'
+                            -type d
                     )
-                # shellcheck disable=SC2086
+                for medium in "${all_media[@]}"; do
+                    arg+=("$medium" 'off')
+                done
                 selected_medium=$(
                     whiptail    --ok-button "$(gettext 'Continue')" \
                                 --noitem                            \
@@ -255,7 +255,7 @@ Connect a usb medium.")
                                 --title     "$title"                \
                                 --radiolist "$text"                 \
                                 20 40 12                            \
-                                "${all_media[@]}"                   \
+                                "${arg[@]}"                         \
                                 2>&1 >/dev/tty                      |
                     sed         's/"//g'                            || true
                     )
