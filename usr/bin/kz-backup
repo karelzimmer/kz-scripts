@@ -218,12 +218,14 @@ Connect a usb medium.")
 
             if $OPTION_GUI; then
                 # FIXME gebruik find ipv ls (overal) icm arrays, ook in kz-restore!
+                # Dan is "# shellcheck disable=SC2086" niet meer nodig.
                 # shellcheck disable=SC2012
                 all_media=$(
                     ls      --directory             \
                             "$usb_mount_point/"*    |
                     sed     --expression='s/^/false /'
                     )
+                # Dan is "# shellcheck disable=SC2086" niet meer nodig.
                 # shellcheck disable=SC2086
                 selected_medium=$(
                     zenity  --list                              \
