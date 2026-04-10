@@ -214,8 +214,8 @@ Connect a usb medium.")
             title=$(gettext 'Make backup')
             text=$(gettext 'Choose USB medium:')
 
+            readarray -t all_media < <(find "$usb_mount_point/"* -prune)
             if $OPTION_GUI; then
-                readarray -t all_media < <(find "$usb_mount_point/"* -prune)
                 for medium in "${all_media[@]}"; do
                     arg+=('false' "$medium")
                 done
@@ -233,7 +233,6 @@ Connect a usb medium.")
                             2> /dev/null                        || true
                     )
             else
-                readarray -t all_media < <(find "$usb_mount_point/"* -prune)
                 for medium in "${all_media[@]}"; do
                     arg+=("$medium" 'off')
                 done

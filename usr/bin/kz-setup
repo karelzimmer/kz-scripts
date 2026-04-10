@@ -330,16 +330,16 @@ function process_option_select() {
     title=$(gettext 'Set up apps')
     text=$(gettext 'Select apps to set up:')
 
+    readarray   all_apps < <(
+        grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
+                "${settings_files[@]}"                  |
+        tr      --squeeze-repeats                       \
+                '[:space:]'                             |
+        cut     --delimiter=' '                         \
+                --fields=3                              |
+        sort    --unique
+        )
     if $OPTION_GUI; then
-        readarray -t all_apps < <(
-            grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
-                    "${settings_files[@]}"                  |
-            tr      --squeeze-repeats                       \
-                    '[:space:]'                             |
-            cut     --delimiter=' '                         \
-                    --fields=3                              |
-            sort    --unique
-            )
         for app in "${all_apps[@]}"; do
             arg+=('false' "$app")
         done
@@ -356,16 +356,13 @@ function process_option_select() {
                     "${arg[@]}"                         \
                     2> /dev/null                        || true
             )
+        #TODO guify met zenity
+        if [[ -z $selected_apps ]]; then
+            text=$(gettext 'No apps selected.')
+            kz.infomsg "$text"
+            exit 0
+        fi
     else
-        readarray -t all_apps < <(
-            grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
-                    "${settings_files[@]}"                  |
-            tr      --squeeze-repeats                       \
-                    '[:space:]'                             |
-            cut     --delimiter=' '                         \
-                    --fields=3                              |
-            sort    --unique
-            )
         for app in "${all_apps[@]}"; do
             arg+=("$app" 'off')
         done
@@ -380,12 +377,14 @@ function process_option_select() {
                         2>&1 >/dev/tty                      |
             sed         's/"//g'                            || true
             )
-    fi
-
-    if [[ -z $selected_apps ]]; then
-        text=$(gettext 'No apps selected.')
-        kz.infomsg "$text"
-        exit 0
+        if [[ -z $selected_apps ]]; then
+            text=$(gettext 'No apps selected.')
+            whiptail    --backtitle "$PROGRAM_NAME" \
+                        --title "$title"            \
+                        --msgbox "$text"            \
+                        20 40
+            exit 0
+        fi
     fi
     argument_app=true
     for selected_app in $selected_apps; do
