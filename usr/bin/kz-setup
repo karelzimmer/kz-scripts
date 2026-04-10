@@ -356,10 +356,14 @@ function process_option_select() {
                     "${arg[@]}"                         \
                     2> /dev/null                        || true
             )
-        #TODO guify met zenity
         if [[ -z $selected_apps ]]; then
             text=$(gettext 'No apps selected.')
-            kz.infomsg "$text"
+            zenity  --info                  \
+                    --width     600         \
+                    --height    100         \
+                    --title     "$title"    \
+                    --text      "$text"     \
+                    2> /dev/null            || true
             exit 0
         fi
     else
@@ -594,7 +598,7 @@ function execute_command() {
         TERM=ansi                                               \
         whiptail    --backtitle "$PROGRAM_NAME"                 \
                     --title     "$title"                        \
-                    --infobox "$app_name_line\n         $cmd"   \
+                    --infobox   "$app_name_line\n         $cmd" \
                     8 78
     fi
 

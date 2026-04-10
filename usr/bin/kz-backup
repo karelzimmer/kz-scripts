@@ -214,6 +214,7 @@ Connect a usb medium.")
             title=$(gettext 'Make backup')
             text=$(gettext 'Choose USB medium:')
 
+            #TODO is optie -t echt nodig?
             readarray -t all_media < <(find "$usb_mount_point/"* -prune)
             if $OPTION_GUI; then
                 for medium in "${all_media[@]}"; do
@@ -232,6 +233,16 @@ Connect a usb medium.")
                             "${arg[@]}"                         \
                             2> /dev/null                        || true
                     )
+                if [[ -z $selected_medium ]]; then
+                    text=$(gettext 'No USB medium selected.')
+                    zenity  --info                  \
+                            --width     600         \
+                            --height    100         \
+                            --title     "$title"    \
+                            --text      "$text"     \
+                            2> /dev/null            || true
+                    exit 0
+                fi
             else
                 for medium in "${all_media[@]}"; do
                     arg+=("$medium" 'off')
@@ -247,12 +258,16 @@ Connect a usb medium.")
                                 2>&1 >/dev/tty                      |
                     sed         's/"//g'                            || true
                     )
-            fi
-
-            if [[ -z $selected_medium ]]; then
-                text=$(gettext 'No USB medium selected.')
-                kz.infomsg "$text"
-                exit 0
+                if [[ -z $selected_medium ]]; then
+                    text=$(gettext 'No USB medium selected.')
+                    zenity  --info                  \
+                            --width     600         \
+                            --height    100         \
+                            --title     "$title"    \
+                            --text      "$text"     \
+                            2> /dev/null            || true
+                    exit 0
+                fi
             fi
             medium=$selected_medium
         fi
