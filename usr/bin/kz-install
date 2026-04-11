@@ -620,12 +620,11 @@ function execute_command() {
         kz.logmsg "$cmd"
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
-        # TODO Dit werkt, nu nog verder met whiptailen :-), ook kz-install
-        TERM=ansi                                               \
-        whiptail    --backtitle "$PROGRAM_NAME"                 \
-                    --title     "$title"                        \
-                    --infobox   "$app_name_line\n         $cmd" \
-                    8 78
+        TERM=ansi                                                   \
+        whiptail    --backtitle "$PROGRAM_NAME"                     \
+                    --title     "$title"                            \
+                    --infobox   "$app_name_line\n\n         $cmd"   \
+                    10 78
     fi
 
     if $OPTION_GUI; then
