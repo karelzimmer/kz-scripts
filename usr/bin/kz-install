@@ -328,7 +328,7 @@ $USAGE"
 # or text user interface (TUI).
 function process_option_select() {
     local -a all_apps=()
-    local -a arg=()
+    local -a choices=()
     local app=''
     local selected_apps=''
     local text=''
@@ -346,10 +346,12 @@ function process_option_select() {
                 --fields=3                              |
         sort    --unique
         )
+
     if $OPTION_GUI; then
         for app in "${all_apps[@]}"; do
-            arg+=('false' "$app")
+            choices+=('false' "$app")
         done
+        # No array is needed because the app name does not contain spaces.
         selected_apps=$(
             zenity  --list                              \
                     --checklist                         \
@@ -360,7 +362,7 @@ function process_option_select() {
                     --ok-label  "$(gettext 'Continue')" \
                     --column    "$(gettext 'SEL')"      \
                     --column    "$(gettext 'APP')"      \
-                    "${arg[@]}"                         \
+                    "${choices[@]}"                     \
                     2> /dev/null                        || true
             )
         if [[ -z $selected_apps ]]; then
@@ -375,8 +377,9 @@ function process_option_select() {
         fi
     else
         for app in "${all_apps[@]}"; do
-            arg+=("$app" 'off')
+            choices+=("$app" 'off')
         done
+        # No array is needed because the app name does not contain spaces.
         selected_apps=$(
             whiptail    --ok-button "$(gettext 'Continue')" \
                         --noitem                            \
@@ -384,7 +387,7 @@ function process_option_select() {
                         --title     "$title"                \
                         --checklist "$text"                 \
                         20 40 12                            \
-                        "${arg[@]}"                         \
+                        "${choices[@]}"                     \
                         2>&1 >/dev/tty                      |
             sed         's/"//g'                            || true
             )
@@ -397,6 +400,7 @@ function process_option_select() {
             exit 0
         fi
     fi
+
     argument_app=true
     for selected_app in $selected_apps; do
         app_arguments[$selected_app]=$selected_app

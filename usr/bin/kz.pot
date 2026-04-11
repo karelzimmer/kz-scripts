@@ -182,19 +182,19 @@ msgstr ""
 msgid "Choose USB medium:"
 msgstr ""
 
-#: kz-backup:231 kz-install:361 kz-restore:231 kz-setup:354
+#: kz-backup:232 kz-install:363 kz-restore:232 kz-setup:356
 msgid "SEL"
 msgstr ""
 
-#: kz-backup:232 kz-restore:232
+#: kz-backup:233 kz-restore:233
 msgid "MEDIUM"
 msgstr ""
 
-#: kz-backup:237 kz-backup:262 kz-restore:237 kz-restore:262
+#: kz-backup:238 kz-backup:264 kz-restore:238 kz-restore:264
 msgid "No USB medium selected."
 msgstr ""
 
-#: kz-backup:321
+#: kz-backup:324
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
@@ -202,50 +202,50 @@ msgid ""
 "Further reading:"
 msgstr ""
 
-#: kz-backup:341
+#: kz-backup:344
 msgid "==== START list of manual installed packages"
 msgstr ""
 
-#: kz-backup:342
+#: kz-backup:345
 msgid "==== END list of manual installed packages"
 msgstr ""
 
-#: kz-backup:343
+#: kz-backup:346
 msgid "==== START list of installed snaps"
 msgstr ""
 
-#: kz-backup:344
+#: kz-backup:347
 msgid "==== END list of installed snaps"
 msgstr ""
 
-#: kz-backup:345
+#: kz-backup:348
 msgid "==== START list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:346
+#: kz-backup:349
 msgid "==== END list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:385
+#: kz-backup:388
 msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
-#: kz-backup:410 kz-backup:422
+#: kz-backup:413 kz-backup:425
 msgid "Additional users can be added manually:"
 msgstr ""
 
-#: kz-backup:412
+#: kz-backup:415
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
 "3. Enter Name <user> and Username <username>."
 msgstr ""
 
-#: kz-backup:417 kz-backup:477 kz-backup:514
+#: kz-backup:420 kz-backup:480 kz-backup:517
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:424
+#: kz-backup:427
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -258,7 +258,7 @@ msgid ""
 "sudo passwd --delete --expire <username>"
 msgstr ""
 
-#: kz-backup:470
+#: kz-backup:473
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -268,7 +268,7 @@ msgid ""
 "4. Select avatar.ico in Personal folder / Settings, or another picture file."
 msgstr ""
 
-#: kz-backup:508
+#: kz-backup:511
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -277,71 +277,71 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:214 kz-backup:563 kz-menu:71 kz-backup.desktop:10
+#: kz-backup:214 kz-backup:566 kz-menu:71 kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
-#: kz-backup:564
+#: kz-backup:567
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:600
+#: kz-backup:603
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:642 kz-install:663 kz-restore:375 kz-setup:627
+#: kz-backup:645 kz-install:667 kz-restore:378 kz-setup:631
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:643
+#: kz-backup:646
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:645 kz-restore:378
+#: kz-backup:648 kz-restore:381
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:646
+#: kz-backup:649
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:647 kz-restore:380
+#: kz-backup:650 kz-restore:383
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:648
+#: kz-backup:651
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:650 kz-install:668 kz-restore:383 kz-setup:631
+#: kz-backup:653 kz-install:672 kz-restore:386 kz-setup:635
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:651 kz-install:669 kz-restore:384 kz-setup:632
+#: kz-backup:654 kz-install:673 kz-restore:387 kz-setup:636
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:652
+#: kz-backup:655
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:671
+#: kz-backup:674
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:689
+#: kz-backup:692
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:699
+#: kz-backup:702
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 
-#: kz-backup:705 kz-restore:439
+#: kz-backup:708 kz-restore:442
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
@@ -873,7 +873,7 @@ msgstr ""
 msgid "  0  No apps found."
 msgstr ""
 
-#: kz-install:337 kz-install:533 kz-menu:73 kz-install.desktop:10
+#: kz-install:337 kz-install:537 kz-menu:73 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
@@ -882,60 +882,60 @@ msgstr ""
 msgid "Select apps to install:"
 msgstr ""
 
-#: kz-install:362 kz-setup:355
+#: kz-install:364 kz-setup:357
 msgid "APP"
 msgstr ""
 
-#: kz-install:367 kz-install:392 kz-setup:360 kz-setup:385
+#: kz-install:369 kz-install:395 kz-setup:362 kz-setup:388
 msgid "No apps selected."
 msgstr ""
 
-#: kz-install:416
+#: kz-install:420
 msgid "automatically-added-update"
 msgstr ""
 
-#: kz-install:418
+#: kz-install:422
 msgid "Update package lists before installing apps."
 msgstr ""
 
-#: kz-install:468 kz-setup:447
+#: kz-install:472 kz-setup:451
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:523 kz-setup:502
+#: kz-install:527 kz-setup:506
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:534 kz-menu:51
+#: kz-install:538 kz-menu:51
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:566 kz-setup:543
+#: kz-install:570 kz-setup:547
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:567 kz-setup:544
+#: kz-install:571 kz-setup:548
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:664
+#: kz-install:668
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:670
+#: kz-install:674
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:687
+#: kz-install:691
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:689
+#: kz-install:693
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:695
+#: kz-install:699
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1031,11 +1031,11 @@ msgstr ""
 msgid "Show WiFi details"
 msgstr ""
 
-#: kz-menu:74 kz-restore:214 kz-restore:298 kz-restore.desktop:10
+#: kz-menu:74 kz-restore:214 kz-restore:301 kz-restore.desktop:10
 msgid "Restore backup"
 msgstr ""
 
-#: kz-menu:75 kz-setup:330 kz-setup:511 kz-setup.desktop:10
+#: kz-menu:75 kz-setup:330 kz-setup:515 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr ""
 
@@ -1051,9 +1051,9 @@ msgstr ""
 msgid "Select a choice:"
 msgstr ""
 
-#: kz-backup:230 kz-backup:251 kz-install:360 kz-install:381 kz-menu:204
-#: kz-menu:239 kz-menu:374 kz-menu:409 kz-restore:230 kz-restore:251
-#: kz-setup:353 kz-setup:374
+#: kz-backup:231 kz-backup:253 kz-install:362 kz-install:384 kz-menu:204
+#: kz-menu:239 kz-menu:374 kz-menu:409 kz-restore:231 kz-restore:253
+#: kz-setup:355 kz-setup:377
 msgid "Continue"
 msgstr ""
 
@@ -1131,43 +1131,43 @@ msgid ""
 "                 use backup in specified directory"
 msgstr ""
 
-#: kz-restore:278
+#: kz-restore:281
 #, sh-format
 msgid "No BACKUP-$USER@$HOSTNAME found in $medium."
 msgstr ""
 
-#: kz-restore:299
+#: kz-restore:302
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:376
+#: kz-restore:379
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:379
+#: kz-restore:382
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:381
+#: kz-restore:384
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:385
+#: kz-restore:388
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:404
+#: kz-restore:407
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:423
+#: kz-restore:426
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-restore:433
+#: kz-restore:436
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"
@@ -1247,39 +1247,39 @@ msgstr ""
 msgid "Select apps to set up:"
 msgstr ""
 
-#: kz-setup:512
+#: kz-setup:516
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:628
+#: kz-setup:632
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:633
+#: kz-setup:637
 msgid "Try to set up/reset the apps again."
 msgstr ""
 
-#: kz-setup:650
+#: kz-setup:654
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:652
+#: kz-setup:656
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:660
+#: kz-setup:664
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:665
+#: kz-setup:669
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:684
+#: kz-setup:688
 msgid "Log out of the computer yourself."
 msgstr ""
 

@@ -172,7 +172,7 @@ $USAGE"
 # This function checks if the source is available.
 function check_source() {
     local -a all_media=()
-    local -a arg=()
+    local -a choices=()
     local program_name=${PROGRAM_NAME/kz-/kz }
     local selected_medium=''
     local text=''
@@ -214,12 +214,13 @@ Connect a usb medium.")
             title=$(gettext 'Restore backup')
             text=$(gettext 'Choose USB medium:')
 
-            #TODO is optie -t echt nodig?
-            readarray -t all_media < <(find "$usb_mount_point/"* -prune)
+            readarray all_media < <(find "$usb_mount_point/"* -prune)
+
             if $OPTION_GUI; then
                 for medium in "${all_media[@]}"; do
-                    arg+=('false' "$medium")
+                    choices+=('false' "$medium")
                 done
+                # No array is needed, because only one can be selected.
                 selected_medium=$(
                     zenity  --list                              \
                             --radiolist                         \
@@ -230,7 +231,7 @@ Connect a usb medium.")
                             --ok-label  "$(gettext 'Continue')" \
                             --column    "$(gettext 'SEL')"      \
                             --column    "$(gettext 'MEDIUM')"   \
-                            "${arg[@]}"                          \
+                            "${choices[@]}"                     \
                             2> /dev/null                        || true
                     )
                 if [[ -z $selected_medium ]]; then
@@ -245,8 +246,9 @@ Connect a usb medium.")
                 fi
             else
                 for medium in "${all_media[@]}"; do
-                    arg+=("$medium" 'off')
+                    choices+=("$medium" 'off')
                 done
+                # No array is needed, because only one can be selected.
                 selected_medium=$(
                     whiptail    --ok-button "$(gettext 'Continue')" \
                                 --noitem                            \
@@ -254,7 +256,7 @@ Connect a usb medium.")
                                 --title     "$title"                \
                                 --radiolist "$text"                 \
                                 20 40 12                            \
-                                "${arg[@]}"                         \
+                                "${choices[@]}"                     \
                                 2>&1 >/dev/tty                      |
                     sed         's/"//g'                            || true
                     )
@@ -272,6 +274,7 @@ Connect a usb medium.")
             medium=$selected_medium
         fi
     fi
+
     SOURCE=$medium/BACKUP-$USER@$HOSTNAME
 
     if ! [[ -d $SOURCE ]]; then
