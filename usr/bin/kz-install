@@ -394,8 +394,8 @@ function process_option_select() {
         if [[ -z $selected_apps ]]; then
             text=$(gettext 'No apps selected.')
             whiptail    --backtitle "$PROGRAM_NAME" \
-                        --title "$title"            \
-                        --msgbox "$text"            \
+                        --title     "$title"        \
+                        --msgbox    "$text"         \
                         20 40
             exit 0
         fi

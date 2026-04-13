@@ -423,12 +423,12 @@ $(gettext 'Try restoring the back up again.')"
                     2> /dev/null            || true
         else
             whiptail    --backtitle "$PROGRAM_NAME" \
-                        --title "$title"            \
-                        --msgbox "$text"            \
+                        --title     "$title"        \
+                        --msgbox    "$text"         \
                         25 80
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title     "$title"        \
-                        --textbox "$ERROR_LOG"      \
+                        --textbox   "$ERROR_LOG"    \
                         25 80
         fi
         exit 1
@@ -474,6 +474,7 @@ $medium"
 $(gettext '*** Remember to safely(!) remove the USB medium ***')"
     fi
 
+    title=$(gettext 'Make backup')
     if $OPTION_GUI; then
         zenity  --info                  \
                 --width     600         \
@@ -483,8 +484,8 @@ $(gettext '*** Remember to safely(!) remove the USB medium ***')"
                 2> /dev/null            || true
     else
         whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title "$title"            \
-                    --msgbox "$text"            \
+                    --title     "$title"        \
+                    --msgbox    "$text"         \
                     25 80
     fi
 

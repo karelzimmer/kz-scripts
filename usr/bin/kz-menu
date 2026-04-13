@@ -319,8 +319,8 @@ Roughly boils down to:
                 2> /dev/null            || true
     else
         whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title "$title"            \
-                    --msgbox "$text"            \
+                    --title     "$title"        \
+                    --msgbox    "$text"         \
                     25 80
     fi
 }

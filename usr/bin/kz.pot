@@ -277,7 +277,8 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:213 kz-backup:565 kz-menu:71 kz-backup.desktop:10
+#: kz-backup:213 kz-backup:565 kz-backup:747 kz-menu:71 kz-restore:477
+#: kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
