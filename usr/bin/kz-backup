@@ -594,7 +594,6 @@ EOF
                 2> /dev/null                    || BACKUP_RC=$?
     else
         text+='...'
-        kz.infomsg "$text"
         TERM=ansi
         rsync       --archive                       \
                     --info=progress2                \
@@ -744,7 +743,20 @@ $medium"
 
 $(gettext '*** Remember to safely(!) remove the USB medium ***')"
     fi
-    kz.infomsg "$text"
+
+    if $OPTION_GUI; then
+        zenity  --info                  \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$text"     \
+                2> /dev/null            || true
+    else
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title "$title"            \
+                    --msgbox "$text"            \
+                    25 80
+    fi
 
     exit 0
 }

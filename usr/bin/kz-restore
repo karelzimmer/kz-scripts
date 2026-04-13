@@ -326,12 +326,28 @@ function restore_backup() {
                 2> /dev/null            || RESTORE_RC=$?
     else
         text+='...'
-        kz.infomsg "$text"
-        rsync   --archive               \
-                --info=progress2        \
-                "$SOURCE/"              \
-                "$HOME/"                \
-                2>> "$ERROR_LOG"        || RESTORE_RC=$?
+        TERM=ansi
+        rsync       --archive                       \
+                    --info=progress2                \
+                    "$SOURCE/"                      \
+                    "$HOME/"                        \
+                    2>> "$ERROR_LOG"                |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    tr '\r' '\n'                    |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    awk "{ print \$2 }"             |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    tr --delete '%'                 |
+        whiptail    --backtitle "$PROGRAM_NAME"     \
+                    --title     "$title"            \
+                    --gauge     "$title..."         \
+                    6 50 0                          || RESTORE_RC=$?
     fi
 }
 
@@ -391,9 +407,14 @@ $(eval_gettext "is there not enough space on \$HOME.")
 $(gettext 'Actions to take:')
 $(gettext 'Check the error messages after this.')
 $(gettext 'Try restoring the back up again.')"
-        kz.errmsg "$text"
 
         if $OPTION_GUI; then
+            zenity  --error                 \
+                    --width     600         \
+                    --height    100         \
+                    --title     "$title"    \
+                    --text      "$text"     \
+                    2> /dev/null            || true
             zenity  --text-info             \
                     --filename="$ERROR_LOG" \
                     --width     700         \
@@ -401,8 +422,14 @@ $(gettext 'Try restoring the back up again.')"
                     --title     "$title"    \
                     2> /dev/null            || true
         else
-            kz.infomsg "$title $ERROR_LOG:"
-            less --no-init --quit-if-one-screen "$ERROR_LOG"
+            whiptail    --backtitle "$PROGRAM_NAME" \
+                        --title "$title"            \
+                        --msgbox "$text"            \
+                        25 80
+            whiptail    --backtitle "$PROGRAM_NAME" \
+                        --title     "$title"        \
+                        --textbox "$ERROR_LOG"      \
+                        25 80
         fi
         exit 1
     fi
@@ -446,7 +473,20 @@ $medium"
 
 $(gettext '*** Remember to safely(!) remove the USB medium ***')"
     fi
-    kz.infomsg "$text"
+
+    if $OPTION_GUI; then
+        zenity  --info                  \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$text"     \
+                2> /dev/null            || true
+    else
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title "$title"            \
+                    --msgbox "$text"            \
+                    25 80
+    fi
 
     exit 0
 }
