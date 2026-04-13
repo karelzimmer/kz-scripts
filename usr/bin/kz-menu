@@ -89,8 +89,8 @@ readonly -a  MENU2_DESCS=(
 # Globals
 # #############################################################################
 
-declare OPTION_GUI=false
-
+declare GUI_MODE=false
+declare TUI_MODE=true
 
 # #############################################################################
 # Functions
@@ -101,7 +101,7 @@ function process() {
     local -i rc=0
 
     check_input "$@"
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         process_menu1_gui
     else
         process_menu1_tui
@@ -145,7 +145,8 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                OPTION_GUI=true
+                GUI_MODE=true
+                TUI_MODE=false
                 shift
                 ;;
             -h | --help )
@@ -310,19 +311,7 @@ Roughly boils down to:
 2. Create a bootable USB stick.
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
-    if $OPTION_GUI; then
-        zenity  --info                  \
-                --width     520         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$text"     \
-                2> /dev/null            || true
-    else
-        whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title     "$title"        \
-                    --msgbox    "$text"         \
-                    25 80
-    fi
+    kz.infomsg "$text"
 }
 
 
@@ -351,7 +340,7 @@ function process_menu1_choice4() {
 
 # This function processes menu 2.
 function process_menu2() {
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         process_menu2_gui
     else
         process_menu2_tui
@@ -435,7 +424,7 @@ function process_menu2_choice() {
         title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
         process_commands
     else
-        if $OPTION_GUI; then
+        if $GUI_MODE; then
             process_menu1_gui
         else
             process_menu1_tui
@@ -493,7 +482,7 @@ $description ($command)"
     text+="
 
 $(gettext 'Proceed?')"
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         if zenity   --question                          \
                     --no-markup                         \
                     --width         520                 \
@@ -522,7 +511,7 @@ $(gettext 'Proceed?')"
 
 # This function executes the commands.
 function execute_command() {
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         $command --gui || rc=$?
     else
         $command || rc=$?

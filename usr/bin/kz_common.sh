@@ -118,7 +118,7 @@ function kz.errmsg() {
     local title=''
 
     kz.logmsg "$*"
-    if ${OPTION_GUI:-false}; then
+    if ${GUI_MODE:-false}; then
         # shellcheck disable=SC2154
         title=$PROGRAM_DESC
         zenity  --error                 \
@@ -127,6 +127,11 @@ function kz.errmsg() {
                 --title     "$title"    \
                 --text      "$*"        \
                 2> /dev/null            || true
+    elif ${TUI_MODE:-false}; then
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title     "$title"        \
+                    --msgbox    "$*"            \
+                    25 80
     else
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
@@ -139,7 +144,7 @@ function kz.infomsg() {
     local title=''
 
     kz.logmsg "$*"
-    if ${OPTION_GUI:-false}; then
+    if ${GUI_MODE:-false}; then
         title=$PROGRAM_DESC
         zenity  --info                  \
                 --width     600         \
@@ -147,6 +152,11 @@ function kz.infomsg() {
                 --title     "$title"    \
                 --text      "$*"        \
                 2> /dev/null            || true
+    elif ${TUI_MODE:-false}; then
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title     "$title"        \
+                    --msgbox    "$*"            \
+                    25 80
     else
         printf '%b\n' "$*"
     fi
@@ -212,7 +222,7 @@ function kz.process_option_help() {
     local yelp_man=''
     local yelp_man_url=''
 
-    OPTION_GUI=false
+    GUI_MODE=false
     if [[ -n ${DISPLAY-} ]]; then
         # yelp_man_url="$(gettext ', or see the ')"
         # yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
@@ -248,7 +258,7 @@ function kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
-    OPTION_GUI=false
+    GUI_MODE=false
     # shellcheck disable=SC2154
     text="$USAGE
 
@@ -262,7 +272,7 @@ function kz.process_option_version() {
     local build_id='n/a'  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
-    OPTION_GUI=false
+    GUI_MODE=false
     if [[ -f /usr/share/doc/kz/build.id ]]; then
         # shellcheck disable=SC2034
         build_id=$(cat /usr/share/doc/kz/build.id)

@@ -69,10 +69,11 @@ usage,version,debug"
 
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
-declare OPTION_GUI=false
+declare GUI_MODE=false
 declare OPTION_REMOVE=false
 declare OPTION_SELECT=false
 declare REBOOT=false
+declare TUI_MODE=true
 
 
 # #############################################################################
@@ -153,7 +154,7 @@ found.")
     fi
 
     kz.become_check
-    $OPTION_GUI || sudo true
+    $GUI_MODE || sudo true
     install_apps
 }
 
@@ -207,7 +208,8 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                OPTION_GUI=true
+                GUI_MODE=true
+                TUI_MODE=false
                 shift
                 ;;
             -l | --list )
@@ -268,7 +270,7 @@ environment available")"
 
 # This function browses through the installation files.
 function process_option_browse() {
-    OPTION_GUI=false
+    GUI_MODE=false
     less --no-init --quit-if-one-screen < <(
         cat "${installation_files[@]}" || true
         )
@@ -280,7 +282,7 @@ function process_option_list() {
     local apps=''
     local text=''
 
-    OPTION_GUI=false
+    GUI_MODE=false
     text=$(gettext 'The following apps are available:')
     apps=$(
         grep    "#[[:space:]]\+${install}[[:space:]]\+" \
@@ -347,7 +349,7 @@ function process_option_select() {
         sort    --unique
         )
 
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         for app in "${all_apps[@]}"; do
             choices+=('false' "$app")
         done
@@ -367,12 +369,7 @@ function process_option_select() {
             )
         if [[ -z $selected_apps ]]; then
             text=$(gettext 'No apps selected.')
-            zenity  --info                  \
-                    --width     600         \
-                    --height    100         \
-                    --title     "$title"    \
-                    --text      "$text"     \
-                    2> /dev/null            || true
+            kz.infomsg "$text"
             exit 0
         fi
     else
@@ -393,10 +390,7 @@ function process_option_select() {
             )
         if [[ -z $selected_apps ]]; then
             text=$(gettext 'No apps selected.')
-            whiptail    --backtitle "$PROGRAM_NAME" \
-                        --title     "$title"        \
-                        --msgbox    "$text"         \
-                        20 40
+            kz.infomsg "$text"
             exit 0
         fi
     fi
@@ -507,7 +501,7 @@ function process_installation_files_by_hostname() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    OPTION_GUI=false
+    GUI_MODE=false
     less --no-init --quit-if-one-screen "$command_file"
 }
 
@@ -537,7 +531,7 @@ function install_apps() {
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
 
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_command_file > >(
@@ -566,7 +560,7 @@ function process_command_file() {
     local command_record=''
     local text=''
 
-    if ! $OPTION_GUI; then
+    if ! $GUI_MODE; then
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
         kz.infomsg "$text"
@@ -613,7 +607,7 @@ function process_command_file() {
 function execute_command() {
     local cmd=$1
 
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         if $app_line; then
             kz.logmsg "$app_name_line"
         fi
@@ -627,7 +621,7 @@ function execute_command() {
                     10 78
     fi
 
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         kz.check_debian_package_manager
         pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                      \
@@ -673,7 +667,7 @@ $(gettext 'Check the error messages after this.')
 $(gettext 'Try to install/remove the apps again.')"
         kz.errmsg "$text"
 
-        if $OPTION_GUI; then
+        if $GUI_MODE; then
             zenity  --text-info             \
                     --filename="$ERROR_LOG" \
                     --width     700         \
@@ -701,7 +695,7 @@ changing system settings.")"
     kz.infomsg "$text"
 
     if $REBOOT; then
-        if $OPTION_GUI; then
+        if $GUI_MODE; then
             pkexec /usr/bin/kz-install-pkexec "$reboot"
         else
             kz.wait_for_enter

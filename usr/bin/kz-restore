@@ -57,8 +57,9 @@ readonly OPTIONS_LONG='gui,source:,help,manual,usage,version,debug'
 
 declare -i RESTORE_RC=0
 declare ERROR_LOG=''
-declare OPTION_GUI=false
+declare GUI_MODE=false
 declare SOURCE=''
+declare TUI_MODE=true
 
 
 # #############################################################################
@@ -114,7 +115,8 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                OPTION_GUI=true
+                GUI_MODE=true
+                TUI_MODE=false
                 shift
                 ;;
             -s | --source )
@@ -199,7 +201,7 @@ $USAGE"
 
 Connect a usb medium.")
             kz.infomsg "$text"
-            $OPTION_GUI || kz.wait_for_enter
+            $GUI_MODE || kz.wait_for_enter
             medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
@@ -215,7 +217,7 @@ Connect a usb medium.")
 
             readarray all_media < <(find "$usb_mount_point/"* -prune)
 
-            if $OPTION_GUI; then
+            if $GUI_MODE; then
                 for medium in "${all_media[@]}"; do
                     choices+=('false' "$medium")
                 done
@@ -279,7 +281,7 @@ Connect a usb medium.")
     if ! [[ -d $SOURCE ]]; then
         text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
         kz.infomsg "$text"
-        $OPTION_GUI || kz.wait_for_enter
+        $GUI_MODE || kz.wait_for_enter
         if ! [[ -d $SOURCE ]]; then
             kz.errmsg "$text"
             exit 1
@@ -301,7 +303,7 @@ function restore_backup() {
     text=$(gettext 'Preparing restore (this can take a while)')
     kz.logmsg "$title"...
 
-    if $OPTION_GUI; then
+    if $GUI_MODE; then
         rsync   --archive               \
                 --info=progress2        \
                 "$SOURCE/"              \
@@ -408,13 +410,8 @@ $(gettext 'Actions to take:')
 $(gettext 'Check the error messages after this.')
 $(gettext 'Try restoring the back up again.')"
 
-        if $OPTION_GUI; then
-            zenity  --error                 \
-                    --width     600         \
-                    --height    100         \
-                    --title     "$title"    \
-                    --text      "$text"     \
-                    2> /dev/null            || true
+        if $GUI_MODE; then
+            kz.errmsg "$text"
             zenity  --text-info             \
                     --filename="$ERROR_LOG" \
                     --width     700         \
@@ -422,10 +419,7 @@ $(gettext 'Try restoring the back up again.')"
                     --title     "$title"    \
                     2> /dev/null            || true
         else
-            whiptail    --backtitle "$PROGRAM_NAME" \
-                        --title     "$title"        \
-                        --msgbox    "$text"         \
-                        25 80
+            kz.errmsg "$text"
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title     "$title"        \
                         --textbox   "$ERROR_LOG"    \
@@ -474,20 +468,7 @@ $medium"
 $(gettext '*** Remember to safely(!) remove the USB medium ***')"
     fi
 
-    title=$(gettext 'Make backup')
-    if $OPTION_GUI; then
-        zenity  --info                  \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$text"     \
-                2> /dev/null            || true
-    else
-        whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title     "$title"        \
-                    --msgbox    "$text"         \
-                    25 80
-    fi
+    kz.infomsg "$text"
 
     exit 0
 }
