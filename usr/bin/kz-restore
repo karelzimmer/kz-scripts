@@ -184,7 +184,6 @@ function check_source() {
     fi
 
     if $option_source; then
-        OPTION_GUI=false
         if ! [[ -d $source_argument ]]; then
             text="$program_name: $source_argument: \
 $(gettext 'directory does not exist')
@@ -304,10 +303,17 @@ function restore_backup() {
 
     if $OPTION_GUI; then
         rsync   --archive               \
-                --verbose               \
+                --info=progress2        \
                 "$SOURCE/"              \
                 "$HOME/"                \
                 2>> "$ERROR_LOG"        |
+        stdbuf  --input=0               \
+                --output=0              \
+                --error=0               \
+                tr '\r' '\n'            |
+        stdbuf  --input=0               \
+                --output=0              \
+                --error=0               \
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -322,8 +328,7 @@ function restore_backup() {
         text+='...'
         kz.infomsg "$text"
         rsync   --archive               \
-                --verbose               \
-                --human-readable        \
+                --info=progress2        \
                 "$SOURCE/"              \
                 "$HOME/"                \
                 2>> "$ERROR_LOG"        || RESTORE_RC=$?

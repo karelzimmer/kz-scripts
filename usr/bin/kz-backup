@@ -184,7 +184,6 @@ function check_target() {
     fi
 
     if $option_target; then
-        OPTION_GUI=false
         if ! [[ -d $target_argument ]]; then
             text="$program_name: $target_argument: \
 $(gettext 'directory does not exist')
@@ -569,13 +568,20 @@ EOF
 
     if $OPTION_GUI; then
         rsync   --archive                       \
-                --verbose                       \
+                --info=progress2                \
                 --delete                        \
                 --exclude-from="$exclude_file"  \
                 --delete-excluded               \
                 "$HOME/"                        \
                 "$TARGET/"                      \
                 2>> "$ERROR_LOG"                |
+        stdbuf  --input=0                       \
+                --output=0                      \
+                --error=0                       \
+                tr '\r' '\n'                    |
+        stdbuf  --input=0                       \
+                --output=0                      \
+                --error=0                       \
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
                 --auto-close                    \
@@ -590,8 +596,7 @@ EOF
         text+='...'
         kz.infomsg "$text"
         rsync   --archive                       \
-                --verbose                       \
-                --human-readable                \
+                --info=progress2                \
                 --delete                        \
                 --exclude-from="$exclude_file"  \
                 --delete-excluded               \
