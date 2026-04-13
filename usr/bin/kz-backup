@@ -595,14 +595,27 @@ EOF
     else
         text+='...'
         kz.infomsg "$text"
-        rsync   --archive                       \
-                --info=progress2                \
-                --delete                        \
-                --exclude-from="$exclude_file"  \
-                --delete-excluded               \
-                "$HOME/"                        \
-                "$TARGET/"                      \
-                2>> "$ERROR_LOG"               || BACKUP_RC=$?
+        TERM=ansi
+        rsync       --archive                       \
+                    --info=progress2                \
+                    --delete                        \
+                    --exclude-from="$exclude_file"  \
+                    --delete-excluded               \
+                    "$HOME/"                        \
+                    "$TARGET/"                      \
+                    2>> "$ERROR_LOG"                |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    tr '\r' '\n'                    |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    awk -W interactive '/^ /{ print int(+$2); fflush();  next}$0{ print "# " $0}' |
+        whiptail    --backtitle "$PROGRAM_NAME"     \
+                    --title     "$title"            \
+                    --gauge     "$title..."         \
+                    6 50 0                          || BACKUP_RC=$?
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")
