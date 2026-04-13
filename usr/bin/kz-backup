@@ -611,7 +611,11 @@ EOF
         stdbuf      --input=0                       \
                     --output=0                      \
                     --error=0                       \
-                    awk -W interactive '/^ /{ print int(+$2); fflush();  next}$0{ print "# " $0}' |
+                    awk '{ print $2 }'              |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    tr --delete '%'                 |
         whiptail    --backtitle "$PROGRAM_NAME"     \
                     --title     "$title"            \
                     --gauge     "$title..."         \

@@ -328,64 +328,64 @@ msgstr "Back-up maken"
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-#: kz-backup:621
+#: kz-backup:625
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:663 kz-install:666 kz-restore:383 kz-setup:630
+#: kz-backup:667 kz-install:666 kz-restore:383 kz-setup:630
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:664
+#: kz-backup:668
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:666 kz-restore:386
+#: kz-backup:670 kz-restore:386
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:667
+#: kz-backup:671
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:668 kz-restore:388
+#: kz-backup:672 kz-restore:388
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:669
+#: kz-backup:673
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:671 kz-install:671 kz-restore:391 kz-setup:634
+#: kz-backup:675 kz-install:671 kz-restore:391 kz-setup:634
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:672 kz-install:672 kz-restore:392 kz-setup:635
+#: kz-backup:676 kz-install:672 kz-restore:392 kz-setup:635
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:673
+#: kz-backup:677
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:692
+#: kz-backup:696
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:710
+#: kz-backup:714
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:720
+#: kz-backup:724
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 "De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
 
-#: kz-backup:726 kz-restore:447
+#: kz-backup:730 kz-restore:447
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
