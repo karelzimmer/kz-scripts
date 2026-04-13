@@ -389,7 +389,7 @@ function process_option_select() {
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title "$title"            \
                         --msgbox "$text"            \
-                        20 40
+                        25 80
             exit 0
         fi
     fi

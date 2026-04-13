@@ -611,7 +611,7 @@ EOF
         stdbuf      --input=0                       \
                     --output=0                      \
                     --error=0                       \
-                    awk '{ print $2 }'              |
+                    awk "{ print \$2 }"             |
         stdbuf      --input=0                       \
                     --output=0                      \
                     --error=0                       \
@@ -638,7 +638,11 @@ EOF
                 2>> "$ERROR_LOG"
     else
         text+='...'
-        kz.infomsg "$text"
+        TERM=ansi                               \
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title     "$title"        \
+                    --infobox   "$text"         \
+                    10 78
         sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
     fi
 }
@@ -675,9 +679,14 @@ $(eval_gettext "is there not enough space on \$TARGET.")
 $(gettext 'Actions to take:')
 $(gettext 'Check the error messages after this.')
 $(gettext 'Try creating the back up again.')"
-        kz.errmsg "$text"
 
         if $OPTION_GUI; then
+            zenity  --error                 \
+                    --width     600         \
+                    --height    100         \
+                    --title     "$title"    \
+                    --text      "$text"     \
+                    2> /dev/null            || true
             zenity  --text-info             \
                     --filename="$ERROR_LOG" \
                     --width     700         \
@@ -685,8 +694,14 @@ $(gettext 'Try creating the back up again.')"
                     --title     "$title"    \
                     2> /dev/null            || true
         else
-            kz.infomsg "$title $ERROR_LOG:"
-            less --no-init --quit-if-one-screen "$ERROR_LOG"
+            whiptail    --backtitle "$PROGRAM_NAME" \
+                        --title "$title"            \
+                        --msgbox "$text"            \
+                        25 80
+            whiptail    --backtitle "$PROGRAM_NAME" \
+                        --title     "$title"        \
+                        --textbox "$ERROR_LOG"      \
+                        25 80
         fi
         exit 1
     fi

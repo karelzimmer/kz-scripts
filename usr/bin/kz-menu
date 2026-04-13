@@ -321,7 +321,7 @@ Roughly boils down to:
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title "$title"            \
                     --msgbox "$text"            \
-                    25 60
+                    25 80
     fi
 }
 
