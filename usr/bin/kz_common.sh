@@ -113,23 +113,19 @@ function kz.check_repos() {
 
 # This function returns an error message.
 function kz.errmsg() {
-    # shellcheck disable=SC2153,SC215,SC2154
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local title=''
-
     kz.logmsg "$*"
     if ${GUI_MODE:-false}; then
         # shellcheck disable=SC2154
-        title=$PROGRAM_DESC
-        zenity  --error                 \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$*"        \
-                2> /dev/null            || true
+        zenity  --error                     \
+                --width     600             \
+                --height    100             \
+                --title     "$PROGRAM_DESC" \
+                --text      "$*"            \
+                2> /dev/null                || true
     elif ${TUI_MODE:-false}; then
+        # shellcheck disable=SC2153,SC2154
         whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title     "$title"        \
+                    --title     "$PROGRAM_DESC" \
                     --msgbox    "$*"            \
                     25 80
     else
@@ -140,21 +136,17 @@ function kz.errmsg() {
 
 # This function returns an informational message.
 function kz.infomsg() {
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local title=''
-
     kz.logmsg "$*"
     if ${GUI_MODE:-false}; then
-        title=$PROGRAM_DESC
-        zenity  --info                  \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$*"        \
-                2> /dev/null            || true
+        zenity  --info                      \
+                --width     600             \
+                --height    100             \
+                --title     "$PROGRAM_DESC" \
+                --text      "$*"            \
+                2> /dev/null                || true
     elif ${TUI_MODE:-false}; then
         whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title     "$title"        \
+                    --title     "$PROGRAM_DESC" \
                     --msgbox    "$*"            \
                     25 80
     else

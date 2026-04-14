@@ -90,11 +90,11 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:111 kz_common.py:316 kz-update:80
+#: kz:111 kz_common.py:311 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz:117 kz_common.py:228 kz_common.py:237 kz_common.py:273 kz_common.py:322
+#: kz:117 kz_common.py:223 kz_common.py:232 kz_common.py:268 kz_common.py:317
 #: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
 #: kz-update:100 kz-update:302
 msgid "Program {} encountered an error."
@@ -102,7 +102,7 @@ msgstr ""
 
 #: kz:173 kz-backup:158 kz-build:164 kz-check:132 kz-deploy:142 kz-desktop:205
 #: kz-dev:132 kz-install:254 kz-menu:177 kz-restore:158 kz-setup:250
-#: kz-update:181 kz-wifi:130
+#: kz-update:181 kz-wifi:128
 msgid "internal error"
 msgstr ""
 
@@ -163,7 +163,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:166 kz-build:172 kz-check:140 kz-deploy:150 kz-desktop:213
-#: kz-dev:138 kz-menu:185 kz-restore:166 kz-update:187 kz-wifi:136
+#: kz-dev:138 kz-menu:185 kz-restore:166 kz-update:187 kz-wifi:134
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -517,51 +517,51 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz_common.py:55 kz_common.sh:42
+#: kz_common.py:56 kz_common.sh:42
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:152 kz_common.sh:173
+#: kz_common.py:147 kz_common.sh:165
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:158 kz_common.sh:180
+#: kz_common.py:153 kz_common.sh:172
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:164 kz_common.sh:187
+#: kz_common.py:159 kz_common.sh:179
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:199
+#: kz_common.py:194
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:203
+#: kz_common.py:198
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:205
+#: kz_common.py:200
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:250
+#: kz_common.py:245
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:277
+#: kz_common.py:272
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:278 kz_common.sh:282
+#: kz_common.py:273 kz_common.sh:274
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:279 kz_common.sh:283
+#: kz_common.py:274 kz_common.sh:275
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:313 kz_common.sh:413
+#: kz_common.py:308 kz_common.sh:405
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -583,34 +583,34 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:233
+#: kz_common.sh:225
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:237
+#: kz_common.sh:229
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:265
+#: kz_common.sh:257
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:280
+#: kz_common.sh:272
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:373
+#: kz_common.sh:365
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:388
+#: kz_common.sh:380
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -1321,11 +1321,11 @@ msgstr ""
 msgid "Usage: kz wifi [<options>]"
 msgstr ""
 
-#: kz-wifi:150
+#: kz-wifi:148
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 
-#: kz-wifi:160 kz-wifi:171
+#: kz-wifi:157
 msgid "No WiFi device found."
 msgstr ""
 

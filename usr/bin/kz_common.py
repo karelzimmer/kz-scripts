@@ -15,6 +15,7 @@ import os
 import subprocess
 import sys
 import time
+from turtle import title
 from systemd import journal  # type: ignore
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
@@ -37,8 +38,8 @@ NORMAL: str = '\033[0m'
 # Functions
 # #############################################################################
 
-def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                 GUI_MODE: bool = False) -> int:
+def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str, GUI_MODE: bool = False,
+                 TUI_MODE: bool = False) -> int:
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise exits 0 with descriptive message.
@@ -53,7 +54,7 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
         return 0
     else:
         text = GREEN + _('Already performed by the administrator.') + NORMAL
-        infomsg(PROGRAM_NAME, PROGRAM_DESC, text, GUI_MODE)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, text, GUI_MODE, TUI_MODE)
         sys.exit(0)
 
 
@@ -91,22 +92,19 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     logmsg(PROGRAM_NAME, TEXT)
     if GUI_MODE:
-        title: str = PROGRAM_DESC
-        zenity: str = f'zenity  --error                 \
-                                --width     600         \
-                                --height    100         \
-                                --title     "{title}"   \
-                                --text      "{TEXT}"    || true'
+        zenity: str = f'zenity  --error                         \
+                                --width     600                 \
+                                --height    100                 \
+                                --title     "{PROGRAM_DESC}"    \
+                                --text      "{TEXT}"            || true'
         subprocess.run(zenity, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     elif TUI_MODE:
-        title: str = PROGRAM_DESC
-        zenity: str = f'zenity  --error                 \
-                                --width     600         \
-                                --height    100         \
-                                --title     "{title}"   \
-                                --text      "{TEXT}"    || true'
-        subprocess.run(zenity, executable='bash', shell=True,
+        whiptail: str = f'whiptail    --backtitle "{PROGRAM_NAME}"    \
+                                    --title     "{PROGRAM_DESC}"    \
+                                    --msgbox    "{TEXT}"            \
+                                    25 80'
+        subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
         print(f'{RED}{TEXT}{NORMAL}')
@@ -119,22 +117,19 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     logmsg(PROGRAM_NAME, TEXT)
     if GUI_MODE:
-        title: str = PROGRAM_DESC
-        zenity: str = f'zenity  --info                  \
-                                --width     600         \
-                                --height    100         \
-                                --title     "{title}"   \
-                                --text      "{TEXT}"    || true'
+        zenity: str = f'zenity  --info                          \
+                                --width     600                 \
+                                --height    100                 \
+                                --title     "{PROGRAM_DESC}"    \
+                                --text      "{TEXT}"            || true'
         subprocess.run(zenity, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     elif TUI_MODE:
-        title: str = PROGRAM_DESC
-        zenity: str = f'zenity  --info                  \
-                                --width     600         \
-                                --height    100         \
-                                --title     "{title}"   \
-                                --text      "{TEXT}"    || true'
-        subprocess.run(zenity, executable='bash', shell=True,
+        whiptail: str = f'whiptail    --backtitle "{PROGRAM_NAME}"    \
+                                    --title     "{PROGRAM_DESC}"    \
+                                    --msgbox    "{TEXT}"            \
+                                    25 80'
+        subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
         print(TEXT)
