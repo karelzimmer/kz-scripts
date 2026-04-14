@@ -111,7 +111,7 @@ function process_deb_packages() {
 
     # Install kz package.
     check_debian_package_manager
-    yes | sudo apt-get install "$reinstall" "$kz_deb_local_file"
+    sudo apt-get install "$reinstall" --assume-yes "$kz_deb_local_file"
 }
 
 
