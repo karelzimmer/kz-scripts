@@ -409,9 +409,9 @@ $(eval_gettext "is there not enough space on \$HOME.")
 $(gettext 'Actions to take:')
 $(gettext 'Check the error messages after this.')
 $(gettext 'Try restoring the back up again.')"
+        kz.errmsg "$text"
 
         if $GUI_MODE; then
-            kz.errmsg "$text"
             zenity  --text-info             \
                     --filename="$ERROR_LOG" \
                     --width     700         \
@@ -419,7 +419,6 @@ $(gettext 'Try restoring the back up again.')"
                     --title     "$title"    \
                     2> /dev/null            || true
         else
-            kz.errmsg "$text"
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title     "$title"        \
                         --textbox   "$ERROR_LOG"    \

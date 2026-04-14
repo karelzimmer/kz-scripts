@@ -638,9 +638,10 @@ $(gettext 'Try to set up/reset the apps again.')"
                     --title     "$title"    \
                     2> /dev/null            || true
         else
-            kz.wait_for_enter
-            kz.infomsg "$title $ERROR_LOG:"
-            less --no-init --quit-if-one-screen "$ERROR_LOG"
+            whiptail    --backtitle "$PROGRAM_NAME" \
+                        --title     "$title"        \
+                        --textbox   "$ERROR_LOG"    \
+                        25 80
         fi
     fi
 
@@ -665,7 +666,7 @@ apps and changing user settings.")"
         kz.infomsg "$text"
 
         if [[ -n ${DISPLAY-} ]]; then
-            # A GUI is available
+            # A GUI is available.
             $GUI_MODE || kz.wait_for_enter
 
             if type cinnamon-session |& $PROGRAM_LOGS; then

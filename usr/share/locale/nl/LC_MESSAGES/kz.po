@@ -369,23 +369,23 @@ msgstr "Controleer de foutmeldingen hierna."
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:701
+#: kz-backup:700
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:719
+#: kz-backup:718
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:729
+#: kz-backup:728
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 "De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
 
-#: kz-backup:735 kz-restore:468
+#: kz-backup:734 kz-restore:467
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -1022,15 +1022,15 @@ msgstr "De installatie van de volgende apps bevat fouten:"
 msgid "Try to install/remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
-#: kz-install:684
+#: kz-install:685
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:686
+#: kz-install:687
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:692
+#: kz-install:693
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1274,17 +1274,17 @@ msgstr "is er te weinig ruimte op $HOME."
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:433
+#: kz-restore:432
 #, sh-format
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-restore:452
+#: kz-restore:451
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr "De back-up is teruggezet voor $user, er zijn $num_users gebruikers:"
 
-#: kz-restore:462
+#: kz-restore:461
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"
@@ -1394,15 +1394,15 @@ msgstr "Het instellen van de volgende apps bevat fouten:"
 msgid "Try to set up/reset the apps again."
 msgstr "Probeer de apps opnieuw in te stellen of te resetten."
 
-#: kz-setup:647
+#: kz-setup:648
 msgid "Apps set up completed."
 msgstr "Apps instellen is voltooid."
 
-#: kz-setup:649
+#: kz-setup:650
 msgid "Apps reset completed."
 msgstr "Apps resetten is voltooid."
 
-#: kz-setup:657
+#: kz-setup:658
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1410,7 +1410,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:662
+#: kz-setup:663
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1418,7 +1418,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:681
+#: kz-setup:682
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
