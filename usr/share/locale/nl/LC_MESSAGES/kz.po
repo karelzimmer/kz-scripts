@@ -1204,15 +1204,15 @@ msgstr ""
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: kz-menu:484
+#: kz-menu:483
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:492
+#: kz-menu:491
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:493
+#: kz-menu:492
 msgid "No"
 msgstr "Nee"
 
@@ -1602,7 +1602,7 @@ msgstr "*** git squash merge in 10 stappen ***"
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr "Werkt het beste in twee aparte terminals door te kopiëren en plakken."
 
-#: gitsquash:56 kz-menu:469
+#: gitsquash:56 kz-menu:468
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
