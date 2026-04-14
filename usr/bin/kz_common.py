@@ -92,15 +92,15 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     logmsg(PROGRAM_NAME, TEXT)
     if GUI_MODE:
-        zenity: str = f'zenity  --error                         \
-                                --width     600                 \
-                                --height    100                 \
-                                --title     "{PROGRAM_DESC}"    \
-                                --text      "{TEXT}"            || true'
+        zenity: str = f'zenity      --error                         \
+                                    --width     600                 \
+                                    --height    100                 \
+                                    --title     "{PROGRAM_DESC}"    \
+                                    --text      "{TEXT}"            || true'
         subprocess.run(zenity, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     elif TUI_MODE:
-        whiptail: str = f'whiptail    --backtitle "{PROGRAM_NAME}"    \
+        whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
                                     --title     "{PROGRAM_DESC}"    \
                                     --msgbox    "{TEXT}"            \
                                     25 80'
@@ -117,15 +117,15 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     logmsg(PROGRAM_NAME, TEXT)
     if GUI_MODE:
-        zenity: str = f'zenity  --info                          \
-                                --width     600                 \
-                                --height    100                 \
-                                --title     "{PROGRAM_DESC}"    \
-                                --text      "{TEXT}"            || true'
+        zenity: str = f'zenity      --info                          \
+                                    --width     600                 \
+                                    --height    100                 \
+                                    --title     "{PROGRAM_DESC}"    \
+                                    --text      "{TEXT}"            || true'
         subprocess.run(zenity, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     elif TUI_MODE:
-        whiptail: str = f'whiptail    --backtitle "{PROGRAM_NAME}"    \
+        whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
                                     --title     "{PROGRAM_DESC}"    \
                                     --msgbox    "{TEXT}"            \
                                     25 80'

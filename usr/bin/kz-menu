@@ -496,9 +496,9 @@ $(gettext 'Proceed?')"
             execute_command=false
         fi
     else
-        if whiptail --backtitle "$PROGRAM_NAME" \
-                    --title     "$title"        \
-                    --yesno     "$text"         \
+        if whiptail --backtitle "$PROGRAM_NAME"         \
+                    --title     "$title"                \
+                    --yesno     "$text"                 \
                     25 60; then
             execute_command=true
         else

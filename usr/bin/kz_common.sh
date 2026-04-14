@@ -116,12 +116,12 @@ function kz.errmsg() {
     kz.logmsg "$*"
     if ${GUI_MODE:-false}; then
         # shellcheck disable=SC2154
-        zenity  --error                     \
-                --width     600             \
-                --height    100             \
-                --title     "$PROGRAM_DESC" \
-                --text      "$*"            \
-                2> /dev/null                || true
+        zenity      --error                     \
+                    --width     600             \
+                    --height    100             \
+                    --title     "$PROGRAM_DESC" \
+                    --text      "$*"            \
+                    2> /dev/null                || true
     elif ${TUI_MODE:-false}; then
         # shellcheck disable=SC2153,SC2154
         whiptail    --backtitle "$PROGRAM_NAME" \
@@ -138,12 +138,12 @@ function kz.errmsg() {
 function kz.infomsg() {
     kz.logmsg "$*"
     if ${GUI_MODE:-false}; then
-        zenity  --info                      \
-                --width     600             \
-                --height    100             \
-                --title     "$PROGRAM_DESC" \
-                --text      "$*"            \
-                2> /dev/null                || true
+        zenity      --info                      \
+                    --width     600             \
+                    --height    100             \
+                    --title     "$PROGRAM_DESC" \
+                    --text      "$*"            \
+                    2> /dev/null                || true
     elif ${TUI_MODE:-false}; then
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title     "$PROGRAM_DESC" \

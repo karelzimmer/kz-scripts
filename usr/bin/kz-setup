@@ -348,23 +348,18 @@ function process_option_select() {
         done
         # No array is needed because the app name does not contain spaces.
         selected_apps=$(
-            zenity  --list                              \
-                    --checklist                         \
-                    --separator ' '                     \
-                    --height    400                     \
-                    --title     "$title"                \
-                    --text      "$text"                 \
-                    --ok-label  "$(gettext 'Continue')" \
-                    --column    "$(gettext 'SEL')"      \
-                    --column    "$(gettext 'APP')"      \
-                    "${choices[@]}"                     \
-                    2> /dev/null                        || true
+            zenity      --list                              \
+                        --checklist                         \
+                        --separator ' '                     \
+                        --height    400                     \
+                        --title     "$title"                \
+                        --text      "$text"                 \
+                        --ok-label  "$(gettext 'Continue')" \
+                        --column    "$(gettext 'SEL')"      \
+                        --column    "$(gettext 'APP')"      \
+                        "${choices[@]}"                     \
+                        2> /dev/null                        || true
             )
-        if [[ -z $selected_apps ]]; then
-            text=$(gettext 'No apps selected.')
-            kz.infomsg "$text"
-            exit 0
-        fi
     else
         for app in "${all_apps[@]}"; do
             choices+=("$app" 'off')
@@ -381,11 +376,11 @@ function process_option_select() {
                         2>&1 >/dev/tty                      |
             sed         's/"//g'                            || true
             )
-        if [[ -z $selected_apps ]]; then
-            text=$(gettext 'No apps selected.')
-            kz.infomsg "$text"
-            exit 0
-        fi
+    fi
+    if [[ -z $selected_apps ]]; then
+        text=$(gettext 'No apps selected.')
+        kz.infomsg "$text"
+        exit 0
     fi
 
     argument_app=true
@@ -631,12 +626,12 @@ $(gettext 'Try to set up/reset the apps again.')"
         kz.errmsg "$text"
 
         if $GUI_MODE; then
-            zenity  --text-info             \
-                    --filename="$ERROR_LOG" \
-                    --width     700         \
-                    --height    500         \
-                    --title     "$title"    \
-                    2> /dev/null            || true
+            zenity      --text-info                 \
+                        --filename="$ERROR_LOG"     \
+                        --width     700             \
+                        --height    500             \
+                        --title     "$title"        \
+                        2> /dev/null                || true
         else
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title     "$title"        \

@@ -234,16 +234,6 @@ Connect a usb medium.")
                             "${choices[@]}"                     \
                             2> /dev/null                        || true
                     )
-                if [[ -z $selected_medium ]]; then
-                    text=$(gettext 'No USB medium selected.')
-                    zenity  --info                  \
-                            --width     600         \
-                            --height    100         \
-                            --title     "$title"    \
-                            --text      "$text"     \
-                            2> /dev/null            || true
-                    exit 0
-                fi
             else
                 for medium in "${all_media[@]}"; do
                     choices+=("$medium" 'off')
@@ -260,16 +250,11 @@ Connect a usb medium.")
                                 2>&1 >/dev/tty                      |
                     sed         's/"//g'                            || true
                     )
-                if [[ -z $selected_medium ]]; then
-                    text=$(gettext 'No USB medium selected.')
-                    zenity  --info                  \
-                            --width     600         \
-                            --height    100         \
-                            --title     "$title"    \
-                            --text      "$text"     \
-                            2> /dev/null            || true
-                    exit 0
-                fi
+            fi
+            if [[ -z $selected_medium ]]; then
+                text=$(gettext 'No USB medium selected.')
+                kz.infomsg "$text"
+                exit 0
             fi
             medium=$selected_medium
         fi
@@ -302,28 +287,28 @@ function restore_backup() {
     kz.logmsg "$title"...
 
     if $GUI_MODE; then
-        rsync   --archive               \
-                --info=progress2        \
-                "$SOURCE/"              \
-                "$HOME/"                \
-                2>> "$ERROR_LOG"        |
-        stdbuf  --input=0               \
-                --output=0              \
-                --error=0               \
-                tr '\r' '\n'            |
-        stdbuf  --input=0               \
-                --output=0              \
-                --error=0               \
-        sed     --expression='s/^/#/'   |
-        zenity  --progress              \
-                --auto-close            \
-                --no-cancel             \
-                --pulsate               \
-                --width     600         \
-                --height    50          \
-                --title     "$title"    \
-                --text      "$text"     \
-                2> /dev/null            || RESTORE_RC=$?
+        rsync       --archive                       \
+                    --info=progress2                \
+                    "$SOURCE/"                      \
+                    "$HOME/"                        \
+                    2>> "$ERROR_LOG"                |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    tr '\r' '\n'                    |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+        sed         --expression='s/^/#/'           |
+        zenity      --progress                      \
+                    --auto-close                    \
+                    --no-cancel                     \
+                    --pulsate                       \
+                    --width     600                 \
+                    --height    50                  \
+                    --title     "$title"            \
+                    --text      "$text"             \
+                    2> /dev/null                    || RESTORE_RC=$?
     else
         text+='...'
         TERM=ansi
@@ -410,12 +395,12 @@ $(gettext 'Try restoring the back up again.')"
         kz.errmsg "$text"
 
         if $GUI_MODE; then
-            zenity  --text-info             \
-                    --filename="$ERROR_LOG" \
-                    --width     700         \
-                    --height    500         \
-                    --title     "$title"    \
-                    2> /dev/null            || true
+            zenity      --text-info                 \
+                        --filename="$ERROR_LOG"     \
+                        --width     700             \
+                        --height    500             \
+                        --title     "$title"        \
+                        2> /dev/null                || true
         else
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title     "$title"        \
