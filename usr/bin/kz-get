@@ -141,7 +141,7 @@ function process_rpm_packages() {
         kz_rpm_site_file=$packages_url/kz-4.2.1-1.noarch.rpm
     fi
 
-    if type kz > /dev/null; then
+    if type kz &> /dev/null; then
         install='reinstall'
     else
         install='install'
