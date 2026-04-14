@@ -201,7 +201,6 @@ $USAGE"
 
 Connect a usb medium.")
             kz.infomsg "$text"
-            $GUI_MODE || kz.wait_for_enter
             medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
@@ -281,7 +280,6 @@ Connect a usb medium.")
     if ! [[ -d $SOURCE ]]; then
         text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
         kz.infomsg "$text"
-        $GUI_MODE || kz.wait_for_enter
         if ! [[ -d $SOURCE ]]; then
             kz.errmsg "$text"
             exit 1

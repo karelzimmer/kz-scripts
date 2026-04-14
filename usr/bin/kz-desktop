@@ -285,6 +285,7 @@ function process_option_reset () {
 function capture_gnome_changes() {
     local config_a_file=''
     local config_b_file=''
+    local prompt=''
     local text=''
 
     config_a_file=$(mktemp -t "$PROGRAM_NAME-a-XXXXXXXXXX.config")
@@ -293,9 +294,16 @@ function capture_gnome_changes() {
     save_configuration_database A "$config_a_file"
     text=$(gettext 'Now make the change in the desktop environment.')
     kz.infomsg "$text"
-    kz.wait_for_enter
+
+    prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
+    kz.logmsg "$prompt"
+    printf '\n'
+    read -rp "$prompt" < /dev/tty
+    printf '\n'
+
     # Capturing the configuration database after.
     save_configuration_database B "$config_b_file"
+
     report_database_changes "$config_a_file" "$config_b_file"
 }
 

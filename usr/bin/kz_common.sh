@@ -367,7 +367,12 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit )
-            kz.term_cleanup
+            if ! [[ -o xtrace ]]; then
+                # Clean up temporary files if not in debug mode.
+                text='Cleaning up temporary files...'
+                kz.logmsg "$text"
+                rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
+            fi
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"
             text="==== END logs for script $PROGRAM_NAME"
@@ -382,29 +387,4 @@ $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;
     esac
-}
-
-
-# This function cleans up temporary files on exit signal.
-function kz.term_cleanup() {
-    local text=''
-
-    if ! [[ -o xtrace ]]; then
-        # Clean up temporary files if not in debug mode.
-        text='Cleaning up temporary files...'
-        kz.logmsg "$text"
-        rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
-    fi
-}
-
-
-# This function waits for the user to press Enter.
-function kz.wait_for_enter() {
-    local prompt=''
-
-    prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    kz.logmsg "$prompt"
-    printf '\n'
-    read -rp "$prompt" < /dev/tty
-    printf '\n'
 }

@@ -667,8 +667,6 @@ apps and changing user settings.")"
 
         if [[ -n ${DISPLAY-} ]]; then
             # A GUI is available.
-            $GUI_MODE || kz.wait_for_enter
-
             if type cinnamon-session |& $PROGRAM_LOGS; then
                 # Cinnamon.
                 cinnamon-session-quit --logout --force

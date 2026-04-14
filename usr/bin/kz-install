@@ -699,7 +699,6 @@ changing system settings.")"
         if $GUI_MODE; then
             pkexec /usr/bin/kz-install-pkexec "$reboot"
         else
-            kz.wait_for_enter
             eval "$reboot"
         fi
     fi
