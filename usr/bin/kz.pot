@@ -420,7 +420,7 @@ msgstr ""
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:486 kz-deploy:245
+#: kz-build:486 kz-deploy:246
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:513 kz-check:589 kz-deploy:268
+#: kz-build:514 kz-check:589 kz-deploy:271
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -654,7 +654,7 @@ msgstr ""
 msgid "Website upload failed."
 msgstr ""
 
-#: kz-deploy:255
+#: kz-deploy:257
 msgid "Install Debian package failed."
 msgstr ""
 
@@ -1482,7 +1482,7 @@ msgid "MAINTENANCE:"
 msgstr ""
 
 #: ckhtml:127 gitbranch:63 gitclone:80 gitfetch:63 gitinit:53 gitpull:63
-#: gitsquash:78 gitstatus:63 kz-build:517 kz-check:593 kz-deploy:272 kz-dev:278
+#: gitsquash:78 gitstatus:63 kz-build:518 kz-check:593 kz-deploy:275 kz-dev:278
 #: kz-post-migrate:71 kz-update:314
 msgid "Complete!"
 msgstr ""

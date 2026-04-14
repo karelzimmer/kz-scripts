@@ -684,6 +684,7 @@ apps and changing user settings.")"
     else
         kz.infomsg "$text"
     fi
+
     exit 0
 }
 

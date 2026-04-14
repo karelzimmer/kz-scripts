@@ -509,14 +509,15 @@ function term() {
 package is installed")
         kz.errmsg "$text"
     fi
+
     if $ERR_FLAG; then
         text=$(gettext 'Please check all the messages above and fix them.')
         kz.errmsg "$text"
         exit 1
     else
-    text=$GREEN$(gettext 'Complete!')$NORMAL
-    kz.infomsg "$text"
-    exit 0
+        text=$GREEN$(gettext 'Complete!')$NORMAL
+        kz.infomsg "$text"
+        exit 0
     fi
 }
 

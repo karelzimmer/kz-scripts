@@ -232,6 +232,7 @@ function upload_website() {
         kz.errmsg "$text"
         ERR_FLAG=true
     fi
+
     # Make reply with password empty.
     REPLY=''
 }
@@ -251,10 +252,12 @@ function install_package() {
     if $OPTION_DEV; then
         parm='--dev'
     fi
+
     if ! (wget karelzimmer.nl/getkz; bash getkz "$parm"); then
         text=$(gettext 'Install Debian package failed.')
         kz.errmsg "$text"
     fi
+
     cd "$OLDPWD"
     kz.logmsg 'Called kz-get (via wget and bash).'
 }
