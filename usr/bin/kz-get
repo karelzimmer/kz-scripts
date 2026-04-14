@@ -112,12 +112,6 @@ function process_deb_packages() {
     # Install kz package.
     check_debian_package_manager
     yes | sudo apt-get install "$reinstall" "$kz_deb_local_file"
-
-    # Install zenity if not already installed and DISPLAY is set (GUI).
-    if ! type zenity > /dev/null && [[ -n ${DISPLAY-} ]]; then
-        check_debian_package_manager
-        sudo apt-get install --assume-yes zenity
-    fi
 }
 
 
@@ -160,11 +154,6 @@ function process_rpm_packages() {
 
     # Install kz package.
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
-
-    # Install zenity if not already installed and DISPLAY is set (GUI).
-    if ! type zenity > /dev/null && [[ -n ${DISPLAY-} ]]; then
-        sudo dnf install --assumeyes zenity
-    fi
 }
 
 
