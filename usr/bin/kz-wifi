@@ -161,11 +161,11 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str, GUI_MODE: bool = False,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, GUI_MODE, TUI_MODE)
 
 
-def term() -> None:
+def term(PROGRAM_NAME: str = '', rc: int = 0, TUI_MODE: bool = False) -> None:
     """
     This function controls the termination of the script.
     """
-    kz.term(PROGRAM_NAME, 0)
+    kz.term(PROGRAM_NAME, 0, TUI_MODE)
 
 
 # #############################################################################

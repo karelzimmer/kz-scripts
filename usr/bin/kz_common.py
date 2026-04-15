@@ -279,11 +279,12 @@ def term(PROGRAM_NAME: str, rc: int, TUI_MODE: bool = False) -> None:
     """
     This function controls the termination.
     """
-    clear_screen: str = 'clear -x' 
+    clear_screen: str = 'clear -x'
     status: str = '1/FAILURE'
     text: str = ''
 
-    subprocess.run(clear_screen, executable='bash', shell=True)
+    if TUI_MODE:
+        subprocess.run(clear_screen, executable='bash', shell=True)
 
     if rc == 0:
         status = '0/SUCCESS'
