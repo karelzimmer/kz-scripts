@@ -609,17 +609,15 @@ function execute_command() {
 # This function controls the termination of the script.
 function term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
-    local separator_line=''
     local text=''
     local title=''
 
     # Error-log (stderr) also to the main log.
-    separator_line=$(eval printf '=%.0s' '{1..100}')
-    kz.logmsg "$separator_line"
+    kz.logmsg '---------------------------------------------------------------'
     text="** $ERROR_LOG (stderr)"
     printf '%s\n%s\n' ' ' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
-    kz.logmsg "$separator_line"
+    kz.logmsg '---------------------------------------------------------------'
 
     if [[ -n ${FAILED_APPS[*]} ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"

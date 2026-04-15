@@ -377,6 +377,8 @@ function term() {
 
     # Error-log (stderr) also to the main log.
     kz.logmsg '---------------------------------------------------------------'
+    text="** $ERROR_LOG (stderr)"
+    printf '%s\n%s\n' ' ' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
     kz.logmsg '---------------------------------------------------------------'
 
