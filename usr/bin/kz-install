@@ -556,10 +556,14 @@ function process_command_file() {
     local text=''
 
     # FIXME , if TUI_mode + --infobox (kz.infomsg=--msgbox!).
-    if ! $GUI_MODE; then
+    if $TUI_MODE; then
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
-        kz.infomsg "$text"
+        TERM=ansi                               \
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title     "$title"        \
+                    --infobox   "$text"         \
+                    10 78
     fi
 
     while read -r command_record; do

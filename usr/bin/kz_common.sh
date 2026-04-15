@@ -373,6 +373,9 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
                 kz.logmsg "$text"
                 rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
             fi
+            if ${TUI_MODE:-false}; then
+                clear -x
+            fi
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"
             text="==== END logs for script $PROGRAM_NAME"
