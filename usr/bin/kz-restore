@@ -280,7 +280,7 @@ function restore_backup() {
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
     text="** $ERROR_LOG (stderr)"
-    printf '%s\n' "$text" > "$ERROR_LOG"
+    printf '%s\n\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
