@@ -275,16 +275,12 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 
-def term(PROGRAM_NAME: str, rc: int, TUI_MODE: bool = False) -> None:
+def term(PROGRAM_NAME: str, rc: int) -> None:
     """
     This function controls the termination.
     """
-    clear_screen: str = 'clear -x'
     status: str = '1/FAILURE'
     text: str = ''
-
-    if TUI_MODE:
-        subprocess.run(clear_screen, executable='bash', shell=True)
 
     if rc == 0:
         status = '0/SUCCESS'
