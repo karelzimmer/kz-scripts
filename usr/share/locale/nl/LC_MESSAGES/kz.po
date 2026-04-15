@@ -332,7 +332,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:653 kz-install:660 kz-restore:384 kz-setup:625
+#: kz-backup:653 kz-install:659 kz-restore:384 kz-setup:625
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -357,11 +357,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:661 kz-install:665 kz-restore:392 kz-setup:629
+#: kz-backup:661 kz-install:664 kz-restore:392 kz-setup:629
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:662 kz-install:666 kz-restore:393 kz-setup:630
+#: kz-backup:662 kz-install:665 kz-restore:393 kz-setup:630
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -1006,31 +1006,31 @@ msgstr "Geen opdrachten om uit te voeren."
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
-#: kz-install:560 kz-setup:536 kz-setup:538
+#: kz-install:559 kz-setup:536 kz-setup:538
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:561 kz-setup:537 kz-setup:539
+#: kz-install:560 kz-setup:537 kz-setup:539
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
-#: kz-install:661
+#: kz-install:660
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:667
+#: kz-install:666
 msgid "Try to install/remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
-#: kz-install:685
+#: kz-install:684
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:687
+#: kz-install:686
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:693
+#: kz-install:692
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."

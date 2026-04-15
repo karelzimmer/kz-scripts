@@ -289,7 +289,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:653 kz-install:660 kz-restore:384 kz-setup:625
+#: kz-backup:653 kz-install:659 kz-restore:384 kz-setup:625
 msgid "error messages"
 msgstr ""
 
@@ -314,11 +314,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:661 kz-install:665 kz-restore:392 kz-setup:629
+#: kz-backup:661 kz-install:664 kz-restore:392 kz-setup:629
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:662 kz-install:666 kz-restore:393 kz-setup:630
+#: kz-backup:662 kz-install:665 kz-restore:393 kz-setup:630
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -911,31 +911,31 @@ msgstr ""
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:560 kz-setup:536 kz-setup:538
+#: kz-install:559 kz-setup:536 kz-setup:538
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:561 kz-setup:537 kz-setup:539
+#: kz-install:560 kz-setup:537 kz-setup:539
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:661
+#: kz-install:660
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:667
+#: kz-install:666
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:685
+#: kz-install:684
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:687
+#: kz-install:686
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:693
+#: kz-install:692
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
