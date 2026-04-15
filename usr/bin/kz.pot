@@ -90,13 +90,13 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:111 kz_common.py:311 kz-update:80
+#: kz:111 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz:117 kz_common.py:223 kz_common.py:232 kz_common.py:268 kz_common.py:317
-#: kz-dev:163 kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86
-#: kz-update:100 kz-update:302
+#: kz:117 kz_common.py:222 kz_common.py:231 kz_common.py:267 kz-dev:163
+#: kz-dev:174 kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86 kz-update:100
+#: kz-update:302
 msgid "Program {} encountered an error."
 msgstr ""
 
@@ -517,51 +517,51 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz_common.py:56 kz_common.sh:42
+#: kz_common.py:55 kz_common.sh:42
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:147 kz_common.sh:165
+#: kz_common.py:146 kz_common.sh:165
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:153 kz_common.sh:172
+#: kz_common.py:152 kz_common.sh:172
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:159 kz_common.sh:179
+#: kz_common.py:158 kz_common.sh:179
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:194
+#: kz_common.py:193
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:198
+#: kz_common.py:197
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:200
+#: kz_common.py:199
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:245
+#: kz_common.py:244
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:272
+#: kz_common.py:271
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:273 kz_common.sh:274
+#: kz_common.py:272 kz_common.sh:274
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:274 kz_common.sh:275
+#: kz_common.py:273 kz_common.sh:275
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.py:308 kz-desktop:298
+#: kz-desktop:298
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 

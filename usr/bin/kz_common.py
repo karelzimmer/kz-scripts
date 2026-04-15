@@ -15,7 +15,6 @@ import os
 import subprocess
 import sys
 import time
-from turtle import title
 from systemd import journal  # type: ignore
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
@@ -276,12 +275,15 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
 
 
-def term(PROGRAM_NAME: str, rc: int) -> None:
+def term(PROGRAM_NAME: str, rc: int, TUI_MODE: bool = False) -> None:
     """
     This function controls the termination.
     """
+    clear_screen: str = 'clear -x' 
     status: str = '1/FAILURE'
     text: str = ''
+
+    subprocess.run(clear_screen, executable='bash', shell=True)
 
     if rc == 0:
         status = '0/SUCCESS'
@@ -295,27 +297,3 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
         sys.exit(0)
     else:
         sys.exit(1)
-
-
-def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
-    """
-    This function waits for the user to press Enter.
-    """
-    exc: BaseException
-    text: str = ''
-
-    try:
-        text = '\n' + _('Press the Enter key to continue [Enter]: ') + '\n'
-        input(text)
-    except KeyboardInterrupt:
-        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        term(PROGRAM_NAME, 1)
-    except Exception as exc:
-        text = str(exc)
-        logmsg(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        term(PROGRAM_NAME, 1)
-
-    return 0
