@@ -555,6 +555,7 @@ function process_command_file() {
     local command_record=''
     local text=''
 
+    # FIXME , if TUI_mode + --infobox (kz.infomsg=--msgbox!).
     if ! $GUI_MODE; then
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
