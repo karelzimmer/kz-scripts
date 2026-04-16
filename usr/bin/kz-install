@@ -520,8 +520,8 @@ function install_apps() {
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
-    text="** $ERROR_LOG (stderr)"
-    printf '%s\n%s\n' "$text" ' ' > "$ERROR_LOG"
+    text="** $ERROR_LOG (stderr) *********************************************"
+    printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
@@ -646,12 +646,10 @@ function term() {
     local title=''
 
 
-    # Error-log (stderr) also to the main log.
-    kz.logmsg '---------------------------------------------------------------'
-    text="** $ERROR_LOG (stderr)"
-    printf '%s\n%s\n' ' ' "$text" >> "$ERROR_LOG"
+    # Error-log also to the main log.
+    text="** $ERROR_LOG (stderr) *********************************************"
+    printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
-    kz.logmsg '---------------------------------------------------------------'
 
     if [[ -n ${FAILED_APPS[*]} ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"
@@ -675,7 +673,7 @@ $(gettext 'Try to install/remove the apps again.')"
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title     "$title"        \
                         --textbox   "$ERROR_LOG"    \
-                        25 80
+                        30 90
         fi
     fi
 
