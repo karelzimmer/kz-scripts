@@ -890,15 +890,15 @@ msgstr ""
 msgid "No apps selected."
 msgstr ""
 
-#: kz-install:409
+#: kz-install:410
 msgid "automatically-added-update"
 msgstr ""
 
-#: kz-install:411
+#: kz-install:412
 msgid "Update package lists before installing apps."
 msgstr ""
 
-#: kz-install:461 kz-setup:440
+#: kz-install:462 kz-setup:441
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""

@@ -102,7 +102,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
         whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
                                     --title     "{PROGRAM_DESC}"    \
                                     --msgbox    "{TEXT}"            \
-                                    25 80'
+                                    20 80'
         subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
@@ -127,7 +127,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
         whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
                                     --title     "{PROGRAM_DESC}"    \
                                     --msgbox    "{TEXT}"            \
-                                    25 80'
+                                    20 80'
         subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:

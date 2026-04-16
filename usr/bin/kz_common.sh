@@ -127,7 +127,7 @@ function kz.errmsg() {
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title     "$PROGRAM_DESC" \
                     --msgbox    "$*"            \
-                    25 80
+                    20 80
     else
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
@@ -148,7 +148,7 @@ function kz.infomsg() {
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title     "$PROGRAM_DESC" \
                     --msgbox    "$*"            \
-                    25 80
+                    20 80
     else
         printf '%b\n' "$*"
     fi

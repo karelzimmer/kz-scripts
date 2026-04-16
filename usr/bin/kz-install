@@ -401,6 +401,7 @@ function process_option_select() {
 function process_argument_app() {
     local app_argument=''
     local err_flag=false
+    local text=''
 
     if [[ $install = 'INSTALL' ]]; then
         # Refresh package lists before installing apps, to minimize the risk of
@@ -421,6 +422,7 @@ if grep --quiet rhel /etc/os-release; then sudo dnf check-update || true; fi
     done
 
     if $err_flag; then
+        kz.errmsg "$text"
         exit 1
     fi
 }
@@ -432,7 +434,6 @@ function process_installation_files_by_app_argument() {
     local app_match=false
     local install_record=''
     local no_app_match=true
-    local text=''
 
     while read -r install_record; do
         case $install_record in
@@ -458,8 +459,7 @@ function process_installation_files_by_app_argument() {
 
     if $no_app_match; then
         err_flag=true
-        text=$(eval_gettext "App '\$app_argument' not found.")
-        kz.errmsg "$text"
+        text+=$(eval_gettext "App '\$app_argument' not found.")
     fi
 }
 
