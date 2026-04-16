@@ -590,12 +590,12 @@ function execute_command() {
     kz.logmsg "$cmd"
 
     if $GUI_MODE; then
-        printf '%s\n' "#$app_name_line"
+        printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         TERM=ansi                                                   \
         whiptail    --backtitle "$PROGRAM_NAME"                     \
                     --title     "$title"                            \
-                    --infobox   "$app_name_line"   \
+                    --infobox   "$app_name_line\n\n         $cmd"   \
                     10 90
     fi
 
@@ -603,7 +603,7 @@ function execute_command() {
             1> >($PROGRAM_LOGS) \
             2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
 
-    sleep 0.5
+    sleep 0.2
 }
 
 
@@ -613,7 +613,7 @@ function term() {
     local text=''
     local title=''
 
-    # Error log also to the standard log.
+    # Error log also to the main log.
     text="** $ERROR_LOG (stderr) *********************************************"
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
