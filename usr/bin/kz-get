@@ -160,12 +160,13 @@ function process_rpm_packages() {
 # This function controls the termination of the script.
 function term() {
     local text=''
-    local separator_line=''
 
     gpg --import /usr/share/kz/kz-public-key.gpg
 
-    separator_line=$(eval printf '=%.0s' '{1..80}')
-    text="\n$separator_line\n\n"
+    text="
+===============================================================================
+
+"
 
     if $OPTION_DEV; then
         text+="$RED$(gettext "Please note: the development version of \
