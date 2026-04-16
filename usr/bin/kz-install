@@ -459,7 +459,7 @@ function process_installation_files_by_app_argument() {
 
     if $no_app_match; then
         err_flag=true
-        text+=$(eval_gettext "App '\$app_argument' not found.")
+        text+=$(eval_gettext "App '\$app_argument' not found.")'\n' 
     fi
 }
 
