@@ -532,16 +532,15 @@ function process_command_file() {
     local command_record=''
     local text=''
 
+    # FIXME mag weg
     if $TUI_MODE; then
-        text="$(gettext 'NUM/TOT  APP')
-         $(gettext 'COMMAND')..."
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
         TERM=ansi                               \
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title     "$title"        \
                     --infobox   "$text"         \
-                    10 78
+                    10 90
     fi
 
     while read -r command_record; do
@@ -591,18 +590,20 @@ function execute_command() {
     kz.logmsg "$cmd"
 
     if $GUI_MODE; then
-        printf '%s\n' "#$app_name_line\n\n$cmd"
+        printf '%s\n' "#$app_name_line"
     else
         TERM=ansi                                                   \
         whiptail    --backtitle "$PROGRAM_NAME"                     \
                     --title     "$title"                            \
-                    --infobox   "$app_name_line\n\n         $cmd"   \
-                    10 78
+                    --infobox   "$app_name_line"   \
+                    10 90
     fi
 
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
             2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
+
+    sleep 0.5
 }
 
 
@@ -612,7 +613,7 @@ function term() {
     local text=''
     local title=''
 
-    # Error-log also to the main log.
+    # Error log also to the standard log.
     text="** $ERROR_LOG (stderr) *********************************************"
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
@@ -680,6 +681,10 @@ apps and changing user settings.")"
         fi
     else
         kz.infomsg "$text"
+    fi
+
+    if $TUI_MODE; then
+        clear -x
     fi
 
     exit 0

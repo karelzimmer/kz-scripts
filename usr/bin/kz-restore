@@ -375,7 +375,7 @@ function term() {
         usb_mount_point=/run/media/$USER
     fi
 
-    # Error-log also to the main log.
+    # Error log also to the standard log.
     text="** $ERROR_LOG (stderr) *********************************************"
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
