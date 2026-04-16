@@ -214,7 +214,7 @@ Connect a usb medium.")
             title=$(gettext 'Make backup')
             text=$(gettext 'Choose USB medium:')
 
-            readarray all_media < <(find "$usb_mount_point/"* -prune)
+            readarray -t all_media < <(find "$usb_mount_point/"* -prune)
 
             if $GUI_MODE; then
                 for medium in "${all_media[@]}"; do
