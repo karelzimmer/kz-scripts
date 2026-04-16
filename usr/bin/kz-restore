@@ -299,6 +299,10 @@ function restore_backup() {
         stdbuf      --input=0                       \
                     --output=0                      \
                     --error=0                       \
+                    awk "{ print \$2 \" \" \$4 }"   |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
         sed         --expression='s/^/#/'           |
         zenity      --progress                      \
                     --auto-close                    \

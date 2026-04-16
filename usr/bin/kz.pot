@@ -285,63 +285,63 @@ msgstr ""
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:607
+#: kz-backup:611
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:654 kz-install:640 kz-restore:384 kz-setup:605
+#: kz-backup:658 kz-install:640 kz-restore:388 kz-setup:605
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:655
+#: kz-backup:659
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:657 kz-restore:387
+#: kz-backup:661 kz-restore:391
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:658
+#: kz-backup:662
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:659 kz-restore:389
+#: kz-backup:663 kz-restore:393
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:660
+#: kz-backup:664
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:662 kz-install:645 kz-restore:392 kz-setup:609
+#: kz-backup:666 kz-install:645 kz-restore:396 kz-setup:609
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:663 kz-install:646 kz-restore:393 kz-setup:610
+#: kz-backup:667 kz-install:646 kz-restore:397 kz-setup:610
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:664
+#: kz-backup:668
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:685
+#: kz-backup:689
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:703
+#: kz-backup:707
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:713
+#: kz-backup:717
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 
-#: kz-backup:719 kz-restore:450
+#: kz-backup:723 kz-restore:454
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
@@ -1132,34 +1132,34 @@ msgstr ""
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:385
+#: kz-restore:389
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:388
+#: kz-restore:392
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:390
+#: kz-restore:394
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:394
+#: kz-restore:398
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:415
+#: kz-restore:419
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:434
+#: kz-restore:438
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-restore:444
+#: kz-restore:448
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"

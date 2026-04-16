@@ -565,6 +565,10 @@ EOF
         stdbuf      --input=0                       \
                     --output=0                      \
                     --error=0                       \
+                    awk "{ print \$2 \" \" \$4 }"   |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
         sed         --expression='s/^/#/'           |
         zenity      --progress                      \
                     --auto-close                    \
@@ -605,8 +609,8 @@ EOF
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")
+    kz.logmsg "$text"...
     if $GUI_MODE; then
-        kz.logmsg "$title"...
         sync                            |
         zenity      --progress                  \
                     --pulsate                   \
