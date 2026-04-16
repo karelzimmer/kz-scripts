@@ -555,17 +555,6 @@ function process_command_file() {
     local command_record=''
     local text=''
 
-    # FIXME mag weg
-    if $TUI_MODE; then
-        text="$(gettext 'NUM/TOT  APP')
-         $(gettext 'COMMAND')..."
-        TERM=ansi                               \
-        whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title     "$title"        \
-                    --infobox   "$text"         \
-                    10 78
-    fi
-
     while read -r command_record; do
         case $command_record in
             '' )
