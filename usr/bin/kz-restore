@@ -315,7 +315,6 @@ function restore_backup() {
                     --text      "$text"             \
                     2> /dev/null                    || RESTORE_RC=$?
     else
-        text+='...'
         tput civis
         TERM=ansi
         rsync       --archive                       \
@@ -337,9 +336,9 @@ function restore_backup() {
                     --error=0                       \
                     tr --delete '%'                 |
         whiptail    --backtitle "$PROGRAM_NAME"     \
-                    --title     "$title"            \
-                    --gauge     "$title..."         \
-                    6 50 0                          || RESTORE_RC=$?
+                    --title     "$PROGRAM_DESC"     \
+                    --gauge     "$PROGRAM_DESC..."  \
+                    6 70 0                          || RESTORE_RC=$?
         tput cnorm
     fi
 }

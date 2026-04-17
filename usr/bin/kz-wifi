@@ -30,7 +30,7 @@ PROGRAM_NAME: str = 'kz-wifi'
 PROGRAM_DESC: str = _('Show WiFi details')
 
 USAGE: str = _(
-    "Usage: kz wifi [-g|--gui]\n"
+    "Usage: kz wifi [-g|--gui] [--cli]\n"
     "               [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
     )
 
@@ -41,6 +41,7 @@ HELP_LINES: list[str] = [
     '',
     _('Options:'),
     _('  -g, --gui      run in graphical mode'),
+    _('      --cli      run in command-line mode'),
     _('  -h, --help     show this help text'),
     _('  -m, --manual   show manual page'),
     _('  -u, --usage    show a short usage summary'),
@@ -50,7 +51,7 @@ HELP: str = '\n'.join(HELP_LINES)
 del HELP_LINES
 
 OPTIONS_SHORT: str = 'ghmuv'
-OPTIONS_LONG: list[str] = ['gui', 'help', 'manual', 'usage', 'version']
+OPTIONS_LONG: list[str] = ['gui', 'cli', 'help', 'manual', 'usage', 'version']
 
 
 # #############################################################################
@@ -62,17 +63,17 @@ OPTIONS_LONG: list[str] = ['gui', 'help', 'manual', 'usage', 'version']
 # Functions
 # #############################################################################
 
-def process(GUI_MODE: bool = False, TUI_MODE: bool = True) -> None:
+def process(MODE: str = 'tui') -> None:
     """
     This function performs the script actions.
     """
-    GUI_MODE = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+    MODE = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
-    show_secrets(PROGRAM_NAME, PROGRAM_DESC, GUI_MODE, TUI_MODE)
+    show_secrets(PROGRAM_NAME, PROGRAM_DESC, MODE)
 
 
 def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
-                HELP: str) -> bool:
+                HELP: str) -> str:
     """
     This function checks the script input.
     """
@@ -90,15 +91,15 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
-    GUI_MODE = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts,
-                               args)
+    MODE = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts,
+                           args)
 
-    return GUI_MODE
+    return MODE
 
 
 def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
                     HELP: str, opts: list[tuple[str, str]],
-                    args: list[str]) -> bool:
+                    args: list[str]) -> str:
     """
     This function handles the script options and arguments.
     """
@@ -106,12 +107,13 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     opt: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
-    GUI_MODE: bool = False
+    MODE: str = 'tui'
 
     for opt, arg in opts:
         if opt in ('-g', '--gui'):
-            GUI_MODE = True
-            TUI_MODE = False
+            MODE = 'gui'
+        elif opt in ('--cli'):
+            MODE = 'cli'
         elif opt in ('-h', '--help'):
             kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
             kz.term(PROGRAM_NAME, 0)
@@ -135,11 +137,11 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
-    return GUI_MODE
+    return MODE
 
 
-def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str, GUI_MODE: bool = False,
-                 TUI_MODE: bool = False) -> None:
+def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                 MODE: str = 'tui') -> None:
     """
     This function shows the Wi-Fi secrets.
     """
@@ -155,10 +157,10 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str, GUI_MODE: bool = False,
                                       ).stdout
     except Exception:
         text = _('No WiFi device found.')
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, GUI_MODE, TUI_MODE)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
     else:
         text = str(nmcli_output.decode('utf-8')) + text
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, GUI_MODE, TUI_MODE)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
 
 
 def term(PROGRAM_NAME: str = '', rc: int = 0) -> None:
