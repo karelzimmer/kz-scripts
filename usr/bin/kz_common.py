@@ -197,7 +197,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
         _("Type '{} --manual' or 'man {}'{} ").\
         format(program_name, program_name, yelp_man) + \
         _('for more information.')
-    infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+    infomsg(PROGRAM_NAME, PROGRAM_DESC, text, 'cli')
 
 
 def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
@@ -243,7 +243,7 @@ def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
 
     text = USAGE + '\n\n' + _("Type '{} --help' for more information.").\
         format(program_name)
-    infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+    infomsg(PROGRAM_NAME, PROGRAM_DESC, text, 'cli')
 
 
 def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
@@ -272,7 +272,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
             _('Written by Karel Zimmer <info@karelzimmer.nl>.') + '\n' + \
             _('License CC0 1.0 ' +
                 '<https://creativecommons.org/publicdomain/zero/1.0>.')
-        infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, text, 'cli')
 
 
 def term(PROGRAM_NAME: str, rc: int) -> None:

@@ -69,11 +69,10 @@ usage,version,debug"
 
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
-declare GUI_MODE=false
+declare MODE='tui'
 declare OPTION_REMOVE=false
 declare OPTION_SELECT=false
 declare REBOOT=false
-declare TUI_MODE=true
 
 
 # #############################################################################
@@ -154,7 +153,9 @@ found.")
     fi
 
     kz.become_check
-    $GUI_MODE || sudo true
+    if ! [[ ${MODE-} = 'gui' ]]; then
+        sudo true
+    fi
     install_apps
 }
 
@@ -208,8 +209,7 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                GUI_MODE=true
-                TUI_MODE=false
+                MODE='gui'
                 shift
                 ;;
             -l | --list )
@@ -270,7 +270,7 @@ environment available")"
 
 # This function browses through the installation files.
 function process_option_browse() {
-    GUI_MODE=false
+    MODE='tui'
     less --no-init --quit-if-one-screen < <(
         cat "${installation_files[@]}" || true
         )
@@ -282,7 +282,7 @@ function process_option_list() {
     local apps=''
     local text=''
 
-    GUI_MODE=false
+    MODE='tui'
     text=$(gettext 'The following apps are available:')
     apps=$(
         grep    "#[[:space:]]\+${install}[[:space:]]\+" \
@@ -349,7 +349,7 @@ function process_option_select() {
         sort    --unique
         )
 
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         for app in "${all_apps[@]}"; do
             choices+=('false' "$app")
         done
@@ -496,7 +496,7 @@ function process_installation_files_by_hostname() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    GUI_MODE=false
+    MODE='cli'
     less --no-init --quit-if-one-screen "$command_file"
 }
 
@@ -526,7 +526,7 @@ function install_apps() {
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
 
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_command_file > >(
@@ -595,7 +595,7 @@ function execute_command() {
 
     kz.logmsg "$app_name_line:$cmd"
 
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         TERM=ansi                                                   \
@@ -605,7 +605,7 @@ function execute_command() {
                     10 90
     fi
 
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         kz.check_debian_package_manager
         pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                      \
@@ -647,7 +647,7 @@ $(gettext 'Check the error messages after this.')
 $(gettext 'Try to install/remove the apps again.')"
         kz.errmsg "$text"
 
-        if $GUI_MODE; then
+        if [[ ${MODE-} = 'gui' ]]; then
             zenity      --text-info                 \
                         --filename="$ERROR_LOG"     \
                         --width     700             \
@@ -676,14 +676,14 @@ changing system settings.")"
     kz.infomsg "$text"
 
     if $REBOOT; then
-        if $GUI_MODE; then
+        if [[ ${MODE-} = 'gui' ]]; then
             pkexec /usr/bin/kz-install-pkexec "$reboot"
         else
             eval "$reboot"
         fi
     fi
 
-    if $TUI_MODE; then
+    if [[ ${MODE-} = 'tui' ]]; then
         clear -x
     fi
 

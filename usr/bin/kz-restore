@@ -57,9 +57,8 @@ readonly OPTIONS_LONG='gui,source:,help,manual,usage,version,debug'
 
 declare -i RESTORE_RC=0
 declare ERROR_LOG=''
-declare GUI_MODE=false
+declare MODE='tui'
 declare SOURCE=''
-declare TUI_MODE=true
 
 
 # #############################################################################
@@ -115,8 +114,7 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                GUI_MODE=true
-                TUI_MODE=false
+                MODE='gui'
                 shift
                 ;;
             -s | --source )
@@ -216,7 +214,7 @@ Connect a usb medium.")
 
             readarray -t all_media < <(find "$usb_mount_point/"* -prune)
 
-            if $GUI_MODE; then
+            if [[ ${MODE-} = 'gui' ]]; then
                 for medium in "${all_media[@]}"; do
                     choices+=('false' "$medium")
                 done
@@ -286,7 +284,7 @@ function restore_backup() {
     text=$(gettext 'Preparing restore (this can take a while)')
     kz.logmsg "$title"...
 
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         rsync       --archive                       \
                     --info=progress2                \
                     --no-inc-recursive              \
@@ -401,7 +399,7 @@ $(gettext 'Check the error messages after this.')
 $(gettext 'Try restoring the back up again.')"
         kz.errmsg "$text"
 
-        if $GUI_MODE; then
+        if [[ ${MODE-} = 'gui' ]]; then
             zenity      --text-info                 \
                         --filename="$ERROR_LOG"     \
                         --width     700             \

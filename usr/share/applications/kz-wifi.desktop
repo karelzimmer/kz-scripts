@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Show WiFi details
-Comment=Show WiFi details
+Comment=Show WiFi details if connected to a WiFi network
 Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-wifi --gui

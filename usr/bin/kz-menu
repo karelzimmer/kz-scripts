@@ -89,8 +89,8 @@ readonly -a  MENU2_DESCS=(
 # Globals
 # #############################################################################
 
-declare GUI_MODE=false
-declare TUI_MODE=true
+declare MODE='tui'
+
 
 # #############################################################################
 # Functions
@@ -101,7 +101,7 @@ function process() {
     local -i rc=0
 
     check_input "$@"
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         process_menu1_gui
     else
         process_menu1_tui
@@ -145,8 +145,7 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                GUI_MODE=true
-                TUI_MODE=false
+                MODE='gui'
                 shift
                 ;;
             -h | --help )
@@ -340,7 +339,7 @@ function process_menu1_choice4() {
 
 # This function processes menu 2.
 function process_menu2() {
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         process_menu2_gui
     else
         process_menu2_tui
@@ -424,7 +423,7 @@ function process_menu2_choice() {
         title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
         process_commands
     else
-        if $GUI_MODE; then
+        if [[ ${MODE-} = 'gui' ]]; then
             process_menu1_gui
         else
             process_menu1_tui
@@ -481,7 +480,7 @@ $description ($command)"
     text+="
 
 $(gettext 'Proceed?')"
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         if zenity   --question                          \
                     --no-markup                         \
                     --width         520                 \
@@ -510,7 +509,7 @@ $(gettext 'Proceed?')"
 
 # This function executes the commands.
 function execute_command() {
-    if $GUI_MODE; then
+    if [[ ${MODE-} = 'gui' ]]; then
         $command --gui || rc=$?
     else
         $command || rc=$?

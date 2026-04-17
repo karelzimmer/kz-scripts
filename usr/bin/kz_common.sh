@@ -114,7 +114,7 @@ function kz.check_repos() {
 # This function returns an error message.
 function kz.errmsg() {
     kz.logmsg "$*"
-    if ${GUI_MODE:-false}; then
+    if [[ ${MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
         zenity      --error                     \
                     --width     600             \
@@ -122,7 +122,7 @@ function kz.errmsg() {
                     --title     "$PROGRAM_DESC" \
                     --text      "$*"            \
                     2> /dev/null                || true
-    elif ${TUI_MODE:-false}; then
+    elif [[ ${MODE-} = 'tui' ]]; then
         # shellcheck disable=SC2153,SC2154
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title     "$PROGRAM_DESC" \
@@ -137,14 +137,14 @@ function kz.errmsg() {
 # This function returns an informational message.
 function kz.infomsg() {
     kz.logmsg "$*"
-    if ${GUI_MODE:-false}; then
+    if [[ ${MODE-} = 'gui' ]]; then
         zenity      --info                      \
                     --width     600             \
                     --height    100             \
                     --title     "$PROGRAM_DESC" \
                     --text      "$*"            \
                     2> /dev/null                || true
-    elif ${TUI_MODE:-false}; then
+    elif [[ ${MODE-} = 'tui' ]]; then
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title     "$PROGRAM_DESC" \
                     --msgbox    "$*"            \
@@ -214,7 +214,7 @@ function kz.process_option_help() {
     local yelp_man=''
     local yelp_man_url=''
 
-    GUI_MODE=false
+    MODE='cli'
     if [[ -n ${DISPLAY-} ]]; then
         # yelp_man_url="$(gettext ', or see the ')"
         # yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
@@ -250,7 +250,7 @@ function kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
-    GUI_MODE=false
+    MODE='cli'
     # shellcheck disable=SC2154
     text="$USAGE
 
@@ -264,7 +264,7 @@ function kz.process_option_version() {
     local build_id='n/a'  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
-    GUI_MODE=false
+    MODE='cli'
     if [[ -f /usr/share/doc/kz/build.id ]]; then
         # shellcheck disable=SC2034
         build_id=$(cat /usr/share/doc/kz/build.id)
