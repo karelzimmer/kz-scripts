@@ -1464,7 +1464,7 @@ msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:159
+#: kz-wifi:160 kz-wifi:171
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 

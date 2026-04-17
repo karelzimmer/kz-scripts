@@ -149,18 +149,29 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
     nmcli_output: bytes
     text: str = _('Use this data to connect to the wireless network.')
 
-    try:
-        nmcli_output = subprocess.run(command, executable='bash',
-                                      stdout=subprocess.PIPE,
-                                      stderr=subprocess.DEVNULL,
-                                      shell=True, check=True,
-                                      ).stdout
-    except Exception:
-        text = _('No WiFi device found.')
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+    if MODE in ('gui', 'tui'):
+        try:
+            nmcli_output = subprocess.run(command, executable='bash',
+                                          stdout=subprocess.PIPE,
+                                          stderr=subprocess.DEVNULL,
+                                          shell=True, check=True,
+                                          ).stdout
+        except Exception:
+            text = _('No WiFi device found.')
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+        else:
+            text = str(nmcli_output.decode('utf-8')) + text
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
     else:
-        text = str(nmcli_output.decode('utf-8')) + text
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+        try:
+            # Shows in Terminal QR code for quick connection to Wi-Fi network.
+            subprocess.run(command, executable='bash',
+                           stderr=subprocess.DEVNULL, shell=True, check=True)
+        except Exception:
+            text = _('No WiFi device found.')
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+        else:
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
 
 
 def term(PROGRAM_NAME: str = '', rc: int = 0) -> None:
