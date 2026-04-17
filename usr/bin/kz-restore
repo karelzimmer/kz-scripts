@@ -289,6 +289,7 @@ function restore_backup() {
     if $GUI_MODE; then
         rsync       --archive                       \
                     --info=progress2                \
+                    --no-inc-recursive              \
                     "$SOURCE/"                      \
                     "$HOME/"                        \
                     2>> "$ERROR_LOG"                |
@@ -315,9 +316,11 @@ function restore_backup() {
                     2> /dev/null                    || RESTORE_RC=$?
     else
         text+='...'
+        tput civis
         TERM=ansi
         rsync       --archive                       \
                     --info=progress2                \
+                    --no-inc-recursive              \
                     "$SOURCE/"                      \
                     "$HOME/"                        \
                     2>> "$ERROR_LOG"                |
@@ -337,6 +340,7 @@ function restore_backup() {
                     --title     "$title"            \
                     --gauge     "$title..."         \
                     6 50 0                          || RESTORE_RC=$?
+        tput cnorm
     fi
 }
 

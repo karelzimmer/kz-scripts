@@ -367,6 +367,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit )
+            tput cnorm
             if ! [[ -o xtrace ]]; then
                 # Clean up temporary files if not in debug mode.
                 text='Cleaning up temporary files...'

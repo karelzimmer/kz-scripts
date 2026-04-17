@@ -552,6 +552,7 @@ EOF
     if $GUI_MODE; then
         rsync       --archive                       \
                     --info=progress2                \
+                    --no-inc-recursive              \
                     --delete                        \
                     --exclude-from="$exclude_file"  \
                     --delete-excluded               \
@@ -581,9 +582,11 @@ EOF
                     2> /dev/null                    || BACKUP_RC=$?
     else
         text+='...'
+        tput civis
         TERM=ansi
         rsync       --archive                       \
                     --info=progress2                \
+                    --no-inc-recursive              \
                     --delete                        \
                     --exclude-from="$exclude_file"  \
                     --delete-excluded               \
@@ -606,6 +609,7 @@ EOF
                     --title     "$title"            \
                     --gauge     "$title..."         \
                     6 50 0                          || BACKUP_RC=$?
+        tput cnorm
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")
