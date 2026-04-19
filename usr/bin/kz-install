@@ -154,42 +154,22 @@ found.")
 
     kz.become_check
     if [[ ${MODE-} = 'tui' ]]; then
-    #!/bin/bash
-
-# whiptail  [  --title  title  ]  [  --backtitle  backtitle  ]  [  --clear ] [ --default-item string ] [ --defaultno ] [ --fb ] [ --nocancel ] [
-#        --yes-button text ] [ --no-button text ] [ --ok-button text ] [ --cancel-button text ] [ --noitem [ ] --output-fd fd ] [ --separate-output ] [
-#        --scrolltext ] [ --topleft ] box-options
-#
-#       --passwordbox text height width [init]
-#              A password box is similar to an input box, except the text the user enters is not displayed. This is useful when  prompting  for  pass‐
-#              words  or  other sensitive information. Be aware that if anything is passed in "init", it will be visible in the system's process table
-#              to casual snoopers. Also, it is very confusing to the user to provide them with a default password they cannot see. For these  reasons,
-#              using "init" is highly discouraged.
-
-
-if ! pwd=$(
-        whiptail    --title         "Password" \
-                    --passwordbox   "Enter your new password" \
-                    8 70 \
-                    2>&1 >/dev/tty
-        ); then
-	echo 'Geannuleerd!'
-fi
-
-if ! sudo --stdin <<< "$pwd" true 2> /dev/null; then
-	echo 'Fout ww'
-fi
-
-	# Voor TUI:
-        kz.check_debian_package_manager
-        sudo --non-interactive --validate || sudo --stdin <<< "$pwd" true 2> /dev/null
-        eval    "$cmd"              \
-                1> >($PROGRAM_LOGS) \
-                2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
-
+        while true; do
+            if sudo --non-interactive --validate 2> /dev/null; then
+                break
+            else
+                sudo --stdin <<< "$(
+                    whiptail    --title         "Password"              \
+                                --passwordbox   "Enter your password"   \
+                                8 70                                    \
+                                2>&1 >/dev/tty
+                    )" true 2> /dev/null
+            fi
+        done
     elif  [[ ${MODE-} = 'cli' ]]; then
         sudo true
     fi
+    kz.check_debian_package_manager
     install_apps
 }
 
