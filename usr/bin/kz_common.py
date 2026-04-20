@@ -38,7 +38,7 @@ NORMAL: str = '\033[0m'
 # #############################################################################
 
 def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                 MODE: str = 'tui') -> int:
+                 UI_MODE: str = 'tui') -> int:
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise exits 0 with descriptive message.
@@ -53,7 +53,7 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
         return 0
     else:
         text = GREEN + _('Already performed by the administrator.') + NORMAL
-        infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, text, UI_MODE)
         sys.exit(0)
 
 
@@ -85,12 +85,12 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
 
 
 def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
-           MODE: str = 'tui') -> None:
+           UI_MODE: str = 'tui') -> None:
     """
     This function returns an error message.
     """
     logmsg(PROGRAM_NAME, TEXT)
-    if MODE == 'gui':
+    if UI_MODE == 'gui':
         zenity: str = f'zenity      --error                         \
                                     --width     600                 \
                                     --height    100                 \
@@ -98,7 +98,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
                                     --text      "{TEXT}"            || true'
         subprocess.run(zenity, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
-    elif MODE == 'tui':
+    elif UI_MODE == 'tui':
         whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
                                     --title     "{PROGRAM_DESC}"    \
                                     --msgbox    "{TEXT}"            \
@@ -110,12 +110,12 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
 
 
 def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
-            MODE: str = 'tui') -> None:
+            UI_MODE: str = 'tui') -> None:
     """
     This function returns an informational message.
     """
     logmsg(PROGRAM_NAME, TEXT)
-    if MODE == 'gui':
+    if UI_MODE == 'gui':
         zenity: str = f'zenity      --info                          \
                                     --width     600                 \
                                     --height    100                 \
@@ -123,7 +123,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
                                     --text      "{TEXT}"            || true'
         subprocess.run(zenity, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
-    elif MODE == 'tui':
+    elif UI_MODE == 'tui':
         whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
                                     --title     "{PROGRAM_DESC}"    \
                                     --msgbox    "{TEXT}"            \

@@ -78,19 +78,19 @@ def process() -> None:
         subprocess.run(check_sudo, executable='bash', shell=True, check=True)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         kz.term(PROGRAM_NAME, 1)
     except Exception as exc:
         text = str(exc)
         kz.logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         kz.term(PROGRAM_NAME, 1)
 
     # Undocumented feature, gitpull.
     if os.path.exists(f'{os.getenv("HOME")}/bin/gitpull'):
         text = kz.BOLD + _('GITPULL -- 0/2') + kz.NORMAL
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         try:
             subprocess.run('gitpull', executable='bash', shell=True,
                            check=True)
@@ -98,36 +98,36 @@ def process() -> None:
             text = str(exc)
             kz.logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
             kz.term(PROGRAM_NAME, 1)
 
     if subprocess.run(check_debian, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         text = kz.BOLD + _('UPDATE -- 1/2') + kz.NORMAL
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         perform_update_debs()
         perform_upgrade_debs()
         perform_update_flatpaks()
         perform_update_snaps()
         text = kz.BOLD + _('CLEANUP -- 2/2') + kz.NORMAL
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         perform_cleanup_debs()
     elif subprocess.run(check_rhel, executable='bash',
                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                         shell=True).returncode == 0:
         text = kz.BOLD + _('UPDATE -- 1/2') + kz.NORMAL
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         perform_update_rpms()
         perform_upgrade_rpms()
         perform_update_flatpaks()
         perform_update_snaps()
         text = kz.BOLD + _('CLEANUP -- 2/2') + kz.NORMAL
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         perform_cleanup_rpms()
     else:
         text = _('fatal: unknown os release')
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         kz.term(PROGRAM_NAME, 1)
 
 
@@ -147,7 +147,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
                                        OPTIONS_LONG)
     except getopt.error as err:
         text = f'{program_name}: {err}\n{USAGE}'
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         kz.term(PROGRAM_NAME, 1)
 
     process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts, args)
@@ -179,13 +179,13 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.term(PROGRAM_NAME, 0)
         else:
             text = PROGRAM_NAME + ': getopt: ' + _('internal error')
-            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
             kz.term(PROGRAM_NAME, 1)
 
     if args:
         text = program_name + ': ' + ' '.join(args) + ': ' + \
             _('arguments are not allowed') + '\n' + USAGE
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         kz.term(PROGRAM_NAME, 1)
 
 
@@ -291,7 +291,7 @@ def perform_command(command: str = '') -> None:
     text: str
 
     text = f'{command}...'
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
 
     kz.check_debian_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
@@ -300,7 +300,7 @@ def perform_command(command: str = '') -> None:
         text = str(exc)
         kz.logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
         kz.term(PROGRAM_NAME, 1)
     print()  # Print a newline after the command output.
 
@@ -312,7 +312,7 @@ def term() -> None:
     text: str
 
     text = kz.GREEN + _('Complete!') + kz.NORMAL
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text,'cli')
     kz.term(PROGRAM_NAME, 0)
 
 

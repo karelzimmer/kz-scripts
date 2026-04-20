@@ -70,7 +70,7 @@ usage,version,debug"
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
 declare LOGOUT=false
-declare MODE='tui'
+declare UI_MODE='tui'
 declare OPTION_RESET=false
 declare OPTION_SELECT=false
 
@@ -203,7 +203,7 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                MODE='gui'
+                UI_MODE='gui'
                 shift
                 ;;
             -l | --list )
@@ -264,7 +264,7 @@ environment available")"
 
 # This function browses through the settings files.
 function process_option_browse() {
-    MODE='cli'
+    UI_MODE='cli'
     less --no-init --quit-if-one-screen < <(cat "${settings_files[@]}" || true)
 }
 
@@ -274,7 +274,7 @@ function process_option_list() {
     local apps=''
     local text=''
 
-    MODE='cli'
+    UI_MODE='cli'
     text=$(gettext 'The following apps are available:')
     apps=$(
         grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
@@ -340,7 +340,7 @@ function process_option_select() {
         sort    --unique
         )
 
-    if [[ ${MODE-} = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         for app in "${all_apps[@]}"; do
             choices+=('false' "$app")
         done
@@ -473,7 +473,7 @@ function process_settings_files_by_hostname() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    MODE='cli'
+    UI_MODE='cli'
     less --no-init --quit-if-one-screen "$command_file"
 }
 
@@ -502,7 +502,7 @@ function setup_apps() {
     title=$(gettext 'Set up apps')
     text=$(gettext 'Preparing set up')
 
-    if [[ ${MODE-} = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_command_file > >(
@@ -570,7 +570,7 @@ function execute_command() {
 
     kz.logmsg "$app_name_line:$cmd"
 
-    if [[ ${MODE-} = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         TERM=ansi                                                   \
@@ -609,7 +609,7 @@ $(gettext 'Check the error messages after this.')
 $(gettext 'Try to set up/reset the apps again.')"
         kz.errmsg "$text"
 
-        if [[ ${MODE-} = 'gui' ]]; then
+        if [[ ${UI_MODE-} = 'gui' ]]; then
             zenity      --text-info                 \
                         --filename="$ERROR_LOG"     \
                         --width     700             \
@@ -664,7 +664,7 @@ apps and changing user settings.")"
         kz.infomsg "$text"
     fi
 
-    if [[ ${MODE-} = 'tui' ]]; then
+    if [[ ${UI_MODE-} = 'tui' ]]; then
         clear -x
     fi
 

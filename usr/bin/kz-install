@@ -69,7 +69,7 @@ usage,version,debug"
 
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
-declare MODE='tui'
+declare UI_MODE='tui'
 declare OPTION_REMOVE=false
 declare OPTION_SELECT=false
 declare REBOOT=false
@@ -153,23 +153,6 @@ found.")
     fi
 
     kz.become_check
-    if [[ ${MODE-} = 'tui' ]]; then
-        while true; do
-            if sudo --non-interactive --validate 2> /dev/null; then
-                break
-            else
-                sudo --stdin <<< "$(
-                    whiptail    --title         "Password"              \
-                                --passwordbox   "Enter your password"   \
-                                8 70                                    \
-                                2>&1 >/dev/tty
-                    )" true 2> /dev/null
-            fi
-        done
-    elif  [[ ${MODE-} = 'cli' ]]; then
-        sudo true
-    fi
-    kz.check_debian_package_manager
     install_apps
 }
 
@@ -223,7 +206,7 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                MODE='gui'
+                UI_MODE='gui'
                 shift
                 ;;
             -l | --list )
@@ -284,7 +267,7 @@ environment available")"
 
 # This function browses through the installation files.
 function process_option_browse() {
-    MODE='tui'
+    UI_MODE='tui'
     less --no-init --quit-if-one-screen < <(
         cat "${installation_files[@]}" || true
         )
@@ -296,7 +279,7 @@ function process_option_list() {
     local apps=''
     local text=''
 
-    MODE='tui'
+    UI_MODE='tui'
     text=$(gettext 'The following apps are available:')
     apps=$(
         grep    "#[[:space:]]\+${install}[[:space:]]\+" \
@@ -363,7 +346,7 @@ function process_option_select() {
         sort    --unique
         )
 
-    if [[ ${MODE-} = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         for app in "${all_apps[@]}"; do
             choices+=('false' "$app")
         done
@@ -510,7 +493,7 @@ function process_installation_files_by_hostname() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    MODE='cli'
+    UI_MODE='cli'
     less --no-init --quit-if-one-screen "$command_file"
 }
 
@@ -540,7 +523,7 @@ function install_apps() {
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
 
-    if [[ ${MODE-} = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_command_file > >(
@@ -567,6 +550,26 @@ function process_command_file() {
     local app_name=''
     local command_record=''
     local text=''
+
+    # FIXME
+    if [[ ${UI_MODE-} = 'tui' ]]; then
+        sudo --reset-timestamp
+        while true; do
+            if sudo --non-interactive --validate 2> /dev/null; then
+                break
+            else
+                sudo --stdin <<< "$(
+                    whiptail    --title         "Password"              \
+                                --passwordbox   "Enter your password"   \
+                                8 70                                    \
+                                2>&1 >/dev/tty
+                    )" true 2> /dev/null
+            fi
+        done
+    elif  [[ ${UI_MODE-} = 'cli' ]]; then
+        sudo --reset-timestamp
+        sudo true
+    fi
 
     while read -r command_record; do
         case $command_record in
@@ -609,7 +612,7 @@ function execute_command() {
 
     kz.logmsg "$app_name_line:$cmd"
 
-    if [[ ${MODE-} = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         TERM=ansi                                                   \
@@ -619,7 +622,7 @@ function execute_command() {
                     10 90
     fi
 
-    if [[ ${MODE-} = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         kz.check_debian_package_manager
         pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                      \
@@ -661,7 +664,7 @@ $(gettext 'Check the error messages after this.')
 $(gettext 'Try to install/remove the apps again.')"
         kz.errmsg "$text"
 
-        if [[ ${MODE-} = 'gui' ]]; then
+        if [[ ${UI_MODE-} = 'gui' ]]; then
             zenity      --text-info                 \
                         --filename="$ERROR_LOG"     \
                         --width     700             \
@@ -690,14 +693,14 @@ changing system settings.")"
     kz.infomsg "$text"
 
     if $REBOOT; then
-        if [[ ${MODE-} = 'gui' ]]; then
+        if [[ ${UI_MODE-} = 'gui' ]]; then
             pkexec /usr/bin/kz-install-pkexec "$reboot"
         else
             eval "$reboot"
         fi
     fi
 
-    if [[ ${MODE-} = 'tui' ]]; then
+    if [[ ${UI_MODE-} = 'tui' ]]; then
         clear -x
     fi
 

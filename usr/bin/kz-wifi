@@ -63,13 +63,13 @@ OPTIONS_LONG: list[str] = ['gui', 'cli', 'help', 'manual', 'usage', 'version']
 # Functions
 # #############################################################################
 
-def process(MODE: str = 'tui') -> None:
+def process(UI_MODE: str = 'tui') -> None:
     """
     This function performs the script actions.
     """
-    MODE = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+    UI_MODE = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
-    show_secrets(PROGRAM_NAME, PROGRAM_DESC, MODE)
+    show_secrets(PROGRAM_NAME, PROGRAM_DESC, UI_MODE)
 
 
 def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
@@ -91,10 +91,10 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
-    MODE = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts,
+    UI_MODE = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts,
                            args)
 
-    return MODE
+    return UI_MODE
 
 
 def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
@@ -107,13 +107,13 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     opt: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
-    MODE: str = 'tui'
+    UI_MODE: str = 'tui'
 
     for opt, arg in opts:
         if opt in ('-g', '--gui'):
-            MODE = 'gui'
+            UI_MODE = 'gui'
         elif opt in ('--cli'):
-            MODE = 'cli'
+            UI_MODE = 'cli'
         elif opt in ('-h', '--help'):
             kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
             kz.term(PROGRAM_NAME, 0)
@@ -137,11 +137,11 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
         kz.term(PROGRAM_NAME, 1)
 
-    return MODE
+    return UI_MODE
 
 
 def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                 MODE: str = 'tui') -> None:
+                 UI_MODE: str = 'tui') -> None:
     """
     This function shows the Wi-Fi secrets.
     """
@@ -149,7 +149,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
     nmcli_output: bytes
     text: str = _('Use this data to connect to the wireless network.')
 
-    if MODE in ('gui', 'tui'):
+    if UI_MODE in ('gui', 'tui'):
         try:
             nmcli_output = subprocess.run(command, executable='bash',
                                           stdout=subprocess.PIPE,
@@ -158,10 +158,10 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
                                           ).stdout
         except Exception:
             text = _('No WiFi device found.')
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, UI_MODE)
         else:
             text = str(nmcli_output.decode('utf-8')) + text
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, UI_MODE)
     else:
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
@@ -169,9 +169,9 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
                            stderr=subprocess.DEVNULL, shell=True, check=True)
         except Exception:
             text = _('No WiFi device found.')
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, UI_MODE)
         else:
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, MODE)
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text, UI_MODE)
 
 
 def term(PROGRAM_NAME: str = '', rc: int = 0) -> None:
