@@ -336,7 +336,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:659 kz-install:657 kz-restore:389 kz-setup:603
+#: kz-backup:659 kz-install:664 kz-restore:389 kz-setup:604
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -361,11 +361,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:667 kz-install:662 kz-restore:397 kz-setup:607
+#: kz-backup:667 kz-install:669 kz-restore:397 kz-setup:608
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:668 kz-install:663 kz-restore:398 kz-setup:608
+#: kz-backup:668 kz-install:670 kz-restore:398 kz-setup:609
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -1010,23 +1010,29 @@ msgstr "Geen opdrachten om uit te voeren."
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
-#: kz-install:658
+#: kz-install:556 nl.karelzimmer.kz-install.policy:22
+msgid "Authentication is required to install apps and change system settings"
+msgstr ""
+"Authenticatie is vereist om apps te installeren en systeeminstellingen te "
+"wijzigen"
+
+#: kz-install:665
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:664
+#: kz-install:671
 msgid "Try to install/remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
-#: kz-install:682
+#: kz-install:689
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:684
+#: kz-install:691
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:690
+#: kz-install:697
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1382,23 +1388,23 @@ msgstr "Selecteer apps om in te stellen:"
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:604
+#: kz-setup:605
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:609
+#: kz-setup:610
 msgid "Try to set up/reset the apps again."
 msgstr "Probeer de apps opnieuw in te stellen of te resetten."
 
-#: kz-setup:627
+#: kz-setup:628
 msgid "Apps set up completed."
 msgstr "Apps instellen is voltooid."
 
-#: kz-setup:629
+#: kz-setup:630
 msgid "Apps reset completed."
 msgstr "Apps resetten is voltooid."
 
-#: kz-setup:637
+#: kz-setup:638
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1406,7 +1412,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:642
+#: kz-setup:643
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1414,7 +1420,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:659
+#: kz-setup:660
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
@@ -1579,12 +1585,6 @@ msgstr "Wrapper-script voor kz_common"
 #: nl.karelzimmer.kz_common.policy:22
 msgid "Execute the fuser command requiring root privileges"
 msgstr "Voer de opdracht fuser uit waarvoor root-rechten nodig zijn"
-
-#: nl.karelzimmer.kz-install.policy:22
-msgid "Authentication is required to install apps and change system settings"
-msgstr ""
-"Authenticatie is vereist om apps te installeren en systeeminstellingen te "
-"wijzigen"
 
 #: nl.karelzimmer.kz-wifi.policy:21
 msgid "Polkit wrapper script for kz-wifi"

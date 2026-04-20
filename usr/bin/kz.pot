@@ -293,7 +293,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:659 kz-install:657 kz-restore:389 kz-setup:603
+#: kz-backup:659 kz-install:664 kz-restore:389 kz-setup:604
 msgid "error messages"
 msgstr ""
 
@@ -318,11 +318,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:667 kz-install:662 kz-restore:397 kz-setup:607
+#: kz-backup:667 kz-install:669 kz-restore:397 kz-setup:608
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:668 kz-install:663 kz-restore:398 kz-setup:608
+#: kz-backup:668 kz-install:670 kz-restore:398 kz-setup:609
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -915,23 +915,27 @@ msgstr ""
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:658
+#: kz-install:556 nl.karelzimmer.kz-install.policy:22
+msgid "Authentication is required to install apps and change system settings"
+msgstr ""
+
+#: kz-install:665
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:664
+#: kz-install:671
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:682
+#: kz-install:689
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:684
+#: kz-install:691
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:690
+#: kz-install:697
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1247,35 +1251,35 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:604
+#: kz-setup:605
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:609
+#: kz-setup:610
 msgid "Try to set up/reset the apps again."
 msgstr ""
 
-#: kz-setup:627
+#: kz-setup:628
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:629
+#: kz-setup:630
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:637
+#: kz-setup:638
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:642
+#: kz-setup:643
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:659
+#: kz-setup:660
 msgid "Log out of the computer yourself."
 msgstr ""
 
@@ -1435,10 +1439,6 @@ msgstr ""
 
 #: nl.karelzimmer.kz_common.policy:22
 msgid "Execute the fuser command requiring root privileges"
-msgstr ""
-
-#: nl.karelzimmer.kz-install.policy:22
-msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
 #: nl.karelzimmer.kz-wifi.policy:21

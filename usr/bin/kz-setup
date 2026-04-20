@@ -513,7 +513,8 @@ function setup_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"     2> /dev/null
+                    --text      "$text"     \
+                    2> /dev/null
             )
     else
         process_command_file

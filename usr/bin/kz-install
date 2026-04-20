@@ -549,21 +549,28 @@ function process_command_file() {
     local app_name_line=''
     local app_name=''
     local command_record=''
-    local text=''
+    local title=''
 
     # FIXME
+    text="
+$(gettext "Authentication is required to install apps and change system \
+settings")
+"
     if [[ ${UI_MODE-} = 'tui' ]]; then
         sudo --reset-timestamp
         while true; do
             if sudo --non-interactive --validate 2> /dev/null; then
                 break
             else
-                sudo --stdin <<< "$(
-                    whiptail    --title         "Password"              \
-                                --passwordbox   "Enter your password"   \
-                                8 70                                    \
-                                2>&1 >/dev/tty
-                    )" true 2> /dev/null
+                sudo    --stdin <<< "$(
+                            whiptail    --backtitle     "$PROGRAM_NAME" \
+                                        --title         "$PROGRAM_DESC" \
+                                        --passwordbox   "$text"         \
+                                        10 70                           \
+                                        2>&1 >/dev/tty                  || true
+                            )"          \
+                        true            \
+                        2> /dev/null    || true
             fi
         done
     elif  [[ ${UI_MODE-} = 'cli' ]]; then
