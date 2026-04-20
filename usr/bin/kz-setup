@@ -70,9 +70,9 @@ usage,version,debug"
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
 declare LOGOUT=false
-declare UI_MODE='tui'
 declare OPTION_RESET=false
 declare OPTION_SELECT=false
+declare UI_MODE='tui'
 
 
 # #############################################################################

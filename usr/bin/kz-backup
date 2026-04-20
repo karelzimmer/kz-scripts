@@ -58,8 +58,8 @@ readonly OPTIONS_LONG='gui,target:,help,manual,usage,version,cli,debug'
 
 declare -i BACKUP_RC=0
 declare ERROR_LOG=''
-declare UI_MODE='tui'
 declare TARGET=''
+declare UI_MODE='tui'
 
 
 # #############################################################################
