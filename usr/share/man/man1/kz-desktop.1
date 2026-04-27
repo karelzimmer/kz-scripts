@@ -46,10 +46,20 @@ bottom, the existing one must first be removed with option \fB-d\fR,
 File \fI<favorite>\fR.desktop must exist in one of the application directories
 such as /usr/share/applications or /var/lib/snapd/desktop/applications.
 .sp
+Option \fB-h\fR, \fB--help\fR shows a short description of the available
+options and exits.
+.sp
 With option \fB-l\fR, \fB--list\fR the current favorites are displayed.
+.sp
+Option \fB-m\fR, \fB--manual\fR shows the manual page and exits.
 .sp
 With option \fB-r\fR, \fB--reset\fR the favorites bar (dash, dock) is reset
 with default favourites.
+.sp
+Option \fB-u\fR, \fB--usage\fR shows a short usage summary and exits.
+.sp
+Option \fB-v\fR, \fB--version\fR shows the program version, author, and
+copyright, and exits.
 .sp
 If no options are specified, \fBkz desktop\fR shows changes in the
 configuration database after a change in the desktop environment.
@@ -84,26 +94,23 @@ Add application icon (favorite) \fI<favorite>\fR in front of the favorites bar
 Remove application icon (favorite) \fI<favorite>\fR from the favorites bar
 (dash, dock).
 .TP
-\fB-l\fR, \fB--list\fR
-Display the current favorites and app folders.
-.TP
-\fB-r\fR, \fB--reset\fR
-Reset the favorites bar (dash, dock) with default favourites.
-.TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.
 .TP
+\fB-l\fR, \fB--list\fR
+Display the current favorites and app folders.
+.TP
 \fB-m\fR, \fB--manual\fR
 Show the manual page.
+.TP
+\fB-r\fR, \fB--reset\fR
+Reset the favorites bar (dash, dock) with default favourites.
 .TP
 \fB-u\fR, \fB--usage\fR
 Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
-.TP
-\fB-D\fR, \fB--debug\fR
-Run in debugging mode, print diagnostic messages and keep temporary files.
 
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not

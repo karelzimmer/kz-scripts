@@ -12,7 +12,7 @@ kz-setup - set up apps
 
 .SH SYNOPSIS
 .SY kz\ setup
-[<options>] [--] [\fI<app>\fR...]
+[<options>] [\fI<app>\fR...]
 .YS
 
 .SH DESCRIPTION
@@ -20,6 +20,9 @@ kz-setup - set up apps
 .sp
 Use (first) \fBkz install\fR to install apps and change system settings,
 \fBkz setup\fR is a post install setup script.
+.sp
+In a desktop environment, command \fBkz setup\fR can be runs in graphical
+mode by searching for \fBsetup\fR, click on \fBKZ Set up apps\fR pictogram.
 .sp
 \fBkz setup\fR processes settings files that contains commands for setting up
 apps and changing user settings.
@@ -58,17 +61,37 @@ With option \fB-b\fR, \fB--browse\fR you can browse through the settings files.
 .sp
 Option \fB-c\fR, \fB--cat\fR gives the contents of the command file.
 .sp
+With option \fB-C\fR, \fB--cli\fR, \fBkz setup\fR runs in command-line mode
+(CLI).
+.sp
 With option \fB-f\fR, \fB--file\fR \fI<file>\fR another settings file can be
 specified. This option can be used repeatedly.
 .sp
-With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode if
-possible. A desktop environment is required.
+With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode
+(GUI), a desktop environment is required.
+.sp
+Option \fB-h\fR, \fB--help\fR shows a short description of the available
+options and exits.
 .sp
 Option \fB-l\fR, \fB--list\fR lists all apps available in the settings files.
+.sp
+Option \fB-m\fR, \fB--manual\fR shows the manual page and exits.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .sp
 Option \fB-s\fR, \fB--select\fR is used to select apps.
+.br
+In a desktop environment, the command \fBkz setup --gui --select\fR can be
+executed in graphical mode by searching for \fBsetup\fR and clicking on the
+\fBKZ Set up apps\fR pictogram.
+.sp
+With option \fB-T\fR, \fB--tui\fR, \fBkz setup\fR runs in text-based mode
+(TUI), this is the default mode.
+.sp
+Option \fB-u\fR, \fB--usage\fR shows a short usage summary and exits.
+.sp
+Option \fB-v\fR, \fB--version\fR shows the program version, author, and
+copyright, and exits.
 
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
@@ -79,15 +102,23 @@ Browse through the settings file.
 \fB-c\fR, \fB--cat\fR
 Display the contents of the command file.
 .TP
+\fB-C\fR, \fB--cli\fR
+Run in command-line mode (CLI).
+.TP
 \fB-f\fR, \fB--file\fR \fI<file>\fR
 Process the specified file. This option can be used repeatedly.
 .TP
 \fB-g\fR, \fB--gui\fR
-Run in graphical mode (gui=graphical user interface). A desktop
-environment is required.
+Run in graphical mode (GUI).
+.TP
+\fB-h\fR, \fB--help\fR
+Show a short description of the available options.
 .TP
 \fB-l\fR, \fB--list\fR
 Show a list of apps to set up.
+.TP
+\fB-m\fR, \fB--manual\fR
+Show the manual page.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset the apps.
@@ -95,20 +126,14 @@ Reset the apps.
 \fB-s\fR, \fB--select\fR
 Select apps.
 .TP
-\fB-h\fR, \fB--help\fR
-Show a short description of the available options.
-.TP
-\fB-m\fR, \fB--manual\fR
-Show the manual page.
+\fB-T\fR, \fB--tui\fR
+Run in text-based mode (TUI), this is the default mode.
 .TP
 \fB-u\fR, \fB--usage\fR
 Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
-.TP
-\fB-D\fR, \fB--debug\fR
-Run in debugging mode, print diagnostic messages and keep temporary files.
 
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not
@@ -136,7 +161,7 @@ Decrypted settings file containing additional commands that are added to the
 command file, for example kz-setup-decrypted-SkQLswclj3.sh.
 .RE
 .sp
-/tmp/kz-setup-commands-XXXXXXXXXX.sh.
+/tmp/kz-setup-commands-XXXXXXXXXX.sh
 .RS
 Temporary command file, e.g. kz-setup-commands-SYpGEKVWZI.sh.
 .RE

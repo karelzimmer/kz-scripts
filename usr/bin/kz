@@ -31,9 +31,8 @@ PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Execute the kz command')
 
 USAGE: str = _(
-    "Usage: kz [-l|--list]\n"
-    "          [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n"
-    "          <command> [<arguments>]"
+    "Usage: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]\n"
+    "          [-v|--version] <command> [<arguments>]"
     )
 
 HELP_LINES: list[str] = [
@@ -42,8 +41,8 @@ HELP_LINES: list[str] = [
     PROGRAM_DESC + '.',
     '',
     _('Options:'),
-    _('  -l, --list     show available commands'),
     _('  -h, --help     show this help text'),
+    _('  -l, --list     show available commands'),
     _('  -m, --manual   show manual page'),
     _('  -u, --usage    show a short usage summary'),
     _('  -v, --version  show program version'),
@@ -55,8 +54,8 @@ HELP_LINES: list[str] = [
 HELP: str = '\n'.join(HELP_LINES)
 del HELP_LINES
 
-OPTIONS_SHORT: str = 'lhmuv'
-OPTIONS_LONG: list[str] = ['list', 'help', 'manual', 'usage', 'version']
+OPTIONS_SHORT: str = 'hlmuv'
+OPTIONS_LONG: list[str] = ['help', 'list', 'manual', 'usage', 'version']
 
 
 # #############################################################################
@@ -73,8 +72,8 @@ def process() -> None:
     This function performs the script actions.
     """
     arg_num: int = 0
+    cmd: str = '/usr/bin/kz'
     exc: BaseException
-    exec: str = '/usr/bin/kz'
     text: str
 
     for arg_num in range(len(sys.argv)):
@@ -87,36 +86,34 @@ def process() -> None:
                 term()
             else:
                 # Build kz-<command> and check if kz-<command> exists.
-                exec += '-' + sys.argv[arg_num]
-                if not os.path.exists(exec):
+                cmd += '-' + sys.argv[arg_num]
+                if not os.path.exists(cmd):
                     text = 'kz: ' + sys.argv[arg_num] + ': ' + \
                         _('command does not exist') + '\n' + USAGE
-                    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+                    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
                     kz.term(PROGRAM_NAME, 1)
         else:
             # Build kz-<command> <arguments>.
-            exec += ' ' + sys.argv[arg_num]
+            cmd += ' ' + sys.argv[arg_num]
 
-    if exec == '/usr/bin/kz':
+    if cmd == '/usr/bin/kz':
         text = PROGRAM_NAME + ': ' + _('command is required') + '\n' + \
                USAGE
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
     else:
-        text = f'Restart (exec {exec}...)'
+        text = f'Start {cmd}...)'
         kz.logmsg(PROGRAM_NAME, text)
         try:
-            subprocess.run(f'exec {exec}', executable='bash', shell=True)
+            subprocess.run(f'{cmd}', shell=True, check=True)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-            kz.term(PROGRAM_NAME, 1)
-        except Exception as exc:
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            kz.term(PROGRAM_NAME, 130)
+        except subprocess.CalledProcessError as exc:
             text = str(exc)
             kz.logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-            kz.term(PROGRAM_NAME, 1)
+            kz.term(PROGRAM_NAME, exc.returncode)
         else:
             term()
 
@@ -137,7 +134,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
                                        OPTIONS_LONG)
     except getopt.error as err:
         text = f'{program_name}: {err}\n{USAGE}'
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
 
     process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts, args)
@@ -154,11 +151,11 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     text: str
 
     for opt, arg in opts:
-        if opt in ('-l', '--list'):
-            process_option_list()
-            kz.term(PROGRAM_NAME, 0)
-        elif opt in ('-h', '--help'):
+        if opt in ('-h', '--help'):
             kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
+            kz.term(PROGRAM_NAME, 0)
+        elif opt in ('-l', '--list'):
+            process_option_list()
             kz.term(PROGRAM_NAME, 0)
         elif opt in ('-m', '--manual'):
             kz.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
@@ -171,7 +168,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.term(PROGRAM_NAME, 0)
         else:
             text = PROGRAM_NAME + ': getopt: ' + _('internal error')
-            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             kz.term(PROGRAM_NAME, 1)
 
 
@@ -200,7 +197,7 @@ def process_option_list() -> None:
         text += '  0  ' + _('Use "man kz" for available commands.') + '\n'
 
     text += '\n' + _('Use "kz <command> [<arguments>]" to execute a command.')
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
 def term() -> None:

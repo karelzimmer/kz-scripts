@@ -24,15 +24,14 @@ PROGRAM_DESC=$(gettext 'Set up apps and change user settings')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(
-gettext 'Usage: kz setup [-b|--browse] [-c|--cat] [-f|--file <file>]...
-                [-g|--gui] [-l|--list] [-r|--reset] [-s|--select]
-                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [-D|--debug] [--] [<app>...]'
-    )
+USAGE=$(gettext "\
+Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file <file>]...
+                [-g|--gui] [-h|--help] [-l|--list] [-m|--manual]
+                [-r|--reset] [-s|--select] [-T|--tui] [-u|--usage]
+                [-v|--version] [<app>...]")
 readonly USAGE
 
-HELP="$(gettext 'Usage: kz setup [<options>] [--] [<arguments>]')
+HELP="$(gettext 'Usage: kz setup [<options>] [<arguments>]')
 
 $PROGRAM_DESC.
 
@@ -42,25 +41,26 @@ options too.")
 
 $(gettext '  -b, --browse   browse settings files')
 $(gettext '  -c, --cat      show contents of command file')
-$(gettext "  -f, --file <file>
-                 process specified settings files")
+$(gettext '  -C, --cli      run in command-line mode')
+$(gettext '  -f, --file <file>
+                 process specified settings files')
 $(gettext '  -g, --gui      run in graphical mode')
+$(gettext '  -h, --help     show this help text')
 $(gettext '  -l, --list     show available apps')
+$(gettext '  -m, --manual   show manual page')
 $(gettext '  -r, --reset    set apps on default values')
 $(gettext '  -s, --select   select apps')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
+$(gettext '  -T, --tui      run in text-based mode (default)')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')
-$(gettext '  -D, --debug    show debug information')
 
 $(gettext 'Arguments:')
 $(gettext '  <app>          process specified apps')"
 readonly HELP
 
-readonly OPTIONS_SHORT='bcf:glrshmuvD'
-readonly OPTIONS_LONG="browse,cat,file:,gui,list,reset,select,help,manual,\
-usage,version,debug"
+readonly OPTIONS_SHORT='bcCf:ghlmrsTuv'
+readonly OPTIONS_LONG="browse,cat,cli,file:,gui,help,list,manual,reset,select,\
+tui,usage,version"
 
 
 # #############################################################################
@@ -70,9 +70,9 @@ usage,version,debug"
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
 declare LOGOUT=false
-declare OPTION_GUI=false
 declare OPTION_RESET=false
 declare OPTION_SELECT=false
+declare UI_MODE='tui'
 
 
 # #############################################################################
@@ -103,6 +103,7 @@ function process() {
     if ! $option_file; then
         settings_files[++settings_file_num]=$settings_file_default
         # Decrypt GPG-encrypted settings file.
+        gpg --import /usr/share/kz/kz-public-key.gpg |& $PROGRAM_LOGS
         settings_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
         gpg --decrypt                       \
@@ -166,6 +167,7 @@ function check_input() {
                 --name          "$program_name"     \
                 --              "$@"
         )   ||  {
+                    UI_MODE='cli'
                     kz.infomsg "$USAGE"
                     exit 1
                 }
@@ -191,6 +193,10 @@ function process_options() {
                 option_cat=true
                 shift
                 ;;
+            -C | --cli )
+                UI_MODE='cli'
+                shift
+                ;;
             -f | --file )
                 option_file=true
                 settings_files[++settings_file_num]=$2
@@ -203,12 +209,20 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                OPTION_GUI=true
+                UI_MODE='gui'
                 shift
+                ;;
+            -h | --help )
+                kz.process_option_help
+                exit 0
                 ;;
             -l | --list )
                 option_list=true
                 shift
+                ;;
+            -m | --manual )
+                kz.process_option_manual
+                exit 0
                 ;;
             -r | --reset )
                 OPTION_RESET=true
@@ -220,13 +234,9 @@ environment available")"
                 OPTION_SELECT=true
                 shift
                 ;;
-            -h | --help )
-                kz.process_option_help
-                exit 0
-                ;;
-            -m | --manual )
-                kz.process_option_manual
-                exit 0
+            -T | --tui )
+                UI_MODE='tui'
+                shift
                 ;;
             -u | --usage )
                 kz.process_option_usage
@@ -235,10 +245,6 @@ environment available")"
             -v | --version )
                 kz.process_option_version
                 exit 0
-                ;;
-            -D | --debug )
-                set -o xtrace
-                shift
                 ;;
             -- )
                 shift
@@ -264,7 +270,7 @@ environment available")"
 
 # This function browses through the settings files.
 function process_option_browse() {
-    OPTION_GUI=false
+    UI_MODE='cli'
     less --no-init --quit-if-one-screen < <(cat "${settings_files[@]}" || true)
 }
 
@@ -274,7 +280,7 @@ function process_option_list() {
     local apps=''
     local text=''
 
-    OPTION_GUI=false
+    UI_MODE='cli'
     text=$(gettext 'The following apps are available:')
     apps=$(
         grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
@@ -318,70 +324,68 @@ $USAGE"
 }
 
 
-# This function processes apps selected via the graphical user interface (GUI)
-# or text user interface (TUI).
+# This function let the user select apps.
 function process_option_select() {
-    local all_apps=''
-    local selected_apps=''
+    local -a all_apps=()
+    local -a choices=()
+    local app=''
     local text=''
     local title=''
 
     title=$(gettext 'Set up apps')
     text=$(gettext 'Select apps to set up:')
 
-    if $OPTION_GUI; then
-        all_apps=$(
-            grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
-                    "${settings_files[@]}"                  |
-            tr      --squeeze-repeats                       \
-                    '[:space:]'                             |
-            cut     --delimiter=' '                         \
-                    --fields=3                              |
-            sort    --unique                                |
-            sed     --expression='s/^/false /'
-            )
+    readarray   all_apps < <(
+        grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
+                "${settings_files[@]}"                  |
+        tr      --squeeze-repeats                       \
+                '[:space:]'                             |
+        cut     --delimiter=' '                         \
+                --fields=3                              |
+        sort    --unique
+        )
 
-        # shellcheck disable=SC2086
+    if [[ $UI_MODE = 'gui' ]]; then
+        for app in "${all_apps[@]}"; do
+            choices+=('false' "$app")
+        done
+        # No array is needed because the app name does not contain spaces.
         selected_apps=$(
-            zenity  --list                          \
-                    --checklist                     \
-                    --separator ' '                 \
-                    --height    400                 \
-                    --title     "$title"            \
-                    --text      "$text"             \
-                    --column    "$(gettext 'SEL')"  \
-                    --column    "$(gettext 'APP')"  \
-                    $all_apps                       || true
+            zenity      --list                              \
+                        --checklist                         \
+                        --separator ' '                     \
+                        --height    400                     \
+                        --title     "$title"                \
+                        --text      "$text"                 \
+                        --ok-label  "$(gettext 'Continue')" \
+                        --column    "$(gettext 'SEL')"      \
+                        --column    "$(gettext 'APP')"      \
+                        "${choices[@]}"                     \
+                        2> /dev/null                        || true
             )
     else
-        all_apps=$(
-            grep    "#[[:space:]]\+${setup}[[:space:]]\+" \
-                    "${settings_files[@]}"              |
-            tr      --squeeze-repeats                       \
-                    '[:space:]'                             |
-            cut     --delimiter=' '                         \
-                    --fields=3                              |
-            sort    --unique                                |
-            sed     --expression='s/$/ off/'
-            )
-
-        # shellcheck disable=SC2086
+        for app in "${all_apps[@]}"; do
+            choices+=("$app" 'off')
+        done
+        # No array is needed because the app name does not contain spaces.
         selected_apps=$(
-            whiptail    --noitem                \
-                        --backtitle "$title"    \
-                        --checklist "$text"     \
-                        20 40 12                \
-                        $all_apps               \
-                        2>&1 >/dev/tty          |
-            sed         's/"//g'                || true
+            whiptail    --ok-button "$(gettext 'Continue')" \
+                        --noitem                            \
+                        --backtitle "$PROGRAM_NAME"         \
+                        --title     "$title"                \
+                        --checklist "$text"                 \
+                        20 40 12                            \
+                        "${choices[@]}"                     \
+                        2>&1 >/dev/tty                      |
+            sed         's/"//g'                            || true
             )
     fi
-
     if [[ -z $selected_apps ]]; then
         text=$(gettext 'No apps selected.')
         kz.infomsg "$text"
         exit 0
     fi
+
     argument_app=true
     for selected_app in $selected_apps; do
         app_arguments[$selected_app]=$selected_app
@@ -393,12 +397,14 @@ function process_option_select() {
 function process_argument_app() {
     local app_argument=''
     local err_flag=false
+    local text=''
 
     for app_argument in "${app_arguments[@]}"; do
         process_settings_files_by_app_argument
     done
 
     if $err_flag; then
+        kz.errmsg "$text"
         exit 1
     fi
 }
@@ -410,7 +416,6 @@ function process_settings_files_by_app_argument() {
     local app_match=false
     local setup_record=''
     local no_app_match=true
-    local text=''
 
     while read -r setup_record; do
         case $setup_record in
@@ -436,8 +441,7 @@ function process_settings_files_by_app_argument() {
 
     if $no_app_match; then
         err_flag=true
-        text=$(eval_gettext "App '\$app_argument' not found.")
-        kz.errmsg "$text"
+        text+=$(eval_gettext "App '\$app_argument' not found.")'\n'
     fi
 }
 
@@ -474,7 +478,7 @@ function process_settings_files_by_hostname() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    OPTION_GUI=false
+    UI_MODE='cli'
     less --no-init --quit-if-one-screen "$command_file"
 }
 
@@ -497,13 +501,13 @@ function setup_apps() {
     fi
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
-    text="** $ERROR_LOG (stderr)"
+    text="** $ERROR_LOG (stderr) *********************************************"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Set up apps')
     text=$(gettext 'Preparing set up')
 
-    if $OPTION_GUI; then
+    if [[ $UI_MODE = 'gui' ]]; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_command_file > >(
@@ -514,7 +518,8 @@ function setup_apps() {
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"     2> /dev/null
+                    --text      "$text"     \
+                    2> /dev/null
             )
     else
         process_command_file
@@ -525,17 +530,9 @@ function setup_apps() {
 # This function reads commands from the command file for further processing.
 function process_command_file() {
     local -i app_seq_num=0
-    local app_line=false
     local app_name_line=''
     local app_name=''
     local command_record=''
-    local text=''
-
-    if ! $OPTION_GUI; then
-        text="$(gettext 'NUM/TOT  APP')
-         $(gettext 'COMMAND')..."
-        kz.infomsg "$text"
-    fi
 
     while read -r command_record; do
         case $command_record in
@@ -551,14 +548,13 @@ function process_command_file() {
                     cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))
-                app_line=true
                 printf  -v app_name_line    \
                         "%3d/%-3d  %s"      \
                         "$app_seq_num"      \
                         "$app_tot_num"      \
                         "$app_name"
                 # To corrolate possible error messages with app name.
-                printf ' \n%s\n' "-- App $app_name" >> "$ERROR_LOG"
+                printf ' %s\n' "-- App $app_name" >> "$ERROR_LOG"
                 ;;
             '#'* )
                 # Skip comment record.
@@ -567,7 +563,6 @@ function process_command_file() {
             * )
                 # Process command record.
                 execute_command "$command_record"
-                app_line=false
                 ;;
         esac
     done < "$command_file"
@@ -577,54 +572,42 @@ function process_command_file() {
 # This function reports and executes a command from the command file.
 function execute_command() {
     local cmd=$1
-    local -i cmd_dis_len=0
-    local -i cmd_dis_max=0
-    local cmd_dis=''
 
-    if $OPTION_GUI; then
-        if $app_line; then
-            kz.logmsg "$app_name_line"
-        fi
-        kz.logmsg "$cmd"
+    kz.logmsg "$app_name_line:$cmd"
+
+    if [[ $UI_MODE = 'gui' ]]; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
-        if $app_line; then
-            kz.infomsg "$app_name_line"
-        fi
-        # Ellipsize terminal output.
-        # Width 9 characters less, 9 for leading spaces.
-        cmd_dis_max=$(( $(tput cols) - 9 ))
-        if [[ ${#cmd} -gt $cmd_dis_max ]]; then
-            # Width 12 characters less, 9 for leading spaces and 3 for trailing
-            # ellipsis.
-            cmd_dis_len=$(( $(tput cols) - 12 ))
-            cmd_dis=${cmd:0:cmd_dis_len}...
-        else
-            cmd_dis=$cmd
-        fi
-        kz.infomsg "         $cmd_dis"
+        TERM=ansi                                                   \
+        whiptail    --backtitle "$PROGRAM_NAME"                     \
+                    --title     "$title"                            \
+                    --infobox   "$app_name_line\n\n         $cmd"   \
+                    10 90
     fi
 
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
             2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
+
+    sleep 0.05
 }
 
 
 # This function controls the termination of the script.
 function term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
-    local separator_line=''
     local text=''
     local title=''
 
-    # Error-log (stderr) also to the main log.
-    separator_line=$(eval printf '=%.0s' '{1..100}')
-    kz.logmsg "$separator_line"
-    text="** $ERROR_LOG (stderr)"
-    printf '%s\n%s\n' ' ' "$text" >> "$ERROR_LOG"
+    # Due to the use of whiptail --infobox.
+    if [[ $UI_MODE = 'tui' ]]; then
+        clear -x
+    fi
+
+    # Error log also to the main log.
+    text="** $ERROR_LOG (stderr) *********************************************"
+    printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
-    kz.logmsg "$separator_line"
 
     if [[ -n ${FAILED_APPS[*]} ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"
@@ -636,17 +619,18 @@ $(gettext 'Check the error messages after this.')
 $(gettext 'Try to set up/reset the apps again.')"
         kz.errmsg "$text"
 
-        if $OPTION_GUI; then
-            zenity  --text-info             \
-                    --filename="$ERROR_LOG" \
-                    --width     700         \
-                    --height    500         \
-                    --title     "$title"    \
-                    2> /dev/null            || true
+        if [[ $UI_MODE = 'gui' ]]; then
+            zenity      --text-info                 \
+                        --filename="$ERROR_LOG"     \
+                        --width     700             \
+                        --height    500             \
+                        --title     "$title"        \
+                        2> /dev/null                || true
         else
-            kz.wait_for_enter
-            kz.infomsg "$title $ERROR_LOG:"
-            less --no-init --quit-if-one-screen "$ERROR_LOG"
+            whiptail    --backtitle "$PROGRAM_NAME" \
+                        --title     "$title"        \
+                        --textbox   "$ERROR_LOG"    \
+                        30 90
         fi
     fi
 
@@ -671,9 +655,7 @@ apps and changing user settings.")"
         kz.infomsg "$text"
 
         if [[ -n ${DISPLAY-} ]]; then
-            # A GUI is available
-            $OPTION_GUI || kz.wait_for_enter
-
+            # A GUI is available.
             if type cinnamon-session |& $PROGRAM_LOGS; then
                 # Cinnamon.
                 cinnamon-session-quit --logout --force
@@ -691,6 +673,7 @@ apps and changing user settings.")"
     else
         kz.infomsg "$text"
     fi
+
     exit 0
 }
 

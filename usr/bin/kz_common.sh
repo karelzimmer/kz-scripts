@@ -20,7 +20,7 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-# List NORMAL last here so that -x doesn't bork the display.
+# List NORMAL last here so that debugging (-vx) doesn't bork the display.
 readonly BOLD='\033[1m'
 readonly GREEN=$BOLD'\033[32m'
 readonly RED=$BOLD'\033[31m'
@@ -113,20 +113,21 @@ function kz.check_repos() {
 
 # This function returns an error message.
 function kz.errmsg() {
-    # shellcheck disable=SC2153,SC215,SC2154
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local title=''
-
     kz.logmsg "$*"
-    if ${OPTION_GUI:-false}; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
-        title=$PROGRAM_DESC
-        zenity  --error                 \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$*"        \
-                2> /dev/null            || true
+        zenity      --error                     \
+                    --width     600             \
+                    --height    100             \
+                    --title     "$PROGRAM_DESC" \
+                    --text      "$*"            \
+                    2> /dev/null                || true
+    elif [[ ${UI_MODE-} = 'tui' ]]; then
+        # shellcheck disable=SC2153,SC2154
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title     "$PROGRAM_DESC" \
+                    --msgbox    "$*"            \
+                    18 80
     else
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
@@ -135,18 +136,19 @@ function kz.errmsg() {
 
 # This function returns an informational message.
 function kz.infomsg() {
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local title=''
-
     kz.logmsg "$*"
-    if ${OPTION_GUI:-false}; then
-        title=$PROGRAM_DESC
-        zenity  --info                  \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$*"        \
-                2> /dev/null            || true
+    if [[ ${UI_MODE-} = 'gui' ]]; then
+        zenity      --info                      \
+                    --width     600             \
+                    --height    100             \
+                    --title     "$PROGRAM_DESC" \
+                    --text      "$*"            \
+                    2> /dev/null                || true
+    elif [[ ${UI_MODE-} = 'tui' ]]; then
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title     "$PROGRAM_DESC" \
+                    --msgbox    "$*"            \
+                    18 80
     else
         printf '%b\n' "$*"
     fi
@@ -212,7 +214,7 @@ function kz.process_option_help() {
     local yelp_man=''
     local yelp_man_url=''
 
-    OPTION_GUI=false
+    UI_MODE='cli'
     if [[ -n ${DISPLAY-} ]]; then
         # yelp_man_url="$(gettext ', or see the ')"
         # yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
@@ -248,7 +250,7 @@ function kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
-    OPTION_GUI=false
+    UI_MODE='cli'
     # shellcheck disable=SC2154
     text="$USAGE
 
@@ -262,7 +264,7 @@ function kz.process_option_version() {
     local build_id='n/a'  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
-    OPTION_GUI=false
+    UI_MODE='cli'
     if [[ -f /usr/share/doc/kz/build.id ]]; then
         # shellcheck disable=SC2034
         build_id=$(cat /usr/share/doc/kz/build.id)
@@ -365,7 +367,12 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit )
-            kz.term_cleanup
+            tput cnorm || true
+            if [[ $rc -eq 0 ]]; then
+                text='Cleaning up temporary files...'
+                kz.logmsg "$text"
+                rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
+            fi
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"
             text="==== END logs for script $PROGRAM_NAME"
@@ -380,29 +387,4 @@ $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;
     esac
-}
-
-
-# This function cleans up temporary files on exit signal.
-function kz.term_cleanup() {
-    local text=''
-
-    if ! [[ -o xtrace ]]; then
-        # Clean up temporary files if not in debug mode.
-        text='Cleaning up temporary files...'
-        kz.logmsg "$text"
-        rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
-    fi
-}
-
-
-# This function waits for the user to press Enter.
-function kz.wait_for_enter() {
-    local prompt=''
-
-    prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    kz.logmsg "$prompt"
-    printf '\n'
-    read -rp "$prompt" < /dev/tty
-    printf '\n'
 }

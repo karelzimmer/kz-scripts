@@ -24,12 +24,11 @@ PROGRAM_DESC=$(gettext 'Change the GNOME-based desktop')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(
-gettext 'Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]
-                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]
-                  [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                  [-D|--debug]'
-    )
+USAGE=$(gettext "\
+Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]
+                  [-d|--delete <favorite>] [-h|--help] [-l|--list]
+                  [-m|--manual] [-r|--reset] [-u|--usage]
+                  [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz desktop [<options>]')
@@ -46,18 +45,17 @@ $(gettext '  -b, --addbef <favorite>
                  add favorite at the beginning')
 $(gettext '  -d, --delete <favorite>
                  delete favorite')
-$(gettext '  -l, --list     show favorites')
-$(gettext '  -r, --reset    set favorites on default values')
 $(gettext '  -h, --help     show this help text')
+$(gettext '  -l, --list     show favorites')
 $(gettext '  -m, --manual   show manual page')
+$(gettext '  -r, --reset    set favorites on default values')
 $(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')
-$(gettext '  -D, --debug    show debug information')"
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='a:b:d:lrhmuvD'
-readonly OPTIONS_LONG="addaft:,addbef:,delete:,list,reset,help,manual,usage,\
-version,debug"
+readonly OPTIONS_SHORT='a:b:d:hlmruv'
+readonly OPTIONS_LONG="addaft:,addbef:,delete:,help,list,manual,reset,usage,\
+version"
 
 # #############################################################################
 # Globals
@@ -169,21 +167,21 @@ $USAGE"
                 favorite_argument=$2
                 shift 2
                 ;;
-            -l | --list )
-                option_list=true
-                shift
-                ;;
-            -r | --reset )
-                option_reset=true
-                shift
-                ;;
             -h | --help )
                 kz.process_option_help
                 exit 0
                 ;;
+            -l | --list )
+                option_list=true
+                shift
+                ;;
             -m | --manual )
                 kz.process_option_manual
                 exit 0
+                ;;
+            -r | --reset )
+                option_reset=true
+                shift
                 ;;
             -u | --usage )
                 kz.process_option_usage
@@ -192,10 +190,6 @@ $USAGE"
             -v | --version )
                 kz.process_option_version
                 exit 0
-                ;;
-            -D | --debug )
-                set -o xtrace
-                shift
                 ;;
             -- )
                 shift
@@ -285,6 +279,7 @@ function process_option_reset () {
 function capture_gnome_changes() {
     local config_a_file=''
     local config_b_file=''
+    local prompt=''
     local text=''
 
     config_a_file=$(mktemp -t "$PROGRAM_NAME-a-XXXXXXXXXX.config")
@@ -293,9 +288,16 @@ function capture_gnome_changes() {
     save_configuration_database A "$config_a_file"
     text=$(gettext 'Now make the change in the desktop environment.')
     kz.infomsg "$text"
-    kz.wait_for_enter
+
+    prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
+    kz.logmsg "$prompt"
+    printf '\n'
+    read -rp "$prompt" < /dev/tty
+    printf '\n'
+
     # Capturing the configuration database after.
     save_configuration_database B "$config_b_file"
+
     report_database_changes "$config_a_file" "$config_b_file"
 }
 

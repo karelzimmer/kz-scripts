@@ -21,8 +21,18 @@ kz-deploy - distribute website and kz packages
 The \fBkz deploy\fR command builds and places the kz package and the website on
 the Internet so that the scripts and documents are available for general use.
 .sp
-With option \fB--dev\fR the development version of the kz package is
+With option \fB-d\fR, \fB--dev\fR the development version of the kz package is
 distributed.
+.sp
+Option \fB-h\fR, \fB--help\fR shows a short description of the available
+options and exits.
+.sp
+Option \fB-m\fR, \fB--manual\fR shows the manual page and exits.
+.sp
+Option \fB-u\fR, \fB--usage\fR shows a short usage summary and exits.
+.sp
+Option \fB-v\fR, \fB--version\fR shows the program version, author, and
+copyright, and exits.
 .sp
 With command \fBkz get\fR package kz can be installed on the local computer.
 .sp
@@ -47,9 +57,6 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
-.TP
-\fB-D\fR, \fB--debug\fR
-Run in debugging mode, print diagnostic messages and keep temporary files.
 
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not

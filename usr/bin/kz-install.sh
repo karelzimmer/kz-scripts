@@ -841,22 +841,6 @@ if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo flatpak uninstall --assumeyes flathub com.microsoft.Edge; fi
 
-# INSTALL needrestart pc06 pc07
-# -----------------------------------------------------------------------------
-# Check which daemons need to be restarted after library upgrades.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes needrestart; fi
-#
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes needrestart; fi
-
-# REMOVE needrestart pc06 pc07
-# -----------------------------------------------------------------------------
-# Check which daemons need to be restarted after library upgrades.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes needrestart; fi
-#
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes needrestart; fi
-
 # INSTALL nmap pc06 pc07
 # -----------------------------------------------------------------------------
 # Network MAPper.

@@ -21,14 +21,31 @@ kz-wifi - show WiFi details
 In a desktop environment command \fBkz wifi\fR can be executed by
 searching for \fBwifi\fR, click on \fBKZ WiFi data\fR pictogram.
 .sp
-With option \fB-g\fR, \fB--gui\fR, \fBkz wifi\fR runs in graphical mode if
-possible. A desktop environment is required.
+By default, \fBkz wifi\fR runs in text-based mode (TUI).
+.sp
+With option \fB-g\fR, \fB--gui\fR, \fBkz wifi\fR runs in graphical mode (GUI),
+a desktop environment is required.
+.sp
+Option \fB-h\fR, \fB--help\fR shows a short description of the available
+options and exits.
+.sp
+Option \fB-m\fR, \fB--manual\fR shows the manual page and exits.
+.sp
+Option \fB-u\fR, \fB--usage\fR shows a short usage summary and exits.
+.sp
+Option \fB-v\fR, \fB--version\fR shows the program version, author, and
+copyright, and exits.
+.sp
+With option \fB-C\fR, \fB--cli\fR, \fBkz wifi\fR runs in command-line mode
+(CLI).
+.sp
+With option \fB-T\fR, \fB--tui\fR, \fBkz wifi\fR runs in text-based mode (TUI),
+this is the default mode.
 
 .SH OPTIONS
 .TP
 \fB-g\fR, \fB--gui\fR
-Run in graphical mode (gui=graphical user interface). A desktop
-environment is required.
+Run in graphical mode (GUI).
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.
@@ -41,6 +58,12 @@ Show the available options.
 .TP
 \fB-v\fR, \fB--version\fR
 Show the version, author, and copyright.
+.TP
+\fB-C\fR, \fB--cli\fR
+Run in command-line mode (CLI).
+.TP
+\fB-T\fR, \fB--tui\fR
+Run in text-based mode (TUI), this is the default mode.
 
 .SH EXIT STATUS
 Normally exit value 0 is returned; if an error occurs, the exit value is not

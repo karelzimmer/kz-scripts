@@ -21,14 +21,31 @@ kz-wifi - toon WiFi-details
 In een desktopomgeving kan opdracht \fBkz wifi\fR worden uitgevoerd door te
 zoeken naar \fBwifi\fR, klik op \fBKZ WiFi-informatie tonen\fR-pictogram.
 .sp
+Standaard wordt \fBkz wifi\fR in tekstgebaseerde modus uitgevoerd (TUI).
+.sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz wifi\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
+.sp
+Optie \fB-h\fR, \fB--help\fR toont een korte beschrijving van de beschikbare
+opties en sluit af.
+.sp
+Optie \fB-m\fR, \fB--manual\fR toont de handleiding en sluit af.
+.sp
+Optie \fB-u\fR, \fB--usage\fR toont een korte gebruikssamenvatting en sluit af.
+.sp
+Optie \fB-v\fR, \fB--version\fR toont de programmaversie, auteur en copyright
+en sluit af.
+.sp
+Met optie \fB-C\fR, \fB--cli\fR wordt \fBkz wifi\fR in opdrachtregelmodus
+uitgevoerd (CLI).
+.sp
+Met optie \fB-T\fR, \fB--tui\fR wordt \fBkz wifi\fR in tekstgebaseerde modus
+uitgevoerd (TUI), dit is de standaardmodus.
 
 .SH OPTIES
 .TP
 \fB-g\fR, \fB--gui\fR
-Draai in grafische modus (gui=graphical user interface;
-grafische gebruikersinterface). Een desktopomgeving is vereist.
+Draai in grafische modus (GUI).
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.
@@ -41,6 +58,12 @@ Toon de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur en het auteursrecht.
+.TP
+\fB-C\fR, \fB--cli\fR
+Draai in opdrachtregelmodus (CLI).
+.TP
+\fB-T\fR, \fB--tui\fR
+Draai in tekstgebaseerde modus (TUI), dit is de standaardmodus.
 
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de

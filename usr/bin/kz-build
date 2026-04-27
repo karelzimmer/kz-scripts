@@ -28,9 +28,10 @@ PROGRAM_DESC=$(gettext 'Build website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext 'Usage: kz build [-d|--dev]
-                [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                [-D|--debug]')
+USAGE=$(gettext "\
+Usage: kz build [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]
+                [-v|--version]"
+    )
 readonly USAGE
 
 HELP="$(gettext "Usage: kz build [<options>]")
@@ -42,12 +43,11 @@ $(gettext '  -d, --dev      build the development version of package kz')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')
-$(gettext '  -D, --debug    show debug information')"
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='dhmuvD'
-readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
+readonly OPTIONS_SHORT='dhmuv'
+readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
 # The following directories are used to build the website and packages.
 readonly DOCS_REPO=$HOME/kz-docs
@@ -151,10 +151,6 @@ function process_options() {
             -v | --version )
                 kz.process_option_version
                 exit 0
-                ;;
-            -D | --debug )
-                set -o xtrace
-                shift
                 ;;
             -- )
                 shift
@@ -509,14 +505,15 @@ function term() {
 package is installed")
         kz.errmsg "$text"
     fi
+
     if $ERR_FLAG; then
         text=$(gettext 'Please check all the messages above and fix them.')
         kz.errmsg "$text"
         exit 1
     else
-    text=$GREEN$(gettext 'Complete!')$NORMAL
-    kz.infomsg "$text"
-    exit 0
+        text=$GREEN$(gettext 'Complete!')$NORMAL
+        kz.infomsg "$text"
+        exit 0
     fi
 }
 

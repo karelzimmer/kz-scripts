@@ -6,6 +6,6 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-declare DASHOPTIONS='-a --addaft -b --addbef -d --delete -l --list -r --reset
-    -h --help -m --manual -u --usage -v --version -D --debug'
+declare DASHOPTIONS='-a --addaft -b --addbef -d --delete -h --help -l --list -m
+    --manual -r --reset -u --usage -v --version'
 complete -o default -W "$DASHOPTIONS" kz-desktop

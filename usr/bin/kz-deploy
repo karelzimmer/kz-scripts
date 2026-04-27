@@ -28,11 +28,9 @@ PROGRAM_DESC=$(gettext 'Distribute website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(
-gettext 'Usage: kz deploy [-d|--dev]
-                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                 [-D|--debug]'
-    )
+USAGE=$(gettext "\
+Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]
+                 [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz deploy [<options>]')
@@ -44,12 +42,11 @@ $(gettext '  -d, --dev      deploy the development version of package kz')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')
-$(gettext '  -D, --debug    show debug information')"
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='dhmuvD'
-readonly OPTIONS_LONG='dev,help,manual,usage,version,debug'
+readonly OPTIONS_SHORT='dhmuv'
+readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
 
 # #############################################################################
@@ -129,10 +126,6 @@ function process_options() {
             -v | --version )
                 kz.process_option_version
                 exit 0
-                ;;
-            -D | --debug )
-                set -o xtrace
-                shift
                 ;;
             -- )
                 shift
@@ -232,6 +225,7 @@ function upload_website() {
         kz.errmsg "$text"
         ERR_FLAG=true
     fi
+
     # Make reply with password empty.
     REPLY=''
 }
@@ -251,10 +245,12 @@ function install_package() {
     if $OPTION_DEV; then
         parm='--dev'
     fi
+
     if ! (wget karelzimmer.nl/getkz; bash getkz "$parm"); then
         text=$(gettext 'Install Debian package failed.')
         kz.errmsg "$text"
     fi
+
     cd "$OLDPWD"
     kz.logmsg 'Called kz-get (via wget and bash).'
 }

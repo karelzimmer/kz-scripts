@@ -18,8 +18,9 @@ kz-restore - back-up terugzetten
 .SH BESCHRIJVING
 \fBkz restore\fR zet een back-up (reservekopie) van de Persoonlijke map terug.
 .sp
-In een desktopomgeving kan opdracht \fBkz restore\fR worden uitgevoerd door te
-zoeken naar \fBback\fR, klik op \fBKZ Herstel Persoonlijke map\fR-pictogram.
+In een desktopomgeving kan opdracht \fBkz restore\fR worden uitgevoerd in
+grafische modus door te zoeken naar \fBback\fR, klik op
+\fBKZ Herstel Persoonlijke map\fR-pictogram.
 .sp
 De back-up wordt verwacht op een aangekoppeld usb-medium zoals een usb
 externe harddisk in map \fBBACKUP-<gebruikersnaam>@<computernaam>\fR,
@@ -30,12 +31,28 @@ In een desktopomgeving als de back-up is teruggezet, wordt de de eerder
 ingestelde bureaubladachtergrond teruggezet, zie de sectie \fBBESTANDEN\fR
 hieronder.
 .sp
+Met optie \fB-C\fR, \fB--cli\fR wordt \fBkz restore\fR in opdrachtregelmodus
+uitgevoerd (CLI).
+.sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz restore\fR in grafische modus
-uitgevoerd. Een desktopomgeving is vereist.
+uitgevoerd (GUI), een desktopomgeving is vereist.
+.sp
+Optie \fB-h\fR, \fB--help\fR toont een korte beschrijving van de beschikbare
+opties en sluit af.
+.sp
+Optie \fB-m\fR, \fB--manual\fR toont de handleiding en sluit af.
 .sp
 Met optie \fB-s\fR, \fB--source\fR \fI<map>\fR kan een andere locatie opgegeven
 worden. Bijvoorbeeld /media/karel/usbstick in plaats van
 /media/karel/backupdisk.
+.sp
+Met optie \fB-T\fR, \fB--tui\fR wordt \fBkz restore\fR in tekstgebaseerde modus
+uitgevoerd (TUI), dit is de standaardmodus.
+.sp
+Optie \fB-u\fR, \fB--usage\fR toont een korte gebruikssamenvatting en sluit af.
+.sp
+Optie \fB-v\fR, \fB--version\fR toont de programmaversie, auteur en copyright
+en sluit af.
 .sp
 Voor het terugzetten van de back-up wordt rsync gebruikt.
 .br
@@ -53,12 +70,11 @@ Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
-\fB-g\fR, \fB--gui\fR
-Draai in grafische modus (gui=graphical user interface;
-grafische gebruikersinterface). Een desktopomgeving is vereist.
+\fB-C\fR, \fB--cli\fR
+Draai in opdrachtregelmodus (CLI).
 .TP
-\fB-s\fR, \fB--source \fI<map>\fR
-Gebruik de back-up in de opgegeven map.
+\fB-g\fR, \fB--gui\fR
+Draai in grafische modus (GUI).
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.
@@ -66,15 +82,17 @@ Toon een korte omschrijving van de beschikbare opties.
 \fB-m\fR, \fB--manual\fR
 Toon de handleidingpagina.
 .TP
+\fB-s\fR, \fB--source \fI<map>\fR
+Gebruik de back-up in de opgegeven map.
+.TP
+\fB-T\fR, \fB--tui\fR
+Draai in tekstgebaseerde modus (TUI), dit is de standaardmodus.
+.TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur en het auteursrecht.
-.TP
-\fB-D\fR, \fB--debug\fR
-Voer uit in debugmodus, geef diagnostische berichten weer en bewaar tijdelijke
-bestanden.
 
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de

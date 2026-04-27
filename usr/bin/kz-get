@@ -111,7 +111,7 @@ function process_deb_packages() {
 
     # Install kz package.
     check_debian_package_manager
-    yes | sudo apt-get install "$reinstall" "$kz_deb_local_file"
+    sudo apt-get install "$reinstall" --assume-yes "$kz_deb_local_file"
 }
 
 
@@ -141,7 +141,7 @@ function process_rpm_packages() {
         kz_rpm_site_file=$packages_url/kz-4.2.1-1.noarch.rpm
     fi
 
-    if type kz > /dev/null; then
+    if type kz &> /dev/null; then
         install='reinstall'
     else
         install='install'
@@ -160,12 +160,11 @@ function process_rpm_packages() {
 # This function controls the termination of the script.
 function term() {
     local text=''
-    local separator_line=''
 
-    gpg --import /usr/share/kz/kz-public-key.gpg
+    text="
+===============================================================================
 
-    separator_line=$(eval printf '=%.0s' '{1..80}')
-    text="\n$separator_line\n\n"
+"
 
     if $OPTION_DEV; then
         text+="$RED$(gettext "Please note: the development version of \

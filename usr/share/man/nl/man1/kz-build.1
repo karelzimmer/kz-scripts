@@ -20,7 +20,18 @@ kz-build - bouw website en kz-pakketten
 .sp
 Het gebouwde Debian-pakket kz wordt vervolgens lokaal geïnstalleerd.
 .sp
-Met optie \fB--dev\fR wordt de ontwikkelingsversie van het kz-pakket gebouwd.
+Met optie \fB-d\fR, \fB--dev\fR wordt de ontwikkelingsversie van het kz-pakket
+gebouwd.
+.sp
+Optie \fB-h\fR, \fB--help\fR toont een korte beschrijving van de beschikbare
+opties en sluit af.
+.sp
+Optie \fB-m\fR, \fB--manual\fR toont de handleiding en sluit af.
+.sp
+Optie \fB-u\fR, \fB--usage\fR toont een korte gebruikssamenvatting en sluit af.
+.sp
+Optie \fB-v\fR, \fB--version\fR toont de programmaversie, auteur en copyright
+en sluit af.
 .sp
 Als de ontwikkelingsrepositories niet op main staan of niet schoon zijn, wordt
 er ook een ontwikkelingsversie gemaakt (kz-dev-....).
@@ -53,10 +64,6 @@ Toon de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur en het auteursrecht.
-.TP
-\fB-D\fR, \fB--debug\fR
-Voer uit in debugmodus, geef diagnostische berichten weer en bewaar tijdelijke
-bestanden.
 
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de

@@ -38,7 +38,7 @@ NORMAL: str = '\033[0m'
 # #############################################################################
 
 def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                 OPTION_GUI: bool = False) -> int:
+                 UI_MODE: str = 'tui') -> int:
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise exits 0 with descriptive message.
@@ -53,7 +53,7 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
         return 0
     else:
         text = GREEN + _('Already performed by the administrator.') + NORMAL
-        infomsg(PROGRAM_NAME, PROGRAM_DESC, text, OPTION_GUI)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         sys.exit(0)
 
 
@@ -84,39 +84,51 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     return 0
 
 
-def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
-           OPTION_GUI: bool = False) -> None:
+def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
+           TEXT: str) -> None:
     """
     This function returns an error message.
     """
     logmsg(PROGRAM_NAME, TEXT)
-    if OPTION_GUI:
-        title: str = PROGRAM_DESC
-        zenity: str = f'zenity  --error                 \
-                                --width     600         \
-                                --height    100         \
-                                --title     "{title}"   \
-                                --text      "{TEXT}"    || true'
+    if UI_MODE == 'gui':
+        zenity: str = f'zenity      --error                         \
+                                    --width     600                 \
+                                    --height    100                 \
+                                    --title     "{PROGRAM_DESC}"    \
+                                    --text      "{TEXT}"            || true'
         subprocess.run(zenity, executable='bash', shell=True,
+                       stderr=subprocess.DEVNULL)
+    elif UI_MODE == 'tui':
+        whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
+                                    --title     "{PROGRAM_DESC}"    \
+                                    --msgbox    "{TEXT}"            \
+                                    18 80'
+        subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
         print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
-            OPTION_GUI: bool = False) -> None:
+def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
+            TEXT: str) -> None:
     """
     This function returns an informational message.
     """
     logmsg(PROGRAM_NAME, TEXT)
-    if OPTION_GUI:
-        title: str = PROGRAM_DESC
-        zenity: str = f'zenity  --info                  \
-                                --width     600         \
-                                --height    100         \
-                                --title     "{title}"   \
-                                --text      "{TEXT}"    || true'
+    if UI_MODE == 'gui':
+        zenity: str = f'zenity      --info                          \
+                                    --width     600                 \
+                                    --height    100                 \
+                                    --title     "{PROGRAM_DESC}"    \
+                                    --text      "{TEXT}"            || true'
         subprocess.run(zenity, executable='bash', shell=True,
+                       stderr=subprocess.DEVNULL)
+    elif UI_MODE == 'tui':
+        whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
+                                    --title     "{PROGRAM_DESC}"    \
+                                    --msgbox    "{TEXT}"            \
+                                    18 80'
+        subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
         print(TEXT)
@@ -185,7 +197,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
         _("Type '{} --manual' or 'man {}'{} ").\
         format(program_name, program_name, yelp_man) + \
         _('for more information.')
-    infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+    infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
 def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
@@ -204,21 +216,21 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
             subprocess.run(yelp, executable='bash',
                            stderr=subprocess.DEVNULL,
                            shell=True, check=True,)
-        except Exception as exc:
+        except subprocess.CalledProcessError as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-            term(PROGRAM_NAME, 1)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            term(PROGRAM_NAME, exc.returncode)
     else:
         try:
             subprocess.run(man, executable='bash', shell=True, check=True)
-        except Exception as exc:
+        except subprocess.CalledProcessError as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-            term(PROGRAM_NAME, 1)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            term(PROGRAM_NAME, exc.returncode)
 
 
 def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
@@ -231,7 +243,7 @@ def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
 
     text = USAGE + '\n\n' + _("Type '{} --help' for more information.").\
         format(program_name)
-    infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+    infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
 def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
@@ -253,14 +265,14 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         text = str(exc)
         logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         term(PROGRAM_NAME, 1)
     finally:
         text = _('kz version 4.2.1 (built {}).').format(build_id) + '\n\n' + \
             _('Written by Karel Zimmer <info@karelzimmer.nl>.') + '\n' + \
             _('License CC0 1.0 ' +
                 '<https://creativecommons.org/publicdomain/zero/1.0>.')
-        infomsg(PROGRAM_NAME, PROGRAM_DESC, text)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
 def term(PROGRAM_NAME: str, rc: int) -> None:
@@ -282,27 +294,3 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
         sys.exit(0)
     else:
         sys.exit(1)
-
-
-def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
-    """
-    This function waits for the user to press Enter.
-    """
-    exc: BaseException
-    text: str = ''
-
-    try:
-        text = '\n' + _('Press the Enter key to continue [Enter]: ') + '\n'
-        input(text)
-    except KeyboardInterrupt:
-        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        term(PROGRAM_NAME, 1)
-    except Exception as exc:
-        text = str(exc)
-        logmsg(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        errmsg(PROGRAM_NAME, PROGRAM_DESC, text)
-        term(PROGRAM_NAME, 1)
-
-    return 0

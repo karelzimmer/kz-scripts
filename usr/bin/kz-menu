@@ -23,9 +23,9 @@ PROGRAM_DESC=$(gettext 'Execute the kz commands through a menu')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "Usage: kz menu [-g|--gui] [-h|--help] [-m|--manual] \
-[-u|--usage]
-               [-v|--version] [-D|--debug]")
+USAGE=$(gettext "\
+Usage: kz menu [-C|--cli] [-g|--gui] [-h|--help] [-m|--manual] [-T|--tui]
+               [-u|--usage] [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz menu [<options>]')
@@ -33,37 +33,38 @@ HELP="$(gettext 'Usage: kz menu [<options>]')
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
+$(gettext '  -C, --cli      run in command-line mode')
 $(gettext '  -g, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
+$(gettext '  -T, --tui      run in text-based mode (default)')
 $(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')
-$(gettext '  -D, --debug    show debug information')"
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='ghmuvD'
-readonly OPTIONS_LONG='gui,help,manual,usage,version,debug'
+readonly OPTIONS_SHORT='CghmTuv'
+readonly OPTIONS_LONG='cli,gui,help,manual,tui,usage,version'
 
 # Define the menu1 options.
 MENU1_TITLE=$(gettext 'Installation menu')
 readonly MENU1_TITLE
 readonly MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
 readonly -a  MENU1_ACTIONS=(
-            [1]="$(gettext 'Prepare installation')"
-                "$(gettext 'Perform installation')"
-                "$(gettext 'Finish installation')"
-                "$(gettext 'Set up user')"
-                "$(gettext 'Command menu')"
-                "$(gettext 'Exit')"
-            )
+    [1]="$(gettext 'Prepare installation')"
+    [2]="$(gettext 'Perform installation')"
+    [3]="$(gettext 'Finish installation')"
+    [4]="$(gettext 'Set up user')"
+    [5]="$(gettext 'Command menu')"
+    [6]="$(gettext 'Exit')"
+    )
 readonly -a  MENU1_DESCS=(
-            [1]="$(gettext 'Checklist chapter 1')"
-                "$(gettext 'Checklist chapter 2')"
-                "$(gettext 'Checklist chapter 3')"
-                "$(gettext 'Checklist chapter 4')"
-                "$(gettext 'Show command menu')"
-                "$(gettext 'Exit menu')"
-            )
+    [1]="$(gettext 'Checklist chapter 1')"
+    [2]="$(gettext 'Checklist chapter 2')"
+    [3]="$(gettext 'Checklist chapter 3')"
+    [4]="$(gettext 'Checklist chapter 4')"
+    [5]="$(gettext 'Show command menu')"
+    [6]="$(gettext 'Exit menu')"
+    )
 readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
 # Define the menu2 options.
@@ -71,21 +72,21 @@ MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
 readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
 readonly -a  MENU2_ACTIONS=(
-            [1]="$(gettext 'Make backup')"
-                "$(gettext 'Show WiFi details')"
-                "$(gettext 'Install apps')"
-                "$(gettext 'Restore backup')"
-                "$(gettext 'Set up apps')"
-                "$(gettext 'Go to installation menu')"
+    [1]="$(gettext 'Make backup')"
+    [2]="$(gettext 'Show WiFi details')"
+    [3]="$(gettext 'Install apps')"
+    [4]="$(gettext 'Restore backup')"
+    [5]="$(gettext 'Set up apps')"
+    [6]="$(gettext 'Go to installation menu')"
             )
 readonly -a  MENU2_DESCS=(
-            [1]='kz backup'
-                'kz wifi'
-                'kz install'
-                'kz restore'
-                'kz setup'
-                "$(gettext 'Back')"
-            )
+    [1]='kz backup'
+    [2]='kz wifi'
+    [3]='kz install'
+    [4]='kz restore'
+    [5]='kz setup'
+    [6]="$(gettext 'Back')"
+    )
 readonly MENU2_LINES=${#MENU2_DESCS[@]}
 
 
@@ -93,7 +94,7 @@ readonly MENU2_LINES=${#MENU2_DESCS[@]}
 # Globals
 # #############################################################################
 
-declare OPTION_GUI=false
+declare UI_MODE='tui'
 
 
 # #############################################################################
@@ -105,10 +106,12 @@ function process() {
     local -i rc=0
 
     check_input "$@"
-    if $OPTION_GUI; then
+    if [[ $UI_MODE = 'gui' ]]; then
         process_menu1_gui
-    else
+    elif [[ $UI_MODE = 'tui' ]]; then
         process_menu1_tui
+    else
+        process_menu1_cli
     fi
 }
 
@@ -125,6 +128,7 @@ function check_input() {
                 --name          "$program_name"     \
                 --              "$@"
         )   ||  {
+                    UI_MODE='cli'
                     kz.infomsg "$USAGE"
                     exit 1
                 }
@@ -142,6 +146,10 @@ function process_options() {
 
     while true; do
         case $1 in
+            -C | --cli )
+                UI_MODE='cli'
+                shift
+                ;;
             -g | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
                     text="$program_name: $1: $(gettext "no desktop \
@@ -149,7 +157,7 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                OPTION_GUI=true
+                UI_MODE='gui'
                 shift
                 ;;
             -h | --help )
@@ -160,6 +168,10 @@ environment available")"
                 kz.process_option_manual
                 exit 0
                 ;;
+            -T | --tui )
+                UI_MODE='tui'
+                shift
+                ;;
             -u | --usage )
                 kz.process_option_usage
                 exit 0
@@ -167,10 +179,6 @@ environment available")"
             -v | --version )
                 kz.process_option_version
                 exit 0
-                ;;
-            -D | --debug )
-                set -o xtrace
-                shift
                 ;;
             -- )
                 shift
@@ -197,7 +205,7 @@ $USAGE"
 function process_menu1_gui() {
     local title=$MENU1_TITLE
 
-    while true; do
+    # while true; do
         REPLY=$(
             zenity  --list                                              \
                     --radiolist                                         \
@@ -211,20 +219,55 @@ function process_menu1_gui() {
                     --column        "$(gettext 'NUM')"                  \
                     --column        "$(gettext 'ACTION')"               \
                     --column        "$(gettext 'DESCRIPTION')"          \
-                    TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_DESCS[1]}"   \
-                    FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_DESCS[2]}"   \
-                    FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}"   \
-                    FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
-                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
+                    true  1 "${MENU1_ACTIONS[1]}" "${MENU1_DESCS[1]}"   \
+                    false 2 "${MENU1_ACTIONS[2]}" "${MENU1_DESCS[2]}"   \
+                    false 3 "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}"   \
+                    false 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
+                    false 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
                     2> /dev/null                                        || true
-            ) || exit 0
+            )   || exit 0
         process_menu1_choice
-    done
+    # done
 }
 
 
 # This function shows and processes menu 1 in TUI mode.
 function process_menu1_tui() {
+    local -a items=(
+        [1]="$(printf '%-24s' "${MENU1_ACTIONS[1]}") ${MENU1_DESCS[1]}"
+        [2]="$(printf '%-24s' "${MENU1_ACTIONS[2]}") ${MENU1_DESCS[2]}"
+        [3]="$(printf '%-24s' "${MENU1_ACTIONS[3]}") ${MENU1_DESCS[3]}"
+        [4]="$(printf '%-24s' "${MENU1_ACTIONS[4]}") ${MENU1_DESCS[4]}"
+        [5]="$(printf '%-24s' "${MENU1_ACTIONS[5]}") ${MENU1_DESCS[5]}"
+        )
+    local text=''
+    local title=''
+
+    title=$(gettext 'Installation menu')
+    text=$(gettext 'Select a choice:')
+
+    while true; do
+        REPLY=$(
+            whiptail    --ok-button     "$(gettext 'Continue')" \
+                        --cancel-button "$(gettext 'Exit')"     \
+                        --backtitle     "$PROGRAM_NAME"         \
+                        --title         "$title"                \
+                        --menu          "$text"                 \
+                        25 60 10                                \
+                        1 "${items[1]}"                         \
+                        2 "${items[2]}"                         \
+                        3 "${items[3]}"                         \
+                        4 "${items[4]}"                         \
+                        5 "${items[5]}"                         \
+                        2>&1 >/dev/tty
+            )   || exit 0
+        process_menu1_choice
+    done
+}
+
+
+# This function shows and processes menu 1 in CLI mode.
+function process_menu1_cli() {
     local menu1_action=''
     local prompt=''
 
@@ -286,9 +329,7 @@ function process_menu1_choice() {
             exit 0
             ;;
         * )
-            text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-            kz.errmsg "$text"
-            exit 1
+            exit 0
             ;;
     esac
 }
@@ -302,7 +343,6 @@ function process_menu1_choice1() {
     local title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
 
     process_commands
-    $OPTION_GUI || kz.wait_for_enter
 }
 
 
@@ -321,17 +361,7 @@ Roughly boils down to:
 2. Create a bootable USB stick.
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
-    if $OPTION_GUI; then
-        zenity  --info                  \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$text"     \
-                2> /dev/null            || true
-    else
-        printf '%s\n' "$text"
-        kz.wait_for_enter
-    fi
+    kz.infomsg "$text"
 }
 
 
@@ -343,7 +373,6 @@ function process_menu1_choice3() {
     local title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
 
     process_commands
-    $OPTION_GUI || kz.wait_for_enter
 }
 
 
@@ -351,21 +380,22 @@ function process_menu1_choice3() {
 function process_menu1_choice4() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
-            "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
+        [2]="${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
         )
     local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
 
     process_commands
-    $OPTION_GUI || kz.wait_for_enter
 }
 
 
 # This function processes menu 2.
 function process_menu2() {
-    if $OPTION_GUI; then
+    if [[ $UI_MODE = 'gui' ]]; then
         process_menu2_gui
-    else
+    elif [[ $UI_MODE = 'tui' ]]; then
         process_menu2_tui
+    else
+        process_menu2_cli
     fi
 }
 
@@ -388,13 +418,13 @@ function process_menu2_gui() {
                     --column        "$(gettext 'NUM')"                  \
                     --column        "$(gettext 'ACTION')"               \
                     --column        "$(gettext 'DESCRIPTION')"          \
-                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_DESCS[1]}"   \
-                    FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_DESCS[2]}"   \
-                    FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_DESCS[3]}"   \
-                    FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
-                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
+                    true  1 "${MENU2_ACTIONS[1]}" "${MENU2_DESCS[1]}"   \
+                    false 2 "${MENU2_ACTIONS[2]}" "${MENU2_DESCS[2]}"   \
+                    false 3 "${MENU2_ACTIONS[3]}" "${MENU2_DESCS[3]}"   \
+                    false 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
+                    false 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
                     2> /dev/null                                        || true
-            ) || break
+            )   || break
         process_menu2_choice
     done
 }
@@ -402,6 +432,41 @@ function process_menu2_gui() {
 
 # This function shows and processes menu 2 in TUI mode.
 function process_menu2_tui() {
+    local -a items=(
+        [1]="$(printf '%-24s' "${MENU2_ACTIONS[1]}") ${MENU2_DESCS[1]}"
+        [2]="$(printf '%-24s' "${MENU2_ACTIONS[2]}") ${MENU2_DESCS[2]}"
+        [3]="$(printf '%-24s' "${MENU2_ACTIONS[3]}") ${MENU2_DESCS[3]}"
+        [4]="$(printf '%-24s' "${MENU2_ACTIONS[4]}") ${MENU2_DESCS[4]}"
+        [5]="$(printf '%-24s' "${MENU2_ACTIONS[5]}") ${MENU2_DESCS[5]}"
+        )
+    local text=''
+    local title=''
+
+    title=$(gettext 'Command menu')
+    text=$(gettext 'Select a choice:')
+
+    while true; do
+        REPLY=$(
+            whiptail    --ok-button     "$(gettext 'Continue')" \
+                        --cancel-button "$(gettext 'Back')"     \
+                        --backtitle     "$PROGRAM_NAME"         \
+                        --title         "$title"                \
+                        --menu          "$text"                 \
+                        25 60 10                                \
+                        1 "${items[1]}"                         \
+                        2 "${items[2]}"                         \
+                        3 "${items[3]}"                         \
+                        4 "${items[4]}"                         \
+                        5 "${items[5]}"                         \
+                        2>&1 >/dev/tty
+            )   || break
+        process_menu2_choice
+    done
+}
+
+
+# This function shows and processes menu 2 in CLI mode.
+function process_menu2_cli() {
     local menu2_action=''
     local prompt=''
 
@@ -442,27 +507,21 @@ function process_menu2_tui() {
 # This function processes menu 2 choice.
 function process_menu2_choice() {
     local text=''
-
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
-        )
-    local -i reply_save=''
-    local title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
+    local -a rows=()
+    local title=''
 
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        reply_save=$REPLY
+        rows[1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
+        title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
         process_commands
-        # Setup apps on a server means manual logout.
-        if [[ $reply_save -eq 5 ]] && [[ -z ${DISPLAY-} ]]; then
-            exit "$rc"
-        fi
-        $OPTION_GUI || kz.wait_for_enter
-    elif [[ $REPLY -eq $MENU2_LINES ]]; then
-        process_menu1_tui
     else
-        text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-        kz.errmsg "$text"
-        exit 1
+        if [[ $UI_MODE = 'gui' ]]; then
+            process_menu1_gui
+        elif [[ $UI_MODE = 'tui' ]]; then
+            process_menu1_tui
+        else
+            process_menu1_cli
+        fi
     fi
 }
 
@@ -473,7 +532,6 @@ function process_commands() {
     local command=''
     local description=''
     local execute_command=false
-    local title=''
 
     show_commands_before_execution
 
@@ -488,6 +546,7 @@ function process_commands() {
             title="$description ($command)"
             execute_command
         done
+        term
     fi
 }
 
@@ -513,16 +572,13 @@ function show_commands_before_execution() {
 $description ($command)"
     done
 
-    text+="
-"
-    prompt="$(gettext 'Proceed?')"
-    kz.logmsg "$prompt"
-    if $OPTION_GUI; then
+    if [[ $UI_MODE = 'gui' ]]; then
         text+="
-$prompt"
+
+$(gettext 'Proceed?')"
         if zenity   --question                          \
                     --no-markup                         \
-                    --width         600                 \
+                    --width         520                 \
                     --height        100                 \
                     --title         "$title"            \
                     --text          "$text"             \
@@ -533,8 +589,21 @@ $prompt"
         else
             execute_command=false
         fi
+    elif [[ $UI_MODE = 'tui' ]]; then
+        text+="
+
+$(gettext 'Proceed?')"
+        if whiptail --backtitle "$PROGRAM_NAME"         \
+                    --title     "$title"                \
+                    --yesno     "$text"                 \
+                    25 60; then
+            execute_command=true
+        else
+            execute_command=false
+        fi
     else
-        printf '\n%s\n' "$text"
+        printf '\n%s\n\n' "$text"
+        prompt="$(gettext 'Proceed?')"
         while true; do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
@@ -557,11 +626,7 @@ $prompt"
 
 # This function executes the commands.
 function execute_command() {
-    if $OPTION_GUI; then
-        $command --gui || rc=$?
-    else
-        $command || rc=$?
-    fi
+    $command --"$UI_MODE" || rc=$?
     kz.logmsg "$command: rc=$rc"
 }
 

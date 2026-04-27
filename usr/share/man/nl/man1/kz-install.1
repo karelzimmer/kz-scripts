@@ -12,7 +12,7 @@ kz-install - installeer apps
 
 .SH SAMENVATTING
 .SY kz\ install
-[<opties>] [--] [\fI<app>\fR...]
+[<opties>] [\fI<app>\fR...]
 .YS
 
 .SH BESCHRIJVING
@@ -65,19 +65,39 @@ installatiebestanden.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
+Met optie \fB-C\fR, \fB--cli\fR wordt \fBkz install\fR in opdrachtregelmodus
+uitgevoerd (CLI).
+.sp
 Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander
 installatiebestand opgegeven worden. Deze optie kan herhaaldelijk gebruikt
 worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz install\fR in grafische modus
-uitgevoerd. Een desktopomgeving is vereist.
+uitgevoerd (GUI), een desktopomgeving is vereist.
+.sp
+Optie \fB-h\fR, \fB--help\fR toont een korte beschrijving van de beschikbare
+opties en sluit af.
 .sp
 Optie \fB-l\fR, \fB--list\fR geeft een lijst van alle apps die beschikbaar zijn
 in de installatiebestanden.
 .sp
+Optie \fB-m\fR, \fB--manual\fR toont de handleiding en sluit af.
+.sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .sp
 Optie \fB-s\fR, \fB--select\fR wordt gebruikt om apps te selecteren.
+.br
+In een desktopomgeving kan opdracht \fBkz install --gui --select\fR worden
+uitgevoerd in grafische modus door te zoeken naar \fBinst\fR en te klikken op
+\fBKZ Apps installeren\fR-pictogram.
+.sp
+Met optie \fB-T\fR, \fB--tui\fR wordt \fBkz install\fR in tekstgebaseerde modus
+uitgevoerd (TUI), dit is de standaardmodus.
+.sp
+Optie \fB-u\fR, \fB--usage\fR toont een korte gebruikssamenvatting en sluit af.
+.sp
+Optie \fB-v\fR, \fB--version\fR toont de programmaversie, auteur en copyright
+en sluit af.
 .sp
 Om een app te verwijderen, op een Debian systeem gebruik:
     sudo apt-get remove --assume-yes <app>
@@ -104,15 +124,23 @@ Blader door de installatiebestanden.
 \fB-c\fR, \fB--cat\fR
 Toon de inhoud van het opdrachtbestand.
 .TP
+\fB-C\fR, \fB--cli\fR
+Draai in opdrachtregelmodus (CLI).
+.TP
 \fB-f\fR, \fB--file\fR \fI<bestand>\fR
 Verwerk het opgegeven bestand. Deze optie kan herhaaldelijk gebruikt worden.
 .TP
 \fB-g\fR, \fB--gui\fR
-Draai in grafische modus (gui=graphical user interface;
-grafische gebruikersinterface). Een desktopomgeving is vereist.
+Draai in grafische modus (GUI).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
 .TP
 \fB-l\fR, \fB--list\fR
 Toon een lijst van beschikbare apps om te installeren of verwijderen.
+.TP
+\fB-m\fR, \fB--manual\fR
+Toon de handleidingpagina.
 .TP
 \fB-r\fR, \fB--remove\fR
 Verwijder de apps.
@@ -120,21 +148,14 @@ Verwijder de apps.
 \fB-s\fR, \fB--select\fR
 Selecteer apps.
 .TP
-\fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
-.TP
-\fB-m\fR, \fB--manual\fR
-Toon de handleidingpagina.
+\fB-T\fR, \fB--tui\fR
+Draai in tekstgebaseerde modus (TUI), dit is de standaardmodus.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur en het auteursrecht.
-.TP
-\fB-D\fR, \fB--debug\fR
-Voer uit in debugmodus, geef diagnostische berichten weer en bewaar tijdelijke
-bestanden.
 
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de

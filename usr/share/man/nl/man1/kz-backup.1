@@ -18,24 +18,41 @@ kz-backup - maak back-up
 .SH BESCHRIJVING
 \fBkz backup\fR maakt een back-up (reservekopie) van de Persoonlijke map.
 .sp
-In een desktopomgeving kan opdracht \fBkz backup\fR worden uitgevoerd door te
-zoeken naar \fBback\fR, klik op \fBKZ Back-up Persoonlijke map\fR-pictogram.
+In een desktopomgeving kan opdracht \fBkz backup\fR worden uitgevoerd in
+grafische modus door te zoeken naar \fBback\fR, klik op
+\fBKZ Back-up Persoonlijke map\fR-pictogram.
 .sp
-Voordat er een back-up wordt gemaakt worden,, ingestelde
-bureaubladachtergrond, gebruikersfoto, favorieten en WiFi informatie
-opgeslagen. Zie de sectie \fBBESTANDEN\fR hieronder voor de preciese lokatie.
+Voordat er een back-up wordt gemaakt worden ingestelde bureaubladachtergrond,
+gebruikersfoto, favorieten en WiFi informatie opgeslagen. Zie de sectie
+\fBBESTANDEN\fR hieronder voor de preciese lokatie.
 .sp
 De back-up wordt geplaatst op een aangekoppeld usb-medium zoals een usb
 externe harddisk in map \fBBACKUP-<gebruikersnaam>@<computernaam>\fR, deze map
 wordt aangemaakt als nodig, bijvoorbeeld
 /media/karel/backupdisk/BACKUP-karel@pc-van-karel voor Karel op pc-van-karel.
 .sp
+Met optie \fB-C\fR, \fB--cli\fR wordt \fBkz backup\fR in opdrachtregelmodus
+uitgevoerd (CLI).
+.sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz backup\fR in grafische modus
-uitgevoerd. Een desktopomgeving is vereist.
+uitgevoerd (GUI), een desktopomgeving is vereist.
+.sp
+Optie \fB-h\fR, \fB--help\fR toont een korte beschrijving van de beschikbare
+opties en sluit af.
+.sp
+Optie \fB-m\fR, \fB--manual\fR toont de handleiding en sluit af.
 .sp
 Met optie \fB-t\fR, \fB--target\fR \fI<map>\fR kan een andere locatie opgegeven
 worden. Bijvoorbeeld /media/karel/usbstick in plaats van
 /media/karel/backupdisk.
+.sp
+Met optie \fB-T\fR, \fB--tui\fR wordt \fBkz backup\fR in tekstgebaseerde modus
+uitgevoerd (TUI), dit is de standaardmodus.
+.sp
+Optie \fB-u\fR, \fB--usage\fR toont een korte gebruikssamenvatting en sluit af.
+.sp
+Optie \fB-v\fR, \fB--version\fR toont de programmaversie, auteur en copyright
+en sluit af.
 .sp
 Locaties die genegeerd worden door \fBkz backup\fR zijn de door Git beheerde
 mappen ("git-managed").
@@ -55,12 +72,11 @@ Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
-\fB-g\fR, \fB--gui\fR
-Draai in grafische modus (gui=graphical user interface;
-grafische gebruikersinterface). Een desktopomgeving is vereist.
+\fB-C\fR, \fB--cli\fR
+Draai in opdrachtregelmodus (CLI).
 .TP
-\fB-t\fR, \fB--target \fI<map>\fR
-Plaats de back-up in de opgegeven map.
+\fB-g\fR, \fB--gui\fR
+Draai in grafische modus (GUI).
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.
@@ -68,15 +84,17 @@ Toon een korte omschrijving van de beschikbare opties.
 \fB-m\fR, \fB--manual\fR
 Toon de handleidingpagina.
 .TP
+\fB-t\fR, \fB--target \fI<map>\fR
+Plaats de back-up in de opgegeven map.
+.TP
+\fB-T\fR, \fB--tui\fR
+Draai in tekstgebaseerde modus (TUI), dit is de standaardmodus.
+.TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur en het auteursrecht.
-.TP
-\fB-D\fR, \fB--debug\fR
-Voer uit in debugmodus, geef diagnostische berichten weer en bewaar tijdelijke
-bestanden.
 
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de

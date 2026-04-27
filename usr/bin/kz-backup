@@ -24,9 +24,10 @@ PROGRAM_DESC=$(gettext 'Make a backup copy of the Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext 'Usage: kz backup [-g|--gui] [-t|--target <directory>]
-                 [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]
-                 [-D|--debug]')
+USAGE=$(gettext "\
+Usage: kz backup [-C|--cli] [-g|--gui] [-h|--help] [-m|--manual]
+                 [-t|--target <directory>] [-T|--tui] [-u|--usage]
+                 [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz backup [<options>]")
@@ -37,18 +38,19 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
+$(gettext '  -C, --cli      run in command-line mode')
 $(gettext '  -g, --gui      run in graphical mode')
-$(gettext '  -t, --target <directory>
-                 place backup in specified directory')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
+$(gettext '  -t, --target <directory>
+                 place backup in specified directory')
+$(gettext '  -T, --tui      run in text-based mode (default)')
 $(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')
-$(gettext '  -D, --debug    show debug information')"
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='gt:hmuvD'
-readonly OPTIONS_LONG='gui,target:,help,manual,usage,version,debug'
+readonly OPTIONS_SHORT='Cghmt:Tuv'
+readonly OPTIONS_LONG='cli,gui,help,manual,target:,tui,usage,version'
 
 
 # #############################################################################
@@ -57,8 +59,8 @@ readonly OPTIONS_LONG='gui,target:,help,manual,usage,version,debug'
 
 declare -i BACKUP_RC=0
 declare ERROR_LOG=''
-declare OPTION_GUI=false
 declare TARGET=''
+declare UI_MODE='tui'
 
 
 # #############################################################################
@@ -90,6 +92,7 @@ function check_input() {
                 --name          "$program_name"     \
                 --              "$@"
         )   ||  {
+                    UI_MODE='cli'
                     kz.infomsg "$USAGE"
                     exit 1
                 }
@@ -107,6 +110,10 @@ function process_options() {
 
     while true; do
         case $1 in
+            -C | --cli )
+                UI_MODE='cli'
+                shift
+                ;;
             -g | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
                     text="$program_name: $1: $(gettext "no desktop \
@@ -114,8 +121,16 @@ environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                OPTION_GUI=true
+                UI_MODE='gui'
                 shift
+                ;;
+            -h | --help )
+                kz.process_option_help
+                exit 0
+                ;;
+            -m | --manual )
+                kz.process_option_manual
+                exit 0
                 ;;
             -t | --target )
                 if $option_target; then
@@ -128,13 +143,9 @@ $USAGE"
                 target_argument=$2
                 shift 2
                 ;;
-            -h | --help )
-                kz.process_option_help
-                exit 0
-                ;;
-            -m | --manual )
-                kz.process_option_manual
-                exit 0
+            -T | --tui )
+                UI_MODE='tui'
+                shift
                 ;;
             -u | --usage )
                 kz.process_option_usage
@@ -143,10 +154,6 @@ $USAGE"
             -v | --version )
                 kz.process_option_version
                 exit 0
-                ;;
-            -D | --debug )
-                set -o xtrace
-                shift
                 ;;
             -- )
                 shift
@@ -171,7 +178,8 @@ $USAGE"
 
 # This function checks if the target is available.
 function check_target() {
-    local all_media=''
+    local -a all_media=()
+    local -a choices=()
     local program_name=${PROGRAM_NAME/kz-/kz }
     local selected_medium=''
     local text=''
@@ -183,7 +191,6 @@ function check_target() {
     fi
 
     if $option_target; then
-        OPTION_GUI=false
         if ! [[ -d $target_argument ]]; then
             text="$program_name: $target_argument: \
 $(gettext 'directory does not exist')
@@ -193,65 +200,71 @@ $USAGE"
         fi
         medium=$target_argument
     else
-        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+        medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
         if [[ -z $medium ]]; then
             text=$(gettext "No usb medium found.
 
 Connect a usb medium.")
             kz.infomsg "$text"
-            $OPTION_GUI || kz.wait_for_enter
-            medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+            medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
                 exit 1
             fi
         fi
 
-        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+        medium=$(find "$usb_mount_point/"* -prune || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+            # Let the user select the desired medium.
 
             title=$(gettext 'Make backup')
             text=$(gettext 'Choose USB medium:')
 
-            if $OPTION_GUI; then
-                # shellcheck disable=SC2012
-                all_media=$(
-                    ls      --directory             \
-                            "$usb_mount_point/"*    |
-                    sed     --expression='s/^/false /'
-                    )
-                # shellcheck disable=SC2086
+            readarray -t all_media < <(find "$usb_mount_point/"* -prune)
+
+            if [[ $UI_MODE = 'gui' ]]; then
+                for medium in "${all_media[@]}"; do
+                    choices+=('false' "$medium")
+                done
+                # No array is needed, because only one can be selected.
                 selected_medium=$(
-                    zenity  --list                              \
-                            --radiolist                         \
-                            --separator ' '                     \
-                            --height    400                     \
-                            --title     "$title"                \
-                            --text      "$text"                 \
-                            --column    "$(gettext 'SEL')"      \
-                            --column    "$(gettext 'MEDIUM')"   \
-                            $all_media                          \
-                            2> /dev/null                        || true
+                    zenity      --list                              \
+                                --radiolist                         \
+                                --separator ' '                     \
+                                --height    400                     \
+                                --title     "$title"                \
+                                --text      "$text"                 \
+                                --ok-label  "$(gettext 'Continue')" \
+                                --column    "$(gettext 'SEL')"      \
+                                --column    "$(gettext 'MEDIUM')"   \
+                                "${choices[@]}"                     \
+                                2> /dev/null                        || true
+                    )
+            elif [[ $UI_MODE = 'tui' ]]; then
+                for medium in "${all_media[@]}"; do
+                    choices+=("$medium" 'off')
+                done
+                # No array is needed, because only one can be selected.
+                selected_medium=$(
+                    whiptail    --ok-button "$(gettext 'Continue')" \
+                                --noitem                            \
+                                --backtitle "$PROGRAM_NAME"         \
+                                --title     "$title"                \
+                                --radiolist "$text"                 \
+                                20 40 12                            \
+                                "${choices[@]}"                     \
+                                2>&1 >/dev/tty                      |
+                    sed         's/"//g'                            || true
                     )
             else
-                # shellcheck disable=SC2012
-                all_media=$(
-                    ls      --directory             \
-                            "$usb_mount_point/"*    |
-                    sed     --expression='s/$/ off/'
-                    )
-                # shellcheck disable=SC2086
-                selected_medium=$(
-                    whiptail    --noitem                \
-                                --backtitle "$title"    \
-                                --radiolist "$text"     \
-                                20 40 12                \
-                                $all_media              \
-                                2>&1 >/dev/tty          |
-                    sed         's/"//g'                || true
-                    )
-            fi
+                text="$(gettext 'More than one USB medium is connected:')
+$medium
 
+$(gettext "Use \"kz backup --target <usb medium>\" to select the desired USB \
+medium.")"
+                kz.infomsg "$text"
+                exit 0
+            fi
             if [[ -z $selected_medium ]]; then
                 text=$(gettext 'No USB medium selected.')
                 kz.infomsg "$text"
@@ -260,30 +273,8 @@ Connect a usb medium.")
             medium=$selected_medium
         fi
     fi
-    TARGET=$medium/BACKUP-$USER@$HOSTNAME
 
-    # Fix old backup locations and old namings.
-    # <medium>/<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
-    if [[ -d $medium/$USER@$HOSTNAME ]]; then
-        mv      --verbose                           \
-                "$medium/$USER@$HOSTNAME"           \
-                "$TARGET"                           |& $PROGRAM_LOGS
-    fi
-    # <medium>/backups/<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
-    if [[ -d $medium/backups/$USER@$HOSTNAME ]]; then
-        mv      --verbose                           \
-                "$medium/backups/$USER@$HOSTNAME"   \
-                "$TARGET"                           |& $PROGRAM_LOGS
-        rmdir   --ignore-fail-on-non-empty          \
-                --verbose                           \
-                "$medium/backups"                   |& $PROGRAM_LOGS
-    fi
-    # <medium>/backup-<user>@<hostname> -> <medium>/BACKUP-<user>@<hostname>
-    if [[ -d $medium/backup-$USER@$HOSTNAME ]]; then
-        mv      --verbose                           \
-                "$medium/backup-$USER@$HOSTNAME"    \
-                "$TARGET"                           |& $PROGRAM_LOGS
-    fi
+    TARGET=$medium/BACKUP-$USER@$HOSTNAME
 }
 
 
@@ -456,10 +447,7 @@ function backup_setting_wifi() {
 
     kz.logmsg 'Save the WiFi information...'
 
-    # Call kz-wifi.
-    kz.logmsg 'Calling kz-wifi...'
-    kz-wifi > "$output_file"
-    kz.logmsg 'Called kz-wifi.'
+    pkexec /usr/bin/kz-wifi-pkexec > "$output_file" 2>&1 || true
 }
 
 
@@ -568,60 +556,96 @@ $(
 EOF
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
-    text="** $ERROR_LOG (stderr)"
+    text="** $ERROR_LOG (stderr) *********************************************"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     kz.logmsg "$title"...
 
-    if $OPTION_GUI; then
-        rsync   --archive                       \
-                --verbose                       \
-                --delete                        \
-                --exclude-from="$exclude_file"  \
-                --delete-excluded               \
-                "$HOME/"                        \
-                "$TARGET/"                      \
-                2>> "$ERROR_LOG"                |
-        sed     --expression='s/^/#/'           |
-        zenity  --progress                      \
-                --auto-close                    \
-                --no-cancel                     \
-                --pulsate                       \
-                --width     600                 \
-                --height    50                  \
-                --title     "$title"            \
-                --text      "$text"             \
-                2> /dev/null                    || BACKUP_RC=$?
+    if [[ $UI_MODE = 'gui' ]]; then
+        rsync       --archive                       \
+                    --verbose                       \
+                    --delete                        \
+                    --exclude-from="$exclude_file"  \
+                    --delete-excluded               \
+                    "$HOME/"                        \
+                    "$TARGET/"                      \
+                    2>> "$ERROR_LOG"                |
+        sed         --expression='s/^/#/'           |
+        zenity      --progress                      \
+                    --auto-close                    \
+                    --no-cancel                     \
+                    --pulsate                       \
+                    --width     600                 \
+                    --height    50                  \
+                    --title     "$title"            \
+                    --text      "$text"             \
+                    2> /dev/null                    || BACKUP_RC=$?
+    elif [[ $UI_MODE = 'tui' ]]; then
+        tput        civis                           || true
+        rsync       --archive                       \
+                    --info=progress2                \
+                    --no-inc-recursive              \
+                    --delete                        \
+                    --exclude-from="$exclude_file"  \
+                    --delete-excluded               \
+                    "$HOME/"                        \
+                    "$TARGET/"                      \
+                    2>> "$ERROR_LOG"                |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    tr '\r' '\n'                    |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    awk "{ print \$2 }"             |
+        stdbuf      --input=0                       \
+                    --output=0                      \
+                    --error=0                       \
+                    tr --delete '%'                 |
+        whiptail    --backtitle "$PROGRAM_NAME"     \
+                    --title     "$PROGRAM_DESC"     \
+                    --gauge     "$title..."         \
+                    6 70 0                          || BACKUP_RC=$?
+        tput        cnorm                           || true
     else
         text+='...'
         kz.infomsg "$text"
-        rsync   --archive                       \
-                --verbose                       \
-                --human-readable                \
-                --delete                        \
-                --exclude-from="$exclude_file"  \
-                --delete-excluded               \
-                "$HOME/"                        \
-                "$TARGET/"                      \
-                2>> "$ERROR_LOG"               || BACKUP_RC=$?
+        rsync       --archive                       \
+                    --verbose                       \
+                    --human-readable                \
+                    --delete                        \
+                    --exclude-from="$exclude_file"  \
+                    --delete-excluded               \
+                    "$HOME/"                        \
+                    "$TARGET/"                      \
+                    2>> "$ERROR_LOG"                || BACKUP_RC=$?
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")
-    if $OPTION_GUI; then
-        kz.logmsg "$title"...
-        sync                            |
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$title"    \
-                --text      "$text"     \
-                1> >($PROGRAM_LOGS)     \
-                2>> "$ERROR_LOG"
+    kz.logmsg "$text"...
+    if [[ $UI_MODE = 'gui' ]]; then
+        sync                                        |
+        zenity      --progress                      \
+                    --pulsate                       \
+                    --auto-close                    \
+                    --no-cancel                     \
+                    --width     600                 \
+                    --height    50                  \
+                    --title     "$title"            \
+                    --text      "$text"             \
+                    1> >($PROGRAM_LOGS)             \
+                    2>> "$ERROR_LOG"
+    elif [[ $UI_MODE = 'tui' ]]; then
+        text+='...'
+        TERM=ansi                                   \
+        whiptail    --backtitle "$PROGRAM_NAME"     \
+                    --title     "$title"            \
+                    --infobox   "$text"             \
+                    10 78
+        sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
     else
         text+='...'
         kz.infomsg "$text"
@@ -640,14 +664,19 @@ function term() {
     local users=''
     local usb_mount_point=/media/$USER
 
+    # Due to the use of whiptail --infobox.
+    if [[ $UI_MODE = 'tui' ]]; then
+        clear -x
+    fi
+
     if grep --quiet rhel /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 
-    # Error-log (stderr) also to the main log.
-    kz.logmsg '---------------------------------------------------------------'
+    # Error log also to the standard log.
+    text="** $ERROR_LOG (stderr) *********************************************"
+    printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
-    kz.logmsg '---------------------------------------------------------------'
 
     if [[ $BACKUP_RC -ne 0 ]]; then
         title="$PROGRAM_DESC $(gettext 'error messages')"
@@ -663,13 +692,18 @@ $(gettext 'Check the error messages after this.')
 $(gettext 'Try creating the back up again.')"
         kz.errmsg "$text"
 
-        if $OPTION_GUI; then
-            zenity  --text-info             \
-                    --filename="$ERROR_LOG" \
-                    --width     700         \
-                    --height    500         \
-                    --title     "$title"    \
-                    2> /dev/null            || true
+        if [[ $UI_MODE = 'gui' ]]; then
+            zenity      --text-info                 \
+                        --filename="$ERROR_LOG"     \
+                        --width     700             \
+                        --height    500             \
+                        --title     "$title"        \
+                        2> /dev/null                || true
+        elif [[ $UI_MODE = 'tui' ]]; then
+            whiptail    --backtitle "$PROGRAM_NAME" \
+                        --title     "$title"        \
+                        --textbox   "$ERROR_LOG"    \
+                        30 90
         else
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
@@ -703,7 +737,7 @@ $users"
     fi
 
     if [[ $TARGET == $usb_mount_point* ]]; then
-        medium=$(ls --directory "$usb_mount_point/"* 2> /dev/null || true)
+        medium=$(find "$usb_mount_point/"* -prune || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text+="
 
