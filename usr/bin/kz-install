@@ -273,7 +273,7 @@ environment available")"
 
 # This function browses through the installation files.
 function process_option_browse() {
-    UI_MODE='tui'
+    UI_MODE='cli'
     less --no-init --quit-if-one-screen < <(
         cat "${installation_files[@]}" || true
         )
@@ -285,7 +285,7 @@ function process_option_list() {
     local apps=''
     local text=''
 
-    UI_MODE='tui'
+    UI_MODE='cli'
     text=$(gettext 'The following apps are available:')
     apps=$(
         grep    "#[[:space:]]\+${install}[[:space:]]\+" \
