@@ -765,7 +765,6 @@ changing system settings.")"
     fi
 
     if $REBOOT; then
-    
         if [[ $UI_MODE = 'gui' ]]; then
             pkexec /usr/bin/kz-install-pkexec "$reboot"
         else
