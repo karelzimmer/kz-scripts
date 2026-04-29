@@ -304,8 +304,9 @@ function backup_settings() {
     rm  --force                     \
         --recursive                 \
         --verbose                   \
-        "$HOME/kz-backup"           \
-        "$HOME/Instellingen"        |& $PROGRAM_LOGS
+        "$HOME/.kz"                 \
+        "$HOME/Instellingen"        \
+        "$HOME/kz-backup"           |& $PROGRAM_LOGS
     rm  --force                     \
         --verbose                   \
         "$settings_dir/avatar"      \

@@ -204,7 +204,7 @@ msgid ""
 "Use \"kz backup --target <usb medium>\" to select the desired USB medium."
 msgstr ""
 
-#: kz-backup:368
+#: kz-backup:369
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
@@ -212,50 +212,50 @@ msgid ""
 "Further reading:"
 msgstr ""
 
-#: kz-backup:326
+#: kz-backup:327
 msgid "==== START list of manual installed packages"
 msgstr ""
 
-#: kz-backup:327
+#: kz-backup:328
 msgid "==== END list of manual installed packages"
 msgstr ""
 
-#: kz-backup:328
+#: kz-backup:329
 msgid "==== START list of installed snaps"
 msgstr ""
 
-#: kz-backup:329
+#: kz-backup:330
 msgid "==== END list of installed snaps"
 msgstr ""
 
-#: kz-backup:330
+#: kz-backup:331
 msgid "==== START list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:331
+#: kz-backup:332
 msgid "==== END list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:388
+#: kz-backup:389
 msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
-#: kz-backup:413 kz-backup:425
+#: kz-backup:414 kz-backup:426
 msgid "Additional users can be added manually:"
 msgstr ""
 
-#: kz-backup:415
+#: kz-backup:416
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
 "3. Enter Name <user> and Username <username>."
 msgstr ""
 
-#: kz-backup:420 kz-backup:477 kz-backup:531
+#: kz-backup:421 kz-backup:478 kz-backup:532
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:427
+#: kz-backup:428
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -268,7 +268,7 @@ msgid ""
 "sudo passwd --delete --expire <username>"
 msgstr ""
 
-#: kz-backup:470
+#: kz-backup:471
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -278,7 +278,7 @@ msgid ""
 "4. Select avatar.ico in Personal folder / Settings, or another picture file."
 msgstr ""
 
-#: kz-backup:525
+#: kz-backup:526
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -287,71 +287,71 @@ msgid ""
 "3. Right-click on the desired image and choose Set as Background."
 msgstr ""
 
-#: kz-backup:220 kz-backup:563 kz-menu:75 kz-backup.desktop:10
+#: kz-backup:220 kz-backup:564 kz-menu:75 kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
-#: kz-backup:564
+#: kz-backup:565
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:628
+#: kz-backup:629
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:683 kz-install:721 kz-restore:401 kz-setup:613
+#: kz-backup:684 kz-install:721 kz-restore:401 kz-setup:613
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:684
+#: kz-backup:685
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:686 kz-restore:404
+#: kz-backup:687 kz-restore:404
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:687
+#: kz-backup:688
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:688 kz-restore:406
+#: kz-backup:689 kz-restore:406
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:689
+#: kz-backup:690
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:691 kz-install:726 kz-restore:409 kz-setup:617
+#: kz-backup:692 kz-install:726 kz-restore:409 kz-setup:617
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:692 kz-install:727 kz-restore:410 kz-setup:618
+#: kz-backup:693 kz-install:727 kz-restore:410 kz-setup:618
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:693
+#: kz-backup:694
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:717
+#: kz-backup:718
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:735
+#: kz-backup:736
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:745
+#: kz-backup:746
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 
-#: kz-backup:751 kz-restore:470
+#: kz-backup:752 kz-restore:470
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
