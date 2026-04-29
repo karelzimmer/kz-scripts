@@ -289,45 +289,28 @@ function backup_settings() {
         mkdir --verbose "$settings_dir" |& $PROGRAM_LOGS
     fi
 
-    backup_setting_readme
     backup_setting_apps
+    backup_setting_readme
     backup_setting_users
     backup_setting_wifi
 
     if [[ -n ${DISPLAY-} ]]; then
         backup_setting_avatar
         backup_setting_desktop
-        backup_setting_favs
+        backup_setting_favorites
     fi
 
     # Remove old naming of folders/files.
-    rm  --force                 \
-        --recursive             \
-        --verbose               \
-        "$HOME/kz-backup"       \
-        "$HOME/Instellingen"    |& $PROGRAM_LOGS
-    rm  --force                 \
-        --verbose               \
-        "$settings_dir/desktop" \
-        "$settings_dir/avatar"  |& $PROGRAM_LOGS
-}
-
-
-# This function creates a README.
-function backup_setting_readme() {
-    local output_file=$settings_dir/README
-    local text=''
-
-    kz.logmsg 'Create settings README...'
-
-    text="$(gettext "This folder contains files created by kz-backup.
-These files are used by kz-restore and others.
-
-Further reading:")
-    man kz backup
-    man kz restore
-    man kz setup"
-    printf '%s\n' "$text" > "$output_file"
+    rm  --force                     \
+        --recursive                 \
+        --verbose                   \
+        "$HOME/kz-backup"           \
+        "$HOME/Instellingen"        |& $PROGRAM_LOGS
+    rm  --force                     \
+        --verbose                   \
+        "$settings_dir/avatar"      \
+        "$settings_dir/desktop"     \
+        "$settings_dir/favs.txt"    |& $PROGRAM_LOGS
 }
 
 
@@ -372,6 +355,24 @@ function backup_setting_apps() {
             printf '%s\n' "$footer3"
         } >> "$output_file"
     fi
+}
+
+
+# This function creates a README.
+function backup_setting_readme() {
+    local output_file=$settings_dir/README
+    local text=''
+
+    kz.logmsg 'Create settings README...'
+
+    text="$(gettext "This folder contains files created by kz-backup.
+These files are used by kz-restore and others.
+
+Further reading:")
+    man kz backup
+    man kz restore
+    man kz setup"
+    printf '%s\n' "$text" > "$output_file"
 }
 
 
@@ -479,6 +480,23 @@ $(gettext '[1] Windows, command, or magnifying glass key.')"
 }
 
 
+# This function saves the favorite apps in the dash.
+function backup_setting_favorites() {
+    local output_file=$settings_dir/favorites.txt
+
+    kz.logmsg 'Save the favorite apps...'
+
+    gsettings   get                             \
+                org.gnome.shell favorite-apps   |
+                tr '[' ' '                      |
+                tr ']' ' '                      |
+                tr "'" ' '                      |
+                tr --delete '[:space:]'         |
+                tr ',' '\n'                     \
+                > "$output_file"                |& $PROGRAM_LOGS || true
+}
+
+
 # This function copies the desktop background, if available, and saves
 # instructions for setting desktop background.
 function backup_setting_desktop() {
@@ -513,23 +531,6 @@ function backup_setting_desktop() {
 $(gettext '[1] Windows, command, or magnifying glass key.')"
 
     printf '%s\n' "$text" > "$output_file_2"
-}
-
-
-# This function saves the favorite apps in the dash.
-function backup_setting_favs() {
-    local output_file=$settings_dir/favs.txt
-
-    kz.logmsg 'Save the favorite apps...'
-
-    gsettings   get                             \
-                org.gnome.shell favorite-apps   |
-                tr '[' ' '                      |
-                tr ']' ' '                      |
-                tr "'" ' '                      |
-                tr --delete '[:space:]'         |
-                tr ',' '\n'                     \
-                > "$output_file"                |& $PROGRAM_LOGS || true
 }
 
 
