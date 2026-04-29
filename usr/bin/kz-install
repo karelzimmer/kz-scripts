@@ -568,37 +568,17 @@ function process_command_file() {
     local app_name_line=''
     local app_name=''
     local command_record=''
+    local text=''
 
     text="
 $(gettext "Authentication is required to install apps and change system \
 settings")
 "
-    if [[ $UI_MODE = 'tui' ]]; then
-        sudo --reset-timestamp
-        while true; do
-            if sudo --non-interactive --validate 2> /dev/null; then
-                break
-            else
-                if ! sudo   --stdin <<< "$(
-                            whiptail    --backtitle     "$PROGRAM_NAME" \
-                                        --title         "$PROGRAM_DESC" \
-                                        --passwordbox   "$text"         \
-                                        10 70                           \
-                                        2>&1 >/dev/tty                  || true
-                            )"      \
-                            true    2> /dev/null; then
-                    text=$(gettext 'Authentication is required to continue.')
-                    kz.errmsg "$text"
-                    exit 1
-                fi
-            fi
-        done
-    elif [[ $UI_MODE = 'cli' ]]; then
-        sudo --reset-timestamp
-        sudo true
-    fi
+    # To maximize the time window without asking for authentication.
+    sudo --reset-timestamp
 
     if [[ $UI_MODE = 'cli' ]]; then
+        sudo true
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
         kz.infomsg "$text"
@@ -654,28 +634,6 @@ function execute_command() {
 
     if [[ $UI_MODE = 'gui' ]]; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
-    elif [[ $UI_MODE = 'tui' ]]; then
-        TERM=ansi                                                   \
-        whiptail    --backtitle "$PROGRAM_NAME"                     \
-                    --title     "$title"                            \
-                    --infobox   "$app_name_line\n\n         $cmd"   \
-                    10 90
-    else
-        # Ellipsize terminal output.
-        # Width 9 characters less, 9 for leading spaces.
-        cmd_dis_max=$(( $(tput cols) - 9 ))
-        if [[ ${#cmd} -gt $cmd_dis_max ]]; then
-            # Width 12 characters less, 9 for leading spaces and 3 for trailing
-            # ellipsis.
-            cmd_dis_len=$(( $(tput cols) - 12 ))
-            cmd_dis=${cmd:0:cmd_dis_len}...
-        else
-            cmd_dis=$cmd
-        fi
-        kz.infomsg "         $cmd_dis"
-    fi
-
-    if [[ $UI_MODE = 'gui' ]]; then
         kz.check_debian_package_manager
         pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                      \
@@ -691,7 +649,49 @@ function execute_command() {
         if [[ $cmd = 'REBOOT=true' ]]; then
             REBOOT=true
         fi
+    elif [[ $UI_MODE = 'tui' ]]; then
+        while true; do
+            if sudo --non-interactive --validate 2> /dev/null; then
+                break
+            else
+                if ! sudo   --stdin <<< "$(
+                            whiptail    --backtitle     "$PROGRAM_NAME" \
+                                        --title         "$PROGRAM_DESC" \
+                                        --passwordbox   "$text"         \
+                                        10 70                           \
+                                        2>&1 >/dev/tty                  || true
+                            )"      \
+                            true    2> /dev/null; then
+                    text=$(gettext 'Authentication is required to continue.')
+                    kz.errmsg "$text"
+                    exit 1
+                fi
+            fi
+        done
+        TERM=ansi                                                   \
+        whiptail    --backtitle "$PROGRAM_NAME"                     \
+                    --title     "$title"                            \
+                    --infobox   "$app_name_line\n\n         $cmd"   \
+                    10 90
+        kz.check_debian_package_manager
+        eval    "$cmd"              \
+                1> >($PROGRAM_LOGS) \
+                2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
     else
+        # MODE = 'cli'
+        # Ellipsize terminal output.
+        # Width 9 characters less, 9 for leading spaces.
+        cmd_dis_max=$(( $(tput cols) - 9 ))
+        if [[ ${#cmd} -gt $cmd_dis_max ]]; then
+            # Width 12 characters less, 9 for leading spaces and 3 for trailing
+            # ellipsis.
+            cmd_dis_len=$(( $(tput cols) - 12 ))
+            cmd_dis=${cmd:0:cmd_dis_len}...
+        else
+            cmd_dis=$cmd
+        fi
+        sudo true
+        kz.infomsg "         $cmd_dis"
         kz.check_debian_package_manager
         eval    "$cmd"              \
                 1> >($PROGRAM_LOGS) \
@@ -741,6 +741,7 @@ $(gettext 'Try to install/remove the apps again.')"
                         --textbox   "$ERROR_LOG"    \
                         30 90
         else
+            kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
@@ -759,7 +760,12 @@ changing system settings.")"
     fi
     kz.infomsg "$text"
 
+    if [[ $UI_MODE = 'cli' ]]; then
+        kz.wait_for_enter
+    fi
+
     if $REBOOT; then
+    
         if [[ $UI_MODE = 'gui' ]]; then
             pkexec /usr/bin/kz-install-pkexec "$reboot"
         else

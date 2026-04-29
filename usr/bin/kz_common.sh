@@ -388,3 +388,13 @@ $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             ;;
     esac
 }
+
+
+# This function waits for the user to press the Enter key.
+function kz.wait_for_enter() {
+    prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
+    kz.logmsg "$prompt"
+    printf '\n'
+    read -rp "$prompt" < /dev/tty
+    printf '\n'
+}

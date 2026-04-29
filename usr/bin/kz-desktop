@@ -289,11 +289,7 @@ function capture_gnome_changes() {
     text=$(gettext 'Now make the change in the desktop environment.')
     kz.infomsg "$text"
 
-    prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    kz.logmsg "$prompt"
-    printf '\n'
-    read -rp "$prompt" < /dev/tty
-    printf '\n'
+    kz.wait_for_enter
 
     # Capturing the configuration database after.
     save_configuration_database B "$config_b_file"

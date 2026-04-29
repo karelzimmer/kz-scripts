@@ -534,6 +534,12 @@ function process_command_file() {
     local app_name=''
     local command_record=''
 
+    if [[ $UI_MODE = 'cli' ]]; then
+        text="$(gettext 'NUM/TOT  APP')
+         $(gettext 'COMMAND')..."
+        kz.infomsg "$text"
+    fi
+
     while read -r command_record; do
         case $command_record in
             '' )
@@ -553,6 +559,9 @@ function process_command_file() {
                         "$app_seq_num"      \
                         "$app_tot_num"      \
                         "$app_name"
+                if [[ $UI_MODE = 'cli' ]]; then
+                    kz.infomsg "$app_name_line"
+                fi
                 # To corrolate possible error messages with app name.
                 printf ' %s\n' "-- App $app_name" >> "$ERROR_LOG"
                 ;;
@@ -572,17 +581,34 @@ function process_command_file() {
 # This function reports and executes a command from the command file.
 function execute_command() {
     local cmd=$1
+    local -i cmd_dis_len=0
+    local -i cmd_dis_max=0
+    local cmd_dis=''
 
     kz.logmsg "$app_name_line:$cmd"
 
     if [[ $UI_MODE = 'gui' ]]; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
-    else
+    elif [[ $UI_MODE = 'tui' ]]; then
         TERM=ansi                                                   \
         whiptail    --backtitle "$PROGRAM_NAME"                     \
                     --title     "$title"                            \
                     --infobox   "$app_name_line\n\n         $cmd"   \
                     10 90
+    else
+        # MODE = 'cli'
+        # Ellipsize terminal output.
+        # Width 9 characters less, 9 for leading spaces.
+        cmd_dis_max=$(( $(tput cols) - 9 ))
+        if [[ ${#cmd} -gt $cmd_dis_max ]]; then
+            # Width 12 characters less, 9 for leading spaces and 3 for trailing
+            # ellipsis.
+            cmd_dis_len=$(( $(tput cols) - 12 ))
+            cmd_dis=${cmd:0:cmd_dis_len}...
+        else
+            cmd_dis=$cmd
+        fi
+        kz.infomsg "         $cmd_dis"
     fi
 
     eval    "$cmd"              \
@@ -626,11 +652,15 @@ $(gettext 'Try to set up/reset the apps again.')"
                         --height    500             \
                         --title     "$title"        \
                         2> /dev/null                || true
-        else
+        elif [[ $UI_MODE = 'tui' ]]; then
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title     "$title"        \
                         --textbox   "$ERROR_LOG"    \
                         30 90
+        else
+            kz.wait_for_enter
+            kz.infomsg "$title $ERROR_LOG:"
+            less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
     fi
 
@@ -653,6 +683,10 @@ $(gettext "Type 'logout' to log out of the computer to finish setting up the \
 apps and changing user settings.")"
         fi
         kz.infomsg "$text"
+
+        if [[ $UI_MODE = 'cli' ]]; then
+            kz.wait_for_enter
+        fi
 
         if [[ -n ${DISPLAY-} ]]; then
             # A GUI is available.

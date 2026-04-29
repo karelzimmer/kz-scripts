@@ -343,7 +343,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:684 kz-install:721 kz-restore:401 kz-setup:613
+#: kz-backup:684 kz-install:721 kz-restore:401 kz-setup:639
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -368,11 +368,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:692 kz-install:726 kz-restore:409 kz-setup:617
+#: kz-backup:692 kz-install:726 kz-restore:409 kz-setup:643
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:693 kz-install:727 kz-restore:410 kz-setup:618
+#: kz-backup:693 kz-install:727 kz-restore:410 kz-setup:644
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -380,23 +380,23 @@ msgstr "Controleer de foutmeldingen hierna."
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:718
+#: kz-backup:719
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:736
+#: kz-backup:737
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:746
+#: kz-backup:747
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 "De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
 
-#: kz-backup:752 kz-restore:470
+#: kz-backup:753 kz-restore:471
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -621,7 +621,7 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz-desktop:292
+#: kz_common.sh:395
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -785,12 +785,12 @@ msgstr "Favorieten:"
 msgid "Now make the change in the desktop environment."
 msgstr "Voer nu de wijziging uit in de desktopomgeving."
 
-#: kz-desktop:318
+#: kz-desktop:314
 #, sh-format
 msgid "Config database content captured ($fase)."
 msgstr "Inhoud configuratiedatabase vastgelegd ($fase)."
 
-#: kz-desktop:330
+#: kz-desktop:326
 msgid ""
 "Changes in the configuration database,\n"
 "< is the old setting (A),\n"
@@ -800,7 +800,7 @@ msgstr ""
 "< is de oude   instelling (A),\n"
 "> is de nieuwe instelling (B):"
 
-#: kz-desktop:335
+#: kz-desktop:331
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr "Gebruik \"gsettings set <wijziging>\" bij wijzigingen."
 
@@ -1019,21 +1019,21 @@ msgstr "Geen opdrachten om uit te voeren."
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
-#: kz-install:573 nl.karelzimmer.kz-install.policy:22
+#: kz-install:574 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 "Authenticatie is vereist om apps te installeren en systeeminstellingen te "
 "wijzigen"
 
-#: kz-install:590 kz-install:685
+#: kz-install:643 kz-install:665
 msgid "Authentication is required to continue."
 msgstr "Authenticatie is vereist om door te gaan."
 
-#: kz-install:602
+#: kz-install:582 kz-setup:538
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:603
+#: kz-install:583 kz-setup:539
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
@@ -1045,15 +1045,15 @@ msgstr "De installatie van de volgende apps bevat fouten:"
 msgid "Try to install/remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
-#: kz-install:749
+#: kz-install:750
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:751
+#: kz-install:752
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:757
+#: kz-install:758
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1307,17 +1307,17 @@ msgstr "is er te weinig ruimte op $HOME."
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:435
+#: kz-restore:436
 #, sh-format
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-restore:454
+#: kz-restore:455
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr "De back-up is teruggezet voor $user, er zijn $num_users gebruikers:"
 
-#: kz-restore:464
+#: kz-restore:465
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"
@@ -1420,23 +1420,23 @@ msgstr "Selecteer apps om in te stellen:"
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:614
+#: kz-setup:640
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:619
+#: kz-setup:645
 msgid "Try to set up/reset the apps again."
 msgstr "Probeer de apps opnieuw in te stellen of te resetten."
 
-#: kz-setup:637
+#: kz-setup:667
 msgid "Apps set up completed."
 msgstr "Apps instellen is voltooid."
 
-#: kz-setup:639
+#: kz-setup:669
 msgid "Apps reset completed."
 msgstr "Apps resetten is voltooid."
 
-#: kz-setup:647
+#: kz-setup:677
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1444,7 +1444,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:652
+#: kz-setup:682
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1452,7 +1452,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:669
+#: kz-setup:703
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 

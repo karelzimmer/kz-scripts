@@ -299,7 +299,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:684 kz-install:721 kz-restore:401 kz-setup:613
+#: kz-backup:684 kz-install:721 kz-restore:401 kz-setup:639
 msgid "error messages"
 msgstr ""
 
@@ -324,11 +324,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:692 kz-install:726 kz-restore:409 kz-setup:617
+#: kz-backup:692 kz-install:726 kz-restore:409 kz-setup:643
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:693 kz-install:727 kz-restore:410 kz-setup:618
+#: kz-backup:693 kz-install:727 kz-restore:410 kz-setup:644
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -336,22 +336,22 @@ msgstr ""
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:718
+#: kz-backup:719
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:736
+#: kz-backup:737
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:746
+#: kz-backup:747
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 
-#: kz-backup:752 kz-restore:470
+#: kz-backup:753 kz-restore:471
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
@@ -568,7 +568,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-desktop:292
+#: kz_common.sh:395
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -718,19 +718,19 @@ msgstr ""
 msgid "Now make the change in the desktop environment."
 msgstr ""
 
-#: kz-desktop:318
+#: kz-desktop:314
 #, sh-format
 msgid "Config database content captured ($fase)."
 msgstr ""
 
-#: kz-desktop:330
+#: kz-desktop:326
 msgid ""
 "Changes in the configuration database,\n"
 "< is the old setting (A),\n"
 "> is the new setting (B):"
 msgstr ""
 
-#: kz-desktop:335
+#: kz-desktop:331
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr ""
 
@@ -925,19 +925,19 @@ msgstr ""
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:573 nl.karelzimmer.kz-install.policy:22
+#: kz-install:574 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:590 kz-install:685
+#: kz-install:643 kz-install:665
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:602
+#: kz-install:582 kz-setup:538
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:603
+#: kz-install:583 kz-setup:539
 msgid "COMMAND"
 msgstr ""
 
@@ -949,15 +949,15 @@ msgstr ""
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:749
+#: kz-install:750
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:751
+#: kz-install:752
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:757
+#: kz-install:758
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1187,17 +1187,17 @@ msgstr ""
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:435
+#: kz-restore:436
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:454
+#: kz-restore:455
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-restore:464
+#: kz-restore:465
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"
@@ -1281,35 +1281,35 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:614
+#: kz-setup:640
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:619
+#: kz-setup:645
 msgid "Try to set up/reset the apps again."
 msgstr ""
 
-#: kz-setup:637
+#: kz-setup:667
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:639
+#: kz-setup:669
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:647
+#: kz-setup:677
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:652
+#: kz-setup:682
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:669
+#: kz-setup:703
 msgid "Log out of the computer yourself."
 msgstr ""
 

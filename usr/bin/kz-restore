@@ -424,6 +424,7 @@ $(gettext 'Try restoring the back up again.')"
                         --textbox   "$ERROR_LOG"    \
                         30 90
         else
+            kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
