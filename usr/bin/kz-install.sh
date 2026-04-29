@@ -707,10 +707,8 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes kr
 # -----------------------------------------------------------------------------
 # Kernel-based Virtual Machine.
 # Images are in: /var/lib/libvirt/images/
-# Dpkg::Options to prevent interaction while restoring /etc/libvirt
-# configuration files.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-system-x86 virtinst virt-manager; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf groupinstall "Virtualization Host"; fi
 #
@@ -735,7 +733,7 @@ REBOOT=true
 # Images are in: /var/lib/libvirt/images/
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-system-x86 virtinst virt-manager; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo systemctl disable --now libvirtd; fi
 if grep --quiet rhel /etc/os-release; then sudo dnf groupremove "Virtualization Host"; fi
