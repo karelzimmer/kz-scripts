@@ -711,23 +711,15 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes kr
 # configuration files.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
-# -----------------------------------------------------------------------------
-# Prevent "Error starting domain: Requested operation is not valid: network
-# 'default' is not active".
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default; fi
-# -----------------------------------------------------------------------------
-# Check network 'default' with
-# "sudo virsh --connect=qemu:///system net-info default", should output
-# 'Autostart: yes'.
-# -----------------------------------------------------------------------------
+#
 if grep --quiet rhel /etc/os-release; then sudo dnf groupinstall "Virtualization Host"; fi
-if grep --quiet rhel /etc/os-release; then sudo systemctl enable --now libvirtd; fi
+#
+sudo systemctl enable --now libvirtd
 # -----------------------------------------------------------------------------
 # Prevent "Error starting domain: Requested operation is not valid: network
 # 'default' is not active".
 # -----------------------------------------------------------------------------
-if grep --quiet rhel /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default; fi
+sudo virsh --connect=qemu:///system net-autostart default
 # -----------------------------------------------------------------------------
 # Check network 'default' with
 # "sudo virsh --connect=qemu:///system net-info default", should output
