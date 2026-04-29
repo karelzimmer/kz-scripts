@@ -1045,15 +1045,15 @@ msgstr "De installatie van de volgende apps bevat fouten:"
 msgid "Try to install/remove the apps again."
 msgstr "Probeer de apps opnieuw te installeren of te verwijderen."
 
-#: kz-install:750
+#: kz-install:749
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:752
+#: kz-install:751
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:758
+#: kz-install:757
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."

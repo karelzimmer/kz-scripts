@@ -949,15 +949,15 @@ msgstr ""
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:750
+#: kz-install:749
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:752
+#: kz-install:751
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:758
+#: kz-install:757
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."

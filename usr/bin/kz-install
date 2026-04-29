@@ -593,7 +593,7 @@ settings")
                 fi
             fi
         done
-    elif  [[ $UI_MODE = 'cli' ]]; then
+    elif [[ $UI_MODE = 'cli' ]]; then
         sudo --reset-timestamp
         sudo true
     fi
@@ -703,7 +703,7 @@ function execute_command() {
 # This function controls the termination of the script.
 function term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
-    local reboot='sudo systemctl reboot'
+    local reboot='systemctl --check-inhibitors=no reboot'
     local text=''
     local title=''
 
@@ -741,7 +741,6 @@ $(gettext 'Try to install/remove the apps again.')"
                         --textbox   "$ERROR_LOG"    \
                         30 90
         else
-            kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
