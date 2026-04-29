@@ -666,7 +666,7 @@ function term() {
     local users=''
     local usb_mount_point=/media/$USER
 
-    # Due to the use of whiptail --infobox.
+    # Due to the use of whiptail infobox.
     if [[ $UI_MODE = 'tui' ]]; then
         clear -x
     fi
