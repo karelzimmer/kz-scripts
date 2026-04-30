@@ -581,7 +581,7 @@ settings")
         sudo true
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
-        kz.infomsg "$text"
+        printf '%s\n' "$text"
     fi
 
     while read -r command_record; do
@@ -604,7 +604,7 @@ settings")
                         "$app_tot_num"      \
                         "$app_name"
                 if [[ $UI_MODE = 'cli' ]]; then
-                    kz.infomsg "$app_name_line"
+                    printf '%s\n' "$app_name_line"
                 fi
                 # To corrolate possible error messages with app name.
                 printf ' %s\n' "-- App $app_name" >> "$ERROR_LOG"
@@ -630,7 +630,7 @@ function execute_command() {
     local cmd_dis=''
     local -i pkexec_rc=0
 
-    kz.logmsg "$app_name_line:$cmd"
+    kz.logmsg "$app_name_line\n\n         $cmd"
 
     if [[ $UI_MODE = 'gui' ]]; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
@@ -691,7 +691,7 @@ function execute_command() {
             cmd_dis=$cmd
         fi
         sudo true
-        kz.infomsg "         $cmd_dis"
+        printf '%s\n' "         $cmd_dis"
         kz.check_debian_package_manager
         eval    "$cmd"              \
                 1> >($PROGRAM_LOGS) \
@@ -760,7 +760,7 @@ changing system settings.")"
     fi
     kz.infomsg "$text"
 
-    if [[ $UI_MODE = 'cli' ]]; then
+    if $REBOOT && [[ $UI_MODE = 'cli' ]]; then
         kz.wait_for_enter
     fi
 
