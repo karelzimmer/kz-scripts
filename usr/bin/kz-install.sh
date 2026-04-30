@@ -375,8 +375,8 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; f
 # -----------------------------------------------------------------------------
 # Web browser (ESR = Extended Support Release).
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || true; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes firefox firefox-locale-"${LANG:0:2}" || true; fi
+if grep --quiet Debian /etc/os-release; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo apt-get install --assume-yes firefox firefox-locale-"${LANG:0:2}"; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
@@ -384,8 +384,8 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes firefox;
 # -----------------------------------------------------------------------------
 # Web browser (ESR = Extended Support Release).
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || true; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes firefox firefox-locale-"${LANG:0:2}" || true; fi
+if grep --quiet Debian /etc/os-release; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}"; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo apt-get remove --assume-yes firefox firefox-locale-"${LANG:0:2}" || true; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
 
@@ -1162,6 +1162,24 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes te
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes teamviewer; fi
 
+# INSTALL thunderbird *
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet Debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}"; fi
+#
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes thunderbird; fi
+
+# REMOVE thunderbird *
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet Debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}"; fi
+if grep --quiet Ubuntu /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}"; fi
+#
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes thunderbird; fi
+
 # INSTALL tree pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Display directory tree.
@@ -1177,23 +1195,6 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes tree; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes tree; fi
-
-# INSTALL thunderbird *
-# -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}" || true; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}" || true; fi
-#
-if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes thunderbird; fi
-
-# REMOVE thunderbird *
-# -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
-# -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird; fi
-#
-if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes thunderbird; fi
 
 # INSTALL transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
