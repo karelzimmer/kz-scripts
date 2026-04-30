@@ -371,6 +371,24 @@ if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes fd
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
 
+# INSTALL firefox *
+# -----------------------------------------------------------------------------
+# Web browser (ESR = Extended Support Release).
+# -----------------------------------------------------------------------------
+if ! sudo apt-get install --assume-yes firefox-esr firefox firefox-l10n-"${LANG:0:2}"; then sudo apt-get install --assume-yes firefox; fi
+if ! sudo apt-get install --assume-yes firefox; then sudo apt-get install --assume-yes firefox-esr firefox firefox-l10n-"${LANG:0:2}"; fi
+#
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes firefox; fi
+
+# REMOVE firefox *
+# -----------------------------------------------------------------------------
+# Web browser (ESR = Extended Support Release).
+# -----------------------------------------------------------------------------
+if ! sudo apt-get remove --assume-yes firefox-esr firefox firefox-l10n-"${LANG:0:2}"; then sudo apt-get remove --assume-yes firefox; fi
+if ! sudo apt-get remove --assume-yes firefox; then sudo apt-get remove --assume-yes firefox-esr firefox firefox-l10n-"${LANG:0:2}"; fi
+#
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
+
 # INSTALL fwupd-settings #none
 # -----------------------------------------------------------------------------
 # Disable FirmWare UPdate Daemon.
@@ -1159,6 +1177,22 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes tree; fi
 if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes tree; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes tree; fi
+
+# INSTALL thunderbird *
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird; fi
+#
+if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes thunderbird; fi
+
+# REMOVE thunderbird *
+# -----------------------------------------------------------------------------
+# E-mail, calendar, contacts, and task management.
+# -----------------------------------------------------------------------------
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes thunderbird; fi
+#
+if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes thunderbird; fi
 
 # INSTALL transmission pc01 pc06 pc07
 # -----------------------------------------------------------------------------
