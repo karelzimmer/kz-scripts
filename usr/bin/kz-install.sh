@@ -375,8 +375,8 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes fdupes; f
 # -----------------------------------------------------------------------------
 # Web browser (ESR = Extended Support Release).
 # -----------------------------------------------------------------------------
-if ! sudo apt-get install --assume-yes firefox-esr firefox firefox-l10n-"${LANG:0:2}"; then sudo apt-get install --assume-yes firefox; fi
-if ! sudo apt-get install --assume-yes firefox; then sudo apt-get install --assume-yes firefox-esr firefox firefox-l10n-"${LANG:0:2}"; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || true; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes firefox firefox-locale-"${LANG:0:2}" || true; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
@@ -384,8 +384,8 @@ if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes firefox;
 # -----------------------------------------------------------------------------
 # Web browser (ESR = Extended Support Release).
 # -----------------------------------------------------------------------------
-if ! sudo apt-get remove --assume-yes firefox-esr firefox firefox-l10n-"${LANG:0:2}"; then sudo apt-get remove --assume-yes firefox; fi
-if ! sudo apt-get remove --assume-yes firefox; then sudo apt-get remove --assume-yes firefox-esr firefox firefox-l10n-"${LANG:0:2}"; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || true; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get remove --assume-yes firefox firefox-locale-"${LANG:0:2}" || true; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
 
@@ -1182,7 +1182,8 @@ if grep --quiet rhel /etc/os-release; then sudo dnf remove --assumeyes tree; fi
 # -----------------------------------------------------------------------------
 # E-mail, calendar, contacts, and task management.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}" || true; fi
+if grep --quiet debian /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}" || true; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf install --assumeyes thunderbird; fi
 
