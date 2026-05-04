@@ -189,7 +189,6 @@ function check_target() {
     local -a all_media=()
     local -a choices=()
     local -i max_choices=0
-    local -i medium_no=0
     local program_name=${PROGRAM_NAME/kz-/kz }
     local selected_medium=''
     local text=''
@@ -274,18 +273,17 @@ Connect a usb medium.")
                         "$(gettext 'Choose USB medium:')"
                 all_media=("$usb_mount_point"/*)
                 for medium in "${all_media[@]}"; do
-                    ((++medium_no))
-                    printf "%3d %s\n" "$medium_no" "$medium"
+                    ((++max_choices))
+                    printf "%3d %s\n" "$max_choices" "$medium"
                 done
-                max_choices=$(( medium_no + 1 ))
+                ((++max_choices))
                 printf  '%3d %s\n'      \
                         "$max_choices"  \
                         "$(gettext 'Exit')"
 
                 printf '\n'
                 while true; do
-                    prompt=$(eval_gettext \
-"Select number [1-\$max_choices]: ")
+                    prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
                     kz.logmsg "$prompt"
                     read -rp "$prompt"
 
