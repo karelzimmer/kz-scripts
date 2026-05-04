@@ -188,6 +188,8 @@ $USAGE"
 function check_source() {
     local -a all_media=()
     local -a choices=()
+    local -i max_choices=0
+    local -i medium_no=0
     local program_name=${PROGRAM_NAME/kz-/kz }
     local selected_medium=''
     local text=''
@@ -266,18 +268,45 @@ Connect a usb medium.")
                     )
             else
                 UI_MODE='cli'
-                text="$(gettext 'More than one USB medium is connected:')
-$medium
+                UI_MODE='cli'
+                text=$(gettext 'More than one USB medium is connected.')
+                printf  '%s\n\n%s\n'    \
+                        "$text"         \
+                        "$(gettext 'Choose USB medium:')"
+                all_media=("$usb_mount_point"/*)
+                for medium in "${all_media[@]}"; do
+                    ((++medium_no))
+                    printf "%3d %s\n" "$medium_no" "$medium"
+                done
+                max_choices=$(( medium_no + 1 ))
+                printf  '%3d %s\n'      \
+                        "$max_choices"  \
+                        "$(gettext 'Exit')"
 
-$(gettext "Use \"kz restore --source <usb medium>\" to select the desired USB \
-medium.")"
-                kz.infomsg "$text"
-                exit 0
-            fi
-            if [[ -z $selected_medium ]]; then
-                text=$(gettext 'No USB medium selected.')
-                kz.infomsg "$text"
-                exit 0
+                printf '\n'
+                while true; do
+                    prompt=$(eval_gettext \
+"Select number [1-\$max_choices]: ")
+                    kz.logmsg "$prompt"
+                    read -rp "$prompt"
+
+                    case $REPLY in
+                        *[^[:digit:]]* )
+                            continue
+                            ;;
+                        * )
+                            if [[ $REPLY -eq $max_choices ]]; then
+                                exit 0
+                            elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]
+                            then
+                                selected_medium=${all_media[REPLY-1]}
+                                break
+                            else
+                                continue
+                            fi
+                            ;;
+                    esac
+                done
             fi
             medium=$selected_medium
         fi
