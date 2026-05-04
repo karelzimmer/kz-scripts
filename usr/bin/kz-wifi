@@ -106,6 +106,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     This function handles the script options and arguments.
     """
     arg: str = ''
+    check_zenity: str = ' && '
     opt: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
@@ -115,6 +116,24 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         if opt in ('-C', '--cli'):
             UI_MODE = 'cli'
         elif opt in ('-g', '--gui'):
+            if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
+                              stdout=subprocess.DEVNULL,
+                              stderr=subprocess.DEVNULL,
+                              shell=True,).returncode != 0:
+                UI_MODE = 'cli'
+                text = PROGRAM_NAME + ': ' + opt + ': '
+                text += _('no desktop environment available')
+                kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+                kz.term(PROGRAM_NAME, 1)
+            if subprocess.run('type zenity', executable='bash',
+                              stdout=subprocess.DEVNULL,
+                              stderr=subprocess.DEVNULL,
+                              shell=True,).returncode != 0:
+                UI_MODE = 'cli'
+                text = PROGRAM_NAME + ': ' + opt + ': '
+                text += _('zenity is required; run kz-get first')
+                kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+                kz.term(PROGRAM_NAME, 1)
             UI_MODE = 'gui'
         elif opt in ('-h', '--help'):
             kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)

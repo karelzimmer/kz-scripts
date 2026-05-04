@@ -420,6 +420,8 @@ sed --in-place 's/eval/#eval/g' ~/.bashrc
 # Disable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
 sed --in-place '/^stty -ixon/d' ~/.bashrc
+#
+LOGOUT=true
 
 # SETUP terminal pc06 pc07
 # -----------------------------------------------------------------------------
@@ -453,15 +455,15 @@ kz-desktop --delete=thunderbird
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=code
 #
-xdg-mime default code.desktop application/json
-xdg-mime default code.desktop application/x-desktop
-xdg-mime default code.desktop application/x-shellscript
-xdg-mime default code.desktop application/xml
-xdg-mime default code.desktop text/html
-xdg-mime default code.desktop text/markdown
-xdg-mime default code.desktop text/plain
-xdg-mime default code.desktop text/troff
-xdg-mime default code.desktop text/x-python
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/json; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/x-desktop; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/x-shellscript; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/xml; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/html; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/markdown; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/plain; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/troff; fi
+if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
 # RESET vscode pc06 pc07
 # -----------------------------------------------------------------------------

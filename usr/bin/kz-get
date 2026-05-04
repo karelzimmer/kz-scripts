@@ -112,6 +112,13 @@ function process_deb_packages() {
     # Install kz package.
     check_debian_package_manager
     sudo apt-get install "$reinstall" --assume-yes "$kz_deb_local_file"
+
+    # Check in a desktop environment if zenity package is installed, and if
+    # not, install it. This is needed for the GUI mode of the kz scripts.
+    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
+        check_debian_package_manager
+        sudo apt-get install --assume-yes zenity
+    fi
 }
 
 
@@ -154,6 +161,12 @@ function process_rpm_packages() {
 
     # Install kz package.
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
+
+    # Check in a desktop environment if zenity package is installed, and if
+    # not, install it. This is needed for the GUI mode of the kz scripts.
+    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
+        sudo dnf install --assumeyes zenity
+    fi
 }
 
 

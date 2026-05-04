@@ -207,8 +207,16 @@ function process_options() {
                 ;;
             -g | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
-                    text="$program_name: $1: $(gettext "no desktop \
-environment available")"
+                    UI_MODE='cli'
+                    text="$program_name: $1: \
+$(gettext "no desktop environment available")"
+                    kz.infomsg "$text"
+                    exit 1
+                fi
+                if ! type zenity |& $PROGRAM_LOGS; then
+                    UI_MODE='cli'
+                    text="$program_name: $1: \
+$(gettext "zenity is required; run kz-get first")"
                     kz.infomsg "$text"
                     exit 1
                 fi
@@ -391,6 +399,7 @@ function process_option_select() {
             sed         's/"//g'                            || true
             )
     else
+        UI_MODE='cli'
         if [[ $install = 'INSTALL' ]]; then
             text=$(gettext 'Use "kz install <app>..." to install the apps.')
         else
@@ -423,7 +432,7 @@ function process_argument_app() {
         # Refresh package lists before installing apps, to minimize the risk of
         # errors due to outdated package lists.
         printf '%s\n' "\
-# INSTALL $(gettext 'automatically-added-update')
+# INSTALL 1-$(gettext 'update-automatically-added')
 # -----------------------------------------------------------------------------
 # $(gettext 'Update package lists before installing apps.')
 # -----------------------------------------------------------------------------
@@ -678,7 +687,7 @@ function execute_command() {
                 1> >($PROGRAM_LOGS) \
                 2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
     else
-        # MODE = 'cli'
+        UI_MODE='cli'
         # Ellipsize terminal output.
         # Width 9 characters less, 9 for leading spaces.
         cmd_dis_max=$(( $(tput cols) - 9 ))
@@ -738,9 +747,11 @@ $(gettext 'Try to install/remove the apps again.')"
         elif [[ $UI_MODE = 'tui' ]]; then
             whiptail    --backtitle "$PROGRAM_NAME" \
                         --title     "$title"        \
+                        --scrolltext                \
                         --textbox   "$ERROR_LOG"    \
                         30 90
         else
+            UI_MODE='cli'
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"

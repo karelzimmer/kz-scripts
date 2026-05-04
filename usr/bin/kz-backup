@@ -116,8 +116,16 @@ function process_options() {
                 ;;
             -g | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
-                    text="$program_name: $1: $(gettext "no desktop \
-environment available")"
+                    UI_MODE='cli'
+                    text="$program_name: $1: \
+$(gettext "no desktop environment available")"
+                    kz.infomsg "$text"
+                    exit 1
+                fi
+                if ! type zenity |& $PROGRAM_LOGS; then
+                    UI_MODE='cli'
+                    text="$program_name: $1: \
+$(gettext "zenity is required; run kz-get first")"
                     kz.infomsg "$text"
                     exit 1
                 fi
@@ -257,6 +265,7 @@ Connect a usb medium.")
                     sed         's/"//g'                            || true
                     )
             else
+                UI_MODE='cli'
                 text="$(gettext 'More than one USB medium is connected:')
 $medium
 
@@ -613,6 +622,7 @@ EOF
                     6 70 0                          || BACKUP_RC=$?
         tput        cnorm                           || true
     else
+        UI_MODE='cli'
         text+='...'
         kz.infomsg "$text"
         rsync       --archive                       \
@@ -649,6 +659,7 @@ EOF
                     10 78
         sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
     else
+        UI_MODE='cli'
         text+='...'
         kz.infomsg "$text"
         sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
@@ -707,6 +718,7 @@ $(gettext 'Try creating the back up again.')"
                         --textbox   "$ERROR_LOG"    \
                         30 90
         else
+            UI_MODE='cli'
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
