@@ -11,7 +11,7 @@
 # format of this file.
 # =============================================================================
 
-# INSTALL 1-updates *
+# INSTALL 1-update *
 # -----------------------------------------------------------------------------
 # Add Debian components to package sources.
 # -----------------------------------------------------------------------------
@@ -24,7 +24,7 @@ if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf check-update || true; fi
 
-# REMOVE 1-updates *
+# REMOVE 1-update *
 # -----------------------------------------------------------------------------
 # Remove Debian components from package sources.
 # -----------------------------------------------------------------------------
