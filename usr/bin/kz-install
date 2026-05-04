@@ -586,6 +586,10 @@ settings")
     # To maximize the time window without asking for authentication.
     sudo --reset-timestamp
 
+    # Skip user prompts during installations or upgrades.
+    # This ensures an uninterrupted, automated installation process.
+    export DEBIAN_FRONTEND=noninteractive
+
     if [[ $UI_MODE = 'cli' ]]; then
         sudo true
         text="$(gettext 'NUM/TOT  APP')
