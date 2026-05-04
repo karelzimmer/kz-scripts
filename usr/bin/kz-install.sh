@@ -18,13 +18,11 @@
 if grep --quiet Debian /etc/os-release && [[ -f /etc/apt/sources.list ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet Debian /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place 's/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
 # -----------------------------------------------------------------------------
-# Update package lists and upgrade all packages.
+# Update package lists.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get upgrade --assume-yes; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf check-update || true; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf upgrade --assumeyes --refresh; fi
 
 # REMOVE 1-updates *
 # -----------------------------------------------------------------------------
@@ -33,13 +31,11 @@ if grep --quiet rhel /etc/os-release; then sudo dnf upgrade --assumeyes --refres
 if grep --quiet Debian /etc/os-release && [[ -f /etc/apt/sources.list ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet Debian /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place 's/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
 # -----------------------------------------------------------------------------
-# Update package lists and upgrade all packages.
+# Update package lists.
 # -----------------------------------------------------------------------------
 if grep --quiet debian /etc/os-release; then sudo apt-get update; fi
-if grep --quiet debian /etc/os-release; then sudo apt-get upgrade --assume-yes; fi
 #
 if grep --quiet rhel /etc/os-release; then sudo dnf check-update || true; fi
-if grep --quiet rhel /etc/os-release; then sudo dnf upgrade --assumeyes --refresh; fi
 
 # INSTALL aer-settings #none
 # -----------------------------------------------------------------------------
