@@ -69,11 +69,11 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
-if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 #
-if grep --quiet rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet rhel /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet rhel /etc/os-release && gnome-extensions info no-overview@fthx > /dev/null; then gnome-extensions enable no-overview@fthx; fi
+if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info no-overview@fthx > /dev/null; then gnome-extensions enable no-overview@fthx; fi
 #
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
@@ -109,11 +109,11 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network > /
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash > /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 #
-if grep --quiet debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 #
-if grep --quiet rhel /etc/os-release && gnome-extensions info no-overview@fthx > /dev/null; then gnome-extensions disable no-overview@fthx; fi
-if grep --quiet rhel /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet rhel /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info no-overview@fthx > /dev/null; then gnome-extensions disable no-overview@fthx; fi
+if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 #
 LOGOUT=true
 
@@ -162,8 +162,8 @@ git config --global --unset alias.logg
 # Desktop environment.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate > /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if gsettings get org.gnome.desktop.input-sources sources > /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed "s/, ('ibus', 'mozc-jp')//")"; fi
-if gsettings get org.gnome.desktop.input-sources sources > /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed "s/('ibus', 'mozc-jp'), //")"; fi
+if gsettings get org.gnome.desktop.input-sources sources > /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
+if gsettings get org.gnome.desktop.input-sources sources > /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
 if gsettings get org.gnome.desktop.interface clock-show-date > /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if gsettings get org.gnome.desktop.interface clock-show-weekday > /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
 if gsettings get org.gnome.desktop.interface font-antialiasing > /dev/null; then gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'; fi
@@ -236,7 +236,7 @@ kz-desktop --delete=google-chrome
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
-if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 #
@@ -246,7 +246,7 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 
@@ -282,7 +282,7 @@ kz-desktop --delete=org.libreoffice.LibreOffice.writer
 # -----------------------------------------------------------------------------
 if type lxsession > /dev/null; then pcmanfm; fi
 if type lxsession > /dev/null; then until [[ -f ~/.config/libfm/libfm.conf ]]; do sleep 2; done; fi
-if type lxsession > /dev/null; then sed --in-place 's/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
+if type lxsession > /dev/null; then sed --in-place --expression='s/single_click=0/single_click=1/g' ~/.config/libfm/libfm.conf; fi
 #
 LOGOUT=true
 
@@ -290,7 +290,7 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Desktop environment.
 # -----------------------------------------------------------------------------
-if type lxsession > /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place 's/single_click=1/single_click=0/g' ~/.config/libfm/libfm.conf; fi
+if type lxsession > /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=1/single_click=0/g' ~/.config/libfm/libfm.conf; fi
 #
 LOGOUT=true
 
@@ -329,7 +329,7 @@ kz-desktop --delete=microsoft-edge
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
-if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 #
@@ -339,7 +339,7 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Enable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev > /dev/null; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 #
@@ -375,9 +375,9 @@ rm --force --recursive ~/.cache/thumbnails/
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then kz-desktop --addaft=spotify; fi
+if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spotify; fi
 #
-if grep --quiet rhel /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
+if grep --quiet --regexp='rhel' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
 # RESET spotify *
 # -----------------------------------------------------------------------------
@@ -385,9 +385,9 @@ if grep --quiet rhel /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet debian /etc/os-release; then kz-desktop --delete=spotify; fi
+if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify; fi
 #
-if grep --quiet rhel /etc/os-release; then kz-desktop --delete=kz-spotify; fi
+if grep --quiet --regexp='rhel' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 # SETUP terminal *
 # -----------------------------------------------------------------------------

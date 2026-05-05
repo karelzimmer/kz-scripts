@@ -291,14 +291,14 @@ function process_option_list() {
     UI_MODE='cli'
     text=$(gettext 'The following apps are available:')
     apps=$(
-        grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
-                "${settings_files[@]}"                  |
-        tr      --squeeze-repeats                       \
-                '[:space:]'                             |
-        cut     --delimiter=' '                         \
-                --fields=3                              |
-        sort    --unique                                |
-        sed     --expression='s/^/    /'                || true
+        grep    --regexp="#[[:space:]]\+${setup}[[:space:]]\+"  \
+                "${settings_files[@]}"                          |
+        tr      --squeeze-repeats                               \
+                '[:space:]'                                     |
+        cut     --delimiter=' '                                 \
+                --fields=3                                      |
+        sort    --unique                                        |
+        sed     --expression='s/^/    /'                        || true
         )
     if [[ -n $apps ]]; then
         text+="
@@ -344,12 +344,12 @@ function process_option_select() {
     text=$(gettext 'Select apps to set up:')
 
     readarray   all_apps < <(
-        grep    "#[[:space:]]\+${setup}[[:space:]]\+"   \
-                "${settings_files[@]}"                  |
-        tr      --squeeze-repeats                       \
-                '[:space:]'                             |
-        cut     --delimiter=' '                         \
-                --fields=3                              |
+        grep    --regexp="#[[:space:]]\+${setup}[[:space:]]\+"  \
+                "${settings_files[@]}"                          |
+        tr      --squeeze-repeats                               \
+                '[:space:]'                                     |
+        cut     --delimiter=' '                                 \
+                --fields=3                                      |
         sort    --unique
         )
 
@@ -385,7 +385,7 @@ function process_option_select() {
                         20 40 12                            \
                         "${choices[@]}"                     \
                         2>&1 >/dev/tty                      |
-            sed         's/"//g'                            || true
+            sed         --expression='s/"//g'               || true
             )
     fi
     if [[ -z $selected_apps ]]; then
@@ -498,9 +498,9 @@ function setup_apps() {
     local title=''
 
     app_tot_num=$(
-        grep    --count                                 \
-                "#[[:space:]]\+${setup}[[:space:]]\+"   \
-                "$command_file"                         || true
+        grep    --count                                         \
+                --regexp="#[[:space:]]\+${setup}[[:space:]]\+"  \
+                "$command_file"                                 || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )

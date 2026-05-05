@@ -60,7 +60,7 @@ function process() {
     local text=''
 
     check_input "$@"
-    if ! grep --quiet debian /etc/os-release; then
+    if ! grep --quiet --regexp='debian' /etc/os-release; then
         text=$(gettext 'Must run on a Debian or Debian-based system.')
         kz.infomsg "$text"
         exit 1
@@ -156,10 +156,10 @@ function check_website() {
 
     # Check files which are not used on the html pages.
     while read -r file; do
-        if grep --quiet                 \
-                --recursive             \
-                "$(basename "$file")"   \
-                "$uploads_dist_html"    ; then
+        if grep --quiet                         \
+                --recursive                     \
+                --regexp="$(basename "$file")"  \
+                "$uploads_dist_html"; then
             # The file is used in the html pages.
             continue
         else
@@ -358,12 +358,12 @@ function check_code() {
     local tab_completion_script='# ''shellcheck shell=bash'
     local text=''
 
-    if grep --quiet --line-regexp "$bash_script" "$script"; then
+    if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
         check_shellcheck
-    elif grep --quiet --line-regexp "$tab_completion_script" "$script"
+    elif grep --quiet --line-regexp --regexp="$tab_completion_script" "$script"
         then
         check_shellcheck
-    elif grep --quiet --line-regexp "$python_script" "$script"; then
+    elif grep --quiet --line-regexp --regexp="$python_script" "$script"; then
         check_pycodestyle
         check_mypy
         check_script
@@ -421,7 +421,7 @@ not found.")
     fi
 
     # Polkit action definition file (only with so-called root scripts).
-    if grep --quiet "$root_script" "$file"; then
+    if grep --quiet --regexp="$root_script" "$file"; then
         dir=$scripts_repo/usr/share/polkit-1/actions
 
         if ! [[ -f $dir/nl.karelzimmer.$scriptname.policy ]]; then
@@ -485,16 +485,16 @@ function check_record_length() {
     local text=''
 
     # Python is checked by pycodestyle.
-    if grep --quiet --line-regexp "$python_script" "$script"; then
+    if grep --quiet --line-regexp --regexp="$python_script" "$script"; then
         return 0
     fi
 
-    if grep --quiet '.\{80\}' "$script"; then
+    if grep --quiet --regexp='.\{80\}' "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(eval_gettext "One or more lines are too long (>79):") $NORMAL"
         kz.infomsg "$text"
-        grep '.\{80\}' "$script" || true
+        grep --regexp='.\{80\}' "$script" || true
         ERR_FLAG=true
     fi
 }
@@ -559,14 +559,14 @@ $RED    $(gettext 'Flagged annotation found.')$NORMAL
 function check_trailing_spaces() {
     local text=''
 
-    if grep --quiet ' ''$' "$script"; then
+    if grep --quiet --regexp=' ''$' "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED    $(gettext 'End spaces found.')$NORMAL
 "
         kz.infomsg "$text"
         grep    --line-number   \
-                ' ''$'          \
+                --regexp=' ''$' \
                 "$script"       |
         sed     --expression='s/^/    /'
         ERR_FLAG=true
