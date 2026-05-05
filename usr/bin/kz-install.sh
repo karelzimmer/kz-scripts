@@ -611,7 +611,7 @@ if systemctl status ufw > /dev/null; then sudo ufw reload; fi
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gufw; fi
 #
-if grep --quiet --regexp='fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gufw; fi
+if grep --quiet --regexp='rhel' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gufw; fi
 #
 sudo ufw enable
 #
@@ -768,7 +768,7 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes flatpak; fi
 if grep --quiet --regexp='fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if grep --quiet --regexp='fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo flatpak install --assumeyes app/org.libreoffice.LibreOffice; fi
+if grep --quiet --regexp='fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo flatpak install --assumeyes flathub app/org.libreoffice.LibreOffice; fi
 
 # REMOVE libreoffice *
 # -----------------------------------------------------------------------------
@@ -908,7 +908,7 @@ if grep --quiet --regexp='fedora' /etc/os-release; then sudo dnf remove --assume
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes systemd-timesyncd; fi
 #
-if grep --quiet --regexp='fedora' /etc/os-release; then sudo dnf install --assumeyes systemd-timesyncd; fi
+if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf install --assumeyes systemd-timesyncd; fi
 
 # REMOVE ntp *
 # -----------------------------------------------------------------------------

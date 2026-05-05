@@ -23,10 +23,33 @@ Package kz contains scripts for installing and managing Debian and Debian-based
 systems such as Ubuntu, and Red Hat and Red Hat-based systems such as Rocky
 Linux.
 .sp
-Package kz has been tested on Debian, Ubuntu, and Rock Linux in combination
+Package kz has been tested on Debian, Ubuntu, and Rocky Linux in combination
 with various desktop environments such as GNOME (is similar to macOS and Ubuntu
 and is most used), Cinnamon (is similar to Windows and Linux Mint), and LXDE
 (is similar to Windows and for very old computers).
+.sp
+Examples of how to determine on which systems the kz package and the associated
+commands are executed:
+.br
+Only Debian systems:
+.br
+grep 'Debian' /etc/os-release
+.sp
+Debian systems and Debian-based systems such as Ubuntu:
+.br
+grep 'debian' /etc/os-release
+.sp
+Only Ubuntu systems:
+.br
+grep 'Ubuntu' /etc/os-release
+.sp
+Only RHEL systems:
+.br
+grep 'rhel' /etc/os-release
+.sp
+RHEL systems and RHEL-based systems:
+.br
+grep 'fedora' /etc/os-release
 .sp
 Option \fB-h\fR, \fB--help\fR shows a short description of the available
 options and exits.

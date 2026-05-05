@@ -717,7 +717,7 @@ function execute_command() {
 # This function controls the termination of the script.
 function term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
-    local reboot='sudo systemctl --check-inhibitors=no reboot'
+    local reboot='systemctl --check-inhibitors=no reboot'
     local text=''
     local title=''
 

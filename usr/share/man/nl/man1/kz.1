@@ -23,10 +23,33 @@ Pakket kz bevat scripts voor het installeren en beheren van Debian en
 Debian-gebaseerde systemen zoals Ubuntu en Red Hat en Red Hat-gebaseerde
 systemen zoals Rocky Linux.
 .sp
-Pakket kz is getest op Debian, Ubuntu en Rock Linux in combinatie met
+Pakket kz is getest op Debian, Ubuntu en Rocky Linux in combinatie met
 verschillende desktopomgevingen zoals GNOME (lijkt op macOS en Ubuntu en is het
-meest gebruikt), Cinnamon (lijkt op Windows en Linux Mint) en LXDE
-(lijkt op Windows en is bedoeld voor zeer oude computers).
+meest gebruikt), Cinnamon (lijkt op Windows en Linux Mint) en LXDE (lijkt op
+Windows en is bedoeld voor zeer oude computers).
+.sp
+Voorbeelden van hoe te bepalen op welke systemen het pakket kz en de
+bijbehorende commando's worden uitgevoerd:
+.br
+Alleen Debian-systemen:
+.br
+grep 'Debian' /etc/os-release
+.sp
+Debian-systemen en op Debian gebaseerde systemen zoals Ubuntu:
+.br
+grep 'debian' /etc/os-release
+.sp
+Alleen Ubuntu-systemen:
+.br
+grep 'Ubuntu' /etc/os-release
+.sp
+Alleen RHEL-systemen:
+.br
+grep 'rhel' /etc/os-release
+.sp
+RHEL-systemen en op RHEL gebaseerde systemen:
+.br
+grep 'fedora' /etc/os-release
 .sp
 Optie \fB-h\fR, \fB--help\fR toont een korte beschrijving van de beschikbare
 opties en sluit af.
