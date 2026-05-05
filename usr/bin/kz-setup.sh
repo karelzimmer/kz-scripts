@@ -71,9 +71,9 @@ if gsettings get org.gnome.shell disable-user-extensions > /dev/null; then gsett
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 #
-if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info no-overview@fthx > /dev/null; then gnome-extensions enable no-overview@fthx; fi
+if grep --quiet --regexp='fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet --regexp='fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='fedora' /etc/os-release && gnome-extensions info no-overview@fthx > /dev/null; then gnome-extensions enable no-overview@fthx; fi
 #
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action > /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
@@ -111,9 +111,9 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash > /dev/null;
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 #
-if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info no-overview@fthx > /dev/null; then gnome-extensions disable no-overview@fthx; fi
-if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet --regexp='rhel' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='fedora' /etc/os-release && gnome-extensions info no-overview@fthx > /dev/null; then gnome-extensions disable no-overview@fthx; fi
+if grep --quiet --regexp='fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com > /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet --regexp='fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com > /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 #
 LOGOUT=true
 
@@ -377,7 +377,7 @@ rm --force --recursive ~/.cache/thumbnails/
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spotify; fi
 #
-if grep --quiet --regexp='rhel' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
+if grep --quiet --regexp='fedora' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
 # RESET spotify *
 # -----------------------------------------------------------------------------
@@ -387,7 +387,7 @@ if grep --quiet --regexp='rhel' /etc/os-release; then kz-desktop --addaft=kz-spo
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify; fi
 #
-if grep --quiet --regexp='rhel' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
+if grep --quiet --regexp='fedora' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 # SETUP terminal *
 # -----------------------------------------------------------------------------

@@ -69,7 +69,7 @@ function init() {
 function process() {
     if grep --quiet --regexp='debian' /etc/os-release; then
         process_deb_packages
-    elif grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
+    elif grep --quiet --regexp='fedora' /etc/os-release; then
         process_rpm_packages
     else
         printf '%s\n' 'fatal: unknown os release' >&2
