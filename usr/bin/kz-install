@@ -432,7 +432,7 @@ function process_argument_app() {
         # Refresh package lists before installing apps, to minimize the risk of
         # errors due to outdated package lists.
         printf '%s\n' "\
-# INSTALL 1-update ($(gettext 'automatically added'))
+# INSTALL 1-update-$(gettext 'automatically-added')
 # -----------------------------------------------------------------------------
 # $(gettext 'Update package lists before installing apps.')
 # -----------------------------------------------------------------------------
