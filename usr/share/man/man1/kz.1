@@ -31,25 +31,25 @@ and is most used), Cinnamon (is similar to Windows and Linux Mint), and LXDE
 Examples of how to determine on which systems the kz package and the associated
 commands are executed:
 .br
-Debian systems:
+    Debian systems:
 .br
-grep 'Debian' /etc/os-release
+        grep 'Debian' /etc/os-release
 .sp
-Debian and Debian-based systems such as Ubuntu:
+    Debian and Debian-based systems such as Ubuntu:
 .br
-grep 'debian' /etc/os-release
+        grep 'debian' /etc/os-release
 .sp
-Ubuntu systems:
+    Ubuntu systems:
 .br
-grep 'Ubuntu' /etc/os-release
+        grep 'Ubuntu' /etc/os-release
 .sp
-Red Hat and Red Hat-based systems such as Rocky Linux:
+    Red Hat and Red Hat-based systems such as Rocky Linux:
 .br
-grep 'rhel' /etc/os-release
+        grep 'rhel' /etc/os-release
 .sp
-Red Hat and Red Hat-based systems, and Fedora:
+    Red Hat and Red Hat-based systems, and Fedora:
 .br
-grep 'fedora' /etc/os-release
+        grep 'rhel\\|fedora' /etc/os-release
 .sp
 Option \fB-h\fR, \fB--help\fR shows a short description of the available
 options and exits.

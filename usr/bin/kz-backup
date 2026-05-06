@@ -195,7 +195,7 @@ function check_target() {
     local title=''
     local usb_mount_point=/media/$USER
 
-    if grep --quiet --regexp='fedora' /etc/os-release; then
+    if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 
@@ -714,7 +714,7 @@ function term() {
         clear -x
     fi
 
-    if grep --quiet --regexp='fedora' /etc/os-release; then
+    if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 

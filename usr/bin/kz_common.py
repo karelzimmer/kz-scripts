@@ -63,7 +63,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     waits for the next check if so.
     """
     check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
-    check_rhel: str = r"grep --quiet --regexp='fedora' /etc/os-release"
+    check_rhel: str = r"grep --quiet --regexp='rhel\|fedora' /etc/os-release"
     text: str = 'Wait for another package manager to finish...'
 
     if subprocess.run(check_rhel, executable='bash',

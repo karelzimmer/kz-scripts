@@ -438,7 +438,7 @@ function process_argument_app() {
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 #
-if grep --quiet --regexp='fedora' /etc/os-release; then sudo dnf check-u\
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf check-u\
 pdate || true; fi
 "       > "$command_file"
     fi
