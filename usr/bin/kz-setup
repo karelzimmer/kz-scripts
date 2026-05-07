@@ -394,10 +394,11 @@ function process_option_select() {
             )
     else
         UI_MODE='cli'
+        text=$(gettext 'Use "kz setup --list" to show available apps.')'\n'
         if [[ $setup = 'SETUP' ]]; then
-            text=$(gettext 'Use "kz setup <app>..." to set up the apps.')
+            text+=$(gettext 'Use "kz setup <app>..." to set up the apps.')
         else
-            text=$(gettext "Use \"kz setup --reset <app>...\" to reset the \
+            text+=$(gettext "Use \"kz setup --reset <app>...\" to reset the \
 apps.")
         fi
         kz.infomsg "$text"

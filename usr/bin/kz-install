@@ -400,10 +400,11 @@ function process_option_select() {
             )
     else
         UI_MODE='cli'
+        text=$(gettext 'Use "kz install --list" to show available apps.')'\n'
         if [[ $install = 'INSTALL' ]]; then
-            text=$(gettext 'Use "kz install <app>..." to install the apps.')
+            text+=$(gettext 'Use "kz install <app>..." to install the apps.')
         else
-            text=$(gettext "Use \"kz install --remove <app>...\" to remove \
+            text+=$(gettext "Use \"kz install --remove <app>...\" to remove \
 the apps.")
         fi
         kz.infomsg "$text"
