@@ -22,7 +22,7 @@ if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sourc
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf install --assumeyes epel-release; fi
 # -----------------------------------------------------------------------------
-# Update package lists.
+# Refresh package lists.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 #
@@ -39,7 +39,7 @@ if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sourc
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf remove --assumeyes epel-release; fi
 # -----------------------------------------------------------------------------
-# Update package lists.
+# Refresh package lists.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
 #

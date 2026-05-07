@@ -911,11 +911,11 @@ msgid "No apps selected."
 msgstr ""
 
 #: kz-install:435
-msgid "automatically-added"
+msgid "automatically added"
 msgstr ""
 
 #: kz-install:437
-msgid "Update package lists before installing apps."
+msgid "Refresh package lists before installing apps."
 msgstr ""
 
 #: kz-install:488 kz-setup:452

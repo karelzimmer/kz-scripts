@@ -1003,12 +1003,12 @@ msgid "No apps selected."
 msgstr "Geen apps geselecteerd."
 
 #: kz-install:435
-msgid "automatically-added"
-msgstr "automatisch-toegevoegd"
+msgid "automatically added"
+msgstr "automatisch toegevoegd"
 
 #: kz-install:437
-msgid "Update package lists before installing apps."
-msgstr "Werk de pakketlijsten bij alvorens apps te installeren."
+msgid "Refresh package lists before installing apps."
+msgstr "Ververs de pakketlijsten alvorens apps te installeren."
 
 #: kz-install:488 kz-setup:452
 #, sh-format
