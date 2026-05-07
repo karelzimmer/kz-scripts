@@ -911,7 +911,7 @@ msgid "No apps selected."
 msgstr ""
 
 #: kz-install:435
-msgid "automatically added"
+msgid "*** automatically added ***"
 msgstr ""
 
 #: kz-install:437
