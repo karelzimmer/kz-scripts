@@ -340,8 +340,13 @@ function process_option_select() {
     local text=''
     local title=''
 
-    title=$(gettext 'Set up apps')
-    text=$(gettext 'Select apps to set up:')
+    if [[ $setup = 'SETUP' ]]; then
+        title=$(gettext 'Set up apps')
+        text=$(gettext 'Select apps to set up:')
+    else
+        title=$(gettext 'Reset apps')
+        text=$(gettext 'Select apps to reset:')
+    fi
 
     readarray   all_apps < <(
         grep    --regexp="#[[:space:]]\+${setup}[[:space:]]\+"  \
@@ -371,7 +376,7 @@ function process_option_select() {
                         "${choices[@]}"                     \
                         2> /dev/null                        || true
             )
-    else
+    elif [[ $UI_MODE = 'tui' ]]; then
         for app in "${all_apps[@]}"; do
             choices+=("$app" 'off')
         done
@@ -387,6 +392,16 @@ function process_option_select() {
                         2>&1 >/dev/tty                      |
             sed         --expression='s/"//g'               || true
             )
+    else
+        UI_MODE='cli'
+        if [[ $setup = 'SETUP' ]]; then
+            text=$(gettext 'Use "kz setup <app>..." to set up the apps.')
+        else
+            text=$(gettext "Use \"kz setup --reset <app>...\" to reset the \
+apps.")
+        fi
+        kz.infomsg "$text"
+        exit 0
     fi
     if [[ -z $selected_apps ]]; then
         text=$(gettext 'No apps selected.')
