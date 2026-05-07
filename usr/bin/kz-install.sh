@@ -13,12 +13,12 @@
 
 # INSTALL 1-update *
 # -----------------------------------------------------------------------------
-# Add components to package sources on Debian.
+# Add components to package sources if on Debian.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
 # -----------------------------------------------------------------------------
-# Add Extra Packages for Enterprise Linux (EPEL) on RHEL.
+# Add Extra Packages for Enterprise Linux (EPEL) if on RHEL.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf install --assumeyes epel-release; fi
 # -----------------------------------------------------------------------------
@@ -30,12 +30,12 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf check-upd
 
 # REMOVE 1-update *
 # -----------------------------------------------------------------------------
-# Remove components from package sources from Debian.
+# Remove components from package sources if on Debian.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
 if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
 # -----------------------------------------------------------------------------
-# Remove Extra Packages for Enterprise Linux (EPEL) from RHEL.
+# Remove Extra Packages for Enterprise Linux (EPEL) if on RHEL.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf remove --assumeyes epel-release; fi
 # -----------------------------------------------------------------------------
@@ -121,7 +121,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 
 # INSTALL apport-settings #none
 # -----------------------------------------------------------------------------
-# Disable automatic crash report generation for Ubuntu.
+# Disable automatic crash report generation if on Ubuntu.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl stop apport.service; fi
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl disable apport.service; fi
@@ -130,7 +130,7 @@ if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo rm --force --verbos
 
 # REMOVE apport-settings #none
 # -----------------------------------------------------------------------------
-# Enable automatic crash report generation for Ubuntu.
+# Enable automatic crash report generation if on Ubuntu.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl enable --now apport.service; fi
