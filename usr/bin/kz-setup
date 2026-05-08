@@ -648,8 +648,6 @@ function execute_command() {
             1> >($PROGRAM_LOGS) \
             2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
 
-    # Setup commands runs fast, to prevent flickering, a small sleep duration.
-    sleep 0.2
 }
 
 
