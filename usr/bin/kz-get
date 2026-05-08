@@ -194,7 +194,11 @@ Checklist installation can be found on https://karelzimmer.nl/en.")"
 
 $(gettext "Type 'exit' to close this window.")"
     fi
-    printf '%b\n' "$text"
+    text+="
+
+===============================================================================
+"
+    printf '%s' "$text"
 
     rm --force getkz* /tmp/kz-*.deb
 
