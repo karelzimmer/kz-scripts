@@ -202,8 +202,7 @@ function check_source() {
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
             text="$program_name: $source_argument: \
-$(gettext 'directory does not exist')
-$USAGE"
+$(gettext 'directory does not exist')"
             kz.infomsg "$text"
             exit 1
         fi

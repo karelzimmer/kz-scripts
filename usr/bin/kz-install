@@ -295,16 +295,7 @@ function process_option_list() {
 
     UI_MODE='cli'
     text=$(gettext 'The following apps are available:')
-    apps=$(
-        grep    --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
-                "${installation_files[@]}"                          |
-        tr      --squeeze-repeats                                   \
-                '[:space:]'                                         |
-        cut     --delimiter=' '                                     \
-                --fields=3                                          |
-        sort    --unique                                            |
-        sed     --expression='s/^/    /'                            || true
-        )
+    app_list
     if [[ -n $apps ]]; then
         text+="
 $apps"
@@ -329,11 +320,25 @@ whole command file.")"
 $(gettext "Use \"kz install --browse\" to view the contents of the default \
 installation files.")"
     else
-        text+="$(gettext '  0  No apps found.')
-
-$USAGE"
+        text+="
+$(gettext '  0  No apps found.')"
     fi
     kz.infomsg "$text"
+}
+
+
+# This function makes a list of available apps from the installation files.
+function app_list() {
+    apps=$(
+        grep    --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
+                "${installation_files[@]}"                          |
+        tr      --squeeze-repeats                                   \
+                '[:space:]'                                         |
+        cut     --delimiter=' '                                     \
+                --fields=3                                          |
+        sort    --unique                                        |
+        sed     --expression='s/^/    /'                        || true
+        )
 }
 
 
@@ -342,6 +347,7 @@ function process_option_select() {
     local -a all_apps=()
     local -a choices=()
     local app=''
+    local apps=''
     local selected_apps=''
     local text=''
     local title=''
@@ -354,15 +360,14 @@ function process_option_select() {
         text=$(gettext 'Select apps to remove:')
     fi
 
-    readarray   all_apps < <(
-        grep    --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
-                "${installation_files[@]}"                          |
-        tr      --squeeze-repeats                                   \
-                '[:space:]'                                         |
-        cut     --delimiter=' '                                     \
-                --fields=3                                          |
-        sort    --unique
-        )
+    app_list
+    readarray all_apps <<< "$apps"
+    if [[ -z $apps ]]; then
+            text+="
+$(gettext '  0  No apps found.')"
+        kz.infomsg "$text"
+        exit 0
+    fi        
 
     if [[ $UI_MODE = 'gui' ]]; then
         for app in "${all_apps[@]}"; do
@@ -400,12 +405,15 @@ function process_option_select() {
             )
     else
         UI_MODE='cli'
-        text=$(gettext 'Use "kz install --list" to show available apps.')'\n'
+        app_list
+        text+="
+$apps"
         if [[ $install = 'INSTALL' ]]; then
-            text+=$(gettext 'Use "kz install <app>..." to install the apps.')
+            text+="
+$(gettext 'Use "kz install <app>..." to install the apps.')"
         else
-            text+=$(gettext "Use \"kz install --remove <app>...\" to remove \
-the apps.")
+            text+="
+$(gettext "Use \"kz install --remove <app>...\" to remove the apps.")"
         fi
         kz.infomsg "$text"
         exit 0

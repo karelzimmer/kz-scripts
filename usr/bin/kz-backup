@@ -202,8 +202,7 @@ function check_target() {
     if $option_target; then
         if ! [[ -d $target_argument ]]; then
             text="$program_name: $target_argument: \
-$(gettext 'directory does not exist')
-$USAGE"
+$(gettext 'directory does not exist')"
             kz.infomsg "$text"
             exit 1
         fi
