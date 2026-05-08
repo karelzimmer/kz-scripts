@@ -410,9 +410,11 @@ $(gettext '  0  No apps found.')"
 $apps"
         if [[ $install = 'INSTALL' ]]; then
             text+="
+
 $(gettext 'Use "kz install <app>..." to install the apps.')"
         else
             text+="
+
 $(gettext "Use \"kz install --remove <app>...\" to remove the apps.")"
         fi
         kz.infomsg "$text"

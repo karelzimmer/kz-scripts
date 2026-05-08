@@ -403,9 +403,11 @@ $(gettext '  0  No apps found.')"
 $apps"
         if [[ $setup = 'SETUP' ]]; then
             text+="
+
 $(gettext 'Use "kz setup <app>..." to set up the apps.')"
         else
             text+="
+
 $(gettext "Use \"kz setup --reset <app>...\" to reset the apps.")"
         fi
         kz.infomsg "$text"
