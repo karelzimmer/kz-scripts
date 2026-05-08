@@ -926,11 +926,11 @@ msgstr "Installatiebestand '$installation_file' niet gevonden."
 msgid "The following apps are available:"
 msgstr "De volgende apps zijn beschikbaar:"
 
-#: kz-install:305 kz-install:413
+#: kz-install:308 kz-install:413
 msgid "Use \"kz install <app>...\" to install the apps."
 msgstr "Gebruik \"kz install <app>...\" om de apps te installeren."
 
-#: kz-install:306
+#: kz-install:309
 msgid ""
 "Use \"kz install --cat <app>...\" to view the contents of the apps command "
 "file."
@@ -938,18 +938,18 @@ msgstr ""
 "Gebruik \"kz install --cat <app>...\" om de inhoud van het opdrachtbestand "
 "voor apps te bekijken."
 
-#: kz-install:308
+#: kz-install:311
 msgid ""
 "Use \"kz install --cat\" to view the contents of the whole command file."
 msgstr ""
 "Gebruik \"kz install --cat\" om de inhoud van het hele opdrachtbestand te "
 "bekijken."
 
-#: kz-install:313 kz-install:416
+#: kz-install:316 kz-install:416
 msgid "Use \"kz install --remove <app>...\" to remove the apps."
 msgstr "Gebruik \"kz install --remove <app>...\" om de apps te verwijderen."
 
-#: kz-install:314
+#: kz-install:317
 msgid ""
 "Use \"kz install --cat --remove <app>...\" to view the contents of the apps "
 "command file."
@@ -957,7 +957,7 @@ msgstr ""
 "Gebruik \"kz install --cat --remove <app>...\" om de inhoud van het "
 "opdrachtbestand voor apps te bekijken."
 
-#: kz-install:316
+#: kz-install:319
 msgid ""
 "Use \"kz install --cat --remove\" to view the contents of the whole command "
 "file."
@@ -965,7 +965,7 @@ msgstr ""
 "Gebruik \"kz install --cat --remove\" om de inhoud van het hele "
 "opdrachtbestand te bekijken."
 
-#: kz-install:320
+#: kz-install:323
 msgid ""
 "Use \"kz install --browse\" to view the contents of the default installation "
 "files."
@@ -973,7 +973,7 @@ msgstr ""
 "Gebruik \"kz install --browse\" om de inhoud van de standaard "
 "installatiebestanden te bekijken."
 
-#: kz-install:324 kz-install:367 kz-setup:319 kz-setup:361
+#: kz-install:301 kz-install:366 kz-setup:296 kz-setup:360
 msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
@@ -1369,11 +1369,11 @@ msgstr "  -r, --reset    stel apps in op standaardwaarden"
 msgid "Settings file '$settings_file' not found."
 msgstr "Instellingenbestand '$settings_file' niet gevonden."
 
-#: kz-setup:300 kz-setup:406
+#: kz-setup:303 kz-setup:406
 msgid "Use \"kz setup <app>...\" to set up the apps."
 msgstr "Gebruik \"kz setup <app>...\" om de apps in te stellen."
 
-#: kz-setup:301
+#: kz-setup:304
 msgid ""
 "Use \"kz setup --cat <app>...\" to view the contents of the apps command "
 "file."
@@ -1381,17 +1381,17 @@ msgstr ""
 "Gebruik \"kz setup --cat <app>...\" om de inhoud van het opdrachtbestand "
 "voor apps te bekijken."
 
-#: kz-setup:303
+#: kz-setup:306
 msgid "Use  \"kz setup --cat\" to view the contents of the whole command file."
 msgstr ""
 "Gebruik \"kz setup --cat\" om de inhoud van het hele opdrachtbestand te "
 "bekijken."
 
-#: kz-setup:308 kz-setup:409
+#: kz-setup:311 kz-setup:409
 msgid "Use \"kz setup --reset <app>...\" to reset the apps."
 msgstr "Gebruik \"kz setup --reset <app>...\" om de apps te resetten."
 
-#: kz-setup:309
+#: kz-setup:312
 msgid ""
 "Use \"kz setup --cat --reset <app>...\" to view the contents of the apps "
 "command file."
@@ -1399,7 +1399,7 @@ msgstr ""
 "Gebruik \"kz setup --cat --reset <app>...\" om de inhoud van het "
 "opdrachtbestand voor apps te bekijken."
 
-#: kz-setup:311
+#: kz-setup:314
 msgid ""
 "Use \"kz setup --cat --reset\" to view the contents of the whole command "
 "file."
@@ -1407,7 +1407,7 @@ msgstr ""
 "Gebruik \"kz setup --cat --reset\" om de inhoud van het hele opdrachtbestand "
 "te bekijken."
 
-#: kz-setup:315
+#: kz-setup:318
 msgid ""
 "Use \"kz setup --browse\" to view the contents of the default settings files."
 msgstr ""

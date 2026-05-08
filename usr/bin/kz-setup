@@ -291,7 +291,10 @@ function process_option_list() {
     UI_MODE='cli'
     text=$(gettext 'The following apps are available:')
     app_list
-    if [[ -n $apps ]]; then
+    if [[ -z $apps ]]; then
+        text+="
+$(gettext '  0  No apps found.')"
+    else
         text+="
 $apps"
         if [[ $setup = 'SETUP' ]]; then
@@ -314,9 +317,6 @@ command file.")"
         text+="
 $(gettext "Use \"kz setup --browse\" to view the contents of the default \
 settings files.")"
-    else
-        text+="
-$(gettext '  0  No apps found.')"
     fi
     kz.infomsg "$text"
 }
@@ -355,13 +355,13 @@ function process_option_select() {
     fi
 
     app_list
-    readarray all_apps <<< "$apps"
     if [[ -z $apps ]]; then
             text+="
 $(gettext '  0  No apps found.')"
         kz.infomsg "$text"
         exit 0
     fi
+    readarray all_apps <<< "$apps"
 
     if [[ $UI_MODE = 'gui' ]]; then
         for app in "${all_apps[@]}"; do
