@@ -847,20 +847,18 @@ msgstr ""
 "commando uit:"
 
 #: kz-get:187
-msgid ""
-"Package kz has been successfully installed.\n"
-"\n"
-"Now follow the steps as described in the Checklist installation.\n"
-"\n"
-"Checklist installation can be found on https://karelzimmer.nl/en."
-msgstr ""
-"Pakket kz is succesvol geïnstalleerd.\n"
-"\n"
-"Volg nu de stappen zoals beschreven in de Checklist installatie.\n"
-"\n"
-"Checklist installatie is te vinden op https://karelzimmer.nl/nl."
+msgid "Package kz has been successfully installed."
+msgstr "Pakket kz is succesvol geïnstalleerd."
 
-#: kz-get:195
+#: kz-get:189
+msgid "Now follow the steps as described in the Checklist installation."
+msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
+
+#: kz-get:192
+msgid "Checklist installation can be found on https://karelzimmer.nl/en."
+msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
+
+#: kz-get:197
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 

@@ -777,15 +777,18 @@ msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
 #: kz-get:187
-msgid ""
-"Package kz has been successfully installed.\n"
-"\n"
-"Now follow the steps as described in the Checklist installation.\n"
-"\n"
-"Checklist installation can be found on https://karelzimmer.nl/en."
+msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:195
+#: kz-get:189
+msgid "Now follow the steps as described in the Checklist installation."
+msgstr ""
+
+#: kz-get:192
+msgid "Checklist installation can be found on https://karelzimmer.nl/en."
+msgstr ""
+
+#: kz-get:197
 msgid "Type 'exit' to close this window."
 msgstr ""
 
