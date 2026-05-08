@@ -336,8 +336,8 @@ function app_list() {
                 '[:space:]'                                         |
         cut     --delimiter=' '                                     \
                 --fields=3                                          |
-        sort    --unique                                        |
-        sed     --expression='s/^/    /'                        || true
+        sort    --unique                                            |
+        sed     --expression='s/^/    /'                            || true
         )
 }
 
