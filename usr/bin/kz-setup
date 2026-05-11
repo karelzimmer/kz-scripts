@@ -658,7 +658,7 @@ function term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
     local title=''
-    
+
     # Due to the use of whiptail infobox.
     if [[ $UI_MODE = 'tui' ]]; then
         clear -x

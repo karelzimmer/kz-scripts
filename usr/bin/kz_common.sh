@@ -290,7 +290,6 @@ function kz.term() {
     local rc_desc=''
     local status=$rc/FAILURE
     local text=''
-    local text2=''
 
     case $rc in
         0 )
@@ -365,9 +364,10 @@ function kz.term() {
             text="$(eval_gettext \
 "Program \$PROGRAM_NAME encountered an error.")"
             kz.errmsg "$text"
-            text="$PROGRAM_NAME: error $rc on line $lineno in function \
-$function while executing command: $command"
-            text2=$(gettext "Type 'exit' to close this window.")
+            text="Error $rc on line $lineno in function $function while \
+executing command: $command"
+            text+="
+$(gettext "Type 'exit' to close this window.")"
             gnome-terminal  --                                          \
                             bash -c                                     \
                             "journalctl --all                           \
@@ -375,8 +375,7 @@ $function while executing command: $command"
                                         --pager-end                     \
                                         --no-pager                      \
                                         --identifier='$PROGRAM_NAME';   \
-                                        printf '$RED%s\n'   \"$text\";  \
-                                        printf '%s\n'       \"$text2\"; \
+                                        printf '$RED%s\n' \"$text\";    \
                                         exec bash"                      \
                                         2> /dev/null                    || true
             exit "$rc"
