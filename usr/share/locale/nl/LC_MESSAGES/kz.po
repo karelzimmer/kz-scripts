@@ -347,7 +347,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:726 kz-install:746 kz-restore:436 kz-setup:676
+#: kz-backup:726 kz-install:746 kz-restore:436 kz-setup:673
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -372,11 +372,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:734 kz-install:751 kz-restore:444 kz-setup:680
+#: kz-backup:734 kz-install:751 kz-restore:444 kz-setup:677
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:735 kz-install:752 kz-restore:445 kz-setup:681
+#: kz-backup:735 kz-install:752 kz-restore:445 kz-setup:678
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -432,63 +432,63 @@ msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 msgid "Build website"
 msgstr "Bouw website"
 
-#: kz-build:240
+#: kz-build:239
 msgid "Generate gettext files"
 msgstr "Genereer gettext-bestanden"
 
-#: kz-build:256
+#: kz-build:255
 msgid "skip, is a direcory."
 msgstr "overslaan, is een map."
 
-#: kz-build:260
+#: kz-build:259
 msgid "skip, is not a file."
 msgstr "overslaan, is geen bestand."
 
-#: kz-build:264
+#: kz-build:263
 msgid "skip, is a LICENSE file."
 msgstr "overslaan, is een LICENSE bestand."
 
-#: kz-build:268
+#: kz-build:267
 msgid "skip, is a README file."
 msgstr "overslaan, is een README bestand."
 
-#: kz-build:272
+#: kz-build:271
 msgid "skip, is GPG-encrypted."
 msgstr "overslaan, is met GPG versleuteld."
 
-#: kz-build:276
+#: kz-build:275
 msgid "skip, is a gettext POT file."
 msgstr "overslaan, is een gettext POT-bestand."
 
-#: kz-build:280
+#: kz-build:279
 msgid "skip, is a gettext PO file."
 msgstr "overslaan, is een gettext PO-bestand."
 
-#: kz-build:284
+#: kz-build:283
 msgid "skip, is a gettext MO file."
 msgstr "overslaan, is een gettext MO-bestand."
 
-#: kz-build:306
+#: kz-build:305
 msgid "can't determine the language"
 msgstr "kan de taal niet bepalen"
 
-#: kz-build:340
+#: kz-build:339
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-#: kz-build:414
+#: kz-build:413
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-#: kz-build:487 kz-deploy:239
+#: kz-build:486 kz-deploy:239
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:509 kz-get:219
+#: kz-build:508 kz-get:184
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:515 kz-check:582 kz-deploy:264
+#: kz-build:514 kz-check:582 kz-deploy:264
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -625,7 +625,7 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.sh:410
+#: kz_common.sh:395
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -671,12 +671,12 @@ msgstr "Typ '$program_name --help' voor meer informatie."
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:366
+#: kz_common.sh:365
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:400
+#: kz_common.sh:385
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -846,19 +846,19 @@ msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
 "commando uit:"
 
-#: kz-get:223
+#: kz-get:188
 msgid "Package kz has been successfully installed."
 msgstr "Pakket kz is succesvol geïnstalleerd."
 
-#: kz-get:226
+#: kz-get:191
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 
-#: kz-get:229
+#: kz-get:194
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
-#: kz_common.sh:370 kz-get:233
+#: kz-get:198
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
@@ -1428,23 +1428,23 @@ msgstr "Selecteer apps om te resetten:"
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:677
+#: kz-setup:674
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:682
+#: kz-setup:679
 msgid "Try to set up/reset the apps again."
 msgstr "Probeer de apps opnieuw in te stellen of te resetten."
 
-#: kz-setup:705
+#: kz-setup:702
 msgid "Apps set up completed."
 msgstr "Apps instellen is voltooid."
 
-#: kz-setup:707
+#: kz-setup:704
 msgid "Apps reset completed."
 msgstr "Apps resetten is voltooid."
 
-#: kz-setup:715
+#: kz-setup:712
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1452,7 +1452,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:720
+#: kz-setup:717
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1460,7 +1460,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:741
+#: kz-setup:738
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
@@ -1667,7 +1667,7 @@ msgid "MAINTENANCE:"
 msgstr "ONDERHOUD:"
 
 #: ckhtml:127 gitbranch:63 gitclone:80 gitfetch:63 gitinit:53 gitpull:63
-#: gitsquash:78 gitstatus:63 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:278
+#: gitsquash:78 gitstatus:63 kz-build:518 kz-check:586 kz-deploy:268 kz-dev:278
 #: kz-post-migrate:71 kz-update:314
 msgid "Complete!"
 msgstr "Klaar!"

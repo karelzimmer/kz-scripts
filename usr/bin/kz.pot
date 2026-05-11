@@ -305,7 +305,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:726 kz-install:746 kz-restore:436 kz-setup:676
+#: kz-backup:726 kz-install:746 kz-restore:436 kz-setup:673
 msgid "error messages"
 msgstr ""
 
@@ -330,11 +330,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:734 kz-install:751 kz-restore:444 kz-setup:680
+#: kz-backup:734 kz-install:751 kz-restore:444 kz-setup:677
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:735 kz-install:752 kz-restore:445 kz-setup:681
+#: kz-backup:735 kz-install:752 kz-restore:445 kz-setup:678
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -387,63 +387,63 @@ msgstr ""
 msgid "Build website"
 msgstr ""
 
-#: kz-build:240
+#: kz-build:239
 msgid "Generate gettext files"
 msgstr ""
 
-#: kz-build:256
+#: kz-build:255
 msgid "skip, is a direcory."
 msgstr ""
 
-#: kz-build:260
+#: kz-build:259
 msgid "skip, is not a file."
 msgstr ""
 
-#: kz-build:264
+#: kz-build:263
 msgid "skip, is a LICENSE file."
 msgstr ""
 
-#: kz-build:268
+#: kz-build:267
 msgid "skip, is a README file."
 msgstr ""
 
-#: kz-build:272
+#: kz-build:271
 msgid "skip, is GPG-encrypted."
 msgstr ""
 
-#: kz-build:276
+#: kz-build:275
 msgid "skip, is a gettext POT file."
 msgstr ""
 
-#: kz-build:280
+#: kz-build:279
 msgid "skip, is a gettext PO file."
 msgstr ""
 
-#: kz-build:284
+#: kz-build:283
 msgid "skip, is a gettext MO file."
 msgstr ""
 
-#: kz-build:306
+#: kz-build:305
 msgid "can't determine the language"
 msgstr ""
 
-#: kz-build:340
+#: kz-build:339
 msgid "Build Debian package"
 msgstr ""
 
-#: kz-build:414
+#: kz-build:413
 msgid "Build RPM package"
 msgstr ""
 
-#: kz-build:487 kz-deploy:239
+#: kz-build:486 kz-deploy:239
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:509 kz-get:219
+#: kz-build:508 kz-get:184
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:515 kz-check:582 kz-deploy:264
+#: kz-build:514 kz-check:582 kz-deploy:264
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -574,7 +574,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.sh:410
+#: kz_common.sh:395
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -618,12 +618,12 @@ msgstr ""
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:366
+#: kz_common.sh:365
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:400
+#: kz_common.sh:385
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -776,19 +776,19 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:223
+#: kz-get:188
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:226
+#: kz-get:191
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:229
+#: kz-get:194
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz_common.sh:370 kz-get:233
+#: kz-get:198
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -1296,35 +1296,35 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:677
+#: kz-setup:674
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:682
+#: kz-setup:679
 msgid "Try to set up/reset the apps again."
 msgstr ""
 
-#: kz-setup:705
+#: kz-setup:702
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:707
+#: kz-setup:704
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:715
+#: kz-setup:712
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:720
+#: kz-setup:717
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:741
+#: kz-setup:738
 msgid "Log out of the computer yourself."
 msgstr ""
 
@@ -1527,7 +1527,7 @@ msgid "MAINTENANCE:"
 msgstr ""
 
 #: ckhtml:127 gitbranch:63 gitclone:80 gitfetch:63 gitinit:53 gitpull:63
-#: gitsquash:78 gitstatus:63 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:278
+#: gitsquash:78 gitstatus:63 kz-build:518 kz-check:586 kz-deploy:268 kz-dev:278
 #: kz-post-migrate:71 kz-update:314
 msgid "Complete!"
 msgstr ""

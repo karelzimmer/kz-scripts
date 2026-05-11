@@ -21,9 +21,6 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-readonly PROGRAM_NAME='kz-get'
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
-
 # List NORMAL last here so that -x doesn't bork the display.
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
@@ -39,7 +36,6 @@ declare OPTION_DEV=false
 # #############################################################################
 # Functions
 # #############################################################################
-
 
 # This function performs initial actions.
 function init() {
@@ -67,49 +63,27 @@ function init() {
         printf "$RED%s$NORMAL\n" 'fatal: must not be run as root' >&2
         exit 1
     fi
-
-    # Script-hardening.
-    set -o errexit
-    set -o errtrace
-    set -o nounset
-    set -o pipefail
-
-    trap 'err_report $? $LINENO' ERR
 }
-
-
-# This function reports errors.
-# shellcheck disable=SC2317,SC2329
-function err_report() {
-    printf '\n' >&2
-    journalctl  --all       \
-                --catalog   \
-                --pager-end \
-                --no-pager  \
-                --identifier="$PROGRAM_NAME"
-    printf "$RED%s$NORMAL\n" "$PROGRAM_NAME: error $1 on line $2" >&2
-}
-
 
 # This function performs the script actions.
 function process() {
     if grep --quiet --regexp='debian' /etc/os-release; then
-        process_kz_deb_package
+        process_deb_packages
     elif grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
-        process_kz_rpm_package
+        process_rpm_packages
     else
-        printf "$RED%s$NORMAL\n" 'fatal: unknown os release' >&2
+        printf '%s\n' 'fatal: unknown os release' >&2
         exit 1
     fi
 }
 
 
 # This function downloads and installs Debian package kz.
-function process_kz_deb_package() {
+function process_deb_packages() {
     local kz_deb_local_file=''
     local kz_deb_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'
-    local install='install'
+    local reinstall=''
 
     if $OPTION_DEV; then
         kz_deb_site_file=$packages_url/kz-dev_4.2.1-1_all.deb
@@ -119,36 +93,31 @@ function process_kz_deb_package() {
         kz_deb_local_file=$(mktemp -t "kz-XXXXXXXXXX.deb")
     fi
 
-    if type kz |& $PROGRAM_LOGS; then
-        install='reinstall'
+    if type kz &> /dev/null; then
+        reinstall='--reinstall'
     fi
 
-    sudo true || exit 1
-
-    printf '%s' 'Download kz...'
-    wget    --output-document="$kz_deb_local_file"  \
-            "$kz_deb_site_file"                     |& $PROGRAM_LOGS
+    # Download kz package.
+    wget --output-document="$kz_deb_local_file" "$kz_deb_site_file"
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
-    printf '\n%s' 'Install. kz...'
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
+    sudo true || exit 1
     check_debian_package_manager
-    sudo apt-get update |& $PROGRAM_LOGS
+    sudo apt-get update
+    printf '\n'
 
-    # Install kz deb package.
+    # Install kz package.
     check_debian_package_manager
-    sudo    apt-get                 \
-            "$install"              \
-            --assume-yes            \
-            "$kz_deb_local_file"    |& $PROGRAM_LOGS
+    sudo apt-get install "$reinstall" --assume-yes "$kz_deb_local_file"
 
     # Check in a desktop environment if zenity package is installed, and if
     # not, install it. This is needed for the GUI mode of the kz scripts.
-    if [[ -n ${DISPLAY-} ]] && ! type zenity |& $PROGRAM_LOGS; then
+    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
         check_debian_package_manager
-        sudo apt-get install --assume-yes zenity |& $PROGRAM_LOGS
+        sudo apt-get install --assume-yes zenity
     fi
 }
 
@@ -168,8 +137,8 @@ function check_debian_package_manager() {
 
 
 # This function installs RPM package kz.
-function process_kz_rpm_package() {
-    local install='install'
+function process_rpm_packages() {
+    local install=''
     local kz_rpm_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'
 
@@ -179,28 +148,24 @@ function process_kz_rpm_package() {
         kz_rpm_site_file=$packages_url/kz-4.2.1-1.noarch.rpm
     fi
 
-    if type kz |& $PROGRAM_LOGS; then
+    if type kz &> /dev/null; then
         install='reinstall'
+    else
+        install='install'
     fi
 
-    sudo true || exit 1
-
-    printf '%s' 'Download kz...'
-    # Downloading the RPM package is not necessary, because DNF supports
-    # installation via a URL.
-    sleep 0.2
-    printf '\n%s' 'Install. kz...'
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    sudo dnf check-update |& $PROGRAM_LOGS || true
+    sudo dnf check-update || true
+    printf '\n'
 
-    # Install kz rpm package.
-    sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
+    # Install kz package.
+    sudo dnf "$install" --assumeyes "$kz_rpm_site_file"
 
     # Check in a desktop environment if zenity package is installed, and if
     # not, install it. This is needed for the GUI mode of the kz scripts.
-    if [[ -n ${DISPLAY-} ]] && ! type zenity |& $PROGRAM_LOGS; then
-        sudo dnf install --assumeyes zenity |& $PROGRAM_LOGS
+    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
+        sudo dnf install --assumeyes zenity
     fi
 }
 
@@ -209,7 +174,7 @@ function process_kz_rpm_package() {
 function term() {
     local text=''
 
-    text="
+    text="\
 ===============================================================================
 
 "
