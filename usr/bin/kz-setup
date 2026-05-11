@@ -361,7 +361,7 @@ $(gettext '  0  No apps found.')"
         kz.infomsg "$text"
         exit 0
     fi
-    readarray all_apps <<< "$apps"
+    readarray -t all_apps <<< "$apps"
 
     if [[ $UI_MODE = 'gui' ]]; then
         for app in "${all_apps[@]}"; do
@@ -658,7 +658,7 @@ function term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
     local title=''
-
+    
     # Due to the use of whiptail infobox.
     if [[ $UI_MODE = 'tui' ]]; then
         clear -x
