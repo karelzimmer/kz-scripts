@@ -484,7 +484,7 @@ msgstr "Bouw RPM-pakket"
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:509 kz-get:219
+#: kz-build:509 kz-get:234
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -671,12 +671,12 @@ msgstr "Typ '$program_name --help' voor meer informatie."
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:365
+#: kz_common.sh:365 kz-get:101
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:368
+#: kz_common.sh:368 kz-get:103
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
@@ -689,7 +689,7 @@ msgstr ""
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr "Gebruik 'journalctl -xe' om te controleren wat er misging."
 
-#: kz_common.sh:377 kz-get:233
+#: kz_common.sh:377 kz-get:248
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
@@ -863,15 +863,15 @@ msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
 "commando uit:"
 
-#: kz-get:223
+#: kz-get:238
 msgid "Package kz has been successfully installed."
 msgstr "Pakket kz is succesvol geïnstalleerd."
 
-#: kz-get:226
+#: kz-get:241
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 
-#: kz-get:229
+#: kz-get:244
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 

@@ -74,20 +74,35 @@ function init() {
     set -o nounset
     set -o pipefail
 
-    trap 'err_report $? $LINENO' ERR
+    trap 'err_report err $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' ERR
 }
 
 
 # This function reports errors.
 # shellcheck disable=SC2317,SC2329
 function err_report() {
+    local signal=$1
+    local -i lineno=$2
+    local function=$3
+    local command=$4
+    local -i rc=$5
+
+    text="Signal: $signal, line: $lineno, function: $function, "
+    text+="command: $command, exit code: $rc."
+    printf '%s' "$text" |& $PROGRAM_LOGS
+
     printf '\n' >&2
     journalctl  --all       \
                 --catalog   \
                 --pager-end \
                 --no-pager  \
                 --identifier="$PROGRAM_NAME"
-    printf "$RED%s$NORMAL\n" "$PROGRAM_NAME: error $1 on line $2" >&2
+    text="$(eval_gettext \
+"Program \$PROGRAM_NAME encountered an error.")
+$(eval_gettext \
+"Error \$rc on line \$lineno in function \$function while executing command: \
+\$command")"
+    printf "$RED%s$NORMAL\n" "$text" >&2
 }
 
 
