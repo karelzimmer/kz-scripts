@@ -364,8 +364,15 @@ function kz.term() {
             text="$(eval_gettext \
 "Program \$PROGRAM_NAME encountered an error.")"
             kz.errmsg "$text"
-            text="Error $rc on line $lineno in function $function while \
-executing command: $command"
+            text="$(eval_gettext \
+"Error \$rc on line \$lineno in function \$function while executing command: \
+\$command")"
+            if [[ -z ${DISPLAY-} ]]; then
+                text+="
+$(gettext "Use 'journalctl -xe' to check what went wrong.")"
+                kz.errmsg "$text"
+                exit "$rc"
+            fi
             text+="
 $(gettext "Type 'exit' to close this window.")"
             gnome-terminal  --                                          \

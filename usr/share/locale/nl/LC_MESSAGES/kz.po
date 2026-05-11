@@ -625,7 +625,7 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.sh:409
+#: kz_common.sh:416
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -676,7 +676,24 @@ msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:399
+#: kz_common.sh:368
+#, sh-format
+msgid ""
+"Error $rc on line $lineno in function $function while executing command: "
+"$command"
+msgstr ""
+"Fout $rc op regel $lineno in functie $function bij het uitvoeren van "
+"commando: $command"
+
+#: kz_common.sh:372
+msgid "Use 'journalctl -xe' to check what went wrong."
+msgstr "Gebruik 'journalctl -xe' om te controleren wat er misging."
+
+#: kz_common.sh:377 kz-get:233
+msgid "Type 'exit' to close this window."
+msgstr "Typ 'exit' om dit venster te sluiten."
+
+#: kz_common.sh:406
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -857,10 +874,6 @@ msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 #: kz-get:229
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
-
-#: kz_common.sh:370 kz-get:233
-msgid "Type 'exit' to close this window."
-msgstr "Typ 'exit' om dit venster te sluiten."
 
 #: kz-install:23 kz-install.desktop:11
 msgid "Install apps and change system settings"
