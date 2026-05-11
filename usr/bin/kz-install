@@ -367,7 +367,7 @@ $(gettext '  0  No apps found.')"
         kz.infomsg "$text"
         exit 0
     fi
-    readarray all_apps <<< "$apps"
+    readarray -t all_apps <<< "$apps"
 
     if [[ $UI_MODE = 'gui' ]]; then
         for app in "${all_apps[@]}"; do
