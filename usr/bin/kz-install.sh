@@ -109,7 +109,7 @@ if [[ -n ${DISPLAY-} ]]; then sudo flatpak uninstall --assumeyes org.angryip.ips
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ansible; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ansible-core; fi
 
 # REMOVE ansible pc06 pc07
 # -----------------------------------------------------------------------------
@@ -117,7 +117,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ansible; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ansible-core; fi
 
 # INSTALL apport-settings #none
 # -----------------------------------------------------------------------------
