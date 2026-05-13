@@ -72,7 +72,7 @@ function process() {
         exit 1
     fi
     kz.become_check
-    sudo true
+    sudo --validate
     check
     deploy
 }

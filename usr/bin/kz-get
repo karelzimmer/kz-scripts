@@ -51,7 +51,7 @@ function init() {
     fi
 
     # Check if systemd is available.
-    if ! type systemctl > /dev/null; then
+    if ! type systemctl &> /dev/null; then
         printf "$RED%s$NORMAL\n" 'fatal: no systemd available' >&2
         exit 1
     fi
@@ -121,10 +121,10 @@ function process() {
 
 # This function downloads and installs Debian package kz.
 function process_kz_deb_package() {
+    local install='install'
     local kz_deb_local_file=''
     local kz_deb_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'
-    local install='install'
 
     if $OPTION_DEV; then
         kz_deb_site_file=$packages_url/kz-dev_4.2.1-1_all.deb
@@ -134,11 +134,11 @@ function process_kz_deb_package() {
         kz_deb_local_file=$(mktemp -t "kz-XXXXXXXXXX.deb")
     fi
 
-    if type kz |& $PROGRAM_LOGS; then
+    if type kz &> /dev/null; then
         install='reinstall'
     fi
 
-    sudo true || exit 1
+    sudo --validate || exit 1
 
     printf '%s' 'Download kz...'
     wget    --output-document="$kz_deb_local_file"  \
@@ -154,17 +154,7 @@ function process_kz_deb_package() {
 
     # Install kz deb package.
     check_debian_package_manager
-    sudo    apt-get                 \
-            "$install"              \
-            --assume-yes            \
-            "$kz_deb_local_file"    |& $PROGRAM_LOGS
-
-    # Check in a desktop environment if zenity package is installed, and if
-    # not, install it. This is needed for the GUI mode of the kz scripts.
-    if [[ -n ${DISPLAY-} ]] && ! type zenity |& $PROGRAM_LOGS; then
-        check_debian_package_manager
-        sudo apt-get install --assume-yes zenity |& $PROGRAM_LOGS
-    fi
+    sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
 }
 
 
@@ -194,29 +184,19 @@ function process_kz_rpm_package() {
         kz_rpm_site_file=$packages_url/kz-4.2.1-1.noarch.rpm
     fi
 
-    if type kz |& $PROGRAM_LOGS; then
+    if type kz &> /dev/null; then
         install='reinstall'
     fi
 
-    sudo true || exit 1
+    sudo --validate || exit 1
 
-    printf '%s' 'Download kz...'
-    # Downloading the RPM package is not necessary, because DNF supports
-    # installation via a URL.
-    sleep 0.2
-    printf '\n%s' 'Install. kz...'
+    printf '%s' 'Install. kz...'
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
     sudo dnf check-update |& $PROGRAM_LOGS || true
 
     # Install kz rpm package.
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
-
-    # Check in a desktop environment if zenity package is installed, and if
-    # not, install it. This is needed for the GUI mode of the kz scripts.
-    if [[ -n ${DISPLAY-} ]] && ! type zenity |& $PROGRAM_LOGS; then
-        sudo dnf install --assumeyes zenity |& $PROGRAM_LOGS
-    fi
 }
 
 

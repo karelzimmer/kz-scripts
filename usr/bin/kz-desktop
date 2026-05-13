@@ -80,7 +80,7 @@ function process() {
     local text=''
 
     check_input "$@"
-    if type gnome-session |& $PROGRAM_LOGS; then
+    if type gnome-session &> /dev/null; then
         favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
         desktopfile=$favorite_argument.desktop
     else

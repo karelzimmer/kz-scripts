@@ -91,7 +91,7 @@ function process() {
         exit 1
     fi
     kz.become_check
-    sudo true
+    sudo --validate
     build_website
     generate_gettext_files
     kz.check_repos || OPTION_DEV=true

@@ -80,11 +80,11 @@ readonly -a  MENU2_ACTIONS=(
     [6]="$(gettext 'Go to installation menu')"
             )
 readonly -a  MENU2_DESCS=(
-    [1]='kz backup'
-    [2]='kz wifi'
-    [3]='kz install'
-    [4]='kz restore'
-    [5]='kz setup'
+    [1]='kz-backup'
+    [2]='kz-wifi'
+    [3]='kz-install'
+    [4]='kz-restore'
+    [5]='kz-setup'
     [6]="$(gettext 'Back')"
     )
 readonly MENU2_LINES=${#MENU2_DESCS[@]}
@@ -159,7 +159,7 @@ $(gettext "no desktop environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                if ! type zenity |& $PROGRAM_LOGS; then
+                if ! type zenity &> /dev/null; then
                     UI_MODE='cli'
                     text="$program_name: $1: \
 $(gettext "zenity is required; run kz-get first")"

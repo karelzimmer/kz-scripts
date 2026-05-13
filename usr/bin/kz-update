@@ -65,7 +65,7 @@ def process() -> None:
     """
     This function performs the script actions.
     """
-    check_sudo: str = 'sudo true'
+    check_sudo: str = 'sudo --validate'
     check_debian: str = "grep --quiet 'debian' /etc/os-release"
     check_rhel: str = r"grep --quiet 'rhel\|fedora' /etc/os-release"
     text: str

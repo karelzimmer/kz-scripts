@@ -137,6 +137,19 @@ found.")
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
+    if [[ $install = 'INSTALL' ]]; then
+        # Refresh package lists before installing apps, to minimize the risk of
+        # errors due to incomplete and outdated package lists.
+        printf '%s\n' "# INSTALL update *** automatically added ***
+# -----------------------------------------------------------------------------
+# Refresh package lists before installing apps.
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf check-u\
+pdate || true; fi
+"       > "$command_file"
+    fi
 
     if $OPTION_SELECT; then
         process_option_select
@@ -213,7 +226,7 @@ $(gettext "no desktop environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                if ! type zenity |& $PROGRAM_LOGS; then
+                if ! type zenity &> /dev/null; then
                     UI_MODE='cli'
                     text="$program_name: $1: \
 $(gettext "zenity is required; run kz-get first")"
@@ -439,21 +452,6 @@ function process_argument_app() {
     local err_flag=false
     local text=''
 
-    if [[ $install = 'INSTALL' ]]; then
-        # Refresh package lists before installing apps, to minimize the risk of
-        # errors due to outdated package lists.
-        printf '%s\n' "\
-# INSTALL 1-update $(gettext '*** automatically added ***')
-# -----------------------------------------------------------------------------
-# $(gettext 'Refresh package lists before installing apps.')
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf check-u\
-pdate || true; fi
-"       > "$command_file"
-    fi
-
     for app_argument in "${app_arguments[@]}"; do
         process_installation_files_by_app_argument
     done
@@ -595,15 +593,12 @@ function process_command_file() {
 $(gettext "Authentication is required to install apps and change system \
 settings")
 "
-    # To maximize the time window without asking for authentication.
-    sudo --reset-timestamp
-
     # Skip user prompts during installations or upgrades.
     # This ensures an uninterrupted, automated installation process.
     export DEBIAN_FRONTEND=noninteractive
 
     if [[ $UI_MODE = 'cli' ]]; then
-        sudo true
+        sudo --validate
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
         printf '%s\n' "$text"
@@ -715,7 +710,7 @@ function execute_command() {
         else
             cmd_dis=$cmd
         fi
-        sudo true
+        sudo --validate
         printf '%s\n' "         $cmd_dis"
         kz.check_debian_package_manager
         eval    "$cmd"              \

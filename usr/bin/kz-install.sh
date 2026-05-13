@@ -11,40 +11,6 @@
 # format of this file.
 # =============================================================================
 
-# INSTALL 1-update *
-# -----------------------------------------------------------------------------
-# Add components to package sources if on Debian.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/main non-free-firmware/contrib main non-free non-free-firmware/' /etc/apt/debian.sources; fi
-# -----------------------------------------------------------------------------
-# Add Extra Packages for Enterprise Linux (EPEL) if on RHEL.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf install --assumeyes epel-release; fi
-# -----------------------------------------------------------------------------
-# Refresh package lists.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf check-update || true; fi
-
-# REMOVE 1-update *
-# -----------------------------------------------------------------------------
-# Remove components from package sources if on Debian.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/sources.list ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/sources.list; fi
-if grep --quiet --regexp='Debian' /etc/os-release && [[ -f /etc/apt/debian.sources ]]; then sudo sed --in-place --expression='s/contrib main non-free non-free-firmware/main non-free-firmware/' /etc/apt/debian.sources; fi
-# -----------------------------------------------------------------------------
-# Remove Extra Packages for Enterprise Linux (EPEL) if on RHEL.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf remove --assumeyes epel-release; fi
-# -----------------------------------------------------------------------------
-# Refresh package lists.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf check-update || true; fi
-
 # INSTALL aer-settings #none
 # -----------------------------------------------------------------------------
 # Disable Advanced Error Reporting.
@@ -253,11 +219,11 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) > /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) > /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) > /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-no-overview) > /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-no-overview) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
 #
 REBOOT=true
 
@@ -265,11 +231,11 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) > /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) > /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) > /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-no-overview) > /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-no-overview) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
 #
 REBOOT=true
 
@@ -391,6 +357,65 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes firefox; fi
 
+# INSTALL firewall *
+# -----------------------------------------------------------------------------
+# (Gui for) Uncomplicated FireWall (Debian).
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ufw; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gufw; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo ufw enable; fi
+# -----------------------------------------------------------------------------
+# GUI for firewall daemon (RHEL).
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='rhel' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes firewall-config; fi
+# -----------------------------------------------------------------------------
+# GSConnect.
+# -----------------------------------------------------------------------------
+if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
+#
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
+# -----------------------------------------------------------------------------
+# SSH.
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw allow ssh; fi
+if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw reload; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --permanent --add-service=ssh; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --reload; fi
+
+# REMOVE firewall *
+# -----------------------------------------------------------------------------
+# (Gui for) Uncomplicated FireWall (Debian).
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo ufw disable; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ufw; fi
+# -----------------------------------------------------------------------------
+# GUI for firewall daemon (RHEL).
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes firewall-config; fi
+# -----------------------------------------------------------------------------
+# GSConnect.
+# -----------------------------------------------------------------------------
+if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
+#
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
+# -----------------------------------------------------------------------------
+# SSH.
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw delete allow ssh; fi
+if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw reload; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --permanent --remove-service=ssh; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --reload; fi
+
 # INSTALL fwupd-settings #none
 # -----------------------------------------------------------------------------
 # Disable FirmWare UPdate Daemon.
@@ -411,7 +436,7 @@ sudo systemctl start fwupd.service
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session > /dev/null; then sudo apt-get install --assume-yes gdebi; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 #
 # App gdebi is not available on Red Hat and Red Hat-based system.
 
@@ -419,7 +444,7 @@ if grep --quiet --regexp='debian' /etc/os-release && type gnome-session > /dev/n
 # -----------------------------------------------------------------------------
 # View and install deb files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session > /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 #
 # App gdebi is not available on Red Hat and Red Hat-based system.
 
@@ -463,17 +488,17 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session > /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session > /dev/null; then sudo dnf install --assumeyes gnome-tweaks; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes gnome-tweaks; fi
 
 # REMOVE gnome-tweaks pc06 pc07
 # -----------------------------------------------------------------------------
 # Adjust advanced settings.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session > /dev/null; then sudo apt-get remove --assume-yes gnome-tweaks; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gnome-tweaks; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session > /dev/null; then sudo dnf remove --assumeyes gnome-tweaks; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
 # INSTALL google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -585,59 +610,33 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) > /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
+#
+if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 #
-if systemctl status ufw > /dev/null; then sudo ufw allow 1714:1764/udp; fi
-if systemctl status ufw > /dev/null; then sudo ufw allow 1714:1764/tcp; fi
-if systemctl status ufw > /dev/null; then sudo ufw reload; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
 
 # REMOVE gsconnect pc06 pc07
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) > /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
+#
+if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 #
-if systemctl status ufw > /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
-if systemctl status ufw > /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
-if systemctl status ufw > /dev/null; then sudo ufw reload; fi
-
-# INSTALL gufw *
-# -----------------------------------------------------------------------------
-# Gui for Uncomplicated FireWall.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get install --assume-yes gufw; fi
-#
-if grep --quiet --regexp='rhel' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes gufw; fi
-#
-sudo ufw enable
-#
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw allow 1714:1764/udp; fi
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw allow 1714:1764/tcp; fi
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw reload; fi
-#
-if type ssh > /dev/null; then sudo ufw allow ssh; fi
-if type ssh > /dev/null; then sudo ufw reload; fi
-
-# REMOVE gufw *
-# -----------------------------------------------------------------------------
-# Gui for Uncomplicated FireWall.
-# -----------------------------------------------------------------------------
-sudo ufw disable
-#
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo apt-get remove --assume-yes gufw; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes gufw; fi
-#
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw reload; fi
-#
-if type ssh > /dev/null; then sudo ufw delete allow ssh; fi
-if type ssh > /dev/null; then sudo ufw reload; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
 
 # INSTALL htop pc01 pc06 pc07
 # -----------------------------------------------------------------------------
@@ -855,7 +854,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 # Disable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) > /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 #
@@ -865,7 +864,7 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Enable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) > /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 #
@@ -908,7 +907,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes systemd-timesyncd; fi
 #
-if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf install --assumeyes systemd-timesyncd; fi
+# App ntp is not available on Red Hat and Red Hat-based system.
 
 # REMOVE ntp *
 # -----------------------------------------------------------------------------
@@ -916,7 +915,7 @@ if grep --quiet --regexp='rhel' /etc/os-release; then sudo dnf install --assumey
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes systemd-timesyncd; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes systemd-timesyncd; fi
+# App ntp is not available on Red Hat and Red Hat-based system.
 
 # INSTALL poedit pc06 pc07
 # -----------------------------------------------------------------------------
@@ -1091,8 +1090,8 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 #
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 #
-if systemctl status ufw > /dev/null; then sudo ufw allow ssh; fi
-if systemctl status ufw > /dev/null; then sudo ufw reload; fi
+if systemctl status ufw &> /dev/null; then sudo ufw allow ssh; fi
+if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
 # -----------------------------------------------------------------------------
 # Check for remote root access.
 # -----------------------------------------------------------------------------
@@ -1116,21 +1115,24 @@ sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ssh; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes openssh; fi
-#
-if systemctl status ufw > /dev/null; then sudo ufw delete allow ssh; fi
-if systemctl status ufw > /dev/null; then sudo ufw reload; fi
 # -----------------------------------------------------------------------------
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts; fi
+#
+if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw delete allow ssh; fi
+if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw reload; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --permanent --remove-service=ssh; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --reload; fi
 
 # INSTALL sushi #none
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session > /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-sushi; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session > /dev/null; then sudo dnf install --assumeyes sushi; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes sushi; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
@@ -1140,9 +1142,9 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session > 
 # -----------------------------------------------------------------------------
 # Quick preview.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session > /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gnome-sushi; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session > /dev/null; then sudo dnf remove --assumeyes sushi; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes sushi; fi
 
 # INSTALL teamviewer *
 # -----------------------------------------------------------------------------
@@ -1214,40 +1216,6 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes tree; fi
 
-# INSTALL ufw *
-# -----------------------------------------------------------------------------
-# Uncomplicated FireWall.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ufw; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ufw; fi
-#
-sudo ufw enable
-#
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw allow 1714:1764/udp; fi
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw allow 1714:1764/tcp; fi
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw reload; fi
-#
-if type ssh > /dev/null; then sudo ufw allow ssh; fi
-if type ssh > /dev/null; then sudo ufw reload; fi
-
-# REMOVE ufw *
-# -----------------------------------------------------------------------------
-# Uncomplicated FireWall.
-# -----------------------------------------------------------------------------
-sudo ufw disable
-#
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ufw; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ufw; fi
-#
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
-if dpkg --status gnome-shell-extension-gsconnect > /dev/null; then sudo ufw reload; fi
-#
-if type ssh > /dev/null; then sudo ufw delete allow ssh; fi
-if type ssh > /dev/null; then sudo ufw reload; fi
-
 # INSTALL usbutils pc06 pc07
 # -----------------------------------------------------------------------------
 # USB utilities.
@@ -1272,15 +1240,15 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 # Add guest user.
 # -----------------------------------------------------------------------------
-if ! id "$(TEXTDOMAIN=kz gettext 'guest')" > /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(TEXTDOMAIN=kz gettext 'Guest_user')" "$(TEXTDOMAIN=kz gettext 'guest')"; fi
+if ! id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(TEXTDOMAIN=kz gettext 'Guest_user')" "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 #
-if id "$(TEXTDOMAIN=kz gettext 'guest')" > /dev/null; then sudo passwd --delete "$(TEXTDOMAIN=kz gettext 'guest')"; fi
+if id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo passwd --delete "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 # REMOVE user-guest pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Delete guest user.
 # -----------------------------------------------------------------------------
-if id "$(TEXTDOMAIN=kz gettext 'guest')" > /dev/null; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
+if id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 # INSTALL vlc *
 # -----------------------------------------------------------------------------

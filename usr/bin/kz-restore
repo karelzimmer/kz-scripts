@@ -118,7 +118,7 @@ $(gettext "no desktop environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                if ! type zenity |& $PROGRAM_LOGS; then
+                if ! type zenity &> /dev/null; then
                     UI_MODE='cli'
                     text="$program_name: $1: \
 $(gettext "zenity is required; run kz-get first")"
@@ -404,7 +404,7 @@ function restore_settings() {
 function restore_setting_desktop() {
     local input_file=$settings_dir/desktop.ico
 
-    if type gsettings |& $PROGRAM_LOGS && [[ -f $input_file ]]; then
+    if type gsettings &> /dev/null && [[ -f $input_file ]]; then
         kz.logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
