@@ -7,7 +7,6 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-
 # #############################################################################
 # Imports
 # #############################################################################
@@ -15,7 +14,6 @@
 export TEXTDOMAIN='kz'
 export TEXTDOMAINDIR='/usr/share/locale'
 source /usr/bin/gettext.sh
-
 
 # #############################################################################
 # Constants
@@ -28,13 +26,11 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
-
 # #############################################################################
 # Globals
 # #############################################################################
 
 declare OPTION_DEV=false
-
 
 # #############################################################################
 # Functions
@@ -50,47 +46,20 @@ function init() {
         exit 0
     fi
 
-    # Check if systemd is available.
-    if ! type systemctl &> /dev/null; then
-        printf "$RED%s$NORMAL\n" 'fatal: no systemd available' >&2
-        exit 1
-    fi
-
-    # Check if os release is available.
-    if ! [[ -f /etc/os-release ]]; then
-        printf "$RED%s$NORMAL\n" 'fatal: no os release available' >&2
-        exit 1
-    fi
-
-    # Check if started as root.
-    if [[ $UID -eq 0 ]]; then
-        printf "$RED%s$NORMAL\n" 'fatal: must not be run as root' >&2
-        exit 1
-    fi
-
     # Script-hardening.
     set -o errexit
     set -o errtrace
     set -o nounset
     set -o pipefail
 
-    trap 'err_report err $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' ERR
+    # Trap signals.
+    trap 'err_report' ERR SIGHUP SIGINT SIGTERM
 }
 
 
 # This function reports errors.
 # shellcheck disable=SC2317,SC2329
 function err_report() {
-    local signal=$1
-    local -i lineno=$2
-    local function=$3
-    local command=$4
-    local -i rc=$5
-
-    text="Signal: $signal, line: $lineno, function: $function, "
-    text+="command: $command, exit code: $rc."
-    printf '%s' "$text" |& $PROGRAM_LOGS
-
     printf '\n' >&2
     journalctl  --all       \
                 --catalog   \
@@ -98,10 +67,7 @@ function err_report() {
                 --no-pager  \
                 --identifier="$PROGRAM_NAME"
     text="$(eval_gettext \
-"Program \$PROGRAM_NAME encountered an error.")
-$(eval_gettext \
-"Error \$rc on line \$lineno in function \$function while executing command: \
-\$command")"
+"Program \$PROGRAM_NAME encountered an error.")"
     printf "$RED%s$NORMAL\n" "$text" >&2
 }
 
@@ -149,31 +115,11 @@ function process_kz_deb_package() {
     printf '\n%s' 'Update.....'
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    check_debian_package_manager
     sudo apt-get update |& $PROGRAM_LOGS
 
     printf '\n%s' 'Install....'
     # Install kz deb package.
-    check_debian_package_manager
     sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
-}
-
-
-# This function checks if a Debian package manager is already running and waits
-# for the next check if so.
-function check_debian_package_manager() {
-    local text=''
-
-    if ! type fuser &> /dev/null; then
-        return 0
-    fi
-
-    while sudo  fuser                           \
-                --silent                        \
-                /var/cache/debconf/config.dat   \
-                /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        sleep 2
-    done
 }
 
 
@@ -243,7 +189,6 @@ $NORMAL\n\n"
 
     exit 0
 }
-
 # #############################################################################
 # Main
 # #############################################################################
