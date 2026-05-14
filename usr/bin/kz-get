@@ -164,6 +164,10 @@ function process_kz_deb_package() {
 function check_debian_package_manager() {
     local text=''
 
+    if ! type fuser &> /dev/null; then
+        return 0
+    fi
+
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
