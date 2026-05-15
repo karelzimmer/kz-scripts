@@ -53,6 +53,7 @@ function init() {
     set -o pipefail
 
     # Trap signals.
+    trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
     trap 'err_report' ERR SIGHUP SIGINT SIGTERM
 }
 
@@ -184,8 +185,6 @@ $NORMAL\n\n"
 ===============================================================================
 "
     printf '%b' "$text"
-
-    rm --force getkz* /tmp/kz-*.deb
 
     exit 0
 }
