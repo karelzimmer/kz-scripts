@@ -662,11 +662,11 @@ msgid "  -d, --dev      deploy the development version of package kz"
 msgstr ""
 
 #: kz-deploy:155
-msgid "CHECK"
+msgid "*** Check ***"
 msgstr ""
 
 #: kz-deploy:169
-msgid "DEPLOY"
+msgid "*** Deploy ***"
 msgstr ""
 
 #: kz-deploy:206

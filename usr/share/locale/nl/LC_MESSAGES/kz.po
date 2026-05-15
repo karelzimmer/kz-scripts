@@ -719,12 +719,12 @@ msgid "  -d, --dev      deploy the development version of package kz"
 msgstr "  -d, --dev      distribueer de ontwikkelingsversie van pakket kz"
 
 #: kz-deploy:155
-msgid "CHECK"
-msgstr "CONTROLEREN"
+msgid "*** Check ***"
+msgstr "*** Controleren ***"
 
 #: kz-deploy:169
-msgid "DEPLOY"
-msgstr "DISTRIBUEREN"
+msgid "*** Deploy ***"
+msgstr "*** Distribueren ***"
 
 #: kz-deploy:206
 msgid "Upload website"
