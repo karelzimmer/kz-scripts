@@ -480,7 +480,7 @@ msgstr "Bouw Debian-pakket..."
 msgid "Build RPM package..."
 msgstr "Bouw RPM-pakket..."
 
-#: kz-build:487 kz-deploy:239
+#: kz-build:487
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
@@ -737,6 +737,10 @@ msgstr "Wachtwoord voor"
 #: kz-deploy:224
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
+
+#: kz-deploy:239
+msgid "Install..."
+msgstr "Installeren..."
 
 #: kz-deploy:250
 msgid "Install Debian package failed."

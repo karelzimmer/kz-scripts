@@ -236,8 +236,8 @@ function install_package() {
     local parm=''
     local text=''
 
-    text=$(gettext 'Install Debian package (this may take a while)...')
-    kz.infomsg "$text"
+    text=$BOLD$(gettext 'Install...')$NORMAL
+    kz.infomsg "\n$text"
 
     kz.logmsg 'Calling kz-get (via wget and bash)...'
     # Call kz-get via wget and bash as a regular user would do.

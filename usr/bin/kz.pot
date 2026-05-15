@@ -435,7 +435,7 @@ msgstr ""
 msgid "Build RPM package..."
 msgstr ""
 
-#: kz-build:487 kz-deploy:239
+#: kz-build:487
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
@@ -679,6 +679,10 @@ msgstr ""
 
 #: kz-deploy:224
 msgid "Website upload failed."
+msgstr ""
+
+#: kz-deploy:239
+msgid "Install..."
 msgstr ""
 
 #: kz-deploy:250
