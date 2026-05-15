@@ -1344,15 +1344,15 @@ msgid "Usage: kz update [<options>]"
 msgstr ""
 
 #: kz-update:92
-msgid "GITPULL"
+msgid "*** GITPULL ***"
 msgstr ""
 
 #: kz-update:107 kz-update:119
-msgid "UPDATE"
+msgid "*** UPDATE ***"
 msgstr ""
 
 #: gitsquash:66 kz-update:113 kz-update:125
-msgid "CLEANUP"
+msgid "*** CLEANUP ***"
 msgstr ""
 
 #: kz-update:129
@@ -1510,19 +1510,19 @@ msgid "The following will be executed:"
 msgstr ""
 
 #: gitsquash:54
-msgid "PREPARE"
+msgid "*** PREPARE ***"
 msgstr ""
 
 #: gitsquash:58
-msgid "MERGE"
+msgid "*** MERGE ***"
 msgstr ""
 
 #: gitsquash:62
-msgid "COMMIT"
+msgid "*** COMMIT ***"
 msgstr ""
 
 #: gitsquash:70
-msgid "MAINTENANCE"
+msgid "*** MAINTENANCE ***"
 msgstr ""
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
