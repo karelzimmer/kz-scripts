@@ -180,7 +180,7 @@ function build_website() {
     local startdir=$PWD
     local text=''
 
-    text=$(gettext 'Build website')...
+    text=$(gettext 'Build website...')
     kz.infomsg "$text"
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/src/.
@@ -237,7 +237,7 @@ $HOME/kz-scripts/usr/share/applications \
 $HOME/kz-scripts/usr/share/polkit-1/actions"
     local gettext_file=''
 
-    text=$(gettext 'Generate gettext files')...
+    text=$(gettext 'Generate gettext files..')
     kz.infomsg "$text"
 
     # Remove '#: filename:line' lines, these are generated again by xgettext.
@@ -337,7 +337,7 @@ function build_deb_package() {
     local text=''
     local to_build=''
 
-    text=$(gettext 'Build Debian package')...
+    text=$(gettext 'Build Debian package...')
     kz.infomsg "$text"
 
     # Fill kz-deb/dist/ with kz-deb/src/.
@@ -411,7 +411,7 @@ function build_rpm_package() {
     local text=''
     local to_copy=''
 
-    text=$(gettext 'Build RPM package')...
+    text=$(gettext 'Build RPM package...')
     kz.infomsg "$text"
 
     # Fill kz-rpm/dist/ with kz-rpm/src/.

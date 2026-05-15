@@ -429,12 +429,12 @@ msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
 #: kz-build:183
-msgid "Build website"
-msgstr "Bouw website"
+msgid "Build website..."
+msgstr "Bouw website..."
 
 #: kz-build:240
-msgid "Generate gettext files"
-msgstr "Genereer gettext-bestanden"
+msgid "Generate gettext files.."
+msgstr "Genereer gettext-bestanden.."
 
 #: kz-build:256
 msgid "skip, is a direcory."
@@ -473,12 +473,12 @@ msgid "can't determine the language"
 msgstr "kan de taal niet bepalen"
 
 #: kz-build:340
-msgid "Build Debian package"
-msgstr "Bouw Debian-pakket"
+msgid "Build Debian package..."
+msgstr "Bouw Debian-pakket..."
 
 #: kz-build:414
-msgid "Build RPM package"
-msgstr "Bouw RPM-pakket"
+msgid "Build RPM package..."
+msgstr "Bouw RPM-pakket..."
 
 #: kz-build:487 kz-deploy:239
 msgid "Install Debian package (this may take a while)..."
