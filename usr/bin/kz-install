@@ -555,7 +555,8 @@ function install_apps() {
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
-    text="** $ERROR_LOG (stderr) *********************************************"
+    text="\
+== $ERROR_LOG (stderr) ======================================================="
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Install apps')
@@ -627,7 +628,7 @@ settings")
                     printf '%s\n' "$app_name_line"
                 fi
                 # To corrolate possible error messages with app name.
-                printf ' %s\n' "-- App $app_name" >> "$ERROR_LOG"
+                printf '%s\n' "== App $app_name" >> "$ERROR_LOG"
                 ;;
             '#'* )
                 # Skip comment record.
@@ -733,7 +734,8 @@ function term() {
     fi
 
     # Error log also to the standard log.
-    text="** $ERROR_LOG (stderr) *********************************************"
+    text="\
+== $ERROR_LOG (stderr) ======================================================="
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
