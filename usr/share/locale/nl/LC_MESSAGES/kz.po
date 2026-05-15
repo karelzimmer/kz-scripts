@@ -1483,16 +1483,16 @@ msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
 #: kz-update:92
-msgid "*** GITPULL ***"
-msgstr "*** GITPULL ***"
+msgid "*** Gitpull ***"
+msgstr "*** Gitpull ***"
 
 #: kz-update:107 kz-update:119
-msgid "*** UPDATE ***"
-msgstr "*** BIJWERKEN ***"
+msgid "*** Update ***"
+msgstr "*** Bijwerken ***"
 
 #: gitsquash:66 kz-update:113 kz-update:125
-msgid "*** CLEANUP ***"
-msgstr "*** OPRUIMEN ***"
+msgid "*** Cleanup ***"
+msgstr "*** Opruimen ***"
 
 #: kz-update:129
 msgid "fatal: unknown os release"
@@ -1652,20 +1652,20 @@ msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
 #: gitsquash:54
-msgid "*** PREPARE ***"
-msgstr "*** VOORBEREIDEN ***"
+msgid "*** Prepare ***"
+msgstr "*** Voorbereiden ***"
 
 #: gitsquash:58
-msgid "*** MERGE ***"
-msgstr "*** SAMENVOEGEN ***"
+msgid "*** Merge ***"
+msgstr "*** Samenvoegen ***"
 
 #: gitsquash:62
-msgid "*** COMMIT ***"
-msgstr "*** BEVESTIGEN ***"
+msgid "*** Commit ***"
+msgstr "*** Bevestigen ***"
 
 #: gitsquash:70
-msgid "*** MAINTENANCE ***"
-msgstr "*** ONDERHOUD ***"
+msgid "*** Maintenance ***"
+msgstr "*** Onderhoud ***"
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
 #: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:278
