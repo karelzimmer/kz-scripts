@@ -1171,10 +1171,6 @@ msgid ""
 "                 use backup in specified directory"
 msgstr ""
 
-msgid ""
-"Use \"kz restore --source <usb medium>\" to select the desired USB medium."
-msgstr ""
-
 #: kz-restore:314
 #, sh-format
 msgid "No BACKUP-$USER@$HOSTNAME found in $medium."

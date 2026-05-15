@@ -1282,12 +1282,6 @@ msgstr ""
 "  -s, --source <map>\n"
 "                 gebruik de back-up in de opgegeven map"
 
-msgid ""
-"Use \"kz restore --source <usb medium>\" to select the desired USB medium."
-msgstr ""
-"Gebruik \"kz restore --source <usb-medium>\" om het gewenste USB-medium te "
-"selecteren."
-
 #: kz-restore:314
 #, sh-format
 msgid "No BACKUP-$USER@$HOSTNAME found in $medium."
