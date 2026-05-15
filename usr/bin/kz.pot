@@ -1351,7 +1351,7 @@ msgstr ""
 msgid "UPDATE"
 msgstr ""
 
-#: kz-update:113 kz-update:125
+#: gitsquash:66 kz-update:113 kz-update:125
 msgid "CLEANUP"
 msgstr ""
 
@@ -1497,36 +1497,32 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: gitsquash:49
+#: gitsquash:48
 msgid "*** git squash merge in 10 steps ***"
 msgstr ""
 
-#: gitsquash:51
+#: gitsquash:50
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr ""
 
-#: gitsquash:54 kz-menu:573
+#: gitsquash:52 kz-menu:573
 msgid "The following will be executed:"
 msgstr ""
 
-#: gitsquash:56
-msgid "PREPARE:"
+#: gitsquash:54
+msgid "PREPARE"
 msgstr ""
 
-#: gitsquash:60
-msgid "MERGE:"
+#: gitsquash:58
+msgid "MERGE"
 msgstr ""
 
-#: gitsquash:64
-msgid "COMMIT:"
+#: gitsquash:62
+msgid "COMMIT"
 msgstr ""
 
-#: gitsquash:68
-msgid "CLEANUP:"
-msgstr ""
-
-#: gitsquash:72
-msgid "MAINTENANCE:"
+#: gitsquash:70
+msgid "MAINTENANCE"
 msgstr ""
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64

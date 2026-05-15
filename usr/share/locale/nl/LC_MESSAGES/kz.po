@@ -1490,7 +1490,7 @@ msgstr "GITPULL"
 msgid "UPDATE"
 msgstr "BIJWERKEN"
 
-#: kz-update:113 kz-update:125
+#: gitsquash:66 kz-update:113 kz-update:125
 msgid "CLEANUP"
 msgstr "OPRUIMEN"
 
@@ -1639,37 +1639,33 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: gitsquash:49
+#: gitsquash:48
 msgid "*** git squash merge in 10 steps ***"
 msgstr "*** git squash merge in 10 stappen ***"
 
-#: gitsquash:51
+#: gitsquash:50
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr "Werkt het beste in twee aparte terminals door te kopiëren en plakken."
 
-#: gitsquash:54 kz-menu:573
+#: gitsquash:52 kz-menu:573
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
-#: gitsquash:56
-msgid "PREPARE:"
-msgstr "VOORBEREIDEN:"
+#: gitsquash:54
+msgid "PREPARE"
+msgstr "VOORBEREIDEN"
 
-#: gitsquash:60
-msgid "MERGE:"
-msgstr "SAMENVOEGEN:"
+#: gitsquash:58
+msgid "MERGE"
+msgstr "SAMENVOEGEN"
 
-#: gitsquash:64
-msgid "COMMIT:"
-msgstr "BEVESTIGEN:"
+#: gitsquash:62
+msgid "COMMIT"
+msgstr "BEVESTIGEN"
 
-#: gitsquash:68
-msgid "CLEANUP:"
-msgstr "OPRUIMEN:"
-
-#: gitsquash:72
-msgid "MAINTENANCE:"
-msgstr "ONDERHOUD:"
+#: gitsquash:70
+msgid "MAINTENANCE"
+msgstr "ONDERHOUD"
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
 #: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:278
