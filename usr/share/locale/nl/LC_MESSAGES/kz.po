@@ -719,12 +719,12 @@ msgid "  -d, --dev      deploy the development version of package kz"
 msgstr "  -d, --dev      distribueer de ontwikkelingsversie van pakket kz"
 
 #: kz-deploy:155
-msgid "*** Check ***"
-msgstr "*** Controleren ***"
+msgid "Check..."
+msgstr "Controleren..."
 
 #: kz-deploy:169
-msgid "*** Deploy ***"
-msgstr "*** Distribueren ***"
+msgid "Deploy..."
+msgstr "Distribueren..."
 
 #: kz-deploy:206
 msgid "Upload website"
@@ -1483,16 +1483,16 @@ msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
 #: kz-update:92
-msgid "*** Gitpull ***"
-msgstr "*** Gitpull ***"
+msgid "Gitpull..."
+msgstr "Gitpull..."
 
 #: kz-update:107 kz-update:119
-msgid "*** Update ***"
-msgstr "*** Bijwerken ***"
+msgid "Update..."
+msgstr "Bijwerken..."
 
-#: gitsquash:66 kz-update:113 kz-update:125
-msgid "*** Cleanup ***"
-msgstr "*** Opruimen ***"
+#: gitsquash:70 kz-update:113 kz-update:125
+msgid "Cleanup..."
+msgstr "Opruimen..."
 
 #: kz-update:129
 msgid "fatal: unknown os release"
@@ -1639,33 +1639,33 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: gitsquash:48
-msgid "*** git squash merge in 10 steps ***"
-msgstr "*** git squash merge in 10 stappen ***"
+#: gitsquash:52
+msgid "Git squash merge in 10 steps."
+msgstr "Git squash merge in 10 stappen."
 
-#: gitsquash:50
+#: gitsquash:54
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr "Werkt het beste in twee aparte terminals door te kopiëren en plakken."
 
-#: gitsquash:52 kz-menu:573
+#: gitsquash:56 kz-menu:573
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
-#: gitsquash:54
-msgid "*** Prepare ***"
-msgstr "*** Voorbereiden ***"
-
 #: gitsquash:58
-msgid "*** Merge ***"
-msgstr "*** Samenvoegen ***"
+msgid "Prepare..."
+msgstr "Voorbereiden..."
 
 #: gitsquash:62
-msgid "*** Commit ***"
-msgstr "*** Bevestigen ***"
+msgid "Merge..."
+msgstr "Samenvoegen..."
 
-#: gitsquash:70
-msgid "*** Maintenance ***"
-msgstr "*** Onderhoud ***"
+#: gitsquash:66
+msgid "Commit..."
+msgstr "Bevestigen..."
+
+#: gitsquash:74
+msgid "Maintenance..."
+msgstr "Onderhoud..."
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
 #: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:278
