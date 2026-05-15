@@ -89,7 +89,7 @@ def process() -> None:
 
     # Undocumented feature, gitpull.
     if os.path.exists(f'{os.getenv("HOME")}/bin/gitpull'):
-        text = kz.BOLD + _('*** Gitpull ***') + kz.NORMAL
+        text = _('*** Gitpull ***')
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         try:
             subprocess.run('gitpull', executable='bash', shell=True,
@@ -104,25 +104,25 @@ def process() -> None:
     if subprocess.run(check_debian, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
-        text = kz.BOLD + _('*** Update ***') + kz.NORMAL
+        text = _('*** Update ***')
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_update_debs()
         perform_upgrade_debs()
         perform_update_flatpaks()
         perform_update_snaps()
-        text = kz.BOLD + _('*** Cleanup ***') + kz.NORMAL
+        text = _('*** Cleanup ***')
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_cleanup_debs()
     elif subprocess.run(check_rhel, executable='bash',
                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                         shell=True).returncode == 0:
-        text = kz.BOLD + _('*** Update ***') + kz.NORMAL
+        text = _('*** Update ***')
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_update_rpms()
         perform_upgrade_rpms()
         perform_update_flatpaks()
         perform_update_snaps()
-        text = kz.BOLD + _('*** Cleanup ***') + kz.NORMAL
+        text = _('*** Cleanup ***')
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_cleanup_rpms()
     else:
