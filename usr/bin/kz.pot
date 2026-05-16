@@ -93,7 +93,7 @@ msgstr ""
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz_common.py:246 kz_common.py:255 kz_common.py:291 kz-dev:163 kz-dev:174
+#: kz_common.py:243 kz_common.py:252 kz_common.py:288 kz-dev:163 kz-dev:174
 #: kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86 kz-update:100 kz-update:302
 msgid "Program {} encountered an error."
 msgstr ""
@@ -546,31 +546,31 @@ msgstr ""
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:217
+#: kz_common.py:214
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:221
+#: kz_common.py:218
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:223
+#: kz_common.py:220
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:268
+#: kz_common.py:265
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:295
+#: kz_common.py:292
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:296 kz_common.sh:274
+#: kz_common.py:293 kz_common.sh:274
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:297 kz_common.sh:275
+#: kz_common.py:294 kz_common.sh:275
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
