@@ -179,8 +179,11 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     # ...but not on older distributions, e.g. Rocky Linux 8.
 
     # Build the structured journal data package (field radius separated by \n).
-    payload = f"SYSLOG_IDENTIFIER={PROGRAM_NAME}\nMESSAGE={TEXT}\n"\
-        .encode('utf-8')
+    payload = (
+        f"SYSLOG_IDENTIFIER={PROGRAM_NAME}\n"
+        f"MESSAGE={TEXT}\n"
+        ).encode('utf-8')
+
 
     # Connect to the local systemd journal socket.
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
