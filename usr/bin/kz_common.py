@@ -184,7 +184,6 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
         f"MESSAGE={TEXT}\n"
         ).encode('utf-8')
 
-
     # Connect to the local systemd journal socket.
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
     try:
