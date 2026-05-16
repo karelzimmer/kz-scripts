@@ -94,7 +94,7 @@ msgstr "opdracht is vereist"
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz_common.py:222 kz_common.py:231 kz_common.py:267 kz-dev:163 kz-dev:174
+#: kz_common.py:244 kz_common.py:253 kz_common.py:289 kz-dev:163 kz-dev:174
 #: kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86 kz-update:100 kz-update:302
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
@@ -580,47 +580,47 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz_common.py:55 kz_common.sh:42
+#: kz_common.py:56 kz_common.sh:42
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:146 kz_common.sh:165
+#: kz_common.py:147 kz_common.sh:165
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:152 kz_common.sh:172
+#: kz_common.py:153 kz_common.sh:172
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:158 kz_common.sh:179
+#: kz_common.py:159 kz_common.sh:179
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:193
+#: kz_common.py:215
 msgid ", or see the {} man page"
 msgstr ", of zie de {} man-pagina"
 
-#: kz_common.py:197
+#: kz_common.py:219
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:199
+#: kz_common.py:221
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:244
+#: kz_common.py:266
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:271
+#: kz_common.py:293
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:272 kz_common.sh:274
+#: kz_common.py:294 kz_common.sh:274
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:273 kz_common.sh:275
+#: kz_common.py:295 kz_common.sh:275
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."

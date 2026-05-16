@@ -10,12 +10,13 @@
 # Imports
 # #############################################################################
 
+from base64 import encode
 import gettext
 import os
+import socket
 import subprocess
 import sys
 import time
-from systemd import journal  # type: ignore
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -169,7 +170,28 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     This function records a informational message to the log.
     """
-    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
+    log: bytes = b''
+    sock: socket.socket
+
+    # This also works fine...
+    # from systemd import journal  # type: ignore
+    # journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
+    # ...but not on older distributions, e.g. Rocky Linux 8.
+
+    # Build the structured journal data package (field radius separated by \n).
+    payload = f"SYSLOG_IDENTIFIER={PROGRAM_NAME}\nMESSAGE={TEXT}\n"\
+        .encode('utf-8')
+
+    # Connect to the local systemd journal socket.
+    sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+    try:
+        sock.connect('/run/systemd/journal/socket')
+        sock.sendall(payload)
+    except Exception:
+        # Fallback to stdout if systemd-journald is not reachable.
+        print(f"[{PROGRAM_NAME}] {TEXT}")
+    finally:
+        sock.close()
 
 
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,

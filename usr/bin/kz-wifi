@@ -197,7 +197,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
 
 
-def term(PROGRAM_NAME: str = '', rc: int = 0) -> None:
+def term() -> None:
     """
     This function controls the termination of the script.
     """
