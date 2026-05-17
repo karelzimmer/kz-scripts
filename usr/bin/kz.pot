@@ -81,38 +81,38 @@ msgstr ""
 msgid "  <arguments>    arguments for command"
 msgstr ""
 
-#: kz:92
+#: kz:93
 msgid "command does not exist"
 msgstr ""
 
-#: kz:100
+#: kz:102
 msgid "command is required"
 msgstr ""
 
-#: kz:110 kz-update:80
+#: kz:111 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz_common.py:243 kz_common.py:252 kz_common.py:288 kz-dev:163 kz-dev:174
-#: kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86 kz-update:100 kz-update:302
+#: kz_common.py:244 kz_common.py:253 kz_common.py:291 kz-dev:165 kz-dev:176
+#: kz-dev:189 kz-dev:207 kz-dev:225 kz-update:86 kz-update:100 kz-update:304
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:170 kz-backup:171 kz-build:160 kz-check:125 kz-deploy:135 kz-desktop:199
+#: kz:171 kz-backup:171 kz-build:160 kz-check:125 kz-deploy:135 kz-desktop:199
 #: kz-dev:132 kz-install:278 kz-menu:197 kz-restore:171 kz-setup:262
-#: kz-update:181 kz-wifi:153
+#: kz-update:181 kz-wifi:157
 msgid "internal error"
 msgstr ""
 
-#: kz:181
+#: kz:182
 msgid "The following commands are available:"
 msgstr ""
 
-#: kz:197
+#: kz:198
 msgid "Use \"man kz\" for available commands."
 msgstr ""
 
-#: kz:199
+#: kz:201
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 
@@ -155,12 +155,12 @@ msgid "  -T, --tui      run in text-based mode (default)"
 msgstr ""
 
 #: kz-backup:121 kz-desktop:214 kz-install:225 kz-menu:158 kz-restore:117
-#: kz-setup:209 kz-wifi:125
+#: kz-setup:209 kz-wifi:126
 msgid "no desktop environment available"
 msgstr ""
 
 #: kz-backup:128 kz-install:232 kz-menu:165 kz-restore:124 kz-setup:216
-#: kz-wifi:134
+#: kz-wifi:137
 msgid "zenity is required; run kz-get first"
 msgstr ""
 
@@ -169,7 +169,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:179 kz-build:168 kz-check:133 kz-deploy:143 kz-desktop:207
-#: kz-dev:138 kz-menu:205 kz-restore:179 kz-update:187 kz-wifi:159
+#: kz-dev:139 kz-menu:205 kz-restore:179 kz-update:188 kz-wifi:164
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -530,19 +530,19 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz_common.py:56 kz_common.sh:42
+#: kz_common.py:57 kz_common.sh:42
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:147 kz_common.sh:165
+#: kz_common.py:148 kz_common.sh:165
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:153 kz_common.sh:172
+#: kz_common.py:154 kz_common.sh:172
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:159 kz_common.sh:179
+#: kz_common.py:160 kz_common.sh:179
 msgid "fatal: must not be run as root"
 msgstr ""
 
@@ -550,27 +550,27 @@ msgstr ""
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:218
+#: kz_common.py:219
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:220
+#: kz_common.py:221 kz_common.py:268
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:265
+#: kz_common.py:267
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:292
+#: kz_common.py:295
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:293 kz_common.sh:274
+#: kz_common.py:296 kz_common.sh:274
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:294 kz_common.sh:275
+#: kz_common.py:297 kz_common.sh:275
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
@@ -673,7 +673,7 @@ msgstr ""
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:210 kz-dev:249
+#: kz-deploy:210 kz-dev:251
 msgid "Password for"
 msgstr ""
 
@@ -771,27 +771,27 @@ msgstr ""
 msgid "Usage: kz dev [<options>]"
 msgstr ""
 
-#: kz-dev:152
+#: kz-dev:154
 msgid "Clone repos..."
 msgstr ""
 
-#: kz-dev:193
+#: kz-dev:195
 msgid "Pull repos..."
 msgstr ""
 
-#: kz-dev:211
+#: kz-dev:213
 msgid "Status repos..."
 msgstr ""
 
-#: kz-dev:245
+#: kz-dev:247
 msgid "Download website..."
 msgstr ""
 
-#: kz-dev:262
+#: kz-dev:264
 msgid "Website download failed."
 msgstr ""
 
-#: kz-dev:271
+#: kz-dev:274
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
@@ -1369,11 +1369,11 @@ msgstr ""
 msgid "Usage: kz wifi [<options>]"
 msgstr ""
 
-#: kz-wifi:173
+#: kz-wifi:179
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 
-#: kz-wifi:183 kz-wifi:194
+#: kz-wifi:189 kz-wifi:200
 msgid "No WiFi device found."
 msgstr ""
 
@@ -1526,7 +1526,7 @@ msgid "Maintenance..."
 msgstr ""
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
-#: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:278
-#: kz-post-migrate:71 kz-update:314
+#: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:280
+#: kz-post-migrate:71 kz-update:316
 msgid "Complete!"
 msgstr ""

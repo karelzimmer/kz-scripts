@@ -29,8 +29,8 @@ _ = gettext.gettext
 
 # List NORMAL last here so that debugging doesn't bork the display.
 BOLD: str = '\033[1m'
-GREEN: str = BOLD + '\033[32m'
-RED: str = BOLD + '\033[31m'
+GREEN: str = f'{BOLD}\033[32m'
+RED: str = f'{BOLD}\033[31m'
 NORMAL: str = '\033[0m'
 
 
@@ -44,8 +44,9 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise exits 0 with descriptive message.
     """
-    check_become_root: str = "groups $USER | grep --quiet --regexp='sudo'" + \
-        " --regexp='wheel'"
+    check_become_root: str = (
+        "groups $USER | grep --quiet --regexp='sudo' --regexp='wheel'"
+        )
     text: str = ''
 
     if subprocess.run(check_become_root, executable='bash',
@@ -53,7 +54,7 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
                       shell=True).returncode == 0:
         return 0
     else:
-        text = GREEN + _('Already performed by the administrator.') + NORMAL
+        text = f'{GREEN}{_("Already performed by the administrator.")}{NORMAL}'
         infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         sys.exit(0)
 
@@ -209,15 +210,15 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
-        yelp_man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + \
-            program_name + '(1)'
+        yelp_man_url = f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{program_name}(1)'
         yelp_man = _(", or see the {} man page").format(yelp_man_url)
         yelp_man += '\x1b]8;;\x1b\\'
 
-    text = HELP + '\n\n' + \
-        _("Type '{} --manual' or 'man {}'{} ").\
-        format(program_name, program_name, yelp_man) + \
-        _('for more information.')
+    text = f'{HELP}\n\n'
+    text += (
+        _("Type '{} --manual' or 'man {}'{} ")
+        ).format(program_name, program_name, yelp_man)
+    text += _('for more information.')
     infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
@@ -262,8 +263,10 @@ def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str = ''
 
-    text = USAGE + '\n\n' + _("Type '{} --help' for more information.").\
-        format(program_name)
+    text = f'{USAGE}\n\n'
+    text += _("Type '{} --help' for more information.").format(program_name)
+    text += _('for more information.')
+
     infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
@@ -289,10 +292,10 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         term(PROGRAM_NAME, 1)
     finally:
-        text = _('kz version 4.2.1 (built {}).').format(build_id) + '\n\n' + \
-            _('Written by Karel Zimmer <info@karelzimmer.nl>.') + '\n' + \
-            _('License CC0 1.0 ' +
-                '<https://creativecommons.org/publicdomain/zero/1.0>.')
+        text = f'{_('kz version 4.2.1 (built {}).').format(build_id)}\n\n'
+        text += f'{_("Written by Karel Zimmer <info@karelzimmer.nl>.")}\n'
+        text += _('License CC0 1.0 ' +
+                  '<https://creativecommons.org/publicdomain/zero/1.0>.')
         infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 

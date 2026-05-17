@@ -38,7 +38,7 @@ USAGE: str = _(
 HELP_LINES: list[str] = [
     _('Usage: kz dev [<options>]'),
     '',
-    PROGRAM_DESC + '.',
+    f'{PROGRAM_DESC}.',
     '',
     _('Options:'),
     _('  -h, --help     show this help text'),
@@ -129,13 +129,15 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         else:
-            text = PROGRAM_NAME + ': getopt: ' + _('internal error')
+            text = f'{PROGRAM_NAME}: getopt: {_('internal error')}'
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             kz.term(PROGRAM_NAME, 1)
 
     if args:
-        text = program_name + ': ' + ' '.join(args) + ': ' + \
-            _('arguments are not allowed') + '\n' + USAGE
+        text = (
+            f"{program_name}: {' '.join(args)}: "
+            f"{_('arguments are not allowed')}\n{USAGE}"
+            )
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -164,8 +166,8 @@ def pull_repos() -> None:
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             kz.term(PROGRAM_NAME, exc.returncode)
     else:
-        command = 'git clone https://github.com/karelzimmer/bin.git ' + \
-            bin_repo
+        command = 'git clone https://github.com/karelzimmer/bin.git '
+        command += bin_repo
         try:
             subprocess.run(command, executable='bash', shell=True, check=True)
         except subprocess.CalledProcessError as exc:
@@ -246,7 +248,7 @@ def download_website() -> None:
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
     if not os.path.exists(ftp_login):
-        text = _('Password for') + ' ftp://' + ftp_host + ': '
+        text = f'{_("Password for")} ftp://{ftp_host}: '
         with open(ftp_login, 'w') as file:
             file.write(getpass.getpass(text))
         os.chmod(ftp_login, 0o600)
@@ -268,14 +270,14 @@ def term() -> None:
     """
     This function controls the termination of the script.
     """
-    text = '\n' + _('To complete the set up of the development environment, ' +
-                    'please run:')
-
+    text = '\n'
+    text = _('To complete the set up of the development environment, please ' +
+             'run:')
     text += '\nkz-install ansible fakeroot git groff jq lftp nmap python'
     text += ' poedit rpm shellcheck spice-vdagent usbutils\n'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
-    text = kz.GREEN + _('Complete!') + kz.NORMAL
+    text = f"{kz.GREEN}{_('Complete!')}{kz.NORMAL}"
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
     kz.term(PROGRAM_NAME, 0)

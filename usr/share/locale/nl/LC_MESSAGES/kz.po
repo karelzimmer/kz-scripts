@@ -82,38 +82,38 @@ msgstr "  <opdracht>     voer opdracht uit"
 msgid "  <arguments>    arguments for command"
 msgstr "  <argumenten>   argumenten voor opdracht"
 
-#: kz:92
+#: kz:93
 msgid "command does not exist"
 msgstr "opdracht bestaat niet"
 
-#: kz:100
+#: kz:102
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:110 kz-update:80
+#: kz:111 kz-update:80
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz_common.py:243 kz_common.py:252 kz_common.py:288 kz-dev:163 kz-dev:174
-#: kz-dev:187 kz-dev:205 kz-dev:223 kz-update:86 kz-update:100 kz-update:302
+#: kz_common.py:244 kz_common.py:253 kz_common.py:291 kz-dev:165 kz-dev:176
+#: kz-dev:189 kz-dev:207 kz-dev:225 kz-update:86 kz-update:100 kz-update:304
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:170 kz-backup:171 kz-build:160 kz-check:125 kz-deploy:135 kz-desktop:199
+#: kz:171 kz-backup:171 kz-build:160 kz-check:125 kz-deploy:135 kz-desktop:199
 #: kz-dev:132 kz-install:278 kz-menu:197 kz-restore:171 kz-setup:262
-#: kz-update:181 kz-wifi:153
+#: kz-update:181 kz-wifi:157
 msgid "internal error"
 msgstr "interne fout"
 
-#: kz:181
+#: kz:182
 msgid "The following commands are available:"
 msgstr "De volgende opdrachten zijn beschikbaar:"
 
-#: kz:197
+#: kz:198
 msgid "Use \"man kz\" for available commands."
 msgstr "Gebruik \"man kz\" voor beschikbare opdrachten."
 
-#: kz:199
+#: kz:201
 msgid "Use \"kz <command> [<arguments>]\" to execute a command."
 msgstr ""
 "Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
@@ -164,12 +164,12 @@ msgid "  -T, --tui      run in text-based mode (default)"
 msgstr "  -T, --tui      draai in tekstgebaseerde modus (standaard)"
 
 #: kz-backup:121 kz-desktop:214 kz-install:225 kz-menu:158 kz-restore:117
-#: kz-setup:209 kz-wifi:125
+#: kz-setup:209 kz-wifi:126
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
 #: kz-backup:128 kz-install:232 kz-menu:165 kz-restore:124 kz-setup:216
-#: kz-wifi:134
+#: kz-wifi:137
 msgid "zenity is required; run kz-get first"
 msgstr "zenity is vereist, voer eerst kz-get uit"
 
@@ -178,7 +178,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:179 kz-build:168 kz-check:133 kz-deploy:143 kz-desktop:207
-#: kz-dev:138 kz-menu:205 kz-restore:179 kz-update:187 kz-wifi:159
+#: kz-dev:139 kz-menu:205 kz-restore:179 kz-update:188 kz-wifi:164
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -580,19 +580,19 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz_common.py:56 kz_common.sh:42
+#: kz_common.py:57 kz_common.sh:42
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:147 kz_common.sh:165
+#: kz_common.py:148 kz_common.sh:165
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:153 kz_common.sh:172
+#: kz_common.py:154 kz_common.sh:172
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:159 kz_common.sh:179
+#: kz_common.py:160 kz_common.sh:179
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
@@ -600,27 +600,27 @@ msgstr "fataal: mag niet als root worden uitgevoerd"
 msgid ", or see the {} man page"
 msgstr ", of zie de {} man-pagina"
 
-#: kz_common.py:218
+#: kz_common.py:219
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:220
+#: kz_common.py:221 kz_common.py:268
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:265
+#: kz_common.py:267
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:292
+#: kz_common.py:295
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:293 kz_common.sh:274
+#: kz_common.py:296 kz_common.sh:274
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:294 kz_common.sh:275
+#: kz_common.py:297 kz_common.sh:275
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
@@ -730,7 +730,7 @@ msgstr "Distribueren..."
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:210 kz-dev:249
+#: kz-deploy:210 kz-dev:251
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
@@ -841,27 +841,27 @@ msgstr "Gebruik: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
 
-#: kz-dev:152
+#: kz-dev:154
 msgid "Clone repos..."
 msgstr "Clone repo's..."
 
-#: kz-dev:193
+#: kz-dev:195
 msgid "Pull repos..."
 msgstr "Pull repo's..."
 
-#: kz-dev:211
+#: kz-dev:213
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-#: kz-dev:245
+#: kz-dev:247
 msgid "Download website..."
 msgstr "Downloaden website..."
 
-#: kz-dev:262
+#: kz-dev:264
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-#: kz-dev:271
+#: kz-dev:274
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
@@ -1508,12 +1508,12 @@ msgstr ""
 msgid "Usage: kz wifi [<options>]"
 msgstr "Gebruik: kz wifi [<opties>]"
 
-#: kz-wifi:173
+#: kz-wifi:179
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:183 kz-wifi:194
+#: kz-wifi:189 kz-wifi:200
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
@@ -1666,7 +1666,7 @@ msgid "Maintenance..."
 msgstr "Onderhoud..."
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
-#: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:278
-#: kz-post-migrate:71 kz-update:314
+#: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:280
+#: kz-post-migrate:71 kz-update:316
 msgid "Complete!"
 msgstr "Klaar!"

@@ -37,7 +37,7 @@ USAGE: str = _(
 HELP_LINES: list[str] = [
     _('Usage: kz update [<options>]'),
     '',
-    PROGRAM_DESC + '.',
+    f'{PROGRAM_DESC}.',
     '',
     _('Options:'),
     _('  -h, --help     show this help text'),
@@ -89,7 +89,7 @@ def process() -> None:
 
     # Undocumented feature, gitpull.
     if os.path.exists(f'{os.getenv("HOME")}/bin/gitpull'):
-        text = kz.BOLD + _('Gitpull...') + kz.NORMAL
+        text = f'{kz.BOLD}{_('Gitpull...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         try:
             subprocess.run('gitpull', executable='bash', shell=True,
@@ -104,25 +104,25 @@ def process() -> None:
     if subprocess.run(check_debian, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
-        text = kz.BOLD + _('Update...') + kz.NORMAL
+        text = f'{kz.BOLD}{_('Update...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_update_debs()
         perform_upgrade_debs()
         perform_update_flatpaks()
         perform_update_snaps()
-        text = kz.BOLD + _('Cleanup...') + kz.NORMAL
+        text = f'{kz.BOLD}{_('Cleanup...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_cleanup_debs()
     elif subprocess.run(check_rhel, executable='bash',
                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                         shell=True).returncode == 0:
-        text = kz.BOLD + _('Update...') + kz.NORMAL
+        text = f'{kz.BOLD}{_('Update...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_update_rpms()
         perform_upgrade_rpms()
         perform_update_flatpaks()
         perform_update_snaps()
-        text = kz.BOLD + _('Cleanup...') + kz.NORMAL
+        text = f'{kz.BOLD}{_('Cleanup...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_cleanup_rpms()
     else:
@@ -178,13 +178,15 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         else:
-            text = PROGRAM_NAME + ': getopt: ' + _('internal error')
+            text = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             kz.term(PROGRAM_NAME, 1)
 
     if args:
-        text = program_name + ': ' + ' '.join(args) + ': ' + \
-            _('arguments are not allowed') + '\n' + USAGE
+        text = (
+            f"{program_name}: {' '.join(args)}: "
+            f"{_('arguments are not allowed')}\n{USAGE}"
+            )
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
 
@@ -311,7 +313,7 @@ def term() -> None:
     """
     text: str
 
-    text = kz.GREEN + _('Complete!') + kz.NORMAL
+    text = f'{kz.GREEN}{_('Complete!')}{kz.NORMAL}'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
     kz.term(PROGRAM_NAME, 0)
 
