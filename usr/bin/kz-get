@@ -143,11 +143,6 @@ function process_kz_rpm_package() {
 
     sudo --validate || exit 1
 
-    printf '%s' 'Update....'
-    # Refresh package lists before installing apps, to minimize the risk of
-    # errors due to outdated package lists.
-    sudo dnf check-update |& $PROGRAM_LOGS || true
-
     printf '\n%s' 'Install...'
     # Install kz rpm package.
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS

@@ -118,7 +118,6 @@ def process() -> None:
                         shell=True).returncode == 0:
         text = f'{kz.BOLD}{_('Update...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-        perform_update_rpms()
         perform_upgrade_rpms()
         perform_update_flatpaks()
         perform_update_snaps()
@@ -227,16 +226,6 @@ def perform_update_snaps() -> None:
                       shell=True,).returncode == 0:
         command = 'sudo snap refresh'
         perform_command(command)
-
-
-def perform_update_rpms() -> None:
-    """
-    This function updates installed RPM packages.
-    """
-    command: str
-
-    command = 'sudo dnf check-update || true'
-    perform_command(command)
 
 
 def perform_upgrade_debs() -> None:

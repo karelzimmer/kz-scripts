@@ -137,17 +137,16 @@ found.")
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
-    if [[ $install = 'INSTALL' ]]; then
-        # Refresh package lists before installing apps, to minimize the risk of
-        # errors due to incomplete and outdated package lists.
+    # To minimize the risk of errors due to outdated Debian package lists.
+    if  grep    --quiet             \
+                --regexp='debian'   \
+                /etc/os-release     &&
+        [[ $install = 'INSTALL' ]]; then
         printf '%s\n' "# INSTALL update *** automatically added ***
 # -----------------------------------------------------------------------------
-# Refresh package lists before installing apps.
+# Refresh Debian package lists before installing apps.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get update; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf check-u\
-pdate || true; fi
+sudo apt-get update
 "       > "$command_file"
     fi
 
