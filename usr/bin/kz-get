@@ -143,7 +143,7 @@ function process_kz_rpm_package() {
 
     sudo --validate || exit 1
 
-    printf '\n%s' 'Install...'
+    printf '%s' 'Install...'
     # Install kz rpm package.
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
 }
