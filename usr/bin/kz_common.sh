@@ -369,6 +369,7 @@ $(gettext "Use 'journalctl -xe' to check what went wrong.")"
                 exit "$rc"
             fi
             text+="
+$(gettext "Use 'journalctl -xe' to check what went wrong.")
 $(gettext "Type 'exit' to close this window.")"
             gnome-terminal  --                                          \
                             bash -c                                     \
