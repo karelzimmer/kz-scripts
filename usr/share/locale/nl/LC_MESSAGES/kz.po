@@ -95,13 +95,13 @@ msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz_common.py:244 kz_common.py:253 kz_common.py:291 kz-dev:165 kz-dev:176
-#: kz-dev:189 kz-dev:207 kz-dev:225 kz-update:86 kz-update:100 kz-update:293
+#: kz-dev:189 kz-dev:207 kz-dev:225 kz-update:86 kz-update:279
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:171 kz-backup:171 kz-build:160 kz-check:125 kz-deploy:135 kz-desktop:199
 #: kz-dev:132 kz-install:277 kz-menu:197 kz-restore:171 kz-setup:262
-#: kz-update:180 kz-wifi:157
+#: kz-update:166 kz-wifi:157
 msgid "internal error"
 msgstr "interne fout"
 
@@ -178,7 +178,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:179 kz-build:168 kz-check:133 kz-deploy:143 kz-desktop:207
-#: kz-dev:139 kz-menu:205 kz-restore:179 kz-update:187 kz-wifi:164
+#: kz-dev:139 kz-menu:205 kz-restore:179 kz-update:173 kz-wifi:164
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -1480,19 +1480,15 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-#: kz-update:92
-msgid "Gitpull..."
-msgstr "Gitpull..."
-
-#: kz-update:107 kz-update:119
+#: kz-update:93 kz-update:105
 msgid "Update..."
 msgstr "Bijwerken..."
 
-#: gitsquash:70 kz-update:113 kz-update:124
+#: gitsquash:70 kz-update:99 kz-update:110
 msgid "Cleanup..."
 msgstr "Opruimen..."
 
-#: kz-update:128
+#: kz-update:114
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os-release"
 
@@ -1667,6 +1663,6 @@ msgstr "Onderhoud..."
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
 #: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:280
-#: kz-post-migrate:71 kz-update:305
+#: kz-post-migrate:71 kz-update:291
 msgid "Complete!"
 msgstr "Klaar!"
