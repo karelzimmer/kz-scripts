@@ -21,6 +21,10 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
+# List NORMAL last here so that debugging (-vx) doesn't bork the display.
+readonly BOLD='\033[1m'
+readonly NORMAL='\033[0m'
+
 
 # #############################################################################
 # Globals
@@ -65,4 +69,4 @@ printf '\n%s\n' "$text"
 find_files 'delete'
 
 text=$(gettext 'Complete!')
-printf '%s\n' "$text"
+printf "$BOLD%s$NORMAL\n" "$text"

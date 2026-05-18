@@ -516,7 +516,7 @@ package is installed")
         kz.errmsg "$text"
         exit 1
     else
-        text=$(gettext 'Complete!')
+        printf "$BOLD%s$NORMAL\n" "$(gettext 'Complete!')"
         kz.infomsg "$text"
         exit 0
     fi

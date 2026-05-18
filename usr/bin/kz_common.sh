@@ -21,7 +21,7 @@ source /usr/bin/gettext.sh
 # #############################################################################
 
 # List NORMAL last here so that debugging (-vx) doesn't bork the display.
-readonly RED='\033[1;31m'
+readonly BOLD='\033[1m'
 readonly NORMAL='\033[0m'
 
 
@@ -127,7 +127,7 @@ function kz.errmsg() {
                     --msgbox    "$*"            \
                     18 80
     else
-        printf "$RED%b$NORMAL\n" "$*" >&2
+        printf "$BOLD%b$NORMAL\n" "$*" >&2
     fi
 }
 
@@ -159,22 +159,19 @@ function kz.init() {
 
     # Check if systemd is available .
     if ! type systemctl &> /dev/null; then
-        printf  "$RED%s$NORMAL\n"   \
-                "$(gettext 'fatal: no systemd available')" >&2
+        printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
         exit 1
     fi
 
     # Check if os release is available.
     if ! [[ -f /etc/os-release ]]; then
-        printf  "$RED%s$NORMAL\n"   \
-                "$(gettext 'fatal: no os release available')" >&2
+        printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
         exit 1
     fi
 
     # Check if started as root.
     if [[ $UID -eq 0 ]]; then
-        printf  "$RED%s$NORMAL\n"   \
-                "$(gettext 'fatal: must not be run as root')" >&2
+        printf '%s\n' "$(gettext 'fatal: must not be run as root')" >&2
         exit 1
     fi
 
@@ -380,7 +377,7 @@ $(gettext "Type 'exit' to close this window.")"
                                         --pager-end                     \
                                         --no-pager                      \
                                         --identifier='$PROGRAM_NAME';   \
-                                        printf '$RED%s\n' \"$text\";    \
+                                        printf '$BOLD%s\n' \"$text\";   \
                                         exec bash"                      \
                                         2> /dev/null                    || true
             exit "$rc"

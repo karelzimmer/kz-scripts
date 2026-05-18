@@ -94,7 +94,7 @@ msgstr "opdracht is vereist"
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz_common.py:243 kz_common.py:252 kz_common.py:290 kz-dev:165 kz-dev:176
+#: kz_common.py:242 kz_common.py:251 kz_common.py:289 kz-dev:165 kz-dev:176
 #: kz-dev:189 kz-dev:207 kz-dev:225 kz-update:86 kz-update:279
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
@@ -580,52 +580,52 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz_common.py:56 kz_common.sh:40 kz-get:100
+#: kz_common.py:55 kz_common.sh:40 kz-get:100
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:147 kz_common.sh:163
+#: kz_common.py:146 kz_common.sh:162
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:153 kz_common.sh:170
+#: kz_common.py:152 kz_common.sh:168
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:159 kz_common.sh:177
+#: kz_common.py:158 kz_common.sh:174
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:213
+#: kz_common.py:212
 msgid ", or see the {} man page"
 msgstr ", of zie de {} man-pagina"
 
-#: kz_common.py:218
+#: kz_common.py:217
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:220 kz_common.py:267
+#: kz_common.py:219 kz_common.py:266
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:266
+#: kz_common.py:265
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:294
+#: kz_common.py:293
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:295 kz_common.sh:272
+#: kz_common.py:294 kz_common.sh:269
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:296 kz_common.sh:273
+#: kz_common.py:295 kz_common.sh:270
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.sh:414
+#: kz_common.sh:411
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -647,12 +647,12 @@ msgstr "Controleer of alle repo's schoon zijn"
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz_common.sh:223
+#: kz_common.sh:220
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ", of zie de $yelp_man_url man-pagina"
 
-#: kz_common.sh:227
+#: kz_common.sh:224
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
@@ -661,22 +661,22 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man voor meer "
 "informatie."
 
-#: kz_common.sh:255
+#: kz_common.sh:252
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:270
+#: kz_common.sh:267
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:363 kz-get:72
+#: kz_common.sh:360 kz-get:72
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:366
+#: kz_common.sh:363
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
@@ -685,15 +685,15 @@ msgstr ""
 "Fout $rc op regel $lineno in functie $function bij het uitvoeren van "
 "commando: $command"
 
-#: kz_common.sh:370
+#: kz_common.sh:367
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr "Gebruik 'journalctl -xe' om te controleren wat er misging."
 
-#: kz_common.sh:375 kz-get:207
+#: kz_common.sh:372 kz-get:207
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:404
+#: kz_common.sh:401
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -1080,12 +1080,12 @@ msgstr "gast"
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
-#: kz-post-migrate:52
+#: kz-post-migrate:56
 #, sh-format
 msgid "Searching Windows-specific files in '$PWD' and subfolders..."
 msgstr "Windows-specifieke bestanden zoeken in '$PWD' en submappen..."
 
-#: kz-post-migrate:58
+#: kz-post-migrate:62
 msgid ""
 "Press the Enter key to delete the Windows-specific files, or Ctrl-C to stop "
 "[Enter/Ctrl-C]: "
@@ -1093,7 +1093,7 @@ msgstr ""
 "Druk op de Enter-toets om de Windows-specifieke bestanden te verwijderen, of "
 "Ctrl-C om te stoppen [Enter/Ctrl-C]: "
 
-#: kz-post-migrate:62
+#: kz-post-migrate:66
 #, sh-format
 msgid "Deleting Windows-specific files in '$PWD' and subfolders..."
 msgstr "Windows-specifieke bestanden verwijderen in '$PWD' en submappen..."
@@ -1663,6 +1663,6 @@ msgstr "Onderhoud..."
 
 #: ckhtml:124 gitbranch:63 gitclone:80 gitfetch:63 gitinit:50 gitpull:63
 #: gitstatus:63 kz-build:519 kz-check:588 kz-deploy:270 kz-dev:280
-#: kz-post-migrate:67 kz-update:291
+#: kz-post-migrate:71 kz-update:291
 msgid "Complete!"
 msgstr "Klaar!"

@@ -372,7 +372,7 @@ function check_code() {
     else
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED    $(gettext "Unknown script. Function check_code cannot check script \
+$BOLD    $(gettext "Unknown script. Function check_code cannot check script \
 code.")$NORMAL
 "
         kz.infomsg "$text"
@@ -494,7 +494,7 @@ function check_record_length() {
     if grep --quiet --regexp='.\{80\}' "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED    $(eval_gettext "One or more lines are too long (>79):") $NORMAL"
+$BOLD    $(eval_gettext "One or more lines are too long (>79):") $NORMAL"
         kz.infomsg "$text"
         grep --regexp='.\{80\}' "$script" || true
         ERR_FLAG=true
@@ -543,7 +543,7 @@ function check_tags() {
             "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED    $(gettext 'Flagged annotation found.')$NORMAL
+$BOLD    $(gettext 'Flagged annotation found.')$NORMAL
 "
         kz.infomsg "$text"
         grep    --line-number           \
@@ -564,7 +564,7 @@ function check_trailing_spaces() {
     if grep --quiet --regexp=' ''$' "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED    $(gettext 'End spaces found.')$NORMAL
+$BOLD    $(gettext 'End spaces found.')$NORMAL
 "
         kz.infomsg "$text"
         grep    --line-number   \
@@ -585,7 +585,7 @@ function term() {
         kz.errmsg "$text"
         exit 1
     else
-        text=$(gettext 'Complete!')
+        printf "$BOLD%s$NORMAL\n" "$(gettext 'Complete!')"
         kz.infomsg "$text"
         exit 0
     fi

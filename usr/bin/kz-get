@@ -24,7 +24,7 @@ readonly PROGRAM_NAME='kz-get'
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 # List NORMAL last here so that -x doesn't bork the display.
-readonly RED='\033[1;31m'
+readonly BOLD='\033[1m'
 readonly NORMAL='\033[0m'
 
 # #############################################################################
@@ -70,7 +70,7 @@ function err_report() {
                 --identifier="$PROGRAM_NAME"
     text="$(eval_gettext \
 "Program \$PROGRAM_NAME encountered an error.")"
-    printf "$RED%s$NORMAL\n" "$text" >&2
+    printf "$BOLD%s$NORMAL\n" "$text" >&2
 }
 
 
@@ -84,7 +84,7 @@ function process() {
     elif grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         process_kz_rpm_package
     else
-        printf "$RED%s$NORMAL\n" 'fatal: unknown os release' >&2
+        printf "$BOLD%s$NORMAL\n" 'fatal: unknown os release' >&2
         exit 1
     fi
 }
@@ -189,7 +189,7 @@ function term() {
 "
 
     if $OPTION_DEV; then
-        text+="    $RED$(gettext \
+        text+="    $BOLD$(gettext \
 "Please note: the development version of the kz package is installed")\
 $NORMAL\n\n"
     fi
