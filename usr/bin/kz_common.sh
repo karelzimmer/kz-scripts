@@ -373,9 +373,9 @@ $(gettext "Type 'exit' to close this window.")"
             gnome-terminal  --                                          \
                             bash -c                                     \
                             "journalctl --all                           \
-                                        --catalog                       \
-                                        --pager-end                     \
+                                        --lines=20                      \
                                         --no-pager                      \
+                                        --pager-end                     \
                                         --identifier='$PROGRAM_NAME';   \
                                         printf '$BOLD%s\n' \"$text\";   \
                                         exec bash"                      \

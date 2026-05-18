@@ -64,9 +64,9 @@ function init() {
 function err_report() {
     printf '\n' >&2
     journalctl  --all       \
-                --catalog   \
-                --pager-end \
+                --lines=20  \
                 --no-pager  \
+                --pager-end \
                 --identifier="$PROGRAM_NAME"
     text="$(eval_gettext \
 "Program \$PROGRAM_NAME encountered an error.")"
@@ -124,6 +124,7 @@ function process_kz_deb_package() {
     fi
 
     printf '%s' 'Download...'
+    printf '%s\n' "Downloading $kz_deb_site_file" |& $PROGRAM_LOGS
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_file"                     |& $PROGRAM_LOGS
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
@@ -174,6 +175,7 @@ function process_kz_rpm_package() {
     fi
 
     printf '%s' 'Install...'
+    printf '%s\n' "Installing $kz_rpm_site_file" |& $PROGRAM_LOGS
     # Install kz rpm package.
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
 }
