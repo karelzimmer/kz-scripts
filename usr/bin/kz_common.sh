@@ -38,7 +38,10 @@ function kz.become_check() {
     if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
-        text=$GREEN$(gettext 'Already performed by the administrator.')$NORMAL
+        text=$(gettext 'Already performed by the administrator.')
+        if [[ ${UI_MODE-} = 'cli' ]]; then
+            text=$GREEN$text$NORMAL
+        fi
         kz.infomsg "$text"
         exit 0
     fi
