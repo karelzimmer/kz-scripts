@@ -98,7 +98,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:171 kz-backup:171 kz-build:160 kz-check:127 kz-deploy:135 kz-desktop:199
+#: kz:171 kz-backup:171 kz-build:160 kz-check:125 kz-deploy:135 kz-desktop:199
 #: kz-dev:132 kz-install:277 kz-menu:197 kz-restore:171 kz-setup:262
 #: kz-update:166 kz-wifi:157
 msgid "internal error"
@@ -168,7 +168,7 @@ msgstr ""
 msgid "too many options"
 msgstr ""
 
-#: kz-backup:179 kz-build:168 kz-check:135 kz-deploy:143 kz-desktop:207
+#: kz-backup:179 kz-build:168 kz-check:133 kz-deploy:143 kz-desktop:207
 #: kz-dev:139 kz-menu:205 kz-restore:179 kz-update:173 kz-wifi:164
 msgid "arguments are not allowed"
 msgstr ""
@@ -379,7 +379,7 @@ msgstr ""
 msgid "  -d, --dev      build the development version of package kz"
 msgstr ""
 
-#: kz-build:89 kz-check:66 kz-deploy:70 kz-dev:75
+#: kz-build:89 kz-check:64 kz-deploy:70 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
@@ -443,7 +443,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:516 kz-check:584 kz-deploy:264
+#: kz-build:516 kz-check:582 kz-deploy:264
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -459,74 +459,74 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr ""
 
-#: kz-check:152
+#: kz-check:150
 msgid "Check website..."
 msgstr ""
 
-#: kz-check:195
+#: kz-check:193
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 
-#: kz-check:245
+#: kz-check:243
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr ""
 
-#: kz-check:257
+#: kz-check:255
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr ""
 
-#: kz-check:268
+#: kz-check:266
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:283
+#: kz-check:281
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
-#: kz-check:375
+#: kz-check:373
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:395
+#: kz-check:393
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:408
+#: kz-check:406
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:419
+#: kz-check:417
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:430
+#: kz-check:428
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:450 kz-check:461
+#: kz-check:448 kz-check:459
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr ""
 
-#: kz-check:497
+#: kz-check:495
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:546
+#: kz-check:544
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:567
+#: kz-check:565
 msgid "End spaces found."
 msgstr ""
 
@@ -1522,15 +1522,7 @@ msgid "Maintenance..."
 msgstr ""
 
 #: ckhtml:124 gitbranch:63 gitclone:80 gitfetch:63 gitinit:50 gitpull:63
-#: gitstatus:63 kz-build:520 kz-check:588 kz-deploy:268 kz-dev:280
+#: gitstatus:63 kz-build:520 kz-check:586 kz-deploy:268 kz-dev:280
 #: kz-post-migrate:71 kz-update:291
 msgid "Complete!"
-msgstr ""
-
-msgid ""
-"build: Please note: the development version of the kz package is installed"
-msgstr ""
-
-msgid ""
-"get: Please note: the development version of the kz package is installed"
 msgstr ""

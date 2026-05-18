@@ -42,8 +42,6 @@ readonly HELP
 readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
-readonly BOLD='\033[1m'
-
 
 # #############################################################################
 # Globals
