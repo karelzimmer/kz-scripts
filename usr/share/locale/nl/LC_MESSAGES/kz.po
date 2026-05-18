@@ -484,11 +484,11 @@ msgstr "Bouw RPM-pakket..."
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:509 kz-get:193
+#: kz-build:510 kz-get:193
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:515 kz-check:584 kz-deploy:264
+#: kz-build:516 kz-check:584 kz-deploy:264
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -1662,7 +1662,19 @@ msgid "Maintenance..."
 msgstr "Onderhoud..."
 
 #: ckhtml:124 gitbranch:63 gitclone:80 gitfetch:63 gitinit:50 gitpull:63
-#: gitstatus:63 kz-build:519 kz-check:588 kz-deploy:268 kz-dev:280
+#: gitstatus:63 kz-build:520 kz-check:588 kz-deploy:268 kz-dev:280
 #: kz-post-migrate:71 kz-update:291
 msgid "Complete!"
 msgstr "Klaar!"
+
+#, fuzzy
+#| msgid "Please note: the development version of the kz package is installed"
+msgid ""
+"build: Please note: the development version of the kz package is installed"
+msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
+
+#, fuzzy
+#| msgid "Please note: the development version of the kz package is installed"
+msgid ""
+"get: Please note: the development version of the kz package is installed"
+msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"

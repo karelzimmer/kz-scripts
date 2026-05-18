@@ -505,6 +505,7 @@ function install_deb_package() {
 # This function controls the termination of the script.
 function term() {
     local text=''
+
     if $OPTION_DEV; then
         text=$(gettext "Please note: the development version of the kz \
 package is installed")
@@ -516,7 +517,7 @@ package is installed")
         kz.errmsg "$text"
         exit 1
     else
-        printf "$BOLD%s\n$NORMAL" "$(gettext 'Complete!')"
+        printf "$BOLD%s$NORMAL\n" "$(gettext 'Complete!')"
         kz.infomsg "$text"
         exit 0
     fi
