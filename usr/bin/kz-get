@@ -25,6 +25,7 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly RED='\033[1;31m'
+readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
 # #############################################################################
@@ -76,6 +77,9 @@ function err_report() {
 
 # This function performs the script actions.
 function process() {
+    become_check
+    sudo --validate || exit 1
+
     if grep --quiet --regexp='debian' /etc/os-release; then
         process_kz_deb_package
     elif grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
@@ -83,6 +87,20 @@ function process() {
     else
         printf "$RED%s$NORMAL\n" 'fatal: unknown os release' >&2
         exit 1
+    fi
+}
+
+# This function checks if the user is allowed to become root and returns 0 if
+# so, otherwise exits 0 with descriptive message.
+function become_check() {
+    local text=''
+
+    if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
+        return 0
+    else
+        text=$(gettext 'Already performed by the administrator.')
+        printf "$GREEN%s$NORMAL\n" "$text"
+        exit 0
     fi
 }
 
@@ -106,8 +124,6 @@ function process_kz_deb_package() {
         install='reinstall'
     fi
 
-    sudo --validate || exit 1
-
     printf '%s' 'Download...'
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_file"                     |& $PROGRAM_LOGS
@@ -117,11 +133,28 @@ function process_kz_deb_package() {
     printf '\n%s' 'Update.....'
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
+    check_debian_package_manager
     sudo apt-get update |& $PROGRAM_LOGS
 
     printf '\n%s' 'Install....'
     # Install kz deb package.
+    check_debian_package_manager
     sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
+}
+
+
+# This function checks if a Debian package manager is already running and waits
+# for the next check if so.
+function check_debian_package_manager() {
+    local text='Wait for another package manager to finish...'
+
+    while sudo  fuser                           \
+                --silent                        \
+                /var/cache/debconf/config.dat   \
+                /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
+        printf '%s\n' "$text" |& $PROGRAM_LOGS
+        sleep 2
+    done
 }
 
 
@@ -140,8 +173,6 @@ function process_kz_rpm_package() {
     if type kz &> /dev/null; then
         install='reinstall'
     fi
-
-    sudo --validate || exit 1
 
     printf '%s' 'Install...'
     # Install kz rpm package.
