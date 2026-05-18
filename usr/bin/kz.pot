@@ -98,7 +98,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:171 kz-backup:171 kz-build:160 kz-check:125 kz-deploy:135 kz-desktop:199
+#: kz:171 kz-backup:171 kz-build:160 kz-check:127 kz-deploy:137 kz-desktop:199
 #: kz-dev:132 kz-install:277 kz-menu:197 kz-restore:171 kz-setup:262
 #: kz-update:166 kz-wifi:157
 msgid "internal error"
@@ -168,7 +168,7 @@ msgstr ""
 msgid "too many options"
 msgstr ""
 
-#: kz-backup:179 kz-build:168 kz-check:133 kz-deploy:143 kz-desktop:207
+#: kz-backup:179 kz-build:168 kz-check:135 kz-deploy:145 kz-desktop:207
 #: kz-dev:139 kz-menu:205 kz-restore:179 kz-update:173 kz-wifi:164
 msgid "arguments are not allowed"
 msgstr ""
@@ -379,7 +379,7 @@ msgstr ""
 msgid "  -d, --dev      build the development version of package kz"
 msgstr ""
 
-#: kz-build:89 kz-check:64 kz-deploy:70 kz-dev:75
+#: kz-build:89 kz-check:66 kz-deploy:72 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
@@ -443,11 +443,11 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:515 kz-check:582 kz-deploy:264
+#: kz-build:515 kz-check:584 kz-deploy:266
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
-#: kz-check:23 kz-deploy:180
+#: kz-check:23 kz-deploy:182
 msgid "Check scripts and website"
 msgstr ""
 
@@ -459,90 +459,90 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr ""
 
-#: kz-check:150
+#: kz-check:152
 msgid "Check website..."
 msgstr ""
 
-#: kz-check:193
+#: kz-check:195
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 
-#: kz-check:243
+#: kz-check:245
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr ""
 
-#: kz-check:255
+#: kz-check:257
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr ""
 
-#: kz-check:266
+#: kz-check:268
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:281
+#: kz-check:283
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
-#: kz-check:373
+#: kz-check:375
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:393
+#: kz-check:395
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:406
+#: kz-check:408
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:417
+#: kz-check:419
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:428
+#: kz-check:430
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:448 kz-check:459
+#: kz-check:450 kz-check:461
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr ""
 
-#: kz-check:495
+#: kz-check:497
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:544
+#: kz-check:546
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:565
+#: kz-check:567
 msgid "End spaces found."
 msgstr ""
 
-#: kz_common.py:57 kz_common.sh:42 kz-get:101
+#: kz_common.py:57 kz_common.sh:41 kz-get:101
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:148 kz_common.sh:165
+#: kz_common.py:148 kz_common.sh:164
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:154 kz_common.sh:172
+#: kz_common.py:154 kz_common.sh:171
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:160 kz_common.sh:179
+#: kz_common.py:160 kz_common.sh:178
 msgid "fatal: must not be run as root"
 msgstr ""
 
@@ -566,79 +566,79 @@ msgstr ""
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:296 kz_common.sh:274
+#: kz_common.py:296 kz_common.sh:273
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:297 kz_common.sh:275
+#: kz_common.py:297 kz_common.sh:274
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.sh:416
+#: kz_common.sh:415
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
-#: kz_common.sh:73
+#: kz_common.sh:72
 msgid "Check that all repos are on branch main"
 msgstr ""
 
-#: kz_common.sh:79
+#: kz_common.sh:78
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr ""
 
-#: kz_common.sh:86
+#: kz_common.sh:85
 msgid "Check that all repos are clean"
 msgstr ""
 
-#: kz_common.sh:97
+#: kz_common.sh:96
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:225
+#: kz_common.sh:224
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:229
+#: kz_common.sh:228
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:257
+#: kz_common.sh:256
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:272
+#: kz_common.sh:271
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:365 kz-get:73
+#: kz_common.sh:364 kz-get:73
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:368
+#: kz_common.sh:367
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
 "$command"
 msgstr ""
 
-#: kz_common.sh:372
+#: kz_common.sh:371
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:377 kz-get:208
+#: kz_common.sh:376 kz-get:208
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:406
+#: kz_common.sh:405
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -661,31 +661,31 @@ msgstr ""
 msgid "  -d, --dev      deploy the development version of package kz"
 msgstr ""
 
-#: kz-deploy:155
+#: kz-deploy:157
 msgid "Check..."
 msgstr ""
 
-#: kz-deploy:169
+#: kz-deploy:171
 msgid "Deploy..."
 msgstr ""
 
-#: kz-deploy:206
+#: kz-deploy:208
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:210 kz-dev:251
+#: kz-deploy:212 kz-dev:251
 msgid "Password for"
 msgstr ""
 
-#: kz-deploy:224
+#: kz-deploy:226
 msgid "Website upload failed."
 msgstr ""
 
-#: kz-deploy:239
+#: kz-deploy:241
 msgid "Install..."
 msgstr ""
 
-#: kz-deploy:250
+#: kz-deploy:252
 msgid "Install Debian package failed."
 msgstr ""
 
@@ -1522,7 +1522,7 @@ msgid "Maintenance..."
 msgstr ""
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
-#: gitstatus:64 kz-build:519 kz-check:586 kz-deploy:268 kz-dev:280
+#: gitstatus:64 kz-build:519 kz-check:588 kz-deploy:270 kz-dev:280
 #: kz-post-migrate:71 kz-update:291
 msgid "Complete!"
 msgstr ""

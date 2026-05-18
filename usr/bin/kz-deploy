@@ -48,6 +48,8 @@ readonly HELP
 readonly OPTIONS_SHORT='dhmuv'
 readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
+readonly BOLD='\033[1m'
+
 
 # #############################################################################
 # Globals
