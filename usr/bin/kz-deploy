@@ -48,8 +48,6 @@ readonly HELP
 readonly OPTIONS_SHORT='dhmuv'
 readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
-readonly BOLD='\033[1m'
-
 
 # #############################################################################
 # Globals
@@ -267,7 +265,7 @@ function term() {
         kz.errmsg "$text"
         exit 1
     else
-        printf "$BOLD%s$NORMAL\n" "$(gettext 'Complete!')"
+        printf "$BOLD%s\n$NORMAL" "$(gettext 'Complete!')"
         kz.infomsg "$text"
         exit 0
     fi

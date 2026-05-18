@@ -99,7 +99,7 @@ msgstr "Programma {} is onderbroken."
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:171 kz-backup:171 kz-build:160 kz-check:127 kz-deploy:137 kz-desktop:199
+#: kz:171 kz-backup:171 kz-build:160 kz-check:127 kz-deploy:135 kz-desktop:199
 #: kz-dev:132 kz-install:277 kz-menu:197 kz-restore:171 kz-setup:262
 #: kz-update:166 kz-wifi:157
 msgid "internal error"
@@ -177,7 +177,7 @@ msgstr "zenity is vereist, voer eerst kz-get uit"
 msgid "too many options"
 msgstr "te veel opties"
 
-#: kz-backup:179 kz-build:168 kz-check:135 kz-deploy:145 kz-desktop:207
+#: kz-backup:179 kz-build:168 kz-check:135 kz-deploy:143 kz-desktop:207
 #: kz-dev:139 kz-menu:205 kz-restore:179 kz-update:173 kz-wifi:164
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
@@ -424,7 +424,7 @@ msgstr "Gebruik: kz build [<opties>]"
 msgid "  -d, --dev      build the development version of package kz"
 msgstr "  -d, --dev      bouw de ontwikkelingsversie van pakket kz"
 
-#: kz-build:89 kz-check:66 kz-deploy:72 kz-dev:75
+#: kz-build:89 kz-check:66 kz-deploy:70 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
@@ -488,11 +488,11 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:515 kz-check:584 kz-deploy:266
+#: kz-build:515 kz-check:584 kz-deploy:264
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz-check:23 kz-deploy:182
+#: kz-check:23 kz-deploy:180
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 
@@ -718,31 +718,31 @@ msgstr "Gebruik: kz deploy [<opties>]"
 msgid "  -d, --dev      deploy the development version of package kz"
 msgstr "  -d, --dev      distribueer de ontwikkelingsversie van pakket kz"
 
-#: kz-deploy:157
+#: kz-deploy:155
 msgid "Check..."
 msgstr "Controleren..."
 
-#: kz-deploy:171
+#: kz-deploy:169
 msgid "Deploy..."
 msgstr "Distribueren..."
 
-#: kz-deploy:208
+#: kz-deploy:206
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:212 kz-dev:251
+#: kz-deploy:210 kz-dev:251
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
-#: kz-deploy:226
+#: kz-deploy:224
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-#: kz-deploy:241
+#: kz-deploy:239
 msgid "Install..."
 msgstr "Installeren..."
 
-#: kz-deploy:252
+#: kz-deploy:250
 msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
@@ -1662,7 +1662,7 @@ msgid "Maintenance..."
 msgstr "Onderhoud..."
 
 #: ckhtml:124 gitbranch:63 gitclone:80 gitfetch:63 gitinit:50 gitpull:63
-#: gitstatus:63 kz-build:519 kz-check:588 kz-deploy:270 kz-dev:280
+#: gitstatus:63 kz-build:519 kz-check:588 kz-deploy:268 kz-dev:280
 #: kz-post-migrate:71 kz-update:291
 msgid "Complete!"
 msgstr "Klaar!"

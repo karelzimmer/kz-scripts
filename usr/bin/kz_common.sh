@@ -127,7 +127,7 @@ function kz.errmsg() {
                     --msgbox    "$*"            \
                     18 80
     else
-        printf "$BOLD%b$NORMAL\n" "$*" >&2
+        printf "$BOLD%b\n$NORMAL" "$*" >&2
     fi
 }
 
