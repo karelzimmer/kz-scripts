@@ -566,15 +566,15 @@ msgstr ""
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:294 kz_common.sh:269
+#: kz_common.py:294 kz_common.sh:265
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:295 kz_common.sh:270
+#: kz_common.py:295 kz_common.sh:266
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.sh:412
+#: kz_common.sh:408
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -596,49 +596,49 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:220
+#: kz_common.sh:216
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:224
+#: kz_common.sh:220
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:252
+#: kz_common.sh:248
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:267
+#: kz_common.sh:263
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:360 kz-get:75
+#: kz_common.sh:356 kz-get:75
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:363
+#: kz_common.sh:359
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
 "$command"
 msgstr ""
 
-#: kz_common.sh:367 kz_common.sh:372 kz-get:66
+#: kz_common.sh:363 kz_common.sh:368 kz-get:66
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:373 kz-get:215
+#: kz_common.sh:369 kz-get:215
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:402
+#: kz_common.sh:398
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""

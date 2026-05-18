@@ -211,10 +211,6 @@ function kz.process_option_help() {
 
     UI_MODE='cli'
     if [[ -n ${DISPLAY-} ]]; then
-        # yelp_man_url="$(gettext ', or see the ')"
-        # yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
-        # yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
-
         # shellcheck disable=SC2034
         yelp_man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1)"
         yelp_man=$(eval_gettext ", or see the \$yelp_man_url man page")
