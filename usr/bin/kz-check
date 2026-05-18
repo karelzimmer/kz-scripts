@@ -585,7 +585,7 @@ function term() {
         kz.errmsg "$text"
         exit 1
     else
-        text=$GREEN$(gettext 'Complete!')$NORMAL
+        text=$(gettext 'Complete!')
         kz.infomsg "$text"
         exit 0
     fi

@@ -21,7 +21,6 @@ source /usr/bin/gettext.sh
 # #############################################################################
 
 # List NORMAL last here so that debugging (-vx) doesn't bork the display.
-readonly GREEN='\033[1;32m'
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
@@ -39,9 +38,6 @@ function kz.become_check() {
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
-        if [[ ${UI_MODE-} = 'cli' ]]; then
-            text=$GREEN$text$NORMAL
-        fi
         kz.infomsg "$text"
         exit 0
     fi

@@ -25,7 +25,6 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly RED='\033[1;31m'
-readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
 # #############################################################################
@@ -99,7 +98,7 @@ function become_check() {
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
-        printf "$GREEN%s$NORMAL\n" "$text"
+        printf "%s\n" "$text"
         exit 0
     fi
 }
