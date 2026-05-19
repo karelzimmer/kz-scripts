@@ -1665,8 +1665,8 @@ msgstr "Bevestigen..."
 msgid "Maintenance..."
 msgstr "Onderhoud..."
 
-#: ckhtml:124 gitbranch:63 gitclone:80 gitfetch:63 gitinit:50 gitpull:63
-#: gitstatus:63 kz-build:520 kz-check:586 kz-deploy:268 kz-dev:280
+#: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
+#: gitstatus:64 kz-build:520 kz-check:586 kz-deploy:268 kz-dev:280
 #: kz-post-migrate:71 kz-update:291
 msgid "Complete!"
 msgstr "Klaar!"
