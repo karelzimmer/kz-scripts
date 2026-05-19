@@ -93,6 +93,8 @@ def process() -> None:
         text = f'{kz.BOLD}{_('Update...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_update_debs()
+        text = f'{kz.BOLD}{_('Upgrade...')}{kz.NORMAL}'
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_upgrade_debs()
         perform_update_flatpaks()
         perform_update_snaps()
@@ -102,7 +104,7 @@ def process() -> None:
     elif subprocess.run(check_rhel, executable='bash',
                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                         shell=True).returncode == 0:
-        text = f'{kz.BOLD}{_('Update...')}{kz.NORMAL}'
+        text = f'{kz.BOLD}{_('Upgrade...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_upgrade_rpms()
         perform_update_flatpaks()
