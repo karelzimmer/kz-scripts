@@ -439,7 +439,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:510 kz-get:204
+#: kz-build:510 kz-get:205
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -530,7 +530,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz_common.py:57 kz_common.sh:42 kz-get:106
+#: kz_common.py:57 kz_common.sh:42 kz-get:107
 msgid "Already performed by the administrator."
 msgstr ""
 
@@ -618,7 +618,7 @@ msgstr ""
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:364 kz-get:78
+#: kz_common.sh:364 kz-get:79
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
@@ -630,15 +630,15 @@ msgid ""
 "$command"
 msgstr ""
 
-#: kz_common.sh:371 kz_common.sh:376 kz-get:67
+#: kz_common.sh:371 kz_common.sh:376 kz-get:68
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:377 kz-get:68
+#: kz_common.sh:377 kz-get:69
 msgid "The last few lines of the log are displayed here."
 msgstr ""
 
-#: kz_common.sh:378 kz-get:218
+#: kz_common.sh:378 kz-get:219
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -799,15 +799,15 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:208
+#: kz-get:209
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:211
+#: kz-get:212
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:214
+#: kz-get:215
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 

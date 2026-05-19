@@ -24,8 +24,9 @@ readonly PROGRAM_NAME='kz-get'
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 # List NORMAL last here so that -x doesn't bork the display.
-readonly RED='\033[1;31m'
-readonly GREEN='\033[1;32m'
+readonly BOLD='\033[1m'
+readonly GREEN=$BOLD'\033[32m'
+readonly RED=$BOLD'\033[31m'
 readonly NORMAL='\033[0m'
 
 # #############################################################################
@@ -205,8 +206,8 @@ function term() {
 $NORMAL\n\n"
     fi
 
-    text+="    $(gettext "Package kz has been successfully installed.")
-
+    text+="    $GREEN$(gettext "Package kz has been successfully installed.")
+$NORMAL
     $(gettext \
 "Now follow the steps as described in the Checklist installation.")
 
@@ -215,7 +216,7 @@ $NORMAL\n\n"
     if [[ -n ${DISPLAY-} ]]; then
         text+="
 
-    $(gettext "Type 'exit' to close this window.")"
+    $BOLD$(gettext "Type 'exit' to close this window.")$NORMAL"
     fi
     text+="
 
