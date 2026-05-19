@@ -374,11 +374,13 @@ $(gettext "Use 'journalctl -xe' to check what went wrong.")"
             fi
             text+="
 $(gettext "Use 'journalctl -xe' to check what went wrong.")
+$(gettext "The last few lines of the log are displayed here.")
 $(gettext "Type 'exit' to close this window.")"
             gnome-terminal  --                                          \
                             bash -c                                     \
                             "journalctl --all                           \
-                                        --lines=20                      \
+                                        --catalog                       \
+                                        --lines                         \
                                         --no-pager                      \
                                         --pager-end                     \
                                         --identifier='$PROGRAM_NAME';   \
