@@ -63,11 +63,14 @@ function init() {
 # This function reports errors.
 # shellcheck disable=SC2317,SC2329
 function err_report() {
+            text+="
+$(gettext "Use 'journalctl -xe' to check what went wrong.")"
+    printf "$BOLD%s$NORMAL\n" "$text" >&2
     printf '\n' >&2
     journalctl  --all       \
-                --catalog   \
-                --pager-end \
+                --lines=20  \
                 --no-pager  \
+                --pager-end \
                 --identifier="$PROGRAM_NAME"
     text="$(eval_gettext \
 "Program \$PROGRAM_NAME encountered an error.")"
@@ -124,20 +127,24 @@ function process_kz_deb_package() {
         install='reinstall'
     fi
 
+    # Download kz deb package.
     printf '%s' 'Download...'
+    printf '%s\n' "Downloading $kz_deb_site_file..." |& $PROGRAM_LOGS
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_file"                     |& $PROGRAM_LOGS
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
 
-    printf '\n%s' 'Update.....'
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
+    printf '\n%s' 'Update.....'
+    printf '%s\n' "Update package lists..." |& $PROGRAM_LOGS
     check_debian_package_manager
     sudo apt-get update |& $PROGRAM_LOGS
 
-    printf '\n%s' 'Install....'
     # Install kz deb package.
+    printf '\n%s' 'Install....'
+    printf '%s\n' "Installing $kz_deb_site_file..." |& $PROGRAM_LOGS
     check_debian_package_manager
     sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
 }
@@ -174,8 +181,9 @@ function process_kz_rpm_package() {
         install='reinstall'
     fi
 
-    printf '%s' 'Install...'
     # Install kz rpm package.
+    printf '%s' 'Install...'
+    printf '%s\n' "Installing $kz_rpm_site_file..." |& $PROGRAM_LOGS
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
 }
 

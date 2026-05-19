@@ -219,10 +219,6 @@ function kz.process_option_help() {
 
     UI_MODE='cli'
     if [[ -n ${DISPLAY-} ]]; then
-        # yelp_man_url="$(gettext ', or see the ')"
-        # yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1) "
-        # yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
-
         # shellcheck disable=SC2034
         yelp_man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1)"
         yelp_man=$(eval_gettext ", or see the \$yelp_man_url man page")
@@ -377,13 +373,14 @@ $(gettext "Use 'journalctl -xe' to check what went wrong.")"
                 exit "$rc"
             fi
             text+="
+$(gettext "Use 'journalctl -xe' to check what went wrong.")
 $(gettext "Type 'exit' to close this window.")"
             gnome-terminal  --                                          \
                             bash -c                                     \
                             "journalctl --all                           \
-                                        --catalog                       \
-                                        --pager-end                     \
+                                        --lines=20                      \
                                         --no-pager                      \
+                                        --pager-end                     \
                                         --identifier='$PROGRAM_NAME';   \
                                         printf '$RED%s\n' \"$text\";    \
                                         exec bash"                      \
