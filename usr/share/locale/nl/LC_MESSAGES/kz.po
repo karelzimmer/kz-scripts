@@ -693,7 +693,7 @@ msgstr "Gebruik 'journalctl -xe' om te controleren wat er misging."
 msgid "The last few lines of the log are displayed here."
 msgstr "De laatste paar regels van de log worden hier weergegeven."
 
-#: kz_common.sh:378 kz-get:219
+#: kz_common.sh:378 kz-get:218
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
@@ -879,7 +879,7 @@ msgstr "Pakket kz is succesvol geïnstalleerd."
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 
-#: kz-get:215
+#: kz-get:214
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 

@@ -638,7 +638,7 @@ msgstr ""
 msgid "The last few lines of the log are displayed here."
 msgstr ""
 
-#: kz_common.sh:378 kz-get:219
+#: kz_common.sh:378 kz-get:218
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -807,7 +807,7 @@ msgstr ""
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:215
+#: kz-get:214
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
