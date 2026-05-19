@@ -65,7 +65,7 @@ function init() {
 function err_report() {
             text+="
 $(gettext "Use 'journalctl -xe' to check what went wrong.")"
-    printf "$BOLD%s$NORMAL\n" "$text" >&2
+    printf "$RED%s$NORMAL\n" "$text" >&2
     printf '\n' >&2
     journalctl  --all       \
                 --lines=20  \

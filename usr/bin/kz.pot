@@ -439,7 +439,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:510 kz-get:194
+#: kz-build:510 kz-get:202
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -530,7 +530,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz_common.py:57 kz_common.sh:42 kz-get:101
+#: kz_common.py:57 kz_common.sh:42 kz-get:104
 msgid "Already performed by the administrator."
 msgstr ""
 
@@ -566,15 +566,15 @@ msgstr ""
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:296 kz_common.sh:277
+#: kz_common.py:296 kz_common.sh:273
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:297 kz_common.sh:278
+#: kz_common.py:297 kz_common.sh:274
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.sh:419
+#: kz_common.sh:416
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -596,49 +596,49 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:228
+#: kz_common.sh:224
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:232
+#: kz_common.sh:228
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:260
+#: kz_common.sh:256
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:275
+#: kz_common.sh:271
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:368 kz-get:73
+#: kz_common.sh:364 kz-get:76
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:371
+#: kz_common.sh:367
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
 "$command"
 msgstr ""
 
-#: kz_common.sh:375
+#: kz_common.sh:371 kz_common.sh:376 kz-get:67
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:380 kz-get:208
+#: kz_common.sh:377 kz-get:216
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:409
+#: kz_common.sh:406
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -795,15 +795,15 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:198
+#: kz-get:206
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:201
+#: kz-get:209
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:204
+#: kz-get:212
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
