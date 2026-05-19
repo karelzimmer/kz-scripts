@@ -22,6 +22,8 @@ source /usr/bin/gettext.sh
 
 # List NORMAL last here so that debugging (-vx) doesn't bork the display.
 readonly BOLD='\033[1m'
+readonly GREEN=$BOLD'\033[32m'
+readonly RED=$BOLD'\033[31m'
 readonly NORMAL='\033[0m'
 
 
@@ -38,6 +40,9 @@ function kz.become_check() {
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
+        if [[ ${UI_MODE-} = 'cli' ]]; then
+            text=$GREEN$text$NORMAL
+        fi
         kz.infomsg "$text"
         exit 0
     fi
@@ -127,7 +132,7 @@ function kz.errmsg() {
                     --msgbox    "$*"            \
                     18 80
     else
-        printf "$BOLD%b\n$NORMAL" "$*" >&2
+        printf "$RED%b$NORMAL\n" "$*" >&2
     fi
 }
 
@@ -159,19 +164,22 @@ function kz.init() {
 
     # Check if systemd is available .
     if ! type systemctl &> /dev/null; then
-        printf '%s\n' "$(gettext 'fatal: no systemd available')" >&2
+        printf  "$RED%s$NORMAL\n"   \
+                "$(gettext 'fatal: no systemd available')" >&2
         exit 1
     fi
 
     # Check if os release is available.
     if ! [[ -f /etc/os-release ]]; then
-        printf '%s\n' "$(gettext 'fatal: no os release available')" >&2
+        printf  "$RED%s$NORMAL\n"   \
+                "$(gettext 'fatal: no os release available')" >&2
         exit 1
     fi
 
     # Check if started as root.
     if [[ $UID -eq 0 ]]; then
-        printf '%s\n' "$(gettext 'fatal: must not be run as root')" >&2
+        printf  "$RED%s$NORMAL\n"   \
+                "$(gettext 'fatal: must not be run as root')" >&2
         exit 1
     fi
 
@@ -377,7 +385,7 @@ $(gettext "Type 'exit' to close this window.")"
                                         --pager-end                     \
                                         --no-pager                      \
                                         --identifier='$PROGRAM_NAME';   \
-                                        printf '$BOLD%s\n' \"$text\";   \
+                                        printf '$RED%s\n' \"$text\";    \
                                         exec bash"                      \
                                         2> /dev/null                    || true
             exit "$rc"

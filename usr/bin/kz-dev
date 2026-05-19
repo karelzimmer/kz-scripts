@@ -277,7 +277,7 @@ def term() -> None:
     text += ' poedit rpm shellcheck spice-vdagent usbutils\n'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
-    text = _('Complete!')
+    text = f"{kz.GREEN}{_('Complete!')}{kz.NORMAL}"
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
     kz.term(PROGRAM_NAME, 0)

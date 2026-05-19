@@ -29,6 +29,8 @@ _ = gettext.gettext
 
 # List NORMAL last here so that debugging doesn't bork the display.
 BOLD: str = '\033[1m'
+GREEN: str = f'{BOLD}\033[32m'
+RED: str = f'{BOLD}\033[31m'
 NORMAL: str = '\033[0m'
 
 
@@ -52,7 +54,7 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
                       shell=True).returncode == 0:
         return 0
     else:
-        text = _("Already performed by the administrator.")
+        text = f'{GREEN}{_("Already performed by the administrator.")}{NORMAL}'
         infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         sys.exit(0)
 
@@ -106,7 +108,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
-        print(f'{BOLD}{TEXT}{NORMAL}')
+        print(f'{RED}{TEXT}{NORMAL}')
 
 
 def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
@@ -144,19 +146,19 @@ def init(PROGRAM_NAME: str) -> None:
     if subprocess.run('type systemctl', executable='bash',
                       stdout=subprocess.DEVNULL, shell=True).returncode != 0:
         text = _('fatal: no systemd available')
-        print(f'{BOLD}{text}{NORMAL}', file=sys.stderr)
+        print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
 
     # Check if os release is available.
     if not os.path.exists('/etc/os-release'):
         text = _('fatal: no os release available')
-        print(f'{BOLD}{text}{NORMAL}', file=sys.stderr)
+        print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
 
     # Check if started as root.
     if os.getuid() == 0:
         text = _('fatal: must not be run as root')
-        print(f'{BOLD}{text}{NORMAL}', file=sys.stderr)
+        print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
 
     text = f'==== START logs for script {PROGRAM_NAME}'

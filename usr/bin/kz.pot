@@ -93,7 +93,7 @@ msgstr ""
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz_common.py:242 kz_common.py:251 kz_common.py:289 kz-dev:165 kz-dev:176
+#: kz_common.py:244 kz_common.py:253 kz_common.py:291 kz-dev:165 kz-dev:176
 #: kz-dev:189 kz-dev:207 kz-dev:225 kz-update:86 kz-update:279
 msgid "Program {} encountered an error."
 msgstr ""
@@ -439,7 +439,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:510 kz-get:193
+#: kz-build:510 kz-get:194
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -530,115 +530,115 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz_common.py:55 kz_common.sh:40 kz-get:100
+#: kz_common.py:57 kz_common.sh:42 kz-get:101
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:146 kz_common.sh:162
+#: kz_common.py:148 kz_common.sh:168
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:152 kz_common.sh:168
+#: kz_common.py:154 kz_common.sh:175
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:158 kz_common.sh:174
+#: kz_common.py:160 kz_common.sh:182
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:212
+#: kz_common.py:214
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:217
+#: kz_common.py:219
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:219 kz_common.py:266
+#: kz_common.py:221 kz_common.py:268
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:265
+#: kz_common.py:267
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:293
+#: kz_common.py:295
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:294 kz_common.sh:269
+#: kz_common.py:296 kz_common.sh:277
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:295 kz_common.sh:270
+#: kz_common.py:297 kz_common.sh:278
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.sh:411
+#: kz_common.sh:419
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
-#: kz_common.sh:71
+#: kz_common.sh:76
 msgid "Check that all repos are on branch main"
 msgstr ""
 
-#: kz_common.sh:77
+#: kz_common.sh:82
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr ""
 
-#: kz_common.sh:84
+#: kz_common.sh:89
 msgid "Check that all repos are clean"
 msgstr ""
 
-#: kz_common.sh:95
+#: kz_common.sh:100
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:220
+#: kz_common.sh:228
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:224
+#: kz_common.sh:232
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:252
+#: kz_common.sh:260
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:267
+#: kz_common.sh:275
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:360 kz-get:72
+#: kz_common.sh:368 kz-get:73
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:363
+#: kz_common.sh:371
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
 "$command"
 msgstr ""
 
-#: kz_common.sh:367
+#: kz_common.sh:375
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:372 kz-get:207
+#: kz_common.sh:380 kz-get:208
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:401
+#: kz_common.sh:409
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -795,15 +795,15 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:197
+#: kz-get:198
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:200
+#: kz-get:201
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:203
+#: kz-get:204
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 

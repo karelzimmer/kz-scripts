@@ -94,7 +94,7 @@ msgstr "opdracht is vereist"
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz_common.py:242 kz_common.py:251 kz_common.py:289 kz-dev:165 kz-dev:176
+#: kz_common.py:244 kz_common.py:253 kz_common.py:291 kz-dev:165 kz-dev:176
 #: kz-dev:189 kz-dev:207 kz-dev:225 kz-update:86 kz-update:279
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
@@ -484,7 +484,7 @@ msgstr "Bouw RPM-pakket..."
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:510 kz-get:193
+#: kz-build:510 kz-get:194
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -580,79 +580,79 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz_common.py:55 kz_common.sh:40 kz-get:100
+#: kz_common.py:57 kz_common.sh:42 kz-get:101
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:146 kz_common.sh:162
+#: kz_common.py:148 kz_common.sh:168
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:152 kz_common.sh:168
+#: kz_common.py:154 kz_common.sh:175
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:158 kz_common.sh:174
+#: kz_common.py:160 kz_common.sh:182
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:212
+#: kz_common.py:214
 msgid ", or see the {} man page"
 msgstr ", of zie de {} man-pagina"
 
-#: kz_common.py:217
+#: kz_common.py:219
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:219 kz_common.py:266
+#: kz_common.py:221 kz_common.py:268
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:265
+#: kz_common.py:267
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:293
+#: kz_common.py:295
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:294 kz_common.sh:269
+#: kz_common.py:296 kz_common.sh:277
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:295 kz_common.sh:270
+#: kz_common.py:297 kz_common.sh:278
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.sh:411
+#: kz_common.sh:419
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz_common.sh:71
+#: kz_common.sh:76
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
-#: kz_common.sh:77
+#: kz_common.sh:82
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-#: kz_common.sh:84
+#: kz_common.sh:89
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
-#: kz_common.sh:95
+#: kz_common.sh:100
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz_common.sh:220
+#: kz_common.sh:228
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ", of zie de $yelp_man_url man-pagina"
 
-#: kz_common.sh:224
+#: kz_common.sh:232
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
@@ -661,22 +661,22 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man voor meer "
 "informatie."
 
-#: kz_common.sh:252
+#: kz_common.sh:260
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:267
+#: kz_common.sh:275
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:360 kz-get:72
+#: kz_common.sh:368 kz-get:73
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:363
+#: kz_common.sh:371
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
@@ -685,15 +685,15 @@ msgstr ""
 "Fout $rc op regel $lineno in functie $function bij het uitvoeren van "
 "commando: $command"
 
-#: kz_common.sh:367
+#: kz_common.sh:375
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr "Gebruik 'journalctl -xe' om te controleren wat er misging."
 
-#: kz_common.sh:372 kz-get:207
+#: kz_common.sh:380 kz-get:208
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:401
+#: kz_common.sh:409
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -867,15 +867,15 @@ msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
 "commando uit:"
 
-#: kz-get:197
+#: kz-get:198
 msgid "Package kz has been successfully installed."
 msgstr "Pakket kz is succesvol geïnstalleerd."
 
-#: kz-get:200
+#: kz-get:201
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 
-#: kz-get:203
+#: kz-get:204
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 

@@ -265,7 +265,7 @@ function term() {
         kz.errmsg "$text"
         exit 1
     else
-        printf "$BOLD%s$NORMAL\n" "$(gettext 'Complete!')"
+        text="$GREEN$(gettext 'Complete!')$NORMAL"
         kz.infomsg "$text"
         exit 0
     fi
