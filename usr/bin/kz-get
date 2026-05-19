@@ -118,7 +118,7 @@ function process_kz_deb_package() {
     local packages_url='https://karelzimmer.nl/assets/packages'
 
     if $OPTION_DEV; then
-        kz_deb_site_file=$packages_url/kz-dev_4.2.1-1_all.de
+        kz_deb_site_file=$packages_url/kz-dev_4.2.1-1_all.deb
         kz_deb_local_file=$(mktemp -t "kz-dev-XXXXXXXXXX.deb")
     else
         kz_deb_site_file=$packages_url/kz_4.2.1-1_all.deb
