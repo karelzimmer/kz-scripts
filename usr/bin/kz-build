@@ -71,9 +71,9 @@ readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 # Globals
 # #############################################################################
 
-declare OPTION_DEV=false
 declare ERR_FLAG=false
-
+declare OPTION_DEV=false
+declare UI_MODE='cli'
 
 # #############################################################################
 # Functions

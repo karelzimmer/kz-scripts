@@ -94,13 +94,13 @@ msgstr "opdracht is vereist"
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz_common.py:244 kz_common.py:253 kz_common.py:291 kz-dev:165 kz-dev:176
-#: kz-dev:189 kz-dev:207 kz-dev:225 kz-update:86 kz-update:281
+#: kz_common.py:244 kz_common.py:253 kz_common.py:291 kz-dev:167 kz-dev:178
+#: kz-dev:191 kz-dev:209 kz-dev:227 kz-update:86 kz-update:281
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:171 kz-backup:171 kz-build:160 kz-check:125 kz-deploy:135 kz-desktop:199
-#: kz-dev:132 kz-install:277 kz-menu:197 kz-restore:171 kz-setup:262
+#: kz:171 kz-backup:171 kz-build:160 kz-check:126 kz-deploy:136 kz-desktop:199
+#: kz-dev:134 kz-install:277 kz-menu:197 kz-restore:171 kz-setup:262
 #: kz-update:168 kz-wifi:157
 msgid "internal error"
 msgstr "interne fout"
@@ -177,8 +177,8 @@ msgstr "zenity is vereist, voer eerst kz-get uit"
 msgid "too many options"
 msgstr "te veel opties"
 
-#: kz-backup:179 kz-build:168 kz-check:133 kz-deploy:143 kz-desktop:207
-#: kz-dev:139 kz-menu:205 kz-restore:179 kz-update:175 kz-wifi:164
+#: kz-backup:179 kz-build:168 kz-check:134 kz-deploy:144 kz-desktop:207
+#: kz-dev:141 kz-menu:205 kz-restore:179 kz-update:175 kz-wifi:164
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -424,7 +424,7 @@ msgstr "Gebruik: kz build [<opties>]"
 msgid "  -d, --dev      build the development version of package kz"
 msgstr "  -d, --dev      bouw de ontwikkelingsversie van pakket kz"
 
-#: kz-build:89 kz-check:64 kz-deploy:70 kz-dev:75
+#: kz-build:89 kz-check:65 kz-deploy:71 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
@@ -488,11 +488,11 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:516 kz-check:582 kz-deploy:264
+#: kz-build:516 kz-check:583 kz-deploy:265
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz-check:23 kz-deploy:180
+#: kz-check:23 kz-deploy:181
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 
@@ -505,55 +505,55 @@ msgstr ""
 msgid "Usage: kz check [<options>]"
 msgstr "Gebruik: kz check [<opties>]"
 
-#: kz-check:150
+#: kz-check:151
 msgid "Check website..."
 msgstr "Controleer website..."
 
-#: kz-check:193
+#: kz-check:194
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 "Bestanden die niet in html worden gebruikt en waarschijnlijk wel verwijderd "
 "kunnen worden:"
 
-#: kz-check:243
+#: kz-check:244
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr "Gettext berichtencatalogus-sjabloon $file niet gevonden."
 
-#: kz-check:255
+#: kz-check:256
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr "Gettext berichtencatalogus $file niet gevonden."
 
-#: kz-check:266
+#: kz-check:267
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr "Berichtencatalogus $file niet gevonden."
 
-#: kz-check:281
+#: kz-check:282
 msgid "Check scripts (this may take a while)..."
 msgstr "Controleer scripts (dit kan even duren)..."
 
-#: kz-check:373
+#: kz-check:374
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr "Onbekend script.  Functie check_code kan scriptcode niet controleren."
 
-#: kz-check:393
+#: kz-check:394
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr "Script $scriptname --usage gaf een fout."
 
-#: kz-check:406
+#: kz-check:407
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
-#: kz-check:417
+#: kz-check:418
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
-#: kz-check:428
+#: kz-check:429
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -562,21 +562,21 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:448 kz-check:459
+#: kz-check:449 kz-check:460
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr "Man-pagina $dir{1,5}/$scriptname.{1,5} niet gevonden."
 
-#: kz-check:495
+#: kz-check:496
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr "Een of meer regels zijn te lang (>79):"
 
-#: kz-check:544
+#: kz-check:545
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:565
+#: kz-check:566
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
@@ -722,31 +722,31 @@ msgstr "Gebruik: kz deploy [<opties>]"
 msgid "  -d, --dev      deploy the development version of package kz"
 msgstr "  -d, --dev      distribueer de ontwikkelingsversie van pakket kz"
 
-#: kz-deploy:155
+#: kz-deploy:156
 msgid "Check..."
 msgstr "Controleren..."
 
-#: kz-deploy:169
+#: kz-deploy:170
 msgid "Deploy..."
 msgstr "Distribueren..."
 
-#: kz-deploy:206
+#: kz-deploy:207
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:210 kz-dev:251
+#: kz-deploy:211 kz-dev:253
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
-#: kz-deploy:224
+#: kz-deploy:225
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-#: kz-deploy:239
+#: kz-deploy:240
 msgid "Install..."
 msgstr "Installeren..."
 
-#: kz-deploy:250
+#: kz-deploy:251
 msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
@@ -845,27 +845,27 @@ msgstr "Gebruik: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
 
-#: kz-dev:154
+#: kz-dev:156
 msgid "Clone repos..."
 msgstr "Clone repo's..."
 
-#: kz-dev:195
+#: kz-dev:197
 msgid "Pull repos..."
 msgstr "Pull repo's..."
 
-#: kz-dev:213
+#: kz-dev:215
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-#: kz-dev:247
+#: kz-dev:249
 msgid "Download website..."
 msgstr "Downloaden website..."
 
-#: kz-dev:264
+#: kz-dev:266
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-#: kz-dev:274
+#: kz-dev:276
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
@@ -1670,7 +1670,7 @@ msgid "Maintenance..."
 msgstr "Onderhoud..."
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
-#: gitstatus:64 kz-build:520 kz-check:586 kz-deploy:268 kz-dev:280
+#: gitstatus:64 kz-build:520 kz-check:587 kz-deploy:269 kz-dev:282
 #: kz-post-migrate:71 kz-update:293
 msgid "Complete!"
 msgstr "Klaar!"

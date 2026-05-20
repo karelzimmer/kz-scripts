@@ -72,7 +72,7 @@ def process() -> None:
 
     check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
-    kz.become_check(PROGRAM_NAME, PROGRAM_DESC)
+    kz.become_check(PROGRAM_NAME, PROGRAM_DESC, 'cli')
 
     try:
         subprocess.run(check_sudo, executable='bash', shell=True, check=True)

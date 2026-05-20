@@ -40,7 +40,7 @@ function kz.become_check() {
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
-        if [[ ${UI_MODE-} = 'cli' ]]; then
+        if [[ $UI_MODE = 'cli' ]]; then
             text=$GREEN$text$NORMAL
         fi
         kz.infomsg "$text"
@@ -117,7 +117,7 @@ function kz.check_repos() {
 # This function returns an error message.
 function kz.errmsg() {
     kz.logmsg "$*"
-    if [[ ${UI_MODE-} = 'gui' ]]; then
+    if [[ $UI_MODE = 'gui' ]]; then
         # shellcheck disable=SC2154
         zenity      --error                     \
                     --width     600             \
@@ -125,13 +125,14 @@ function kz.errmsg() {
                     --title     "$PROGRAM_DESC" \
                     --text      "$*"            \
                     2> /dev/null                || true
-    elif [[ ${UI_MODE-} = 'tui' ]]; then
+    elif [[ $UI_MODE = 'tui' ]]; then
         # shellcheck disable=SC2153,SC2154
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title     "$PROGRAM_DESC" \
                     --msgbox    "$*"            \
                     18 80
     else
+        UI_MODE='cli'
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
 }
@@ -140,19 +141,20 @@ function kz.errmsg() {
 # This function returns an informational message.
 function kz.infomsg() {
     kz.logmsg "$*"
-    if [[ ${UI_MODE-} = 'gui' ]]; then
+    if [[ $UI_MODE = 'gui' ]]; then
         zenity      --info                      \
                     --width     600             \
                     --height    100             \
                     --title     "$PROGRAM_DESC" \
                     --text      "$*"            \
                     2> /dev/null                || true
-    elif [[ ${UI_MODE-} = 'tui' ]]; then
+    elif [[ $UI_MODE = 'tui' ]]; then
         whiptail    --backtitle "$PROGRAM_NAME" \
                     --title     "$PROGRAM_DESC" \
                     --msgbox    "$*"            \
                     18 80
     else
+        UI_MODE='cli'
         printf '%b\n' "$*"
     fi
 }

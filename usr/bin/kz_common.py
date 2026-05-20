@@ -108,6 +108,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
+        UI_MODE = 'cli'
         print(f'{RED}{TEXT}{NORMAL}', file=sys.stderr)
 
 
@@ -133,6 +134,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         subprocess.run(whiptail, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
+        UI_MODE = 'cli'
         print(TEXT)
 
 

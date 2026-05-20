@@ -55,6 +55,7 @@ readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
 declare ERR_FLAG=false
 declare OPTION_DEV=false
+declare UI_MODE='cli'
 
 
 # #############################################################################

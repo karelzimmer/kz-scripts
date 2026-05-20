@@ -78,6 +78,8 @@ def process() -> None:
 
     check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
+    kz.become_check(PROGRAM_NAME, PROGRAM_DESC, 'cli')
+
     pull_repos()
     download_website()
 
