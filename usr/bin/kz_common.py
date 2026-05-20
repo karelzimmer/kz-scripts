@@ -54,7 +54,9 @@ def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
                       shell=True).returncode == 0:
         return 0
     else:
-        text = f'{GREEN}{_("Already performed by the administrator.")}{NORMAL}'
+        text = _("Already performed by the administrator.")
+        if UI_MODE == 'cli':
+            text = f'{GREEN}{text}{NORMAL}'
         infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         sys.exit(0)
 

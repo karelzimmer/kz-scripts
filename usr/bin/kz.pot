@@ -93,7 +93,7 @@ msgstr ""
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz_common.py:246 kz_common.py:255 kz_common.py:293 kz-dev:167 kz-dev:178
+#: kz_common.py:248 kz_common.py:257 kz_common.py:295 kz-dev:167 kz-dev:178
 #: kz-dev:191 kz-dev:209 kz-dev:227 kz-update:86 kz-update:281
 msgid "Program {} encountered an error."
 msgstr ""
@@ -534,43 +534,43 @@ msgstr ""
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:150 kz_common.sh:170
+#: kz_common.py:152 kz_common.sh:170
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:156 kz_common.sh:177
+#: kz_common.py:158 kz_common.sh:177
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:162 kz_common.sh:184
+#: kz_common.py:164 kz_common.sh:184
 msgid "fatal: must not be run as root"
 msgstr ""
 
-#: kz_common.py:216
+#: kz_common.py:218
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:221
+#: kz_common.py:223
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:223 kz_common.py:270
+#: kz_common.py:225 kz_common.py:272
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:269
+#: kz_common.py:271
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:297
+#: kz_common.py:299
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:298 kz_common.sh:275
+#: kz_common.py:300 kz_common.sh:275
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:299 kz_common.sh:276
+#: kz_common.py:301 kz_common.sh:276
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
