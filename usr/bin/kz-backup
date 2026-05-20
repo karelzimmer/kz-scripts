@@ -265,7 +265,6 @@ Connect a usb medium.")
                     sed         --expression='s/"//g'               || true
                     )
             else
-                UI_MODE='cli'
                 text=$(gettext 'More than one USB medium is connected.')
                 printf  '%s\n\n%s\n'    \
                         "$text"         \
@@ -654,7 +653,6 @@ EOF
                     6 70 0                          || BACKUP_RC=$?
         tput        cnorm                           || true
     else
-        UI_MODE='cli'
         text+='...'
         kz.infomsg "$text"
         rsync       --archive                       \
@@ -691,7 +689,6 @@ EOF
                     10 78
         sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
     else
-        UI_MODE='cli'
         text+='...'
         kz.infomsg "$text"
         sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
@@ -751,7 +748,6 @@ $(gettext 'Try creating the back up again.')"
                         --textbox   "$ERROR_LOG"    \
                         30 90
         else
-            UI_MODE='cli'
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"

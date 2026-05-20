@@ -132,7 +132,6 @@ function kz.errmsg() {
                     --msgbox    "$*"            \
                     18 80
     else
-        UI_MODE='cli'
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
 }
@@ -154,7 +153,6 @@ function kz.infomsg() {
                     --msgbox    "$*"            \
                     18 80
     else
-        UI_MODE='cli'
         printf '%b\n' "$*"
     fi
 }

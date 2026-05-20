@@ -404,7 +404,6 @@ function process_menu2() {
     elif [[ $UI_MODE = 'tui' ]]; then
         process_menu2_tui
     else
-        UI_MODE='cli'
         process_menu2_cli
     fi
 }
@@ -530,7 +529,6 @@ function process_menu2_choice() {
         elif [[ $UI_MODE = 'tui' ]]; then
             process_menu1_tui
         else
-            UI_MODE='cli'
             process_menu1_cli
         fi
     fi
@@ -613,7 +611,6 @@ $(gettext 'Proceed?')"
             execute_command=false
         fi
     else
-        UI_MODE='cli'
         printf '\n%s\n\n' "$text"
         prompt="$(gettext 'Proceed?')"
         while true; do

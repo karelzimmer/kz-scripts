@@ -416,7 +416,6 @@ $(gettext '  0  No apps found.')"
             sed         --expression='s/"//g'               || true
             )
     else
-        UI_MODE='cli'
         app_list
         text+="
 $apps"
@@ -698,7 +697,6 @@ function execute_command() {
                 1> >($PROGRAM_LOGS) \
                 2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
     else
-        UI_MODE='cli'
         # Ellipsize terminal output.
         # Width 9 characters less, 9 for leading spaces.
         cmd_dis_max=$(( $(tput cols) - 9 ))
@@ -763,7 +761,6 @@ $(gettext 'Try to install/remove the apps again.')"
                         --textbox   "$ERROR_LOG"    \
                         30 90
         else
-            UI_MODE='cli'
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"

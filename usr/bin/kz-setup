@@ -398,7 +398,6 @@ $(gettext '  0  No apps found.')"
             sed         --expression='s/"//g'               || true
             )
     else
-        UI_MODE='cli'
         text+="
 $apps"
         if [[ $setup = 'SETUP' ]]; then
@@ -630,7 +629,6 @@ function execute_command() {
                     --infobox   "$app_name_line\n\n         $cmd"   \
                     10 90
     else
-        UI_MODE='cli'
         # Ellipsize terminal output.
         # Width 9 characters less, 9 for leading spaces.
         cmd_dis_max=$(( $(tput cols) - 9 ))
@@ -694,7 +692,6 @@ $(gettext 'Try to set up/reset the apps again.')"
                         --textbox   "$ERROR_LOG"    \
                         30 90
         else
-            UI_MODE='cli'
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
