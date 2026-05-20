@@ -163,7 +163,8 @@ def init(PROGRAM_NAME: str) -> None:
         print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
 
-    text = f'==== START logs for script {PROGRAM_NAME}'
+    text = f'\
+==== START logs for script {PROGRAM_NAME} ===================================='
     logmsg(PROGRAM_NAME, text)
     text = f"Started ({' '.join(sys.argv)} as {os.getlogin()})."
     logmsg(PROGRAM_NAME, text)
@@ -313,7 +314,8 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
 
     text = f'Ended (code=exited, status={status}).'
     logmsg(PROGRAM_NAME, text)
-    text = f'==== END logs for script {PROGRAM_NAME}'
+    text = f'\
+==== END logs for script {PROGRAM_NAME} ======================================'
     logmsg(PROGRAM_NAME, text)
 
     if rc == 0:
