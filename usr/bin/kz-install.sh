@@ -37,8 +37,8 @@ REBOOT=true
 # Enable Advanced Error Reporting.
 # -----------------------------------------------------------------------------
 # Enable kernel config parameter PCIEAER (Peripheral Component Interconnect
-# Express Advanced Error Reporting) to "allow" the log gets flooded with
-# 'AER: Corrected errors received'. This is usually needed for HP hardware.
+# Express Advanced Error Reporting) to allow 'AER: Corrected errors received'
+# messages to appear in the log. This is usually the case for HP hardware.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
 #
