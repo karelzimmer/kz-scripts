@@ -542,7 +542,7 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
 
-# INSTALL greeter *
+# INSTALL greeter-settings *
 # -----------------------------------------------------------------------------
 # Enable LightDM display manager user greeter.
 # -----------------------------------------------------------------------------
@@ -550,7 +550,7 @@ if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/
 #
 REBOOT=true
 
-# REMOVE greeter *
+# REMOVE greeter-settings *
 # -----------------------------------------------------------------------------
 # Disable LightDM display manager user greeter.
 # -----------------------------------------------------------------------------
