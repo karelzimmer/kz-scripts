@@ -390,7 +390,7 @@ $(gettext '  0  No apps found.')"
             zenity      --list                              \
                         --checklist                         \
                         --separator ' '                     \
-                        --height    400                     \
+                        --height    500                     \
                         --title     "$title"                \
                         --text      "$text"                 \
                         --ok-label  "$(gettext 'Continue')" \

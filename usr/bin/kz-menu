@@ -219,7 +219,7 @@ function process_menu1_gui() {
             zenity  --list                                              \
                     --radiolist                                         \
                     --width         520                                 \
-                    --height        400                                 \
+                    --height        420                                 \
                     --title         "$title"                            \
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \
@@ -418,7 +418,7 @@ function process_menu2_gui() {
             zenity  --list                                              \
                     --radiolist                                         \
                     --width         520                                 \
-                    --height        400                                 \
+                    --height        420                                 \
                     --title         "$title"                            \
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \

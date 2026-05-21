@@ -239,7 +239,7 @@ Connect a usb medium.")
                     zenity      --list                              \
                                 --radiolist                         \
                                 --separator ' '                     \
-                                --height    400                     \
+                                --height    500                     \
                                 --title     "$title"                \
                                 --text      "$text"                 \
                                 --ok-label  "$(gettext 'Continue')" \
