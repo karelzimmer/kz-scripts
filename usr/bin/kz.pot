@@ -98,7 +98,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:171 kz-backup:171 kz-build:160 kz-check:126 kz-deploy:136 kz-desktop:199
+#: kz:171 kz-backup:171 kz-build:160 kz-check:126 kz-deploy:136 kz-desktop:200
 #: kz-dev:134 kz-install:277 kz-menu:197 kz-restore:171 kz-setup:262
 #: kz-update:168 kz-wifi:157
 msgid "internal error"
@@ -154,7 +154,7 @@ msgstr ""
 msgid "  -T, --tui      run in text-based mode (default)"
 msgstr ""
 
-#: kz-backup:121 kz-desktop:214 kz-install:224 kz-menu:158 kz-restore:117
+#: kz-backup:121 kz-desktop:215 kz-install:224 kz-menu:158 kz-restore:117
 #: kz-setup:209 kz-wifi:126
 msgid "no desktop environment available"
 msgstr ""
@@ -164,11 +164,11 @@ msgstr ""
 msgid "zenity is required; run kz-get first"
 msgstr ""
 
-#: kz-backup:145 kz-desktop:139 kz-desktop:150 kz-desktop:161 kz-restore:133
+#: kz-backup:145 kz-desktop:140 kz-desktop:151 kz-desktop:162 kz-restore:133
 msgid "too many options"
 msgstr ""
 
-#: kz-backup:179 kz-build:168 kz-check:134 kz-deploy:144 kz-desktop:207
+#: kz-backup:179 kz-build:168 kz-check:134 kz-deploy:144 kz-desktop:208
 #: kz-dev:141 kz-menu:205 kz-restore:179 kz-update:175 kz-wifi:164
 msgid "arguments are not allowed"
 msgstr ""
@@ -741,31 +741,31 @@ msgstr ""
 msgid "  -r, --reset    set favorites on default values"
 msgstr ""
 
-#: kz-desktop:87
+#: kz-desktop:88
 msgid "No GNOME session found."
 msgstr ""
 
-#: kz-desktop:268
+#: kz-desktop:269
 msgid "Favorite apps:"
 msgstr ""
 
-#: kz-desktop:291
+#: kz-desktop:292
 msgid "Now make the change in the desktop environment."
 msgstr ""
 
-#: kz-desktop:316
+#: kz-desktop:317
 #, sh-format
 msgid "Config database content captured ($fase)."
 msgstr ""
 
-#: kz-desktop:328
+#: kz-desktop:329
 msgid ""
 "Changes in the configuration database,\n"
 "< is the old setting (A),\n"
 "> is the new setting (B):"
 msgstr ""
 
-#: kz-desktop:333
+#: kz-desktop:334
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr ""
 
