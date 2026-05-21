@@ -152,6 +152,14 @@ function process_kz_deb_package() {
     printf '%s\n' "Installing $kz_deb_site_file..." |& $PROGRAM_LOGS
     check_debian_package_manager
     sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
+
+    # Install zenity if a graphical display is available and zenity is not
+    # already installed, e.g. on Pop!_OS.
+    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
+        printf '%s\n' "Installing zenity..." |& $PROGRAM_LOGS
+        check_debian_package_manager
+        sudo apt-get install --assume-yes zenity |& $PROGRAM_LOGS
+    fi
 }
 
 
@@ -190,6 +198,13 @@ function process_kz_rpm_package() {
     printf '%s' 'Install...'
     printf '%s\n' "Installing $kz_rpm_site_file..." |& $PROGRAM_LOGS
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
+
+    # Install zenity if a graphical display is available and zenity is not
+    # already installed, e.g. on Fedora.
+    if [[ -n ${DISPLAY-} ]] && ! type zenity &> /dev/null; then
+        printf '%s\n' "Installing zenity..." |& $PROGRAM_LOGS
+        sudo dnf install --assumeyes zenity |& $PROGRAM_LOGS
+    fi
 }
 
 
