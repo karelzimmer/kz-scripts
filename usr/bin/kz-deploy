@@ -232,7 +232,7 @@ function upload_website() {
 }
 
 
-# This function installs package kz.
+# This function installs the kz package as a production verification test.
 function install_package() {
     local parm=''
     local text=''
