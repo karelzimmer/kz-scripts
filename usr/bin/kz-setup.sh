@@ -63,7 +63,7 @@ kz-desktop --addaft=kz-cockpit
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-cockpit
 
-# SETUP dash-to-dock *
+# SETUP dash-to-dock-extension *
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
@@ -91,7 +91,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null
 #
 LOGOUT=true
 
-# RESET dash-to-dock *
+# RESET dash-to-dock-extension *
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
@@ -230,7 +230,7 @@ kz-desktop --addbef=google-chrome
 # -----------------------------------------------------------------------------
 kz-desktop --delete=google-chrome
 
-# SETUP gsconnect pc06 pc07
+# SETUP gsconnect-extension pc06 pc07
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
@@ -242,7 +242,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 #
 LOGOUT=true
 
-# RESET gsconnect pc06 pc07
+# RESET gsconnect-extension pc06 pc07
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
@@ -323,7 +323,7 @@ kz-desktop --addaft=microsoft-edge
 # -----------------------------------------------------------------------------
 kz-desktop --delete=microsoft-edge
 
-# SETUP no-annoyance *
+# SETUP no-annoyance-extension *
 # -----------------------------------------------------------------------------
 # Disable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
@@ -335,7 +335,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 #
 LOGOUT=true
 
-# RESET no-annoyance *
+# RESET no-annoyance-extension *
 # -----------------------------------------------------------------------------
 # Enable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------

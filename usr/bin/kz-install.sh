@@ -215,7 +215,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes cups; fi
 
-# INSTALL dash-to-dock *
+# INSTALL dash-to-dock-extension *
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
@@ -227,7 +227,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session &
 #
 REBOOT=true
 
-# REMOVE dash-to-dock *
+# REMOVE dash-to-dock-extension *
 # -----------------------------------------------------------------------------
 # Move the dash out of the overview transforming it in a dock.
 # -----------------------------------------------------------------------------
@@ -606,7 +606,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfi
 #
 REBOOT=true
 
-# INSTALL gsconnect pc06 pc07
+# INSTALL gsconnect-extension pc06 pc07
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
@@ -622,7 +622,7 @@ if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent -
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
 
-# REMOVE gsconnect pc06 pc07
+# REMOVE gsconnect-extension pc06 pc07
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
@@ -850,7 +850,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
 
-# INSTALL no-annoyance *
+# INSTALL no-annoyance-extension *
 # -----------------------------------------------------------------------------
 # Disable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
@@ -860,7 +860,7 @@ if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-
 #
 REBOOT=true
 
-# REMOVE no-annoyance *
+# REMOVE no-annoyance-extension *
 # -----------------------------------------------------------------------------
 # Enable the 'Window is ready' notification.
 # -----------------------------------------------------------------------------
