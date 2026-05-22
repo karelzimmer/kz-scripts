@@ -70,15 +70,13 @@ function err_report() {
 $(gettext "Use 'journalctl -xe' to check what went wrong.")
 $(gettext "The last few lines of the log are displayed here.")"
     printf "$RED%s$NORMAL\n" "$text" >&2
-    # printf '\n' >&2
     journalctl  --all       \
                 --catalog   \
-                --lines  \
+                --lines     \
                 --no-pager  \
                 --pager-end \
                 --identifier="$PROGRAM_NAME"
-    text="$(eval_gettext \
-"Program \$PROGRAM_NAME encountered an error.")"
+    text="$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
     printf "$RED%s$NORMAL\n" "$text" >&2
 }
 
@@ -201,7 +199,6 @@ function term() {
 ===============================================================================
 
 "
-
     if $OPTION_DEV; then
         text+="    $RED$(gettext \
 "Please note: the development version of the kz package is installed")\

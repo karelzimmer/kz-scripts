@@ -497,7 +497,7 @@ msgstr "Bouw RPM-pakket..."
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:510 kz-get:207
+#: kz-build:510 kz-get:204
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -593,7 +593,7 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz_common.py:57 kz_common.sh:42 kz-get:109
+#: kz_common.py:57 kz_common.sh:42 kz-get:107
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
@@ -684,7 +684,7 @@ msgstr "Typ '$program_name --help' voor meer informatie."
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:365 kz-get:81
+#: kz_common.sh:365 kz-get:79
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
@@ -706,7 +706,7 @@ msgstr "Gebruik 'journalctl -xe' om te controleren wat er misging."
 msgid "The last few lines of the log are displayed here."
 msgstr "De laatste paar regels van de log worden hier weergegeven."
 
-#: kz_common.sh:379 kz-get:220
+#: kz_common.sh:379 kz-get:217
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
@@ -884,15 +884,15 @@ msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
 "commando uit:"
 
-#: kz-get:211
+#: kz-get:208
 msgid "Package kz has been successfully installed."
 msgstr "Pakket kz is succesvol geïnstalleerd."
 
-#: kz-get:214
+#: kz-get:211
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 
-#: kz-get:216
+#: kz-get:213
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
