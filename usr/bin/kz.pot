@@ -311,7 +311,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:732 kz-install:741 kz-restore:437 kz-setup:674
+#: kz-backup:732 kz-install:741 kz-restore:437 kz-setup:671
 msgid "error messages"
 msgstr ""
 
@@ -336,11 +336,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:740 kz-install:746 kz-restore:445 kz-setup:678
+#: kz-backup:740 kz-install:746 kz-restore:445 kz-setup:675
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:741 kz-install:747 kz-restore:446 kz-setup:679
+#: kz-backup:741 kz-install:747 kz-restore:446 kz-setup:676
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -1309,35 +1309,35 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:675
+#: kz-setup:672
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:680
+#: kz-setup:677
 msgid "Try to set up/reset the apps again."
 msgstr ""
 
-#: kz-setup:702
+#: kz-setup:699
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:704
+#: kz-setup:701
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:712
+#: kz-setup:709
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:717
+#: kz-setup:714
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:738
+#: kz-setup:735
 msgid "Log out of the computer yourself."
 msgstr ""
 
