@@ -445,7 +445,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:510 kz-get:222
+#: kz-build:510 kz-get:207
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -644,7 +644,7 @@ msgstr ""
 msgid "The last few lines of the log are displayed here."
 msgstr ""
 
-#: kz_common.sh:379 kz-get:235
+#: kz_common.sh:379 kz-get:220
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -805,15 +805,15 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:226
+#: kz-get:211
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:229
+#: kz-get:214
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:231
+#: kz-get:216
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 

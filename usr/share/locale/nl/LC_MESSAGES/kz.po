@@ -497,7 +497,7 @@ msgstr "Bouw RPM-pakket..."
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:510 kz-get:222
+#: kz-build:510 kz-get:207
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
@@ -706,7 +706,7 @@ msgstr "Gebruik 'journalctl -xe' om te controleren wat er misging."
 msgid "The last few lines of the log are displayed here."
 msgstr "De laatste paar regels van de log worden hier weergegeven."
 
-#: kz_common.sh:379 kz-get:235
+#: kz_common.sh:379 kz-get:220
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
@@ -884,15 +884,15 @@ msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
 "commando uit:"
 
-#: kz-get:226
+#: kz-get:211
 msgid "Package kz has been successfully installed."
 msgstr "Pakket kz is succesvol geïnstalleerd."
 
-#: kz-get:229
+#: kz-get:214
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 
-#: kz-get:231
+#: kz-get:216
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
