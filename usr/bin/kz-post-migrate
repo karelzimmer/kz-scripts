@@ -68,5 +68,5 @@ subfolders...")
 printf '\n%s\n' "$text"
 find_files 'delete'
 
-text="$(gettext 'Complete!')"
+text=$(gettext 'Complete!')
 printf "$GREEN%s$NORMAL\n" "$text"
