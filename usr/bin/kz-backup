@@ -122,13 +122,6 @@ $(gettext "no desktop environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                if ! type zenity &> /dev/null; then
-                    UI_MODE='cli'
-                    text="$program_name: $1: \
-$(gettext "zenity is required; run kz-get first")"
-                    kz.infomsg "$text"
-                    exit 1
-                fi
                 UI_MODE='gui'
                 shift
                 ;;
@@ -222,6 +215,7 @@ Connect a usb medium.")
         fi
 
         medium=$(find "$usb_mount_point/"* -prune || true)
+        # More than one medium is connected.
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             # Let the user select the desired medium.
 
@@ -255,15 +249,15 @@ Connect a usb medium.")
                 done
                 # No array is needed, because only one can be selected.
                 selected_medium=$(
-                    whiptail    --ok-button "$(gettext 'Continue')" \
-                                --noitem                            \
-                                --backtitle "$PROGRAM_NAME"         \
-                                --title     "$title"                \
-                                --radiolist "$text"                 \
-                                20 40 12                            \
-                                "${choices[@]}"                     \
-                                2>&1 >/dev/tty                      |
-                    sed         --expression='s/"//g'               || true
+                    dialog  --no-items                          \
+                            --ok-label  "$(gettext 'Continue')" \
+                            --backtitle "$PROGRAM_NAME"         \
+                            --title     "$title"                \
+                            --radiolist "$text"                 \
+                            0 0 0                               \
+                            "${choices[@]}"                     \
+                            2>&1 >/dev/tty                      |
+                    sed     --expression='s/"//g'               || true
                     )
             else
                 text=$(gettext 'More than one USB medium is connected.')
@@ -613,87 +607,71 @@ EOF
     kz.logmsg "$title"...
 
     if [[ $UI_MODE = 'gui' ]]; then
-        rsync       --archive                       \
-                    --verbose                       \
-                    --delete                        \
-                    --exclude-from="$exclude_file"  \
-                    --delete-excluded               \
-                    "$HOME/"                        \
-                    "$TARGET/"                      \
-                    2>> "$ERROR_LOG"                |
-        sed         --expression='s/^/#/'           |
-        zenity      --progress                      \
-                    --auto-close                    \
-                    --no-cancel                     \
-                    --pulsate                       \
-                    --width     600                 \
-                    --height    50                  \
-                    --title     "$title"            \
-                    --text      "$text"             \
-                    2> /dev/null                    || BACKUP_RC=$?
+        rsync   --archive                       \
+                --verbose                       \
+                --delete                        \
+                --exclude-from="$exclude_file"  \
+                --delete-excluded               \
+                "$HOME/"                        \
+                "$TARGET/"                      \
+                2>> "$ERROR_LOG"                |
+        sed     --expression='s/^/#/'           |
+        zenity  --progress                      \
+                --auto-close                    \
+                --no-cancel                     \
+                --pulsate                       \
+                --width     600                 \
+                --height    50                  \
+                --title     "$title"            \
+                --text      "$text"             \
+                2> /dev/null                    || BACKUP_RC=$?
     elif [[ $UI_MODE = 'tui' ]]; then
-        tput        civis                           || true
-        rsync       --archive                       \
-                    --info=progress2                \
-                    --no-inc-recursive              \
-                    --delete                        \
-                    --exclude-from="$exclude_file"  \
-                    --delete-excluded               \
-                    "$HOME/"                        \
-                    "$TARGET/"                      \
-                    2>> "$ERROR_LOG"                |
-        stdbuf      --input=0                       \
-                    --output=0                      \
-                    --error=0                       \
-                    tr '\r' '\n'                    |
-        stdbuf      --input=0                       \
-                    --output=0                      \
-                    --error=0                       \
-                    awk "{ print \$2 }"             |
-        stdbuf      --input=0                       \
-                    --output=0                      \
-                    --error=0                       \
-                    tr --delete '%'                 |
-        whiptail    --backtitle "$PROGRAM_NAME"     \
-                    --title     "$PROGRAM_DESC"     \
-                    --gauge     "$title..."         \
-                    6 70 0                          || BACKUP_RC=$?
-        tput        cnorm                           || true
+        rsync   --archive                       \
+                --verbose                       \
+                --delete                        \
+                --exclude-from="$exclude_file"  \
+                --delete-excluded               \
+                "$HOME/"                        \
+                "$TARGET/"                      \
+                2>> "$ERROR_LOG"                |
+        dialog  --backtitle "$PROGRAM_NAME"     \
+                --title "$title"                \
+                --progressbox                   \
+                20 70                           || BACKUP_RC=$?
     else
         text+='...'
         kz.infomsg "$text"
-        rsync       --archive                       \
-                    --verbose                       \
-                    --human-readable                \
-                    --delete                        \
-                    --exclude-from="$exclude_file"  \
-                    --delete-excluded               \
-                    "$HOME/"                        \
-                    "$TARGET/"                      \
-                    2>> "$ERROR_LOG"                || BACKUP_RC=$?
+        rsync   --archive                       \
+                --verbose                       \
+                --human-readable                \
+                --delete                        \
+                --exclude-from="$exclude_file"  \
+                --delete-excluded               \
+                "$HOME/"                        \
+                "$TARGET/"                      \
+                2>> "$ERROR_LOG"                || BACKUP_RC=$?
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")
     kz.logmsg "$text"...
     if [[ $UI_MODE = 'gui' ]]; then
         sync                                        |
-        zenity      --progress                      \
-                    --pulsate                       \
-                    --auto-close                    \
-                    --no-cancel                     \
-                    --width     600                 \
-                    --height    50                  \
-                    --title     "$title"            \
-                    --text      "$text"             \
-                    1> >($PROGRAM_LOGS)             \
-                    2>> "$ERROR_LOG"
+        zenity  --progress                  \
+                --pulsate                   \
+                --auto-close                \
+                --no-cancel                 \
+                --width     600             \
+                --height    50              \
+                --title     "$title"        \
+                --text      "$text"         \
+                1> >($PROGRAM_LOGS)         \
+                2>> "$ERROR_LOG"
     elif [[ $UI_MODE = 'tui' ]]; then
         text+='...'
-        TERM=ansi                                   \
-        whiptail    --backtitle "$PROGRAM_NAME"     \
-                    --title     "$title"            \
-                    --infobox   "$text"             \
-                    10 78
+        dialog  --backtitle "$PROGRAM_NAME" \
+                --title     "$title"        \
+                --infobox   "$text"         \
+                0 0
         sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
     else
         text+='...'
@@ -712,11 +690,6 @@ function term() {
     local user=''
     local users=''
     local usb_mount_point=/media/$USER
-
-    # Due to the use of whiptail infobox.
-    if [[ $UI_MODE = 'tui' ]]; then
-        clear -x
-    fi
 
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         usb_mount_point=/run/media/$USER
@@ -743,17 +716,18 @@ $(gettext 'Try creating the back up again.')"
         kz.errmsg "$text"
 
         if [[ $UI_MODE = 'gui' ]]; then
-            zenity      --text-info                 \
-                        --filename="$ERROR_LOG"     \
-                        --width     700             \
-                        --height    500             \
-                        --title     "$title"        \
-                        2> /dev/null                || true
+            zenity  --text-info                 \
+                    --filename="$ERROR_LOG"     \
+                    --width     700             \
+                    --height    500             \
+                    --title     "$title"        \
+                    2> /dev/null                || true
         elif [[ $UI_MODE = 'tui' ]]; then
-            whiptail    --backtitle "$PROGRAM_NAME" \
-                        --title     "$title"        \
-                        --textbox   "$ERROR_LOG"    \
-                        30 90
+            dialog  --scrollbar                 \
+                    --backtitle "$PROGRAM_NAME" \
+                    --title     "$title"        \
+                    --textbox   "$ERROR_LOG"    \
+                    0 0
         else
             kz.wait_for_enter
             kz.infomsg "$title $ERROR_LOG:"

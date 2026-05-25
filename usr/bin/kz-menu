@@ -159,13 +159,6 @@ $(gettext "no desktop environment available")"
                     kz.infomsg "$text"
                     exit 1
                 fi
-                if ! type zenity &> /dev/null; then
-                    UI_MODE='cli'
-                    text="$program_name: $1: \
-$(gettext "zenity is required; run kz-get first")"
-                    kz.infomsg "$text"
-                    exit 1
-                fi
                 UI_MODE='gui'
                 shift
                 ;;
@@ -234,7 +227,7 @@ function process_menu1_gui() {
                     false 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
                     false 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
                     2> /dev/null                                        || true
-            )   || exit 0
+            ) || exit 0
         process_menu1_choice
     # done
 }
@@ -257,19 +250,19 @@ function process_menu1_tui() {
 
     while true; do
         REPLY=$(
-            whiptail    --ok-button     "$(gettext 'Continue')" \
-                        --cancel-button "$(gettext 'Exit')"     \
-                        --backtitle     "$PROGRAM_NAME"         \
-                        --title         "$title"                \
-                        --menu          "$text"                 \
-                        25 60 10                                \
-                        1 "${items[1]}"                         \
-                        2 "${items[2]}"                         \
-                        3 "${items[3]}"                         \
-                        4 "${items[4]}"                         \
-                        5 "${items[5]}"                         \
-                        2>&1 >/dev/tty
-            )   || exit 0
+            dialog  --ok-label      "$(gettext 'Continue')" \
+                    --cancel-label  "$(gettext 'Exit')"     \
+                    --backtitle     "$PROGRAM_NAME"         \
+                    --title         "$title"                \
+                    --menu          "$text"                 \
+                    0 0 0                                   \
+                    1 "${items[1]}"                         \
+                    2 "${items[2]}"                         \
+                    3 "${items[3]}"                         \
+                    4 "${items[4]}"                         \
+                    5 "${items[5]}"                         \
+                    2>&1 >/dev/tty
+            ) || exit 0
         process_menu1_choice
     done
 }
@@ -433,7 +426,7 @@ function process_menu2_gui() {
                     false 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
                     false 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
                     2> /dev/null                                        || true
-            )   || break
+            ) || break
         process_menu2_choice
     done
 }
@@ -456,19 +449,19 @@ function process_menu2_tui() {
 
     while true; do
         REPLY=$(
-            whiptail    --ok-button     "$(gettext 'Continue')" \
-                        --cancel-button "$(gettext 'Back')"     \
-                        --backtitle     "$PROGRAM_NAME"         \
-                        --title         "$title"                \
-                        --menu          "$text"                 \
-                        25 60 10                                \
-                        1 "${items[1]}"                         \
-                        2 "${items[2]}"                         \
-                        3 "${items[3]}"                         \
-                        4 "${items[4]}"                         \
-                        5 "${items[5]}"                         \
-                        2>&1 >/dev/tty
-            )   || break
+            dialog  --ok-label      "$(gettext 'Continue')" \
+                    --cancel-label  "$(gettext 'Back')"     \
+                    --backtitle     "$PROGRAM_NAME"         \
+                    --title         "$title"                \
+                    --menu          "$text"                 \
+                    0 0 0                                   \
+                    1 "${items[1]}"                         \
+                    2 "${items[2]}"                         \
+                    3 "${items[3]}"                         \
+                    4 "${items[4]}"                         \
+                    5 "${items[5]}"                         \
+                    2>&1 >/dev/tty
+            ) || break
         process_menu2_choice
     done
 }
@@ -602,10 +595,10 @@ $(gettext 'Proceed?')"
         text+="
 
 $(gettext 'Proceed?')"
-        if whiptail --backtitle "$PROGRAM_NAME"         \
+        if dialog   --backtitle "$PROGRAM_NAME"         \
                     --title     "$title"                \
                     --yesno     "$text"                 \
-                    25 60; then
+                    0 0; then
             execute_command=true
         else
             execute_command=false

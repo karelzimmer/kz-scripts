@@ -119,18 +119,19 @@ function kz.errmsg() {
     kz.logmsg "$*"
     if [[ $UI_MODE = 'gui' ]]; then
         # shellcheck disable=SC2154
-        zenity      --error                     \
-                    --width     600             \
-                    --height    100             \
-                    --title     "$PROGRAM_DESC" \
-                    --text      "$*"            \
-                    2> /dev/null                || true
+        zenity  --error                     \
+                --width     600             \
+                --height    100             \
+                --title     "$PROGRAM_DESC" \
+                --text      "$*"            \
+                2> /dev/null                || true
     elif [[ $UI_MODE = 'tui' ]]; then
         # shellcheck disable=SC2153,SC2154
-        whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title     "$PROGRAM_DESC" \
-                    --msgbox    "$*"            \
-                    18 80
+        dialog  --colors                    \
+                --backtitle "$PROGRAM_NAME" \
+                --title     "$PROGRAM_DESC" \
+                --msgbox    "\Zb\Z1$*\Zn"   \
+                0 0
     else
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
@@ -141,17 +142,17 @@ function kz.errmsg() {
 function kz.infomsg() {
     kz.logmsg "$*"
     if [[ $UI_MODE = 'gui' ]]; then
-        zenity      --info                      \
-                    --width     600             \
-                    --height    100             \
-                    --title     "$PROGRAM_DESC" \
-                    --text      "$*"            \
-                    2> /dev/null                || true
+        zenity  --info                      \
+                --width     600             \
+                --height    100             \
+                --title     "$PROGRAM_DESC" \
+                --text      "$*"            \
+                2> /dev/null                || true
     elif [[ $UI_MODE = 'tui' ]]; then
-        whiptail    --backtitle "$PROGRAM_NAME" \
-                    --title     "$PROGRAM_DESC" \
-                    --msgbox    "$*"            \
-                    18 80
+        dialog  --backtitle "$PROGRAM_NAME" \
+                --title     "$PROGRAM_DESC" \
+                --msgbox    "$*"            \
+                0 0
     else
         printf '%b\n' "$*"
     fi
@@ -391,7 +392,9 @@ $(gettext "Type 'exit' to close this window.")"
             exit "$rc"
             ;;
         exit )
-            tput cnorm || true
+            if [[ $UI_MODE = 'tui' ]]; then
+                clear -x
+            fi
             if [[ $rc -eq 0 ]]; then
                 text='Cleaning up temporary files...'
                 kz.logmsg "$text"

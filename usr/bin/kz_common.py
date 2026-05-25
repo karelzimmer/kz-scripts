@@ -103,11 +103,11 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         subprocess.run(zenity, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     elif UI_MODE == 'tui':
-        whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
-                                    --title     "{PROGRAM_DESC}"    \
-                                    --msgbox    "{TEXT}"            \
-                                    18 80'
-        subprocess.run(whiptail, executable='bash', shell=True,
+        dialog: str = f'dialog  --backtitle "{PROGRAM_NAME}"    \
+                                --title     "{PROGRAM_DESC}"    \
+                                --msgbox    "{TEXT}"            \
+                                0 0'
+        subprocess.run(dialog, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
         print(f'{RED}{TEXT}{NORMAL}', file=sys.stderr)
@@ -128,11 +128,11 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         subprocess.run(zenity, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     elif UI_MODE == 'tui':
-        whiptail: str = f'whiptail  --backtitle "{PROGRAM_NAME}"    \
-                                    --title     "{PROGRAM_DESC}"    \
-                                    --msgbox    "{TEXT}"            \
-                                    18 80'
-        subprocess.run(whiptail, executable='bash', shell=True,
+        dialog: str = f'dialog  --backtitle "{PROGRAM_NAME}"    \
+                                --title     "{PROGRAM_DESC}"    \
+                                --msgbox    "{TEXT}"            \
+                                0 0'
+        subprocess.run(dialog, executable='bash', shell=True,
                        stderr=subprocess.DEVNULL)
     else:
         print(TEXT)
@@ -302,7 +302,7 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
-def term(PROGRAM_NAME: str, rc: int) -> None:
+def term(PROGRAM_NAME: str, rc: int, UI_MODE: str = 'cli') -> None:
     """
     This function controls the termination.
     """
@@ -317,6 +317,9 @@ def term(PROGRAM_NAME: str, rc: int) -> None:
     text = f'\
 ==== END logs for script {PROGRAM_NAME} ======================================'
     logmsg(PROGRAM_NAME, text)
+
+    if UI_MODE == 'tui':
+        subprocess.run('clear -x', executable='bash', shell=True)
 
     if rc == 0:
         sys.exit(0)
