@@ -228,8 +228,8 @@ function kz.process_option_help() {
 
     text="$(eval_gettext "Type '\$program_name --manual' or 'man \
 \$program_name'\$yelp_man for more information.")"
-    # shellcheck disable=SC2154
     UI_MODE='cli'
+    # shellcheck disable=SC2154
     kz.infomsg "$HELP
 
 $text"
