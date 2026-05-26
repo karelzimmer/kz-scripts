@@ -182,8 +182,7 @@ function check_input() {
                 --name          "$program_name"     \
                 --              "$@"
         )   ||  {
-                    UI_MODE='cli'
-                    kz.infomsg "$USAGE"
+                    UI_MODE='cli' kz.infomsg "$USAGE"
                     exit 1
                 }
     eval set -- "$parsed"
@@ -219,10 +218,9 @@ function process_options() {
                 ;;
             -g | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
-                    UI_MODE='cli'
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"
-                    kz.infomsg "$text"
+                    UI_MODE='cli' kz.infomsg "$text"
                     exit 1
                 fi
                 UI_MODE='gui'
@@ -286,7 +284,6 @@ $(gettext "no desktop environment available")"
 
 # This function browses through the installation files.
 function process_option_browse() {
-    UI_MODE='cli'
     less --no-init --quit-if-one-screen < <(
         cat "${installation_files[@]}" || true
         )
@@ -298,7 +295,6 @@ function process_option_list() {
     local apps=''
     local text=''
 
-    UI_MODE='cli'
     text=$(gettext 'The following apps are available:')
     app_list
     if [[ -z $apps ]]; then
@@ -328,7 +324,7 @@ whole command file.")"
 $(gettext "Use \"kz install --browse\" to view the contents of the default \
 installation files.")"
     fi
-    kz.infomsg "$text"
+    UI_MODE='cli' kz.infomsg "$text"
 }
 
 
@@ -523,7 +519,6 @@ function process_installation_files_by_hostname() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    UI_MODE='cli'
     less --no-init --quit-if-one-screen "$command_file"
 }
 

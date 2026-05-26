@@ -60,8 +60,6 @@ OPTIONS_LONG: list[str] = ['cli', 'gui', 'help', 'manual', 'tui', 'usage',
 # Globals
 # #############################################################################
 
-UI_MODE: str = 'tui'
-
 
 # #############################################################################
 # Functions
@@ -71,12 +69,12 @@ def process(UI_MODE: str = 'tui') -> None:
     """
     This function performs the script actions.
     """
-    UI_MODE = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+    UI_MODE = check_input(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, USAGE, HELP)
 
     show_secrets(PROGRAM_NAME, PROGRAM_DESC, UI_MODE)
 
 
-def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str, USAGE: str,
                 HELP: str) -> str:
     """
     This function checks the script input.
@@ -95,14 +93,14 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
 
-    UI_MODE = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, opts,
-                              args)
+    UI_MODE = process_options(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, USAGE, HELP,
+                              opts, args)
 
     return UI_MODE
 
 
-def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
-                    HELP: str, opts: list[tuple[str, str]],
+def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
+                    USAGE: str, HELP: str, opts: list[tuple[str, str]],
                     args: list[str]) -> str:
     """
     This function handles the script options and arguments.
@@ -111,7 +109,6 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     opt: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
-    UI_MODE: str = 'tui'
 
     for opt, arg in opts:
         if opt in ('-C', '--cli'):
@@ -155,6 +152,8 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             )
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         kz.term(PROGRAM_NAME, 1)
+    # FIXME
+    print(UI_MODE)
 
     return UI_MODE
 
@@ -181,6 +180,8 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
         else:
             text = f'{str(nmcli_output.decode("utf-8"))}{text}'
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+    if UI_MODE == 'tui':
+        subprocess.run('clear -x', executable='bash', shell=True)
     else:
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
@@ -197,7 +198,7 @@ def term() -> None:
     """
     This function controls the termination of the script.
     """
-    kz.term(PROGRAM_NAME, 0, UI_MODE)
+    kz.term(PROGRAM_NAME, 0)
 
 
 # #############################################################################

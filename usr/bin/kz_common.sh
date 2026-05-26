@@ -219,7 +219,6 @@ function kz.process_option_help() {
     local yelp_man=''
     local yelp_man_url=''
 
-    UI_MODE='cli'
     if [[ -n ${DISPLAY-} ]]; then
         # shellcheck disable=SC2034
         yelp_man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1)"
@@ -230,7 +229,7 @@ function kz.process_option_help() {
     text="$(eval_gettext "Type '\$program_name --manual' or 'man \
 \$program_name'\$yelp_man for more information.")"
     # shellcheck disable=SC2154
-    kz.infomsg "$HELP
+    UI_MODE='cli' kz.infomsg "$HELP
 
 $text"
 }
@@ -251,12 +250,11 @@ function kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
-    UI_MODE='cli'
     # shellcheck disable=SC2154
     text="$USAGE
 
 $(eval_gettext "Type '\$program_name --help' for more information.")"
-    kz.infomsg "$text"
+    UI_MODE='cli' kz.infomsg "$text"
 }
 
 
@@ -265,7 +263,6 @@ function kz.process_option_version() {
     local build_id='n/a'  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
-    UI_MODE='cli'
     if [[ -f /usr/share/doc/kz/build.id ]]; then
         # shellcheck disable=SC2034
         build_id=$(cat /usr/share/doc/kz/build.id)
@@ -275,7 +272,7 @@ function kz.process_option_version() {
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.")"
-    kz.infomsg "$text"
+    UI_MODE='cli' kz.infomsg "$text"
 }
 
 

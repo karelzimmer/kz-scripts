@@ -92,8 +92,7 @@ function check_input() {
                 --name          "$program_name"     \
                 --              "$@"
         )   ||  {
-                    UI_MODE='cli'
-                    kz.infomsg "$USAGE"
+                    UI_MODE='cli' kz.infomsg "$USAGE"
                     exit 1
                 }
     eval set -- "$parsed"
@@ -112,10 +111,9 @@ function process_options() {
         case $1 in
             -g | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
-                    UI_MODE='cli'
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"
-                    kz.infomsg "$text"
+                    UI_MODE='cli' kz.infomsg "$text"
                     exit 1
                 fi
                 UI_MODE='gui'
@@ -125,7 +123,7 @@ $(gettext "no desktop environment available")"
                 if $option_source; then
                     text="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    kz.infomsg "$text"
+                    UI_MODE='cli' kz.infomsg "$text"
                     exit 1
                 fi
                 option_source=true
