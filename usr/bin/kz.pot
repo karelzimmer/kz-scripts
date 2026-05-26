@@ -306,7 +306,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:704 kz-install:733 kz-restore:415 kz-setup:667
+#: kz-backup:704 kz-install:735 kz-restore:415 kz-setup:667
 msgid "error messages"
 msgstr ""
 
@@ -331,11 +331,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:712 kz-install:738 kz-restore:423 kz-setup:671
+#: kz-backup:712 kz-install:740 kz-restore:423 kz-setup:671
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:713 kz-install:739 kz-restore:424 kz-setup:672
+#: kz-backup:713 kz-install:741 kz-restore:424 kz-setup:672
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -883,7 +883,7 @@ msgid ""
 "Use \"kz install --cat\" to view the contents of the whole command file."
 msgstr ""
 
-#: kz-install:320 kz-install:424
+#: kz-install:320 kz-install:425
 msgid ""
 "Use \"kz install --remove <app>...\" or \"kz install --remove --select\" to "
 "remove the apps."
@@ -911,7 +911,7 @@ msgstr ""
 msgid "  0  No apps found."
 msgstr ""
 
-#: kz-install:362 kz-install:555 kz-menu:77 kz-install.desktop:10
+#: kz-install:362 kz-install:557 kz-menu:77 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
@@ -932,56 +932,56 @@ msgstr ""
 msgid "APP"
 msgstr ""
 
-#: kz-install:430 kz-setup:414
+#: kz-install:432 kz-setup:414
 msgid "No apps selected."
 msgstr ""
 
-#: kz-install:490 kz-setup:474
+#: kz-install:492 kz-setup:474
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:544 kz-setup:528
+#: kz-install:546 kz-setup:528
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:556 kz-menu:53
+#: kz-install:558 kz-menu:53
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:586 nl.karelzimmer.kz-install.policy:22
+#: kz-install:588 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:656 kz-install:678
+#: kz-install:658 kz-install:680
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:595 kz-setup:569
+#: kz-install:597 kz-setup:569
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:596 kz-setup:570
+#: kz-install:598 kz-setup:570
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:734
+#: kz-install:736
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:740
+#: kz-install:742
 msgid "Try to install/remove the apps again."
 msgstr ""
 
-#: kz-install:763
+#: kz-install:765
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:765
+#: kz-install:767
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:771
+#: kz-install:773
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."

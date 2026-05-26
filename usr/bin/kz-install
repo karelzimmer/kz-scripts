@@ -417,11 +417,13 @@ $apps"
         if [[ $install = 'INSTALL' ]]; then
             text+="
 
-$(gettext 'Use "kz install <app>..." or "kz install --select" to install the apps.')"
+$(gettext 'Use "kz install <app>..." or "kz install --select" to install the \
+apps.')"
         else
             text+="
 
-$(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove --select\" to remove the apps.")"
+$(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove \
+--select\" to remove the apps.")"
         fi
         kz.infomsg "$text"
         exit 0
