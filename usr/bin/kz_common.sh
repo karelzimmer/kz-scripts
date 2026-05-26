@@ -409,6 +409,9 @@ $(gettext "Type 'exit' to close this window.")"
             exit "$rc"
             ;;
         * )
+            if [[ $UI_MODE = 'tui' ]]; then
+                reset
+            fi
             text="$(eval_gettext \
 "Program \$PROGRAM_NAME has been interrupted.")"
             kz.errmsg "$text"

@@ -575,7 +575,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.sh:423
+#: kz_common.sh:426
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -643,7 +643,7 @@ msgstr ""
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:413
+#: kz_common.sh:416
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
