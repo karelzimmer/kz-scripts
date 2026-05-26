@@ -152,8 +152,6 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
             )
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         kz.term(PROGRAM_NAME, 1)
-    # FIXME
-    print(UI_MODE)
 
     return UI_MODE
 

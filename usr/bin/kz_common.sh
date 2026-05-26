@@ -40,7 +40,7 @@ function kz.become_check() {
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
-        if [[ $UI_MODE = 'cli' ]]; then
+        if [[ ${UI_MODE-} = 'cli' ]]; then
             text=$GREEN$text$NORMAL
         fi
         kz.infomsg "$text"
