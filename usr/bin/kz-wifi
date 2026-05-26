@@ -118,7 +118,6 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
                               stdout=subprocess.DEVNULL,
                               stderr=subprocess.DEVNULL,
                               shell=True,).returncode != 0:
-                UI_MODE = 'cli'
                 text = (
                     f'{PROGRAM_NAME}: {opt}: '
                     f'{_('no desktop environment available')}'

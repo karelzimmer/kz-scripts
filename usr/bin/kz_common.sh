@@ -229,7 +229,8 @@ function kz.process_option_help() {
     text="$(eval_gettext "Type '\$program_name --manual' or 'man \
 \$program_name'\$yelp_man for more information.")"
     # shellcheck disable=SC2154
-    UI_MODE='cli' kz.infomsg "$HELP
+    UI_MODE='cli'
+    kz.infomsg "$HELP
 
 $text"
 }
@@ -254,7 +255,8 @@ function kz.process_option_usage() {
     text="$USAGE
 
 $(eval_gettext "Type '\$program_name --help' for more information.")"
-    UI_MODE='cli' kz.infomsg "$text"
+    UI_MODE='cli'
+    kz.infomsg "$text"
 }
 
 
@@ -272,7 +274,8 @@ function kz.process_option_version() {
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.")"
-    UI_MODE='cli' kz.infomsg "$text"
+    UI_MODE='cli'
+    kz.infomsg "$text"
 }
 
 
