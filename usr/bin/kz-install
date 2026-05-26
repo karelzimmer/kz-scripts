@@ -308,7 +308,8 @@ $apps"
         if [[ $install = 'INSTALL' ]]; then
             text+="
 
-$(gettext 'Use "kz install <app>..." to install the apps.')
+$(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
+the apps.")
 $(gettext "Use \"kz install --cat <app>...\" to view the contents of the apps \
 command file.")
 $(gettext "Use \"kz install --cat\" to view the contents of the whole command \
@@ -316,7 +317,8 @@ file.")"
         else
             text+="
 
-$(gettext 'Use "kz install --remove <app>..." to remove the apps.')
+$(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove \
+--select\" to remove the apps.")
 $(gettext "Use \"kz install --cat --remove <app>...\" to view the contents of \
 the apps command file.")
 $(gettext "Use \"kz install --cat --remove\" to view the contents of the \
@@ -415,11 +417,11 @@ $apps"
         if [[ $install = 'INSTALL' ]]; then
             text+="
 
-$(gettext 'Use "kz install <app>..." to install the apps.')"
+$(gettext 'Use "kz install <app>..." or "kz install --select" to install the apps.')"
         else
             text+="
 
-$(gettext "Use \"kz install --remove <app>...\" to remove the apps.")"
+$(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove --select\" to remove the apps.")"
         fi
         kz.infomsg "$text"
         exit 0

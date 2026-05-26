@@ -292,7 +292,8 @@ $apps"
         if [[ $setup = 'SETUP' ]]; then
             text+="
 
-$(gettext 'Use "kz setup <app>..." to set up the apps.')
+$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
+apps.")
 $(gettext "Use \"kz setup --cat <app>...\" to view the contents of the apps \
 command file.")
 $(gettext "Use  \"kz setup --cat\" to view the contents of the whole command \
@@ -300,7 +301,8 @@ file.")"
         else
             text+="
 
-$(gettext 'Use "kz setup --reset <app>..." to reset the apps.')
+$(gettext "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" \
+to reset the apps.")
 $(gettext "Use \"kz setup --cat --reset <app>...\" to view the contents of \
 the apps command file.")
 $(gettext "Use \"kz setup --cat --reset\" to view the contents of the whole \
@@ -397,11 +399,13 @@ $apps"
         if [[ $setup = 'SETUP' ]]; then
             text+="
 
-$(gettext 'Use "kz setup <app>..." to set up the apps.')"
+$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
+apps.")"
         else
             text+="
 
-$(gettext "Use \"kz setup --reset <app>...\" to reset the apps.")"
+$(gettext "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" \
+to reset the apps.")"
         fi
         kz.infomsg "$text"
         exit 0
