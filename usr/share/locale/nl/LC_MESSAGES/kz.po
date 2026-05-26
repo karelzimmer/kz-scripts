@@ -1520,12 +1520,12 @@ msgstr ""
 msgid "Usage: kz wifi [<options>]"
 msgstr "Gebruik: kz wifi [<opties>]"
 
-#: kz-wifi:168
+#: kz-wifi:166
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:178 kz-wifi:191
+#: kz-wifi:176 kz-wifi:189
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
