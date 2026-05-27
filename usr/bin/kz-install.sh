@@ -91,14 +91,14 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl stop apport.service; fi
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl disable apport.service; fi
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=.*$/enabled=0/' /etc/default/apport; fi
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
 
 # REMOVE apport-settings #none
 # -----------------------------------------------------------------------------
 # Enable automatic crash report generation if on Ubuntu.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=.*$/enabled=1/' /etc/default/apport; fi
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl enable --now apport.service; fi
 
 # INSTALL backintime #none
