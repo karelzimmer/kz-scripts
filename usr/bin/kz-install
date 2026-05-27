@@ -738,8 +738,12 @@ errors:")
 ${FAILED_APPS[*]}
 
 $(gettext 'Actions to take:')
-$(gettext 'Check the error messages after this.')
-$(gettext 'Try to install/remove the apps again.')"
+$(gettext 'Check the error messages after this.')"
+        if [[ $install = 'INSTALL' ]]; then
+            text+=$(gettext 'Try to install the apps again.')
+        else
+            text+=$(gettext 'Try to remove the apps again.')
+        fi
         kz.errmsg "$text"
 
         if [[ $UI_MODE = 'gui' ]]; then

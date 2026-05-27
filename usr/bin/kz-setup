@@ -669,8 +669,12 @@ function term() {
 ${FAILED_APPS[*]}
 
 $(gettext 'Actions to take:')
-$(gettext 'Check the error messages after this.')
-$(gettext 'Try to set up/reset the apps again.')"
+$(gettext 'Check the error messages after this.')"
+        if [[ $setup = 'SETUP' ]]; then
+            text+=$(gettext 'Try to set up the apps again.')
+        else
+            text+=$(gettext 'Try to reset the apps again.')
+        fi
         kz.errmsg "$text"
 
         if [[ $UI_MODE = 'gui' ]]; then
