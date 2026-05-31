@@ -236,7 +236,7 @@ kz-desktop --delete=google-chrome
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev &> /dev/null; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io &> /dev/null; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 #
@@ -246,7 +246,7 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev &> /dev/null; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io &> /dev/null; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 

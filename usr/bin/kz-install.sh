@@ -369,25 +369,39 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo ufw enable; fi
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='rhel' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes firewall-config; fi
 # -----------------------------------------------------------------------------
-# GSConnect.
+# Add firewall rules for GSConnect if installed.
 # -----------------------------------------------------------------------------
-if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
-if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
-if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw reload; fi
 #
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
-# SSH.
+# Add firewall rules for SSH if installed.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw allow ssh; fi
-if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw reload; fi
+if (type ssh && systemctl status ufw) &> /dev/null; then sudo ufw allow ssh; fi
+if (type ssh && systemctl status ufw) &> /dev/null; then sudo ufw reload; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --permanent --add-service=ssh; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --reload; fi
+if (type ssh && systemctl status firewalld) &> /dev/null; then sudo firewall-cmd --permanent --add-service=ssh; fi
+if (type ssh && systemctl status firewalld) &> /dev/null; then sudo firewall-cmd --reload; fi
 
 # REMOVE firewall *
+# -----------------------------------------------------------------------------
+# Remove firewall rules for GSConnect if installed.
+# -----------------------------------------------------------------------------
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
+#
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
+# -----------------------------------------------------------------------------
+# Remove firewall rules for SSH if installed.
+# -----------------------------------------------------------------------------
+if (type ssh && systemctl status ufw) &> /dev/null; then sudo ufw delete allow ssh; fi
+#
+if (type ssh && systemctl status firewalld) &> /dev/null; then sudo firewall-cmd --permanent --remove-service=ssh; fi
 # -----------------------------------------------------------------------------
 # (Gui for) Uncomplicated FireWall (Debian).
 # -----------------------------------------------------------------------------
@@ -397,24 +411,6 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 # GUI for firewall daemon (RHEL).
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes firewall-config; fi
-# -----------------------------------------------------------------------------
-# GSConnect.
-# -----------------------------------------------------------------------------
-if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
-if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
-if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
-#
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
-# -----------------------------------------------------------------------------
-# SSH.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw delete allow ssh; fi
-if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw reload; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --permanent --remove-service=ssh; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --reload; fi
 
 # INSTALL fwupd-settings #none
 # -----------------------------------------------------------------------------
@@ -612,11 +608,14 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
 #
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
+#
+# -----------------------------------------------------------------------------
+# Add firewall rules for GSConnect if firewall is active.
+# -----------------------------------------------------------------------------
 if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
 if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
 if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
-#
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 #
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
@@ -628,11 +627,14 @@ if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
 #
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
+#
+# -----------------------------------------------------------------------------
+# Remove firewall rules for GSConnect if firewall is active.
+# -----------------------------------------------------------------------------
 if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
 if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
 if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
-#
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 #
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
@@ -1089,9 +1091,14 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --a
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes openssh; fi
 #
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+# -----------------------------------------------------------------------------
+# Add firewall rules for SSH if firewall is active.
+# -----------------------------------------------------------------------------
+if systemctl status ufw &> /dev/null && type ssh &> /dev/null; then sudo ufw allow ssh; fi
+if systemctl status ufw &> /dev/null && type ssh &> /dev/null; then sudo ufw reload; fi
 #
-if systemctl status ufw &> /dev/null; then sudo ufw allow ssh; fi
-if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
+if systemctl status firewalld &> /dev/null && type ssh &> /dev/null; then sudo firewall-cmd --permanent --add-service=ssh; fi
+if systemctl status firewalld &> /dev/null && type ssh &> /dev/null; then sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
 # Check for remote root access.
 # -----------------------------------------------------------------------------
@@ -1119,12 +1126,14 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts; fi
+# -----------------------------------------------------------------------------
+# Remove firewall rules for SSH if firewall is active.
+# -----------------------------------------------------------------------------
+if systemctl status ufw &> /dev/null && type ssh &> /dev/null; then sudo ufw delete allow ssh; fi
+if systemctl status ufw &> /dev/null && type ssh &> /dev/null; then sudo ufw reload; fi
 #
-if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw delete allow ssh; fi
-if grep --quiet --regexp='debian' /etc/os-release && type ssh &> /dev/null; then sudo ufw reload; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --permanent --remove-service=ssh; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type ssh &> /dev/null; then sudo firewall-cmd --reload; fi
+if systemctl status firewalld &> /dev/null && type ssh &> /dev/null; then sudo firewall-cmd --permanent --remove-service=ssh; fi
+if systemctl status firewalld &> /dev/null && type ssh &> /dev/null; then sudo firewall-cmd --reload; fi
 
 # INSTALL sushi #none
 # -----------------------------------------------------------------------------

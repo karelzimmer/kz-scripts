@@ -99,7 +99,7 @@ msgstr "Programma {} is onderbroken."
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:171 kz-backup:163 kz-build:160 kz-check:126 kz-deploy:136 kz-desktop:200
+#: kz:171 kz-backup:163 kz-build:165 kz-check:126 kz-deploy:136 kz-desktop:200
 #: kz-dev:134 kz-install:269 kz-menu:188 kz-restore:163 kz-setup:253
 #: kz-update:168 kz-wifi:143
 msgid "internal error"
@@ -172,7 +172,7 @@ msgstr "geen desktopomgeving beschikbaar"
 msgid "too many options"
 msgstr "te veel opties"
 
-#: kz-backup:171 kz-build:168 kz-check:134 kz-deploy:144 kz-desktop:208
+#: kz-backup:171 kz-build:173 kz-check:134 kz-deploy:144 kz-desktop:208
 #: kz-dev:141 kz-menu:196 kz-restore:171 kz-update:175 kz-wifi:150
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
@@ -436,67 +436,71 @@ msgstr "  -d, --dev      bouw de ontwikkelingsversie van pakket kz"
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
-#: kz-build:183
+#: kz-build:100
+msgid "Building development versions (deb + RPM) of package kz..."
+msgstr "Bouw ontwikkelingsversies (deb + RPM) van pakket kz..."
+
+#: kz-build:188
 msgid "Build website..."
 msgstr "Bouw website..."
 
-#: kz-build:240
+#: kz-build:245
 msgid "Generate gettext files.."
 msgstr "Genereer gettext-bestanden.."
 
-#: kz-build:256
+#: kz-build:261
 msgid "skip, is a direcory."
 msgstr "overslaan, is een map."
 
-#: kz-build:260
+#: kz-build:265
 msgid "skip, is not a file."
 msgstr "overslaan, is geen bestand."
 
-#: kz-build:264
+#: kz-build:269
 msgid "skip, is a LICENSE file."
 msgstr "overslaan, is een LICENSE bestand."
 
-#: kz-build:268
+#: kz-build:273
 msgid "skip, is a README file."
 msgstr "overslaan, is een README bestand."
 
-#: kz-build:272
+#: kz-build:277
 msgid "skip, is GPG-encrypted."
 msgstr "overslaan, is met GPG versleuteld."
 
-#: kz-build:276
+#: kz-build:281
 msgid "skip, is a gettext POT file."
 msgstr "overslaan, is een gettext POT-bestand."
 
-#: kz-build:280
+#: kz-build:285
 msgid "skip, is a gettext PO file."
 msgstr "overslaan, is een gettext PO-bestand."
 
-#: kz-build:284
+#: kz-build:289
 msgid "skip, is a gettext MO file."
 msgstr "overslaan, is een gettext MO-bestand."
 
-#: kz-build:306
+#: kz-build:311
 msgid "can't determine the language"
 msgstr "kan de taal niet bepalen"
 
-#: kz-build:340
+#: kz-build:345
 msgid "Build Debian package..."
 msgstr "Bouw Debian-pakket..."
 
-#: kz-build:414
+#: kz-build:419
 msgid "Build RPM package..."
 msgstr "Bouw RPM-pakket..."
 
-#: kz-build:487
+#: kz-build:492
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:510 kz-get:204
+#: kz-build:515 kz-get:204
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:516 kz-check:583 kz-deploy:265
+#: kz-build:521 kz-check:583 kz-deploy:265
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -1095,11 +1099,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:1243 kz-install.sh:1245 kz-install.sh:1251
+#: kz-install.sh:1252 kz-install.sh:1254 kz-install.sh:1260
 msgid "guest"
 msgstr "gast"
 
-#: kz-install.sh:1243
+#: kz-install.sh:1252
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
@@ -1699,7 +1703,7 @@ msgid "Maintenance..."
 msgstr "Onderhoud..."
 
 #: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
-#: gitstatus:64 kz-build:520 kz-check:587 kz-deploy:269 kz-dev:282
+#: gitstatus:64 kz-build:525 kz-check:587 kz-deploy:269 kz-dev:282
 #: kz-post-migrate:71 kz-update:293
 msgid "Complete!"
 msgstr "Klaar!"

@@ -95,6 +95,11 @@ function process() {
     build_website
     generate_gettext_files
     kz.check_repos || OPTION_DEV=true
+    if $OPTION_DEV; then
+        text=$(gettext \
+'Building development versions (deb + RPM) of package kz...')
+        kz.errmsg "$text"
+    fi
     # Capture build id kz packages (ISO 8601 YYYY-MM-DDTHH:MM:SS).
     build_id=$(date '+%FT%T')
     build_deb_package
