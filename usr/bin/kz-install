@@ -417,8 +417,8 @@ $apps"
         if [[ $install = 'INSTALL' ]]; then
             text+="
 
-$(gettext 'Use "kz install <app>..." or "kz install --select" to install the \
-apps.')"
+$(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
+the apps.")"
         else
             text+="
 
