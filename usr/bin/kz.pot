@@ -981,15 +981,15 @@ msgstr ""
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:765
+#: kz-install:766
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:767
+#: kz-install:768
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:773
+#: kz-install:774
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1329,27 +1329,27 @@ msgstr ""
 msgid "Try to reset the apps again."
 msgstr ""
 
-#: kz-setup:696
+#: kz-setup:697
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:698
+#: kz-setup:699
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:706
+#: kz-setup:707
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:711
+#: kz-setup:712
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:732
+#: kz-setup:733
 msgid "Log out of the computer yourself."
 msgstr ""
 

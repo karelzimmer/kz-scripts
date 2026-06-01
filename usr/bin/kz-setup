@@ -691,6 +691,7 @@ $(gettext 'Check the error messages after this.')
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
+        exit 1
     fi
 
     text=$(gettext "Apps set up completed.")
