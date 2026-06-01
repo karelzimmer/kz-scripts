@@ -72,6 +72,8 @@ declare ERROR_LOG=''
 declare LOGOUT=false
 declare OPTION_RESET=false
 declare OPTION_SELECT=false
+declare RESET='RESET'
+declare SETUP='SETUP'
 declare UI_MODE='tui'
 
 
@@ -91,11 +93,9 @@ function process() {
     local option_cat=false
     local option_file=false
     local option_list=false
-    local reset='RESET'
     local settings_file_decrypted=''
     local settings_file_default=/usr/bin/$PROGRAM_NAME.sh
     local settings_file=''
-    local setup='SETUP'
     local text=''
 
     check_input "$@"
@@ -225,8 +225,8 @@ $(gettext "no desktop environment available")"
                 ;;
             -r | --reset )
                 OPTION_RESET=true
-                setup='RESET'
-                reset='SETUP'
+                SETUP='RESET'
+                RESET='SETUP'
                 shift
                 ;;
             -s | --select )
@@ -289,7 +289,7 @@ $(gettext '  0  No apps found.')"
     else
         text+="
 $apps"
-        if [[ $setup = 'SETUP' ]]; then
+        if [[ $SETUP = 'SETUP' ]]; then
             text+="
 
 $(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
@@ -320,7 +320,7 @@ settings files.")"
 # This function makes a list of available apps from the settings files.
 function app_list() {
     apps=$(
-        grep    --regexp="#[[:space:]]\+${setup}[[:space:]]\+"  \
+        grep    --regexp="#[[:space:]]\+${SETUP}[[:space:]]\+"  \
                 "${settings_files[@]}"                          |
         tr      --squeeze-repeats                               \
                 '[:space:]'                                     |
@@ -341,7 +341,7 @@ function process_option_select() {
     local text=''
     local title=''
 
-    if [[ $setup = 'SETUP' ]]; then
+    if [[ $SETUP = 'SETUP' ]]; then
         title=$(gettext 'Set up apps')
         text=$(gettext 'Select apps to set up:')
     else
@@ -396,7 +396,7 @@ $(gettext '  0  No apps found.')"
     else
         text+="
 $apps"
-        if [[ $setup = 'SETUP' ]]; then
+        if [[ $SETUP = 'SETUP' ]]; then
             text+="
 
 $(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
@@ -449,14 +449,14 @@ function process_settings_files_by_app_argument() {
 
     while read -r setup_record; do
         case $setup_record in
-            '#'[[:space:]]*${setup}[[:space:]]*${app_argument}[[:space:]]* )
+            '#'[[:space:]]*${SETUP}[[:space:]]*${app_argument}[[:space:]]* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$setup_record" >> "$command_file"
                 ;;
-            '#'[[:space:]]*${setup}[[:space:]]* | \
-            '#'[[:space:]]*${reset}[[:space:]]* )
+            '#'[[:space:]]*${SETUP}[[:space:]]* | \
+            '#'[[:space:]]*${RESET}[[:space:]]* )
                 # Skip mismatched app record.
                 app_match=false
                 ;;
@@ -484,14 +484,14 @@ function process_settings_files_by_hostname() {
 
     while read -r setup_record; do
         case $setup_record in
-            '#'[[:space:]]*${setup}[[:space:]]*'*' | \
-            '#'[[:space:]]*${setup}[[:space:]]*$HOSTNAME* )
+            '#'[[:space:]]*${SETUP}[[:space:]]*'*' | \
+            '#'[[:space:]]*${SETUP}[[:space:]]*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
                 printf '%s\n' "$setup_record" >> "$command_file"
                 ;;
-            '#'[[:space:]]*${setup}[[:space:]]* | \
-            '#'[[:space:]]*${reset}[[:space:]]* )
+            '#'[[:space:]]*${SETUP}[[:space:]]* | \
+            '#'[[:space:]]*${RESET}[[:space:]]* )
                 # Skip mismatched app record.
                 host_match=false
                 ;;
@@ -521,7 +521,7 @@ function setup_apps() {
 
     app_tot_num=$(
         grep    --count                                         \
-                --regexp="#[[:space:]]\+${setup}[[:space:]]\+"  \
+                --regexp="#[[:space:]]\+${SETUP}[[:space:]]\+"  \
                 "$command_file"                                 || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
@@ -577,7 +577,7 @@ function process_command_file() {
                 # Skip empty record.
                 continue
                 ;;
-            '#'[[:space:]]*${setup}[[:space:]]* )
+            '#'[[:space:]]*${SETUP}[[:space:]]* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
@@ -652,11 +652,6 @@ function term() {
     local text=''
     local title=''
 
-    # Due to the use of whiptail infobox.
-    if [[ $UI_MODE = 'tui' ]]; then
-        clear -x
-    fi
-
     # Error log also to the main log.
     text="\
 == $ERROR_LOG (stderr) ======================================================="
@@ -669,8 +664,9 @@ function term() {
 ${FAILED_APPS[*]}
 
 $(gettext 'Actions to take:')
-$(gettext 'Check the error messages after this.')"
-        if [[ $setup = 'SETUP' ]]; then
+$(gettext 'Check the error messages after this.')
+"
+        if [[ $SETUP = 'SETUP' ]]; then
             text+=$(gettext 'Try to set up the apps again.')
         else
             text+=$(gettext 'Try to reset the apps again.')

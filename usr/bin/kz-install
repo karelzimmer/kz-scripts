@@ -73,6 +73,8 @@ declare OPTION_REMOVE=false
 declare OPTION_SELECT=false
 declare REBOOT=false
 declare UI_MODE='tui'
+declare INSTALL='INSTALL'
+declare REMOVE='REMOVE'
 
 
 # #############################################################################
@@ -87,7 +89,6 @@ function process() {
     local argument_app=false
     local command_file=''
     local err_flag=false
-    local install='INSTALL'
     local installation_file_decrypted=''
     local installation_file_default=/usr/bin/$PROGRAM_NAME.sh
     local installation_file=''
@@ -95,7 +96,6 @@ function process() {
     local option_cat=false
     local option_file=false
     local option_list=false
-    local remove='REMOVE'
     local text=''
 
     check_input "$@"
@@ -141,7 +141,7 @@ found.")
     if  grep    --quiet             \
                 --regexp='debian'   \
                 /etc/os-release     &&
-        [[ $install = 'INSTALL' ]]; then
+        [[ $INSTALL = 'INSTALL' ]]; then
         printf '%s\n' "# INSTALL update *** automatically added ***
 # -----------------------------------------------------------------------------
 # Refresh Debian package lists before installing apps.
@@ -241,8 +241,8 @@ $(gettext "no desktop environment available")"
                 ;;
             -r | --remove )
                 OPTION_REMOVE=true
-                install='REMOVE'
-                remove='INSTALL'
+                INSTALL='REMOVE'
+                REMOVE='INSTALL'
                 shift
                 ;;
             -s | --select )
@@ -305,7 +305,7 @@ $(gettext '  0  No apps found.')"
     else
         text+="
 $apps"
-        if [[ $install = 'INSTALL' ]]; then
+        if [[ $INSTALL = 'INSTALL' ]]; then
             text+="
 
 $(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
@@ -336,7 +336,7 @@ installation files.")"
 # This function makes a list of available apps from the installation files.
 function app_list() {
     apps=$(
-        grep    --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
+        grep    --regexp="#[[:space:]]\+${INSTALL}[[:space:]]\+"    \
                 "${installation_files[@]}"                          |
         tr      --squeeze-repeats                                   \
                 '[:space:]'                                         |
@@ -358,7 +358,7 @@ function process_option_select() {
     local text=''
     local title=''
 
-    if [[ $install = 'INSTALL' ]]; then
+    if [[ $INSTALL = 'INSTALL' ]]; then
         title=$(gettext 'Install apps')
         text=$(gettext 'Select apps to install:')
     else
@@ -414,7 +414,7 @@ $(gettext '  0  No apps found.')"
         app_list
         text+="
 $apps"
-        if [[ $install = 'INSTALL' ]]; then
+        if [[ $INSTALL = 'INSTALL' ]]; then
             text+="
 
 $(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
@@ -467,14 +467,14 @@ function process_installation_files_by_app_argument() {
 
     while read -r install_record; do
         case $install_record in
-            '#'[[:space:]]*${install}[[:space:]]*${app_argument}[[:space:]]* )
+            '#'[[:space:]]*${INSTALL}[[:space:]]*${app_argument}[[:space:]]* )
                 # Add matching app record to command file.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$install_record" >> "$command_file"
                 ;;
-            '#'[[:space:]]*${install}[[:space:]]* | \
-            '#'[[:space:]]*${remove}[[:space:]]* )
+            '#'[[:space:]]*${INSTALL}[[:space:]]* | \
+            '#'[[:space:]]*${REMOVE}[[:space:]]* )
                 # Skip mismatched app record.
                 app_match=false
                 ;;
@@ -502,14 +502,14 @@ function process_installation_files_by_hostname() {
 
     while read -r install_record; do
         case $install_record in
-            '#'[[:space:]]*${install}[[:space:]]*'*' | \
-            '#'[[:space:]]*${install}[[:space:]]*$HOSTNAME* )
+            '#'[[:space:]]*${INSTALL}[[:space:]]*'*' | \
+            '#'[[:space:]]*${INSTALL}[[:space:]]*$HOSTNAME* )
                 # Add matching app record to command file.
                 host_match=true
                 printf '%s\n' "$install_record" >> "$command_file"
                 ;;
-            '#'[[:space:]]*${install}[[:space:]]* | \
-            '#'[[:space:]]*${remove}[[:space:]]* )
+            '#'[[:space:]]*${INSTALL}[[:space:]]* | \
+            '#'[[:space:]]*${REMOVE}[[:space:]]* )
                 # Skip mismatched app record.
                 host_match=false
                 ;;
@@ -539,7 +539,7 @@ function install_apps() {
 
     app_tot_num=$(
         grep    --count                                             \
-                --regexp="#[[:space:]]\+${install}[[:space:]]\+"    \
+                --regexp="#[[:space:]]\+${INSTALL}[[:space:]]\+"    \
                 "$command_file"                                     || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
@@ -605,7 +605,7 @@ system settings")
                 # Skip empty line.
                 continue
                 ;;
-            '#'[[:space:]]*${install}[[:space:]]* )
+            '#'[[:space:]]*${INSTALL}[[:space:]]* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
@@ -720,11 +720,6 @@ function term() {
     local text=''
     local title=''
 
-    # Due to the use of whiptail infobox.
-    if [[ $UI_MODE = 'tui' ]]; then
-        clear -x
-    fi
-
     # Error log also to the standard log.
     text="\
 == $ERROR_LOG (stderr) ======================================================="
@@ -738,8 +733,9 @@ errors:")
 ${FAILED_APPS[*]}
 
 $(gettext 'Actions to take:')
-$(gettext 'Check the error messages after this.')"
-        if [[ $install = 'INSTALL' ]]; then
+$(gettext 'Check the error messages after this.')
+"
+        if [[ $INSTALL = 'INSTALL' ]]; then
             text+=$(gettext 'Try to install the apps again.')
         else
             text+=$(gettext 'Try to remove the apps again.')
