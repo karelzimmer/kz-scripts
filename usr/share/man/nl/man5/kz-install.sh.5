@@ -199,24 +199,24 @@ De app kan alsnog worden geïnstalleerd met de opdracht 'kz install calibre'.
 .EX
 # INSTALL calibre pc01
 # -----------------------------------------------------------------------------
-# E-book manager.
+# Powerful and easy to use e-book manager.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install -\
 -assume-yes calibre; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo --validate \
-&& wget --output-document=- https://download.calibre-ebook.com/linux-installer\
-.sh | sudo sh; fi
+if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo --validate\
+ && wget --output-document=- https://download.calibre-ebook.com/linux-installe\
+r.sh | sudo sh; fi
 
 # REMOVE calibre pc01
 # -----------------------------------------------------------------------------
-# E-book manager.
+# Powerful and easy to use e-book manager.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --\
 assume-yes calibre; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo calibre-uni\
-nstall; fi
+if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo calibre-un\
+install; fi
 .EE
 
 .SH ZIE OOK
