@@ -117,7 +117,7 @@ function kz.check_repos() {
 # This function returns an error message.
 function kz.errmsg() {
     kz.logmsg "$*"
-    if [[ $UI_MODE = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
         zenity  --error                     \
                 --width     600             \
@@ -125,7 +125,7 @@ function kz.errmsg() {
                 --title     "$PROGRAM_DESC" \
                 --text      "$*"            \
                 2> /dev/null                || true
-    elif [[ $UI_MODE = 'tui' ]]; then
+    elif [[ ${UI_MODE-} = 'tui' ]]; then
         # shellcheck disable=SC2153,SC2154
         dialog  --colors                    \
                 --backtitle "$PROGRAM_NAME" \
@@ -141,14 +141,14 @@ function kz.errmsg() {
 # This function returns an informational message.
 function kz.infomsg() {
     kz.logmsg "$*"
-    if [[ $UI_MODE = 'gui' ]]; then
+    if [[ ${UI_MODE-} = 'gui' ]]; then
         zenity  --info                      \
                 --width     600             \
                 --height    100             \
                 --title     "$PROGRAM_DESC" \
                 --text      "$*"            \
                 2> /dev/null                || true
-    elif [[ $UI_MODE = 'tui' ]]; then
+    elif [[ ${UI_MODE-} = 'tui' ]]; then
         dialog  --backtitle "$PROGRAM_NAME" \
                 --title     "$PROGRAM_DESC" \
                 --msgbox    "$*"            \
@@ -392,7 +392,7 @@ $(gettext "Type 'exit' to close this window.")"
             exit "$rc"
             ;;
         exit )
-            if [[ $UI_MODE = 'tui' ]]; then
+            if [[ ${UI_MODE-} = 'tui' ]]; then
                 clear -x
             fi
             if [[ $rc -eq 0 ]]; then
@@ -409,7 +409,7 @@ $(gettext "Type 'exit' to close this window.")"
             exit "$rc"
             ;;
         * )
-            if [[ $UI_MODE = 'tui' ]]; then
+            if [[ ${UI_MODE-} = 'tui' ]]; then
                 reset
             fi
             text="$(eval_gettext \

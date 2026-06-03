@@ -12,7 +12,11 @@
 # Imports
 # #############################################################################
 
-source kz_common.sh as kz
+if [[ -f ~/kz-scripts/usr/bin/kz_common.sh ]]; then
+    source ~/kz-scripts/usr/bin/kz_common.sh as kz
+else
+    source kz_common.sh as kz
+fi
 
 
 # #############################################################################
@@ -48,7 +52,6 @@ readonly OPTIONS_LONG='help,manual,usage,version'
 # #############################################################################
 
 declare ERR_FLAG=false
-declare UI_MODE='cli'
 
 
 # #############################################################################
