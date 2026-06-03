@@ -306,7 +306,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:704 kz-install:769 kz-restore:415 kz-setup:700
+#: kz-backup:704 kz-install:771 kz-restore:415 kz-setup:702
 msgid "error messages"
 msgstr ""
 
@@ -331,11 +331,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:712 kz-install:774 kz-restore:423 kz-setup:704
+#: kz-backup:712 kz-install:776 kz-restore:423 kz-setup:706
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:713 kz-install:775 kz-restore:424 kz-setup:705
+#: kz-backup:713 kz-install:777 kz-restore:424 kz-setup:707
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -969,27 +969,27 @@ msgstr ""
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:770
+#: kz-install:772
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:778
+#: kz-install:780
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:780
+#: kz-install:782
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:805
+#: kz-install:807
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:807
+#: kz-install:809
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:813
+#: kz-install:815
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1317,39 +1317,39 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:701
+#: kz-setup:703
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:708
+#: kz-setup:710
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:710
+#: kz-setup:712
 msgid "Try to reset the apps again."
 msgstr ""
 
-#: kz-setup:735
+#: kz-setup:737
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:737
+#: kz-setup:739
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:745
+#: kz-setup:747
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:750
+#: kz-setup:752
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:771
+#: kz-setup:773
 msgid "Log out of the computer yourself."
 msgstr ""
 

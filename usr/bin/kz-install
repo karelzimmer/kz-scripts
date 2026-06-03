@@ -722,6 +722,8 @@ function execute_command() {
                 fi
             fi
         done
+        # This tput locks the cursor position top-left to prevent flickering.
+        tput cup 0 0
         dialog  --backtitle "$PROGRAM_NAME"                     \
                 --title     "$title"                            \
                 --infobox   "$app_name_line\n\n         $cmd"   \
