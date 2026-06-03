@@ -283,7 +283,6 @@ $(gettext "no desktop environment available")"
 }
 
 
-# TODO: GUIfy.
 # This function browses through the installation files.
 function process_option_browse() {
     local title=''

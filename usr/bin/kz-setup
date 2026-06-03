@@ -266,7 +266,6 @@ $(gettext "no desktop environment available")"
     fi
 }
 
-# TODO: GUIfy.
 # This function browses through the settings files.
 function process_option_browse() {
     local title=''
