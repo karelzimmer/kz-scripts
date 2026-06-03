@@ -13,43 +13,43 @@
 
 # SETUP bitwarden *
 # -----------------------------------------------------------------------------
-# Password manager.
+# A secure and free password manager for all of your devices.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=com.bitwarden.desktop
 
 # RESET bitwarden *
 # -----------------------------------------------------------------------------
-# Password manager.
+# A secure and free password manager for all of your devices.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.bitwarden.desktop
 
 # SETUP bottles pc06 pc07
 # -----------------------------------------------------------------------------
-# Run Windows software on Linux.
+# Run Windows software.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=com.usebottles.bottles
 
 # RESET bottles pc06 pc07
 # -----------------------------------------------------------------------------
-# Run Windows software on Linux.
+# Run Windows software.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.usebottles.bottles
 
 # SETUP cinnamon-settings *
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
 
 # RESET cinnamon-settings *
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
 
 # SETUP cockpit pc06
 # -----------------------------------------------------------------------------
-# Web console.
+# Web Console for Linux servers.
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
@@ -57,7 +57,7 @@ kz-desktop --addaft=kz-cockpit
 
 # RESET cockpit pc06
 # -----------------------------------------------------------------------------
-# Web console.
+# Web Console for Linux servers.
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
@@ -65,7 +65,7 @@ kz-desktop --delete=kz-cockpit
 
 # SETUP dash-to-dock-extension *
 # -----------------------------------------------------------------------------
-# Move the dash out of the overview transforming it in a dock.
+# A dock for the Gnome Shell.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
@@ -93,7 +93,7 @@ LOGOUT=true
 
 # RESET dash-to-dock-extension *
 # -----------------------------------------------------------------------------
-# Move the dash out of the overview transforming it in a dock.
+# A dock for the Gnome Shell.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
@@ -119,31 +119,31 @@ LOGOUT=true
 
 # SETUP evolution *
 # -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
+# Groupware suite with mail client and organizer.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Evolution
 
 # RESET evolution *
 # -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
+# Groupware suite with mail client and organizer.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=org.gnome.Evolution
 
 # SETUP evolution pc06 pc07
 # -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
+# Groupware suite with mail client and organizer.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=org.gnome.Evolution
 
 # RESET evolution pc06 pc07
 # -----------------------------------------------------------------------------
-# E-mail, calendar, contacts, and task management.
+# Groupware suite with mail client and organizer.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Evolution
 
 # SETUP git pc06 pc07
 # -----------------------------------------------------------------------------
-# Distributed revision control system.
+# Fast, scalable, distributed revision control system.
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
@@ -151,7 +151,7 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 # RESET git pc06 pc07
 # -----------------------------------------------------------------------------
-# Distributed revision control system.
+# Fast, scalable, distributed revision control system.
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
@@ -159,7 +159,7 @@ git config --global --unset alias.logg
 
 # SETUP gnome-settings *
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
@@ -190,7 +190,7 @@ LOGOUT=true
 
 # RESET gnome-settings *
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
@@ -220,13 +220,13 @@ LOGOUT=true
 
 # SETUP google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
-# Web browser.
+# The web browser from Google.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=google-chrome
 
 # RESET google-chrome pc01 pc06 pc07
 # -----------------------------------------------------------------------------
-# Web browser.
+# The web browser from Google.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=google-chrome
 
@@ -252,33 +252,33 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gscon
 
 # SETUP kvm pc06 pc07
 # -----------------------------------------------------------------------------
-# Kernel-based Virtual Machine.
+# KVM (for Kernel-based Virtual Machine) is a full virtualization solution.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=virt-manager
 
 # RESET kvm pc06 pc07
 # -----------------------------------------------------------------------------
-# Kernel-based Virtual Machine.
+# KVM (for Kernel-based Virtual Machine) is a full virtualization solution.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=virt-manager
 
 # SETUP libreoffice *
 # -----------------------------------------------------------------------------
-# Office suite.
+# Office productivity suite.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=libreoffice-writer
 kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
 # RESET libreoffice *
 # -----------------------------------------------------------------------------
-# Office suite.
+# Office productivity suite.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
 # SETUP lxde-settings *
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# LXDE desktop environment settings.
 # -----------------------------------------------------------------------------
 if type lxsession &> /dev/null; then pcmanfm; fi
 if type lxsession &> /dev/null; then until [[ -f ~/.config/libfm/libfm.conf ]]; do sleep 2; done; fi
@@ -288,7 +288,7 @@ LOGOUT=true
 
 # RESET lxde-settings *
 # -----------------------------------------------------------------------------
-# Desktop environment.
+# LXDE desktop environment settings.
 # -----------------------------------------------------------------------------
 if type lxsession > /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=.*$/single_click=0/g' ~/.config/libfm/libfm.conf; fi
 #
@@ -296,9 +296,7 @@ LOGOUT=true
 
 # SETUP lynis #none
 # -----------------------------------------------------------------------------
-# Security auditing.
-# -----------------------------------------------------------------------------
-if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; fi
+# Security auditing and hardening tool for Linux/Unix.
 # -----------------------------------------------------------------------------
 # Usage:
 # $ cd ~/lynis
@@ -307,19 +305,19 @@ if ! [[ -d ~/lynis ]]; then git clone https://github.com/CISOfy/lynis ~/lynis; f
 
 # RESET lynis #none
 # -----------------------------------------------------------------------------
-# Security auditing.
+# Security auditing and hardening tool for Linux/Unix.
 # -----------------------------------------------------------------------------
 rm --force --recursive ~/lynis
 
 # SETUP microsoft-edge pc06 pc07
 # -----------------------------------------------------------------------------
-# Web browser.
+# The web browser from Microsoft.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=microsoft-edge
 
 # RESET microsoft-edge pc06 pc07
 # -----------------------------------------------------------------------------
-# Web browser.
+# The web browser from Microsoft.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=microsoft-edge
 
@@ -347,19 +345,19 @@ LOGOUT=true
 
 # SETUP private-home *
 # -----------------------------------------------------------------------------
-# Private home.
+# Private home directory permissions.
 # -----------------------------------------------------------------------------
 chmod 750 ~
 
 # RESET private-home *
 # -----------------------------------------------------------------------------
-# Private home.
+# Private home directory permissions.
 # -----------------------------------------------------------------------------
 chmod 755 ~
 
 # SETUP spotify *
 # -----------------------------------------------------------------------------
-# Music and podcasts.
+# Spotify streaming music client.
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
@@ -369,7 +367,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --addaf
 
 # RESET spotify *
 # -----------------------------------------------------------------------------
-# Music and podcasts.
+# Spotify streaming music client.
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
@@ -379,7 +377,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delet
 
 # SETUP terminal *
 # -----------------------------------------------------------------------------
-# Terminal emulator.
+# Terminal emulator application.
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
@@ -397,7 +395,7 @@ LOGOUT=true
 
 # RESET terminal *
 # -----------------------------------------------------------------------------
-# Terminal emulator.
+# Terminal emulator application.
 # -----------------------------------------------------------------------------
 # Disable aliases.
 # -----------------------------------------------------------------------------
@@ -413,43 +411,43 @@ LOGOUT=true
 
 # SETUP terminal pc06 pc07
 # -----------------------------------------------------------------------------
-# Terminal emulator.
+# Terminal emulator application.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=org.gnome.Terminal
 
 # RESET terminal pc06 pc07
 # -----------------------------------------------------------------------------
-# Terminal emulator.
+# Terminal emulator application.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Terminal
 
 # SETUP thumbnails-cache #none
 # -----------------------------------------------------------------------------
-# Restore thumbnails.
+# Restore thumbnails in nautilus.
 # -----------------------------------------------------------------------------
 rm --force --recursive ~/.cache/thumbnails/
 
 # RESET thumbnails-cache #none
 # -----------------------------------------------------------------------------
-# Restore thumbnails.
+# Restore thumbnails in nautilus.
 # -----------------------------------------------------------------------------
 rm --force --recursive ~/.cache/thumbnails/
 
 # SETUP thunderbird *
 # -----------------------------------------------------------------------------
-# Web browser.
+# Mail/news client with RSS, chat and integrated spam filter support.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=thunderbird
 
 # RESET thunderbird *
 # -----------------------------------------------------------------------------
-# Web browser.
+# Mail/news client with RSS, chat and integrated spam filter support.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=thunderbird
 
 # SETUP vscode pc06 pc07
 # -----------------------------------------------------------------------------
-# Editor.
+# Code editing. Redefined.
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
@@ -467,7 +465,7 @@ if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
 # RESET vscode pc06 pc07
 # -----------------------------------------------------------------------------
-# Editor.
+# Code editing. Redefined.
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
@@ -475,7 +473,7 @@ kz-desktop --delete=code
 
 # SETUP webmin pc07
 # -----------------------------------------------------------------------------
-# Web console.
+# Web Console for Linux servers.
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
@@ -483,7 +481,7 @@ kz-desktop --addaft=kz-webmin
 
 # RESET webmin pc07
 # -----------------------------------------------------------------------------
-# Web console.
+# Web Console for Linux servers.
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
@@ -491,12 +489,12 @@ kz-desktop --delete=kz-webmin
 
 # SETUP zoom pc01
 # -----------------------------------------------------------------------------
-# Videoconferencing.
+# Cloud-based communication and collaboration platform.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-zoom
 
 # RESET zoom pc01
 # -----------------------------------------------------------------------------
-# Videoconferencing.
+# Cloud-based communication and collaboration platform.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-zoom
