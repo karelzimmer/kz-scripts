@@ -654,7 +654,7 @@ EOF
     text=$(gettext "Writing data from memory (this may take a while)")
     kz.logmsg "$text"...
     if [[ $UI_MODE = 'gui' ]]; then
-        sync                                        |
+        sync                                |
         zenity  --progress                  \
                 --pulsate                   \
                 --auto-close                \

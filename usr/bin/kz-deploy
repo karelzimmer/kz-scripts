@@ -72,6 +72,7 @@ function process() {
         exit 1
     fi
     kz.become_check
+    sudo --validate
     check
     deploy
 }
@@ -195,7 +196,10 @@ function upload_website() {
     local ftp_host=server106.hosting2go.nl
     local ftp_login=$HOME/.$ftp_host'.login'
     local ftp_opts='--reverse --delete --verbose'
-    local ftp_set='set ssl:verify-certificate no'
+    local ftp_set='set net:timeout 10;'
+    ftp_set+='set net:max-retries 2;'
+    ftp_set+='set net:reconnect-interval-base 5;'
+    ftp_set+='set ssl:verify-certificate no;'
     local ftp_to=/httpdocs
     local ftp_user=kzimmer
     local ftp_x_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
@@ -216,7 +220,7 @@ function upload_website() {
 
     if ! lftp   --user      "$ftp_user"             \
                 --password  "$(cat "$ftp_login")"   \
-                -e          "$ftp_set; $ftp_x_cmd"  \
+                -e          "$ftp_set $ftp_x_cmd"   \
                 "$ftp_host"; then
         # Force entering the password next time.
         rm --force --verbose "$ftp_login"*

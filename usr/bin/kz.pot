@@ -98,7 +98,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:171 kz-backup:163 kz-build:164 kz-check:129 kz-deploy:134 kz-desktop:199
+#: kz:171 kz-backup:163 kz-build:164 kz-check:129 kz-deploy:135 kz-desktop:199
 #: kz-dev:134 kz-install:269 kz-menu:188 kz-restore:163 kz-setup:254
 #: kz-update:168 kz-wifi:143
 msgid "internal error"
@@ -163,7 +163,7 @@ msgstr ""
 msgid "too many options"
 msgstr ""
 
-#: kz-backup:171 kz-build:172 kz-check:137 kz-deploy:142 kz-desktop:207
+#: kz-backup:171 kz-build:172 kz-check:137 kz-deploy:143 kz-desktop:207
 #: kz-dev:141 kz-menu:196 kz-restore:171 kz-update:175 kz-wifi:150
 msgid "arguments are not allowed"
 msgstr ""
@@ -448,11 +448,11 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:520 kz-check:586 kz-deploy:263
+#: kz-build:520 kz-check:586 kz-deploy:267
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
-#: kz-check:27 kz-deploy:179
+#: kz-check:27 kz-deploy:180
 msgid "Check scripts and website"
 msgstr ""
 
@@ -670,31 +670,31 @@ msgstr ""
 msgid "  -d, --dev      deploy the development version of package kz"
 msgstr ""
 
-#: kz-deploy:154
+#: kz-deploy:155
 msgid "Check..."
 msgstr ""
 
-#: kz-deploy:168
+#: kz-deploy:169
 msgid "Deploy..."
 msgstr ""
 
-#: kz-deploy:205
+#: kz-deploy:209
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:209 kz-dev:253
+#: kz-deploy:213 kz-dev:256
 msgid "Password for"
 msgstr ""
 
-#: kz-deploy:223
+#: kz-deploy:227
 msgid "Website upload failed."
 msgstr ""
 
-#: kz-deploy:238
+#: kz-deploy:242
 msgid "Install..."
 msgstr ""
 
-#: kz-deploy:249
+#: kz-deploy:253
 msgid "Install Debian package failed."
 msgstr ""
 
@@ -792,15 +792,15 @@ msgstr ""
 msgid "Status repos..."
 msgstr ""
 
-#: kz-dev:249
+#: kz-dev:252
 msgid "Download website..."
 msgstr ""
 
-#: kz-dev:266
+#: kz-dev:269
 msgid "Website download failed."
 msgstr ""
 
-#: kz-dev:276
+#: kz-dev:279
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
@@ -1548,7 +1548,7 @@ msgid "Maintenance..."
 msgstr ""
 
 #: ckhtml:123 gitbranch:56 gitclone:73 gitfetch:56 gitinit:59 gitpull:56
-#: gitstatus:56 kz-build:524 kz-check:590 kz-deploy:267 kz-dev:282
+#: gitstatus:56 kz-build:524 kz-check:590 kz-deploy:271 kz-dev:285
 #: kz-post-migrate:71 kz-update:293
 msgid "Complete!"
 msgstr ""
