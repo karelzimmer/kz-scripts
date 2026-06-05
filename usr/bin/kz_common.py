@@ -33,7 +33,7 @@ GREEN: str = f'{BOLD}\033[32m'
 RED: str = f'{BOLD}\033[31m'
 NORMAL: str = '\033[0m'
 
-# Where is the code stored locally.
+# Where the the code is stored locally.
 ORIGIN: str = f'{os.getenv("HOME")}'
 
 

@@ -12,11 +12,7 @@
 # Imports
 # #############################################################################
 
-if [[ -f ~/kz-scripts/usr/bin/kz_common.sh ]]; then
-    source ~/kz-scripts/usr/bin/kz_common.sh as kz
-else
-    source kz_common.sh as kz
-fi
+source ~/kz-scripts/usr/bin/kz_common.sh as kz || exit 1
 
 
 # #############################################################################

@@ -26,7 +26,7 @@ readonly GREEN=$BOLD'\033[32m'
 readonly RED=$BOLD'\033[31m'
 readonly NORMAL='\033[0m'
 
-# Where is the code stored locally.
+# Where the the code is stored locally.
 readonly ORIGIN=$HOME
 
 

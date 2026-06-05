@@ -35,7 +35,7 @@ msgstr ""
 msgid "Usage: kz [<options>] <command> [<arguments>]"
 msgstr ""
 
-#: kz:43 kz-backup:37 kz-build:41 kz-check:39 kz-deploy:40 kz-desktop:38
+#: kz:43 kz-backup:37 kz-build:37 kz-check:35 kz-deploy:36 kz-desktop:38
 #: kz-dev:43 kz-install:38 kz-menu:35 kz-restore:37 kz-setup:38 kz-update:42
 #: kz-wifi:42
 msgid "Options:"
@@ -45,25 +45,25 @@ msgstr ""
 msgid "  -l, --list     show available commands"
 msgstr ""
 
-#: kz:44 kz-backup:43 kz-build:43 kz-check:40 kz-deploy:42 kz-desktop:48
+#: kz:44 kz-backup:43 kz-build:39 kz-check:36 kz-deploy:38 kz-desktop:48
 #: kz-dev:44 kz-install:48 kz-menu:38 kz-restore:43 kz-setup:48 kz-update:43
 #: kz-wifi:45
 msgid "  -h, --help     show this help text"
 msgstr ""
 
-#: kz:46 kz-backup:44 kz-build:44 kz-check:41 kz-deploy:43 kz-desktop:50
+#: kz:46 kz-backup:44 kz-build:40 kz-check:37 kz-deploy:39 kz-desktop:50
 #: kz-dev:45 kz-install:50 kz-menu:39 kz-restore:44 kz-setup:50 kz-update:44
 #: kz-wifi:46
 msgid "  -m, --manual   show manual page"
 msgstr ""
 
-#: kz:47 kz-backup:48 kz-build:45 kz-check:42 kz-deploy:44 kz-desktop:52
+#: kz:47 kz-backup:48 kz-build:41 kz-check:38 kz-deploy:40 kz-desktop:52
 #: kz-dev:46 kz-install:54 kz-menu:41 kz-restore:48 kz-setup:54 kz-update:45
 #: kz-wifi:48
 msgid "  -u, --usage    show a short usage summary"
 msgstr ""
 
-#: kz:48 kz-backup:49 kz-build:46 kz-check:43 kz-deploy:45 kz-desktop:53
+#: kz:48 kz-backup:49 kz-build:42 kz-check:39 kz-deploy:41 kz-desktop:53
 #: kz-dev:47 kz-install:55 kz-menu:42 kz-restore:49 kz-setup:55 kz-update:46
 #: kz-wifi:49
 msgid "  -v, --version  show program version"
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:171 kz-backup:163 kz-build:164 kz-check:129 kz-deploy:135 kz-desktop:199
+#: kz:171 kz-backup:163 kz-build:160 kz-check:125 kz-deploy:131 kz-desktop:199
 #: kz-dev:134 kz-install:269 kz-menu:188 kz-restore:163 kz-setup:254
 #: kz-update:168 kz-wifi:143
 msgid "internal error"
@@ -163,7 +163,7 @@ msgstr ""
 msgid "too many options"
 msgstr ""
 
-#: kz-backup:171 kz-build:172 kz-check:137 kz-deploy:143 kz-desktop:207
+#: kz-backup:171 kz-build:168 kz-check:133 kz-deploy:139 kz-desktop:207
 #: kz-dev:141 kz-menu:196 kz-restore:171 kz-update:175 kz-wifi:150
 msgid "arguments are not allowed"
 msgstr ""
@@ -362,176 +362,176 @@ msgstr ""
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
-#: kz-build:27
+#: kz-build:23
 msgid "Build website and kz packages"
 msgstr ""
 
-#: kz-build:31
+#: kz-build:27
 msgid ""
 "Usage: kz build [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]\n"
 "                [-v|--version]"
 msgstr ""
 
-#: kz-build:37
+#: kz-build:33
 msgid "Usage: kz build [<options>]"
 msgstr ""
 
-#: kz-build:42
+#: kz-build:38
 msgid "  -d, --dev      build the development version of package kz"
 msgstr ""
 
-#: kz-build:88 kz-check:68 kz-deploy:70 kz-dev:75
+#: kz-build:84 kz-check:64 kz-deploy:66 kz-dev:75
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
-#: kz-build:99
+#: kz-build:95
 msgid "Building development versions (deb + RPM) of package kz..."
 msgstr ""
 
-#: kz-build:187
+#: kz-build:183
 msgid "Build website..."
 msgstr ""
 
-#: kz-build:244
+#: kz-build:240
 msgid "Generate gettext files.."
 msgstr ""
 
-#: kz-build:260
+#: kz-build:256
 msgid "skip, is a direcory."
 msgstr ""
 
-#: kz-build:264
+#: kz-build:260
 msgid "skip, is not a file."
 msgstr ""
 
-#: kz-build:268
+#: kz-build:264
 msgid "skip, is a LICENSE file."
 msgstr ""
 
-#: kz-build:272
+#: kz-build:268
 msgid "skip, is a README file."
 msgstr ""
 
-#: kz-build:276
+#: kz-build:272
 msgid "skip, is GPG-encrypted."
 msgstr ""
 
-#: kz-build:280
+#: kz-build:276
 msgid "skip, is a gettext POT file."
 msgstr ""
 
-#: kz-build:284
+#: kz-build:280
 msgid "skip, is a gettext PO file."
 msgstr ""
 
-#: kz-build:288
+#: kz-build:284
 msgid "skip, is a gettext MO file."
 msgstr ""
 
-#: kz-build:310
+#: kz-build:306
 msgid "can't determine the language"
 msgstr ""
 
-#: kz-build:344
+#: kz-build:340
 msgid "Build Debian package..."
 msgstr ""
 
-#: kz-build:418
+#: kz-build:414
 msgid "Build RPM package..."
 msgstr ""
 
-#: kz-build:491
+#: kz-build:487
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:514 kz-get:204
+#: kz-build:510 kz-get:204
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:520 kz-check:586 kz-deploy:264
+#: kz-build:516 kz-check:582 kz-deploy:260
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
-#: kz-check:27 kz-deploy:180
+#: kz-check:23 kz-deploy:176
 msgid "Check scripts and website"
 msgstr ""
 
-#: kz-check:31
+#: kz-check:27
 msgid "Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 
-#: kz-check:35
+#: kz-check:31
 msgid "Usage: kz check [<options>]"
 msgstr ""
 
-#: kz-check:154
+#: kz-check:150
 msgid "Check website..."
 msgstr ""
 
-#: kz-check:197
+#: kz-check:193
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 
-#: kz-check:247
+#: kz-check:243
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr ""
 
-#: kz-check:259
+#: kz-check:255
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr ""
 
-#: kz-check:270
+#: kz-check:266
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr ""
 
-#: kz-check:285
+#: kz-check:281
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
-#: kz-check:377
+#: kz-check:373
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:397
+#: kz-check:393
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:410
+#: kz-check:406
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:421
+#: kz-check:417
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:432
+#: kz-check:428
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:452 kz-check:463
+#: kz-check:448 kz-check:459
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr ""
 
-#: kz-check:499
+#: kz-check:495
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:548
+#: kz-check:544
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:569
+#: kz-check:565
 msgid "End spaces found."
 msgstr ""
 
@@ -652,49 +652,49 @@ msgstr ""
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
 
-#: kz-deploy:27
+#: kz-deploy:23
 msgid "Distribute website and kz packages"
 msgstr ""
 
-#: kz-deploy:31
+#: kz-deploy:27
 msgid ""
 "Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]\n"
 "                 [-v|--version]"
 msgstr ""
 
-#: kz-deploy:36
+#: kz-deploy:32
 msgid "Usage: kz deploy [<options>]"
 msgstr ""
 
-#: kz-deploy:41
+#: kz-deploy:37
 msgid "  -d, --dev      deploy the development version of package kz"
 msgstr ""
 
-#: kz-deploy:155
+#: kz-deploy:151
 msgid "Check..."
 msgstr ""
 
-#: kz-deploy:169
+#: kz-deploy:165
 msgid "Deploy..."
 msgstr ""
 
-#: kz-deploy:206
+#: kz-deploy:202
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:210 kz-dev:253
+#: kz-deploy:206 kz-dev:253
 msgid "Password for"
 msgstr ""
 
-#: kz-deploy:224
+#: kz-deploy:220
 msgid "Website upload failed."
 msgstr ""
 
-#: kz-deploy:239
+#: kz-deploy:235
 msgid "Install..."
 msgstr ""
 
-#: kz-deploy:250
+#: kz-deploy:246
 msgid "Install Debian package failed."
 msgstr ""
 
@@ -1548,7 +1548,7 @@ msgid "Maintenance..."
 msgstr ""
 
 #: ckhtml:123 gitbranch:56 gitclone:73 gitfetch:56 gitinit:59 gitpull:56
-#: gitstatus:56 kz-build:524 kz-check:590 kz-deploy:268 kz-dev:282
+#: gitstatus:56 kz-build:520 kz-check:586 kz-deploy:264 kz-dev:282
 #: kz-post-migrate:71 kz-update:293
 msgid "Complete!"
 msgstr ""
