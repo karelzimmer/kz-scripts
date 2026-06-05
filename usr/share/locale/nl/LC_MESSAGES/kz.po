@@ -500,7 +500,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:520 kz-check:586 kz-deploy:267
+#: kz-build:520 kz-check:586 kz-deploy:264
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -742,23 +742,23 @@ msgstr "Controleren..."
 msgid "Deploy..."
 msgstr "Distribueren..."
 
-#: kz-deploy:209
+#: kz-deploy:206
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:213 kz-dev:256
+#: kz-deploy:210 kz-dev:253
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
-#: kz-deploy:227
+#: kz-deploy:224
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-#: kz-deploy:242
+#: kz-deploy:239
 msgid "Install..."
 msgstr "Installeren..."
 
-#: kz-deploy:253
+#: kz-deploy:250
 msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
@@ -869,15 +869,15 @@ msgstr "Pull repo's..."
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-#: kz-dev:252
+#: kz-dev:249
 msgid "Download website..."
 msgstr "Downloaden website..."
 
-#: kz-dev:269
+#: kz-dev:266
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-#: kz-dev:279
+#: kz-dev:276
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
@@ -1703,7 +1703,7 @@ msgid "Maintenance..."
 msgstr "Onderhoud..."
 
 #: ckhtml:123 gitbranch:56 gitclone:73 gitfetch:56 gitinit:59 gitpull:56
-#: gitstatus:56 kz-build:524 kz-check:590 kz-deploy:271 kz-dev:285
+#: gitstatus:56 kz-build:524 kz-check:590 kz-deploy:268 kz-dev:282
 #: kz-post-migrate:71 kz-update:293
 msgid "Complete!"
 msgstr "Klaar!"

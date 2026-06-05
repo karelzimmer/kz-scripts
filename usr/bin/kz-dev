@@ -240,10 +240,7 @@ def download_website() -> None:
     ftp_host: str = 'server106.hosting2go.nl'
     ftp_login: str = f'{os.getenv("HOME")}/.{ftp_host}.login'
     ftp_opts: str = '--delete --verbose'
-    ftp_set: str = 'set net:timeout 10;'
-    ftp_set += 'set net:max-retries 2;'
-    ftp_set += 'set net:reconnect-interval-base 5;'
-    ftp_set += 'set ssl:verify-certificate no;'
+    ftp_set: str = 'set ssl:verify-certificate no'
     ftp_to: str = f'{kz.ORIGIN}/kz-uploads/dist'
     ftp_user: str = 'kzimmer'
     ftp_x_cmd: str = f'mirror {ftp_opts} {ftp_from} {ftp_to}; exit'
@@ -258,9 +255,9 @@ def download_website() -> None:
             file.write(getpass.getpass(text))
         os.chmod(ftp_login, 0o600)
 
-    lftp: str = f"lftp  --user      {ftp_user}              \
-                        --password  $(cat {ftp_login})      \
-                        -e          '{ftp_set} {ftp_x_cmd}' \
+    lftp: str = f"lftp  --user      {ftp_user}                  \
+                        --password  $(cat {ftp_login})          \
+                        -e          '{ftp_set}; {ftp_x_cmd}'    \
                         {ftp_host}"
     try:
         subprocess.run(lftp, executable='bash', shell=True, check=True)
