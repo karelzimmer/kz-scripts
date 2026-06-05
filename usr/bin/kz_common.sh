@@ -20,11 +20,14 @@ source /usr/bin/gettext.sh
 # Constants
 # #############################################################################
 
-# List NORMAL last here so that debugging (-vx) doesn't bork the display.
+# List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
 readonly GREEN=$BOLD'\033[32m'
 readonly RED=$BOLD'\033[31m'
 readonly NORMAL='\033[0m'
+
+# Where is the code stored locally.
+readonly ORIGIN=$HOME
 
 
 # #############################################################################
@@ -77,7 +80,7 @@ function kz.check_repos() {
     kz.infomsg "$text"
 
     for repo in $repos; do
-        cd "$HOME/$repo"
+        cd "$ORIGIN/$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             text=$(eval_gettext "Repo \$repo not on branch main.")
             kz.errmsg "$text"
@@ -90,7 +93,7 @@ function kz.check_repos() {
     kz.infomsg "$text"
 
     for repo in $repos; do
-        cd "$HOME/$repo"
+        cd "$ORIGIN/$repo"
 
         # Prevent false positives.
         # shellcheck disable=SC2154

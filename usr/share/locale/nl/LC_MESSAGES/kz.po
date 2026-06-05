@@ -94,7 +94,7 @@ msgstr "opdracht is vereist"
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz_common.py:247 kz_common.py:256 kz_common.py:294 kz-dev:167 kz-dev:178
+#: kz_common.py:250 kz_common.py:259 kz_common.py:297 kz-dev:167 kz-dev:178
 #: kz-dev:191 kz-dev:209 kz-dev:227 kz-update:86 kz-update:281
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
@@ -592,79 +592,79 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz_common.py:57 kz_common.sh:42 kz-get:107
+#: kz_common.py:60 kz_common.sh:45 kz-get:107
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:150 kz_common.sh:169
+#: kz_common.py:153 kz_common.sh:172
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:156 kz_common.sh:176
+#: kz_common.py:159 kz_common.sh:179
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:162 kz_common.sh:183
+#: kz_common.py:165 kz_common.sh:186
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:217
+#: kz_common.py:220
 msgid ", or see the {} man page"
 msgstr ", of zie de {} man-pagina"
 
-#: kz_common.py:222
+#: kz_common.py:225
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:224 kz_common.py:271
+#: kz_common.py:227 kz_common.py:274
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:270
+#: kz_common.py:273
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:298
+#: kz_common.py:301
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:299 kz_common.sh:274
+#: kz_common.py:302 kz_common.sh:277
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:300 kz_common.sh:275
+#: kz_common.py:303 kz_common.sh:278
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz_common.sh:426
+#: kz_common.sh:429
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz_common.sh:76
+#: kz_common.sh:79
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
-#: kz_common.sh:82
+#: kz_common.sh:85
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-#: kz_common.sh:89
+#: kz_common.sh:92
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
-#: kz_common.sh:100
+#: kz_common.sh:103
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz_common.sh:225
+#: kz_common.sh:228
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ", of zie de $yelp_man_url man-pagina"
 
-#: kz_common.sh:229
+#: kz_common.sh:232
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
@@ -673,22 +673,22 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man voor meer "
 "informatie."
 
-#: kz_common.sh:257
+#: kz_common.sh:260
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:272
+#: kz_common.sh:275
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:366 kz-get:79
+#: kz_common.sh:369 kz-get:79
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:369
+#: kz_common.sh:372
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
@@ -697,19 +697,19 @@ msgstr ""
 "Fout $rc op regel $lineno in functie $function bij het uitvoeren van "
 "commando: $command"
 
-#: kz_common.sh:373 kz_common.sh:378 kz-get:70
+#: kz_common.sh:376 kz_common.sh:381 kz-get:70
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr "Gebruik 'journalctl -xe' om te controleren wat er misging."
 
-#: kz_common.sh:379 kz-get:71
+#: kz_common.sh:382 kz-get:71
 msgid "The last few lines of the log are displayed here."
 msgstr "De laatste paar regels van de log worden hier weergegeven."
 
-#: kz_common.sh:380 kz-get:217
+#: kz_common.sh:383 kz-get:217
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:416
+#: kz_common.sh:419
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -1525,7 +1525,7 @@ msgstr "Bijwerken..."
 msgid "Upgrade..."
 msgstr "Opwaarderen..."
 
-#: gitsquash:70 kz-update:101 kz-update:112
+#: gitsquash:61 kz-update:101 kz-update:112
 msgid "Cleanup..."
 msgstr "Opruimen..."
 
@@ -1674,36 +1674,36 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: gitsquash:52
+#: gitsquash:43
 msgid "Git squash merge in 10 steps."
 msgstr "Git squash merge in 10 stappen."
 
-#: gitsquash:54
+#: gitsquash:45
 msgid "Works best in two separate terminals by copying and pasting."
 msgstr "Werkt het beste in twee aparte terminals door te kopiëren en plakken."
 
-#: gitsquash:56 kz-menu:562
+#: gitsquash:47 kz-menu:562
 msgid "The following will be executed:"
 msgstr "Het volgende wordt uitgevoerd:"
 
-#: gitsquash:58
+#: gitsquash:49
 msgid "Prepare..."
 msgstr "Voorbereiden..."
 
-#: gitsquash:62
+#: gitsquash:53
 msgid "Merge..."
 msgstr "Samenvoegen..."
 
-#: gitsquash:66
+#: gitsquash:57
 msgid "Commit..."
 msgstr "Bevestigen..."
 
-#: gitsquash:74
+#: gitsquash:65
 msgid "Maintenance..."
 msgstr "Onderhoud..."
 
-#: ckhtml:128 gitbranch:64 gitclone:81 gitfetch:64 gitinit:54 gitpull:64
-#: gitstatus:64 kz-build:524 kz-check:590 kz-deploy:268 kz-dev:282
+#: ckhtml:123 gitbranch:56 gitclone:73 gitfetch:56 gitinit:59 gitpull:56
+#: gitstatus:56 kz-build:524 kz-check:590 kz-deploy:268 kz-dev:282
 #: kz-post-migrate:71 kz-update:293
 msgid "Complete!"
 msgstr "Klaar!"

@@ -50,19 +50,19 @@ readonly OPTIONS_SHORT='dhmuv'
 readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
 # The following directories are used to build the website and packages.
-readonly DOCS_REPO=$HOME/kz-docs
-readonly SCRIPTS_REPO=$HOME/kz-scripts
+readonly DOCS_REPO=$ORIGIN/kz-docs
+readonly SCRIPTS_REPO=$ORIGIN/kz-scripts
 
-readonly UPLOADS_REPO_SRCDIR=$HOME/kz-uploads/src
-readonly UPLOADS_REPO_DISTDIR=$HOME/kz-uploads/dist
+readonly UPLOADS_REPO_SRCDIR=$ORIGIN/kz-uploads/src
+readonly UPLOADS_REPO_DISTDIR=$ORIGIN/kz-uploads/dist
 
-readonly DEB_REPO_SRCDIR=$HOME/kz-deb/src
-readonly DEB_REPO_DISTDIR=$HOME/kz-deb/dist
+readonly DEB_REPO_SRCDIR=$ORIGIN/kz-deb/src
+readonly DEB_REPO_DISTDIR=$ORIGIN/kz-deb/dist
 readonly DEB_NAME=kz_4.2.1-1_all.deb
 readonly DEB_DEV_NAME=kz-dev_4.2.1-1_all.deb
 
-readonly RPM_REPO_SRCDIR=$HOME/kz-rpm/src
-readonly RPM_REPO_DISTDIR=$HOME/kz-rpm/dist
+readonly RPM_REPO_SRCDIR=$ORIGIN/kz-rpm/src
+readonly RPM_REPO_DISTDIR=$ORIGIN/kz-rpm/dist
 readonly RPM_NAME=kz-4.2.1-1.noarch.rpm
 readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 
@@ -227,7 +227,7 @@ function build_website() {
 function generate_gettext_files() {
     local bash_script='#!''/usr/bin/env bash'
     local gettext_language=''
-    local its_dir=$HOME/kz-scripts/usr/share/gettext/its
+    local its_dir=$ORIGIN/kz-scripts/usr/share/gettext/its
     local lc_messages_dir=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES
     local pot_dir=$SCRIPTS_REPO/usr/bin/
     local python_script='#!''/usr/bin/env python3'
@@ -235,10 +235,10 @@ function generate_gettext_files() {
     local text=''
     local gettext_dir=''
     local gettext_dirs="\
-$HOME/bin \
-$HOME/kz-scripts/usr/bin \
-$HOME/kz-scripts/usr/share/applications \
-$HOME/kz-scripts/usr/share/polkit-1/actions"
+$ORIGIN/bin \
+$ORIGIN/kz-scripts/usr/bin \
+$ORIGIN/kz-scripts/usr/share/applications \
+$ORIGIN/kz-scripts/usr/share/polkit-1/actions"
     local gettext_file=''
 
     text=$(gettext 'Generate gettext files..')
@@ -461,7 +461,7 @@ function build_rpm_package() {
 
     # Create RPM package in kz-rpm/dist/.
     # NOTE: rpmbuild requires the _topdir to be in double quotes.
-    cd "$HOME"
+    cd "$ORIGIN"
     rpmbuild    -ba                                         \
                 --build-in-place                            \
                 --define                                    \
