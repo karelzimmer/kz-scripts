@@ -194,7 +194,7 @@ function check_scripts_and_website() {
 function upload_website() {
     local ftp_from=$ORIGIN/kz-uploads/dist
     local ftp_host=server106.hosting2go.nl
-    local ftp_login=$ORIGIN/.$ftp_host'.login'
+    local ftp_login=$HOME/.$ftp_host'.login'
     local ftp_opts='--reverse --delete --verbose'
     local ftp_set='set ssl:verify-certificate no'
     local ftp_to=/httpdocs

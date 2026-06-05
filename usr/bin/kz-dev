@@ -238,7 +238,7 @@ def download_website() -> None:
     file = None
     ftp_from: str = '/httpdocs'
     ftp_host: str = 'server106.hosting2go.nl'
-    ftp_login: str = f'{kz.ORIGIN}/.{ftp_host}.login'
+    ftp_login: str = f'{os.getenv("HOME")}/.{ftp_host}.login'
     ftp_opts: str = '--delete --verbose'
     ftp_set: str = 'set ssl:verify-certificate no'
     ftp_to: str = f'{kz.ORIGIN}/kz-uploads/dist'
