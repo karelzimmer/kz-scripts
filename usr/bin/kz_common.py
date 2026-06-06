@@ -105,7 +105,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
                                     --text      "{TEXT}"            || true'
         try:
             subprocess.run(zenity, executable='bash', shell=True,
-                       stderr=subprocess.DEVNULL)
+                           stderr=subprocess.DEVNULL)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -117,7 +117,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
                                 0 0'
         try:
             subprocess.run(dialog, executable='bash', shell=True,
-                       stderr=subprocess.DEVNULL)
+                           stderr=subprocess.DEVNULL)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -140,7 +140,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
                                     --text      "{TEXT}"            || true'
         try:
             subprocess.run(zenity, executable='bash', shell=True,
-                       stderr=subprocess.DEVNULL)
+                           stderr=subprocess.DEVNULL)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -152,7 +152,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
                                 0 0'
         try:
             subprocess.run(dialog, executable='bash', shell=True,
-                       stderr=subprocess.DEVNULL)
+                           stderr=subprocess.DEVNULL)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
