@@ -110,6 +110,12 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             term(PROGRAM_NAME, 130)
+        except Exception as exc:
+            text = str(exc)
+            logmsg(PROGRAM_NAME, text)
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            term(PROGRAM_NAME, 1)
     elif UI_MODE == 'tui':
         dialog: str = f'dialog  --backtitle "{PROGRAM_NAME}"    \
                                 --title     "{PROGRAM_DESC}"    \
@@ -122,6 +128,12 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             term(PROGRAM_NAME, 130)
+        except Exception as exc:
+            text = str(exc)
+            logmsg(PROGRAM_NAME, text)
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            term(PROGRAM_NAME, 1)
     else:
         print(f'{RED}{TEXT}{NORMAL}', file=sys.stderr)
 
@@ -145,6 +157,12 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             term(PROGRAM_NAME, 130)
+        except Exception as exc:
+            text = str(exc)
+            logmsg(PROGRAM_NAME, text)
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            term(PROGRAM_NAME, 1)
     elif UI_MODE == 'tui':
         dialog: str = f'dialog  --backtitle "{PROGRAM_NAME}"    \
                                 --title     "{PROGRAM_DESC}"    \
@@ -157,6 +175,12 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             term(PROGRAM_NAME, 130)
+        except Exception as exc:
+            text = str(exc)
+            logmsg(PROGRAM_NAME, text)
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            term(PROGRAM_NAME, 1)
     else:
         print(TEXT)
 

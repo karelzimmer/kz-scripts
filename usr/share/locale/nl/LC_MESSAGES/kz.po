@@ -90,13 +90,14 @@ msgstr "opdracht bestaat niet"
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:111 kz_common.py:110 kz_common.py:122 kz_common.py:145 kz_common.py:157
-#: kz_common.py:268 kz_common.py:281 kz-dev:165 kz-dev:180 kz-dev:197
+#: kz:111 kz_common.py:110 kz_common.py:128 kz_common.py:157 kz_common.py:175
+#: kz_common.py:292 kz_common.py:305 kz-dev:165 kz-dev:180 kz-dev:197
 #: kz-dev:219 kz-dev:241 kz-dev:285 kz-update:80 kz-update:279
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz_common.py:274 kz_common.py:287 kz_common.py:325 kz-dev:171 kz-dev:186
+#: kz_common.py:116 kz_common.py:134 kz_common.py:163 kz_common.py:181
+#: kz_common.py:298 kz_common.py:311 kz_common.py:349 kz-dev:171 kz-dev:186
 #: kz-dev:203 kz-dev:225 kz-dev:247 kz-update:86 kz-update:285
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
@@ -598,43 +599,43 @@ msgstr "Eindspaties gevonden."
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:173 kz_common.sh:172
+#: kz_common.py:197 kz_common.sh:172
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:179 kz_common.sh:179
+#: kz_common.py:203 kz_common.sh:179
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:185 kz_common.sh:186
+#: kz_common.py:209 kz_common.sh:186
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:240
+#: kz_common.py:264
 msgid ", or see the {} man page"
 msgstr ", of zie de {} man-pagina"
 
-#: kz_common.py:245
+#: kz_common.py:269
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:247 kz_common.py:302
+#: kz_common.py:271 kz_common.py:326
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:301
+#: kz_common.py:325
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:329
+#: kz_common.py:353
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:330 kz_common.sh:277
+#: kz_common.py:354 kz_common.sh:277
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:331 kz_common.sh:278
+#: kz_common.py:355 kz_common.sh:278
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
