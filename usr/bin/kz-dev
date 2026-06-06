@@ -161,6 +161,10 @@ def pull_repos() -> None:
         command = f'git -C {bin_repo} pull'
         try:
             subprocess.run(command, executable='bash', shell=True, check=True)
+        except KeyboardInterrupt:
+            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            kz.term(PROGRAM_NAME, 130)
         except subprocess.CalledProcessError as exc:
             text = str(exc)
             kz.logmsg(PROGRAM_NAME, text)
@@ -172,6 +176,10 @@ def pull_repos() -> None:
         command += bin_repo
         try:
             subprocess.run(command, executable='bash', shell=True, check=True)
+        except KeyboardInterrupt:
+            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+            kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            kz.term(PROGRAM_NAME, 130)
         except subprocess.CalledProcessError as exc:
             text = str(exc)
             kz.logmsg(PROGRAM_NAME, text)
@@ -185,6 +193,10 @@ def pull_repos() -> None:
     command = f'{bin_repo}/gitclone'
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+        kz.term(PROGRAM_NAME, 130)
     except subprocess.CalledProcessError as exc:
         text = str(exc)
         kz.logmsg(PROGRAM_NAME, text)
@@ -203,6 +215,10 @@ def pull_repos() -> None:
     command = f'{bin_repo}/gitpull'
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+        kz.term(PROGRAM_NAME, 130)
     except subprocess.CalledProcessError as exc:
         text = str(exc)
         kz.logmsg(PROGRAM_NAME, text)
@@ -221,6 +237,10 @@ def pull_repos() -> None:
     command = f'{bin_repo}/gitstatus'
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+        kz.term(PROGRAM_NAME, 130)
     except subprocess.CalledProcessError as exc:
         text = str(exc)
         kz.logmsg(PROGRAM_NAME, text)
@@ -261,6 +281,10 @@ def download_website() -> None:
                         {ftp_host}"
     try:
         subprocess.run(lftp, executable='bash', shell=True, check=True)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+        kz.term(PROGRAM_NAME, 130)
     except subprocess.CalledProcessError as exc:
         os.remove(ftp_login)  # Force entering the password next time.
         text = _('Website download failed.')

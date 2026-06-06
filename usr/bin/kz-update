@@ -275,6 +275,10 @@ def perform_command(command: str = '') -> None:
     kz.check_debian_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+        kz.term(PROGRAM_NAME, 130)
     except Exception as exc:
         text = str(exc)
         kz.logmsg(PROGRAM_NAME, text)

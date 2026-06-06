@@ -177,8 +177,6 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
         else:
             text = f'{str(nmcli_output.decode("utf-8"))}{text}'
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-    if UI_MODE == 'tui':
-        subprocess.run('clear -x', executable='bash', shell=True)
     else:
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.

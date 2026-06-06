@@ -90,12 +90,14 @@ msgstr "opdracht bestaat niet"
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:111 kz-update:80
+#: kz:111 kz_common.py:110 kz_common.py:122 kz_common.py:145 kz_common.py:157
+#: kz_common.py:268 kz_common.py:281 kz-dev:165 kz-dev:180 kz-dev:197
+#: kz-dev:219 kz-dev:241 kz-dev:285 kz-update:80 kz-update:279
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
-#: kz_common.py:250 kz_common.py:259 kz_common.py:297 kz-dev:167 kz-dev:178
-#: kz-dev:191 kz-dev:209 kz-dev:227 kz-update:86 kz-update:281
+#: kz_common.py:274 kz_common.py:287 kz_common.py:325 kz-dev:171 kz-dev:186
+#: kz-dev:203 kz-dev:225 kz-dev:247 kz-update:86 kz-update:285
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
@@ -596,43 +598,43 @@ msgstr "Eindspaties gevonden."
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:153 kz_common.sh:172
+#: kz_common.py:173 kz_common.sh:172
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:159 kz_common.sh:179
+#: kz_common.py:179 kz_common.sh:179
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:165 kz_common.sh:186
+#: kz_common.py:185 kz_common.sh:186
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
-#: kz_common.py:220
+#: kz_common.py:240
 msgid ", or see the {} man page"
 msgstr ", of zie de {} man-pagina"
 
-#: kz_common.py:225
+#: kz_common.py:245
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr "Typ '{} --manual' of 'man {}'{} "
 
-#: kz_common.py:227 kz_common.py:274
+#: kz_common.py:247 kz_common.py:302
 msgid "for more information."
 msgstr "voor meer informatie."
 
-#: kz_common.py:273
+#: kz_common.py:301
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-#: kz_common.py:301
+#: kz_common.py:329
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:302 kz_common.sh:277
+#: kz_common.py:330 kz_common.sh:277
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:303 kz_common.sh:278
+#: kz_common.py:331 kz_common.sh:278
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
@@ -746,7 +748,7 @@ msgstr "Distribueren..."
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:206 kz-dev:253
+#: kz-deploy:206 kz-dev:273
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
@@ -861,23 +863,23 @@ msgstr "Gebruik: kz dev [<opties>]"
 msgid "Clone repos..."
 msgstr "Clone repo's..."
 
-#: kz-dev:197
+#: kz-dev:209
 msgid "Pull repos..."
 msgstr "Pull repo's..."
 
-#: kz-dev:215
+#: kz-dev:231
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-#: kz-dev:249
+#: kz-dev:269
 msgid "Download website..."
 msgstr "Downloaden website..."
 
-#: kz-dev:266
+#: kz-dev:290
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-#: kz-dev:276
+#: kz-dev:300
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
@@ -1550,7 +1552,7 @@ msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:175 kz-wifi:188
+#: kz-wifi:175 kz-wifi:186
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
@@ -1702,8 +1704,7 @@ msgstr "Bevestigen..."
 msgid "Maintenance..."
 msgstr "Onderhoud..."
 
-#: ckhtml:123 gitbranch:56 gitclone:73 gitfetch:56 gitinit:59 gitpull:56
-#: gitstatus:56 kz-build:520 kz-check:586 kz-deploy:264 kz-dev:282
-#: kz-post-migrate:71 kz-update:293
+#: common.sh:29 kz-build:520 kz-check:586 kz-deploy:264 kz-dev:306
+#: kz-post-migrate:71 kz-update:297
 msgid "Complete!"
 msgstr "Klaar!"
