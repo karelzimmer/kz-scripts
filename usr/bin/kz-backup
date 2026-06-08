@@ -625,6 +625,8 @@ EOF
                 --text      "$text"             \
                 2> /dev/null                    || BACKUP_RC=$?
     elif [[ $UI_MODE = 'tui' ]]; then
+        # This tput locks the cursor position top-left to prevent flickering.
+        tput cup 0 0
         rsync   --archive                       \
                 --verbose                       \
                 --delete                        \

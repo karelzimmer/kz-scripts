@@ -129,6 +129,8 @@ function kz.errmsg() {
                 --text      "$*"            \
                 2> /dev/null                || true
     elif [[ ${UI_MODE-} = 'tui' ]]; then
+        # This tput locks the cursor position top-left to prevent flickering.
+        tput cup 0 0
         # shellcheck disable=SC2153,SC2154
         dialog  --colors                    \
                 --backtitle "$PROGRAM_NAME" \
@@ -152,6 +154,8 @@ function kz.infomsg() {
                 --text      "$*"            \
                 2> /dev/null                || true
     elif [[ ${UI_MODE-} = 'tui' ]]; then
+        # This tput locks the cursor position top-left to prevent flickering.
+        tput cup 0 0
         dialog  --backtitle "$PROGRAM_NAME" \
                 --title     "$PROGRAM_DESC" \
                 --msgbox    "$*"            \

@@ -305,63 +305,63 @@ msgstr ""
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:654
+#: kz-backup:656
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:704 kz-install:771 kz-restore:415 kz-setup:702
+#: kz-backup:706 kz-install:771 kz-restore:417 kz-setup:702
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:705
+#: kz-backup:707
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:707 kz-restore:418
+#: kz-backup:709 kz-restore:420
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:708
+#: kz-backup:710
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:709 kz-restore:420
+#: kz-backup:711 kz-restore:422
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:710
+#: kz-backup:712
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:712 kz-install:776 kz-restore:423 kz-setup:706
+#: kz-backup:714 kz-install:776 kz-restore:425 kz-setup:706
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:713 kz-install:777 kz-restore:424 kz-setup:707
+#: kz-backup:715 kz-install:777 kz-restore:426 kz-setup:707
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:714
+#: kz-backup:716
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:740
+#: kz-backup:742
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:758
+#: kz-backup:760
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:768
+#: kz-backup:770
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 
-#: kz-backup:774 kz-restore:486
+#: kz-backup:776 kz-restore:488
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
@@ -542,15 +542,15 @@ msgstr ""
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:197 kz_common.sh:172
+#: kz_common.py:197 kz_common.sh:176
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:203 kz_common.sh:179
+#: kz_common.py:203 kz_common.sh:183
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:209 kz_common.sh:186
+#: kz_common.py:209 kz_common.sh:190
 msgid "fatal: must not be run as root"
 msgstr ""
 
@@ -574,15 +574,15 @@ msgstr ""
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:354 kz_common.sh:277
+#: kz_common.py:354 kz_common.sh:281
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:355 kz_common.sh:278
+#: kz_common.py:355 kz_common.sh:282
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz_common.sh:429
+#: kz_common.sh:433
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -604,53 +604,53 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:228
+#: kz_common.sh:232
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:232
+#: kz_common.sh:236
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:260
+#: kz_common.sh:264
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:275
+#: kz_common.sh:279
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:369 kz-get:79
+#: kz_common.sh:373 kz-get:79
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:372
+#: kz_common.sh:376
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
 "$command"
 msgstr ""
 
-#: kz_common.sh:376 kz_common.sh:381 kz-get:70
+#: kz_common.sh:380 kz_common.sh:385 kz-get:70
 msgid "Use 'journalctl -xe' to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:382 kz-get:71
+#: kz_common.sh:386 kz-get:71
 msgid "The last few lines of the log are displayed here."
 msgstr ""
 
-#: kz_common.sh:383 kz-get:217
+#: kz_common.sh:387 kz-get:217
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:419
+#: kz_common.sh:423
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -1199,34 +1199,34 @@ msgstr ""
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:416
+#: kz-restore:418
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:419
+#: kz-restore:421
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:421
+#: kz-restore:423
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:425
+#: kz-restore:427
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:451
+#: kz-restore:453
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:470
+#: kz-restore:472
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-restore:480
+#: kz-restore:482
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"
