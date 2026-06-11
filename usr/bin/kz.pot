@@ -200,12 +200,20 @@ msgstr ""
 msgid "MEDIUM"
 msgstr ""
 
+#: kz-backup:263 kz-restore:263
+msgid "More than one USB medium is connected."
+msgstr ""
+
 #: kz-backup:303
 msgid "No USB medium selected."
 msgstr ""
 
-#: kz-backup:263 kz-restore:263
-msgid "More than one USB medium is connected."
+#: kz-backup:314
+#, sh-format
+msgid ""
+"The backup has to be renamed!\n"
+"From: $old\n"
+"to  : $TARGET"
 msgstr ""
 
 #: kz-backup:418
@@ -1205,9 +1213,17 @@ msgid ""
 "                 use backup in specified directory"
 msgstr ""
 
+#: kz-restore:308
+#, sh-format
+msgid ""
+"The backup has to be renamed!\n"
+"From: $old\n"
+"to  : $SOURCE"
+msgstr ""
+
 #: kz-restore:316
 #, sh-format
-msgid "No BACKUP-$USER@$HOSTNAME found in $medium."
+msgid "No BACKUP_$HOSTNAME_$USER found in $medium."
 msgstr ""
 
 #: kz-restore:337
@@ -1540,20 +1556,4 @@ msgstr ""
 #: kz-build:519 kz-check:583 kz-deploy:264 kz-dev:317 kz-post-migrate:66
 #: kz-update:292
 msgid "Complete!"
-msgstr ""
-
-#: kz-backup:314
-#, sh-format
-msgid ""
-"The backup has to be renamed!\n"
-"From $old\n"
-"to   $TARGET."
-msgstr ""
-
-#: kz-restore:308
-#, sh-format
-msgid ""
-"The backup has to be renamed!\n"
-"From $old\n"
-"to   $SOURCE."
 msgstr ""

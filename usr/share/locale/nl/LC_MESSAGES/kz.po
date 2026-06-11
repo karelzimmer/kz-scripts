@@ -212,13 +212,24 @@ msgstr "SEL"
 msgid "MEDIUM"
 msgstr "MEDIUM"
 
+#: kz-backup:263 kz-restore:263
+msgid "More than one USB medium is connected."
+msgstr "Meer dan één USB-medium is aangesloten."
+
 #: kz-backup:303
 msgid "No USB medium selected."
 msgstr "Geen USB-medium geselecteerd."
 
-#: kz-backup:263 kz-restore:263
-msgid "More than one USB medium is connected."
-msgstr "Meer dan één USB-medium is aangesloten."
+#: kz-backup:314
+#, sh-format
+msgid ""
+"The backup has to be renamed!\n"
+"From: $old\n"
+"to  : $TARGET"
+msgstr ""
+"De back-up moet hernoemd worden!\n"
+"Van  : $old\n"
+"naar : $TARGET"
 
 #: kz-backup:418
 msgid ""
@@ -1329,10 +1340,21 @@ msgstr ""
 "  -s, --source <map>\n"
 "                 gebruik de back-up in de opgegeven map"
 
+#: kz-restore:308
+#, sh-format
+msgid ""
+"The backup has to be renamed!\n"
+"From: $old\n"
+"to  : $SOURCE"
+msgstr ""
+"De back-up moet hernoemd worden!\n"
+"Van  : $old\n"
+"naar : $SOURCE"
+
 #: kz-restore:316
 #, sh-format
-msgid "No BACKUP-$USER@$HOSTNAME found in $medium."
-msgstr "Geen BACKUP-$USER@$HOSTNAME gevonden in $medium."
+msgid "No BACKUP_$HOSTNAME_$USER found in $medium."
+msgstr "Geen BACKUP_$HOSTNAME_$USER gevonden in $medium."
 
 #: kz-restore:337
 msgid "Preparing restore (this can take a while)"
@@ -1698,25 +1720,3 @@ msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 #: kz-update:292
 msgid "Complete!"
 msgstr "Klaar!"
-
-#: kz-backup:314
-#, sh-format
-msgid ""
-"The backup has to be renamed!\n"
-"From $old\n"
-"to   $TARGET."
-msgstr ""
-"De back-up moet hernoemd worden!\n"
-"Van  $old\n"
-"naar $TARGET."
-
-#: kz-restore:308
-#, sh-format
-msgid ""
-"The backup has to be renamed!\n"
-"From $old\n"
-"to   $SOURCE."
-msgstr ""
-"De back-up moet hernoemd worden!\n"
-"Van  $old\n"
-"naar $SOURCE."
