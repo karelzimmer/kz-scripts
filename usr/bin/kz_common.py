@@ -34,7 +34,8 @@ RED: str = f'{BOLD}\033[31m'
 NORMAL: str = '\033[0m'
 
 # Where the the code is stored locally.
-ORIGIN: str = f'{os.getenv("HOME")}'
+ORIGIN: str = subprocess.run('xdg-user-dir PROJECTS', stdout=subprocess.PIPE,
+                             shell=True, text=True).stdout.strip('\n')
 
 
 # #############################################################################

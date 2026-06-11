@@ -12,7 +12,7 @@
 # Imports
 # #############################################################################
 
-source ~/kz-scripts/usr/bin/kz_common.sh as kz &> /dev/null || exit 1
+source "$(xdg-user-dir PROJECTS)/kz-scripts/usr/bin/kz_common.sh" as kz
 
 
 # #############################################################################
@@ -528,25 +528,22 @@ function check_shellcheck() {
 
 # This function checks the existence of tags.
 function check_tags() {
-    local esc_bug='B''U''G'
     local esc_fixme='F''I''X''M''E'
     local esc_todo='T''O''D''O'
     local text=''
 
     if grep --quiet                 \
             --word-regexp           \
-            --regexp="$esc_bug"     \
             --regexp="$esc_fixme"   \
             --regexp="$esc_todo"    \
             "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED    $(gettext 'Flagged annotation found.')$NORMAL
+$BOLD    $(gettext 'Flagged annotation found.')$NORMAL
 "
         kz.infomsg "$text"
         grep    --line-number           \
                 --word-regexp           \
-                --regexp="$esc_bug"     \
                 --regexp="$esc_fixme"   \
                 --regexp="$esc_todo"    \
                 "$script"               |

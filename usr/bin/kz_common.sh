@@ -27,7 +27,8 @@ readonly RED=$BOLD'\033[31m'
 readonly NORMAL='\033[0m'
 
 # Where the the code is stored locally.
-readonly ORIGIN=$HOME
+ORIGIN=$(xdg-user-dir PROJECTS)
+readonly ORIGIN
 
 
 # #############################################################################
@@ -72,12 +73,14 @@ function kz.check_debian_package_manager() {
 function kz.check_repos() {
     local err_flag=false
     local repo=''
-    local repos='kz-deb kz-docs kz-rpm kz-scripts kz-uploads'
+    local repos=''
     local startdir=$PWD
     local text=''
 
     text=$(gettext 'Check that all repos are on branch main')...
     kz.infomsg "$text"
+
+    repos=$(find "$ORIGIN"/kz-* -prune -printf '%f\n')
 
     for repo in $repos; do
         cd "$ORIGIN/$repo"

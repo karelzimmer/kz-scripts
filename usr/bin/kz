@@ -180,17 +180,17 @@ def process_option_list() -> None:
     text: str
 
     text = f'{_("The following commands are available:")}\n'
-    command: str = f"find   /usr/bin/kz-*               \
+    command: str = f'find   /usr/bin/kz-*               \
                             -maxdepth 1                 \
                             -type f                     \
                             -executable                 \
                             -readable                   \
-                            -not -name '*-pkexec'       \
-                            -not -name '*~'             \
-                            -printf '%f\n'          |   \
+                            -not -name "*-pkexec"       \
+                            -not -name "*~"             \
+                            -printf "%f\n"          |   \
                      sort                           |   \
-                     sed    --expression='s/kz-//'  |   \
-                     sed    --expression='s/^/    /'"
+                     sed    --expression="s/kz-//"  |   \
+                     sed    --expression="s/^/    /"'
     try:
         text += subprocess.run(command, stdout=subprocess.PIPE,
                                shell=True, check=True, text=True).stdout

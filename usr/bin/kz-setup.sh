@@ -1,4 +1,4 @@
-# shellcheck shell=bash disable=SC2034
+# shellcheck shell=bash disable=SC2034,SC2129
 # #############################################################################
 # SPDX-FileComment: Settings file for use with kz setup
 #
@@ -381,10 +381,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delet
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place 's/#alias/alias/g' ~/.bashrc
-sed --in-place 's/# alias/alias/g' ~/.bashrc
-sed --in-place 's/# export/export/g' ~/.bashrc
-sed --in-place 's/# eval/eval/g' ~/.bashrc
+sed --in-place --expression='s/#alias/alias/g' --expression='s/# alias/alias/g' --expression='s/# export/export/g' --expression='s/# eval/eval/g' ~/.bashrc
 # -----------------------------------------------------------------------------
 # Enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
@@ -399,13 +396,11 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Disable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place 's/alias/#alias/g' ~/.bashrc
-sed --in-place 's/export/#export/g' ~/.bashrc
-sed --in-place 's/eval/#eval/g' ~/.bashrc
+sed --in-place --expression='s/^alias/#alias/g' --expression='s/^export/#export/g' --expression='s/^eval/#eval/g' ~/.bashrc
 # -----------------------------------------------------------------------------
 # Disable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place '/^stty -ixon/d' ~/.bashrc
+sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 #
 LOGOUT=true
 
@@ -413,6 +408,10 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Terminal emulator application.
 # -----------------------------------------------------------------------------
+sed --in-place --expression='/^alias bin/d' --expression='/^alias kzbin/d' --expression='/^alias kzdocs/d' ~/.bashrc
+echo "alias bin='cd $(xdg-user-dir PROJECTS)/bin'" >> ~/.bashrc
+echo "alias kzbin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'" >> ~/.bashrc
+echo "alias kzdocs='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc
 kz-desktop --addbef=org.gnome.Terminal
 
 # RESET terminal pc06 pc07
@@ -420,6 +419,7 @@ kz-desktop --addbef=org.gnome.Terminal
 # Terminal emulator application.
 # -----------------------------------------------------------------------------
 kz-desktop --delete=org.gnome.Terminal
+sed --in-place --expression='/^alias bin/d' --expression='/^alias kzbin/d' --expression='/^alias kzdocs/d' ~/.bashrc
 
 # SETUP thumbnails-cache #none
 # -----------------------------------------------------------------------------
@@ -486,6 +486,21 @@ kz-desktop --addaft=kz-webmin
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-webmin
+
+# SETUP xdg-projects-dir *
+# TODO: app xdg-projects-dir is not required when version xdg-user-dirs >= 0.20
+# -----------------------------------------------------------------------------
+# Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs.
+# -----------------------------------------------------------------------------
+if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; else mkdir --parents --verbose ~/Projects; fi
+if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; else xdg-user-dirs-update --set PROJECTS ~/Projects; fi
+xdg-user-dirs-update
+
+# RESET xdg-projects-dir *
+# -----------------------------------------------------------------------------
+# Reset XDG_PROJECTS_DIR in ~/.config/user-dirs.dirs.
+# -----------------------------------------------------------------------------
+xdg-user-dirs-update --set PROJECTS ~
 
 # SETUP zoom pc01
 # -----------------------------------------------------------------------------

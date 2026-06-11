@@ -583,17 +583,10 @@ function create_backup() {
     exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX.list")
 
     cat <<EOF > "$exclude_file"
-# Exclude Git-managed directories.
-$(
-    find    "$ORIGIN"       \
-            -maxdepth 2     \
-            -name .git      \
-            -type d         \
-            -print          |
-    cut     --delimiter='/' \
-            --fields=4      |
-    sort
-    )
+# Exclude cache files
+.cache/
+# Exclude Git-managed directories
+$(find "$HOME" -type d -name ".git" -printf "%P\n" | sed 's/\/\.git//')
 EOF
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")

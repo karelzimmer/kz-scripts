@@ -12,7 +12,7 @@
 # Imports
 # #############################################################################
 
-source ~/kz-scripts/usr/bin/kz_common.sh as kz &> /dev/null || exit 1
+source "$(xdg-user-dir PROJECTS)/kz-scripts/usr/bin/kz_common.sh" as kz
 
 
 # #############################################################################
@@ -92,7 +92,7 @@ function process() {
     kz.check_repos || OPTION_DEV=true
     if $OPTION_DEV; then
         text=$(gettext \
-'Building development versions (deb + RPM) of package kz...')
+'Building development versions of package kz (deb + RPM)...')
         kz.errmsg "$text"
     fi
     # Capture build id kz packages (ISO 8601 YYYY-MM-DDTHH:MM:SS).
@@ -231,7 +231,6 @@ function generate_gettext_files() {
     local text=''
     local gettext_dir=''
     local gettext_dirs="\
-$ORIGIN/bin \
 $ORIGIN/kz-scripts/usr/bin \
 $ORIGIN/kz-scripts/usr/share/applications \
 $ORIGIN/kz-scripts/usr/share/polkit-1/actions"
