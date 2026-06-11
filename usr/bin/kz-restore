@@ -181,6 +181,7 @@ function check_source() {
     local -a all_media=()
     local -a choices=()
     local -i max_choices=0
+    local old=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local selected_medium=''
     local text=''
@@ -301,7 +302,15 @@ Connect a usb medium.")
         fi
     fi
 
-    SOURCE=$medium/BACKUP-$USER@$HOSTNAME
+    SOURCE=$medium/BACKUP_${HOSTNAME}_$USER
+    old=$medium/BACKUP-$USER@$HOSTNAME
+    if [[ -e $old ]]; then
+        text=$(eval_gettext "The backup has to be renamed!
+From \$old
+to   \$SOURCE.")
+        kz.infomsg "$text"
+        exit 1
+    fi
 
     if ! [[ -d $SOURCE ]]; then
         text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
