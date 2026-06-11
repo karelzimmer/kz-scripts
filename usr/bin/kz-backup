@@ -317,7 +317,7 @@ function backup_settings() {
 
     kz.logmsg 'Backup settings...'
 
-    settings_dir=$HOME/Settings
+    settings_dir=$HOME/.kz-backup-settings
     if ! [[ -d $settings_dir ]]; then
         mkdir --verbose "$settings_dir" |& $PROGRAM_LOGS
     fi
@@ -339,6 +339,7 @@ function backup_settings() {
         --verbose                   \
         "$HOME/.kz"                 \
         "$HOME/Instellingen"        \
+        "$HOME/Settings"            \
         "$HOME/kz-backup"           |& $PROGRAM_LOGS
     rm  --force                     \
         --verbose                   \
@@ -512,7 +513,8 @@ function backup_setting_avatar() {
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
-4. Select avatar.ico in Personal folder / Settings, or another picture file.")
+4. Select avatar.ico in Personal folder / .kz-backup-settings (hidden folder),
+   or another picture file.")
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"
 
@@ -565,8 +567,9 @@ function backup_setting_desktop() {
     text="$(gettext "To set the desktop background:
 
 1. Press the Super key[1], type 'file' and click on Files.
-2. Open the folder containing the desired image.
-3. Right-click on the desired image and choose Set as Background.")
+2. Right-click on desktop.ico in Personal folder / .kz-backup-settings \
+(hidden folder),
+   or another picture file, and choose Set as Background.")
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"
 

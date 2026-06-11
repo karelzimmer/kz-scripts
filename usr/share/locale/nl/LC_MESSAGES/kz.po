@@ -220,7 +220,7 @@ msgstr "Geen USB-medium geselecteerd."
 msgid "More than one USB medium is connected."
 msgstr "Meer dan één USB-medium is aangesloten."
 
-#: kz-backup:408
+#: kz-backup:409
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
@@ -232,51 +232,51 @@ msgstr ""
 "\n"
 "Verder lezen:"
 
-#: kz-backup:360
+#: kz-backup:361
 msgid ""
 "==== START list of manual installed packages ================================"
 msgstr ""
 "==== BEGIN overzicht van handmatig geïnstalleerde pakketten ================="
 
-#: kz-backup:362
+#: kz-backup:363
 msgid ""
 "==== END list of manual installed packages =================================="
 msgstr ""
 "==== EINDE overzicht van handmatig geïnstalleerde pakketten ================="
 
-#: kz-backup:364
+#: kz-backup:365
 msgid ""
 "==== START list of installed snaps =========================================="
 msgstr ""
 "==== BEGIN overzicht van geïnstalleerde snaps ==============================="
 
-#: kz-backup:366
+#: kz-backup:367
 msgid ""
 "==== END list of installed snaps ============================================"
 msgstr ""
 "==== EINDE overzicht van geïnstalleerde snaps ==============================="
 
-#: kz-backup:368
+#: kz-backup:369
 msgid ""
 "==== START list of installed Flatpak apps ==================================="
 msgstr ""
 "==== BEGIN overzicht van geïnstalleerde flatpak-apps ========================"
 
-#: kz-backup:370
+#: kz-backup:371
 msgid ""
 "==== END list of installed Flatpak apps ====================================="
 msgstr ""
 "==== EINDE overzicht van geïnstalleerde flatpak-apps ========================"
 
-#: kz-backup:428
+#: kz-backup:429
 msgid "USERNAME|UID|GID|USER"
 msgstr "GEBRUIKERSNAAM|UID|GID|GEBRUIKER"
 
-#: kz-backup:453 kz-backup:465
+#: kz-backup:454 kz-backup:466
 msgid "Additional users can be added manually:"
 msgstr "Extra gebruikers kunnen handmatig worden toegevoegd:"
 
-#: kz-backup:455
+#: kz-backup:456
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
@@ -287,11 +287,11 @@ msgstr ""
 "2. Klik op Ontgrendelen en vervolgens op Gebruiker toevoegen.\n"
 "3. Vul in Naam <gebruiker> en Gebruikersnaam <gebruikersnaam>."
 
-#: kz-backup:460 kz-backup:517 kz-backup:571
+#: kz-backup:461 kz-backup:519 kz-backup:574
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr "[1] Windows-, command- of vergrootglastoets."
 
-#: kz-backup:467
+#: kz-backup:468
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -313,14 +313,16 @@ msgstr ""
 "# Gebruiker kan wachtwoord instellen bij de eerste keer aanmelden:\n"
 "sudo passwd --delete --expire <gebruikersnaam>"
 
-#: kz-backup:510
+#: kz-backup:511
 msgid ""
 "To set the users avatar:\n"
 "\n"
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Change avatar (pencil icon).\n"
 "3. Click Select a file.\n"
-"4. Select avatar.ico in Personal folder / Settings, or another picture file."
+"4. Select avatar.ico in Personal folder / .kz-backup-settings (hidden "
+"folder),\n"
+"   or another picture file."
 msgstr ""
 "Om de avatar van de gebruiker in te stellen:\n"
 "\n"
@@ -328,90 +330,93 @@ msgstr ""
 "Gebruikers.\n"
 "2. Klik op Avatar veranderen (potloodpictogram).\n"
 "3. Klik op Selecteer een bestand.\n"
-"4. Selecteer avatar.ico in Persoonlijke map / Instellingen, of een ander "
-"afbeeldingsbestand."
+"4. Selecteer avatar.ico in Persoonlijke map / .kz-backup-settings (verborgen "
+"map),\n"
+"   of een ander afbeeldingsbestand."
 
-#: kz-backup:565
+#: kz-backup:567
 msgid ""
 "To set the desktop background:\n"
 "\n"
 "1. Press the Super key[1], type 'file' and click on Files.\n"
-"2. Open the folder containing the desired image.\n"
-"3. Right-click on the desired image and choose Set as Background."
+"2. Right-click on desktop.ico in Personal folder / .kz-backup-settings "
+"(hidden folder),\n"
+"   or another picture file, and choose Set as Background."
 msgstr ""
 "Om de bureaubladachtergrond in te stellen:\n"
 "\n"
 "1. Druk op de Super-toets[1], typ 'best' en klik op Bestanden.\n"
-"2. Open de map met de gewenste afbeelding.\n"
-"3. Rechtsklik op de gewenste afbeelding en kies Instellen als "
+"2. Rechtsklik op desktop.ico in Persoonlijke map / .kz-backup-settings "
+"(verborgen map),\n"
+"   of een ander afbeeldingsbestand, en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:221 kz-backup:597 kz-menu:75 kz-backup.desktop:10
+#: kz-backup:221 kz-backup:600 kz-menu:75 kz-backup.desktop:10
 msgid "Make backup"
 msgstr "Back-up maken"
 
-#: kz-backup:598
+#: kz-backup:601
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-#: kz-backup:649
+#: kz-backup:652
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:699 kz-install:771 kz-restore:417 kz-setup:702
+#: kz-backup:702 kz-install:771 kz-restore:417 kz-setup:702
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:700
+#: kz-backup:703
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:702 kz-restore:420
+#: kz-backup:705 kz-restore:420
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:703
+#: kz-backup:706
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:704 kz-restore:422
+#: kz-backup:707 kz-restore:422
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:705
+#: kz-backup:708
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:707 kz-install:776 kz-restore:425 kz-setup:706
+#: kz-backup:710 kz-install:776 kz-restore:425 kz-setup:706
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:708 kz-install:777 kz-restore:426 kz-setup:707
+#: kz-backup:711 kz-install:777 kz-restore:426 kz-setup:707
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:709
+#: kz-backup:712
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:735
+#: kz-backup:738
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:753
+#: kz-backup:756
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:763
+#: kz-backup:766
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 "De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
 
-#: kz-backup:769 kz-restore:488
+#: kz-backup:772 kz-restore:488
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
