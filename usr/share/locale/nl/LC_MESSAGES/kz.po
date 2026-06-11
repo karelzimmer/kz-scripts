@@ -374,7 +374,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:711 kz-install:771 kz-restore:426 kz-setup:702
+#: kz-backup:711 kz-install:771 kz-restore:429 kz-setup:702
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -382,7 +382,7 @@ msgstr "foutmeldingen"
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:714 kz-restore:429
+#: kz-backup:714 kz-restore:432
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
@@ -390,7 +390,7 @@ msgstr "Mogelijke oorzaken:"
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:716 kz-restore:431
+#: kz-backup:716 kz-restore:434
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
@@ -399,11 +399,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:719 kz-install:776 kz-restore:434 kz-setup:706
+#: kz-backup:719 kz-install:776 kz-restore:437 kz-setup:706
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:720 kz-install:777 kz-restore:435 kz-setup:707
+#: kz-backup:720 kz-install:777 kz-restore:438 kz-setup:707
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -427,7 +427,7 @@ msgid ""
 msgstr ""
 "De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
 
-#: kz-backup:781 kz-restore:497
+#: kz-backup:781 kz-restore:500
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -1225,7 +1225,7 @@ msgstr "Menu verlaten"
 msgid "Show WiFi details"
 msgstr "WiFi-details tonen"
 
-#: kz-menu:78 kz-restore:222 kz-restore:336 kz-restore.desktop:10
+#: kz-menu:78 kz-restore:222 kz-restore:339 kz-restore.desktop:10
 msgid "Restore backup"
 msgstr "Back-up terugzetten"
 
@@ -1353,43 +1353,43 @@ msgstr ""
 
 #: kz-restore:316
 #, sh-format
-msgid "No BACKUP_$HOSTNAME_$USER found in $medium."
-msgstr "Geen BACKUP_$HOSTNAME_$USER gevonden in $medium."
+msgid "No BACKUP_${HOSTNAME}_$USER found in $medium."
+msgstr "Geen BACKUP_${HOSTNAME}_$USER gevonden in $medium."
 
-#: kz-restore:337
+#: kz-restore:340
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
 
-#: kz-restore:427
+#: kz-restore:430
 msgid "Restore ended with errors."
 msgstr "Back-up terugzetten is geëindigd met fouten."
 
-#: kz-restore:430
+#: kz-restore:433
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 "Zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up of"
 
-#: kz-restore:432
+#: kz-restore:435
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr "is er te weinig ruimte op $HOME."
 
-#: kz-restore:436
+#: kz-restore:439
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:462
+#: kz-restore:465
 #, sh-format
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-restore:481
+#: kz-restore:484
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr "De back-up is teruggezet voor $user, er zijn $num_users gebruikers:"
 
-#: kz-restore:491
+#: kz-restore:494
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"
