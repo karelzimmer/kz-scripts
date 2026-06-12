@@ -207,6 +207,9 @@ $(gettext 'directory does not exist')"
 
 Connect a usb medium.")
             kz.infomsg "$text"
+            if [[ $UI_MODE = 'cli' ]]; then
+                kz.wait_for_enter
+            fi
             medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"

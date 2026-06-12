@@ -207,6 +207,9 @@ $(gettext 'directory does not exist')"
 
 Connect a usb medium.")
             kz.infomsg "$text"
+            if [[ $UI_MODE = 'cli' ]]; then
+                kz.wait_for_enter
+            fi
             medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
@@ -314,14 +317,8 @@ to  : \$SOURCE")
 
     if ! [[ -d $SOURCE ]]; then
         text=$(eval_gettext "No BACKUP_\${HOSTNAME}_\$USER found in \$medium.")
-        kz.infomsg "$text"
-        if [[ $UI_MODE = 'cli' ]]; then
-            kz.wait_for_enter
-        fi
-        if ! [[ -d $SOURCE ]]; then
-            kz.errmsg "$text"
-            exit 1
-        fi
+        kz.errmsg "$text"
+        exit 1
     fi
 }
 
