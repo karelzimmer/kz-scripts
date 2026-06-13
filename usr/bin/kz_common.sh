@@ -180,7 +180,7 @@ function kz.init() {
         exit 1
     fi
 
-    # Check if os release is available.
+    # Check if os r elease is available.
     if ! [[ -f /etc/os-release ]]; then
         printf  "$RED%s$NORMAL\n"   \
                 "$(gettext 'fatal: no os release available')" >&2
@@ -380,12 +380,12 @@ function kz.term() {
 \$command")"
             if [[ -z ${DISPLAY-} ]]; then
                 text+="
-$(gettext "Use 'journalctl -xe' to check what went wrong.")"
+$(gettext "Use \"journalctl -xe\" to check what went wrong.")"
                 kz.errmsg "$text"
                 exit "$rc"
             fi
             text+="
-$(gettext "Use 'journalctl -xe' to check what went wrong.")
+$(gettext "Use \"journalctl -xe\" to check what went wrong.")
 $(gettext "The last few lines of the log are displayed here.")
 $(gettext "Type 'exit' to close this window.")"
             gnome-terminal  --                                          \
