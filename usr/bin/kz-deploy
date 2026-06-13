@@ -71,7 +71,6 @@ function process() {
         kz.infomsg "$text"
         exit 1
     fi
-    # kz.become_check
     sudo --validate
     check
     deploy

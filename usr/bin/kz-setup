@@ -727,7 +727,8 @@ $(gettext 'Check the error messages after this.')
                     --textbox   "$ERROR_LOG"    \
                     0 0
         else
-            kz.wait_for_enter
+            #FIXME: This is not ideal
+            read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
@@ -755,7 +756,8 @@ apps and changing user settings.")"
         kz.infomsg "$text"
 
         if $LOGOUT && [[ $UI_MODE = 'cli' ]]; then
-            kz.wait_for_enter
+            #FIXME: This is not ideal
+            read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
         fi
 
         if [[ -n ${DISPLAY-} ]]; then

@@ -89,7 +89,6 @@ function process() {
         kz.infomsg "$text"
         exit 1
     fi
-    # kz.become_check
     sudo --validate
     build_website
     generate_gettext_files
@@ -496,7 +495,6 @@ function install_deb_package() {
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
     fi
 
-    kz.check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \

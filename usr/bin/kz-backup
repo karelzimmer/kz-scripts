@@ -208,7 +208,8 @@ $(gettext 'directory does not exist')"
 Connect a usb medium.")
             kz.infomsg "$text"
             if [[ $UI_MODE = 'cli' ]]; then
-                kz.wait_for_enter
+                #FIXME: This is not ideal
+                read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
             fi
             medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
@@ -267,7 +268,7 @@ Connect a usb medium.")
                 printf  '%s\n\n%s\n'    \
                         "$text"         \
                         "$(gettext 'Choose USB medium:')"
-                all_media=("$usb_mount_point"/*)
+                all_media=("$usb_mount_point/"*)
                 for medium in "${all_media[@]}"; do
                     ((++max_choices))
                     printf "%3d %s\n" "$max_choices" "$medium"
@@ -738,7 +739,8 @@ $(gettext 'Try creating the back up again.')"
                     --textbox   "$ERROR_LOG"    \
                     0 0
         else
-            kz.wait_for_enter
+            #FIXME: This is not ideal
+            read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi

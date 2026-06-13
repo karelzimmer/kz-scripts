@@ -165,7 +165,7 @@ sudo apt-get update
         exit 0
     fi
 
-    kz.become_check
+    become_check
     install_apps
 }
 
@@ -570,6 +570,24 @@ function process_option_cat() {
 }
 
 
+# This function checks if the user is allowed to become root and returns 0 if
+# so, otherwise exits 0 with descriptive message.
+function become_check() {
+    local text=''
+
+    if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
+        return 0
+    else
+        text=$(gettext 'Already performed by the administrator.')
+        if [[ ${UI_MODE-} = 'cli' ]]; then
+            text=$GREEN$text$NORMAL
+        fi
+        kz.infomsg "$text"
+        exit 0
+    fi
+}
+
+
 # This function starts installing the apps.
 function install_apps() {
     local -i app_tot_num=0
@@ -688,7 +706,7 @@ function execute_command() {
 
     if [[ $UI_MODE = 'gui' ]]; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
-        kz.check_debian_package_manager
+        check_debian_package_manager
         pkexec  /usr/bin/kz-install-pkexec  \
                 "$cmd"                      \
                 1> >($PROGRAM_LOGS)         \
@@ -728,7 +746,7 @@ function execute_command() {
                 --title     "$title"                            \
                 --infobox   "$app_name_line\n\n         $cmd"   \
                 10 90
-        kz.check_debian_package_manager
+        check_debian_package_manager
         eval    "$cmd"              \
                 1> >($PROGRAM_LOGS) \
                 2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
@@ -746,11 +764,27 @@ function execute_command() {
         fi
         sudo --validate
         printf '%s\n' "         $cmd_dis"
-        kz.check_debian_package_manager
+        check_debian_package_manager
         eval    "$cmd"              \
                 1> >($PROGRAM_LOGS) \
                 2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
     fi
+}
+
+
+# This function checks if a Debian package manager is already running and waits
+# for the next check if so.
+function check_debian_package_manager() {
+    local text='Wait for another package manager to finish...'
+
+    if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
+        return 0
+    fi
+
+    while pkexec /usr/bin/kz_common-pkexec; do
+        kz.logmsg "$text"
+        sleep 2
+    done
 }
 
 
@@ -797,7 +831,8 @@ $(gettext 'Check the error messages after this.')
                     --textbox   "$ERROR_LOG"    \
                     0 0
         else
-            kz.wait_for_enter
+            #FIXME: This is not ideal
+            read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
@@ -818,7 +853,8 @@ changing system settings.")"
     kz.infomsg "$text"
 
     if $REBOOT && [[ $UI_MODE = 'cli' ]]; then
-        kz.wait_for_enter
+        #FIXME: This is not ideal
+        read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
     fi
 
     if $REBOOT; then

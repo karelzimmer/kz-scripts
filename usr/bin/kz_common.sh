@@ -21,9 +21,11 @@ source /usr/bin/gettext.sh
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
+# shellcheck disable=SC2034
 readonly BOLD='\033[1m'
-readonly GREEN=$BOLD'\033[32m'
-readonly RED=$BOLD'\033[31m'
+# shellcheck disable=SC2034
+readonly GREEN='\033[1;32m'
+readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 # Where the the code is stored locally.
@@ -34,40 +36,6 @@ readonly ORIGIN
 # #############################################################################
 # Functions
 # #############################################################################
-
-# This function checks if the user is allowed to become root and returns 0 if
-# so, otherwise exits 0 with descriptive message.
-function kz.become_check() {
-    local text=''
-
-    if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
-        return 0
-    else
-        text=$(gettext 'Already performed by the administrator.')
-        if [[ ${UI_MODE-} = 'cli' ]]; then
-            text=$GREEN$text$NORMAL
-        fi
-        kz.infomsg "$text"
-        exit 0
-    fi
-}
-
-
-# This function checks if a Debian package manager is already running and waits
-# for the next check if so.
-function kz.check_debian_package_manager() {
-    local text='Wait for another package manager to finish...'
-
-    if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
-        return 0
-    fi
-
-    while pkexec /usr/bin/kz_common-pkexec; do
-        kz.logmsg "$text"
-        sleep 2
-    done
-}
-
 
 # This function check that the repos are in the desired state.
 function kz.check_repos() {
@@ -80,7 +48,7 @@ function kz.check_repos() {
     text=$(gettext 'Check that all repos are on branch main')...
     kz.infomsg "$text"
 
-    repos=$(find "$ORIGIN"/kz-* -prune -printf '%f\n')
+    repos=$(find "$ORIGIN/kz-"* -prune -printf '%f\n')
 
     for repo in $repos; do
         cd "$ORIGIN/$repo"
@@ -428,14 +396,4 @@ $(gettext "Type 'exit' to close this window.")"
             exit "$rc"
             ;;
     esac
-}
-
-
-# This function waits for the user to press the Enter key.
-function kz.wait_for_enter() {
-    prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    kz.logmsg "$prompt"
-    printf '\n'
-    read -rp "$prompt" < /dev/tty
-    printf '\n'
 }

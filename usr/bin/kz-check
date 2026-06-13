@@ -69,8 +69,6 @@ function process() {
         kz.infomsg "$text"
         exit 1
     fi
-    # kz.become_check
-    sudo --validate
     check_website
     check_gettext
     check_scripts
