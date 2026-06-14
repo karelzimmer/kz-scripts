@@ -1,4 +1,4 @@
-# shellcheck shell=bash source=/dev/null
+# shellcheck shell=bash source=/dev/null disable=SC2034,SC2154
 # #############################################################################
 # SPDX-FileComment: Common module for kz Bash scripts
 #
@@ -21,16 +21,13 @@ source /usr/bin/gettext.sh
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
-# shellcheck disable=SC2034
 readonly BOLD='\033[1m'
-# shellcheck disable=SC2034
 readonly GREEN='\033[1;32m'
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 # Where the the code is stored locally.
 ORIGIN=$(xdg-user-dir PROJECTS)
-# shellcheck disable=SC2034
 readonly ORIGIN
 
 
@@ -136,7 +133,6 @@ function kz.init() {
 
 # This function records an informational message to the log.
 function kz.logmsg() {
-    # shellcheck disable=SC2034
     printf '%b\n' "$*" |& $PROGRAM_LOGS
 }
 
@@ -149,7 +145,6 @@ function kz.process_option_help() {
     local yelp_man_url=''
 
     if [[ -n ${DISPLAY-} ]]; then
-        # shellcheck disable=SC2034
         yelp_man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1)"
         yelp_man=$(eval_gettext ", or see the \$yelp_man_url man page")
         yelp_man+="\033]8;;\033\\"
@@ -195,7 +190,6 @@ function kz.process_option_version() {
     local text=''
 
     if [[ -f /usr/share/doc/kz/build.id ]]; then
-        # shellcheck disable=SC2034
         build_id=$(cat /usr/share/doc/kz/build.id)
     fi
     text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")

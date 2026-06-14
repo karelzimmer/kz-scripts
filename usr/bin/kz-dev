@@ -67,6 +67,8 @@ def process() -> None:
     check_lftp: str = 'type lftp'
     text: str
 
+    check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+
     try:
         subprocess.run(check_sudo, executable='bash', shell=True, check=True)
     except KeyboardInterrupt:
@@ -101,7 +103,6 @@ def process() -> None:
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
 
-    check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
     get_repos()
     download_website()
 

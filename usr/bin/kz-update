@@ -65,6 +65,7 @@ def process() -> None:
     check_rhel: str = r"grep --quiet 'rhel\|fedora' /etc/os-release"
     text: str
 
+    check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
     try:
         subprocess.run(check_sudo, executable='bash', shell=True, check=True)
     except KeyboardInterrupt:
@@ -107,8 +108,6 @@ def process() -> None:
         text = _('fatal: unknown os release')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
-
-    check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
 
 
 def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
