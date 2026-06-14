@@ -725,11 +725,11 @@ msgstr "Gebruik \"journalctl -xe\" om te controleren wat er misging."
 msgid "The last few lines of the log are displayed here."
 msgstr "De laatste paar regels van de log worden hier weergegeven."
 
-#: kz_common.sh:303 kz-get:221
+#: kz-get:221
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:339
+#: kz_common.sh:336
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."

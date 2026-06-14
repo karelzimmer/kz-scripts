@@ -300,18 +300,15 @@ $(gettext "Use \"journalctl -xe\" to check what went wrong.")"
             text+="
 $(gettext "Use \"journalctl -xe\" to check what went wrong.")
 $(gettext "The last few lines of the log are displayed here.")
-$(gettext "Type 'exit' to close this window.")"
-            gnome-terminal  --                                          \
-                            bash -c                                     \
-                            "journalctl --all                           \
-                                        --catalog                       \
-                                        --lines                         \
-                                        --no-pager                      \
-                                        --pager-end                     \
-                                        --identifier='$PROGRAM_NAME';   \
-                                        printf '$RED%s\n' \"$text\";    \
-                                        exec bash"                      \
-                                        2> /dev/null                    || true
+            $(
+                journalctl  --all                           \
+                            --catalog                       \
+                            --lines                         \
+                            --no-pager                      \
+                            --pager-end                     \
+                            --identifier="$PROGRAM_NAME"
+            )"
+            kz.errmsg "$text"
             exit "$rc"
             ;;
         exit )
