@@ -183,6 +183,7 @@ function check_source() {
     local -i max_choices=0
     local old=''
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local prompt=''
     local selected_medium=''
     local text=''
     local title=''
@@ -208,8 +209,8 @@ $(gettext 'directory does not exist')"
 Connect a usb medium.")
             kz.infomsg "$text"
             if [[ $UI_MODE = 'cli' ]]; then
-                #FIXME: This is not ideal
-                read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
+                prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+                read -rp "$prompt" < /dev/tty
             fi
             medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
@@ -407,11 +408,12 @@ function restore_setting_desktop() {
 function term() {
     local -i num_users=0
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local prompt=''
     local text=''
     local title=''
+    local usb_mount_point=/media/$USER
     local user=''
     local users=''
-    local usb_mount_point=/media/$USER
 
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         usb_mount_point=/run/media/$USER
@@ -451,8 +453,8 @@ $(gettext 'Try restoring the back up again.')"
                     --textbox   "$ERROR_LOG"    \
                     0 0
         else
-            #FIXME: This is not ideal
-            read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
+            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+            read -rp "$prompt" < /dev/tty
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi

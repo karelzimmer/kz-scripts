@@ -689,6 +689,7 @@ function execute_command() {
 # This function controls the termination of the script.
 function term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local prompt=''
     local text=''
     local title=''
 
@@ -727,8 +728,8 @@ $(gettext 'Check the error messages after this.')
                     --textbox   "$ERROR_LOG"    \
                     0 0
         else
-            #FIXME: This is not ideal
-            read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
+            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+            read -rp "$prompt" < /dev/tty
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
@@ -756,8 +757,8 @@ apps and changing user settings.")"
         kz.infomsg "$text"
 
         if $LOGOUT && [[ $UI_MODE = 'cli' ]]; then
-            #FIXME: This is not ideal
-            read -rp "$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
+            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+            read -rp "$prompt" < /dev/tty
         fi
 
         if [[ -n ${DISPLAY-} ]]; then

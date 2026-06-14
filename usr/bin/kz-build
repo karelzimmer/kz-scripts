@@ -92,7 +92,7 @@ function process() {
     sudo --validate
     build_website
     generate_gettext_files
-    kz.check_repos || OPTION_DEV=true
+    check_repos || OPTION_DEV=true
     if $OPTION_DEV; then
         text=$(gettext \
 'Building development versions of package kz (deb + RPM)...')
@@ -331,6 +331,57 @@ $ORIGIN/kz-scripts/usr/share/polkit-1/actions"
     # CREATE MO FILE
     msgfmt  --output-file="$lc_messages_dir/kz.mo"  \
             "$lc_messages_dir/kz.po"                |& $PROGRAM_LOGS
+}
+
+
+# This function check that the repos are in the desired state.
+function check_repos() {
+    local err_flag=false
+    local repo=''
+    local repos=''
+    local startdir=$PWD
+    local text=''
+
+    text=$(gettext 'Check that all repos are on branch main')...
+    kz.infomsg "$text"
+
+    repos=$(find "$ORIGIN/kz-"* -prune -printf '%f\n')
+
+    for repo in $repos; do
+        cd "$ORIGIN/$repo"
+        if [[ $(git branch --show-current) != 'main' ]]; then
+            text=$(eval_gettext "Repo \$repo not on branch main.")
+            kz.errmsg "$text"
+            git status
+            err_flag=true
+        fi
+    done
+
+    text=$(gettext 'Check that all repos are clean')...
+    kz.infomsg "$text"
+
+    for repo in $repos; do
+        cd "$ORIGIN/$repo"
+
+        # Prevent false positives.
+        # shellcheck disable=SC2154
+        git status |& $PROGRAM_LOGS
+
+        if ! git diff-index --quiet HEAD; then
+            text=$(eval_gettext "Repo \$repo is not clean.")
+            kz.errmsg "$text"
+            git status
+            err_flag=true
+        fi
+    done
+
+    cd "$startdir"
+
+    if $err_flag; then
+        return 1
+    else
+        return 0
+    fi
 }
 
 

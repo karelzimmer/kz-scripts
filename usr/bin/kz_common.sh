@@ -37,57 +37,6 @@ readonly ORIGIN
 # Functions
 # #############################################################################
 
-# This function check that the repos are in the desired state.
-function kz.check_repos() {
-    local err_flag=false
-    local repo=''
-    local repos=''
-    local startdir=$PWD
-    local text=''
-
-    text=$(gettext 'Check that all repos are on branch main')...
-    kz.infomsg "$text"
-
-    repos=$(find "$ORIGIN/kz-"* -prune -printf '%f\n')
-
-    for repo in $repos; do
-        cd "$ORIGIN/$repo"
-        if [[ $(git branch --show-current) != 'main' ]]; then
-            text=$(eval_gettext "Repo \$repo not on branch main.")
-            kz.errmsg "$text"
-            git status
-            err_flag=true
-        fi
-    done
-
-    text=$(gettext 'Check that all repos are clean')...
-    kz.infomsg "$text"
-
-    for repo in $repos; do
-        cd "$ORIGIN/$repo"
-
-        # Prevent false positives.
-        # shellcheck disable=SC2154
-        git status |& $PROGRAM_LOGS
-
-        if ! git diff-index --quiet HEAD; then
-            text=$(eval_gettext "Repo \$repo is not clean.")
-            kz.errmsg "$text"
-            git status
-            err_flag=true
-        fi
-    done
-
-    cd "$startdir"
-
-    if $err_flag; then
-        return 1
-    else
-        return 0
-    fi
-}
-
-
 # This function returns an error message.
 function kz.errmsg() {
     kz.logmsg "$*"
