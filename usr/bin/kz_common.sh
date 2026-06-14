@@ -1,4 +1,4 @@
-# shellcheck shell=bash source=/dev/null
+# shellcheck shell=bash source=/dev/null disable=SC2034,SC2154
 # #############################################################################
 # SPDX-FileComment: Common module for kz Bash scripts
 #
@@ -22,8 +22,8 @@ source /usr/bin/gettext.sh
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BOLD='\033[1m'
-readonly GREEN=$BOLD'\033[32m'
-readonly RED=$BOLD'\033[31m'
+readonly GREEN='\033[1;32m'
+readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 # Where the the code is stored locally.
@@ -34,91 +34,6 @@ readonly ORIGIN
 # #############################################################################
 # Functions
 # #############################################################################
-
-# This function checks if the user is allowed to become root and returns 0 if
-# so, otherwise exits 0 with descriptive message.
-function kz.become_check() {
-    local text=''
-
-    if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
-        return 0
-    else
-        text=$(gettext 'Already performed by the administrator.')
-        if [[ ${UI_MODE-} = 'cli' ]]; then
-            text=$GREEN$text$NORMAL
-        fi
-        kz.infomsg "$text"
-        exit 0
-    fi
-}
-
-
-# This function checks if a Debian package manager is already running and waits
-# for the next check if so.
-function kz.check_debian_package_manager() {
-    local text='Wait for another package manager to finish...'
-
-    if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
-        return 0
-    fi
-
-    while pkexec /usr/bin/kz_common-pkexec; do
-        kz.logmsg "$text"
-        sleep 2
-    done
-}
-
-
-# This function check that the repos are in the desired state.
-function kz.check_repos() {
-    local err_flag=false
-    local repo=''
-    local repos=''
-    local startdir=$PWD
-    local text=''
-
-    text=$(gettext 'Check that all repos are on branch main')...
-    kz.infomsg "$text"
-
-    repos=$(find "$ORIGIN"/kz-* -prune -printf '%f\n')
-
-    for repo in $repos; do
-        cd "$ORIGIN/$repo"
-        if [[ $(git branch --show-current) != 'main' ]]; then
-            text=$(eval_gettext "Repo \$repo not on branch main.")
-            kz.errmsg "$text"
-            git status
-            err_flag=true
-        fi
-    done
-
-    text=$(gettext 'Check that all repos are clean')...
-    kz.infomsg "$text"
-
-    for repo in $repos; do
-        cd "$ORIGIN/$repo"
-
-        # Prevent false positives.
-        # shellcheck disable=SC2154
-        git status |& $PROGRAM_LOGS
-
-        if ! git diff-index --quiet HEAD; then
-            text=$(eval_gettext "Repo \$repo is not clean.")
-            kz.errmsg "$text"
-            git status
-            err_flag=true
-        fi
-    done
-
-    cd "$startdir"
-
-    if $err_flag; then
-        return 1
-    else
-        return 0
-    fi
-}
-
 
 # This function returns an error message.
 function kz.errmsg() {
@@ -180,7 +95,7 @@ function kz.init() {
         exit 1
     fi
 
-    # Check if os release is available.
+    # Check if os r elease is available.
     if ! [[ -f /etc/os-release ]]; then
         printf  "$RED%s$NORMAL\n"   \
                 "$(gettext 'fatal: no os release available')" >&2
@@ -230,7 +145,6 @@ function kz.process_option_help() {
     local yelp_man_url=''
 
     if [[ -n ${DISPLAY-} ]]; then
-        # shellcheck disable=SC2034
         yelp_man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1)"
         yelp_man=$(eval_gettext ", or see the \$yelp_man_url man page")
         yelp_man+="\033]8;;\033\\"
@@ -276,7 +190,6 @@ function kz.process_option_version() {
     local text=''
 
     if [[ -f /usr/share/doc/kz/build.id ]]; then
-        # shellcheck disable=SC2034
         build_id=$(cat /usr/share/doc/kz/build.id)
     fi
     text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
@@ -380,25 +293,21 @@ function kz.term() {
 \$command")"
             if [[ -z ${DISPLAY-} ]]; then
                 text+="
-$(gettext "Use 'journalctl -xe' to check what went wrong.")"
-                kz.errmsg "$text"
-                exit "$rc"
-            fi
-            text+="
-$(gettext "Use 'journalctl -xe' to check what went wrong.")
+$(gettext "Use \"journalctl -xe\" to check what went wrong.")"
+            else
+                text+="
+$(gettext "Use \"journalctl -xe\" to check what went wrong.")
 $(gettext "The last few lines of the log are displayed here.")
-$(gettext "Type 'exit' to close this window.")"
-            gnome-terminal  --                                          \
-                            bash -c                                     \
-                            "journalctl --all                           \
-                                        --catalog                       \
-                                        --lines                         \
-                                        --no-pager                      \
-                                        --pager-end                     \
-                                        --identifier='$PROGRAM_NAME';   \
-                                        printf '$RED%s\n' \"$text\";    \
-                                        exec bash"                      \
-                                        2> /dev/null                    || true
+                $(
+                    journalctl  --all                           \
+                                --catalog                       \
+                                --lines                         \
+                                --no-pager                      \
+                                --pager-end                     \
+                                --identifier="$PROGRAM_NAME"
+                )"
+            fi
+            kz.errmsg "$text"
             exit "$rc"
             ;;
         exit )
@@ -428,14 +337,4 @@ $(gettext "Type 'exit' to close this window.")"
             exit "$rc"
             ;;
     esac
-}
-
-
-# This function waits for the user to press the Enter key.
-function kz.wait_for_enter() {
-    prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    kz.logmsg "$prompt"
-    printf '\n'
-    read -rp "$prompt" < /dev/tty
-    printf '\n'
 }

@@ -21,6 +21,8 @@
         <description gettext-domain="kz">Install apps</description>
         <message gettext-domain="kz">Authentication is required to install apps and change system settings</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install-pkexec</annotate>
+        <!-- Retain $DISPLAY, not to run a GUI application, but to be able to check if a GUI is available. -->
+        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
             <allow_any>auth_self_keep</allow_any>
             <allow_active>auth_self_keep</allow_active>

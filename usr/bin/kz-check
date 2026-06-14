@@ -12,7 +12,11 @@
 # Imports
 # #############################################################################
 
-source "$(xdg-user-dir PROJECTS)/kz-scripts/usr/bin/kz_common.sh" as kz
+if [[ -f "$(xdg-user-dir PROJECTS)/kz-scripts/usr/bin/kz_common.sh" ]]; then
+    source "$(xdg-user-dir PROJECTS)/kz-scripts/usr/bin/kz_common.sh" as kz
+else
+    source kz_common.sh as kz
+fi
 
 
 # #############################################################################
@@ -65,7 +69,6 @@ function process() {
         kz.infomsg "$text"
         exit 1
     fi
-    kz.become_check
     check_website
     check_gettext
     check_scripts

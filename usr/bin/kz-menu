@@ -287,7 +287,7 @@ function process_menu1_cli() {
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
         kz.logmsg "$prompt"
-        read -rp "$prompt"
+        read -rp "$prompt" < /dev/tty
 
         case $REPLY in
             *[^[:digit:]]* )
@@ -486,7 +486,7 @@ function process_menu2_cli() {
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
         kz.logmsg "$prompt"
-        read -rp "$prompt"
+        read -rp "$prompt" < /dev/tty
 
         case $REPLY in
             *[^[:digit:]]* )
@@ -605,7 +605,7 @@ $(gettext 'Proceed?')"
         printf '\n%s\n\n' "$text"
         prompt="$(gettext 'Proceed?')"
         while true; do
-            read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
+            read -rp "$(eval_gettext "\$prompt [Y/n]: ")" < /dev/tty
             case $REPLY in
                 [YyJj]* | '' )
                     execute_command=true

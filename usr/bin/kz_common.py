@@ -16,7 +16,6 @@ import os
 import socket
 import subprocess
 import sys
-import time
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -29,8 +28,8 @@ _ = gettext.gettext
 
 # List NORMAL last here so that debugging doesn't bork the display.
 BOLD: str = '\033[1m'
-GREEN: str = f'{BOLD}\033[32m'
-RED: str = f'{BOLD}\033[31m'
+GREEN: str = '\033[1;32m'
+RED: str = '\033[1;31m'
 NORMAL: str = '\033[0m'
 
 # Where the the code is stored locally.
@@ -41,56 +40,6 @@ ORIGIN: str = subprocess.run('xdg-user-dir PROJECTS', stdout=subprocess.PIPE,
 # #############################################################################
 # Functions
 # #############################################################################
-
-def become_check(PROGRAM_NAME: str, PROGRAM_DESC: str,
-                 UI_MODE: str = 'tui') -> int:
-    """
-    This function checks if the user is allowed to become root and returns 0 if
-    so, otherwise exits 0 with descriptive message.
-    """
-    check_become_root: str = (
-        "groups $USER | grep --quiet --regexp='sudo' --regexp='wheel'"
-        )
-    text: str = ''
-
-    if subprocess.run(check_become_root, executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode == 0:
-        return 0
-    else:
-        text = _("Already performed by the administrator.")
-        if UI_MODE == 'cli':
-            text = f'{GREEN}{text}{NORMAL}'
-        infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-        sys.exit(0)
-
-
-def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
-    """
-    This function checks if a Debian package manager is already running and
-    waits for the next check if so.
-    """
-    check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
-    check_rhel: str = r"grep --quiet --regexp='rhel\|fedora' /etc/os-release"
-    text: str = 'Wait for another package manager to finish...'
-
-    if subprocess.run(check_rhel, executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode == 0:
-        return 0
-
-    while True:
-        try:
-            subprocess.run(check_debian_package_manager, executable='bash',
-                           shell=True, check=True)
-        except Exception:
-            break
-        else:
-            logmsg(PROGRAM_NAME, text)
-            time.sleep(1)
-
-    return 0
-
 
 def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
            TEXT: str) -> None:

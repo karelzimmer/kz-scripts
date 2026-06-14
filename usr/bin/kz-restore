@@ -181,7 +181,9 @@ function check_source() {
     local -a all_media=()
     local -a choices=()
     local -i max_choices=0
+    local old=''
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local prompt=''
     local selected_medium=''
     local text=''
     local title=''
@@ -206,6 +208,10 @@ $(gettext 'directory does not exist')"
 
 Connect a usb medium.")
             kz.infomsg "$text"
+            if [[ $UI_MODE = 'cli' ]]; then
+                prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+                read -rp "$prompt" < /dev/tty
+            fi
             medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 kz.errmsg "$text"
@@ -263,7 +269,7 @@ Connect a usb medium.")
                 printf  '%s\n\n%s\n'    \
                         "$text"         \
                         "$(gettext 'Choose USB medium:')"
-                all_media=("$usb_mount_point"/*)
+                all_media=("$usb_mount_point/"*)
                 for medium in "${all_media[@]}"; do
                     ((++max_choices))
                     printf "%3d %s\n" "$max_choices" "$medium"
@@ -277,7 +283,7 @@ Connect a usb medium.")
                 while true; do
                     prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
                     kz.logmsg "$prompt"
-                    read -rp "$prompt"
+                    read -rp "$prompt" < /dev/tty
 
                     case $REPLY in
                         *[^[:digit:]]* )
@@ -301,15 +307,20 @@ Connect a usb medium.")
         fi
     fi
 
-    SOURCE=$medium/BACKUP-$USER@$HOSTNAME
+    SOURCE=$medium/BACKUP_${HOSTNAME}_$USER
+    old=$medium/BACKUP-$USER@$HOSTNAME
+    if [[ -e $old ]]; then
+        text=$(eval_gettext "The backup has to be renamed!
+From: \$old
+to  : \$SOURCE")
+        kz.infomsg "$text"
+        exit 1
+    fi
 
     if ! [[ -d $SOURCE ]]; then
-        text=$(eval_gettext "No BACKUP-\$USER@\$HOSTNAME found in \$medium.")
-        kz.infomsg "$text"
-        if ! [[ -d $SOURCE ]]; then
-            kz.errmsg "$text"
-            exit 1
-        fi
+        text=$(eval_gettext "No BACKUP_\${HOSTNAME}_\$USER found in \$medium.")
+        kz.errmsg "$text"
+        exit 1
     fi
 }
 
@@ -397,11 +408,12 @@ function restore_setting_desktop() {
 function term() {
     local -i num_users=0
     local program_name=${PROGRAM_NAME/kz-/kz }
+    local prompt=''
     local text=''
     local title=''
+    local usb_mount_point=/media/$USER
     local user=''
     local users=''
-    local usb_mount_point=/media/$USER
 
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         usb_mount_point=/run/media/$USER
@@ -441,7 +453,8 @@ $(gettext 'Try restoring the back up again.')"
                     --textbox   "$ERROR_LOG"    \
                     0 0
         else
-            kz.wait_for_enter
+            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+            read -rp "$prompt" < /dev/tty
             kz.infomsg "$title $ERROR_LOG:"
             less --no-init --quit-if-one-screen "$ERROR_LOG"
         fi
