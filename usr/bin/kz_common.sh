@@ -30,6 +30,7 @@ readonly NORMAL='\033[0m'
 
 # Where the the code is stored locally.
 ORIGIN=$(xdg-user-dir PROJECTS)
+# shellcheck disable=SC2034
 readonly ORIGIN
 
 
@@ -135,6 +136,7 @@ function kz.init() {
 
 # This function records an informational message to the log.
 function kz.logmsg() {
+    # shellcheck disable=SC2034
     printf '%b\n' "$*" |& $PROGRAM_LOGS
 }
 
