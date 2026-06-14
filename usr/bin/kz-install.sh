@@ -480,6 +480,22 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes git; fi
 
+# INSTALL gnome-extension-manager pc06 pc07
+# -----------------------------------------------------------------------------
+# Utility for managing GNOME Shell Extensions.
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-extension-manager; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes gnome-extensions-app; fi
+
+# REMOVE gnome-extension-manager pc06 pc07
+# -----------------------------------------------------------------------------
+# Utility for managing GNOME Shell Extensions.
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gnome-extension-manager; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes gnome-extensions-app; fi
+
 # INSTALL gnome-tweaks pc06 pc07
 # -----------------------------------------------------------------------------
 # Tool to adjust advanced configuration settings for GNOME.
