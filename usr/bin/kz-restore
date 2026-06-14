@@ -283,7 +283,7 @@ Connect a usb medium.")
                 while true; do
                     prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
                     kz.logmsg "$prompt"
-                    read -rp "$prompt"
+                    read -rp "$prompt" < /dev/tty
 
                     case $REPLY in
                         *[^[:digit:]]* )
