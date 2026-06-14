@@ -294,20 +294,19 @@ function kz.term() {
             if [[ -z ${DISPLAY-} ]]; then
                 text+="
 $(gettext "Use \"journalctl -xe\" to check what went wrong.")"
-                kz.errmsg "$text"
-                exit "$rc"
-            fi
-            text+="
+            else
+                text+="
 $(gettext "Use \"journalctl -xe\" to check what went wrong.")
 $(gettext "The last few lines of the log are displayed here.")
-            $(
-                journalctl  --all                           \
-                            --catalog                       \
-                            --lines                         \
-                            --no-pager                      \
-                            --pager-end                     \
-                            --identifier="$PROGRAM_NAME"
-            )"
+                $(
+                    journalctl  --all                           \
+                                --catalog                       \
+                                --lines                         \
+                                --no-pager                      \
+                                --pager-end                     \
+                                --identifier="$PROGRAM_NAME"
+                )"
+            fi
             kz.errmsg "$text"
             exit "$rc"
             ;;
