@@ -502,7 +502,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &>
 # -----------------------------------------------------------------------------
 # Utility for managing GNOME Shell Extensions.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-extension-manager; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-manager; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes gnome-extensions-app; fi
 
@@ -510,7 +510,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &>
 # -----------------------------------------------------------------------------
 # Utility for managing GNOME Shell Extensions.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gnome-extension-manager; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-manager; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes gnome-extensions-app; fi
 
