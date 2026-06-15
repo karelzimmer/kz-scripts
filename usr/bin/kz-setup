@@ -26,7 +26,7 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
 Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file <file>]...
-                [-g|--gui] [-h|--help] [-l|--list] [-m|--manual]
+                [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]
                 [-r|--reset] [-s|--select] [-T|--tui] [-u|--usage]
                 [-v|--version] [<app>...]")
 readonly USAGE
@@ -44,7 +44,7 @@ $(gettext '  -c, --cat      show contents of command file')
 $(gettext '  -C, --cli      run in command-line mode')
 $(gettext '  -f, --file <file>
                  process specified settings files')
-$(gettext '  -g, --gui      run in graphical mode')
+$(gettext '  -G, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -l, --list     show available apps')
 $(gettext '  -m, --manual   show manual page')
@@ -58,7 +58,7 @@ $(gettext 'Arguments:')
 $(gettext '  <app>          process specified apps')"
 readonly HELP
 
-readonly OPTIONS_SHORT='bcCf:ghlmrsTuv'
+readonly OPTIONS_SHORT='bcCf:GhlmrsTuv'
 readonly OPTIONS_LONG="browse,cat,cli,file:,gui,help,list,manual,reset,select,\
 tui,usage,version"
 
@@ -161,8 +161,7 @@ function check_input() {
     local program_name=${PROGRAM_NAME/kz-/kz }
 
     parsed=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
+        getopt  --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$program_name"     \
                 --              "$@"
@@ -202,7 +201,7 @@ function process_options() {
                 settings_files[++settings_file_num]=$2
                 shift 2
                 ;;
-            -g | --gui )
+            -G | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"

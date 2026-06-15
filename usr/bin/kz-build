@@ -112,8 +112,7 @@ function check_input() {
     local parsed=''
 
     parsed=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
+        getopt  --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$program_name"     \
                 --              "$@"

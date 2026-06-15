@@ -25,7 +25,7 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz backup [-C|--cli] [-g|--gui] [-h|--help] [-m|--manual]
+Usage: kz backup [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]
                  [-t|--target <directory>] [-T|--tui] [-u|--usage]
                  [-v|--version]")
 readonly USAGE
@@ -39,7 +39,7 @@ $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
 $(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -g, --gui      run in graphical mode')
+$(gettext '  -G, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -t, --target <directory>
@@ -49,7 +49,7 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='Cghmt:Tuv'
+readonly OPTIONS_SHORT='CGhmt:Tuv'
 readonly OPTIONS_LONG='cli,gui,help,manual,target:,tui,usage,version'
 
 
@@ -86,8 +86,7 @@ function check_input() {
     local program_name=${PROGRAM_NAME/kz-/kz }
 
     parsed=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
+        getopt  --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$program_name"     \
                 --              "$@"
@@ -114,7 +113,7 @@ function process_options() {
                 UI_MODE='cli'
                 shift
                 ;;
-            -g | --gui )
+            -G | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"

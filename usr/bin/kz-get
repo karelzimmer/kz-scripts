@@ -44,7 +44,7 @@ declare OPTION_DEV=false
 
 # This function performs initial actions.
 function init() {
-    if [[ $* = -* && '--dev' == *"$*"* ]]; then
+    if [[ $* = '-d' || $*  = '--dev' ]]; then
         OPTION_DEV=true
     elif [[ -n $* ]]; then
         printf '%s\n' 'kz get [-d | --dev]'

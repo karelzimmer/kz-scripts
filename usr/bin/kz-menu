@@ -24,7 +24,7 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz menu [-C|--cli] [-g|--gui] [-h|--help] [-m|--manual] [-T|--tui]
+Usage: kz menu [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual] [-T|--tui]
                [-u|--usage] [-v|--version]")
 readonly USAGE
 
@@ -34,7 +34,7 @@ $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -g, --gui      run in graphical mode')
+$(gettext '  -G, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -T, --tui      run in text-based mode (default)')
@@ -42,7 +42,7 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='CghmTuv'
+readonly OPTIONS_SHORT='CGhmTuv'
 readonly OPTIONS_LONG='cli,gui,help,manual,tui,usage,version'
 
 # Define the menu1 options.
@@ -122,8 +122,7 @@ function check_input() {
     local program_name=${PROGRAM_NAME/kz-/kz }
 
     parsed=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
+        getopt  --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$program_name"     \
                 --              "$@"
@@ -150,7 +149,7 @@ function process_options() {
                 UI_MODE='cli'
                 shift
                 ;;
-            -g | --gui )
+            -G | --gui )
                 if [[ -z ${DISPLAY-} ]]; then
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"
@@ -225,7 +224,7 @@ function process_menu1_gui() {
                     false 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
                     false 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
                     2> /dev/null                                        || true
-            ) || exit 0
+            )   || exit 0
         process_menu1_choice
     # done
 }
@@ -260,7 +259,7 @@ function process_menu1_tui() {
                     4 "${items[4]}"                         \
                     5 "${items[5]}"                         \
                     2>&1 >/dev/tty
-            ) || exit 0
+            )   || exit 0
         process_menu1_choice
     done
 }
@@ -424,7 +423,7 @@ function process_menu2_gui() {
                     false 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
                     false 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
                     2> /dev/null                                        || true
-            ) || break
+            )   || break
         process_menu2_choice
     done
 }
@@ -459,7 +458,7 @@ function process_menu2_tui() {
                     4 "${items[4]}"                         \
                     5 "${items[5]}"                         \
                     2>&1 >/dev/tty
-            ) || break
+            )   || break
         process_menu2_choice
     done
 }
