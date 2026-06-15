@@ -487,11 +487,6 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes pipx; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes pipx; fi
-#
-if type gnome-session &> /dev/null; then sudo pipx install gnome-extensions-cli --system-site-packages; fi
-if type gnome-session &> /dev/null; then sudo pipx ensurepath; fi
-#
-REBOOT=true
 
 # REMOVE gnome-extension-cli pc06 pc07
 # -----------------------------------------------------------------------------

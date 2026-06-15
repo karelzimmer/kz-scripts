@@ -161,25 +161,28 @@ git config --global --unset alias.logg
 # -----------------------------------------------------------------------------
 # GNOME desktop extensions.
 # -----------------------------------------------------------------------------
+if type gnome-session &> /dev/null; then pipx install gnome-extensions-cli --system-site-packages; fi
+if type gnome-session &> /dev/null; then pipx ensurepath; fi
+#
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/
-gext install "CoverflowAltTab@palatis.blogspot.com"
-gext enable "CoverflowAltTab@palatis.blogspot.com"
+if type gnome-session &> /dev/null; then bash -c 'gext install "CoverflowAltTab@palatis.blogspot.com"'; fi
+if type gnome-session &> /dev/null; then bash -c 'gext enable "CoverflowAltTab@palatis.blogspot.com"'; fi
 #
 # Compiz windows effect
 # https://extensions.gnome.org/extension/3210/compiz-windows-effect/
-gext install "compiz-windows-effect@hermes83.github.com"
-gext enable "compiz-windows-effect@hermes83.github.com"
+if type gnome-session &> /dev/null; then bash -c 'gext install "compiz-windows-effect@hermes83.github.com"'; fi   
+if type gnome-session &> /dev/null; then bash -c 'gext enable "compiz-windows-effect@hermes83.github.com"'; fi
 #
 # Compiz alike magic lamp effect
 # https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/
-gext install "compiz-alike-magic-lamp-effect@hermes83.github.com"
-gext enable "compiz-alike-magic-lamp-effect@hermes83.github.com"
+if type gnome-session &> /dev/null; then bash -c 'gext install "compiz-alike-magic-lamp-effect@hermes83.github.com"'; fi
+if type gnome-session &> /dev/null; then bash -c 'gext enable "compiz-alike-magic-lamp-effect@hermes83.github.com"'; fi
 #
 # Desktop Cube
 # https://extensions.gnome.org/extension/4648/desktop-cube/
-gext install "desktop-cube@schneegans.github.com"
-gext enable "desktop-cube@schneegans.github.com"
+if type gnome-session &> /dev/null; then bash -c 'gext install "desktop-cube@schneegans.github.com"'; fi
+if type gnome-session &> /dev/null; then bash -c 'gext enable "desktop-cube@schneegans.github.com"'; fi
 
 # RESET gnome-extensions pc06 pc07
 # -----------------------------------------------------------------------------
@@ -187,23 +190,23 @@ gext enable "desktop-cube@schneegans.github.com"
 # -----------------------------------------------------------------------------
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/
-gext disable "CoverflowAltTab@palatis.blogspot.com"
-gext uninstall "CoverflowAltTab@palatis.blogspot.com"
+if type gnome-session &> /dev/null; then bash -c 'gext disable "CoverflowAltTab@palatis.blogspot.com"'; fi
+if type gnome-session &> /dev/null; then bash -c 'gext uninstall "CoverflowAltTab@palatis.blogspot.com"'; fi
 #
 # Compiz windows effect
 # https://extensions.gnome.org/extension/3210/compiz-windows-effect/
-gext disable "compiz-windows-effect@hermes83.github.com"
-gext uninstall "compiz-windows-effect@hermes83.github.com"
+if type gnome-session &> /dev/null; then bash -c 'gext disable "compiz-windows-effect@hermes83.github.com"'; fi
+if type gnome-session &> /dev/null; then bash -c 'gext uninstall "compiz-windows-effect@hermes83.github.com"'; fi
 #
 # Compiz alike magic lamp effect
 # https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/
-gext disable "compiz-alike-magic-lamp-effect@hermes83.github.com"
-gext uninstall "compiz-alike-magic-lamp-effect@hermes83.github.com"
+if type gnome-session &> /dev/null; then bash -c 'gext disable "compiz-alike-magic-lamp-effect@hermes83.github.com"'; fi
+if type gnome-session &> /dev/null; then bash -c 'gext uninstall "compiz-alike-magic-lamp-effect@hermes83.github.com"'; fi
 #
 # Desktop Cube
 # https://extensions.gnome.org/extension/4648/desktop-cube/
-gext disable "desktop-cube@schneegans.github.com"
-gext uninstall "desktop-cube@schneegans.github.com"
+if type gnome-session &> /dev/null; then bash -c 'gext disable "desktop-cube@schneegans.github.com"'; fi
+if type gnome-session &> /dev/null; then bash -c 'gext uninstall "desktop-cube@schneegans.github.com"'; fi
 
 # SETUP gnome-settings *
 # -----------------------------------------------------------------------------
