@@ -539,7 +539,7 @@ kz-desktop --addaft=kz-webmin
 kz-desktop --delete=kz-webmin
 
 # SETUP xdg-projects-dir *
-# TODO: app xdg-projects-dir is not required when version xdg-user-dirs >= 0.20
+# *NOTE app xdg-projects-dir is not required with xdg-user-dirs version 0.20 or higher.
 # -----------------------------------------------------------------------------
 # Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs.
 # -----------------------------------------------------------------------------
