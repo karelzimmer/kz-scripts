@@ -302,11 +302,12 @@ $(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
                 --title     "$title"                        \
                 2> /dev/null                                || true
     elif [[ $UI_MODE = 'tui' ]]; then
-        dialog  --scrollbar                                 \
+        dialog  --mouse                                     \
+                --scrollbar                                 \
                 --backtitle "$PROGRAM_NAME"                 \
                 --title     "$title"                        \
                 --textbox   "$installation_file_combined"   \
-                0 0
+                0 0                                         || true
     else
         less --no-init --quit-if-one-screen "$installation_file_combined"
     fi
@@ -559,11 +560,12 @@ function process_option_cat() {
                 --title     "$title"        \
                 2> /dev/null                || true
     elif [[ $UI_MODE = 'tui' ]]; then
-        dialog  --scrollbar                 \
+        dialog  --mouse                     \
+                --scrollbar                 \
                 --backtitle "$PROGRAM_NAME" \
                 --title     "$title"        \
                 --textbox   "$command_file" \
-                0 0
+                0 0                         || true
     else
         less --no-init --quit-if-one-screen "$command_file"
     fi
@@ -745,7 +747,7 @@ function execute_command() {
         dialog  --backtitle "$PROGRAM_NAME"                     \
                 --title     "$title"                            \
                 --infobox   "$app_name_line\n\n         $cmd"   \
-                10 90
+                10 90                                           || true
         check_debian_package_manager
         eval    "$cmd"              \
                 1> >($PROGRAM_LOGS) \
@@ -826,11 +828,12 @@ $(gettext 'Check the error messages after this.')
                     --title     "$title"        \
                     2> /dev/null                || true
         elif [[ $UI_MODE = 'tui' ]]; then
-            dialog  --scrollbar                 \
+            dialog  --mouse                     \
+                    --scrollbar                 \
                     --backtitle "$PROGRAM_NAME" \
                     --title     "$title"        \
                     --textbox   "$ERROR_LOG"    \
-                    0 0
+                    0 0                         || true
         else
             prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
             read -rp "$prompt" < /dev/tty

@@ -54,7 +54,7 @@ function kz.errmsg() {
                 --backtitle "$PROGRAM_NAME" \
                 --title     "$PROGRAM_DESC" \
                 --msgbox    "\Zb\Z1$*\Zn"   \
-                0 0
+                0 0                         || true
     else
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
@@ -77,7 +77,7 @@ function kz.infomsg() {
         dialog  --backtitle "$PROGRAM_NAME" \
                 --title     "$PROGRAM_DESC" \
                 --msgbox    "$*"            \
-                0 0
+                0 0                         || true
     else
         printf '%b\n' "$*"
     fi
@@ -95,7 +95,7 @@ function kz.init() {
         exit 1
     fi
 
-    # Check if os r elease is available.
+    # Check if os release is available.
     if ! [[ -f /etc/os-release ]]; then
         printf  "$RED%s$NORMAL\n"   \
                 "$(gettext 'fatal: no os release available')" >&2

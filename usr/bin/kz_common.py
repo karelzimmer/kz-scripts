@@ -70,7 +70,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         dialog: str = f'dialog  --backtitle "{PROGRAM_NAME}"    \
                                 --title     "{PROGRAM_DESC}"    \
                                 --msgbox    "{TEXT}"            \
-                                0 0'
+                                0 0                             || true'
         try:
             subprocess.run(dialog, executable='bash', shell=True,
                            stderr=subprocess.DEVNULL)
@@ -117,7 +117,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         dialog: str = f'dialog  --backtitle "{PROGRAM_NAME}"    \
                                 --title     "{PROGRAM_DESC}"    \
                                 --msgbox    "{TEXT}"            \
-                                0 0'
+                                0 0                             || true'
         try:
             subprocess.run(dialog, executable='bash', shell=True,
                            stderr=subprocess.DEVNULL)

@@ -682,7 +682,7 @@ EOF
         dialog  --backtitle "$PROGRAM_NAME" \
                 --title     "$title"        \
                 --infobox   "$text"         \
-                0 0
+                0 0                         || true
         sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
     else
         text+='...'
@@ -735,11 +735,12 @@ $(gettext 'Try creating the back up again.')"
                     --title     "$title"        \
                     2> /dev/null                || true
         elif [[ $UI_MODE = 'tui' ]]; then
-            dialog  --scrollbar                 \
+            dialog  --mouse                     \
+                    --scrollbar                 \
                     --backtitle "$PROGRAM_NAME" \
                     --title     "$title"        \
                     --textbox   "$ERROR_LOG"    \
-                    0 0
+                    0 0                         || true
         else
             prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
             read -rp "$prompt" < /dev/tty
