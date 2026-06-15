@@ -490,6 +490,8 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &>
 #
 if type gnome-session &> /dev/null; then sudo pipx install gnome-extensions-cli --system-site-packages; fi
 if type gnome-session &> /dev/null; then sudo pipx ensurepath; fi
+#
+REBOOT=true
 
 # REMOVE gnome-extension-cli pc06 pc07
 # -----------------------------------------------------------------------------

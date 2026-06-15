@@ -157,7 +157,7 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 # -----------------------------------------------------------------------------
 git config --global --unset alias.logg
 
-# SETUP gnome-settings pc06 pc07
+# SETUP gnome-extensions pc06 pc07
 # -----------------------------------------------------------------------------
 # GNOME desktop extensions.
 # -----------------------------------------------------------------------------
@@ -181,7 +181,7 @@ gext enable "compiz-alike-magic-lamp-effect@hermes83.github.com"
 gext install "desktop-cube@schneegans.github.com"
 gext enable "desktop-cube@schneegans.github.com"
 
-# RESET gnome-settings pc06 pc07
+# RESET gnome-extensions pc06 pc07
 # -----------------------------------------------------------------------------
 # GNOME desktop extensions.
 # -----------------------------------------------------------------------------
