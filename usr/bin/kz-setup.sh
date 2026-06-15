@@ -171,7 +171,7 @@ if type gnome-session &> /dev/null; then bash -c 'gext enable "CoverflowAltTab@p
 #
 # Compiz windows effect
 # https://extensions.gnome.org/extension/3210/compiz-windows-effect/
-if type gnome-session &> /dev/null; then bash -c 'gext install "compiz-windows-effect@hermes83.github.com"'; fi   
+if type gnome-session &> /dev/null; then bash -c 'gext install "compiz-windows-effect@hermes83.github.com"'; fi
 if type gnome-session &> /dev/null; then bash -c 'gext enable "compiz-windows-effect@hermes83.github.com"'; fi
 #
 # Compiz alike magic lamp effect
