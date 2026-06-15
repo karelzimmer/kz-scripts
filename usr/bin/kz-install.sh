@@ -480,24 +480,6 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes git; fi
 
-# INSTALL gnome-extension-cli pc06 pc07
-# -----------------------------------------------------------------------------
-# Execute binaries from Python packages in isolated environments.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes pipx; fi
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx install gnome-extensions-cli --system-site-packages; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes pipx; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx install gnome-extensions-cli --system-site-packages; fi
-
-# REMOVE gnome-extension-cli pc06 pc07
-# -----------------------------------------------------------------------------
-# Execute binaries from Python packages in isolated environments.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx uninstall gnome-extensions-cli; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx uninstall gnome-extensions-cli; fi
-
 # INSTALL gnome-extension-manager pc06 pc07
 # -----------------------------------------------------------------------------
 # Utility for managing GNOME Shell Extensions.

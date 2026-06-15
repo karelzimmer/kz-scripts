@@ -157,54 +157,6 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 # -----------------------------------------------------------------------------
 git config --global --unset alias.logg
 
-# SETUP gnome-settings pc06 pc07
-# -----------------------------------------------------------------------------
-# GNOME desktop extensions.
-# -----------------------------------------------------------------------------
-# Coverflow Alt-Tab
-# https://extensions.gnome.org/extension/97/coverflow-alt-tab/
-gext install "CoverflowAltTab@palatis.blogspot.com"
-gext enable "CoverflowAltTab@palatis.blogspot.com"
-#
-# Compiz windows effect
-# https://extensions.gnome.org/extension/3210/compiz-windows-effect/
-gext install "compiz-windows-effect@hermes83.github.com"
-gext enable "compiz-windows-effect@hermes83.github.com"
-#
-# Compiz alike magic lamp effect
-# https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/
-gext install "compiz-alike-magic-lamp-effect@hermes83.github.com"
-gext enable "compiz-alike-magic-lamp-effect@hermes83.github.com"
-#
-# Desktop Cube
-# https://extensions.gnome.org/extension/4648/desktop-cube/
-gext install "desktop-cube@schneegans.github.com"
-gext enable "desktop-cube@schneegans.github.com"
-
-# RESET gnome-settings pc06 pc07
-# -----------------------------------------------------------------------------
-# GNOME desktop extensions.
-# -----------------------------------------------------------------------------
-# Coverflow Alt-Tab
-# https://extensions.gnome.org/extension/97/coverflow-alt-tab/
-gext disable "CoverflowAltTab@palatis.blogspot.com"
-gext uninstall "CoverflowAltTab@palatis.blogspot.com"
-#
-# Compiz windows effect
-# https://extensions.gnome.org/extension/3210/compiz-windows-effect/
-gext disable "compiz-windows-effect@hermes83.github.com"
-gext uninstall "compiz-windows-effect@hermes83.github.com"
-#
-# Compiz alike magic lamp effect
-# https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/
-gext disable "compiz-alike-magic-lamp-effect@hermes83.github.com"
-gext uninstall "compiz-alike-magic-lamp-effect@hermes83.github.com"
-#
-# Desktop Cube
-# https://extensions.gnome.org/extension/4648/desktop-cube/
-gext disable "desktop-cube@schneegans.github.com"
-gext uninstall "desktop-cube@schneegans.github.com"
-
 # SETUP gnome-settings *
 # -----------------------------------------------------------------------------
 # GNOME desktop environment settings.
