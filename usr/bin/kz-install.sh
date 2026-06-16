@@ -341,7 +341,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
 
-# INSTALL firefox *
+# INSTALL firefox #none
 # -----------------------------------------------------------------------------
 # Mozilla Firefox web browser - Extended Support Release (ESR).
 # -----------------------------------------------------------------------------
@@ -349,7 +349,7 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes firefox; fi
 
-# REMOVE firefox *
+# REMOVE firefox #none
 # -----------------------------------------------------------------------------
 # Mozilla Firefox web browser - Extended Support Release (ESR).
 # -----------------------------------------------------------------------------
@@ -934,7 +934,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
 # INSTALL ntfsprogs-plus #none
-# *NOTE The ntfsprogs-plus app is available with Linux Kernel version 7.1 or higher.
+# == NOTE The ntfsprogs-plus app is available with Linux Kernel version 7.1 or higher.
 # -----------------------------------------------------------------------------
 # NTFS filesystem driver and utilities.
 # -----------------------------------------------------------------------------
@@ -1104,7 +1104,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; fi
 
-# INSTALL spotify *
+# INSTALL spotify pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Spotify streaming music client.
 # -----------------------------------------------------------------------------
@@ -1117,7 +1117,7 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then echo 'The spotify app is available as a web app.'; fi
 
-# REMOVE spotify *
+# REMOVE spotify pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Spotify streaming music client.
 # -----------------------------------------------------------------------------
@@ -1224,7 +1224,7 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes teamviewer; fi
 
-# INSTALL thunderbird *
+# INSTALL thunderbird #none
 # -----------------------------------------------------------------------------
 # Mail/news client with RSS, chat and integrated spam filter support.
 # -----------------------------------------------------------------------------
@@ -1232,7 +1232,7 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf install --assumeyes thunderbird; fi
 
-# REMOVE thunderbird *
+# REMOVE thunderbird #none
 # -----------------------------------------------------------------------------
 # Mail/news client with RSS, chat and integrated spam filter support.
 # -----------------------------------------------------------------------------

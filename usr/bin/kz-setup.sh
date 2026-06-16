@@ -313,14 +313,14 @@ kz-desktop --addaft=virt-manager
 # -----------------------------------------------------------------------------
 kz-desktop --delete=virt-manager
 
-# SETUP libreoffice *
+# SETUP libreoffice #none
 # -----------------------------------------------------------------------------
 # Office productivity suite.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=libreoffice-writer
 kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
-# RESET libreoffice *
+# RESET libreoffice #none
 # -----------------------------------------------------------------------------
 # Office productivity suite.
 # -----------------------------------------------------------------------------
@@ -406,7 +406,7 @@ chmod 750 ~
 # -----------------------------------------------------------------------------
 chmod 755 ~
 
-# SETUP spotify *
+# SETUP spotify pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Spotify streaming music client.
 # -----------------------------------------------------------------------------
@@ -416,7 +416,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spot
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
-# RESET spotify *
+# RESET spotify pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Spotify streaming music client.
 # -----------------------------------------------------------------------------
@@ -484,13 +484,13 @@ rm --force --recursive ~/.cache/thumbnails/
 # -----------------------------------------------------------------------------
 rm --force --recursive ~/.cache/thumbnails/
 
-# SETUP thunderbird *
+# SETUP thunderbird #none
 # -----------------------------------------------------------------------------
 # Mail/news client with RSS, chat and integrated spam filter support.
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=thunderbird
 
-# RESET thunderbird *
+# RESET thunderbird #none
 # -----------------------------------------------------------------------------
 # Mail/news client with RSS, chat and integrated spam filter support.
 # -----------------------------------------------------------------------------
