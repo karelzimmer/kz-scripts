@@ -35,13 +35,13 @@ kz-desktop --addaft=com.usebottles.bottles
 # -----------------------------------------------------------------------------
 kz-desktop --delete=com.usebottles.bottles
 
-# SETUP cinnamon-settings *
+# SETUP cinnamon-settings #none
 # -----------------------------------------------------------------------------
 # Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
 
-# RESET cinnamon-settings *
+# RESET cinnamon-settings #none
 # -----------------------------------------------------------------------------
 # Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -327,7 +327,7 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
-# SETUP lxde-settings *
+# SETUP lxde-settings #none
 # -----------------------------------------------------------------------------
 # LXDE desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -337,7 +337,7 @@ if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click
 #
 LOGOUT=true
 
-# RESET lxde-settings *
+# RESET lxde-settings #none
 # -----------------------------------------------------------------------------
 # LXDE desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -426,7 +426,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spot
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
-# SETUP terminal *
+# SETUP terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator application.
 # -----------------------------------------------------------------------------
@@ -441,7 +441,7 @@ echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 #
 LOGOUT=true
 
-# RESET terminal *
+# RESET terminal pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Terminal emulator application.
 # -----------------------------------------------------------------------------
@@ -538,7 +538,7 @@ kz-desktop --addaft=kz-webmin
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-webmin
 
-# SETUP xdg-projects-dir *
+# SETUP xdg-projects-dir pc01 pc06 pc07
 # *NOTE app xdg-projects-dir is not required with xdg-user-dirs version 0.20 or higher.
 # -----------------------------------------------------------------------------
 # Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs.
@@ -547,7 +547,7 @@ if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; else mk
 if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; else xdg-user-dirs-update --set PROJECTS ~/Projects; fi
 xdg-user-dirs-update
 
-# RESET xdg-projects-dir *
+# RESET xdg-projects-dir pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Reset XDG_PROJECTS_DIR in ~/.config/user-dirs.dirs.
 # -----------------------------------------------------------------------------

@@ -117,7 +117,7 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes backintime-qt; fi
 
-# INSTALL bash-completion *
+# INSTALL bash-completion pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Programmable completion for the bash shell.
 # -----------------------------------------------------------------------------
@@ -125,7 +125,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --a
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes bash-completion; fi
 
-# REMOVE bash-completion *
+# REMOVE bash-completion pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Programmable completion for the bash shell.
 # -----------------------------------------------------------------------------
@@ -570,17 +570,17 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${DISPLAY-} ]]; then 
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]]; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
 
-# INSTALL greeter-settings *
+# INSTALL greeter-settings #none
 # -----------------------------------------------------------------------------
-# Enable LightDM display manager user greeter.
+# Enable Cinnamon/LXDE LightDM display manager user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 #
 REBOOT=true
 
-# REMOVE greeter-settings *
+# REMOVE greeter-settings #none
 # -----------------------------------------------------------------------------
-# Disable LightDM display manager user greeter.
+# Disable Cinnamon/LXDE LightDM display manager user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
 #
@@ -827,7 +827,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes mlocate; fi
 
-# INSTALL lshw *
+# INSTALL lshw pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Information about hardware configuration.
 # -----------------------------------------------------------------------------
@@ -835,7 +835,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --a
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes lshw; fi
 
-# REMOVE lshw *
+# REMOVE lshw pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Information about hardware configuration.
 # -----------------------------------------------------------------------------
