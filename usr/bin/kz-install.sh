@@ -572,7 +572,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${DISPLAY-} ]];
 
 # INSTALL greeter-settings #none
 # -----------------------------------------------------------------------------
-# Enable Cinnamon/LXDE LightDM display manager user greeter.
+# Enable Cinnamon/LXDE user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 #
@@ -580,7 +580,7 @@ REBOOT=true
 
 # REMOVE greeter-settings #none
 # -----------------------------------------------------------------------------
-# Disable Cinnamon/LXDE LightDM display manager user greeter.
+# Disable Cinnamon/LXDE user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
 #

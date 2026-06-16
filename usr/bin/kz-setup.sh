@@ -538,7 +538,7 @@ kz-desktop --addaft=kz-webmin
 # -----------------------------------------------------------------------------
 kz-desktop --delete=kz-webmin
 
-# SETUP xdg-projects-dir pc01 pc06 pc07
+# SETUP xdg-projects-dir pc06 pc07
 # *NOTE app xdg-projects-dir is not required with xdg-user-dirs version 0.20 or higher.
 # -----------------------------------------------------------------------------
 # Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs.
@@ -547,7 +547,7 @@ if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; else mk
 if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; else xdg-user-dirs-update --set PROJECTS ~/Projects; fi
 xdg-user-dirs-update
 
-# RESET xdg-projects-dir pc01 pc06 pc07
+# RESET xdg-projects-dir pc06 pc07
 # -----------------------------------------------------------------------------
 # Reset XDG_PROJECTS_DIR in ~/.config/user-dirs.dirs.
 # -----------------------------------------------------------------------------
