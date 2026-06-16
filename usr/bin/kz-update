@@ -88,8 +88,9 @@ def process() -> None:
         text = f'{kz.BOLD}{_('Upgrade...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_upgrade_debs()
-        perform_update_flatpaks()
         perform_update_snaps()
+        perform_update_flatpaks()
+        perform_update_extensions()
         text = f'{kz.BOLD}{_('Cleanup...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_cleanup_debs()
@@ -99,8 +100,9 @@ def process() -> None:
         text = f'{kz.BOLD}{_('Upgrade...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_upgrade_rpms()
-        perform_update_flatpaks()
         perform_update_snaps()
+        perform_update_flatpaks()
+        perform_update_extensions()
         text = f'{kz.BOLD}{_('Cleanup...')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_cleanup_rpms()
@@ -180,18 +182,14 @@ def perform_update_debs() -> None:
     perform_command(command)
 
 
-def perform_update_flatpaks() -> None:
+def perform_upgrade_debs() -> None:
     """
-    This function updates installed Flatpak packages.
+    This function upgrades installed Debian packages.
     """
     command: str
 
-    if subprocess.run('type flatpak', executable='bash',
-                      stdout=subprocess.DEVNULL,
-                      stderr=subprocess.DEVNULL,
-                      shell=True,).returncode == 0:
-        command = 'sudo flatpak --assumeyes update'
-        perform_command(command)
+    command = 'sudo apt-get --assume-yes upgrade'
+    perform_command(command)
 
 
 def perform_update_snaps() -> None:
@@ -208,14 +206,32 @@ def perform_update_snaps() -> None:
         perform_command(command)
 
 
-def perform_upgrade_debs() -> None:
+def perform_update_flatpaks() -> None:
     """
-    This function upgrades installed Debian packages.
+    This function updates installed Flatpak packages.
     """
     command: str
 
-    command = 'sudo apt-get --assume-yes upgrade'
-    perform_command(command)
+    if subprocess.run('type flatpak', executable='bash',
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL,
+                      shell=True,).returncode == 0:
+        command = 'sudo flatpak --assumeyes update'
+        perform_command(command)
+
+
+def perform_update_extensions() -> None:
+    """
+    This function updates all enabled extensions.
+    """
+    command: str
+
+    if subprocess.run('type gext', executable='bash',
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL,
+                      shell=True,).returncode == 0:
+        command = 'gext update'
+        perform_command(command)
 
 
 def perform_upgrade_rpms() -> None:

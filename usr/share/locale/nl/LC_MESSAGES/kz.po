@@ -92,19 +92,19 @@ msgstr "opdracht is vereist"
 
 #: kz:111 kz_common.py:60 kz_common.py:78 kz_common.py:107 kz_common.py:125
 #: kz_common.py:242 kz_common.py:255 kz-dev:75 kz-dev:188 kz-dev:203 kz-dev:220
-#: kz-dev:242 kz-dev:264 kz-dev:308 kz-update:72 kz-update:271
+#: kz-dev:242 kz-dev:264 kz-dev:308 kz-update:72 kz-update:287
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz_common.py:66 kz_common.py:84 kz_common.py:113 kz_common.py:131
 #: kz_common.py:248 kz_common.py:261 kz_common.py:299 kz-dev:81 kz-dev:194
-#: kz-dev:209 kz-dev:226 kz-dev:248 kz-dev:270 kz-update:78 kz-update:277
+#: kz-dev:209 kz-dev:226 kz-dev:248 kz-dev:270 kz-update:78 kz-update:293
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:171 kz-backup:162 kz-build:162 kz-check:127 kz-deploy:133 kz-desktop:193
 #: kz-dev:157 kz-install:268 kz-menu:187 kz-restore:162 kz-setup:253
-#: kz-update:160 kz-wifi:138
+#: kz-update:162 kz-wifi:138
 msgid "internal error"
 msgstr "interne fout"
 
@@ -176,7 +176,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:170 kz-build:170 kz-check:135 kz-deploy:141 kz-desktop:201
-#: kz-dev:164 kz-menu:195 kz-restore:170 kz-update:167 kz-wifi:145
+#: kz-dev:164 kz-menu:195 kz-restore:170 kz-update:169 kz-wifi:145
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -1564,15 +1564,15 @@ msgstr "Gebruik: kz update [<opties>]"
 msgid "Update..."
 msgstr "Bijwerken..."
 
-#: kz-update:88 kz-update:99
+#: kz-update:88 kz-update:100
 msgid "Upgrade..."
 msgstr "Opwaarderen..."
 
-#: kz-update:93 kz-update:104
+#: kz-update:94 kz-update:106
 msgid "Cleanup..."
 msgstr "Opruimen..."
 
-#: kz-update:108
+#: kz-update:110
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os-release"
 
@@ -1718,6 +1718,6 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
 #: kz-build:571 kz-check:585 kz-deploy:317 kz-dev:329 kz-post-migrate:66
-#: kz-update:316
+#: kz-update:332
 msgid "Complete!"
 msgstr "Klaar!"
