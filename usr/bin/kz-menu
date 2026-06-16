@@ -357,7 +357,7 @@ Checklist installation can be found on https://karelzimmer.nl/en.
 Roughly boils down to:
 
 1. Download a CD image file (.iso).
-2. Create a bootable USB stick.
+2. Create a bootable USB stick (see Linux info).
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
     kz.infomsg "$text"
