@@ -6,6 +6,6 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-declare DASHOPTIONS='-C --CLI -G --gui -h --help -m --manual -t --target -T
+declare DASHOPTIONS='-C --cli -G --gui -h --help -m --manual -t --target -T
     --tui -u --usage -v --version'
 complete -o default -W "$DASHOPTIONS" kz-backup
