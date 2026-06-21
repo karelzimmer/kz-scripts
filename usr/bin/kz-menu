@@ -204,7 +204,7 @@ $USAGE"
 function process_menu1_gui() {
     local title=$MENU1_TITLE
 
-    # while true; do
+    while true; do
         REPLY=$(
             zenity  --list                                              \
                     --radiolist                                         \
@@ -226,7 +226,7 @@ function process_menu1_gui() {
                     2> /dev/null                                        || true
             )   || exit 0
         process_menu1_choice
-    # done
+    done
 }
 
 
@@ -347,6 +347,7 @@ function process_menu1_choice1() {
 
 # This function processes menu 1 choice 2.
 function process_menu1_choice2() {
+    local prompt=''
     local text=''
     local title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
 
@@ -359,8 +360,14 @@ Roughly boils down to:
 1. Download a CD image file (.iso).
 2. Create a bootable USB stick (see Linux info).
 3. Boot the computer from this USB stick.
-4. Install Linux.")"
+4. Install Linux.")
+"
     kz.infomsg "$text"
+    if [[ $UI_MODE = 'cli' ]]; then
+        prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+        read -rp "$prompt" < /dev/tty
+    fi
+
 }
 
 
@@ -545,7 +552,6 @@ function process_commands() {
             title="$description ($command)"
             execute_command
         done
-        term
     fi
 }
 
