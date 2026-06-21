@@ -171,7 +171,7 @@ def get_repos() -> None:
     """
     This function retrieves the public repos.
     """
-    bin_repo: str = f'{kz.ORIGIN}/bin'
+    bin_repo: str = f'{kz.GITROOT}/bin'
     command: str
     exc: BaseException
     text: str
@@ -179,7 +179,7 @@ def get_repos() -> None:
     text = _('Clone repos...')
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
-    # Populate ORIGIN/bin first.
+    # Populate GITROOT/bin first.
     if os.path.exists(bin_repo):
         command = f'git -C {bin_repo} pull'
         try:
@@ -284,7 +284,7 @@ def download_website() -> None:
     ftp_login: str = f'{os.getenv("HOME")}/.{ftp_host}.login'
     ftp_opts: str = '--delete --verbose'
     ftp_set: str = 'set ssl:verify-certificate no'
-    ftp_to: str = f'{kz.ORIGIN}/kz-uploads/dist'
+    ftp_to: str = f'{kz.GITROOT}/kz-uploads/dist'
     ftp_user: str = 'kzimmer'
     ftp_x_cmd: str = f'mirror {ftp_opts} {ftp_from} {ftp_to}; exit'
     text: str

@@ -60,7 +60,7 @@ declare ERR_FLAG=false
 
 # This function performs the script actions.
 function process() {
-    local scripts_repo=$ORIGIN/kz-scripts
+    local scripts_repo=$GITROOT/kz-scripts
     local text=''
 
     check_input "$@"
@@ -145,9 +145,9 @@ function check_website() {
     local -i check=0
     local file=''
     local text=''
-    local uploads_dist_assets=$ORIGIN/kz-uploads/dist/assets
-    local uploads_dist_html=$ORIGIN/kz-uploads/dist/html
-    local uploads_src_assets=$ORIGIN/kz-uploads/src/assets
+    local uploads_dist_assets=$GITROOT/kz-uploads/dist/assets
+    local uploads_dist_html=$GITROOT/kz-uploads/dist/html
+    local uploads_src_assets=$GITROOT/kz-uploads/src/assets
 
     text=$(gettext 'Check website...')
     kz.infomsg "$text"
@@ -208,8 +208,8 @@ function check_website() {
 
     # Difference between src/ and dist/.
     diff    --recursive                 \
-            "$ORIGIN/kz-uploads/src/"     \
-            "$ORIGIN/kz-uploads/dist/"    \
+            "$GITROOT/kz-uploads/src/"     \
+            "$GITROOT/kz-uploads/dist/"    \
             --exclude='documents'       \
             --exclude='packages'        \
             --exclude='scripts'         || ERR_FLAG=true
@@ -349,7 +349,7 @@ function check_scripts() {
                     -print                                          |
             sort
             )
-    cd "$ORIGIN"
+    cd "$GITROOT"
 }
 
 

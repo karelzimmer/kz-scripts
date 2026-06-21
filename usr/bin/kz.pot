@@ -402,67 +402,67 @@ msgstr ""
 msgid "Building development versions of package kz (deb + RPM)..."
 msgstr ""
 
-#: kz-build:185
+#: kz-build:184
 msgid "Build website..."
 msgstr ""
 
-#: kz-build:241
+#: kz-build:238
 msgid "Generate gettext files.."
 msgstr ""
 
-#: kz-build:257
+#: kz-build:254
 msgid "skip, is a direcory."
 msgstr ""
 
-#: kz-build:261
+#: kz-build:258
 msgid "skip, is not a file."
 msgstr ""
 
-#: kz-build:265
+#: kz-build:262
 msgid "skip, is a LICENSE file."
 msgstr ""
 
-#: kz-build:269
+#: kz-build:266
 msgid "skip, is a README file."
 msgstr ""
 
-#: kz-build:273
+#: kz-build:270
 msgid "skip, is GPG-encrypted."
 msgstr ""
 
-#: kz-build:277
+#: kz-build:274
 msgid "skip, is a gettext POT file."
 msgstr ""
 
-#: kz-build:281
+#: kz-build:278
 msgid "skip, is a gettext PO file."
 msgstr ""
 
-#: kz-build:285
+#: kz-build:282
 msgid "skip, is a gettext MO file."
 msgstr ""
 
-#: kz-build:307
+#: kz-build:304
 msgid "can't determine the language"
 msgstr ""
 
-#: kz-build:392
+#: kz-build:385
 msgid "Build Debian package..."
 msgstr ""
 
-#: kz-build:466
+#: kz-build:458
 msgid "Build RPM package..."
 msgstr ""
 
-#: kz-build:539
+#: kz-build:530
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:561 kz-get:208
+#: kz-build:552 kz-get:208
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:567 kz-check:581 kz-deploy:313
+#: kz-build:558 kz-check:581 kz-deploy:310
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -598,20 +598,20 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
-#: kz-build:344 kz-deploy:182
+#: kz-build:339 kz-deploy:182
 msgid "Check that all repos are on branch main"
 msgstr ""
 
-#: kz-build:352 kz-deploy:190
+#: kz-build:347 kz-deploy:190
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr ""
 
-#: kz-build:359 kz-deploy:197
+#: kz-build:354 kz-deploy:197
 msgid "Check that all repos are clean"
 msgstr ""
 
-#: kz-build:370 kz-deploy:208
+#: kz-build:365 kz-deploy:208
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr ""
@@ -709,7 +709,7 @@ msgstr ""
 msgid "Install..."
 msgstr ""
 
-#: kz-deploy:299
+#: kz-deploy:298
 msgid "Install Debian package failed."
 msgstr ""
 
@@ -1554,7 +1554,7 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:571 kz-check:585 kz-deploy:317 kz-dev:329 kz-post-migrate:66
+#: kz-build:562 kz-check:585 kz-deploy:314 kz-dev:329 kz-post-migrate:66
 #: kz-update:332
 msgid "Complete!"
 msgstr ""

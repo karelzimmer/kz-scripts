@@ -27,8 +27,8 @@ readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 # Where the the code is stored locally.
-ORIGIN=$(xdg-user-dir PROJECTS)
-readonly ORIGIN
+GITROOT=$(xdg-user-dir PROJECTS)
+readonly GITROOT
 
 
 # #############################################################################

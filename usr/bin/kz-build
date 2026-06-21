@@ -50,19 +50,19 @@ readonly OPTIONS_SHORT='dhmuv'
 readonly OPTIONS_LONG='dev,help,manual,usage,version'
 
 # The following directories are used to build the website and packages.
-readonly DOCS_REPO=$ORIGIN/kz-docs
-readonly SCRIPTS_REPO=$ORIGIN/kz-scripts
+readonly DOCS_REPO=$GITROOT/kz-docs
+readonly SCRIPTS_REPO=$GITROOT/kz-scripts
 
-readonly UPLOADS_REPO_SRCDIR=$ORIGIN/kz-uploads/src
-readonly UPLOADS_REPO_DISTDIR=$ORIGIN/kz-uploads/dist
+readonly UPLOADS_REPO_SRCDIR=$GITROOT/kz-uploads/src
+readonly UPLOADS_REPO_DISTDIR=$GITROOT/kz-uploads/dist
 
-readonly DEB_REPO_SRCDIR=$ORIGIN/kz-deb/src
-readonly DEB_REPO_DISTDIR=$ORIGIN/kz-deb/dist
+readonly DEB_REPO_SRCDIR=$GITROOT/kz-deb/src
+readonly DEB_REPO_DISTDIR=$GITROOT/kz-deb/dist
 readonly DEB_NAME=kz_4.2.1-1_all.deb
 readonly DEB_DEV_NAME=kz-dev_4.2.1-1_all.deb
 
-readonly RPM_REPO_SRCDIR=$ORIGIN/kz-rpm/src
-readonly RPM_REPO_DISTDIR=$ORIGIN/kz-rpm/dist
+readonly RPM_REPO_SRCDIR=$GITROOT/kz-rpm/src
+readonly RPM_REPO_DISTDIR=$GITROOT/kz-rpm/dist
 readonly RPM_NAME=kz-4.2.1-1.noarch.rpm
 readonly RPM_DEV_NAME=kz-dev-4.2.1-1.noarch.rpm
 
@@ -179,7 +179,6 @@ $USAGE"
 function build_website() {
     local file=''
     local filename=''
-    local startdir=$PWD
     local text=''
 
     text=$(gettext 'Build website...')
@@ -205,7 +204,6 @@ function build_website() {
                         "$file"
         fi
     done
-    cd "$startdir"
 
     # Copy kz-get to kz-uploads.
     mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/scripts" |& $PROGRAM_LOGS
@@ -225,17 +223,16 @@ function build_website() {
 function generate_gettext_files() {
     local bash_script='#!''/usr/bin/env bash'
     local gettext_language=''
-    local its_dir=$ORIGIN/kz-scripts/usr/share/gettext/its
+    local its_dir=$GITROOT/kz-scripts/usr/share/gettext/its
     local lc_messages_dir=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES
     local pot_dir=$SCRIPTS_REPO/usr/bin/
     local python_script='#!''/usr/bin/env python3'
-    local startdir=$PWD
     local text=''
     local gettext_dir=''
     local gettext_dirs="\
-$ORIGIN/kz-scripts/usr/bin \
-$ORIGIN/kz-scripts/usr/share/applications \
-$ORIGIN/kz-scripts/usr/share/polkit-1/actions"
+$GITROOT/kz-scripts/usr/bin \
+$GITROOT/kz-scripts/usr/share/applications \
+$GITROOT/kz-scripts/usr/share/polkit-1/actions"
     local gettext_file=''
 
     text=$(gettext 'Generate gettext files..')
@@ -325,7 +322,6 @@ $ORIGIN/kz-scripts/usr/share/polkit-1/actions"
                         "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
         done
     done
-    cd "$startdir"
 
     # CREATE MO FILE
     msgfmt  --output-file="$lc_messages_dir/kz.mo"  \
@@ -338,16 +334,15 @@ function check_repos() {
     local err_flag=false
     local repo=''
     local repos=''
-    local startdir=$PWD
     local text=''
 
     text=$(gettext 'Check that all repos are on branch main')...
     kz.infomsg "$text"
 
-    repos=$(find "$ORIGIN/kz-"* -prune -printf '%f\n')
+    repos=$(find "$GITROOT/kz-"* -prune -printf '%f\n')
 
     for repo in $repos; do
-        cd "$ORIGIN/$repo"
+        cd "$GITROOT/$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             text=$(eval_gettext "Repo \$repo not on branch main.")
             kz.errmsg "$text"
@@ -360,7 +355,7 @@ function check_repos() {
     kz.infomsg "$text"
 
     for repo in $repos; do
-        cd "$ORIGIN/$repo"
+        cd "$GITROOT/$repo"
 
         # Prevent false positives.
         # shellcheck disable=SC2154
@@ -373,8 +368,6 @@ function check_repos() {
             err_flag=true
         fi
     done
-
-    cd "$startdir"
 
     if $err_flag; then
         return 1
@@ -459,7 +452,6 @@ function build_deb_package() {
 
 # This function builds RPM package kz.
 function build_rpm_package() {
-    local startdir=$PWD
     local text=''
     local to_copy=''
 
@@ -509,13 +501,12 @@ function build_rpm_package() {
 
     # Create RPM package in kz-rpm/dist/.
     # NOTE: rpmbuild requires the _topdir to be in double quotes.
-    cd "$ORIGIN"
+    cd "$GITROOT"
     rpmbuild    -ba                                         \
                 --build-in-place                            \
                 --define                                    \
                 "_topdir $RPM_REPO_DISTDIR/rpmbuild"        \
                 "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"  |& $PROGRAM_LOGS
-    cd "$startdir"
 
     if $OPTION_DEV; then
         to_copy=$UPLOADS_REPO_DISTDIR/assets/packages/$RPM_DEV_NAME

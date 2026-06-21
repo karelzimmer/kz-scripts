@@ -602,7 +602,7 @@ function create_backup() {
 # Exclude cache files
 .cache/
 # Exclude Git-managed directories
-$(find "$HOME" -type d -name ".git" -printf "%P\n" | sed 's/\/\.git//')
+$(find "$HOME" -type d -name ".git" -printf "%P\n" | sed 's|/.git||')
 EOF
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")

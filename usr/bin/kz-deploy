@@ -176,16 +176,16 @@ function check_repos() {
     local err_flag=false
     local repo=''
     local repos=''
-    local startdir=$PWD
+    # local startdir=$PWD
     local text=''
 
     text=$(gettext 'Check that all repos are on branch main')...
     kz.infomsg "$text"
 
-    repos=$(find "$ORIGIN/kz-"* -prune -printf '%f\n')
+    repos=$(find "$GITROOT/kz-"* -prune -printf '%f\n')
 
     for repo in $repos; do
-        cd "$ORIGIN/$repo"
+        cd "$GITROOT/$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             text=$(eval_gettext "Repo \$repo not on branch main.")
             kz.errmsg "$text"
@@ -198,7 +198,7 @@ function check_repos() {
     kz.infomsg "$text"
 
     for repo in $repos; do
-        cd "$ORIGIN/$repo"
+        cd "$GITROOT/$repo"
 
         # Prevent false positives.
         # shellcheck disable=SC2154
@@ -212,7 +212,7 @@ function check_repos() {
         fi
     done
 
-    cd "$startdir"
+    # cd "$startdir"
 
     if $err_flag; then
         return 1
@@ -241,7 +241,7 @@ function check_scripts_and_website() {
 
 # This function uploads the website.
 function upload_website() {
-    local ftp_from=$ORIGIN/kz-uploads/dist
+    local ftp_from=$GITROOT/kz-uploads/dist
     local ftp_host=server106.hosting2go.nl
     local ftp_login=$HOME/.$ftp_host'.login'
     local ftp_opts='--reverse --delete --verbose'
@@ -294,13 +294,10 @@ function install_package() {
     if $OPTION_DEV; then
         parm='--dev'
     fi
-
     if ! (wget karelzimmer.nl/getkz; bash getkz "$parm"); then
         text=$(gettext 'Install Debian package failed.')
         kz.errmsg "$text"
     fi
-
-    cd "$OLDPWD"
     kz.logmsg 'Called kz-get (via wget and bash).'
 }
 
