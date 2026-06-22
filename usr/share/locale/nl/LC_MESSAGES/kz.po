@@ -199,7 +199,7 @@ msgid "Choose USB medium:"
 msgstr "Kies USB-medium:"
 
 #: kz-backup:244 kz-backup:257 kz-install:412 kz-install:425 kz-menu:215
-#: kz-menu:250 kz-menu:421 kz-menu:456 kz-restore:244 kz-restore:257
+#: kz-menu:250 kz-menu:424 kz-menu:459 kz-restore:244 kz-restore:257
 #: kz-setup:394 kz-setup:407
 msgid "Continue"
 msgstr "Verder"
@@ -657,7 +657,7 @@ msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
 #: kz-backup:211 kz-backup:744 kz-desktop:288 kz-install:837 kz-install:859
-#: kz-menu:367 kz-restore:211 kz-restore:456 kz-setup:733 kz-setup:762
+#: kz-menu:370 kz-restore:211 kz-restore:456 kz-setup:733 kz-setup:762
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -1185,7 +1185,7 @@ msgstr "Installatie afronden"
 msgid "Set up user"
 msgstr "Gebruiker inrichten"
 
-#: kz-menu:57 kz-menu:71 kz-menu:451
+#: kz-menu:57 kz-menu:71 kz-menu:454
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
@@ -1238,36 +1238,36 @@ msgstr "Apps instellen"
 msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
-#: kz-menu:88 kz-menu:422 kz-menu:457
+#: kz-menu:88 kz-menu:425 kz-menu:460
 msgid "Back"
 msgstr "Terug"
 
-#: kz-menu:214 kz-menu:246 kz-menu:420 kz-menu:452
+#: kz-menu:214 kz-menu:246 kz-menu:423 kz-menu:455
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
-#: kz-menu:217 kz-menu:423
+#: kz-menu:217 kz-menu:426
 msgid "CHOICE"
 msgstr "KEUZE"
 
-#: kz-menu:218 kz-menu:276 kz-menu:424 kz-menu:482
+#: kz-menu:218 kz-menu:277 kz-menu:427 kz-menu:486
 msgid "NUM"
 msgstr "NUM"
 
-#: kz-menu:219 kz-menu:277 kz-menu:425 kz-menu:483
+#: kz-menu:219 kz-menu:278 kz-menu:428 kz-menu:487
 msgid "ACTION"
 msgstr "ACTIE"
 
-#: kz-menu:220 kz-menu:278 kz-menu:426 kz-menu:484
+#: kz-menu:220 kz-menu:279 kz-menu:429 kz-menu:488
 msgid "DESCRIPTION"
 msgstr "BESCHRIJVING"
 
-#: kz-menu:287
+#: kz-menu:288
 #, sh-format
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr "Voer uit nummer [1-$MENU1_LINES]: "
 
-#: kz-menu:355
+#: kz-menu:357
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1289,28 +1289,28 @@ msgstr ""
 "3. Start de computer op vanaf deze USB-stick.\n"
 "4. Installeer Linux."
 
-#: kz-menu:493
+#: kz-menu:497
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: kz-menu:567
+#: kz-menu:573
 msgid "The following will be executed:"
 msgstr "Het volgende zal worden uitgevoerd:"
 
-#: kz-menu:583 kz-menu:600 kz-menu:611
+#: kz-menu:589 kz-menu:606 kz-menu:619
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:590
+#: kz-menu:596
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:591
+#: kz-menu:597
 msgid "No"
 msgstr "Nee"
 
-#: kz-menu:613
+#: kz-menu:620
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr "$prompt [J/n]: "
