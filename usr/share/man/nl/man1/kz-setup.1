@@ -35,9 +35,8 @@ Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt.
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
-Bij het verwerken van de instellingenbestanden worden de opdrachten voor voor
-iedere en de huidige computer geselecteerd en gekopieerd naar een
-opdrachtbestand.
+Bij het verwerken van de instellingenbestanden worden de opdrachten voor iedere
+en de huidige computer geselecteerd en gekopieerd naar een opdrachtbestand.
 .br
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 .br
@@ -57,9 +56,10 @@ Per te verwerken app worden de opdrachten geselecteerd uit de
 instellingenbestanden en gekopieerd naar het opdrachtbestand.
 .sp
 Met optie \fB-b\fR, \fB--browse\fR kan gebladerd worden door de
-instellingenbestanden.
+instellingenbestanden met alle opdrachten en informatie.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand met de
+geselecteerde opdrachten en informatie.
 .sp
 Met optie \fB-C\fR, \fB--cli\fR wordt \fBkz setup\fR in opdrachtregelmodus
 uitgevoerd (CLI).
@@ -69,12 +69,12 @@ instellingenbestand opgegeven worden. Deze optie kan herhaaldelijk gebruikt
 worden.
 .sp
 Met optie \fB-G\fR, \fB--gui\fR wordt \fBkz setup\fR in grafische modus
-uitgevoerd (GUI), een desktopomgeving is vereist.
+uitgevoerd (GUI). Een desktopomgeving is vereist.
 .sp
 Optie \fB-h\fR, \fB--help\fR toont een korte beschrijving van de beschikbare
 opties en sluit af.
 .sp
-Optie \fB-l\fR, \fB--list\fR geeft een lijst alle van apps die beschikbaar zijn
+Optie \fB-l\fR, \fB--list\fR geeft een lijst van alle apps die beschikbaar zijn
 in de instellingenbestanden.
 .sp
 Optie \fB-m\fR, \fB--manual\fR toont de handleiding en sluit af.
@@ -99,10 +99,11 @@ en sluit af.
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
 \fB-b\fR, \fB--browse\fR
-Blader door het instellingenbestand.
+Blader door het instellingenbestand met alle opdrachten en informatie.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van het opdrachtbestand.
+Toon de inhoud van het opdrachtbestand met de geselecteerde opdrachten en
+informatie.
 .TP
 \fB-C\fR, \fB--cli\fR
 Draai in opdrachtregelmodus (CLI).
@@ -111,7 +112,7 @@ Draai in opdrachtregelmodus (CLI).
 Verwerk het opgegeven bestand. Deze optie kan herhaaldelijk gebruikt worden.
 .TP
 \fB-G\fR, \fB--gui\fR
-Draai in grafische modus (GUI).
+Draai in grafische modus (GUI). Een desktopomgeving is vereist.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.

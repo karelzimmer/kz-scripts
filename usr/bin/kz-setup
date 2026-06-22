@@ -39,8 +39,10 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -b, --browse   browse settings files')
-$(gettext '  -c, --cat      show contents of command file')
+$(gettext "  -b, --browse   browse settings files with all commands and \
+information")
+$(gettext "  -c, --cat      show contents of command file with selected \
+commands and information")
 $(gettext '  -C, --cli      run in command-line mode')
 $(gettext '  -f, --file <file>
                  process specified settings files')

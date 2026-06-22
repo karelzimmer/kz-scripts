@@ -50,7 +50,7 @@ De computer zal indien nodig opnieuw opstarten.
 Voor de indeling van de installatiebestanden zie \fBman kz install.sh\fR en
 \fBman kz install.sh.gpg\fR.
 .sp
-Voor instructies over het toevoegen van extra gebruikers, zie de sectie
+Voor instructies over het toevoegen van extra gebruikers zie de sectie
 \fBBESTANDEN\fR hieronder.
 .sp
 Naar keuze kunnen te verwerken apps opgegeven worden met argument \fI<app>\fR,
@@ -61,9 +61,10 @@ Per te verwerken app worden de opdrachten geselecteerd uit de
 installatiebestanden en gekopieerd naar het opdrachtbestand.
 .sp
 Met optie \fB-b\fR, \fB--browse\fR kan gebladerd worden door de
-installatiebestanden.
+installatiebestanden met alle opdrachten en informatie.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand met de
+geselecteerde opdrachten en informatie.
 .sp
 Met optie \fB-C\fR, \fB--cli\fR wordt \fBkz install\fR in opdrachtregelmodus
 uitgevoerd (CLI).
@@ -73,7 +74,7 @@ installatiebestand opgegeven worden. Deze optie kan herhaaldelijk gebruikt
 worden.
 .sp
 Met optie \fB-G\fR, \fB--gui\fR wordt \fBkz install\fR in grafische modus
-uitgevoerd (GUI), een desktopomgeving is vereist.
+uitgevoerd (GUI). Een desktopomgeving is vereist.
 .sp
 Optie \fB-h\fR, \fB--help\fR toont een korte beschrijving van de beschikbare
 opties en sluit af.
@@ -119,10 +120,11 @@ Op een Red Hat systeem probeer het volgende:
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
 \fB-b\fR, \fB--browse\fR
-Blader door de installatiebestanden.
+Blader door de installatiebestanden met alle opdrachten en informatie.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van het opdrachtbestand.
+Toon de inhoud van het opdrachtbestand met de geselecteerde opdrachten en
+informatie.
 .TP
 \fB-C\fR, \fB--cli\fR
 Draai in opdrachtregelmodus (CLI).
@@ -131,7 +133,7 @@ Draai in opdrachtregelmodus (CLI).
 Verwerk het opgegeven bestand. Deze optie kan herhaaldelijk gebruikt worden.
 .TP
 \fB-G\fR, \fB--gui\fR
-Draai in grafische modus (GUI).
+Draai in grafische modus (GUI). Een desktopomgeving is vereist.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.
