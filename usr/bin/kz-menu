@@ -271,7 +271,8 @@ function process_menu1_cli() {
     local prompt=''
 
     while true; do
-        printf  '\n%s\n\n%3s  %-24s  %s\n'  \
+        clear -x
+        printf  '%s\n\n%3s  %-24s  %s\n'    \
                 "$MENU1_HEAD"               \
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
@@ -351,7 +352,8 @@ function process_menu1_choice2() {
     local text=''
     local title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
 
-    text="
+    text="==== $title ====
+
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on https://karelzimmer.nl/en.
 
@@ -362,6 +364,7 @@ Roughly boils down to:
 3. Boot the computer from this USB stick.
 4. Install Linux.")
 "
+    clear -x
     kz.infomsg "$text"
     if [[ $UI_MODE = 'cli' ]]; then
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
@@ -477,7 +480,8 @@ function process_menu2_cli() {
     local prompt=''
 
     while true; do
-        printf  '\n%s\n\n%3s  %-25s  %s\n'  \
+        clear -x
+        printf  '%s\n\n%3s  %-25s  %s\n'    \
                 "$MENU2_HEAD"               \
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
@@ -564,7 +568,9 @@ function show_commands_before_execution() {
     local prompt=''
     local text=''
 
-    text="$(gettext 'The following will be executed:')
+    text="==== $title ====
+
+$(gettext 'The following will be executed:')
 "
     for row in "${!rows[@]}"; do
         description=$(
@@ -607,9 +613,10 @@ $(gettext 'Proceed?')"
             execute_command=false
         fi
     else
-        printf '\n%s\n\n' "$text"
-        prompt="$(gettext 'Proceed?')"
         while true; do
+            clear -x
+            printf '%s\n\n' "$text"
+            prompt="$(gettext 'Proceed?')"
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")" < /dev/tty
             case $REPLY in
                 [YyJj]* | '' )
