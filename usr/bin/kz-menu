@@ -364,13 +364,14 @@ Roughly boils down to:
 3. Boot the computer from this USB stick.
 4. Install Linux.")
 "
-    clear -x
+    if [[ $UI_MODE = 'cli' ]]; then
+        clear -x
+    fi
     kz.infomsg "$text"
     if [[ $UI_MODE = 'cli' ]]; then
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
         read -rp "$prompt" < /dev/tty
     fi
-
 }
 
 

@@ -187,7 +187,7 @@ msgid "Choose USB medium:"
 msgstr ""
 
 #: kz-backup:244 kz-backup:257 kz-install:412 kz-install:425 kz-menu:215
-#: kz-menu:250 kz-menu:424 kz-menu:459 kz-restore:244 kz-restore:257
+#: kz-menu:250 kz-menu:425 kz-menu:460 kz-restore:244 kz-restore:257
 #: kz-setup:394 kz-setup:407
 msgid "Continue"
 msgstr ""
@@ -594,7 +594,7 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 #: kz-backup:211 kz-backup:744 kz-desktop:288 kz-install:837 kz-install:859
-#: kz-menu:370 kz-restore:211 kz-restore:456 kz-setup:733 kz-setup:762
+#: kz-menu:372 kz-restore:211 kz-restore:456 kz-setup:733 kz-setup:762
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -1072,7 +1072,7 @@ msgstr ""
 msgid "Set up user"
 msgstr ""
 
-#: kz-menu:57 kz-menu:71 kz-menu:454
+#: kz-menu:57 kz-menu:71 kz-menu:455
 msgid "Command menu"
 msgstr ""
 
@@ -1125,27 +1125,27 @@ msgstr ""
 msgid "Go to installation menu"
 msgstr ""
 
-#: kz-menu:88 kz-menu:425 kz-menu:460
+#: kz-menu:88 kz-menu:426 kz-menu:461
 msgid "Back"
 msgstr ""
 
-#: kz-menu:214 kz-menu:246 kz-menu:423 kz-menu:455
+#: kz-menu:214 kz-menu:246 kz-menu:424 kz-menu:456
 msgid "Select a choice:"
 msgstr ""
 
-#: kz-menu:217 kz-menu:426
+#: kz-menu:217 kz-menu:427
 msgid "CHOICE"
 msgstr ""
 
-#: kz-menu:218 kz-menu:277 kz-menu:427 kz-menu:486
+#: kz-menu:218 kz-menu:277 kz-menu:428 kz-menu:487
 msgid "NUM"
 msgstr ""
 
-#: kz-menu:219 kz-menu:278 kz-menu:428 kz-menu:487
+#: kz-menu:219 kz-menu:278 kz-menu:429 kz-menu:488
 msgid "ACTION"
 msgstr ""
 
-#: kz-menu:220 kz-menu:279 kz-menu:429 kz-menu:488
+#: kz-menu:220 kz-menu:279 kz-menu:430 kz-menu:489
 msgid "DESCRIPTION"
 msgstr ""
 
@@ -1167,28 +1167,28 @@ msgid ""
 "4. Install Linux."
 msgstr ""
 
-#: kz-menu:497
+#: kz-menu:498
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: kz-menu:576
+#: kz-menu:577
 msgid "The following will be executed:"
 msgstr ""
 
-#: kz-menu:592 kz-menu:609 kz-menu:622
+#: kz-menu:593 kz-menu:610 kz-menu:623
 msgid "Proceed?"
 msgstr ""
 
-#: kz-menu:599
+#: kz-menu:600
 msgid "Yes"
 msgstr ""
 
-#: kz-menu:600
+#: kz-menu:601
 msgid "No"
 msgstr ""
 
-#: kz-menu:623
+#: kz-menu:624
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr ""
