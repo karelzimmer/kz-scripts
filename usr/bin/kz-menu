@@ -568,9 +568,12 @@ function show_commands_before_execution() {
     local prompt=''
     local text=''
 
-    text="==== $title ====
+    if [[ $UI_MODE = 'cli' ]]; then
+        text="==== $title ====
 
-$(gettext 'The following will be executed:')
+"
+    fi
+    text+="$(gettext 'The following will be executed:')
 "
     for row in "${!rows[@]}"; do
         description=$(
