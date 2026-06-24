@@ -38,12 +38,11 @@ herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 Bij het verwerken van de instellingenbestanden worden de opdrachten voor iedere
 en de huidige computer geselecteerd en gekopieerd naar een opdrachtbestand.
 .br
-De opdrachten in het opdrachtbestand worden uitgevoerd.
+De opdrachten in het opdrachtbestand worden uitgevoerd en de gebruiker wordt
+indien nodig uitgelogd.
 .br
 Als er fouten worden gevonden, wordt een overzicht van de foutmeldingen
 gegeven.
-.br
-De gebruiker wordt indien nodig uitgelogd.
 .sp
 Voor de indeling van de instellingenbestanden zie \fBman kz setup.sh\fR en
 \fBman kz setup.sh.gpg\fR.
@@ -191,7 +190,7 @@ Instructies voor het herstellen van de avatar, indien beschikbaar.
 .sp
 \fBkz setup\fR
 .RS
-Stel alles in wat in het standaard instellingenbestand staat.
+Stel alle automatisch geselecteerde apps in.
 Hiervoor is in een desktopomgeving ook starter \fBKZ Apps instellen\fR \
 beschikbaar.
 .RE
@@ -208,12 +207,12 @@ Reset Google Chrome.
 .sp
 \fBkz setup --cat google-chrome\fR
 .RS
-Toon instel-opdrachten voor Google Chrome.
+Toon instel-opdrachten en informatie voor Google Chrome.
 .RE
 .sp
 \fBkz setup --cat --reset google-chrome\fR
 .RS
-Toon reset-opdrachten voor Google Chrome.
+Toon reset-opdrachten en informatie voor Google Chrome.
 .RE
 .EE
 

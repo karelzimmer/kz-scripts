@@ -41,11 +41,10 @@ the result remains the same when executed repeatedly (idempotent).
 When processing the settings files, the commands for any and the current
 computer are selected and copied to a command file.
 .br
-The commands in the command file are executed.
-.br, with all commands and information
-If errors are found, an overview of the error messages is given.
+The commands in the command file are executed and the user will be logged out
+if necessary.
 .br
-The user will be logged out if necessary.
+If errors are found, an overview of the error messages is given.
 .sp
 For the format of the settings files see \fBman kz setup.sh\fR and
 \fBman kz setup.sh.gpg\fR.
@@ -189,7 +188,7 @@ Instructions for restoring the user avatar, if available.
 .sp
 \fBkz setup\fR
 .RS
-Set up everything in the default settings file.
+Set up all automatically selected apps.
 Starter \fBKZ Setup apps\fR is also available for this in a desktop \
 environment.
 .RE
@@ -206,12 +205,12 @@ Reset Google Chrome.
 .sp
 \fBkz setup --cat google-chrome\fR
 .RS
-Show set up commands for Google Chrome.
+Show set up commands and information for Google Chrome.
 .RE
 .sp
 \fBkz setup --cat --reset google-chrome\fR
 .RS
-Show reset commands for Google Chrome.
+Show reset commands and information for Google Chrome.
 .RE
 .EE
 

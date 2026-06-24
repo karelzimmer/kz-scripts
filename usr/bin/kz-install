@@ -332,24 +332,24 @@ $apps"
             text+="
 
 $(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
-the apps.")
-$(gettext "Use \"kz install --cat <app>...\" to view the contents of the apps \
-command file.")
-$(gettext "Use \"kz install --cat\" to view the contents of the whole command \
-file.")"
-        else
+self-selected apps.")
+$(gettext "Use \"kz install --cat <app>...\" to view the contents of the \
+command file with self-selected commands and information.")
+$(gettext "Use \"kz install --cat\" to view the contents of the command \
+file with automatically selected commands and information.")"
+       else
             text+="
 
 $(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove \
---select\" to remove the apps.")
+--select\" to remove self-selected apps.")
 $(gettext "Use \"kz install --cat --remove <app>...\" to view the contents of \
-the apps command file.")
+the command file with self-selected commands and information.")
 $(gettext "Use \"kz install --cat --remove\" to view the contents of the \
-whole command file.")"
+command file with automatically selected commands and information.")"
         fi
         text+="
-$(gettext "Use \"kz install --browse\" to view the contents of the default \
-installation files.")"
+$(gettext "Use \"kz install --browse\" to view the contents of the \
+installation files with all commands and information.")"
     fi
     UI_MODE='cli'
     kz.infomsg "$text"
@@ -441,12 +441,14 @@ $apps"
             text+="
 
 $(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
-the apps.")"
+self-selected apps.")
+$(gettext "Use \"kz install\" to install automatically selected apps.")"
         else
             text+="
 
 $(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove \
---select\" to remove the apps.")"
+--select\" to remove self-selected apps.")
+$(gettext "Use \"kz install\" to remove automatically selected apps.")"
         fi
         kz.infomsg "$text"
         exit 0

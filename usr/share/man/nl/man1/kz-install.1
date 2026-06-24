@@ -40,12 +40,11 @@ herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 Bij het verwerken van de installatiebestanden worden de opdrachten voor iedere
 en de huidige computer geselecteerd en gekopieerd naar een opdrachtbestand.
 .br
-De opdrachten in het opdrachtbestand worden uitgevoerd.
+De opdrachten in het opdrachtbestand worden uitgevoerd en de computer zal
+indien nodig opnieuw opstarten.
 .br
 Als er fouten worden gevonden, wordt een overzicht van de foutmeldingen
 gegeven.
-.br
-De computer zal indien nodig opnieuw opstarten.
 .sp
 Voor de indeling van de installatiebestanden zie \fBman kz install.sh\fR en
 \fBman kz install.sh.gpg\fR.
@@ -206,7 +205,7 @@ Instructies voor het toevoegen van extra gebruikers.
 .sp
 \fBkz install\fR
 .RS
-Installeer alles wat in het standaard installatiebestand staat.
+Installeer alle automatisch geselecteerde apps.
 Hiervoor is in een desktopomgeving ook starter \fBKZ Apps installeren\fR \
 beschikbaar.
 .RE
@@ -223,12 +222,12 @@ Verwijder Google Chrome.
 .sp
 \fBkz install --cat google-chrome\fR
 .RS
-Toon installatie-opdrachten voor Google Chrome.
+Toon installatie-opdrachten en informatie voor Google Chrome.
 .RE
 .sp
 \fBkz install --cat --remove google-chrome\fR
 .RS
-Toon verwijder-opdrachten voor Google Chrome.
+Toon verwijder-opdrachten en informatie voor Google Chrome.
 .RE
 
 .SH ZIE OOK
