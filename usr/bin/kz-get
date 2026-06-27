@@ -209,8 +209,9 @@ function term() {
 $NORMAL\n\n"
     fi
 
-    text+="    $GREEN$(gettext "Package kz has been successfully installed.")
+    text+="    $GREEN$(gettext "Package kz has been successfully installed.")\
 $NORMAL
+
     $(gettext \
 "Now follow the steps as described in the Checklist installation.")
     $(gettext \
