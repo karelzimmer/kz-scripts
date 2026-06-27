@@ -132,13 +132,13 @@ function process_kz_deb_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf '\n%s' 'Debian update.....'
+    printf '%s' 'Debian update.....'
     printf '%s\n' "Update package lists..." |& $PROGRAM_LOGS
     check_debian_package_manager
     sudo apt-get update |& $PROGRAM_LOGS
 
     # Download kz deb package.
-    printf '%s' 'Deb kz download...'
+    printf '\n%s' 'Deb kz download...'
     printf '%s\n' "Downloading $kz_deb_site_file..." |& $PROGRAM_LOGS
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_file"                     |& $PROGRAM_LOGS
