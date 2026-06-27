@@ -102,8 +102,8 @@ msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:171 kz-backup:162 kz-build:162 kz-check:127 kz-deploy:133 kz-desktop:193
-#: kz-dev:157 kz-install:270 kz-menu:187 kz-restore:162 kz-setup:255
-#: kz-update:162 kz-wifi:139
+#: kz-dev:157 kz-install:270 kz-menu:187 kz-menu:332 kz-menu:550 kz-restore:162
+#: kz-setup:255 kz-update:162 kz-wifi:139
 msgid "internal error"
 msgstr ""
 
@@ -187,7 +187,7 @@ msgid "Choose USB medium:"
 msgstr ""
 
 #: kz-backup:244 kz-backup:257 kz-install:414 kz-install:427 kz-menu:215
-#: kz-menu:250 kz-menu:425 kz-menu:460 kz-restore:244 kz-restore:257
+#: kz-menu:250 kz-menu:427 kz-menu:462 kz-restore:244 kz-restore:257
 #: kz-setup:396 kz-setup:409
 msgid "Continue"
 msgstr ""
@@ -594,7 +594,8 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 #: kz-backup:211 kz-backup:744 kz-desktop:288 kz-install:842 kz-install:864
-#: kz-menu:372 kz-restore:211 kz-restore:456 kz-setup:737 kz-setup:766
+#: kz-menu:374 kz-menu:581 kz-restore:211 kz-restore:456 kz-setup:737
+#: kz-setup:766
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -1085,7 +1086,7 @@ msgstr ""
 msgid "Set up user"
 msgstr ""
 
-#: kz-menu:57 kz-menu:71 kz-menu:455
+#: kz-menu:57 kz-menu:71 kz-menu:457
 msgid "Command menu"
 msgstr ""
 
@@ -1138,27 +1139,27 @@ msgstr ""
 msgid "Go to installation menu"
 msgstr ""
 
-#: kz-menu:88 kz-menu:426 kz-menu:461
+#: kz-menu:88 kz-menu:428 kz-menu:463
 msgid "Back"
 msgstr ""
 
-#: kz-menu:214 kz-menu:246 kz-menu:424 kz-menu:456
+#: kz-menu:214 kz-menu:246 kz-menu:426 kz-menu:458
 msgid "Select a choice:"
 msgstr ""
 
-#: kz-menu:217 kz-menu:427
+#: kz-menu:217 kz-menu:429
 msgid "CHOICE"
 msgstr ""
 
-#: kz-menu:218 kz-menu:277 kz-menu:428 kz-menu:487
+#: kz-menu:218 kz-menu:277 kz-menu:430 kz-menu:489
 msgid "NUM"
 msgstr ""
 
-#: kz-menu:219 kz-menu:278 kz-menu:429 kz-menu:488
+#: kz-menu:219 kz-menu:278 kz-menu:431 kz-menu:490
 msgid "ACTION"
 msgstr ""
 
-#: kz-menu:220 kz-menu:279 kz-menu:430 kz-menu:489
+#: kz-menu:220 kz-menu:279 kz-menu:432 kz-menu:491
 msgid "DESCRIPTION"
 msgstr ""
 
@@ -1167,7 +1168,7 @@ msgstr ""
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr ""
 
-#: kz-menu:357
+#: kz-menu:359
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en.\n"
@@ -1180,28 +1181,28 @@ msgid ""
 "4. Install Linux."
 msgstr ""
 
-#: kz-menu:498
+#: kz-menu:500
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
-#: kz-menu:577
+#: kz-menu:657
 msgid "The following will be executed:"
 msgstr ""
 
-#: kz-menu:593 kz-menu:610 kz-menu:623
+#: kz-menu:673 kz-menu:690 kz-menu:703
 msgid "Proceed?"
 msgstr ""
 
-#: kz-menu:600
+#: kz-menu:680
 msgid "Yes"
 msgstr ""
 
-#: kz-menu:601
+#: kz-menu:681
 msgid "No"
 msgstr ""
 
-#: kz-menu:624
+#: kz-menu:704
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr ""

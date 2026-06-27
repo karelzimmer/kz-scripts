@@ -329,7 +329,9 @@ function process_menu1_choice() {
             exit 0
             ;;
         * )
-            exit 0
+            text="$PROGRAM_NAME: menu1_choice: $(gettext 'internal error')"
+            kz.errmsg "$text"
+            exit 1
             ;;
     esac
 }
@@ -518,22 +520,100 @@ function process_menu2_cli() {
 # This function processes menu 2 choice.
 function process_menu2_choice() {
     local text=''
-    local -a rows=()
-    local title=''
 
-    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        rows[1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
-        title="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
-        process_commands
-    else
-        if [[ $UI_MODE = 'gui' ]]; then
-            process_menu1_gui
-        elif [[ $UI_MODE = 'tui' ]]; then
-            process_menu1_tui
-        else
-            process_menu1_cli
-        fi
+    case $REPLY in
+        1 )
+            process_menu2_choice1
+            ;;
+        2 )
+            process_menu2_choice2
+            ;;
+        3 )
+            process_menu2_choice3
+            ;;
+        4 )
+            process_menu2_choice4
+            ;;
+        5 )
+            process_menu2_choice5
+            ;;
+        6 )
+            if [[ $UI_MODE = 'gui' ]]; then
+                process_menu1_gui
+            elif [[ $UI_MODE = 'tui' ]]; then
+                process_menu1_tui
+            else
+                process_menu1_cli
+            fi
+            ;;
+        * )
+            text="$PROGRAM_NAME: menu2_choice: $(gettext 'internal error')"
+            kz.errmsg "$text"
+            exit 1
+            ;;
+    esac
+}
+
+
+# This function processes menu 2 choice 1.
+function process_menu2_choice1() {
+    local -a rows=(
+        [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
+        )
+    local title="${MENU2_ACTIONS[1]} (${MENU2_DESCS[1]})"
+
+    process_commands
+}
+
+
+# This function processes menu 2 choice 2.
+function process_menu2_choice2() {
+    local -a rows=(
+        [1]="${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
+        )
+    local title="${MENU2_ACTIONS[2]} (${MENU2_DESCS[2]})"
+
+    if [[ $UI_MODE = 'cli' ]]; then
+        clear -x
     fi
+    process_commands
+    if [[ $UI_MODE = 'cli' ]]; then
+        prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+        read -rp "$prompt" < /dev/tty
+    fi
+}
+
+
+# This function processes menu 2 choice 3.
+function process_menu2_choice3() {
+    local -a rows=(
+        [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
+        )
+    local title="${MENU2_ACTIONS[3]} (${MENU2_DESCS[3]})"
+
+    process_commands
+}
+
+
+# This function processes menu 2 choice 4.
+function process_menu2_choice4() {
+    local -a rows=(
+        [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
+        )
+    local title="${MENU2_ACTIONS[4]} (${MENU2_DESCS[4]})"
+
+    process_commands
+}
+
+
+# This function processes menu 2 choice 5.
+function process_menu2_choice5() {
+    local -a rows=(
+        [1]="${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
+        )
+    local title="${MENU2_ACTIONS[5]} (${MENU2_DESCS[5]})"
+
+    process_commands
 }
 
 
@@ -625,6 +705,7 @@ $(gettext 'Proceed?')"
             case $REPLY in
                 [YyJj]* | '' )
                     execute_command=true
+                    clear -x
                     break
                     ;;
                 [Nn]* )
