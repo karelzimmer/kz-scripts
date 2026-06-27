@@ -131,7 +131,7 @@ function process_kz_deb_package() {
     fi
 
     # Download kz deb package.
-    printf '%s' 'Download...'
+    printf '%s' 'Deb kz download...'
     printf '%s\n' "Downloading $kz_deb_site_file..." |& $PROGRAM_LOGS
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_file"                     |& $PROGRAM_LOGS
@@ -140,7 +140,7 @@ function process_kz_deb_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf '\n%s' 'Update.....'
+    printf '\n%s' 'Debian update.....'
     printf '%s\n' "Update package lists..." |& $PROGRAM_LOGS
     check_debian_package_manager
     sudo apt-get update |& $PROGRAM_LOGS
@@ -150,7 +150,7 @@ function process_kz_deb_package() {
     export DEBIAN_FRONTEND=noninteractive
 
     # Install kz deb package.
-    printf '\n%s' 'Install....'
+    printf '\n%s' 'Deb kz install....'
     printf '%s\n' "Installing $kz_deb_site_file..." |& $PROGRAM_LOGS
     check_debian_package_manager
     sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
@@ -189,7 +189,7 @@ function process_kz_rpm_package() {
     fi
 
     # Install kz rpm package.
-    printf '%s' 'Install...'
+    printf '%s' 'RPM kz install...'
     printf '%s\n' "Installing $kz_rpm_site_file..." |& $PROGRAM_LOGS
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
 }
