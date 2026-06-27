@@ -219,7 +219,7 @@ function process_options() {
                 shift 2
                 ;;
             -G | --gui )
-                if [[ -z ${DISPLAY-} ]]; then
+                if [[ -z ${XDG_CURRENT_DESKTOP-} ]]; then
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"
                     kz.infomsg "$text"
@@ -713,6 +713,7 @@ function execute_command() {
         printf '%s\n' "#$app_name_line\n\n$cmd"
         check_debian_package_manager
         pkexec  /usr/bin/kz-install-pkexec  \
+                "${XDG_CURRENT_DESKTOP-}"   \
                 "$cmd"                      \
                 1> >($PROGRAM_LOGS)         \
                 2>> "$ERROR_LOG"            || pkexec_rc=$?

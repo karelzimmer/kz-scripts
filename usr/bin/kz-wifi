@@ -109,7 +109,8 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         if opt in ('-C', '--cli'):
             UI_MODE = 'cli'
         elif opt in ('-G', '--gui'):
-            if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
+            if subprocess.run('[[ -n ${XDG_CURRENT_DESKTOP-} ]]',
+                              executable='bash',
                               stdout=subprocess.DEVNULL,
                               stderr=subprocess.DEVNULL,
                               shell=True,).returncode != 0:

@@ -503,15 +503,15 @@ kz-desktop --delete=thunderbird
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=code
 #
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/json; fi
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/x-desktop; fi
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/x-shellscript; fi
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop application/xml; fi
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/html; fi
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/markdown; fi
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/plain; fi
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/troff; fi
-if [[ -n ${DISPLAY-} ]]; then xdg-mime default code.desktop text/x-python; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/json; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/x-desktop; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/x-shellscript; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/xml; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/html; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/markdown; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/plain; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/troff; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
 # RESET vscode pc06 pc07
 # -----------------------------------------------------------------------------

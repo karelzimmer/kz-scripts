@@ -144,7 +144,7 @@ function kz.process_option_help() {
     local yelp_man=''
     local yelp_man_url=''
 
-    if [[ -n ${DISPLAY-} ]]; then
+    if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
         yelp_man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1)"
         yelp_man=$(eval_gettext ", or see the \$yelp_man_url man page")
         yelp_man+="\033]8;;\033\\"
@@ -162,7 +162,7 @@ $text"
 
 # This function displays the manual page.
 function kz.process_option_manual() {
-    if [[ -n ${DISPLAY-} ]]; then
+    if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
         yelp man:"$PROGRAM_NAME" 2> /dev/null
     else
         man "$PROGRAM_NAME"
@@ -291,7 +291,7 @@ function kz.term() {
             text="$(eval_gettext \
 "Error \$rc on line \$lineno in function \$function while executing command: \
 \$command")"
-            if [[ -z ${DISPLAY-} ]]; then
+            if [[ -z ${XDG_CURRENT_DESKTOP-} ]]; then
                 text+="
 $(gettext "Use \"journalctl -xe\" to check what went wrong.")"
             else

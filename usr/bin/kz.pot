@@ -103,7 +103,7 @@ msgstr ""
 
 #: kz:171 kz-backup:162 kz-build:162 kz-check:127 kz-deploy:133 kz-desktop:193
 #: kz-dev:157 kz-install:270 kz-menu:187 kz-restore:162 kz-setup:255
-#: kz-update:162 kz-wifi:138
+#: kz-update:162 kz-wifi:139
 msgid "internal error"
 msgstr ""
 
@@ -158,7 +158,7 @@ msgid "  -T, --tui      run in text-based mode (default)"
 msgstr ""
 
 #: kz-backup:119 kz-desktop:208 kz-install:224 kz-menu:155 kz-restore:115
-#: kz-setup:209 kz-wifi:118
+#: kz-setup:209 kz-wifi:119
 msgid "no desktop environment available"
 msgstr ""
 
@@ -167,7 +167,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:170 kz-build:170 kz-check:135 kz-deploy:141 kz-desktop:201
-#: kz-dev:164 kz-menu:195 kz-restore:170 kz-update:169 kz-wifi:145
+#: kz-dev:164 kz-menu:195 kz-restore:170 kz-update:169 kz-wifi:146
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -320,7 +320,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:716 kz-install:811 kz-restore:428 kz-setup:708
+#: kz-backup:716 kz-install:812 kz-restore:428 kz-setup:708
 msgid "error messages"
 msgstr ""
 
@@ -345,11 +345,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:724 kz-install:816 kz-restore:436 kz-setup:712
+#: kz-backup:724 kz-install:817 kz-restore:436 kz-setup:712
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:725 kz-install:817 kz-restore:437 kz-setup:713
+#: kz-backup:725 kz-install:818 kz-restore:437 kz-setup:713
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -593,7 +593,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:211 kz-backup:744 kz-desktop:288 kz-install:841 kz-install:863
+#: kz-backup:211 kz-backup:744 kz-desktop:288 kz-install:842 kz-install:864
 #: kz-menu:372 kz-restore:211 kz-restore:456 kz-setup:737 kz-setup:766
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
@@ -993,7 +993,7 @@ msgstr ""
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:720 kz-install:742
+#: kz-install:721 kz-install:743
 msgid "Authentication is required to continue."
 msgstr ""
 
@@ -1005,27 +1005,27 @@ msgstr ""
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:812
+#: kz-install:813
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:820
+#: kz-install:821
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:822
+#: kz-install:823
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:849
+#: kz-install:850
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:851
+#: kz-install:852
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:857
+#: kz-install:858
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1453,11 +1453,11 @@ msgstr ""
 msgid "Usage: kz wifi [<options>]"
 msgstr ""
 
-#: kz-wifi:160
+#: kz-wifi:161
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 
-#: kz-wifi:170 kz-wifi:181
+#: kz-wifi:171 kz-wifi:182
 msgid "No WiFi device found."
 msgstr ""
 

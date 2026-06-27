@@ -204,7 +204,7 @@ $USAGE"
         exit 1
     fi
 
-    if [[ -z ${DISPLAY-} ]]; then
+    if [[ -z ${XDG_CURRENT_DESKTOP-} ]]; then
         text="$program_name: $(gettext 'no desktop environment available')"
         kz.infomsg "$text"
         exit 0

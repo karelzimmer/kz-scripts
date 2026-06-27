@@ -207,7 +207,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str = ''
 
-    if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
+    if subprocess.run('[[ -n ${XDG_CURRENT_DESKTOP-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         yelp_man_url = f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{program_name}(1)'
@@ -231,7 +231,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     text: str = ''
     yelp: str = f'yelp man:{PROGRAM_NAME}'
 
-    if subprocess.run('[[ -n ${DISPLAY-} ]]', executable='bash',
+    if subprocess.run('[[ -n ${XDG_CURRENT_DESKTOP-} ]]', executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
         try:

@@ -215,7 +215,7 @@ $NORMAL
 "Now follow the steps as described in the Checklist installation.")
     $(gettext \
 "Checklist installation can be found on https://karelzimmer.nl/en.")"
-    if [[ -n ${DISPLAY-} ]]; then
+    if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
         text+="
 
     $BOLD$(gettext "Type 'exit' to close this window.")$NORMAL"
