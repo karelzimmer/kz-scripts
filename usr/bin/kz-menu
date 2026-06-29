@@ -325,13 +325,8 @@ function process_menu1_choice() {
         5 )
             process_menu2
             ;;
-        6 )
+        6 | * )
             exit 0
-            ;;
-        * )
-            text="$PROGRAM_NAME: menu1_choice: $(gettext 'internal error')"
-            kz.errmsg "$text"
-            exit 1
             ;;
     esac
 }
@@ -537,7 +532,7 @@ function process_menu2_choice() {
         5 )
             process_menu2_choice5
             ;;
-        6 )
+        6 | * )
             if [[ $UI_MODE = 'gui' ]]; then
                 process_menu1_gui
             elif [[ $UI_MODE = 'tui' ]]; then
@@ -545,11 +540,6 @@ function process_menu2_choice() {
             else
                 process_menu1_cli
             fi
-            ;;
-        * )
-            text="$PROGRAM_NAME: menu2_choice: $(gettext 'internal error')"
-            kz.errmsg "$text"
-            exit 1
             ;;
     esac
 }
