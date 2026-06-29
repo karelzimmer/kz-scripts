@@ -325,7 +325,7 @@ function process_menu1_choice() {
         5 )
             process_menu2
             ;;
-        6 | * )
+        * )
             exit 0
             ;;
     esac
@@ -532,7 +532,7 @@ function process_menu2_choice() {
         5 )
             process_menu2_choice5
             ;;
-        6 | * )
+        * )
             if [[ $UI_MODE = 'gui' ]]; then
                 process_menu1_gui
             elif [[ $UI_MODE = 'tui' ]]; then
