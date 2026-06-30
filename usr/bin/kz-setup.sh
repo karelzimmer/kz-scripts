@@ -12,11 +12,17 @@
 # =============================================================================
 
 # SETUP bitwarden
-# DESC  SETUP: A secure and free password manager for all of your devices.
+# DESC  A secure and free password manager for all of your devices (*).
 # HOST  *
 kz-desktop --addaft=com.bitwarden.desktop
 
 # RESET bitwarden
-# DESC  RESET: A secure and free password manager for all of your devices.
-# HOST  *
+kz-desktop --delete=com.bitwarden.desktop
+
+# SETUP bitwarden
+# DESC  A secure and free password manager for all of your devices (pc06 pc06).
+# HOST  pc06 pc07
+kz-desktop --addaft=com.bitwarden.desktop
+
+# RESET bitwarden
 kz-desktop --delete=com.bitwarden.desktop
