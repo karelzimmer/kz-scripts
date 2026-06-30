@@ -474,11 +474,8 @@ function process_settings_files_by_app_argument() {
     local no_app_match=true
     local setup_record=''
     local write_header=false
-    local host_match=false
-
 
     # TODO: Add support for multiple recordtypes in the settings file.
-    # TODO: Waarom werkt dit niet goed?
     while read -r setup_record; do
         case $setup_record in
             '#'[[:space:]]*${SETUP}[[:space:]]*${app_argument}* )
@@ -496,18 +493,15 @@ function process_settings_files_by_app_argument() {
             '#'[[:space:]]*HOST[[:space:]]* )
                 # Save host record.
                 host_record=$setup_record
-                # Set switch.
-                host_match=true
                 ;;
             '#'[[:space:]]*${SETUP}[[:space:]]* | \
             '#'[[:space:]]*${RESET}[[:space:]]* )
                 # Skip mismatched app records, reset switches.
                 app_match=false
-                host_match=false
                 write_header=false
                 ;;
             * )
-                if $app_match && $host_match; then
+                if $app_match; then
                     if $write_header; then
                         # Add saved header information to command file.
                         {
@@ -528,7 +522,6 @@ function process_settings_files_by_app_argument() {
         err_flag=true
         text+=$(eval_gettext "App '\$app_argument' not found.")'\n'
     fi
-    cat "$command_file"  # DEBUG
 }
 
 
@@ -549,7 +542,7 @@ function process_settings_files_by_hostname() {
             '#'[[:space:]]*${SETUP}[[:space:]]* )
                 # Save app record.
                 app_record=$setup_record
-                # Set switches.
+                # Set switch.
                 app_match=true
                 ;;
             '#'[[:space:]]*DESC[[:space:]]* )
@@ -560,7 +553,7 @@ function process_settings_files_by_hostname() {
             '#'[[:space:]]*HOST[[:space:]]*$HOSTNAME* )
                 # Save host record.
                 host_record=$setup_record
-                # Set switch.
+                # Set switches.
                 host_match=true
                 write_header=true
                 ;;
