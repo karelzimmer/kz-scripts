@@ -544,7 +544,6 @@ function process_settings_files_by_hostname() {
     local write_header=false
 
     # TODO: Add support for multiple recordtypes in the settings file.
-    # TODO: Waarom werkt dit wel goed met app_match, maar niet zonder app_match?
     while read -r setup_record; do
         case $setup_record in
             '#'[[:space:]]*${SETUP}[[:space:]]* )
@@ -552,7 +551,6 @@ function process_settings_files_by_hostname() {
                 app_record=$setup_record
                 # Set switches.
                 app_match=true
-                write_header=true
                 ;;
             '#'[[:space:]]*DESC[[:space:]]* )
                 # Save description record.
@@ -564,6 +562,7 @@ function process_settings_files_by_hostname() {
                 host_record=$setup_record
                 # Set switch.
                 host_match=true
+                write_header=true
                 ;;
             '#'[[:space:]]*${SETUP}[[:space:]]* | \
             '#'[[:space:]]*${RESET}[[:space:]]* )

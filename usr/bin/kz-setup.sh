@@ -14,15 +14,23 @@
 # SETUP bitwarden
 # DESC  A secure and free password manager for all of your devices (*).
 # HOST  *
-kz-desktop --addaft=com.bitwarden.desktop
+kz-desktop --addaft=com.bitwarden.desktop #1
 
 # RESET bitwarden
-kz-desktop --delete=com.bitwarden.desktop
+kz-desktop --delete=com.bitwarden.desktop #2
 
 # SETUP bitwarden
 # DESC  A secure and free password manager for all of your devices (pc06 pc06).
 # HOST  pc06 pc07
-kz-desktop --addaft=com.bitwarden.desktop
+kz-desktop --addaft=com.bitwarden.desktop #3
 
 # RESET bitwarden
-kz-desktop --delete=com.bitwarden.desktop
+kz-desktop --delete=com.bitwarden.desktop #4
+
+# SETUP bottles
+# DESC  Run Windows software.
+# HOST  pc06 pc07
+kz-desktop --addaft=com.usebottles.bottles
+
+# RESET bottles
+kz-desktop --delete=com.usebottles.bottles
