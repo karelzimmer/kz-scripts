@@ -503,30 +503,50 @@ function process_settings_files_by_app_argument() {
 # This function generates the command file from the settings file and filters
 # by host.
 function process_settings_files_by_hostname() {
-    local host_match=false
+    local action_match=false
+    local app_record=''
+    local desc_record='No description available.'
     local setup_record=''
 
+    # TODO: Add support for multiple recordtypes in the settings file.
     while read -r setup_record; do
         case $setup_record in
-            '#'[[:space:]]*${SETUP}[[:space:]]*'*' | \
-            '#'[[:space:]]*${SETUP}[[:space:]]*$HOSTNAME* )
-                # Add matching app record to command file.
-                host_match=true
-                printf '%s\n' "$setup_record" >> "$command_file"
+            '#'[[:space:]]*${SETUP}[[:space:]]* )
+                # Save app record.
+                app_record=$setup_record
+                action_match=true
+                ;;
+            '#'[[:space:]]*DESC[[:space:]]* )
+                # Save description record.
+                desc_record=$setup_record
+                ;;
+            '#'[[:space:]]*HOST[[:space:]]*'*' | \
+            '#'[[:space:]]*HOST[[:space:]]*$HOSTNAME* )
+                # Add matching app, desc, and hosts records to command file.
+                if $action_match; then
+                    {
+                        printf '%s\n' "$app_record"
+                        printf '%s\n' "$desc_record"
+                        printf '%s\n' "$setup_record"
+                    } >> "$command_file"
+                    app_record=''
+                    desc_record='No description available.'
+                fi
                 ;;
             '#'[[:space:]]*${SETUP}[[:space:]]* | \
             '#'[[:space:]]*${RESET}[[:space:]]* )
-                # Skip mismatched app record.
-                host_match=false
+                # Skip mismatched app records.
+                action_match=false
                 ;;
             * )
-                if $host_match; then
+                if $action_match; then
                     # Add record to command file.
                     printf '%s\n' "$setup_record" >> "$command_file"
                 fi
                 ;;
         esac
     done < <(cat "${settings_files[@]}")
+    cat "$command_file"; exit 0  # DEBUG
 }
 
 
