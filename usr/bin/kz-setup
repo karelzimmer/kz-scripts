@@ -474,8 +474,11 @@ function process_settings_files_by_app_argument() {
     local no_app_match=true
     local setup_record=''
     local write_header=false
+    local host_match=false
+
 
     # TODO: Add support for multiple recordtypes in the settings file.
+    # TODO: Waarom werkt dit niet goed?
     while read -r setup_record; do
         case $setup_record in
             '#'[[:space:]]*${SETUP}[[:space:]]*${app_argument}* )
@@ -493,15 +496,18 @@ function process_settings_files_by_app_argument() {
             '#'[[:space:]]*HOST[[:space:]]* )
                 # Save host record.
                 host_record=$setup_record
+                # Set switch.
+                host_match=true
                 ;;
             '#'[[:space:]]*${SETUP}[[:space:]]* | \
             '#'[[:space:]]*${RESET}[[:space:]]* )
                 # Skip mismatched app records, reset switches.
                 app_match=false
+                host_match=false
                 write_header=false
                 ;;
             * )
-                if $app_match; then
+                if $app_match && $host_match; then
                     if $write_header; then
                         # Add saved header information to command file.
                         {
@@ -538,6 +544,7 @@ function process_settings_files_by_hostname() {
     local write_header=false
 
     # TODO: Add support for multiple recordtypes in the settings file.
+    # TODO: Waarom werkt dit wel goed met app_match, maar niet zonder app_match?
     while read -r setup_record; do
         case $setup_record in
             '#'[[:space:]]*${SETUP}[[:space:]]* )
