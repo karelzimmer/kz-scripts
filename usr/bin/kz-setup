@@ -476,10 +476,19 @@ function process_settings_files_by_app_argument() {
     local write_header=false
 
     # TODO: Add support for multiple recordtypes in the settings file.
+    # +-----------------------------------------------------------------------+
+    # | # SETUP <app>   [1]
+    # | # DESC  <desc>  [2]
+    # | # HOST  <host>  [3]
+    # | <cmd>...        [4]
+    # |
+    # | # RESET <app>   [1]
+    # | <cmd>...        [4]
+    # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
             '#'[[:space:]]*${SETUP}[[:space:]]*${app_argument}* )
-                # Save app record.
+                # Save app record [1].
                 app_record=$setup_record
                 # Set switches.
                 app_match=true
@@ -487,11 +496,11 @@ function process_settings_files_by_app_argument() {
                 write_header=true
                 ;;
             '#'[[:space:]]*DESC[[:space:]]* )
-                # Save description record.
+                # Save description record [2].
                 desc_record=$setup_record
                 ;;
             '#'[[:space:]]*HOST[[:space:]]* )
-                # Save host record.
+                # Save host record [3].
                 host_record=$setup_record
                 ;;
             '#'[[:space:]]*${SETUP}[[:space:]]* | \
@@ -505,14 +514,14 @@ function process_settings_files_by_app_argument() {
                     if $write_header; then
                         # Add saved header information to command file.
                         {
-                            printf '%s\n' "$app_record"
-                            printf '%s\n' "$desc_record"
-                            printf '%s\n' "$host_record"
+                            printf '%s\n' "$app_record"                 # [1]
+                            printf '%s\n' "$desc_record"                # [2]
+                            printf '%s\n' "$host_record"                # [3]
                         } >> "$command_file"
                         write_header=false
                     fi
-                    # Add record to command file.
-                    printf '%s\n' "$setup_record" >> "$command_file"
+                    # Add record to command file [4].
+                    printf '%s\n' "$setup_record" >> "$command_file"    # [4]
                 fi
                 ;;
         esac
@@ -537,21 +546,34 @@ function process_settings_files_by_hostname() {
     local write_header=false
 
     # TODO: Add support for multiple recordtypes in the settings file.
+    # +-----------------------------------------------------------------------+
+    # | # SETUP <app>   [1]
+    # | # DESC  <desc>  [2]
+    # | # HOST  <host>  [3]
+    # | <cmd>...        [4]
+    # |
+    # | # RESET <app>   [1]
+    # | <cmd>...        [4]
+    # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
             '#'[[:space:]]*${SETUP}[[:space:]]* )
-                # Save app record.
+                # Save app record [1].
                 app_record=$setup_record
                 # Set switch.
+                # Switch app_match is here not literally a match on app name,
+                # like in the function that processes argument <app>, but is
+                # required for the reset option because matches on <host> also
+                # causes setup commands to be included with the reset commands.
                 app_match=true
                 ;;
             '#'[[:space:]]*DESC[[:space:]]* )
-                # Save description record.
+                # Save description record [2].
                 desc_record=$setup_record
                 ;;
             '#'[[:space:]]*HOST[[:space:]]*'*' | \
             '#'[[:space:]]*HOST[[:space:]]*$HOSTNAME* )
-                # Save host record.
+                # Save host record [3].
                 host_record=$setup_record
                 # Set switches.
                 host_match=true
@@ -568,19 +590,18 @@ function process_settings_files_by_hostname() {
                     if $write_header; then
                         # Add saved header information to command file.
                         {
-                            printf '%s\n' "$app_record"
-                            printf '%s\n' "$desc_record"
-                            printf '%s\n' "$host_record"
+                            printf '%s\n' "$app_record"                 # [1]
+                            printf '%s\n' "$desc_record"                # [2]
+                            printf '%s\n' "$host_record"                # [3]
                         } >> "$command_file"
                         write_header=false
                     fi
-                    # Add record to command file.
-                    printf '%s\n' "$setup_record" >> "$command_file"
+                    # Add record to command file [4].
+                    printf '%s\n' "$setup_record" >> "$command_file"    # [4]
                 fi
                 ;;
         esac
     done < <(cat "${settings_files[@]}")
-    cat "$command_file"; exit 0  # DEBUG
 }
 
 
