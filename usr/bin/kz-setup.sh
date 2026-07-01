@@ -38,7 +38,9 @@ if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings 
 # SETUP cockpit
 # DESC  Web Console for Linux servers.
 # HOST  pc06
-# USAGE Web app https://localhost:9090
+# -----------------------------------------------------------------------------
+# Web app: https://localhost:9090
+# -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-cockpit
 
 # RESET cockpit
@@ -113,7 +115,9 @@ kz-desktop --delete=org.gnome.Evolution
 # SETUP git
 # DESC  Fast, scalable, distributed revision control system.
 # HOST  pc06 pc07
-# USAGE Web app https://github.com
+# -----------------------------------------------------------------------------
+# Web app: https://github.com
+# -----------------------------------------------------------------------------
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 # RESET git
@@ -124,45 +128,54 @@ git config --global --unset alias.logg
 # HOST  pc06 pc07
 if type gnome-session &> /dev/null; then pipx install gnome-extensions-cli --system-site-packages; fi
 if type gnome-session &> /dev/null; then pipx ensurepath; fi
-#
+# -----------------------------------------------------------------------------
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/
+# -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext install 'CoverflowAltTab@palatis.blogspot.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext enable 'CoverflowAltTab@palatis.blogspot.com'; fi
-#
+# -----------------------------------------------------------------------------
 # Compiz windows effect
 # https://extensions.gnome.org/extension/3210/compiz-windows-effect/
+# -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext install 'compiz-windows-effect@hermes83.github.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext enable 'compiz-windows-effect@hermes83.github.com'; fi
-#
+# -----------------------------------------------------------------------------
 # Compiz alike magic lamp effect
 # https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/
+# -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext install 'compiz-alike-magic-lamp-effect@hermes83.github.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext enable 'compiz-alike-magic-lamp-effect@hermes83.github.com'; fi
-#
+# -----------------------------------------------------------------------------
 # Desktop Cube
 # https://extensions.gnome.org/extension/4648/desktop-cube/
+# -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext install 'desktop-cube@schneegans.github.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext enable 'desktop-cube@schneegans.github.com'; fi
 
 # RESET gnome-extensions
+# -----------------------------------------------------------------------------
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/
+# -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext disable 'CoverflowAltTab@palatis.blogspot.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext uninstall 'CoverflowAltTab@palatis.blogspot.com'; fi
-#
+# -----------------------------------------------------------------------------
 # Compiz windows effect
 # https://extensions.gnome.org/extension/3210/compiz-windows-effect/
+# -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext disable 'compiz-windows-effect@hermes83.github.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext uninstall 'compiz-windows-effect@hermes83.github.com'; fi
-#
+# -----------------------------------------------------------------------------
 # Compiz alike magic lamp effect
 # https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/
+# -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext disable 'compiz-alike-magic-lamp-effect@hermes83.github.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext uninstall 'compiz-alike-magic-lamp-effect@hermes83.github.com'; fi
-#
+# -----------------------------------------------------------------------------
 # Desktop Cube
 # https://extensions.gnome.org/extension/4648/desktop-cube/
+# -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext disable 'desktop-cube@schneegans.github.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext uninstall 'desktop-cube@schneegans.github.com'; fi
 
@@ -282,9 +295,12 @@ LOGOUT=true
 # SETUP lynis
 # DESC  Security auditing and hardening tool for Linux/Unix.
 # HOST  #none
-# USAGE $ git clone https://github.com/CISOfy/lynis.git $HOME
-# USAGE $ cd ~/lynis
-# USAGE $ [sudo] ./lynis audit system
+git clone https://github.com/CISOfy/lynis.git $HOME
+# -----------------------------------------------------------------------------
+# Usage:
+# $ cd ~/lynis
+# $ [sudo] ./lynis audit system
+# -----------------------------------------------------------------------------
 
 # RESET lynis
 rm --force --recursive ~/lynis
@@ -326,7 +342,9 @@ chmod 755 ~
 # SETUP spotify
 # DESC  Spotify streaming music client.
 # HOST  pc01 pc06 pc07
-# USAGE Web app https://open.spotify.com
+# -----------------------------------------------------------------------------
+# Web app: https://open.spotify.com
+# -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spotify; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
@@ -339,19 +357,26 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delet
 # SETUP terminal
 # DESC  Terminal emulator application.
 # HOST  pc01 pc06 pc07
+# -----------------------------------------------------------------------------
 # Enable aliases.
+# -----------------------------------------------------------------------------
 sed --in-place --expression='s/#alias/alias/g' --expression='s/# alias/alias/g' --expression='s/# export/export/g' --expression='s/# eval/eval/g' ~/.bashrc
+# -----------------------------------------------------------------------------
 # Enable search forward in history (with Ctrl-S).
+# -----------------------------------------------------------------------------
 sed --in-place '/^stty -ixon/d' ~/.bashrc
 echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 #
 LOGOUT=true
 
 # RESET terminal
-# DESC  Terminal emulator application.
+# -----------------------------------------------------------------------------
 # Disable aliases.
+# -----------------------------------------------------------------------------
 sed --in-place --expression='s/^alias/#alias/g' --expression='s/^export/#export/g' --expression='s/^eval/#eval/g' ~/.bashrc
+# -----------------------------------------------------------------------------
 # Disable search forward in history (with Ctrl-S).
+# -----------------------------------------------------------------------------
 sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 #
 LOGOUT=true
@@ -387,7 +412,9 @@ kz-desktop --delete=thunderbird
 # SETUP vscode
 # DESC  Code editing. Redefined.
 # HOST  pc06 pc07
-# USAGE Web app https://vscode.dev
+# -----------------------------------------------------------------------------
+# Web app: https://vscode.dev
+# -----------------------------------------------------------------------------
 kz-desktop --addbef=code
 #
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/json; fi
@@ -406,7 +433,9 @@ kz-desktop --delete=code
 # SETUP webmin
 # DESC  Web Console for Linux servers.
 # HOST  pc07
-# USAGE Web app https://localhost:10000
+# -----------------------------------------------------------------------------
+# Web app: https://localhost:10000
+# -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-webmin
 
 # RESET webmin
@@ -415,7 +444,9 @@ kz-desktop --delete=kz-webmin
 # SETUP xdg-projects-dir
 # DESC  Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs.
 # HOST  pc06 pc07
-# USAGE App xdg-projects-dir is not required with xdg-user-dirs version 0.20 or higher.
+# -----------------------------------------------------------------------------
+# App xdg-projects-dir is not required with xdg-user-dirs version 0.20 or higher.
+# -----------------------------------------------------------------------------
 if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; else mkdir --parents --verbose ~/Projects; fi
 if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; else xdg-user-dirs-update --set PROJECTS ~/Projects; fi
 xdg-user-dirs-update

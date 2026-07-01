@@ -374,7 +374,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:716 kz-install:812 kz-restore:428 kz-setup:762
+#: kz-backup:716 kz-install:812 kz-restore:428 kz-setup:783
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -399,11 +399,11 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:724 kz-install:817 kz-restore:436 kz-setup:766
+#: kz-backup:724 kz-install:817 kz-restore:436 kz-setup:787
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:725 kz-install:818 kz-restore:437 kz-setup:767
+#: kz-backup:725 kz-install:818 kz-restore:437 kz-setup:788
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -659,8 +659,8 @@ msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
 #: kz-backup:211 kz-backup:744 kz-desktop:288 kz-install:842 kz-install:864
-#: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:456 kz-setup:791
-#: kz-setup:820
+#: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:456 kz-setup:812
+#: kz-setup:841
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -1091,12 +1091,12 @@ msgstr ""
 msgid "No apps selected."
 msgstr "Geen apps geselecteerd."
 
-#: kz-install:517 kz-setup:523
+#: kz-install:517 kz-setup:532
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr "App '$app_argument' niet gevonden."
 
-#: kz-install:608 kz-setup:625
+#: kz-install:608 kz-setup:646
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
@@ -1114,11 +1114,11 @@ msgstr ""
 msgid "Authentication is required to continue."
 msgstr "Authenticatie is vereist om door te gaan."
 
-#: kz-install:659 kz-setup:666
+#: kz-install:659 kz-setup:687
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:660 kz-setup:667
+#: kz-install:660 kz-setup:688
 msgid "COMMAND"
 msgstr "OPDRACHT"
 
@@ -1150,9 +1150,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
+#: kz-install.sh:1054 kz-install.sh:1056 kz-install.sh:1059
 msgid "guest"
 msgstr "gast"
 
+#: kz-install.sh:1054
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
@@ -1251,7 +1253,7 @@ msgstr "WiFi-details tonen"
 msgid "Restore backup"
 msgstr "Back-up terugzetten"
 
-#: kz-menu:79 kz-setup:367 kz-setup:635 kz-setup.desktop:10
+#: kz-menu:79 kz-setup:367 kz-setup:656 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr "Apps instellen"
 
@@ -1543,31 +1545,31 @@ msgstr ""
 "Gebruik \"kz setup --reset\" om de automatisch geselecteerde apps te "
 "resetten."
 
-#: kz-setup:636
+#: kz-setup:657
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:763
+#: kz-setup:784
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:770
+#: kz-setup:791
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:772
+#: kz-setup:793
 msgid "Try to reset the apps again."
 msgstr "Probeer de apps opnieuw te resetten."
 
-#: kz-setup:799
+#: kz-setup:820
 msgid "Apps set up completed."
 msgstr "Apps instellen is voltooid."
 
-#: kz-setup:801
+#: kz-setup:822
 msgid "Apps reset completed."
 msgstr "Apps resetten is voltooid."
 
-#: kz-setup:809
+#: kz-setup:830
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1575,7 +1577,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:814
+#: kz-setup:835
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1583,7 +1585,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:836
+#: kz-setup:857
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
