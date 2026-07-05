@@ -21,24 +21,16 @@ setup.
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in een versleuteld instellingenbestand, kz-setup.sh.gpg.
 .sp
-In het instellingenbestand staan zogenaamde \fBapp-regel\fRs en
+In het instellingenbestand staan zogenaamde \fBapp-\fR, \fBdesc-\fR,
+\fBhost-\fR en \fBopdracht-regel\fRs.
+.sp
+De \fBapp-regel\fR geeft aan voor welke app de opdrachten uitgevoerd moeten
+worden, de \fBdesc-regel\fR geeft een beschrijving van de app en de
+\fBhost-regel\fR geeft aan op welke computers de opdrachten uitgevoerd moeten
+worden.
+.br
+Deze regels worden gevolgd door één of meer regels met opdrachten, de
 \fBopdracht-regel\fRs.
-.sp
-De \fBapp-regel\fR geeft aan waar de opdrachten uitgevoerd moeten worden en
-wordt gevolgd door één of meer regels met opdrachten (\fBopdracht-regel\fRs).
-.sp
-Een \fBapp-regel\fR bestaat uit vier delen, elk deel gescheiden door minstens
-één spatie, zoals '# SETUP <app> <host>' en '# RESET <app> <host>'.
-.br
-1. #        (commentaarsymbool)
-.br
-2. <actie>  (SETUP of RESET)
-.br
-3. <app>    (de naam van de app)
-.br
-4. <host>   (de naam van de computers of *)
-.br
-Hierna volgen één of meer \fBopdracht-regel\fRs met opdrachten voor <app>.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
@@ -62,34 +54,52 @@ T}
 l | l
 l | l.
 T{
-# SETUP <app> <host>
+# SETUP <app>
 T}:T{
-De app <app> instellen op <host> (\fBapp-regel\fR)
+Welke app instellen (\fBapp-regel\fR), wordt verwerkt.
 T}
 T{
-# Commentaar...
+# DESC  <desc>
 T}:T{
-Commentaarregel
+Een beschrijving van de app (\fBdesc-regel\fR), wordt verwerkt.
 T}
 T{
-Opdracht
+# HOST  <host>
 T}:T{
-App instel-opdracht (één of meer \fBopdracht-regel\fRs)
-T}
-T{
-T}:T{
-Lege regel (geen, één of meer)
-T}
-T{
-# RESET <app> <host>
-T}:T{
-De app <app> resetten op <host> (\fBapp-regel\fR voor optie
-\fB-r\fR, \fB--reset\fR)
+Op welke computers de app ingesteld moet worden (\fBhost-regel\fR), wordt
+verwerkt.
 T}
 T{
 Opdracht
 T}:T{
-Reset-opdracht (één of meer \fBopdracht-regel\fRs)
+Instel-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
+T}
+T{
+T}:T{
+Lege regel (geen, één of meer), wordt overgeslagen.
+T}
+T{
+# RESET <app>
+T}:T{
+De app resetten (\fBapp-regel\fR voor optie \fB-r\fR, \fB--reset\fR), wordt
+verwerkt.
+.br
+De beschrijving en computers worden overgenomen van de
+.br
+vooorgaande '# SETUP <app>' regel.
+T}
+T{
+Opdracht
+T}:T{
+Reset-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
+T}
+T{
+T}:T{
+T}
+T{
+# Commentaar
+T}:T{
+Commentaarregel (geen, één of meer), wordt overgeslagen.
 T}
 .TE
 .LP
@@ -107,106 +117,66 @@ T}
 l | l
 l | l.
 T{
-# SETUP calibre *
+# SETUP calibre
 T}:T{
-Stel calibre in op iedere computer, zie [1]
+Stel calibre in.
+T}
+T{
+# DESC  Powerful and easy to use e-book manager.
+T}:T{
+Beschrijving van calibre.
+T}
+T{
+# HOST  *
+T}:T{
+Calibre instellen op iedere computer, zie [1].
 T}
 T{
 kz-desktop --addbef=calibre
 T}:T{
+Instel-opdracht voor calibre.
 T}
 T{
 T}:T{
 T}
 T{
-# RESET calibre *
+# RESET calibre
 T}:T{
-Reset calibre op iedere computer, zie [1]
+Reset calibre.
 T}
 T{
 kz-desktop --delete=calibre
 T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# SETUP calibre pc01
-T}:T{
-Stel calibre in alleen op pc01, zie [2]
-T}
-T{
-kz-desktop --addbef=calibre
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# SETUP calibre pc01 pc02
-T}:T{
-Stel calibre in op pc01 en pc02, zie [3]
-T}
-T{
-kz-desktop --addbef=calibre
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# SETUP calibre #none
-T}:T{
-Stel calibre niet standaard in, zie [4]
-T}
-T{
-kz-desktop --addbef=calibre
-T}:T{
+Reset-opdracht voor calibre.
 T}
 .TE
 .sp
-.sp
 [1]
 .br
-De regel met '*' zorgt ervoor dat de bijbehorende opdrachten op alle computers
-worden uitgevoerd.
+De regel met 'HOST *' zorgt ervoor dat de bijbehorende opdrachten op alle
+computers worden uitgevoerd.
 .sp
-[2]
-.br
-De regel met 'pc01' zorgt ervoor dat de bijbehorende opdrachten standaard
+Een regel met 'HOST pc01' zorgt ervoor dat de bijbehorende opdrachten standaard
 alleen op pc01 worden uitgevoerd.
 .br
-De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
-setup calibre'.
-.sp
-[3]
+Een regel met 'HOST pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten
+standaard alleen op pc01 en pc02 worden uitgevoerd.
 .br
-De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc01 en pc02 worden uitgevoerd.
+Een regel met 'HOST #none' zorgt ervoor dat de bijbehorende opdrachten
+standaard niet worden uitgevoerd (OPMERKING: '#none' is geen geldige\
+computernaam en wordt daarom nooit standaard geselecteerd).
 .br
-De app kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
-setup calibre'.
-.sp
-[4]
-.br
-De regel met '#none' zorgt ervoor dat de bijbehorende opdrachten standaard
-niet worden uitgevoerd (OPMERKING: '#none' is geen geldige computernaam en
-wordt daarom nooit standaard geselecteerd).
-.br
-De app kan alsnog worden ingesteld met de opdracht 'kz setup calibre'.
+Een app kan alsnog worden ingesteld met de opdracht 'kz setup <app>',
+zoals 'kz setup calibre'.
 
 .SH VOORBEELDEN
 .EX
-# SETUP calibre pc01
-# -----------------------------------------------------------------------------
-# Powerful and easy to use e-book manager.
-# -----------------------------------------------------------------------------
+# SETUP calibre
+# DESC  Powerful and easy to use e-book manager.
+# HOST  pc06
 kz-desktop --addaft=calibre-gui
 
-# RESET calibre pc01
-# -----------------------------------------------------------------------------
-# Powerful and easy to use e-book manager.
-# -----------------------------------------------------------------------------
+# RESET calibre
 kz-desktop --delete=calibre-gui
 .EE
 

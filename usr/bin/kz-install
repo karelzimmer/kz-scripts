@@ -487,24 +487,57 @@ function process_argument_app() {
 # filters by <app>.
 function process_installation_files_by_app_argument() {
     local app_match=false
-    local install_record=''
+    local app_record=''
+    local desc_record=''
+    local host_record=''
     local no_app_match=true
+    local install_record=''
+    local write_saved_records=false
 
+    # +-----------------------------------------------------------------------+
+    # | # INSTALL <app>     [1] "app_record"    SELECT
+    # | # DESC    <desc>    [2] "desc_record"
+    # | # HOST    <host>    [3] "host_record"
+    # | <cmd>...
+    # |
+    # | # REMOVE <app>      [1] "app_record"
+    # | <cmd>...
+    # +-----------------------------------------------------------------------+
     while read -r install_record; do
         case $install_record in
-            '#'[[:space:]]*${INSTALL}[[:space:]]*${app_argument}[[:space:]]* )
-                # Add matching app record to command file.
+            '#'[[:space:]]*${INSTALL}[[:space:]]*${app_argument}* )
+                # Save app record.
+                app_record=$install_record  # [1]
+                # Set switches.
                 app_match=true
                 no_app_match=false
-                printf '%s\n' "$install_record" >> "$command_file"
+                write_saved_records=true
                 ;;
-            '#'[[:space:]]*${INSTALL}[[:space:]]* | \
+            '#'[[:space:]]*DESC[[:space:]]* )
+                # Save description record.
+                desc_record=$install_record # [2]
+                ;;
+            '#'[[:space:]]*HOST[[:space:]]* )
+                # Save host record.
+                host_record=$install_record # [3]
+                ;;
             '#'[[:space:]]*${REMOVE}[[:space:]]* )
-                # Skip mismatched app record.
+                # Skip mismatched app records.
+                # Reset switches.
                 app_match=false
+                write_saved_records=false
                 ;;
             * )
                 if $app_match; then
+                    if $write_saved_records; then
+                        # Write saved records to the command file.
+                        {
+                            printf '%s\n' "$app_record"     # [1]
+                            printf '%s\n' "$desc_record"    # [2]
+                            printf '%s\n' "$host_record"    # [3]
+                        } >> "$command_file"
+                        write_saved_records=false
+                    fi
                     # Add record to command file.
                     printf '%s\n' "$install_record" >> "$command_file"
                 fi
@@ -522,24 +555,66 @@ function process_installation_files_by_app_argument() {
 # This function generates the command file from the installation file and
 # filters by host.
 function process_installation_files_by_hostname() {
+    local app_match=false
+    local app_record=''
+    local desc_record=''
     local host_match=false
+    local host_record=''
     local install_record=''
+    local write_saved_records=false
 
+    # +-----------------------------------------------------------------------+
+    # | # INSTALL <app>     [1] "app_record"    SELECT
+    # | # DESC    <desc>    [2] "desc_record"
+    # | # HOST    <host>    [3] "host_record"
+    # | <cmd>...
+    # |
+    # | # REMOVE <app>      [1] "app_record"
+    # | <cmd>...
+    # +-----------------------------------------------------------------------+
     while read -r install_record; do
         case $install_record in
-            '#'[[:space:]]*${INSTALL}[[:space:]]*'*' | \
-            '#'[[:space:]]*${INSTALL}[[:space:]]*$HOSTNAME* )
-                # Add matching app record to command file.
-                host_match=true
-                printf '%s\n' "$install_record" >> "$command_file"
+            '#'[[:space:]]*${INSTALL}[[:space:]]* )
+                # Save app record.
+                app_record=$install_record    # [1]
+                # Set switch.
+                # Switch app_match is here not literally a match on app name,
+                # like in the function that processes argument <app>, but is
+                # required for the remove option because matches on <host> also
+                # causes install commands to be included with the remove
+                # commands.
+                app_match=true
                 ;;
-            '#'[[:space:]]*${INSTALL}[[:space:]]* | \
+            '#'[[:space:]]*DESC[[:space:]]* )
+                # Save description record.
+                desc_record=$install_record   # [2]
+                ;;
+            '#'[[:space:]]*HOST[[:space:]]*'*' | \
+            '#'[[:space:]]*HOST[[:space:]]*$HOSTNAME* )
+                # Save host record.
+                host_record=$install_record   # [3]
+                # Set switches.
+                host_match=true
+                write_saved_records=true
+                ;;
             '#'[[:space:]]*${REMOVE}[[:space:]]* )
-                # Skip mismatched app record.
+                # Skip mismatched app records.
+                # Reset switches.
+                app_match=false
                 host_match=false
+                write_saved_records=false
                 ;;
             * )
-                if $host_match; then
+                if $app_match && $host_match; then
+                    if $write_saved_records; then
+                        # Write saved records to the command file.
+                        {
+                            printf '%s\n' "$app_record"     # [1]
+                            printf '%s\n' "$desc_record"    # [2]
+                            printf '%s\n' "$host_record"    # [3]
+                        } >> "$command_file"
+                        write_saved_records=false
+                    fi
                     # Add record to command file.
                     printf '%s\n' "$install_record" >> "$command_file"
                 fi

@@ -20,25 +20,15 @@ This file contains commands to process as an settings file with kz setup.
 Commands containing personal information, such as a username, are included in
 an GPG-encrypted settings file, kz-setup.sh.gpg.
 .sp
-The settings file contains so-called \fBapp record\fRs and
+The settings file contains contains so-called \fBapp-\fR, \fBdesc-\fR,
+\fBhost-\fR and \fBcommand record\fRs.
+.sp
+The \fBapp record\fR indicates for which app the commands should be executed,
+the \fBdesc record\fR provides a description of the app, and the
+\fBhost record\fR indicates on which computers the commands should be executed.
+.br
+These records are followed by one or more records with commands, the
 \fBcommand record\fRs.
-.sp
-The \fBapp record\fR indicates where the commands should be executed and is
-followed by one or more lines of commands (\fBcommand record\fRs).
-.sp
-An \fBapp record\fR consists of four parts, each part separated by at least one
-space, like '# SETUP <app> <host>' and '# RESET <app> <host>'.
-.br
-1. #        (comment symbol)
-.br
-2. <action> (SETUP or RESET)
-.br
-3. <app>    (the name of the app)
-.br
-4. <host>   (the name of the computers or *)
-.br
-This is followed by one or more \fBcommand record\fRs containing commands for
-<app>.
 .sp
 See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
@@ -54,42 +44,58 @@ More examples can be seen through the \fBkz setup --browse\fR and
 allbox tab(:);
 lb | lb.
 T{
-Record
+Regel
 T}:T{
-Description
+Beschrijving
 T}
 .T&
 l | l
 l | l.
 T{
-# SETUP <app> <host>
+# SETUP <app>
 T}:T{
-Set up <app> on <host> (\fBapp record\fR)
+Which app to set up (\fBapp-record\fR), will be processed.
 T}
 T{
-# Comment...
+# DESC  <desc>
 T}:T{
-Comment line (none, one or more)
+A description of the app (\fBdesc-record\fR), will be processed.
+T}
+T{
+# HOST  <host>
+T}:T{
+On which computers the app should be set up (\fBhost-record\fR), will be
+processed.
 T}
 T{
 Command
 T}:T{
-Setup command (one or more \fBcommand record\fRs)
+Setup command (one or more \fBcommand record\fRs), will be executed.
 T}
 T{
 T}:T{
-Empty line (none, one or more)
+Empty line (none, one or more), will be skipped.
 T}
 T{
-# RESET <app> <host>
+# REMOVE  <app>
 T}:T{
-Reset the app <app> on <host> (\fBapp record\fR for option
-\fB-r\fR, \fB--remove\fR)
+Remove the app (\fBapp-record\fR for option \fB-r\fR, \fB--remove\fR), will be
+processed.
+.br
+The description and computers are taken from the previous '# SETUP <app>' line.
 T}
 T{
-Opdracht
+Command
 T}:T{
-Reset command (one or more \fBcommand record\fRs)
+Remove command (one or more \fBcommand record\fRs), will be executed.
+T}
+T{
+T}:T{
+T}
+T{
+# Comment
+T}:T{
+Comment line (none, one or more), will be skipped.
 T}
 .TE
 .LP
@@ -107,92 +113,56 @@ T}
 l | l
 l | l.
 T{
-# SETUP calibre *
+# SETUP calibre
 T}:T{
-Set up calibre on any computer, see [1]
+Set up calibre.
+T}
+T{
+# DESC  Powerful and easy to use e-book manager.
+T}:T{
+Description of calibre.
+T}
+T{
+# HOST  *
+T}:T{
+Set up calibre on every computer, see [1].
 T}
 T{
 kz-desktop --addbef=calibre
 T}:T{
+Setup command for calibre.
 T}
 T{
 T}:T{
 T}
 T{
-# RESET calibre *
+# RESET calibre
 T}:T{
-Reset calibre on any computer, see [1]
+Reset calibre.
 T}
 T{
 kz-desktop --delete=calibre
 T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# SETUP calibre pc01
-T}:T{
-Set up calibre only on pc01, see [2]
-T}
-T{
-kz-desktop --addbef=calibre
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# SETUP calibre pc01 pc02
-T}:T{
-Set up calibre on pc01 and pc02, see [3]
-T}
-T{
-kz-desktop --addbef=calibre
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# SETUP calibre #none
-T}:T{
-Do not set up calibre by default, see [4]
-T}
-T{
-kz-desktop --addaft=calibre
-T}:T{
+Reset command for calibre.
 T}
 .TE
-.sp
 .sp
 [1]
 .br
 The line with '*' causes the associated commands to run on all computers.
 .sp
-[2]
-.br
-The line with 'pc01' ensures that the associated commands are executed only on
+A line with 'pc01' ensures that the associated commands are executed only on
 host pc01 by default.
 .br
-The app can still be set up on another computer with the command 'kz setup goo\
-gle-earth'.
-.sp
-[3]
+A line with 'pc01 pc02' ensures that the associated commands are executed only
+on pc01 and pc02 by default.
 .br
-The line with 'pc01 pc02' ensures that the associated commands are executed
-only on pc01 and pc02 by default.
+A line with '#none' ensures that the associated commands are not executed by
+default (NOTE: '#none' is not a valid computername and will therefore never be
+selected by default).
 .br
-The app can still be set up on another computer with the command 'kz setup cal\
-ibre'.
-.sp
-[4]
-.br
-The line with '#none' ensures that the associated commands are not executed by
-default (NOTE: '#none' is not a valid computername and will therefore never
-be selected by default).
-.br
-The app can still be set up with the command 'kz setup calibre'.
+The app can still be set up on another computer with the command 'kz setup
+<app>', e.g. 'kz setup calibre'.
 
 .SH EXAMPLES
 .EX

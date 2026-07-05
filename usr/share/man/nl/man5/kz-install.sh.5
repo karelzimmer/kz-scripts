@@ -21,24 +21,16 @@ install.
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in een versleuteld installatiebestand, kz-install.sh.gpg.
 .sp
-In het installatiebestand staan zogenaamde \fBapp-regel\fRs en
+In het installatiebestand staan zogenaamde \fBapp-\fR, \fBdesc-\fR, \fBhost-\fR
+en \fBopdracht-regel\fRs.
+.sp
+De \fBapp-regel\fR geeft aan voor welke app de opdrachten uitgevoerd moeten
+worden, de \fBdesc-regel\fR geeft een beschrijving van de app en de
+\fBhost-regel\fR geeft aan op welke computers de opdrachten uitgevoerd moeten
+worden.
+.br
+Deze regels worden gevolgd door één of meer regels met opdrachten, de
 \fBopdracht-regel\fRs.
-.sp
-De \fBapp-regel\fR geeft aan waar de opdrachten uitgevoerd moeten worden en
-wordt gevolgd door één of meer regels met opdrachten (\fBopdracht-regel\fRs).
-.sp
-Een \fBapp-regel\fR bestaat uit vier delen, elk deel gescheiden door minstens
-één spatie, zoals '# INSTALL <app> <host>' en '# REMOVE <app> <host>'.
-.br
-1. #        (commentaarsymbool)
-.br
-2. <actie>  (INSTALL of REMOVE)
-.br
-3. <app>    (de naam van de app)
-.br
-4. <host>   (de naam van de computers of *)
-.br
-Hierna volgen één of meer \fBopdracht-regel\fRs met opdrachten voor <app>.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
@@ -62,34 +54,52 @@ T}
 l | l
 l | l.
 T{
-# INSTALL <app> <host>
+# INSTALL <app>
 T}:T{
-De app <app> installeren op <host> (\fBapp-regel\fR)
+Welke app installeren (\fBapp-regel\fR), wordt verwerkt.
 T}
 T{
-# Commentaar...
+# DESC    <desc>
 T}:T{
-Commentaarregel (geen, één of meer)
+Een beschrijving van de app (\fBdesc-regel\fR), wordt verwerkt.
 T}
 T{
-Opdracht
+# HOST    <host>
 T}:T{
-App installatie-opdracht (één of meer \fBopdracht-regel\fRs)
-T}
-T{
-T}:T{
-Lege regel (geen, één of meer)
-T}
-T{
-# REMOVE <app> <host>
-T}:T{
-De app <app> verwijderen van <host> (\fBapp-regel\fR voor optie
-\fB-r\fR, \fB--remove\fR)
+Op welke computers de app geïnstalleerd moet worden (\fBhost-regel\fR), wordt
+verwerkt.
 T}
 T{
 Opdracht
 T}:T{
-Verwijder-opdracht (één of meer \fBopdracht-regel\fRs)
+Installatie-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
+T}
+T{
+T}:T{
+Lege regel (geen, één of meer), wordt overgeslagen.
+T}
+T{
+# REMOVE  <app>
+T}:T{
+De app verwijderen (\fBapp-regel\fR voor optie \fB-r\fR, \fB--remove\fR), wordt
+verwerkt.
+.br
+De beschrijving en computers worden overgenomen van de
+.br
+vooorgaande '# INSTALL <app>' regel.
+T}
+T{
+Opdracht
+T}:T{
+Verwijder-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
+T}
+T{
+T}:T{
+T}
+T{
+# Commentaar
+T}:T{
+Commentaarregel (geen, één of meer), wordt overgeslagen.
 T}
 .TE
 .LP
@@ -107,100 +117,63 @@ T}
 l | l
 l | l.
 T{
-# INSTALL calibre *
+# INSTALL calibre
 T}:T{
-Installeer calibre op iedere computer, zie [1]
+Installeer calibre.
+T}
+T{
+# DESC    Powerful and easy to use e-book manager.
+T}:T{
+Beschrijving van calibre.
+T}
+T{
+# HOST    *
+T}:T{
+Calibre installeren op iedere computer, zie [1].
 T}
 T{
 sudo apt-get install --assume-yes calibre
 T}:T{
+Installatie-opdracht voor calibre.
 T}
 T{
 T}:T{
 T}
 T{
-# REMOVE calibre *
+# REMOVE  calibre
 T}:T{
-Verwijder calibre van iedere computer, zie [1]
+Verwijder calibre.
 T}
 T{
 sudo apt-get remove --assume-yes calibre
 T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# INSTALL calibre pc01
-T}:T{
-Installeer calibre alleen op pc01, zie [2]
-T}
-T{
-sudo apt-get install --assume-yes calibre
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# INSTALL calibre pc01 pc02
-T}:T{
-Installeer calibre op pc01 en pc02, zie [3]
-T}
-T{
-sudo apt-get install --assume-yes calibre
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# INSTALL calibre #none
-T}:T{
-Installeer calibre niet standaard, zie [4]
-T}
-T{
-sudo apt-get install --assume-yes calibre
-T}:T{
+Verwijder-opdracht voor calibre.
 T}
 .TE
-.sp
 .sp
 [1]
 .br
 De regel met '*' zorgt ervoor dat de bijbehorende opdrachten op alle computers
 worden uitgevoerd.
 .sp
-[2]
-.br
-De regel met 'pc01' zorgt ervoor dat de bijbehorende opdrachten standaard
+Een regel met 'HOST pc01' zorgt ervoor dat de bijbehorende opdrachten standaard
 alleen op pc01 worden uitgevoerd.
 .br
-De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
-'kz install calibre'.
-.sp
-[3]
+Een regel met 'HOST pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten
+standaard alleen op pc01 en pc02 worden uitgevoerd.
 .br
-De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc01 en pc02 worden uitgevoerd.
-.br
-De app kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
-'kz install calibre'.
-.sp
-[4]
-.br
-De regel '#none' zorgt ervoor dat de bijbehorende opdrachten standaard niet
-worden uitgevoerd op een computer (OPMERKING: '#none' is geen geldige
+Een regel met 'HOST #none' zorgt ervoor dat de bijbehorende opdrachten
+standaard niet worden uitgevoerd (OPMERKING: '#none' is geen geldige\
 computernaam en wordt daarom nooit standaard geselecteerd).
 .br
-De app kan alsnog worden geïnstalleerd met de opdracht 'kz install calibre'.
+Een app kan alsnog worden geïnstalleerd met de opdracht 'kz install <app>',
+zoals 'kz install calibre'.
 
 .SH VOORBEELDEN
 .EX
-# INSTALL calibre pc01
-# -----------------------------------------------------------------------------
-# Powerful and easy to use e-book manager.
-# -----------------------------------------------------------------------------
+# INSTALL calibre
+# DESC    Powerful and easy to use e-book manager.
+# HOST    pc06
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install -\
 -assume-yes calibre; fi
 #
@@ -208,10 +181,7 @@ if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo --validate\
  && wget --output-document=- https://download.calibre-ebook.com/linux-installe\
 r.sh | sudo sh; fi
 
-# REMOVE calibre pc01
-# -----------------------------------------------------------------------------
-# Powerful and easy to use e-book manager.
-# -----------------------------------------------------------------------------
+# REMOVE calibre
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --\
 assume-yes calibre; fi
 #

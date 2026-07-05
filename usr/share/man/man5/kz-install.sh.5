@@ -20,25 +20,15 @@ This file contains commands to process as an installation file with kz install.
 Commands containing personal information, such as a username, are included in
 an GPG-encrypted installation file, kz-install.sh.gpg.
 .sp
-The installation file contains so-called \fBapp record\fRs and
+The installation file contains so-called \fBapp-\fR, \fBdesc-\fR, \fBhost-\fR
+and \fBcommand record\fRs.
+.sp
+The \fBapp record\fR indicates for which app the commands should be executed,
+the \fBdesc record\fR provides a description of the app, and the
+\fBhost record\fR indicates on which computers the commands should be executed.
+.br
+These records are followed by one or more records with commands, the
 \fBcommand record\fRs.
-.sp
-The \fBapp record\fR indicates where the commands should be executed and is
-followed by one or more lines of commands (\fBcommand record\fRs).
-.sp
-An \fBapp record\fR consists of four parts, each part separated by at least one
-space, like '# INSTALL <app> <host>' and '# REMOVE <app> <host>'.
-.br
-1. #        (comment symbol)
-.br
-2. <action> (INSTALL or REMOVE)
-.br
-3. <app>    (the name of the app)
-.br
-4. <host>   (the name of the computers or *)
-.br
-This is followed by one or more \fBcommand record\fRs containing commands for
-<app>.
 .sp
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
@@ -54,7 +44,7 @@ More examples can be seen through the \fBkz install --browse\fR and
 allbox tab(:);
 lb | lb.
 T{
-Record
+Regel
 T}:T{
 Description
 T}
@@ -62,34 +52,51 @@ T}
 l | l
 l | l.
 T{
-# INSTALL <app> <host>
+# INSTALL <app>
 T}:T{
-Install the app <app> on <host> (\fBapp record\fR)
+Which app to install (\fBapp-rule\fR), will be processed.
 T}
 T{
-# Comment...
+# DESC    <desc>
 T}:T{
-Comment line (none, one or more)
+A description of the app (\fBdesc-rule\fR), will be processed.
 T}
 T{
-Command
+# HOST    <host>
 T}:T{
-Install app command (one or more \fBcommand record\fRs)
-T}
-T{
-T}:T{
-Empty line (none, one or more)
-T}
-T{
-# REMOVE <app> <host>
-T}:T{
-Remove the app <app> from <host> (\fBapp record\fR for option \fB-r\fR,
-\fB--remove\fR)
+On which computers the app should be installed (\fBhost-rule\fR), will be
+processed.
 T}
 T{
 Command
 T}:T{
-Remove app command (one or more \fBcommand record\fRs)
+Install app command (one or more \fBcommand record\fRs), will be executed.
+T}
+T{
+T}:T{
+Empty line (none, one or more), will be skipped.
+T}
+T{
+# REMOVE  <app>
+T}:T{
+Remove the app (\fBapp-rule\fR for option \fB-r\fR, \fB--remove\fR), will be
+processed.
+.br
+The description and computers are taken from the previous '# INSTALL <app>'
+line.
+T}
+T{
+Command
+T}:T{
+Remove app command (one or more \fBcommand record\fRs), will be executed.
+T}
+T{
+T}:T{
+T}
+T{
+# Comment
+T}:T{
+Comment line (none, one or more), will be skipped.
 T}
 .TE
 .LP
@@ -107,99 +114,63 @@ T}
 l | l
 l | l.
 T{
-# INSTALL calibre *
+# INSTALL calibre
 T}:T{
-Install calibre on any computer, see [1].
+Install calibre.
+T}
+T{
+# DESC    Powerful and easy to use e-book manager.
+T}:T{
+Description of calibre.
+T}
+T{
+# HOST    *
+T}:T{
+Install calibre on every computer, see [1].
 T}
 T{
 sudo apt-get install --assume-yes calibre
 T}:T{
+Install command for calibre.
 T}
 T{
 T}:T{
 T}
 T{
-# REMOVE calibre *
+# REMOVE  calibre
 T}:T{
-Remove calibre from any computer, see [1].
+Remove calibre.
 T}
 T{
 sudo apt-get remove --assume-yes calibre
 T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# INSTALL calibre pc01
-T}:T{
-Install calibre only on pc01, see [2].
-T}
-T{
-sudo apt-get install --assume-yes calibre
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# INSTALL calibre pc01 pc02
-T}:T{
-Install calibre on pc01 and pc02, see [3].
-T}
-T{
-sudo apt-get install --assume-yes calibre
-T}:T{
-T}
-T{
-T}:T{
-T}
-T{
-# INSTALL calibre #none
-T}:T{
-Do not install calibre by default, see [4].
-T}
-T{
-sudo apt-get install --assume-yes calibre
-T}:T{
+Remove command for calibre.
 T}
 .TE
-.sp
 .sp
 [1]
 .br
 The line with '*' causes the associated commands to run on all computers.
 .sp
-[2]
-.br
-The line with 'pc01' ensures that the associated commands are executed only on
+A line with 'pc01' ensures that the associated commands are executed only on
 host pc01 by default.
 .br
-The app can still be installed on another computer with the command 'kz instal\
-l calibre'.
-.sp
-[3]
-.br
-The line with 'pc01 pc02' ensures that the associated commands are executed
+A line with 'pc01 pc02' ensures that the associated commands are executed
 only on pc01 and pc02 by default.
 .br
-The app can still be installed on another computer with the command 'kz instal\
-l calibre'.
-.sp
-[4]
-.br
-The line with '#none' ensures that the associated commands are not executed on
+A line with '#none' ensures that the associated commands are not executed on
 a computer by default (NOTE: '#none' is not a valid computername and will
 therefore never be selected by default).
 .br
-The app can still be installed with the command 'kz install calibre'.
+The app can still be installed on another computer with the command 'kz install
+<app>', e.g. 'kz install calibre'.
+.sp
 
 .SH EXAMPLES
 .EX
-# INSTALL calibre pc01
-# -----------------------------------------------------------------------------
-# Powerful and easy to use e-book manager.
-# -----------------------------------------------------------------------------
+# INSTALL calibre
+# DESC    Powerful and easy to use e-book manager.
+# HOST    pc06
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install -\
 -assume-yes calibre; fi
 #
@@ -207,10 +178,7 @@ if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo --validate\
  && wget --output-document=- https://download.calibre-ebook.com/linux-installe\
 r.sh | sudo sh; fi
 
-# REMOVE calibre pc01
-# -----------------------------------------------------------------------------
-# Powerful and easy to use e-book manager.
-# -----------------------------------------------------------------------------
+# REMOVE calibre
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --\
 assume-yes calibre; fi
 #

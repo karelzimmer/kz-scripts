@@ -468,24 +468,57 @@ function process_argument_app() {
 # by <app>.
 function process_settings_files_by_app_argument() {
     local app_match=false
-    local setup_record=''
+    local app_record=''
+    local desc_record=''
+    local host_record=''
     local no_app_match=true
+    local setup_record=''
+    local write_saved_records=false
 
+    # +-----------------------------------------------------------------------+
+    # | # SETUP <app>   [1] "app_record"    SELECT
+    # | # DESC  <desc>  [2] "desc_record"
+    # | # HOST  <host>  [3] "host_record"
+    # | <cmd>...
+    # |
+    # | # RESET <app>   [1] "app_record"
+    # | <cmd>...
+    # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
-            '#'[[:space:]]*${SETUP}[[:space:]]*${app_argument}[[:space:]]* )
-                # Add matching app record to command file.
+            '#'[[:space:]]*${SETUP}[[:space:]]*${app_argument}* )
+                # Save app record.
+                app_record=$setup_record    # [1]
+                # Set switches.
                 app_match=true
                 no_app_match=false
-                printf '%s\n' "$setup_record" >> "$command_file"
+                write_saved_records=true
                 ;;
-            '#'[[:space:]]*${SETUP}[[:space:]]* | \
+            '#'[[:space:]]*DESC[[:space:]]* )
+                # Save description record.
+                desc_record=$setup_record   # [2]
+                ;;
+            '#'[[:space:]]*HOST[[:space:]]* )
+                # Save host record.
+                host_record=$setup_record   # [3]
+                ;;
             '#'[[:space:]]*${RESET}[[:space:]]* )
-                # Skip mismatched app record.
+                # Skip mismatched app records.
+                # Reset switches.
                 app_match=false
+                write_saved_records=false
                 ;;
             * )
                 if $app_match; then
+                    if $write_saved_records; then
+                        # Write saved records to the command file.
+                        {
+                            printf '%s\n' "$app_record"     # [1]
+                            printf '%s\n' "$desc_record"    # [2]
+                            printf '%s\n' "$host_record"    # [3]
+                        } >> "$command_file"
+                        write_saved_records=false
+                    fi
                     # Add record to command file.
                     printf '%s\n' "$setup_record" >> "$command_file"
                 fi
@@ -503,24 +536,65 @@ function process_settings_files_by_app_argument() {
 # This function generates the command file from the settings file and filters
 # by host.
 function process_settings_files_by_hostname() {
+    local app_match=false
+    local app_record=''
+    local desc_record=''
     local host_match=false
+    local host_record=''
     local setup_record=''
+    local write_saved_records=false
 
+    # +-----------------------------------------------------------------------+
+    # | # SETUP <app>   [1] "app_record"
+    # | # DESC  <desc>  [2] "desc_record"
+    # | # HOST  <host>  [3] "host_record"   SELECT
+    # | <cmd>...
+    # |
+    # | # RESET <app>   [1] "app_record"
+    # | <cmd>...
+    # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
-            '#'[[:space:]]*${SETUP}[[:space:]]*'*' | \
-            '#'[[:space:]]*${SETUP}[[:space:]]*$HOSTNAME* )
-                # Add matching app record to command file.
-                host_match=true
-                printf '%s\n' "$setup_record" >> "$command_file"
+            '#'[[:space:]]*${SETUP}[[:space:]]* )
+                # Save app record.
+                app_record=$setup_record    # [1]
+                # Set switch.
+                # Switch app_match is here not literally a match on app name,
+                # like in the function that processes argument <app>, but is
+                # required for the reset option because matches on <host> also
+                # causes setup commands to be included with the reset commands.
+                app_match=true
                 ;;
-            '#'[[:space:]]*${SETUP}[[:space:]]* | \
+            '#'[[:space:]]*DESC[[:space:]]* )
+                # Save description record.
+                desc_record=$setup_record   # [2]
+                ;;
+            '#'[[:space:]]*HOST[[:space:]]*'*' | \
+            '#'[[:space:]]*HOST[[:space:]]*$HOSTNAME* )
+                # Save host record.
+                host_record=$setup_record   # [3]
+                # Set switches.
+                host_match=true
+                write_saved_records=true
+                ;;
             '#'[[:space:]]*${RESET}[[:space:]]* )
-                # Skip mismatched app record.
+                # Skip mismatched app records.
+                # Reset switches.
+                app_match=false
                 host_match=false
+                write_saved_records=false
                 ;;
             * )
-                if $host_match; then
+                if $app_match && $host_match; then
+                    if $write_saved_records; then
+                        # Write saved records to the command file.
+                        {
+                            printf '%s\n' "$app_record"     # [1]
+                            printf '%s\n' "$desc_record"    # [2]
+                            printf '%s\n' "$host_record"    # [3]
+                        } >> "$command_file"
+                        write_saved_records=false
+                    fi
                     # Add record to command file.
                     printf '%s\n' "$setup_record" >> "$command_file"
                 fi
