@@ -104,14 +104,16 @@ function process() {
 
     if ! $option_file; then
         installation_files[++installation_file_num]=$installation_file_default
+
         # Decrypt GPG-encrypted installation file.
-        gpg --import /usr/share/kz/kz-public-key.gpg |& $PROGRAM_LOGS
         installation_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
+        gpg --import /usr/share/kz/kz-public-key.gpg |& $PROGRAM_LOGS
         gpg --decrypt                       \
             /usr/bin/kz-install.sh.gpg      \
             2> >($PROGRAM_LOGS)             \
             > "$installation_file_decrypted"
+
         installation_files[++installation_file_num]=\
 $installation_file_decrypted
     fi
