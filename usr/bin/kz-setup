@@ -104,14 +104,16 @@ function process() {
 
     if ! $option_file; then
         settings_files[++settings_file_num]=$settings_file_default
+
         # Decrypt GPG-encrypted settings file.
-        gpg --import /usr/share/kz/kz-public-key.gpg |& $PROGRAM_LOGS
         settings_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
+        gpg --import /usr/share/kz/kz-public-key.gpg |& $PROGRAM_LOGS
         gpg --decrypt                       \
             /usr/bin/kz-setup.sh.gpg        \
-            2> >($PROGRAM_LOGS)             \
-            > "$settings_file_decrypted"
+            > "$settings_file_decrypted"    \
+            2> >($PROGRAM_LOGS)
+
         settings_files[++settings_file_num]=$settings_file_decrypted
     fi
 
