@@ -24,14 +24,16 @@ in dit versleuteld installatiebestand.
 .sp
 Dit bestand is aangemaakt met de volgende voorbeeldopdracht:
 .br
-gpg --output ~/kz-scripts/usr/bin/kz-install.sh.gpg --sign
+gpg --output ~/Projecten/kz-scripts/usr/bin/kz-install.sh.gpg --sign
 ~/kz-install-decrypted.sh
 .sp
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
 kz-install, en als voorbeeld met de opdracht:
 .br
+gpg --import /usr/share/kz/kz-public-key.gpg
+.br
 gpg --output ~/kz-install-decrypted.sh --decrypt
-~/kz-scripts/usr/bin/kz-install.sh.gpg
+~/Projecten/kz-scripts/usr/bin/kz-install.sh.gpg
 .sp
 Gebruik voor de opmaak van de records in dit installatiebestand
 \fBman kz install.sh\fR.
