@@ -26,9 +26,11 @@ in dit versleuteld installatiebestand.
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
 kz-install, en als voorbeeld met de opdracht:
 .br
-gpg --output ~/kz-install-decrypted.sh --no-default-keyring
---keyring /usr/share/kz/kz-public-key.gpg --decrypt
-~/Projecten/kz-scripts/usr/bin/kz-install.sh.gpg
+.nf
+gpg --output ~/kz-install-decrypted.sh --no-default-keyring --keyring /usr/sha\
+re/kz/kz-public-key.gpg --decrypt ~/Projecten/kz-scripts/usr/bin/kz-install.sh\
+.gpg
+.fi
 .sp
 Gebruik voor de opmaak van de records in dit installatiebestand
 \fBman kz install.sh\fR.

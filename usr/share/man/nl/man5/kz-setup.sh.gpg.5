@@ -25,9 +25,10 @@ in dit versleuteld instellingenbestand.
 Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
 kz-setup, en als voorbeeld met de opdracht:
 .br
-gpg --output ~/kz-setup-decrypted.sh --no-default-keyring
---keyring /usr/share/kz/kz-public-key.gpg --decrypt
-~/Projecten/kz-scripts/usr/bin/kz-setup.sh.gpg
+.nf
+gpg --output ~/kz-setup-decrypted.sh --no-default-keyring --keyring /usr/share\
+/kz/kz-public-key.gpg --decrypt ~/Projecten/kz-scripts/usr/bin/kz-setup.sh.gpg
+.fi
 .sp
 Gebruik voor de opmaak van de records in dit instellingenbestand
 \fBman kz setup.sh\fR.

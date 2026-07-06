@@ -23,9 +23,11 @@ GPG-encrypted installation file.
 This file is decrypted before the commands are used in the kz-install script,
 and as an example with the command:
 .br
-gpg --output ~/kz-install-decrypted.sh --no-default-keyring
---keyring /usr/share/kz/kz-public-key.gpg --decrypt
-~/Projects/kz-scripts/usr/bin/kz-install.sh.gpg
+.nf
+gpg --output ~/kz-install-decrypted.sh --no-default-keyring --keyring /usr/sha\
+re/kz/kz-public-key.gpg --decrypt ~/Projects/kz-scripts/usr/bin/kz-install.sh.\
+gpg
+.fi
 .sp
 For the format of the records in this installation file please use
 \fBman kz install.sh\fR.
