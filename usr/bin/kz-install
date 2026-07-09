@@ -533,19 +533,17 @@ function process_installation_files_by_app_argument() {
                 if $app_match; then
                     if $write_saved_records; then
                         # Write saved records to the command file.
-                        {
-                            printf '%s\n' "$app_record"     # [1]
-                            printf '%s\n' "$desc_record"    # [2]
-                            printf '%s\n' "$host_record"    # [3]
-                        } >> "$command_file"
+                        printf '%s\n' "$app_record"     # [1]
+                        printf '%s\n' "$desc_record"    # [2]
+                        printf '%s\n' "$host_record"    # [3]
                         write_saved_records=false
                     fi
                     # Add record to command file.
-                    printf '%s\n' "$install_record" >> "$command_file"
+                    printf '%s\n' "$install_record"
                 fi
                 ;;
         esac
-    done < <(cat "${installation_files[@]}")
+    done < <(cat "${installation_files[@]}") >> "$command_file"
 
     if $no_app_match; then
         err_flag=true
@@ -610,19 +608,17 @@ function process_installation_files_by_hostname() {
                 if $app_match && $host_match; then
                     if $write_saved_records; then
                         # Write saved records to the command file.
-                        {
-                            printf '%s\n' "$app_record"     # [1]
-                            printf '%s\n' "$desc_record"    # [2]
-                            printf '%s\n' "$host_record"    # [3]
-                        } >> "$command_file"
+                        printf '%s\n' "$app_record"     # [1]
+                        printf '%s\n' "$desc_record"    # [2]
+                        printf '%s\n' "$host_record"    # [3]
                         write_saved_records=false
                     fi
                     # Add record to command file.
-                    printf '%s\n' "$install_record" >> "$command_file"
+                    printf '%s\n' "$install_record"
                 fi
                 ;;
         esac
-    done < <(cat "${installation_files[@]}")
+    done < <(cat "${installation_files[@]}") >> "$command_file"
 }
 
 
