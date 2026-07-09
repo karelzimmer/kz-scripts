@@ -11,6 +11,7 @@
 # format of this file.
 # =============================================================================
 
+
 # SETUP bitwarden
 # DESC  A secure and free password manager for all of your devices.
 # HOST  *
@@ -18,6 +19,7 @@ kz-desktop --addaft=com.bitwarden.desktop
 
 # RESET bitwarden
 kz-desktop --delete=com.bitwarden.desktop
+
 
 # SETUP bottles
 # DESC  Run Windows software.
@@ -27,6 +29,7 @@ kz-desktop --addaft=com.usebottles.bottles
 # RESET bottles
 kz-desktop --delete=com.usebottles.bottles
 
+
 # SETUP cinnamon-settings
 # DESC  Cinnamon desktop environment settings.
 # HOST  #none
@@ -34,6 +37,7 @@ if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings 
 
 # RESET cinnamon-settings
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings reset org.nemo.preferences click-policy; fi
+
 
 # SETUP cockpit
 # DESC  Web Console for Linux servers.
@@ -45,6 +49,7 @@ kz-desktop --addaft=kz-cockpit
 
 # RESET cockpit
 kz-desktop --delete=kz-cockpit
+
 
 # SETUP dash-to-dock-extension
 # DESC  A dock for the Gnome Shell.
@@ -96,6 +101,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 #
 LOGOUT=true
 
+
 # SETUP evolution
 # DESC  Groupware suite with mail client and organizer.
 # HOST  *
@@ -104,6 +110,7 @@ kz-desktop --delete=org.gnome.Evolution
 # RESET evolution
 kz-desktop --addbef=org.gnome.Evolution
 
+
 # SETUP evolution
 # DESC  Groupware suite with mail client and organizer.
 # HOST  pc06 pc07
@@ -111,6 +118,7 @@ kz-desktop --addaft=org.gnome.Evolution
 
 # RESET evolution
 kz-desktop --delete=org.gnome.Evolution
+
 
 # SETUP git
 # DESC  Fast, scalable, distributed revision control system.
@@ -122,6 +130,7 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 # RESET git
 git config --global --unset alias.logg
+
 
 # SETUP gnome-extensions
 # DESC  GNOME desktop extensions.
@@ -178,6 +187,7 @@ if type gnome-session &> /dev/null; then ~/.local/bin/gext uninstall 'compiz-ali
 # -----------------------------------------------------------------------------
 if type gnome-session &> /dev/null; then ~/.local/bin/gext disable 'desktop-cube@schneegans.github.com'; fi
 if type gnome-session &> /dev/null; then ~/.local/bin/gext uninstall 'desktop-cube@schneegans.github.com'; fi
+
 
 # SETUP gnome-settings
 # DESC  GNOME desktop environment settings.
@@ -236,6 +246,7 @@ if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gset
 #
 LOGOUT=true
 
+
 # SETUP google-chrome
 # DESC  The web browser from Google.
 # HOST  pc01 pc06 pc07
@@ -243,6 +254,7 @@ kz-desktop --addbef=google-chrome
 
 # RESET google-chrome
 kz-desktop --delete=google-chrome
+
 
 # SETUP gsconnect-extension
 # DESC  Securely connect to mobile devices and other desktops.
@@ -260,6 +272,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gscon
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 
+
 # SETUP kvm
 # DESC  KVM (for Kernel-based Virtual Machine) is a full virtualization solution.
 # HOST  pc06 pc07
@@ -267,6 +280,7 @@ kz-desktop --addaft=virt-manager
 
 # RESET kvm
 kz-desktop --delete=virt-manager
+
 
 # SETUP libreoffice
 # DESC  Office productivity suite.
@@ -277,6 +291,7 @@ kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 # RESET libreoffice
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
+
 
 # SETUP lxde-settings
 # DESC  LXDE desktop environment settings.
@@ -292,6 +307,7 @@ if type lxsession > /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed -
 #
 LOGOUT=true
 
+
 # SETUP lynis
 # DESC  Security auditing and hardening tool for Linux/Unix.
 # HOST  #none
@@ -305,6 +321,7 @@ git clone https://github.com/CISOfy/lynis.git "$HOME/lynis"
 # RESET lynis
 rm --force --recursive "$HOME/lynis"
 
+
 # SETUP microsoft-edge
 # DESC  The web browser from Microsoft.
 # HOST  pc06 pc07
@@ -312,6 +329,7 @@ kz-desktop --addaft=microsoft-edge
 
 # RESET microsoft-edge
 kz-desktop --delete=microsoft-edge
+
 
 # SETUP no-annoyance-extension
 # DESC  Disable the 'Window is ready' notification.
@@ -331,6 +349,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 #
 LOGOUT=true
 
+
 # SETUP private-home
 # DESC  Private home directory permissions.
 # HOST  *
@@ -338,6 +357,7 @@ chmod 750 ~
 
 # RESET private-home
 chmod 755 ~
+
 
 # SETUP spotify
 # DESC  Spotify streaming music client.
@@ -353,6 +373,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --addaf
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
+
 
 # SETUP terminal
 # DESC  Terminal emulator application.
@@ -381,6 +402,7 @@ sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 #
 LOGOUT=true
 
+
 # SETUP terminal
 # DESC  Terminal emulator application.
 # HOST  pc06 pc07
@@ -393,6 +415,7 @@ kz-desktop --addbef=org.gnome.Terminal
 kz-desktop --delete=org.gnome.Terminal
 sed --in-place --expression='/^alias bin/d' --expression='/^alias doc/d' ~/.bashrc
 
+
 # SETUP thumbnails-cache
 # DESC  Restore thumbnails in nautilus.
 # HOST  #none
@@ -401,6 +424,7 @@ rm --force --recursive ~/.cache/thumbnails/
 # RESET thumbnails-cache
 rm --force --recursive ~/.cache/thumbnails/
 
+
 # SETUP thunderbird
 # DESC  Mail/news client with RSS, chat and integrated spam filter support.
 # HOST  #none
@@ -408,6 +432,7 @@ kz-desktop --addbef=thunderbird
 
 # RESET thunderbird
 kz-desktop --delete=thunderbird
+
 
 # SETUP vscode
 # DESC  Code editing. Redefined.
@@ -430,6 +455,7 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/x-p
 # RESET vscode
 kz-desktop --delete=code
 
+
 # SETUP webmin
 # DESC  Web Console for Linux servers.
 # HOST  pc07
@@ -440,6 +466,7 @@ kz-desktop --addaft=kz-webmin
 
 # RESET webmin
 kz-desktop --delete=kz-webmin
+
 
 # SETUP xdg-projects-dir
 # DESC  Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs.
@@ -453,6 +480,7 @@ xdg-user-dirs-update
 
 # RESET xdg-projects-dir
 xdg-user-dirs-update --set PROJECTS ~
+
 
 # SETUP zoom
 # DESC  Cloud-based communication and collaboration platform.
