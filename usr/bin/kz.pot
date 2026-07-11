@@ -1033,11 +1033,11 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1132 kz-install.sh:1134 kz-install.sh:1137
+#: kz-install.sh:1113 kz-install.sh:1115 kz-install.sh:1118
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1132
+#: kz-install.sh:1113
 msgid "Guest_user"
 msgstr ""
 
@@ -1485,14 +1485,6 @@ msgstr ""
 
 #: kz-github.desktop:11
 msgid "Developer platform"
-msgstr ""
-
-#: kz-google-earth.desktop:10
-msgid "Google Earth web app"
-msgstr ""
-
-#: kz-google-earth.desktop:11
-msgid "Exploring the Earth from a web browser"
 msgstr ""
 
 #: kz-shellcheck.desktop:10

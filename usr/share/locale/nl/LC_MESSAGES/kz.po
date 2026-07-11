@@ -1151,11 +1151,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:1132 kz-install.sh:1134 kz-install.sh:1137
+#: kz-install.sh:1113 kz-install.sh:1115 kz-install.sh:1118
 msgid "guest"
 msgstr "gast"
 
-#: kz-install.sh:1132
+#: kz-install.sh:1113
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
@@ -1663,14 +1663,6 @@ msgstr "GitHub web-app"
 #: kz-github.desktop:11
 msgid "Developer platform"
 msgstr "Ontwikkelaarsplatform"
-
-#: kz-google-earth.desktop:10
-msgid "Google Earth web app"
-msgstr "Google Earth web-app"
-
-#: kz-google-earth.desktop:11
-msgid "Exploring the Earth from a web browser"
-msgstr "De aarde verkennen vanuit een webbrowser"
 
 #: kz-shellcheck.desktop:10
 msgid "ShellCheck web app"

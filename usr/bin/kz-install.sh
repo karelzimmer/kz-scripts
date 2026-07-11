@@ -474,25 +474,6 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-re
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes google-chrome-stable; fi
 
 
-# INSTALL google-earth
-# DESC    Explore, search and discover the planet.
-# HOST    pc04
-# -----------------------------------------------------------------------------
-# Web app: https://earth.google.com
-# -----------------------------------------------------------------------------
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo rm --force --verbose /tmp/google-earth.deb; fi
-#
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
-
-# REMOVE  google-earth
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
-#
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
-
-
 # INSTALL greeter-settings
 # DESC    Enable Cinnamon/LXDE user greeter.
 # HOST    #none
