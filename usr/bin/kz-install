@@ -110,7 +110,7 @@ function process() {
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
         gpg --no-default-keyring                        \
             --keyring /usr/share/kz/kz-public-key.gpg   \
-            --decrypt kz-install.sh.gpg                 \
+            --decrypt /usr/bin/kz-install.sh.gpg        \
             > "$installation_file_decrypted"            \
             2> >($PROGRAM_LOGS)
 
