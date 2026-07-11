@@ -91,20 +91,20 @@ msgid "command is required"
 msgstr "opdracht is vereist"
 
 #: kz:111 kz_common.py:60 kz_common.py:78 kz_common.py:107 kz_common.py:125
-#: kz_common.py:242 kz_common.py:255 kz-dev:75 kz-dev:188 kz-dev:203 kz-dev:220
-#: kz-dev:242 kz-dev:264 kz-dev:308 kz-update:72 kz-update:287
+#: kz_common.py:242 kz_common.py:255 kz-dev:80 kz-dev:193 kz-dev:208 kz-dev:225
+#: kz-dev:247 kz-dev:269 kz-dev:313 kz-update:77 kz-update:292
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz_common.py:66 kz_common.py:84 kz_common.py:113 kz_common.py:131
-#: kz_common.py:248 kz_common.py:261 kz_common.py:299 kz-dev:81 kz-dev:194
-#: kz-dev:209 kz-dev:226 kz-dev:248 kz-dev:270 kz-update:78 kz-update:293
+#: kz_common.py:248 kz_common.py:261 kz_common.py:299 kz-dev:86 kz-dev:199
+#: kz-dev:214 kz-dev:231 kz-dev:253 kz-dev:275 kz-update:83 kz-update:298
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:171 kz-backup:162 kz-build:162 kz-check:127 kz-deploy:133 kz-desktop:193
-#: kz-dev:157 kz-install:272 kz-menu:187 kz-restore:162 kz-setup:257
-#: kz-update:162 kz-wifi:139
+#: kz:171 kz-backup:162 kz-build:162 kz-check:127 kz-deploy:133 kz-desktop:198
+#: kz-dev:162 kz-install:272 kz-menu:187 kz-restore:162 kz-setup:257
+#: kz-update:167 kz-wifi:144
 msgid "internal error"
 msgstr "interne fout"
 
@@ -166,17 +166,17 @@ msgstr ""
 msgid "  -T, --tui      run in text-based mode (default)"
 msgstr "  -T, --tui      draai in tekstgebaseerde modus (standaard)"
 
-#: kz-backup:119 kz-desktop:208 kz-install:226 kz-menu:155 kz-restore:115
-#: kz-setup:211 kz-wifi:119
+#: kz-backup:119 kz-desktop:213 kz-install:226 kz-menu:155 kz-restore:115
+#: kz-setup:211 kz-wifi:124
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
-#: kz-backup:136 kz-desktop:133 kz-desktop:144 kz-desktop:155 kz-restore:124
+#: kz-backup:136 kz-desktop:138 kz-desktop:149 kz-desktop:160 kz-restore:124
 msgid "too many options"
 msgstr "te veel opties"
 
-#: kz-backup:170 kz-build:170 kz-check:135 kz-deploy:141 kz-desktop:201
-#: kz-dev:164 kz-menu:195 kz-restore:170 kz-update:169 kz-wifi:146
+#: kz-backup:170 kz-build:170 kz-check:135 kz-deploy:141 kz-desktop:206
+#: kz-dev:169 kz-menu:195 kz-restore:170 kz-update:174 kz-wifi:151
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -451,7 +451,7 @@ msgstr "Gebruik: kz build [<opties>]"
 msgid "  -d, --dev      build the development version of package kz"
 msgstr "  -d, --dev      bouw de ontwikkelingsversie van pakket kz"
 
-#: kz-build:88 kz-check:68 kz-deploy:70 kz-dev:88
+#: kz-build:88 kz-check:68 kz-deploy:70 kz-dev:93
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
@@ -617,15 +617,15 @@ msgstr "Eindspaties gevonden."
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:147 kz_common.sh:94
+#: kz_common.py:147 kz_common.sh:99
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:153 kz_common.sh:101
+#: kz_common.py:153 kz_common.sh:106
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:159 kz_common.sh:108
+#: kz_common.py:159 kz_common.sh:113
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
@@ -649,16 +649,16 @@ msgstr "Typ '{} --help' voor meer informatie."
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:304 kz_common.sh:197
+#: kz_common.py:304 kz_common.sh:202
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:305 kz_common.sh:198
+#: kz_common.py:305 kz_common.sh:203
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz-backup:211 kz-backup:744 kz-desktop:288 kz-install:915 kz-install:937
+#: kz-backup:211 kz-backup:744 kz-desktop:293 kz-install:915 kz-install:937
 #: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:456 kz-setup:809
 #: kz-setup:838
 msgid "Press the Enter key to continue [Enter]: "
@@ -682,12 +682,12 @@ msgstr "Controleer of alle repo's schoon zijn"
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz_common.sh:149
+#: kz_common.sh:154
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ", of zie de $yelp_man_url man-pagina"
 
-#: kz_common.sh:153
+#: kz_common.sh:158
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
@@ -696,22 +696,22 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man voor meer "
 "informatie."
 
-#: kz_common.sh:181
+#: kz_common.sh:186
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:195
+#: kz_common.sh:200
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:289 kz-get:79
+#: kz_common.sh:294 kz-get:79
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:292
+#: kz_common.sh:297
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
@@ -720,11 +720,11 @@ msgstr ""
 "Fout $rc op regel $lineno in functie $function bij het uitvoeren van "
 "commando: $command"
 
-#: kz_common.sh:296 kz_common.sh:299 kz-get:70
+#: kz_common.sh:301 kz_common.sh:304 kz-get:70
 msgid "Use \"journalctl -xe\" to check what went wrong."
 msgstr "Gebruik \"journalctl -xe\" om te controleren wat er misging."
 
-#: kz_common.sh:300 kz-get:71
+#: kz_common.sh:305 kz-get:71
 msgid "The last few lines of the log are displayed here."
 msgstr "De laatste paar regels van de log worden hier weergegeven."
 
@@ -732,7 +732,7 @@ msgstr "De laatste paar regels van de log worden hier weergegeven."
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:335
+#: kz_common.sh:340
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -769,7 +769,7 @@ msgstr "Distribueren..."
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:259 kz-dev:296
+#: kz-deploy:259 kz-dev:301
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
@@ -837,24 +837,24 @@ msgstr "  -l, --list     toon favorieten"
 msgid "  -r, --reset    set favorites on default values"
 msgstr "  -r, --reset    stel favorieten in op standaardwaarden"
 
-#: kz-desktop:82
+#: kz-desktop:87
 msgid "No GNOME session found."
 msgstr "Geen GNOME-sessie gevonden."
 
-#: kz-desktop:262
+#: kz-desktop:267
 msgid "Favorite apps:"
 msgstr "Favorieten:"
 
-#: kz-desktop:285
+#: kz-desktop:290
 msgid "Now make the change in the desktop environment."
 msgstr "Voer nu de wijziging uit in de desktopomgeving."
 
-#: kz-desktop:311
+#: kz-desktop:316
 #, sh-format
 msgid "Config database content captured ($fase)."
 msgstr "Inhoud configuratiedatabase vastgelegd ($fase)."
 
-#: kz-desktop:323
+#: kz-desktop:328
 msgid ""
 "Changes in the configuration database,\n"
 "< is the old setting (A),\n"
@@ -864,7 +864,7 @@ msgstr ""
 "< is de oude   instelling (A),\n"
 "> is de nieuwe instelling (B):"
 
-#: kz-desktop:328
+#: kz-desktop:333
 msgid "Use \"gsettings set <change>\" for changes."
 msgstr "Gebruik \"gsettings set <wijziging>\" bij wijzigingen."
 
@@ -880,35 +880,35 @@ msgstr "Gebruik: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgid "Usage: kz dev [<options>]"
 msgstr "Gebruik: kz dev [<opties>]"
 
-#: kz-dev:95
+#: kz-dev:100
 msgid "First install git, use \"sudo apt install git\"."
 msgstr "Installeer eerst git, gebruik \"sudo apt install git\"."
 
-#: kz-dev:102
+#: kz-dev:107
 msgid "First install lftp, use \"sudo apt install lftp\"."
 msgstr "Installeer eerst lftp, gebruik \"sudo apt install lftp\"."
 
-#: kz-dev:179
+#: kz-dev:184
 msgid "Clone repos..."
 msgstr "Clone repo's..."
 
-#: kz-dev:232
+#: kz-dev:237
 msgid "Pull repos..."
 msgstr "Pull repo's..."
 
-#: kz-dev:254
+#: kz-dev:259
 msgid "Status repos..."
 msgstr "Status repo's..."
 
-#: kz-dev:292
+#: kz-dev:297
 msgid "Download website..."
 msgstr "Downloaden website..."
 
-#: kz-dev:313
+#: kz-dev:318
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-#: kz-dev:323
+#: kz-dev:328
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
@@ -1602,19 +1602,19 @@ msgstr ""
 msgid "Usage: kz update [<options>]"
 msgstr "Gebruik: kz update [<opties>]"
 
-#: kz-update:85
+#: kz-update:90
 msgid "Update..."
 msgstr "Bijwerken..."
 
-#: kz-update:88 kz-update:100
+#: kz-update:93 kz-update:105
 msgid "Upgrade..."
 msgstr "Opwaarderen..."
 
-#: kz-update:94 kz-update:106
+#: kz-update:99 kz-update:111
 msgid "Cleanup..."
 msgstr "Opruimen..."
 
-#: kz-update:110
+#: kz-update:115
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os-release"
 
@@ -1630,12 +1630,12 @@ msgstr ""
 msgid "Usage: kz wifi [<options>]"
 msgstr "Gebruik: kz wifi [<opties>]"
 
-#: kz-wifi:161
+#: kz-wifi:166
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:171 kz-wifi:182
+#: kz-wifi:176 kz-wifi:187
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
@@ -1759,7 +1759,7 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:562 kz-check:585 kz-deploy:314 kz-dev:329 kz-post-migrate:66
-#: kz-update:332
+#: kz-build:562 kz-check:585 kz-deploy:314 kz-dev:334 kz-post-migrate:66
+#: kz-update:337
 msgid "Complete!"
 msgstr "Klaar!"
