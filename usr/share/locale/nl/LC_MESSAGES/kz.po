@@ -617,15 +617,15 @@ msgstr "Eindspaties gevonden."
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
-#: kz_common.py:147 kz_common.sh:99
+#: kz_common.py:147 kz_common.sh:94
 msgid "fatal: no systemd available"
 msgstr "fataal: geen systemd beschikbaar"
 
-#: kz_common.py:153 kz_common.sh:106
+#: kz_common.py:153 kz_common.sh:101
 msgid "fatal: no os release available"
 msgstr "fataal: geen os release beschikbaar"
 
-#: kz_common.py:159 kz_common.sh:113
+#: kz_common.py:159 kz_common.sh:108
 msgid "fatal: must not be run as root"
 msgstr "fataal: mag niet als root worden uitgevoerd"
 
@@ -649,11 +649,11 @@ msgstr "Typ '{} --help' voor meer informatie."
 msgid "kz version 4.2.1 (built {})."
 msgstr "kz versie 4.2.1 (gebouwd {})."
 
-#: kz_common.py:304 kz_common.sh:202
+#: kz_common.py:304 kz_common.sh:197
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-#: kz_common.py:305 kz_common.sh:203
+#: kz_common.py:305 kz_common.sh:198
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
@@ -682,12 +682,12 @@ msgstr "Controleer of alle repo's schoon zijn"
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#: kz_common.sh:154
+#: kz_common.sh:149
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ", of zie de $yelp_man_url man-pagina"
 
-#: kz_common.sh:158
+#: kz_common.sh:153
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
@@ -696,22 +696,22 @@ msgstr ""
 "Typ '$program_name --manual' of 'man $program_name'$yelp_man voor meer "
 "informatie."
 
-#: kz_common.sh:186
+#: kz_common.sh:181
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr "Typ '$program_name --help' voor meer informatie."
 
-#: kz_common.sh:200
+#: kz_common.sh:195
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:294 kz-get:79
+#: kz_common.sh:289 kz-get:79
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-#: kz_common.sh:297
+#: kz_common.sh:292
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
@@ -720,11 +720,11 @@ msgstr ""
 "Fout $rc op regel $lineno in functie $function bij het uitvoeren van "
 "commando: $command"
 
-#: kz_common.sh:301 kz_common.sh:304 kz-get:70
+#: kz_common.sh:296 kz_common.sh:299 kz-get:70
 msgid "Use \"journalctl -xe\" to check what went wrong."
 msgstr "Gebruik \"journalctl -xe\" om te controleren wat er misging."
 
-#: kz_common.sh:305 kz-get:71
+#: kz_common.sh:300 kz-get:71
 msgid "The last few lines of the log are displayed here."
 msgstr "De laatste paar regels van de log worden hier weergegeven."
 
@@ -732,7 +732,7 @@ msgstr "De laatste paar regels van de log worden hier weergegeven."
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:340
+#: kz_common.sh:335
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
