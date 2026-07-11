@@ -1158,12 +1158,12 @@ msgstr "gast"
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
-#: kz-post-migrate:51
+#: kz-post-migrate:56
 #, sh-format
 msgid "Searching Windows-specific files in '$PWD' and subfolders..."
 msgstr "Windows-specifieke bestanden zoeken in '$PWD' en submappen..."
 
-#: kz-post-migrate:57
+#: kz-post-migrate:62
 msgid ""
 "Press the Enter key to delete the Windows-specific files, or Ctrl-C to stop "
 "[Enter/Ctrl-C]: "
@@ -1171,7 +1171,7 @@ msgstr ""
 "Druk op de Enter-toets om de Windows-specifieke bestanden te verwijderen, of "
 "Ctrl-C om te stoppen [Enter/Ctrl-C]: "
 
-#: kz-post-migrate:61
+#: kz-post-migrate:66
 #, sh-format
 msgid "Deleting Windows-specific files in '$PWD' and subfolders..."
 msgstr "Windows-specifieke bestanden verwijderen in '$PWD' en submappen..."
@@ -1759,7 +1759,7 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:562 kz-check:585 kz-deploy:314 kz-dev:334 kz-post-migrate:66
+#: kz-build:562 kz-check:585 kz-deploy:314 kz-dev:334 kz-post-migrate:71
 #: kz-update:337
 msgid "Complete!"
 msgstr "Klaar!"
