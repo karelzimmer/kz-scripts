@@ -5,9 +5,10 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 #
+# =============================================================================
 # Dutch translations for the kz package.
 # This file is distributed under the same license as the kz package.
-#
+# =============================================================================
 msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"

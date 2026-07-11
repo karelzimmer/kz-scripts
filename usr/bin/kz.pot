@@ -5,9 +5,10 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 #
+# =============================================================================
 # Extracted translatable strings for the kz package.
 # This file is distributed under the same license as the kz package.
-#
+# =============================================================================
 #, fuzzy
 msgid ""
 msgstr ""
