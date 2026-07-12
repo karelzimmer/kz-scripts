@@ -154,12 +154,6 @@ def init(PROGRAM_NAME: str) -> None:
         print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
 
-    # Check if started as root.
-    if os.getuid() == 0:
-        text = _('fatal: must not be run as root')
-        print(f'{RED}{text}{NORMAL}', file=sys.stderr)
-        sys.exit(1)
-
     text = f'\
 ==== START logs for script {PROGRAM_NAME} ===================================='
     logmsg(PROGRAM_NAME, text)

@@ -91,13 +91,13 @@ msgid "command is required"
 msgstr ""
 
 #: kz:111 kz_common.py:60 kz_common.py:78 kz_common.py:107 kz_common.py:125
-#: kz_common.py:242 kz_common.py:255 kz-dev:80 kz-dev:193 kz-dev:208 kz-dev:225
+#: kz_common.py:236 kz_common.py:249 kz-dev:80 kz-dev:193 kz-dev:208 kz-dev:225
 #: kz-dev:247 kz-dev:269 kz-dev:313 kz-update:77 kz-update:292
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz_common.py:66 kz_common.py:84 kz_common.py:113 kz_common.py:131
-#: kz_common.py:248 kz_common.py:261 kz_common.py:299 kz-dev:86 kz-dev:199
+#: kz_common.py:242 kz_common.py:255 kz_common.py:293 kz-dev:86 kz-dev:199
 #: kz-dev:214 kz-dev:231 kz-dev:253 kz-dev:275 kz-update:83 kz-update:298
 msgid "Program {} encountered an error."
 msgstr ""
@@ -177,8 +177,9 @@ msgid "directory does not exist"
 msgstr ""
 
 #: kz-backup:206 kz-restore:206
+#, sh-format
 msgid ""
-"No usb medium found.\n"
+"No usb medium found on $usb_mount_point.\n"
 "\n"
 "Connect a usb medium."
 msgstr ""
@@ -321,7 +322,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:716 kz-install:885 kz-restore:428 kz-setup:780
+#: kz-backup:716 kz-install:887 kz-restore:428 kz-setup:780
 msgid "error messages"
 msgstr ""
 
@@ -346,11 +347,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:724 kz-install:890 kz-restore:436 kz-setup:784
+#: kz-backup:724 kz-install:892 kz-restore:436 kz-setup:784
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:725 kz-install:891 kz-restore:437 kz-setup:785
+#: kz-backup:725 kz-install:893 kz-restore:437 kz-setup:785
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -459,7 +460,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:552 kz-get:208
+#: kz-build:552 kz-get:210
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -550,7 +551,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-get:107 kz-install:659
+#: kz-get:109 kz-install:661
 msgid "Already performed by the administrator."
 msgstr ""
 
@@ -562,39 +563,35 @@ msgstr ""
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:159 kz_common.sh:108
-msgid "fatal: must not be run as root"
-msgstr ""
-
-#: kz_common.py:214
+#: kz_common.py:208
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:219
+#: kz_common.py:213
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:221 kz_common.py:276
+#: kz_common.py:215 kz_common.py:270
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:275
+#: kz_common.py:269
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:303
+#: kz_common.py:297
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:304 kz_common.sh:197
+#: kz_common.py:298 kz_common.sh:190
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:305 kz_common.sh:198
+#: kz_common.py:299 kz_common.sh:191
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:211 kz-backup:744 kz-desktop:293 kz-install:915 kz-install:937
+#: kz-backup:211 kz-backup:744 kz-desktop:293 kz-install:917 kz-install:939
 #: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:456 kz-setup:809
 #: kz-setup:838
 msgid "Press the Enter key to continue [Enter]: "
@@ -618,53 +615,53 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:149
+#: kz_common.sh:142
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:153
+#: kz_common.sh:146
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:181
+#: kz_common.sh:174
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:195
+#: kz_common.sh:188
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:289 kz-get:79
+#: kz_common.sh:282 kz-get:79
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:292
+#: kz_common.sh:285
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
 "$command"
 msgstr ""
 
-#: kz_common.sh:296 kz_common.sh:299 kz-get:70
+#: kz_common.sh:289 kz_common.sh:292 kz-get:70
 msgid "Use \"journalctl -xe\" to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:300 kz-get:71
+#: kz_common.sh:293 kz-get:71
 msgid "The last few lines of the log are displayed here."
 msgstr ""
 
-#: kz-get:222
+#: kz-get:224
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:335
+#: kz_common.sh:329
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -829,15 +826,15 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:212
+#: kz-get:214
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:216
+#: kz-get:218
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:218
+#: kz-get:220
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
@@ -945,7 +942,7 @@ msgid ""
 "with all commands and information."
 msgstr ""
 
-#: kz-install:387 kz-install:692 kz-menu:77 kz-install.desktop:10
+#: kz-install:387 kz-install:694 kz-menu:77 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
@@ -983,51 +980,51 @@ msgstr ""
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:681 kz-setup:643
+#: kz-install:683 kz-setup:643
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:693 kz-menu:53
+#: kz-install:695 kz-menu:53
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:723 nl.karelzimmer.kz-install.policy:22
+#: kz-install:725 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:794 kz-install:816
+#: kz-install:796 kz-install:818
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:732 kz-setup:684
+#: kz-install:734 kz-setup:684
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:733 kz-setup:685
+#: kz-install:735 kz-setup:685
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:886
+#: kz-install:888
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:894
+#: kz-install:896
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:896
+#: kz-install:898
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:923
+#: kz-install:925
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:925
+#: kz-install:927
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:931
+#: kz-install:933
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."

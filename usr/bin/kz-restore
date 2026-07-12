@@ -203,7 +203,7 @@ $(gettext 'directory does not exist')"
     else
         medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
         if [[ -z $medium ]]; then
-            text=$(gettext "No usb medium found.
+            text=$(eval_gettext "No usb medium found on \$usb_mount_point.
 
 Connect a usb medium.")
             kz.infomsg "$text"

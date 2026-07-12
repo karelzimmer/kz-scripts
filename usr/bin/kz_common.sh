@@ -102,13 +102,6 @@ function kz.init() {
         exit 1
     fi
 
-    # Check if started as root.
-    if [[ $UID -eq 0 ]]; then
-        printf  "$RED%s$NORMAL\n"   \
-                "$(gettext 'fatal: must not be run as root')" >&2
-        exit 1
-    fi
-
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -317,7 +310,8 @@ $(gettext "The last few lines of the log are displayed here.")
             if [[ $rc -eq 0 ]]; then
                 text='Cleaning up temporary files...'
                 kz.logmsg "$text"
-                rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS
+                rm --force --verbose /tmp/"$PROGRAM_NAME"-* |& $PROGRAM_LOGS ||
+                    true
             fi
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"

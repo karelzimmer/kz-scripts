@@ -648,12 +648,14 @@ function process_option_cat() {
 }
 
 
-# This function checks if the user is allowed to become root and returns 0 if
-# so, otherwise exits 0 with descriptive message.
+# This function returns 0 if the user is root or can become root, otherwise
+# exits 0 with descriptive message.
 function become_check() {
     local text=''
 
-    if groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
+    if [[ $UID -eq 0 ]]; then
+        return 0
+    elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
