@@ -147,9 +147,8 @@ found.")
                 /etc/os-release     &&
         [[ $INSTALL = 'INSTALL' ]]; then
         printf '%s\n' "# INSTALL update *** automatically added ***
-# -----------------------------------------------------------------------------
-# Refresh Debian package lists before installing apps.
-# -----------------------------------------------------------------------------
+# DESC    Refresh Debian package lists before installing apps.
+# HOST    *
 sudo apt-get update
 "       > "$command_file"
     fi
