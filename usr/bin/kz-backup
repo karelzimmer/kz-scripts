@@ -338,7 +338,6 @@ function backup_settings() {
     backup_setting_apps
     backup_setting_readme
     backup_setting_users
-    backup_setting_wifi
 
     if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
         backup_setting_avatar
@@ -358,7 +357,8 @@ function backup_settings() {
         --verbose                   \
         "$settings_dir/avatar"      \
         "$settings_dir/desktop"     \
-        "$settings_dir/favs.txt"    |& $PROGRAM_LOGS
+        "$settings_dir/favs.txt"    \
+        "$settings_dir/wifi.txt"    |& $PROGRAM_LOGS
 }
 
 
@@ -493,16 +493,6 @@ $groups"
     fi
 
     printf '%s\n' "$text" > "$output_file"
-}
-
-
-# This function saves the WiFi information.
-function backup_setting_wifi() {
-    local output_file=$settings_dir/wifi.txt
-
-    kz.logmsg 'Save the WiFi information...'
-
-    pkexec /usr/bin/kz-wifi-pkexec > "$output_file" 2>&1 || true
 }
 
 

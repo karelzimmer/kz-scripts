@@ -300,7 +300,7 @@ msgstr ""
 "2. Klik op Ontgrendelen en vervolgens op Gebruiker toevoegen.\n"
 "3. Vul in Naam <gebruiker> en Gebruikersnaam <gebruikersnaam>."
 
-#: kz-backup:474 kz-backup:532 kz-backup:587
+#: kz-backup:474 kz-backup:522 kz-backup:577
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr "[1] Windows-, command- of vergrootglastoets."
 
@@ -326,7 +326,7 @@ msgstr ""
 "# Gebruiker kan wachtwoord instellen bij de eerste keer aanmelden:\n"
 "sudo passwd --delete --expire <gebruikersnaam>"
 
-#: kz-backup:524
+#: kz-backup:514
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -347,7 +347,7 @@ msgstr ""
 "map),\n"
 "   of een ander afbeeldingsbestand."
 
-#: kz-backup:580
+#: kz-backup:570
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -364,72 +364,72 @@ msgstr ""
 "   of een ander afbeeldingsbestand, en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:226 kz-backup:613 kz-menu:75 kz-backup.desktop:10
+#: kz-backup:226 kz-backup:603 kz-menu:75 kz-backup.desktop:10
 msgid "Make backup"
 msgstr "Back-up maken"
 
-#: kz-backup:614
+#: kz-backup:604
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-#: kz-backup:665
+#: kz-backup:655
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:716 kz-install:887 kz-restore:428 kz-setup:780
+#: kz-backup:706 kz-install:887 kz-restore:428 kz-setup:780
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:717
+#: kz-backup:707
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:719 kz-restore:431
+#: kz-backup:709 kz-restore:431
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:720
+#: kz-backup:710
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:721 kz-restore:433
+#: kz-backup:711 kz-restore:433
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:722
+#: kz-backup:712
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:724 kz-install:892 kz-restore:436 kz-setup:784
+#: kz-backup:714 kz-install:892 kz-restore:436 kz-setup:784
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:725 kz-install:893 kz-restore:437 kz-setup:785
+#: kz-backup:715 kz-install:893 kz-restore:437 kz-setup:785
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:726
+#: kz-backup:716
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:754
+#: kz-backup:744
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:772
+#: kz-backup:762
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:782
+#: kz-backup:772
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 "De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
 
-#: kz-backup:788 kz-restore:501
+#: kz-backup:778 kz-restore:501
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -521,7 +521,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:558 kz-check:581 kz-deploy:310
+#: kz-build:558 kz-check:582 kz-deploy:310
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -567,28 +567,28 @@ msgstr "Berichtencatalogus $file niet gevonden."
 msgid "Check scripts (this may take a while)..."
 msgstr "Controleer scripts (dit kan even duren)..."
 
-#: kz-check:375
+#: kz-check:376
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 "Onbekend script.  FunctieUse \"kz setup <app>...\" or \"kz s check_code kan "
 "scriptcode niet controleren."
 
-#: kz-check:395
+#: kz-check:396
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr "Script $scriptname --usage gaf een fout."
 
-#: kz-check:408
+#: kz-check:409
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
-#: kz-check:419
+#: kz-check:420
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
-#: kz-check:430
+#: kz-check:431
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -597,21 +597,21 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:450 kz-check:461
+#: kz-check:451 kz-check:462
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr "Man-pagina $dir{1,5}/$scriptname.{1,5} niet gevonden."
 
-#: kz-check:497
+#: kz-check:498
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr "Een of meer regels zijn te lang (>79):"
 
-#: kz-check:544
+#: kz-check:545
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:564
+#: kz-check:565
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
@@ -656,7 +656,7 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz-backup:211 kz-backup:744 kz-desktop:293 kz-install:917 kz-install:939
+#: kz-backup:211 kz-backup:734 kz-desktop:293 kz-install:917 kz-install:939
 #: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:456 kz-setup:809
 #: kz-setup:838
 msgid "Press the Enter key to continue [Enter]: "
@@ -1749,7 +1749,7 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:562 kz-check:585 kz-deploy:314 kz-dev:334 kz-post-migrate:71
+#: kz-build:562 kz-check:586 kz-deploy:314 kz-dev:334 kz-post-migrate:71
 #: kz-update:337
 msgid "Complete!"
 msgstr "Klaar!"

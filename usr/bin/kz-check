@@ -362,6 +362,7 @@ function check_code() {
 
     if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
         check_shellcheck
+        check_script
     elif grep --quiet --line-regexp --regexp="$tab_completion_script" "$script"
         then
         check_shellcheck
@@ -385,7 +386,7 @@ code.")$NORMAL
 function check_script() {
     local dir=''
     local gui_option='-''-''g''u''i'
-    local root_script=' ''b''e''c''o''m''e''$'
+    local pkexec_script=' ''p''k''e''x''e''c'' '
     local text=''
 
     # Script.
@@ -423,7 +424,7 @@ not found.")
     fi
 
     # Polkit action definition file (only with so-called root scripts).
-    if grep --quiet --regexp="$root_script" "$file"; then
+    if grep --quiet --regexp="$pkexec_script" "$file"; then
         dir=$scripts_repo/usr/share/polkit-1/actions
 
         if ! [[ -f $dir/nl.karelzimmer.$scriptname.policy ]]; then
