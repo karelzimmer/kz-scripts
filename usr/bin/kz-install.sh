@@ -209,6 +209,19 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session &
 REBOOT=true
 
 
+# INSTALL desktop-settings
+# DESC    Enable Cinnamon/LXDE user greeter.
+# HOST    *
+if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
+#
+REBOOT=true
+
+# REMOVE  desktop-settings
+if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
+#
+REBOOT=true
+
+
 # INSTALL dos2unix
 # DESC    Convert text file line endings between CRLF and LF.
 # HOST    pc06 pc07
@@ -472,19 +485,6 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes google-chrome-stable; fi
 #
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes google-chrome-stable; fi
-
-
-# INSTALL greeter-settings
-# DESC    Enable Cinnamon/LXDE user greeter.
-# HOST    *
-if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
-#
-REBOOT=true
-
-# REMOVE  greeter-settings
-if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
-#
-REBOOT=true
 
 
 # INSTALL groff
