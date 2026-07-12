@@ -1456,7 +1456,7 @@ msgstr ""
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 
-#: kz-wifi:176 kz-wifi:187
+#: kz-wifi:176 kz-wifi:189
 msgid "No WiFi device found."
 msgstr ""
 
