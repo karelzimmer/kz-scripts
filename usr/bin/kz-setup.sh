@@ -32,7 +32,7 @@ kz-desktop --delete=com.usebottles.bottles
 
 # SETUP cinnamon-settings
 # DESC  Cinnamon desktop environment settings.
-# HOST  #none
+# HOST  *
 if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings set org.nemo.preferences click-policy 'single'; fi
 
 # RESET cinnamon-settings
@@ -295,7 +295,7 @@ kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
 # SETUP lxde-settings
 # DESC  LXDE desktop environment settings.
-# HOST  #none
+# HOST  *
 if type lxsession &> /dev/null; then pcmanfm; fi
 if type lxsession &> /dev/null; then until [[ -f ~/.config/libfm/libfm.conf ]]; do sleep 2; done; fi
 if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=.*$/single_click=1/g' ~/.config/libfm/libfm.conf; fi

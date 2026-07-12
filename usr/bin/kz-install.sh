@@ -476,7 +476,7 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc
 
 # INSTALL greeter-settings
 # DESC    Enable Cinnamon/LXDE user greeter.
-# HOST    #none
+# HOST    *
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 #
 REBOOT=true
