@@ -1,6 +1,7 @@
+#!/usr/bin/env bash
 # shellcheck shell=bash
 # #############################################################################
-# SPDX-FileComment: Tab-completion-script for kz-build
+# SPDX-FileComment: Tab-completion-script for kz-build.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

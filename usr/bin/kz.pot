@@ -1,5 +1,5 @@
 # #############################################################################
-# SPDX-FileComment: Portable Object Template (POT) file for the kz package
+# SPDX-FileComment: Portable Object Template (POT) file for the kz package.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -322,7 +322,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:706 kz-install:886 kz-restore:428 kz-setup:780
+#: kz-backup:706 kz-install:885 kz-restore:428 kz-setup:779
 msgid "error messages"
 msgstr ""
 
@@ -347,11 +347,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:714 kz-install:891 kz-restore:436 kz-setup:784
+#: kz-backup:714 kz-install:890 kz-restore:436 kz-setup:783
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:715 kz-install:892 kz-restore:437 kz-setup:785
+#: kz-backup:715 kz-install:891 kz-restore:437 kz-setup:784
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -464,7 +464,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:558 kz-check:582 kz-deploy:310
+#: kz-build:558 kz-check:586 kz-deploy:310
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -511,47 +511,47 @@ msgstr ""
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:396
+#: kz-check:400
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:409
+#: kz-check:413
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:420
+#: kz-check:424
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:431
+#: kz-check:435
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:451 kz-check:462
+#: kz-check:455 kz-check:466
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr ""
 
-#: kz-check:498
+#: kz-check:502
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:545
+#: kz-check:549
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:565
+#: kz-check:569
 msgid "End spaces found."
 msgstr ""
 
-#: kz-get:109 kz-install:660
+#: kz-get:109 kz-install:659
 msgid "Already performed by the administrator."
 msgstr ""
 
@@ -591,9 +591,9 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:211 kz-backup:734 kz-desktop:293 kz-install:916 kz-install:938
-#: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:456 kz-setup:809
-#: kz-setup:838
+#: kz-backup:211 kz-backup:734 kz-desktop:293 kz-install:915 kz-install:937
+#: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:456 kz-setup:808
+#: kz-setup:837
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -942,7 +942,7 @@ msgid ""
 "with all commands and information."
 msgstr ""
 
-#: kz-install:386 kz-install:693 kz-menu:77 kz-install.desktop:10
+#: kz-install:386 kz-install:692 kz-menu:77 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
@@ -980,51 +980,51 @@ msgstr ""
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:682 kz-setup:643
+#: kz-install:681 kz-setup:642
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:694 kz-menu:53
+#: kz-install:693 kz-menu:53
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:724 nl.karelzimmer.kz-install.policy:22
+#: kz-install:723 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:795 kz-install:817
+#: kz-install:794 kz-install:816
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:733 kz-setup:684
+#: kz-install:732 kz-setup:683
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:734 kz-setup:685
+#: kz-install:733 kz-setup:684
 msgid "COMMAND"
 msgstr ""
 
-#: kz-install:887
+#: kz-install:886
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:895
+#: kz-install:894
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:897
+#: kz-install:896
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:924
+#: kz-install:923
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:926
+#: kz-install:925
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:932
+#: kz-install:931
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1129,7 +1129,7 @@ msgstr ""
 msgid "Restore backup"
 msgstr ""
 
-#: kz-menu:79 kz-setup:369 kz-setup:653 kz-setup.desktop:10
+#: kz-menu:79 kz-setup:369 kz-setup:652 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr ""
 
@@ -1374,43 +1374,43 @@ msgstr ""
 msgid "Use \"kz setup --reset\" to reset automatically selected apps."
 msgstr ""
 
-#: kz-setup:654
+#: kz-setup:653
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:781
+#: kz-setup:780
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:788
+#: kz-setup:787
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:790
+#: kz-setup:789
 msgid "Try to reset the apps again."
 msgstr ""
 
-#: kz-setup:817
+#: kz-setup:816
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:819
+#: kz-setup:818
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:827
+#: kz-setup:826
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:832
+#: kz-setup:831
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:854
+#: kz-setup:853
 msgid "Log out of the computer yourself."
 msgstr ""
 
@@ -1572,7 +1572,7 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:562 kz-check:586 kz-deploy:314 kz-dev:334 kz-post-migrate:71
+#: kz-build:562 kz-check:590 kz-deploy:314 kz-dev:334 kz-post-migrate:71
 #: kz-update:337
 msgid "Complete!"
 msgstr ""

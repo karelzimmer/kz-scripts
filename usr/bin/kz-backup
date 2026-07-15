@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Make a backup copy of the Home folder
+# SPDX-FileComment: Make a backup copy of the Home folder.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -536,7 +536,7 @@ function backup_setting_favorites() {
                 tr '[' ' '                      |
                 tr ']' ' '                      |
                 tr "'" ' '                      |
-                tr --delete '[:space:]'         |
+                tr --delete ' '                 |
                 tr ',' '\n'                     \
                 > "$output_file"                |& $PROGRAM_LOGS || true
 }

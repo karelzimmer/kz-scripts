@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Check scripts and website
+# SPDX-FileComment: Check scripts and website.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -389,8 +389,12 @@ function check_script() {
     local pkexec_script=' ''p''k''e''x''e''c'' '
     local text=''
 
-    # Script.
-    if ! "$file" --usage |& $PROGRAM_LOGS; then
+    # Script, completions excluded.
+    dir=$scripts_repo/usr/share/bash-completion/completions
+
+    if [[ $scriptdir = "$dir" ]]; then
+        :
+    elif ! "$file" --usage |& $PROGRAM_LOGS; then
         kz.infomsg "
   $BOLD$scriptdir / $scriptname$NORMAL"
         text='    '$(eval_gettext "Script \$scriptname --usage returned an \

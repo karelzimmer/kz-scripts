@@ -1,6 +1,6 @@
 <!--
 # #############################################################################
-# SPDX-FileComment: Readme for repository kz-scripts
+# SPDX-FileComment: Readme for repository kz-scripts.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

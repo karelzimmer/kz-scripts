@@ -1,5 +1,5 @@
 .\"# ##########################################################################
-.\"# SPDX-FileComment: Man page for kz-setup.sh
+.\"# SPDX-FileComment: Man page for kz-setup.sh.
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
@@ -53,17 +53,17 @@ T}
 l | l
 l | l.
 T{
-# SETUP <app>
+# Setup: <app>
 T}:T{
 Which app to set up (\fBapp-record\fR), will be processed.
 T}
 T{
-# DESC  <desc>
+# Desc:  <desc>
 T}:T{
 A description of the app (\fBdesc-record\fR), will be processed.
 T}
 T{
-# HOST  <host>
+# Host:  <host>
 T}:T{
 On which computers the app should be set up (\fBhost-record\fR), will be
 processed.
@@ -78,12 +78,12 @@ T}:T{
 Empty line (none, one or more), will be skipped.
 T}
 T{
-# REMOVE  <app>
+# Remove:  <app>
 T}:T{
 Remove the app (\fBapp-record\fR for option \fB-r\fR, \fB--remove\fR), will be
 processed.
 .br
-The description and computers are taken from the previous '# SETUP <app>' line.
+The description and computers are taken from the previous '# Setup: <app>' line.
 T}
 T{
 Command
@@ -114,17 +114,17 @@ T}
 l | l
 l | l.
 T{
-# SETUP calibre
+# Setup: calibre
 T}:T{
 Set up calibre.
 T}
 T{
-# DESC  Powerful and easy to use e-book manager.
+# Desc:  Powerful and easy to use e-book manager.
 T}:T{
 Description of calibre.
 T}
 T{
-# HOST  *
+# Host:  *
 T}:T{
 Set up calibre on every computer, see [1].
 T}
@@ -137,7 +137,7 @@ T{
 T}:T{
 T}
 T{
-# RESET calibre
+# Reset: calibre
 T}:T{
 Reset calibre.
 T}
@@ -167,13 +167,13 @@ The app can still be set up on another computer with the command 'kz setup
 
 .SH EXAMPLES
 .EX
-# SETUP calibre pc01
+# Setup: calibre pc01
 # -----------------------------------------------------------------------------
 # Powerful and easy to use e-book manager.
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=calibre-gui
 
-# RESET calibre pc01
+# Reset: calibre pc01
 # -----------------------------------------------------------------------------
 # Powerful and easy to use e-book manager.
 # -----------------------------------------------------------------------------

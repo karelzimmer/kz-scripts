@@ -1,6 +1,6 @@
 # shellcheck shell=bash disable=SC2034,SC2129
 # #############################################################################
-# SPDX-FileComment: Settings file for use with kz setup
+# SPDX-FileComment: Settings file for use with kz setup.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -12,39 +12,39 @@
 # =============================================================================
 
 
-# SETUP bitwarden
-# DESC  A secure and free password manager for all of your devices.
-# HOST  *
+# Setup: bitwarden
+# Desc:  A secure and free password manager for all of your devices.
+# Host:  *
 kz-desktop --addaft=com.bitwarden.desktop
 
-# RESET bitwarden
+# Reset: bitwarden
 kz-desktop --delete=com.bitwarden.desktop
 
 
-# SETUP bottles
-# DESC  Run Windows software.
-# HOST  pc06 pc07
+# Setup: bottles
+# Desc:  Run Windows software.
+# Host:  pc06 pc07
 kz-desktop --addaft=com.usebottles.bottles
 
-# RESET bottles
+# Reset: bottles
 kz-desktop --delete=com.usebottles.bottles
 
 
-# SETUP cockpit
-# DESC  Web Console for Linux servers.
-# HOST  pc06
+# Setup: cockpit
+# Desc:  Web Console for Linux servers.
+# Host:  pc06
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-cockpit
 
-# RESET cockpit
+# Reset: cockpit
 kz-desktop --delete=kz-cockpit
 
 
-# SETUP dash-to-dock-extension
-# DESC  A dock for the Gnome Shell.
-# HOST  *
+# Setup: dash-to-dock-extension
+# Desc:  A dock for the Gnome Shell.
+# Host:  *
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
@@ -69,7 +69,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null
 #
 LOGOUT=true
 
-# RESET dash-to-dock-extension
+# Reset: dash-to-dock-extension
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock custom-theme-shrink; fi
@@ -93,9 +93,9 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 LOGOUT=true
 
 
-# SETUP desktop-settings
-# DESC  Cinnamon/GNOME/LXDE desktop environment settings.
-# HOST  *
+# Setup: desktop-settings
+# Desc:  Cinnamon/GNOME/LXDE desktop environment settings.
+# Host:  *
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -136,7 +136,7 @@ if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click
 #
 LOGOUT=true
 
-# RESET desktop-settings
+# Reset: desktop-settings
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -175,39 +175,39 @@ if type lxsession > /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed -
 LOGOUT=true
 
 
-# SETUP evolution
-# DESC  Groupware suite with mail client and organizer.
-# HOST  *
+# Setup: evolution
+# Desc:  Groupware suite with mail client and organizer.
+# Host:  *
 kz-desktop --delete=org.gnome.Evolution
 
-# RESET evolution
+# Reset: evolution
 kz-desktop --addbef=org.gnome.Evolution
 
 
-# SETUP evolution
-# DESC  Groupware suite with mail client and organizer.
-# HOST  pc06 pc07
+# Setup: evolution
+# Desc:  Groupware suite with mail client and organizer.
+# Host:  pc06 pc07
 kz-desktop --addaft=org.gnome.Evolution
 
-# RESET evolution
+# Reset: evolution
 kz-desktop --delete=org.gnome.Evolution
 
 
-# SETUP git
-# DESC  Fast, scalable, distributed revision control system.
-# HOST  pc06 pc07
+# Setup: git
+# Desc:  Fast, scalable, distributed revision control system.
+# Host:  pc06 pc07
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
-# RESET git
+# Reset: git
 git config --global --unset alias.logg
 
 
-# SETUP gnome-extensions
-# DESC  GNOME desktop extensions.
-# HOST  pc06 pc07
+# Setup: gnome-extensions
+# Desc:  GNOME desktop extensions.
+# Host:  pc06 pc07
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then pipx install gnome-extensions-cli --system-site-packages; fi
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then pipx ensurepath; fi
 # -----------------------------------------------------------------------------
@@ -235,7 +235,7 @@ if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext e
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext install 'desktop-cube@schneegans.github.com'; fi
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext enable 'desktop-cube@schneegans.github.com'; fi
 
-# RESET gnome-extensions
+# Reset: gnome-extensions
 # -----------------------------------------------------------------------------
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/
@@ -262,18 +262,18 @@ if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext d
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext uninstall 'desktop-cube@schneegans.github.com'; fi
 
 
-# SETUP google-chrome
-# DESC  The web browser from Google.
-# HOST  pc01 pc06 pc07
+# Setup: google-chrome
+# Desc:  The web browser from Google.
+# Host:  pc01 pc06 pc07
 kz-desktop --addbef=google-chrome
 
-# RESET google-chrome
+# Reset: google-chrome
 kz-desktop --delete=google-chrome
 
 
-# SETUP gsconnect-extension
-# DESC  Securely connect to mobile devices and other desktops.
-# HOST  pc06 pc07
+# Setup: gsconnect-extension
+# Desc:  Securely connect to mobile devices and other desktops.
+# Host:  pc06 pc07
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io &> /dev/null; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
@@ -282,35 +282,35 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gscon
 #
 LOGOUT=true
 
-# RESET gsconnect-extension
+# Reset: gsconnect-extension
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io &> /dev/null; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 
 
-# SETUP kvm
-# DESC  KVM (for Kernel-based Virtual Machine) is a full virtualization solution.
-# HOST  pc06 pc07
+# Setup: kvm
+# Desc:  KVM (for Kernel-based Virtual Machine) is a full virtualization solution.
+# Host:  pc06 pc07
 kz-desktop --addaft=virt-manager
 
-# RESET kvm
+# Reset: kvm
 kz-desktop --delete=virt-manager
 
 
-# SETUP libreoffice
-# DESC  Office productivity suite.
-# HOST  #none
+# Setup: libreoffice
+# Desc:  Office productivity suite.
+# Host:  #none
 kz-desktop --addaft=libreoffice-writer
 kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
-# RESET libreoffice
+# Reset: libreoffice
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
 
-# SETUP lynis
-# DESC  Security auditing and hardening tool for Linux/Unix.
-# HOST  #none
+# Setup: lynis
+# Desc:  Security auditing and hardening tool for Linux/Unix.
+# Host:  #none
 git clone https://github.com/CISOfy/lynis.git "$HOME/lynis"
 # -----------------------------------------------------------------------------
 # Usage:
@@ -318,22 +318,22 @@ git clone https://github.com/CISOfy/lynis.git "$HOME/lynis"
 # $ [sudo] ./lynis audit system
 # -----------------------------------------------------------------------------
 
-# RESET lynis
+# Reset: lynis
 rm --force --recursive "$HOME/lynis"
 
 
-# SETUP microsoft-edge
-# DESC  The web browser from Microsoft.
-# HOST  pc06 pc07
+# Setup: microsoft-edge
+# Desc:  The web browser from Microsoft.
+# Host:  pc06 pc07
 kz-desktop --addaft=microsoft-edge
 
-# RESET microsoft-edge
+# Reset: microsoft-edge
 kz-desktop --delete=microsoft-edge
 
 
-# SETUP no-annoyance-extension
-# DESC  Disable the 'Window is ready' notification.
-# HOST  *
+# Setup: no-annoyance-extension
+# Desc:  Disable the 'Window is ready' notification.
+# Host:  *
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev &> /dev/null; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
@@ -342,7 +342,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 #
 LOGOUT=true
 
-# RESET no-annoyance-extension
+# Reset: no-annoyance-extension
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev &> /dev/null; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
@@ -350,18 +350,18 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 LOGOUT=true
 
 
-# SETUP private-home
-# DESC  Private home directory permissions.
-# HOST  *
+# Setup: private-home
+# Desc:  Private home directory permissions.
+# Host:  *
 chmod 750 ~
 
-# RESET private-home
+# Reset: private-home
 chmod 755 ~
 
 
-# SETUP spotify
-# DESC  Spotify streaming music client.
-# HOST  pc01 pc06 pc07
+# Setup: spotify
+# Desc:  Spotify streaming music client.
+# Host:  pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
@@ -369,15 +369,15 @@ if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spot
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
-# RESET spotify
+# Reset: spotify
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 
-# SETUP terminal
-# DESC  Terminal emulator application.
-# HOST  pc01 pc06 pc07
+# Setup: terminal
+# Desc:  Terminal emulator application.
+# Host:  pc01 pc06 pc07
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
@@ -390,7 +390,7 @@ echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 #
 LOGOUT=true
 
-# RESET terminal
+# Reset: terminal
 # -----------------------------------------------------------------------------
 # Disable aliases.
 # -----------------------------------------------------------------------------
@@ -403,40 +403,40 @@ sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 LOGOUT=true
 
 
-# SETUP terminal
-# DESC  Terminal emulator application.
-# HOST  pc06 pc07
+# Setup: terminal
+# Desc:  Terminal emulator application.
+# Host:  pc06 pc07
 sed --in-place --expression='/^alias bin/d' --expression='/^alias doc/d' ~/.bashrc
 echo "alias bin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'" >> ~/.bashrc
 echo "alias doc='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc
 kz-desktop --addbef=org.gnome.Terminal
 
-# RESET terminal
+# Reset: terminal
 kz-desktop --delete=org.gnome.Terminal
 sed --in-place --expression='/^alias bin/d' --expression='/^alias doc/d' ~/.bashrc
 
 
-# SETUP thumbnails-cache
-# DESC  Restore thumbnails in nautilus.
-# HOST  #none
+# Setup: thumbnails-cache
+# Desc:  Restore thumbnails in nautilus.
+# Host:  #none
 rm --force --recursive ~/.cache/thumbnails/
 
-# RESET thumbnails-cache
+# Reset: thumbnails-cache
 rm --force --recursive ~/.cache/thumbnails/
 
 
-# SETUP thunderbird
-# DESC  Mail/news client with RSS, chat and integrated spam filter support.
-# HOST  #none
+# Setup: thunderbird
+# Desc:  Mail/news client with RSS, chat and integrated spam filter support.
+# Host:  #none
 kz-desktop --addbef=thunderbird
 
-# RESET thunderbird
+# Reset: thunderbird
 kz-desktop --delete=thunderbird
 
 
-# SETUP vscode
-# DESC  Code editing. Redefined.
-# HOST  pc06 pc07
+# Setup: vscode
+# Desc:  Code editing. Redefined.
+# Host:  pc06 pc07
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
@@ -452,25 +452,25 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/pla
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/troff; fi
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
-# RESET vscode
+# Reset: vscode
 kz-desktop --delete=code
 
 
-# SETUP webmin
-# DESC  Web Console for Linux servers.
-# HOST  pc07
+# Setup: webmin
+# Desc:  Web Console for Linux servers.
+# Host:  pc07
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-webmin
 
-# RESET webmin
+# Reset: webmin
 kz-desktop --delete=kz-webmin
 
 
-# SETUP xdg-projects-dir
-# DESC  Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs.
-# HOST  pc06 pc07
+# Setup: xdg-projects-dir
+# Desc:  Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs.
+# Host:  pc06 pc07
 # -----------------------------------------------------------------------------
 # App xdg-projects-dir is not required with xdg-user-dirs version 0.20 or higher.
 # -----------------------------------------------------------------------------
@@ -478,14 +478,17 @@ if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; else mk
 if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; else xdg-user-dirs-update --set PROJECTS ~/Projects; fi
 xdg-user-dirs-update
 
-# RESET xdg-projects-dir
+# Reset: xdg-projects-dir
 xdg-user-dirs-update --set PROJECTS ~
 
 
-# SETUP zoom
-# DESC  Cloud-based communication and collaboration platform.
-# HOST  pc01
+# Setup: zoom
+# Desc:  Cloud-based communication and collaboration platform.
+# Host:  pc01
 kz-desktop --addaft=kz-zoom
 
-# RESET zoom
+# Reset: zoom
 kz-desktop --delete=kz-zoom
+
+
+# EOF

@@ -1,5 +1,5 @@
 .\"# ##########################################################################
-.\"# SPDX-FileComment: Man page for kz-install.sh
+.\"# SPDX-FileComment: Man page for kz-install.sh.
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
@@ -53,17 +53,17 @@ T}
 l | l
 l | l.
 T{
-# INSTALL <app>
+# Install: <app>
 T}:T{
 Which app to install (\fBapp-rule\fR), will be processed.
 T}
 T{
-# DESC    <desc>
+# Desc:    <desc>
 T}:T{
 A description of the app (\fBdesc-rule\fR), will be processed.
 T}
 T{
-# HOST    <host>
+# Host:    <host>
 T}:T{
 On which computers the app should be installed (\fBhost-rule\fR), will be
 processed.
@@ -78,12 +78,12 @@ T}:T{
 Empty line (none, one or more), will be skipped.
 T}
 T{
-# REMOVE  <app>
+# Remove:  <app>
 T}:T{
 Remove the app (\fBapp-rule\fR for option \fB-r\fR, \fB--remove\fR), will be
 processed.
 .br
-The description and computers are taken from the previous '# INSTALL <app>'
+The description and computers are taken from the previous '# Install: <app>'
 line.
 T}
 T{
@@ -115,17 +115,17 @@ T}
 l | l
 l | l.
 T{
-# INSTALL calibre
+# Install: calibre
 T}:T{
 Install calibre.
 T}
 T{
-# DESC    Powerful and easy to use e-book manager.
+# Desc:    Powerful and easy to use e-book manager.
 T}:T{
 Description of calibre.
 T}
 T{
-# HOST    *
+# Host:    *
 T}:T{
 Install calibre on every computer, see [1].
 T}
@@ -138,7 +138,7 @@ T{
 T}:T{
 T}
 T{
-# REMOVE  calibre
+# Remove:  calibre
 T}:T{
 Remove calibre.
 T}
@@ -169,9 +169,9 @@ The app can still be installed on another computer with the command 'kz install
 
 .SH EXAMPLES
 .EX
-# INSTALL calibre
-# DESC    Powerful and easy to use e-book manager.
-# HOST    pc06
+# Install: calibre
+# Desc:    Powerful and easy to use e-book manager.
+# Host:    pc06
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install -\
 -assume-yes calibre; fi
 #
@@ -179,7 +179,7 @@ if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo --validate\
  && wget --output-document=- https://download.calibre-ebook.com/linux-installe\
 r.sh | sudo sh; fi
 
-# REMOVE calibre
+# Remove: calibre
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --\
 assume-yes calibre; fi
 #

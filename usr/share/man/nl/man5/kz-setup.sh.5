@@ -1,5 +1,5 @@
 .\"# ##########################################################################
-.\"# SPDX-FileComment: Man page for kz-setup.sh (Dutch)
+.\"# SPDX-FileComment: Man page for kz-setup.sh (Dutch).
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
@@ -55,17 +55,17 @@ T}
 l | l
 l | l.
 T{
-# SETUP <app>
+# Setup: <app>
 T}:T{
 Welke app instellen (\fBapp-regel\fR), wordt verwerkt.
 T}
 T{
-# DESC  <desc>
+# Desc:  <desc>
 T}:T{
 Een beschrijving van de app (\fBdesc-regel\fR), wordt verwerkt.
 T}
 T{
-# HOST  <host>
+# Host:  <host>
 T}:T{
 Op welke computers de app ingesteld moet worden (\fBhost-regel\fR), wordt
 verwerkt.
@@ -80,14 +80,14 @@ T}:T{
 Lege regel (geen, één of meer), wordt overgeslagen.
 T}
 T{
-# RESET <app>
+# Reset: <app>
 T}:T{
 De app resetten (\fBapp-regel\fR voor optie \fB-r\fR, \fB--reset\fR), wordt
 verwerkt.
 .br
 De beschrijving en computers worden overgenomen van de
 .br
-vooorgaande '# SETUP <app>' regel.
+vooorgaande '# Setup: <app>' regel.
 T}
 T{
 Opdracht
@@ -118,17 +118,17 @@ T}
 l | l
 l | l.
 T{
-# SETUP calibre
+# Setup: calibre
 T}:T{
 Stel calibre in.
 T}
 T{
-# DESC  Powerful and easy to use e-book manager.
+# Desc:  Powerful and easy to use e-book manager.
 T}:T{
 Beschrijving van calibre.
 T}
 T{
-# HOST  *
+# Host:  *
 T}:T{
 Calibre instellen op iedere computer, zie [1].
 T}
@@ -141,7 +141,7 @@ T{
 T}:T{
 T}
 T{
-# RESET calibre
+# Reset: calibre
 T}:T{
 Reset calibre.
 T}
@@ -172,12 +172,12 @@ zoals 'kz setup calibre'.
 
 .SH VOORBEELDEN
 .EX
-# SETUP calibre
-# DESC  Powerful and easy to use e-book manager.
-# HOST  pc06
+# Setup: calibre
+# Desc:  Powerful and easy to use e-book manager.
+# Host:  pc06
 kz-desktop --addaft=calibre-gui
 
-# RESET calibre
+# Reset: calibre
 kz-desktop --delete=calibre-gui
 .EE
 

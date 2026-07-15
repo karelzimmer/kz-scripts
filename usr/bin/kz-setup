@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 # #############################################################################
-# SPDX-FileComment: Set up apps and change user settings
+# SPDX-FileComment: Set up apps and change user settings.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -74,8 +74,8 @@ declare ERROR_LOG=''
 declare LOGOUT=false
 declare OPTION_RESET=false
 declare OPTION_SELECT=false
-declare RESET='RESET'
-declare SETUP='SETUP'
+declare RESET='Reset:'
+declare SETUP='Setup:'
 declare UI_MODE='tui'
 
 
@@ -229,8 +229,8 @@ $(gettext "no desktop environment available")"
                 ;;
             -r | --reset )
                 OPTION_RESET=true
-                SETUP='RESET'
-                RESET='SETUP'
+                SETUP='Reset:'
+                RESET='Setup:'
                 shift
                 ;;
             -s | --select )
@@ -313,7 +313,7 @@ $(gettext '  0  No apps found.')"
     else
         text+="
 $apps"
-        if [[ $SETUP = 'SETUP' ]]; then
+        if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
 $(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up \
@@ -344,14 +344,14 @@ settings files with all commands and information.")"
 # This function makes a list of available apps from the settings files.
 function app_list() {
     apps=$(
-        grep    --regexp="#[[:space:]]\+${SETUP}[[:space:]]\+"  \
-                "${settings_files[@]}"                          |
-        tr      --squeeze-repeats                               \
-                '[:space:]'                                     |
-        cut     --delimiter=' '                                 \
-                --fields=3                                      |
-        sort    --unique                                        |
-        sed     --expression='s/^/    /'                        || true
+        grep    --regexp="#.*${SETUP}.*"    \
+                "${settings_files[@]}"      |
+        tr      --squeeze-repeats           \
+                ' '                         |
+        cut     --delimiter=' '             \
+                --fields=3                  |
+        sort    --unique                    |
+        sed     --expression='s/^/    /'    || true
         )
 }
 
@@ -365,7 +365,7 @@ function process_option_select() {
     local text=''
     local title=''
 
-    if [[ $SETUP = 'SETUP' ]]; then
+    if [[ $SETUP = 'Setup:' ]]; then
         title=$(gettext 'Set up apps')
         text=$(gettext 'Select apps to set up:')
     else
@@ -420,7 +420,7 @@ $(gettext '  0  No apps found.')"
     else
         text+="
 $apps"
-        if [[ $SETUP = 'SETUP' ]]; then
+        if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
 $(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up \
@@ -478,17 +478,17 @@ function process_settings_files_by_app_argument() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # SETUP <app>   [1] "app_record"    SELECT
-    # | # DESC  <desc>  [2] "desc_record"
-    # | # HOST  <host>  [3] "host_record"
+    # | # Setup: <app>  [1] "app_record"    SELECT
+    # | # Desc:  <desc> [2] "desc_record"
+    # | # Host:  <host> [3] "host_record"
     # | <cmd>...
     # |
-    # | # RESET <app>   [1] "app_record"
+    # | # Reset: <app>  [1] "app_record"
     # | <cmd>...
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
-            '#'[[:space:]]*${SETUP}[[:space:]]*${app_argument}* )
+            '#'*${SETUP}*${app_argument}* )
                 # Save app record.
                 app_record=$setup_record    # [1]
                 # Set switches.
@@ -496,16 +496,16 @@ function process_settings_files_by_app_argument() {
                 no_app_match=false
                 write_saved_records=true
                 ;;
-            '#'[[:space:]]*DESC[[:space:]]* )
+            '#'*'Desc:'* )
                 # Save description record.
                 desc_record=$setup_record   # [2]
                 ;;
-            '#'[[:space:]]*HOST[[:space:]]* )
+            '#'*'Host:'* )
                 # Save host record.
                 host_record=$setup_record   # [3]
                 ;;
-            '#'[[:space:]]*${RESET}[[:space:]]* )
-                # Skip mismatched app records.
+            '#'*${RESET}* | '#'*'EOF'* )
+                # Stop at mismatched app record or End-Of-File.
                 # Reset switches.
                 app_match=false
                 write_saved_records=false
@@ -545,17 +545,17 @@ function process_settings_files_by_hostname() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # SETUP <app>   [1] "app_record"
-    # | # DESC  <desc>  [2] "desc_record"
-    # | # HOST  <host>  [3] "host_record"   SELECT
+    # | # Setup: <app>  [1] "app_record"
+    # | # Desc:  <desc> [2] "desc_record"
+    # | # Host:  <host> [3] "host_record"   SELECT
     # | <cmd>...
     # |
-    # | # RESET <app>   [1] "app_record"
+    # | # Reset: <app>  [1] "app_record"
     # | <cmd>...
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
-            '#'[[:space:]]*${SETUP}[[:space:]]* )
+            '#'*${SETUP}* )
                 # Save app record.
                 app_record=$setup_record    # [1]
                 # Set switch.
@@ -565,20 +565,19 @@ function process_settings_files_by_hostname() {
                 # causes setup commands to be included with the reset commands.
                 app_match=true
                 ;;
-            '#'[[:space:]]*DESC[[:space:]]* )
+            '#'*'Desc:'* )
                 # Save description record.
                 desc_record=$setup_record   # [2]
                 ;;
-            '#'[[:space:]]*HOST[[:space:]]*'*' | \
-            '#'[[:space:]]*HOST[[:space:]]*$HOSTNAME* )
+            '#'*'Host:'*'*'* | '#'*'Host:'*$HOSTNAME* )
                 # Save host record.
                 host_record=$setup_record   # [3]
                 # Set switches.
                 host_match=true
                 write_saved_records=true
                 ;;
-            '#'[[:space:]]*${RESET}[[:space:]]* )
-                # Skip mismatched app records.
+            '#'*${RESET}* | '#'*'EOF'* )
+                # Stop at mismatched app record or End-Of-File.
                 # Reset switches.
                 app_match=false
                 host_match=false
@@ -635,9 +634,9 @@ function setup_apps() {
     local title=''
 
     app_tot_num=$(
-        grep    --count                                         \
-                --regexp="#[[:space:]]\+${SETUP}[[:space:]]\+"  \
-                "$command_file"                                 || true
+        grep    --count                     \
+                --regexp="#.*${SETUP}.*"    \
+                "$command_file"             || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )
@@ -692,11 +691,11 @@ function process_command_file() {
                 # Skip empty record.
                 continue
                 ;;
-            '#'[[:space:]]*${SETUP}[[:space:]]* )
+            '# '*${SETUP}' '* )
                 # App record.
                 app_name=$(
-                    printf '%s\n' "$command_record"     |
-                    tr --squeeze-repeats '[:space:]'    |
+                    printf '%s\n' "$command_record" |
+                    tr --squeeze-repeats ' '        |
                     cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))
@@ -784,7 +783,7 @@ ${FAILED_APPS[*]}
 $(gettext 'Actions to take:')
 $(gettext 'Check the error messages after this.')
 "
-        if [[ $SETUP = 'SETUP' ]]; then
+        if [[ $SETUP = 'Setup:' ]]; then
             text+=$(gettext 'Try to set up the apps again.')
         else
             text+=$(gettext 'Try to reset the apps again.')

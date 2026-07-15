@@ -1,6 +1,6 @@
 # shellcheck shell=bash source=/dev/null disable=SC2034,SC2154
 # #############################################################################
-# SPDX-FileComment: Common module for kz Bash scripts
+# SPDX-FileComment: Common module for kz Bash scripts.
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
