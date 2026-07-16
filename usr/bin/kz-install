@@ -39,10 +39,8 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext "  -b, --browse   browse installation files with all commands and \
-information")
-$(gettext "  -c, --cat      show contents of command file with selected \
-commands and information")
+$(gettext '  -b, --browse   browse through all commands and information')
+$(gettext '  -c, --cat      show selected commands and information')
 $(gettext '  -C, --cli      run in command-line mode')
 $(gettext '  -f, --file <file>
                  process specified installation files')
@@ -333,24 +331,23 @@ $apps"
             text+="
 
 $(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
-self-selected apps.")
-$(gettext "Use \"kz install --cat <app>...\" to view the contents of the \
-command file with self-selected commands and information.")
-$(gettext "Use \"kz install --cat\" to view the contents of the command \
-file with automatically selected commands and information.")"
+the self-selected apps.")
+$(gettext "Use \"kz install --cat <app>...\" to view the self-selected \
+commands and information.")
+$(gettext "Use \"kz install --cat\" to view the automatically selected \
+commands and information.")"
        else
             text+="
 
 $(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove \
---select\" to remove self-selected apps.")
-$(gettext "Use \"kz install --cat --remove <app>...\" to view the contents of \
-the command file with self-selected commands and information.")
-$(gettext "Use \"kz install --cat --remove\" to view the contents of the \
-command file with automatically selected commands and information.")"
+--select\" to remove the self-selected apps.")
+$(gettext "Use \"kz install --cat --remove <app>...\" to view the \
+self-selected commands and information.")
+$(gettext "Use \"kz install --cat --remove\" to view the automatically \
+selected commands and information.")"
         fi
         text+="
-$(gettext "Use \"kz install --browse\" to view the contents of the \
-installation files with all commands and information.")"
+$(gettext "Use \"kz install --browse\" to view all commands and information.")"
     fi
     UI_MODE='cli'
     kz.infomsg "$text"
@@ -442,14 +439,14 @@ $apps"
             text+="
 
 $(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
-self-selected apps.")
-$(gettext "Use \"kz install\" to install automatically selected apps.")"
+the self-selected apps.")
+$(gettext "Use \"kz install\" to install the automatically selected apps.")"
         else
             text+="
 
 $(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove \
---select\" to remove self-selected apps.")
-$(gettext "Use \"kz install\" to remove automatically selected apps.")"
+--select\" to remove the self-selected apps.")
+$(gettext "Use \"kz install\" to remove the automatically selected apps.")"
         fi
         kz.infomsg "$text"
         exit 0

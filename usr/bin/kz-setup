@@ -39,10 +39,8 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext "  -b, --browse   browse settings files with all commands and \
-information")
-$(gettext "  -c, --cat      show contents of command file with selected \
-commands and information")
+$(gettext '  -b, --browse   browse through all commands and information')
+$(gettext '  -c, --cat      show selected commands and information')
 $(gettext '  -C, --cli      run in command-line mode')
 $(gettext '  -f, --file <file>
                  process specified settings files')
@@ -316,25 +314,24 @@ $apps"
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
-$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up \
+$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
 self-selected apps.")
-$(gettext "Use \"kz setup --cat <app>...\" to view the contents of the \
-command file with self-selected commands and information.")
-$(gettext "Use  \"kz setup --cat\" to view the contents of the command file \
-with automatically selected commands and information.")"
+$(gettext "Use \"kz setup --cat <app>...\" to view the self-selected commands \
+and information.")
+$(gettext "Use \"kz setup --cat\" to view the automatically selected \
+commands and information.")"
         else
             text+="
 
 $(gettext "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" \
-to reset self-selected apps.")
-$(gettext "Use \"kz setup --cat --reset <app>...\" to view the contents of \
-the command file with self-selected commands and information.")
-$(gettext "Use \"kz setup --cat --reset\" to view the contents of the command \
-file with automatically selected commands and information.")"
+to reset the self-selected apps.")
+$(gettext "Use \"kz setup --cat --reset <app>...\" to view the self-selected \
+commands and information.")
+$(gettext "Use \"kz setup --cat --reset\" to view the automatically selected \
+commands and information.")"
         fi
         text+="
-$(gettext "Use \"kz setup --browse\" to view the contents of the \
-settings files with all commands and information.")"
+$(gettext "Use \"kz setup --browse\" to view all commands and information.")"
     fi
     UI_MODE='cli'
     kz.infomsg "$text"
@@ -423,15 +420,16 @@ $apps"
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
-$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up \
+$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
 self-selected apps.")
-$(gettext "Use \"kz setup\" to set up automatically selected apps.")"
+$(gettext "Use \"kz setup\" to set up the automatically selected apps.")"
         else
             text+="
 
 $(gettext "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" \
-to reset self-selected apps.")
-$(gettext "Use \"kz setup --reset\" to reset automatically selected apps.")"
+to reset the self-selected apps.")
+$(gettext "Use \"kz setup --reset\" to reset the automatically selected \
+apps.")"
         fi
         kz.infomsg "$text"
         exit 0

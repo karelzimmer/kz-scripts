@@ -210,8 +210,11 @@ REBOOT=true
 
 
 # Install: desktop-settings
-# Desc:    Enable Cinnamon/LXDE user greeter.
+# Desc:    Cinnamon/GNOME/LXDE desktop environment settings.
 # Host:    *
+# -----------------------------------------------------------------------------
+# Enable Cinnamon/LXDE user greeter.
+# -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 #
 REBOOT=true
