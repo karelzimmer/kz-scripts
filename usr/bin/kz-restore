@@ -306,8 +306,17 @@ Connect a usb medium.")
         fi
     fi
 
-    SOURCE=$medium/BACKUP_${HOSTNAME}_$USER
+    SOURCE=$medium/backup_${HOSTNAME}_$USER
+
     old=$medium/BACKUP-$USER@$HOSTNAME
+    if [[ -e $old ]]; then
+        text=$(eval_gettext "The backup has to be renamed!
+From: \$old
+to  : \$SOURCE")
+        kz.infomsg "$text"
+        exit 1
+    fi
+    old=$medium/BACKUP_${HOSTNAME}_$USER
     if [[ -e $old ]]; then
         text=$(eval_gettext "The backup has to be renamed!
 From: \$old
@@ -317,7 +326,7 @@ to  : \$SOURCE")
     fi
 
     if ! [[ -d $SOURCE ]]; then
-        text=$(eval_gettext "No BACKUP_\${HOSTNAME}_\$USER found in \$medium.")
+        text=$(eval_gettext "No backup_\${HOSTNAME}_\$USER found in \$medium.")
         kz.errmsg "$text"
         exit 1
     fi

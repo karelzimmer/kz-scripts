@@ -27,8 +27,8 @@ and WiFi information are saved. See \fBFILES\fR section below for the exact
 location.
 .sp
 The backup is placed on a mounted usb medium such as a USB external hard disk
-in folder \fBBACKUP-<username>@<computername>\fR, this folder is created as
-needed, for example /media/karel/backupdisk/BACKUP_pc-of-karel_karel for Karel
+in folder \fBbackup_<computername>_<username>\fR, this folder is created as
+needed, for example /media/karel/backupdisk/backup_pc-of-karel_karel for Karel
 at pc-of-karel.
 .sp
 With option \fB-C\fR, \fB--cli\fR, \fBkz backup\fR runs in command-line mode
@@ -162,7 +162,7 @@ environment.
 \fBkz backup --target /media/karel/usbstick\fR
 .RS
 Back up the Home folder of Karel on pc-of-karel to /media/karel/usbstick in the
-folder BACKUP_pc-of-karel_karel (this folder will be created as needed).
+folder backup_pc-of-karel_karel (this folder will be created as needed).
 .RE
 .EE
 

@@ -312,8 +312,17 @@ Connect a usb medium.")
         fi
     fi
 
-    TARGET=$medium/BACKUP_${HOSTNAME}_$USER
+    TARGET=$medium/backup_${HOSTNAME}_$USER
+
     old=$medium/BACKUP-$USER@$HOSTNAME
+    if [[ -e $old ]]; then
+        text=$(eval_gettext "The backup has to be renamed!
+From: \$old
+to  : \$TARGET")
+        kz.infomsg "$text"
+        exit 1
+    fi
+    old=$medium/BACKUP_${HOSTNAME}_$USER
     if [[ -e $old ]]; then
         text=$(eval_gettext "The backup has to be renamed!
 From: \$old

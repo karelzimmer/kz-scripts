@@ -210,7 +210,7 @@ msgstr ""
 msgid "No USB medium selected."
 msgstr ""
 
-#: kz-backup:318
+#: kz-backup:319 kz-backup:327
 #, sh-format
 msgid ""
 "The backup has to be renamed!\n"
@@ -218,7 +218,7 @@ msgid ""
 "to  : $TARGET"
 msgstr ""
 
-#: kz-backup:422
+#: kz-backup:431
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
@@ -226,56 +226,56 @@ msgid ""
 "Further reading:"
 msgstr ""
 
-#: kz-backup:374
+#: kz-backup:383
 msgid ""
 "==== START list of manual installed packages ================================"
 msgstr ""
 
-#: kz-backup:376
+#: kz-backup:385
 msgid ""
 "==== END list of manual installed packages =================================="
 msgstr ""
 
-#: kz-backup:378
+#: kz-backup:387
 msgid ""
 "==== START list of installed snaps =========================================="
 msgstr ""
 
-#: kz-backup:380
+#: kz-backup:389
 msgid ""
 "==== END list of installed snaps ============================================"
 msgstr ""
 
-#: kz-backup:382
+#: kz-backup:391
 msgid ""
 "==== START list of installed Flatpak apps ==================================="
 msgstr ""
 
-#: kz-backup:384
+#: kz-backup:393
 msgid ""
 "==== END list of installed Flatpak apps ====================================="
 msgstr ""
 
-#: kz-backup:442
+#: kz-backup:451
 msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
-#: kz-backup:467 kz-backup:479
+#: kz-backup:476 kz-backup:488
 msgid "Additional users can be added manually:"
 msgstr ""
 
-#: kz-backup:469
+#: kz-backup:478
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
 "3. Enter Name <user> and Username <username>."
 msgstr ""
 
-#: kz-backup:474 kz-backup:522 kz-backup:577
+#: kz-backup:483 kz-backup:531 kz-backup:586
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:481
+#: kz-backup:490
 msgid ""
 "# Standard user:\n"
 "sudo useradd --create-home --comment '<user>' <username>\n"
@@ -288,7 +288,7 @@ msgid ""
 "sudo passwd --delete --expire <username>"
 msgstr ""
 
-#: kz-backup:514
+#: kz-backup:523
 msgid ""
 "To set the users avatar:\n"
 "\n"
@@ -300,7 +300,7 @@ msgid ""
 "   or another picture file."
 msgstr ""
 
-#: kz-backup:570
+#: kz-backup:579
 msgid ""
 "To set the desktop background:\n"
 "\n"
@@ -310,71 +310,71 @@ msgid ""
 "   or another picture file, and choose Set as Background."
 msgstr ""
 
-#: kz-backup:226 kz-backup:603 kz-menu:75 kz-backup.desktop:10
+#: kz-backup:226 kz-backup:612 kz-menu:75 kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
-#: kz-backup:604
+#: kz-backup:613
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:655
+#: kz-backup:664
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:706 kz-install:882 kz-restore:428 kz-setup:777
+#: kz-backup:715 kz-install:882 kz-restore:437 kz-setup:777
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:707
+#: kz-backup:716
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:709 kz-restore:431
+#: kz-backup:718 kz-restore:440
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:710
+#: kz-backup:719
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:711 kz-restore:433
+#: kz-backup:720 kz-restore:442
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:712
+#: kz-backup:721
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:714 kz-install:887 kz-restore:436 kz-setup:781
+#: kz-backup:723 kz-install:887 kz-restore:445 kz-setup:781
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:715 kz-install:888 kz-restore:437 kz-setup:782
+#: kz-backup:724 kz-install:888 kz-restore:446 kz-setup:782
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:716
+#: kz-backup:725
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:744
+#: kz-backup:753
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:762
+#: kz-backup:771
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:772
+#: kz-backup:781
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 
-#: kz-backup:778 kz-restore:501
+#: kz-backup:787 kz-restore:510
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
@@ -591,8 +591,8 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:211 kz-backup:734 kz-desktop:293 kz-install:912 kz-install:934
-#: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:456 kz-setup:806
+#: kz-backup:211 kz-backup:743 kz-desktop:293 kz-install:912 kz-install:934
+#: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:465 kz-setup:806
 #: kz-setup:835
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
@@ -1120,7 +1120,7 @@ msgstr ""
 msgid "Show WiFi details"
 msgstr ""
 
-#: kz-menu:78 kz-restore:226 kz-restore:337 kz-restore.desktop:10
+#: kz-menu:78 kz-restore:226 kz-restore:346 kz-restore.desktop:10
 msgid "Restore backup"
 msgstr ""
 
@@ -1221,7 +1221,7 @@ msgid ""
 "                 use backup in specified directory"
 msgstr ""
 
-#: kz-restore:312
+#: kz-restore:313 kz-restore:321
 #, sh-format
 msgid ""
 "The backup has to be renamed!\n"
@@ -1229,43 +1229,43 @@ msgid ""
 "to  : $SOURCE"
 msgstr ""
 
-#: kz-restore:320
+#: kz-restore:329
 #, sh-format
-msgid "No BACKUP_${HOSTNAME}_$USER found in $medium."
+msgid "No backup_${HOSTNAME}_$USER found in $medium."
 msgstr ""
 
-#: kz-restore:338
+#: kz-restore:347
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:429
+#: kz-restore:438
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:432
+#: kz-restore:441
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:434
+#: kz-restore:443
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:438
+#: kz-restore:447
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:466
+#: kz-restore:475
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-restore:485
+#: kz-restore:494
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-restore:495
+#: kz-restore:504
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"
