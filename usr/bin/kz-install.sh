@@ -210,7 +210,7 @@ REBOOT=true
 
 
 # Install: desktop-settings
-# Desc:    Cinnamon/GNOME/LXDE desktop environment settings.
+# Desc:    Desktop environment settings.
 # Host:    *
 # -----------------------------------------------------------------------------
 # Enable Cinnamon/LXDE user greeter.

@@ -94,7 +94,7 @@ LOGOUT=true
 
 
 # Setup: desktop-settings
-# Desc:  Cinnamon/GNOME/LXDE desktop environment settings.
+# Desc:  Desktop environment settings.
 # Host:  *
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
