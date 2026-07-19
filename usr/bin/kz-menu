@@ -214,10 +214,10 @@ function process_menu1_gui() {
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \
                     --cancel-label  "$(gettext 'Exit')"                 \
-                    --column        "$(gettext 'CHOICE')"               \
-                    --column        "$(gettext 'NUM')"                  \
-                    --column        "$(gettext 'ACTION')"               \
-                    --column        "$(gettext 'DESCRIPTION')"          \
+                    --column        "$(gettext 'Choice')"               \
+                    --column        "$(gettext 'Num')"                  \
+                    --column        "$(gettext 'Action')"               \
+                    --column        "$(gettext 'Description')"          \
                     true  1 "${MENU1_ACTIONS[1]}" "${MENU1_DESCS[1]}"   \
                     false 2 "${MENU1_ACTIONS[2]}" "${MENU1_DESCS[2]}"   \
                     false 3 "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}"   \
@@ -274,9 +274,9 @@ function process_menu1_cli() {
         clear -x
         printf  '%s\n\n%3s  %-24s  %s\n'    \
                 "$MENU1_HEAD"               \
-                "$(gettext 'NUM')"          \
-                "$(gettext 'ACTION')"       \
-                "$(gettext 'DESCRIPTION')"
+                "$(gettext 'Num')"          \
+                "$(gettext 'Action')"       \
+                "$(gettext 'Description')"
         for menu1_action in "${!MENU1_ACTIONS[@]}"; do
             printf  '%3s  %-24s  %s\n'                  \
                     "$menu1_action"                     \
@@ -421,10 +421,10 @@ function process_menu2_gui() {
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \
                     --cancel-label  "$(gettext 'Back')"                 \
-                    --column        "$(gettext 'CHOICE')"               \
-                    --column        "$(gettext 'NUM')"                  \
-                    --column        "$(gettext 'ACTION')"               \
-                    --column        "$(gettext 'DESCRIPTION')"          \
+                    --column        "$(gettext 'Choice')"               \
+                    --column        "$(gettext 'Num')"                  \
+                    --column        "$(gettext 'Action')"               \
+                    --column        "$(gettext 'Description')"          \
                     true  1 "${MENU2_ACTIONS[1]}" "${MENU2_DESCS[1]}"   \
                     false 2 "${MENU2_ACTIONS[2]}" "${MENU2_DESCS[2]}"   \
                     false 3 "${MENU2_ACTIONS[3]}" "${MENU2_DESCS[3]}"   \
@@ -481,9 +481,9 @@ function process_menu2_cli() {
         clear -x
         printf  '%s\n\n%3s  %-25s  %s\n'    \
                 "$MENU2_HEAD"               \
-                "$(gettext 'NUM')"          \
-                "$(gettext 'ACTION')"       \
-                "$(gettext 'DESCRIPTION')"
+                "$(gettext 'Num')"          \
+                "$(gettext 'Action')"       \
+                "$(gettext 'Description')"
         for menu2_action in "${!MENU2_ACTIONS[@]}"; do
             printf  '%3s  %-25s  %s\n'                  \
                     "$menu2_action"                     \

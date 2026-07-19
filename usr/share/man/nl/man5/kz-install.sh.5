@@ -22,13 +22,12 @@ install.
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in een versleuteld installatiebestand, kz-install.sh.gpg.
 .sp
-In het installatiebestand staan zogenaamde \fBapp-\fR, \fBdesc-\fR, \fBhost-\fR
-en \fBopdracht-regel\fRs.
+In het installatiebestand staan zogenaamde \fBapp-\fR, \fBhost-\fR en
+\fBopdracht-regel\fRs.
 .sp
 De \fBapp-regel\fR geeft aan voor welke app de opdrachten uitgevoerd moeten
-worden, de \fBdesc-regel\fR geeft een beschrijving van de app en de
-\fBhost-regel\fR geeft aan op welke computers de opdrachten uitgevoerd moeten
-worden.
+worden en geeft een beschrijving van de app, en de \fBhost-regel\fR geeft aan
+op welke computers de opdrachten uitgevoerd moeten worden.
 .br
 Deze regels worden gevolgd door één of meer regels met opdrachten, de
 \fBopdracht-regel\fRs.
@@ -55,14 +54,9 @@ T}
 l | l
 l | l.
 T{
-# Install: <app>
+# Install: <app> | <beschrijving>
 T}:T{
 Welke app installeren (\fBapp-regel\fR), wordt verwerkt.
-T}
-T{
-# Desc:    <desc>
-T}:T{
-Een beschrijving van de app (\fBdesc-regel\fR), wordt verwerkt.
 T}
 T{
 # Host:    <host>
@@ -80,7 +74,7 @@ T}:T{
 Lege regel (geen, één of meer), wordt overgeslagen.
 T}
 T{
-# Remove:  <app>
+# Remove:  <app> | <beschrijving>
 T}:T{
 De app verwijderen (\fBapp-regel\fR voor optie \fB-r\fR, \fB--remove\fR), wordt
 verwerkt.
@@ -118,14 +112,9 @@ T}
 l | l
 l | l.
 T{
-# Install: calibre
+# Install: calibre | Powerful and easy to use e-book manager
 T}:T{
 Installeer calibre.
-T}
-T{
-# Desc:    Powerful and easy to use e-book manager.
-T}:T{
-Beschrijving van calibre.
 T}
 T{
 # Host:    *
@@ -141,7 +130,7 @@ T{
 T}:T{
 T}
 T{
-# Remove:  calibre
+# Remove:  calibre | Powerful and easy to use e-book manager
 T}:T{
 Verwijder calibre.
 T}
@@ -172,8 +161,7 @@ zoals 'kz install calibre'.
 
 .SH VOORBEELDEN
 .EX
-# Install: calibre
-# Desc:    Powerful and easy to use e-book manager.
+# Install: calibre | Powerful and easy to use e-book manager
 # Host:    pc06
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install -\
 -assume-yes calibre; fi
@@ -182,7 +170,7 @@ if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo --validate\
  && wget --output-document=- https://download.calibre-ebook.com/linux-installe\
 r.sh | sudo sh; fi
 
-# Remove: calibre
+# Remove: calibre | Powerful and easy to use e-book manager
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --\
 assume-yes calibre; fi
 #

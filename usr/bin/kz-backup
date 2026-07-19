@@ -234,18 +234,18 @@ Connect a usb medium.")
                 done
                 # No array is needed, because only one can be selected.
                 selected_medium=$(
-                    zenity      --list                              \
-                                --radiolist                         \
-                                --separator ' '                     \
-                                --width     400                     \
-                                --height    500                     \
-                                --title     "$title"                \
-                                --text      "$text"                 \
-                                --ok-label  "$(gettext 'Continue')" \
-                                --column    "$(gettext 'SEL')"      \
-                                --column    "$(gettext 'MEDIUM')"   \
-                                "${choices[@]}"                     \
-                                2> /dev/null                        || true
+                    zenity  --list                              \
+                            --radiolist                         \
+                            --separator ' '                     \
+                            --width     400                     \
+                            --height    500                     \
+                            --title     "$title"                \
+                            --text      "$text"                 \
+                            --ok-label  "$(gettext 'Continue')" \
+                            --column    "$(gettext 'Sel')"      \
+                            --column    "$(gettext 'Medium')"   \
+                            "${choices[@]}"                     \
+                            2> /dev/null                        || true
                     )
             elif [[ $UI_MODE = 'tui' ]]; then
                 for medium in "${all_media[@]}"; do

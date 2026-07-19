@@ -21,12 +21,12 @@ This file contains commands to process as an installation file with kz install.
 Commands containing personal information, such as a username, are included in
 an GPG-encrypted installation file, kz-install.sh.gpg.
 .sp
-The installation file contains so-called \fBapp-\fR, \fBdesc-\fR, \fBhost-\fR
-and \fBcommand record\fRs.
+The installation file contains so-called \fBapp-\fR, \fBhost-\fR and \
+\fBcommand record\fRs.
 .sp
-The \fBapp record\fR indicates for which app the commands should be executed,
-the \fBdesc record\fR provides a description of the app, and the
-\fBhost record\fR indicates on which computers the commands should be executed.
+The \fBapp record\fR indicates for which app the commands should be executed
+and provides a description of the app, and the \fBhost record\fR indicates on
+which computers the commands should be executed.
 .br
 These records are followed by one or more records with commands, the
 \fBcommand record\fRs.
@@ -53,19 +53,14 @@ T}
 l | l
 l | l.
 T{
-# Install: <app>
+# Install: <app> | <description>
 T}:T{
-Which app to install (\fBapp-rule\fR), will be processed.
-T}
-T{
-# Desc:    <desc>
-T}:T{
-A description of the app (\fBdesc-rule\fR), will be processed.
+Which app to install (\fBapp record\fR), will be processed.
 T}
 T{
 # Host:    <host>
 T}:T{
-On which computers the app should be installed (\fBhost-rule\fR), will be
+On which computers the app should be installed (\fBhost record\fR), will be
 processed.
 T}
 T{
@@ -78,9 +73,9 @@ T}:T{
 Empty line (none, one or more), will be skipped.
 T}
 T{
-# Remove:  <app>
+# Remove:  <app> | <description>
 T}:T{
-Remove the app (\fBapp-rule\fR for option \fB-r\fR, \fB--remove\fR), will be
+Remove the app (\fBapp record\fR for option \fB-r\fR, \fB--remove\fR), will be
 processed.
 .br
 The description and computers are taken from the previous '# Install: <app>'
@@ -115,14 +110,9 @@ T}
 l | l
 l | l.
 T{
-# Install: calibre
+# Install: calibre | Powerful and easy to use e-book manager
 T}:T{
 Install calibre.
-T}
-T{
-# Desc:    Powerful and easy to use e-book manager.
-T}:T{
-Description of calibre.
 T}
 T{
 # Host:    *
@@ -138,7 +128,7 @@ T{
 T}:T{
 T}
 T{
-# Remove:  calibre
+# Remove:  calibre | Powerful and easy to use e-book manager
 T}:T{
 Remove calibre.
 T}
@@ -169,8 +159,7 @@ The app can still be installed on another computer with the command 'kz install
 
 .SH EXAMPLES
 .EX
-# Install: calibre
-# Desc:    Powerful and easy to use e-book manager.
+# Install: calibre | Powerful and easy to use e-book manager
 # Host:    pc06
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install -\
 -assume-yes calibre; fi
@@ -179,7 +168,7 @@ if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo --validate\
  && wget --output-document=- https://download.calibre-ebook.com/linux-installe\
 r.sh | sudo sh; fi
 
-# Remove: calibre
+# Remove: calibre | Powerful and easy to use e-book manager
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --\
 assume-yes calibre; fi
 #

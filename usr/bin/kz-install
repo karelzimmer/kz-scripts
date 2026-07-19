@@ -144,8 +144,8 @@ found.")
                 --regexp='debian'   \
                 /etc/os-release     &&
         [[ $INSTALL = 'Install:' ]]; then
-        printf '%s\n' "# Install: update *** automatically added ***
-# Desc:    Refresh Debian package lists before installing apps.
+        printf '%s\n' "# Install: update | Refresh package lists *** automatic\
+ally added ***
 # Host:    *
 sudo apt-get update
 "       > "$command_file"
@@ -322,11 +322,20 @@ function process_option_list() {
     text=$(gettext 'The following apps are available:')
     app_list
     if [[ -z $apps ]]; then
-        text+="
-$(gettext '  0  No apps found.')"
+        text+="$(gettext 'No apps found.')"
     else
-        text+="
-$apps"
+        readarray -t all_apps <<< "$apps"
+        for app in "${all_apps[@]}"; do
+            read -r appname description <<< "$app"
+            choices+=("|$appname|$description\n")
+        done
+        text+='\n'
+        text+="$(
+            echo -e "${choices[*]}" |
+            column  --separator '|' \
+                    --table         \
+                    --output-separator '   '
+            )"
         if [[ $INSTALL = 'Install:' ]]; then
             text+="
 
@@ -354,17 +363,23 @@ $(gettext "Use \"kz install --browse\" to view all commands and information.")"
 }
 
 
-# This function makes a list of available apps from the installation files.
+# This function makes a list of available apps and descriptions from the
+# installation files.
 function app_list() {
+    # +-----------------------------------------------------------------------+
+    # | From (app record):
+    # | "# Install: <app> | <description>"
+    # | To (app list record):
+    # | "<app> <description>"
+    # +-----------------------------------------------------------------------+
     apps=$(
-        grep    --regexp="#.*${INSTALL}.*"  \
+        grep    --regexp="# .*${INSTALL}.*" \
                 "${installation_files[@]}"  |
-        tr      --squeeze-repeats           \
-                ' '                         |
+        tr      --delete '|'                |
+        tr      --squeeze-repeats ' '       |
         cut     --delimiter=' '             \
-                --fields=3                  |
-        sort    --unique                    |
-        sed     --expression='s/^/    /'    || true
+                --fields=3-                 |
+        sort    --unique                    || true
         )
 }
 
@@ -390,7 +405,7 @@ function process_option_select() {
     app_list
     if [[ -z $apps ]]; then
             text+="
-$(gettext '  0  No apps found.')"
+$(gettext 'No apps found.')"
         kz.infomsg "$text"
         exit 0
     fi
@@ -398,43 +413,53 @@ $(gettext '  0  No apps found.')"
 
     if [[ $UI_MODE = 'gui' ]]; then
         for app in "${all_apps[@]}"; do
-            choices+=('false' "$app")
+            read -r appname description <<< "$app"
+            choices+=('false' "$appname" "$description")
         done
         # No array is needed because the app name does not contain spaces.
         selected_apps=$(
-            zenity  --list                              \
-                    --checklist                         \
-                    --separator ' '                     \
-                    --width     100                     \
-                    --height    500                     \
-                    --title     "$title"                \
-                    --text      "$text"                 \
-                    --ok-label  "$(gettext 'Continue')" \
-                    --column    "$(gettext 'SEL')"      \
-                    --column    "$(gettext 'APP')"      \
-                    "${choices[@]}"                     \
-                    2> /dev/null                        || true
+            zenity  --list                                  \
+                    --checklist                             \
+                    --separator ' '                         \
+                    --width     700                         \
+                    --height    500                         \
+                    --title     "$title"                    \
+                    --text      "$text"                     \
+                    --ok-label  "$(gettext 'Continue')"     \
+                    --column    "$(gettext 'Sel')"          \
+                    --column    "$(gettext 'App')"          \
+                    --column    "$(gettext 'Description')"  \
+                    "${choices[@]}"                         \
+                    2> /dev/null                            || true
             )
     elif [[ $UI_MODE = 'tui' ]]; then
         for app in "${all_apps[@]}"; do
-            choices+=("$app" 'off')
+            read -r appname description <<< "$app"
+            choices+=("$appname" "$description" 'off')
         done
         # No array is needed because the app name does not contain spaces.
         selected_apps=$(
-            dialog  --no-items                          \
-                    --ok-label  "$(gettext 'Continue')" \
+            dialog  --ok-label  "$(gettext 'Continue')" \
                     --backtitle "$PROGRAM_NAME"         \
                     --title     "$title"                \
+                    --separate-output                   \
                     --checklist "$text"                 \
                     0 0 0                               \
                     "${choices[@]}"                     \
-                    2>&1 >/dev/tty                      |
-            sed     --expression='s/"//g'               || true
+                    2>&1 >/dev/tty                      || true
             )
     else
-        app_list
-        text+="
-$apps"
+        for app in "${all_apps[@]}"; do
+            read -r appname description <<< "$app"
+            choices+=("|$appname|$description\n")
+        done
+        text+='\n'
+        text+="$(
+            echo -e "${choices[*]}" |
+            column  --separator '|' \
+                    --table         \
+                    --output-separator '   '
+            )"
         if [[ $INSTALL = 'Install:' ]]; then
             text+="
 
@@ -486,24 +511,22 @@ function process_argument_app() {
 function process_installation_files_by_app_argument() {
     local app_match=false
     local app_record=''
-    local desc_record=''
     local host_record=''
     local no_app_match=true
     local install_record=''
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Install: <app>    [1] "app_record"    SELECT
-    # | # Desc:    <desc>   [2] "desc_record"
-    # | # Host:    <host>   [3] "host_record"
+    # | # Install: <app> | <description>    [1] "app record"    <== Selection
+    # | # Host:    <host>                   [2] "host record"
     # | <cmd>...
     # |
-    # | # Remove: <app>     [1] "app_record"
+    # | # Remove:  <app> | <description>    [1] "app record"
     # | <cmd>...
     # +-----------------------------------------------------------------------+
     while read -r install_record; do
         case $install_record in
-            '#'*${INSTALL}*${app_argument}* )
+            '# '*${INSTALL}*' '$app_argument' '* )
                 # Save app record.
                 app_record=$install_record  # [1]
                 # Set switches.
@@ -511,15 +534,11 @@ function process_installation_files_by_app_argument() {
                 no_app_match=false
                 write_saved_records=true
                 ;;
-            '#'*'Desc:'* )
-                # Save description record.
-                desc_record=$install_record # [2]
-                ;;
-            '#'*'Host:'* )
+            '# '*'Host:'* )
                 # Save host record.
-                host_record=$install_record # [3]
+                host_record=$install_record # [2]
                 ;;
-            '#'*${REMOVE}* | '#'*'EOF'* )
+            '# '*${REMOVE}* | '# EOF' )
                 # Stop at mismatched app record or End-Of-File.
                 # Reset switches.
                 app_match=false
@@ -530,8 +549,7 @@ function process_installation_files_by_app_argument() {
                     if $write_saved_records; then
                         # Write saved records to the command file.
                         printf '%s\n' "$app_record"     # [1]
-                        printf '%s\n' "$desc_record"    # [2]
-                        printf '%s\n' "$host_record"    # [3]
+                        printf '%s\n' "$host_record"    # [2]
                         write_saved_records=false
                     fi
                     # Add record to command file.
@@ -553,24 +571,22 @@ function process_installation_files_by_app_argument() {
 function process_installation_files_by_hostname() {
     local app_match=false
     local app_record=''
-    local desc_record=''
     local host_match=false
     local host_record=''
     local install_record=''
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Install: <app>    [1] "app_record"    SELECT
-    # | # Desc:    <desc>   [2] "desc_record"
-    # | # Host:    <host>   [3] "host_record"
+    # | # Install: <app> | <description>    [1] "app record"    <== "Selection"
+    # | # Host:    <host>                   [2] "host record"   <== Selection
     # | <cmd>...
     # |
-    # | # Remove: <app>     [1] "app_record"
+    # | # Remove:  <app> | <description>    [1] "app record"
     # | <cmd>...
     # +-----------------------------------------------------------------------+
     while read -r install_record; do
         case $install_record in
-            '#'*${INSTALL}* )
+            '#'*" ${INSTALL} "* )
                 # Save app record.
                 app_record=$install_record    # [1]
                 # Set switch.
@@ -581,18 +597,14 @@ function process_installation_files_by_hostname() {
                 # commands.
                 app_match=true
                 ;;
-            '#'*'Desc:'* )
-                # Save description record.
-                desc_record=$install_record   # [2]
-                ;;
-            '#'*'Host:'*'*'* | '#'*'Host:'*$HOSTNAME* )
+            '# '*'Host:'*'*'* | '# '*'Host:'*$HOSTNAME* )
                 # Save host record.
-                host_record=$install_record   # [3]
+                host_record=$install_record   # [2]
                 # Set switches.
                 host_match=true
                 write_saved_records=true
                 ;;
-            '#'*${REMOVE}* | '#'*'EOF'* )
+            '# '*${REMOVE}* | '# EOF' )
                 # Stop at mismatched app record or End-Of-File.
                 # Reset switches.
                 app_match=false
@@ -604,8 +616,7 @@ function process_installation_files_by_hostname() {
                     if $write_saved_records; then
                         # Write saved records to the command file.
                         printf '%s\n' "$app_record"     # [1]
-                        printf '%s\n' "$desc_record"    # [2]
-                        printf '%s\n' "$host_record"    # [3]
+                        printf '%s\n' "$host_record"    # [2]
                         write_saved_records=false
                     fi
                     # Add record to command file.
@@ -671,7 +682,7 @@ function install_apps() {
 
     app_tot_num=$(
         grep    --count                     \
-                --regexp="#.*${INSTALL}.*"  \
+                --regexp="# .*${INSTALL}.*" \
                 "$command_file"             || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
@@ -726,8 +737,8 @@ system settings")
 
     if [[ $UI_MODE = 'cli' ]]; then
         sudo --validate
-        text="$(gettext 'NUM/TOT  APP')
-         $(gettext 'COMMAND')..."
+        text="$(gettext 'Num/Tot  App | Description')
+         $(gettext 'Command')..."
         printf '%s\n' "$text"
     fi
 
@@ -742,7 +753,7 @@ system settings")
                 app_name=$(
                     printf '%s\n' "$command_record" |
                     tr --squeeze-repeats ' '        |
-                    cut --delimiter=' ' --fields=3
+                    cut --delimiter=' ' --fields=3-
                     )
                 (( ++app_seq_num ))
                 printf  -v app_name_line    \

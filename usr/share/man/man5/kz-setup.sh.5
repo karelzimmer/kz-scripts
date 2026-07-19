@@ -21,12 +21,12 @@ This file contains commands to process as an settings file with kz setup.
 Commands containing personal information, such as a username, are included in
 an GPG-encrypted settings file, kz-setup.sh.gpg.
 .sp
-The settings file contains contains so-called \fBapp-\fR, \fBdesc-\fR,
-\fBhost-\fR and \fBcommand record\fRs.
+The settings file contains contains so-called \fBapp-\fR, \fBhost-\fR and \
+\fBcommand record\fRs.
 .sp
-The \fBapp record\fR indicates for which app the commands should be executed,
-the \fBdesc record\fR provides a description of the app, and the
-\fBhost record\fR indicates on which computers the commands should be executed.
+The \fBapp record\fR indicates for which app the commands should be executed
+and provides a description of the app, and the \fBhost record\fR indicates on
+which computers the commands should be executed.
 .br
 These records are followed by one or more records with commands, the
 \fBcommand record\fRs.
@@ -53,14 +53,9 @@ T}
 l | l
 l | l.
 T{
-# Setup: <app>
+# Setup: <app> | <description>
 T}:T{
 Which app to set up (\fBapp-record\fR), will be processed.
-T}
-T{
-# Desc:  <desc>
-T}:T{
-A description of the app (\fBdesc-record\fR), will be processed.
 T}
 T{
 # Host:  <host>
@@ -78,7 +73,7 @@ T}:T{
 Empty line (none, one or more), will be skipped.
 T}
 T{
-# Remove:  <app>
+# Reset: <app> | <description>
 T}:T{
 Remove the app (\fBapp-record\fR for option \fB-r\fR, \fB--remove\fR), will be
 processed.
@@ -115,14 +110,9 @@ T}
 l | l
 l | l.
 T{
-# Setup: calibre
+# Setup: calibre | Powerful and easy to use e-book manager
 T}:T{
 Set up calibre.
-T}
-T{
-# Desc:  Powerful and easy to use e-book manager.
-T}:T{
-Description of calibre.
 T}
 T{
 # Host:  *
@@ -138,7 +128,7 @@ T{
 T}:T{
 T}
 T{
-# Reset: calibre
+# Reset: calibre | Powerful and easy to use e-book manager
 T}:T{
 Reset calibre.
 T}
@@ -168,16 +158,11 @@ The app can still be set up on another computer with the command 'kz setup
 
 .SH EXAMPLES
 .EX
-# Setup: calibre pc01
-# -----------------------------------------------------------------------------
-# Powerful and easy to use e-book manager.
-# -----------------------------------------------------------------------------
+# Setup: calibre | Powerful and easy to use e-book manager
+# Host:  pc06
 kz-desktop --addaft=calibre-gui
 
-# Reset: calibre pc01
-# -----------------------------------------------------------------------------
-# Powerful and easy to use e-book manager.
-# -----------------------------------------------------------------------------
+# Reset: calibre | Powerful and easy to use e-book manager
 kz-desktop --delete=calibre-gui
 .EE
 

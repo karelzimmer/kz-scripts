@@ -242,8 +242,8 @@ Connect a usb medium.")
                             --title     "$title"                \
                             --text      "$text"                 \
                             --ok-label  "$(gettext 'Continue')" \
-                            --column    "$(gettext 'SEL')"      \
-                            --column    "$(gettext 'MEDIUM')"   \
+                            --column    "$(gettext 'Sel')"      \
+                            --column    "$(gettext 'Medium')"   \
                             "${choices[@]}"                     \
                             2> /dev/null                        || true
                     )

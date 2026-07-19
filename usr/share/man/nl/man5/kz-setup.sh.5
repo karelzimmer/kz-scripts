@@ -22,13 +22,12 @@ setup.
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in een versleuteld instellingenbestand, kz-setup.sh.gpg.
 .sp
-In het instellingenbestand staan zogenaamde \fBapp-\fR, \fBdesc-\fR,
-\fBhost-\fR en \fBopdracht-regel\fRs.
+In het instellingenbestand staan zogenaamde \fBapp-\fR, \fBhost-\fR en
+\fBopdracht-regel\fRs.
 .sp
 De \fBapp-regel\fR geeft aan voor welke app de opdrachten uitgevoerd moeten
-worden, de \fBdesc-regel\fR geeft een beschrijving van de app en de
-\fBhost-regel\fR geeft aan op welke computers de opdrachten uitgevoerd moeten
-worden.
+worden en geeft een beschrijving van de app, en de \fBhost-regel\fR geeft aan
+op welke computers de opdrachten uitgevoerd moeten worden.
 .br
 Deze regels worden gevolgd door één of meer regels met opdrachten, de
 \fBopdracht-regel\fRs.
@@ -55,14 +54,9 @@ T}
 l | l
 l | l.
 T{
-# Setup: <app>
+# Setup: <app> | <beschrijving>
 T}:T{
 Welke app instellen (\fBapp-regel\fR), wordt verwerkt.
-T}
-T{
-# Desc:  <desc>
-T}:T{
-Een beschrijving van de app (\fBdesc-regel\fR), wordt verwerkt.
 T}
 T{
 # Host:  <host>
@@ -80,7 +74,7 @@ T}:T{
 Lege regel (geen, één of meer), wordt overgeslagen.
 T}
 T{
-# Reset: <app>
+# Reset: <app> | <beschrijving>
 T}:T{
 De app resetten (\fBapp-regel\fR voor optie \fB-r\fR, \fB--reset\fR), wordt
 verwerkt.
@@ -118,14 +112,9 @@ T}
 l | l
 l | l.
 T{
-# Setup: calibre
+# Setup: calibre | Powerful and easy to use e-book manager
 T}:T{
 Stel calibre in.
-T}
-T{
-# Desc:  Powerful and easy to use e-book manager.
-T}:T{
-Beschrijving van calibre.
 T}
 T{
 # Host:  *
@@ -141,7 +130,7 @@ T{
 T}:T{
 T}
 T{
-# Reset: calibre
+# Reset: calibre | Powerful and easy to use e-book manager
 T}:T{
 Reset calibre.
 T}
@@ -172,12 +161,11 @@ zoals 'kz setup calibre'.
 
 .SH VOORBEELDEN
 .EX
-# Setup: calibre
-# Desc:  Powerful and easy to use e-book manager.
+# Setup: calibre | Powerful and easy to use e-book manager
 # Host:  pc06
 kz-desktop --addaft=calibre-gui
 
-# Reset: calibre
+# Reset: calibre | Powerful and easy to use e-book manager
 kz-desktop --delete=calibre-gui
 .EE
 
