@@ -394,14 +394,14 @@ $(gettext "Use \"kz setup --browse\" to view all commands and information.")"
 # This function makes a list of available apps and descriptions from the
 # settings files.
 function make_app_list() {
+    local app_records=''
     # In calling function declare at least:
     # local -a app_list=()
     # local app_list_row=''
-    local app_records=''
 
     # +-----------------------------------------------------------------------+
     # | From (app record):
-    # | "# Install: <app> | <description>"
+    # | "# Setup: <app> | <description>"
     # | To (app list row):
     # | "<app> <description>"
     # +-----------------------------------------------------------------------+
@@ -416,6 +416,7 @@ function make_app_list() {
         )
     readarray -t app_list <<< "$app_records"
 
+    # In calling function use app_list like this:
     # for app_list_row in "${app_list[@]}"; do
     #     read -r app_name app_desc <<< "$app_list_row"
     #     ...
