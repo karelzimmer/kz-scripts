@@ -357,14 +357,7 @@ $(gettext 'No apps found.')"
                 --textbox   "$text_file"    \
                 0 0                         || true
     else
-        text+='\n'
-        text+=$(
-            printf '|%s|%s\n'        \
-                    "${choices[@]}" |
-            column  --table         \
-                    --separator '|' \
-                    --output-separator '    '
-            )
+        make_cli_app_list
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
@@ -421,6 +414,19 @@ function make_app_list() {
     #     read -r app_name app_desc <<< "$app_list_row"
     #     ...
     # done
+}
+
+
+# This function makes a list of available apps and descriptions for option cli.
+function make_cli_app_list() {
+    text+='\n'
+    text+=$(
+        printf '|%s|%s\n'       \
+                "${choices[@]}" |
+        column  --table         \
+                --separator '|' \
+                --output-separator '    '
+        )
 }
 
 
@@ -494,14 +500,7 @@ $(gettext 'No apps found.')"
             read -r app_name app_desc <<< "$app_list_row"
             choices+=("$app_name" "$app_desc")
         done
-        text+='\n'
-        text+=$(
-            printf '|%s|%s\n'       \
-                    "${choices[@]}" |
-            column  --table         \
-                    --separator '|' \
-                    --output-separator '    '
-            )
+        make_cli_app_list
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 

@@ -188,13 +188,13 @@ msgstr ""
 msgid "Choose USB medium:"
 msgstr ""
 
-#: kz-backup:244 kz-backup:257 kz-install:484 kz-install:499 kz-menu:215
+#: kz-backup:244 kz-backup:257 kz-install:490 kz-install:505 kz-menu:215
 #: kz-menu:250 kz-menu:422 kz-menu:457 kz-restore:244 kz-restore:257
-#: kz-setup:468 kz-setup:483
+#: kz-setup:474 kz-setup:489
 msgid "Continue"
 msgstr ""
 
-#: kz-backup:245 kz-install:485 kz-restore:245 kz-setup:469
+#: kz-backup:245 kz-install:491 kz-restore:245 kz-setup:475
 msgid "Sel"
 msgstr ""
 
@@ -322,7 +322,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:715 kz-install:951 kz-restore:437 kz-setup:848
+#: kz-backup:715 kz-install:950 kz-restore:437 kz-setup:847
 msgid "error messages"
 msgstr ""
 
@@ -347,11 +347,11 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:723 kz-install:956 kz-restore:445 kz-setup:852
+#: kz-backup:723 kz-install:955 kz-restore:445 kz-setup:851
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:724 kz-install:957 kz-restore:446 kz-setup:853
+#: kz-backup:724 kz-install:956 kz-restore:446 kz-setup:852
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -551,7 +551,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-get:109 kz-install:725
+#: kz-get:109 kz-install:724
 msgid "Already performed by the administrator."
 msgstr ""
 
@@ -591,9 +591,9 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:211 kz-backup:743 kz-desktop:293 kz-install:981 kz-install:1003
-#: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:465 kz-setup:877
-#: kz-setup:906
+#: kz-backup:211 kz-backup:743 kz-desktop:293 kz-install:980 kz-install:1002
+#: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:465 kz-setup:876
+#: kz-setup:905
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -893,137 +893,137 @@ msgstr ""
 msgid "The following apps are available:"
 msgstr ""
 
-#: kz-install:334 kz-install:464 kz-setup:318 kz-setup:448
+#: kz-install:334 kz-install:470 kz-setup:318 kz-setup:454
 msgid "No apps found."
 msgstr ""
 
-#: kz-install:387 kz-install:524
+#: kz-install:380 kz-install:523
 msgid ""
 "Use \"kz install <app>...\" or \"kz install --select\" to install the self-"
 "selected apps."
 msgstr ""
 
-#: kz-install:389
+#: kz-install:382
 msgid ""
 "Use \"kz install --cat <app>...\" to view the self-selected commands and "
 "information."
 msgstr ""
 
-#: kz-install:391
+#: kz-install:384
 msgid ""
 "Use \"kz install --cat\" to view the automatically selected commands and "
 "information."
 msgstr ""
 
-#: kz-install:396 kz-install:530
+#: kz-install:389 kz-install:529
 msgid ""
 "Use \"kz install --remove <app>...\" or \"kz install --remove --select\" to "
 "remove the self-selected apps."
 msgstr ""
 
-#: kz-install:398
+#: kz-install:391
 msgid ""
 "Use \"kz install --cat --remove <app>...\" to view the self-selected "
 "commands and information."
 msgstr ""
 
-#: kz-install:400
+#: kz-install:393
 msgid ""
 "Use \"kz install --cat --remove\" to view the automatically selected "
 "commands and information."
 msgstr ""
 
-#: kz-install:404
+#: kz-install:397
 msgid "Use \"kz install --browse\" to view all commands and information."
 msgstr ""
 
-#: kz-install:454 kz-install:758 kz-menu:77 kz-install.desktop:10
+#: kz-install:460 kz-install:757 kz-menu:77 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
 
-#: kz-install:455
+#: kz-install:461
 msgid "Select apps to install:"
 msgstr ""
 
-#: kz-install:457
+#: kz-install:463
 msgid "Remove apps"
 msgstr ""
 
-#: kz-install:458
+#: kz-install:464
 msgid "Select apps to remove:"
 msgstr ""
 
-#: kz-install:486 kz-setup:470
+#: kz-install:492 kz-setup:476
 msgid "App"
 msgstr ""
 
-#: kz-install:487 kz-menu:220 kz-menu:279 kz-menu:427 kz-menu:486 kz-setup:471
+#: kz-install:493 kz-menu:220 kz-menu:279 kz-menu:427 kz-menu:486 kz-setup:477
 msgid "Description"
 msgstr ""
 
-#: kz-install:526
+#: kz-install:525
 msgid "Use \"kz install\" to install the automatically selected apps."
 msgstr ""
 
-#: kz-install:532
+#: kz-install:531
 msgid "Use \"kz install\" to remove the automatically selected apps."
 msgstr ""
 
-#: kz-install:538 kz-setup:523
+#: kz-install:537 kz-setup:522
 msgid "No apps selected."
 msgstr ""
 
-#: kz-install:622 kz-setup:607
+#: kz-install:621 kz-setup:606
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:747 kz-setup:711
+#: kz-install:746 kz-setup:710
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:759 kz-menu:53
+#: kz-install:758 kz-menu:53
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:789 nl.karelzimmer.kz-install.policy:22
+#: kz-install:788 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:860 kz-install:882
+#: kz-install:859 kz-install:881
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:798 kz-setup:752
+#: kz-install:797 kz-setup:751
 msgid "Num/Tot  App | Description"
 msgstr ""
 
-#: kz-install:799 kz-setup:753
+#: kz-install:798 kz-setup:752
 msgid "Command"
 msgstr ""
 
-#: kz-install:952
+#: kz-install:951
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:960
+#: kz-install:959
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:962
+#: kz-install:961
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:989
+#: kz-install:988
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:991
+#: kz-install:990
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:997
+#: kz-install:996
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1128,7 +1128,7 @@ msgstr ""
 msgid "Restore backup"
 msgstr ""
 
-#: kz-menu:79 kz-setup:438 kz-setup:721 kz-setup.desktop:10
+#: kz-menu:79 kz-setup:444 kz-setup:720 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr ""
 
@@ -1306,103 +1306,103 @@ msgstr ""
 msgid "Settings file '$settings_file' not found."
 msgstr ""
 
-#: kz-setup:371 kz-setup:508
+#: kz-setup:364 kz-setup:507
 msgid ""
 "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the self-"
 "selected apps."
 msgstr ""
 
-#: kz-setup:373
+#: kz-setup:366
 msgid ""
 "Use \"kz setup --cat <app>...\" to view the self-selected commands and "
 "information."
 msgstr ""
 
-#: kz-setup:375
+#: kz-setup:368
 msgid ""
 "Use \"kz setup --cat\" to view the automatically selected commands and "
 "information."
 msgstr ""
 
-#: kz-setup:380 kz-setup:514
+#: kz-setup:373 kz-setup:513
 msgid ""
 "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" to reset "
 "the self-selected apps."
 msgstr ""
 
-#: kz-setup:382
+#: kz-setup:375
 msgid ""
 "Use \"kz setup --cat --reset <app>...\" to view the self-selected commands "
 "and information."
 msgstr ""
 
-#: kz-setup:384
+#: kz-setup:377
 msgid ""
 "Use \"kz setup --cat --reset\" to view the automatically selected commands "
 "and information."
 msgstr ""
 
-#: kz-setup:388
+#: kz-setup:381
 msgid "Use \"kz setup --browse\" to view all commands and information."
 msgstr ""
 
-#: kz-setup:439
+#: kz-setup:445
 msgid "Select apps to set up:"
 msgstr ""
 
-#: kz-setup:441
+#: kz-setup:447
 msgid "Reset apps"
 msgstr ""
 
-#: kz-setup:442
+#: kz-setup:448
 msgid "Select apps to reset:"
 msgstr ""
 
-#: kz-setup:510
+#: kz-setup:509
 msgid "Use \"kz setup\" to set up the automatically selected apps."
 msgstr ""
 
-#: kz-setup:516
+#: kz-setup:515
 msgid "Use \"kz setup --reset\" to reset the automatically selected apps."
 msgstr ""
 
-#: kz-setup:722
+#: kz-setup:721
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:849
+#: kz-setup:848
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:856
+#: kz-setup:855
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:858
+#: kz-setup:857
 msgid "Try to reset the apps again."
 msgstr ""
 
-#: kz-setup:885
+#: kz-setup:884
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:887
+#: kz-setup:886
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:895
+#: kz-setup:894
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:900
+#: kz-setup:899
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:922
+#: kz-setup:921
 msgid "Log out of the computer yourself."
 msgstr ""
 
