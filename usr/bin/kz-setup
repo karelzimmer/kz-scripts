@@ -300,26 +300,71 @@ function process_option_browse() {
 
 # This function shows the available apps from the settings files.
 function process_option_list() {
-    local apps=''
+    local -a app_list=()
+    local -a choices=()
+    local app_desc=''
+    local app_name=''
+    local app_list_row=''
     local text=''
+    local text_file=''
+    local title=''
 
     text=$(gettext 'The following apps are available:')
-    app_list
-    if [[ -z $apps ]]; then
-        text+="$(gettext 'No apps found.')"
+    title=$text
+
+    make_app_list
+    if [[ -z ${app_list[*]} ]]; then
+            text+="
+$(gettext 'No apps found.')"
+        kz.infomsg "$text"
+        exit 0
+    fi
+    for app_list_row in "${app_list[@]}"; do
+        read -r app_name app_desc <<< "$app_list_row"
+        choices+=("$app_name" "$app_desc")
+    done
+
+    if [[ $UI_MODE = 'gui' ]]; then
+        text=$(
+            printf '%s|%s\n'            \
+                    "${choices[@]}"     |
+            column  --table             \
+                    --separator '|'
+            )
+        printf  '%s\n'                  \
+                "$text"                 |
+        zenity  --text-info             \
+                --width     900         \
+                --height    500         \
+                --title     "$title"    \
+                --font="Monospace 10"   \
+                2> /dev/null            || true
+    elif [[ $UI_MODE = 'tui' ]]; then
+        text=$(
+            printf '%s|%s\n'                \
+                    "${choices[@]}"         |
+            column  --table                 \
+                    --separator '|'
+            )
+        text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
+        printf  '%s\n'                      \
+                "$text"                     \
+                > "$text_file"
+        dialog  --mouse                     \
+                --scrollbar                 \
+                --backtitle "$PROGRAM_NAME" \
+                --title     "$title"        \
+                --textbox   "$text_file"    \
+                0 0                         || true
     else
-        readarray -t all_apps <<< "$apps"
-        for app in "${all_apps[@]}"; do
-            read -r appname description <<< "$app"
-            choices+=("|$appname|$description\n")
-        done
         text+='\n'
-        text+="$(
-            echo -e "${choices[*]}" |
-            column  --separator '|' \
-                    --table         \
-                    --output-separator '   '
-            )"
+        text+=$(
+            printf '|%s|%s\n'        \
+                    "${choices[@]}" |
+            column  --table         \
+                    --separator '|' \
+                      --output-separator '    '
+            )
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
@@ -341,22 +386,26 @@ commands and information.")"
         fi
         text+="
 $(gettext "Use \"kz setup --browse\" to view all commands and information.")"
+        kz.infomsg "$text"
     fi
-    UI_MODE='cli'
-    kz.infomsg "$text"
 }
 
 
 # This function makes a list of available apps and descriptions from the
 # settings files.
-function app_list() {
+function make_app_list() {
+    # In calling function declare at least:
+    # local -a app_list=()
+    # local app_list_row=''
+    local app_records=''
+
     # +-----------------------------------------------------------------------+
     # | From (app record):
-    # | "# Setup: <app> | <description>"
-    # | To (app list record):
+    # | "# Install: <app> | <description>"
+    # | To (app list row):
     # | "<app> <description>"
     # +-----------------------------------------------------------------------+
-    apps=$(
+    app_records=$(
         grep    --regexp="# .*${SETUP}.*"   \
                 "${settings_files[@]}"      |
         tr      --delete '|'                |
@@ -365,17 +414,22 @@ function app_list() {
                 --fields=3-                 |
         sort    --unique                    || true
         )
+    readarray -t app_list <<< "$app_records"
+
+    # for app_list_row in "${app_list[@]}"; do
+    #     read -r app_name app_desc <<< "$app_list_row"
+    #     ...
+    # done
 }
 
 
 # This function let the user select apps.
 function process_option_select() {
-    local -a all_apps=()
+    local -a app_list=()
     local -a choices=()
-    local app=''
-    local appname=''
-    local description=''
-    local apps=''
+    local app_desc=''
+    local app_name=''
+    local app_list_row=''
     local text=''
     local title=''
 
@@ -387,26 +441,26 @@ function process_option_select() {
         text=$(gettext 'Select apps to reset:')
     fi
 
-    app_list
-    if [[ -z $apps ]]; then
+    make_app_list
+    if [[ -z ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
         kz.infomsg "$text"
         exit 0
     fi
-    readarray -t all_apps <<< "$apps"
 
     if [[ $UI_MODE = 'gui' ]]; then
-        for app in "${all_apps[@]}"; do
-            read -r appname description <<< "$app"
-            choices+=('false' "$appname" "$description")
+        for app_list_row in "${app_list[@]}"; do
+            read -r app_name app_desc <<< "$app_list_row"
+            choices+=('false' "$app_name" "$app_desc")
         done
-        # No array is needed because the app name does not contain spaces.
+        # The variable selected_apps does not need to be an array, because the
+        # app name does not contain spaces.
         selected_apps=$(
             zenity  --list                                  \
                     --checklist                             \
                     --separator ' '                         \
-                    --width     700                         \
+                    --width     800                         \
                     --height    500                         \
                     --title     "$title"                    \
                     --text      "$text"                     \
@@ -418,11 +472,12 @@ $(gettext 'No apps found.')"
                     2> /dev/null                            || true
             )
     elif [[ $UI_MODE = 'tui' ]]; then
-        for app in "${all_apps[@]}"; do
-            read -r appname description <<< "$app"
-            choices+=("$appname" "$description" 'off')
+        for app_list_row in "${app_list[@]}"; do
+            read -r app_name app_desc <<< "$app_list_row"
+            choices+=("$app_name" "$app_desc" 'off')
         done
-        # No array is needed because the app name does not contain spaces.
+        # The variable selected_apps does not need to be an array, because the
+        # app name does not contain spaces.
         selected_apps=$(
             dialog  --ok-label  "$(gettext 'Continue')" \
                     --backtitle "$PROGRAM_NAME"         \
@@ -434,17 +489,18 @@ $(gettext 'No apps found.')"
                     2>&1 >/dev/tty                      || true
             )
     else
-        for app in "${all_apps[@]}"; do
-            read -r appname description <<< "$app"
-            choices+=("|$appname|$description\n")
+        for app_list_row in "${app_list[@]}"; do
+            read -r app_name app_desc <<< "$app_list_row"
+            choices+=("$app_name" "$app_desc")
         done
         text+='\n'
-        text+="$(
-            echo -e "${choices[*]}" |
-            column  --separator '|' \
-                    --table         \
-                    --output-separator '   '
-            )"
+        text+=$(
+            printf '|%s|%s\n'       \
+                    "${choices[@]}" |
+            column  --table         \
+                    --separator '|' \
+                      --output-separator '    '
+            )
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
@@ -504,7 +560,7 @@ function process_settings_files_by_app_argument() {
 
     # +-----------------------------------------------------------------------+
     # | # Setup: <app> | <description>  [1] "app record"    <== Selection
-    # | # Host:  <host>                 [2] "host record"
+    # | # Host:  <host>...              [2] "host record"
     # | <cmd>...
     # |
     # | # Reset: <app> | <description>  [1] "app record"
@@ -564,7 +620,7 @@ function process_settings_files_by_hostname() {
 
     # +-----------------------------------------------------------------------+
     # | # Setup: <app> | <description>  [1] "app record"    <== "Selection"
-    # | # Host:  <host>                 [2] "host record"   <== Selection
+    # | # Host:  <host>...              [2] "host record"   <== Selection
     # | <cmd>...
     # |
     # | # Reset: <app> | <description>  [1] "app record"
