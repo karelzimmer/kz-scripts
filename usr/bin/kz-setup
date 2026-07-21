@@ -363,7 +363,7 @@ $(gettext 'No apps found.')"
                     "${choices[@]}" |
             column  --table         \
                     --separator '|' \
-                      --output-separator '    '
+                    --output-separator '    '
             )
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
@@ -499,7 +499,7 @@ $(gettext 'No apps found.')"
                     "${choices[@]}" |
             column  --table         \
                     --separator '|' \
-                      --output-separator '    '
+                    --output-separator '    '
             )
         if [[ $SETUP = 'Setup:' ]]; then
             text+="

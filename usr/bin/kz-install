@@ -379,7 +379,7 @@ $(gettext 'No apps found.')"
                     "${choices[@]}" |
             column  --table         \
                     --separator '|' \
-                      --output-separator '    '
+                    --output-separator '    '
             )
         if [[ $INSTALL = 'Install:' ]]; then
             text+="
@@ -515,7 +515,7 @@ $(gettext 'No apps found.')"
                     "${choices[@]}" |
             column  --table         \
                     --separator '|' \
-                      --output-separator '    '
+                    --output-separator '    '
             )
         if [[ $INSTALL = 'Install:' ]]; then
             text+="
