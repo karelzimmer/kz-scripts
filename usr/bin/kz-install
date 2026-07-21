@@ -303,7 +303,7 @@ $(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
                 2> /dev/null                                || true
     elif [[ $UI_MODE = 'tui' ]]; then
         dialog  --mouse                                     \
-                --scrollbar                     app_list            \
+                --scrollbar                                 \
                 --backtitle "$PROGRAM_NAME"                 \
                 --title     "$title"                        \
                 --textbox   "$installation_file_combined"   \
