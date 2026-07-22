@@ -634,7 +634,7 @@ function process_installation_files_by_hostname() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Install: <app> | <description>    [1] "app record"    <== "Selection"
+    # | # Install: <app> | <description>    [1] "app record"
     # | # Host:    <host>...                [2] "host record"   <== Selection
     # | <cmd>...
     # |
@@ -647,12 +647,12 @@ function process_installation_files_by_hostname() {
                 # Save app record.
                 app_record=$install_record    # [1]
                 # Set switch.
+                app_match=true
                 # Switch app_match is here not literally a match on app name,
                 # like in the function that processes argument <app>, but is
                 # required for the remove option because matches on <host> also
                 # causes install commands to be included with the remove
                 # commands.
-                app_match=true
                 ;;
             '# '*'Host:'*'*'* | '# '*'Host:'*$HOSTNAME* )
                 # Save host record.

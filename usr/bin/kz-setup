@@ -619,7 +619,7 @@ function process_settings_files_by_hostname() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Setup: <app> | <description>  [1] "app record"    <== "Selection"
+    # | # Setup: <app> | <description>  [1] "app record"
     # | # Host:  <host>...              [2] "host record"   <== Selection
     # | <cmd>...
     # |
@@ -632,11 +632,11 @@ function process_settings_files_by_hostname() {
                 # Save app record.
                 app_record=$setup_record    # [1]
                 # Set switch.
+                app_match=true
                 # Switch app_match is here not literally a match on app name,
                 # like in the function that processes argument <app>, but is
                 # required for the reset option because matches on <host> also
                 # causes setup commands to be included with the reset commands.
-                app_match=true
                 ;;
             '# '*'Host:'*'*'* | '# '*'Host:'*$HOSTNAME* )
                 # Save host record.
