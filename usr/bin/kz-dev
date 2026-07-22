@@ -52,6 +52,10 @@ del HELP_LINES
 OPTIONS_SHORT: str = 'hmuv'
 OPTIONS_LONG: list[str] = ['help', 'manual', 'usage', 'version']
 
+# Where the the code is stored locally.
+GITROOT: str = subprocess.run('xdg-user-dir PROJECTS', stdout=subprocess.PIPE,
+                              shell=True, text=True).stdout.strip('\n')
+
 
 # #############################################################################
 # Globals
@@ -176,7 +180,7 @@ def get_repos() -> None:
     """
     This function retrieves the public repos.
     """
-    bin_repo: str = f'{kz.GITROOT}/bin'
+    bin_repo: str = f'{GITROOT}/bin'
     command: str
     exc: BaseException
     text: str
@@ -289,7 +293,7 @@ def download_website() -> None:
     ftp_login: str = f'{os.getenv("HOME")}/.{ftp_host}.login'
     ftp_opts: str = '--delete --verbose'
     ftp_set: str = 'set ssl:verify-certificate no'
-    ftp_to: str = f'{kz.GITROOT}/kz-uploads/dist'
+    ftp_to: str = f'{GITROOT}/kz-uploads/dist'
     ftp_user: str = 'kzimmer'
     ftp_x_cmd: str = f'mirror {ftp_opts} {ftp_from} {ftp_to}; exit'
     text: str

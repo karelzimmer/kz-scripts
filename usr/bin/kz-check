@@ -46,6 +46,10 @@ readonly HELP
 readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
+# Where the the code is stored locally.
+GITROOT=$(xdg-user-dir PROJECTS)
+readonly GITROOT
+
 
 # #############################################################################
 # Globals
