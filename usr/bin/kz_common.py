@@ -45,6 +45,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     logmsg(PROGRAM_NAME, TEXT)
     if UI_MODE == 'gui':
         zenity: str = f'zenity      --error                         \
+                                    --no-markup                     \
                                     --width     600                 \
                                     --height    100                 \
                                     --title     "{PROGRAM_DESC}"    \
@@ -92,6 +93,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     logmsg(PROGRAM_NAME, TEXT)
     if UI_MODE == 'gui':
         zenity: str = f'zenity      --info                          \
+                                    --no-markup                     \
                                     --width     600                 \
                                     --height    100                 \
                                     --title     "{PROGRAM_DESC}"    \

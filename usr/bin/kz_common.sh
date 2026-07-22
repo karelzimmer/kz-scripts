@@ -37,6 +37,7 @@ function kz.errmsg() {
     if [[ ${UI_MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
         zenity  --error                     \
+                --no-markup                 \
                 --width     600             \
                 --height    100             \
                 --title     "$PROGRAM_DESC" \
@@ -62,6 +63,7 @@ function kz.infomsg() {
     kz.logmsg "$*"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         zenity  --info                      \
+                --no-markup                 \
                 --width     600             \
                 --height    100             \
                 --title     "$PROGRAM_DESC" \
