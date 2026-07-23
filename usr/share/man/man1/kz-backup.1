@@ -27,7 +27,7 @@ and WiFi information are saved. See \fBFILES\fR section below for the exact
 location.
 .sp
 The backup is placed on a mounted usb medium such as a USB external hard disk
-in folder \fBbackup_<computername>_<username>\fR, this folder is created as
+in folder \fBbackup_computername_username\fR, this folder is created as
 needed, for example /media/karel/backupdisk/backup_pc-of-karel_karel for Karel
 at pc-of-karel.
 .sp
@@ -55,7 +55,8 @@ Option \fB-v\fR, \fB--version\fR shows the program version, author, and
 copyright, and exits.
 .sp
 Locations ignored by \fBkz backup\fR are directories managed by Git.
-Example: ~/kz-scripts is skipped due to the presence of ~/kz-scripts/.git.
+Example: /home/username/Projects/kz-scripts is skipped due to the presence of
+/home/username/Projects/kz-scripts/.git.
 .sp
 Tool rsync is used to create the backup.
 .br
@@ -99,42 +100,42 @@ Normally exit value 0 is returned; if an error occurs, the exit value is not
 equal to 0.
 
 .SH FILES
-~/.kz-backup-settings/apps.txt
+/home/username/.kz-backup-settings/apps.txt
 .RS
 List of installed apps. For checking installation.
 .RE
 .sp
-~/.kz-backup-settings/avatar.ico
+/home/username/.kz-backup-settings/avatar.ico
 .RS
 Backup of user avatar, if available.
 .RE
 .sp
-~/.kz-backup-settings/avatar.txt
+/home/username/.kz-backup-settings/avatar.txt
 .RS
 Instructions for restoring the user avatar, if available.
 .RE
 .sp
-~/.kz-backup-settings.ico
+/home/username/.kz-backup-settings.ico
 .RS
 Backup of desktop background, if available.
 .RE
 .sp
-~/.kz-backup-settings/desktop.txt
+/home/username/.kz-backup-settings/desktop.txt
 .RS
 Instructions for restoring the desktop background, if available.
 .RE
 .sp
-~/.kz-backup-settings/favorites.txt
+/home/username/.kz-backup-settings/favorites.txt
 .RS
 Set favorites in the favorites bar (dash/dock). For checking set up.
 .RE
 .sp
-~/.kz-backup-settings/users.txt
+/home/username/.kz-backup-settings/users.txt
 .RS
 Instructions for adding additional users.
 .RE
 .sp
-~/.kz-backup-settings/wifi.txt
+/home/username/.kz-backup-settings/wifi.txt
 .RS
 Saved WiFi information.
 .RE

@@ -28,7 +28,7 @@ gebruikersfoto, favorieten en WiFi informatie opgeslagen. Zie de sectie
 \fBBESTANDEN\fR hieronder voor de preciese lokatie.
 .sp
 De back-up wordt geplaatst op een aangekoppeld usb-medium zoals een usb
-externe harddisk in map \fBbackup_<computernaam>_<gebruikersnaam>\fR, deze map
+externe harddisk in map \fBbackup_computernaam_gebruikersnaam\fR, deze map
 wordt aangemaakt als nodig, bijvoorbeeld
 /media/karel/backupdisk/backup_pc-van-karel_karel voor Karel op pc-van-karel.
 .sp
@@ -57,8 +57,8 @@ en sluit af.
 .sp
 Locaties die genegeerd worden door \fBkz backup\fR zijn de door Git beheerde
 mappen ("git-managed").
-Voorbeeld: ~/kz-scripts wordt overgeslagen vanwege de aanwezigheid van
-~/kz-scripts/.git.
+Voorbeeld: /home/gebruikersnaam/Projecten/kz-scripts wordt overgeslagen vanwege
+de aanwezigheid van /home/gebruikersnaam/Projecten/kz-scripts/.git.
 .sp
 Voor het maken van de back-up wordt rsync gebruikt.
 .br
@@ -102,43 +102,43 @@ Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
 afsluitwaarde ongelijk 0.
 
 .SH BESTANDEN
-~/.kz-backup-settings/apps.txt
+/home/gebruikersnaam/.kz-backup-settings/apps.txt
 .RS
 Lijst van geïnstalleerde apps. Ter controle van de installatie.
 .RE
 .sp
-~/.kz-backup-settings/avatar.ico
+/home/gebruikersnaam/.kz-backup-settings/avatar.ico
 .RS
 Back-up van de avatar, indien beschikbaar.
 .RE
 .sp
-~/.kz-backup-settings/avatar.txt
+/home/gebruikersnaam/.kz-backup-settings/avatar.txt
 .RS
 Instructies voor het terugzetten van de avatar, indien beschikbaar.
 .RE
 .sp
-~/.kz-backup-settings/desktop.ico
+/home/gebruikersnaam/.kz-backup-settings/desktop.ico
 .RS
 Back-up van bureaubladachtergrond, indien beschikbaar.
 .RE
 .sp
-~/.kz-backup-settings/desktop.txt
+/home/gebruikersnaam/.kz-backup-settings/desktop.txt
 .RS
 Instructies voor het terugzetten van bureaubladachtergrond.
 .RE
 .sp
-~/.kz-backup-settings/favorites.txt
+/home/gebruikersnaam/.kz-backup-settings/favorites.txt
 .RS
 Ingestelde favorieten in de favorietenbalk (dash/dock). Ter controle van de
 instellingen.
 .RE
 .sp
-~/.kz-backup-settings/users.txt
+/home/gebruikersnaam/.kz-backup-settings/users.txt
 .RS
 Instructies voor het toevoegen van extra gebruikers.
 .RE
 .sp
-~/.kz-backup-settings/wifi.txt
+/home/gebruikersnaam/.kz-backup-settings/wifi.txt
 .RS
 Opgeslagen WiFi-informatie.
 .RE
