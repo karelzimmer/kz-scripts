@@ -449,8 +449,10 @@ kz-desktop --delete=kz-webmin
 # -----------------------------------------------------------------------------
 # This app is not required when "apt-cache show xdg-user-dirs" shows version 0.20 or higher.
 # -----------------------------------------------------------------------------
-if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; else mkdir --parents --verbose ~/Projects; fi
-if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; else xdg-user-dirs-update --set PROJECTS ~/Projects; fi
+if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; fi
+if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; fi
+if [[ ${LANG:0:2} = 'en' ]]; then mkdir --parents --verbose ~/Projects; fi
+if [[ ${LANG:0:2} = 'en' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projects; fi
 xdg-user-dirs-update
 
 # Reset: xdg-projects-dir | Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs
