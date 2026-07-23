@@ -447,7 +447,7 @@ kz-desktop --delete=kz-webmin
 # Setup: xdg-projects-dir | Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs
 # Host:  pc06 pc07
 # -----------------------------------------------------------------------------
-# App xdg-projects-dir is not required with xdg-user-dirs version 0.20 or higher.
+# This app is not required when "apt-cache show xdg-user-dirs" shows version 0.20 or higher.
 # -----------------------------------------------------------------------------
 if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; else mkdir --parents --verbose ~/Projects; fi
 if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; else xdg-user-dirs-update --set PROJECTS ~/Projects; fi
