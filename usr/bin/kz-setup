@@ -399,7 +399,7 @@ function make_app_list() {
     # | "<app> <description>"
     # +-----------------------------------------------------------------------+
     app_records=$(
-        grep    --regexp="# .*${SETUP}.*"   \
+        grep    --regexp="#.*${SETUP}.*"    \
                 "${settings_files[@]}"      |
         tr      --delete '|'                |
         tr      --squeeze-repeats ' '       |
@@ -568,7 +568,7 @@ function process_settings_files_by_app_argument() {
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
-            '# '*${SETUP}*' '$app_argument' '* )
+            '#'*${SETUP}*' '$app_argument' '* )
                 # Save app record.
                 app_record=$setup_record    # [1]
                 # Set switches.
@@ -576,11 +576,11 @@ function process_settings_files_by_app_argument() {
                 no_app_match=false
                 write_saved_records=true
                 ;;
-            '# '*'Host:'* )
+            '#'*'Host:'* )
                 # Save host record.
                 host_record=$setup_record   # [2]
                 ;;
-            '# '*${RESET}* | '# EOF' )
+            '#'*${RESET}* | '# EOF' )
                 # Stop at mismatched app record or End-Of-File.
                 # Reset switches.
                 app_match=false
@@ -628,7 +628,7 @@ function process_settings_files_by_hostname() {
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
-            '# '*${SETUP}* )
+            '#'*${SETUP}* )
                 # Save app record.
                 app_record=$setup_record    # [1]
                 # Set switch.
@@ -638,14 +638,14 @@ function process_settings_files_by_hostname() {
                 # required for the reset option because matches on <host> also
                 # causes setup commands to be included with the reset commands.
                 ;;
-            '# '*'Host:'*'*'* | '# '*'Host:'*$HOSTNAME* )
+            '#'*'Host:'*'*'* | '#'*'Host:'*$HOSTNAME* )
                 # Save host record.
                 host_record=$setup_record   # [2]
                 # Set switches.
                 host_match=true
                 write_saved_records=true
                 ;;
-            '# '*${RESET}* | '# EOF' )
+            '#'*${RESET}* | '# EOF' )
                 # Stop at mismatched app record or End-Of-File.
                 # Reset switches.
                 app_match=false
@@ -703,7 +703,7 @@ function setup_apps() {
 
     app_tot_num=$(
         grep    --count                     \
-                --regexp="# .*${SETUP}.*"   \
+                --regexp="#.*${SETUP}.*"    \
                 "$command_file"             || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
