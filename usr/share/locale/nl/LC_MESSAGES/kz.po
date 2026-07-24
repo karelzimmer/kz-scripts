@@ -1064,8 +1064,8 @@ msgid "App"
 msgstr "App"
 
 #: kz-install:493 kz-menu:220 kz-menu:279 kz-menu:427 kz-menu:486 kz-setup:477
-msgid "Description"
-msgstr "Beschrijving"
+msgid "DESCRIPTION"
+msgstr "BESCHRIJVING"
 
 #: kz-install:525
 msgid "Use \"kz install\" to install the automatically selected apps."
@@ -1106,8 +1106,8 @@ msgid "Authentication is required to continue."
 msgstr "Authenticatie is vereist om door te gaan."
 
 #: kz-install:797 kz-setup:751
-msgid "Num/Tot  App | Description"
-msgstr "Num/Tot  App | Beschrijving"
+msgid "NUM/TOT  APP | DESCRIPTION"
+msgstr "NUM/TOT  APP | BESCHRIJVING"
 
 #: kz-install:798 kz-setup:752
 msgid "Command"
@@ -1261,16 +1261,16 @@ msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
 #: kz-menu:217 kz-menu:424
-msgid "Choice"
-msgstr "Keuze"
+msgid "CHOICE"
+msgstr "KEUZE"
 
 #: kz-menu:218 kz-menu:277 kz-menu:425 kz-menu:484
-msgid "Num"
-msgstr "Num"
+msgid "NUM"
+msgstr "NUM"
 
 #: kz-menu:219 kz-menu:278 kz-menu:426 kz-menu:485
-msgid "Action"
-msgstr "Actie"
+msgid "ACTION"
+msgstr "ACTIE"
 
 #: kz-menu:288
 #, sh-format

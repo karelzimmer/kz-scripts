@@ -394,9 +394,9 @@ function make_app_list() {
 
     # +-----------------------------------------------------------------------+
     # | From (app record):
-    # | "# Setup: APP | <description>"
+    # | "# Setup: APP | DESCRIPTION"
     # | To (app list row):
-    # | "APP <description>"
+    # | "APP DESCRIPTION"
     # +-----------------------------------------------------------------------+
     app_records=$(
         grep    --regexp="#.*${SETUP}.*"    \
@@ -474,7 +474,7 @@ $(gettext 'No apps found.')"
                     --ok-label  "$(gettext 'Continue')"     \
                     --column    "$(gettext 'Sel')"          \
                     --column    "$(gettext 'App')"          \
-                    --column    "$(gettext 'Description')"  \
+                    --column    "$(gettext 'DESCRIPTION')"  \
                     "${choices[@]}"                         \
                     2> /dev/null                            || true
             )
@@ -559,12 +559,12 @@ function process_settings_files_by_app_argument() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Setup: APP | <description>  [1] "app record"    <== Selection
-    # | # Host:  <host>...              [2] "host record"
-    # | <cmd>...
+    # | # Setup: APP | DESCRIPTION  [1] "app record"    <== Selection
+    # | # Host:  HOST...            [2] "host record"
+    # | CMD...
     # |
-    # | # Reset: APP | <description>  [1] "app record"
-    # | <cmd>...
+    # | # Reset: APP | DESCRIPTION  [1] "app record"
+    # | CMD...
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
@@ -619,12 +619,12 @@ function process_settings_files_by_hostname() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Setup: APP | <description>  [1] "app record"
-    # | # Host:  <host>...              [2] "host record"   <== Selection
-    # | <cmd>...
+    # | # Setup: APP | DESCRIPTION  [1] "app record"
+    # | # Host:  HOST...            [2] "host record"   <== Selection
+    # | CMD...
     # |
-    # | # Reset: APP | <description>  [1] "app record"
-    # | <cmd>...
+    # | # Reset: APP | DESCRIPTION  [1] "app record"
+    # | CMD...
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
@@ -635,7 +635,7 @@ function process_settings_files_by_hostname() {
                 app_match=true
                 # Switch app_match is here not literally a match on app name,
                 # like in the function that processes argument APP, but is
-                # required for the reset option because matches on <host> also
+                # required for the reset option because matches on HOST also
                 # causes setup commands to be included with the reset commands.
                 ;;
             '#'*'Host:'*'*'* | '#'*'Host:'*$HOSTNAME* )
@@ -748,7 +748,7 @@ function process_command_file() {
     local command_record=''
 
     if [[ $UI_MODE = 'cli' ]]; then
-        text="$(gettext 'Num/Tot  App | Description')
+        text="$(gettext 'NUM/TOT  APP | DESCRIPTION')
          $(gettext 'Command')..."
         printf '%s\n' "$text"
     fi

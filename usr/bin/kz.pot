@@ -959,7 +959,7 @@ msgid "App"
 msgstr ""
 
 #: kz-install:493 kz-menu:220 kz-menu:279 kz-menu:427 kz-menu:486 kz-setup:477
-msgid "Description"
+msgid "DESCRIPTION"
 msgstr ""
 
 #: kz-install:525
@@ -996,7 +996,7 @@ msgid "Authentication is required to continue."
 msgstr ""
 
 #: kz-install:797 kz-setup:751
-msgid "Num/Tot  App | Description"
+msgid "NUM/TOT  APP | DESCRIPTION"
 msgstr ""
 
 #: kz-install:798 kz-setup:752
@@ -1145,15 +1145,15 @@ msgid "Select a choice:"
 msgstr ""
 
 #: kz-menu:217 kz-menu:424
-msgid "Choice"
+msgid "CHOICE"
 msgstr ""
 
 #: kz-menu:218 kz-menu:277 kz-menu:425 kz-menu:484
-msgid "Num"
+msgid "NUM"
 msgstr ""
 
 #: kz-menu:219 kz-menu:278 kz-menu:426 kz-menu:485
-msgid "Action"
+msgid "ACTION"
 msgstr ""
 
 #: kz-menu:288
