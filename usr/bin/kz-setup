@@ -421,11 +421,12 @@ function make_app_list() {
 function make_cli_app_list() {
     text+='\n'
     text+=$(
-        printf '|%s|%s\n'       \
-                "${choices[@]}" |
-        column  --table         \
-                --separator '|' \
-                --output-separator '    '
+        printf '|%s|%s\n'                   \
+                "${choices[@]}"             |
+        column  --table                     \
+                --separator '|'             \
+                --output-separator '    '   \
+                --table-columns " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
 }
 
