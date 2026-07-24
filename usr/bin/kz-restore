@@ -26,11 +26,11 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
 Usage: kz restore [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]
-                  [-s|--source <directory>] [-T|--tui] [-u|--usage]
+                  [-s|--source DIRECTORY] [-T|--tui] [-u|--usage]
                   [-v|--version]")
 readonly USAGE
 
-HELP="$(gettext 'Usage: kz restore [<options>]')
+HELP="$(gettext 'Usage: kz restore [OPTIONS]')
 
 $PROGRAM_DESC.
 
@@ -42,7 +42,7 @@ $(gettext '  -C, --cli      run in command-line mode')
 $(gettext '  -G, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
-$(gettext '  -s, --source <directory>
+$(gettext '  -s, --source DIRECTORY
                  use backup in specified directory')
 $(gettext '  -T, --tui      run in text-based mode (default)')
 $(gettext '  -u, --usage    show a short usage summary')

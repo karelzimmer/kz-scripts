@@ -34,7 +34,7 @@ Usage: kz build [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]
     )
 readonly USAGE
 
-HELP="$(gettext "Usage: kz build [<options>]")
+HELP="$(gettext "Usage: kz build [OPTIONS]")
 
 $PROGRAM_DESC.
 

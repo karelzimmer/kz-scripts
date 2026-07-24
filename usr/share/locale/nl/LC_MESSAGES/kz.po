@@ -34,8 +34,8 @@ msgstr ""
 "            [-v|--version] OPDRACHT [ARGUMENTEN]"
 
 #: kz:39
-msgid "Usage: kz [<options>] COMMAND [ARGUMENTS]"
-msgstr "Gebruik: kz [<opties>] OPDRACHT [ARGUMENTEN]"
+msgid "Usage: kz [OPTIONS] COMMAND [ARGUMENTS]"
+msgstr "Gebruik: kz [OPTIES] OPDRACHT [ARGUMENTEN]"
 
 #: kz:43 kz-backup:37 kz-build:41 kz-check:39 kz-deploy:40 kz-desktop:38
 #: kz-dev:43 kz-install:38 kz-menu:35 kz-restore:37 kz-setup:38 kz-update:42
@@ -128,16 +128,16 @@ msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 #: kz-backup:27
 msgid ""
 "Usage: kz backup [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]\n"
-"                 [-t|--target <directory>] [-T|--tui] [-u|--usage]\n"
+"                 [-t|--target DIRECTORY] [-T|--tui] [-u|--usage]\n"
 "                 [-v|--version]"
 msgstr ""
 "Gebruik: kz backup [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]\n"
-"                   [-t|--target <map>] [-T|--tui] [-u|--usage]\n"
+"                   [-t|--target MAP] [-T|--tui] [-u|--usage]\n"
 "                   [-v|--version]"
 
 #: kz-backup:33
-msgid "Usage: kz backup [<options>]"
-msgstr "Gebruik: kz backup [<opties>]"
+msgid "Usage: kz backup [OPTIONS]"
+msgstr "Gebruik: kz backup [OPTIES]"
 
 #: kz-backup:38 kz-desktop:39 kz-install:39 kz-restore:38 kz-setup:39
 msgid ""
@@ -156,10 +156,10 @@ msgstr "  -G, --gui      draai in grafische modus"
 
 #: kz-backup:45
 msgid ""
-"  -t, --target <directory>\n"
+"  -t, --target DIRECTORY\n"
 "                 place backup in specified directory"
 msgstr ""
-"  -t, --target <map>\n"
+"  -t, --target MAP\n"
 "                 plaats de back-up in de opgegeven map"
 
 #: kz-backup:47 kz-install:53 kz-menu:40 kz-restore:47 kz-setup:53 kz-wifi:47
@@ -445,8 +445,8 @@ msgstr ""
 "                  [-v|--version]"
 
 #: kz-build:37
-msgid "Usage: kz build [<options>]"
-msgstr "Gebruik: kz build [<opties>]"
+msgid "Usage: kz build [OPTIONS]"
+msgstr "Gebruik: kz build [OPTIES]"
 
 #: kz-build:42
 msgid "  -d, --dev      build the development version of package kz"
@@ -534,8 +534,8 @@ msgstr ""
 "Gebruik: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
 #: kz-check:35
-msgid "Usage: kz check [<options>]"
-msgstr "Gebruik: kz check [<opties>]"
+msgid "Usage: kz check [OPTIONS]"
+msgstr "Gebruik: kz check [OPTIES]"
 
 #: kz-check:156
 msgid "Check website..."
@@ -747,8 +747,8 @@ msgstr ""
 "                   [-v|--version]"
 
 #: kz-deploy:36
-msgid "Usage: kz deploy [<options>]"
-msgstr "Gebruik: kz deploy [<opties>]"
+msgid "Usage: kz deploy [OPTIONS]"
+msgstr "Gebruik: kz deploy [OPTIES]"
 
 #: kz-deploy:41
 msgid "  -d, --dev      deploy the development version of package kz"
@@ -799,8 +799,8 @@ msgstr ""
 "                    [-v|--version]"
 
 #: kz-desktop:34
-msgid "Usage: kz desktop [<options>]"
-msgstr "Gebruik: kz desktop [<opties>]"
+msgid "Usage: kz desktop [OPTIONS]"
+msgstr "Gebruik: kz desktop [OPTIES]"
 
 #: kz-desktop:42
 msgid ""
@@ -874,8 +874,8 @@ msgid "Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr "Gebruik: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
 #: kz-dev:39
-msgid "Usage: kz dev [<options>]"
-msgstr "Gebruik: kz dev [<opties>]"
+msgid "Usage: kz dev [OPTIONS]"
+msgstr "Gebruik: kz dev [OPTIES]"
 
 #: kz-dev:104
 msgid "First install git, use \"sudo apt install git\"."
@@ -941,8 +941,8 @@ msgstr ""
 "                    [-v|--version] [<app>...]"
 
 #: kz-install:34
-msgid "Usage: kz install [<options>] [ARGUMENTS]"
-msgstr "Gebruik: kz install [<opties>] [ARGUMENTEN]"
+msgid "Usage: kz install [OPTIONS] [ARGUMENTS]"
+msgstr "Gebruik: kz install [OPTIES] [ARGUMENTEN]"
 
 #: kz-install:42 kz-setup:42
 msgid "  -b, --browse   browse through all commands and information"
@@ -1180,8 +1180,8 @@ msgstr ""
 "                 [-u|--usage] [-v|--version]"
 
 #: kz-menu:31
-msgid "Usage: kz menu [<options>]"
-msgstr "Gebruik: kz menu [<opties>]"
+msgid "Usage: kz menu [OPTIONS]"
+msgstr "Gebruik: kz menu [OPTIES]"
 
 #: kz-menu:49 kz-menu:245 kz-menu.desktop:10
 msgid "Installation menu"
@@ -1332,23 +1332,23 @@ msgstr "Zet een back-up (reservekopie) van de Persoonlijke map terug"
 #: kz-restore:27
 msgid ""
 "Usage: kz restore [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]\n"
-"                  [-s|--source <directory>] [-T|--tui] [-u|--usage]\n"
+"                  [-s|--source DIRECTORY] [-T|--tui] [-u|--usage]\n"
 "                  [-v|--version]"
 msgstr ""
 "Gebruik: kz restore [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]\n"
-"                    [-s|--source <map>] [-T|--tui] [-u|--usage]\n"
+"                    [-s|--source MAP] [-T|--tui] [-u|--usage]\n"
 "                    [-v|--version]"
 
 #: kz-restore:33
-msgid "Usage: kz restore [<options>]"
-msgstr "Gebruik: kz restore [<opties>]"
+msgid "Usage: kz restore [OPTIONS]"
+msgstr "Gebruik: kz restore [OPTIES]"
 
 #: kz-restore:45
 msgid ""
-"  -s, --source <directory>\n"
+"  -s, --source DIRECTORY\n"
 "                 use backup in specified directory"
 msgstr ""
-"  -s, --source <map>\n"
+"  -s, --source MAP\n"
 "                 gebruik de back-up in de opgegeven map"
 
 #: kz-restore:313 kz-restore:321
@@ -1426,8 +1426,8 @@ msgstr ""
 "                  [-v|--version] [<app>...]"
 
 #: kz-setup:34
-msgid "Usage: kz setup [<options>] [ARGUMENTS]"
-msgstr "Gebruik: kz setup [<opties>] [ARGUMENTEN]"
+msgid "Usage: kz setup [OPTIONS] [ARGUMENTS]"
+msgstr "Gebruik: kz setup [OPTIES] [ARGUMENTEN]"
 
 msgid ""
 "  -b, --browse   browse settings files with all commands and information"
@@ -1582,8 +1582,8 @@ msgstr ""
 "Gebruik: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
 #: kz-update:38
-msgid "Usage: kz update [<options>]"
-msgstr "Gebruik: kz update [<opties>]"
+msgid "Usage: kz update [OPTIONS]"
+msgstr "Gebruik: kz update [OPTIES]"
 
 #: kz-update:90
 msgid "Update..."
@@ -1610,8 +1610,8 @@ msgstr ""
 "                 [-T|--tui] [-u|--usage] [-v|--version]"
 
 #: kz-wifi:38
-msgid "Usage: kz wifi [<options>]"
-msgstr "Gebruik: kz wifi [<opties>]"
+msgid "Usage: kz wifi [OPTIONS]"
+msgstr "Gebruik: kz wifi [OPTIES]"
 
 #: kz-wifi:166
 msgid "Use this data to connect to the wireless network."

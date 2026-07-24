@@ -31,7 +31,7 @@ Usage: kz install [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file <file>]...
                   [-v|--version] [<app>...]")
 readonly USAGE
 
-HELP="$(gettext 'Usage: kz install [<options>] [ARGUMENTS]')
+HELP="$(gettext 'Usage: kz install [OPTIONS] [ARGUMENTS]')
 
 $PROGRAM_DESC.
 

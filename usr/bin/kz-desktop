@@ -31,7 +31,7 @@ Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]
                   [-v|--version]")
 readonly USAGE
 
-HELP="$(gettext 'Usage: kz desktop [<options>]')
+HELP="$(gettext 'Usage: kz desktop [OPTIONS]')
 
 $PROGRAM_DESC.
 

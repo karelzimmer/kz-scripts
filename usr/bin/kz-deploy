@@ -33,7 +33,7 @@ Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]
                  [-v|--version]")
 readonly USAGE
 
-HELP="$(gettext 'Usage: kz deploy [<options>]')
+HELP="$(gettext 'Usage: kz deploy [OPTIONS]')
 
 $PROGRAM_DESC.
 

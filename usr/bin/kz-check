@@ -32,7 +32,7 @@ USAGE=$(gettext "\
 Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]")
 readonly USAGE
 
-HELP="$(gettext 'Usage: kz check [<options>]')
+HELP="$(gettext 'Usage: kz check [OPTIONS]')
 
 $PROGRAM_DESC.
 

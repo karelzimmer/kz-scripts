@@ -28,7 +28,7 @@ Usage: kz menu [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual] [-T|--tui]
                [-u|--usage] [-v|--version]")
 readonly USAGE
 
-HELP="$(gettext 'Usage: kz menu [<options>]')
+HELP="$(gettext 'Usage: kz menu [OPTIONS]')
 
 $PROGRAM_DESC.
 
