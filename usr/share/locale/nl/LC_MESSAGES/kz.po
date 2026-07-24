@@ -28,14 +28,14 @@ msgstr "Voer de kz-opdracht uit"
 #: kz:34
 msgid ""
 "Usage: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]\n"
-"          [-v|--version] <command> [<arguments>]"
+"          [-v|--version] COMMAND [ARGUMENTS]"
 msgstr ""
 "Gebruik: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]\n"
-"            [-v|--version] <opdracht> [<argumenten>]"
+"            [-v|--version] OPDRACHT [ARGUMENTEN]"
 
 #: kz:39
-msgid "Usage: kz [<options>] <command> [<arguments>]"
-msgstr "Gebruik: kz [<opties>] <opdracht> [<argumenten>]"
+msgid "Usage: kz [<options>] COMMAND [ARGUMENTS]"
+msgstr "Gebruik: kz [<opties>] OPDRACHT [ARGUMENTEN]"
 
 #: kz:43 kz-backup:37 kz-build:41 kz-check:39 kz-deploy:40 kz-desktop:38
 #: kz-dev:43 kz-install:38 kz-menu:35 kz-restore:37 kz-setup:38 kz-update:42
@@ -76,12 +76,12 @@ msgid "Arguments:"
 msgstr "Argumenten:"
 
 #: kz:51
-msgid "  <command>      execute command"
-msgstr "  <opdracht>     voer opdracht uit"
+msgid "  COMMAND      execute command"
+msgstr "  OPDRACHT     voer opdracht uit"
 
 #: kz:52
-msgid "  <arguments>    arguments for command"
-msgstr "  <argumenten>   argumenten voor opdracht"
+msgid "  ARGUMENTS    arguments for command"
+msgstr "  ARGUMENTEN   argumenten voor opdracht"
 
 #: kz:93
 msgid "command does not exist"
@@ -118,9 +118,8 @@ msgid "Use \"man kz\" for available commands."
 msgstr "Gebruik \"man kz\" voor beschikbare opdrachten."
 
 #: kz:201
-msgid "Use \"kz <command> [<arguments>]\" to execute a command."
-msgstr ""
-"Gebruik \"kz <opdracht> [<argumenten>]\" om een opdracht uit te voeren."
+msgid "Use \"kz COMMAND [ARGUMENTS]\" to execute a command."
+msgstr "Gebruik \"kz OPDRACHT [ARGUMENTEN]\" om een opdracht uit te voeren."
 
 #: kz-backup:23 kz-backup.desktop:11
 msgid "Make a backup copy of the Home folder"
@@ -942,8 +941,8 @@ msgstr ""
 "                    [-v|--version] [<app>...]"
 
 #: kz-install:34
-msgid "Usage: kz install [<options>] [<arguments>]"
-msgstr "Gebruik: kz install [<opties>] [<argumenten>]"
+msgid "Usage: kz install [<options>] [ARGUMENTS]"
+msgstr "Gebruik: kz install [<opties>] [ARGUMENTEN]"
 
 #: kz-install:42 kz-setup:42
 msgid "  -b, --browse   browse through all commands and information"
@@ -1427,8 +1426,8 @@ msgstr ""
 "                  [-v|--version] [<app>...]"
 
 #: kz-setup:34
-msgid "Usage: kz setup [<options>] [<arguments>]"
-msgstr "Gebruik: kz setup [<opties>] [<argumenten>]"
+msgid "Usage: kz setup [<options>] [ARGUMENTS]"
+msgstr "Gebruik: kz setup [<opties>] [ARGUMENTEN]"
 
 msgid ""
 "  -b, --browse   browse settings files with all commands and information"

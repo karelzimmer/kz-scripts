@@ -29,11 +29,11 @@ msgstr ""
 #: kz:34
 msgid ""
 "Usage: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]\n"
-"          [-v|--version] <command> [<arguments>]"
+"          [-v|--version] COMMAND [ARGUMENTS]"
 msgstr ""
 
 #: kz:39
-msgid "Usage: kz [<options>] <command> [<arguments>]"
+msgid "Usage: kz [<options>] COMMAND [ARGUMENTS]"
 msgstr ""
 
 #: kz:43 kz-backup:37 kz-build:41 kz-check:39 kz-deploy:40 kz-desktop:38
@@ -75,11 +75,11 @@ msgid "Arguments:"
 msgstr ""
 
 #: kz:51
-msgid "  <command>      execute command"
+msgid "  COMMAND      execute command"
 msgstr ""
 
 #: kz:52
-msgid "  <arguments>    arguments for command"
+msgid "  ARGUMENTS    arguments for command"
 msgstr ""
 
 #: kz:93
@@ -117,7 +117,7 @@ msgid "Use \"man kz\" for available commands."
 msgstr ""
 
 #: kz:201
-msgid "Use \"kz <command> [<arguments>]\" to execute a command."
+msgid "Use \"kz COMMAND [ARGUMENTS]\" to execute a command."
 msgstr ""
 
 #: kz-backup:23 kz-backup.desktop:11
@@ -851,7 +851,7 @@ msgid ""
 msgstr ""
 
 #: kz-install:34
-msgid "Usage: kz install [<options>] [<arguments>]"
+msgid "Usage: kz install [<options>] [ARGUMENTS]"
 msgstr ""
 
 #: kz-install:42 kz-setup:42
@@ -1284,7 +1284,7 @@ msgid ""
 msgstr ""
 
 #: kz-setup:34
-msgid "Usage: kz setup [<options>] [<arguments>]"
+msgid "Usage: kz setup [<options>] [ARGUMENTS]"
 msgstr ""
 
 msgid ""

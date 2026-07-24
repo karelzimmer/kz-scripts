@@ -32,11 +32,11 @@ PROGRAM_DESC: str = _('Execute the kz command')
 
 USAGE: str = _(
     "Usage: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]\n"
-    "          [-v|--version] <command> [<arguments>]"
+    "          [-v|--version] COMMAND [ARGUMENTS]"
     )
 
 HELP_LINES: list[str] = [
-    _('Usage: kz [<options>] <command> [<arguments>]'),
+    _('Usage: kz [<options>] COMMAND [ARGUMENTS]'),
     '',
     f'{PROGRAM_DESC}.',
     '',
@@ -48,8 +48,8 @@ HELP_LINES: list[str] = [
     _('  -v, --version  show program version'),
     '',
     _('Arguments:'),
-    _('  <command>      execute command'),
-    _('  <arguments>    arguments for command')
+    _('  COMMAND      execute command'),
+    _('  ARGUMENTS    arguments for command')
     ]
 HELP: str = '\n'.join(HELP_LINES)
 del HELP_LINES
@@ -85,7 +85,7 @@ def process() -> None:
                 check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
                 term()
             else:
-                # Build kz-<command> and check if kz-<command> exists.
+                # Build kz-COMMAND and check if kz-COMMAND exists.
                 cmd += f'-{sys.argv[arg_num]}'
                 if not os.path.exists(cmd):
                     text = (
@@ -95,7 +95,7 @@ def process() -> None:
                     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
                     kz.term(PROGRAM_NAME, 1)
         else:
-            # Build kz-<command> <arguments>.
+            # Build kz-COMMAND ARGUMENTS.
             cmd += f' {sys.argv[arg_num]}'
 
     if cmd == '/usr/bin/kz':
@@ -198,7 +198,7 @@ def process_option_list() -> None:
         text += f'  0  {_('Use "man kz" for available commands.')} \n'
 
     text += '\n'
-    text += _('Use "kz <command> [<arguments>]" to execute a command.')
+    text += _('Use "kz COMMAND [ARGUMENTS]" to execute a command.')
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
