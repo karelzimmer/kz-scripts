@@ -25,10 +25,10 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz install [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file <file>]...
+Usage: kz install [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file FILE]...
                   [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]
                   [-r|--remove] [-s|--select] [-T|--tui] [-u|--usage]
-                  [-v|--version] [<app>...]")
+                  [-v|--version] [APP...]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz install [OPTIONS] [ARGUMENTS]')
@@ -42,7 +42,7 @@ options too.")
 $(gettext '  -b, --browse   browse through all commands and information')
 $(gettext '  -c, --cat      show selected commands and information')
 $(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -f, --file <file>
+$(gettext '  -f, --file FILE
                  process specified installation files')
 $(gettext '  -G, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
@@ -55,7 +55,7 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')
 
 $(gettext 'Arguments:')
-$(gettext '  <app>          process specified apps')"
+$(gettext '  APP          process specified apps')"
 readonly HELP
 
 readonly OPTIONS_SHORT='bcCf:GhlmrsTuv'
@@ -377,18 +377,18 @@ $(gettext 'No apps found.')"
         if [[ $INSTALL = 'Install:' ]]; then
             text+="
 
-$(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
+$(gettext "Use \"kz install APP...\" or \"kz install --select\" to install \
 the self-selected apps.")
-$(gettext "Use \"kz install --cat <app>...\" to view the self-selected \
+$(gettext "Use \"kz install --cat APP...\" to view the self-selected \
 commands and information.")
 $(gettext "Use \"kz install --cat\" to view the automatically selected \
 commands and information.")"
        else
             text+="
 
-$(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove \
+$(gettext "Use \"kz install --remove APP...\" or \"kz install --remove \
 --select\" to remove the self-selected apps.")
-$(gettext "Use \"kz install --cat --remove <app>...\" to view the \
+$(gettext "Use \"kz install --cat --remove APP...\" to view the \
 self-selected commands and information.")
 $(gettext "Use \"kz install --cat --remove\" to view the automatically \
 selected commands and information.")"
@@ -410,9 +410,9 @@ function make_app_list() {
 
     # +-----------------------------------------------------------------------+
     # | From (app record):
-    # | "# Install: <app> | <description>"
+    # | "# Install: APP | <description>"
     # | To (app list row):
-    # | "<app> <description>"
+    # | "APP <description>"
     # +-----------------------------------------------------------------------+
     app_records=$(
         grep    --regexp="#.*${INSTALL}.*"  \
@@ -520,13 +520,13 @@ $(gettext 'No apps found.')"
         if [[ $INSTALL = 'Install:' ]]; then
             text+="
 
-$(gettext "Use \"kz install <app>...\" or \"kz install --select\" to install \
+$(gettext "Use \"kz install APP...\" or \"kz install --select\" to install \
 the self-selected apps.")
 $(gettext "Use \"kz install\" to install the automatically selected apps.")"
         else
             text+="
 
-$(gettext "Use \"kz install --remove <app>...\" or \"kz install --remove \
+$(gettext "Use \"kz install --remove APP...\" or \"kz install --remove \
 --select\" to remove the self-selected apps.")
 $(gettext "Use \"kz install\" to remove the automatically selected apps.")"
         fi
@@ -546,7 +546,7 @@ $(gettext "Use \"kz install\" to remove the automatically selected apps.")"
 }
 
 
-# This function processes argument <app>.
+# This function processes argument APP.
 function process_argument_app() {
     local app_argument=''
     local err_flag=false
@@ -564,7 +564,7 @@ function process_argument_app() {
 
 
 # This function generates the command file from the installation file and
-# filters by <app>.
+# filters by APP.
 function process_installation_files_by_app_argument() {
     local app_match=false
     local app_record=''
@@ -574,11 +574,11 @@ function process_installation_files_by_app_argument() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Install: <app> | <description>    [1] "app record"    <== Selection
+    # | # Install: APP | <description>    [1] "app record"    <== Selection
     # | # Host:    <host>...                [2] "host record"
     # | <cmd>...
     # |
-    # | # Remove:  <app> | <description>    [1] "app record"
+    # | # Remove:  APP | <description>    [1] "app record"
     # | <cmd>...
     # +-----------------------------------------------------------------------+
     while read -r install_record; do
@@ -634,11 +634,11 @@ function process_installation_files_by_hostname() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Install: <app> | <description>    [1] "app record"
+    # | # Install: APP | <description>    [1] "app record"
     # | # Host:    <host>...                [2] "host record"   <== Selection
     # | <cmd>...
     # |
-    # | # Remove:  <app> | <description>    [1] "app record"
+    # | # Remove:  APP | <description>    [1] "app record"
     # | <cmd>...
     # +-----------------------------------------------------------------------+
     while read -r install_record; do
@@ -649,7 +649,7 @@ function process_installation_files_by_hostname() {
                 # Set switch.
                 app_match=true
                 # Switch app_match is here not literally a match on app name,
-                # like in the function that processes argument <app>, but is
+                # like in the function that processes argument APP, but is
                 # required for the remove option because matches on <host> also
                 # causes install commands to be included with the remove
                 # commands.

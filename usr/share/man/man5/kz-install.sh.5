@@ -53,7 +53,7 @@ T}
 l | l
 l | l.
 T{
-# Install: <app> | <description>
+# Install: APP | <description>
 T}:T{
 Which app to install (\fBapp record\fR), will be processed.
 T}
@@ -73,12 +73,12 @@ T}:T{
 Empty line (none, one or more), will be skipped.
 T}
 T{
-# Remove:  <app> | <description>
+# Remove:  APP | <description>
 T}:T{
 Remove the app (\fBapp record\fR for option \fB-r\fR, \fB--remove\fR), will be
 processed.
 .br
-The description and computers are taken from the previous '# Install: <app>'
+The description and computers are taken from the previous '# Install: APP'
 line.
 T}
 T{
@@ -154,7 +154,7 @@ a computer by default (NOTE: '#none' is not a valid computername and will
 therefore never be selected by default).
 .br
 The app can still be installed on another computer with the command 'kz install
-<app>', e.g. 'kz install calibre'.
+APP', e.g. 'kz install calibre'.
 .sp
 
 .SH EXAMPLES

@@ -25,10 +25,10 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file <file>]...
+Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file FILE]...
                 [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]
                 [-r|--reset] [-s|--select] [-T|--tui] [-u|--usage]
-                [-v|--version] [<app>...]")
+                [-v|--version] [APP...]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz setup [OPTIONS] [ARGUMENTS]')
@@ -42,7 +42,7 @@ options too.")
 $(gettext '  -b, --browse   browse through all commands and information')
 $(gettext '  -c, --cat      show selected commands and information')
 $(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -f, --file <file>
+$(gettext '  -f, --file FILE
                  process specified settings files')
 $(gettext '  -G, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
@@ -55,7 +55,7 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')
 
 $(gettext 'Arguments:')
-$(gettext '  <app>          process specified apps')"
+$(gettext '  APP          process specified apps')"
 readonly HELP
 
 readonly OPTIONS_SHORT='bcCf:GhlmrsTuv'
@@ -361,18 +361,18 @@ $(gettext 'No apps found.')"
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
-$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
+$(gettext "Use \"kz setup APP...\" or \"kz setup --select\" to set up the \
 self-selected apps.")
-$(gettext "Use \"kz setup --cat <app>...\" to view the self-selected commands \
+$(gettext "Use \"kz setup --cat APP...\" to view the self-selected commands \
 and information.")
 $(gettext "Use \"kz setup --cat\" to view the automatically selected \
 commands and information.")"
         else
             text+="
 
-$(gettext "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" \
+$(gettext "Use \"kz setup --reset APP...\" or \"kz setup --select --reset\" \
 to reset the self-selected apps.")
-$(gettext "Use \"kz setup --cat --reset <app>...\" to view the self-selected \
+$(gettext "Use \"kz setup --cat --reset APP...\" to view the self-selected \
 commands and information.")
 $(gettext "Use \"kz setup --cat --reset\" to view the automatically selected \
 commands and information.")"
@@ -394,9 +394,9 @@ function make_app_list() {
 
     # +-----------------------------------------------------------------------+
     # | From (app record):
-    # | "# Setup: <app> | <description>"
+    # | "# Setup: APP | <description>"
     # | To (app list row):
-    # | "<app> <description>"
+    # | "APP <description>"
     # +-----------------------------------------------------------------------+
     app_records=$(
         grep    --regexp="#.*${SETUP}.*"    \
@@ -504,13 +504,13 @@ $(gettext 'No apps found.')"
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
-$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
+$(gettext "Use \"kz setup APP...\" or \"kz setup --select\" to set up the \
 self-selected apps.")
 $(gettext "Use \"kz setup\" to set up the automatically selected apps.")"
         else
             text+="
 
-$(gettext "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" \
+$(gettext "Use \"kz setup --reset APP...\" or \"kz setup --select --reset\" \
 to reset the self-selected apps.")
 $(gettext "Use \"kz setup --reset\" to reset the automatically selected \
 apps.")"
@@ -531,7 +531,7 @@ apps.")"
 }
 
 
-# This function processes argument <app>.
+# This function processes argument APP.
 function process_argument_app() {
     local app_argument=''
     local err_flag=false
@@ -549,7 +549,7 @@ function process_argument_app() {
 
 
 # This function generates the command file from the settings file and filters
-# by <app>.
+# by APP.
 function process_settings_files_by_app_argument() {
     local app_match=false
     local app_record=''
@@ -559,11 +559,11 @@ function process_settings_files_by_app_argument() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Setup: <app> | <description>  [1] "app record"    <== Selection
+    # | # Setup: APP | <description>  [1] "app record"    <== Selection
     # | # Host:  <host>...              [2] "host record"
     # | <cmd>...
     # |
-    # | # Reset: <app> | <description>  [1] "app record"
+    # | # Reset: APP | <description>  [1] "app record"
     # | <cmd>...
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
@@ -619,11 +619,11 @@ function process_settings_files_by_hostname() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Setup: <app> | <description>  [1] "app record"
+    # | # Setup: APP | <description>  [1] "app record"
     # | # Host:  <host>...              [2] "host record"   <== Selection
     # | <cmd>...
     # |
-    # | # Reset: <app> | <description>  [1] "app record"
+    # | # Reset: APP | <description>  [1] "app record"
     # | <cmd>...
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
@@ -634,7 +634,7 @@ function process_settings_files_by_hostname() {
                 # Set switch.
                 app_match=true
                 # Switch app_match is here not literally a match on app name,
-                # like in the function that processes argument <app>, but is
+                # like in the function that processes argument APP, but is
                 # required for the reset option because matches on <host> also
                 # causes setup commands to be included with the reset commands.
                 ;;

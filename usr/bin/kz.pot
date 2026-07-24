@@ -844,10 +844,10 @@ msgstr ""
 
 #: kz-install:27
 msgid ""
-"Usage: kz install [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file <file>]...\n"
+"Usage: kz install [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file FILE]...\n"
 "                  [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]\n"
 "                  [-r|--remove] [-s|--select] [-T|--tui] [-u|--usage]\n"
-"                  [-v|--version] [<app>...]"
+"                  [-v|--version] [APP...]"
 msgstr ""
 
 #: kz-install:34
@@ -864,7 +864,7 @@ msgstr ""
 
 #: kz-install:45
 msgid ""
-"  -f, --file <file>\n"
+"  -f, --file FILE\n"
 "                 process specified installation files"
 msgstr ""
 
@@ -881,7 +881,7 @@ msgid "  -s, --select   select apps"
 msgstr ""
 
 #: kz-install:58 kz-setup:58
-msgid "  <app>          process specified apps"
+msgid "  APP          process specified apps"
 msgstr ""
 
 #: kz-install:121
@@ -899,13 +899,13 @@ msgstr ""
 
 #: kz-install:380 kz-install:523
 msgid ""
-"Use \"kz install <app>...\" or \"kz install --select\" to install the self-"
+"Use \"kz install APP...\" or \"kz install --select\" to install the self-"
 "selected apps."
 msgstr ""
 
 #: kz-install:382
 msgid ""
-"Use \"kz install --cat <app>...\" to view the self-selected commands and "
+"Use \"kz install --cat APP...\" to view the self-selected commands and "
 "information."
 msgstr ""
 
@@ -917,14 +917,14 @@ msgstr ""
 
 #: kz-install:389 kz-install:529
 msgid ""
-"Use \"kz install --remove <app>...\" or \"kz install --remove --select\" to "
+"Use \"kz install --remove APP...\" or \"kz install --remove --select\" to "
 "remove the self-selected apps."
 msgstr ""
 
 #: kz-install:391
 msgid ""
-"Use \"kz install --cat --remove <app>...\" to view the self-selected "
-"commands and information."
+"Use \"kz install --cat --remove APP...\" to view the self-selected commands "
+"and information."
 msgstr ""
 
 #: kz-install:393
@@ -1277,10 +1277,10 @@ msgstr ""
 
 #: kz-setup:27
 msgid ""
-"Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file <file>]...\n"
+"Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file FILE]...\n"
 "                [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]\n"
 "                [-r|--reset] [-s|--select] [-T|--tui] [-u|--usage]\n"
-"                [-v|--version] [<app>...]"
+"                [-v|--version] [APP...]"
 msgstr ""
 
 #: kz-setup:34
@@ -1293,7 +1293,7 @@ msgstr ""
 
 #: kz-setup:45
 msgid ""
-"  -f, --file <file>\n"
+"  -f, --file FILE\n"
 "                 process specified settings files"
 msgstr ""
 
@@ -1308,13 +1308,13 @@ msgstr ""
 
 #: kz-setup:364 kz-setup:507
 msgid ""
-"Use \"kz setup <app>...\" or \"kz setup --select\" to set up the self-"
-"selected apps."
+"Use \"kz setup APP...\" or \"kz setup --select\" to set up the self-selected "
+"apps."
 msgstr ""
 
 #: kz-setup:366
 msgid ""
-"Use \"kz setup --cat <app>...\" to view the self-selected commands and "
+"Use \"kz setup --cat APP...\" to view the self-selected commands and "
 "information."
 msgstr ""
 
@@ -1326,14 +1326,14 @@ msgstr ""
 
 #: kz-setup:373 kz-setup:513
 msgid ""
-"Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" to reset "
+"Use \"kz setup --reset APP...\" or \"kz setup --select --reset\" to reset "
 "the self-selected apps."
 msgstr ""
 
 #: kz-setup:375
 msgid ""
-"Use \"kz setup --cat --reset <app>...\" to view the self-selected commands "
-"and information."
+"Use \"kz setup --cat --reset APP...\" to view the self-selected commands and "
+"information."
 msgstr ""
 
 #: kz-setup:377

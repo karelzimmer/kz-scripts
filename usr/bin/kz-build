@@ -311,14 +311,14 @@ $GITROOT/kz-scripts/usr/share/polkit-1/actions"
                 continue
             fi
 
-            # CREATE POT FILE
+            # Create POT file.
             xgettext    "$gettext_language"         \
                         --join-existing             \
                         --omit-header               \
                         --output="$pot_dir/kz.pot"  \
                         "$gettext_file"             |& $PROGRAM_LOGS
 
-            # CREATE PO FILE
+            # Create PO file.
             msgmerge    --update                    \
                         --backup=none               \
                         --previous                  \
@@ -327,7 +327,7 @@ $GITROOT/kz-scripts/usr/share/polkit-1/actions"
         done
     done
 
-    # CREATE MO FILE
+    # Create MO file.
     msgfmt  --output-file="$lc_messages_dir/kz.mo"  \
             "$lc_messages_dir/kz.po"                |& $PROGRAM_LOGS
 }

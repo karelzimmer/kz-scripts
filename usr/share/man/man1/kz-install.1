@@ -13,7 +13,7 @@ kz-install - install apps
 
 .SH SYNOPSIS
 .SY kz\ install
-[OPTIONS] [\fI<app>\fR...]
+[OPTIONS] [\fIAPP\fR...]
 .YS
 
 .SH DESCRIPTION
@@ -53,7 +53,7 @@ solutions is provided.
 For the format of the installation files see \fBman kz install.sh\fR and
 \fBman kz install.sh.gpg\fR.
 .sp
-Optionally, apps to be processed can be specified with argument \fI<app>\fR, or
+Optionally, apps to be processed can be specified with argument \fIAPP\fR, or
 in a desktop environment by searching for \fBapps\fR, click on
 \fBKZ Install apps\fR pictogram and select the desired apps.
 .br
@@ -69,7 +69,7 @@ selected commands and information.
 With option \fB-C\fR, \fB--cli\fR, \fBkz install\fR runs in command-line mode
 (CLI).
 .sp
-With option \fB-f\fR, \fB--file\fR \fI<file>\fR another installation file can
+With option \fB-f\fR, \fB--file\fR \fIFILE\fR another installation file can
 be specified. This option can be used repeatedly.
 .sp
 With option \fB-G\fR, \fB--gui\fR, \fBkz install\fR is run in graphical mode
@@ -100,10 +100,10 @@ Option \fB-v\fR, \fB--version\fR shows the program version, author, and
 copyright, and exits.
 .sp
 To uninstall a app, on a Debian or Debian-based system you can use:
-    sudo apt-get remove --assume-yes <app>
+    sudo apt-get remove --assume-yes APP
 .br
 On a Red Hat or Red Hat-based system use:
-   sudo dnf remove --assumeyes <app>
+   sudo dnf remove --assumeyes APP
 .sp
 If the installation of apps fails for some reason, on a Debian or Debian-based
 system you can try the following:
@@ -128,7 +128,7 @@ information.
 \fB-C\fR, \fB--cli\fR
 Run in command-line mode (CLI).
 .TP
-\fB-f\fR, \fB--file\fR \fI<file>\fR
+\fB-f\fR, \fB--file\fR \fIFILE\fR
 Process the specified file. This option can be used repeatedly.
 .TP
 \fB-G\fR, \fB--gui\fR
