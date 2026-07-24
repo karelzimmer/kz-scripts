@@ -718,8 +718,8 @@ msgstr ""
 
 #: kz-desktop:27
 msgid ""
-"Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
-"                  [-d|--delete <favorite>] [-h|--help] [-l|--list]\n"
+"Usage: kz desktop [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]\n"
+"                  [-d|--delete FAVORITE] [-h|--help] [-l|--list]\n"
 "                  [-m|--manual] [-r|--reset] [-u|--usage]\n"
 "                  [-v|--version]"
 msgstr ""
@@ -730,19 +730,19 @@ msgstr ""
 
 #: kz-desktop:42
 msgid ""
-"  -a, --addaft <favorite>\n"
+"  -a, --addaft FAVORITE\n"
 "                 add favorite at the end"
 msgstr ""
 
 #: kz-desktop:44
 msgid ""
-"  -b, --addbef <favorite>\n"
+"  -b, --addbef FAVORITE\n"
 "                 add favorite at the beginning"
 msgstr ""
 
 #: kz-desktop:46
 msgid ""
-"  -d, --delete <favorite>\n"
+"  -d, --delete FAVORITE\n"
 "                 delete favorite"
 msgstr ""
 

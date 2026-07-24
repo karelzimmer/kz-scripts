@@ -25,8 +25,8 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]
-                  [-d|--delete <favorite>] [-h|--help] [-l|--list]
+Usage: kz desktop [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]
+                  [-d|--delete FAVORITE] [-h|--help] [-l|--list]
                   [-m|--manual] [-r|--reset] [-u|--usage]
                   [-v|--version]")
 readonly USAGE
@@ -39,11 +39,11 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -a, --addaft <favorite>
+$(gettext '  -a, --addaft FAVORITE
                  add favorite at the end')
-$(gettext '  -b, --addbef <favorite>
+$(gettext '  -b, --addbef FAVORITE
                  add favorite at the beginning')
-$(gettext '  -d, --delete <favorite>
+$(gettext '  -d, --delete FAVORITE
                  delete favorite')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -l, --list     show favorites')

@@ -28,13 +28,13 @@ kz-desktop - change the GNOME-based desktop
 - can add or delete an application icon (favorite).
 .RE
 .sp
-Option \fB-a\fR, \fB--addaft\fR \fI<favorite>\fR adds the specified application
+Option \fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR adds the specified application
 icon (favorite) to the end of the favorites bar (dash, dock).
 .sp
-Option \fB-b\fR, \fB--addbef\fR \fI<favorite>\fR adds the specified application
+Option \fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR adds the specified application
 icon (favorite) to the the beginning of the favorites bar (dash, dock).
 .sp
-Option \fB-d\fR, \fB--delete\fR \fI<favorite>\fR removes the specified
+Option \fB-d\fR, \fB--delete\fR \fIFAVORITE\fR removes the specified
 application icon (favorite) from favorites bar (dash, dock).
 .sp
 If an application icon (favorite) with the specified name already exists, it
@@ -44,7 +44,7 @@ If an application icon (favorite) has been added at the top to be placed at the
 bottom, the existing one must first be removed with option \fB-d\fR,
 \fB--delete\fR.
 .br
-File \fI<favorite>\fR.desktop must exist in one of the application directories
+File \fIFAVORITE\fR.desktop must exist in one of the application directories
 such as /usr/share/applications or /var/lib/snapd/desktop/applications.
 .sp
 Option \fB-h\fR, \fB--help\fR shows a short description of the available
@@ -83,16 +83,16 @@ Command \fBkz desktop\fR can only be run in a desktop environment.
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\fB-a\fR, \fB--addaft\fR \fI<favorite>\fR
-Add application icon (favorite) \fI<favorite>\fR to the back of the favorites
+\fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR
+Add application icon (favorite) \fIFAVORITE\fR to the back of the favorites
 bar (dash, dock).
 .TP
-\fB-b\fR, \fB--addbef\fR \fI<favorite>\fR
-Add application icon (favorite) \fI<favorite>\fR in front of the favorites bar
+\fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR
+Add application icon (favorite) \fIFAVORITE\fR in front of the favorites bar
 (dash, dock).
 .TP
-\fB-d\fR, \fB--delete\fR \fI<favorite>\fR
-Remove application icon (favorite) \fI<favorite>\fR from the favorites bar
+\fB-d\fR, \fB--delete\fR \fIFAVORITE\fR
+Remove application icon (favorite) \fIFAVORITE\fR from the favorites bar
 (dash, dock).
 .TP
 \fB-h\fR, \fB--help\fR
