@@ -25,13 +25,13 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file <file>]...
+Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file FILE]...
                 [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]
                 [-r|--reset] [-s|--select] [-T|--tui] [-u|--usage]
-                [-v|--version] [<app>...]")
+                [-v|--version] [APP...]")
 readonly USAGE
 
-HELP="$(gettext 'Usage: kz setup [<options>] [<arguments>]')
+HELP="$(gettext 'Usage: kz setup [OPTIONS] [ARGUMENTS]')
 
 $PROGRAM_DESC.
 
@@ -42,7 +42,7 @@ options too.")
 $(gettext '  -b, --browse   browse through all commands and information')
 $(gettext '  -c, --cat      show selected commands and information')
 $(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -f, --file <file>
+$(gettext '  -f, --file FILE
                  process specified settings files')
 $(gettext '  -G, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
@@ -55,7 +55,7 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')
 
 $(gettext 'Arguments:')
-$(gettext '  <app>          process specified apps')"
+$(gettext '  APP          process specified apps')"
 readonly HELP
 
 readonly OPTIONS_SHORT='bcCf:GhlmrsTuv'
@@ -325,12 +325,7 @@ $(gettext 'No apps found.')"
     done
 
     if [[ $UI_MODE = 'gui' ]]; then
-        text=$(
-            printf '%s|%s\n'            \
-                    "${choices[@]}"     |
-            column  --table             \
-                    --separator '|'
-            )
+        make_app_list_gui_tui
         printf  '%s\n'                  \
                 "$text"                 |
         zenity  --text-info             \
@@ -340,12 +335,7 @@ $(gettext 'No apps found.')"
                 --font="Monospace 10"   \
                 2> /dev/null            || true
     elif [[ $UI_MODE = 'tui' ]]; then
-        text=$(
-            printf '%s|%s\n'                \
-                    "${choices[@]}"         |
-            column  --table                 \
-                    --separator '|'
-            )
+        make_app_list_gui_tui
         text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
         printf  '%s\n'                      \
                 "$text"                     \
@@ -357,22 +347,22 @@ $(gettext 'No apps found.')"
                 --textbox   "$text_file"    \
                 0 0                         || true
     else
-        make_cli_app_list
+        make_app_list_cli
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
-$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
+$(gettext "Use \"kz setup APP...\" or \"kz setup --select\" to set up the \
 self-selected apps.")
-$(gettext "Use \"kz setup --cat <app>...\" to view the self-selected commands \
+$(gettext "Use \"kz setup --cat APP...\" to view the self-selected commands \
 and information.")
 $(gettext "Use \"kz setup --cat\" to view the automatically selected \
 commands and information.")"
         else
             text+="
 
-$(gettext "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" \
+$(gettext "Use \"kz setup --reset APP...\" or \"kz setup --select --reset\" \
 to reset the self-selected apps.")
-$(gettext "Use \"kz setup --cat --reset <app>...\" to view the self-selected \
+$(gettext "Use \"kz setup --cat --reset APP...\" to view the self-selected \
 commands and information.")
 $(gettext "Use \"kz setup --cat --reset\" to view the automatically selected \
 commands and information.")"
@@ -394,9 +384,9 @@ function make_app_list() {
 
     # +-----------------------------------------------------------------------+
     # | From (app record):
-    # | "# Setup: <app> | <description>"
+    # | "# Setup: APP | DESCRIPTION"
     # | To (app list row):
-    # | "<app> <description>"
+    # | "APP DESCRIPTION"
     # +-----------------------------------------------------------------------+
     app_records=$(
         grep    --regexp="#.*${SETUP}.*"    \
@@ -417,15 +407,29 @@ function make_app_list() {
 }
 
 
+# This function makes a list of available apps and descriptions for option gui
+# and tui.
+function make_app_list_gui_tui() {
+    text=$(
+        printf '%s|%s\n'            \
+                "${choices[@]}"     |
+        column  --table             \
+                --separator '|'     \
+                --table-columns "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+        )
+}
+
+
 # This function makes a list of available apps and descriptions for option cli.
-function make_cli_app_list() {
+function make_app_list_cli() {
     text+='\n'
     text+=$(
-        printf '|%s|%s\n'       \
-                "${choices[@]}" |
-        column  --table         \
-                --separator '|' \
-                --output-separator '    '
+        printf '|%s|%s\n'                   \
+                "${choices[@]}"             |
+        column  --table                     \
+                --separator '|'             \
+                --output-separator '    '   \
+                --table-columns " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
 }
 
@@ -472,9 +476,9 @@ $(gettext 'No apps found.')"
                     --title     "$title"                    \
                     --text      "$text"                     \
                     --ok-label  "$(gettext 'Continue')"     \
-                    --column    "$(gettext 'Sel')"          \
-                    --column    "$(gettext 'App')"          \
-                    --column    "$(gettext 'Description')"  \
+                    --column    "$(gettext 'SEL')"          \
+                    --column    "$(gettext 'APP')"          \
+                    --column    "$(gettext 'DESCRIPTION')"  \
                     "${choices[@]}"                         \
                     2> /dev/null                            || true
             )
@@ -500,17 +504,17 @@ $(gettext 'No apps found.')"
             read -r app_name app_desc <<< "$app_list_row"
             choices+=("$app_name" "$app_desc")
         done
-        make_cli_app_list
+        make_app_list_cli
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
-$(gettext "Use \"kz setup <app>...\" or \"kz setup --select\" to set up the \
+$(gettext "Use \"kz setup APP...\" or \"kz setup --select\" to set up the \
 self-selected apps.")
 $(gettext "Use \"kz setup\" to set up the automatically selected apps.")"
         else
             text+="
 
-$(gettext "Use \"kz setup --reset <app>...\" or \"kz setup --select --reset\" \
+$(gettext "Use \"kz setup --reset APP...\" or \"kz setup --select --reset\" \
 to reset the self-selected apps.")
 $(gettext "Use \"kz setup --reset\" to reset the automatically selected \
 apps.")"
@@ -531,7 +535,7 @@ apps.")"
 }
 
 
-# This function processes argument <app>.
+# This function processes argument APP.
 function process_argument_app() {
     local app_argument=''
     local err_flag=false
@@ -549,7 +553,7 @@ function process_argument_app() {
 
 
 # This function generates the command file from the settings file and filters
-# by <app>.
+# by APP.
 function process_settings_files_by_app_argument() {
     local app_match=false
     local app_record=''
@@ -559,12 +563,12 @@ function process_settings_files_by_app_argument() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Setup: <app> | <description>  [1] "app record"    <== Selection
-    # | # Host:  <host>...              [2] "host record"
-    # | <cmd>...
+    # | # Setup: APP | DESCRIPTION  [1] "app record"    <== Selection
+    # | # Host:  HOST...            [2] "host record"
+    # | CMD...
     # |
-    # | # Reset: <app> | <description>  [1] "app record"
-    # | <cmd>...
+    # | # Reset: APP | DESCRIPTION  [1] "app record"
+    # | CMD...
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
@@ -619,12 +623,12 @@ function process_settings_files_by_hostname() {
     local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Setup: <app> | <description>  [1] "app record"
-    # | # Host:  <host>...              [2] "host record"   <== Selection
-    # | <cmd>...
+    # | # Setup: APP | DESCRIPTION  [1] "app record"
+    # | # Host:  HOST...            [2] "host record"   <== Selection
+    # | CMD...
     # |
-    # | # Reset: <app> | <description>  [1] "app record"
-    # | <cmd>...
+    # | # Reset: APP | DESCRIPTION  [1] "app record"
+    # | CMD...
     # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
@@ -634,8 +638,8 @@ function process_settings_files_by_hostname() {
                 # Set switch.
                 app_match=true
                 # Switch app_match is here not literally a match on app name,
-                # like in the function that processes argument <app>, but is
-                # required for the reset option because matches on <host> also
+                # like in the function that processes argument APP, but is
+                # required for the reset option because matches on HOST also
                 # causes setup commands to be included with the reset commands.
                 ;;
             '#'*'Host:'*'*'* | '#'*'Host:'*$HOSTNAME* )
@@ -748,7 +752,7 @@ function process_command_file() {
     local command_record=''
 
     if [[ $UI_MODE = 'cli' ]]; then
-        text="$(gettext 'Num/Tot  App | Description')
+        text="$(gettext 'NUM/TOT  APP | DESCRIPTION')
          $(gettext 'Command')..."
         printf '%s\n' "$text"
     fi

@@ -35,7 +35,7 @@ USAGE: str = _(
     )
 
 HELP_LINES: list[str] = [
-    _('Usage: kz update [<options>]'),
+    _('Usage: kz update [OPTIONS]'),
     '',
     f'{PROGRAM_DESC}.',
     '',
