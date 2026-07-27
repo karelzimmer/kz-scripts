@@ -28,6 +28,25 @@ kz-desktop --addaft=com.usebottles.bottles
 kz-desktop --delete=com.usebottles.bottles
 
 
+# Setup: caffeine-extension | Disable the screensaver and auto suspend
+# Host:  *
+if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+#
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions enable caffeine@patapon.info; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions enable caffeine@patapon.info; fi
+#
+LOGOUT=true
+
+# Reset: caffeine-extension | Disable the screensaver and auto suspend
+#
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions disable caffeine@patapon.info; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions disable caffeine@patapon.info; fi
+#
+LOGOUT=true
+
+
 # Setup: cockpit | Web Console for Linux servers
 # Host:  pc06
 # -----------------------------------------------------------------------------
@@ -47,7 +66,6 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info no-overview@fthx &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
 #
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
@@ -82,7 +100,6 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info no-overview@fthx &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 #
@@ -202,12 +219,6 @@ git config --global --unset alias.logg
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then pipx install gnome-extensions-cli --system-site-packages; fi
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then pipx ensurepath; fi
 # -----------------------------------------------------------------------------
-# Caffeine
-# https://extensions.gnome.org/extension/517/caffeine/
-# -----------------------------------------------------------------------------
-if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext install 'caffeine@patapon.info'; fi
-if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext enable 'caffeine@patapon.info'; fi
-# -----------------------------------------------------------------------------
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/
 # -----------------------------------------------------------------------------
@@ -233,12 +244,6 @@ if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext i
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext enable 'desktop-cube@schneegans.github.com'; fi
 
 # Reset: gnome-extensions | GNOME desktop extensions
-# -----------------------------------------------------------------------------
-# Caffeine
-# https://extensions.gnome.org/extension/517/caffeine/
-# -----------------------------------------------------------------------------
-if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext disable 'caffeine@patapon.info'; fi
-if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext uninstall 'caffeine@patapon.info'; fi
 # -----------------------------------------------------------------------------
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/
@@ -342,6 +347,25 @@ LOGOUT=true
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev &> /dev/null; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
+#
+LOGOUT=true
+
+
+# Setup: no-overview-extension | No overview at start-up
+# Host:  *
+if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
+#
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
+#
+LOGOUT=true
+
+# Reset: no-overview-extension | No overview at start-up
+# This app is included in dash-to-dock-extension on Debian and Debian-based systems.
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
 #
 LOGOUT=true
 

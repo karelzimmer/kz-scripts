@@ -146,6 +146,22 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes com
 REBOOT=true
 
 
+# Install: caffeine-extension | Disable the screensaver and auto suspend
+# Host:    *
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-caffeine; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
+#
+REBOOT=true
+
+# Remove:  caffeine-extension | Disable the screensaver and auto suspend
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-caffeine; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
+#
+REBOOT=true
+
+
 # Install: cockpit | Web Console for Linux servers
 # Host:    pc06
 # -----------------------------------------------------------------------------
@@ -181,19 +197,15 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # Install: dash-to-dock-extension | A dock for the Gnome Shell
 # Host:    *
 if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-no-overview) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-no-overview; fi
 #
 REBOOT=true
 
 # Remove:  dash-to-dock-extension | A dock for the Gnome Shell
 if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-no-overview) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-no-overview; fi
 #
 REBOOT=true
 
@@ -376,12 +388,12 @@ sudo systemctl start fwupd.service
 # Host:    #none
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gdebi; fi
 #
-# App gdebi is not available on Red Hat and Red Hat-based systems.
+# This app is not available on Red Hat and Red Hat-based systems.
 
 # Remove:  gdebi | Simple tool to view and install deb files - GNOME GUI
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gdebi; fi
 #
-# App gdebi is not available on Red Hat and Red Hat-based systems.
+# This app is not available on Red Hat and Red Hat-based systems.
 
 
 # Install: gettext | GNU Internationalization utilities
@@ -561,12 +573,12 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # Host:    pc06 pc07
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes imagination; fi
 #
-# App imagination is not available on Red Hat and Red Hat-based systems.
+# This app is not available on Red Hat and Red Hat-based systems.
 
 # Remove:  imagination | DVD slide show maker
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes imagination; fi
 #
-# App imagination is not available on Red Hat and Red Hat-based systems.
+# This app is not available on Red Hat and Red Hat-based systems.
 
 
 # Install: jq | Lightweight and flexible command-line JSON processor
@@ -585,12 +597,12 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # Host:    pc06
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes krita; fi
 #
-# App krita is not available on Red Hat and Red Hat-based systems.
+# This app is not available on Red Hat and Red Hat-based systems.
 
 # Remove:  krita | Pixel-based image manipulation program
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes krita; fi
 #
-# App krita is not available on Red Hat and Red Hat-based systems.
+# This app is not available on Red Hat and Red Hat-based systems.
 
 
 # Install: kvm | KVM (for Kernel-based Virtual Machine) is a full virtualization solution
@@ -726,6 +738,22 @@ if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-
 REBOOT=true
 
 
+# # Install: no-overview-extension | No overview at start-up
+# Host:    *
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
+#
+REBOOT=true
+
+# Remove:  no-overview-extension | No overview at start-up
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
+#
+REBOOT=true
+
+
 # Install: ntfs | Read/write NTFS driver for FUSE
 # Host:    #none
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
@@ -772,12 +800,12 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # Host:    *
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes systemd-timesyncd; fi
 #
-# App ntp is not available on Red Hat and Red Hat-based system.
+# This app is not available on Red Hat and Red Hat-based system.
 
 # Remove:  ntp | Minimalistic service to synchronize local time with NTP servers
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes systemd-timesyncd; fi
 #
-# App ntp is not available on Red Hat and Red Hat-based system.
+# This app is not available on Red Hat and Red Hat-based system.
 
 
 # Install: poedit | Gettext catalogs editor
@@ -863,7 +891,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes simplescreenrecorder; fi
 #
-# App simplescreenrecorder is not available on Red Hat and Red Hat-based system.
+# This app is not available on Red Hat and Red Hat-based system.
 
 # Remove:  simplescreenrecorder | Feature-rich screen recorder for X11 and OpenGL
 # -----------------------------------------------------------------------------
@@ -871,7 +899,7 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-re
 # -----------------------------------------------------------------------------
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
 #
-# App simplescreenrecorder is not available on Red Hat and Red Hat-based system.
+# This app is not available on Red Hat and Red Hat-based system.
 
 
 # Install: spice-vdagent | Spice agent for Linux
