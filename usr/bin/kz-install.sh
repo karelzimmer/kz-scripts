@@ -1088,6 +1088,7 @@ if id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo passwd --delete
 # Remove:  user-guest | Add guest user
 if id "$(TEXTDOMAIN=kz gettext 'guest')" &> /dev/null; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
+
 # Install: vlc | Multimedia player and streamer
 # Host:    *
 # -----------------------------------------------------------------------------
