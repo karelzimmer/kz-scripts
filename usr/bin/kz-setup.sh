@@ -267,7 +267,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-ov
 LOGOUT=true
 
 
-# Setup: gnome-shell-extension-visual-effects | Various GNOME visual effects
+# Setup: gnome-shell-extensions-visual-effects | Various GNOME visual effects
 # Host:  pc06 pc07
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then pipx install gnome-extensions-cli --system-site-packages; fi
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then pipx ensurepath; fi
@@ -296,7 +296,7 @@ if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext e
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext install 'desktop-cube@schneegans.github.com'; fi
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext enable 'desktop-cube@schneegans.github.com'; fi
 
-# Reset: gnome-shell-extension-visual-effects | Various GNOME visual effects
+# Reset: gnome-shell-extensions-visual-effects | Various GNOME visual effects
 # -----------------------------------------------------------------------------
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/

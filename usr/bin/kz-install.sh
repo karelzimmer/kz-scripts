@@ -391,7 +391,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes git; fi
 
 
-# Install: gnome-extension-cli | Execute binaries from Python packages in isolated environments
+# Install: gnome-extensions-cli | Execute binaries from Python packages in isolated environments
 # Host:    pc06 pc07
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes pipx; fi
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx install gnome-extensions-cli; fi
@@ -399,22 +399,10 @@ if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes pipx; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx install gnome-extensions-cli; fi
 
-# Remove:  gnome-extension-cli | Execute binaries from Python packages in isolated environments
+# Remove:  gnome-extensions-cli | Execute binaries from Python packages in isolated environments
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx uninstall gnome-extensions-cli; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx uninstall gnome-extensions-cli; fi
-
-
-# Install: gnome-extension-manager | Utility for managing GNOME Shell Extensions
-# Host:    pc06 pc07
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-manager; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes gnome-extensions-app; fi
-
-# Remove:  gnome-extension-manager | Utility for managing GNOME Shell Extensions
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-manager; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes gnome-extensions-app; fi
 
 
 # Install: gnome-shell-extension-caffeine | Disable the screensaver and auto suspend
@@ -484,6 +472,18 @@ if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
 if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
+
+
+# Install: gnome-shell-extension-manager | Utility for managing GNOME Shell Extensions
+# Host:    pc06 pc07
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-manager; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes gnome-extensions-app; fi
+
+# Remove:  gnome-shell-extension-manager | Utility for managing GNOME Shell Extensions
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-manager; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes gnome-extensions-app; fi
 
 
 # Install: gnome-shell-extension-no-annoyance | Disable the 'Window is ready' notification
