@@ -426,8 +426,10 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # Install: gnome-extension-cli | Execute binaries from Python packages in isolated environments
 # Host:    pc06 pc07
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes pipx; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx install gnome-extensions-cli; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes pipx; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx install gnome-extensions-cli; fi
 
 # Remove:  gnome-extension-cli | Execute binaries from Python packages in isolated environments
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo pipx uninstall gnome-extensions-cli; fi
