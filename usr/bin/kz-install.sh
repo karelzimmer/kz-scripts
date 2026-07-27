@@ -146,22 +146,6 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes com
 REBOOT=true
 
 
-# Install: caffeine-extension | Disable the screensaver and auto suspend
-# Host:    *
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-caffeine; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
-#
-REBOOT=true
-
-# Remove:  caffeine-extension | Disable the screensaver and auto suspend
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-caffeine; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
-#
-REBOOT=true
-
-
 # Install: cockpit | Web Console for Linux servers
 # Host:    pc06
 # -----------------------------------------------------------------------------
@@ -192,22 +176,6 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes libcupsimage2; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes cups; fi
-
-
-# Install: dash-to-dock-extension | A dock for the Gnome Shell
-# Host:    *
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
-#
-REBOOT=true
-
-# Remove:  dash-to-dock-extension | A dock for the Gnome Shell
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
-#
-REBOOT=true
 
 
 # Install: desktop-settings | Desktop environment settings
@@ -449,6 +417,107 @@ if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes gnome-extensions-app; fi
 
 
+# Install: gnome-shell-extension-caffeine | Disable the screensaver and auto suspend
+# Host:    *
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-caffeine; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
+#
+REBOOT=true
+
+# Remove:  gnome-shell-extension-caffeine | Disable the screensaver and auto suspend
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-caffeine; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
+#
+REBOOT=true
+
+
+# Install: gnome-shell-extension-dashtodock | A dock for the Gnome Shell
+# Host:    *
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
+#
+REBOOT=true
+
+# Remove:  gnome-shell-extension-dashtodock | A dock for the Gnome Shell
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) &> /dev/null; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+#
+REBOOT=true
+
+
+# Install: gnome-shell-extension-gsconnect | Securely connect to mobile devices and other desktops
+# Host:    pc06 pc07
+# -----------------------------------------------------------------------------
+#  Securely connect to mobile devices and other desktops.
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
+#
+# -----------------------------------------------------------------------------
+# Add firewall rules for GSConnect.
+# -----------------------------------------------------------------------------
+if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
+#
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
+
+# Remove:  gnome-shell-extension-gsconnect | Securely connect to mobile devices and other desktops
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
+#
+# -----------------------------------------------------------------------------
+# Remove firewall rules for GSConnect.
+# -----------------------------------------------------------------------------
+if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
+if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
+#
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
+if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
+
+
+# Install: gnome-shell-extension-no-annoyance | Disable the 'Window is ready' notification
+# Host:    *
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
+#
+REBOOT=true
+
+# Remove:  gnome-shell-extension-no-annoyance | Disable the 'Window is ready' notification
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
+#
+REBOOT=true
+
+
+# Install: gnome-shell-extension-no-overview | No overview at start-up
+# Host:    *
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
+#
+REBOOT=true
+
+# Remove:  gnome-shell-extension-no-overview | No overview at start-up
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+#
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
+#
+REBOOT=true
+
+
 # Install: gnome-tweaks | Tool to adjust advanced configuration settings for GNOME
 # Host:    pc06 pc07
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
@@ -520,43 +589,6 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 #
 REBOOT=true
-
-
-# Install: gsconnect-extension | Securely connect to mobile devices and other desktops
-# Host:    pc06 pc07
-# -----------------------------------------------------------------------------
-#  Securely connect to mobile devices and other desktops.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
-#
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
-#
-# -----------------------------------------------------------------------------
-# Add firewall rules for GSConnect.
-# -----------------------------------------------------------------------------
-if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
-if systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
-if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
-#
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
-
-# Remove:  gsconnect-extension | Securely connect to mobile devices and other desktops
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
-#
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
-#
-# -----------------------------------------------------------------------------
-# Remove firewall rules for GSConnect.
-# -----------------------------------------------------------------------------
-if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
-if systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
-if systemctl status ufw &> /dev/null; then sudo ufw reload; fi
-#
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
-if systemctl status firewalld &> /dev/null; then sudo firewall-cmd --reload; fi
 
 
 # Install: htop | Interactive processes viewer
@@ -722,38 +754,6 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
-
-
-# Install: no-annoyance-extension | Disable the 'Window is ready' notification
-# Host:    *
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
-#
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
-#
-REBOOT=true
-
-# Remove:  no-annoyance-extension | Disable the 'Window is ready' notification
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
-#
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
-#
-REBOOT=true
-
-
-# # Install: no-overview-extension | No overview at start-up
-# Host:    *
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
-#
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
-#
-REBOOT=true
-
-# Remove:  no-overview-extension | No overview at start-up
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) &> /dev/null; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
-#
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
-#
-REBOOT=true
 
 
 # Install: ntfs | Read/write NTFS driver for FUSE
