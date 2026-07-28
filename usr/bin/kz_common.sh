@@ -33,7 +33,7 @@ readonly NORMAL='\033[0m'
 
 # This function returns an error message.
 function kz.errmsg() {
-    kz.logmsg "$*"
+    kz.logmsg "${RED}$*${NORMAL}"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
         zenity  --error                     \
@@ -124,7 +124,7 @@ function kz.init() {
 
 # This function records an informational message to the log.
 function kz.logmsg() {
-    printf '%b\n' "$*" |& $PROGRAM_LOGS
+    printf "${GREEN}%b${NORMAL}\n" "$*" |& $PROGRAM_LOGS
 }
 
 
