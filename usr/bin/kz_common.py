@@ -28,8 +28,8 @@ _ = gettext.gettext
 
 # List NORMAL last here so that debugging doesn't bork the display.
 BOLD: str = '\033[1m'
-GREEN: str = '\033[1;32m'
-RED: str = '\033[1;31m'
+GREEN: str = '\033[32m'
+RED: str = '\033[31m'
 NORMAL: str = '\033[0m'
 
 
@@ -42,7 +42,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an error message.
     """
-    logmsg(PROGRAM_NAME, TEXT)
+    logmsg(PROGRAM_NAME, f'{RED}{TEXT}{NORMAL}')
     if UI_MODE == 'gui':
         zenity: str = f'zenity      --error                         \
                                     --no-markup                     \
@@ -174,7 +174,7 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     # Build the structured journal data package (field radius separated by \n).
     payload = (
         f"SYSLOG_IDENTIFIER={PROGRAM_NAME}\n"
-        f"MESSAGE={TEXT}\n"
+        f"MESSAGE={GREEN}{TEXT}{NORMAL}\n"
         ).encode('utf-8')
 
     # Connect to the local systemd journal socket.
