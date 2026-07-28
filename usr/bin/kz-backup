@@ -339,7 +339,7 @@ function backup_settings() {
 
     kz.logmsg 'Backup settings...'
 
-    settings_dir=$HOME/.kz-backup-settings
+    settings_dir=$HOME/Settings
     if ! [[ -d $settings_dir ]]; then
         mkdir --verbose "$settings_dir" |& $PROGRAM_LOGS
     fi
@@ -358,9 +358,9 @@ function backup_settings() {
     rm  --force                     \
         --recursive                 \
         --verbose                   \
+        "$HOME/.kz-backup-settings" \
         "$HOME/.kz"                 \
         "$HOME/Instellingen"        \
-        "$HOME/Settings"            \
         "$HOME/kz-backup"           |& $PROGRAM_LOGS
     rm  --force                     \
         --verbose                   \
@@ -478,7 +478,7 @@ function backup_setting_users() {
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.
 2. Click on Unlock and then Add User.
-3. Enter Name <user> and Username <username>.")
+3. Enter Name [USER] and Username [USERNAME].")
 
 $(gettext "[1] Windows, command, or magnifying glass key.")
 
@@ -488,14 +488,14 @@ $groups"
         text="$(gettext 'Additional users can be added manually:')
 
 $(gettext "# Standard user:
-sudo useradd --create-home --comment '<user>' <username>
+sudo useradd --create-home --comment '[USER]' [USERNAME]
 # Administrator:
 # Debian or Debian-based:
-sudo usermod --append --groups adm,sudo <username>
+sudo usermod --append --groups adm,sudo [USERNAME]
 # Red Hat or Red Hat-based:
-sudo usermod --append --groups wheel <username>
+sudo usermod --append --groups wheel [USERNAME]
 # User sets password on first login:
-sudo passwd --delete --expire <username>")
+sudo passwd --delete --expire [USERNAME]")
 
 $users
 $groups"
@@ -525,7 +525,7 @@ function backup_setting_avatar() {
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
-4. Select avatar.ico in Personal folder / .kz-backup-settings (hidden folder),
+4. Select avatar.ico in Personal folder / Settings,
    or another picture file.")
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"
@@ -579,8 +579,7 @@ function backup_setting_desktop() {
     text="$(gettext "To set the desktop background:
 
 1. Press the Super key[1], type 'file' and click on Files.
-2. Right-click on desktop.ico in Personal folder / .kz-backup-settings \
-(hidden folder),
+2. Right-click on desktop.ico in Personal folder / Settings,
    or another picture file, and choose Set as Background.")
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"

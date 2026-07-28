@@ -268,24 +268,24 @@ msgstr ""
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
-"3. Enter Name <user> and Username <username>."
+"3. Enter Name [USER] and Username [USERNAME]."
 msgstr ""
 
-#: kz-backup:483 kz-backup:531 kz-backup:586
+#: kz-backup:483 kz-backup:531 kz-backup:585
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
 #: kz-backup:490
 msgid ""
 "# Standard user:\n"
-"sudo useradd --create-home --comment '<user>' <username>\n"
+"sudo useradd --create-home --comment '[USER]' [USERNAME]\n"
 "# Administrator:\n"
 "# Debian or Debian-based:\n"
-"sudo usermod --append --groups adm,sudo <username>\n"
+"sudo usermod --append --groups adm,sudo [USERNAME]\n"
 "# Red Hat or Red Hat-based:\n"
-"sudo usermod --append --groups wheel <username>\n"
+"sudo usermod --append --groups wheel [USERNAME]\n"
 "# User sets password on first login:\n"
-"sudo passwd --delete --expire <username>"
+"sudo passwd --delete --expire [USERNAME]"
 msgstr ""
 
 #: kz-backup:523
@@ -295,8 +295,7 @@ msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Change avatar (pencil icon).\n"
 "3. Click Select a file.\n"
-"4. Select avatar.ico in Personal folder / .kz-backup-settings (hidden "
-"folder),\n"
+"4. Select avatar.ico in Personal folder / Settings,\n"
 "   or another picture file."
 msgstr ""
 
@@ -305,76 +304,75 @@ msgid ""
 "To set the desktop background:\n"
 "\n"
 "1. Press the Super key[1], type 'file' and click on Files.\n"
-"2. Right-click on desktop.ico in Personal folder / .kz-backup-settings "
-"(hidden folder),\n"
+"2. Right-click on desktop.ico in Personal folder / Settings,\n"
 "   or another picture file, and choose Set as Background."
 msgstr ""
 
-#: kz-backup:226 kz-backup:612 kz-menu:75 kz-backup.desktop:10
+#: kz-backup:226 kz-backup:611 kz-menu:75 kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
-#: kz-backup:613
+#: kz-backup:612
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:664
+#: kz-backup:663
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:715 kz-install:954 kz-restore:437 kz-setup:851
+#: kz-backup:714 kz-install:954 kz-restore:437 kz-setup:851
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:716
+#: kz-backup:715
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:718 kz-restore:440
+#: kz-backup:717 kz-restore:440
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:719
+#: kz-backup:718
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:720 kz-restore:442
+#: kz-backup:719 kz-restore:442
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:721
+#: kz-backup:720
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:723 kz-install:959 kz-restore:445 kz-setup:855
+#: kz-backup:722 kz-install:959 kz-restore:445 kz-setup:855
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:724 kz-install:960 kz-restore:446 kz-setup:856
+#: kz-backup:723 kz-install:960 kz-restore:446 kz-setup:856
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:725
+#: kz-backup:724
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:753
+#: kz-backup:752
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:771
+#: kz-backup:770
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:781
+#: kz-backup:780
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 
-#: kz-backup:787 kz-restore:510
+#: kz-backup:786 kz-restore:510
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
@@ -591,7 +589,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:211 kz-backup:743 kz-desktop:293 kz-install:984 kz-install:1006
+#: kz-backup:211 kz-backup:742 kz-desktop:293 kz-install:984 kz-install:1006
 #: kz-menu:369 kz-menu:571 kz-restore:211 kz-restore:465 kz-setup:880
 #: kz-setup:909
 msgid "Press the Enter key to continue [Enter]: "
@@ -954,7 +952,9 @@ msgstr ""
 msgid "Select apps to remove:"
 msgstr ""
 
-msgid "App"
+#: kz-install:434 kz-install:448 kz-install:496 kz-setup:418 kz-setup:432
+#: kz-setup:480
+msgid "APP"
 msgstr ""
 
 #: kz-install:434 kz-install:448 kz-install:497 kz-menu:220 kz-menu:279
@@ -1567,12 +1567,4 @@ msgstr ""
 #: kz-build:566 kz-check:594 kz-deploy:318 kz-dev:338 kz-post-migrate:71
 #: kz-update:337
 msgid "Complete!"
-msgstr ""
-
-msgid "  0  No apps found."
-msgstr ""
-
-#: kz-install:434 kz-install:448 kz-install:496 kz-setup:418 kz-setup:432
-#: kz-setup:480
-msgid "APP"
 msgstr ""
