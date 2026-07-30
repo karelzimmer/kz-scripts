@@ -514,7 +514,8 @@ $(gettext 'No apps found.')"
             column  --table                     \
                     --separator '|'             \
                     --output-separator '    '   \
-                    --table-columns " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+                    --table-columns             \
+                    " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
             )
         if [[ $INSTALL = 'Install:' ]]; then
             text+="
