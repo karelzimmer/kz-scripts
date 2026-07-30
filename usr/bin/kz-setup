@@ -303,16 +303,32 @@ function process_option_list() {
     local -a app_list=()
     local -a choices=()
     local app_desc=''
-    local app_name=''
     local app_list_row=''
-    local text=''
+    local app_name=''
+    local app_records=''
     local text_file=''
+    local text=''
     local title=''
 
     text=$(gettext 'The following apps are available:')
     title=$text
 
-    make_app_list
+    # +-----------------------------------------------------------------------+
+    # | From (app record):
+    # | "# Setup: APP | DESCRIPTION"
+    # | To (app list row):
+    # | "APP DESCRIPTION"
+    # +-----------------------------------------------------------------------+
+    app_records=$(
+        grep    --regexp="#.*${SETUP}.*"    \
+                "${settings_files[@]}"      |
+        tr      --delete '|'                |
+        tr      --squeeze-repeats ' '       |
+        cut     --delimiter=' '             \
+                --fields=3-                 |
+        sort    --unique                    || true
+        )
+    readarray -t app_list <<< "$app_records"
     if [[ -z ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
@@ -325,7 +341,13 @@ $(gettext 'No apps found.')"
     done
 
     if [[ $UI_MODE = 'gui' ]]; then
-        make_app_list_gui_tui
+        text=$(
+            printf '%s|%s\n'            \
+                    "${choices[@]}"     |
+            column  --table             \
+                    --separator '|'     \
+                    --table-columns "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+            )
         printf  '%s\n'                  \
                 "$text"                 |
         zenity  --text-info             \
@@ -335,7 +357,13 @@ $(gettext 'No apps found.')"
                 --font="Monospace 10"   \
                 2> /dev/null            || true
     elif [[ $UI_MODE = 'tui' ]]; then
-        make_app_list_gui_tui
+        text=$(
+            printf '%s|%s\n'            \
+                    "${choices[@]}"     |
+            column  --table             \
+                    --separator '|'     \
+                    --table-columns "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+            )
         text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
         printf  '%s\n'                      \
                 "$text"                     \
@@ -347,7 +375,15 @@ $(gettext 'No apps found.')"
                 --textbox   "$text_file"    \
                 0 0                         || true
     else
-        make_app_list_cli
+        text+='\n'
+        text+=$(
+            printf '|%s|%s\n'                   \
+                    "${choices[@]}"             |
+            column  --table                     \
+                    --separator '|'             \
+                    --output-separator '    '   \
+                    --table-columns " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+            )
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
@@ -374,13 +410,24 @@ $(gettext "Use \"kz setup --browse\" to view all commands and information.")"
 }
 
 
-# This function makes a list of available apps and descriptions from the
-# settings files.
-function make_app_list() {
+# This function let the user select apps.
+function process_option_select() {
+    local -a app_list=()
+    local -a choices=()
+    local app_desc=''
+    local app_list_row=''
+    local app_name=''
     local app_records=''
-    # In calling function declare at least:
-    # local -a app_list=()
-    # local app_list_row=''
+    local text=''
+    local title=''
+
+    if [[ $SETUP = 'Setup:' ]]; then
+        title=$(gettext 'Set up apps')
+        text=$(gettext 'Select apps to set up:')
+    else
+        title=$(gettext 'Reset apps')
+        text=$(gettext 'Select apps to reset:')
+    fi
 
     # +-----------------------------------------------------------------------+
     # | From (app record):
@@ -398,61 +445,6 @@ function make_app_list() {
         sort    --unique                    || true
         )
     readarray -t app_list <<< "$app_records"
-
-    # In calling function use app_list like this:
-    # for app_list_row in "${app_list[@]}"; do
-    #     read -r app_name app_desc <<< "$app_list_row"
-    #     ...
-    # done
-}
-
-
-# This function makes a list of available apps and descriptions for option gui
-# and tui.
-function make_app_list_gui_tui() {
-    text=$(
-        printf '%s|%s\n'            \
-                "${choices[@]}"     |
-        column  --table             \
-                --separator '|'     \
-                --table-columns "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
-        )
-}
-
-
-# This function makes a list of available apps and descriptions for option cli.
-function make_app_list_cli() {
-    text+='\n'
-    text+=$(
-        printf '|%s|%s\n'                   \
-                "${choices[@]}"             |
-        column  --table                     \
-                --separator '|'             \
-                --output-separator '    '   \
-                --table-columns " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
-        )
-}
-
-
-# This function let the user select apps.
-function process_option_select() {
-    local -a app_list=()
-    local -a choices=()
-    local app_desc=''
-    local app_name=''
-    local app_list_row=''
-    local text=''
-    local title=''
-
-    if [[ $SETUP = 'Setup:' ]]; then
-        title=$(gettext 'Set up apps')
-        text=$(gettext 'Select apps to set up:')
-    else
-        title=$(gettext 'Reset apps')
-        text=$(gettext 'Select apps to reset:')
-    fi
-
-    make_app_list
     if [[ -z ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
@@ -504,7 +496,15 @@ $(gettext 'No apps found.')"
             read -r app_name app_desc <<< "$app_list_row"
             choices+=("$app_name" "$app_desc")
         done
-        make_app_list_cli
+        text+='\n'
+        text+=$(
+            printf '|%s|%s\n'                   \
+                    "${choices[@]}"             |
+            column  --table                     \
+                    --separator '|'             \
+                    --output-separator '    '   \
+                    --table-columns " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+            )
         if [[ $SETUP = 'Setup:' ]]; then
             text+="
 
