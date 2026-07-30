@@ -346,7 +346,8 @@ $(gettext 'No apps found.')"
                     "${choices[@]}"     |
             column  --table             \
                     --separator '|'     \
-                    --table-columns "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+                    --table-columns     \
+                    "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
             )
         printf  '%s\n'                  \
                 "$text"                 |
@@ -362,7 +363,8 @@ $(gettext 'No apps found.')"
                     "${choices[@]}"     |
             column  --table             \
                     --separator '|'     \
-                    --table-columns "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+                    --table-columns     \
+                    "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
             )
         text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
         printf  '%s\n'                      \
