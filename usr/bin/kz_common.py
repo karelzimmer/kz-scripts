@@ -222,13 +222,13 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     exc: BaseException
     man_cli: str = f'man {PROGRAM_NAME}'
+    man_gui: str = f'yelp man:{PROGRAM_NAME}'
     man_tui: str = f'man --html {PROGRAM_NAME}'
     text: str = ''
-    yelp: str = f'yelp man:{PROGRAM_NAME}'
 
     if UI_MODE == 'gui':
         try:
-            subprocess.run(yelp, executable='bash',
+            subprocess.run(man_gui, executable='bash',
                            stderr=subprocess.DEVNULL,
                            shell=True, check=True,)
         except KeyboardInterrupt:
