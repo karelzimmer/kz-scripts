@@ -13,6 +13,7 @@
 from base64 import encode
 import gettext
 import os
+from pydoc import cli
 import socket
 import subprocess
 import sys
@@ -214,44 +215,60 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
-def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
+def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                          UI_MODE: str = 'cli') -> None:
     """
-    This function displays the manual page..
+    This function displays the manual page.
     """
     exc: BaseException
-    man: str = f'man {PROGRAM_NAME}'
+    man_cli: str = f'man {PROGRAM_NAME}'
+    man_tui: str = f'man --html {PROGRAM_NAME}'
     text: str = ''
     yelp: str = f'yelp man:{PROGRAM_NAME}'
 
-    if subprocess.run('[[ -n ${XDG_CURRENT_DESKTOP-} ]]', executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode == 0:
+    if UI_MODE == 'gui':
         try:
             subprocess.run(yelp, executable='bash',
                            stderr=subprocess.DEVNULL,
                            shell=True, check=True,)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 130)
         except subprocess.CalledProcessError as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+            term(PROGRAM_NAME, exc.returncode)
+    elif UI_MODE == 'tui':
+        try:
+            subprocess.run(man_tui, executable='bash', shell=True,
+                           check=True)
+            subprocess.run('reset', executable='bash', shell=True)
+            subprocess.run('clear -x', executable='bash', shell=True)
+        except KeyboardInterrupt:
+            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+            term(PROGRAM_NAME, 130)
+        except subprocess.CalledProcessError as exc:
+            text = str(exc)
+            logmsg(PROGRAM_NAME, text)
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, exc.returncode)
     else:
         try:
-            subprocess.run(man, executable='bash', shell=True, check=True)
+            subprocess.run(man_cli, executable='bash', shell=True, check=True)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 130)
         except subprocess.CalledProcessError as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, exc.returncode)
 
 

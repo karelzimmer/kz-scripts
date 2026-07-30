@@ -153,8 +153,10 @@ $text"
 
 # This function displays the manual page.
 function kz.process_option_manual() {
-    if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
-        yelp man:"$PROGRAM_NAME" 2> /dev/null
+    if [[ ${UI_MODE-} = 'gui' ]]; then
+        yelp man:"$PROGRAM_NAME" 2> /dev/null || true
+    elif [[ ${UI_MODE-} = 'tui' ]]; then
+        man --html "$PROGRAM_NAME"
     else
         man "$PROGRAM_NAME"
     fi
@@ -303,6 +305,7 @@ $(gettext "The last few lines of the log are displayed here.")
             ;;
         exit )
             if [[ ${UI_MODE-} = 'tui' ]]; then
+                reset
                 clear -x
             fi
             if [[ $rc -eq 0 ]]; then
@@ -322,6 +325,7 @@ $(gettext "The last few lines of the log are displayed here.")
         * )
             if [[ ${UI_MODE-} = 'tui' ]]; then
                 reset
+                clear -x
             fi
             text="$(eval_gettext \
 "Program \$PROGRAM_NAME has been interrupted.")"

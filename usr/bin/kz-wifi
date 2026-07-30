@@ -130,7 +130,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
             kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
             kz.term(PROGRAM_NAME, 0)
         elif opt in ('-m', '--manual'):
-            kz.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
+            kz.process_option_manual(PROGRAM_NAME, PROGRAM_DESC, UI_MODE)
             kz.term(PROGRAM_NAME, 0)
         elif opt in ('-T', '--tui'):
             UI_MODE = 'tui'
@@ -179,6 +179,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
             text = f'{str(nmcli_output.decode("utf-8"))}{text}'
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         if UI_MODE == 'tui':
+            subprocess.run('reset', executable='bash', shell=True)
             subprocess.run('clear -x', executable='bash', shell=True)
     else:
         try:
@@ -192,7 +193,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
 
 
-def term() -> None:
+def term(UI_MODE: str = 'tui') -> None:
     """
     This function controls the termination of the script.
     """
