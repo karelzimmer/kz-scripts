@@ -144,9 +144,8 @@ found.")
                 --regexp='debian'   \
                 /etc/os-release     &&
         [[ $INSTALL = 'Install:' ]]; then
-        printf '%s\n' "# Install: update | Refresh package lists *** automatic\
-ally added ***
-# Host:    *
+        printf '%s\n' "# Install: update | * | Refresh package lists *** autom\
+atically added ***
 sudo apt-get update
 "       > "$command_file"
     fi
@@ -329,14 +328,22 @@ function process_option_list() {
     text=$(gettext 'The following apps are available:')
     title=$text
 
+    # +-----------------------------------------------------------------------+
+    # | From (app record):
+    # | "# Install: APP | HOST... | DESCRIPTION"
+    # | To (app list row):
+    # | "APP DESCRIPTION"
+    # +-----------------------------------------------------------------------+
     app_records=$(
-        grep    --regexp="#.*${INSTALL}.*"  \
-                "${installation_files[@]}"  |
-        tr      --delete '|'                |
-        tr      --squeeze-repeats ' '       |
-        cut     --delimiter=' '             \
-                --fields=3-                 |
-        sort    --unique                    || true
+        grep    --regexp="#.*$INSTALL.*|.*|.*"  \
+                "${installation_files[@]}"      |
+        tr      --squeeze-repeats ' '           |
+        cut     --delimiter=' '                 \
+                --fields=3-                     |
+        cut     --delimiter='|'                 \
+                --fields=1,3                    |
+        sed     's/ | / /'                      |
+        sort    --unique                        || true
         )
     readarray -t app_list <<< "$app_records"
     if [[ -z ${app_list[*]} ]]; then
@@ -444,18 +451,20 @@ function process_option_select() {
 
     # +-----------------------------------------------------------------------+
     # | From (app record):
-    # | "# Install: APP | DESCRIPTION"
+    # | "# Install: APP | HOST... | DESCRIPTION"
     # | To (app list row):
     # | "APP DESCRIPTION"
     # +-----------------------------------------------------------------------+
     app_records=$(
-        grep    --regexp="#.*${INSTALL}.*"  \
-                "${installation_files[@]}"  |
-        tr      --delete '|'                |
-        tr      --squeeze-repeats ' '       |
-        cut     --delimiter=' '             \
-                --fields=3-                 |
-        sort    --unique                    || true
+        grep    --regexp="#.*$INSTALL.*|.*|.*"  \
+                "${installation_files[@]}"      |
+        tr      --squeeze-repeats ' '           |
+        cut     --delimiter=' '                 \
+                --fields=3-                     |
+        cut     --delimiter='|'                 \
+                --fields=1,3                    |
+        sed     's/ | / /'                      |
+        sort    --unique                        || true
         )
     readarray -t app_list <<< "$app_records"
     if [[ -z ${app_list[*]} ]]; then
@@ -569,48 +578,32 @@ function process_argument_app() {
 # filters by APP.
 function process_installation_files_by_app_argument() {
     local app_match=false
-    local app_record=''
-    local host_record=''
     local install_record=''
     local no_app_match=true
-    local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Install: APP | DESCRIPTION    [1] "app record"    <== Selection
-    # | # Host:    HOST...              [2] "host record"
+    # | # Install: APP | HOST... | DESCRIPTION  "app record"
     # | CMD...
     # |
-    # | # Remove:  APP | DESCRIPTION    [1] "app record"
+    # | # Remove:  APP | HOST... | DESCRIPTION  "app record"
     # | CMD...
     # +-----------------------------------------------------------------------+
     while read -r install_record; do
         case $install_record in
-            '#'*${INSTALL}*' '$app_argument' '* )
-                # Save app record.
-                app_record=$install_record  # [1]
+            '#'*"$INSTALL"*" $app_argument "*'|'*'|'* )
+                # Add record to command file.
+                printf '%s\n' "$install_record"
                 # Set switches.
                 app_match=true
                 no_app_match=false
-                write_saved_records=true
                 ;;
-            '#'*'Host:'* )
-                # Save host record.
-                host_record=$install_record # [2]
-                ;;
-            '#'*${REMOVE}* | '# EOF' )
-                # Stop at mismatched app record or End-Of-File.
-                # Reset switches.
+            '#'*"$REMOVE"*'|'*'|'* )
+                # Stop at mismatched app record.
+                # Reset switch.
                 app_match=false
-                write_saved_records=false
                 ;;
             * )
                 if $app_match; then
-                    if $write_saved_records; then
-                        # Write saved records to the command file.
-                        printf '%s\n' "$app_record"     # [1]
-                        printf '%s\n' "$host_record"    # [2]
-                        write_saved_records=false
-                    fi
                     # Add record to command file.
                     printf '%s\n' "$install_record"
                 fi
@@ -628,56 +621,31 @@ function process_installation_files_by_app_argument() {
 # This function generates the command file from the installation file and
 # filters by host.
 function process_installation_files_by_hostname() {
-    local app_match=false
-    local app_record=''
     local host_match=false
-    local host_record=''
     local install_record=''
-    local write_saved_records=false
 
     # +-----------------------------------------------------------------------+
-    # | # Install: APP | DESCRIPTION    [1] "app record"
-    # | # Host:    HOST...              [2] "host record"   <== Selection
+    # | # Install: APP | HOST... | DESCRIPTION  "app record"
     # | CMD...
     # |
-    # | # Remove:  APP | DESCRIPTION    [1] "app record"
+    # | # Remove:  APP | HOST... | DESCRIPTION  "app record"
     # | CMD...
     # +-----------------------------------------------------------------------+
     while read -r install_record; do
         case $install_record in
-            '#'*${INSTALL}* )
-                # Save app record.
-                app_record=$install_record    # [1]
+            '#'*"$INSTALL"*'|'*'*'*'|'* | '#'*"$INSTALL"*'|'*"$HOSTNAME"*'|'* )
+                # Add record to command file.
+                printf '%s\n' "$install_record"
                 # Set switch.
-                app_match=true
-                # Switch app_match is here not literally a match on app name,
-                # like in the function that processes argument APP, but is
-                # required for the remove option because matches on HOST also
-                # causes install commands to be included with the remove
-                # commands.
-                ;;
-            '#'*'Host:'*'*'* | '#'*'Host:'*$HOSTNAME* )
-                # Save host record.
-                host_record=$install_record   # [2]
-                # Set switches.
                 host_match=true
-                write_saved_records=true
                 ;;
-            '# '*${REMOVE}* | '# EOF' )
-                # Stop at mismatched app record or End-Of-File.
-                # Reset switches.
-                app_match=false
+            '#'*"$REMOVE"*'|'*'|'* )
+                # Stop at mismatched app record.
+                # Reset switch.
                 host_match=false
-                write_saved_records=false
                 ;;
             * )
-                if $app_match && $host_match; then
-                    if $write_saved_records; then
-                        # Write saved records to the command file.
-                        printf '%s\n' "$app_record"     # [1]
-                        printf '%s\n' "$host_record"    # [2]
-                        write_saved_records=false
-                    fi
+                if $host_match; then
                     # Add record to command file.
                     printf '%s\n' "$install_record"
                 fi
@@ -739,10 +707,14 @@ function install_apps() {
     local text=''
     local title=''
 
+    # +-----------------------------------------------------------------------+
+    # | # Install: APP | HOST... | DESCRIPTION
+    # | # Remove:  APP | HOST... | DESCRIPTION
+    # +-----------------------------------------------------------------------+
     app_tot_num=$(
-        grep    --count                     \
-                --regexp="#.*${INSTALL}.*"  \
-                "$command_file"             || true
+        grep    --count                         \
+                --regexp="#.*$INSTALL.*|.*|.*"  \
+                "$command_file"                 || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
         text=$(gettext 'No commands to execute.' )

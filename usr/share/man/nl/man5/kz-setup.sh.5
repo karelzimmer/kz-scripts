@@ -22,12 +22,11 @@ setup.
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in een versleuteld instellingenbestand, kz-setup.sh.gpg.
 .sp
-In het instellingenbestand staan zogenaamde \fBapp-\fR, \fBhost-\fR en
+In het instellingenbestand staan zogenaamde \fBapp-\fR en
 \fBopdracht-regel\fRs.
 .sp
-De \fBapp-regel\fR geeft aan voor welke app de opdrachten uitgevoerd moeten
-worden en geeft een beschrijving van de app, en de \fBhost-regel\fR geeft aan
-op welke computers de opdrachten uitgevoerd moeten worden.
+De \fBapp-regel\fR geeft aan voor welke app en welke computer de opdrachten
+uitgevoerd moeten worden en geeft een beschrijving van de app.
 .br
 Deze regels worden gevolgd door één of meer regels met opdrachten, de
 \fBopdracht-regel\fRs.
@@ -54,15 +53,9 @@ T}
 l | l
 l | l.
 T{
-# Setup: APP | BESCHRIJVING
+# Setup: APP | HOST... | BESCHRIJVING
 T}:T{
-Welke app instellen (\fBapp-regel\fR), wordt verwerkt.
-T}
-T{
-# Host:  HOST
-T}:T{
-Op welke computers de app ingesteld moet worden (\fBhost-regel\fR), wordt
-verwerkt.
+De app instellen (\fBapp-regel\fR), wordt verwerkt.
 T}
 T{
 Opdracht
@@ -74,14 +67,10 @@ T}:T{
 Lege regel (geen, één of meer), wordt overgeslagen.
 T}
 T{
-# Reset: APP | BESCHRIJVING
+# Reset: APP | HOST... | BESCHRIJVING
 T}:T{
 De app resetten (\fBapp-regel\fR voor optie \fB-r\fR, \fB--reset\fR), wordt
 verwerkt.
-.br
-De beschrijving en computers worden overgenomen van de
-.br
-vooorgaande '# Setup: APP' regel.
 T}
 T{
 Opdracht
@@ -112,17 +101,12 @@ T}
 l | l
 l | l.
 T{
-# Setup: calibre | Powerful and easy to use e-book manager
-T}:T{
-Stel calibre in.
-T}
-T{
-# Host:  *
+# Setup: calibre | * | Powerful and easy to use e-book manager
 T}:T{
 Calibre instellen op iedere computer, zie [1].
 T}
 T{
-kz-desktop --addbef=calibre
+kz-desktop --addbef=calibre-gui
 T}:T{
 Instel-opdracht voor calibre.
 T}
@@ -130,12 +114,12 @@ T{
 T}:T{
 T}
 T{
-# Reset: calibre | Powerful and easy to use e-book manager
+# Reset: calibre | * | Powerful and easy to use e-book manager
 T}:T{
-Reset calibre.
+Reset calibre op iedere computer, zie [1].
 T}
 T{
-kz-desktop --delete=calibre
+kz-desktop --delete=calibre-gui
 T}:T{
 Reset-opdracht voor calibre.
 T}
@@ -161,12 +145,11 @@ zoals 'kz setup calibre'.
 
 .SH VOORBEELDEN
 .EX
-# Setup: calibre | Powerful and easy to use e-book manager
-# Host:  pc06
-kz-desktop --addaft=calibre-gui
+# Setup: bottles | pc06 pc07 | Run Windows software
+kz-desktop --addaft=com.usebottles.bottles
 
-# Reset: calibre | Powerful and easy to use e-book manager
-kz-desktop --delete=calibre-gui
+# Reset: bottles | pc06 pc07 | Run Windows software
+kz-desktop --delete=com.usebottles.bottles
 .EE
 
 .SH ZIE OOK

@@ -21,14 +21,12 @@ This file contains commands to process as an installation file with kz install.
 Commands containing personal information, such as a username, are included in
 an GPG-encrypted installation file, kz-install.sh.gpg.
 .sp
-The installation file contains so-called \fBapp-\fR, \fBhost-\fR and \
-\fBcommand record\fRs.
+The installation file contains so-called \fBapp-\fR and \fBcommand record\fRs.
 .sp
-The \fBapp record\fR indicates for which app the commands should be executed
-and provides a description of the app, and the \fBhost record\fR indicates on
-which computers the commands should be executed.
+The \fBapp record\fR indicates for which app and which computer the commands
+should be executed and provides a description of the app.
 .br
-These records are followed by one or more records with commands, the
+This record is followed by one or more records with commands, the
 \fBcommand record\fRs.
 .sp
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
@@ -47,21 +45,15 @@ lb | lb.
 T{
 Record
 T}:T{
-DESCRIPTION
+Description
 T}
 .T&
 l | l
 l | l.
 T{
-# Install: APP | DESCRIPTION
+# Install: APP | HOST... | DESCRIPTION
 T}:T{
-Which app to install (\fBapp record\fR), will be processed.
-T}
-T{
-# Host:    HOST
-T}:T{
-On which computers the app should be installed (\fBhost record\fR), will be
-processed.
+Install the app (\fBapp record\fR), will be processed.
 T}
 T{
 Command
@@ -73,13 +65,10 @@ T}:T{
 Empty line (none, one or more), will be skipped.
 T}
 T{
-# Remove:  APP | DESCRIPTION
+# Remove:  APP | HOST... | DESCRIPTION
 T}:T{
 Remove the app (\fBapp record\fR for option \fB-r\fR, \fB--remove\fR), will be
 processed.
-.br
-The description and computers are taken from the previous '# Install: APP'
-line.
 T}
 T{
 Command
@@ -103,19 +92,14 @@ lb | lb.
 T{
 Record
 T}:T{
-DESCRIPTION
+Description
 T}
 .T&
 - | -
 l | l
 l | l.
 T{
-# Install: calibre | Powerful and easy to use e-book manager
-T}:T{
-Install calibre.
-T}
-T{
-# Host:    *
+# Install: calibre | * | Powerful and easy to use e-book manager
 T}:T{
 Install calibre on every computer, see [1].
 T}
@@ -128,9 +112,9 @@ T{
 T}:T{
 T}
 T{
-# Remove:  calibre | Powerful and easy to use e-book manager
+# Remove:  calibre | * | Powerful and easy to use e-book manager
 T}:T{
-Remove calibre.
+Remove calibre on every computer, see [1].
 T}
 T{
 sudo apt-get remove --assume-yes calibre
@@ -159,21 +143,25 @@ APP', e.g. 'kz install calibre'.
 
 .SH EXAMPLES
 .EX
-# Install: calibre | Powerful and easy to use e-book manager
-# Host:    pc06
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install -\
--assume-yes calibre; fi
+# Install: bottles | pc06 pc07 | Run Windows software
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-\
+release; then sudo apt-get install --assume-yes flatpak; fi
 #
-if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo --validate\
- && wget --output-document=- https://download.calibre-ebook.com/linux-installe\
-r.sh | sudo sh; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /e\
+tc/os-release; then sudo dnf install --assumeyes flatpak; fi
+#
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exi\
+sts flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com\
+.usebottles.bottles; fi
+#
+REBOOT=true
 
-# Remove: calibre | Powerful and easy to use e-book manager
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --\
-assume-yes calibre; fi
+# Remove:  bottles | pc06 pc07 | Run Windows software
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes c\
+om.usebottles.bottles; fi
 #
-if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo calibre-un\
-install; fi
+REBOOT=true
 .EE
 
 .SH SEE ALSO

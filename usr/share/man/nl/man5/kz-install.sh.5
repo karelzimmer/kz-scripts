@@ -22,12 +22,10 @@ install.
 Opdrachten met persoonlijke informatie zoals een gebruikersnaam zijn opgenomen
 in een versleuteld installatiebestand, kz-install.sh.gpg.
 .sp
-In het installatiebestand staan zogenaamde \fBapp-\fR, \fBhost-\fR en
-\fBopdracht-regel\fRs.
+In het installatiebestand staan zogenaamde \fBapp-\fR en \fBopdracht-regel\fRs.
 .sp
-De \fBapp-regel\fR geeft aan voor welke app de opdrachten uitgevoerd moeten
-worden en geeft een beschrijving van de app, en de \fBhost-regel\fR geeft aan
-op welke computers de opdrachten uitgevoerd moeten worden.
+De \fBapp-regel\fR geeft aan voor welke app en welke computer de opdrachten
+uitgevoerd moeten worden en geeft een beschrijving van de app.
 .br
 Deze regels worden gevolgd door één of meer regels met opdrachten, de
 \fBopdracht-regel\fRs.
@@ -54,15 +52,9 @@ T}
 l | l
 l | l.
 T{
-# Install: APP | BESCHRIJVING
+# Install: APP | HOST... | BESCHRIJVING
 T}:T{
-Welke app installeren (\fBapp-regel\fR), wordt verwerkt.
-T}
-T{
-# Host:    HOST
-T}:T{
-Op welke computers de app geïnstalleerd moet worden (\fBhost-regel\fR), wordt
-verwerkt.
+De app installeren (\fBapp-regel\fR), wordt verwerkt.
 T}
 T{
 Opdracht
@@ -74,14 +66,10 @@ T}:T{
 Lege regel (geen, één of meer), wordt overgeslagen.
 T}
 T{
-# Remove:  APP | BESCHRIJVING
+# Remove:  APP | HOST... | BESCHRIJVING
 T}:T{
 De app verwijderen (\fBapp-regel\fR voor optie \fB-r\fR, \fB--remove\fR), wordt
 verwerkt.
-.br
-De beschrijving en computers worden overgenomen van de
-.br
-vooorgaande '# Install: APP' regel.
 T}
 T{
 Opdracht
@@ -112,12 +100,7 @@ T}
 l | l
 l | l.
 T{
-# Install: calibre | Powerful and easy to use e-book manager
-T}:T{
-Installeer calibre.
-T}
-T{
-# Host:    *
+# Install: calibre | * | Powerful and easy to use e-book manager
 T}:T{
 Calibre installeren op iedere computer, zie [1].
 T}
@@ -130,9 +113,9 @@ T{
 T}:T{
 T}
 T{
-# Remove:  calibre | Powerful and easy to use e-book manager
+# Remove:  calibre | * | Powerful and easy to use e-book manager
 T}:T{
-Verwijder calibre.
+Verwijder calibre van iedere computer, zie [1].
 T}
 T{
 sudo apt-get remove --assume-yes calibre
@@ -161,21 +144,25 @@ zoals 'kz install calibre'.
 
 .SH VOORBEELDEN
 .EX
-# Install: calibre | Powerful and easy to use e-book manager
-# Host:    pc06
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install -\
--assume-yes calibre; fi
+# Install: bottles | pc06 pc07 | Run Windows software
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-\
+release; then sudo apt-get install --assume-yes flatpak; fi
 #
-if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo --validate\
- && wget --output-document=- https://download.calibre-ebook.com/linux-installe\
-r.sh | sudo sh; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /e\
+tc/os-release; then sudo dnf install --assumeyes flatpak; fi
+#
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exi\
+sts flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com\
+.usebottles.bottles; fi
+#
+REBOOT=true
 
-# Remove: calibre | Powerful and easy to use e-book manager
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --\
-assume-yes calibre; fi
+# Remove:  bottles | pc06 pc07 | Run Windows software
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes c\
+om.usebottles.bottles; fi
 #
-if grep --quiet --regexp='rhel\\|fedora' /etc/os-release; then sudo calibre-un\
-install; fi
+REBOOT=true
 .EE
 
 .SH ZIE OOK

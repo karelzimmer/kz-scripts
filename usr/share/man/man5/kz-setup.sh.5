@@ -21,12 +21,11 @@ This file contains commands to process as an settings file with kz setup.
 Commands containing personal information, such as a username, are included in
 an GPG-encrypted settings file, kz-setup.sh.gpg.
 .sp
-The settings file contains contains so-called \fBapp-\fR, \fBhost-\fR and \
+The settings file contains contains so-called \fBapp-\fR and \
 \fBcommand record\fRs.
 .sp
-The \fBapp record\fR indicates for which app the commands should be executed
-and provides a description of the app, and the \fBhost record\fR indicates on
-which computers the commands should be executed.
+The \fBapp record\fR indicates for which app and which computer the commands
+should be executed and provides a description of the app.
 .br
 These records are followed by one or more records with commands, the
 \fBcommand record\fRs.
@@ -47,21 +46,15 @@ lb | lb.
 T{
 Record
 T}:T{
-DESCRIPTION
+Description
 T}
 .T&
 l | l
 l | l.
 T{
-# Setup: APP | DESCRIPTION
+# Setup: APP | HOST... | DESCRIPTION
 T}:T{
-Which app to set up (\fBapp-record\fR), will be processed.
-T}
-T{
-# Host:  HOST
-T}:T{
-On which computers the app should be set up (\fBhost-record\fR), will be
-processed.
+Set up the app (\fBapp-record\fR), will be processed.
 T}
 T{
 Command
@@ -73,18 +66,15 @@ T}:T{
 Empty line (none, one or more), will be skipped.
 T}
 T{
-# Reset: APP | DESCRIPTION
+# Reset: APP | HOST... | DESCRIPTION
 T}:T{
-Remove the app (\fBapp-record\fR for option \fB-r\fR, \fB--remove\fR), will be
+Reset the app (\fBapp-record\fR for option \fB-r\fR, \fB--reset\fR), will be
 processed.
-.br
-The description and computers are taken from the previous '# Setup: APP'
-line.
 T}
 T{
 Command
 T}:T{
-Remove command (one or more \fBcommand record\fRs), will be executed.
+Reset command (one or more \fBcommand record\fRs), will be executed.
 T}
 T{
 T}:T{
@@ -103,24 +93,19 @@ lb | lb.
 T{
 Record
 T}:T{
-DESCRIPTION
+Description
 T}
 .T&
 - | -
 l | l
 l | l.
 T{
-# Setup: calibre | Powerful and easy to use e-book manager
-T}:T{
-Set up calibre.
-T}
-T{
-# Host:  *
+# Setup: calibre | * | Powerful and easy to use e-book manager
 T}:T{
 Set up calibre on every computer, see [1].
 T}
 T{
-kz-desktop --addbef=calibre
+kz-desktop --addbef=calibre-gui
 T}:T{
 Setup command for calibre.
 T}
@@ -128,12 +113,12 @@ T{
 T}:T{
 T}
 T{
-# Reset: calibre | Powerful and easy to use e-book manager
+# Reset: calibre | * | Powerful and easy to use e-book manager
 T}:T{
-Reset calibre.
+Reset calibre on every computer, see [1].
 T}
 T{
-kz-desktop --delete=calibre
+kz-desktop --delete=calibre-gui
 T}:T{
 Reset command for calibre.
 T}
@@ -158,12 +143,11 @@ APP', e.g. 'kz setup calibre'.
 
 .SH EXAMPLES
 .EX
-# Setup: calibre | Powerful and easy to use e-book manager
-# Host:  pc06
-kz-desktop --addaft=calibre-gui
+# Setup: bottles | pc06 pc07 | Run Windows software
+kz-desktop --addaft=com.usebottles.bottles
 
-# Reset: calibre | Powerful and easy to use e-book manager
-kz-desktop --delete=calibre-gui
+# Reset: bottles | pc06 pc07 | Run Windows software
+kz-desktop --delete=com.usebottles.bottles
 .EE
 
 .SH SEE ALSO
