@@ -735,12 +735,12 @@ function process_command_file() {
                 # Skip empty record.
                 continue
                 ;;
-            '# '*${SETUP}' '* )
+            '#'*"$SETUP"*'|'*'|'* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record" |
                     tr --squeeze-repeats ' '        |
-                    cut --delimiter=' ' --fields=3-
+                    cut --delimiter=' ' --fields=3
                     )
                 (( ++app_seq_num ))
                 printf  -v app_name_line    \
