@@ -28,9 +28,9 @@ _ = gettext.gettext
 # #############################################################################
 
 # List NORMAL last here so that debugging doesn't bork the display.
-BLUE: str = '\033[34m'
-GREEN: str = '\033[32m'
-RED: str = '\033[31m'
+BLUE: str = '\033[1;34m'
+GREEN: str = '\033[1;32m'
+RED: str = '\033[1;31m'
 NORMAL: str = '\033[0m'
 
 

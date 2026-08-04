@@ -21,9 +21,9 @@ source /usr/bin/gettext.sh
 # #############################################################################
 
 # List NORMAL last here so that -x doesn't bork the display.
-readonly BLUE='\033[34m'
-readonly GREEN='\033[32m'
-readonly RED='\033[31m'
+readonly BLUE='\033[1;34m'
+readonly GREEN='\033[1;32m'
+readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
 
