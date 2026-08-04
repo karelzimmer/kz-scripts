@@ -17,11 +17,6 @@
       "chrome-gnome-shell@gnome.org": {
         "installation_mode": "force_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/latest.xpi"
-      },
-      "jid1-KKzOGWgsW3Ao4Q@jetpack": {
-        "installation_mode": "force_installed",
-        "default_area": "navbar",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/i-dont-care-about-cookies/latest.xpi"
       }
     },
     "PasswordManagerEnabled": false
