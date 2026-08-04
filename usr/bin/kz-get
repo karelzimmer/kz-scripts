@@ -25,7 +25,7 @@ readonly PROGRAM_NAME='kz-get'
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 # List NORMAL last here so that -x doesn't bork the display.
-readonly BOLD='\033[1m'
+readonly BLUE='\033[34m'
 readonly GREEN='\033[32m'
 readonly RED='\033[31m'
 readonly NORMAL='\033[0m'
@@ -221,7 +221,7 @@ $NORMAL
     if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
         text+="
 
-    $BOLD$(gettext "Type 'exit' to close this window.")$NORMAL"
+    $BLUE$(gettext "Type 'exit' to close this window.")$NORMAL"
     fi
     text+="
 
