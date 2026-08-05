@@ -1266,8 +1266,8 @@ msgid "CHOICE"
 msgstr "KEUZE"
 
 #: kz-menu:218 kz-menu:277 kz-menu:425 kz-menu:484
-msgid "NUM"
-msgstr "NUM"
+msgid "NUMBER"
+msgstr "NUMMER"
 
 #: kz-menu:219 kz-menu:278 kz-menu:426 kz-menu:485
 msgid "ACTION"
