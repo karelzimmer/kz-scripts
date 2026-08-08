@@ -661,6 +661,73 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-re
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo flatpak uninstall --assumeyes app/org.libreoffice.LibreOffice; fi
 
 
+# Install: linters | pc06 pc07 | Analyse scripts for errors and style
+# -----------------------------------------------------------------------------
+# MyPy - Optional static typing for Python
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes mypy; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-mypy; fi
+# -----------------------------------------------------------------------------
+# pycodestyle - Python style guide checker (formerly called pep8)
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes pycodestyle; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes pycodestyle; fi
+# -----------------------------------------------------------------------------
+# python3-autopep8 - Tool that automatically formats Python code to conform to PEP 8
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes python3-autopep8; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-autopep8; fi
+# -----------------------------------------------------------------------------
+# Bashate - Bash script style checker
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes python3-bashate; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-bashate; fi
+# -----------------------------------------------------------------------------
+# Shellcheck - Lint tool for shell scripts
+# -----------------------------------------------------------------------------
+# Web app: https://www.shellcheck.net
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
+
+# Remove:  linters | pc06 pc07 | Analyse scripts for errors and style
+# -----------------------------------------------------------------------------
+# MyPy - Optional static typing for Python
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes mypy; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-mypy; fi
+# -----------------------------------------------------------------------------
+# pycodestyle - Python style guide checker (formerly called pep8)
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes pycodestyle; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes pycodestyle; fi
+# -----------------------------------------------------------------------------
+# python3-autopep8 - Tool that automatically formats Python code to conform to PEP 8
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes python3-autopep8; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-autopep8; fi
+# -----------------------------------------------------------------------------
+# Bashate - Bash script style checker
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes python3-bashate; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-bashate; fi
+# -----------------------------------------------------------------------------
+# Shellcheck - Lint tool for shell scripts
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
+#
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
+
+
 # Install: locate | pc06 pc07 | List files in databases that match a pattern
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes locate; fi
 #
@@ -796,19 +863,21 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-re
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes pst-utils; fi
 
 
+
+
 # Install: python | pc06 pc07 | Interactive high-level object-oriented language
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes python3 mypy pycodestyle python3-autopep8 python3-pip python-is-python3; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes python3  python3-pip python-is-python3; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3 python3-mypy pycodestyle python3-pip; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3 python3-pip; fi
 
 # Remove:  python | pc06 pc07 | Interactive high-level object-oriented language
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes python mypy pycodestyle python3-autopep8 python3-pip python-is-python3; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes python python3-pip python-is-python3; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo rm --force --verbose /usr/bin/pip; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3 python3-mypy pycodestyle python3-pip; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pip; fi
 
 
 # Install: rpm | pc06 pc07 | Package manager for RPM
@@ -820,20 +889,6 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
 #
 # App rpm cannot be removed from Red Hat and Red Hat-based system.
-
-
-# Install: shellcheck | pc06 pc07 | Lint tool for shell scripts
-# -----------------------------------------------------------------------------
-# Web app: https://www.shellcheck.net
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
-
-# Remove:  shellcheck | pc06 pc07 | Lint tool for shell scripts
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
-#
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
 
 
 # Install: simplescreenrecorder | #none | Feature-rich screen recorder for X11 and OpenGL

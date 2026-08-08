@@ -518,7 +518,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:563 kz-check:604 kz-deploy:314
+#: kz-build:563 kz-check:601 kz-deploy:314
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -579,17 +579,17 @@ msgstr ""
 msgid "Script $scriptname --usage returned an error."
 msgstr "Script $scriptname --usage gaf een fout."
 
-#: kz-check:423
+#: kz-check:422
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
-#: kz-check:434
+#: kz-check:433
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
-#: kz-check:445
+#: kz-check:444
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -598,21 +598,21 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:465 kz-check:476
+#: kz-check:464 kz-check:474
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr "Man-pagina $dir{1,5}/$scriptname.{1,5} niet gevonden."
 
-#: kz-check:512
+#: kz-check:509
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr "Een of meer regels zijn te lang (>79):"
 
-#: kz-check:567
+#: kz-check:564
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:587
+#: kz-check:584
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
@@ -1146,11 +1146,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:1023 kz-install.sh:1025 kz-install.sh:1028
+#: kz-install.sh:1078 kz-install.sh:1080 kz-install.sh:1083
 msgid "guest"
 msgstr "gast"
 
-#: kz-install.sh:1023
+#: kz-install.sh:1078
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
@@ -1737,7 +1737,7 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:567 kz-check:608 kz-deploy:318 kz-dev:338 kz-post-migrate:71
+#: kz-build:567 kz-check:605 kz-deploy:318 kz-dev:338 kz-post-migrate:71
 #: kz-update:337
 msgid "Complete!"
 msgstr "Klaar!"

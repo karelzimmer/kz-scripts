@@ -464,7 +464,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:563 kz-check:604 kz-deploy:314
+#: kz-build:563 kz-check:601 kz-deploy:314
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -520,38 +520,38 @@ msgstr ""
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:423
+#: kz-check:422
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:434
+#: kz-check:433
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:445
+#: kz-check:444
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:465 kz-check:476
+#: kz-check:464 kz-check:474
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr ""
 
-#: kz-check:512
+#: kz-check:509
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:567
+#: kz-check:564
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:587
+#: kz-check:584
 msgid "End spaces found."
 msgstr ""
 
@@ -1036,11 +1036,11 @@ msgid ""
 "system settings."
 msgstr ""
 
-#: kz-install.sh:1023 kz-install.sh:1025 kz-install.sh:1028
+#: kz-install.sh:1078 kz-install.sh:1080 kz-install.sh:1083
 msgid "guest"
 msgstr ""
 
-#: kz-install.sh:1023
+#: kz-install.sh:1078
 msgid "Guest_user"
 msgstr ""
 
@@ -1569,7 +1569,7 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:567 kz-check:608 kz-deploy:318 kz-dev:338 kz-post-migrate:71
+#: kz-build:567 kz-check:605 kz-deploy:318 kz-dev:338 kz-post-migrate:71
 #: kz-update:337
 msgid "Complete!"
 msgstr ""
