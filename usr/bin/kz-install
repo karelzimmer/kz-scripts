@@ -25,10 +25,10 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz install [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file FILE]...
-                  [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]
-                  [-r|--remove] [-s|--select] [-T|--tui] [-u|--usage]
-                  [-v|--version] [APP...]")
+Usage:   kz install [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file FILE]...
+                    [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]
+                    [-r|--remove] [-s|--select] [-T|--tui] [-u|--usage]
+                    [-v|--version] [APP...]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz install [OPTIONS] [ARGUMENTS]')
@@ -36,26 +36,26 @@ HELP="$(gettext 'Usage: kz install [OPTIONS] [ARGUMENTS]')
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext "  Mandatory arguments to long options are mandatory for short \
+$(gettext "    Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -b, --browse   browse through all commands and information')
-$(gettext '  -c, --cat      show selected commands and information')
-$(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -f, --file FILE
-                 process specified installation files')
-$(gettext '  -G, --gui      run in graphical mode')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -l, --list     show available apps')
-$(gettext '  -m, --manual   show manual page')
-$(gettext '  -r, --remove   delete apps')
-$(gettext '  -s, --select   select apps')
-$(gettext '  -T, --tui      run in text-based mode (default)')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')
+$(gettext '    -b, --browse    browse through all commands and information')
+$(gettext '    -c, --cat       show selected commands and information')
+$(gettext '    -C, --cli       run in command-line mode')
+$(gettext '    -f, --file FILE
+                    process specified installation files')
+$(gettext '    -G, --gui       run in graphical mode')
+$(gettext '    -h, --help      show this help text')
+$(gettext '    -l, --list      show available apps')
+$(gettext '    -m, --manual    show manual page')
+$(gettext '    -r, --remove    delete apps')
+$(gettext '    -s, --select    select apps')
+$(gettext '    -T, --tui       run in text-based mode (default)')
+$(gettext '    -u, --usage     show a short usage summary')
+$(gettext '    -v, --version   show program version')
 
 $(gettext 'Arguments:')
-$(gettext '  APP          process specified apps')"
+$(gettext '    APP             process specified apps')"
 readonly HELP
 
 readonly OPTIONS_SHORT='bcCf:GhlmrsTuv'
@@ -82,7 +82,7 @@ declare REMOVE='Remove:'
 # #############################################################################
 
 # This function performs the script actions.
-function process() {
+process() {
     local -A app_arguments=()
     local -a installation_files=()
     local -i installation_file_num=0
@@ -171,7 +171,7 @@ sudo apt-get update
 
 
 # This function checks the script input.
-function check_input() {
+check_input() {
     local parsed=''
     local program_name=${PROGRAM_NAME/kz-/kz }
 
@@ -193,7 +193,7 @@ function check_input() {
 
 
 # This function handles the script options and arguments.
-function process_options() {
+process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -283,7 +283,7 @@ $(gettext "no desktop environment available")"
 
 
 # This function browses through the installation files.
-function process_option_browse() {
+process_option_browse() {
     local title=''
     local installation_file_combined=''
 
@@ -314,7 +314,7 @@ $(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
 
 
 # This function shows the available apps from the installation files.
-function process_option_list() {
+process_option_list() {
     local -a app_list=()
     local -a choices=()
     local app_desc=''
@@ -413,7 +413,7 @@ $(gettext "Use \"kz install --cat APP...\" to view the self-selected \
 commands and information.")
 $(gettext "Use \"kz install --cat\" to view the automatically selected \
 commands and information.")"
-       else
+        else
             text+="
 
 $(gettext "Use \"kz install --remove APP...\" or \"kz install --remove \
@@ -431,7 +431,7 @@ $(gettext "Use \"kz install --browse\" to view all commands and information.")"
 
 
 # This function let the user select apps.
-function process_option_select() {
+process_option_select() {
     local -a app_list=()
     local -a choices=()
     local app_desc=''
@@ -558,7 +558,7 @@ $(gettext "Use \"kz install\" to remove the automatically selected apps.")"
 
 
 # This function processes argument APP.
-function process_argument_app() {
+process_argument_app() {
     local app_argument=''
     local err_flag=false
     local text=''
@@ -576,7 +576,7 @@ function process_argument_app() {
 
 # This function generates the command file from the installation file and
 # filters by APP.
-function process_installation_files_by_app_argument() {
+process_installation_files_by_app_argument() {
     local app_match=false
     local install_record=''
     local no_app_match=true
@@ -620,7 +620,7 @@ function process_installation_files_by_app_argument() {
 
 # This function generates the command file from the installation file and
 # filters by host.
-function process_installation_files_by_hostname() {
+process_installation_files_by_hostname() {
     local host_match=false
     local install_record=''
 
@@ -656,7 +656,7 @@ function process_installation_files_by_hostname() {
 
 
 # This function displays the contents of the command file.
-function process_option_cat() {
+process_option_cat() {
     local title=''
 
     title="$command_file"
@@ -683,7 +683,7 @@ function process_option_cat() {
 
 # This function returns 0 if the user is root or can become root, otherwise
 # exits 0 with descriptive message.
-function become_check() {
+become_check() {
     local text=''
 
     if [[ $UID -eq 0 ]]; then
@@ -702,7 +702,7 @@ function become_check() {
 
 
 # This function starts installing the apps.
-function install_apps() {
+install_apps() {
     local -i app_tot_num=0
     local text=''
     local title=''
@@ -717,7 +717,7 @@ function install_apps() {
                 "$command_file"                 || true
                 )
     if [[ $app_tot_num -eq 0 ]]; then
-        text=$(gettext 'No commands to execute.' )
+        text=$(gettext 'No commands to execute.')
         kz.infomsg "$text"
         exit 0
     fi
@@ -752,7 +752,7 @@ function install_apps() {
 
 
 # This function reads commands from the command file for further processing.
-function process_command_file() {
+process_command_file() {
     local -i app_seq_num=0
     local app_name_line=''
     local app_name=''
@@ -769,7 +769,7 @@ system settings")
     if [[ $UI_MODE = 'cli' ]]; then
         sudo --validate
         text="$(gettext 'NUM/TOT  APP | DESCRIPTION')
-         $(gettext 'Command')..."
+        $(gettext 'Command')..."
         printf '%s\n' "$text"
     fi
 
@@ -788,7 +788,7 @@ system settings")
                     cut     --delimiter=' '         \
                             --fields=3
                     )
-                (( ++app_seq_num ))
+                app_seq_num=$((app_seq_num + 1))
                 printf  -v app_name_line    \
                         "%3d/%-3d  %s"      \
                         "$app_seq_num"      \
@@ -814,7 +814,7 @@ system settings")
 
 
 # This function reports and executes a command from the command file.
-function execute_command() {
+execute_command() {
     local cmd=$1
     local -i cmd_dis_len=0
     local -i cmd_dis_max=0
@@ -894,7 +894,7 @@ function execute_command() {
 
 # This function checks if a Debian package manager is already running and waits
 # for the next check if so.
-function check_debian_package_manager() {
+check_debian_package_manager() {
     local text='Wait for another package manager to finish...'
 
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
@@ -909,7 +909,7 @@ function check_debian_package_manager() {
 
 
 # This function controls the termination of the script.
-function term() {
+term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local prompt=''
     local reboot='systemctl --check-inhibitors=no reboot'
@@ -963,7 +963,7 @@ $(gettext 'Check the error messages after this.')
 
     text=$(gettext "Apps install completed.")
     if $OPTION_REMOVE; then
-       text=$(gettext "Apps remove completed.")
+        text=$(gettext "Apps remove completed.")
     fi
 
     if $REBOOT; then
@@ -995,7 +995,7 @@ changing system settings.")"
 # Main
 # #############################################################################
 
-function main() {
+main() {
     kz.init "$@"
     process "$@"
     term

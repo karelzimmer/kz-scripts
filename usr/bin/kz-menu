@@ -24,8 +24,8 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz menu [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual] [-T|--tui]
-               [-u|--usage] [-v|--version]")
+Usage:  kz menu [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual] [-T|--tui]
+                [-u|--usage] [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz menu [OPTIONS]')
@@ -33,13 +33,13 @@ HELP="$(gettext 'Usage: kz menu [OPTIONS]')
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -G, --gui      run in graphical mode')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
-$(gettext '  -T, --tui      run in text-based mode (default)')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '    -C, --cli       run in command-line mode')
+$(gettext '    -G, --gui       run in graphical mode')
+$(gettext '    -h, --help      show this help text')
+$(gettext '    -m, --manual    show manual page')
+$(gettext '    -T, --tui       run in text-based mode (default)')
+$(gettext '    -u, --usage     show a short usage summary')
+$(gettext '    -v, --version   show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='CGhmTuv'
@@ -102,7 +102,7 @@ declare UI_MODE='tui'
 # #############################################################################
 
 # This function performs the script actions.
-function process() {
+process() {
     local -i rc=0
 
     check_input "$@"
@@ -117,7 +117,7 @@ function process() {
 
 
 # This function checks the script input.
-function check_input() {
+check_input() {
     local parsed=''
     local program_name=${PROGRAM_NAME/kz-/kz }
 
@@ -139,7 +139,7 @@ function check_input() {
 
 
 # This function handles the script options and arguments.
-function process_options() {
+process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -201,7 +201,7 @@ $USAGE"
 
 
 # This function shows and processes menu 1 in GUI mode.
-function process_menu1_gui() {
+process_menu1_gui() {
     local title=$MENU1_TITLE
 
     while true; do
@@ -231,7 +231,7 @@ function process_menu1_gui() {
 
 
 # This function shows and processes menu 1 in TUI mode.
-function process_menu1_tui() {
+process_menu1_tui() {
     local -a items=(
         [1]="$(printf '%-24s' "${MENU1_ACTIONS[1]}") ${MENU1_DESCS[1]}"
         [2]="$(printf '%-24s' "${MENU1_ACTIONS[2]}") ${MENU1_DESCS[2]}"
@@ -266,7 +266,7 @@ function process_menu1_tui() {
 
 
 # This function shows and processes menu 1 in CLI mode.
-function process_menu1_cli() {
+process_menu1_cli() {
     local menu1_action=''
     local prompt=''
 
@@ -289,24 +289,19 @@ function process_menu1_cli() {
         kz.logmsg "$prompt"
         read -rp "$prompt" < /dev/tty
 
-        case $REPLY in
-            *[^[:digit:]]* )
-                continue
-                ;;
-            * )
-                if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
-                    process_menu1_choice
-                else
-                    continue
-                fi
-                ;;
-        esac
+        if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+            continue
+        elif [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
+            process_menu1_choice
+        else
+            continue
+        fi
     done
 }
 
 
 # This function processes menu 1 choice.
-function process_menu1_choice() {
+process_menu1_choice() {
     local text=''
 
     case $REPLY in
@@ -333,7 +328,7 @@ function process_menu1_choice() {
 
 
 # This function processes menu 1 choice 1.
-function process_menu1_choice1() {
+process_menu1_choice1() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
         )
@@ -344,7 +339,7 @@ function process_menu1_choice1() {
 
 
 # This function processes menu 1 choice 2.
-function process_menu1_choice2() {
+process_menu1_choice2() {
     local prompt=''
     local text=''
     local title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
@@ -373,7 +368,7 @@ Roughly boils down to:
 
 
 # This function processes menu 1 choice 3.
-function process_menu1_choice3() {
+process_menu1_choice3() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
         )
@@ -384,7 +379,7 @@ function process_menu1_choice3() {
 
 
 # This function processes menu 1 choice 4.
-function process_menu1_choice4() {
+process_menu1_choice4() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
         [2]="${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
@@ -396,7 +391,7 @@ function process_menu1_choice4() {
 
 
 # This function processes menu 2.
-function process_menu2() {
+process_menu2() {
     if [[ $UI_MODE = 'gui' ]]; then
         process_menu2_gui
     elif [[ $UI_MODE = 'tui' ]]; then
@@ -408,7 +403,7 @@ function process_menu2() {
 
 
 # This function shows and processes menu 2 in GUI mode.
-function process_menu2_gui() {
+process_menu2_gui() {
     local title=$MENU2_TITLE
 
     while true; do
@@ -438,7 +433,7 @@ function process_menu2_gui() {
 
 
 # This function shows and processes menu 2 in TUI mode.
-function process_menu2_tui() {
+process_menu2_tui() {
     local -a items=(
         [1]="$(printf '%-24s' "${MENU2_ACTIONS[1]}") ${MENU2_DESCS[1]}"
         [2]="$(printf '%-24s' "${MENU2_ACTIONS[2]}") ${MENU2_DESCS[2]}"
@@ -473,7 +468,7 @@ function process_menu2_tui() {
 
 
 # This function shows and processes menu 2 in CLI mode.
-function process_menu2_cli() {
+process_menu2_cli() {
     local menu2_action=''
     local prompt=''
 
@@ -496,24 +491,19 @@ function process_menu2_cli() {
         kz.logmsg "$prompt"
         read -rp "$prompt" < /dev/tty
 
-        case $REPLY in
-            *[^[:digit:]]* )
-                continue
-                ;;
-            * )
-                if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
-                    process_menu2_choice
-                else
-                    continue
-                fi
-                ;;
-        esac
+        if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+            continue
+        elif [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
+            process_menu2_choice
+        else
+            continue
+        fi
     done
 }
 
 
 # This function processes menu 2 choice.
-function process_menu2_choice() {
+process_menu2_choice() {
     local text=''
 
     case $REPLY in
@@ -546,7 +536,7 @@ function process_menu2_choice() {
 
 
 # This function processes menu 2 choice 1.
-function process_menu2_choice1() {
+process_menu2_choice1() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
         )
@@ -557,7 +547,7 @@ function process_menu2_choice1() {
 
 
 # This function processes menu 2 choice 2.
-function process_menu2_choice2() {
+process_menu2_choice2() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
         )
@@ -575,7 +565,7 @@ function process_menu2_choice2() {
 
 
 # This function processes menu 2 choice 3.
-function process_menu2_choice3() {
+process_menu2_choice3() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
         )
@@ -586,7 +576,7 @@ function process_menu2_choice3() {
 
 
 # This function processes menu 2 choice 4.
-function process_menu2_choice4() {
+process_menu2_choice4() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
         )
@@ -597,7 +587,7 @@ function process_menu2_choice4() {
 
 
 # This function processes menu 2 choice 5.
-function process_menu2_choice5() {
+process_menu2_choice5() {
     local -a rows=(
         [1]="${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
         )
@@ -608,7 +598,7 @@ function process_menu2_choice5() {
 
 
 # This function processes the command corresponding to the choice made.
-function process_commands() {
+process_commands() {
     local -i row=0
     local command=''
     local description=''
@@ -632,7 +622,7 @@ function process_commands() {
 
 
 # This function shows the commands before they are executed.
-function show_commands_before_execution() {
+show_commands_before_execution() {
     local -i row=0
     local command=''
     local description=''
@@ -712,14 +702,14 @@ $(gettext 'Proceed?')"
 
 
 # This function executes the commands.
-function execute_command() {
+execute_command() {
     $command --"$UI_MODE" || rc=$?
     kz.logmsg "$command: rc=$rc"
 }
 
 
 # This function controls the termination of the script.
-function term() {
+term() {
     exit 0
 }
 
@@ -728,7 +718,7 @@ function term() {
 # Main
 # #############################################################################
 
-function main() {
+main() {
     kz.init "$@"
     process "$@"
     term

@@ -36,7 +36,7 @@ readonly NORMAL='\033[0m'
 # #############################################################################
 
 # This function searches for/deletes Windows-specific files.
-function find_files() {
+find_files() {
     find .  -type f  -name '~*'        -"$1" \
         -or -type f -iname '*.bat'     -"$1" \
         -or -type f -iname '*.exe'     -"$1" \

@@ -43,7 +43,7 @@ declare OPTION_DEV=false
 # #############################################################################
 
 # This function performs initial actions.
-function init() {
+init() {
     if [[ $* = '-d' || $*  = '--dev' ]]; then
         OPTION_DEV=true
     elif [[ -n $* ]]; then
@@ -65,7 +65,7 @@ function init() {
 
 # This function reports errors.
 # shellcheck disable=SC2317,SC2329
-function err_report() {
+err_report() {
             text+="
 $(gettext "Use \"journalctl -xe\" to check what went wrong.")
 $(gettext "The last few lines of the log are displayed here.")"
@@ -82,7 +82,7 @@ $(gettext "The last few lines of the log are displayed here.")"
 
 
 # This function performs the script actions.
-function process() {
+process() {
     become_check
     sudo --validate || exit 1
 
@@ -98,7 +98,7 @@ function process() {
 
 # This function returns 0 if the user is root or can become root, otherwise
 # exits 0 with descriptive message.
-function become_check() {
+become_check() {
     local text=''
 
     if [[ $UID -eq 0 ]]; then
@@ -114,7 +114,7 @@ function become_check() {
 
 
 # This function downloads and installs Debian package kz.
-function process_kz_deb_package() {
+process_kz_deb_package() {
     local install='install'
     local kz_deb_local_file=''
     local kz_deb_site_file=''
@@ -161,7 +161,7 @@ function process_kz_deb_package() {
 
 # This function checks if a Debian package manager is already running and waits
 # for the next check if so.
-function check_debian_package_manager() {
+check_debian_package_manager() {
     local text='Wait for another package manager to finish...'
 
     while sudo  fuser                           \
@@ -175,7 +175,7 @@ function check_debian_package_manager() {
 
 
 # This function installs RPM package kz.
-function process_kz_rpm_package() {
+process_kz_rpm_package() {
     local install='install'
     local kz_rpm_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'
@@ -198,7 +198,7 @@ function process_kz_rpm_package() {
 
 
 # This function controls the termination of the script.
-function term() {
+term() {
     local text=''
 
     text="

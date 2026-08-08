@@ -32,7 +32,7 @@ readonly NORMAL='\033[0m'
 # #############################################################################
 
 # This function returns an error message.
-function kz.errmsg() {
+kz.errmsg() {
     kz.logmsg "${RED}$*${NORMAL}"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
@@ -59,7 +59,7 @@ function kz.errmsg() {
 
 
 # This function returns an informational message.
-function kz.infomsg() {
+kz.infomsg() {
     kz.logmsg "$*"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         zenity  --info                      \
@@ -83,7 +83,7 @@ function kz.infomsg() {
 
 
 # This function performs initial actions.
-function kz.init() {
+kz.init() {
     local text=''
 
     # Check if systemd is available .
@@ -123,13 +123,13 @@ function kz.init() {
 
 
 # This function records an informational message to the log.
-function kz.logmsg() {
+kz.logmsg() {
     printf "${GREEN}%b${NORMAL}\n" "$*" |& $PROGRAM_LOGS
 }
 
 
 # This function shows the available help.
-function kz.process_option_help() {
+kz.process_option_help() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
     local yelp_man=''
@@ -152,7 +152,7 @@ $text"
 
 
 # This function displays the manual page.
-function kz.process_option_manual() {
+kz.process_option_manual() {
     if [[ ${UI_MODE-} = 'gui' ]]; then
         yelp man:"$PROGRAM_NAME" 2> /dev/null || true
     elif [[ ${UI_MODE-} = 'tui' ]]; then
@@ -164,7 +164,7 @@ function kz.process_option_manual() {
 
 
 # This function shows the available options.
-function kz.process_option_usage() {
+kz.process_option_usage() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -178,7 +178,7 @@ $(eval_gettext "Type '\$program_name --help' for more information.")"
 
 
 # This function displays version, author, and license information.
-function kz.process_option_version() {
+kz.process_option_version() {
     local build_id='n/a'  # ISO 8601 YYYY-MM-DDTHH:MM:SS
     local text=''
 
@@ -196,7 +196,7 @@ $(gettext "License CC0 1.0 \
 
 
 # This function controls the termination of the scripts.
-function kz.term() {
+kz.term() {
     local signal=$1
     local -i lineno=$2
     local function=$3

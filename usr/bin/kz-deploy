@@ -29,8 +29,8 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]
-                 [-v|--version]")
+Usage:    kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]
+                    [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz deploy [OPTIONS]')
@@ -38,11 +38,11 @@ HELP="$(gettext 'Usage: kz deploy [OPTIONS]')
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -d, --dev      deploy the development version of package kz')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '    -d, --dev       deploy the development version of package kz')
+$(gettext '    -h, --help      show this help text')
+$(gettext '    -m, --manual    show manual page')
+$(gettext '    -u, --usage     show a short usage summary')
+$(gettext '    -v, --version   show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='dhmuv'
@@ -66,7 +66,7 @@ declare OPTION_DEV=false
 # #############################################################################
 
 # This function performs the script actions.
-function process() {
+process() {
     local text=''
 
     check_input "$@"
@@ -82,7 +82,7 @@ function process() {
 
 
 # This function checks the script input.
-function check_input() {
+check_input() {
     local parsed=''
     local program_name=${PROGRAM_NAME/kz-/kz }
 
@@ -103,7 +103,7 @@ function check_input() {
 
 
 # This function handles the script options and arguments.
-function process_options() {
+process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -151,7 +151,7 @@ $USAGE"
 
 
 # This function performs checks.
-function check() {
+check() {
     local text=''
 
     text=$BLUE$(gettext 'Check...')$NORMAL
@@ -165,7 +165,7 @@ function check() {
 
 
 # This function performs the deploy.
-function deploy() {
+deploy() {
     local text=''
 
     text=$BLUE$(gettext 'Deploy...')$NORMAL
@@ -176,7 +176,7 @@ function deploy() {
 
 
 # This function check that the repos are in the desired state.
-function check_repos() {
+check_repos() {
     local err_flag=false
     local repo=''
     local repos=''
@@ -227,7 +227,7 @@ function check_repos() {
 
 
 # This function check the scripts and website.
-function check_scripts_and_website() {
+check_scripts_and_website() {
     local text=''
 
     text="$(gettext 'Check scripts and website')..."
@@ -244,7 +244,7 @@ function check_scripts_and_website() {
 
 
 # This function uploads the website.
-function upload_website() {
+upload_website() {
     local ftp_from=$GITROOT/kz-uploads/dist
     local ftp_host=server106.hosting2go.nl
     local ftp_login=$HOME/.$ftp_host'.login'
@@ -285,7 +285,7 @@ function upload_website() {
 
 
 # This function installs the kz package as a production verification test.
-function install_package() {
+install_package() {
     local parm=''
     local text=''
 
@@ -307,7 +307,7 @@ function install_package() {
 
 
 # This function controls the termination of the script.
-function term() {
+term() {
     local text=''
 
     if $ERR_FLAG; then
@@ -326,7 +326,7 @@ function term() {
 # Main
 # #############################################################################
 
-function main() {
+main() {
     kz.init "$@"
     process "$@"
     term

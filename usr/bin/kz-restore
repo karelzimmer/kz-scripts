@@ -25,9 +25,9 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz restore [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]
-                  [-s|--source DIRECTORY] [-T|--tui] [-u|--usage]
-                  [-v|--version]")
+Usage:   kz restore [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]
+                    [-s|--source DIRECTORY] [-T|--tui] [-u|--usage]
+                    [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz restore [OPTIONS]')
@@ -35,18 +35,18 @@ HELP="$(gettext 'Usage: kz restore [OPTIONS]')
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext "  Mandatory arguments to long options are \
+$(gettext "    Mandatory arguments to long options are \
 mandatory for short options too.")
 
-$(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -G, --gui      run in graphical mode')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
-$(gettext '  -s, --source DIRECTORY
-                 use backup in specified directory')
-$(gettext '  -T, --tui      run in text-based mode (default)')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '    -C, --cli       run in command-line mode')
+$(gettext '    -G, --gui       run in graphical mode')
+$(gettext '    -h, --help      show this help text')
+$(gettext '    -m, --manual    show manual page')
+$(gettext '    -s, --source DIRECTORY
+                    use backup in specified directory')
+$(gettext '    -T, --tui       run in text-based mode (default)')
+$(gettext '    -u, --usage     show a short usage summary')
+$(gettext '    -v, --version   show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='CGhms:Tuv'
@@ -68,7 +68,7 @@ declare UI_MODE='tui'
 # #############################################################################
 
 # This function performs the script actions.
-function process() {
+process() {
     local medium=''
     local option_source=false
     local source_argument=''
@@ -81,7 +81,7 @@ function process() {
 
 
 # This function checks the script input.
-function check_input() {
+check_input() {
     local parsed=''
     local program_name=${PROGRAM_NAME/kz-/kz }
 
@@ -103,7 +103,7 @@ function check_input() {
 
 
 # This function handles the script options and arguments.
-function process_options() {
+process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -176,10 +176,10 @@ $USAGE"
 
 
 # This function checks if the source is available.
-function check_source() {
+check_source() {
     local -a all_media=()
     local -a choices=()
-    local -i max_choices=0
+    local -i max_choices=1
     local old=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local prompt=''
@@ -270,10 +270,9 @@ Connect a usb medium.")
                         "$(gettext 'Choose USB medium:')"
                 all_media=("$usb_mount_point/"*)
                 for medium in "${all_media[@]}"; do
-                    ((++max_choices))
-                    printf "%3d %s\n" "$max_choices" "$medium"
+\                    printf "%3d %s\n" "$max_choices" "$medium"
+                    max_choices=$((max_choices + 1))
                 done
-                ((++max_choices))
                 printf  '%3d %s\n'      \
                         "$max_choices"  \
                         "$(gettext 'Exit')"
@@ -284,22 +283,16 @@ Connect a usb medium.")
                     kz.logmsg "$prompt"
                     read -rp "$prompt" < /dev/tty
 
-                    case $REPLY in
-                        *[^[:digit:]]* )
-                            continue
-                            ;;
-                        * )
-                            if [[ $REPLY -eq $max_choices ]]; then
-                                exit 0
-                            elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]
-                            then
-                                selected_medium=${all_media[REPLY-1]}
-                                break
-                            else
-                                continue
-                            fi
-                            ;;
-                    esac
+                    if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+                        continue
+                    elif [[ $REPLY -eq $max_choices ]]; then
+                        exit 0
+                    elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]; then
+                        selected_medium=${all_media[REPLY-1]}
+                        break
+                    else
+                        continue
+                    fi
                 done
             fi
             medium=$selected_medium
@@ -334,7 +327,7 @@ to  : \$SOURCE")
 
 
 # This function restores the backup.
-function restore_backup() {
+restore_backup() {
     local text=''
     local title=''
 
@@ -389,7 +382,7 @@ function restore_backup() {
 
 
 # This function restores the user settings.
-function restore_settings() {
+restore_settings() {
     local settings_dir=$HOME/Settings
 
     if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
@@ -400,7 +393,7 @@ function restore_settings() {
 
 
 # This function restores the desktop background,.
-function restore_setting_desktop() {
+restore_setting_desktop() {
     local input_file=$settings_dir/desktop.ico
 
     if type gsettings &> /dev/null && [[ -f $input_file ]]; then
@@ -413,7 +406,7 @@ function restore_setting_desktop() {
 
 
 # This function controls the termination of the script.
-function term() {
+term() {
     local -i num_users=0
     local program_name=${PROGRAM_NAME/kz-/kz }
     local prompt=''
@@ -520,7 +513,7 @@ $(gettext '*** Remember to safely(!) remove the USB medium ***')"
 # Main
 # #############################################################################
 
-function main() {
+main() {
     kz.init "$@"
     process "$@"
     term

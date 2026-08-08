@@ -39,11 +39,11 @@ HELP="$(gettext "Usage: kz build [OPTIONS]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -d, --dev      build the development version of package kz')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '    -d, --dev       build the development version of package kz')
+$(gettext '    -h, --help      show this help text')
+$(gettext '    -m, --manual    show manual page')
+$(gettext '    -u, --usage     show a short usage summary')
+$(gettext '    -v, --version   show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='dhmuv'
@@ -83,7 +83,7 @@ declare OPTION_DEV=false
 # #############################################################################
 
 # This function performs the script actions.
-function process() {
+process() {
     local build_id=''
     local text=''
 
@@ -111,7 +111,7 @@ function process() {
 
 
 # This function checks the script input.
-function check_input() {
+check_input() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local parsed=''
 
@@ -132,7 +132,7 @@ function check_input() {
 
 
 # This function handles the script options and arguments.
-function process_options() {
+process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -180,8 +180,9 @@ $USAGE"
 
 
 # This function builds the website.
-function build_website() {
+build_website() {
     local file=''
+    local pdf_file=''
     local filename=''
     local text=''
 
@@ -200,8 +201,8 @@ function build_website() {
     for file in *.odt *.txt; do
         filename=${file%.*}
 
-        if [[ $file -nt $UPLOADS_REPO_DISTDIR/assets/documents/$filename.pdf ]]
-        then
+        pdf_file=$UPLOADS_REPO_DISTDIR/assets/documents/$filename.pdf
+        if [[ $file -nt $pdf_file ]]; then
             lowriter    --headless                                          \
                         --convert-to pdf                                    \
                         --outdir "$UPLOADS_REPO_DISTDIR/assets/documents"   \
@@ -224,7 +225,7 @@ function build_website() {
 #    repo kz-scripts,
 # 2. the readable Portable Object (PO) file from the POT file, and
 # 3. the binary Machine Object (MO) file from the PO file.
-function generate_gettext_files() {
+generate_gettext_files() {
     local bash_script='#!''/usr/bin/env bash'
     local gettext_language=''
     local its_dir=$GITROOT/kz-scripts/usr/share/gettext/its
@@ -334,7 +335,7 @@ $GITROOT/kz-scripts/usr/share/polkit-1/actions"
 
 
 # This function check that the repos are in the desired state.
-function check_repos() {
+check_repos() {
     local err_flag=false
     local repo=''
     local repos=''
@@ -382,7 +383,7 @@ function check_repos() {
 
 
 # This function builds Debian package kz.
-function build_deb_package() {
+build_deb_package() {
     local text=''
     local to_build=''
 
@@ -455,7 +456,7 @@ function build_deb_package() {
 
 
 # This function builds RPM package kz.
-function build_rpm_package() {
+build_rpm_package() {
     local text=''
     local to_copy=''
 
@@ -527,7 +528,7 @@ function build_rpm_package() {
 
 
 # This function installs Debian-package kz.
-function install_deb_package() {
+install_deb_package() {
     local text=''
     local to_install=''
 
@@ -549,7 +550,7 @@ function install_deb_package() {
 
 
 # This function controls the termination of the script.
-function term() {
+term() {
     local text=''
 
     if $OPTION_DEV; then
@@ -574,7 +575,7 @@ package is installed")
 # Main
 # #############################################################################
 
-function main() {
+main() {
     kz.init "$@"
     process "$@"
     term

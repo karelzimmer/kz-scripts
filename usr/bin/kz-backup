@@ -25,9 +25,9 @@ readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
 USAGE=$(gettext "\
-Usage: kz backup [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]
-                 [-t|--target DIRECTORY] [-T|--tui] [-u|--usage]
-                 [-v|--version]")
+Usage:    kz backup [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]
+                    [-t|--target DIRECTORY] [-T|--tui] [-u|--usage]
+                    [-v|--version]")
 readonly USAGE
 
 HELP="$(gettext "Usage: kz backup [OPTIONS]")
@@ -35,18 +35,18 @@ HELP="$(gettext "Usage: kz backup [OPTIONS]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext "  Mandatory arguments to long options are mandatory for short \
+$(gettext "    Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -G, --gui      run in graphical mode')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
-$(gettext '  -t, --target DIRECTORY
-                 place backup in specified directory')
-$(gettext '  -T, --tui      run in text-based mode (default)')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '    -C, --cli       run in command-line mode')
+$(gettext '    -G, --gui       run in graphical mode')
+$(gettext '    -h, --help      show this help text')
+$(gettext '    -m, --manual    show manual page')
+$(gettext '    -t, --target DIRECTORY
+                    place backup in specified directory')
+$(gettext '    -T, --tui       run in text-based mode (default)')
+$(gettext '    -u, --usage     show a short usage summary')
+$(gettext '    -v, --version   show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='CGhmt:Tuv'
@@ -68,7 +68,7 @@ declare UI_MODE='tui'
 # #############################################################################
 
 # This function performs the script actions.
-function process() {
+process() {
     local medium=''
     local option_target=false
     local target_argument=''
@@ -81,7 +81,7 @@ function process() {
 
 
 # This function checks the script input.
-function check_input() {
+check_input() {
     local parsed=''
     local program_name=${PROGRAM_NAME/kz-/kz }
 
@@ -103,7 +103,7 @@ function check_input() {
 
 
 # This function handles the script options and arguments.
-function process_options() {
+process_options() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
@@ -176,10 +176,10 @@ $USAGE"
 
 
 # This function checks if the target is available.
-function check_target() {
+check_target() {
     local -a all_media=()
     local -a choices=()
-    local -i max_choices=0
+    local -i max_choices=1
     local old=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local prompt=''
@@ -270,10 +270,9 @@ Connect a usb medium.")
                         "$(gettext 'Choose USB medium:')"
                 all_media=("$usb_mount_point/"*)
                 for medium in "${all_media[@]}"; do
-                    ((++max_choices))
                     printf "%3d %s\n" "$max_choices" "$medium"
+                    max_choices=$((max_choices + 1))
                 done
-                ((++max_choices))
                 printf  '%3d %s\n'      \
                         "$max_choices"  \
                         "$(gettext 'Exit')"
@@ -284,22 +283,16 @@ Connect a usb medium.")
                     kz.logmsg "$prompt"
                     read -rp "$prompt" < /dev/tty
 
-                    case $REPLY in
-                        *[^[:digit:]]* )
-                            continue
-                            ;;
-                        * )
-                            if [[ $REPLY -eq $max_choices ]]; then
-                                exit 0
-                            elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]
-                            then
-                                selected_medium=${all_media[REPLY-1]}
-                                break
-                            else
-                                continue
-                            fi
-                            ;;
-                    esac
+                    if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+                        continue
+                    elif [[ $REPLY -eq $max_choices ]]; then
+                        exit 0
+                    elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]; then
+                        selected_medium=${all_media[REPLY-1]}
+                        break
+                    else
+                        continue
+                    fi
                 done
             fi
 
@@ -334,7 +327,7 @@ to  : \$TARGET")
 
 
 # This function backups the user settings.
-function backup_settings() {
+backup_settings() {
     local settings_dir=''
 
     kz.logmsg 'Backup settings...'
@@ -372,7 +365,7 @@ function backup_settings() {
 
 
 # This function creates a list of installed apps.
-function backup_setting_apps() {
+backup_setting_apps() {
     local footer1
     local footer2
     local header1
@@ -422,7 +415,7 @@ function backup_setting_apps() {
 
 
 # This function creates a README.
-function backup_setting_readme() {
+backup_setting_readme() {
     local output_file=$settings_dir/README
     local text=''
 
@@ -440,7 +433,7 @@ Further reading:")
 
 
 # This function saves instructions for adding additional users.
-function backup_setting_users() {
+backup_setting_users() {
     local groups=''
     local output_file=$settings_dir/users.txt
     local text=''
@@ -507,7 +500,7 @@ $groups"
 
 # This function copies the user avatar and saves instructions for restoring, if
 # possible.
-function backup_setting_avatar() {
+backup_setting_avatar() {
     local input_file=/var/lib/AccountsService/icons/$USER
     local output_file_1=$settings_dir/avatar.ico
     local output_file_2=$settings_dir/avatar.txt
@@ -522,11 +515,11 @@ function backup_setting_avatar() {
 
     text="$(gettext "To set the users avatar:
 
-1. Press the Super key[1], type 'user' and click behind Settings on Users.
-2. Click on Change avatar (pencil icon).
-3. Click Select a file.
-4. Select avatar.ico in Personal folder / Settings,
-   or another picture file.")
+1.  Press the Super key[1], type 'user' and click behind Settings on Users.
+2.  Click on Change avatar (pencil icon).
+3.  Click Select a file.
+4.  Select avatar.ico in Personal folder / Settings,
+    or another picture file.")
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"
 
@@ -535,7 +528,7 @@ $(gettext '[1] Windows, command, or magnifying glass key.')"
 
 
 # This function saves the favorite apps in the dash.
-function backup_setting_favorites() {
+backup_setting_favorites() {
     local output_file=$settings_dir/favorites.txt
 
     kz.logmsg 'Save the favorite apps...'
@@ -553,7 +546,7 @@ function backup_setting_favorites() {
 
 # This function copies the desktop background, if available, and saves
 # instructions for setting desktop background.
-function backup_setting_desktop() {
+backup_setting_desktop() {
     local input_file
     local output_file_1=$settings_dir/desktop.ico
     local output_file_2=$settings_dir/desktop.txt
@@ -578,9 +571,9 @@ function backup_setting_desktop() {
 
     text="$(gettext "To set the desktop background:
 
-1. Press the Super key[1], type 'file' and click on Files.
-2. Right-click on desktop.ico in Personal folder / Settings,
-   or another picture file, and choose Set as Background.")
+1.  Press the Super key[1], type 'file' and click on Files.
+2.  Right-click on desktop.ico in Personal folder / Settings,
+    or another picture file, and choose Set as Background.")
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"
 
@@ -589,7 +582,7 @@ $(gettext '[1] Windows, command, or magnifying glass key.')"
 
 
 # This function creates the backup.
-function create_backup() {
+create_backup() {
     local exclude_file=''
     local text=''
     local title=''
@@ -690,7 +683,7 @@ EOF
 
 
 # This function controls the termination of the script.
-function term() {
+term() {
     local -i num_users=0
     local program_name=${PROGRAM_NAME/kz-/kz }
     local prompt=''
@@ -795,7 +788,7 @@ $(gettext '*** Remember to safely(!) remove the USB medium ***')"
 # Main
 # #############################################################################
 
-function main() {
+main() {
     kz.init "$@"
     process "$@"
     term
