@@ -998,14 +998,16 @@ msgstr ""
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:835 kz-install:857
-msgid "Authentication is required to continue."
+#: kz-install:771 kz-setup:726
+msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:771 kz-setup:726
-msgid ""
-"NUM/TOT  APP\n"
-"         COMMAND..."
+#: kz-install:772 kz-setup:727
+msgid "         COMMAND..."
+msgstr ""
+
+#: kz-install:835 kz-install:857
+msgid "Authentication is required to continue."
 msgstr ""
 
 #: kz-install:927

@@ -768,8 +768,8 @@ system settings")
 
     if [[ $UI_MODE = 'cli' ]]; then
         sudo --validate
-        text="$(gettext "NUM/TOT  APP
-         COMMAND...")"
+        text="$(gettext 'NUM/TOT  APP')
+$(gettext '         COMMAND...')"
         printf '%s\n' "$text"
     fi
 
