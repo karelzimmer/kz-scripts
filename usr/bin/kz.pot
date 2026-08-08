@@ -1003,11 +1003,9 @@ msgid "Authentication is required to continue."
 msgstr ""
 
 #: kz-install:771 kz-setup:726
-msgid "NUM/TOT  APP | DESCRIPTION"
-msgstr ""
-
-#: kz-install:772 kz-setup:727
-msgid "Command"
+msgid ""
+"NUM/TOT  APP\n"
+"         COMMAND..."
 msgstr ""
 
 #: kz-install:927

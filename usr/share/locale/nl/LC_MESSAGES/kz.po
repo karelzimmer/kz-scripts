@@ -1111,12 +1111,12 @@ msgid "Authentication is required to continue."
 msgstr "Authenticatie is vereist om door te gaan."
 
 #: kz-install:771 kz-setup:726
-msgid "NUM/TOT  APP | DESCRIPTION"
-msgstr "NUM/TOT  APP | BESCHRIJVING"
-
-#: kz-install:772 kz-setup:727
-msgid "Command"
-msgstr "Opdracht"
+msgid ""
+"NUM/TOT  APP\n"
+"         COMMAND..."
+msgstr ""
+"NUM/TOT  APP\n"
+"         OPDRACHT..."
 
 #: kz-install:927
 msgid "The installation of the following apps contains errors:"
