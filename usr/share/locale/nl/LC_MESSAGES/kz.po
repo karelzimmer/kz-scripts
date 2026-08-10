@@ -27,7 +27,7 @@ msgstr "Voer de kz-opdracht uit"
 
 #: kz:34
 msgid "Usage: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]"
-msgstr "Gebruik: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
+msgstr "Gebruik: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]"
 
 #: kz:35
 msgid "          [-v|--version] COMMAND [ARGUMENTS]"
