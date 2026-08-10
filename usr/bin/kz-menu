@@ -23,9 +23,9 @@ PROGRAM_DESC=$(gettext 'Execute the kz commands through a menu')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "\
-Usage:  kz menu [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual] [-T|--tui]
-                [-u|--usage] [-v|--version]")
+USAGE="\
+$(gettext 'Usage: kz menu [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]')
+$(gettext '               [-T|--tui] [-u|--usage] [-v|--version]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz menu [OPTIONS]')
@@ -247,7 +247,8 @@ process_menu1_tui() {
 
     while true; do
         REPLY=$(
-            dialog  --ok-label      "$(gettext 'Continue')" \
+            dialog  --mouse                                 \
+                    --ok-label      "$(gettext 'Continue')" \
                     --cancel-label  "$(gettext 'Exit')"     \
                     --backtitle     "$PROGRAM_NAME"         \
                     --title         "$title"                \
@@ -346,15 +347,16 @@ process_menu1_choice2() {
 
     text="==== $title ====
 
-$(gettext "Follow the steps as described in Checklist installation, Chapter 2.
-Checklist installation can be found on https://karelzimmer.nl/en.
+$(gettext "Follow the steps as described in Checklist installation, Chapter \
+2.")
+$(gettext 'Checklist installation can be found on https://karelzimmer.nl/en.')
 
-Roughly boils down to:
+$(gettext 'Roughly boils down to:')
 
-1. Download a CD image file (.iso).
-2. Create a bootable USB stick (see Linux info).
-3. Boot the computer from this USB stick.
-4. Install Linux.")
+$(gettext '1. Download a CD image file (.iso).')
+$(gettext '2. Create a bootable USB stick (see Linux info).')
+$(gettext '3. Boot the computer from this USB stick.')
+$(gettext '4. Install Linux.')
 "
     if [[ $UI_MODE = 'cli' ]]; then
         clear -x
@@ -449,7 +451,8 @@ process_menu2_tui() {
 
     while true; do
         REPLY=$(
-            dialog  --ok-label      "$(gettext 'Continue')" \
+            dialog  --mouse                                 \
+                    --ok-label      "$(gettext 'Continue')" \
                     --cancel-label  "$(gettext 'Back')"     \
                     --backtitle     "$PROGRAM_NAME"         \
                     --title         "$title"                \

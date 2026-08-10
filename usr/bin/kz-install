@@ -24,11 +24,12 @@ PROGRAM_DESC=$(gettext 'Install apps and change system settings')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "\
-Usage:   kz install [-b|--browse] [-c|--cat] [-C|--cli] [-f|--file FILE]...
-                    [-G|--gui] [-h|--help] [-l|--list] [-m|--manual]
-                    [-r|--remove] [-s|--select] [-T|--tui] [-u|--usage]
-                    [-v|--version] [APP...]")
+USAGE="\
+$(gettext 'Usage: kz install [-b|--browse] [-c|--cat] [-C|--cli]')
+$(gettext '                  [-f|--file FILE]... [-G|--gui] [-h|--help]')
+$(gettext '                  [-l|--list] [-m|--manual] [-r|--remove]')
+$(gettext '                  [-s|--select] [-T|--tui] [-u|--usage]')
+$(gettext '                  [-v|--version] [APP...]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz install [OPTIONS] [ARGUMENTS]')
@@ -42,8 +43,8 @@ options too.")
 $(gettext '    -b, --browse    browse through all commands and information')
 $(gettext '    -c, --cat       show selected commands and information')
 $(gettext '    -C, --cli       run in command-line mode')
-$(gettext '    -f, --file FILE
-                    process specified installation files')
+$(gettext '    -f, --file FILE')
+$(gettext '                    process specified installation files')
 $(gettext '    -G, --gui       run in graphical mode')
 $(gettext '    -h, --help      show this help text')
 $(gettext '    -l, --list      show available apps')
@@ -504,7 +505,8 @@ $(gettext 'No apps found.')"
         # The variable selected_apps does not need to be an array, because the
         # app name does not contain spaces.
         selected_apps=$(
-            dialog  --ok-label  "$(gettext 'Continue')" \
+            dialog  --mouse                             \
+                    --ok-label  "$(gettext 'Continue')" \
                     --backtitle "$PROGRAM_NAME"         \
                     --title     "$title"                \
                     --separate-output                   \
@@ -862,7 +864,8 @@ execute_command() {
         done
         # This tput locks the cursor position top-left to prevent flickering.
         tput cup 0 0
-        dialog  --backtitle "$PROGRAM_NAME"                     \
+        dialog  --mouse                                         \
+                --backtitle "$PROGRAM_NAME"                     \
                 --title     "$title"                            \
                 --infobox   "$app_name_line\n\n         $cmd"   \
                 10 90                                           || true

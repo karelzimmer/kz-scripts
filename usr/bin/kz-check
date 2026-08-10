@@ -28,8 +28,9 @@ PROGRAM_DESC=$(gettext 'Check scripts and website')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "\
-Usage: kz check [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]")
+USAGE="\
+$(gettext 'Usage: kz check [-h|--help] [-m|--manual] [-u|--usage]')
+$(gettext '                [-v|--version]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz check [OPTIONS]')
@@ -196,7 +197,7 @@ check_website() {
             check=$((check + 1))
             if [[ check -eq 1 ]]; then
                 text=$(gettext \
-                "Files not used in html that can probably be removed:")
+"Files not used in html that can probably be removed:")
                 kz.errmsg "$text"
             fi
             text="rm $file"
@@ -519,7 +520,7 @@ check_desktop_file_validation() {
     if ! desktop-file-validate "$script" | systemd-cat --identifier=kz-check
     then
         kz.infomsg "
-    $BLUE$scriptdir / $scriptname$NORMAL"
+$BLUE$scriptdir / $scriptname$NORMAL"
         desktop-file-validate "$script" || ERR_FLAG=true
     fi
 }
@@ -561,8 +562,7 @@ check_tags() {
             "$script"; then
         text="
 ${BLUE}In $scriptdir / $scriptname:$NORMAL
-$BLUE    $(gettext 'Flagged annotation found.')$NORMAL
-"
+$BLUE$(gettext 'Flagged annotation found.')$NORMAL"
         kz.infomsg "$text"
         grep    --line-number           \
                 --word-regexp           \

@@ -24,10 +24,10 @@ PROGRAM_DESC=$(gettext 'Make a backup copy of the Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "\
-Usage:    kz backup [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]
-                    [-t|--target DIRECTORY] [-T|--tui] [-u|--usage]
-                    [-v|--version]")
+USAGE="\
+$(gettext "Usage: kz backup [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]")
+$(gettext "                 [-t|--target DIRECTORY] [-T|--tui] [-u|--usage]")
+$(gettext "                 [-v|--version]")"
 readonly USAGE
 
 HELP="$(gettext "Usage: kz backup [OPTIONS]")
@@ -42,8 +42,8 @@ $(gettext '    -C, --cli       run in command-line mode')
 $(gettext '    -G, --gui       run in graphical mode')
 $(gettext '    -h, --help      show this help text')
 $(gettext '    -m, --manual    show manual page')
-$(gettext '    -t, --target DIRECTORY
-                    place backup in specified directory')
+$(gettext '    -t, --target DIRECTORY')
+$(gettext '                    place backup in specified directory')
 $(gettext '    -T, --tui       run in text-based mode (default)')
 $(gettext '    -u, --usage     show a short usage summary')
 $(gettext '    -v, --version   show program version')"
@@ -203,9 +203,9 @@ $(gettext 'directory does not exist')"
     else
         medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
         if [[ -z $medium ]]; then
-            text=$(eval_gettext "No usb medium found on \$usb_mount_point.
+            text="$(eval_gettext "No usb medium found on \$usb_mount_point.")
 
-Connect a usb medium.")
+$(gettext 'Connect a usb medium.')"
             kz.infomsg "$text"
             if [[ $UI_MODE = 'cli' ]]; then
                 prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
@@ -253,7 +253,8 @@ Connect a usb medium.")
                 done
                 # No array is needed, because only one can be selected.
                 selected_medium=$(
-                    dialog  --no-items                          \
+                    dialog  --mouse                             \
+                            --no-items                          \
                             --ok-label  "$(gettext 'Continue')" \
                             --backtitle "$PROGRAM_NAME"         \
                             --title     "$title"                \
@@ -421,14 +422,14 @@ backup_setting_readme() {
 
     kz.logmsg 'Create settings README...'
 
-    text="$(gettext "This folder contains files created by kz-backup.
-These files are used by kz-restore and others.
+    text="$(gettext 'This folder contains files created by kz-backup.')
+$(gettext 'These files are used by kz-restore and others.')
 
-Further reading:")
+$(gettext 'Further reading:')
     man kz backup
     man kz restore
     man kz setup"
-    printf '%s\n' "$text" > "$output_file"
+printf '%s\n' "$text" > "$output_file"
 }
 
 
@@ -469,26 +470,26 @@ backup_setting_users() {
         text="$(gettext 'Additional users can be added manually:')
 
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
-on Users.
-2. Click on Unlock and then Add User.
-3. Enter Name [USER] and Username [USERNAME].")
+on Users.")
+$(gettext '2. Click on Unlock and then Add User.')
+$(gettext '3. Enter Name [USER] and Username [USERNAME].')
 
-$(gettext "[1] Windows, command, or magnifying glass key.")
+$(gettext '[1] Windows, command, or magnifying glass key.')
 
 $users
 $groups"
     else
         text="$(gettext 'Additional users can be added manually:')
 
-$(gettext "# Standard user:
-sudo useradd --create-home --comment '[USER]' [USERNAME]
-# Administrator:
-# Debian or Debian-based:
-sudo usermod --append --groups adm,sudo [USERNAME]
-# Red Hat or Red Hat-based:
-sudo usermod --append --groups wheel [USERNAME]
-# User sets password on first login:
-sudo passwd --delete --expire [USERNAME]")
+$(gettext '# Standard user:')
+$(gettext "sudo useradd --create-home --comment '[USER]' [USERNAME]")
+$(gettext '# Administrator:')
+$(gettext '# Debian or Debian-based:')
+$(gettext 'sudo usermod --append --groups adm,sudo [USERNAME]')
+$(gettext '# Red Hat or Red Hat-based:')
+$(gettext 'sudo usermod --append --groups wheel [USERNAME]')
+$(gettext '# User sets password on first login:')
+$(gettext 'sudo passwd --delete --expire [USERNAME]')
 
 $users
 $groups"
@@ -513,13 +514,14 @@ backup_setting_avatar() {
 
     kz.logmsg 'Save instructions for restoring the avatar...'
 
-    text="$(gettext "To set the users avatar:
+    text="$(gettext 'To set the users avatar:')
 
-1.  Press the Super key[1], type 'user' and click behind Settings on Users.
-2.  Click on Change avatar (pencil icon).
-3.  Click Select a file.
-4.  Select avatar.ico in Personal folder / Settings,
-    or another picture file.")
+$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
+on Users.")
+$(gettext '2. Click on Change avatar (pencil icon).')
+$(gettext '3. Click Select a file.')
+$(gettext '4. Select avatar.ico in Personal folder / Settings,')
+$(gettext '   or another picture file.')
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"
 
@@ -569,11 +571,11 @@ backup_setting_desktop() {
 
     kz.logmsg 'Save instructions for setting the desktop background...'
 
-    text="$(gettext "To set the desktop background:
+    text="$(gettext 'To set the desktop background:')
 
-1.  Press the Super key[1], type 'file' and click on Files.
-2.  Right-click on desktop.ico in Personal folder / Settings,
-    or another picture file, and choose Set as Background.")
+$(gettext "1.  Press the Super key[1], type 'file' and click on Files.")
+$(gettext '2.  Right-click on desktop.ico in Personal folder / Settings,')
+$(gettext '    or another picture file, and choose Set as Background.')
 
 $(gettext '[1] Windows, command, or magnifying glass key.')"
 
@@ -635,7 +637,8 @@ EOF
                 "$HOME/"                        \
                 "$TARGET/"                      \
                 2>> "$ERROR_LOG"                |
-        dialog  --backtitle "$PROGRAM_NAME"     \
+        dialog  --mouse                         \
+                --backtitle "$PROGRAM_NAME"     \
                 --title "$title"                \
                 --progressbox                   \
                 20 70                           || BACKUP_RC=$?
@@ -669,7 +672,8 @@ EOF
                 2>> "$ERROR_LOG"
     elif [[ $UI_MODE = 'tui' ]]; then
         text+='...'
-        dialog  --backtitle "$PROGRAM_NAME" \
+        dialog  --mouse                     \
+                --backtitle "$PROGRAM_NAME" \
                 --title     "$title"        \
                 --infobox   "$text"         \
                 0 0                         || true

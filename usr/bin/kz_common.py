@@ -56,31 +56,33 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
                            stderr=subprocess.DEVNULL)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 130)
         except Exception as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 1)
     elif UI_MODE == 'tui':
-        dialog: str = f'dialog  --backtitle "{PROGRAM_NAME}"    \
-                                --title     "{PROGRAM_DESC}"    \
-                                --msgbox    "{TEXT}"            \
-                                0 0                             || true'
+        dialog: str = f'dialog  --mouse                             \
+                                --colors                            \
+                                --backtitle "{PROGRAM_NAME}"        \
+                                --title     "{PROGRAM_DESC}"        \
+                                --msgbox    "\\Zb\\Z1{TEXT}\\Zn"    \
+                                0 0                                 || true'
         try:
             subprocess.run(dialog, executable='bash', shell=True,
                            stderr=subprocess.DEVNULL)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 130)
         except Exception as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 1)
     else:
         print(f'{RED}{TEXT}{NORMAL}', file=sys.stderr)
@@ -104,16 +106,17 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
                            stderr=subprocess.DEVNULL)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 130)
         except Exception as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 1)
     elif UI_MODE == 'tui':
-        dialog: str = f'dialog  --backtitle "{PROGRAM_NAME}"    \
+        dialog: str = f'dialog  --mouse                         \
+                                --backtitle "{PROGRAM_NAME}"    \
                                 --title     "{PROGRAM_DESC}"    \
                                 --msgbox    "{TEXT}"            \
                                 0 0                             || true'
@@ -122,13 +125,13 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
                            stderr=subprocess.DEVNULL)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 130)
         except Exception as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
             term(PROGRAM_NAME, 1)
     else:
         print(TEXT)

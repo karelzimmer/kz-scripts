@@ -24,10 +24,10 @@ PROGRAM_DESC=$(gettext 'Restore a backup copy of the Home folder')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE=$(gettext "\
-Usage:   kz restore [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]
-                    [-s|--source DIRECTORY] [-T|--tui] [-u|--usage]
-                    [-v|--version]")
+USAGE="\
+$(gettext 'Usage: kz restore [-C|--cli] [-G|--gui] [-h|--help] [-m|--manual]')
+$(gettext '                  [-s|--source DIRECTORY] [-T|--tui] [-u|--usage]')
+$(gettext '                  [-v|--version]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz restore [OPTIONS]')
@@ -42,8 +42,8 @@ $(gettext '    -C, --cli       run in command-line mode')
 $(gettext '    -G, --gui       run in graphical mode')
 $(gettext '    -h, --help      show this help text')
 $(gettext '    -m, --manual    show manual page')
-$(gettext '    -s, --source DIRECTORY
-                    use backup in specified directory')
+$(gettext '    -s, --source DIRECTORY')
+$(gettext '                    use backup in specified directory')
 $(gettext '    -T, --tui       run in text-based mode (default)')
 $(gettext '    -u, --usage     show a short usage summary')
 $(gettext '    -v, --version   show program version')"
@@ -203,9 +203,9 @@ $(gettext 'directory does not exist')"
     else
         medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
         if [[ -z $medium ]]; then
-            text=$(eval_gettext "No usb medium found on \$usb_mount_point.
+            text="$(eval_gettext "No usb medium found on \$usb_mount_point.")
 
-Connect a usb medium.")
+$(gettext 'Connect a usb medium.')"
             kz.infomsg "$text"
             if [[ $UI_MODE = 'cli' ]]; then
                 prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
@@ -253,7 +253,8 @@ Connect a usb medium.")
                 done
                 # No array is needed, because only one can be selected.
                 selected_medium=$(
-                    dialog  --no-items                          \
+                    dialog  --mouse                             \
+                            --no-items                          \
                             --ok-label  "$(gettext 'Continue')" \
                             --backtitle "$PROGRAM_NAME"         \
                             --title     "$title"                \
@@ -364,7 +365,8 @@ restore_backup() {
                 "$SOURCE/"                      \
                 "$HOME/"                        \
                 2>> "$ERROR_LOG"                |
-        dialog  --backtitle "$PROGRAM_NAME"     \
+        dialog  --mouse                         \
+                --backtitle "$PROGRAM_NAME"     \
                 --title "$title"                \
                 --progressbox                   \
                 20 70                           || RESTORE_RC=$?
