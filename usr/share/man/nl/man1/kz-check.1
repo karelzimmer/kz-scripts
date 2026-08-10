@@ -19,8 +19,8 @@ kz-check - controleer scripts en website
 .SH BESCHRIJVING
 \fBkz check\fR voert een controle uit.
 .sp
-Voert controles uit waarbij scripts inhoudelijk en met shellcheck, mypy en
-pycodestyle worden gecontroleerd en de website op inhoud en dode links.
+Voert controles uit waarbij scripts inhoudelijk en met zogenaamnde linters
+worden gecontroleerd, en de website op inhoud en dode links.
 .sp
 Gecontroleerd wordt onder andere:
 .br
@@ -28,17 +28,19 @@ vertaling   - Gettext bestanden zoals .pot, .po en .mo
 .br
 tags        - TODO/FIXME/BUG-tags
 .br
-regels      - aantal regels en regellengte
+regels      - regellengte
 .br
 velden      - zoals vrijgavejaar
 .br
 spaties     - eindspaties
 .br
-shellcheck  - shellscript analyse tool
+bashate     - shellscript stijlcontroleur (linter)
 .br
-mypy        - Python-script analyse tool
+shellcheck  - shellscript analyse tool (linter)
 .br
-pycodestyle - Python-script stijlcontroleur
+mypy        - Python-script analyse tool (linter)
+.br
+pycodestyle - Python-script stijlcontroleur (linter)
 .sp
 Opdracht \fBkz check\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
 .sp

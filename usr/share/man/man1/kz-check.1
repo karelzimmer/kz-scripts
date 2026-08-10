@@ -19,8 +19,8 @@ kz-check - check scripts and website
 .SH DESCRIPTION
 \fBkz check\fR performs a check.
 .sp
-Performs checks that check scripts for content and with shellcheck, mypy, and
-pycodestyle, and the website for content and dead links.
+Performs checks that check scripts for content and with so-called linters, and
+the website for content and dead links.
 .sp
 Among other things, the following are checked:
 .br
@@ -34,11 +34,13 @@ fields      - such as release year
 .br
 spaces      - trailing spaces
 .br
-shellcheck  - shell script analyse tool
+bashate     - shell script style checker (linter)
 .br
-mypy        - Python script analyse tool
+shellcheck  - shell script analyse tool (linter)
 .br
-pycodestyle - Python script style checker
+mypy        - Python script analyse tool (linter)
+.br
+pycodestyle - Python script style checker (linter)
 .sp
 Option \fB-h\fR, \fB--help\fR shows a short description of the available
 options and exits.
