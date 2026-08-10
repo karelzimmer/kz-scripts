@@ -17,6 +17,7 @@ from pydoc import cli
 import socket
 import subprocess
 import sys
+from threading import local
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -167,7 +168,7 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     This function records a informational message to the log.
     """
-    log: bytes = b''
+    grey: str = '\033[90m'
     sock: socket.socket
 
     # This also works fine...
@@ -178,7 +179,7 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     # Build the structured journal data package (field radius separated by \n).
     payload = (
         f"SYSLOG_IDENTIFIER={PROGRAM_NAME}\n"
-        f"MESSAGE={GREEN}{TEXT}{NORMAL}\n"
+        f"MESSAGE={grey}{TEXT}{NORMAL}\n"
         ).encode('utf-8')
 
     # Connect to the local systemd journal socket.

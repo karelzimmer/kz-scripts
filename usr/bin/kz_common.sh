@@ -126,7 +126,9 @@ kz.init() {
 
 # This function records an informational message to the log.
 kz.logmsg() {
-    printf "${GREEN}%b${NORMAL}\n" "$*" |& $PROGRAM_LOGS
+    local grey='\033[90m'
+
+    printf "${grey}%b${NORMAL}\n" "$*" |& $PROGRAM_LOGS
 }
 
 
