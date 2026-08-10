@@ -249,8 +249,6 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
         try:
             subprocess.run(man_tui, executable='bash', shell=True,
                            check=True)
-            subprocess.run('reset', executable='bash', shell=True)
-            subprocess.run('clear -x', executable='bash', shell=True)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
@@ -320,12 +318,16 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
-def term(PROGRAM_NAME: str, rc: int) -> None:
+def term(PROGRAM_NAME: str, rc: int, UI_MODE: str = 'cli') -> None:
     """
     This function controls the termination.
     """
     status: str = '1/FAILURE'
     text: str = ''
+
+    if UI_MODE == 'tui':
+        subprocess.run('reset', executable='bash', shell=True)
+        subprocess.run('clear -x', executable='bash', shell=True)
 
     if rc == 0:
         status = '0/SUCCESS'

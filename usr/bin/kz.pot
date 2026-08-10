@@ -93,14 +93,14 @@ msgid "command is required"
 msgstr ""
 
 #: kz:113 kz_common.py:59 kz_common.py:79 kz_common.py:109 kz_common.py:128
-#: kz_common.py:239 kz_common.py:255 kz_common.py:268 kz-dev:84 kz-dev:197
+#: kz_common.py:239 kz_common.py:253 kz_common.py:266 kz-dev:84 kz-dev:197
 #: kz-dev:212 kz-dev:229 kz-dev:251 kz-dev:273 kz-dev:317 kz-update:77
 #: kz-update:292
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz_common.py:65 kz_common.py:85 kz_common.py:115 kz_common.py:134
-#: kz_common.py:245 kz_common.py:261 kz_common.py:274 kz_common.py:312
+#: kz_common.py:245 kz_common.py:259 kz_common.py:272 kz_common.py:310
 #: kz-dev:90 kz-dev:203 kz-dev:218 kz-dev:235 kz-dev:257 kz-dev:279
 #: kz-update:83 kz-update:298
 msgid "Program {} encountered an error."
@@ -108,19 +108,19 @@ msgstr ""
 
 #: kz:173 kz-backup:162 kz-build:165 kz-check:132 kz-deploy:137 kz-desktop:198
 #: kz-dev:166 kz-install:269 kz-menu:187 kz-restore:162 kz-setup:256
-#: kz-update:167 kz-wifi:146
+#: kz-update:167 kz-wifi:148
 msgid "internal error"
 msgstr ""
 
-#: kz:184
+#: kz:185
 msgid "The following commands are available:"
 msgstr ""
 
-#: kz:200
+#: kz:201
 msgid "Use \"man kz\" for available commands."
 msgstr ""
 
-#: kz:203
+#: kz:204
 msgid "Use \"kz COMMAND [ARGUMENTS]\" to execute a command."
 msgstr ""
 
@@ -170,7 +170,7 @@ msgid "    -T, --tui       run in text-based mode (default)"
 msgstr ""
 
 #: kz-backup:119 kz-desktop:213 kz-install:223 kz-menu:155 kz-restore:115
-#: kz-setup:210 kz-wifi:126
+#: kz-setup:210 kz-wifi:128
 msgid "no desktop environment available"
 msgstr ""
 
@@ -179,7 +179,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:170 kz-build:173 kz-check:140 kz-deploy:145 kz-desktop:206
-#: kz-dev:173 kz-menu:195 kz-restore:170 kz-update:174 kz-wifi:153
+#: kz-dev:173 kz-menu:195 kz-restore:170 kz-update:174 kz-wifi:155
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -640,23 +640,23 @@ msgstr ""
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:218 kz_common.py:289
+#: kz_common.py:218 kz_common.py:287
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:288
+#: kz_common.py:286
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:316
+#: kz_common.py:314
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:317 kz_common.sh:194
+#: kz_common.py:315 kz_common.sh:194
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:318 kz_common.sh:195
+#: kz_common.py:316 kz_common.sh:195
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
@@ -1571,7 +1571,7 @@ msgstr ""
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 
-#: kz-wifi:178 kz-wifi:192
+#: kz-wifi:178 kz-wifi:189
 msgid "No WiFi device found."
 msgstr ""
 
