@@ -31,7 +31,7 @@ msgstr "Gebruik: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]"
 
 #: kz:35
 msgid "          [-v|--version] COMMAND [ARGUMENTS]"
-msgstr "                [-v|--version] OPDRACHT [ARGUMENTEN]"
+msgstr "            [-v|--version] OPDRACHT [ARGUMENTEN]"
 
 #: kz:41
 msgid "Usage: kz [OPTIONS] COMMAND [ARGUMENTS]"
