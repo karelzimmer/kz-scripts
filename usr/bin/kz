@@ -183,7 +183,7 @@ def process_option_list() -> None:
     command: str = ''
 
     text = f'{_("The following commands are available:")}\n'
-    command = f'find    /usr/bin/kz-*               \
+    command = r'find    /usr/bin/kz-*               \
                         -maxdepth 1                 \
                         -type f                     \
                         -executable                 \

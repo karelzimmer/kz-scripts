@@ -10,14 +10,11 @@
 # Imports
 # #############################################################################
 
-from base64 import encode
 import gettext
 import os
-from pydoc import cli
 import socket
 import subprocess
 import sys
-from threading import local
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
