@@ -169,7 +169,7 @@ check_debian_package_manager() {
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
         printf '%s\n' "$text" |& $PROGRAM_LOGS
-        sleep 2
+        sleep 1
     done
 }
 
