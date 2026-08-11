@@ -33,13 +33,13 @@ HELP="$(gettext 'Usage: kz menu [OPTIONS]')
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '    -C, --cli       run in command-line mode')
-$(gettext '    -G, --gui       run in graphical mode')
-$(gettext '    -h, --help      show this help text')
-$(gettext '    -m, --manual    show manual page')
-$(gettext '    -T, --tui       run in text-based mode (default)')
-$(gettext '    -u, --usage     show a short usage summary')
-$(gettext '    -v, --version   show program version')"
+$(gettext '  -C, --cli      run in command-line mode')
+$(gettext '  -G, --gui      run in graphical mode')
+$(gettext '  -h, --help     show this help text')
+$(gettext '  -m, --manual   show manual page')
+$(gettext '  -T, --tui      run in text-based mode (default)')
+$(gettext '  -u, --usage    show a short usage summary')
+$(gettext '  -v, --version  show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='CGhmTuv'
@@ -647,7 +647,8 @@ show_commands_before_execution() {
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
         text+="
-$description ($command)"
+"
+        text+="  $description ($command)"
     done
 
     if [[ $UI_MODE = 'gui' ]]; then

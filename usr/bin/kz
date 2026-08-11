@@ -43,15 +43,15 @@ HELP_LINES: list[str] = [
     f'{PROGRAM_DESC}.',
     '',
     _('Options:'),
-    _('    -h, --help      show this help text'),
-    _('    -l, --list      show available commands'),
-    _('    -m, --manual    show manual page'),
-    _('    -u, --usage     show a short usage summary'),
-    _('    -v, --version   show program version'),
+    _('  -h, --help     show this help text'),
+    _('  -l, --list     show available commands'),
+    _('  -m, --manual   show manual page'),
+    _('  -u, --usage    show a short usage summary'),
+    _('  -v, --version  show program version'),
     '',
     _('Arguments:'),
-    _('  COMMAND      execute command'),
-    _('  ARGUMENTS    arguments for command')
+    _('  COMMAND        execute command'),
+    _('  ARGUMENTS      arguments for command')
     ]
 HELP: str = '\n'.join(HELP_LINES)
 del HELP_LINES
@@ -193,7 +193,7 @@ def process_option_list() -> None:
                         -printf "%f\n"          |   \
                 sort                            |   \
                 sed     --expression="s/kz-//"  |   \
-                sed     --expression="s/^/    /"'
+                sed     --expression="s/^/  /"'
     try:
         text += subprocess.run(command, stdout=subprocess.PIPE,
                                shell=True, check=True, text=True).stdout
