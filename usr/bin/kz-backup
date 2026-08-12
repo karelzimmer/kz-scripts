@@ -425,11 +425,11 @@ backup_setting_readme() {
     text="$(gettext 'This folder contains files created by kz-backup.')
 $(gettext 'These files are used by kz-restore and others.')
 
-$(gettext 'Further reading:')
-    man kz backup
-    man kz restore
-    man kz setup"
-printf '%s\n' "$text" > "$output_file"
+$(gettext 'Further reading:')\n"
+    text+='  man kz backup\n'
+    text+='  man kz restore\n'
+    text+='  man kz setup'
+    printf '%b\n' "$text" > "$output_file"
 }
 
 
