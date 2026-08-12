@@ -205,18 +205,18 @@ term() {
 ===============================================================================
 "
     if $OPTION_DEV; then
-        text+="\n      $RED$(gettext "Please note: the development version of \
-the kz package is installed")\
+        text+="\n       $RED$(gettext "Please note: the development version \
+of the kz package is installed")\
 $NORMAL\n"
     fi
-    text+="\n      $GREEN$(gettext "Package kz has been successfully \
+    text+="\n       $GREEN$(gettext "Package kz has been successfully \
 installed.")$NORMAL\n\n"
-    text+="      $(gettext "Now follow the steps as described in the \
+    text+="       $(gettext "Now follow the steps as described in the \
 Checklist installation.")\n"
-    text+="      $(gettext "Checklist installation can be found on \
+    text+="       $(gettext "Checklist installation can be found on \
 https://karelzimmer.nl/en.")\n\n"
     if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
-        text+="      $BLUE$(gettext "Type 'exit' to close this window.")\
+        text+="       $BLUE$(gettext "Type 'exit' to close this window.")\
 $NORMAL\n"
     fi
     text+="
