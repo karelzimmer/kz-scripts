@@ -48,7 +48,9 @@ readonly OPTIONS_LONG='cli,gui,help,manual,tui,usage,version'
 # Define the menu1 options.
 MENU1_TITLE=$(gettext 'Installation menu')
 readonly MENU1_TITLE
-readonly MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
+HEAD_LINE=$(printf -- '-%0.s' {1..20})
+readonly HEAD_LINE
+readonly MENU1_HEAD="$HEAD_LINE $MENU1_TITLE $HEAD_LINE"
 readonly -a  MENU1_ACTIONS=(
     [1]="$(gettext 'Prepare installation')"
     [2]="$(gettext 'Perform installation')"
@@ -70,7 +72,7 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 # Define the menu2 options.
 MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
-readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
+readonly MENU2_HEAD="$HEAD_LINE $MENU2_TITLE $HEAD_LINE"
 readonly -a  MENU2_ACTIONS=(
     [1]="$(gettext 'Make backup')"
     [2]="$(gettext 'Show WiFi details')"
@@ -345,7 +347,7 @@ process_menu1_choice2() {
     local text=''
     local title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
 
-    text="==== $title ====
+    text="$HEAD_LINE $title $HEAD_LINE
 
 $(gettext "Follow the steps as described in Checklist installation, Chapter \
 2.")

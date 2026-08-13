@@ -691,8 +691,7 @@ setup_apps() {
     fi
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
-    text="\
-== $ERROR_LOG (stderr) ======================================================="
+    text="ERRORLOG $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Set up apps')
@@ -820,7 +819,7 @@ term() {
 
     # Error log also to the main log.
     text="\
-== $ERROR_LOG (stderr) ======================================================="
+ERRORLOG $ERROR_LOG (stderr)"
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 

@@ -726,8 +726,7 @@ install_apps() {
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
-    text="\
-== $ERROR_LOG (stderr) ======================================================="
+    text="ERRORLOG $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Install apps')
@@ -921,7 +920,7 @@ term() {
 
     # Error log also to the standard log.
     text="\
-== $ERROR_LOG (stderr) ======================================================="
+ERRORLOG $ERROR_LOG (stderr)"
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 

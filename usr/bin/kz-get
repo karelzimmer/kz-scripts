@@ -199,29 +199,30 @@ process_kz_rpm_package() {
 
 # This function controls the termination of the script.
 term() {
+    local filler=''
+    local line=''
     local text=''
 
-    text="
-===============================================================================
-"
+    filler=$(printf ' %.0s' {1..7})
+    line=$(printf '=%.0s' {1..79})
+
+    text="\n$line\n"
     if $OPTION_DEV; then
-        text+="\n       $RED$(gettext "Please note: the development version \
+        text+="\n$filler$RED$(gettext "Please note: the development version \
 of the kz package is installed")\
 $NORMAL\n"
     fi
-    text+="\n       $GREEN$(gettext "Package kz has been successfully \
+    text+="\n$filler$GREEN$(gettext "Package kz has been successfully \
 installed.")$NORMAL\n\n"
-    text+="       $(gettext "Now follow the steps as described in the \
+    text+="$filler$(gettext "Now follow the steps as described in the \
 Checklist installation.")\n"
-    text+="       $(gettext "Checklist installation can be found on \
+    text+="$filler$(gettext "Checklist installation can be found on \
 https://karelzimmer.nl/en.")\n\n"
     if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
-        text+="       $BLUE$(gettext "Type 'exit' to close this window.")\
+        text+="$filler$BLUE$(gettext "Type 'exit' to close this window.")\
 $NORMAL\n"
     fi
-    text+="
-===============================================================================
-"
+    text+="\n$line\n"
     printf '%b' "$text"
 
     exit 0

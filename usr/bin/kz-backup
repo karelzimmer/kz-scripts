@@ -374,18 +374,12 @@ backup_setting_apps() {
     local output_file=$settings_dir/apps.txt
     local text=''
 
-    header1=$(gettext "\
-==== START list of manual installed packages ================================")
-    footer1=$(gettext "\
-==== END list of manual installed packages ==================================")
-    header2=$(gettext "\
-==== START list of installed snaps ==========================================")
-    footer2=$(gettext "\
-==== END list of installed snaps ============================================")
-    header3=$(gettext "\
-==== START list of installed Flatpak apps ===================================")
-    footer3=$(gettext "\
-==== END list of installed Flatpak apps =====================================")
+    header1=$(gettext "START list of manual installed packages")
+    footer1=$(gettext "END list of manual installed packages ")
+    header2=$(gettext "START list of installed snaps")
+    footer2=$(gettext "END list of installed snaps")
+    header3=$(gettext "START list of installed Flatpak apps")
+    footer3=$(gettext "END list of installed Flatpak apps")
 
     kz.logmsg 'Create a list of installed apps...(ignore WARNING).'
 
@@ -599,8 +593,7 @@ $(find "$HOME" -type d -name ".git" -printf "%P\n" | sed 's|/.git||')
 EOF
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
-    text="\
-== $ERROR_LOG (stderr) ======================================================="
+    text="ERRORLOG $ERROR_LOG (stderr)"
     printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Make backup')
@@ -703,7 +696,7 @@ term() {
 
     # Error log also to the standard log.
     text="\
-== $ERROR_LOG (stderr) ======================================================="
+ERRORLOG $ERROR_LOG (stderr)"
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
