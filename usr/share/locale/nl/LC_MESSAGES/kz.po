@@ -106,7 +106,7 @@ msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:173 kz-backup:162 kz-build:165 kz-check:132 kz-deploy:137 kz-desktop:198
-#: kz-dev:166 kz-install:269 kz-menu:189 kz-restore:162 kz-setup:256
+#: kz-dev:166 kz-install:269 kz-menu:190 kz-restore:162 kz-setup:256
 #: kz-update:167 kz-wifi:148
 msgid "internal error"
 msgstr "interne fout"
@@ -170,7 +170,7 @@ msgstr "                 plaats de back-up in de opgegeven map"
 msgid "  -T, --tui      run in text-based mode (default)"
 msgstr "  -T, --tui      draai in tekstgebaseerde modus (standaard)"
 
-#: kz-backup:119 kz-desktop:213 kz-install:223 kz-menu:157 kz-restore:115
+#: kz-backup:119 kz-desktop:213 kz-install:223 kz-menu:158 kz-restore:115
 #: kz-setup:210 kz-wifi:128
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
@@ -180,7 +180,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:170 kz-build:173 kz-check:140 kz-deploy:145 kz-desktop:206
-#: kz-dev:173 kz-menu:197 kz-restore:170 kz-update:174 kz-wifi:155
+#: kz-dev:173 kz-menu:198 kz-restore:170 kz-update:174 kz-wifi:155
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -201,8 +201,8 @@ msgstr "Koppel een usb-medium aan."
 msgid "Choose USB medium:"
 msgstr "Kies USB-medium:"
 
-#: kz-backup:244 kz-backup:258 kz-install:493 kz-install:509 kz-menu:217
-#: kz-menu:253 kz-menu:421 kz-menu:457 kz-restore:244 kz-restore:258
+#: kz-backup:244 kz-backup:258 kz-install:493 kz-install:509 kz-menu:218
+#: kz-menu:254 kz-menu:422 kz-menu:458 kz-restore:244 kz-restore:258
 #: kz-setup:478 kz-setup:494
 msgid "Continue"
 msgstr "Verder"
@@ -380,7 +380,7 @@ msgstr ""
 "    of een ander afbeeldingsbestand, en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:226 kz-backup:599 kz-menu:77 kz-backup.desktop:10
+#: kz-backup:226 kz-backup:599 kz-menu:78 kz-backup.desktop:10
 msgid "Make backup"
 msgstr "Back-up maken"
 
@@ -676,7 +676,7 @@ msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
 #: kz-backup:211 kz-backup:732 kz-desktop:293 kz-install:958 kz-install:980
-#: kz-menu:368 kz-menu:566 kz-restore:211 kz-restore:459 kz-setup:856
+#: kz-menu:369 kz-menu:567 kz-restore:211 kz-restore:459 kz-setup:856
 #: kz-setup:885
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
@@ -941,7 +941,7 @@ msgstr "Pakket kz is succesvol geïnstalleerd."
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 
-#: kz-get:219 kz-menu:354
+#: kz-get:219 kz-menu:355
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
@@ -1071,7 +1071,7 @@ msgid "Use \"kz install --browse\" to view all commands and information."
 msgstr ""
 "Gebruik \"kz install --browse\" om alle opdrachten en informatie te bekijken."
 
-#: kz-install:446 kz-install:732 kz-menu:79 kz-install.desktop:10
+#: kz-install:446 kz-install:732 kz-menu:80 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr "Apps installeren"
@@ -1094,7 +1094,7 @@ msgid "APP"
 msgstr "APP"
 
 #: kz-install:368 kz-install:385 kz-install:406 kz-install:496 kz-install:531
-#: kz-menu:222 kz-menu:282 kz-menu:426 kz-menu:486 kz-setup:353 kz-setup:370
+#: kz-menu:223 kz-menu:283 kz-menu:427 kz-menu:487 kz-setup:353 kz-setup:370
 #: kz-setup:391 kz-setup:481 kz-setup:516
 msgid "DESCRIPTION"
 msgstr "BESCHRIJVING"
@@ -1123,7 +1123,7 @@ msgstr "App '$app_argument' niet gevonden."
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
-#: kz-install:733 kz-menu:55
+#: kz-install:733 kz-menu:56
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
@@ -1215,27 +1215,27 @@ msgstr "                 [-T|--tui] [-u|--usage] [-v|--version]"
 msgid "Usage: kz menu [OPTIONS]"
 msgstr "Gebruik: kz menu [OPTIES]"
 
-#: kz-menu:49 kz-menu:247 kz-menu.desktop:10
+#: kz-menu:52 kz-menu:248 kz-menu.desktop:10
 msgid "Installation menu"
 msgstr "Installatiemenu"
 
-#: kz-menu:56
+#: kz-menu:57
 msgid "Perform installation"
 msgstr "Installatie uitvoeren"
 
-#: kz-menu:57
+#: kz-menu:58
 msgid "Finish installation"
 msgstr "Installatie afronden"
 
-#: kz-menu:58
+#: kz-menu:59
 msgid "Set up user"
 msgstr "Gebruiker inrichten"
 
-#: kz-menu:59 kz-menu:73 kz-menu:451
+#: kz-menu:60 kz-menu:74 kz-menu:452
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
-#: kz-backup:279 kz-menu:60 kz-menu:218 kz-menu:254 kz-restore:279
+#: kz-backup:279 kz-menu:61 kz-menu:219 kz-menu:255 kz-restore:279
 msgid "Exit"
 msgstr "Afsluiten"
 
@@ -1244,118 +1244,118 @@ msgstr "Afsluiten"
 msgid "Select number [1-$max_choices]: "
 msgstr "Selecteer nummer [1-$max_choices]: "
 
-#: kz-menu:63
+#: kz-menu:64
 msgid "Checklist chapter 1"
 msgstr "Checklist hoofdstuk 1"
 
-#: kz-menu:64
+#: kz-menu:65
 msgid "Checklist chapter 2"
 msgstr "Checklist hoofdstuk 2"
 
-#: kz-menu:65
+#: kz-menu:66
 msgid "Checklist chapter 3"
 msgstr "Checklist hoofdstuk 3"
 
-#: kz-menu:66
+#: kz-menu:67
 msgid "Checklist chapter 4"
 msgstr "Checklist hoofdstuk 4"
 
-#: kz-menu:67
+#: kz-menu:68
 msgid "Show command menu"
 msgstr "Opdrachtmenu weergeven"
 
-#: kz-menu:68
+#: kz-menu:69
 msgid "Exit menu"
 msgstr "Menu verlaten"
 
-#: kz-menu:78 kz-wifi:30 kz-wifi.desktop:10
+#: kz-menu:79 kz-wifi:30 kz-wifi.desktop:10
 msgid "Show WiFi details"
 msgstr "WiFi-details tonen"
 
-#: kz-menu:80 kz-restore:226 kz-restore:339 kz-restore.desktop:10
+#: kz-menu:81 kz-restore:226 kz-restore:339 kz-restore.desktop:10
 msgid "Restore backup"
 msgstr "Back-up terugzetten"
 
-#: kz-menu:81 kz-setup:431 kz-setup:697 kz-setup.desktop:10
+#: kz-menu:82 kz-setup:431 kz-setup:697 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr "Apps instellen"
 
-#: kz-menu:82
+#: kz-menu:83
 msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
-#: kz-menu:90 kz-menu:422 kz-menu:458
+#: kz-menu:91 kz-menu:423 kz-menu:459
 msgid "Back"
 msgstr "Terug"
 
-#: kz-menu:216 kz-menu:248 kz-menu:420 kz-menu:452
+#: kz-menu:217 kz-menu:249 kz-menu:421 kz-menu:453
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
-#: kz-menu:219 kz-menu:423
+#: kz-menu:220 kz-menu:424
 msgid "CHOICE"
 msgstr "KEUZE"
 
-#: kz-menu:220 kz-menu:280 kz-menu:424 kz-menu:484
+#: kz-menu:221 kz-menu:281 kz-menu:425 kz-menu:485
 msgid "NUMBER"
 msgstr "NUMMER"
 
-#: kz-menu:221 kz-menu:281 kz-menu:425 kz-menu:485
+#: kz-menu:222 kz-menu:282 kz-menu:426 kz-menu:486
 msgid "ACTION"
 msgstr "ACTIE"
 
-#: kz-menu:291
+#: kz-menu:292
 #, sh-format
 msgid "Run number [1-$MENU1_LINES]: "
 msgstr "Voer uit nummer [1-$MENU1_LINES]: "
 
-#: kz-menu:352
+#: kz-menu:353
 msgid "Follow the steps as described in Checklist installation, Chapter 2."
 msgstr ""
 "Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2."
 
-#: kz-menu:356
+#: kz-menu:357
 msgid "Roughly boils down to:"
 msgstr "Komt globaal neer op:"
 
-#: kz-menu:358
+#: kz-menu:359
 msgid "1. Download a CD image file (.iso)."
 msgstr "1. Download een CD-beeldbestand (.iso)."
 
-#: kz-menu:359
+#: kz-menu:360
 msgid "2. Create a bootable USB stick (see Linux info)."
 msgstr "2. Maak een opstartbare USB-stick aan (zie Linux info)."
 
-#: kz-menu:360
+#: kz-menu:361
 msgid "3. Boot the computer from this USB stick."
 msgstr "3. Start de computer op vanaf deze USB-stick."
 
-#: kz-menu:361
+#: kz-menu:362
 msgid "4. Install Linux."
 msgstr "4. Installeer Linux."
 
-#: kz-menu:495
+#: kz-menu:496
 #, sh-format
 msgid "Run number [1-$MENU2_LINES]: "
 msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
-#: kz-menu:642
+#: kz-menu:643
 msgid "The following will be executed:"
 msgstr "Het volgende zal worden uitgevoerd:"
 
-#: kz-menu:659 kz-menu:676 kz-menu:689
+#: kz-menu:660 kz-menu:677 kz-menu:690
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:666
+#: kz-menu:667
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:667
+#: kz-menu:668
 msgid "No"
 msgstr "Nee"
 
-#: kz-menu:690
+#: kz-menu:691
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr "$prompt [J/n]: "
