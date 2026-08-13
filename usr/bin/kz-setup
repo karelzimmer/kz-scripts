@@ -314,12 +314,9 @@ process_option_list() {
     text=$(gettext 'The following apps are available:')
     title=$text
 
-    # +-----------------------------------------------------------------------+
-    # | From (app record):
-    # | "# Setup: APP | HOST... | DESCRIPTION"
-    # | To (app list row):
-    # | "APP DESCRIPTION"
-    # +-----------------------------------------------------------------------+
+    # From (app record): Setup: APP | HOST... | DESCRIPTION
+    #                or: Reset: APP | HOST... | DESCRIPTION
+    # To (app list row): APP DESCRIPTION
     app_records=$(
         grep    --regexp="#.*$SETUP.*|.*|.*"    \
                 "${settings_files[@]}"          |
@@ -435,12 +432,9 @@ process_option_select() {
         text=$(gettext 'Select apps to reset:')
     fi
 
-    # +-----------------------------------------------------------------------+
-    # | From (app record):
-    # | "# Setup: APP | HOST... | DESCRIPTION"
-    # | To (app list row):
-    # | "APP DESCRIPTION"
-    # +-----------------------------------------------------------------------+
+    # From (app record): Setup: APP | HOST... | DESCRIPTION
+    #                or:  Reset: APP | HOST... | DESCRIPTION
+    # To (app list row): APP DESCRIPTION
     app_records=$(
         grep    --regexp="#.*$SETUP.*|.*|.*"    \
                 "${settings_files[@]}"          |
@@ -569,13 +563,6 @@ process_settings_files_by_app_argument() {
     local no_app_match=true
     local setup_record=''
 
-    # +-----------------------------------------------------------------------+
-    # | # Setup: APP | HOST... | DESCRIPTION    "app record"
-    # | CMD...
-    # |
-    # | # Reset: APP | HOST... | DESCRIPTION    "app record"
-    # | CMD...
-    # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
             '#'*"$SETUP"*" $app_argument "*'|'*'|'* )
@@ -612,13 +599,6 @@ process_settings_files_by_hostname() {
     local host_match=false
     local setup_record=''
 
-    # +-----------------------------------------------------------------------+
-    # | # Setup: APP | HOST... | DESCRIPTION    "app record"
-    # | CMD...
-    # |
-    # | # Reset: APP | HOST... | DESCRIPTION    "app record"
-    # | CMD...
-    # +-----------------------------------------------------------------------+
     while read -r setup_record; do
         case $setup_record in
             '#'*"$SETUP"*'|'*'*'*'|'* | '#'*"$SETUP"*'|'*"$HOSTNAME"*'|'* )
@@ -675,10 +655,6 @@ setup_apps() {
     local text=''
     local title=''
 
-    # +-----------------------------------------------------------------------+
-    # | # Setup: APP | HOST... | DESCRIPTION
-    # | # Reset: APP | HOST... | DESCRIPTION
-    # +-----------------------------------------------------------------------+
     app_tot_num=$(
         grep    --count                         \
                 --regexp="#.*$SETUP.*|.*|.*"    \

@@ -329,12 +329,9 @@ process_option_list() {
     text=$(gettext 'The following apps are available:')
     title=$text
 
-    # +-----------------------------------------------------------------------+
-    # | From (app record):
-    # | "# Install: APP | HOST... | DESCRIPTION"
-    # | To (app list row):
-    # | "APP DESCRIPTION"
-    # +-----------------------------------------------------------------------+
+    # From (app record): Install: APP | HOST... | DESCRIPTION
+    #                or: Remove:  APP | HOST... | DESCRIPTION
+    # To (app list row): APP DESCRIPTION
     app_records=$(
         grep    --regexp="#.*$INSTALL.*|.*|.*"  \
                 "${installation_files[@]}"      |
@@ -450,12 +447,9 @@ process_option_select() {
         text=$(gettext 'Select apps to remove:')
     fi
 
-    # +-----------------------------------------------------------------------+
-    # | From (app record):
-    # | "# Install: APP | HOST... | DESCRIPTION"
-    # | To (app list row):
-    # | "APP DESCRIPTION"
-    # +-----------------------------------------------------------------------+
+    # From (app record): Install: APP | HOST... | DESCRIPTION
+    #                or: Remove:  APP | HOST... | DESCRIPTION
+    # To (app list row): APP DESCRIPTION
     app_records=$(
         grep    --regexp="#.*$INSTALL.*|.*|.*"  \
                 "${installation_files[@]}"      |
@@ -583,13 +577,6 @@ process_installation_files_by_app_argument() {
     local install_record=''
     local no_app_match=true
 
-    # +-----------------------------------------------------------------------+
-    # | # Install: APP | HOST... | DESCRIPTION  "app record"
-    # | CMD...
-    # |
-    # | # Remove:  APP | HOST... | DESCRIPTION  "app record"
-    # | CMD...
-    # +-----------------------------------------------------------------------+
     while read -r install_record; do
         case $install_record in
             '#'*"$INSTALL"*" $app_argument "*'|'*'|'* )
@@ -626,13 +613,6 @@ process_installation_files_by_hostname() {
     local host_match=false
     local install_record=''
 
-    # +-----------------------------------------------------------------------+
-    # | # Install: APP | HOST... | DESCRIPTION  "app record"
-    # | CMD...
-    # |
-    # | # Remove:  APP | HOST... | DESCRIPTION  "app record"
-    # | CMD...
-    # +-----------------------------------------------------------------------+
     while read -r install_record; do
         case $install_record in
             '#'*"$INSTALL"*'|'*'*'*'|'* | '#'*"$INSTALL"*'|'*"$HOSTNAME"*'|'* )
@@ -709,10 +689,6 @@ install_apps() {
     local text=''
     local title=''
 
-    # +-----------------------------------------------------------------------+
-    # | # Install: APP | HOST... | DESCRIPTION
-    # | # Remove:  APP | HOST... | DESCRIPTION
-    # +-----------------------------------------------------------------------+
     app_tot_num=$(
         grep    --count                         \
                 --regexp="#.*$INSTALL.*|.*|.*"  \
