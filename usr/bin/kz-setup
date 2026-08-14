@@ -739,7 +739,7 @@ $(gettext '         COMMAND...')"
                 if [[ $UI_MODE = 'cli' ]]; then
                     printf '%s\n' "$app_line"
                 fi
-                # To corrolate possible error messages with app name and 
+                # To corrolate possible error messages with app name and
                 # description.
                 printf 'APP %s |%s\n' "$app_name" "$app_desc" >> "$ERROR_LOG"
                 ;;
