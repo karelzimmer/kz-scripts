@@ -392,60 +392,60 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:704 kz-install:904 kz-restore:431 kz-setup:803
+#: kz-backup:703 kz-install:912 kz-restore:430 kz-setup:812
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:705
+#: kz-backup:704
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:707 kz-restore:434
+#: kz-backup:706 kz-restore:433
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:708
+#: kz-backup:707
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:709 kz-restore:436
+#: kz-backup:708 kz-restore:435
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:710
+#: kz-backup:709
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:712 kz-install:909 kz-restore:439 kz-setup:807
+#: kz-backup:711 kz-install:917 kz-restore:438 kz-setup:816
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:713 kz-install:910 kz-restore:440 kz-setup:808
+#: kz-backup:712 kz-install:918 kz-restore:439 kz-setup:817
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:714
+#: kz-backup:713
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:742
+#: kz-backup:741
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:760
+#: kz-backup:759
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
 
-#: kz-backup:770
+#: kz-backup:769
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 "De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
 
-#: kz-backup:776 kz-restore:504
+#: kz-backup:775 kz-restore:503
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
 
@@ -675,9 +675,9 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz-backup:211 kz-backup:732 kz-desktop:293 kz-install:934 kz-install:956
-#: kz-menu:369 kz-menu:567 kz-restore:211 kz-restore:459 kz-setup:832
-#: kz-setup:861
+#: kz-backup:211 kz-backup:731 kz-desktop:293 kz-install:942 kz-install:964
+#: kz-menu:369 kz-menu:567 kz-restore:211 kz-restore:458 kz-setup:841
+#: kz-setup:870
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -1133,39 +1133,39 @@ msgstr ""
 "Authenticatie is vereist om apps te installeren en systeeminstellingen te "
 "wijzigen"
 
-#: kz-install:748 kz-setup:704
+#: kz-install:748 kz-setup:705
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:749 kz-setup:705
+#: kz-install:749 kz-setup:706
 msgid "         COMMAND..."
 msgstr "         OPDRACHT..."
 
-#: kz-install:812 kz-install:834
+#: kz-install:821 kz-install:843
 msgid "Authentication is required to continue."
 msgstr "Authenticatie is vereist om door te gaan."
 
-#: kz-install:905
+#: kz-install:913
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:913
+#: kz-install:921
 msgid "Try to install the apps again."
 msgstr "Probeer de apps opnieuw te installeren."
 
-#: kz-install:915
+#: kz-install:923
 msgid "Try to remove the apps again."
 msgstr "Probeer de apps opnieuw te verwijderen."
 
-#: kz-install:942
+#: kz-install:950
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:944
+#: kz-install:952
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:950
+#: kz-install:958
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1398,36 +1398,36 @@ msgstr "Geen backup_${HOSTNAME}_$USER gevonden in $medium."
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
 
-#: kz-restore:432
+#: kz-restore:431
 msgid "Restore ended with errors."
 msgstr "Back-up terugzetten is geëindigd met fouten."
 
-#: kz-restore:435
+#: kz-restore:434
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 "Zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up of"
 
-#: kz-restore:437
+#: kz-restore:436
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr "is er te weinig ruimte op $HOME."
 
-#: kz-restore:441
+#: kz-restore:440
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:469
+#: kz-restore:468
 #, sh-format
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-restore:488
+#: kz-restore:487
 #, sh-format
 msgid "The backup has been restored for $user, there are $num_users users:"
 msgstr "De back-up is teruggezet voor $user, er zijn $num_users gebruikers:"
 
-#: kz-restore:498
+#: kz-restore:497
 #, sh-format
 msgid ""
 "The backup $SOURCE has been restored, more than one USB medium is connected:"
@@ -1556,27 +1556,27 @@ msgstr ""
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:804
+#: kz-setup:813
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:811
+#: kz-setup:820
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:813
+#: kz-setup:822
 msgid "Try to reset the apps again."
 msgstr "Probeer de apps opnieuw te resetten."
 
-#: kz-setup:840
+#: kz-setup:849
 msgid "Apps set up completed."
 msgstr "Apps instellen is voltooid."
 
-#: kz-setup:842
+#: kz-setup:851
 msgid "Apps reset completed."
 msgstr "Apps resetten is voltooid."
 
-#: kz-setup:850
+#: kz-setup:859
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1584,7 +1584,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:855
+#: kz-setup:864
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1592,7 +1592,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:877
+#: kz-setup:886
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
