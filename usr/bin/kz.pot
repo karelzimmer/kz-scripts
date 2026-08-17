@@ -236,104 +236,104 @@ msgstr ""
 msgid "to  : $TARGET"
 msgstr ""
 
-#: kz-backup:419
+#: kz-backup:421
 msgid "This folder contains files created by kz-backup."
 msgstr ""
 
-#: kz-backup:420
+#: kz-backup:422
 msgid "These files are used by kz-restore and others."
 msgstr ""
 
-#: kz-backup:422
+#: kz-backup:424
 msgid "Further reading:"
 msgstr ""
 
-#: kz-backup:377
+#: kz-backup:379
 msgid "START list of manual installed packages"
 msgstr ""
 
-#: kz-backup:378
-msgid "END list of manual installed packages "
-msgstr ""
-
-#: kz-backup:379
-msgid "START list of installed snaps"
-msgstr ""
-
 #: kz-backup:380
-msgid "END list of installed snaps"
+msgid "END list of manual installed packages"
 msgstr ""
 
 #: kz-backup:381
-msgid "START list of installed Flatpak apps"
+msgid "START list of installed snaps"
 msgstr ""
 
 #: kz-backup:382
+msgid "END list of installed snaps"
+msgstr ""
+
+#: kz-backup:383
+msgid "START list of installed Flatpak apps"
+msgstr ""
+
+#: kz-backup:384
 msgid "END list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:439
+#: kz-backup:441
 msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
-#: kz-backup:464 kz-backup:476
+#: kz-backup:466 kz-backup:478
 msgid "Additional users can be added manually:"
 msgstr ""
 
-#: kz-backup:466 kz-backup:513
+#: kz-backup:468 kz-backup:515
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users."
 msgstr ""
 
-#: kz-backup:468
+#: kz-backup:470
 msgid "2. Click on Unlock and then Add User."
 msgstr ""
 
-#: kz-backup:469
+#: kz-backup:471
 msgid "3. Enter Name [USER] and Username [USERNAME]."
 msgstr ""
 
-#: kz-backup:471 kz-backup:520 kz-backup:574
+#: kz-backup:473 kz-backup:522 kz-backup:583
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:478
+#: kz-backup:480
 msgid "# Standard user:"
 msgstr ""
 
-#: kz-backup:479
+#: kz-backup:481
 msgid "sudo useradd --create-home --comment '[USER]' [USERNAME]"
 msgstr ""
 
-#: kz-backup:480
+#: kz-backup:482
 msgid "# Administrator:"
 msgstr ""
 
-#: kz-backup:481
+#: kz-backup:483
 msgid "# Debian or Debian-based:"
 msgstr ""
 
-#: kz-backup:482
+#: kz-backup:484
 msgid "sudo usermod --append --groups adm,sudo [USERNAME]"
 msgstr ""
 
-#: kz-backup:483
+#: kz-backup:485
 msgid "# Red Hat or Red Hat-based:"
 msgstr ""
 
-#: kz-backup:484
+#: kz-backup:486
 msgid "sudo usermod --append --groups wheel [USERNAME]"
 msgstr ""
 
-#: kz-backup:485
+#: kz-backup:487
 msgid "# User sets password on first login:"
 msgstr ""
 
-#: kz-backup:486
+#: kz-backup:488
 msgid "sudo passwd --delete --expire [USERNAME]"
 msgstr ""
 
-#: kz-backup:511
+#: kz-backup:513
 msgid "To set the users avatar:"
 msgstr ""
 
@@ -341,103 +341,103 @@ msgid ""
 "1. Press the Super key[1], type \"user\" and click behind Settings on Users."
 msgstr ""
 
-#: kz-backup:515
+#: kz-backup:517
 msgid "2. Click on Change avatar (pencil icon)."
 msgstr ""
 
-#: kz-backup:516
+#: kz-backup:518
 msgid "3. Click Select a file."
 msgstr ""
 
-#: kz-backup:517
+#: kz-backup:519
 msgid "4. Select avatar.ico in Personal folder / Settings,"
 msgstr ""
 
-#: kz-backup:518
+#: kz-backup:520
 msgid "   or another picture file."
 msgstr ""
 
-#: kz-backup:568
+#: kz-backup:577
 msgid "To set the desktop background:"
 msgstr ""
 
-#: kz-backup:570
+#: kz-backup:579
 msgid "1.  Press the Super key[1], type 'file' and click on Files."
 msgstr ""
 
-#: kz-backup:571
+#: kz-backup:580
 msgid "2.  Right-click on desktop.ico in Personal folder / Settings,"
 msgstr ""
 
-#: kz-backup:572
+#: kz-backup:581
 msgid "    or another picture file, and choose Set as Background."
 msgstr ""
 
-#: kz-backup:226 kz-backup:599 kz-menu:78 kz-backup.desktop:10
+#: kz-backup:226 kz-backup:608 kz-menu:78 kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
-#: kz-backup:600
+#: kz-backup:609
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:652
+#: kz-backup:661
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:703 kz-install:912 kz-restore:430 kz-setup:812
+#: kz-backup:712 kz-install:912 kz-restore:430 kz-setup:812
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:704
+#: kz-backup:713
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:706 kz-restore:433
+#: kz-backup:715 kz-restore:433
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:707
+#: kz-backup:716
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:708 kz-restore:435
+#: kz-backup:717 kz-restore:435
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:709
+#: kz-backup:718
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:711 kz-install:917 kz-restore:438 kz-setup:816
+#: kz-backup:720 kz-install:917 kz-restore:438 kz-setup:816
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:712 kz-install:918 kz-restore:439 kz-setup:817
+#: kz-backup:721 kz-install:918 kz-restore:439 kz-setup:817
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:713
+#: kz-backup:722
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:741
+#: kz-backup:750
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:759
+#: kz-backup:768
 #, sh-format
 msgid "The backup has been made for $user, there are $num_users users:"
 msgstr ""
 
-#: kz-backup:769
+#: kz-backup:778
 #, sh-format
 msgid ""
 "The backup $TARGET has been made, more than one USB medium is connected:"
 msgstr ""
 
-#: kz-backup:775 kz-restore:503
+#: kz-backup:784 kz-restore:503
 msgid "*** Remember to safely(!) remove the USB medium ***"
 msgstr ""
 
@@ -660,7 +660,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:211 kz-backup:731 kz-desktop:293 kz-install:942 kz-install:964
+#: kz-backup:211 kz-backup:740 kz-desktop:293 kz-install:942 kz-install:964
 #: kz-menu:369 kz-menu:567 kz-restore:211 kz-restore:458 kz-setup:841
 #: kz-setup:870
 msgid "Press the Enter key to continue [Enter]: "
@@ -1687,4 +1687,12 @@ msgstr ""
 #: kz-build:566 kz-check:605 kz-deploy:318 kz-dev:338 kz-post-migrate:71
 #: kz-update:337
 msgid "Complete!"
+msgstr ""
+
+#: kz-backup:534
+msgid "START list of favorite apps in the dash"
+msgstr ""
+
+#: kz-backup:535
+msgid "END list of favorite apps in the dash"
 msgstr ""

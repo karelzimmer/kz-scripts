@@ -367,15 +367,17 @@ backup_settings() {
 
 # This function creates a list of installed apps.
 backup_setting_apps() {
-    local footer1
-    local footer2
-    local header1
-    local header2
+    local footer1=''
+    local footer2=''
+    local header1=''
+    local header2=''
+    local header3=''
+    local footer3=''
     local output_file=$settings_dir/apps.txt
     local text=''
 
     header1=$(gettext "START list of manual installed packages")
-    footer1=$(gettext "END list of manual installed packages ")
+    footer1=$(gettext "END list of manual installed packages")
     header2=$(gettext "START list of installed snaps")
     footer2=$(gettext "END list of installed snaps")
     header3=$(gettext "START list of installed Flatpak apps")
@@ -525,10 +527,16 @@ $(gettext '[1] Windows, command, or magnifying glass key.')"
 
 # This function saves the favorite apps in the dash.
 backup_setting_favorites() {
+    local footer1=''
+    local header1=''
     local output_file=$settings_dir/favorites.txt
+
+    header1=$(gettext "START list of favorite apps in the dash")
+    footer1=$(gettext "END list of favorite apps in the dash")
 
     kz.logmsg 'Save the favorite apps...'
 
+    printf '%s\n' "$header1" > "$output_file"
     gsettings   get                             \
                 org.gnome.shell favorite-apps   |
                 tr '[' ' '                      |
@@ -536,7 +544,8 @@ backup_setting_favorites() {
                 tr "'" ' '                      |
                 tr --delete ' '                 |
                 tr ',' '\n'                     \
-                > "$output_file"                |& $PROGRAM_LOGS || true
+                >> "$output_file"               |& $PROGRAM_LOGS || true
+    printf '%s\n' "$footer1" >> "$output_file"
 }
 
 
