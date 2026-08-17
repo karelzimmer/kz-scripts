@@ -251,27 +251,27 @@ msgstr "Verder lezen:"
 
 #: kz-backup:379
 msgid "START list of manual installed packages"
-msgstr "BEGIN overzicht van handmatig geïnstalleerde pakketten"
+msgstr "BEGIN lijst van handmatig geïnstalleerde pakketten"
 
 #: kz-backup:380
 msgid "END list of manual installed packages"
-msgstr "EINDE overzicht van handmatig geïnstalleerde pakketten"
+msgstr "EINDE lijst van handmatig geïnstalleerde pakketten"
 
 #: kz-backup:381
 msgid "START list of installed snaps"
-msgstr "BEGIN overzicht van geïnstalleerde snaps"
+msgstr "BEGIN lijst van geïnstalleerde snaps"
 
 #: kz-backup:382
 msgid "END list of installed snaps"
-msgstr "EINDE overzicht van geïnstalleerde snaps"
+msgstr "EINDE lijst van geïnstalleerde snaps"
 
 #: kz-backup:383
 msgid "START list of installed Flatpak apps"
-msgstr "BEGIN overzicht van geïnstalleerde flatpak-apps"
+msgstr "BEGIN lijst van geïnstalleerde flatpak-apps"
 
 #: kz-backup:384
 msgid "END list of installed Flatpak apps"
-msgstr "EINDE overzicht van geïnstalleerde flatpak-apps"
+msgstr "EINDE lijst van geïnstalleerde flatpak-apps"
 
 #: kz-backup:441
 msgid "USERNAME|UID|GID|USER"
@@ -1760,13 +1760,9 @@ msgid "Complete!"
 msgstr "Klaar!"
 
 #: kz-backup:534
-#, fuzzy
-#| msgid "START list of installed snaps"
 msgid "START list of favorite apps in the dash"
-msgstr "BEGIN overzicht van geïnstalleerde snaps"
+msgstr "BEGIN lijst met favoriete apps in de dash"
 
 #: kz-backup:535
-#, fuzzy
-#| msgid "END list of installed snaps"
 msgid "END list of favorite apps in the dash"
-msgstr "EINDE overzicht van geïnstalleerde snaps"
+msgstr "EINDE lijst met favoriete apps in de dash"
