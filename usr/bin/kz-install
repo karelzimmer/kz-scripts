@@ -330,7 +330,7 @@ process_option_list() {
     title=$text
 
     # From (app record): Install: APP | HOST... | DESCRIPTION
-    #                or: Remove:  APP | HOST... | DESCRIPTION
+    #                or: Remove: APP | HOST... | DESCRIPTION
     # To (app list row): APP DESCRIPTION
     app_records=$(
         grep    --regexp="#.*$INSTALL.*|.*|.*"  \
@@ -448,7 +448,7 @@ process_option_select() {
     fi
 
     # From (app record): Install: APP | HOST... | DESCRIPTION
-    #                or: Remove:  APP | HOST... | DESCRIPTION
+    #                or: Remove: APP | HOST... | DESCRIPTION
     # To (app list row): APP DESCRIPTION
     app_records=$(
         grep    --regexp="#.*$INSTALL.*|.*|.*"  \
