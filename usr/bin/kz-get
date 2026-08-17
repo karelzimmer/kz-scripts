@@ -30,7 +30,6 @@ readonly GREEN='\033[1;32m'
 readonly RED='\033[1;31m'
 readonly NORMAL='\033[0m'
 
-
 # #############################################################################
 # Globals
 # #############################################################################
@@ -63,6 +62,28 @@ init() {
 }
 
 
+# This function returns an error message.
+errmsg() {
+    logmsg "${RED}$*${NORMAL}"
+    printf "$RED%b$NORMAL\n" "$*" >&2
+}
+
+
+# This function returns an informational message.
+infomsg() {
+    logmsg "$*"
+    printf '%b\n' "$*"
+}
+
+
+# This function records a message to the log.
+logmsg() {
+    local grey='\033[90m'
+
+    printf "${grey}%b${NORMAL}\n" "$*" |& $PROGRAM_LOGS
+}
+
+
 # This function reports errors.
 # shellcheck disable=SC2317,SC2329
 err_report() {
@@ -77,7 +98,7 @@ $(gettext "The last few lines of the log are displayed here.")"
                 --pager-end \
                 --identifier="$PROGRAM_NAME"
     text="$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
-    printf "$RED%s$NORMAL\n" "$text" >&2
+    errmsg "$text"
 }
 
 
@@ -91,7 +112,7 @@ process() {
     elif grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         process_kz_rpm_package
     else
-        printf "$RED%s$NORMAL\n" 'fatal: unknown os release' >&2
+        errmsg 'fatal: unknown os release'
         exit 1
     fi
 }
@@ -107,7 +128,7 @@ become_check() {
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
-        printf "$GREEN%s$NORMAL\n" "$text"
+        infomsg "$GREEN$text$NORMAL"
         exit 0
     fi
 }
@@ -135,13 +156,13 @@ process_kz_deb_package() {
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
     printf '%s' 'Debian update.....'
-    printf '%s\n' "Update package lists..." |& $PROGRAM_LOGS
+    logmsg "Update package lists..."
     check_debian_package_manager
     sudo apt-get update |& $PROGRAM_LOGS
 
     # Download kz deb package.
     printf '\n%s' 'Deb kz download...'
-    printf '%s\n' "Downloading $kz_deb_site_file..." |& $PROGRAM_LOGS
+    logmsg "Downloading $kz_deb_site_file..."
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_file"                     |& $PROGRAM_LOGS
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
@@ -153,7 +174,7 @@ process_kz_deb_package() {
 
     # Install kz deb package.
     printf '\n%s' 'Deb kz install....'
-    printf '%s\n' "Installing $kz_deb_site_file..." |& $PROGRAM_LOGS
+    logmsg "Installing $kz_deb_site_file..."
     check_debian_package_manager
     sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
 }
@@ -168,7 +189,7 @@ check_debian_package_manager() {
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        printf '%s\n' "$text" |& $PROGRAM_LOGS
+        logmsg "$text"
         sleep 1
     done
 }
@@ -192,7 +213,7 @@ process_kz_rpm_package() {
 
     # Install kz rpm package.
     printf '%s' 'RPM kz install...'
-    printf '%s\n' "Installing $kz_rpm_site_file..." |& $PROGRAM_LOGS
+    logmsg "Installing $kz_rpm_site_file..."
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
 }
 
@@ -222,8 +243,8 @@ https://karelzimmer.nl/en.")\n\n"
         text+="$filler$BLUE$(gettext "Type 'exit' to close this window.")\
 $NORMAL\n"
     fi
-    text+="\n$line\n"
-    printf '%b' "$text"
+    text+="\n$line"
+    infomsg "$text"
 
     exit 0
 }

@@ -123,7 +123,7 @@ kz.init() {
 }
 
 
-# This function records an informational message to the log.
+# This function records a message to the log.
 kz.logmsg() {
     local grey='\033[90m'
 

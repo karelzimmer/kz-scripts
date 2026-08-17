@@ -162,7 +162,7 @@ def init(PROGRAM_NAME: str) -> None:
 
 def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
-    This function records a informational message to the log.
+    This function records a message to the log.
     """
     grey: str = '\033[90m'
     sock: socket.socket
