@@ -723,7 +723,7 @@ msgstr "Typ '$program_name --help' voor meer informatie."
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr "kz versie 4.2.1 (gebouwd $build_id)."
 
-#: kz_common.sh:285 kz-get:100
+#: kz_common.sh:285 kz-get:85
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
@@ -737,11 +737,11 @@ msgstr ""
 "Fout $rc op regel $lineno in functie $function bij het uitvoeren van "
 "commando: $command"
 
-#: kz_common.sh:292 kz_common.sh:295 kz-get:91
+#: kz_common.sh:292 kz_common.sh:295 kz-get:76
 msgid "Use \"journalctl -xe\" to check what went wrong."
 msgstr "Gebruik \"journalctl -xe\" om te controleren wat er misging."
 
-#: kz_common.sh:296 kz-get:92
+#: kz_common.sh:296 kz-get:77
 msgid "The last few lines of the log are displayed here."
 msgstr "De laatste paar regels van de log worden hier weergegeven."
 
