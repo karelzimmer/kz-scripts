@@ -383,9 +383,9 @@ check_code() {
         check_script
     else
         text="
-${BLUE}In $scriptdir / $scriptname:$NORMAL
-$RED$(gettext "Unknown script. Function check_code cannot check script \
-code.")$NORMAL
+${BLUE}In $scriptdir / $scriptname:${NORMAL}
+${RED}$(gettext "Unknown script. Function check_code cannot check script \
+code.")${NORMAL}
 "
         kz.infomsg "$text"
         ERR_FLAG=true
@@ -407,7 +407,7 @@ check_script() {
         :
     elif ! "$file" --usage |& $PROGRAM_LOGS; then
         kz.infomsg "
-    $BLUE$scriptdir / $scriptname$NORMAL"
+    ${BLUE}$scriptdir / $scriptname${NORMAL}"
         text=$(eval_gettext "Script \$scriptname --usage returned an error.")
         kz.errmsg "$text"
         ERR_FLAG=true
@@ -419,7 +419,7 @@ check_script() {
 
         if ! [[ -f $dir/$scriptname.desktop ]]; then
         kz.infomsg "
-$BLUE$scriptdir / $scriptname$NORMAL"
+${BLUE}$scriptdir / $scriptname${NORMAL}"
             text=$(eval_gettext "Desktop configuration file \
 \$dir/\$scriptname.desktop not found.")
             kz.errmsg "$text"
@@ -506,8 +506,8 @@ check_record_length() {
 
     if grep --quiet --regexp='.\{80\}' "$script"; then
         text="
-${BLUE}In $scriptdir / $scriptname:$NORMAL
-$RED    $(eval_gettext "One or more lines are too long (>79):") $NORMAL"
+${BLUE}In $scriptdir / $scriptname:${NORMAL}
+${RED}    $(eval_gettext "One or more lines are too long (>79):") ${NORMAL}"
         kz.infomsg "$text"
         grep --regexp='.\{80\}' "$script" || true
         ERR_FLAG=true
@@ -520,7 +520,7 @@ check_desktop_file_validation() {
     if ! desktop-file-validate "$script" | systemd-cat --identifier=kz-check
     then
         kz.infomsg "
-$BLUE$scriptdir / $scriptname$NORMAL"
+${BLUE}$scriptdir / $scriptname${NORMAL}"
         desktop-file-validate "$script" || ERR_FLAG=true
     fi
 }
@@ -561,8 +561,8 @@ check_tags() {
             --regexp="$esc_todo"    \
             "$script"; then
         text="
-${BLUE}In $scriptdir / $scriptname:$NORMAL
-$BLUE$(gettext 'Flagged annotation found.')$NORMAL"
+${BLUE}In $scriptdir / $scriptname:${NORMAL}
+${BLUE}$(gettext 'Flagged annotation found.')${NORMAL}"
         kz.infomsg "$text"
         grep    --line-number           \
                 --word-regexp           \
@@ -580,8 +580,8 @@ check_trailing_spaces() {
 
     if grep --quiet --regexp=' ''$' "$script"; then
         text="
-${BLUE}In $scriptdir / $scriptname:$NORMAL
-$RED    $(gettext 'End spaces found.')$NORMAL
+${BLUE}In $scriptdir / $scriptname:${NORMAL}
+${RED}    $(gettext 'End spaces found.')${NORMAL}
 "
         kz.infomsg "$text"
         grep    --line-number   \
@@ -602,7 +602,7 @@ term() {
         kz.errmsg "$text"
         exit 1
     else
-        text=$GREEN$(gettext 'Complete!')$NORMAL
+        text=${GREEN}$(gettext 'Complete!')${NORMAL}
         kz.infomsg "$text"
         exit 0
     fi

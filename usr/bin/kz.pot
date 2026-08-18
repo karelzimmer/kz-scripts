@@ -93,14 +93,14 @@ msgid "command is required"
 msgstr ""
 
 #: kz:113 kz_common.py:56 kz_common.py:76 kz_common.py:106 kz_common.py:125
-#: kz_common.py:235 kz_common.py:249 kz_common.py:262 kz-dev:84 kz-dev:197
+#: kz_common.py:236 kz_common.py:250 kz_common.py:263 kz-dev:84 kz-dev:197
 #: kz-dev:212 kz-dev:229 kz-dev:251 kz-dev:273 kz-dev:317 kz-update:77
 #: kz-update:292
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz_common.py:62 kz_common.py:82 kz_common.py:112 kz_common.py:131
-#: kz_common.py:241 kz_common.py:255 kz_common.py:268 kz_common.py:306
+#: kz_common.py:242 kz_common.py:256 kz_common.py:269 kz_common.py:307
 #: kz-dev:90 kz-dev:203 kz-dev:218 kz-dev:235 kz-dev:257 kz-dev:279
 #: kz-update:83 kz-update:298
 msgid "Program {} encountered an error."
@@ -624,39 +624,39 @@ msgstr ""
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:147 kz_common.sh:94
+#: kz_common.py:148 kz_common.sh:95
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:153 kz_common.sh:101
+#: kz_common.py:154 kz_common.sh:102
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:207
+#: kz_common.py:208
 msgid ", or see the {} man page"
 msgstr ""
 
-#: kz_common.py:212
+#: kz_common.py:213
 msgid "Type '{} --manual' or 'man {}'{} "
 msgstr ""
 
-#: kz_common.py:214 kz_common.py:283
+#: kz_common.py:215 kz_common.py:284
 msgid "for more information."
 msgstr ""
 
-#: kz_common.py:282
+#: kz_common.py:283
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:310
+#: kz_common.py:311
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:311 kz_common.sh:193
+#: kz_common.py:312 kz_common.sh:194
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:312 kz_common.sh:194
+#: kz_common.py:313 kz_common.sh:195
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
@@ -684,45 +684,45 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:143
+#: kz_common.sh:144
 #, sh-format
 msgid ", or see the $yelp_man_url man page"
 msgstr ""
 
-#: kz_common.sh:147
+#: kz_common.sh:148
 #, sh-format
 msgid ""
 "Type '$program_name --manual' or 'man $program_name'$yelp_man for more "
 "information."
 msgstr ""
 
-#: kz_common.sh:177
+#: kz_common.sh:178
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:191
+#: kz_common.sh:192
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:285 kz-get:85
+#: kz_common.sh:287 kz-get:85
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:288
+#: kz_common.sh:290
 #, sh-format
 msgid ""
 "Error $rc on line $lineno in function $function while executing command: "
 "$command"
 msgstr ""
 
-#: kz_common.sh:292 kz_common.sh:295 kz-get:76
+#: kz_common.sh:294 kz_common.sh:297 kz-get:76
 msgid "Use \"journalctl -xe\" to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:296 kz-get:77
+#: kz_common.sh:298 kz-get:77
 msgid "The last few lines of the log are displayed here."
 msgstr ""
 
@@ -730,7 +730,7 @@ msgstr ""
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:333
+#: kz_common.sh:335
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""

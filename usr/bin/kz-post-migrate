@@ -69,4 +69,4 @@ printf '\n%s\n' "$text"
 find_files 'delete'
 
 text=$(gettext 'Complete!')
-printf "$GREEN%s$NORMAL\n" "$text"
+printf "${GREEN}%s${NORMAL}\n" "$text"

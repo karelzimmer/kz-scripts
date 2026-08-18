@@ -54,7 +54,7 @@ kz.errmsg() {
                 --msgbox    "\Zb\Z1$*\Zn"   \
                 0 0                         || true
     else
-        printf "$RED%b$NORMAL\n" "$*" >&2
+        printf "${RED}%b${NORMAL}\n" "$*" >&2
     fi
 }
 
@@ -86,18 +86,19 @@ kz.infomsg() {
 
 # This function performs initial actions.
 kz.init() {
+    local bold='\033[1m'
     local text=''
 
     # Check if systemd is available .
     if ! type systemctl &> /dev/null; then
-        printf  "$RED%s$NORMAL\n"   \
+        printf  "${RED}%s${NORMAL}\n"   \
                 "$(gettext 'fatal: no systemd available')" >&2
         exit 1
     fi
 
     # Check if os release is available.
     if ! [[ -f /etc/os-release ]]; then
-        printf  "$RED%s$NORMAL\n"   \
+        printf  "${RED}%s${NORMAL}\n"   \
                 "$(gettext 'fatal: no os release available')" >&2
         exit 1
     fi
@@ -116,7 +117,7 @@ kz.init() {
     trap 'kz.term sigint  $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGINT
     trap 'kz.term sigterm $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGTERM
 
-    text="START logging for script $PROGRAM_NAME"
+    text="${bold}START logging for script $PROGRAM_NAME${NORMAL}"
     kz.logmsg "$text"
     text="Started ($0 $* as $USER)."
     kz.logmsg "$text"
@@ -207,6 +208,7 @@ kz.term() {
     local -i rc=$5
 
     local -i rc_desc_signalno=0
+    local bold='\033[1m'
     local rc_desc=''
     local status=$rc/FAILURE
     local text=''
@@ -319,7 +321,7 @@ $(gettext "The last few lines of the log are displayed here.")
             fi
             text="Ended (code=exited, status=$status)."
             kz.logmsg "$text"
-            text="END logging for script $PROGRAM_NAME"
+            text="${bold}END logging for script $PROGRAM_NAME${NORMAL}"
             kz.logmsg "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGTERM
             exit "$rc"
