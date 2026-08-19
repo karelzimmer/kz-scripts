@@ -33,7 +33,6 @@ readonly NORMAL='\033[0m'
 
 # This function returns an error message.
 kz.errmsg() {
-    kz.logmsg "${RED}$*${NORMAL}"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
         zenity  --error                     \
@@ -61,7 +60,6 @@ kz.errmsg() {
 
 # This function returns an informational message.
 kz.infomsg() {
-    kz.logmsg "$*"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         zenity  --info                      \
                 --no-markup                 \

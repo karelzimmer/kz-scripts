@@ -41,7 +41,6 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an error message.
     """
-    logmsg(PROGRAM_NAME, f'{RED}{TEXT}{NORMAL}')
     if UI_MODE == 'gui':
         zenity: str = f'zenity      --error                         \
                                     --no-markup                     \
@@ -91,7 +90,6 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an informational message.
     """
-    logmsg(PROGRAM_NAME, TEXT)
     if UI_MODE == 'gui':
         zenity: str = f'zenity      --info                          \
                                     --no-markup                     \
@@ -166,6 +164,7 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     This function records a message to the log.
     """
     grey: str = '\033[90m'
+    payload: bytes
     sock: socket.socket
 
     # This also works fine...
