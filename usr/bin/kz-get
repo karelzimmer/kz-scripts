@@ -62,13 +62,6 @@ init() {
 }
 
 
-# This function returns an error message.
-errmsg() {
-    logmsg "${RED}$*${NORMAL}"
-    printf "${RED}%b${NORMAL}\n" "$*" >&2
-}
-
-
 # This function reports errors.
 # shellcheck disable=SC2317,SC2329
 err_report() {
@@ -83,22 +76,7 @@ $(gettext "The last few lines of the log are displayed here.")"
                 --pager-end \
                 --identifier="$PROGRAM_NAME"
     text="$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
-    errmsg "$text"
-}
-
-
-# This function returns an informational message.
-infomsg() {
-    logmsg "$*"
-    printf '%b\n' "$*"
-}
-
-
-# This function records a message to the log.
-logmsg() {
-    local grey='\033[90m'
-
-    printf "${grey}%b${NORMAL}\n" "$*" |& $PROGRAM_LOGS
+    printf "${RED}%b${NORMAL}\n" "$text" >&2
 }
 
 
@@ -112,7 +90,7 @@ process() {
     elif grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         process_kz_rpm_package
     else
-        errmsg 'fatal: unknown os release'
+        printf "${RED}%b${NORMAL}\n" 'fatal: unknown os release' >&2
         exit 1
     fi
 }
@@ -128,7 +106,7 @@ become_check() {
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
-        infomsg "${GREEN}$text${NORMAL}"
+        printf "${GREEN}%b${NORMAL}\n" "$text"
         exit 0
     fi
 }
@@ -177,6 +155,14 @@ process_kz_deb_package() {
     logmsg "Installing $kz_deb_site_file..."
     check_debian_package_manager
     sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
+}
+
+
+# This function records a message to the log.
+logmsg() {
+    local grey='\033[90m'
+
+    printf "${grey}%b${NORMAL}\n" "$*" |& $PROGRAM_LOGS
 }
 
 
@@ -244,7 +230,7 @@ https://karelzimmer.nl/en.")\n\n"
 ${NORMAL}\n"
     fi
     text+="\n$line"
-    infomsg "$text"
+    printf '%b\n' "$text"
 
     exit 0
 }
