@@ -184,7 +184,6 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
         f"SYSLOG_IDENTIFIER={PROGRAM_NAME}\n"
         f"MESSAGE={grey}{message}{NORMAL}\n"
         ).encode('utf-8')
-    print(f"[{PROGRAM_NAME}] {payload}") # DEBUG
 
     # Connect to the local systemd journal socket.
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
