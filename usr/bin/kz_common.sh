@@ -133,9 +133,9 @@ kz.logmsg() {
 
     # If the log message contains unexpected characters such as line breaks,
     # the parser may consider the log line corrupt and *silently* ignore it.
-    # Hence, replace all Newlines (\n) with NL, all Carriage Returns (\r) with
-    # CR, and all Tabs (\t) with TAB.
-    message="${message//$'\n'/NL}"
+    # Hence, replace all Line Feeds (\n) with LF, all Carriage Returns (\r)
+    # with CR, and all Tabs (\t) with TAB.
+    message="${message//$'\n'/LF}"
     message="${message//$'\r'/CR}"
     message="${message//$'\t'/TAB}"
 
