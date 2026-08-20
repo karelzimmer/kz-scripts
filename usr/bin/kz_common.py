@@ -175,8 +175,10 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     # journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
     # ...but not on older distributions, e.g. Rocky Linux 8.
 
-    # Replace all Newlines (\n) with NL, all Carriage Returns (\r) with CR, and
-    # all Tabs (\t) with TAB
+    # If the log message contains unexpected characters such as line breaks,
+    # the parser may consider the log line corrupt and *silently* ignore it.
+    # Hence, replace all Newlines (\n) with NL, all Carriage Returns (\r) with
+    # CR, and all Tabs (\t) with TAB.
     message = TEXT.replace('\n', 'NL').replace('\r', 'CR').replace('\t', 'TAB')
 
     # Build the structured journal data package (field radius separated by \n).
