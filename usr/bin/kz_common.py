@@ -41,6 +41,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an error message.
     """
+    logmsg(PROGRAM_NAME, f'{RED}{TEXT}{NORMAL}')
     if UI_MODE == 'gui':
         zenity: str = f'zenity      --error                         \
                                     --no-markup                     \
@@ -90,6 +91,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an informational message.
     """
+    logmsg(PROGRAM_NAME, TEXT)
     if UI_MODE == 'gui':
         zenity: str = f'zenity      --info                          \
                                     --no-markup                     \
@@ -164,6 +166,7 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     This function records a message to the log.
     """
     grey: str = '\033[90m'
+    message: str = ''
     payload: bytes
     sock: socket.socket
 
@@ -172,11 +175,16 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     # journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
     # ...but not on older distributions, e.g. Rocky Linux 8.
 
+    # Replace all Newlines (\n) with NL, all Carriage Returns (\r) with CR, and
+    # all Tabs (\t) with TAB
+    message = TEXT.replace('\n', 'NL').replace('\r', 'CR').replace('\t', 'TAB')
+
     # Build the structured journal data package (field radius separated by \n).
     payload = (
         f"SYSLOG_IDENTIFIER={PROGRAM_NAME}\n"
-        f"MESSAGE={grey}{TEXT}{NORMAL}\n"
+        f"MESSAGE={grey}{message}{NORMAL}\n"
         ).encode('utf-8')
+    print(f"[{PROGRAM_NAME}] {payload}") # DEBUG
 
     # Connect to the local systemd journal socket.
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)

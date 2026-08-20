@@ -33,6 +33,7 @@ readonly NORMAL='\033[0m'
 
 # This function returns an error message.
 kz.errmsg() {
+    kz.logmsg "${RED}$*${NORMAL}"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
         zenity  --error                     \
@@ -60,6 +61,7 @@ kz.errmsg() {
 
 # This function returns an informational message.
 kz.infomsg() {
+    kz.logmsg "$*"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         zenity  --info                      \
                 --no-markup                 \
@@ -125,8 +127,18 @@ kz.init() {
 # This function records a message to the log.
 kz.logmsg() {
     local grey='\033[90m'
+    local message=''
 
-    printf "${grey}%b${NORMAL}\n" "$*" |& $PROGRAM_LOGS
+    message=$*
+
+    # 1. Replace all Newlines (\n) with NL.
+    message="${message//$'\n'/NL}"
+    # 2. Replace all Carriage Returns (\r) with CR.
+    message="${message//$'\r'/CR}"
+    # 3. Replace all Tabs (\t) with TAB.
+    message="${message//$'\t'/TAB}"
+
+    printf "${grey}%b${NORMAL}\n" "$message" |& $PROGRAM_LOGS
 }
 
 
