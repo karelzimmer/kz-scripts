@@ -193,7 +193,7 @@ def perform_upgrade_debs() -> None:
     """
     command: str
 
-    command = 'sudo apt-get --assume-yes upgrade'
+    command = 'sudo apt-get --assume-yes full-upgrade'
     perform_command(command)
 
 
