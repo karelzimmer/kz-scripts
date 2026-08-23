@@ -14,6 +14,7 @@
 import getopt
 import gettext
 import kz_common as kz
+import os
 import subprocess
 import sys
 import time
@@ -115,6 +116,8 @@ def process() -> None:
         text = _('fatal: unknown os release')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
+
+    check_reboot()
 
 
 def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
@@ -326,6 +329,25 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
             time.sleep(1)
 
     return 0
+
+
+def check_reboot() -> None:
+    path: str = "/var/run/reboot-required"
+    text: str
+
+    # Controleer of het bestand bestaat
+    if os.path.exists(path):
+        text = f'{_('⚠️ System needs to restart!')}'
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+
+        # Read which packages cause the restart.
+        with open(path, 'r') as f:
+            text = f'{_('Packages that cause the restart:')}'
+            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+            print(f.read().strip())
+    else:
+        text = f'{_('✅ No restart needed.')}'
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
 def term() -> None:

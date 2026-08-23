@@ -38,7 +38,7 @@ msgid "Usage: kz [OPTIONS] COMMAND [ARGUMENTS]"
 msgstr "Gebruik: kz [OPTIES] OPDRACHT [ARGUMENTEN]"
 
 #: kz:45 kz-backup:37 kz-build:40 kz-check:40 kz-deploy:40 kz-desktop:38
-#: kz-dev:43 kz-install:39 kz-menu:35 kz-restore:37 kz-setup:39 kz-update:42
+#: kz-dev:43 kz-install:39 kz-menu:35 kz-restore:37 kz-setup:39 kz-update:43
 #: kz-wifi:44
 msgid "Options:"
 msgstr "Opties:"
@@ -48,25 +48,25 @@ msgid "  -l, --list     show available commands"
 msgstr "  -l, --list     toon beschikbare opdrachten"
 
 #: kz:46 kz-backup:43 kz-build:42 kz-check:41 kz-deploy:42 kz-desktop:48
-#: kz-dev:44 kz-install:49 kz-menu:38 kz-restore:43 kz-setup:49 kz-update:43
+#: kz-dev:44 kz-install:49 kz-menu:38 kz-restore:43 kz-setup:49 kz-update:44
 #: kz-wifi:47
 msgid "  -h, --help     show this help text"
 msgstr "  -h, --help     toon deze hulptekst"
 
 #: kz:48 kz-backup:44 kz-build:43 kz-check:42 kz-deploy:43 kz-desktop:50
-#: kz-dev:45 kz-install:51 kz-menu:39 kz-restore:44 kz-setup:51 kz-update:44
+#: kz-dev:45 kz-install:51 kz-menu:39 kz-restore:44 kz-setup:51 kz-update:45
 #: kz-wifi:48
 msgid "  -m, --manual   show manual page"
 msgstr "  -m, --manual   toon handleidingpagina"
 
 #: kz:49 kz-backup:48 kz-build:44 kz-check:43 kz-deploy:44 kz-desktop:52
-#: kz-dev:46 kz-install:55 kz-menu:41 kz-restore:48 kz-setup:55 kz-update:45
+#: kz-dev:46 kz-install:55 kz-menu:41 kz-restore:48 kz-setup:55 kz-update:46
 #: kz-wifi:50
 msgid "  -u, --usage    show a short usage summary"
 msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
 
 #: kz:50 kz-backup:49 kz-build:45 kz-check:44 kz-deploy:45 kz-desktop:53
-#: kz-dev:47 kz-install:56 kz-menu:42 kz-restore:49 kz-setup:56 kz-update:46
+#: kz-dev:47 kz-install:56 kz-menu:42 kz-restore:49 kz-setup:56 kz-update:47
 #: kz-wifi:51
 msgid "  -v, --version  show program version"
 msgstr "  -v, --version  toon de programmaversie"
@@ -93,21 +93,21 @@ msgstr "opdracht is vereist"
 
 #: kz:113 kz_common.py:56 kz_common.py:76 kz_common.py:106 kz_common.py:125
 #: kz_common.py:244 kz_common.py:258 kz_common.py:271 kz-dev:84 kz-dev:197
-#: kz-dev:212 kz-dev:229 kz-dev:251 kz-dev:273 kz-dev:317 kz-update:77
-#: kz-update:292
+#: kz-dev:212 kz-dev:229 kz-dev:251 kz-dev:273 kz-dev:317 kz-update:78
+#: kz-update:296
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz_common.py:62 kz_common.py:82 kz_common.py:112 kz_common.py:131
 #: kz_common.py:250 kz_common.py:264 kz_common.py:277 kz_common.py:315
 #: kz-dev:90 kz-dev:203 kz-dev:218 kz-dev:235 kz-dev:257 kz-dev:279
-#: kz-update:83 kz-update:298
+#: kz-update:84 kz-update:302
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:173 kz-backup:162 kz-build:165 kz-check:132 kz-deploy:137 kz-desktop:198
 #: kz-dev:166 kz-install:269 kz-menu:190 kz-restore:162 kz-setup:256
-#: kz-update:167 kz-wifi:148
+#: kz-update:171 kz-wifi:148
 msgid "internal error"
 msgstr "interne fout"
 
@@ -180,7 +180,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:170 kz-build:173 kz-check:140 kz-deploy:145 kz-desktop:206
-#: kz-dev:173 kz-menu:198 kz-restore:170 kz-update:174 kz-wifi:155
+#: kz-dev:173 kz-menu:198 kz-restore:170 kz-update:178 kz-wifi:155
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -361,6 +361,14 @@ msgstr "4. Selecteer avatar.ico in Persoonlijke map / Instellingen,"
 #: kz-backup:520
 msgid "   or another picture file."
 msgstr "   of een ander afbeeldingsbestand."
+
+#: kz-backup:534
+msgid "START list of favorite apps in the dash"
+msgstr "BEGIN lijst met favoriete apps in de dash"
+
+#: kz-backup:535
+msgid "END list of favorite apps in the dash"
+msgstr "EINDE lijst met favoriete apps in de dash"
 
 #: kz-backup:577
 msgid "To set the desktop background:"
@@ -1596,32 +1604,44 @@ msgstr ""
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
-#: kz-update:31
+#: kz-update:32
 msgid "Update and cleanup the system"
 msgstr "Het systeem bijwerken en opschonen"
 
-#: kz-update:34
+#: kz-update:35
 msgid "Usage: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 msgstr ""
 "Gebruik: kz update [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
-#: kz-update:38
+#: kz-update:39
 msgid "Usage: kz update [OPTIONS]"
 msgstr "Gebruik: kz update [OPTIES]"
 
-#: kz-update:90
+#: kz-update:91
 msgid "Update..."
 msgstr "Bijwerken..."
 
-#: kz-update:93 kz-update:105
+#: kz-update:94 kz-update:106
 msgid "Upgrade..."
 msgstr "Opwaarderen..."
 
-#: kz-update:99 kz-update:111
+#: kz-update:100 kz-update:112
 msgid "Cleanup..."
 msgstr "Opruimen..."
 
-#: kz-update:115
+#: kz-update:341
+msgid "⚠️ System needs to restart!"
+msgstr "⚠️ Systeem moet herstarten!"
+
+#: kz-update:346
+msgid "Packages that cause the restart:"
+msgstr "Pakketten die de herstart veroorzaken:"
+
+#: kz-update:350
+msgid "✅ No restart needed."
+msgstr "✅ Geen herstart nodig."
+
+#: kz-update:116
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os-release"
 
@@ -1755,14 +1775,6 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
 #: kz-build:566 kz-check:605 kz-deploy:318 kz-dev:338 kz-post-migrate:71
-#: kz-update:337
+#: kz-update:360
 msgid "Complete!"
 msgstr "Klaar!"
-
-#: kz-backup:534
-msgid "START list of favorite apps in the dash"
-msgstr "BEGIN lijst met favoriete apps in de dash"
-
-#: kz-backup:535
-msgid "END list of favorite apps in the dash"
-msgstr "EINDE lijst met favoriete apps in de dash"
