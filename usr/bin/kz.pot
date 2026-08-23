@@ -1561,7 +1561,7 @@ msgid "Cleanup..."
 msgstr ""
 
 #: kz-update:340
-msgid "⚠️ System needs to restart!"
+msgid "System needs to restart!"
 msgstr ""
 
 #: kz-update:345
@@ -1569,7 +1569,7 @@ msgid "Packages that cause the restart:"
 msgstr ""
 
 #: kz-update:349
-msgid "✅ No restart needed."
+msgid "No restart needed."
 msgstr ""
 
 #: kz-update:116

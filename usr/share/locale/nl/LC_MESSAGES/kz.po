@@ -1630,16 +1630,16 @@ msgid "Cleanup..."
 msgstr "Opruimen..."
 
 #: kz-update:340
-msgid "⚠️ System needs to restart!"
-msgstr "⚠️ Systeem moet herstarten!"
+msgid "System needs to restart!"
+msgstr "Systeem moet herstarten!"
 
 #: kz-update:345
 msgid "Packages that cause the restart:"
 msgstr "Pakketten die de herstart veroorzaken:"
 
 #: kz-update:349
-msgid "✅ No restart needed."
-msgstr "✅ Geen herstart nodig."
+msgid "No restart needed."
+msgstr "Geen herstart nodig."
 
 #: kz-update:116
 msgid "fatal: unknown os release"
