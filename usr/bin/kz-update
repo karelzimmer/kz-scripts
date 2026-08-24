@@ -338,7 +338,7 @@ def check_reboot() -> None:
     # Controleer of het bestand bestaat
     if os.path.exists(path):
         text = f'{_('System needs to restart!')}'
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
         # Read which packages cause the restart.
         with open(path, 'r') as f:
