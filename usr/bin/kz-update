@@ -332,7 +332,7 @@ def check_debian_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
 
 
 def check_reboot() -> None:
-    path: str = "/var/run/reboot-required"
+    path: str = '/var/run/reboot-required'
     text: str
 
     # Controleer of het bestand bestaat
