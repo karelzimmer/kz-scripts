@@ -41,84 +41,34 @@ More examples can be seen through the \fBkz setup --browse\fR and
 .LP
 .B Table 1. Record types and their processing
 .TS
-allbox tab(:);
-lb | lb.
-T{
-Record
-T}:T{
-Description
-T}
-.T&
-l | l
-l | l.
-T{
-# Setup: APP | HOST... | DESCRIPTION
-T}:T{
-Set up the app (\fBapp-record\fR), will be processed.
-T}
-T{
-# Comment
-T}:T{
-Comment line (none, one or more), will be skipped.
-T}
-T{
-Command
-T}:T{
-Setup command (one or more \fBcommand record\fRs), will be executed.
-T}
-T{
-T}:T{
-Empty line (none, one or more), will be skipped.
-T}
-T{
-# Reset: APP | HOST... | DESCRIPTION
-T}:T{
-Reset the app (\fBapp-record\fR for option \fB-r\fR, \fB--reset\fR), will be
-processed.
-T}
-T{
-Command
-T}:T{
-Reset command (one or more \fBcommand record\fRs), will be executed.
-T}
+allbox tab(^);
+lbx lbx
+l l.
+Record^Description
+# Setup: APP | HOST... | DESCRIPTION^Set up the app (\fBapp-record\fR), will b\
+e processed.
+# Comment^Comment line (none, one or more), will be skipped.
+Command^Setup command (one or more \fBcommand record\fRs), will be executed.
+^Empty line (none, one or more), will be skipped.
+# Reset: APP | HOST... | DESCRIPTION^Reset the app (\fBapp-record\fR for optio\
+n \fB-r\fR, \fB--reset\fR), will be processed.
+Command^Reset command (one or more \fBcommand record\fRs), will be executed.
 .TE
 .LP
 .B Table 2. Example of records and their processing
 .TS
-box tab(:);
-lb | lb.
-T{
-Record
-T}:T{
-Description
-T}
-.T&
+box tab(^);
+lbx | lbx
 - | -
-l | l
 l | l.
-T{
-# Setup: calibre | * | Powerful and easy to use e-book manager
-T}:T{
-Set up calibre on every computer, see [1].
-T}
-T{
-kz-desktop --addbef=calibre-gui
-T}:T{
-Setup command for calibre.
-T}
-T{
-T}:T{
-T}
-T{
-# Reset: calibre | * | Powerful and easy to use e-book manager
-T}:T{
-Reset calibre on every computer, see [1].
-T}
-T{
-kz-desktop --delete=calibre-gui
-T}:T{
-Reset command for calibre.
-T}
+Record^Description
+# Setup: calibre | * | Powerful and easy to use e-book manager^Set up calibre \
+on every computer, see [1].
+kz-desktop --addbef=calibre-gui^Setup command for calibre.
+^
+# Reset: calibre | * | Powerful and easy to use e-book manager^Reset calibre o\
+n every computer, see [1].
+kz-desktop --delete=calibre-gui^Reset command for calibre.
 .TE
 .sp
 [1]

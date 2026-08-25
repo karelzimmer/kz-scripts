@@ -41,84 +41,36 @@ Meer voorbeelden zijn te zien met de opdrachten \fBkz install --browse\fR en
 .LP
 .B Tabel 1. Soorten regels en hun verwerking
 .TS
-allbox tab(:);
-lb | lb.
-T{
-Regel
-T}:T{
-Beschrijving
-T}
-.T&
-l | l
+allbox tab(^);
+lbx | lbx
 l | l.
-T{
-# Install: APP | HOST... | BESCHRIJVING
-T}:T{
-De app installeren (\fBapp-regel\fR), wordt verwerkt.
-T}
-T{
-# Commentaar
-T}:T{
-Commentaarregel (geen, één of meer), wordt overgeslagen.
-T}
-T{
-Opdracht
-T}:T{
-Installatie-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
-T}
-T{
-T}:T{
-Lege regel (geen, één of meer), wordt overgeslagen.
-T}
-T{
-# Remove: APP | HOST... | BESCHRIJVING
-T}:T{
-De app verwijderen (\fBapp-regel\fR voor optie \fB-r\fR, \fB--remove\fR), wordt
-verwerkt.
-T}
-T{
-Opdracht
-T}:T{
-Verwijder-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
-T}
+Regel^Beschrijving
+# Install: APP | HOST... | BESCHRIJVING^De app installeren (\fBapp-regel\fR), \
+wordt verwerkt.
+# Commentaar^Commentaarregel (geen, één of meer), wordt overgeslagen.
+Opdracht^Installatie-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitge\
+voerd.
+^Lege regel (geen, één of meer), wordt overgeslagen.
+# Remove: APP | HOST... | BESCHRIJVING^De app verwijderen (\fBapp-regel\fR voo\
+r optie \fB-r\fR, \fB--remove\fR), wordt verwerkt.
+Opdracht^Verwijder-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevo\
+erd.
 .TE
 .LP
 .B Tabel 2. Voorbeeld van regels en hun verwerking
 .TS
-box tab(:);
-lb | lb.
-T{
-Regel
-T}:T{
-Beschrijving
-T}
-.T&
+box tab(^);
+lbx | lbx
 - | -
-l | l
 l | l.
-T{
-# Install: calibre | * | Powerful and easy to use e-book manager
-T}:T{
-Calibre installeren op iedere computer, zie [1].
-T}
-T{
-sudo apt-get install --assume-yes calibre
-T}:T{
-Installatie-opdracht voor calibre.
-T}
-T{
-T}:T{
-T}
-T{
-# Remove: calibre | * | Powerful and easy to use e-book manager
-T}:T{
-Verwijder calibre van iedere computer, zie [1].
-T}
-T{
-sudo apt-get remove --assume-yes calibre
-T}:T{
-Verwijder-opdracht voor calibre.
-T}
+Regel^Beschrijving
+# Install: calibre | * | Powerful and easy to use e-book manager^Calibre insta\
+lleren op iedere computer, zie [1].
+sudo apt-get install --assume-yes calibre^Installatie-opdracht voor calibre.
+^
+# Remove: calibre | * | Powerful and easy to use e-book manager^Verwijder cali\
+bre van iedere computer, zie [1].
+sudo apt-get remove --assume-yes calibre^Verwijder-opdracht voor calibre.
 .TE
 .sp
 [1]

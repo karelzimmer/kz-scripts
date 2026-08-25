@@ -40,84 +40,34 @@ More examples can be seen through the \fBkz install --browse\fR and
 .LP
 .B Table 1. Record types and their processing
 .TS
-allbox tab(:);
-lb | lb.
-T{
-Record
-T}:T{
-Description
-T}
-.T&
-l | l
+allbox tab(^);
+lbx | lbx
 l | l.
-T{
-# Install: APP | HOST... | DESCRIPTION
-T}:T{
-Install the app (\fBapp record\fR), will be processed.
-T}
-T{
-# Comment
-T}:T{
-Comment line (none, one or more), will be skipped.
-T}
-T{
-Command
-T}:T{
-Install app command (one or more \fBcommand record\fRs), will be executed.
-T}
-T{
-T}:T{
-Empty line (none, one or more), will be skipped.
-T}
-T{
-# Remove: APP | HOST... | DESCRIPTION
-T}:T{
-Remove the app (\fBapp record\fR for option \fB-r\fR, \fB--remove\fR), will be
-processed.
-T}
-T{
-Command
-T}:T{
-Remove app command (one or more \fBcommand record\fRs), will be executed.
-T}
+Record^Description
+# Install: APP | HOST... | DESCRIPTION^Install the app (\fBapp record\fR), wil\
+l be processed.
+# Comment^Comment line (none, one or more), will be skipped.
+Command^Install command (one or more \fBcommand record\fRs), will be executed.
+^Empty line (none, one or more), will be skipped.
+# Remove: APP | HOST... | DESCRIPTION^Remove the app (\fBapp record\fR for opt\
+ion \fB-r\fR, \fB--remove\fR), will be processed.
+Command^Remove command (one or more \fBcommand record\fRs), will be executed.
 .TE
 .LP
 .B Table 2. Example of records and their processing
 .TS
-box tab(:);
-lb | lb.
-T{
-Record
-T}:T{
-Description
-T}
-.T&
+box tab(^);
+lbx | lbx
 - | -
-l | l
 l | l.
-T{
-# Install: calibre | * | Powerful and easy to use e-book manager
-T}:T{
-Install calibre on every computer, see [1].
-T}
-T{
-sudo apt-get install --assume-yes calibre
-T}:T{
-Install command for calibre.
-T}
-T{
-T}:T{
-T}
-T{
-# Remove: calibre | * | Powerful and easy to use e-book manager
-T}:T{
-Remove calibre on every computer, see [1].
-T}
-T{
-sudo apt-get remove --assume-yes calibre
-T}:T{
-Remove command for calibre.
-T}
+Record^Description
+# Install: calibre | * | Powerful and easy to use e-book manager^Install calib\
+re on every computer, see [1].
+sudo apt-get install --assume-yes calibre^Install command for calibre.
+^
+# Remove: calibre | * | Powerful and easy to use e-book manager^Remove calibre\
+ on every computer, see [1].
+sudo apt-get remove --assume-yes calibre^Remove command for calibre.
 .TE
 .sp
 [1]

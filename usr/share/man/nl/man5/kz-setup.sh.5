@@ -42,84 +42,34 @@ Meer voorbeelden zijn te zien met de opdrachten \fBkz setup --browse\fR en
 .LP
 .B Tabel 1. Soorten regels en hun verwerking
 .TS
-allbox tab(:);
-lb | lb.
-T{
-Regel
-T}:T{
-Beschrijving
-T}
-.T&
-l | l
+allbox tab(^);
+lbx | lbx
 l | l.
-T{
-# Setup: APP | HOST... | BESCHRIJVING
-T}:T{
-De app instellen (\fBapp-regel\fR), wordt verwerkt.
-T}
-T{
-# Commentaar
-T}:T{
-Commentaarregel (geen, één of meer), wordt overgeslagen.
-T}
-T{
-Opdracht
-T}:T{
-Instel-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
-T}
-T{
-T}:T{
-Lege regel (geen, één of meer), wordt overgeslagen.
-T}
-T{
-# Reset: APP | HOST... | BESCHRIJVING
-T}:T{
-De app resetten (\fBapp-regel\fR voor optie \fB-r\fR, \fB--reset\fR), wordt
-verwerkt.
-T}
-T{
-Opdracht
-T}:T{
-Reset-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
-T}
+Regel^Beschrijving
+# Setup: APP | HOST... | BESCHRIJVING^De app instellen (\fBapp-regel\fR), word\
+t verwerkt.
+# Commentaar^Commentaarregel (geen, één of meer), wordt overgeslagen.
+Opdracht^Instel-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
+^Lege regel (geen, één of meer), wordt overgeslagen.
+# Reset: APP | HOST... | BESCHRIJVING^De app resetten (\fBapp-regel\fR voor op\
+tie \fB-r\fR, \fB--reset\fR), wordt verwerkt.
+Opdracht^Reset-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
 .TE
 .LP
 .B Tabel 2. Voorbeeld van regels en hun verwerking
 .TS
-box tab(:);
-lb | lb.
-T{
-Regel
-T}:T{
-Beschrijving
-T}
-.T&
+box tab(^);
+lbx | lbx
 - | -
-l | l
 l | l.
-T{
-# Setup: calibre | * | Powerful and easy to use e-book manager
-T}:T{
-Calibre instellen op iedere computer, zie [1].
-T}
-T{
-kz-desktop --addbef=calibre-gui
-T}:T{
-Instel-opdracht voor calibre.
-T}
-T{
-T}:T{
-T}
-T{
-# Reset: calibre | * | Powerful and easy to use e-book manager
-T}:T{
-Reset calibre op iedere computer, zie [1].
-T}
-T{
-kz-desktop --delete=calibre-gui
-T}:T{
-Reset-opdracht voor calibre.
-T}
+Regel^Beschrijving
+# Setup: calibre | * | Powerful and easy to use e-book manager^Calibre instell\
+en op iedere computer, zie [1].
+kz-desktop --addbef=calibre-gui^Instel-opdracht voor calibre.
+^
+# Reset: calibre | * | Powerful and easy to use e-book manager^Calibre resette\
+n op iedere computer, zie [1].
+kz-desktop --delete=calibre-gui^Reset-opdracht voor calibre.
 .TE
 .sp
 [1]
