@@ -71,6 +71,15 @@ sudo apt-get install --assume-yes calibre^Installatie-opdracht voor calibre.
 # Remove: calibre | * | Powerful and easy to use e-book manager^Verwijder cali\
 bre van iedere computer, zie [1].
 sudo apt-get remove --assume-yes calibre^Verwijder-opdracht voor calibre.
+^
+^
+# Install: vscode | pc06 pc07 | Code editing. Redefined^Vscode installeren op \
+pc06 en pc07, zie [2].
+sudo apt-get install --assume-yes code^Installatie-opdracht voor vscode.
+
+# Remove: vscode | pc06 pc07 | Code editing. Redefined^Verwijder vscode van pc\
+06 en pc07, zie [2].
+sudo apt-get remove --assume-yes code^Verwijder-opdracht voor vscode.
 .TE
 .sp
 [1]
@@ -87,32 +96,12 @@ opdrachten standaard alleen op pc01 en pc02 worden uitgevoerd.
 Een regel met '#none' als HOST zorgt ervoor dat de bijbehorende opdrachten
 standaard niet worden uitgevoerd (OPMERKING: '#none' is geen geldige
 computernaam en wordt daarom nooit standaard geselecteerd).
+.sp
+[2]
 .br
-Een app kan alsnog worden geïnstalleerd met de opdracht 'kz install APP',
-zoals 'kz install calibre', in dat geval wordt de inhoud van HOST genegeerd.
-
-.SH VOORBEELDEN
-.EX
-# Install: bottles | pc06 pc07 | Run Windows software
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-\
-release; then sudo apt-get install --assume-yes flatpak; fi
-#
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /e\
-tc/os-release; then sudo dnf install --assumeyes flatpak; fi
-#
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exi\
-sts flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com\
-.usebottles.bottles; fi
-#
-REBOOT=true
-
-# Remove: bottles | pc06 pc07 | Run Windows software
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes c\
-om.usebottles.bottles; fi
-#
-REBOOT=true
-.EE
+Een app kan alsnog worden geïnstalleerd op een andere computer met de
+opdracht 'kz install APP', zoals 'kz install vscode'. In dat geval wordt de
+inhoud van HOST genegeerd.
 
 .SH ZIE OOK
 \fBkz-install\fR(1),

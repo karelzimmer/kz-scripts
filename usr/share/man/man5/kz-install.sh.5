@@ -68,6 +68,15 @@ sudo apt-get install --assume-yes calibre^Install command for calibre.
 # Remove: calibre | * | Powerful and easy to use e-book manager^Remove calibre\
  on every computer, see [1].
 sudo apt-get remove --assume-yes calibre^Remove command for calibre.
+^
+^
+# Install: vscode | pc06 pc07 | Code editing. Redefined^Install vscode on pc06\
+ and pc07, see [2].
+sudo apt-get install --assume-yes code^Install command for vscode.
+
+# Remove: vscode | pc06 pc07 | Code editing. Redefined^Remove vscode from pc06\
+ and pc07, see [2].
+sudo apt-get remove --assume-yes code^Remove command for vscode.
 .TE
 .sp
 [1]
@@ -84,33 +93,12 @@ executed only on pc01 and pc02 by default.
 A line with '#none' as HOST ensures that the associated commands are not
 executed on any computer by default (NOTE: '#none' is not a valid computername
 and will therefore never be selected by default).
-.br
-The app can still be installed on another computer with the command 'kz install
-APP', e.g. 'kz install calibre', in that case, the content of HOST is ignored.
 .sp
-
-.SH EXAMPLES
-.EX
-# Install: bottles | pc06 pc07 | Run Windows software
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-\
-release; then sudo apt-get install --assume-yes flatpak; fi
-#
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /e\
-tc/os-release; then sudo dnf install --assumeyes flatpak; fi
-#
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exi\
-sts flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com\
-.usebottles.bottles; fi
-#
-REBOOT=true
-
-# Remove: bottles | pc06 pc07 | Run Windows software
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes c\
-om.usebottles.bottles; fi
-#
-REBOOT=true
-.EE
+[2]
+.br
+An app can still be installed on another computer with the command 'kz install
+APP', e.g. 'kz install vscode'. In that case, the content of HOST is ignored.
+.sp
 
 .SH SEE ALSO
 \fBkz-install\fR(1),

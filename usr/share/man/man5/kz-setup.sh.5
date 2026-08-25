@@ -69,6 +69,15 @@ kz-desktop --addbef=calibre-gui^Setup command for calibre.
 # Reset: calibre | * | Powerful and easy to use e-book manager^Reset calibre o\
 n every computer, see [1].
 kz-desktop --delete=calibre-gui^Reset command for calibre.
+^
+^
+# Setup: vscode | pc06 pc07 | Code editing. Redefined^Set up vscode on pc06 an\
+d pc07, see [2].
+# kz-desktop --addaft=code^Setup command for vscode.
+^
+# Reset: vscode | pc06 pc07 | Code editing. Redefined^Reset vscode on pc06 and\
+ pc07, see [2].
+kz-desktop --delete=code^Reset command for vscode.
 .TE
 .sp
 [1]
@@ -85,18 +94,11 @@ executed only on pc01 and pc02 by default.
 A line with '#none' as HOST ensures that the associated commands are not
 executed by default (NOTE: '#none' is not a valid computername and will
 therefore never be selected by default).
+.sp
+[2]
 .br
-The app can still be set up on another computer with the command 'kz setup
-APP', e.g. 'kz setup calibre', in that case, the content of HOST is ignored.
-
-.SH EXAMPLES
-.EX
-# Setup: bottles | pc06 pc07 | Run Windows software
-kz-desktop --addaft=com.usebottles.bottles
-
-# Reset: bottles | pc06 pc07 | Run Windows software
-kz-desktop --delete=com.usebottles.bottles
-.EE
+An app can still be set up on another computer with the command 'kz setup
+APP', e.g. 'kz setup vscode'. In that case, the content of HOST is ignored.
 
 .SH SEE ALSO
 \fBkz-setup\fR(1),

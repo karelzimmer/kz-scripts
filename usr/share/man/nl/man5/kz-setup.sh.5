@@ -70,6 +70,15 @@ kz-desktop --addbef=calibre-gui^Instel-opdracht voor calibre.
 # Reset: calibre | * | Powerful and easy to use e-book manager^Calibre resette\
 n op iedere computer, zie [1].
 kz-desktop --delete=calibre-gui^Reset-opdracht voor calibre.
+^
+^
+# Setup: vscode | pc06 pc07 | Code editing. Redefined^Vscode instell\
+en op pc06 en pc07, zie [2].
+# kz-desktop --addaft=code^Instel-opdracht voor vscode.
+^
+# Reset: vscode | pc06 pc07 | Code editing. Redefined^Vscode resetten op pc06 \
+en pc07, zie [2].
+kz-desktop --delete=code^Reset-opdracht voor vscode.
 .TE
 .sp
 [1]
@@ -86,18 +95,12 @@ standaard alleen op pc01 en pc02 worden uitgevoerd.
 Een regel met '#none' als HOST zorgt ervoor dat de bijbehorende opdrachten
 standaard niet worden uitgevoerd (OPMERKING: '#none' is geen geldige
 computernaam en wordt daarom nooit standaard geselecteerd).
+.sp
+[2]
 .br
-Een app kan alsnog worden ingesteld met de opdracht 'kz setup APP',
-zoals 'kz setup calibre', in dat geval wordt de inhoud van HOST genegeerd.
-
-.SH VOORBEELDEN
-.EX
-# Setup: bottles | pc06 pc07 | Run Windows software
-kz-desktop --addaft=com.usebottles.bottles
-
-# Reset: bottles | pc06 pc07 | Run Windows software
-kz-desktop --delete=com.usebottles.bottles
-.EE
+Een app kan alsnog worden ingesteld op een andere computer met de opdracht  'kz
+setup APP', zoals 'kz setup vscode'. In dat geval wordt de inhoud
+van HOST genegeerd.
 
 .SH ZIE OOK
 \fBkz-setup\fR(1),
