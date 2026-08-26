@@ -187,7 +187,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
 
 def perform_install_kz() -> None:
     """
-    This function installs the latest version of the KZ scripts.
+    This function installs the latest version of the KZ package.
     """
     command: str
 
@@ -197,7 +197,8 @@ def perform_install_kz() -> None:
 
 def perform_gitpull() -> None:
     """
-    This function performs a git pull in the KZ scripts repository.
+    This function performs a git pull of all local branches in the home
+    directory.
     """
     command: str
 
