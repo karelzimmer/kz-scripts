@@ -314,7 +314,7 @@ def perform_command(command: str = '') -> None:
     exc: BaseException
     text: str
 
-    text = f'{command}...'
+    text = f'{kz.BLUE}{command}{kz.NORMAL}...'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
     check_debian_package_manager(PROGRAM_NAME, PROGRAM_DESC)
