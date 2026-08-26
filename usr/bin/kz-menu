@@ -348,8 +348,12 @@ process_menu1_choice2() {
     local text=''
     local title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
 
-    text="$LINE $title $LINE
-
+    if [[ $UI_MODE = 'cli' ]]; then
+        clear -x
+        text="$LINE $title $LINE
+"
+    fi
+    text+="
 $(gettext "Follow the steps as described in Checklist installation, Chapter \
 2.")
 $(gettext 'Checklist installation can be found on https://karelzimmer.nl/en.')
@@ -361,9 +365,6 @@ $(gettext '2. Create a bootable USB stick (see Linux info).')
 $(gettext '3. Boot the computer from this USB stick.')
 $(gettext '4. Install Linux.')
 "
-    if [[ $UI_MODE = 'cli' ]]; then
-        clear -x
-    fi
     kz.infomsg "$text"
     if [[ $UI_MODE = 'cli' ]]; then
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
