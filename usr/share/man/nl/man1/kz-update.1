@@ -20,7 +20,10 @@ kz-update - het systeem bijwerken en opschonen
 \fBkz update\fR werkt het systeem bij (update) en schoont het systeem op
 (cleanup).
 .sp
-Alle Debian- en RPM-pakketten, Flatpak-apps en snaps worden bijgewerkt.
+Pakket kz en broncode van pakket kz wordt bijgewerkt.
+.br
+Alle Debian- en RPM-pakketten, Flatpak-apps, snaps en extensies worden
+bijgewerkt.
 .sp
 Als om één of andere reden het bijwerken mislukt, op een Debian of
 Debian-gebaseerd systeem kunt u het volgende proberen:
@@ -32,8 +35,8 @@ Op een Red Hat of Red Hat-gebaseerd systeem probeer het volgende:
     sudo dnf clean all
     sudo dnf makecache
 .sp
-Als om één of andere reden een nieuwe kernel moet worden gebouwd, voer dan 'su\
-do update-initramfs -u' uit.
+Als om één of andere reden een nieuwe kernel moet worden gebouwd, voer dan "su\
+do update-initramfs -u" uit.
 .br
 De noodzaak om deze opdracht handmatig uit te voeren is alleen onder zeer
 ongebruikelijke omstandigheden - een post-installatiescript zal het automatisch

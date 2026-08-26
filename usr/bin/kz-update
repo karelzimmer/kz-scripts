@@ -85,6 +85,11 @@ def process() -> None:
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, exc.returncode)
 
+    text = f'{kz.BLUE}{_('Prepare...')}{kz.NORMAL}'
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+    perform_install_kz()
+    perform_gitpull()
+
     if subprocess.run(check_debian, executable='bash',
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                       shell=True).returncode == 0:
@@ -178,6 +183,30 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             )
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
+
+
+def perform_install_kz() -> None:
+    """
+    This function installs the latest version of the KZ scripts.
+    """
+    command: str
+
+    command = 'cd ~/; wget karelzimmer.nl/getkz; bash getkz'
+    perform_command(command)
+
+
+def perform_gitpull() -> None:
+    """
+    This function performs a git pull in the KZ scripts repository.
+    """
+    command: str
+
+    if subprocess.run('type gitpull', executable='bash',
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL,
+                      shell=True,).returncode == 0:
+        command = 'gitpull'
+        perform_command(command)
 
 
 def perform_update_debs() -> None:

@@ -19,7 +19,9 @@ kz-update - Update and cleanup the system
 .SH DESCRIPTION
 \fBkz update\fR updates and cleanup the system.
 .sp
-All Debian and RPM packages, Flatpak apps, and snaps are updated.
+Package kz and the source code of package kz are being updated.
+.br
+All Debian and RPM packages, Flatpak apps, snaps, and extensions are updated.
 .sp
 If the update fails for some reason, on a Debian or Debian-based system you can
 try the following:
@@ -31,8 +33,8 @@ On a Red Hat or Red Hat-based system try the following:
     sudo dnf clean all
     sudo dnf makecache
 .sp
-If for some reason a new kernel needs to be built, run 'sudo update-initramfs
--u'.
+If for some reason a new kernel needs to be built, run "sudo update-initramfs
+-u".
 .br
 The need to run this command manually is only under very unusual circumstances
 - a post-install script will handle it automatically when a new kernel package
