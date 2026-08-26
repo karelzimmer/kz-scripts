@@ -1634,8 +1634,8 @@ msgid "CLEANUP"
 msgstr "OPRUIMEN"
 
 #: kz-update:369
-msgid "System needs to restart!"
-msgstr "Systeem moet herstarten!"
+msgid "Please note: system needs to restart!"
+msgstr "Let op: het systeem moet herstarten!"
 
 #: kz-update:374
 msgid "Packages that cause the restart:"

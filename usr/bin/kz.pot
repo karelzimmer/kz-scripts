@@ -1565,7 +1565,7 @@ msgid "CLEANUP"
 msgstr ""
 
 #: kz-update:369
-msgid "System needs to restart!"
+msgid "Please note: system needs to restart!"
 msgstr ""
 
 #: kz-update:374
