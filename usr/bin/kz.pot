@@ -1549,19 +1549,19 @@ msgid "Usage: kz update [OPTIONS]"
 msgstr ""
 
 #: kz-update:88
-msgid "Prepare..."
+msgid "PREPARE"
 msgstr ""
 
 #: kz-update:96
-msgid "Update..."
+msgid "UPDATE"
 msgstr ""
 
 #: kz-update:99 kz-update:111
-msgid "Upgrade..."
+msgid "UPGRADE"
 msgstr ""
 
 #: kz-update:105 kz-update:117
-msgid "Cleanup..."
+msgid "CLEANUP"
 msgstr ""
 
 #: kz-update:369

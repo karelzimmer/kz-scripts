@@ -1618,20 +1618,20 @@ msgid "Usage: kz update [OPTIONS]"
 msgstr "Gebruik: kz update [OPTIES]"
 
 #: kz-update:88
-msgid "Prepare..."
-msgstr "Voorbereiden..."
+msgid "PREPARE"
+msgstr "VOORBEREIDEN"
 
 #: kz-update:96
-msgid "Update..."
-msgstr "Bijwerken..."
+msgid "UPDATE"
+msgstr "BIJWERKEN"
 
 #: kz-update:99 kz-update:111
-msgid "Upgrade..."
-msgstr "Opwaarderen..."
+msgid "UPGRADE"
+msgstr "OPWAARDEREN"
 
 #: kz-update:105 kz-update:117
-msgid "Cleanup..."
-msgstr "Opruimen..."
+msgid "CLEANUP"
+msgstr "OPRUIMEN"
 
 #: kz-update:369
 msgid "System needs to restart!"
