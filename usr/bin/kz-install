@@ -759,7 +759,7 @@ $(gettext '         COMMAND...')"
                 # App record.
                 app_seq_num=$((app_seq_num + 1))
                 app_name=$(
-                    printf  '%s\n'                  \
+                    printf  '%s'                    \
                             "$command_record"       |
                     tr      --squeeze-repeats ' '   |
                     cut     --delimiter=' '         \
