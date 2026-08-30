@@ -731,7 +731,6 @@ install_apps() {
 # This function reads commands from the command file for further processing.
 process_command_file() {
     local -i app_seq_num=0
-    local app_desc=''
     local app_line=''
     local app_name=''
     local command_record=''
@@ -766,25 +765,17 @@ $(gettext '         COMMAND...')"
                     cut     --delimiter=' '         \
                             --fields=3
                     )
-                app_desc=$(
-                    printf  '%s\n'                  \
-                            "$command_record"       |
-                    tr      --squeeze-repeats ' '   |
-                    cut     --delimiter='|'         \
-                            --fields=3
-                    )
-                printf  -v app_line            \
-                        "%3d/%-3d  %s |%s"          \
+                printf  -v app_line                 \
+                        "%3d/%-3d  %s"              \
                         "$app_seq_num"              \
                         "$app_tot_num"              \
-                        "$app_name"                 \
-                        "$app_desc"
+                        "$app_name"
                 if [[ $UI_MODE = 'cli' ]]; then
                     printf '%s\n' "$app_line"
                 fi
                 # To corrolate possible error messages with app name and
                 # description.
-                printf 'APP %s |%s\n' "$app_name" "$app_desc" >> "$ERROR_LOG"
+                printf 'APP %s\n' "$app_name" >> "$ERROR_LOG"
                 ;;
             '#'* )
                 # Skip comment record.
