@@ -220,7 +220,7 @@ $(gettext 'Connect a usb medium.')"
 
         medium=$(find "$usb_mount_point/"* -prune || true)
         # More than one medium is connected.
-        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+        if [[ $(wc --lines <<< "$medium") -gt 1 ]]; then
             # Let the user select the desired medium.
 
             title=$(gettext 'Make backup')
@@ -772,7 +772,7 @@ $users"
 
     if [[ $TARGET == $usb_mount_point* ]]; then
         medium=$(find "$usb_mount_point/"* -prune || true)
-        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+        if [[ $(wc --lines <<< "$medium") -gt 1 ]]; then
             text+="
 
 $(eval_gettext "The backup \$TARGET has been made, more than one USB medium \

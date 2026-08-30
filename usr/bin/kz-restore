@@ -220,7 +220,7 @@ $(gettext 'Connect a usb medium.')"
 
         medium=$(find "$usb_mount_point/"* -prune || true)
         # More than one medium is connected.
-        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+        if [[ $(wc --lines <<< "$medium") -gt 1 ]]; then
             # Let the user select the desired medium.
 
             title=$(gettext 'Restore backup')
@@ -295,6 +295,12 @@ $(gettext 'Connect a usb medium.')"
                         continue
                     fi
                 done
+            fi
+
+            if [[ -z $selected_medium ]]; then
+                text=$(gettext 'No USB medium selected.')
+                kz.infomsg "$text"
+                exit 0
             fi
             medium=$selected_medium
         fi
@@ -491,7 +497,7 @@ $users"
 
     if [[ $SOURCE == $usb_mount_point* ]]; then
         medium=$(find "$usb_mount_point/"* -prune || true)
-        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+        if [[ $(wc --lines <<< "$medium") -gt 1 ]]; then
             text+="
 
 $(eval_gettext "The backup \$SOURCE has been restored, more than one USB \
