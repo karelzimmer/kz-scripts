@@ -960,7 +960,9 @@ changing system settings.")"
 
     if $REBOOT; then
         if [[ $UI_MODE = 'gui' ]]; then
-            pkexec /usr/bin/kz-install-pkexec "$reboot"
+            pkexec  /usr/bin/kz-install-pkexec  \
+                    "${XDG_CURRENT_DESKTOP-}"   \
+                    "$reboot"
         else
             eval "$reboot"
         fi
