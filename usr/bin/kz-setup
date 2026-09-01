@@ -874,6 +874,9 @@ apps and changing user settings.")"
             elif type lxsession &> /dev/null; then
                 # LXDE.
                 lxde-logout
+            elif type lxqt-session &> /dev/null; then
+                # LXQt.
+                lxqt-leave --logout
             else
                 text=$(gettext 'Log out of the computer yourself.')
                 kz.infomsg "$text"
