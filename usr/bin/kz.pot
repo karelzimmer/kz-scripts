@@ -557,7 +557,7 @@ msgstr ""
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:562 kz-check:601 kz-deploy:315
+#: kz-build:562 kz-check:602 kz-deploy:315
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -604,47 +604,47 @@ msgstr ""
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
-#: kz-check:387
+#: kz-check:388
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:411
+#: kz-check:412
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:423
+#: kz-check:424
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:434
+#: kz-check:435
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:445
+#: kz-check:446
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:465 kz-check:475
+#: kz-check:466 kz-check:476
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr ""
 
-#: kz-check:510
+#: kz-check:511
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:565
+#: kz-check:566
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:584
+#: kz-check:585
 msgid "End spaces found."
 msgstr ""
 
@@ -1717,7 +1717,7 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:566 kz-check:605 kz-deploy:319 kz-dev:338 kz-post-migrate:71
+#: kz-build:566 kz-check:606 kz-deploy:319 kz-dev:338 kz-post-migrate:71
 #: kz-update:389
 msgid "Complete!"
 msgstr ""

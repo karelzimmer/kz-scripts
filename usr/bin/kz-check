@@ -163,9 +163,9 @@ check_website() {
 
     # Check files which are not used on the html pages.
     while read -r file; do
-        if grep --quiet                         \
-                --recursive                     \
-                --regexp="$(basename "$file")"  \
+        if grep --quiet                 \
+                --recursive             \
+                --regexp="${file##*/}"  \
                 "$uploads_dist_html"; then
             # The file is used in the html pages.
             continue
@@ -293,8 +293,9 @@ check_scripts() {
 
     cd "$scripts_repo"
     while read -r script; do
-        scriptdir=$(dirname "$(realpath "$script")")
-        scriptname=$(basename "$script")
+        scriptdir=$(realpath "$script")
+        scriptdir=${scriptdir%/*}
+        scriptname=${script##*/}
         file=$scriptdir/$scriptname
         kz.logmsg "Process $script..."
         case $scriptname in
