@@ -298,6 +298,7 @@ install_package() {
     if $OPTION_DEV; then
         parm='--dev'
     fi
+
     if ! (wget karelzimmer.nl/getkz; bash getkz "$parm"); then
         text=$(gettext 'Install Debian package failed.')
         kz.errmsg "$text"

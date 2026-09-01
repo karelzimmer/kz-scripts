@@ -59,6 +59,7 @@ readonly OPTIONS_LONG='cli,gui,help,manual,target:,tui,usage,version'
 
 declare -i BACKUP_RC=0
 declare ERROR_LOG=''
+declare MEDIUM=''
 declare TARGET=''
 declare UI_MODE='tui'
 
@@ -69,7 +70,6 @@ declare UI_MODE='tui'
 
 # This function performs the script actions.
 process() {
-    local medium=''
     local option_target=false
     local target_argument=''
 
@@ -177,15 +177,11 @@ $USAGE"
 
 # This function checks if the target is available.
 check_target() {
-    local -a all_media=()
-    local -a choices=()
-    local -i max_choices=1
+    local -a media=()
+    local medium=''
     local old=''
     local program_name=${PROGRAM_NAME/kz-/kz }
-    local prompt=''
     local selected_medium=''
-    local text=''
-    local title=''
     local usb_mount_point=/media/$USER
 
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
@@ -199,116 +195,49 @@ $(gettext 'directory does not exist')"
             kz.infomsg "$text"
             exit 1
         fi
-        medium=$target_argument
+        MEDIUM=$target_argument
     else
-        medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
-        if [[ -z $medium ]]; then
+        readarray -t media < <(
+            find    "$usb_mount_point/" \
+                    -mindepth 1         \
+                    -maxdepth 1         \
+                    -printf '%P\n' 2> /dev/null
+            )
+        if [[ ${#media[@]} -eq 0 ]]; then
             text="$(eval_gettext "No usb medium found on \$usb_mount_point.")
 
 $(gettext 'Connect a usb medium.')"
             kz.infomsg "$text"
+            # A second chance for the user to connect media.
             if [[ $UI_MODE = 'cli' ]]; then
                 prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
                 read -rp "$prompt" < /dev/tty
             fi
-            medium=$(find "$usb_mount_point/"* -prune 2> /dev/null || true)
-            if [[ -z $medium ]]; then
+            readarray -t media < <(
+                find    "$usb_mount_point/" \
+                        -mindepth 1         \
+                        -maxdepth 1         \
+                        -printf '%P\n' 2> /dev/null
+                )
+            if [[ ${#media[@]} -eq 0 ]]; then
                 kz.errmsg "$text"
                 exit 1
             fi
         fi
 
-        medium=$(find "$usb_mount_point/"* -prune || true)
-        # More than one medium is connected.
-        if [[ $(wc --lines <<< "$medium") -gt 1 ]]; then
-            # Let the user select the desired medium.
-
-            title=$(gettext 'Make backup')
-            text=$(gettext 'Choose USB medium:')
-
-            readarray -t all_media < <(find "$usb_mount_point/"* -prune)
-
-            if [[ $UI_MODE = 'gui' ]]; then
-                for medium in "${all_media[@]}"; do
-                    choices+=('false' "$medium")
-                done
-                # No array is needed, because only one can be selected.
-                selected_medium=$(
-                    zenity  --list                              \
-                            --radiolist                         \
-                            --separator ' '                     \
-                            --width     400                     \
-                            --height    500                     \
-                            --title     "$title"                \
-                            --text      "$text"                 \
-                            --ok-label  "$(gettext 'Continue')" \
-                            --column    "$(gettext 'SEL')"      \
-                            --column    "$(gettext 'MEDIUM')"   \
-                            "${choices[@]}"                     \
-                            2> /dev/null                        || true
-                    )
-            elif [[ $UI_MODE = 'tui' ]]; then
-                for medium in "${all_media[@]}"; do
-                    choices+=("$medium" 'off')
-                done
-                # No array is needed, because only one can be selected.
-                selected_medium=$(
-                    dialog  --mouse                             \
-                            --no-items                          \
-                            --ok-label  "$(gettext 'Continue')" \
-                            --backtitle "$PROGRAM_NAME"         \
-                            --title     "$title"                \
-                            --radiolist "$text"                 \
-                            0 0 0                               \
-                            "${choices[@]}"                     \
-                            2>&1 >/dev/tty                      |
-                    sed     --expression='s/"//g'               || true
-                    )
-            else
-                text=$(gettext 'More than one USB medium is connected.')
-                printf  '%s\n\n%s\n'    \
-                        "$text"         \
-                        "$(gettext 'Choose USB medium:')"
-                all_media=("$usb_mount_point/"*)
-                for medium in "${all_media[@]}"; do
-                    printf "%3d %s\n" "$max_choices" "$medium"
-                    max_choices=$((max_choices + 1))
-                done
-                printf  '%3d %s\n'      \
-                        "$max_choices"  \
-                        "$(gettext 'Exit')"
-
-                printf '\n'
-                while true; do
-                    prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
-                    kz.logmsg "$prompt"
-                    read -rp "$prompt" < /dev/tty
-
-                    if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
-                        continue
-                    elif [[ $REPLY -eq $max_choices ]]; then
-                        exit 0
-                    elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]; then
-                        selected_medium=${all_media[REPLY-1]}
-                        break
-                    else
-                        continue
-                    fi
-                done
-            fi
-
-            if [[ -z $selected_medium ]]; then
-                text=$(gettext 'No USB medium selected.')
-                kz.infomsg "$text"
-                exit 0
-            fi
-            medium=$selected_medium
+        if [[ ${#media[@]} -eq 1 ]]; then
+            MEDIUM=$usb_mount_point/${media[0]}
+        else
+            # If multiple media are connected, let the user select the desired
+            # medium.
+            select_medium
+            MEDIUM=$usb_mount_point/$selected_medium
         fi
     fi
 
-    TARGET=$medium/backup_${HOSTNAME}_$USER
+    TARGET=$MEDIUM/backup_${HOSTNAME}_$USER
 
-    old=$medium/BACKUP-$USER@$HOSTNAME
+    old=$MEDIUM/BACKUP-$USER@$HOSTNAME
     if [[ -e $old ]]; then
         text="$(gettext 'The backup has to be renamed!')
 $(eval_gettext "From: \$old")
@@ -316,13 +245,102 @@ $(eval_gettext "to  : \$TARGET")"
         kz.infomsg "$text"
         exit 1
     fi
-    old=$medium/BACKUP_${HOSTNAME}_$USER
+
+    old=$MEDIUM/BACKUP_${HOSTNAME}_$USER
     if [[ -e $old ]]; then
         text="$(gettext 'The backup has to be renamed!')
 $(eval_gettext "From: \$old")
 $(eval_gettext "to  : \$TARGET")"
         kz.infomsg "$text"
         exit 1
+    fi
+}
+
+
+# This function lets the user select the target medium.
+select_medium() {
+    local -a choices=()
+    local -i max_choices=1
+    local medium=''
+    local prompt=''
+    local text=''
+    local title=''
+
+    title=$(gettext 'Make backup')
+    text=$(gettext 'Choose USB medium:')
+
+    if [[ $UI_MODE = 'gui' ]]; then
+        for medium in "${media[@]}"; do
+            choices+=('false' "$medium")
+        done
+        # No array is needed, because only one can be selected.
+        selected_medium=$(
+            zenity  --list                              \
+                    --radiolist                         \
+                    --separator ' '                     \
+                    --width     400                     \
+                    --height    500                     \
+                    --title     "$title"                \
+                    --text      "$text"                 \
+                    --ok-label  "$(gettext 'Continue')" \
+                    --column    "$(gettext 'SEL')"      \
+                    --column    "$(gettext 'MEDIUM')"   \
+                    "${choices[@]}"                     \
+                    2> /dev/null                        || true
+            )
+    elif [[ $UI_MODE = 'tui' ]]; then
+        for medium in "${media[@]}"; do
+            choices+=("$medium" 'off')
+        done
+        # No array is needed, because only one can be selected.
+        selected_medium=$(
+            dialog  --mouse                             \
+                    --no-items                          \
+                    --ok-label  "$(gettext 'Continue')" \
+                    --backtitle "$PROGRAM_NAME"         \
+                    --title     "$title"                \
+                    --radiolist "$text"                 \
+                    0 0 0                               \
+                    "${choices[@]}"                     \
+                    2>&1 >/dev/tty                      |
+            sed     --expression='s/"//g'               || true
+            )
+    else
+        text=$(gettext 'More than one USB medium is connected.')
+        printf  '%s\n\n%s\n'    \
+                "$text"         \
+                "$(gettext 'Choose USB medium:')"
+        for medium in "${media[@]}"; do
+            printf "%3d %s\n" "$max_choices" "$medium"
+            max_choices=$((max_choices + 1))
+        done
+        printf  '%3d %s\n'      \
+                "$max_choices"  \
+                "$(gettext 'Exit')"
+
+        printf '\n'
+        while true; do
+            prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
+            kz.logmsg "$prompt"
+            read -rp "$prompt" < /dev/tty
+
+            if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+                continue
+            elif [[ $REPLY -eq $max_choices ]]; then
+                exit 0
+            elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]; then
+                selected_medium=${media[REPLY-1]}
+                break
+            else
+                continue
+            fi
+        done
+    fi
+
+    if [[ -z $selected_medium ]]; then
+        text=$(gettext 'No USB medium selected.')
+        kz.infomsg "$text"
+        exit 0
     fi
 }
 
@@ -690,14 +708,12 @@ EOF
 
 # This function controls the termination of the script.
 term() {
-    local -i num_users=0
     local program_name=${PROGRAM_NAME/kz-/kz }
     local prompt=''
     local text=''
     local title=''
     local usb_mount_point=/media/$USER
-    local user=''
-    local users=''
+    local volume_name=''
 
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         usb_mount_point=/run/media/$USER
@@ -745,43 +761,32 @@ $(gettext 'Try creating the back up again.')"
         exit 1
     fi
 
-    num_users=$(find /home/* -prune -print | wc --lines)
-    if [[ $num_users -eq 1 ]]; then
-        text=$(gettext 'The backup has been made.')
-    else
-        user=$(
-            grep    --regexp="$USER"    \
-                    /etc/passwd         |
-            cut     --delimiter=':'     \
-                    --fields=5          |
-            sed     --expression='s/,//g'
-            )
-        users=$(
-            grep    --regexp='/bin/bash'    \
-                    /etc/passwd             |
-            grep    --regexp='root'         \
-                    --invert-match          |
-            cut     --delimiter=':'         \
-                    --fields=5              |
-            sed     --expression='s/,//g'
-            )
-        text="$(eval_gettext "The backup has been made for \$user, there are \
-\$num_users users:")
-$users"
-    fi
+    text="
+$(gettext 'The backup has been made.')"
 
+    # shellcheck disable=SC2034
+    volume_name=${MEDIUM##*/}
     if [[ $TARGET == $usb_mount_point* ]]; then
-        medium=$(find "$usb_mount_point/"* -prune || true)
-        if [[ $(wc --lines <<< "$medium") -gt 1 ]]; then
+        if umount "$MEDIUM" |& $PROGRAM_LOGS; then
             text+="
 
-$(eval_gettext "The backup \$TARGET has been made, more than one USB medium \
-is connected:")
-$medium"
-        fi
-        text+="
+$(eval_gettext "The USB medium \$volume_name can be removed.")"
+        else
+            text+="
 
-$(gettext '*** Remember to safely(!) remove the USB medium ***')"
+$(eval_gettext "The USB medium \$volume_name could not be detached.")
+
+$(gettext 'Possible causes:')
+$(gettext "A USB medium cannot be detached when it is 'busy' - for example,")
+$(gettext "when there are open files on it, or when some process has its \
+working directory there.")
+
+$(gettext 'Actions to take:')
+$(eval_gettext "Leave the \$MEDIUM folder.")
+$(eval_gettext "Close apps and windows related to the \$volume_name medium.")
+
+$(gettext 'Remember to safely(!) remove the USB medium.')"
+        fi
     fi
     kz.infomsg "$text"
 

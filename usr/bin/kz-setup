@@ -526,6 +526,7 @@ apps.")"
         kz.infomsg "$text"
         exit 0
     fi
+
     if [[ -z $selected_apps ]]; then
         text=$(gettext 'No apps selected.')
         kz.infomsg "$text"

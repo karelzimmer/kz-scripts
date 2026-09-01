@@ -540,6 +540,7 @@ $(gettext "Use \"kz install\" to remove the automatically selected apps.")"
         kz.infomsg "$text"
         exit 0
     fi
+
     if [[ -z $selected_apps ]]; then
         text=$(gettext 'No apps selected.')
         kz.infomsg "$text"
@@ -815,6 +816,7 @@ execute_command() {
         elif [[ $pkexec_rc -ne 0 ]]; then
             FAILED_APPS[$app_name]=$app_name
         fi
+
         if [[ $cmd = 'REBOOT=true' ]]; then
             REBOOT=true
         fi

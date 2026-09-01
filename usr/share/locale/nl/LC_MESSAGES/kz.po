@@ -184,159 +184,159 @@ msgstr "te veel opties"
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
-#: kz-backup:198 kz-restore:198
+#: kz-backup:194 kz-restore:194
 msgid "directory does not exist"
 msgstr "map bestaat niet"
 
-#: kz-backup:206 kz-restore:206
+#: kz-backup:207 kz-restore:207
 #, sh-format
 msgid "No usb medium found on $usb_mount_point."
 msgstr "Geen usb-medium gevonden op $usb_mount_point."
 
-#: kz-backup:208 kz-restore:208
+#: kz-backup:209 kz-restore:209
 msgid "Connect a usb medium."
 msgstr "Koppel een usb-medium aan."
 
-#: kz-backup:227 kz-backup:271 kz-restore:227 kz-restore:271
+#: kz-backup:270 kz-backup:312 kz-restore:283 kz-restore:325
 msgid "Choose USB medium:"
 msgstr "Kies USB-medium:"
 
-#: kz-backup:244 kz-backup:258 kz-install:487 kz-install:503 kz-menu:218
-#: kz-menu:254 kz-menu:423 kz-menu:459 kz-restore:244 kz-restore:258
+#: kz-backup:285 kz-backup:299 kz-install:487 kz-install:503 kz-menu:218
+#: kz-menu:254 kz-menu:423 kz-menu:459 kz-restore:298 kz-restore:312
 #: kz-setup:472 kz-setup:488
 msgid "Continue"
 msgstr "Verder"
 
-#: kz-backup:245 kz-install:488 kz-restore:245 kz-setup:473
+#: kz-backup:286 kz-install:488 kz-restore:299 kz-setup:473
 msgid "SEL"
 msgstr "SEL"
 
-#: kz-backup:246 kz-restore:246
+#: kz-backup:287 kz-restore:300
 msgid "MEDIUM"
 msgstr "MEDIUM"
 
-#: kz-backup:268 kz-restore:268
+#: kz-backup:309 kz-restore:322
 msgid "More than one USB medium is connected."
 msgstr "Meer dan één USB-medium is aangesloten."
 
-#: kz-backup:301 kz-restore:301
+#: kz-backup:341 kz-restore:237 kz-restore:354
 msgid "No USB medium selected."
 msgstr "Geen USB-medium geselecteerd."
 
-#: kz-backup:313 kz-backup:321 kz-restore:313 kz-restore:321
+#: kz-backup:242 kz-backup:251 kz-restore:249 kz-restore:258
 msgid "The backup has to be renamed!"
 msgstr "De back-up moet hernoemd worden!"
 
-#: kz-backup:314 kz-backup:322 kz-restore:314 kz-restore:322
+#: kz-backup:243 kz-backup:252 kz-restore:250 kz-restore:259
 #, sh-format
 msgid "From: $old"
 msgstr "Van  : $old"
 
-#: kz-backup:315 kz-backup:323
+#: kz-backup:244 kz-backup:253
 #, sh-format
 msgid "to  : $TARGET"
 msgstr "naar : $TARGET"
 
-#: kz-backup:421
+#: kz-backup:439
 msgid "This folder contains files created by kz-backup."
 msgstr "In deze map staan bestanden aangemaakt door kz-backup."
 
-#: kz-backup:422
+#: kz-backup:440
 msgid "These files are used by kz-restore and others."
 msgstr "Deze bestanden worden gebruikt door kz-restore en anderen."
 
-#: kz-backup:424
+#: kz-backup:442
 msgid "Further reading:"
 msgstr "Verder lezen:"
 
-#: kz-backup:379
+#: kz-backup:397
 msgid "START list of manual installed packages"
 msgstr "BEGIN lijst van handmatig geïnstalleerde pakketten"
 
-#: kz-backup:380
+#: kz-backup:398
 msgid "END list of manual installed packages"
 msgstr "EINDE lijst van handmatig geïnstalleerde pakketten"
 
-#: kz-backup:381
+#: kz-backup:399
 msgid "START list of installed snaps"
 msgstr "BEGIN lijst van geïnstalleerde snaps"
 
-#: kz-backup:382
+#: kz-backup:400
 msgid "END list of installed snaps"
 msgstr "EINDE lijst van geïnstalleerde snaps"
 
-#: kz-backup:383
+#: kz-backup:401
 msgid "START list of installed Flatpak apps"
 msgstr "BEGIN lijst van geïnstalleerde flatpak-apps"
 
-#: kz-backup:384
+#: kz-backup:402
 msgid "END list of installed Flatpak apps"
 msgstr "EINDE lijst van geïnstalleerde flatpak-apps"
 
-#: kz-backup:441
+#: kz-backup:459
 msgid "USERNAME|UID|GID|USER"
 msgstr "GEBRUIKERSNAAM|UID|GID|GEBRUIKER"
 
-#: kz-backup:466 kz-backup:478
+#: kz-backup:484 kz-backup:496
 msgid "Additional users can be added manually:"
 msgstr "Extra gebruikers kunnen handmatig worden toegevoegd:"
 
-#: kz-backup:468 kz-backup:515
+#: kz-backup:486 kz-backup:533
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users."
 msgstr ""
 "1. Druk op de Super-toets[1], typ 'gebr' en klik achter Instellingen op "
 "Gebruikers."
 
-#: kz-backup:470
+#: kz-backup:488
 msgid "2. Click on Unlock and then Add User."
 msgstr "2. Klik op Ontgrendelen en vervolgens op Gebruiker toevoegen."
 
-#: kz-backup:471
+#: kz-backup:489
 msgid "3. Enter Name [USER] and Username [USERNAME]."
 msgstr "3. Vul in Naam [GEBRUIKER] en Gebruikersnaam [GEBRUIKERSNAAM]."
 
-#: kz-backup:473 kz-backup:522 kz-backup:583
+#: kz-backup:491 kz-backup:540 kz-backup:601
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr "[1] Windows-, command- of vergrootglastoets."
 
-#: kz-backup:480
+#: kz-backup:498
 msgid "# Standard user:"
 msgstr "# Standaard gebruiker:"
 
-#: kz-backup:481
+#: kz-backup:499
 msgid "sudo useradd --create-home --comment '[USER]' [USERNAME]"
 msgstr "sudo useradd --create-home --comment '[GEBRUIKER]' [GEBRUIKERSNAAM]"
 
-#: kz-backup:482
+#: kz-backup:500
 msgid "# Administrator:"
 msgstr "# Beheerder:"
 
-#: kz-backup:483
+#: kz-backup:501
 msgid "# Debian or Debian-based:"
 msgstr "# Debian of Debian-gebaseerd:"
 
-#: kz-backup:484
+#: kz-backup:502
 msgid "sudo usermod --append --groups adm,sudo [USERNAME]"
 msgstr "sudo usermod --append --groups adm,sudo [GEBRUIKERSNAAM]"
 
-#: kz-backup:485
+#: kz-backup:503
 msgid "# Red Hat or Red Hat-based:"
 msgstr "# Red Hat of Red Hat-gebaseerd:"
 
-#: kz-backup:486
+#: kz-backup:504
 msgid "sudo usermod --append --groups wheel [USERNAME]"
 msgstr "sudo usermod --append --groups wheel [GEBRUIKERSNAAM]"
 
-#: kz-backup:487
+#: kz-backup:505
 msgid "# User sets password on first login:"
 msgstr "# Gebruiker kan wachtwoord instellen bij de eerste keer aanmelden:"
 
-#: kz-backup:488
+#: kz-backup:506
 msgid "sudo passwd --delete --expire [USERNAME]"
 msgstr "sudo passwd --delete --expire [GEBRUIKERSNAAM]"
 
-#: kz-backup:513
+#: kz-backup:531
 msgid "To set the users avatar:"
 msgstr "Om de avatar van de gebruiker in te stellen:"
 
@@ -346,116 +346,140 @@ msgstr ""
 "1. Druk op de Super-toets[1], typ 'gebr' en klik achter Instellingen op "
 "Gebruikers."
 
-#: kz-backup:517
+#: kz-backup:535
 msgid "2. Click on Change avatar (pencil icon)."
 msgstr "2. Klik op Avatar veranderen (potloodpictogram)."
 
-#: kz-backup:518
+#: kz-backup:536
 msgid "3. Click Select a file."
 msgstr "3. Klik op Selecteer een bestand."
 
-#: kz-backup:519
+#: kz-backup:537
 msgid "4. Select avatar.ico in Personal folder / Settings,"
 msgstr "4. Selecteer avatar.ico in Persoonlijke map / Instellingen,"
 
-#: kz-backup:520
+#: kz-backup:538
 msgid "   or another picture file."
 msgstr "   of een ander afbeeldingsbestand."
 
-#: kz-backup:534
+#: kz-backup:552
 msgid "START list of favorite apps in the dash"
 msgstr "BEGIN lijst met favoriete apps in de dash"
 
-#: kz-backup:535
+#: kz-backup:553
 msgid "END list of favorite apps in the dash"
 msgstr "EINDE lijst met favoriete apps in de dash"
 
-#: kz-backup:577
+#: kz-backup:595
 msgid "To set the desktop background:"
 msgstr "Om de bureaubladachtergrond in te stellen:"
 
-#: kz-backup:579
+#: kz-backup:597
 msgid "1.  Press the Super key[1], type 'file' and click on Files."
 msgstr "1.  Druk op de Super-toets[1], typ 'best' en klik op Bestanden."
 
-#: kz-backup:580
+#: kz-backup:598
 msgid "2.  Right-click on desktop.ico in Personal folder / Settings,"
 msgstr "2.  Rechtsklik op desktop.ico in Persoonlijke map / Settings,"
 
-#: kz-backup:581
+#: kz-backup:599
 msgid "    or another picture file, and choose Set as Background."
 msgstr ""
 "    of een ander afbeeldingsbestand, en kies Instellen als "
 "bureaubladachtergrond."
 
-#: kz-backup:226 kz-backup:608 kz-menu:78 kz-backup.desktop:10
+#: kz-backup:269 kz-backup:626 kz-menu:78 kz-backup.desktop:10
 msgid "Make backup"
 msgstr "Back-up maken"
 
-#: kz-backup:609
+#: kz-backup:627
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-#: kz-backup:661
+#: kz-backup:679
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:712 kz-install:903 kz-restore:436 kz-setup:803
+#: kz-backup:728 kz-install:905 kz-restore:459 kz-setup:804
 msgid "error messages"
 msgstr "foutmeldingen"
 
-#: kz-backup:713
+#: kz-backup:729
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:715 kz-restore:439
+#: kz-backup:731 kz-backup:779 kz-restore:462 kz-restore:510
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:716
+#: kz-backup:732
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:717 kz-restore:441
+#: kz-backup:733 kz-restore:464
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:718
+#: kz-backup:734
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:720 kz-install:908 kz-restore:444 kz-setup:807
+#: kz-backup:736 kz-backup:784 kz-install:910 kz-restore:467 kz-restore:515
+#: kz-setup:808
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:721 kz-install:909 kz-restore:445 kz-setup:808
+#: kz-backup:737 kz-install:911 kz-restore:468 kz-setup:809
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:722
+#: kz-backup:738
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:750
+#: kz-backup:765
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:768
+#: kz-backup:773 kz-restore:504
 #, sh-format
-msgid "The backup has been made for $user, there are $num_users users:"
-msgstr "De back-up is gemaakt voor $user, er zijn $num_users gebruikers:"
+msgid "The USB medium $volume_name can be removed."
+msgstr "Het USB-medium $volume_name kan worden verwijderd."
 
-#: kz-backup:778
+#: kz-backup:777 kz-restore:508
 #, sh-format
-msgid ""
-"The backup $TARGET has been made, more than one USB medium is connected:"
+msgid "The USB medium $volume_name could not be detached."
+msgstr "Het USB-medium $volume_name kon niet worden losgekoppeld."
+
+#: kz-backup:780 kz-restore:511
+msgid "A USB medium cannot be detached when it is 'busy' - for example,"
 msgstr ""
-"De back-up $TARGET is gemaakt, er zijn meer dan één USB-medium aangesloten:"
+"Een USB-medium kan niet worden ontkoppeld wanneer het 'bezig' is, "
+"bijvoorbeeld"
 
-#: kz-backup:784 kz-restore:509
-msgid "*** Remember to safely(!) remove the USB medium ***"
-msgstr "*** Vergeet niet om het USB-medium veilig(!) te verwijderen ***"
+#: kz-backup:781 kz-restore:512
+msgid ""
+"when there are open files on it, or when some process has its working "
+"directory there."
+msgstr ""
+"wanneer er bestanden op geopend zijn of wanneer een proces zijn werkmap daar "
+"heeft staan."
+
+#: kz-backup:785 kz-restore:516
+#, sh-format
+msgid "Leave the $MEDIUM folder."
+msgstr "Verlaat de map $MEDIUM."
+
+#: kz-backup:786 kz-restore:517
+#, sh-format
+msgid "Close apps and windows related to the $volume_name medium."
+msgstr ""
+"Sluit apps en vensters die met het medium $volume_name te maken hebben."
+
+#: kz-backup:788 kz-restore:519
+msgid "Remember to safely(!) remove the USB medium."
+msgstr "Vergeet niet het USB-medium veilig(!) te verwijderen."
 
 #: kz-build:27
 msgid "Build website and kz packages"
@@ -545,7 +569,7 @@ msgstr "Installeer Debian-pakket (dit kan even duren)..."
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:562 kz-check:601 kz-deploy:314
+#: kz-build:562 kz-check:601 kz-deploy:315
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -642,7 +666,7 @@ msgstr "Gemarkeerde annotatie gevonden."
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
-#: kz-get:108 kz-install:676
+#: kz-get:108 kz-install:677
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de systeembeheerder."
 
@@ -683,9 +707,9 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz-backup:211 kz-backup:740 kz-desktop:293 kz-install:933 kz-install:955
-#: kz-menu:370 kz-menu:568 kz-restore:211 kz-restore:464 kz-setup:832
-#: kz-setup:861
+#: kz-backup:213 kz-backup:756 kz-desktop:293 kz-install:935 kz-install:957
+#: kz-menu:370 kz-menu:568 kz-restore:213 kz-restore:487 kz-setup:833
+#: kz-setup:862
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -757,7 +781,7 @@ msgstr "De laatste paar regels van de log worden hier weergegeven."
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:346
+#: kz_common.sh:347
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
@@ -802,7 +826,7 @@ msgstr "Uploaden website is mislukt."
 msgid "Install..."
 msgstr "Installeren..."
 
-#: kz-deploy:302
+#: kz-deploy:303
 msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
@@ -1079,7 +1103,7 @@ msgid "Use \"kz install --browse\" to view all commands and information."
 msgstr ""
 "Gebruik \"kz install --browse\" om alle opdrachten en informatie te bekijken."
 
-#: kz-install:443 kz-install:708 kz-menu:80 kz-install.desktop:10
+#: kz-install:443 kz-install:709 kz-menu:80 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr "Apps installeren"
@@ -1118,62 +1142,62 @@ msgstr ""
 "Gebruik \"kz install\" of \"kz install --select\" om de automatisch "
 "geselecteerde apps te verwijderen."
 
-#: kz-install:544 kz-setup:530
+#: kz-install:545 kz-setup:531
 msgid "No apps selected."
 msgstr "Geen apps geselecteerd."
 
-#: kz-install:605 kz-setup:591
+#: kz-install:606 kz-setup:592
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr "App '$app_argument' niet gevonden."
 
-#: kz-install:698 kz-setup:664
+#: kz-install:699 kz-setup:665
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
 
-#: kz-install:709 kz-menu:56
+#: kz-install:710 kz-menu:56
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
-#: kz-install:738 nl.karelzimmer.kz-install.policy:22
+#: kz-install:739 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 "Authenticatie is vereist om apps te installeren en systeeminstellingen te "
 "wijzigen"
 
-#: kz-install:747 kz-setup:704
+#: kz-install:748 kz-setup:705
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:748 kz-setup:705
+#: kz-install:749 kz-setup:706
 msgid "         COMMAND..."
 msgstr "         OPDRACHT..."
 
-#: kz-install:812 kz-install:834
+#: kz-install:813 kz-install:836
 msgid "Authentication is required to continue."
 msgstr "Authenticatie is vereist om door te gaan."
 
-#: kz-install:904
+#: kz-install:906
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:912
+#: kz-install:914
 msgid "Try to install the apps again."
 msgstr "Probeer de apps opnieuw te installeren."
 
-#: kz-install:914
+#: kz-install:916
 msgid "Try to remove the apps again."
 msgstr "Probeer de apps opnieuw te verwijderen."
 
-#: kz-install:941
+#: kz-install:943
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:943
+#: kz-install:945
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:949
+#: kz-install:951
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1243,11 +1267,11 @@ msgstr "Gebruiker inrichten"
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
-#: kz-backup:279 kz-menu:61 kz-menu:219 kz-menu:255 kz-restore:279
+#: kz-backup:319 kz-menu:61 kz-menu:219 kz-menu:255 kz-restore:332
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: kz-backup:283 kz-restore:283
+#: kz-backup:323 kz-restore:336
 #, sh-format
 msgid "Select number [1-$max_choices]: "
 msgstr "Selecteer nummer [1-$max_choices]: "
@@ -1280,11 +1304,11 @@ msgstr "Menu verlaten"
 msgid "Show WiFi details"
 msgstr "WiFi-details tonen"
 
-#: kz-menu:81 kz-restore:226 kz-restore:345 kz-restore.desktop:10
+#: kz-menu:81 kz-restore:282 kz-restore:370 kz-restore.desktop:10
 msgid "Restore backup"
 msgstr "Back-up terugzetten"
 
-#: kz-menu:82 kz-setup:428 kz-setup:673 kz-setup.desktop:10
+#: kz-menu:82 kz-setup:428 kz-setup:674 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr "Apps instellen"
 
@@ -1392,56 +1416,43 @@ msgstr "  -s, --source MAP"
 msgid "                 use backup in specified directory"
 msgstr "                 gebruik de back-up in de opgegeven map"
 
-#: kz-restore:315 kz-restore:323
+#: kz-restore:251 kz-restore:260
 #, sh-format
 msgid "to  : $SOURCE"
 msgstr "naar : $SOURCE"
 
-#: kz-restore:329
+#: kz-restore:266
 #, sh-format
-msgid "No backup_${HOSTNAME}_$USER found in $medium."
-msgstr "Geen backup_${HOSTNAME}_$USER gevonden in $medium."
+msgid "No backup_${HOSTNAME}_$USER found in $MEDIUM."
+msgstr "Geen backup_${HOSTNAME}_$USER gevonden in $MEDIUM."
 
-#: kz-restore:346
+#: kz-restore:371
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
 
-#: kz-restore:437
+#: kz-restore:460
 msgid "Restore ended with errors."
 msgstr "Back-up terugzetten is geëindigd met fouten."
 
-#: kz-restore:440
+#: kz-restore:463
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 "Zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up of"
 
-#: kz-restore:442
+#: kz-restore:465
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr "is er te weinig ruimte op $HOME."
 
-#: kz-restore:446
+#: kz-restore:469
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:474
+#: kz-restore:496
 #, sh-format
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
-
-#: kz-restore:493
-#, sh-format
-msgid "The backup has been restored for $user, there are $num_users users:"
-msgstr "De back-up is teruggezet voor $user, er zijn $num_users gebruikers:"
-
-#: kz-restore:503
-#, sh-format
-msgid ""
-"The backup $SOURCE has been restored, more than one USB medium is connected:"
-msgstr ""
-"De back-up $SOURCE is teruggezet, er zijn meer dan één USB-medium "
-"aangesloten:"
 
 #: kz-setup:23 kz-setup.desktop:11
 msgid "Set up apps and change user settings"
@@ -1560,31 +1571,31 @@ msgstr ""
 "Gebruik \"kz setup --reset\" om de automatisch geselecteerde apps te "
 "resetten."
 
-#: kz-setup:674
+#: kz-setup:675
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:804
+#: kz-setup:805
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:811
+#: kz-setup:812
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:813
+#: kz-setup:814
 msgid "Try to reset the apps again."
 msgstr "Probeer de apps opnieuw te resetten."
 
-#: kz-setup:840
+#: kz-setup:841
 msgid "Apps set up completed."
 msgstr "Apps instellen is voltooid."
 
-#: kz-setup:842
+#: kz-setup:843
 msgid "Apps reset completed."
 msgstr "Apps resetten is voltooid."
 
-#: kz-setup:850
+#: kz-setup:851
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1592,7 +1603,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:855
+#: kz-setup:856
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1600,7 +1611,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:877
+#: kz-setup:878
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
@@ -1778,7 +1789,7 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:566 kz-check:605 kz-deploy:318 kz-dev:338 kz-post-migrate:71
+#: kz-build:566 kz-check:605 kz-deploy:319 kz-dev:338 kz-post-migrate:71
 #: kz-update:389
 msgid "Complete!"
 msgstr "Klaar!"

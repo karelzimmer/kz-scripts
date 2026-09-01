@@ -324,6 +324,7 @@ $(gettext "The last few lines of the log are displayed here.")
                 reset
                 clear -x
             fi
+
             if [[ $rc -eq 0 ]]; then
                 text='Cleaning up temporary files...'
                 kz.logmsg "$text"
