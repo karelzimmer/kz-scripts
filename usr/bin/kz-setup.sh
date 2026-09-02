@@ -74,6 +74,10 @@ if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first &> /de
 if type lxsession &> /dev/null; then pcmanfm; fi
 if type lxsession &> /dev/null; then until [[ -f ~/.config/libfm/libfm.conf ]]; do sleep 2; done; fi
 if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=.*$/single_click=1/g' ~/.config/libfm/libfm.conf; fi
+# -----------------------------------------------------------------------------
+#  LXQt desktop environment settings.
+# -----------------------------------------------------------------------------
+if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Alt%2BF1\./Super_L./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
 #
 LOGOUT=true
 
@@ -112,6 +116,10 @@ if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gset
 #  LXDE desktop environment settings.
 # -----------------------------------------------------------------------------
 if type lxsession > /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=.*$/single_click=0/g' ~/.config/libfm/libfm.conf; fi
+# -----------------------------------------------------------------------------
+#  LXQt desktop environment settings.
+# -----------------------------------------------------------------------------
+if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Super_L./Alt%2BF1\./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
 #
 LOGOUT=true
 
