@@ -1541,7 +1541,7 @@ msgid ""
 "changing user settings."
 msgstr ""
 
-#: kz-setup:877
+#: kz-setup:879
 msgid "Log out of the computer yourself."
 msgstr ""
 
