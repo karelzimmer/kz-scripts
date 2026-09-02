@@ -7,4 +7,11 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
+if [ "$#" -ne 2 ]; then
+    echo 'kz-install-pkexec: illegal number of arguments'
+    # shellcheck disable=SC2016
+    echo 'Usage: /usr/bin/kz-install-pkexec ${XDG_CURRENT_DESKTOP-} COMMAND'
+    exit 1
+fi
+
 XDG_CURRENT_DESKTOP=$1 eval "$2"
