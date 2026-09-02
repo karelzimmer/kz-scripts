@@ -866,13 +866,15 @@ apps and changing user settings.")"
         if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
             # A GUI is available.
             if type cinnamon-session &> /dev/null; then
-                cinnamon-session-quit --logout --force
+                cinnamon-session-quit --logout --no-prompt
             elif type gnome-session &> /dev/null; then
                 gnome-session-quit --logout --no-prompt
             elif type lxsession &> /dev/null; then
                 lxde-logout
             elif type lxqt-session &> /dev/null; then
                 lxqt-leave --logout
+            elif type mate-session &> /dev/null; then
+                mate-session-save --logout
             elif type xfce4-session &> /dev/null; then
                 xfce4-session-logout --logout
             else
