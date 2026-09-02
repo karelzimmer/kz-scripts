@@ -481,13 +481,13 @@ process_menu2_cli() {
 
     while true; do
         clear -x
-        printf  '%s\n\n%6s  %-25s  %s\n'    \
+        printf  '%s\n\n%6s  %-24s  %s\n'    \
                 "$MENU2_HEAD"               \
                 "$(gettext 'NUMBER')"       \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
         for menu2_action in "${!MENU2_ACTIONS[@]}"; do
-            printf  '%6s  %-25s  %s\n'                  \
+            printf  '%6s  %-24s  %s\n'                  \
                     "$menu2_action"                     \
                     "${MENU2_ACTIONS[$menu2_action]}"   \
                     "${MENU2_DESCS[$menu2_action]}"
