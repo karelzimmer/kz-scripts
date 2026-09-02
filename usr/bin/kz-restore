@@ -198,10 +198,10 @@ $(gettext 'directory does not exist')"
         MEDIUM=$source_argument
     else
         readarray -t media < <(
-            find    "$usb_mount_point/" \
-                    -mindepth 1         \
-                    -maxdepth 1         \
-                    -printf '%P\n' 2> /dev/null
+            find    "$usb_mount_point/"         \
+                    -mindepth 1                 \
+                    -maxdepth 1                 \
+                    -printf '%P\n' 2> /dev/null || true
             )
         if [[ ${#media[@]} -eq 0 ]]; then
             text="$(eval_gettext "No usb medium found on \$usb_mount_point.")
@@ -214,10 +214,10 @@ $(gettext 'Connect a usb medium.')"
                 read -rp "$prompt" < /dev/tty
             fi
             readarray -t media < <(
-                find    "$usb_mount_point/" \
-                        -mindepth 1         \
-                        -maxdepth 1         \
-                        -printf '%P\n' 2> /dev/null
+                find    "$usb_mount_point/"         \
+                        -mindepth 1                 \
+                        -maxdepth 1                 \
+                        -printf '%P\n' 2> /dev/null || true
                 )
             if [[ ${#media[@]} -eq 0 ]]; then
                 kz.errmsg "$text"
