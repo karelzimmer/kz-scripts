@@ -873,7 +873,7 @@ apps and changing user settings.")"
                 lxde-logout
             elif type lxqt-session &> /dev/null; then
                 lxqt-leave --logout
-            elif type xfce-session &> /dev/null; then
+            elif type xfce4-session &> /dev/null; then
                 xfce4-session-logout --logout
             else
                 text=$(gettext 'Log out of the computer yourself.')
