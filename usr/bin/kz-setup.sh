@@ -12,31 +12,31 @@
 # =============================================================================
 
 
-# Setup: bitwarden | * | A secure and free password manager for all of your devices
+#|setup|bitwarden|*|A secure and free password manager for all of your devices
 kz-desktop --addaft=com.bitwarden.desktop
 
-# Reset: bitwarden | * | A secure and free password manager for all of your devices
+#|reset|bitwarden|*|A secure and free password manager for all of your devices
 kz-desktop --delete=com.bitwarden.desktop
 
 
-# Setup: bottles | pc06 pc07 | Run Windows software
+#|setup|bottles|pc06 pc07|Run Windows software
 kz-desktop --addaft=com.usebottles.bottles
 
-# Reset: bottles | pc06 pc07 | Run Windows software
+#|reset|bottles|pc06 pc07|Run Windows software
 kz-desktop --delete=com.usebottles.bottles
 
 
-# Setup: cockpit | pc06 | Web Console for Linux servers
+#|setup|cockpit|pc06|Web Console for Linux servers
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-cockpit
 
-# Reset: cockpit | pc06 | Web Console for Linux servers
+#|reset|cockpit|pc06|Web Console for Linux servers
 kz-desktop --delete=kz-cockpit
 
 
-# Setup: desktop-settings | * | Various desktop environments settings
+#|setup|desktop-settings|*|Various desktop environments settings
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -45,8 +45,8 @@ if gsettings get org.nemo.preferences click-policy &> /dev/null; then gsettings 
 #  GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
-if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
+if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources|sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
+if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources|sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
 if gsettings get org.gnome.desktop.interface clock-show-date &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if gsettings get org.gnome.desktop.interface clock-show-weekday &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
 if gsettings get org.gnome.desktop.interface font-antialiasing &> /dev/null; then gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'; fi
@@ -81,7 +81,7 @@ if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Alt%2BF1\
 #
 LOGOUT=true
 
-# Reset: desktop-settings | * | Various desktop environments settings
+#|reset|desktop-settings|*|Various desktop environments settings
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -124,31 +124,31 @@ if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Super_L./
 LOGOUT=true
 
 
-# Setup: evolution | * | Groupware suite with mail client and organizer
+#|setup|evolution|*|Groupware suite with mail client and organizer
 kz-desktop --delete=org.gnome.Evolution
 
-# Reset: evolution | * | Groupware suite with mail client and organizer
+#|reset|evolution|*|Groupware suite with mail client and organizer
 kz-desktop --addbef=org.gnome.Evolution
 
 
-# Setup: evolution | pc06 pc07 | Groupware suite with mail client and organizer
+#|setup|evolution|pc06 pc07|Groupware suite with mail client and organizer
 kz-desktop --addaft=org.gnome.Evolution
 
-# Reset: evolution | pc06 pc07 | Groupware suite with mail client and organizer
+#|reset|evolution|pc06 pc07|Groupware suite with mail client and organizer
 kz-desktop --delete=org.gnome.Evolution
 
 
-# Setup: git | pc06 pc07 | Fast, scalable, distributed revision control system
+#|setup|git|pc06 pc07|Fast, scalable, distributed revision control system
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
-# Reset: git | pc06 pc07 | Fast, scalable, distributed revision control system
+#|reset|git|pc06 pc07|Fast, scalable, distributed revision control system
 git config --global --unset alias.logg
 
 
-# Setup: gnome-shell-extension-caffeine | * | Disable the screensaver and auto suspend
+#|setup|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions enable caffeine@patapon.info; fi
@@ -157,7 +157,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 #
 LOGOUT=true
 
-# Reset: gnome-shell-extension-caffeine | * | Disable the screensaver and auto suspend
+#|reset|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions disable caffeine@patapon.info; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions disable caffeine@patapon.info; fi
@@ -165,7 +165,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 LOGOUT=true
 
 
-# Setup: gnome-shell-extension-dashtodock | * | A dock for the Gnome Shell
+#|setup|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
@@ -189,7 +189,7 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null
 #
 LOGOUT=true
 
-# Reset: gnome-shell-extension-dashtodock | * | A dock for the Gnome Shell
+#|reset|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock custom-theme-shrink; fi
@@ -212,7 +212,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 LOGOUT=true
 
 
-# Setup: gnome-shell-extension-gsconnect | pc06 pc07 | Securely connect to mobile devices and other desktops
+#|setup|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io &> /dev/null; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
@@ -221,13 +221,13 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gscon
 #
 LOGOUT=true
 
-# Reset: gnome-shell-extension-gsconnect | pc06 pc07 | Securely connect to mobile devices and other desktops
+#|reset|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io &> /dev/null; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 
 
-# Setup: gnome-shell-extension-no-annoyance | * | Disable the 'Window is ready' notification
+#|setup|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev &> /dev/null; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
@@ -236,7 +236,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 #
 LOGOUT=true
 
-# Reset: gnome-shell-extension-no-annoyance | * | Disable the 'Window is ready' notification
+#|reset|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev &> /dev/null; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
@@ -244,7 +244,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 LOGOUT=true
 
 
-# Setup: gnome-shell-extension-no-overview | * | No overview at start-up
+#|setup|gnome-shell-extension-no-overview|*|No overview at start-up
 if gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx &> /dev/null; then gnome-extensions enable no-overview@fthx; fi
@@ -253,7 +253,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-ov
 #
 LOGOUT=true
 
-# Reset: gnome-shell-extension-no-overview | * | No overview at start-up
+#|reset|gnome-shell-extension-no-overview|*|No overview at start-up
 # This app is included in dash-to-dock-extension on Debian and Debian-based systems.
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx &> /dev/null; then gnome-extensions disable no-overview@fthx; fi
 #
@@ -262,7 +262,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-ov
 LOGOUT=true
 
 
-# Setup: gnome-shell-extensions-visual-effects | pc06 pc07 | Various GNOME visual effects
+#|setup|gnome-shell-extensions-visual-effects|pc06 pc07|Various GNOME visual effects
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then pipx install gnome-extensions-cli --system-site-packages; fi
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then pipx ensurepath; fi
 # -----------------------------------------------------------------------------
@@ -290,7 +290,7 @@ if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext e
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext install 'desktop-cube@schneegans.github.com'; fi
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext enable 'desktop-cube@schneegans.github.com'; fi
 
-# Reset: gnome-shell-extensions-visual-effects | pc06 pc07 | Various GNOME visual effects
+#|reset|gnome-shell-extensions-visual-effects|pc06 pc07|Various GNOME visual effects
 # -----------------------------------------------------------------------------
 # Coverflow Alt-Tab
 # https://extensions.gnome.org/extension/97/coverflow-alt-tab/
@@ -317,30 +317,30 @@ if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext d
 if type gnome-session &> /dev/null && [[ $UID -ne 0 ]]; then ~/.local/bin/gext uninstall 'desktop-cube@schneegans.github.com'; fi
 
 
-# Setup: google-chrome | pc01 pc06 pc07 | The web browser from Google
+#|setup|google-chrome|pc01 pc06 pc07|The web browser from Google
 kz-desktop --addbef=google-chrome
 
-# Reset: google-chrome | pc01 pc06 pc07 | The web browser from Google
+#|reset|google-chrome|pc01 pc06 pc07|The web browser from Google
 kz-desktop --delete=google-chrome
 
 
-# Setup: kvm | pc06 pc07 | KVM (for Kernel-based Virtual Machine) is a full virtualization solution
+#|setup|kvm|pc06 pc07|KVM (for Kernel-based Virtual Machine) is a full virtualization solution
 kz-desktop --addaft=virt-manager
 
-# Reset: kvm | pc06 pc07 | KVM (for Kernel-based Virtual Machine) is a full virtualization solution
+#|reset|kvm|pc06 pc07|KVM (for Kernel-based Virtual Machine) is a full virtualization solution
 kz-desktop --delete=virt-manager
 
 
-# Setup: libreoffice | #none | Office productivity suite
+#|setup|libreoffice|#none|Office productivity suite
 kz-desktop --addaft=libreoffice-writer
 kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
-# Reset: libreoffice | #none | Office productivity suite
+#|reset|libreoffice|#none|Office productivity suite
 kz-desktop --delete=libreoffice-writer
 kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
 
-# Setup: lynis | #none | Security auditing and hardening tool for Linux/Unix
+#|setup|lynis|#none|Security auditing and hardening tool for Linux/Unix
 git clone https://github.com/CISOfy/lynis.git "$HOME/lynis"
 # -----------------------------------------------------------------------------
 # Usage:
@@ -348,25 +348,25 @@ git clone https://github.com/CISOfy/lynis.git "$HOME/lynis"
 # $ [sudo] ./lynis audit system
 # -----------------------------------------------------------------------------
 
-# Reset: lynis | #none | Security auditing and hardening tool for Linux/Unix
+#|reset|lynis|#none|Security auditing and hardening tool for Linux/Unix
 rm --force --recursive "$HOME/lynis"
 
 
-# Setup: microsoft-edge | pc06 pc07 | The web browser from Microsoft
+#|setup|microsoft-edge|pc06 pc07|The web browser from Microsoft
 kz-desktop --addaft=microsoft-edge
 
-# Reset: microsoft-edge | pc06 pc07 | The web browser from Microsoft
+#|reset|microsoft-edge|pc06 pc07|The web browser from Microsoft
 kz-desktop --delete=microsoft-edge
 
 
-# Setup: private-home | * | Private home directory permissions
+#|setup|private-home|*|Private home directory permissions
 chmod 750 ~
 
-# Reset: private-home | * | Private home directory permissions
+#|reset|private-home|*|Private home directory permissions
 chmod 755 ~
 
 
-# Setup: spotify | pc01 pc06 pc07 | Spotify streaming music client
+#|setup|spotify|pc01 pc06 pc07|Spotify streaming music client
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
@@ -374,13 +374,13 @@ if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spot
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
-# Reset: spotify | pc01 pc06 pc07 | Spotify streaming music client
+#|reset|spotify|pc01 pc06 pc07|Spotify streaming music client
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 
-# Setup: terminal | pc01 pc06 pc07 | Terminal emulator application
+#|setup|terminal|pc01 pc06 pc07|Terminal emulator application
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
@@ -393,7 +393,7 @@ echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 #
 LOGOUT=true
 
-# Reset: terminal | pc01 pc06 pc07 | Terminal emulator application
+#|reset|terminal|pc01 pc06 pc07|Terminal emulator application
 # -----------------------------------------------------------------------------
 # Disable aliases.
 # -----------------------------------------------------------------------------
@@ -406,32 +406,32 @@ sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 LOGOUT=true
 
 
-# Setup: terminal | pc06 pc07 | Terminal emulator application
+#|setup|terminal|pc06 pc07|Terminal emulator application
 sed --in-place --expression='/^alias bin/d' --expression='/^alias doc/d' ~/.bashrc
 echo "alias bin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'" >> ~/.bashrc
 echo "alias doc='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc
 kz-desktop --addbef=org.gnome.Terminal
 
-# Reset: terminal | pc06 pc07 | Terminal emulator application
+#|reset|terminal|pc06 pc07|Terminal emulator application
 kz-desktop --delete=org.gnome.Terminal
 sed --in-place --expression='/^alias bin/d' --expression='/^alias doc/d' ~/.bashrc
 
 
-# Setup: thumbnails-cache | #none | Restore thumbnails in nautilus
+#|setup|thumbnails-cache|#none|Restore thumbnails in nautilus
 rm --force --recursive ~/.cache/thumbnails/
 
-# Reset: thumbnails-cache | #none    | Restore thumbnails in nautilus
+#|reset|thumbnails-cache|#none   |Restore thumbnails in nautilus
 rm --force --recursive ~/.cache/thumbnails/
 
 
-# Setup: thunderbird | #none | Mail/news client with RSS, chat and integrated spam filter support
+#|setup|thunderbird|#none|Mail/news client with RSS, chat and integrated spam filter support
 kz-desktop --addbef=thunderbird
 
-# Reset: thunderbird | #none | Mail/news client with RSS, chat and integrated spam filter support
+#|reset|thunderbird|#none|Mail/news client with RSS, chat and integrated spam filter support
 kz-desktop --delete=thunderbird
 
 
-# Setup: vscode | pc06 pc07 | Code editing. Redefined
+#|setup|vscode|pc06 pc07|Code editing. Redefined
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
@@ -447,21 +447,21 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/pla
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/troff; fi
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/x-python; fi
 
-# Reset: vscode | pc06 pc07 | Code editing. Redefined
+#|reset|vscode|pc06 pc07|Code editing. Redefined
 kz-desktop --delete=code
 
 
-# Setup: webmin | pc07 | Web Console for Linux servers
+#|setup|webmin|pc07|Web Console for Linux servers
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
 kz-desktop --addaft=kz-webmin
 
-# Reset: webmin | pc07 | Web Console for Linux servers
+#|reset|webmin|pc07|Web Console for Linux servers
 kz-desktop --delete=kz-webmin
 
 
-# Setup: xdg-projects-dir | pc06 pc07 | Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs
+#|setup|xdg-projects-dir|pc06 pc07|Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs
 # -----------------------------------------------------------------------------
 # This app is not required when "apt-cache show xdg-user-dirs" shows version 0.20 or higher.
 # -----------------------------------------------------------------------------
@@ -471,12 +471,12 @@ if [[ ${LANG:0:2} = 'en' ]]; then mkdir --parents --verbose ~/Projects; fi
 if [[ ${LANG:0:2} = 'en' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projects; fi
 xdg-user-dirs-update
 
-# Reset: xdg-projects-dir | pc06 pc07 | Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs
+#|reset|xdg-projects-dir|pc06 pc07|Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs
 xdg-user-dirs-update --set PROJECTS ~
 
 
-# Setup: zoom | pc01 | Cloud-based communication and collaboration platform
+#|setup|zoom|pc01|Cloud-based communication and collaboration platform
 kz-desktop --addaft=kz-zoom
 
-# Reset: zoom | pc01 | Cloud-based communication and collaboration platform
+#|reset|zoom|pc01|Cloud-based communication and collaboration platform
 kz-desktop --delete=kz-zoom

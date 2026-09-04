@@ -27,9 +27,31 @@ In het instellingenbestand staan zogenaamde \fBapp-\fR en
 .sp
 De \fBapp-regel\fR geeft aan voor welke app en welke computer de opdrachten
 uitgevoerd moeten worden en geeft een beschrijving van de app.
+.sp
+De \fBapp-regel\fR geeft aan voor welke app en welke computer de opdrachten
+uitgevoerd moeten worden en geeft een beschrijving van de app.
 .br
+Zo'n regel is ingedeeld als een psv-regel (pipe-separated values), de velden
+worden gescheiden door het pipe-teken '|':
+.br
+#|ACTIE|APP|HOST|BESCHRIJVING
+.TS
+box tab(^);
+lb lb lbx
+l l l.
+Veld-nummer^Veld^Beschrijving
+1^#^Hekje, commentaarsymbool
+2^ACTIE^Actie, 'setup' of 'reset'
+3^APP^Naam van de app
+4^HOST^Naam van de computer(s) waarop de opdracht uitgevoerd moet worden
+5^BESCHRIJVING^Beschrijving van de app
+.TE
+.sp
 Deze regels worden gevolgd door één of meer regels met opdrachten, de
 \fBopdracht-regel\fRs.
+.br
+Deze opdrachten kunnen ook in het Terminalvenster op de opdrachtregel worden
+uitgevoerd.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
@@ -46,12 +68,12 @@ allbox tab(^);
 lb lbx
 l l.
 Regel^Beschrijving
-# Setup: APP | HOST... | BESCHRIJVING^De app instellen (\fBapp-regel\fR), word\
+#|setup|APP|HOST|BESCHRIJVING^De app instellen (\fBapp-regel\fR), word\
 t verwerkt.
 # Commentaar^Commentaarregel (geen, één of meer), wordt overgeslagen.
 Opdracht^Instel-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
 ^Lege regel (geen, één of meer), wordt overgeslagen.
-# Reset: APP | HOST... | BESCHRIJVING^De app resetten (\fBapp-regel\fR voor op\
+#|reset|APP|HOST|BESCHRIJVING^De app resetten (\fBapp-regel\fR voor op\
 tie \fB-r\fR, \fB--reset\fR), wordt verwerkt.
 Opdracht^Reset-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevoerd.
 .TE
@@ -63,20 +85,20 @@ lb | lbx
 - | -
 l | l.
 Regel^Beschrijving
-# Setup: calibre | * | Powerful and easy to use e-book manager^Calibre instell\
+#|setup|calibre|*|Powerful and easy to use e-book manager^Calibre instell\
 en op iedere computer, zie [1].
 kz-desktop --addbef=calibre-gui^Instel-opdracht voor calibre.
 ^
-# Reset: calibre | * | Powerful and easy to use e-book manager^Calibre resette\
+#|reset|calibre|*|Powerful and easy to use e-book manager^Calibre resette\
 n op iedere computer, zie [1].
 kz-desktop --delete=calibre-gui^Reset-opdracht voor calibre.
 ^
 ^
-# Setup: vscode | pc06 pc07 | Code editing. Redefined^Vscode instell\
+#|setup|vscode|pc06 pc07|Code editing. Redefined^Vscode instell\
 en op pc06 en pc07, zie [2].
 # kz-desktop --addaft=code^Instel-opdracht voor vscode.
 ^
-# Reset: vscode | pc06 pc07 | Code editing. Redefined^Vscode resetten op pc06 \
+#|reset|vscode|pc06 pc07|Code editing. Redefined^Vscode resetten op pc06 \
 en pc07, zie [2].
 kz-desktop --delete=code^Reset-opdracht voor vscode.
 .TE

@@ -26,8 +26,26 @@ The installation file contains so-called \fBapp-\fR and \fBcommand record\fRs.
 The \fBapp record\fR indicates for which app and which computer the commands
 should be executed and provides a description of the app.
 .br
+Such a record is formatted as a psv record (pipe-separated values), the fields
+are separated by the pipe character '|':
+.br
+#|ACTION|APP|HOST|DESCRIPTION
+.TS
+box tab(^);
+lb lb lbx
+l l l.
+Field number^Field^Description
+1^#^Hash, comment symbol
+2^ACTION^Action, 'install' or 'remove'
+3^APP^Name of the app
+4^HOST^Name of the computer(s) on which the command should be executed
+5^DESCRIPTION^Description of the app
+.TE
+.sp
 This record is followed by one or more records with commands, the
 \fBcommand record\fRs.
+.br
+These commands can also be executed in the Terminal window on the command line.
 .sp
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
@@ -44,12 +62,12 @@ allbox tab(^);
 lb lbx
 l l.
 Record^Description
-# Install: APP | HOST... | DESCRIPTION^Install the app (\fBapp record\fR), wil\
+#|install|APP|HOST|DESCRIPTION^Install the app (\fBapp record\fR), wil\
 l be processed.
 # Comment^Comment line (none, one or more), will be skipped.
 Command^Install command (one or more \fBcommand record\fRs), will be executed.
 ^Empty line (none, one or more), will be skipped.
-# Remove: APP | HOST... | DESCRIPTION^Remove the app (\fBapp record\fR for opt\
+#|remove|APP|HOST|DESCRIPTION^Remove the app (\fBapp record\fR for opt\
 ion \fB-r\fR, \fB--remove\fR), will be processed.
 Command^Remove command (one or more \fBcommand record\fRs), will be executed.
 .TE
@@ -61,20 +79,20 @@ lb | lbx
 - | -
 l | l.
 Record^Description
-# Install: calibre | * | Powerful and easy to use e-book manager^Install calib\
+#|install|calibre|*|Powerful and easy to use e-book manager^Install calib\
 re on every computer, see [1].
 sudo apt-get install --assume-yes calibre^Install command for calibre.
 ^
-# Remove: calibre | * | Powerful and easy to use e-book manager^Remove calibre\
+#|remove|calibre|*|Powerful and easy to use e-book manager^Remove calibre\
  on every computer, see [1].
 sudo apt-get remove --assume-yes calibre^Remove command for calibre.
 ^
 ^
-# Install: vscode | pc06 pc07 | Code editing. Redefined^Install vscode on pc06\
+#|install|vscode|pc06 pc07|Code editing. Redefined^Install vscode on pc06\
  and pc07, see [2].
 sudo apt-get install --assume-yes code^Install command for vscode.
 
-# Remove: vscode | pc06 pc07 | Code editing. Redefined^Remove vscode from pc06\
+#|remove|vscode|pc06 pc07|Code editing. Redefined^Remove vscode from pc06\
  and pc07, see [2].
 sudo apt-get remove --assume-yes code^Remove command for vscode.
 .TE

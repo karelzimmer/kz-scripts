@@ -27,8 +27,27 @@ In het installatiebestand staan zogenaamde \fBapp-\fR en \fBopdracht-regel\fRs.
 De \fBapp-regel\fR geeft aan voor welke app en welke computer de opdrachten
 uitgevoerd moeten worden en geeft een beschrijving van de app.
 .br
+Zo'n regel is ingedeeld als een psv-regel (pipe-separated values), de velden
+worden gescheiden door het pipe-teken '|':
+.br
+#|ACTIE|APP|HOST|BESCHRIJVING
+.TS
+box tab(^);
+lb lb lbx
+l l l.
+Veld-nummer^Veld^Beschrijving
+1^#^Hekje, commentaarsymbool
+2^ACTIE^Actie, 'install' of 'remove'
+3^APP^Naam van de app
+4^HOST^Naam van de computer(s) waarop de opdracht uitgevoerd moet worden
+5^BESCHRIJVING^Beschrijving van de app
+.TE
+.sp
 Deze regels worden gevolgd door één of meer regels met opdrachten, de
 \fBopdracht-regel\fRs.
+.br
+Deze opdrachten kunnen ook in het Terminalvenster op de opdrachtregel worden
+uitgevoerd.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
@@ -45,13 +64,13 @@ allbox tab(^);
 lb lbx
 l l.
 Regel^Beschrijving
-# Install: APP | HOST... | BESCHRIJVING^De app installeren (\fBapp-regel\fR), \
+#|install|APP|HOST|BESCHRIJVING^De app installeren (\fBapp-regel\fR), \
 wordt verwerkt.
 # Commentaar^Commentaarregel (geen, één of meer), wordt overgeslagen.
 Opdracht^Installatie-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitge\
 voerd.
 ^Lege regel (geen, één of meer), wordt overgeslagen.
-# Remove: APP | HOST... | BESCHRIJVING^De app verwijderen (\fBapp-regel\fR voo\
+#|remove|APP|HOST|BESCHRIJVING^De app verwijderen (\fBapp-regel\fR voo\
 r optie \fB-r\fR, \fB--remove\fR), wordt verwerkt.
 Opdracht^Verwijder-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevo\
 erd.
@@ -64,20 +83,20 @@ lb | lbx
 - | -
 l | l.
 Regel^Beschrijving
-# Install: calibre | * | Powerful and easy to use e-book manager^Calibre insta\
+#|install|calibre|*|Powerful and easy to use e-book manager^Calibre insta\
 lleren op iedere computer, zie [1].
 sudo apt-get install --assume-yes calibre^Installatie-opdracht voor calibre.
 ^
-# Remove: calibre | * | Powerful and easy to use e-book manager^Verwijder cali\
+#|remove|calibre|*|Powerful and easy to use e-book manager^Verwijder cali\
 bre van iedere computer, zie [1].
 sudo apt-get remove --assume-yes calibre^Verwijder-opdracht voor calibre.
 ^
 ^
-# Install: vscode | pc06 pc07 | Code editing. Redefined^Vscode installeren op \
+#|install|vscode|pc06 pc07|Code editing. Redefined^Vscode installeren op \
 pc06 en pc07, zie [2].
 sudo apt-get install --assume-yes code^Installatie-opdracht voor vscode.
 
-# Remove: vscode | pc06 pc07 | Code editing. Redefined^Verwijder vscode van pc\
+#|remove|vscode|pc06 pc07|Code editing. Redefined^Verwijder vscode van pc\
 06 en pc07, zie [2].
 sudo apt-get remove --assume-yes code^Verwijder-opdracht voor vscode.
 .TE
@@ -90,8 +109,8 @@ computers worden uitgevoerd.
 Een regel met 'pc01' als HOST zorgt ervoor dat de bijbehorende opdrachten
 standaard alleen op pc01 worden uitgevoerd.
 .br
-Een regel met 'pc01 pc02' als HOST zorgt ervoor dat de bijbehorende
-opdrachten standaard alleen op pc01 en pc02 worden uitgevoerd.
+Een regel met 'pc01 pc02' als HOST zorgt ervoor dat de bijbehorende opdrachten
+standaard alleen op pc01 en pc02 worden uitgevoerd.
 .br
 Een regel met '#none' als HOST zorgt ervoor dat de bijbehorende opdrachten
 standaard niet worden uitgevoerd (OPMERKING: '#none' is geen geldige

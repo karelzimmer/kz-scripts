@@ -27,8 +27,26 @@ The settings file contains contains so-called \fBapp-\fR and \
 The \fBapp record\fR indicates for which app and which computer the commands
 should be executed and provides a description of the app.
 .br
-These records are followed by one or more records with commands, the
+Such a record is formatted as a psv record (pipe-separated values), the fields
+are separated by the pipe character '|':
+.br
+#|ACTION|APP|HOST|DESCRIPTION
+.TS
+box tab(^);
+lb lb lbx
+l l l.
+Field number^Field^Description
+1^#^Hash, comment symbol
+2^ACTION^Action, 'setup' or 'reset'
+3^APP^Name of the app
+4^HOST^Name of the computer(s) on which the command should be executed
+5^DESCRIPTION^Description of the app
+.TE
+.sp
+This record is followed by one or more records with commands, the
 \fBcommand record\fRs.
+.br
+These commands can also be executed in the Terminal window on the command line.
 .sp
 See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
@@ -45,12 +63,12 @@ allbox tab(^);
 lbx lbx
 l l.
 Record^Description
-# Setup: APP | HOST... | DESCRIPTION^Set up the app (\fBapp-record\fR), will b\
+#|setup|APP|HOST|DESCRIPTION^Set up the app (\fBapp-record\fR), will b\
 e processed.
 # Comment^Comment line (none, one or more), will be skipped.
 Command^Setup command (one or more \fBcommand record\fRs), will be executed.
 ^Empty line (none, one or more), will be skipped.
-# Reset: APP | HOST... | DESCRIPTION^Reset the app (\fBapp-record\fR for optio\
+#|reset|APP|HOST|DESCRIPTION^Reset the app (\fBapp-record\fR for optio\
 n \fB-r\fR, \fB--reset\fR), will be processed.
 Command^Reset command (one or more \fBcommand record\fRs), will be executed.
 .TE
@@ -62,20 +80,20 @@ lb | lbx
 - | -
 l | l.
 Record^Description
-# Setup: calibre | * | Powerful and easy to use e-book manager^Set up calibre \
+#|setup|calibre|*|Powerful and easy to use e-book manager^Set up calibre \
 on every computer, see [1].
 kz-desktop --addbef=calibre-gui^Setup command for calibre.
 ^
-# Reset: calibre | * | Powerful and easy to use e-book manager^Reset calibre o\
+#|reset|calibre|*|Powerful and easy to use e-book manager^Reset calibre o\
 n every computer, see [1].
 kz-desktop --delete=calibre-gui^Reset command for calibre.
 ^
 ^
-# Setup: vscode | pc06 pc07 | Code editing. Redefined^Set up vscode on pc06 an\
+#|setup|vscode|pc06 pc07|Code editing. Redefined^Set up vscode on pc06 an\
 d pc07, see [2].
 # kz-desktop --addaft=code^Setup command for vscode.
 ^
-# Reset: vscode | pc06 pc07 | Code editing. Redefined^Reset vscode on pc06 and\
+#|reset|vscode|pc06 pc07|Code editing. Redefined^Reset vscode on pc06 and\
  pc07, see [2].
 kz-desktop --delete=code^Reset command for vscode.
 .TE
