@@ -334,7 +334,7 @@ process_menu1_choice() {
 # This function processes menu 1 choice 1.
 process_menu1_choice1() {
     local -a rows=(
-        [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
+        [1]="${MENU2_ACTIONS[1]}|${MENU2_DESCS[1]}"
         )
     local title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
 
@@ -376,7 +376,7 @@ $(gettext '4. Install Linux.')
 # This function processes menu 1 choice 3.
 process_menu1_choice3() {
     local -a rows=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
+        [1]="${MENU2_ACTIONS[3]}|${MENU2_DESCS[3]}"
         )
     local title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
 
@@ -387,8 +387,8 @@ process_menu1_choice3() {
 # This function processes menu 1 choice 4.
 process_menu1_choice4() {
     local -a rows=(
-        [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
-        [2]="${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
+        [1]="${MENU2_ACTIONS[4]}|${MENU2_DESCS[4]}"
+        [2]="${MENU2_ACTIONS[5]}|${MENU2_DESCS[5]}"
         )
     local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
 
@@ -545,7 +545,7 @@ process_menu2_choice() {
 # This function processes menu 2 choice 1.
 process_menu2_choice1() {
     local -a rows=(
-        [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
+        [1]="${MENU2_ACTIONS[1]}|${MENU2_DESCS[1]}"
         )
     local title="${MENU2_ACTIONS[1]} (${MENU2_DESCS[1]})"
 
@@ -556,7 +556,7 @@ process_menu2_choice1() {
 # This function processes menu 2 choice 2.
 process_menu2_choice2() {
     local -a rows=(
-        [1]="${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
+        [1]="${MENU2_ACTIONS[2]}|${MENU2_DESCS[2]}"
         )
     local title="${MENU2_ACTIONS[2]} (${MENU2_DESCS[2]})"
 
@@ -574,7 +574,7 @@ process_menu2_choice2() {
 # This function processes menu 2 choice 3.
 process_menu2_choice3() {
     local -a rows=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
+        [1]="${MENU2_ACTIONS[3]}|${MENU2_DESCS[3]}"
         )
     local title="${MENU2_ACTIONS[3]} (${MENU2_DESCS[3]})"
 
@@ -585,7 +585,7 @@ process_menu2_choice3() {
 # This function processes menu 2 choice 4.
 process_menu2_choice4() {
     local -a rows=(
-        [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
+        [1]="${MENU2_ACTIONS[4]}|${MENU2_DESCS[4]}"
         )
     local title="${MENU2_ACTIONS[4]} (${MENU2_DESCS[4]})"
 
@@ -596,7 +596,7 @@ process_menu2_choice4() {
 # This function processes menu 2 choice 5.
 process_menu2_choice5() {
     local -a rows=(
-        [1]="${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
+        [1]="${MENU2_ACTIONS[5]}|${MENU2_DESCS[5]}"
         )
     local title="${MENU2_ACTIONS[5]} (${MENU2_DESCS[5]})"
 
@@ -606,17 +606,17 @@ process_menu2_choice5() {
 
 # This function processes the command corresponding to the choice made.
 process_commands() {
-    local -i row=0
     local command=''
     local description=''
     local execute_command=false
+    local row=''
 
     show_commands_before_execution
 
     if $execute_command; then
-        for row in "${!rows[@]}"; do
-            description=${rows[$row]%%#*}
-            command=${rows[$row]#*#}
+        for row in "${rows[@]}"; do
+            description=${row%|*}
+            command=${row#*|}
             title="$description ($command)"
             execute_command
         done
@@ -626,10 +626,10 @@ process_commands() {
 
 # This function shows the commands before they are executed.
 show_commands_before_execution() {
-    local -i row=0
     local command=''
     local description=''
     local prompt=''
+    local row=''
     local text=''
 
     if [[ $UI_MODE = 'cli' ]]; then
@@ -639,9 +639,9 @@ show_commands_before_execution() {
     fi
     text+="$(gettext 'The following will be executed:')
 "
-    for row in "${!rows[@]}"; do
-        description=${rows[$row]%%#*}
-        command=${rows[$row]#*#}
+    for row in "${rows[@]}"; do
+            description=${row%|*}
+            command=${row#*|}
         text+="
 "
         text+="  $description ($command)"
