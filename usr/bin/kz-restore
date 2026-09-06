@@ -221,6 +221,7 @@ $(gettext 'Connect a usb medium.')"
                 )
             if [[ ${#media[@]} -eq 0 ]]; then
                 kz.errmsg "$text"
+                read -rp "$prompt" < /dev/tty
                 exit 1
             fi
         fi

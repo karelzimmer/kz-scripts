@@ -222,8 +222,6 @@ $(gettext 'Connect a usb medium.')"
             if [[ ${#media[@]} -eq 0 ]]; then
                 kz.errmsg "$text"
                 if [[ $UI_MODE = 'cli' ]]; then
-                    prompt=$(\
-gettext 'Press the Enter key to continue [Enter]: ')
                     read -rp "$prompt" < /dev/tty
                 fi
                 exit 1
