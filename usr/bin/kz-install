@@ -85,8 +85,7 @@ declare REMOVE='remove'
 # This function performs the script actions.
 process() {
     local -A app_arguments=()
-    local -a installation_files=()
-    local -i installation_file_num=0
+    local -A installation_files=()
     local argument_app=false
     local command_file=''
     local err_flag=false
@@ -102,7 +101,7 @@ process() {
     check_input "$@"
 
     if ! $option_file; then
-        installation_files[++installation_file_num]=$installation_file_default
+        installation_files[$installation_file_default]=$installation_file_default
 
         # Decrypt GPG-encrypted installation file.
         installation_file_decrypted=\
@@ -113,8 +112,7 @@ $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
             > "$installation_file_decrypted"            \
             2> >($PROGRAM_LOGS)
 
-        installation_files[++installation_file_num]=\
-$installation_file_decrypted
+        installation_files[$installation_file_decrypted]=$installation_file_decrypted
     fi
 
     for installation_file in "${installation_files[@]}"; do
@@ -214,7 +212,7 @@ process_options() {
                 ;;
             -f | --file )
                 option_file=true
-                installation_files[++installation_file_num]=$2
+                installation_files[$2]=$2
                 shift 2
                 ;;
             -G | --gui )

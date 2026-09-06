@@ -85,8 +85,7 @@ declare UI_MODE='tui'
 # This function performs the script actions.
 process() {
     local -A app_arguments=()
-    local -a settings_files=()
-    local -i settings_file_num=0
+    local -A settings_files=()
     local argument_app=false
     local command_file=''
     local err_flag=false
@@ -102,7 +101,7 @@ process() {
     check_input "$@"
 
     if ! $option_file; then
-        settings_files[++settings_file_num]=$settings_file_default
+        settings_files[$settings_file_default]=$settings_file_default
 
         # Decrypt GPG-encrypted settings file.
         settings_file_decrypted=\
@@ -113,7 +112,7 @@ $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
             > "$settings_file_decrypted"                \
             2> >($PROGRAM_LOGS)
 
-        settings_files[++settings_file_num]=$settings_file_decrypted
+        settings_files[$settings_file_decrypted]=$settings_file_decrypted
     fi
 
     for settings_file in "${settings_files[@]}"; do
@@ -201,7 +200,7 @@ process_options() {
                 ;;
             -f | --file )
                 option_file=true
-                settings_files[++settings_file_num]=$2
+                settings_files[$2]=$2
                 shift 2
                 ;;
             -G | --gui )
