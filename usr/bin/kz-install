@@ -101,7 +101,8 @@ process() {
     check_input "$@"
 
     if ! $option_file; then
-        installation_files[$installation_file_default]=$installation_file_default
+        installation_files[$installation_file_default]=\
+$installation_file_default
 
         # Decrypt GPG-encrypted installation file.
         installation_file_decrypted=\
@@ -112,7 +113,8 @@ $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
             > "$installation_file_decrypted"            \
             2> >($PROGRAM_LOGS)
 
-        installation_files[$installation_file_decrypted]=$installation_file_decrypted
+        installation_files[$installation_file_decrypted]=\
+$installation_file_decrypted
     fi
 
     for installation_file in "${installation_files[@]}"; do
