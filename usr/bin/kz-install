@@ -754,12 +754,8 @@ $(gettext '         COMMAND...')"
             "#|$INSTALL|"*'|'*'|'* )
                 # App record.
                 app_seq_num=$((app_seq_num + 1))
-                app_name=$(
-                    printf  '%s'                    \
-                            "$command_record"       |
-                    cut     --delimiter='|'         \
-                            --fields=3
-                    )
+                app_name=${command_record#*|*|}
+                app_name=${app_name%%|*}
                 app_desc=${command_record##*|}
                 printf  -v app_line                 \
                         "%3d/%-3d  %s"              \
