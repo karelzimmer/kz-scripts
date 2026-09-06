@@ -333,8 +333,8 @@ process_menu1_choice() {
 
 # This function processes menu 1 choice 1.
 process_menu1_choice1() {
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[1]}|${MENU2_DESCS[1]}"
+    local -A rows=(
+        [one]="${MENU2_ACTIONS[1]}|${MENU2_DESCS[1]}"
         )
     local title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
 
@@ -375,8 +375,8 @@ $(gettext '4. Install Linux.')
 
 # This function processes menu 1 choice 3.
 process_menu1_choice3() {
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[3]}|${MENU2_DESCS[3]}"
+    local -A rows=(
+        [one]="${MENU2_ACTIONS[3]}|${MENU2_DESCS[3]}"
         )
     local title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
 
@@ -386,9 +386,9 @@ process_menu1_choice3() {
 
 # This function processes menu 1 choice 4.
 process_menu1_choice4() {
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[4]}|${MENU2_DESCS[4]}"
-        [2]="${MENU2_ACTIONS[5]}|${MENU2_DESCS[5]}"
+    local -A rows=(
+        [one]="${MENU2_ACTIONS[4]}|${MENU2_DESCS[4]}"
+        [two]="${MENU2_ACTIONS[5]}|${MENU2_DESCS[5]}"
         )
     local title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
 
@@ -544,8 +544,8 @@ process_menu2_choice() {
 
 # This function processes menu 2 choice 1.
 process_menu2_choice1() {
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[1]}|${MENU2_DESCS[1]}"
+    local -A rows=(
+        [one]="${MENU2_ACTIONS[1]}|${MENU2_DESCS[1]}"
         )
     local title="${MENU2_ACTIONS[1]} (${MENU2_DESCS[1]})"
 
@@ -555,8 +555,8 @@ process_menu2_choice1() {
 
 # This function processes menu 2 choice 2.
 process_menu2_choice2() {
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[2]}|${MENU2_DESCS[2]}"
+    local -A rows=(
+        [one]="${MENU2_ACTIONS[2]}|${MENU2_DESCS[2]}"
         )
     local title="${MENU2_ACTIONS[2]} (${MENU2_DESCS[2]})"
 
@@ -573,8 +573,8 @@ process_menu2_choice2() {
 
 # This function processes menu 2 choice 3.
 process_menu2_choice3() {
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[3]}|${MENU2_DESCS[3]}"
+    local -A rows=(
+        [one]="${MENU2_ACTIONS[3]}|${MENU2_DESCS[3]}"
         )
     local title="${MENU2_ACTIONS[3]} (${MENU2_DESCS[3]})"
 
@@ -584,8 +584,8 @@ process_menu2_choice3() {
 
 # This function processes menu 2 choice 4.
 process_menu2_choice4() {
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[4]}|${MENU2_DESCS[4]}"
+    local -A rows=(
+        [one]="${MENU2_ACTIONS[4]}|${MENU2_DESCS[4]}"
         )
     local title="${MENU2_ACTIONS[4]} (${MENU2_DESCS[4]})"
 
@@ -595,8 +595,8 @@ process_menu2_choice4() {
 
 # This function processes menu 2 choice 5.
 process_menu2_choice5() {
-    local -a rows=(
-        [1]="${MENU2_ACTIONS[5]}|${MENU2_DESCS[5]}"
+    local -A rows=(
+        [one]="${MENU2_ACTIONS[5]}|${MENU2_DESCS[5]}"
         )
     local title="${MENU2_ACTIONS[5]} (${MENU2_DESCS[5]})"
 
