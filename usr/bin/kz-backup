@@ -98,6 +98,7 @@ check_input() {
     eval set -- "$parsed"
     unset parsed
 
+    kz.process_options "$@"
     process_options "$@"
 }
 
@@ -123,14 +124,6 @@ $(gettext "no desktop environment available")"
                 UI_MODE='gui'
                 shift
                 ;;
-            -h | --help )
-                kz.process_option_help
-                exit 0
-                ;;
-            -m | --manual )
-                kz.process_option_manual
-                exit 0
-                ;;
             -t | --target )
                 if $option_target; then
                     text="$program_name: $1 $2: $(gettext 'too many options')
@@ -145,14 +138,6 @@ $USAGE"
             -T | --tui )
                 UI_MODE='tui'
                 shift
-                ;;
-            -u | --usage )
-                kz.process_option_usage
-                exit 0
-                ;;
-            -v | --version )
-                kz.process_option_version
-                exit 0
                 ;;
             -- )
                 shift
@@ -169,6 +154,7 @@ $USAGE"
     if [[ -n $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
+        UI_MODE='cli'
         kz.infomsg "$text"
         exit 1
     fi
@@ -182,8 +168,10 @@ check_target() {
     local old=''
     local program_name=${PROGRAM_NAME/kz-/kz }
     local selected_medium=''
+    local text=''
     local usb_mount_point=/media/$USER
 
+    # Correct mouint point for Red Hat and Fedora systems.
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
@@ -197,37 +185,7 @@ $(gettext 'directory does not exist')"
         fi
         MEDIUM=$target_argument
     else
-        readarray -t media < <(
-            find    "$usb_mount_point/"         \
-                    -mindepth 1                 \
-                    -maxdepth 1                 \
-                    -printf '%P\n' 2> /dev/null || true
-            )
-        if [[ ${#media[@]} -eq 0 ]]; then
-            text="$(eval_gettext "No usb medium found on \$usb_mount_point.")
-
-$(gettext 'Connect a usb medium.')"
-            kz.infomsg "$text"
-            # A second chance for the user to connect media.
-            if [[ $UI_MODE = 'cli' ]]; then
-                prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
-                read -rp "$prompt" < /dev/tty
-            fi
-            readarray -t media < <(
-                find    "$usb_mount_point/"         \
-                        -mindepth 1                 \
-                        -maxdepth 1                 \
-                        -printf '%P\n' 2> /dev/null || true
-                )
-            if [[ ${#media[@]} -eq 0 ]]; then
-                kz.errmsg "$text"
-                if [[ $UI_MODE = 'cli' ]]; then
-                    read -rp "$prompt" < /dev/tty
-                fi
-                exit 1
-            fi
-        fi
-
+        check_target_for_user_action
         if [[ ${#media[@]} -eq 1 ]]; then
             MEDIUM=$usb_mount_point/${media[0]}
         else
@@ -239,7 +197,48 @@ $(gettext 'Connect a usb medium.')"
     fi
 
     TARGET=$MEDIUM/backup_${HOSTNAME}_$USER
+    check_target_for_old_backups
+}
 
+
+# This function checks if the target is made available by the user.
+check_target_for_user_action() {
+    readarray -t media < <(
+        find    "$usb_mount_point/"         \
+                -mindepth 1                 \
+                -maxdepth 1                 \
+                -printf '%P\n' 2> /dev/null || true
+        )
+    if [[ ${#media[@]} -eq 0 ]]; then
+        text="$(eval_gettext "No usb medium found on \$usb_mount_point.")
+
+$(gettext 'Connect a usb medium.')"
+        kz.infomsg "$text"
+        # A second chance for the user to connect media.
+        if [[ $UI_MODE = 'cli' ]]; then
+            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+            read -rp "$prompt" < /dev/tty
+        fi
+        readarray -t media < <(
+            find    "$usb_mount_point/"         \
+                    -mindepth 1                 \
+                    -maxdepth 1                 \
+                    -printf '%P\n' 2> /dev/null || true
+            )
+        if [[ ${#media[@]} -eq 0 ]]; then
+            kz.errmsg "$text"
+            if [[ $UI_MODE = 'cli' ]]; then
+                read -rp "$prompt" < /dev/tty
+            fi
+            exit 1
+        fi
+    fi
+}
+
+
+# This function checks for old backups and prompts the user to rename them.
+# It exits the script if old backups are found.
+check_target_for_old_backups() {
     old=$MEDIUM/BACKUP-$USER@$HOSTNAME
     if [[ -e $old ]]; then
         text="$(gettext 'The backup has to be renamed!')
@@ -263,81 +262,19 @@ $(eval_gettext "to  : \$TARGET")"
 # This function lets the user select the target medium.
 select_medium() {
     local -a choices=()
-    local -i max_choices=1
     local medium=''
-    local prompt=''
     local text=''
     local title=''
 
     title=$(gettext 'Make backup')
-    text=$(gettext 'Choose USB medium:')
+    text=$(gettext 'Select a USB medium:')
 
     if [[ $UI_MODE = 'gui' ]]; then
-        for medium in "${media[@]}"; do
-            choices+=('false' "$medium")
-        done
-        # No array is needed, because only one can be selected.
-        selected_medium=$(
-            zenity  --list                              \
-                    --radiolist                         \
-                    --separator ' '                     \
-                    --width     400                     \
-                    --height    500                     \
-                    --title     "$title"                \
-                    --text      "$text"                 \
-                    --ok-label  "$(gettext 'Continue')" \
-                    --column    "$(gettext 'SEL')"      \
-                    --column    "$(gettext 'MEDIUM')"   \
-                    "${choices[@]}"                     \
-                    2> /dev/null                        || true
-            )
+        select_medium_gui
     elif [[ $UI_MODE = 'tui' ]]; then
-        for medium in "${media[@]}"; do
-            choices+=("$medium" 'off')
-        done
-        # No array is needed, because only one can be selected.
-        selected_medium=$(
-            dialog  --mouse                             \
-                    --no-items                          \
-                    --ok-label  "$(gettext 'Continue')" \
-                    --backtitle "$PROGRAM_NAME"         \
-                    --title     "$title"                \
-                    --radiolist "$text"                 \
-                    0 0 0                               \
-                    "${choices[@]}"                     \
-                    2>&1 >/dev/tty                      |
-            sed     --expression='s/"//g'               || true
-            )
+        select_medium_tui
     else
-        text=$(gettext 'More than one USB medium is connected.')
-        printf  '%s\n\n%s\n'    \
-                "$text"         \
-                "$(gettext 'Choose USB medium:')"
-        for medium in "${media[@]}"; do
-            printf "%3d %s\n" "$max_choices" "$medium"
-            max_choices=$((max_choices + 1))
-        done
-        printf  '%3d %s\n'      \
-                "$max_choices"  \
-                "$(gettext 'Exit')"
-
-        printf '\n'
-        while true; do
-            prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
-            kz.logmsg "$prompt"
-            read -rp "$prompt" < /dev/tty
-
-            if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
-                continue
-            elif [[ $REPLY -eq $max_choices ]]; then
-                exit 0
-            elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]; then
-                selected_medium=${media[REPLY-1]}
-                break
-            else
-                continue
-            fi
-        done
+        select_medium_cli
     fi
 
     if [[ -z $selected_medium ]]; then
@@ -345,6 +282,87 @@ select_medium() {
         kz.infomsg "$text"
         exit 0
     fi
+}
+
+
+# This function lets the user select the target medium in the GUI.
+select_medium_gui() {
+    for medium in "${media[@]}"; do
+        choices+=('false' "$medium")
+    done
+    # No array is needed, because only one can be selected.
+    selected_medium=$(
+        zenity  --list                              \
+                --radiolist                         \
+                --separator ' '                     \
+                --width     400                     \
+                --height    500                     \
+                --title     "$title"                \
+                --text      "$text"                 \
+                --ok-label  "$(gettext 'Continue')" \
+                --column    "$(gettext 'SELECT')"   \
+                --column    "$(gettext 'MEDIUM')"   \
+                "${choices[@]}"                     \
+                2> /dev/null                        || true
+        )
+}
+
+
+# This function lets the user select the target medium using a TUI.
+select_medium_tui() {
+    for medium in "${media[@]}"; do
+        choices+=("$medium" 'off')
+    done
+    # No array is needed, because only one can be selected.
+    selected_medium=$(
+        dialog  --mouse                             \
+                --no-items                          \
+                --ok-label  "$(gettext 'Continue')" \
+                --backtitle "$PROGRAM_NAME"         \
+                --title     "$title"                \
+                --radiolist "$text"                 \
+                0 0 0                               \
+                "${choices[@]}"                     \
+                2>&1 >/dev/tty                      |
+        sed     --expression='s/"//g'               || true
+        )
+}
+
+
+# This function lets the user select the target medium via the CLI.
+select_medium_cli() {
+    local prompt=''
+    local max_choices=1
+
+    text=$(gettext 'More than one USB medium is connected.')
+    printf  '%s\n\n%s\n'    \
+            "$text"         \
+            "$(gettext 'Select a USB medium:')"
+    for medium in "${media[@]}"; do
+        printf "%3d %s\n" "$max_choices" "$medium"
+        max_choices=$((max_choices + 1))
+    done
+    printf  '%3d %s\n'      \
+            "$max_choices"  \
+            "$(gettext 'Exit')"
+
+    printf '\n'
+    while true; do
+        prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
+        kz.logmsg "$prompt"
+        read -rp "$prompt" < /dev/tty
+
+        if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+            continue
+        elif [[ $REPLY -eq $max_choices ]]; then
+            exit 0
+        elif [[ $REPLY -ge 1 && $REPLY -lt $max_choices ]]; then
+            selected_medium=${media[REPLY-1]}
+            break
+        else
+            continue
+        fi
+    done
 }
 
 
@@ -384,7 +402,6 @@ backup_settings() {
         "$settings_dir/favs.txt"    \
         "$settings_dir/wifi.txt"    |& $PROGRAM_LOGS
 }
-
 
 # This function creates a list of installed apps.
 backup_setting_apps() {
@@ -482,9 +499,19 @@ backup_setting_users() {
             )
 
     kz.logmsg 'Save instructions for adding additional users...'
-
     if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
-        text="$(gettext 'Additional users can be added manually:')
+        backup_setting_users_gui
+    else
+        backup_setting_users_cli
+    fi
+
+    printf '%s\n' "$text" > "$output_file"
+}
+
+
+# This function saves instructions for adding additional users in the GUI.
+backup_setting_users_gui() {
+    text="$(gettext 'Additional users can be added manually:')
 
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.")
@@ -495,8 +522,12 @@ $(gettext '[1] Windows, command, or magnifying glass key.')
 
 $users
 $groups"
-    else
-        text="$(gettext 'Additional users can be added manually:')
+}
+
+
+# This function saves instructions for adding additional users via the CLI.
+backup_setting_users_cli() {
+    text="$(gettext 'Additional users can be added manually:')
 
 $(gettext '# Standard user:')
 $(gettext "sudo useradd --create-home --comment '[USER]' [USERNAME]")
@@ -510,9 +541,6 @@ $(gettext 'sudo passwd --delete --expire [USERNAME]')
 
 $users
 $groups"
-    fi
-
-    printf '%s\n' "$text" > "$output_file"
 }
 
 
@@ -631,81 +659,101 @@ EOF
     kz.logmsg "$title"...
 
     if [[ $UI_MODE = 'gui' ]]; then
-        rsync   --archive                       \
-                --verbose                       \
-                --delete                        \
-                --exclude-from="$exclude_file"  \
-                --delete-excluded               \
-                "$HOME/"                        \
-                "$TARGET/"                      \
-                2>> "$ERROR_LOG"                |
-        sed     --expression='s/^/#/'           |
-        zenity  --progress                      \
-                --auto-close                    \
-                --no-cancel                     \
-                --pulsate                       \
-                --width     600                 \
-                --height    50                  \
-                --title     "$title"            \
-                --text      "$text"             \
-                2> /dev/null                    || BACKUP_RC=$?
+        create_backup_gui
     elif [[ $UI_MODE = 'tui' ]]; then
-        # This tput locks the cursor position top-left to prevent flickering.
-        tput cup 0 0
-        rsync   --archive                       \
-                --verbose                       \
-                --delete                        \
-                --exclude-from="$exclude_file"  \
-                --delete-excluded               \
-                "$HOME/"                        \
-                "$TARGET/"                      \
-                2>> "$ERROR_LOG"                |
-        dialog  --mouse                         \
-                --backtitle "$PROGRAM_NAME"     \
-                --title "$title"                \
-                --progressbox                   \
-                20 70                           || BACKUP_RC=$?
+        create_backup_tui
     else
-        text+='...'
-        kz.infomsg "$text"
-        rsync   --archive                       \
-                --verbose                       \
-                --human-readable                \
-                --delete                        \
-                --exclude-from="$exclude_file"  \
-                --delete-excluded               \
-                "$HOME/"                        \
-                "$TARGET/"                      \
-                2>> "$ERROR_LOG"                || BACKUP_RC=$?
+        create_backup_cli
     fi
+}
+
+
+# This function creates the backup in the GUI.
+create_backup_gui() {
+    rsync   --archive                       \
+            --verbose                       \
+            --delete                        \
+            --exclude-from="$exclude_file"  \
+            --delete-excluded               \
+            "$HOME/"                        \
+            "$TARGET/"                      \
+            2>> "$ERROR_LOG"                |
+    sed     --expression='s/^/#/'           |
+    zenity  --progress                      \
+            --auto-close                    \
+            --no-cancel                     \
+            --pulsate                       \
+            --width     600                 \
+            --height    50                  \
+            --title     "$title"            \
+            --text      "$text"             \
+            2> /dev/null                    || BACKUP_RC=$?
 
     text=$(gettext "Writing data from memory (this may take a while)")
     kz.logmsg "$text"...
-    if [[ $UI_MODE = 'gui' ]]; then
-        sync                                |
-        zenity  --progress                  \
-                --pulsate                   \
-                --auto-close                \
-                --no-cancel                 \
-                --width     600             \
-                --height    50              \
-                --title     "$title"        \
-                --text      "$text"         \
-                1> >($PROGRAM_LOGS)         \
-                2>> "$ERROR_LOG"
-    elif [[ $UI_MODE = 'tui' ]]; then
-        text+='...'
-        dialog  --mouse                     \
-                --backtitle "$PROGRAM_NAME" \
-                --title     "$title"        \
-                --infobox   "$text"         \
-                0 0                         || true
-        sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
-    else
-        text+='...'
-        kz.infomsg "$text"
-        sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
-    fi
+    sync                                    |
+    zenity  --progress                      \
+            --pulsate                       \
+            --auto-close                    \
+            --no-cancel                     \
+            --width     600                 \
+            --height    50                  \
+            --title     "$title"            \
+            --text      "$text"             \
+            1> >($PROGRAM_LOGS)             \
+            2>> "$ERROR_LOG"
+}
+
+
+# This function creates the backup using a TUI.
+create_backup_tui() {
+    # This tput locks the cursor position top-left to prevent flickering.
+    tput cup 0 0
+    rsync   --archive                       \
+            --verbose                       \
+            --delete                        \
+            --exclude-from="$exclude_file"  \
+            --delete-excluded               \
+            "$HOME/"                        \
+            "$TARGET/"                      \
+            2>> "$ERROR_LOG"                |
+    dialog  --mouse                         \
+            --backtitle "$PROGRAM_NAME"     \
+            --title "$title"                \
+            --progressbox                   \
+            20 70                           || BACKUP_RC=$?
+
+    text=$(gettext "Writing data from memory (this may take a while)")
+    kz.logmsg "$text"...
+    text+='...'
+    dialog  --mouse                     \
+            --backtitle "$PROGRAM_NAME" \
+            --title     "$title"        \
+            --infobox   "$text"         \
+            0 0                         || true
+    sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
+}
+
+
+# This function creates the backup via the CLI.
+create_backup_cli() {
+    text+='...'
+    kz.infomsg "$text"
+    rsync   --archive                       \
+            --verbose                       \
+            --human-readable                \
+            --delete                        \
+            --exclude-from="$exclude_file"  \
+            --delete-excluded               \
+            "$HOME/"                        \
+            "$TARGET/"                      \
+            2>> "$ERROR_LOG"                || BACKUP_RC=$?
+
+    text=$(gettext "Writing data from memory (this may take a while)")
+    kz.logmsg "$text"...
+    text+='...'
+    kz.infomsg "$text"
+    sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
 }
 
 
@@ -718,6 +766,7 @@ term() {
     local usb_mount_point=/media/$USER
     local volume_name=''
 
+    # Correct mouint point for Red Hat and Fedora systems.
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
@@ -727,49 +776,23 @@ term() {
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
-    if [[ $BACKUP_RC -ne 0 ]]; then
-        title="$PROGRAM_DESC $(gettext 'error messages')"
-        text="$(gettext 'Backup ended with errors.')
-
-$(gettext 'Possible causes:')
-$(gettext 'Were any files added or deleted during the backup, or')
-$(gettext 'some files may not be readable or changeable, or')
-$(eval_gettext "is there not enough space on \$TARGET.")
-
-$(gettext 'Actions to take:')
-$(gettext 'Check the error messages after this.')
-$(gettext 'Try creating the back up again.')"
-        kz.errmsg "$text"
-
-        if [[ $UI_MODE = 'gui' ]]; then
-            zenity  --text-info                 \
-                    --filename="$ERROR_LOG"     \
-                    --width     700             \
-                    --height    500             \
-                    --title     "$title"        \
-                    2> /dev/null                || true
-        elif [[ $UI_MODE = 'tui' ]]; then
-            dialog  --mouse                     \
-                    --scrollbar                 \
-                    --backtitle "$PROGRAM_NAME" \
-                    --title     "$title"        \
-                    --textbox   "$ERROR_LOG"    \
-                    0 0                         || true
-        else
-            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
-            read -rp "$prompt" < /dev/tty
-            kz.infomsg "$title $ERROR_LOG:"
-            less --no-init --quit-if-one-screen "$ERROR_LOG"
-        fi
-        exit 1
+    if [[ $BACKUP_RC -eq 0 ]]; then
+        term_success
+    else
+        term_error
     fi
+}
 
+
+# This function controls the termination of the script when it ends with
+# success.
+term_success() {
     text="
 $(gettext 'The backup has been made.')"
 
-    # shellcheck disable=SC2034
-    volume_name=${MEDIUM##*/}
     if [[ $TARGET == $usb_mount_point* ]]; then
+        # shellcheck disable=SC2034
+        volume_name=${MEDIUM##*/}
         if umount "$MEDIUM" |& $PROGRAM_LOGS; then
             text+="
 
@@ -792,8 +815,47 @@ $(gettext 'Remember to safely(!) remove the USB medium.')"
         fi
     fi
     kz.infomsg "$text"
-
     exit 0
+}
+
+
+# This function controls the termination of the script when it ends with
+# errors.
+term_error() {
+    title="$PROGRAM_DESC $(gettext 'error messages')"
+    text="$(gettext 'Backup ended with errors.')
+
+$(gettext 'Possible causes:')
+$(gettext 'Were any files added or deleted during the backup, or')
+$(gettext 'some files may not be readable or changeable, or')
+$(eval_gettext "is there not enough space on \$TARGET.")
+
+$(gettext 'Actions to take:')
+$(gettext 'Check the error messages after this.')
+$(gettext 'Try creating the back up again.')"
+    kz.errmsg "$text"
+
+    if [[ $UI_MODE = 'gui' ]]; then
+        zenity  --text-info                 \
+                --filename="$ERROR_LOG"     \
+                --width     700             \
+                --height    500             \
+                --title     "$title"        \
+                2> /dev/null                || true
+    elif [[ $UI_MODE = 'tui' ]]; then
+        dialog  --mouse                     \
+                --scrollbar                 \
+                --backtitle "$PROGRAM_NAME" \
+                --title     "$title"        \
+                --textbox   "$ERROR_LOG"    \
+                0 0                         || true
+    else
+        prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+        read -rp "$prompt" < /dev/tty
+        kz.infomsg "$title $ERROR_LOG:"
+        less --no-init --quit-if-one-screen "$ERROR_LOG"
+    fi
+    exit 1
 }
 
 

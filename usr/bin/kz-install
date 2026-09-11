@@ -99,44 +99,12 @@ process() {
     local text=''
 
     check_input "$@"
-
-    if ! $option_file; then
-        installation_files[$installation_file_default]=\
-$installation_file_default
-
-        # Decrypt GPG-encrypted installation file.
-        installation_file_decrypted=\
-$(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        gpg --no-default-keyring                        \
-            --keyring /usr/share/kz/kz-public-key.gpg   \
-            --decrypt /usr/bin/kz-install.sh.gpg        \
-            > "$installation_file_decrypted"            \
-            2> >($PROGRAM_LOGS)
-
-        installation_files[$installation_file_decrypted]=\
-$installation_file_decrypted
-    fi
-
-    for installation_file in "${installation_files[@]}"; do
-        if ! [[ -f $installation_file ]]; then
-            text=$(eval_gettext "Installation file '\$installation_file' not \
-found.")
-            kz.errmsg "$text"
-            err_flag=true
-        fi
-    done
-    if $err_flag; then
-        exit 1
-    fi
+    check_installation_files
 
     if $option_browse; then
         process_option_browse
-        exit 0
-    fi
-
-    if $option_list; then
+    elif $option_list; then
         process_option_list
-        exit 0
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
@@ -154,16 +122,13 @@ sudo apt-get update
     if $OPTION_SELECT; then
         process_option_select
     fi
-
     if $argument_app; then
         process_argument_app
     else
         process_installation_files_by_hostname
     fi
-
     if $option_cat; then
         process_option_cat
-        exit 0
     fi
 
     become_check
@@ -189,6 +154,7 @@ check_input() {
     eval set -- "$parsed"
     unset parsed
 
+    kz.process_options "$@"
     process_options "$@"
 }
 
@@ -227,17 +193,9 @@ $(gettext "no desktop environment available")"
                 UI_MODE='gui'
                 shift
                 ;;
-            -h | --help )
-                kz.process_option_help
-                exit 0
-                ;;
             -l | --list )
                 option_list=true
                 shift
-                ;;
-            -m | --manual )
-                kz.process_option_manual
-                exit 0
                 ;;
             -r | --remove )
                 OPTION_REMOVE=true
@@ -252,14 +210,6 @@ $(gettext "no desktop environment available")"
             -T | --tui )
                 UI_MODE='tui'
                 shift
-                ;;
-            -u | --usage )
-                kz.process_option_usage
-                exit 0
-                ;;
-            -v | --version )
-                kz.process_option_version
-                exit 0
                 ;;
             -- )
                 shift
@@ -279,6 +229,39 @@ $(gettext "no desktop environment available")"
             app_arguments[$1]=$1
             shift
         done
+    fi
+}
+
+
+# This function checks if the installation files exist.
+check_installation_files() {
+    if ! $option_file; then
+        installation_files[$installation_file_default]=\
+$installation_file_default
+
+        # Decrypt GPG-encrypted installation file.
+        installation_file_decrypted=\
+$(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
+        gpg --no-default-keyring                        \
+            --keyring /usr/share/kz/kz-public-key.gpg   \
+            --decrypt /usr/bin/kz-install.sh.gpg        \
+            > "$installation_file_decrypted"            \
+            2> >($PROGRAM_LOGS)
+
+        installation_files[$installation_file_decrypted]=\
+$installation_file_decrypted
+    fi
+
+    for installation_file in "${installation_files[@]}"; do
+        if ! [[ -f $installation_file ]]; then
+            text=$(eval_gettext "Installation file '\$installation_file' not \
+found.")
+            kz.errmsg "$text"
+            err_flag=true
+        fi
+    done
+    if $err_flag; then
+        exit 1
     fi
 }
 
@@ -311,6 +294,7 @@ $(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
     else
         less --no-init --quit-if-one-screen "$installation_file_combined"
     fi
+    exit 0
 }
 
 
@@ -353,54 +337,78 @@ $(gettext 'No apps found.')"
     done
 
     if [[ $UI_MODE = 'gui' ]]; then
-        text=$(
-            printf '%s|%s\n'            \
-                    "${choices[@]}"     |
-            column  --table             \
-                    --separator '|'     \
-                    --table-columns     \
-                    "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
-            )
-        printf  '%s\n'                  \
-                "$text"                 |
-        zenity  --text-info             \
-                --width     900         \
-                --height    500         \
-                --title     "$title"    \
-                --font="Monospace 10"   \
-                2> /dev/null            || true
+        process_option_list_gui
     elif [[ $UI_MODE = 'tui' ]]; then
-        text=$(
-            printf '%s|%s\n'            \
-                    "${choices[@]}"     |
-            column  --table             \
-                    --separator '|'     \
-                    --table-columns     \
-                    "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
-            )
-        text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
-        printf  '%s\n'                      \
-                "$text"                     \
-                > "$text_file"
-        dialog  --mouse                     \
-                --scrollbar                 \
-                --backtitle "$PROGRAM_NAME" \
-                --title     "$title"        \
-                --textbox   "$text_file"    \
-                0 0                         || true
+        process_option_list_tui
     else
-        text+='\n'
-        text+=$(
-            printf '|%s|%s\n'               \
-                    "${choices[@]}"         |
-            column  --table                 \
-                    --separator '|'         \
-                    --output-separator '  ' \
-                    --table-columns         \
-                    " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
-            )
-        if [[ $INSTALL = 'install' ]]; then
-            text+="
+        process_option_list_cli
+    fi
+}
+
+
+# This function shows the available apps from the installation files in the
+# GUI.
+process_option_list_gui() {
+    text=$(
+        printf '%s|%s\n'            \
+                "${choices[@]}"     |
+        column  --table             \
+                --separator '|'     \
+                --table-columns     \
+                "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+        )
+    printf  '%s\n'                  \
+            "$text"                 |
+    zenity  --text-info             \
+            --width     900         \
+            --height    500         \
+            --title     "$title"    \
+            --font="Monospace 10"   \
+            2> /dev/null            || true
+    exit 0
+}
+
+
+# This function shows the available apps from the installation files using a
+# TUI.
+process_option_list_tui() {
+    text=$(
+        printf '%s|%s\n'            \
+                "${choices[@]}"     |
+        column  --table             \
+                --separator '|'     \
+                --table-columns     \
+                "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+        )
+    text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
+    printf  '%s\n'                      \
+            "$text"                     \
+            > "$text_file"
+    dialog  --mouse                     \
+            --scrollbar                 \
+            --backtitle "$PROGRAM_NAME" \
+            --title     "$title"        \
+            --textbox   "$text_file"    \
+            0 0                         || true
+    exit 0
+}
+
+
+# This function shows the available apps from the installation files via the
+# CLI.
+process_option_list_cli() {
+    text+='\n'
+    text+=$(
+        printf '|%s|%s\n'               \
+                "${choices[@]}"         |
+        column  --table                 \
+                --separator '|'         \
+                --output-separator '  ' \
+                --table-columns         \
+                " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+        )
+    if [[ $INSTALL = 'install' ]]; then
+        text+="
 
 $(gettext "Use \"kz install APP...\" or \"kz install --select\" to install \
 the self-selected apps.")
@@ -408,8 +416,8 @@ $(gettext "Use \"kz install --cat APP...\" to view the self-selected \
 commands and information.")
 $(gettext "Use \"kz install --cat\" to view the automatically selected \
 commands and information.")"
-        else
-            text+="
+    else
+        text+="
 
 $(gettext "Use \"kz install --remove APP...\" or \"kz install --remove \
 --select\" to remove the self-selected apps.")
@@ -417,11 +425,11 @@ $(gettext "Use \"kz install --cat --remove APP...\" to view the \
 self-selected commands and information.")
 $(gettext "Use \"kz install --cat --remove\" to view the automatically \
 selected commands and information.")"
-        fi
-        text+="
-$(gettext "Use \"kz install --browse\" to view all commands and information.")"
-        kz.infomsg "$text"
     fi
+    text+="
+$(gettext "Use \"kz install --browse\" to view all commands and information.")"
+    kz.infomsg "$text"
+    exit 0
 }
 
 
@@ -464,75 +472,11 @@ $(gettext 'No apps found.')"
     fi
 
     if [[ $UI_MODE = 'gui' ]]; then
-        for app_list_row in "${app_list[@]}"; do
-            read -r app_name app_desc <<< "$app_list_row"
-            choices+=('false' "$app_name" "$app_desc")
-        done
-        # The variable selected_apps does not need to be an array, because the
-        # app name is a word, does not contain spaces.
-        selected_apps=$(
-            zenity  --list                                  \
-                    --checklist                             \
-                    --separator ' '                         \
-                    --width     800                         \
-                    --height    500                         \
-                    --title     "$title"                    \
-                    --text      "$text"                     \
-                    --ok-label  "$(gettext 'Continue')"     \
-                    --column    "$(gettext 'SEL')"          \
-                    --column    "$(gettext 'APP')"          \
-                    --column    "$(gettext 'DESCRIPTION')"  \
-                    "${choices[@]}"                         \
-                    2> /dev/null                            || true
-            )
+        process_option_select_gui
     elif [[ $UI_MODE = 'tui' ]]; then
-        for app_list_row in "${app_list[@]}"; do
-            read -r app_name app_desc <<< "$app_list_row"
-            choices+=("$app_name" "$app_desc" 'off')
-        done
-        # The variable selected_apps does not need to be an array, because the
-        # app name is a word, does not contain spaces.
-        selected_apps=$(
-            dialog  --mouse                             \
-                    --ok-label  "$(gettext 'Continue')" \
-                    --backtitle "$PROGRAM_NAME"         \
-                    --title     "$title"                \
-                    --separate-output                   \
-                    --checklist "$text"                 \
-                    0 0 0                               \
-                    "${choices[@]}"                     \
-                    2>&1 >/dev/tty                      || true
-            )
+        process_option_select_tui
     else
-        for app_list_row in "${app_list[@]}"; do
-            read -r app_name app_desc <<< "$app_list_row"
-            choices+=("$app_name" "$app_desc")
-        done
-        text+='\n'
-        text+=$(
-            printf '|%s|%s\n'                   \
-                    "${choices[@]}"             |
-            column  --table                     \
-                    --separator '|'             \
-                    --output-separator '    '   \
-                    --table-columns             \
-                    " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
-            )
-        if [[ $INSTALL = 'install' ]]; then
-            text+="
-
-$(gettext "Use \"kz install APP...\" or \"kz install --select\" to install \
-the self-selected apps.")
-$(gettext "Use \"kz install\" to install the automatically selected apps.")"
-        else
-            text+="
-
-$(gettext "Use \"kz install --remove APP...\" or \"kz install --remove \
---select\" to remove the self-selected apps.")
-$(gettext "Use \"kz install\" to remove the automatically selected apps.")"
-        fi
-        kz.infomsg "$text"
-        exit 0
+        process_option_select_cli
     fi
 
     if [[ -z $selected_apps ]]; then
@@ -545,6 +489,88 @@ $(gettext "Use \"kz install\" to remove the automatically selected apps.")"
     for selected_app in $selected_apps; do
         app_arguments[$selected_app]=$selected_app
     done
+}
+
+
+# This function let the user select apps in the GUI.
+process_option_select_gui() {
+    for app_list_row in "${app_list[@]}"; do
+        read -r app_name app_desc <<< "$app_list_row"
+        choices+=('false' "$app_name" "$app_desc")
+    done
+    # The variable selected_apps does not need to be an array, because the app
+    # name is a word, does not contain spaces.
+    selected_apps=$(
+        zenity  --list                                  \
+                --checklist                             \
+                --separator ' '                         \
+                --width     820                         \
+                --height    500                         \
+                --title     "$title"                    \
+                --text      "$text"                     \
+                --ok-label  "$(gettext 'Continue')"     \
+                --column    "$(gettext 'SELECT')"       \
+                --column    "$(gettext 'APP')"          \
+                --column    "$(gettext 'DESCRIPTION')"  \
+                "${choices[@]}"                         \
+                2> /dev/null                            || true
+        )
+}
+
+
+# This function let the user select apps using a TUI.
+process_option_select_tui() {
+    for app_list_row in "${app_list[@]}"; do
+        read -r app_name app_desc <<< "$app_list_row"
+        choices+=("$app_name" "$app_desc" 'off')
+    done
+    # The variable selected_apps does not need to be an array, because the app
+    # name is a word, does not contain spaces.
+    selected_apps=$(
+        dialog  --mouse                             \
+                --ok-label  "$(gettext 'Continue')" \
+                --backtitle "$PROGRAM_NAME"         \
+                --title     "$title"                \
+                --separate-output                   \
+                --checklist "$text"                 \
+                0 0 0                               \
+                "${choices[@]}"                     \
+                2>&1 >/dev/tty                      || true
+        )
+}
+
+
+# This function let the user select apps via the CLI.
+process_option_select_cli() {
+    for app_list_row in "${app_list[@]}"; do
+        read -r app_name app_desc <<< "$app_list_row"
+        choices+=("$app_name" "$app_desc")
+    done
+    text+='\n'
+    text+=$(
+        printf '|%s|%s\n'                   \
+                "${choices[@]}"             |
+        column  --table                     \
+                --separator '|'             \
+                --output-separator '    '   \
+                --table-columns             \
+                " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
+        )
+    if [[ $INSTALL = 'install' ]]; then
+        text+="
+
+$(gettext "Use \"kz install APP...\" or \"kz install --select\" to install \
+the self-selected apps.")
+$(gettext "Use \"kz install\" to install the automatically selected apps.")"
+    else
+        text+="
+
+$(gettext "Use \"kz install --remove APP...\" or \"kz install --remove \
+--select\" to remove the self-selected apps.")
+$(gettext "Use \"kz install\" to remove the automatically selected apps.")"
+    fi
+    kz.infomsg "$text"
+    exit 0
 }
 
 
@@ -655,6 +681,7 @@ process_option_cat() {
     else
         less --no-init --quit-if-one-screen "$command_file"
     fi
+    exit 0
 }
 
 
@@ -793,72 +820,35 @@ execute_command() {
     kz.logmsg "$app_line\n\n         $cmd"
 
     if [[ $UI_MODE = 'gui' ]]; then
-        printf '%s\n' "#$app_line\n\n$cmd"
-        check_debian_package_manager
-        pkexec  /usr/bin/kz-install-pkexec  \
-                "${XDG_CURRENT_DESKTOP-}"   \
-                "$cmd"                      \
-                1> >($PROGRAM_LOGS)         \
-                2>> "$ERROR_LOG"            || pkexec_rc=$?
-        if [[ $pkexec_rc -eq 126 ]]; then
-            text=$(gettext 'Authentication is required to continue.')
-            kz.errmsg "$text"
-            exit 1
-        elif [[ $pkexec_rc -ne 0 ]]; then
-            FAILED_APPS[$app_name]=$app_name
-        fi
-
-        if [[ $cmd = 'REBOOT=true' ]]; then
-            REBOOT=true
-        fi
+        execute_command_gui
     elif [[ $UI_MODE = 'tui' ]]; then
-        while true; do
-            if sudo --non-interactive --validate 2> /dev/null; then
-                break
-            else
-                if ! sudo   --stdin <<< "$(
-                            dialog  --insecure                      \
-                                    --backtitle     "$PROGRAM_NAME" \
-                                    --title         "$PROGRAM_DESC" \
-                                    --passwordbox   "$text"         \
-                                    0 0                             \
-                                    2>&1 >/dev/tty                  || true
-                            )" true 2> /dev/null; then
-                    text=$(gettext 'Authentication is required to continue.')
-                    kz.errmsg "$text"
-                    exit 1
-                fi
-            fi
-        done
-        # This tput locks the cursor position top-left to prevent flickering.
-        tput cup 0 0
-        dialog  --mouse                                     \
-                --backtitle "$PROGRAM_NAME"                 \
-                --title     "$title"                        \
-                --infobox   "$app_line\n\n         $cmd"    \
-                10 90                                       || true
-        check_debian_package_manager
-        eval    "$cmd"              \
-                1> >($PROGRAM_LOGS) \
-                2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
+        execute_command_tui
     else
-        # Ellipsize terminal output.
-        # Width 9 characters less, 9 for leading spaces.
-        cmd_dis_max=$(( $(tput cols) - 9 ))
-        if [[ ${#cmd} -gt $cmd_dis_max ]]; then
-            # Width 12 characters less, 9 for leading spaces and 3 for trailing
-            # ellipsis.
-            cmd_dis_len=$(( $(tput cols) - 12 ))
-            cmd_dis=${cmd:0:cmd_dis_len}...
-        else
-            cmd_dis=$cmd
-        fi
-        sudo --validate
-        printf '%s\n' "         $cmd_dis"
-        check_debian_package_manager
-        eval    "$cmd"              \
-                1> >($PROGRAM_LOGS) \
-                2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
+        execute_command_cli
+    fi
+}
+
+
+# This function reports and executes a command from the command file in the
+# GUI.
+execute_command_gui() {
+    printf '%s\n' "#$app_line\n\n$cmd"
+    check_debian_package_manager
+    pkexec  /usr/bin/kz-install-pkexec  \
+            "${XDG_CURRENT_DESKTOP-}"   \
+            "$cmd"                      \
+            1> >($PROGRAM_LOGS)         \
+            2>> "$ERROR_LOG"            || pkexec_rc=$?
+    if [[ $pkexec_rc -eq 126 ]]; then
+        text=$(gettext 'Authentication is required to continue.')
+        kz.errmsg "$text"
+        exit 1
+    elif [[ $pkexec_rc -ne 0 ]]; then
+        FAILED_APPS[$app_name]=$app_name
+    fi
+
+    if [[ $cmd = 'REBOOT=true' ]]; then
+        REBOOT=true
     fi
 }
 
@@ -879,6 +869,64 @@ check_debian_package_manager() {
 }
 
 
+# This function reports and executes a command from the command file using a
+# TUI.
+execute_command_tui() {
+    while true; do
+        if sudo --non-interactive --validate 2> /dev/null; then
+            break
+        else
+            if ! sudo   --stdin <<< "$(
+                        dialog  --insecure                      \
+                                --backtitle     "$PROGRAM_NAME" \
+                                --title         "$PROGRAM_DESC" \
+                                --passwordbox   "$text"         \
+                                0 0                             \
+                                2>&1 >/dev/tty                  || true
+                        )" true 2> /dev/null; then
+                text=$(gettext 'Authentication is required to continue.')
+                kz.errmsg "$text"
+                exit 1
+            fi
+        fi
+    done
+    # This tput locks the cursor position top-left to prevent flickering.
+    tput cup 0 0
+    dialog  --mouse                                     \
+            --backtitle "$PROGRAM_NAME"                 \
+            --title     "$title"                        \
+            --infobox   "$app_line\n\n         $cmd"    \
+            10 90                                       || true
+    check_debian_package_manager
+    eval    "$cmd"              \
+            1> >($PROGRAM_LOGS) \
+            2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
+}
+
+
+# This function reports and executes a command from the command file in the
+# CLI.
+execute_command_cli() {
+    # Ellipsize terminal output.
+    # Width 9 characters less, 9 for leading spaces.
+    cmd_dis_max=$(( $(tput cols) - 9 ))
+    if [[ ${#cmd} -gt $cmd_dis_max ]]; then
+        # Width 12 characters less, 9 for leading spaces and 3 for trailing
+        # ellipsis.
+        cmd_dis_len=$(( $(tput cols) - 12 ))
+        cmd_dis=${cmd:0:cmd_dis_len}...
+    else
+        cmd_dis=$cmd
+    fi
+    sudo --validate
+    printf '%s\n' "         $cmd_dis"
+    check_debian_package_manager
+    eval    "$cmd"              \
+            1> >($PROGRAM_LOGS) \
+            2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
+}
+
+
 # This function controls the termination of the script.
 term() {
     local program_name=${PROGRAM_NAME/kz-/kz }
@@ -892,45 +940,17 @@ term() {
     printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
-    if [[ -n ${FAILED_APPS[*]} ]]; then
-        title="$PROGRAM_DESC $(gettext 'error messages')"
-        text="$(gettext "The installation of the following apps contains \
-errors:")
-${FAILED_APPS[*]}
-
-$(gettext 'Actions to take:')
-$(gettext 'Check the error messages after this.')
-"
-        if [[ $INSTALL = 'install' ]]; then
-            text+=$(gettext 'Try to install the apps again.')
-        else
-            text+=$(gettext 'Try to remove the apps again.')
-        fi
-        kz.errmsg "$text"
-
-        if [[ $UI_MODE = 'gui' ]]; then
-            zenity  --text-info                 \
-                    --filename="$ERROR_LOG"     \
-                    --width     700             \
-                    --height    500             \
-                    --title     "$title"        \
-                    2> /dev/null                || true
-        elif [[ $UI_MODE = 'tui' ]]; then
-            dialog  --mouse                     \
-                    --scrollbar                 \
-                    --backtitle "$PROGRAM_NAME" \
-                    --title     "$title"        \
-                    --textbox   "$ERROR_LOG"    \
-                    0 0                         || true
-        else
-            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
-            read -rp "$prompt" < /dev/tty
-            kz.infomsg "$title:"
-            less --no-init --quit-if-one-screen "$ERROR_LOG"
-        fi
-        exit 1
+    if [[ -z ${FAILED_APPS[*]} ]]; then
+        term_success
+    else
+        term_error
     fi
+}
 
+
+# This function controls the termination of the script when it ends with
+# success.
+term_success() {
     text=$(gettext "Apps install completed.")
     if $OPTION_REMOVE; then
         text=$(gettext "Apps remove completed.")
@@ -958,8 +978,48 @@ changing system settings.")"
             eval "$reboot"
         fi
     fi
-
     exit 0
+}
+
+
+# This function controls the termination of the script when it ends with
+# errors.
+term_error() {
+    title="$PROGRAM_DESC $(gettext 'error messages')"
+    text="$(gettext "The installation of the following apps contains errors:")
+${FAILED_APPS[*]}
+
+$(gettext 'Actions to take:')
+$(gettext 'Check the error messages after this.')
+"
+    if [[ $INSTALL = 'install' ]]; then
+        text+=$(gettext 'Try to install the apps again.')
+    else
+        text+=$(gettext 'Try to remove the apps again.')
+    fi
+    kz.errmsg "$text"
+
+    if [[ $UI_MODE = 'gui' ]]; then
+        zenity  --text-info                 \
+                --filename="$ERROR_LOG"     \
+                --width     700             \
+                --height    500             \
+                --title     "$title"        \
+                2> /dev/null                || true
+    elif [[ $UI_MODE = 'tui' ]]; then
+        dialog  --mouse                     \
+                --scrollbar                 \
+                --backtitle "$PROGRAM_NAME" \
+                --title     "$title"        \
+                --textbox   "$ERROR_LOG"    \
+                0 0                         || true
+    else
+        prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+        read -rp "$prompt" < /dev/tty
+        kz.infomsg "$title:"
+        less --no-init --quit-if-one-screen "$ERROR_LOG"
+    fi
+    exit 1
 }
 
 

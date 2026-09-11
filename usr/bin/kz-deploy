@@ -98,6 +98,7 @@ check_input() {
     eval set -- "$parsed"
     unset parsed
 
+    kz.process_options "$@"
     process_options "$@"
 }
 
@@ -112,22 +113,6 @@ process_options() {
             -d | --dev )
                 OPTION_DEV=true
                 shift
-                ;;
-            -h | --help )
-                kz.process_option_help
-                exit 0
-                ;;
-            -m | --manual )
-                kz.process_option_manual
-                exit 0
-                ;;
-            -u | --usage )
-                kz.process_option_usage
-                exit 0
-                ;;
-            -v | --version )
-                kz.process_option_version
-                exit 0
                 ;;
             -- )
                 shift
@@ -178,9 +163,21 @@ deploy() {
 # This function check that the repos are in the desired state.
 check_repos() {
     local err_flag=false
+
+    check_repos_are_on_main
+    check_repos_are_clean
+    if $err_flag; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+
+# This function check that the repos are on branch main.
+check_repos_are_on_main() {
     local repo=''
     local repos=''
-    # local startdir=$PWD
     local text=''
 
     text=$(gettext 'Check that all repos are on branch main')...
@@ -197,6 +194,14 @@ check_repos() {
             err_flag=true
         fi
     done
+}
+
+
+# This function check that the repos are clean.
+check_repos_are_clean() {
+    local repo=''
+    local repos=''
+    local text=''
 
     text=$(gettext 'Check that all repos are clean')...
     kz.infomsg "$text"
@@ -215,14 +220,6 @@ check_repos() {
             err_flag=true
         fi
     done
-
-    # cd "$startdir"
-
-    if $err_flag; then
-        return 1
-    else
-        return 0
-    fi
 }
 
 

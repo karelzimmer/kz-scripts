@@ -143,38 +143,55 @@ kz.logmsg() {
 }
 
 
+# This function handles the common script options.
+kz.process_options() {
+    while true; do
+        case $1 in
+            -h | --help )
+                kz.process_option_help
+                ;;
+            -m | --manual )
+                kz.process_option_manual
+                ;;
+            -u | --usage )
+                kz.process_option_usage
+                ;;
+            -v | --version )
+                kz.process_option_version
+                ;;
+            -- )
+                shift
+                break
+                ;;
+            * )
+                shift
+                continue
+                ;;
+        esac
+    done
+}
+
+
 # This function shows the available help.
 kz.process_option_help() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
-    local yelp_man=''
-    local yelp_man_url=''
-
-    if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
-        yelp_man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$program_name(1)"
-        yelp_man=$(eval_gettext ", or see the \$yelp_man_url man page")
-        yelp_man+="\033]8;;\033\\"
-    fi
 
     text="$(eval_gettext "Type '\$program_name --manual' or 'man \
-\$program_name'\$yelp_man for more information.")"
+\$program_name' for more information.")"
     UI_MODE='cli'
     # shellcheck disable=SC2154
     kz.infomsg "$HELP
 
 $text"
+    exit 0
 }
 
 
 # This function displays the manual page.
 kz.process_option_manual() {
-    if [[ ${UI_MODE-} = 'gui' ]]; then
-        yelp man:"$PROGRAM_NAME" 2> /dev/null || true
-    elif [[ ${UI_MODE-} = 'tui' ]]; then
-        man --html "$PROGRAM_NAME"
-    else
-        man "$PROGRAM_NAME"
-    fi
+    man "$PROGRAM_NAME"
+    exit 0
 }
 
 
@@ -189,6 +206,7 @@ kz.process_option_usage() {
 $(eval_gettext "Type '\$program_name --help' for more information.")"
     UI_MODE='cli'
     kz.infomsg "$text"
+    exit 0
 }
 
 
@@ -207,6 +225,7 @@ $(gettext "License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.")"
     UI_MODE='cli'
     kz.infomsg "$text"
+    exit 0
 }
 
 

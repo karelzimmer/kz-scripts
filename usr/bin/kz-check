@@ -97,6 +97,7 @@ check_input() {
     eval set -- "$parsed"
     unset parsed
 
+    kz.process_options "$@"
     process_options "$@"
 }
 
@@ -108,22 +109,6 @@ process_options() {
 
     while true; do
         case $1 in
-            -h | --help )
-                kz.process_option_help
-                exit 0
-                ;;
-            -m | --manual )
-                kz.process_option_manual
-                exit 0
-                ;;
-            -u | --usage )
-                kz.process_option_usage
-                exit 0
-                ;;
-            -v | --version )
-                kz.process_option_version
-                exit 0
-                ;;
             -- )
                 shift
                 break
@@ -147,13 +132,6 @@ $USAGE"
 
 # This function checks the website for missing or not used files.
 check_website() {
-    local -i check=0
-    local file=''
-    local text=''
-    local uploads_dist_assets=$GITROOT/kz-uploads/dist/assets
-    local uploads_dist_html=$GITROOT/kz-uploads/dist/html
-    local uploads_src_assets=$GITROOT/kz-uploads/src/assets
-
     text=$(gettext 'Check website...')
     kz.infomsg "$text"
 
@@ -161,60 +139,12 @@ check_website() {
     # i.e. whether each link can be followed/whether a file is present.
     # This function does the opposite: are all files used?
 
-    # Check files which are not used on the html pages.
-    while read -r file; do
-        if grep --quiet                 \
-                --recursive             \
-                --regexp="${file##*/}"  \
-                "$uploads_dist_html"; then
-            # The file is used in the html pages.
-            continue
-        else
-            # The file is not used in the html pages.
-            # Check whether it is a file that can be deleted.
-            # If it is not a file that can be deleted, then it is an error.
-            case $file in
-                *.asc )
-                    # GPG keys.
-                    continue
-                    ;;
-                *icons/LF* )
-                    # Base files for website.
-                    continue
-                    ;;
-                *kz-dev*.deb | *kz-dev*.rpm )
-                    # Development versions of kz packages.
-                    continue
-                    ;;
-                *sources.list | *wallpapers.tar )
-                    # Extra files
-                    continue
-                    ;;
-                *)
-                    :
-                    ;;
-            esac
-            check=$((check + 1))
-            if [[ check -eq 1 ]]; then
-                text=$(gettext \
-"Files not used in html that can probably be removed:")
-                kz.errmsg "$text"
-            fi
-            text="rm $file"
-            kz.infomsg "$text"
-        fi
-    done < <(
-        find    "$uploads_src_assets"   \
-                "$uploads_dist_assets"  \
-                -type f                 \
-                -print                  |
-                sort
-            )
+    check_website_files
 
     # Difference between src/ and dist/.
     diff    --recursive                 \
-            "$GITROOT/kz-uploads/src/"     \
-            "$GITROOT/kz-uploads/dist/"    \
+            "$GITROOT/kz-uploads/src/"  \
+            "$GITROOT/kz-uploads/dist/" \
             --exclude='documents'       \
             --exclude='packages'        \
             --exclude='scripts'         || ERR_FLAG=true
@@ -236,6 +166,50 @@ check_website() {
     # NOTE: add  2> /dev/null after every checklink if needed
 }
 
+
+# This function checks for files which are not used on the html pages.
+check_website_files() {
+    local -i check=0
+    local file=''
+    local text=''
+
+    while read -r file; do
+        if grep --quiet                 \
+                --recursive             \
+                --regexp="${file##*/}"  \
+                "$GITROOT/kz-uploads/dist/html"; then
+            # The file is used in the html pages.
+            continue
+        else
+            # The file is not used in the html pages.
+            # Check whether it is a file that can be deleted.
+            # If it is not a file that can be deleted, then it is an error.
+            case $file in
+                *.asc | *icons/LF* | *kz-dev*.deb | *kz-dev*.rpm | \
+                *sources.list | *wallpapers.tar )
+                    continue
+                    ;;
+                *)
+                    :
+                    ;;
+            esac
+            check=$((check + 1))
+            if [[ check -eq 1 ]]; then
+                text=$(gettext \
+"Files not used in html that can probably be removed:")
+                kz.errmsg "$text"
+            fi
+            text="rm $file"
+            kz.infomsg "$text"
+        fi
+    done < <(
+        find    "$GITROOT/kz-uploads/src/assets"    \
+                "$GITROOT/kz-uploads/dist/assets"   \
+                -type f                             \
+                -print                              |
+                sort
+            )
+}
 
 # This function checks for gettext required files.
 check_gettext() {

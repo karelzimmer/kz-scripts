@@ -43,47 +43,74 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     logmsg(PROGRAM_NAME, f'{RED}{TEXT}{NORMAL}')
     if UI_MODE == 'gui':
-        zenity: str = f'zenity      --error                         \
-                                    --no-markup                     \
-                                    --width     600                 \
-                                    --height    100                 \
-                                    --title     "{PROGRAM_DESC}"    \
-                                    --text      "{TEXT}"            || true'
-        try:
-            subprocess.run(zenity, executable='bash', shell=True,
-                           stderr=subprocess.DEVNULL)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 130)
-        except Exception as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 1)
+        errmsg_gui(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, TEXT)
     elif UI_MODE == 'tui':
-        dialog: str = f'dialog  --mouse                             \
-                                --colors                            \
-                                --backtitle "{PROGRAM_NAME}"        \
-                                --title     "{PROGRAM_DESC}"        \
-                                --msgbox    "\\Zb\\Z1{TEXT}\\Zn"    \
-                                0 0                                 || true'
-        try:
-            subprocess.run(dialog, executable='bash', shell=True,
-                           stderr=subprocess.DEVNULL)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 130)
-        except Exception as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 1)
+        errmsg_tui(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, TEXT)
     else:
-        print(f'{RED}{TEXT}{NORMAL}', file=sys.stderr)
+        errmsg_cli(TEXT)
+
+
+def errmsg_gui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
+               TEXT: str) -> None:
+    """
+    This function returns an error message in the GUI.
+    """
+    text: str = ''
+    zenity: str = f'zenity      --error                         \
+                                --no-markup                     \
+                                --width     600                 \
+                                --height    100                 \
+                                --title     "{PROGRAM_DESC}"    \
+                                --text      "{TEXT}"            || true'
+
+    try:
+        subprocess.run(zenity, executable='bash', shell=True,
+                       stderr=subprocess.DEVNULL)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 130)
+    except Exception as exc:
+        text = str(exc)
+        logmsg(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 1)
+
+
+def errmsg_tui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
+               TEXT: str) -> None:
+    """
+    This function returns an error message using a TUI.
+    """
+    dialog: str = f'dialog  --mouse                             \
+                            --colors                            \
+                            --backtitle "{PROGRAM_NAME}"        \
+                            --title     "{PROGRAM_DESC}"        \
+                            --msgbox    "\\Zb\\Z1{TEXT}\\Zn"    \
+                            0 0                                 || true'
+    text: str = ''
+
+    try:
+        subprocess.run(dialog, executable='bash', shell=True,
+                       stderr=subprocess.DEVNULL)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 130)
+    except Exception as exc:
+        text = str(exc)
+        logmsg(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 1)
+
+
+def errmsg_cli(TEXT: str) -> None:
+    """
+    This function returns an error message via the CLI.
+    """
+    print(f'{RED}{TEXT}{NORMAL}', file=sys.stderr)
 
 
 def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
@@ -93,46 +120,73 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     logmsg(PROGRAM_NAME, TEXT)
     if UI_MODE == 'gui':
-        zenity: str = f'zenity      --info                          \
-                                    --no-markup                     \
-                                    --width     600                 \
-                                    --height    100                 \
-                                    --title     "{PROGRAM_DESC}"    \
-                                    --text      "{TEXT}"            || true'
-        try:
-            subprocess.run(zenity, executable='bash', shell=True,
-                           stderr=subprocess.DEVNULL)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 130)
-        except Exception as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 1)
+        infomsg_gui(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, TEXT)
     elif UI_MODE == 'tui':
-        dialog: str = f'dialog  --mouse                         \
-                                --backtitle "{PROGRAM_NAME}"    \
-                                --title     "{PROGRAM_DESC}"    \
-                                --msgbox    "{TEXT}"            \
-                                0 0                             || true'
-        try:
-            subprocess.run(dialog, executable='bash', shell=True,
-                           stderr=subprocess.DEVNULL)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 130)
-        except Exception as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 1)
+        infomsg_tui(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, TEXT)
     else:
-        print(TEXT)
+        infomsg_cli(TEXT)
+
+
+def infomsg_gui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
+                TEXT: str) -> None:
+    """
+    This function returns an informational message in the GUI.
+    """
+    text: str = ''
+    zenity: str = f'zenity      --info                          \
+                                --no-markup                     \
+                                --width     600                 \
+                                --height    100                 \
+                                --title     "{PROGRAM_DESC}"    \
+                                --text      "{TEXT}"            || true'
+
+    try:
+        subprocess.run(zenity, executable='bash', shell=True,
+                       stderr=subprocess.DEVNULL)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 130)
+    except Exception as exc:
+        text = str(exc)
+        logmsg(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 1)
+
+
+def infomsg_tui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
+                TEXT: str) -> None:
+    """
+    This function returns an informational message using a TUI.
+    """
+    dialog: str = f'dialog  --mouse                         \
+                            --backtitle "{PROGRAM_NAME}"    \
+                            --title     "{PROGRAM_DESC}"    \
+                            --msgbox    "{TEXT}"            \
+                            0 0                             || true'
+    text: str = ''
+
+    try:
+        subprocess.run(dialog, executable='bash', shell=True,
+                       stderr=subprocess.DEVNULL)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 130)
+    except Exception as exc:
+        text = str(exc)
+        logmsg(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 1)
+
+
+def infomsg_cli(TEXT: str) -> None:
+    """
+    This function returns an informational message via the CLI.
+    """
+    print(f'{TEXT}', file=sys.stderr)
 
 
 def init(PROGRAM_NAME: str) -> None:
@@ -204,23 +258,13 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     This function shows the available help.
     """
-    yelp_man_url: str = ''
-    yelp_man: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str = ''
 
-    if subprocess.run('[[ -n ${XDG_CURRENT_DESKTOP-} ]]', executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode == 0:
-        yelp_man_url = f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{program_name}(1)'
-        yelp_man = _(", or see the {} man page").format(yelp_man_url)
-        yelp_man += '\x1b]8;;\x1b\\'
-
     text = f'{HELP}\n\n'
     text += (
-        _("Type '{} --manual' or 'man {}'{} ")
-        ).format(program_name, program_name, yelp_man)
-    text += _('for more information.')
+        _("Type '{} --manual' or 'man {}' for more information.")
+        ).format(program_name, program_name)
     infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
@@ -229,54 +273,82 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     This function displays the manual page.
     """
+    if UI_MODE == 'gui':
+        process_option_manual_gui(PROGRAM_NAME, PROGRAM_DESC, UI_MODE)
+    elif UI_MODE == 'tui':
+        process_option_manual_tui(PROGRAM_NAME, PROGRAM_DESC, UI_MODE)
+    else:
+        process_option_manual_cli(PROGRAM_NAME, PROGRAM_DESC, UI_MODE)
+
+
+def process_option_manual_gui(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                              UI_MODE: str = 'cli') -> None:
+    """
+    This function displays the manual page in the GUI.
+    """
     exc: BaseException
-    man_cli: str = f'man {PROGRAM_NAME}'
     man_gui: str = f'yelp man:{PROGRAM_NAME}'
+    text: str = ''
+
+    try:
+        subprocess.run(man_gui, executable='bash', stderr=subprocess.DEVNULL,
+                       shell=True, check=True,)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 130)
+    except subprocess.CalledProcessError as exc:
+        text = str(exc)
+        logmsg(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, exc.returncode)
+
+
+def process_option_manual_tui(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                              UI_MODE: str = 'cli') -> None:
+    """
+    This function displays the manual page using a TUI.
+    """
+    exc: BaseException
     man_tui: str = f'man --html {PROGRAM_NAME}'
     text: str = ''
 
-    if UI_MODE == 'gui':
-        try:
-            subprocess.run(man_gui, executable='bash',
-                           stderr=subprocess.DEVNULL,
-                           shell=True, check=True,)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 130)
-        except subprocess.CalledProcessError as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, exc.returncode)
-    elif UI_MODE == 'tui':
-        try:
-            subprocess.run(man_tui, executable='bash', shell=True,
-                           check=True)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 130)
-        except subprocess.CalledProcessError as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, exc.returncode)
-    else:
-        try:
-            subprocess.run(man_cli, executable='bash', shell=True, check=True)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, 130)
-        except subprocess.CalledProcessError as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
-            term(PROGRAM_NAME, exc.returncode)
+    try:
+        subprocess.run(man_tui, executable='bash', shell=True, check=True)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 130)
+    except subprocess.CalledProcessError as exc:
+        text = str(exc)
+        logmsg(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, exc.returncode)
+
+
+def process_option_manual_cli(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                              UI_MODE: str = 'cli') -> None:
+    """
+    This function displays the manual page via the CLI.
+    """
+    exc: BaseException
+    man_cli: str = f'man {PROGRAM_NAME}'
+    text: str = ''
+
+    try:
+        subprocess.run(man_cli, executable='bash', shell=True, check=True)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 130)
+    except subprocess.CalledProcessError as exc:
+        text = str(exc)
+        logmsg(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, exc.returncode)
 
 
 def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
@@ -289,7 +361,6 @@ def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
 
     text = f'{USAGE}\n\n'
     text += _("Type '{} --help' for more information.").format(program_name)
-    text += _('for more information.')
 
     infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 

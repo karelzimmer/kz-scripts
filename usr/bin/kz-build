@@ -126,6 +126,7 @@ check_input() {
     eval set -- "$parsed"
     unset parsed
 
+    kz.process_options "$@"
     process_options "$@"
 }
 
@@ -140,22 +141,6 @@ process_options() {
             -d | --dev )
                 OPTION_DEV=true
                 shift
-                ;;
-            -h | --help )
-                kz.process_option_help
-                exit 0
-                ;;
-            -m | --manual )
-                kz.process_option_manual
-                exit 0
-                ;;
-            -u | --usage )
-                kz.process_option_usage
-                exit 0
-                ;;
-            -v | --version )
-                kz.process_option_version
-                exit 0
                 ;;
             -- )
                 shift
@@ -219,7 +204,7 @@ build_website() {
 }
 
 
-# This function generates the following gettext files:
+# This function generates the gettext files.
 # 1. The readable Portable Object Template (POT) file from the source code in
 #    repo kz-scripts,
 # 2. the readable Portable Object (PO) file from the POT file, and
@@ -232,11 +217,9 @@ generate_gettext_files() {
     local pot_dir=$SCRIPTS_REPO/usr/bin/
     local python_script='#!''/usr/bin/env python3'
     local text=''
-    local gettext_dir=''
-    local gettext_dirs="\
-$GITROOT/kz-scripts/usr/bin \
-$GITROOT/kz-scripts/usr/share/applications \
-$GITROOT/kz-scripts/usr/share/polkit-1/actions"
+    local gettext_dir_scripts=$GITROOT/kz-scripts/usr/bin
+    local gettext_dir_applications=$GITROOT/kz-scripts/usr/share/applications
+    local gettext_dir_policies=$GITROOT/kz-scripts/usr/share/polkit-1/actions
     local gettext_file=''
 
     text=$(gettext 'Generate gettext files..')
@@ -248,90 +231,101 @@ $GITROOT/kz-scripts/usr/share/polkit-1/actions"
         "$pot_dir/kz.pot"       \
         "$lc_messages_dir/kz.po"
 
-    for gettext_dir in $gettext_dirs; do
-
-        cd "$gettext_dir"
-        for gettext_file in *; do
-            text="$gettext_dir/$gettext_file: "
-            kz.logmsg "$text"
-            if [[ -d $gettext_file ]]; then
-                text=$(gettext 'skip, is a direcory.')
-                kz.logmsg "$text"
-                continue
-            elif ! [[ -f $gettext_file ]]; then
-                text=$(gettext 'skip, is not a file.')
-                kz.logmsg "$text"
-                continue
-            elif [[ $gettext_file == LICENSE ]]; then
-                text=$(gettext 'skip, is a LICENSE file.')
-                kz.logmsg "$text"
-                continue
-            elif [[ $gettext_file == README.md ]]; then
-                text=$(gettext 'skip, is a README file.')
-                kz.logmsg "$text"
-                continue
-            elif [[ $gettext_file == *.gpg ]]; then
-                text=$(gettext 'skip, is GPG-encrypted.')
-                kz.logmsg "$text"
-                continue
-            elif [[ $gettext_file == *.pot ]]; then
-                text=$(gettext 'skip, is a gettext POT file.')
-                kz.logmsg "$text"
-                continue
-            elif [[ $gettext_file == *.po ]]; then
-                text=$(gettext 'skip, is a gettext PO file.')
-                kz.logmsg "$text"
-                continue
-            elif [[ $gettext_file == *.mo ]]; then
-                text=$(gettext 'skip, is a gettext MO file.')
-                kz.logmsg "$text"
-                continue
-            elif [[ $gettext_file == *.desktop ]]; then
-                gettext_language='--language=Desktop'
-            elif [[ $gettext_file == *.policy ]]; then
-                gettext_language="--its=$its_dir/kz-policy.its"
-            elif [[ $gettext_file == *.py ]]; then
-                gettext_language='--language=Python'
-            elif grep   --quiet                     \
-                        --line-regexp               \
-                        --regexp="$python_script"   \
-                        "$gettext_file"; then
-                gettext_language='--language=Python'
-            elif [[ $gettext_file == *.sh ]]; then
-                gettext_language='--language=Shell'
-            elif grep   --quiet                     \
-                        --line-regexp               \
-                        --regexp="$bash_script"     \
-                        "$gettext_file"; then
-                gettext_language='--language=Shell'
-            else
-                text+=$(gettext "can't determine the language")
-                kz.errmsg "$text"
-                ERR_FLAG=true
-                continue
-            fi
-
-            # Create POT file.
-            xgettext    "$gettext_language"         \
-                        --join-existing             \
-                        --omit-header               \
-                        --output="$pot_dir/kz.pot"  \
-                        "$gettext_file"             |& $PROGRAM_LOGS
-
-            # Create PO file.
-            msgmerge    --update                    \
-                        --backup=none               \
-                        --previous                  \
-                        "$lc_messages_dir/kz.po"    \
-                        "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
-        done
-    done
+    generate_gettext_files_scripts
+    generate_gettext_files_applications
+    generate_gettext_files_policies
 
     # Create MO file.
     msgfmt  --output-file="$lc_messages_dir/kz.mo"  \
             "$lc_messages_dir/kz.po"                |& $PROGRAM_LOGS
 }
 
+
+# This function generates the gettext files PO and POT for scripts.
+generate_gettext_files_scripts() {
+    cd "$gettext_dir_scripts"
+    for gettext_file in *; do
+        if [[ -d $gettext_file ]]; then
+            continue
+        elif [[ $gettext_file == *.py ]]; then
+            gettext_language='--language=Python'
+        elif grep   --quiet                     \
+                    --line-regexp               \
+                    --regexp="$python_script"   \
+                    "$gettext_file"; then
+            gettext_language='--language=Python'
+        elif [[ $gettext_file == *.sh ]]; then
+            gettext_language='--language=Shell'
+        elif grep   --quiet                     \
+                    --line-regexp               \
+                    --regexp="$bash_script"     \
+                    "$gettext_file"; then
+            gettext_language='--language=Shell'
+        fi
+
+        # Create POT file.
+        xgettext    "$gettext_language"         \
+                    --join-existing             \
+                    --omit-header               \
+                    --output="$pot_dir/kz.pot"  \
+                    "$gettext_file"             |& $PROGRAM_LOGS
+
+        # Create PO file.
+        msgmerge    --update                    \
+                    --backup=none               \
+                    --previous                  \
+                    "$lc_messages_dir/kz.po"    \
+                    "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
+    done
+}
+
+
+
+# This function generates the gettext files PO and POT for applications.
+generate_gettext_files_applications() {
+    cd "$gettext_dir_applications"
+    for gettext_file in *; do
+        gettext_language='--language=Desktop'
+
+        # Create POT file.
+        xgettext    "$gettext_language"         \
+                    --join-existing             \
+                    --omit-header               \
+                    --output="$pot_dir/kz.pot"  \
+                    "$gettext_file"             |& $PROGRAM_LOGS
+
+        # Create PO file.
+        msgmerge    --update                    \
+                    --backup=none               \
+                    --previous                  \
+                    "$lc_messages_dir/kz.po"    \
+                    "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
+    done
+}
+
+
+
+# This function generates the gettext files PO and POT for policies.
+generate_gettext_files_policies() {
+    cd "$gettext_dir_policies"
+    for gettext_file in *; do
+        gettext_language="--its=$its_dir/kz-policy.its"
+
+        # Create POT file.
+        xgettext    "$gettext_language"         \
+                    --join-existing             \
+                    --omit-header               \
+                    --output="$pot_dir/kz.pot"  \
+                    "$gettext_file"             |& $PROGRAM_LOGS
+
+        # Create PO file.
+        msgmerge    --update                    \
+                    --backup=none               \
+                    --previous                  \
+                    "$lc_messages_dir/kz.po"    \
+                    "$pot_dir/kz.pot"           |& $PROGRAM_LOGS
+    done
+}
 
 # This function check that the repos are in the desired state.
 check_repos() {
@@ -384,18 +378,31 @@ check_repos() {
 # This function builds Debian package kz.
 build_deb_package() {
     local text=''
-    local to_build=''
 
     text=$(gettext 'Build Debian package...')
     kz.infomsg "$text"
 
-    # Fill kz-deb/dist/ with kz-deb/src/.
+    build_deb_package_sync_deb
+    build_deb_package_sync_scripts
+    build_deb_package_compress_man_pages
+    build_deb_package_create_deb
+}
+
+
+# This function synchronizes the Debian package source directory with the
+# distribution directory.
+build_deb_package_sync_deb() {
     rsync   --archive           \
             --delete            \
             --verbose           \
             "$DEB_REPO_SRCDIR/" \
             "$DEB_REPO_DISTDIR" |& $PROGRAM_LOGS
+}
 
+
+# This function synchronizes the Debian package scripts with the
+# distribution directory.
+build_deb_package_sync_scripts() {
     # Make sure the permissions are correct for the sync with repo kz-scripts.
     chmod   --verbose                   \
             'u=rwx,g=rx,o=rx'           \
@@ -413,7 +420,6 @@ build_deb_package() {
             --verbose                   \
             'u=rw,g=rw,o=r' {} \;       |& $PROGRAM_LOGS
 
-    # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive               \
             --verbose               \
             --exclude='.mypy_cache' \
@@ -425,14 +431,23 @@ build_deb_package() {
             --exclude='kz.pot'      \
             "$SCRIPTS_REPO/"        \
             "$DEB_REPO_DISTDIR"     |& $PROGRAM_LOGS
+}
 
-    # Compress man pages.
+
+# This function compresses the man pages for the Debian package kz.
+build_deb_package_compress_man_pages() {
     gzip    --best                                      \
             --force                                     \
             "$DEB_REPO_DISTDIR/usr/share/man/man1/"*    \
             "$DEB_REPO_DISTDIR/usr/share/man/man5/"*    \
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man1/"* \
             "$DEB_REPO_DISTDIR/usr/share/man/nl/man5/"* |& $PROGRAM_LOGS
+}
+
+
+# This function creates the Debian package kz.
+build_deb_package_create_deb() {
+    local to_build=''
 
     if $OPTION_DEV; then
         build_id+=' *** DEV ***'
@@ -440,6 +455,7 @@ build_deb_package() {
     mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
 
+    # build_deb_package_create_deb
     # Create Debian package in kz-uploads.
     mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/packages" |& $PROGRAM_LOGS
     if $OPTION_DEV; then
@@ -453,7 +469,6 @@ build_deb_package() {
                 "$to_build"         |& $PROGRAM_LOGS
 }
 
-
 # This function builds RPM package kz.
 build_rpm_package() {
     local text=''
@@ -462,13 +477,28 @@ build_rpm_package() {
     text=$(gettext 'Build RPM package...')
     kz.infomsg "$text"
 
-    # Fill kz-rpm/dist/ with kz-rpm/src/.
+    build_rpm_package_sync_rpm
+    build_rpm_package_sync_scripts
+    build_rpm_package_compress_man_pages
+    build_rpm_package_create_rpm
+}
+
+
+# This function synchronizes the RPM package source directory with the
+# distribution directory.
+build_rpm_package_sync_rpm() {
     rsync   --archive           \
             --delete            \
             --verbose           \
             "$RPM_REPO_SRCDIR/" \
             "$RPM_REPO_DISTDIR" |& $PROGRAM_LOGS
 
+}
+
+
+# This function synchronizes the RPM package scripts with the
+# distribution directory.
+build_rpm_package_sync_scripts() {
     # Make sure the permissions are correct for the sync with repo kz-scripts.
     chmod   --verbose                   \
             'u=rwx,g=rx,o=rx'           \
@@ -479,7 +509,6 @@ build_rpm_package() {
             --                          \
             "$SCRIPTS_REPO/usr/bin/"*.* |& $PROGRAM_LOGS
 
-    # Fill kz-rpm/dist/ with repo kz-scripts.
     rsync   --archive               \
             --verbose               \
             --exclude='.mypy_cache' \
@@ -491,15 +520,22 @@ build_rpm_package() {
             --exclude='kz.pot'      \
             "$SCRIPTS_REPO/"        \
             "$RPM_REPO_DISTDIR"     |& $PROGRAM_LOGS
+}
 
-    # Compress man pages.
+
+# This function compresses the man pages for the RPM package kz.
+build_rpm_package_compress_man_pages() {
     gzip    --best                                      \
             --force                                     \
             "$RPM_REPO_DISTDIR/usr/share/man/man1/"*    \
             "$RPM_REPO_DISTDIR/usr/share/man/man5/"*    \
             "$RPM_REPO_DISTDIR/usr/share/man/nl/man1/"* \
             "$RPM_REPO_DISTDIR/usr/share/man/nl/man5/"* |& $PROGRAM_LOGS
+}
 
+
+# This function creates the RPM package kz.
+build_rpm_package_create_rpm() {
     mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/build.id"
 

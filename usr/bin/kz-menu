@@ -137,6 +137,7 @@ check_input() {
     eval set -- "$parsed"
     unset parsed
 
+    kz.process_options "$@"
     process_options "$@"
 }
 
@@ -162,25 +163,9 @@ $(gettext "no desktop environment available")"
                 UI_MODE='gui'
                 shift
                 ;;
-            -h | --help )
-                kz.process_option_help
-                exit 0
-                ;;
-            -m | --manual )
-                kz.process_option_manual
-                exit 0
-                ;;
             -T | --tui )
                 UI_MODE='tui'
                 shift
-                ;;
-            -u | --usage )
-                kz.process_option_usage
-                exit 0
-                ;;
-            -v | --version )
-                kz.process_option_version
-                exit 0
                 ;;
             -- )
                 shift
@@ -197,6 +182,7 @@ $(gettext "no desktop environment available")"
     if [[ -n $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
+        UI_MODE='cli'
         kz.infomsg "$text"
         exit 1
     fi
@@ -640,64 +626,82 @@ show_commands_before_execution() {
     text+="$(gettext 'The following will be executed:')
 "
     for row in "${rows[@]}"; do
-            description=${row%|*}
-            command=${row#*|}
+        description=${row%|*}
+        command=${row#*|}
         text+="
 "
         text+="  $description ($command)"
     done
 
     if [[ $UI_MODE = 'gui' ]]; then
-        text+="
-
-$(gettext 'Proceed?')"
-        if zenity   --question                          \
-                    --no-markup                         \
-                    --width         520                 \
-                    --height        100                 \
-                    --title         "$title"            \
-                    --text          "$text"             \
-                    --ok-label      "$(gettext 'Yes')"  \
-                    --cancel-label  "$(gettext 'No')"   \
-                    2> /dev/null; then
-            execute_command=true
-        else
-            execute_command=false
-        fi
+        show_commands_before_execution_gui
     elif [[ $UI_MODE = 'tui' ]]; then
+        show_commands_before_execution_tui
+    else
+        show_commands_before_execution_cli
+    fi
+}
+
+
+# This function shows the commands before they are executed in the GUI.
+show_commands_before_execution_gui() {
+    text+="
+
+$(gettext 'Proceed?')"
+    if zenity   --question                          \
+                --no-markup                         \
+                --width         520                 \
+                --height        100                 \
+                --title         "$title"            \
+                --text          "$text"             \
+                --ok-label      "$(gettext 'Yes')"  \
+                --cancel-label  "$(gettext 'No')"   \
+                2> /dev/null; then
+        execute_command=true
+    else
+        execute_command=false
+    fi
+}
+
+
+# This function shows the commands before they are executed using a TUI.
+show_commands_before_execution_tui() {
         text+="
 
 $(gettext 'Proceed?')"
-        if dialog   --backtitle "$PROGRAM_NAME"         \
-                    --title     "$title"                \
-                    --yesno     "$text"                 \
-                    0 0; then
-            execute_command=true
-        else
-            execute_command=false
-        fi
+    if dialog   --backtitle "$PROGRAM_NAME"         \
+                --title     "$title"                \
+                --yesno     "$text"                 \
+                0 0; then
+        execute_command=true
     else
-        while true; do
-            clear -x
-            printf '%s\n\n' "$text"
-            prompt="$(gettext 'Proceed?')"
-            read -rp "$(eval_gettext "\$prompt [Y/n]: ")" < /dev/tty
-            case $REPLY in
-                [YyJj]* | '' )
-                    execute_command=true
-                    clear -x
-                    break
-                    ;;
-                [Nn]* )
-                    execute_command=false
-                    break
-                    ;;
-                * )
-                    continue
-                    ;;
-            esac
-        done
+        execute_command=false
     fi
+}
+
+
+# This function shows the commands before they are executed via the CLI.
+show_commands_before_execution_cli() {
+    while true; do
+        clear -x
+        printf '%s\n\n' "$text"
+        prompt="$(gettext 'Proceed?')"
+        read -rp "$(eval_gettext "\$prompt [Y/n]: ")" < /dev/tty
+        case $REPLY in
+            [YyJj]* | '' )
+                execute_command=true
+                clear -x
+                break
+                ;;
+            [Nn]* )
+                execute_command=false
+                break
+                ;;
+            * )
+                continue
+                ;;
+        esac
+    done
 }
 
 
