@@ -31,8 +31,8 @@ PROGRAM_NAME: str = 'kz'
 PROGRAM_DESC: str = _('Execute the kz command')
 
 USAGE_LINES: list[str] = [
-    _('Usage: kz [-h|--help] [-l|--list] [-m|--manual] [-u|--usage]'),
-    _('          [-v|--version] COMMAND [ARGUMENTS]')
+    _('Usage: kz [-h|--help] [-l|--list] [-u|--usage] [-v|--version]'),
+    _('          COMMAND [ARGUMENTS]')
     ]
 USAGE: str = '\n'.join(USAGE_LINES)
 del USAGE_LINES
@@ -45,7 +45,6 @@ HELP_LINES: list[str] = [
     _('Options:'),
     _('  -h, --help     show this help text'),
     _('  -l, --list     show available commands'),
-    _('  -m, --manual   show manual page'),
     _('  -u, --usage    show a short usage summary'),
     _('  -v, --version  show program version'),
     '',
@@ -56,8 +55,8 @@ HELP_LINES: list[str] = [
 HELP: str = '\n'.join(HELP_LINES)
 del HELP_LINES
 
-OPTIONS_SHORT: str = 'hlmuv'
-OPTIONS_LONG: list[str] = ['help', 'list', 'manual', 'usage', 'version']
+OPTIONS_SHORT: str = 'hluv'
+OPTIONS_LONG: list[str] = ['help', 'list', 'usage', 'version']
 
 
 # #############################################################################
@@ -159,9 +158,6 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.term(PROGRAM_NAME, 0)
         elif opt in ('-l', '--list'):
             process_option_list()
-            kz.term(PROGRAM_NAME, 0)
-        elif opt in ('-m', '--manual'):
-            kz.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         elif opt in ('-u', '--usage'):
             kz.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)

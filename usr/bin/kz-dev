@@ -31,9 +31,7 @@ _ = gettext.gettext
 PROGRAM_NAME: str = 'kz-dev'
 PROGRAM_DESC: str = _('Set up a development environment')
 
-USAGE: str = (
-    _("Usage: kz dev [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]")
-    )
+USAGE: str = _("Usage: kz dev [-h|--help] [-u|--usage] [-v|--version]")
 
 HELP_LINES: list[str] = [
     _('Usage: kz dev [OPTIONS]'),
@@ -42,15 +40,14 @@ HELP_LINES: list[str] = [
     '',
     _('Options:'),
     _('  -h, --help     show this help text'),
-    _('  -m, --manual   show manual page'),
     _('  -u, --usage    show a short usage summary'),
     _('  -v, --version  show program version'),
     ]
 HELP: str = '\n'.join(HELP_LINES)
 del HELP_LINES
 
-OPTIONS_SHORT: str = 'hmuv'
-OPTIONS_LONG: list[str] = ['help', 'manual', 'usage', 'version']
+OPTIONS_SHORT: str = 'huv'
+OPTIONS_LONG: list[str] = ['help', 'usage', 'version']
 
 # Where the the code is stored locally.
 GITROOT: str = subprocess.run('xdg-user-dir PROJECTS', stdout=subprocess.PIPE,
@@ -117,9 +114,6 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
-            kz.term(PROGRAM_NAME, 0)
-        elif opt in ('-m', '--manual'):
-            kz.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         elif opt in ('-u', '--usage'):
             kz.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)

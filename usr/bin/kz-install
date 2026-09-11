@@ -27,9 +27,9 @@ readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 USAGE="\
 $(gettext 'Usage: kz install [-b|--browse] [-c|--cat] [-C|--cli]')
 $(gettext '                  [-f|--file FILE]... [-G|--gui] [-h|--help]')
-$(gettext '                  [-l|--list] [-m|--manual] [-r|--remove]')
-$(gettext '                  [-s|--select] [-T|--tui] [-u|--usage]')
-$(gettext '                  [-v|--version] [APP...]')"
+$(gettext '                  [-l|--list] [-r|--remove] [-s|--select]')
+$(gettext '                  [-T|--tui] [-u|--usage] [-v|--version]')
+$(gettext '                  [APP...]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz install [OPTIONS] [ARGUMENTS]')
@@ -48,7 +48,6 @@ $(gettext '                 process specified installation files')
 $(gettext '  -G, --gui      run in graphical mode')
 $(gettext '  -h, --help     show this help text')
 $(gettext '  -l, --list     show available apps')
-$(gettext '  -m, --manual   show manual page')
 $(gettext '  -r, --remove   delete apps')
 $(gettext '  -s, --select   select apps')
 $(gettext '  -T, --tui      run in text-based mode (default)')
@@ -59,9 +58,9 @@ $(gettext 'Arguments:')
 $(gettext '  APP            process specified apps')"
 readonly HELP
 
-readonly OPTIONS_SHORT='bcCf:GhlmrsTuv'
-readonly OPTIONS_LONG="browse,cat,cli,file:,gui,help,list,manual,remove,\
-select,tui,usage,version"
+readonly OPTIONS_SHORT='bcCf:Ghlrstuv'
+readonly OPTIONS_LONG="browse,cat,cli,file:,gui,help,list,remove,select,tui,\
+usage,version"
 
 
 # #############################################################################

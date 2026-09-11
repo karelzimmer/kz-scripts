@@ -150,9 +150,6 @@ kz.process_options() {
             -h | --help )
                 kz.process_option_help
                 ;;
-            -m | --manual )
-                kz.process_option_manual
-                ;;
             -u | --usage )
                 kz.process_option_usage
                 ;;
@@ -177,20 +174,12 @@ kz.process_option_help() {
     local program_name=${PROGRAM_NAME/kz-/kz }
     local text=''
 
-    text="$(eval_gettext "Type '\$program_name --manual' or 'man \
-\$program_name' for more information.")"
+    text="$(eval_gettext "Type 'man \$program_name' for more information.")"
     UI_MODE='cli'
     # shellcheck disable=SC2154
     kz.infomsg "$HELP
 
 $text"
-    exit 0
-}
-
-
-# This function displays the manual page.
-kz.process_option_manual() {
-    man "$PROGRAM_NAME"
     exit 0
 }
 

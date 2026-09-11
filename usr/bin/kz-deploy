@@ -28,9 +28,8 @@ PROGRAM_DESC=$(gettext 'Distribute website and kz packages')
 readonly PROGRAM_DESC
 readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
 
-USAGE="\
-$(gettext 'Usage: kz deploy [-d|--dev] [-h|--help] [-m|--manual] [-u|--usage]')
-$(gettext '                 [-v|--version]')"
+USAGE="$(gettext \
+'Usage: kz deploy [-d|--dev] [-h|--help] [-u|--usage] [-v|--version]')"
 readonly USAGE
 
 HELP="$(gettext 'Usage: kz deploy [OPTIONS]')
@@ -40,13 +39,12 @@ $PROGRAM_DESC.
 $(gettext 'Options:')
 $(gettext '  -d, --dev      deploy the development version of package kz')
 $(gettext '  -h, --help     show this help text')
-$(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 readonly HELP
 
-readonly OPTIONS_SHORT='dhmuv'
-readonly OPTIONS_LONG='dev,help,manual,usage,version'
+readonly OPTIONS_SHORT='dhuv'
+readonly OPTIONS_LONG='dev,help,usage,version'
 
 # Where the the code is stored locally.
 GITROOT=$(xdg-user-dir PROJECTS)
