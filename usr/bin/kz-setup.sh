@@ -72,6 +72,8 @@ if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first &> /de
 #  LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
 if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Alt%2BF1\./Super_L./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/\[General\]/a single_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
 #
 LOGOUT=true
 
@@ -110,6 +112,7 @@ if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gset
 #  LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
 if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Super_L./Alt%2BF1\./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
+if type lxqt-session &> /dev/null; then sed --in-place --expression='/single_click_activate=.*$/d' ~/.config/lxqt/lxqt.conf; fi
 #
 LOGOUT=true
 
