@@ -386,7 +386,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:824 kz-install:987 kz-restore:529 kz-setup:881
+#: kz-backup:824 kz-install:987 kz-restore:529 kz-setup:879
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -412,11 +412,11 @@ msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
 #: kz-backup:809 kz-backup:832 kz-install:991 kz-restore:514 kz-restore:537
-#: kz-setup:885
+#: kz-setup:883
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:833 kz-install:992 kz-restore:538 kz-setup:886
+#: kz-backup:833 kz-install:992 kz-restore:538 kz-setup:884
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -647,7 +647,7 @@ msgstr ""
 
 #: kz-backup:218 kz-backup:852 kz-desktop:275 kz-install:967 kz-install:1016
 #: kz-menu:355 kz-menu:553 kz-restore:240 kz-restore:557 kz-setup:846
-#: kz-setup:910
+#: kz-setup:908
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -1488,15 +1488,15 @@ msgstr ""
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-#: kz-setup:882
+#: kz-setup:880
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:889
+#: kz-setup:887
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:891
+#: kz-setup:889
 msgid "Try to reset the apps again."
 msgstr "Probeer de apps opnieuw te resetten."
 
@@ -1524,7 +1524,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:871
+#: kz-setup:869
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 

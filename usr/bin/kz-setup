@@ -865,8 +865,6 @@ term_success_logout() {
             gnome-session-quit --logout --no-prompt
         elif type lxqt-session &> /dev/null; then
             lxqt-leave --logout
-        elif type xfce4-session &> /dev/null; then
-            xfce4-session-logout --logout
         else
             text=$(gettext 'Log out of the computer yourself.')
             kz.infomsg "$text"
