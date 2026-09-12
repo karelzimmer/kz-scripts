@@ -499,27 +499,27 @@ msgstr "Bouw website..."
 msgid "Generate gettext files.."
 msgstr "Genereer gettext-bestanden.."
 
-#: kz-build:380
+#: kz-build:400
 msgid "Build Debian package..."
 msgstr "Bouw Debian-pakket..."
 
-#: kz-build:475
+#: kz-build:495
 msgid "Build RPM package..."
 msgstr "Bouw RPM-pakket..."
 
-#: kz-build:568
+#: kz-build:588
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:590 kz-get:206
+#: kz-build:610 kz-get:206
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:596 kz-check:573 kz-deploy:310
+#: kz-build:616 kz-check:573 kz-deploy:312
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz-check:27 kz-deploy:228
+#: kz-check:27 kz-deploy:230
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 
@@ -651,20 +651,20 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz-build:335 kz-deploy:181
+#: kz-build:351 kz-deploy:181
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
-#: kz-build:343 kz-deploy:189
+#: kz-build:359 kz-deploy:189
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-#: kz-build:350 kz-deploy:204
+#: kz-build:374 kz-deploy:204
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
-#: kz-build:361 kz-deploy:215
+#: kz-build:387 kz-deploy:217
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
@@ -743,23 +743,23 @@ msgstr "Controleren..."
 msgid "Deploy..."
 msgstr "Distribueren..."
 
-#: kz-deploy:254
+#: kz-deploy:256
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:258 kz-dev:351
+#: kz-deploy:260 kz-dev:351
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
-#: kz-deploy:272
+#: kz-deploy:274
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-#: kz-deploy:287
+#: kz-deploy:289
 msgid "Install..."
 msgstr "Installeren..."
 
-#: kz-deploy:298
+#: kz-deploy:300
 msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
@@ -1705,7 +1705,7 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:600 kz-check:577 kz-deploy:314 kz-dev:384 kz-post-migrate:71
+#: kz-build:620 kz-check:577 kz-deploy:316 kz-dev:384 kz-post-migrate:71
 #: kz-update:399
 msgid "Complete!"
 msgstr "Klaar!"

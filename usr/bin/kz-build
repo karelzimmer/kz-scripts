@@ -332,6 +332,22 @@ check_repos() {
     local repos=''
     local text=''
 
+    check_repos_are_on_main
+    check_repos_are_clean
+    if $err_flag; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+
+# This function check that the repos are on branch main.
+check_repos_are_on_main() {
+    local repo=''
+    local repos=''
+    local text=''
+
     text=$(gettext 'Check that all repos are on branch main')...
     kz.infomsg "$text"
 
@@ -346,9 +362,19 @@ check_repos() {
             err_flag=true
         fi
     done
+}
+
+
+# This function check that the repos are clean.
+check_repos_are_clean() {
+    local repo=''
+    local repos=''
+    local text=''
 
     text=$(gettext 'Check that all repos are clean')...
     kz.infomsg "$text"
+
+    repos=$(find "$GITROOT/kz-"* -prune -printf '%f\n')
 
     for repo in $repos; do
         cd "$GITROOT/$repo"
@@ -364,12 +390,6 @@ check_repos() {
             err_flag=true
         fi
     done
-
-    if $err_flag; then
-        return 1
-    else
-        return 0
-    fi
 }
 
 
