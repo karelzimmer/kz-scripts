@@ -67,7 +67,8 @@ UI_MODE: str = 'tui'
 # Functions
 # #############################################################################
 
-def process() -> None:
+def process(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+            HELP: str, UI_MODE: str = 'tui') -> None:
     """
     This function performs the script actions.
     """
@@ -199,5 +200,5 @@ def term() -> None:
 # #############################################################################
 
 kz.init(PROGRAM_NAME)
-process()
+process(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, UI_MODE)
 term()

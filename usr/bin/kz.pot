@@ -78,41 +78,41 @@ msgstr ""
 msgid "  ARGUMENTS      arguments for command"
 msgstr ""
 
-#: kz:94
+#: kz:95
 msgid "command does not exist"
 msgstr ""
 
-#: kz:103
+#: kz:104
 msgid "command is required"
 msgstr ""
 
-#: kz:112 kz_common.py:70 kz_common.py:98 kz_common.py:147 kz_common.py:174
-#: kz-dev:148 kz-dev:222 kz-dev:237 kz-dev:254 kz-dev:286 kz-dev:318 kz-dev:362
-#: kz-update:84 kz-update:333
+#: kz:113 kz_common.py:70 kz_common.py:98 kz_common.py:147 kz_common.py:174
+#: kz-dev:149 kz-dev:223 kz-dev:238 kz-dev:255 kz-dev:287 kz-dev:319 kz-dev:363
+#: kz-update:85 kz-update:335
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz_common.py:76 kz_common.py:104 kz_common.py:153 kz_common.py:180
-#: kz_common.py:301 kz-dev:154 kz-dev:228 kz-dev:243 kz-dev:260 kz-dev:292
-#: kz-dev:324 kz-update:90 kz-update:339
+#: kz_common.py:301 kz-dev:155 kz-dev:229 kz-dev:244 kz-dev:261 kz-dev:293
+#: kz-dev:325 kz-update:91 kz-update:341
 msgid "Program {} encountered an error."
 msgstr ""
 
-#: kz:169 kz-backup:146 kz-build:148 kz-check:114 kz-deploy:120 kz-desktop:180
-#: kz-dev:125 kz-install:218 kz-menu:174 kz-restore:146 kz-setup:237
-#: kz-update:139 kz-wifi:143
+#: kz:170 kz-backup:146 kz-build:148 kz-check:114 kz-deploy:120 kz-desktop:180
+#: kz-dev:126 kz-install:218 kz-menu:174 kz-restore:146 kz-setup:237
+#: kz-update:140 kz-wifi:144
 msgid "internal error"
 msgstr ""
 
-#: kz:181
+#: kz:182
 msgid "The following commands are available:"
 msgstr ""
 
-#: kz:197
+#: kz:198
 msgid "Use \"man kz\" for available commands."
 msgstr ""
 
-#: kz:200
+#: kz:201
 msgid "Use \"kz COMMAND [ARGUMENTS]\" to execute a command."
 msgstr ""
 
@@ -162,7 +162,7 @@ msgid "  -T, --tui      run in text-based mode (default)"
 msgstr ""
 
 #: kz-backup:119 kz-desktop:195 kz-install:188 kz-menu:158 kz-restore:115
-#: kz-setup:207 kz-wifi:126
+#: kz-setup:207 kz-wifi:127
 msgid "no desktop environment available"
 msgstr ""
 
@@ -171,7 +171,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:154 kz-build:156 kz-check:122 kz-deploy:128 kz-desktop:188
-#: kz-dev:132 kz-menu:182 kz-restore:154 kz-update:146 kz-wifi:150
+#: kz-dev:133 kz-menu:182 kz-restore:154 kz-update:147 kz-wifi:151
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -473,7 +473,7 @@ msgstr ""
 msgid "  -d, --dev      build the development version of package kz"
 msgstr ""
 
-#: kz-build:89 kz-check:70 kz-deploy:72 kz-dev:169
+#: kz-build:89 kz-check:70 kz-deploy:72 kz-dev:170
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
@@ -728,7 +728,7 @@ msgstr ""
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:258 kz-dev:350
+#: kz-deploy:258 kz-dev:351
 msgid "Password for"
 msgstr ""
 
@@ -841,19 +841,19 @@ msgstr ""
 msgid "Usage: kz dev [OPTIONS]"
 msgstr ""
 
-#: kz-dev:184
+#: kz-dev:185
 msgid "First install git, use \"sudo apt install git\"."
 msgstr ""
 
-#: kz-dev:199
+#: kz-dev:200
 msgid "First install lftp, use \"sudo apt install lftp\"."
 msgstr ""
 
-#: kz-dev:367
+#: kz-dev:368
 msgid "Website download failed."
 msgstr ""
 
-#: kz-dev:377
+#: kz-dev:378
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
@@ -1478,35 +1478,35 @@ msgstr ""
 msgid "Usage: kz update [OPTIONS]"
 msgstr ""
 
-#: kz-update:159
+#: kz-update:160
 msgid "PREPARE"
 msgstr ""
 
-#: kz-update:191
+#: kz-update:192
 msgid "UPDATE"
 msgstr ""
 
-#: kz-update:194 kz-update:206
+#: kz-update:195 kz-update:207
 msgid "UPGRADE"
 msgstr ""
 
-#: kz-update:200 kz-update:212
+#: kz-update:201 kz-update:213
 msgid "CLEANUP"
 msgstr ""
 
-#: kz-update:378
+#: kz-update:380
 msgid "Please note: system needs to restart!"
 msgstr ""
 
-#: kz-update:383
+#: kz-update:385
 msgid "Packages that cause the restart:"
 msgstr ""
 
-#: kz-update:387
+#: kz-update:389
 msgid "No restart needed."
 msgstr ""
 
-#: kz-update:216
+#: kz-update:217
 msgid "fatal: unknown os release"
 msgstr ""
 
@@ -1518,11 +1518,11 @@ msgstr ""
 msgid "Usage: kz wifi [OPTIONS]"
 msgstr ""
 
-#: kz-wifi:163
+#: kz-wifi:164
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 
-#: kz-wifi:173 kz-wifi:184
+#: kz-wifi:174 kz-wifi:185
 msgid "No WiFi device found."
 msgstr ""
 
@@ -1638,7 +1638,7 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:600 kz-check:577 kz-deploy:314 kz-dev:383 kz-post-migrate:71
-#: kz-update:397
+#: kz-build:600 kz-check:577 kz-deploy:314 kz-dev:384 kz-post-migrate:71
+#: kz-update:399
 msgid "Complete!"
 msgstr ""

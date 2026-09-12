@@ -77,41 +77,41 @@ msgstr "  OPDRACHT       voer opdracht uit"
 msgid "  ARGUMENTS      arguments for command"
 msgstr "  ARGUMENTEN     argumenten voor opdracht"
 
-#: kz:94
+#: kz:95
 msgid "command does not exist"
 msgstr "opdracht bestaat niet"
 
-#: kz:103
+#: kz:104
 msgid "command is required"
 msgstr "opdracht is vereist"
 
-#: kz:112 kz_common.py:70 kz_common.py:98 kz_common.py:147 kz_common.py:174
-#: kz-dev:148 kz-dev:222 kz-dev:237 kz-dev:254 kz-dev:286 kz-dev:318 kz-dev:362
-#: kz-update:84 kz-update:333
+#: kz:113 kz_common.py:70 kz_common.py:98 kz_common.py:147 kz_common.py:174
+#: kz-dev:149 kz-dev:223 kz-dev:238 kz-dev:255 kz-dev:287 kz-dev:319 kz-dev:363
+#: kz-update:85 kz-update:335
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz_common.py:76 kz_common.py:104 kz_common.py:153 kz_common.py:180
-#: kz_common.py:301 kz-dev:154 kz-dev:228 kz-dev:243 kz-dev:260 kz-dev:292
-#: kz-dev:324 kz-update:90 kz-update:339
+#: kz_common.py:301 kz-dev:155 kz-dev:229 kz-dev:244 kz-dev:261 kz-dev:293
+#: kz-dev:325 kz-update:91 kz-update:341
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:169 kz-backup:146 kz-build:148 kz-check:114 kz-deploy:120 kz-desktop:180
-#: kz-dev:125 kz-install:218 kz-menu:174 kz-restore:146 kz-setup:237
-#: kz-update:139 kz-wifi:143
+#: kz:170 kz-backup:146 kz-build:148 kz-check:114 kz-deploy:120 kz-desktop:180
+#: kz-dev:126 kz-install:218 kz-menu:174 kz-restore:146 kz-setup:237
+#: kz-update:140 kz-wifi:144
 msgid "internal error"
 msgstr "interne fout"
 
-#: kz:181
+#: kz:182
 msgid "The following commands are available:"
 msgstr "De volgende opdrachten zijn beschikbaar:"
 
-#: kz:197
+#: kz:198
 msgid "Use \"man kz\" for available commands."
 msgstr "Gebruik \"man kz\" voor beschikbare opdrachten."
 
-#: kz:200
+#: kz:201
 msgid "Use \"kz COMMAND [ARGUMENTS]\" to execute a command."
 msgstr "Gebruik \"kz OPDRACHT [ARGUMENTEN]\" om een opdracht uit te voeren."
 
@@ -163,7 +163,7 @@ msgid "  -T, --tui      run in text-based mode (default)"
 msgstr "  -T, --tui      draai in tekstgebaseerde modus (standaard)"
 
 #: kz-backup:119 kz-desktop:195 kz-install:188 kz-menu:158 kz-restore:115
-#: kz-setup:207 kz-wifi:126
+#: kz-setup:207 kz-wifi:127
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
@@ -172,7 +172,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:154 kz-build:156 kz-check:122 kz-deploy:128 kz-desktop:188
-#: kz-dev:132 kz-menu:182 kz-restore:154 kz-update:146 kz-wifi:150
+#: kz-dev:133 kz-menu:182 kz-restore:154 kz-update:147 kz-wifi:151
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -483,7 +483,7 @@ msgstr "Gebruik: kz build [OPTIES]"
 msgid "  -d, --dev      build the development version of package kz"
 msgstr "  -d, --dev      bouw de ontwikkelingsversie van pakket kz"
 
-#: kz-build:89 kz-check:70 kz-deploy:72 kz-dev:169
+#: kz-build:89 kz-check:70 kz-deploy:72 kz-dev:170
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
@@ -747,7 +747,7 @@ msgstr "Distribueren..."
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:258 kz-dev:350
+#: kz-deploy:258 kz-dev:351
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
@@ -862,19 +862,19 @@ msgstr "Gebruik: kz dev [-h|--help] [-u|--usage] [-v|--version]"
 msgid "Usage: kz dev [OPTIONS]"
 msgstr "Gebruik: kz dev [OPTIES]"
 
-#: kz-dev:184
+#: kz-dev:185
 msgid "First install git, use \"sudo apt install git\"."
 msgstr "Installeer eerst git, gebruik \"sudo apt install git\"."
 
-#: kz-dev:199
+#: kz-dev:200
 msgid "First install lftp, use \"sudo apt install lftp\"."
 msgstr "Installeer eerst lftp, gebruik \"sudo apt install lftp\"."
 
-#: kz-dev:367
+#: kz-dev:368
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-#: kz-dev:377
+#: kz-dev:378
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 "Om de ontwikkelomgeving volledig in te stellen, voert u het volgende "
@@ -1556,35 +1556,35 @@ msgstr "Gebruik: kz update [-h|--help] [-u|--usage] [-v|--version]"
 msgid "Usage: kz update [OPTIONS]"
 msgstr "Gebruik: kz update [OPTIES]"
 
-#: kz-update:159
+#: kz-update:160
 msgid "PREPARE"
 msgstr "VOORBEREIDEN"
 
-#: kz-update:191
+#: kz-update:192
 msgid "UPDATE"
 msgstr "BIJWERKEN"
 
-#: kz-update:194 kz-update:206
+#: kz-update:195 kz-update:207
 msgid "UPGRADE"
 msgstr "OPWAARDEREN"
 
-#: kz-update:200 kz-update:212
+#: kz-update:201 kz-update:213
 msgid "CLEANUP"
 msgstr "OPRUIMEN"
 
-#: kz-update:378
+#: kz-update:380
 msgid "Please note: system needs to restart!"
 msgstr "Let op: het systeem moet herstarten!"
 
-#: kz-update:383
+#: kz-update:385
 msgid "Packages that cause the restart:"
 msgstr "Pakketten die de herstart veroorzaken:"
 
-#: kz-update:387
+#: kz-update:389
 msgid "No restart needed."
 msgstr "Geen herstart nodig."
 
-#: kz-update:216
+#: kz-update:217
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os-release"
 
@@ -1596,12 +1596,12 @@ msgstr "Gebruik: kz wifi [-C|--cli] [-G|--gui] [-h|--help] [-T|--tui]"
 msgid "Usage: kz wifi [OPTIONS]"
 msgstr "Gebruik: kz wifi [OPTIES]"
 
-#: kz-wifi:163
+#: kz-wifi:164
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:173 kz-wifi:184
+#: kz-wifi:174 kz-wifi:185
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
@@ -1717,7 +1717,7 @@ msgstr "Wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:600 kz-check:577 kz-deploy:314 kz-dev:383 kz-post-migrate:71
-#: kz-update:397
+#: kz-build:600 kz-check:577 kz-deploy:314 kz-dev:384 kz-post-migrate:71
+#: kz-update:399
 msgid "Complete!"
 msgstr "Klaar!"

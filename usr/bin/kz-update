@@ -59,16 +59,17 @@ OPTIONS_LONG: list[str] = ['help', 'usage', 'version']
 # Functions
 # #############################################################################
 
-def process() -> None:
+def process(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
+            HELP: str) -> None:
     """
     This function performs the script actions.
     """
     check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
     check_sudo(PROGRAM_NAME, PROGRAM_DESC)
-    perform_install_kz()
-    perform_gitpull()
-    perform_update()
-    check_reboot()
+    perform_install_kz(PROGRAM_NAME, PROGRAM_DESC)
+    perform_gitpull(PROGRAM_NAME, PROGRAM_DESC)
+    perform_update(PROGRAM_NAME, PROGRAM_DESC)
+    check_reboot(PROGRAM_NAME, PROGRAM_DESC)
 
 
 def check_sudo(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
@@ -149,7 +150,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.term(PROGRAM_NAME, 1)
 
 
-def perform_install_kz() -> None:
+def perform_install_kz(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function installs the latest version of the KZ package.
     """
@@ -160,10 +161,10 @@ def perform_install_kz() -> None:
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
     command = 'cd ~/; wget karelzimmer.nl/getkz; bash getkz'
-    perform_command(command)
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_gitpull() -> None:
+def perform_gitpull(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function performs a git pull of all local branches in the home
     directory.
@@ -175,10 +176,10 @@ def perform_gitpull() -> None:
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
         command = 'gitpull'
-        perform_command(command)
+        perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_update() -> None:
+def perform_update(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function performs the system update.
     """
@@ -190,55 +191,55 @@ def perform_update() -> None:
                       shell=True).returncode == 0:
         text = f'{kz.BLUE}{_('UPDATE')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-        perform_update_debs()
+        perform_update_debs(PROGRAM_NAME, PROGRAM_DESC)
         text = f'{kz.BLUE}{_('UPGRADE')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-        perform_upgrade_debs()
-        perform_update_snaps()
-        perform_update_flatpaks()
-        perform_update_extensions()
+        perform_upgrade_debs(PROGRAM_NAME, PROGRAM_DESC)
+        perform_update_snaps(PROGRAM_NAME, PROGRAM_DESC)
+        perform_update_flatpaks(PROGRAM_NAME, PROGRAM_DESC)
+        perform_update_extensions(PROGRAM_NAME, PROGRAM_DESC)
         text = f'{kz.BLUE}{_('CLEANUP')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-        perform_cleanup_debs()
+        perform_cleanup_debs(PROGRAM_NAME, PROGRAM_DESC)
     elif subprocess.run(check_rhel, executable='bash',
                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                         shell=True).returncode == 0:
         text = f'{kz.BLUE}{_('UPGRADE')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-        perform_upgrade_rpms()
-        perform_update_snaps()
-        perform_update_flatpaks()
-        perform_update_extensions()
+        perform_upgrade_rpms(PROGRAM_NAME, PROGRAM_DESC)
+        perform_update_snaps(PROGRAM_NAME, PROGRAM_DESC)
+        perform_update_flatpaks(PROGRAM_NAME, PROGRAM_DESC)
+        perform_update_extensions(PROGRAM_NAME, PROGRAM_DESC)
         text = f'{kz.BLUE}{_('CLEANUP')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-        perform_cleanup_rpms()
+        perform_cleanup_rpms(PROGRAM_NAME, PROGRAM_DESC)
     else:
         text = _('fatal: unknown os release')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
 
 
-def perform_update_debs() -> None:
+def perform_update_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function updates installed Debian packages.
     """
     command: str
 
     command = 'sudo apt-get update'
-    perform_command(command)
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_upgrade_debs() -> None:
+def perform_upgrade_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function upgrades installed Debian packages.
     """
     command: str
 
     command = 'sudo apt-get --assume-yes full-upgrade'
-    perform_command(command)
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_update_snaps() -> None:
+def perform_update_snaps(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function updates installed Snap packages.
     """
@@ -249,10 +250,10 @@ def perform_update_snaps() -> None:
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
         command = 'sudo snap refresh'
-        perform_command(command)
+        perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_update_flatpaks() -> None:
+def perform_update_flatpaks(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function updates installed Flatpak packages.
     """
@@ -263,10 +264,10 @@ def perform_update_flatpaks() -> None:
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
         command = 'sudo flatpak --assumeyes update'
-        perform_command(command)
+        perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_update_extensions() -> None:
+def perform_update_extensions(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function updates all enabled extensions.
     """
@@ -277,46 +278,47 @@ def perform_update_extensions() -> None:
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
         command = 'gext update'
-        perform_command(command)
+        perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_upgrade_rpms() -> None:
+def perform_upgrade_rpms(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function upgrades installed RPM packages.
     """
     command: str
 
     command = 'sudo dnf upgrade --assumeyes --refresh'
-    perform_command(command)
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_cleanup_debs() -> None:
+def perform_cleanup_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function performs a Debian packages cleanup.
     """
     command: str
 
     command = 'sudo apt-get autoclean'
-    perform_command(command)
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
     command = 'sudo apt-get autoremove --assume-yes'
-    perform_command(command)
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_cleanup_rpms() -> None:
+def perform_cleanup_rpms(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function performs a RPM packages cleanup.
     """
     command: str
 
     command = 'sudo dnf clean all'
-    perform_command(command)
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
     command = 'sudo dnf autoremove --assumeyes'
-    perform_command(command)
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
-def perform_command(command: str = '') -> None:
+def perform_command(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                    command: str = '') -> None:
     """
     This function executes a Bash command.
     """
@@ -369,7 +371,7 @@ def check_debian_package_manager(PROGRAM_NAME: str) -> int:
     return 0
 
 
-def check_reboot() -> None:
+def check_reboot(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     path: str = '/var/run/reboot-required'
     text: str
 
@@ -388,7 +390,7 @@ def check_reboot() -> None:
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
-def term() -> None:
+def term(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function controls the termination of the script.
     """
@@ -404,5 +406,5 @@ def term() -> None:
 # #############################################################################
 
 kz.init(PROGRAM_NAME)
-process()
-term()
+process(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+term(PROGRAM_NAME, PROGRAM_DESC)
