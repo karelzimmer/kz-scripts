@@ -669,14 +669,10 @@ msgstr "Controleer of alle repo's schoon zijn"
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-#, sh-format
-msgid ", or see the $yelp_man_url man page"
-msgstr ", of zie de $yelp_man_url man-pagina"
-
 #: kz_common.sh:177
 #, sh-format
 msgid "Type 'man $program_name' for more information."
-msgstr "Typ 'man $program_name'$yelp_man voor meer informatie."
+msgstr "Typ 'man $program_name' voor meer informatie."
 
 #: kz_common.sh:195
 #, sh-format

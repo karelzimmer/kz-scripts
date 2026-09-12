@@ -652,10 +652,6 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#, sh-format
-msgid ", or see the $yelp_man_url man page"
-msgstr ""
-
 #: kz_common.sh:177
 #, sh-format
 msgid "Type 'man $program_name' for more information."
