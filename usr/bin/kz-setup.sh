@@ -69,12 +69,6 @@ if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-
 if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first &> /dev/null; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true; fi
 # -----------------------------------------------------------------------------
-#  LXDE desktop environment settings.
-# -----------------------------------------------------------------------------
-if type lxsession &> /dev/null; then pcmanfm; fi
-if type lxsession &> /dev/null; then until [[ -f ~/.config/libfm/libfm.conf ]]; do sleep 2; done; fi
-if type lxsession &> /dev/null; then sed --in-place --expression='s/single_click=.*$/single_click=1/g' ~/.config/libfm/libfm.conf; fi
-# -----------------------------------------------------------------------------
 #  LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
 if type lxqt-session &> /dev/null; then sed --in-place --expression='s/Alt%2BF1\./Super_L./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
@@ -112,10 +106,6 @@ if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-
 if gsettings get org.gnome.shell.extensions.ding show-home &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first &> /dev/null; then gsettings reset org.gtk.gtk4.Settings.FileChooser sort-directories-first; fi
 if gsettings get org.gnome.desktop.input-sources sources &> /dev/null; then gsettings reset org.gnome.desktop.input-sources sources; fi
-# -----------------------------------------------------------------------------
-#  LXDE desktop environment settings.
-# -----------------------------------------------------------------------------
-if type lxsession > /dev/null && [[ -f ~/.config/libfm/libfm.conf ]]; then sed --in-place --expression='s/single_click=.*$/single_click=0/g' ~/.config/libfm/libfm.conf; fi
 # -----------------------------------------------------------------------------
 #  LXQt desktop environment settings.
 # -----------------------------------------------------------------------------

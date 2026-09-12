@@ -170,7 +170,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 
 #|install|desktop-settings|*|Various desktop environments settings
 # -----------------------------------------------------------------------------
-# Enable Cinnamon/LXDE/MATE/Xfce user greeter.
+# Enable Cinnamon/Xfce user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 #
@@ -178,7 +178,7 @@ REBOOT=true
 
 #|remove|desktop-settings|*|Various desktop environments settings
 # -----------------------------------------------------------------------------
-# Disable Cinnamon/LXDE/MATE/Xfce user greeter.
+# Disable Cinnamon/Xfce user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
 #
