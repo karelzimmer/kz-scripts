@@ -97,7 +97,7 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.term(PROGRAM_NAME, 1)
 
     UI_MODE = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP,
-                    opts, args)
+                              opts, args)
     return UI_MODE
 
 
