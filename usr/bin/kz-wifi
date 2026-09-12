@@ -72,13 +72,16 @@ def process(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     """
     This function performs the script actions.
     """
-    check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+
+    UI_MODE = check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+
+    print(UI_MODE); kz.term(PROGRAM_NAME, 1)
 
     show_secrets(PROGRAM_NAME, PROGRAM_DESC, UI_MODE)
 
 
 def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
-                HELP: str) -> None:
+                HELP: str) -> str:
     """
     This function checks the script input.
     """
@@ -96,14 +99,15 @@ def check_input(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
 
-    process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP,
+    UI_MODE = process_options(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP,
                     opts, args)
+    return UI_MODE
 
 
 def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str,
                     USAGE: str, HELP: str,
                     opts: list[tuple[str, str]],
-                    args: list[str]) -> None:
+                    args: list[str]) -> str:
     """
     This function handles the script options and arguments.
     """
@@ -111,7 +115,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str,
     opt: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
-    global UI_MODE
+    UI_MODE: str = 'tui'
 
     for opt, arg in opts:
         if opt in ('-C', '--cli'):
@@ -153,6 +157,8 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str,
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         kz.term(PROGRAM_NAME, 1)
 
+    return UI_MODE
+
 
 def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
                  UI_MODE: str = 'tui') -> None:
@@ -188,7 +194,7 @@ def show_secrets(PROGRAM_NAME: str, PROGRAM_DESC: str,
             kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
 
 
-def term() -> None:
+def term(PROGRAM_NAME: str, UI_MODE: str = 'tui') -> None:
     """
     This function controls the termination of the script.
     """
@@ -200,5 +206,5 @@ def term() -> None:
 # #############################################################################
 
 kz.init(PROGRAM_NAME)
-process(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP, UI_MODE)
-term()
+process(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
+term(PROGRAM_NAME, UI_MODE)

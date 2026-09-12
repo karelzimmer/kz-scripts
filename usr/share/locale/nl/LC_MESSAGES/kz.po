@@ -99,7 +99,7 @@ msgstr "In programma {} is een fout opgetreden."
 
 #: kz:170 kz-backup:146 kz-build:148 kz-check:114 kz-deploy:120 kz-desktop:180
 #: kz-dev:126 kz-install:218 kz-menu:174 kz-restore:146 kz-setup:237
-#: kz-update:140 kz-wifi:144
+#: kz-update:140 kz-wifi:148
 msgid "internal error"
 msgstr "interne fout"
 
@@ -163,7 +163,7 @@ msgid "  -T, --tui      run in text-based mode (default)"
 msgstr "  -T, --tui      draai in tekstgebaseerde modus (standaard)"
 
 #: kz-backup:119 kz-desktop:195 kz-install:188 kz-menu:158 kz-restore:115
-#: kz-setup:207 kz-wifi:127
+#: kz-setup:207 kz-wifi:131
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
@@ -172,7 +172,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:154 kz-build:156 kz-check:122 kz-deploy:128 kz-desktop:188
-#: kz-dev:133 kz-menu:182 kz-restore:154 kz-update:147 kz-wifi:151
+#: kz-dev:133 kz-menu:182 kz-restore:154 kz-update:147 kz-wifi:155
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
@@ -1596,12 +1596,12 @@ msgstr "Gebruik: kz wifi [-C|--cli] [-G|--gui] [-h|--help] [-T|--tui]"
 msgid "Usage: kz wifi [OPTIONS]"
 msgstr "Gebruik: kz wifi [OPTIES]"
 
-#: kz-wifi:164
+#: kz-wifi:170
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 "Gebruik deze gegevens om verbinding te maken met het draadloze netwerk."
 
-#: kz-wifi:174 kz-wifi:185
+#: kz-wifi:180 kz-wifi:191
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
