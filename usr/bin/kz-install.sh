@@ -282,9 +282,9 @@ if grep --quiet --regexp='rhel'     /etc/os-release && [[ -n ${XDG_CURRENT_DESKT
 # -----------------------------------------------------------------------------
 # Add firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
-if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
-if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
-if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw reload; fi
+if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw       &> /dev/null; then sudo ufw allow 1714:1764/udp; fi
+if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw       &> /dev/null; then sudo ufw allow 1714:1764/tcp; fi
+if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw       &> /dev/null; then sudo ufw reload; fi
 #
 if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
 if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
@@ -302,8 +302,8 @@ if (type ssh && systemctl status firewalld) &> /dev/null; then sudo firewall-cmd
 # -----------------------------------------------------------------------------
 #  Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
-if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
-if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
+if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw       &> /dev/null; then sudo ufw delete allow 1714:1764/udp; fi
+if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status ufw       &> /dev/null; then sudo ufw delete allow 1714:1764/tcp; fi
 #
 if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
 if gnome-extensions list --enabled|grep --quiet gsconnect && systemctl status firewalld &> /dev/null; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi

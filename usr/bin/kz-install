@@ -372,11 +372,11 @@ process_option_list_gui() {
 # TUI.
 process_option_list_tui() {
     text=$(
-        printf '%s|%s\n'            \
-                "${choices[@]}"     |
-        column  --table             \
-                --separator '|'     \
-                --table-columns     \
+        printf '%s|%s\n'                \
+                "${choices[@]}"         |
+        column  --table                 \
+                --separator '|'         \
+                --table-columns         \
                 "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
     text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
