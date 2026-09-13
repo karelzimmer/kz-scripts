@@ -394,7 +394,8 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delet
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place --expression='s/#.*alias/alias/g'            ~/.bashrc
+sed --in-place --expression='s/#alias/alias/g'              ~/.bashrc
+sed --in-place --expression='s/# alias/alias/g'             ~/.bashrc
 sed --in-place --expression='s/# export/export/g'           ~/.bashrc
 sed --in-place --expression='s/# eval/eval/g'               ~/.bashrc
 # -----------------------------------------------------------------------------
