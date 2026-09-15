@@ -18,12 +18,12 @@
 # Express Advanced Error Reporting) prevents the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if ! grep --quiet --regexp='noaer'      /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/'    /etc/default/grub; fi
-if ! grep --quiet --regexp='noaer'      /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/'              /etc/default/grub; fi
+if ! grep --quiet --regexp='noaer'      /etc/default/grub   ; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/'    /etc/default/grub; fi
+if ! grep --quiet --regexp='noaer'      /etc/default/grub   ; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/'              /etc/default/grub; fi
 #
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo update-grub; fi
+if grep --quiet --regexp='debian'       /etc/os-release     ; then sudo update-grub; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release     ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for available kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -37,11 +37,11 @@ REBOOT=true
 # Express Advanced Error Reporting) to allow 'AER: Corrected errors received'
 # messages to appear in the log. This is usually the case for HP hardware.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='noaer'        /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
+if grep --quiet --regexp='noaer'        /etc/default/grub   ; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
 #
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo update-grub; fi
+if grep --quiet --regexp='debian'       /etc/os-release     ; then sudo update-grub; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release     ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for missing kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
