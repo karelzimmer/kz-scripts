@@ -272,13 +272,13 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='rhel\|fedora' /etc
 # -----------------------------------------------------------------------------
 #  Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'   /etc/os-release; then sudo apt-get install --assume-yes ufw; fi
-if grep --quiet --regexp='debian'   /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes gufw; fi
-if grep --quiet --regexp='debian'   /etc/os-release; then sudo ufw enable; fi
+if grep --quiet --regexp='debian'   /etc/os-release                                         ; then sudo apt-get install --assume-yes ufw; fi
+if grep --quiet --regexp='debian'   /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]     ; then sudo apt-get install --assume-yes gufw; fi
+if grep --quiet --regexp='debian'   /etc/os-release                                         ; then sudo ufw enable; fi
 # -----------------------------------------------------------------------------
 # Firewall configuration application.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel'     /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes firewall-config; fi
+if grep --quiet --regexp='rhel'     /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]     ; then sudo dnf install --assumeyes firewall-config; fi
 # -----------------------------------------------------------------------------
 # Add firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
@@ -310,18 +310,18 @@ if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status 
 # -----------------------------------------------------------------------------
 # Remove firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if (type ssh && systemctl status ufw)      ; then sudo ufw delete allow ssh; fi
+if (type ssh && systemctl status ufw)                   ; then sudo ufw delete allow ssh; fi
 #
-if (type ssh && systemctl status firewalld); then sudo firewall-cmd --permanent --remove-service=ssh; fi
+if (type ssh && systemctl status firewalld)             ; then sudo firewall-cmd --permanent --remove-service=ssh; fi
 # -----------------------------------------------------------------------------
 # Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo ufw disable; fi
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes ufw; fi
+if grep --quiet --regexp='debian'       /etc/os-release ; then sudo ufw disable; fi
+if grep --quiet --regexp='debian'       /etc/os-release ; then sudo apt-get remove --assume-yes ufw; fi
 # -----------------------------------------------------------------------------
 # Firewall configuration application.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes firewall-config; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release ; then sudo dnf remove --assumeyes firewall-config; fi
 
 
 #|install|fwupd-settings|#none|Disable Firmware update daemon
@@ -387,29 +387,29 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; t
 #|install|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
 if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get install --assume-yes gnome-shell-extension-caffeine; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine); then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine)      ; then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
 #
 REBOOT=true
 
 #|remove|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
 if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get remove --assume-yes gnome-shell-extension-caffeine; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine); then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine)      ; then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
 #
 REBOOT=true
 
 
 #|install|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock); then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock)   ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock); then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock)          ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 #
 REBOOT=true
 
 #|remove|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock); then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock)   ; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock); then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock)          ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 #
 REBOOT=true
 
@@ -462,14 +462,14 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; t
 
 
 #|install|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance); then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance)  ; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 #
 REBOOT=true
 
 #|remove|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance); then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance)  ; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 #
@@ -477,14 +477,14 @@ REBOOT=true
 
 
 #|install|gnome-shell-extension-no-overview|*|No overview at start-up
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview); then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview)   ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
 #
 REBOOT=true
 
 #|remove|gnome-shell-extension-no-overview|*|No overview at start-up
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview); then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview)   ; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 #
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
 #
