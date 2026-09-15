@@ -608,7 +608,7 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-re
 # -----------------------------------------------------------------------------
 # Images are in: /var/lib/libvirt/images/
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-system-x86 virtinst; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes virt-manager; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf groupinstall "Virtualization Host"; fi
@@ -628,7 +628,7 @@ REBOOT=true
 
 #|remove|kvm|pc06 pc07|KVM (for Kernel-based Virtual Machine) is a full virtualization solution
 if grep --quiet --regexp='debian'       /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-system-x86 virtinst; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes virt-manager; fi
 #
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo systemctl disable --now libvirtd; fi
