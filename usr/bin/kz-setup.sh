@@ -40,7 +40,7 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy                                  ; then gsettings set org.nemo.preferences click-policy 'single'; fi
+if gsettings get org.nemo.preferences click-policy; then gsettings set org.nemo.preferences click-policy 'single'; fi
 # -----------------------------------------------------------------------------
 #  GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -83,7 +83,7 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy                                  ; then gsettings reset org.nemo.preferences click-policy; fi
+if gsettings get org.nemo.preferences click-policy; then gsettings reset org.nemo.preferences click-policy; fi
 # -----------------------------------------------------------------------------
 #  GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -168,8 +168,8 @@ if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org
 #
 if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 #
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme         ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action               ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
