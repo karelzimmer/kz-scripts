@@ -98,7 +98,7 @@ msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
 #: kz:170 kz-backup:146 kz-build:148 kz-check:114 kz-deploy:120 kz-desktop:180
-#: kz-dev:126 kz-install:218 kz-menu:174 kz-restore:146 kz-setup:237
+#: kz-dev:126 kz-install:218 kz-menu:174 kz-restore:147 kz-setup:237
 #: kz-update:140 kz-wifi:145
 msgid "internal error"
 msgstr "interne fout"
@@ -162,64 +162,64 @@ msgstr "                 plaats de back-up in de opgegeven map"
 msgid "  -T, --tui      run in text-based mode (default)"
 msgstr "  -T, --tui      draai in tekstgebaseerde modus (standaard)"
 
-#: kz-backup:119 kz-desktop:195 kz-install:188 kz-menu:158 kz-restore:115
+#: kz-backup:119 kz-desktop:195 kz-install:188 kz-menu:158 kz-restore:116
 #: kz-setup:207 kz-wifi:128
 msgid "no desktop environment available"
 msgstr "geen desktopomgeving beschikbaar"
 
-#: kz-backup:128 kz-desktop:136 kz-desktop:147 kz-desktop:158 kz-restore:124
+#: kz-backup:128 kz-desktop:136 kz-desktop:147 kz-desktop:158 kz-restore:125
 msgid "too many options"
 msgstr "te veel opties"
 
 #: kz-backup:154 kz-build:156 kz-check:122 kz-deploy:128 kz-desktop:188
-#: kz-dev:133 kz-menu:182 kz-restore:154 kz-update:147 kz-wifi:152
+#: kz-dev:133 kz-menu:182 kz-restore:155 kz-update:147 kz-wifi:152
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
 
-#: kz-backup:181 kz-restore:180
+#: kz-backup:181 kz-restore:253
 msgid "directory does not exist"
 msgstr "map bestaat niet"
 
-#: kz-backup:213 kz-restore:235
+#: kz-backup:213 kz-restore:308
 #, sh-format
 msgid "No usb medium found on $usb_mount_point."
 msgstr "Geen usb-medium gevonden op $usb_mount_point."
 
-#: kz-backup:215 kz-restore:237
+#: kz-backup:215 kz-restore:310
 msgid "Connect a usb medium."
 msgstr "Koppel een usb-medium aan."
 
-#: kz-backup:271 kz-backup:341 kz-restore:270 kz-restore:340
+#: kz-backup:271 kz-backup:341 kz-restore:343 kz-restore:413
 msgid "Select a USB medium:"
 msgstr "Selecteer een USB-medium:"
 
 #: kz-backup:303 kz-backup:321 kz-install:510 kz-install:530 kz-menu:203
-#: kz-menu:239 kz-menu:408 kz-menu:444 kz-restore:302 kz-restore:320
+#: kz-menu:239 kz-menu:408 kz-menu:444 kz-restore:375 kz-restore:393
 #: kz-setup:491 kz-setup:511
 msgid "Continue"
 msgstr "Verder"
 
-#: kz-backup:304 kz-install:511 kz-restore:303 kz-setup:492
+#: kz-backup:304 kz-install:511 kz-restore:376 kz-setup:492
 msgid "SELECT"
 msgstr "SELECT"
 
-#: kz-backup:305 kz-restore:304
+#: kz-backup:305 kz-restore:377
 msgid "MEDIUM"
 msgstr "MEDIUM"
 
-#: kz-backup:338 kz-restore:337
+#: kz-backup:338 kz-restore:410
 msgid "More than one USB medium is connected."
 msgstr "Meer dan één USB-medium is aangesloten."
 
-#: kz-backup:282 kz-restore:281
+#: kz-backup:282 kz-restore:354
 msgid "No USB medium selected."
 msgstr "Geen USB-medium geselecteerd."
 
-#: kz-backup:245 kz-backup:254 kz-restore:201 kz-restore:210
+#: kz-backup:245 kz-backup:254 kz-restore:274 kz-restore:283
 msgid "The backup has to be renamed!"
 msgstr "De back-up moet hernoemd worden!"
 
-#: kz-backup:246 kz-backup:255 kz-restore:202 kz-restore:211
+#: kz-backup:246 kz-backup:255 kz-restore:275 kz-restore:284
 #, sh-format
 msgid "From: $old"
 msgstr "Van  : $old"
@@ -386,7 +386,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:826 kz-install:987 kz-restore:531 kz-setup:879
+#: kz-backup:826 kz-install:987 kz-restore:604 kz-setup:879
 msgid "error messages"
 msgstr "foutmeldingen"
 
@@ -394,7 +394,7 @@ msgstr "foutmeldingen"
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:806 kz-backup:829 kz-restore:511 kz-restore:534
+#: kz-backup:806 kz-backup:829 kz-restore:584 kz-restore:607
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
@@ -402,7 +402,7 @@ msgstr "Mogelijke oorzaken:"
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:831 kz-restore:536
+#: kz-backup:831 kz-restore:609
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
@@ -411,12 +411,12 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:811 kz-backup:834 kz-install:991 kz-restore:516 kz-restore:539
+#: kz-backup:811 kz-backup:834 kz-install:991 kz-restore:589 kz-restore:612
 #: kz-setup:883
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:835 kz-install:992 kz-restore:540 kz-setup:884
+#: kz-backup:835 kz-install:992 kz-restore:613 kz-setup:884
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -428,23 +428,23 @@ msgstr "Probeer de back-up opnieuw te maken."
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:800 kz-restore:505
+#: kz-backup:800 kz-restore:578
 #, sh-format
 msgid "The USB medium $volume_name can be removed."
 msgstr "Het USB-medium $volume_name kan worden verwijderd."
 
-#: kz-backup:804 kz-restore:509
+#: kz-backup:804 kz-restore:582
 #, sh-format
 msgid "The USB medium $volume_name could not be detached."
 msgstr "Het USB-medium $volume_name kon niet worden losgekoppeld."
 
-#: kz-backup:807 kz-restore:512
+#: kz-backup:807 kz-restore:585
 msgid "A USB medium cannot be detached when it is 'busy' - for example,"
 msgstr ""
 "Een USB-medium kan niet worden ontkoppeld wanneer het 'bezig' is, "
 "bijvoorbeeld"
 
-#: kz-backup:808 kz-restore:513
+#: kz-backup:808 kz-restore:586
 msgid ""
 "when there are open files on it, or when some process has its working "
 "directory there."
@@ -452,18 +452,18 @@ msgstr ""
 "wanneer er bestanden op geopend zijn of wanneer een proces zijn werkmap daar "
 "heeft staan."
 
-#: kz-backup:812 kz-restore:517
+#: kz-backup:812 kz-restore:590
 #, sh-format
 msgid "Leave the $MEDIUM folder."
 msgstr "Verlaat de map $MEDIUM."
 
-#: kz-backup:813 kz-restore:518
+#: kz-backup:813 kz-restore:591
 #, sh-format
 msgid "Close apps and windows related to the $volume_name medium."
 msgstr ""
 "Sluit apps en vensters die met het medium $volume_name te maken hebben."
 
-#: kz-backup:815 kz-restore:520
+#: kz-backup:815 kz-restore:593
 msgid "Remember to safely(!) remove the USB medium."
 msgstr "Vergeet niet het USB-medium veilig(!) te verwijderen."
 
@@ -646,7 +646,7 @@ msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
 #: kz-backup:219 kz-backup:854 kz-desktop:275 kz-install:967 kz-install:1016
-#: kz-menu:355 kz-menu:553 kz-restore:241 kz-restore:559 kz-setup:846
+#: kz-menu:355 kz-menu:553 kz-restore:314 kz-restore:632 kz-setup:846
 #: kz-setup:908
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
@@ -1176,11 +1176,11 @@ msgstr "Gebruiker inrichten"
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
-#: kz-backup:348 kz-menu:60 kz-menu:204 kz-menu:240 kz-restore:347
+#: kz-backup:348 kz-menu:60 kz-menu:204 kz-menu:240 kz-restore:420
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: kz-backup:352 kz-restore:351
+#: kz-backup:352 kz-restore:424
 #, sh-format
 msgid "Select number [1-$max_choices]: "
 msgstr "Selecteer nummer [1-$max_choices]: "
@@ -1213,7 +1213,8 @@ msgstr "Menu verlaten"
 msgid "Show WiFi details"
 msgstr "WiFi-details tonen"
 
-#: kz-menu:80 kz-restore:269 kz-restore:378 kz-restore.desktop:10
+#: kz-menu:80 kz-restore:170 kz-restore:342 kz-restore:451
+#: kz-restore.desktop:10
 msgid "Restore backup"
 msgstr "Back-up terugzetten"
 
@@ -1284,19 +1285,19 @@ msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 msgid "The following will be executed:"
 msgstr "Het volgende zal worden uitgevoerd:"
 
-#: kz-menu:649 kz-menu:670 kz-menu:687
+#: kz-menu:649 kz-menu:670 kz-menu:687 kz-restore:173
 msgid "Proceed?"
 msgstr "Verder gaan?"
 
-#: kz-menu:656
+#: kz-menu:656 kz-restore:194
 msgid "Yes"
 msgstr "Ja"
 
-#: kz-menu:657
+#: kz-menu:657 kz-restore:195
 msgid "No"
 msgstr "Nee"
 
-#: kz-menu:688
+#: kz-menu:688 kz-restore:220
 #, sh-format
 msgid "$prompt [Y/n]: "
 msgstr "$prompt [J/n]: "
@@ -1329,40 +1330,44 @@ msgstr "  -s, --source MAP"
 msgid "                 use backup in specified directory"
 msgstr "                 gebruik de back-up in de opgegeven map"
 
-#: kz-restore:203 kz-restore:212
+#: kz-restore:171
+msgid "The backup will be restored"
+msgstr "De back-up zal worden teruggezet."
+
+#: kz-restore:276 kz-restore:285
 #, sh-format
 msgid "to  : $SOURCE"
 msgstr "naar : $SOURCE"
 
-#: kz-restore:218
+#: kz-restore:291
 #, sh-format
 msgid "No backup_${HOSTNAME}_$USER found in $MEDIUM."
 msgstr "Geen backup_${HOSTNAME}_$USER gevonden in $MEDIUM."
 
-#: kz-restore:379
+#: kz-restore:452
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
 
-#: kz-restore:532
+#: kz-restore:605
 msgid "Restore ended with errors."
 msgstr "Back-up terugzetten is geëindigd met fouten."
 
-#: kz-restore:535
+#: kz-restore:608
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 "Zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up of"
 
-#: kz-restore:537
+#: kz-restore:610
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr "is er te weinig ruimte op $HOME."
 
-#: kz-restore:541
+#: kz-restore:614
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:497
+#: kz-restore:570
 #, sh-format
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."

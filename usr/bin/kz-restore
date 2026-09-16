@@ -73,6 +73,7 @@ process() {
     local source_argument=''
 
     check_input "$@"
+    ask_confirmation
     check_source
     restore_backup
     restore_settings
@@ -157,6 +158,78 @@ $USAGE"
         kz.infomsg "$text"
         exit 1
     fi
+}
+
+
+# This function asks for confirmation before proceeding with the restore
+# operation.
+ask_confirmation() {
+    local text=''
+    local title=''
+
+    title=$(gettext 'Restore backup')
+    text="$(gettext 'The backup will be restored')
+    
+$(gettext 'Proceed?')"
+
+    if [[ $UI_MODE = 'gui' ]]; then
+        ask_confirmation_gui
+    elif [[ $UI_MODE = 'tui' ]]; then
+        ask_confirmation_tui
+    else
+        ask_confirmation_cli
+    fi
+}
+
+
+# This function asks for confirmation before proceeding with the restore
+# operation in the GUI.
+ask_confirmation_gui() {
+    if ! zenity --question                          \
+                --no-markup                         \
+                --width         520                 \
+                --height        100                 \
+                --title         "$title"            \
+                --text          "$text"             \
+                --ok-label      "$(gettext 'Yes')"  \
+                --cancel-label  "$(gettext 'No')"   \
+                2> /dev/null; then
+        exit 0
+    fi
+}
+
+
+# This function asks for confirmation before proceeding with the restore
+# operation using a TUI.
+ask_confirmation_tui() {
+    if ! dialog --backtitle "$PROGRAM_NAME"         \
+                --title     "$title"                \
+                --yesno     "$text"                 \
+                0 0; then
+        exit 0
+    fi
+}
+
+
+# This function asks for confirmation before proceeding with the restore
+# operation via the CLI.
+ask_confirmation_cli() {
+    local prompt=$text
+
+    while true; do
+        read -rp "$(eval_gettext "\$prompt [Y/n]: ")" < /dev/tty
+        case $REPLY in
+            [YyJj]* | '' )
+                return 0
+                ;;
+            [Nn]* )
+                exit 0
+                ;;
+            * )
+                continue
+                ;;
+        esac
+    done
 }
 
 
