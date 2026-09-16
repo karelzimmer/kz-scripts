@@ -259,6 +259,8 @@ generate_gettext_files_scripts() {
                     --regexp="$bash_script"     \
                     "$gettext_file"; then
             gettext_language='--language=Shell'
+        else
+            continue
         fi
 
         # Create POT file.
