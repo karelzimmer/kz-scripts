@@ -229,9 +229,9 @@ generate_gettext_files() {
         "$pot_dir/kz.pot"       \
         "$lc_messages_dir/kz.po"
 
-    generate_gettext_files_scripts
-    generate_gettext_files_applications
-    generate_gettext_files_policies
+    generate_gettext_files_for_scripts
+    generate_gettext_files_for_applications
+    generate_gettext_files_for_policies
 
     # Create MO file.
     msgfmt  --output-file="$lc_messages_dir/kz.mo"  \
@@ -240,7 +240,7 @@ generate_gettext_files() {
 
 
 # This function generates the gettext files PO and POT for scripts.
-generate_gettext_files_scripts() {
+generate_gettext_files_for_scripts() {
     cd "$gettext_dir_scripts"
     for gettext_file in *; do
         if [[ -d $gettext_file ]]; then
@@ -282,11 +282,11 @@ generate_gettext_files_scripts() {
 
 
 # This function generates the gettext files PO and POT for applications.
-generate_gettext_files_applications() {
+generate_gettext_files_for_applications() {
+    gettext_language='--language=Desktop'
+
     cd "$gettext_dir_applications"
     for gettext_file in *; do
-        gettext_language='--language=Desktop'
-
         # Create POT file.
         xgettext    "$gettext_language"         \
                     --join-existing             \
@@ -306,10 +306,11 @@ generate_gettext_files_applications() {
 
 
 # This function generates the gettext files PO and POT for policies.
-generate_gettext_files_policies() {
+generate_gettext_files_for_policies() {
+    gettext_language="--its=$its_dir/kz-policy.its"
+
     cd "$gettext_dir_policies"
     for gettext_file in *; do
-        gettext_language="--its=$its_dir/kz-policy.its"
 
         # Create POT file.
         xgettext    "$gettext_language"         \
