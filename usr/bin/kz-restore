@@ -169,7 +169,7 @@ ask_confirmation() {
 
     title=$(gettext 'Restore backup')
     text="$(gettext 'The backup will be restored')
-    
+
 $(gettext 'Proceed?')"
 
     if [[ $UI_MODE = 'gui' ]]; then
