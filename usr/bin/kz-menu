@@ -105,8 +105,6 @@ declare UI_MODE='tui'
 
 # This function performs the script actions.
 process() {
-    local -i rc=0
-
     check_input "$@"
     if [[ $UI_MODE = 'gui' ]]; then
         process_menu1_gui
@@ -706,6 +704,8 @@ show_commands_before_execution_cli() {
 
 # This function executes the commands.
 execute_command() {
+    local -i rc=0
+
     $command --"$UI_MODE" || rc=$?
     kz.logmsg "$command: rc=$rc"
 }
