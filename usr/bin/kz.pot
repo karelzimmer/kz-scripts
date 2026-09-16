@@ -865,7 +865,7 @@ msgstr ""
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
-#: kz-install:23 kz-install.desktop:11
+#: kz-install:23
 msgid "Install apps and change system settings"
 msgstr ""
 
@@ -983,8 +983,8 @@ msgstr ""
 msgid "Install apps"
 msgstr ""
 
-#: kz-install:448
-msgid "Select apps to install:"
+#: kz-install:448 kz-install.desktop:11
+msgid "Select apps to install"
 msgstr ""
 
 #: kz-install:450
@@ -992,7 +992,7 @@ msgid "Remove apps"
 msgstr ""
 
 #: kz-install:451
-msgid "Select apps to remove:"
+msgid "Select apps to remove"
 msgstr ""
 
 #: kz-install:357 kz-install:380 kz-install:407 kz-install:512 kz-install:556
@@ -1326,7 +1326,7 @@ msgstr ""
 msgid "The backup has been restored."
 msgstr ""
 
-#: kz-setup:23 kz-setup.desktop:11
+#: kz-setup:23
 msgid "Set up apps and change user settings"
 msgstr ""
 
@@ -1407,8 +1407,8 @@ msgstr ""
 msgid "Use \"kz setup --browse\" to view all commands and information."
 msgstr ""
 
-#: kz-setup:429
-msgid "Select apps to set up:"
+#: kz-setup:429 kz-setup.desktop:11
+msgid "Select apps to set up"
 msgstr ""
 
 #: kz-setup:431
@@ -1416,7 +1416,7 @@ msgid "Reset apps"
 msgstr ""
 
 #: kz-setup:432
-msgid "Select apps to reset:"
+msgid "Select apps to reset"
 msgstr ""
 
 #: kz-setup:544

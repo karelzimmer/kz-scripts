@@ -445,10 +445,10 @@ process_option_select() {
 
     if [[ $INSTALL = 'install' ]]; then
         title=$(gettext 'Install apps')
-        text=$(gettext 'Select apps to install:')
+        text=$(gettext 'Select apps to install')':'
     else
         title=$(gettext 'Remove apps')
-        text=$(gettext 'Select apps to remove:')
+        text=$(gettext 'Select apps to remove')':'
     fi
 
     # From (app record): #|ACTION|APP|HOST|DESCRIPTION

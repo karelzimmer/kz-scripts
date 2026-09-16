@@ -426,10 +426,10 @@ process_option_select() {
 
     if [[ $SETUP = 'setup' ]]; then
         title=$(gettext 'Set up apps')
-        text=$(gettext 'Select apps to set up:')
+        text=$(gettext 'Select apps to set up')':'
     else
         title=$(gettext 'Reset apps')
-        text=$(gettext 'Select apps to reset:')
+        text=$(gettext 'Select apps to reset')':'
     fi
 
     # From (app record): #|ACTION|APP|HOST|DESCRIPTION

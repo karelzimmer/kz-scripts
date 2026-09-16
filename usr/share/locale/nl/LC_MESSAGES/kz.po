@@ -886,7 +886,7 @@ msgstr "Volg nu de stappen zoals beschreven in de Checklist installatie."
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr "Checklist installatie is te vinden op https://karelzimmer.nl/nl."
 
-#: kz-install:23 kz-install.desktop:11
+#: kz-install:23
 msgid "Install apps and change system settings"
 msgstr "Installeer apps en wijzig systeeminstellingen"
 
@@ -1017,17 +1017,17 @@ msgstr ""
 msgid "Install apps"
 msgstr "Apps installeren"
 
-#: kz-install:448
-msgid "Select apps to install:"
-msgstr "Selecteer apps om te installeren:"
+#: kz-install:448 kz-install.desktop:11
+msgid "Select apps to install"
+msgstr "Selecteer apps om te installeren"
 
 #: kz-install:450
 msgid "Remove apps"
 msgstr "Apps verwijderen"
 
 #: kz-install:451
-msgid "Select apps to remove:"
-msgstr "Selecteer apps om te verwijderen:"
+msgid "Select apps to remove"
+msgstr "Selecteer apps om te verwijderen"
 
 #: kz-install:357 kz-install:380 kz-install:407 kz-install:512 kz-install:556
 #: kz-setup:340 kz-setup:362 kz-setup:388 kz-setup:493 kz-setup:537
@@ -1372,7 +1372,7 @@ msgstr "Probeer de back-up opnieuw terug te zetten."
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
-#: kz-setup:23 kz-setup.desktop:11
+#: kz-setup:23
 msgid "Set up apps and change user settings"
 msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
@@ -1466,17 +1466,17 @@ msgid "Use \"kz setup --browse\" to view all commands and information."
 msgstr ""
 "Gebruik \"kz setup --browse\" om alle opdrachten en informatie te bekijken."
 
-#: kz-setup:429
-msgid "Select apps to set up:"
-msgstr "Selecteer apps om in te stellen:"
+#: kz-setup:429 kz-setup.desktop:11
+msgid "Select apps to set up"
+msgstr "Selecteer apps om in te stellen"
 
 #: kz-setup:431
 msgid "Reset apps"
 msgstr "Apps resetten"
 
 #: kz-setup:432
-msgid "Select apps to reset:"
-msgstr "Selecteer apps om te resetten:"
+msgid "Select apps to reset"
+msgstr "Selecteer apps om te resetten"
 
 #: kz-setup:544
 msgid "Use \"kz setup\" to set up the automatically selected apps."
