@@ -360,6 +360,8 @@ select_medium() {
 
 # This function lets the user select the source medium in the GUI.
 select_medium_gui() {
+    local -i rc=0
+
     for medium in "${media[@]}"; do
         choices+=('false' "$medium")
     done
@@ -376,13 +378,18 @@ select_medium_gui() {
                 --column    "$(gettext 'SELECT')"   \
                 --column    "$(gettext 'MEDIUM')"   \
                 "${choices[@]}"                     \
-                2> /dev/null                        || true
-        )
+                2> /dev/null
+        ) || rc=$?
+    if [[ $rc -ne 0 ]]; then
+        exit 0
+    fi
 }
 
 
 # This function lets the user select the source medium using a TUI.
 select_medium_tui() {
+    local -i rc=0
+
     for medium in "${media[@]}"; do
         choices+=("$medium" 'off')
     done
@@ -397,8 +404,11 @@ select_medium_tui() {
                 0 0 0                               \
                 "${choices[@]}"                     \
                 2>&1 >/dev/tty                      |
-        sed     --expression='s/"//g'               || true
-        )
+        sed     --expression='s/"//g'
+        ) || rc=$?
+    if [[ $rc -ne 0 ]]; then
+        exit 0
+    fi
 }
 
 
