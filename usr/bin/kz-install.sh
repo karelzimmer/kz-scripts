@@ -946,9 +946,9 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian'       /etc
 # -----------------------------------------------------------------------------
 # Secure shell client and server.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes ssh; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes openssh-client openssh-server; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes openssh; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes openssh-clients openssh-server; fi
 #
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 # -----------------------------------------------------------------------------
@@ -979,9 +979,9 @@ if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='4
 # -----------------------------------------------------------------------------
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 #
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes ssh; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes openssh-client openssh-server; fi
 #
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes openssh; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes openssh-clients openssh-server; fi
 # -----------------------------------------------------------------------------
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
