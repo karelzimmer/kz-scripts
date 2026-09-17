@@ -452,15 +452,15 @@ kz-desktop --delete=thunderbird
 # -----------------------------------------------------------------------------
 kz-desktop --addbef=code
 #
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/json; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/x-desktop; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/x-shellscript; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop application/xml; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/html; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/markdown; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/plain; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/troff; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then xdg-mime default code.desktop text/x-python; fi
+if type xdg-mime; then xdg-mime default code.desktop application/json; fi
+if type xdg-mime; then xdg-mime default code.desktop application/x-desktop; fi
+if type xdg-mime; then xdg-mime default code.desktop application/x-shellscript; fi
+if type xdg-mime; then xdg-mime default code.desktop application/xml; fi
+if type xdg-mime; then xdg-mime default code.desktop text/html; fi
+if type xdg-mime; then xdg-mime default code.desktop text/markdown; fi
+if type xdg-mime; then xdg-mime default code.desktop text/plain; fi
+if type xdg-mime; then xdg-mime default code.desktop text/troff; fi
+if type xdg-mime; then xdg-mime default code.desktop text/x-python; fi
 
 #|reset|vscode|pc06 pc07|Code editing. Redefined
 kz-desktop --delete=code
