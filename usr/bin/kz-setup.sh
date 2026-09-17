@@ -410,13 +410,13 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Disable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place --expression='s/^alias/#alias/g'             ~/.bashrc
-sed --in-place --expression='s/^export/#export/g'           ~/.bashrc
-sed --in-place --expression='s/^eval/#eval/g'               ~/.bashrc
+sed --in-place --expression='s/^alias/#alias/g'     ~/.bashrc
+sed --in-place --expression='s/^export/#export/g'   ~/.bashrc
+sed --in-place --expression='s/^eval/#eval/g'       ~/.bashrc
 # -----------------------------------------------------------------------------
 # Disable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place --expression='/^stty -ixon/d'                ~/.bashrc
+sed --in-place --expression='/^stty -ixon/d'        ~/.bashrc
 #
 LOGOUT=true
 
@@ -429,7 +429,7 @@ kz-desktop --addbef=org.gnome.Terminal
 
 #|reset|terminal|pc06 pc07|Terminal emulator application
 kz-desktop --delete=org.gnome.Terminal
-sed --in-place --expression='/^alias bin/d' --expression='/^alias doc/d'    ~/.bashrc
+sed --in-place --expression='/^alias bin/d' --expression='/^alias doc/d' ~/.bashrc
 
 
 #|setup|thumbnails-cache|#none|Restore thumbnails in nautilus

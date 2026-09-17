@@ -310,9 +310,9 @@ if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status 
 # -----------------------------------------------------------------------------
 # Remove firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if (type ssh && systemctl status ufw)                   ; then sudo ufw delete allow ssh; fi
+if (type ssh && systemctl status ufw)       ; then sudo ufw delete allow ssh; fi
 #
-if (type ssh && systemctl status firewalld)             ; then sudo firewall-cmd --permanent --remove-service=ssh; fi
+if (type ssh && systemctl status firewalld) ; then sudo firewall-cmd --permanent --remove-service=ssh; fi
 # -----------------------------------------------------------------------------
 # Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
@@ -553,9 +553,9 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/' /etc/defau
 # -----------------------------------------------------------------------------
 sudo sed --in-place --expression='s/ loglevel=3//'  /etc/default/grub
 #
-if grep --quiet --regexp='debian'                   /etc/os-release; then sudo update-grub; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo update-grub; fi
 #
-if grep --quiet --regexp='rhel\|fedora'             /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 #
 REBOOT=true
 
