@@ -474,15 +474,13 @@ $(gettext 'No apps found.')"
 
 # This function let the user select apps in the GUI.
 process_option_select_gui() {
-    local -i rc=0
-
     for app_list_row in "${app_list[@]}"; do
         read -r app_name app_desc <<< "$app_list_row"
         choices+=('false' "$app_name" "$app_desc")
     done
     # The variable selected_apps does not need to be an array, because the app
     # name is a word, does not contain spaces.
-    selected_apps=$(
+    if ! selected_apps=$(
         zenity  --list                                  \
                 --checklist                             \
                 --separator ' '                         \
@@ -496,8 +494,7 @@ process_option_select_gui() {
                 --column    "$(gettext 'DESCRIPTION')"  \
                 "${choices[@]}"                         \
                 2> /dev/null
-        ) || rc=$?
-    if [[ $rc -ne 0 ]]; then
+        ); then
         exit 0
     fi
 }
@@ -505,15 +502,13 @@ process_option_select_gui() {
 
 # This function let the user select apps using a TUI.
 process_option_select_tui() {
-    local -i rc=0
-
     for app_list_row in "${app_list[@]}"; do
         read -r app_name app_desc <<< "$app_list_row"
         choices+=("$app_name" "$app_desc" 'off')
     done
     # The variable selected_apps does not need to be an array, because the app
     # name is a word, does not contain spaces.
-    selected_apps=$(
+    if ! selected_apps=$(
         dialog  --mouse                             \
                 --ok-label  "$(gettext 'Continue')" \
                 --backtitle "$PROGRAM_NAME"         \
@@ -523,8 +518,7 @@ process_option_select_tui() {
                 0 0 0                               \
                 "${choices[@]}"                     \
                 2>&1 >/dev/tty
-        ) || rc=$?
-    if [[ $rc -ne 0 ]]; then
+        ); then
         exit 0
     fi
 }

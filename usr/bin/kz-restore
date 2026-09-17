@@ -360,13 +360,11 @@ select_medium() {
 
 # This function lets the user select the source medium in the GUI.
 select_medium_gui() {
-    local -i rc=0
-
     for medium in "${media[@]}"; do
         choices+=('false' "$medium")
     done
     # No array is needed, because only one can be selected.
-    selected_medium=$(
+    if ! selected_medium=$(
         zenity  --list                              \
                 --radiolist                         \
                 --separator ' '                     \
@@ -379,8 +377,7 @@ select_medium_gui() {
                 --column    "$(gettext 'MEDIUM')"   \
                 "${choices[@]}"                     \
                 2> /dev/null
-        ) || rc=$?
-    if [[ $rc -ne 0 ]]; then
+        ); then
         exit 0
     fi
 }
@@ -388,13 +385,11 @@ select_medium_gui() {
 
 # This function lets the user select the source medium using a TUI.
 select_medium_tui() {
-    local -i rc=0
-
     for medium in "${media[@]}"; do
         choices+=("$medium" 'off')
     done
     # No array is needed, because only one can be selected.
-    selected_medium=$(
+    if ! selected_medium=$(
         dialog  --mouse                             \
                 --no-items                          \
                 --ok-label  "$(gettext 'Continue')" \
@@ -405,8 +400,7 @@ select_medium_tui() {
                 "${choices[@]}"                     \
                 2>&1 >/dev/tty                      |
         sed     --expression='s/"//g'
-        ) || rc=$?
-    if [[ $rc -ne 0 ]]; then
+        ); then
         exit 0
     fi
 }
