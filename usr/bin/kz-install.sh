@@ -551,7 +551,7 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/' /etc/defau
 # -----------------------------------------------------------------------------
 # Enable warnings.
 # -----------------------------------------------------------------------------
-sudo sed --in-place --expression='s/ loglevel=3//'  /etc/default/grub
+sudo sed --in-place --expression='s/ loglevel=3//' /etc/default/grub
 #
 if grep --quiet --regexp='debian'       /etc/os-release; then sudo update-grub; fi
 #
