@@ -188,25 +188,25 @@ msgstr ""
 msgid "Connect a usb medium."
 msgstr ""
 
-#: kz-backup:271 kz-backup:345 kz-restore:343 kz-restore:417
+#: kz-backup:271 kz-backup:347 kz-restore:343 kz-restore:419
 msgid "Select a USB medium:"
 msgstr ""
 
-#: kz-backup:303 kz-backup:323 kz-install:510 kz-install:532 kz-menu:201
-#: kz-menu:237 kz-menu:406 kz-menu:442 kz-restore:375 kz-restore:395
+#: kz-backup:304 kz-backup:325 kz-install:510 kz-install:532 kz-menu:201
+#: kz-menu:237 kz-menu:406 kz-menu:442 kz-restore:376 kz-restore:397
 #: kz-setup:491 kz-setup:513
 msgid "Continue"
 msgstr ""
 
-#: kz-backup:304 kz-install:511 kz-restore:376 kz-setup:492
+#: kz-backup:305 kz-install:511 kz-restore:377 kz-setup:492
 msgid "SELECT"
 msgstr ""
 
-#: kz-backup:305 kz-restore:377
+#: kz-backup:306 kz-restore:378
 msgid "MEDIUM"
 msgstr ""
 
-#: kz-backup:342 kz-restore:414
+#: kz-backup:344 kz-restore:416
 msgid "More than one USB medium is connected."
 msgstr ""
 
@@ -228,232 +228,232 @@ msgstr ""
 msgid "to  : $TARGET"
 msgstr ""
 
-#: kz-backup:464
+#: kz-backup:466
 msgid "This folder contains files created by kz-backup."
 msgstr ""
 
-#: kz-backup:465
+#: kz-backup:467
 msgid "These files are used by kz-restore and others."
 msgstr ""
 
-#: kz-backup:467
+#: kz-backup:469
 msgid "Further reading:"
 msgstr ""
 
-#: kz-backup:422
+#: kz-backup:424
 msgid "START list of manual installed packages"
 msgstr ""
 
-#: kz-backup:423
+#: kz-backup:425
 msgid "END list of manual installed packages"
 msgstr ""
 
-#: kz-backup:424
+#: kz-backup:426
 msgid "START list of installed snaps"
 msgstr ""
 
-#: kz-backup:425
+#: kz-backup:427
 msgid "END list of installed snaps"
 msgstr ""
 
-#: kz-backup:426
+#: kz-backup:428
 msgid "START list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:427
+#: kz-backup:429
 msgid "END list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:484
+#: kz-backup:486
 msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
-#: kz-backup:519 kz-backup:535
+#: kz-backup:521 kz-backup:537
 msgid "Additional users can be added manually:"
 msgstr ""
 
-#: kz-backup:521 kz-backup:569
+#: kz-backup:523 kz-backup:571
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users."
 msgstr ""
 
-#: kz-backup:523
+#: kz-backup:525
 msgid "2. Click on Unlock and then Add User."
 msgstr ""
 
-#: kz-backup:524
+#: kz-backup:526
 msgid "3. Enter Name [USER] and Username [USERNAME]."
 msgstr ""
 
-#: kz-backup:526 kz-backup:576 kz-backup:637
+#: kz-backup:528 kz-backup:578 kz-backup:639
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:537
+#: kz-backup:539
 msgid "# Standard user:"
 msgstr ""
 
-#: kz-backup:538
+#: kz-backup:540
 msgid "sudo useradd --create-home --comment '[USER]' [USERNAME]"
 msgstr ""
 
-#: kz-backup:539
+#: kz-backup:541
 msgid "# Administrator:"
 msgstr ""
 
-#: kz-backup:540
+#: kz-backup:542
 msgid "# Debian or Debian-based:"
 msgstr ""
 
-#: kz-backup:541
+#: kz-backup:543
 msgid "sudo usermod --append --groups adm,sudo [USERNAME]"
 msgstr ""
 
-#: kz-backup:542
+#: kz-backup:544
 msgid "# Red Hat or Red Hat-based:"
 msgstr ""
 
-#: kz-backup:543
+#: kz-backup:545
 msgid "sudo usermod --append --groups wheel [USERNAME]"
 msgstr ""
 
-#: kz-backup:544
+#: kz-backup:546
 msgid "# User sets password on first login:"
 msgstr ""
 
-#: kz-backup:545
+#: kz-backup:547
 msgid "sudo passwd --delete --expire [USERNAME]"
 msgstr ""
 
-#: kz-backup:567
+#: kz-backup:569
 msgid "To set the users avatar:"
 msgstr ""
 
-#: kz-backup:571
+#: kz-backup:573
 msgid "2. Click on Change avatar (pencil icon)."
 msgstr ""
 
-#: kz-backup:572
+#: kz-backup:574
 msgid "3. Click Select a file."
 msgstr ""
 
-#: kz-backup:573
+#: kz-backup:575
 msgid "4. Select avatar.ico in Personal folder / Settings,"
 msgstr ""
 
-#: kz-backup:574
+#: kz-backup:576
 msgid "   or another picture file."
 msgstr ""
 
-#: kz-backup:588
+#: kz-backup:590
 msgid "START list of favorite apps in the dash"
 msgstr ""
 
-#: kz-backup:589
+#: kz-backup:591
 msgid "END list of favorite apps in the dash"
 msgstr ""
 
-#: kz-backup:631
+#: kz-backup:633
 msgid "To set the desktop background:"
 msgstr ""
 
-#: kz-backup:633
+#: kz-backup:635
 msgid "1.  Press the Super key[1], type 'file' and click on Files."
 msgstr ""
 
-#: kz-backup:634
+#: kz-backup:636
 msgid "2.  Right-click on desktop.ico in Personal folder / Settings,"
 msgstr ""
 
-#: kz-backup:635
+#: kz-backup:637
 msgid "    or another picture file, and choose Set as Background."
 msgstr ""
 
-#: kz-backup:270 kz-backup:662 kz-menu:77 kz-backup.desktop:10
+#: kz-backup:270 kz-backup:664 kz-menu:77 kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
-#: kz-backup:663
+#: kz-backup:665
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:697 kz-backup:731 kz-backup:757
+#: kz-backup:699 kz-backup:733 kz-backup:759
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:830 kz-install:991 kz-restore:608 kz-setup:883
+#: kz-backup:832 kz-install:991 kz-restore:610 kz-setup:883
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:831
+#: kz-backup:833
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:810 kz-backup:833 kz-restore:588 kz-restore:611
+#: kz-backup:812 kz-backup:835 kz-restore:590 kz-restore:613
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:834
+#: kz-backup:836
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:835 kz-restore:613
+#: kz-backup:837 kz-restore:615
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:836
+#: kz-backup:838
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:815 kz-backup:838 kz-install:995 kz-restore:593 kz-restore:616
+#: kz-backup:817 kz-backup:840 kz-install:995 kz-restore:595 kz-restore:618
 #: kz-setup:887
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:839 kz-install:996 kz-restore:617 kz-setup:888
+#: kz-backup:841 kz-install:996 kz-restore:619 kz-setup:888
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:840
+#: kz-backup:842
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:796
+#: kz-backup:798
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:804 kz-restore:582
+#: kz-backup:806 kz-restore:584
 #, sh-format
 msgid "The USB medium $volume_name can be removed."
 msgstr ""
 
-#: kz-backup:808 kz-restore:586
+#: kz-backup:810 kz-restore:588
 #, sh-format
 msgid "The USB medium $volume_name could not be detached."
 msgstr ""
 
-#: kz-backup:811 kz-restore:589
+#: kz-backup:813 kz-restore:591
 msgid "A USB medium cannot be detached when it is 'busy' - for example,"
 msgstr ""
 
-#: kz-backup:812 kz-restore:590
+#: kz-backup:814 kz-restore:592
 msgid ""
 "when there are open files on it, or when some process has its working "
 "directory there."
 msgstr ""
 
-#: kz-backup:816 kz-restore:594
+#: kz-backup:818 kz-restore:596
 #, sh-format
 msgid "Leave the $MEDIUM folder."
 msgstr ""
 
-#: kz-backup:817 kz-restore:595
+#: kz-backup:819 kz-restore:597
 #, sh-format
 msgid "Close apps and windows related to the $volume_name medium."
 msgstr ""
 
-#: kz-backup:819 kz-restore:597
+#: kz-backup:821 kz-restore:599
 msgid "Remember to safely(!) remove the USB medium."
 msgstr ""
 
@@ -628,8 +628,8 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:219 kz-backup:858 kz-desktop:275 kz-install:971 kz-install:1020
-#: kz-menu:353 kz-menu:551 kz-restore:314 kz-restore:636 kz-setup:850
+#: kz-backup:219 kz-backup:860 kz-desktop:275 kz-install:971 kz-install:1020
+#: kz-menu:353 kz-menu:551 kz-restore:314 kz-restore:638 kz-setup:850
 #: kz-setup:912
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
@@ -1133,11 +1133,11 @@ msgstr ""
 msgid "Command menu"
 msgstr ""
 
-#: kz-backup:352 kz-menu:60 kz-menu:202 kz-menu:238 kz-restore:424
+#: kz-backup:354 kz-menu:60 kz-menu:202 kz-menu:238 kz-restore:426
 msgid "Exit"
 msgstr ""
 
-#: kz-backup:356 kz-restore:428
+#: kz-backup:358 kz-restore:430
 #, sh-format
 msgid "Select number [1-$max_choices]: "
 msgstr ""
@@ -1170,7 +1170,7 @@ msgstr ""
 msgid "Show WiFi details"
 msgstr ""
 
-#: kz-menu:80 kz-restore:170 kz-restore:342 kz-restore:455
+#: kz-menu:80 kz-restore:170 kz-restore:342 kz-restore:457
 #: kz-restore.desktop:10
 msgid "Restore backup"
 msgstr ""
@@ -1300,28 +1300,28 @@ msgstr ""
 msgid "No backup_${HOSTNAME}_$USER found in $MEDIUM."
 msgstr ""
 
-#: kz-restore:456
+#: kz-restore:458
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:609
+#: kz-restore:611
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:612
+#: kz-restore:614
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:614
+#: kz-restore:616
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:618
+#: kz-restore:620
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:574
+#: kz-restore:576
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""

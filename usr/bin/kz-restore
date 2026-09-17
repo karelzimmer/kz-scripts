@@ -363,7 +363,8 @@ select_medium_gui() {
     for medium in "${media[@]}"; do
         choices+=('false' "$medium")
     done
-    # No array is needed, because only one can be selected.
+    # The variable selected_medium does not need to be an array, because only
+    # one medium can be selected.
     if ! selected_medium=$(
         zenity  --list                              \
                 --radiolist                         \
@@ -388,7 +389,8 @@ select_medium_tui() {
     for medium in "${media[@]}"; do
         choices+=("$medium" 'off')
     done
-    # No array is needed, because only one can be selected.
+    # The variable selected_medium does not need to be an array, because only
+    # one medium can be selected.
     if ! selected_medium=$(
         dialog  --mouse                             \
                 --no-items                          \
