@@ -707,7 +707,7 @@ execute_command() {
     local -i rc=0
 
     $command --"$UI_MODE" || rc=$?
-    kz.logmsg "$command: rc=$rc"
+    kz.logmsg "$command --$UI_MODE: rc=$rc"
 }
 
 
