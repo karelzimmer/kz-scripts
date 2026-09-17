@@ -57,8 +57,8 @@ init() {
     set -o pipefail
 
     # Trap signals.
-    trap 'rm --force getkz* /tmp/kz-*.deb' EXIT
     trap 'err_report' ERR SIGHUP SIGINT SIGTERM
+    trap 'rm --force getkz getkz.[0-9]* /tmp/kz-*.deb' EXIT
 }
 
 
