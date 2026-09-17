@@ -1015,7 +1015,7 @@ msgid "Use \"kz install\" to remove the automatically selected apps."
 msgstr ""
 
 #: kz-install:482 kz-setup:463
-msgid "No apps selected."
+msgid "No app selected."
 msgstr ""
 
 #: kz-install:629 kz-setup:611

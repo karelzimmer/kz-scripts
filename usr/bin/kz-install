@@ -479,7 +479,7 @@ $(gettext 'No apps found.')"
     fi
 
     if [[ -z $selected_apps ]]; then
-        text=$(gettext 'No apps selected.')
+        text=$(gettext 'No app selected.')
         kz.infomsg "$text"
         exit 0
     fi

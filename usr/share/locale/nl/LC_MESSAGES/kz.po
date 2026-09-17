@@ -1052,7 +1052,7 @@ msgstr ""
 "geselecteerde apps te verwijderen."
 
 #: kz-install:482 kz-setup:463
-msgid "No apps selected."
+msgid "No app selected."
 msgstr "Geen apps geselecteerd."
 
 #: kz-install:629 kz-setup:611
