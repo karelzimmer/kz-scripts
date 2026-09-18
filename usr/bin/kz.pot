@@ -679,11 +679,11 @@ msgid ""
 "$command"
 msgstr ""
 
-#: kz_common.sh:312 kz-get:69
+#: kz_common.sh:313 kz_common.sh:316 kz-get:69
 msgid "Use \"journalctl -xe\" to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:313 kz-get:70
+#: kz_common.sh:317 kz-get:70
 msgid "The last few lines of the log are displayed here."
 msgstr ""
 
@@ -691,7 +691,7 @@ msgstr ""
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:350
+#: kz_common.sh:354
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""

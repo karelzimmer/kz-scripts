@@ -307,11 +307,14 @@ kz.term() {
             kz.errmsg "$text"
             text="$(eval_gettext \
 "Error \$rc on line \$lineno in function \$function while executing command: \
-\$command")
-
+\$command")"
+            if [[ -z ${XDG_CURRENT_DESKTOP-} ]]; then
+                text+="
+$(gettext "Use \"journalctl -xe\" to check what went wrong.")"
+            else
+                text+="
 $(gettext "Use \"journalctl -xe\" to check what went wrong.")
-$(gettext "The last few lines of the log are displayed here.")
-                $(
+$(gettext "The last few lines of the log are displayed here.")                $(
                     journalctl  --all                           \
                                 --catalog                       \
                                 --lines                         \
@@ -319,6 +322,7 @@ $(gettext "The last few lines of the log are displayed here.")
                                 --pager-end                     \
                                 --identifier="$PROGRAM_NAME"
                 )"
+            fi
             kz.errmsg "$text"
             exit "$rc"
             ;;
