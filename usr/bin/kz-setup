@@ -807,10 +807,7 @@ execute_command() {
 
 # This function controls the termination of the script.
 term() {
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local prompt=''
     local text=''
-    local title=''
 
     # Error log also to the main log.
     text="ERRORLOG (stderr) $ERROR_LOG"
@@ -828,6 +825,9 @@ term() {
 # This function controls the termination of the script when it ends with
 # success.
 term_success() {
+    local prompt=''
+    local text=''
+
     text=$(gettext "Apps set up completed.")
     if $OPTION_RESET; then
         text=$(gettext "Apps reset completed.")
@@ -880,6 +880,10 @@ term_success_logout() {
 # This function controls the termination of the script when it ends with
 # errors.
 term_error() {
+    local prompt=''
+    local text=''
+    local title=''
+
     title="$PROGRAM_DESC $(gettext 'error messages')"
     text="$(gettext "The set up of the following apps contains errors:")
 ${FAILED_APPS[*]}

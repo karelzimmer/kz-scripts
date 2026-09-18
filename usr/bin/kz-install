@@ -932,12 +932,6 @@ execute_command_cli() {
 
 # This function controls the termination of the script.
 term() {
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local prompt=''
-    local reboot='systemctl --check-inhibitors=no reboot'
-    local text=''
-    local title=''
-
     # Error log also to the standard log.
     text="ERRORLOG (stderr) $ERROR_LOG"
     printf '%s\n' "$text" >> "$ERROR_LOG"
@@ -954,6 +948,10 @@ term() {
 # This function controls the termination of the script when it ends with
 # success.
 term_success() {
+    local prompt=''
+    local reboot='systemctl --check-inhibitors=no reboot'
+    local text=''
+
     text=$(gettext "Apps install completed.")
     if $OPTION_REMOVE; then
         text=$(gettext "Apps remove completed.")
@@ -988,6 +986,10 @@ changing system settings.")"
 # This function controls the termination of the script when it ends with
 # errors.
 term_error() {
+    local prompt=''
+    local text=''
+    local title=''
+
     title="$PROGRAM_DESC $(gettext 'error messages')"
     text="$(gettext "The installation of the following apps contains errors:")
 ${FAILED_APPS[*]}

@@ -766,12 +766,8 @@ create_backup_cli() {
 
 # This function controls the termination of the script.
 term() {
-    local program_name=${PROGRAM_NAME/kz-/kz }
-    local prompt=''
     local text=''
-    local title=''
     local usb_mount_point=/media/$USER
-    local volume_name=''
 
     # Correct mouint point for Red Hat and Fedora systems.
     if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
@@ -794,6 +790,8 @@ term() {
 # This function controls the termination of the script when it ends with
 # success.
 term_success() {
+    local volume_name=''
+
     text="
 $(gettext 'The backup has been made.')"
 
@@ -829,6 +827,9 @@ $(gettext 'Remember to safely(!) remove the USB medium.')"
 # This function controls the termination of the script when it ends with
 # errors.
 term_error() {
+    local prompt=''
+    local title=''
+
     title="$PROGRAM_DESC $(gettext 'error messages')"
     text="$(gettext 'Backup ended with errors.')
 
