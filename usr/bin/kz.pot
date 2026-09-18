@@ -381,79 +381,79 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:832 kz-install:991 kz-restore:610 kz-setup:883
+#: kz-backup:833 kz-install:993 kz-restore:611 kz-setup:887
 msgid "error messages"
 msgstr ""
 
-#: kz-backup:833
+#: kz-backup:834
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:812 kz-backup:835 kz-restore:590 kz-restore:613
+#: kz-backup:810 kz-backup:836 kz-restore:588 kz-restore:614
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:836
+#: kz-backup:837
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:837 kz-restore:615
+#: kz-backup:838 kz-restore:616
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:838
+#: kz-backup:839
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:817 kz-backup:840 kz-install:995 kz-restore:595 kz-restore:618
-#: kz-setup:887
+#: kz-backup:815 kz-backup:841 kz-install:997 kz-restore:593 kz-restore:619
+#: kz-setup:891
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:841 kz-install:996 kz-restore:619 kz-setup:888
+#: kz-backup:842 kz-install:998 kz-restore:620 kz-setup:892
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:842
+#: kz-backup:843
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:798
+#: kz-backup:796
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:806 kz-restore:584
+#: kz-backup:804 kz-restore:582
 #, sh-format
 msgid "The USB medium $volume_name can be removed."
 msgstr ""
 
-#: kz-backup:810 kz-restore:588
+#: kz-backup:808 kz-restore:586
 #, sh-format
 msgid "The USB medium $volume_name could not be detached."
 msgstr ""
 
-#: kz-backup:813 kz-restore:591
+#: kz-backup:811 kz-restore:589
 msgid "A USB medium cannot be detached when it is 'busy' - for example,"
 msgstr ""
 
-#: kz-backup:814 kz-restore:592
+#: kz-backup:812 kz-restore:590
 msgid ""
 "when there are open files on it, or when some process has its working "
 "directory there."
 msgstr ""
 
-#: kz-backup:818 kz-restore:596
+#: kz-backup:816 kz-restore:594
 #, sh-format
 msgid "Leave the $MEDIUM folder."
 msgstr ""
 
-#: kz-backup:819 kz-restore:597
+#: kz-backup:817 kz-restore:595
 #, sh-format
 msgid "Close apps and windows related to the $volume_name medium."
 msgstr ""
 
-#: kz-backup:821 kz-restore:599
+#: kz-backup:819 kz-restore:597
 msgid "Remember to safely(!) remove the USB medium."
 msgstr ""
 
@@ -628,9 +628,9 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:219 kz-backup:860 kz-desktop:275 kz-install:971 kz-install:1020
-#: kz-menu:353 kz-menu:551 kz-restore:314 kz-restore:638 kz-setup:850
-#: kz-setup:912
+#: kz-backup:219 kz-backup:861 kz-desktop:275 kz-install:969 kz-install:1022
+#: kz-menu:353 kz-menu:551 kz-restore:314 kz-restore:639 kz-setup:850
+#: kz-setup:916
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -1047,27 +1047,27 @@ msgstr ""
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:992
+#: kz-install:994
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:999
+#: kz-install:1001
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:1001
+#: kz-install:1003
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:957
+#: kz-install:955
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:959
+#: kz-install:957
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:965
+#: kz-install:963
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1304,24 +1304,24 @@ msgstr ""
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:611
+#: kz-restore:612
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:614
+#: kz-restore:615
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:616
+#: kz-restore:617
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:620
+#: kz-restore:621
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:576
+#: kz-restore:574
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""
@@ -1431,15 +1431,15 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:884
+#: kz-setup:888
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:891
+#: kz-setup:895
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:893
+#: kz-setup:897
 msgid "Try to reset the apps again."
 msgstr ""
 
