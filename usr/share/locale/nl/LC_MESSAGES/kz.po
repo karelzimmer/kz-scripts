@@ -1688,7 +1688,7 @@ msgstr "Videogesprek met anderen vanuit een webbrowser"
 
 #: nl.karelzimmer.kz_common.policy:21
 msgid "Polkit wrapper script for kz_common"
-msgstr "Wrapper-script voor kz_common"
+msgstr "Polkit wrapper-script voor kz_common"
 
 #: nl.karelzimmer.kz_common.policy:22
 msgid "Execute the fuser command requiring root privileges"
@@ -1696,7 +1696,7 @@ msgstr "Voer de opdracht fuser uit waarvoor root-rechten nodig zijn"
 
 #: nl.karelzimmer.kz-wifi.policy:21
 msgid "Polkit wrapper script for kz-wifi"
-msgstr "Wrapper-script voor kz-wifi"
+msgstr "Polkit wrapper-script voor kz-wifi"
 
 #: nl.karelzimmer.kz-wifi.policy:22
 msgid "Execute the nmcli command requiring root privileges"
