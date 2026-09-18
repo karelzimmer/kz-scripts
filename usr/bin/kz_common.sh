@@ -314,7 +314,8 @@ $(gettext "Use \"journalctl -xe\" to check what went wrong.")"
             else
                 text+="
 $(gettext "Use \"journalctl -xe\" to check what went wrong.")
-$(gettext "The last few lines of the log are displayed here.")                $(
+$(gettext "The last few lines of the log are displayed here.")
+                $(
                     journalctl  --all                           \
                                 --catalog                       \
                                 --lines                         \

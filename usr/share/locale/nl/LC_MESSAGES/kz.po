@@ -710,7 +710,7 @@ msgstr "De laatste paar regels van de log worden hier weergegeven."
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:354
+#: kz_common.sh:355
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
