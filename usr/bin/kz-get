@@ -65,17 +65,9 @@ init() {
 # This function reports errors.
 # shellcheck disable=SC2317,SC2329
 err_report() {
-            text+="
-$(gettext "Use \"journalctl -xe\" to check what went wrong.")
-$(gettext "The last few lines of the log are displayed here.")"
-    printf "${RED}%s${NORMAL}\n" "$text" >&2
-    journalctl  --all       \
-                --catalog   \
-                --lines     \
-                --no-pager  \
-                --pager-end \
-                --identifier="$PROGRAM_NAME"
-    text="$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
+    text="$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
+
+$(gettext "Use \"journalctl -xe\" to check what went wrong.")"
     printf "${RED}%b${NORMAL}\n" "$text" >&2
 }
 

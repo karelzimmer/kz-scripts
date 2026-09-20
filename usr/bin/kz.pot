@@ -501,7 +501,7 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:613 kz-get:206
+#: kz-build:613 kz-get:198
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
@@ -596,7 +596,7 @@ msgstr ""
 msgid "End spaces found."
 msgstr ""
 
-#: kz-get:108 kz-install:701
+#: kz-get:100 kz-install:701
 msgid "Already performed by the administrator."
 msgstr ""
 
@@ -667,31 +667,20 @@ msgstr ""
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:306 kz-get:78
+#: kz_common.sh:254 kz-get:68
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz_common.sh:309
-#, sh-format
-msgid ""
-"Error $rc on line $lineno in function $function while executing command: "
-"$command"
-msgstr ""
-
-#: kz_common.sh:313 kz_common.sh:316 kz-get:69
+#: kz_common.sh:257 kz-get:70
 msgid "Use \"journalctl -xe\" to check what went wrong."
 msgstr ""
 
-#: kz_common.sh:317 kz-get:70
-msgid "The last few lines of the log are displayed here."
-msgstr ""
-
-#: kz-get:217
+#: kz-get:209
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:355
+#: kz_common.sh:296
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -853,15 +842,15 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:210
+#: kz-get:202
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:212
+#: kz-get:204
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:214 kz-menu:342
+#: kz-get:206 kz-menu:342
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
