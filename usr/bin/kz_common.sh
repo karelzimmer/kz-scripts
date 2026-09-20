@@ -252,10 +252,6 @@ kz.term_err() {
     local text=''
 
     text=$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
-    if [[ ${UI_MODE-} != 'gui' ]]; then
-        text+="\n"
-        text+=$(gettext "Use \"journalctl -xe\" to check what went wrong.")
-    fi
     kz.errmsg "$text"
 
     exit "$rc"
@@ -271,6 +267,7 @@ kz.term_exit() {
         reset
         clear -x
     fi
+
     if [[ $rc -eq 0 ]]; then
         text='Cleaning up temporary files...'
         kz.logmsg "$text"
@@ -278,9 +275,12 @@ kz.term_exit() {
             --verbose               \
             /tmp/"$PROGRAM_NAME"-*  |& $PROGRAM_LOGS || true
     fi
+
     text="${bold}END logging for script $PROGRAM_NAME${NORMAL}"
     kz.logmsg "$text"
+
     trap - ERR EXIT SIGHUP SIGINT SIGTERM
+
     exit "$rc"
 }
 
@@ -293,7 +293,9 @@ kz.term_int() {
         reset
         clear -x
     fi
+
     text="$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
     kz.errmsg "$text"
+
     exit "$rc"
 }

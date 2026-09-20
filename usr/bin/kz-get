@@ -57,18 +57,8 @@ init() {
     set -o pipefail
 
     # Trap signals.
-    trap 'err_report' ERR SIGHUP SIGINT SIGTERM
+    trap 'term_err' ERR SIGHUP SIGINT SIGTERM
     trap 'rm --force getkz getkz.[0-9]* /tmp/kz-*.deb' EXIT
-}
-
-
-# This function reports errors.
-# shellcheck disable=SC2317,SC2329
-err_report() {
-    text="$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
-
-$(gettext "Use \"journalctl -xe\" to check what went wrong.")"
-    printf "${RED}%b${NORMAL}\n" "$text" >&2
 }
 
 
@@ -213,6 +203,14 @@ ${NORMAL}\n"
     printf '%b\n' "$text"
 
     exit 0
+}
+
+
+# This function processes script errors.
+# shellcheck disable=SC2317,SC2329
+term_err() {
+    text=$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
+    printf "${RED}%b${NORMAL}\n" "$text" >&2
 }
 
 
