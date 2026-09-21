@@ -201,7 +201,7 @@ def perform_install_kz(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    command = 'cd ~/; wget karelzimmer.nl/getkz; bash getkz'
+    command = 'cd ~ && wget karelzimmer.nl/getkz && bash getkz'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -326,7 +326,7 @@ def perform_command(PROGRAM_NAME: str, PROGRAM_DESC: str,
     exc: BaseException
     text: str
 
-    text = f'{kz.BLUE}{command}{kz.NORMAL}...'
+    text = f'{kz.BLUE}{command}...{kz.NORMAL}'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
     check_debian_package_manager(PROGRAM_NAME)
