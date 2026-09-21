@@ -88,13 +88,13 @@ msgstr ""
 
 #: kz:113 kz_common.py:70 kz_common.py:98 kz_common.py:147 kz_common.py:174
 #: kz-dev:149 kz-dev:223 kz-dev:238 kz-dev:255 kz-dev:287 kz-dev:319 kz-dev:363
-#: kz-update:83 kz-update:339
+#: kz-update:83 kz-update:336
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz_common.py:76 kz_common.py:104 kz_common.py:153 kz_common.py:180
 #: kz_common.py:301 kz-dev:155 kz-dev:229 kz-dev:244 kz-dev:261 kz-dev:293
-#: kz-dev:325 kz-update:89 kz-update:345
+#: kz-dev:325 kz-update:89 kz-update:342
 msgid "Program {} encountered an error."
 msgstr ""
 
@@ -1464,7 +1464,7 @@ msgstr ""
 msgid "Usage: kz update [OPTIONS]"
 msgstr ""
 
-#: kz-update:161 kz-update:178 kz-update:204
+#: kz-update:161 kz-update:178
 msgid "UPDATE"
 msgstr ""
 
@@ -1476,15 +1476,15 @@ msgstr ""
 msgid "CLEANUP"
 msgstr ""
 
-#: kz-update:384
+#: kz-update:381
 msgid "Please note: system needs to restart!"
 msgstr ""
 
-#: kz-update:389
+#: kz-update:386
 msgid "Packages that cause the restart:"
 msgstr ""
 
-#: kz-update:393
+#: kz-update:390
 msgid "No restart needed."
 msgstr ""
 
@@ -1621,6 +1621,6 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
 #: kz-build:623 kz-check:577 kz-deploy:316 kz-dev:384 kz-post-migrate:71
-#: kz-update:403
+#: kz-update:400
 msgid "Complete!"
 msgstr ""

@@ -201,9 +201,6 @@ def perform_install_kz(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    text = f'{kz.BLUE}{_('UPDATE')}{kz.NORMAL}'
-    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-
     command = 'cd ~/; wget karelzimmer.nl/getkz; bash getkz'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
