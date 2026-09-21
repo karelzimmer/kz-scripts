@@ -160,6 +160,8 @@ def perform_update(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
                       shell=True).returncode == 0:
         text = f'{kz.BLUE}{_('UPDATE')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+        perform_install_kz(PROGRAM_NAME, PROGRAM_DESC)
+        perform_gitpull(PROGRAM_NAME, PROGRAM_DESC)
         perform_update_debs(PROGRAM_NAME, PROGRAM_DESC)
         text = f'{kz.BLUE}{_('UPGRADE')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -173,6 +175,10 @@ def perform_update(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     elif subprocess.run(check_rhel, executable='bash',
                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                         shell=True).returncode == 0:
+        text = f'{kz.BLUE}{_('UPDATE')}{kz.NORMAL}'
+        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+        perform_install_kz(PROGRAM_NAME, PROGRAM_DESC)
+        perform_gitpull(PROGRAM_NAME, PROGRAM_DESC)
         text = f'{kz.BLUE}{_('UPGRADE')}{kz.NORMAL}'
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_upgrade_rpms(PROGRAM_NAME, PROGRAM_DESC)
@@ -186,6 +192,35 @@ def perform_update(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         text = _('fatal: unknown os release')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
+
+
+def perform_install_kz(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
+    """
+    This function installs the latest version of the KZ package.
+    """
+    command: str
+    text: str
+
+    text = f'{kz.BLUE}{_('UPDATE')}{kz.NORMAL}'
+    kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
+
+    command = 'cd ~/; wget karelzimmer.nl/getkz; bash getkz'
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
+
+
+def perform_gitpull(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
+    """
+    This function performs a git pull of all local branches in the home
+    directory.
+    """
+    command: str
+
+    if subprocess.run('type gitpull', executable='bash',
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL,
+                      shell=True,).returncode == 0:
+        command = 'gitpull'
+        perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
 def perform_update_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
