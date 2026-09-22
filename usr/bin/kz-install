@@ -121,11 +121,13 @@ sudo apt-get update
     if $OPTION_SELECT; then
         process_option_select
     fi
+
     if $argument_app; then
         process_argument_app
     else
         process_installation_files_by_hostname
     fi
+
     if $option_cat; then
         process_option_cat
     fi
@@ -324,12 +326,14 @@ process_option_list() {
         )
 
     readarray -t app_list <<< "$app_records"
+
     if [[ -z ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
         kz.infomsg "$text"
         exit 0
     fi
+
     for app_list_row in "${app_list[@]}"; do
         read -r app_name app_desc <<< "$app_list_row"
         choices+=("$app_name" "$app_desc")
@@ -497,6 +501,7 @@ process_option_select_gui() {
         read -r app_name app_desc <<< "$app_list_row"
         choices+=('false' "$app_name" "$app_desc")
     done
+
     # The variable selected_apps does not need to be an array, because the app
     # name is a word, does not contain spaces.
     if ! selected_apps=$(
@@ -525,6 +530,7 @@ process_option_select_tui() {
         read -r app_name app_desc <<< "$app_list_row"
         choices+=("$app_name" "$app_desc" 'off')
     done
+
     # The variable selected_apps does not need to be an array, because the app
     # name is a word, does not contain spaces.
     if ! selected_apps=$(
@@ -549,6 +555,7 @@ process_option_select_cli() {
         read -r app_name app_desc <<< "$app_list_row"
         choices+=("$app_name" "$app_desc")
     done
+
     text+='\n'
     text+=$(
         printf '|%s|%s\n'                   \
@@ -559,6 +566,7 @@ process_option_select_cli() {
                 --table-columns             \
                 " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
+
     if [[ $INSTALL = 'install' ]]; then
         text+="
 
@@ -573,6 +581,7 @@ $(gettext "Use \"kz install --remove APP...\" or \"kz install --remove \
 $(gettext "Use \"kz install\" to remove the automatically selected apps.")"
     fi
     kz.infomsg "$text"
+
     exit 0
 }
 
@@ -684,6 +693,7 @@ process_option_cat() {
     else
         less --no-init --quit-if-one-screen "$command_file"
     fi
+
     exit 0
 }
 
@@ -795,7 +805,8 @@ $(gettext '         COMMAND...')"
                 if [[ $UI_MODE = 'cli' ]]; then
                     printf '%s\n' "$app_line"
                 fi
-                # To corrolate possible error messages with app name and
+
+                # To correlate possible error messages with app name and
                 # description.
                 printf 'APP %s\n' "$app_name" >> "$ERROR_LOG"
                 ;;
@@ -893,6 +904,7 @@ execute_command_tui() {
             fi
         fi
     done
+
     # This tput locks the cursor position top-left to prevent flickering.
     tput cup 0 0
     dialog  --mouse                                     \
@@ -921,9 +933,13 @@ execute_command_cli() {
     else
         cmd_dis=$cmd
     fi
+
     sudo --validate
+
     printf '%s\n' "         $cmd_dis"
+
     check_debian_package_manager
+
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
             2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
@@ -979,6 +995,7 @@ changing system settings.")"
             eval "$reboot"
         fi
     fi
+
     exit 0
 }
 
@@ -1024,6 +1041,7 @@ $(gettext 'Check the error messages after this.')
         kz.infomsg "$title:"
         less --no-init --quit-if-one-screen "$ERROR_LOG"
     fi
+
     exit 1
 }
 

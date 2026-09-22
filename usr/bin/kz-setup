@@ -111,11 +111,13 @@ process() {
     if $OPTION_SELECT; then
         process_option_select
     fi
+
     if $argument_app; then
         process_argument_app
     else
         process_settings_files_by_hostname
     fi
+
     if $option_cat; then
         process_option_cat
     fi
@@ -308,12 +310,14 @@ process_option_list() {
         )
 
     readarray -t app_list <<< "$app_records"
+
     if [[ -z ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
         kz.infomsg "$text"
         exit 0
     fi
+
     for app_list_row in "${app_list[@]}"; do
         read -r app_name app_desc <<< "$app_list_row"
         choices+=("$app_name" "$app_desc")
@@ -339,8 +343,10 @@ process_option_list_gui() {
                 --table-columns     \
                 "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
+
     printf  '%s\n'                  \
             "$text"                 |
+
     zenity  --text-info             \
             --width     900         \
             --height    500         \
@@ -361,16 +367,20 @@ process_option_list_tui() {
                 --table-columns         \
                 "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
+
     text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
+
     printf  '%s\n'                      \
             "$text"                     \
             > "$text_file"
+
     dialog  --mouse                     \
             --scrollbar                 \
             --backtitle "$PROGRAM_NAME" \
             --title     "$title"        \
             --textbox   "$text_file"    \
             0 0                         || true
+
     exit 0
 }
 
@@ -478,6 +488,7 @@ process_option_select_gui() {
         read -r app_name app_desc <<< "$app_list_row"
         choices+=('false' "$app_name" "$app_desc")
     done
+
     # The variable selected_apps does not need to be an array, because the app
     # name is a word, does not contain spaces.
     if ! selected_apps=$(
@@ -506,6 +517,7 @@ process_option_select_tui() {
         read -r app_name app_desc <<< "$app_list_row"
         choices+=("$app_name" "$app_desc" 'off')
     done
+
     # The variable selected_apps does not need to be an array, because the app
     # name is a word, does not contain spaces.
     if ! selected_apps=$(
@@ -530,6 +542,7 @@ process_option_select_cli() {
         read -r app_name app_desc <<< "$app_list_row"
         choices+=("$app_name" "$app_desc")
     done
+
     text+='\n'
     text+=$(
         printf '|%s|%s\n'                   \
@@ -540,6 +553,7 @@ process_option_select_cli() {
                 --table-columns             \
                 " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
+
     if [[ $SETUP = 'setup' ]]; then
         text+="
 
@@ -555,6 +569,7 @@ $(gettext "Use \"kz setup --reset\" to reset the automatically selected \
 apps.")"
     fi
     kz.infomsg "$text"
+
     exit 0
 }
 
@@ -666,6 +681,7 @@ process_option_cat() {
     else
         less --no-init --quit-if-one-screen "$command_file"
     fi
+
     exit 0
 }
 
@@ -748,7 +764,8 @@ $(gettext '         COMMAND...')"
                 if [[ $UI_MODE = 'cli' ]]; then
                     printf '%s\n' "$app_line"
                 fi
-                # To corrolate possible error messages with app name and
+
+                # To correlate possible error messages with app name and
                 # description.
                 printf 'APP %s\n' "$app_name" >> "$ERROR_LOG"
                 ;;
@@ -846,6 +863,7 @@ $(gettext "Type 'logout' to log out of the computer to finish setting up the \
 apps and changing user settings.")"
         fi
         kz.infomsg "$text"
+
         if $LOGOUT && [[ $UI_MODE = 'cli' ]]; then
             prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
             read -rp "$prompt" < /dev/tty
@@ -854,6 +872,7 @@ apps and changing user settings.")"
     else
         kz.infomsg "$text"
     fi
+
     exit 0
 }
 
@@ -918,6 +937,7 @@ $(gettext 'Check the error messages after this.')
         kz.infomsg "$title:"
         less --no-init --quit-if-one-screen "$ERROR_LOG"
     fi
+
     exit 1
 }
 

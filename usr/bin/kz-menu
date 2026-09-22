@@ -336,6 +336,7 @@ process_menu1_choice2() {
         text="$LINE $title $LINE
 "
     fi
+
     text+="
 $(gettext "Follow the steps as described in Checklist installation, Chapter \
 2.")
@@ -349,6 +350,7 @@ $(gettext '3. Boot the computer from this USB stick.')
 $(gettext '4. Install Linux.')
 "
     kz.infomsg "$text"
+
     if [[ $UI_MODE = 'cli' ]]; then
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
         read -rp "$prompt" < /dev/tty
@@ -546,7 +548,9 @@ process_menu2_choice2() {
     if [[ $UI_MODE = 'cli' ]]; then
         clear -x
     fi
+
     process_commands
+
     if [[ $UI_MODE = 'cli' ]]; then
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
         read -rp "$prompt" < /dev/tty
@@ -620,6 +624,7 @@ show_commands_before_execution() {
 
 "
     fi
+
     text+="$(gettext 'The following will be executed:')
 "
     for row in "${rows[@]}"; do

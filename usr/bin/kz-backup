@@ -209,16 +209,19 @@ check_target_for_user_action() {
                 -printf '%P\n'      \
                 2> /dev/null        || true
         )
+
     if [[ ${#media[@]} -eq 0 ]]; then
         text="$(eval_gettext "No usb medium found on \$usb_mount_point.")
 
 $(gettext 'Connect a usb medium.')"
         kz.infomsg "$text"
+
         # A second chance for the user to connect media.
         if [[ $UI_MODE = 'cli' ]]; then
             prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
             read -rp "$prompt" < /dev/tty
         fi
+
         readarray -t media < <(
             find    "$usb_mount_point/" \
                     -mindepth 1         \
@@ -226,6 +229,7 @@ $(gettext 'Connect a usb medium.')"
                     -printf '%P\n'      \
                     2> /dev/null        || true
             )
+
         if [[ ${#media[@]} -eq 0 ]]; then
             kz.errmsg "$text"
             if [[ $UI_MODE = 'cli' ]]; then

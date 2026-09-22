@@ -66,11 +66,13 @@ process() {
     local text=''
 
     check_input "$@"
+
     if ! grep --quiet --regexp='debian' /etc/os-release; then
         text=$(gettext 'Must run on a Debian or Debian-based system.')
         kz.infomsg "$text"
         exit 1
     fi
+
     check_website
     check_gettext
     check_scripts
@@ -190,12 +192,14 @@ check_website_files() {
                     :
                     ;;
             esac
+
             check=$((check + 1))
             if [[ check -eq 1 ]]; then
                 text=$(gettext \
 "Files not used in html that can probably be removed:")
                 kz.errmsg "$text"
             fi
+
             text="rm $file"
             kz.infomsg "$text"
         fi

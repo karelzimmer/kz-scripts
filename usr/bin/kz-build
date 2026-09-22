@@ -473,6 +473,7 @@ build_deb_package_create_deb() {
     if $OPTION_DEV; then
         build_id+=' *** DEV ***'
     fi
+
     mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
     chmod   --verbose                               \
@@ -483,11 +484,13 @@ build_deb_package_create_deb() {
     # build_deb_package_create_deb
     # Create Debian package in kz-uploads.
     mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/packages" |& $PROGRAM_LOGS
+
     if $OPTION_DEV; then
         to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_DEV_NAME"
     else
         to_build="$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"
     fi
+
     fakeroot    dpkg-deb            \
                 --build             \
                 "$DEB_REPO_DISTDIR" \

@@ -68,11 +68,13 @@ process() {
     local text=''
 
     check_input "$@"
+
     if ! grep --quiet --regexp='debian' /etc/os-release; then
         text=$(gettext 'Must run on a Debian or Debian-based system.')
         kz.infomsg "$text"
         exit 1
     fi
+
     sudo --validate
     check
     deploy
@@ -139,10 +141,12 @@ check() {
 
     text=${BLUE}$(gettext 'Check...')${NORMAL}
     kz.infomsg "$text"
+
     if ! check_repos; then
         ERR_FLAG=true
         OPTION_DEV=true
     fi
+
     check_scripts_and_website
 }
 
