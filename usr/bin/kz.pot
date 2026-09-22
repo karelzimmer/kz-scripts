@@ -497,15 +497,15 @@ msgstr ""
 msgid "Build RPM package..."
 msgstr ""
 
-#: kz-build:595
+#: kz-build:599
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:617 kz-get:188
+#: kz-build:621 kz-get:188
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:623 kz-check:573 kz-deploy:312
+#: kz-build:627 kz-check:573 kz-deploy:312
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -1620,7 +1620,7 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:627 kz-check:577 kz-deploy:316 kz-dev:384 kz-post-migrate:71
+#: kz-build:631 kz-check:577 kz-deploy:316 kz-dev:384 kz-post-migrate:71
 #: kz-update:400
 msgid "Complete!"
 msgstr ""
