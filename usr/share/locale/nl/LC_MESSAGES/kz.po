@@ -503,19 +503,19 @@ msgstr "Genereer gettext-bestanden.."
 msgid "Build Debian package..."
 msgstr "Bouw Debian-pakket..."
 
-#: kz-build:498
+#: kz-build:502
 msgid "Build RPM package..."
 msgstr "Bouw RPM-pakket..."
 
-#: kz-build:591
+#: kz-build:595
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:613 kz-get:188
+#: kz-build:617 kz-get:188
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:619 kz-check:573 kz-deploy:312
+#: kz-build:623 kz-check:573 kz-deploy:312
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -1685,7 +1685,7 @@ msgstr "Polkit wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:623 kz-check:577 kz-deploy:316 kz-dev:384 kz-post-migrate:71
+#: kz-build:627 kz-check:577 kz-deploy:316 kz-dev:384 kz-post-migrate:71
 #: kz-update:400
 msgid "Complete!"
 msgstr "Klaar!"

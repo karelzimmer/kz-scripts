@@ -475,6 +475,10 @@ build_deb_package_create_deb() {
     fi
     mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
+    chmod   --verbose       \
+            'u=rw,g=r,o=r'  \
+            --              \
+            "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id" |& $PROGRAM_LOGS
 
     # build_deb_package_create_deb
     # Create Debian package in kz-uploads.
