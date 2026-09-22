@@ -247,7 +247,7 @@ if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org
 #
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx; then gnome-extensions enable no-overview@fthx; fi
 #
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
 #
 LOGOUT=true
 
