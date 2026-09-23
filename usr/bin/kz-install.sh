@@ -52,7 +52,7 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes org.a
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes org.angryip.ipscan; fi
 
 #|install|ansible|pc06 pc07|Configuration management, deployment, and task execution system
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ansibl; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ansible-core; fi
 
 #|remove|ansible|pc06 pc07|Configuration management, deployment, and task execution system
