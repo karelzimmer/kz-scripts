@@ -43,10 +43,10 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release     ; then sudo grub2-mk
 REBOOT=true
 
 #|install|angryipscan|pc06 pc07|Fast and friendly network scanner
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes org.angryip.ipscan; fi
+if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes org.angryip.ipscan; fi
 
 #|remove|angryipscan|pc06 pc07|Fast and friendly network scanner
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes org.angryip.ipscan; fi
@@ -86,10 +86,10 @@ if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remov
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes bash-completion; fi
 
 #|install|bitwarden|*|A secure and free password manager for all of your devices
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com.bitwarden.desktop; fi
+if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com.bitwarden.desktop; fi
 REBOOT=true
 
 #|remove|bitwarden|*|A secure and free password manager for all of your devices
@@ -97,10 +97,10 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes com
 REBOOT=true
 
 #|install|bottles|pc06 pc07|Run Windows software
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com.usebottles.bottles; fi
+if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com.usebottles.bottles; fi
 REBOOT=true
 
 #|remove|bottles|pc06 pc07|Run Windows software

@@ -36,7 +36,7 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy; then gsettings set org.nemo.preferences click-policy 'single'; fi
+if gsettings get org.nemo.preferences click-policy                                  ; then gsettings set org.nemo.preferences click-policy 'single'; fi
 # -----------------------------------------------------------------------------
 #  GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -67,18 +67,18 @@ if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first       
 # -----------------------------------------------------------------------------
 #  LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
-if type lxqt-session; then sed --in-place --expression='s/Alt%2BF1\./Super_L./g'                                   ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session; then sed --in-place --expression='/single_click_activate=/d'                                 ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session; then sed --in-place --expression='/\[General\]/a single_click_activate=true'                 ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session; then sed --in-place --expression='/categoriesAtRight=/d'                                     ~/.config/lxqt/panel.conf; fi
-if type lxqt-session; then sed --in-place --expression='/\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=false'    ~/.config/lxqt/panel.conf; fi
+if type lxqt-session; then sed --in-place --expression='s/Alt%2BF1\./Super_L./g'                                ~/.config/lxqt/globalkeyshortcuts.conf; fi
+if type lxqt-session; then sed --in-place --expression='/single_click_activate=/d'                              ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session; then sed --in-place --expression='/\[General\]/a single_click_activate=true'              ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session; then sed --in-place --expression='/categoriesAtRight=/d'                                  ~/.config/lxqt/panel.conf; fi
+if type lxqt-session; then sed --in-place --expression='/\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=false' ~/.config/lxqt/panel.conf; fi
 LOGOUT=true
 
 #|reset|desktop-settings|*|Various desktop environments settings
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy; then gsettings reset org.nemo.preferences click-policy; fi
+if gsettings get org.nemo.preferences click-policy                                  ; then gsettings reset org.nemo.preferences click-policy; fi
 # -----------------------------------------------------------------------------
 #  GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -108,11 +108,11 @@ if gsettings get org.gnome.desktop.input-sources sources                        
 # -----------------------------------------------------------------------------
 #  LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
-if type lxqt-session; then sed --in-place --expression='s/Super_L./Alt%2BF1\./g'                               ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session; then sed --in-place --expression='/single_click_activate=/d'                             ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session; then sed --in-place --expression='/\[General\]/a single_click_activate=false'            ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session; then sed --in-place --expression='/categoriesAtRight=/d'                                 ~/.config/lxqt/panel.conf; fi
-if type lxqt-session; then sed --in-place --expression='/\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=true' ~/.config/lxqt/panel.conf; fi
+if type lxqt-session; then sed --in-place --expression='s/Super_L./Alt%2BF1\./g'                                ~/.config/lxqt/globalkeyshortcuts.conf; fi
+if type lxqt-session; then sed --in-place --expression='/single_click_activate=/d'                              ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session; then sed --in-place --expression='/\[General\]/a single_click_activate=false'             ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session; then sed --in-place --expression='/categoriesAtRight=/d'                                  ~/.config/lxqt/panel.conf; fi
+if type lxqt-session; then sed --in-place --expression='/\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=true'  ~/.config/lxqt/panel.conf; fi
 LOGOUT=true
 
 #|setup|evolution|*|Groupware suite with mail client and organizer
@@ -137,9 +137,9 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 git config --global --unset alias.logg
 
 #|setup|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
-if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions enable caffeine@patapon.info; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions enable caffeine@patapon.info; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                ; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info caffeine@patapon.info  ; then gnome-extensions enable caffeine@patapon.info; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info  ; then gnome-extensions enable caffeine@patapon.info; fi
 LOGOUT=true
 
 #|reset|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
@@ -148,42 +148,42 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 LOGOUT=true
 
 #|setup|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                                                ; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme         ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action               ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink        ; then gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size         ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                 ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position              ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height              ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed            ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network        ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted   ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                 ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                                             ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                                                   ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                                            ; then gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                                             ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                                                    ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                                                     ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                                                  ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                                                  ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                                                ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                                                                    ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network                                                            ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted                                                       ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                                                                     ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
 LOGOUT=true
 
 #|reset|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme         ; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action               ; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink        ; then gsettings reset org.gnome.shell.extensions.dash-to-dock custom-theme-shrink; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size         ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                 ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position              ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height              ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed            ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                ; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network        ; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted   ; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                 ; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
-if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                                             ; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                                                   ; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                                            ; then gsettings reset org.gnome.shell.extensions.dash-to-dock custom-theme-shrink; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                                             ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                                                    ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                                                     ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                                                  ; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                                                  ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                                                ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                                                                    ; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network                                                            ; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted                                                       ; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                                                                     ; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
+if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 LOGOUT=true
 
 #|setup|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
