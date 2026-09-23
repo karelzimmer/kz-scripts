@@ -276,7 +276,7 @@ process_option_browse() {
 $(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
     cat "${installation_files[@]}" > "$installation_file_combined"
 
-    title="$installation_file_combined"
+    title="Browse $installation_file_combined"
 
     if [[ $UI_MODE = 'gui' ]]; then
         zenity  --text-info                                 \
@@ -293,7 +293,10 @@ $(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
                 --textbox   "$installation_file_combined"   \
                 0 0                                         || true
     else
-        less --no-init --quit-if-one-screen "$installation_file_combined"
+        less    --no-init                                   \
+                --quit-if-one-screen                        \
+                --prompt="$title"                           \
+                "$installation_file_combined"
     fi
     exit 0
 }
@@ -674,7 +677,7 @@ process_installation_files_by_hostname() {
 process_option_cat() {
     local title=''
 
-    title="$command_file"
+    title="Cat $command_file"
 
     if [[ $UI_MODE = 'gui' ]]; then
         zenity  --text-info                 \
@@ -691,7 +694,10 @@ process_option_cat() {
                 --textbox   "$command_file" \
                 0 0                         || true
     else
-        less --no-init --quit-if-one-screen "$command_file"
+        less    --no-init                   \
+                --quit-if-one-screen        \
+                --prompt="$title"           \
+                "$command_file"
     fi
 
     exit 0
@@ -1039,7 +1045,10 @@ $(gettext 'Check the error messages after this.')
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
         read -rp "$prompt" < /dev/tty
         kz.infomsg "$title:"
-        less --no-init --quit-if-one-screen "$ERROR_LOG"
+        less    --no-init                   \
+                --quit-if-one-screen        \
+                --prompt="$title"           \
+                "$ERROR_LOG"
     fi
 
     exit 1

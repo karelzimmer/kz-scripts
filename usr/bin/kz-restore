@@ -674,7 +674,10 @@ $(gettext 'Try restoring the back up again.')"
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
         read -rp "$prompt" < /dev/tty
         kz.infomsg "$title $ERROR_LOG:"
-        less --no-init --quit-if-one-screen "$ERROR_LOG"
+        less    --no-init                   \
+                --quit-if-one-screen        \
+                --prompt="$title"           \
+                "$ERROR_LOG"
     fi
 
     exit 1

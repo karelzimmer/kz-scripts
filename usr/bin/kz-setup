@@ -277,7 +277,10 @@ process_option_browse() {
                 --textbox   "$settings_file_combined"   \
                 0 0                                     || true
     else
-        less --no-init --quit-if-one-screen "$settings_file_combined"
+        less    --no-init                               \
+                --quit-if-one-screen                    \
+                --prompt="$title"                       \
+                "$settings_file_combined"
     fi
     exit 0
 }
@@ -679,7 +682,10 @@ process_option_cat() {
                 --textbox   "$command_file" \
                 0 0                         || true
     else
-        less --no-init --quit-if-one-screen "$command_file"
+        less    --no-init                   \
+                --quit-if-one-screen        \
+                --prompt="$title"           \
+                "$command_file"
     fi
 
     exit 0
@@ -935,7 +941,10 @@ $(gettext 'Check the error messages after this.')
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
         read -rp "$prompt" < /dev/tty
         kz.infomsg "$title:"
-        less --no-init --quit-if-one-screen "$ERROR_LOG"
+        less    --no-init                   \
+                --quit-if-one-screen        \
+                --prompt="$title"           \
+                "$ERROR_LOG"
     fi
 
     exit 1
