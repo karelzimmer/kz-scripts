@@ -489,6 +489,20 @@ restore_backup_gui() {
             --title     "$title"            \
             --text      "$text"             \
             2> /dev/null                    || RESTORE_RC=$?
+
+    text=$(gettext "Writing data from memory (this may take a while)")
+    kz.logmsg "$text"...
+    sync                                    |
+    zenity  --progress                      \
+            --pulsate                       \
+            --auto-close                    \
+            --no-cancel                     \
+            --width     600                 \
+            --height    50                  \
+            --title     "$title"            \
+            --text      "$text"             \
+            1> >($PROGRAM_LOGS)             \
+            2>> "$ERROR_LOG"
 }
 
 
@@ -506,6 +520,16 @@ restore_backup_tui() {
             --title "$title"                \
             --progressbox                   \
             20 70                           || RESTORE_RC=$?
+
+    text=$(gettext "Writing data from memory (this may take a while)")
+    kz.logmsg "$text"...
+    text+='...'
+    dialog  --mouse                     \
+            --backtitle "$PROGRAM_NAME" \
+            --title     "$title"        \
+            --infobox   "$text"         \
+            0 0                         || true
+    sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
 }
 
 
@@ -530,6 +554,12 @@ restore_settings() {
         kz.logmsg 'Restore settings...'
         restore_setting_desktop
     fi
+
+    text=$(gettext "Writing data from memory (this may take a while)")
+    kz.logmsg "$text"...
+    text+='...'
+    kz.infomsg "$text"
+    sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
 }
 
 
