@@ -180,8 +180,8 @@ term() {
     local line=''
     local text=''
 
-    filler=$(printf ' %.0s' {1..7})
-    line=$(printf '=%.0s' {1..79})
+    filler=$(   printf -- ' %.0s' {1..7})
+    line=$(     printf -- '*%.0s' {1..79})
 
     text="\n$line\n"
 
