@@ -378,7 +378,7 @@ msgid "Preparing backup (this may take a while)"
 msgstr ""
 
 #: kz-backup:703 kz-backup:737 kz-backup:763 kz-restore:493 kz-restore:524
-#: kz-restore:534
+#: kz-restore:558
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
