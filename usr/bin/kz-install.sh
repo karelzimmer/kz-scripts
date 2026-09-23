@@ -43,53 +43,53 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release     ; then sudo grub2-mk
 REBOOT=true
 
 #|install|angryipscan|pc06 pc07|Fast and friendly network scanner
-if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
-if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes org.angryip.ipscan; fi
+if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install     --assume-yes    flatpak; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf     install     --assumeyes     flatpak; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add  --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install     --assumeyes     org.angryip.ipscan; fi
 
 #|remove|angryipscan|pc06 pc07|Fast and friendly network scanner
 if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes org.angryip.ipscan; fi
 
 #|install|ansible|pc06 pc07|Configuration management, deployment, and task execution system
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes ansible; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ansible-core; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    ansible; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     ansible-core; fi
 
 #|remove|ansible|pc06 pc07|Configuration management, deployment, and task execution system
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes ansible; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ansible-core; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes ansible; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  ansible-core; fi
 
 #|install|apport-settings|#none|Disable Ubuntu's official crash reporting system
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl stop apport.service; fi
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl disable apport.service; fi
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=.*$/enabled=0/' /etc/default/apport; fi
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed    --in-place  --expression='s/enabled=.*$/enabled=0/' /etc/default/apport; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo rm     --force     --verbose                               /var/crash/*; fi
 
 #|remove|apport-settings|#none|Enable Ubuntu's official crash reporting system
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=.*$/enabled=1/' /etc/default/apport; fi
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl enable --now apport.service; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed                --in-place --expression='s/enabled=.*$/enabled=1/'  /etc/default/apport; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl enable   --now                                               apport.service; fi
 
 #|install|backintime|#none|Simple backup/snapshot system (graphical interface)
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes backintime-qt; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes backintime-qt; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    backintime-qt; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     backintime-qt; fi
 
 #|remove|backintime|#none|Simple backup/snapshot system (graphical interface)
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes backintime-qt; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes backintime-qt; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes backintime-qt; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  backintime-qt; fi
 
 #|install|bash-completion|pc01 pc06 pc07|Programmable completion for the bash shell
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes bash-completion; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes bash-completion; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    bash-completion; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     bash-completion; fi
 
 #|remove|bash-completion|pc01 pc06 pc07|Programmable completion for the bash shell
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes bash-completion; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes bash-completion; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes bash-completion; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  bash-completion; fi
 
 #|install|bitwarden|*|A secure and free password manager for all of your devices
-if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
-if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com.bitwarden.desktop; fi
+if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install     --assume-yes    flatpak; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf     install     --assumeyes     flatpak; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add  --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install     --assumeyes     com.bitwarden.desktop; fi
 REBOOT=true
 
 #|remove|bitwarden|*|A secure and free password manager for all of your devices
@@ -97,10 +97,10 @@ if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes com
 REBOOT=true
 
 #|install|bottles|pc06 pc07|Run Windows software
-if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes flatpak; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
-if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes com.usebottles.bottles; fi
+if grep --quiet --regexp='debian'       /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get     install     --assume-yes    flatpak; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release &&  [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf         install     --assumeyes     flatpak; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak     remote-add  --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
+if                                                          [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak     install     --assumeyes     com.usebottles.bottles; fi
 REBOOT=true
 
 #|remove|bottles|pc06 pc07|Run Windows software
@@ -111,25 +111,25 @@ REBOOT=true
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:9090
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes cockpit cockpit-pcp; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes cockpit cockpit-pcp; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    cockpit cockpit-pcp; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     cockpit cockpit-pcp; fi
 
 #|remove|cockpit|pc06|Web Console for Linux servers
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes cockpit; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes cockpit; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes cockpit; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  cockpit; fi
 
 #|install|cups|*|Common UNIX Printing System(tm) - PPD/driver support, web interface
 # -----------------------------------------------------------------------------
 # Web app: http://localhost:631
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes cups; fi
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes libcupsimage2; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes cups; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    cups; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    libcupsimage2; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     cups; fi
 
 #|remove|cups|*|Common UNIX Printing System(tm) - PPD/driver support, web interface
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes libcupsimage2; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes cups; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes cups; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes libcupsimage2; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  cups; fi
 
 #|install|desktop-settings|*|Various desktop environments settings
 # -----------------------------------------------------------------------------
@@ -146,48 +146,48 @@ if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/
 REBOOT=true
 
 #|install|dos2unix|pc06 pc07|Convert text file line endings between CRLF and LF
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes dos2unix; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes dos2unix; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    dos2unix; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     dos2unix; fi
 
 #|remove|dos2unix|pc06 pc07|Convert text file line endings between CRLF and LF
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes dos2unix; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes dos2unix; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes dos2unix; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  dos2unix; fi
 
 #|install|evolution|pc06 pc07|Groupware suite with mail client and organizer
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes evolution; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes evolution; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    evolution; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     evolution; fi
 
 #|remove|evolution|pc06 pc07|Groupware suite with mail client and organizer
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes evolution; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes evolution; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes evolution; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  evolution; fi
 
 #|install|exiftool|pc06 pc07|Library and program to read and write meta information in multimedia files
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes perl-Image-ExifTool; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    libimage-exiftool-perl; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     perl-Image-ExifTool; fi
 
 #|remove|exiftool|pc06 pc07|Library and program to read and write meta information in multimedia files
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes perl-Image-ExifTool; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes libimage-exiftool-perl; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  perl-Image-ExifTool; fi
 
 #|install|fakeroot|pc06 pc07|Tool for simulating superuser privileges
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes fakeroot; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes fakeroot; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    fakeroot; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     fakeroot; fi
 
 #|remove|fakeroot|pc06 pc07|Tool for simulating superuser privileges
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes fakeroot; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes fakeroot; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes fakeroot; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  fakeroot; fi
 
 #|install|fastfetch|pc06 pc07|Neofetch-like tool for fetching system information
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes fastfetch; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes fastfetch; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    fastfetch; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     fastfetch; fi
 
 #|remove|fastfetch|pc06 pc07|Neofetch-like tool for fetching system information
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes fastfetch; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes fastfetch; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes fastfetch; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  fastfetch; fi
 
 #|install|fdupes|#none|Identifies duplicate files within given directories
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes fdupes; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes fdupes; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    fdupes; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     fdupes; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ fdupes -r   /path/to/folder # Report recursively from /path/to/folder
@@ -196,28 +196,28 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 # -----------------------------------------------------------------------------
 
 #|remove|fdupes|#none|Identifies duplicate files within given directories
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes fdupes; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  fdupes; fi
 
 #|install|firefox|#none|Mozilla Firefox web browser - Extended Support Release (ESR)
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || sudo apt-get install --assume-yes firefox firefox-locale-"${LANG:0:2}"; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes firefox; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    firefox-esr firefox-esr-l10n-"${LANG:0:2}" || sudo apt-get  install --assume-yes    firefox firefox-locale-"${LANG:0:2}"; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     firefox; fi
 
 #|remove|firefox|#none|Mozilla Firefox web browser - Extended Support Release (ESR)
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || sudo apt-get remove --assume-yes firefox firefox-locale-"${LANG:0:2}"; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes firefox; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || sudo apt-get  remove --assume-yes firefox firefox-locale-"${LANG:0:2}"; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  firefox; fi
 
 #|install|firewall|*|Program for managing a Netfilter firewall
 # -----------------------------------------------------------------------------
 #  Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'   /etc/os-release                                         ; then sudo apt-get install --assume-yes ufw; fi
-if grep --quiet --regexp='debian'   /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]     ; then sudo apt-get install --assume-yes gufw; fi
+if grep --quiet --regexp='debian'   /etc/os-release                                         ; then sudo apt-get  install --assume-yes    ufw; fi
+if grep --quiet --regexp='debian'   /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]     ; then sudo apt-get  install --assume-yes    gufw; fi
 if grep --quiet --regexp='debian'   /etc/os-release                                         ; then sudo ufw enable; fi
 # -----------------------------------------------------------------------------
 # Firewall configuration application.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel'     /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]     ; then sudo dnf install --assumeyes firewall-config; fi
+if grep --quiet --regexp='rhel'     /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]     ; then sudo dnf      install --assumeyes     firewall-config; fi
 # -----------------------------------------------------------------------------
 # Add firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
@@ -252,11 +252,11 @@ if (type ssh && systemctl status firewalld)                                     
 # Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian'       /etc/os-release                                     ; then sudo ufw disable; fi
-if grep --quiet --regexp='debian'       /etc/os-release                                     ; then sudo apt-get remove --assume-yes ufw; fi
+if grep --quiet --regexp='debian'       /etc/os-release                                     ; then sudo apt-get  remove --assume-yes ufw; fi
 # -----------------------------------------------------------------------------
 # Firewall configuration application.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release                                     ; then sudo dnf remove --assumeyes firewall-config; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release                                     ; then sudo dnf      remove --assumeyes  firewall-config; fi
 
 #|install|fwupd-settings|#none|Disable Firmware update daemon
 sudo systemctl stop fwupd.service
@@ -269,36 +269,36 @@ sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
 #|install|gdebi|#none|Simple tool to view and install deb files - GNOME GUI
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gdebi; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session; then sudo apt-get  install --assume-yes    gdebi; fi
 # This app is not available on Red Hat and Red Hat-based systems.
 
 #|remove|gdebi|#none|Simple tool to view and install deb files - GNOME GUI
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes gdebi; fi
+if grep --quiet --regexp='debian' /etc/os-release && type gnome-session; then sudo apt-get  remove --assume-yes gdebi; fi
 # This app is not available on Red Hat and Red Hat-based systems.
 
 #|install|gettext|pc06 pc07|GNU Internationalization utilities
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes gettext; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes gettext; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    gettext; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     gettext; fi
 
 #|remove|gettext|pc06 pc07|GNU Internationalization utilities
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes gettext; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes gettext; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes gettext; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  gettext; fi
 
 #|install|git|pc06 pc07|Fast, scalable, distributed revision control system
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes git; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes git; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    git; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     git; fi
 
 #|remove|git|pc06 pc07|Fast, scalable, distributed revision control system
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes git; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes git; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes git; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  git; fi
 
 #|install|gnome-extensions-cli|pc06 pc07|Execute binaries from Python packages in isolated environments
-if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes pipx; fi
+if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get  install --assume-yes    pipx; fi
 if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo pipx install gnome-extensions-cli; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf install --assumeyes pipx; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf      install --assumeyes     pipx; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo pipx install gnome-extensions-cli; fi
 
 #|remove|gnome-extensions-cli|pc06 pc07|Execute binaries from Python packages in isolated environments
@@ -306,30 +306,30 @@ if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; t
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo pipx uninstall gnome-extensions-cli; fi
 
 #|install|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
-if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get install --assume-yes gnome-shell-extension-caffeine; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine)      ; then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
+if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get  install --assume-yes    gnome-shell-extension-caffeine; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine)      ; then sudo dnf      install --assumeyes     gnome-shell-extension-caffeine; fi
 REBOOT=true
 
 #|remove|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
-if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get remove --assume-yes gnome-shell-extension-caffeine; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine)      ; then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
+if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get  remove --assume-yes gnome-shell-extension-caffeine; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine)      ; then sudo dnf      remove --assumeyes  gnome-shell-extension-caffeine; fi
 REBOOT=true
 
 #|install|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock)   ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock)          ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock)   ; then sudo apt-get  install --assume-yes    gnome-shell-extension-dashtodock; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock)          ; then sudo dnf      install --assumeyes     gnome-shell-extension-dash-to-dock; fi
 REBOOT=true
 
 #|remove|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock)   ; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock)          ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet --regexp='debian'       /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock)   ; then sudo apt-get  remove --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock)          ; then sudo dnf      remove --assumeyes  gnome-shell-extension-dash-to-dock; fi
 REBOOT=true
 
 #|install|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
 # -----------------------------------------------------------------------------
 #  Securely connect to mobile devices and other desktops.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect); then sudo apt-get install --assume-yes gnome-shell-extension-gsconnect; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect); then sudo apt-get  install --assume-yes    gnome-shell-extension-gsconnect; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 # -----------------------------------------------------------------------------
 # Add firewall rules for GSConnect.
@@ -342,7 +342,7 @@ if systemctl status firewalld   ; then sudo firewall-cmd --permanent --add-port=
 if systemctl status firewalld   ; then sudo firewall-cmd --reload; fi
 
 #|remove|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect); then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect); then sudo apt-get  remove --assume-yes gnome-shell-extension-gsconnect; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 # -----------------------------------------------------------------------------
 # Remove firewall rules for GSConnect.
@@ -355,59 +355,59 @@ if systemctl status firewalld   ; then sudo firewall-cmd --permanent --remove-po
 if systemctl status firewalld   ; then sudo firewall-cmd --reload; fi
 
 #|install|gnome-shell-extension-manager|pc06 pc07|Utility for managing GNOME Shell Extensions
-if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gnome-shell-extension-manager; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf install --assumeyes gnome-extensions-app; fi
+if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get  install --assume-yes    gnome-shell-extension-manager; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf      install --assumeyes     gnome-extensions-app; fi
 
 #|remove|gnome-shell-extension-manager|pc06 pc07|Utility for managing GNOME Shell Extensions
-if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes gnome-shell-extension-manager; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf remove --assumeyes gnome-extensions-app; fi
+if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get  remove --assume-yes gnome-shell-extension-manager; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf      remove --assumeyes  gnome-extensions-app; fi
 
 #|install|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance)  ; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance)  ; then sudo apt-get  install --assume-yes    gnome-shell-extension-no-annoyance; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 REBOOT=true
 
 #|remove|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance)  ; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance)  ; then sudo apt-get  remove --assume-yes gnome-shell-extension-no-annoyance; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 REBOOT=true
 
 #|install|gnome-shell-extension-no-overview|*|No overview at start-up
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview)   ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview)   ; then sudo apt-get  install --assume-yes    gnome-shell-extension-no-overview; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
 REBOOT=true
 
 #|remove|gnome-shell-extension-no-overview|*|No overview at start-up
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview)   ; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview)   ; then sudo apt-get  remove --assume-yes gnome-shell-extension-no-overview; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
 REBOOT=true
 
 #|install|gnome-tweaks|pc06 pc07|Tool to adjust advanced configuration settings for GNOME
-if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gnome-tweaks; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf install --assumeyes gnome-tweaks; fi
+if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get  install --assume-yes    gnome-tweaks; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf      install --assumeyes     gnome-tweaks; fi
 
 #|remove|gnome-tweaks|pc06 pc07|Tool to adjust advanced configuration settings for GNOME
-if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes gnome-tweaks; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf remove --assumeyes gnome-tweaks; fi
+if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get  remove --assume-yes gnome-tweaks; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf      remove --assumeyes  gnome-tweaks; fi
 
 #|install|google-chrome|pc01 pc06 pc07|The web browser from Google
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    /tmp/google-chrome.deb; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /tmp/google-chrome.deb; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 #|remove|google-chrome|pc01 pc06 pc07|The web browser from Google
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes google-chrome-stable; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes google-chrome-stable; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes google-chrome-stable; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  google-chrome-stable; fi
 
 #|install|groff|pc06 pc07|GNU troff text-formatting system
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes groff; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes groff; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    groff; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     groff; fi
 
 #|remove|groff|pc06 pc07|GNU troff text-formatting system
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes groff; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes groff; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes groff; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  groff; fi
 
 #|install|grub-settings|*|Reduce GRUB menu display time
 # -----------------------------------------------------------------------------
@@ -436,43 +436,43 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfi
 REBOOT=true
 
 #|install|htop|pc01 pc06 pc07|Interactive processes viewer
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes htop; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes htop; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    htop; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     htop; fi
 
 #|remove|htop|pc01 pc06 pc07|Interactive processes viewer
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes htop; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes htop; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes htop; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  htop; fi
 
 #|install|imagination|pc06 pc07|DVD slide show maker
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes imagination; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    imagination; fi
 # This app is not available on Red Hat and Red Hat-based systems.
 
 #|remove|imagination|pc06 pc07|DVD slide show maker
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes imagination; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes imagination; fi
 # This app is not available on Red Hat and Red Hat-based systems.
 
 #|install|jq|pc06 pc07|Lightweight and flexible command-line JSON processor
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes jq; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes jq; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    jq; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     jq; fi
 
 #|remove|jq|pc06 pc07|Lightweight and flexible command-line JSON processor
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes jq; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes jq; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes jq; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  jq; fi
 
 #|install|krita|pc06|Pixel-based image manipulation program
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes krita; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    krita; fi
 # This app is not available on Red Hat and Red Hat-based systems.
 
 #|remove|krita|pc06|Pixel-based image manipulation program
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes krita; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes krita; fi
 # This app is not available on Red Hat and Red Hat-based systems.
 
 #|install|kvm|pc06 pc07|KVM (for Kernel-based Virtual Machine) is a full virtualization solution
 # -----------------------------------------------------------------------------
 # Images are in: /var/lib/libvirt/images/
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes virt-manager; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    virt-manager; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf groupinstall "Virtualization Host"; fi
 sudo systemctl enable --now libvirtd
 # -----------------------------------------------------------------------------
@@ -489,129 +489,129 @@ REBOOT=true
 
 #|remove|kvm|pc06 pc07|KVM (for Kernel-based Virtual Machine) is a full virtualization solution
 if grep --quiet --regexp='debian'       /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes virt-manager; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes virt-manager; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo systemctl disable --now libvirtd; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf groupremove "Virtualization Host"; fi
 REBOOT=true
 
 #|install|lftp|pc06 pc07|Sophisticated command-line FTP/HTTP/BitTorrent client programs
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes lftp; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    lftp; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     lftp; fi
 
 #|remove|lftp|pc06 pc07|Sophisticated command-line FTP/HTTP/BitTorrent client programs
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes lftp; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes lftp; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes lftp; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  lftp; fi
 
 #|install|libreoffice|*|Office productivity suite
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes libreoffice; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    libreoffice; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     flatpak; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes flathub app/org.libreoffice.LibreOffice; fi
 
 #|remove|libreoffice|*|Office productivity suite
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes libreoffice; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes libreoffice; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes app/org.libreoffice.LibreOffice; fi
 
 #|install|linters|pc06 pc07|Analyse scripts for errors and style
 # -----------------------------------------------------------------------------
 # MyPy - Optional static typing for Python
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes mypy; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-mypy; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    mypy; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     python3-mypy; fi
 # -----------------------------------------------------------------------------
 # pycodestyle - Python style guide checker (formerly called pep8)
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes pycodestyle; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes pycodestyle; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    pycodestyle; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     pycodestyle; fi
 # -----------------------------------------------------------------------------
 # python3-autopep8 - Tool that automatically formats Python code to conform to PEP 8
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes python3-autopep8; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-autopep8; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    python3-autopep8; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     python3-autopep8; fi
 # -----------------------------------------------------------------------------
 # Bashate - Bash script style checker
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes python3-bashate; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-bashate; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    python3-bashate; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     python3-bashate; fi
 # -----------------------------------------------------------------------------
 # Shellcheck - Lint tool for shell scripts
 # -----------------------------------------------------------------------------
 # Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    shellcheck; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     shellcheck; fi
 
 #|remove|linters|pc06 pc07|Analyse scripts for errors and style
 # -----------------------------------------------------------------------------
 # MyPy - Optional static typing for Python
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes mypy; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-mypy; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes mypy; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  python3-mypy; fi
 # -----------------------------------------------------------------------------
 # pycodestyle - Python style guide checker (formerly called pep8)
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes pycodestyle; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes pycodestyle; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes pycodestyle; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  pycodestyle; fi
 # -----------------------------------------------------------------------------
 # python3-autopep8 - Tool that automatically formats Python code to conform to PEP 8
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes python3-autopep8; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-autopep8; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes python3-autopep8; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  python3-autopep8; fi
 # -----------------------------------------------------------------------------
 # Bashate - Bash script style checker
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes python3-bashate; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-bashate; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes python3-bashate; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  python3-bashate; fi
 # -----------------------------------------------------------------------------
 # Shellcheck - Lint tool for shell scripts
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes shellcheck; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  shellcheck; fi
 
 #|install|locate|pc06 pc07|List files in databases that match a pattern
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes locate; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes mlocate; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    locate; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     mlocate; fi
 sudo updatedb
 
 #|remove|locate|pc06 pc07|List files in databases that match a pattern
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes locate; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes mlocate; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes locate; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  mlocate; fi
 
 #|install|lshw|pc01 pc06 pc07|Information about hardware configuration
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes lshw; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes lshw; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    lshw; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     lshw; fi
 
 #|remove|lshw|pc01 pc06 pc07|Information about hardware configuration
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes lshw; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes lshw; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes lshw; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  lshw; fi
 
 #|install|microsoft-edge|pc06 pc07|The web browser from Microsoft
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc|sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main"|sudo tee /etc/apt/sources.list.d/microsoft-edge.list; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes microsoft-edge-stable; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    microsoft-edge-stable; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     flatpak; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes flathub com.microsoft.Edge; fi
 
 #|remove|microsoft-edge|pc06 pc07|The web browser from Microsoft
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes microsoft-edge-stable; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes microsoft-edge-stable; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/microsoft-edge.list; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes flathub com.microsoft.Edge; fi
 
 #|install|nmap|pc06 pc07|The network mapper
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes nmap; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes nmap; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    nmap; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     nmap; fi
 
 #|remove|nmap|pc06 pc07|The network mapper
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes nmap; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  nmap; fi
 
 #|install|ntfs|#none|Read/write NTFS driver for FUSE
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfs-3g ntfsprogs; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    ntfs-3g; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     ntfs-3g ntfsprogs; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ findmnt # or lsblk
@@ -627,35 +627,35 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 # -----------------------------------------------------------------------------
 
 #|remove|ntfs|#none|Read/write NTFS driver for FUSE
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes ntfs-3g; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  ntfs-3g ntfsprogs; fi
 
 #|install|ntfsprogs-plus|#none|NTFS filesystem driver and utilities
 # -----------------------------------------------------------------------------
 # The ntfsprogs-plus app is available with Linux Kernel version 7.1 or higher.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes ntfsprogs-plus; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfsprogs-plus; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    ntfsprogs-plus; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     ntfsprogs-plus; fi
 
 #|remove|ntfsprogs-plus|#none|NTFS filesystem driver and utilities
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes ntfsprogs-plus; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ntfsprogs-plus; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes ntfsprogs-plus; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  ntfsprogs-plus; fi
 
 #|install|ntp|*|Minimalistic service to synchronize local time with NTP servers
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes systemd-timesyncd; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    systemd-timesyncd; fi
 # This app is not available on Red Hat and Red Hat-based system.
 
 #|remove|ntp|*|Minimalistic service to synchronize local time with NTP servers
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes systemd-timesyncd; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes systemd-timesyncd; fi
 # This app is not available on Red Hat and Red Hat-based system.
 
 #|install|poedit|pc06 pc07|Gettext catalogs editor
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes poedit; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes poedit; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    poedit; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     poedit; fi
 
 #|remove|poedit|pc06 pc07|Gettext catalogs editor
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes poedit; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes poedit; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes poedit; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  poedit; fi
 
 #|install|pst-utils|pc06 pc07|Tools for reading Microsoft Outlook PST files
 # -----------------------------------------------------------------------------
@@ -667,45 +667,45 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_D
 #   LDAP
 # - pst2dii - export data from PST files to Summation dii load file format
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes pst-utils; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    pst-utils; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'Download pst-utils.rpm from https://www.rpmfind.net/ and install with "sudo dnf install ./pst-utils-*.x86_64.rpm".'; fi
 
 #|remove|pst-utils|pc06 pc07|Tools for reading Microsoft Outlook PST files
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes pst-utils; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes pst-utils; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes pst-utils; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  pst-utils; fi
 
 #|install|python|pc06 pc07|Interactive high-level object-oriented language
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes python3  python3-pip python-is-python3; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    python3  python3-pip python-is-python3; fi
 if grep --quiet --regexp='debian'       /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if grep --quiet --regexp='debian'       /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3 python3-pip; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     python3 python3-pip; fi
 
 #|remove|python|pc06 pc07|Interactive high-level object-oriented language
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes python python3-pip python-is-python3; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes python python3-pip python-is-python3; fi
 if grep --quiet --regexp='debian'       /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8; fi
 if grep --quiet --regexp='debian'       /etc/os-release; then sudo rm --force --verbose /usr/bin/pip; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pip; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  python3 python3-pip; fi
 
 #|install|rpm|pc06 pc07|Package manager for RPM
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes rpm; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    rpm; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     rpm; fi
 
 #|remove|rpm|pc06 pc07|Package manager for RPM
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes rpm; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes rpm; fi
 # App rpm cannot be removed from Red Hat and Red Hat-based system.
 
 #|install|simplescreenrecorder|#none|Feature-rich screen recorder for X11 and OpenGL
 # -----------------------------------------------------------------------------
 # Requires the use of Xorg/X11.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes simplescreenrecorder; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    simplescreenrecorder; fi
 # This app is not available on Red Hat and Red Hat-based system.
 
 #|remove|simplescreenrecorder|#none|Feature-rich screen recorder for X11 and OpenGL
 # -----------------------------------------------------------------------------
 # Required the use of Xorg/X11. Enable Wayland again?
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes simplescreenrecorder; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes simplescreenrecorder; fi
 # This app is not available on Red Hat and Red Hat-based system.
 
 #|install|spice-vdagent|pc06 pc07|Spice agent for Linux
@@ -713,12 +713,12 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP
 # Enhancing virtualized guest systems by the use of SPICE (Simple Protocol for
 # Independent Computing Environments) system.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes spice-vdagent; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes spice-vdagent; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    spice-vdagent; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     spice-vdagent; fi
 
 #|remove|spice-vdagent|pc06 pc07|Spice agent for Linux
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes spice-vdagent; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes spice-vdagent; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes spice-vdagent; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  spice-vdagent; fi
 
 #|install|spotify|pc01 pc06 pc07|Spotify streaming music client
 # -----------------------------------------------------------------------------
@@ -727,11 +727,11 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg|sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free'|sudo tee /etc/apt/sources.list.d/spotify.list; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes spotify-client; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    spotify-client; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'The spotify app is available as a web app.'; fi
 
 #|remove|spotify|pc01 pc06 pc07|Spotify streaming music client
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes spotify-client; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes spotify-client; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
 # App spotify cannot be removed from Red Hat and Red Hat-based system.
@@ -740,8 +740,8 @@ if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_D
 # -----------------------------------------------------------------------------
 # Secure shell client and server.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get install --assume-yes openssh-client openssh-server; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes openssh-clients openssh-server; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  install --assume-yes    openssh-client openssh-server; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      install --assumeyes     openssh-clients openssh-server; fi
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 # -----------------------------------------------------------------------------
 # Add firewall rules for SSH.
@@ -768,8 +768,8 @@ if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='4
 # Secure shell client and server.
 # -----------------------------------------------------------------------------
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
-if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get remove --assume-yes openssh-client openssh-server; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes openssh-clients openssh-server; fi
+if grep --quiet --regexp='debian'       /etc/os-release; then sudo apt-get  remove --assume-yes openssh-client openssh-server; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf      remove --assumeyes  openssh-clients openssh-server; fi
 # -----------------------------------------------------------------------------
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
@@ -783,64 +783,64 @@ if systemctl status firewalld   && type ssh; then sudo firewall-cmd --permanent 
 if systemctl status firewalld   && type ssh; then sudo firewall-cmd --reload; fi
 
 #|install|sushi|#none|Sushi is a quick previewer for nautilus
-if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gnome-sushi; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf install --assumeyes sushi; fi
+if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get  install --assume-yes    gnome-sushi; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf      install --assumeyes     sushi; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
 # -----------------------------------------------------------------------------
 
 #|remove|sushi|#none|Sushi is a quick previewer for nautilus
-if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get remove --assume-yes gnome-sushi; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf remove --assumeyes sushi; fi
+if grep --quiet --regexp='debian'       /etc/os-release && type gnome-session; then sudo apt-get  remove --assume-yes gnome-sushi; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf      remove --assumeyes  sushi; fi
 
 #|install|teamviewer|*|Remote control and meeting solution
 # -----------------------------------------------------------------------------
 # Web app: https://start.teamviewer.com
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    /tmp/teamviewer.deb; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /tmp/teamviewer.deb; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 #|remove|teamviewer|*|Remote control and meeting solution
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes teamviewer; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes teamviewer; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes teamviewer; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  teamviewer; fi
 
 #|install|thunderbird|#none|Mail/news client with RSS, chat and integrated spam filter support
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}" || sudo apt-get install --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}"; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes thunderbird; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    thunderbird thunderbird-l10n-"${LANG:0:2}" || sudo apt-get  install --assume-yes    thunderbird thunderbird-locale-"${LANG:0:2}"; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     thunderbird; fi
 
 #|remove|thunderbird|#none|Mail/news client with RSS, chat and integrated spam filter support
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}" || sudo apt-get remove --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}"; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes thunderbird; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}" || sudo apt-get  remove --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}"; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  thunderbird; fi
 
 #|install|transmission|pc01 pc06 pc07|Lightweight BitTorrent client
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes transmission; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes transmission; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    transmission; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     transmission; fi
 
 #|remove|transmission|pc01 pc06 pc07|Lightweight BitTorrent client
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes transmission; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes transmission; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes transmission; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  transmission; fi
 
 #|install|tree|pc01 pc06 pc07|Displays an indented directory tree, in color
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes tree; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes tree; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    tree; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     tree; fi
 
 #|remove|tree|pc01 pc06 pc07|Displays an indented directory tree, in color
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes tree; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes tree; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes tree; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  tree; fi
 
 #|install|usbutils|pc06 pc07|Linux USB utilities
 # -----------------------------------------------------------------------------
 # This package contains the lsusb utility.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes usbutils; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes usbutils; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    usbutils; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     usbutils; fi
 
 #|remove|usbutils|pc06 pc07|Linux USB utilities
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes usbutils; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes usbutils; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes usbutils; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  usbutils; fi
 
 #|install|user-guest|pc01 pc06 pc07|Add guest user
 if  !   id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(TEXTDOMAIN=kz gettext 'Guest_user')" "$(TEXTDOMAIN=kz gettext 'guest')"; fi
@@ -853,25 +853,25 @@ if id "$(TEXTDOMAIN=kz gettext 'guest')"   ; then sudo userdel --remove "$(TEXTD
 # -----------------------------------------------------------------------------
 # Multimedia player and streamer.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes vlc; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes vlc; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    vlc; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     vlc; fi
 # -----------------------------------------------------------------------------
 # Tools for transcoding, streaming and playing of multimedia files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes ffmpeg*; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes ffmpeg*; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    ffmpeg*; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     ffmpeg*; fi
 
 #|remove|vlc|*|Multimedia player and streamer
 # -----------------------------------------------------------------------------
 # Multimedia player and streamer.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes vlc; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes vlc; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes vlc; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  vlc; fi
 # -----------------------------------------------------------------------------
 # Tools for transcoding, streaming and playing of multimedia files.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes ffmpeg*; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes ffmpeg*; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes ffmpeg*; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  ffmpeg*; fi
 
 #|install|vscode|pc06 pc07|Code editing. Redefined
 # -----------------------------------------------------------------------------
@@ -880,18 +880,18 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_D
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "code code/add-microsoft-repo boolean true"|sudo debconf-set-selections; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc|sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes apt-transport-https; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    apt-transport-https; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes code; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    code; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo update-alternatives --set editor /usr/bin/code; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc'|sudo tee /etc/yum.repos.d/vscode.repo; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes code; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     code; fi
 
 #|remove|vscode|pc06 pc07|Code editing. Redefined
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo update-alternatives --remove editor /usr/bin/code; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes code; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes code; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes code; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  code; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
 #|install|webmin|pc07|Web Console for Linux servers
@@ -901,16 +901,16 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_D
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo sh /tmp/setup-repos.sh --force; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes webmin; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  install --assume-yes    webmin; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo sh /tmp/setup-repos.sh --force; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /tmp/setup-repos.sh; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes webmin; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      install --assumeyes     webmin; fi
 
 #|remove|webmin|pc07|Web Console for Linux servers
-if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes webmin; fi
+if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get  remove --assume-yes webmin; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
 if grep --quiet --regexp='debian'       /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes webmin; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf      remove --assumeyes  webmin; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf update; fi

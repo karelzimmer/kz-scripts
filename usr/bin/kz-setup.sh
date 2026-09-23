@@ -36,34 +36,34 @@ kz-desktop --delete=kz-cockpit
 # -----------------------------------------------------------------------------
 #  Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
-if gsettings get org.nemo.preferences click-policy                                  ; then gsettings set org.nemo.preferences click-policy 'single'; fi
+if gsettings get org.nemo.preferences click-policy                                  ; then gsettings set org.nemo.preferences click-policy                                      'single'; fi
 # -----------------------------------------------------------------------------
 #  GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
-if gsettings get org.gnome.desktop.calendar show-weekdate                           ; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if gsettings get org.gnome.desktop.input-sources sources                            ; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources|sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
-if gsettings get org.gnome.desktop.input-sources sources                            ; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources|sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
-if gsettings get org.gnome.desktop.interface clock-show-date                        ; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
-if gsettings get org.gnome.desktop.interface clock-show-weekday                     ; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if gsettings get org.gnome.desktop.interface font-antialiasing                      ; then gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'; fi
-if gsettings get org.gnome.desktop.interface show-battery-percentage                ; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
-if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                ; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
-if gsettings get org.gnome.desktop.screensaver lock-enabled                         ; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
-if gsettings get org.gnome.desktop.session idle-delay                               ; then gsettings set org.gnome.desktop.session idle-delay 900; fi
-if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent             ; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if gsettings get org.gnome.desktop.wm.preferences button-layout                     ; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
-if gsettings get org.gnome.mutter center-new-windows                                ; then gsettings set org.gnome.mutter center-new-windows true; fi
-if gsettings get org.gnome.nautilus.icon-view default-zoom-level                    ; then gsettings set org.gnome.nautilus.icon-view default-zoom-level large; fi
-if gsettings get org.gnome.nautilus.list-view use-tree-view                         ; then gsettings set org.gnome.nautilus.list-view use-tree-view true; fi
-if gsettings get org.gnome.nautilus.preferences click-policy                        ; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
-if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover            ; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if gsettings get org.gnome.nautilus.preferences show-create-link                    ; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if gsettings get org.gnome.nautilus.preferences show-image-thumbnails               ; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if gsettings get org.gnome.settings-daemon.plugins.power power-button-action        ; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action interactive; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type     ; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing; fi
-if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type nothing; fi
-if gsettings get org.gnome.shell.extensions.ding show-home                          ; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first           ; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true; fi
+if gsettings get org.gnome.desktop.calendar show-weekdate                           ; then gsettings set org.gnome.desktop.calendar show-weekdate                               true; fi
+if gsettings get org.gnome.desktop.input-sources sources                            ; then gsettings set org.gnome.desktop.input-sources sources                                "$(gsettings get org.gnome.desktop.input-sources sources|sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
+if gsettings get org.gnome.desktop.input-sources sources                            ; then gsettings set org.gnome.desktop.input-sources sources                                "$(gsettings get org.gnome.desktop.input-sources sources|sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
+if gsettings get org.gnome.desktop.interface clock-show-date                        ; then gsettings set org.gnome.desktop.interface clock-show-date                            true; fi
+if gsettings get org.gnome.desktop.interface clock-show-weekday                     ; then gsettings set org.gnome.desktop.interface clock-show-weekday                         true; fi
+if gsettings get org.gnome.desktop.interface font-antialiasing                      ; then gsettings set org.gnome.desktop.interface font-antialiasing                          'rgba'; fi
+if gsettings get org.gnome.desktop.interface show-battery-percentage                ; then gsettings set org.gnome.desktop.interface show-battery-percentage                    true; fi
+if gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click                ; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click                    true; fi
+if gsettings get org.gnome.desktop.screensaver lock-enabled                         ; then gsettings set org.gnome.desktop.screensaver lock-enabled                             false; fi
+if gsettings get org.gnome.desktop.session idle-delay                               ; then gsettings set org.gnome.desktop.session idle-delay                                   900; fi
+if gsettings get org.gnome.desktop.sound allow-volume-above-100-percent             ; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent                 true; fi
+if gsettings get org.gnome.desktop.wm.preferences button-layout                     ; then gsettings set org.gnome.desktop.wm.preferences button-layout                         ':minimize,maximize,close'; fi
+if gsettings get org.gnome.mutter center-new-windows                                ; then gsettings set org.gnome.mutter center-new-windows                                    true; fi
+if gsettings get org.gnome.nautilus.icon-view default-zoom-level                    ; then gsettings set org.gnome.nautilus.icon-view default-zoom-level                        large; fi
+if gsettings get org.gnome.nautilus.list-view use-tree-view                         ; then gsettings set org.gnome.nautilus.list-view use-tree-view                             true; fi
+if gsettings get org.gnome.nautilus.preferences click-policy                        ; then gsettings set org.gnome.nautilus.preferences click-policy                            'single'; fi
+if gsettings get org.gnome.nautilus.preferences open-folder-on-dnd-hover            ; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover                true; fi
+if gsettings get org.gnome.nautilus.preferences show-create-link                    ; then gsettings set org.gnome.nautilus.preferences show-create-link                        true; fi
+if gsettings get org.gnome.nautilus.preferences show-image-thumbnails               ; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails                   'always'; fi
+if gsettings get org.gnome.settings-daemon.plugins.power power-button-action        ; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action            interactive; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type     ; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type         nothing; fi
+if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type    nothing; fi
+if gsettings get org.gnome.shell.extensions.ding show-home                          ; then gsettings set org.gnome.shell.extensions.ding show-home                              false; fi
+if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first           ; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first               true; fi
 # -----------------------------------------------------------------------------
 #  LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
@@ -137,9 +137,9 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 git config --global --unset alias.logg
 
 #|setup|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
-if gsettings get org.gnome.shell disable-user-extensions                                                ; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info caffeine@patapon.info  ; then gnome-extensions enable caffeine@patapon.info; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info  ; then gnome-extensions enable caffeine@patapon.info; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                ; then gsettings        set     org.gnome.shell disable-user-extensions false; fi
+if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info caffeine@patapon.info  ; then gnome-extensions enable  caffeine@patapon.info; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info  ; then gnome-extensions enable  caffeine@patapon.info; fi
 LOGOUT=true
 
 #|reset|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
@@ -148,23 +148,23 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 LOGOUT=true
 
 #|setup|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if gsettings get org.gnome.shell disable-user-extensions                                                                                ; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                                             ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                                                   ; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                                            ; then gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                                             ; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                                                    ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                                                     ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                                                  ; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                                                  ; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                                                ; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                                                                    ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network                                                            ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted                                                       ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true; fi
-if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                                                                     ; then gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                                                ; then gsettings        set     org.gnome.shell disable-user-extensions                             false; fi
+if grep --quiet --regexp='debian'       /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions enable  dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com ; then gnome-extensions enable  dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com                          ; then gnome-extensions enable  dash-to-dock@micxgx.gmail.com; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme                                                             ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock apply-custom-theme          true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock click-action                                                                   ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock click-action                'minimize-or-previews'; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink                                                            ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock custom-theme-shrink         true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dash-max-icon-size                                                             ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock dash-max-icon-size          32; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup                                                    ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-fixed                                                                     ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock dock-fixed                  true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock dock-position                                                                  ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock dock-position               'BOTTOM'; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock extend-height                                                                  ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock extend-height               true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock icon-size-fixed                                                                ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock icon-size-fixed             true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts                                                                    ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock show-mounts                 true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network                                                            ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock show-mounts-network         false; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted                                                       ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted    true; fi
+if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash                                                                     ; then gsettings        set     org.gnome.shell.extensions.dash-to-dock show-trash                  false; fi
 LOGOUT=true
 
 #|reset|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
@@ -187,8 +187,8 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 LOGOUT=true
 
 #|setup|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
-if gsettings get org.gnome.shell disable-user-extensions                                                    ; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io   ; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                    ; then gsettings        set     org.gnome.shell disable-user-extensions false; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io   ; then gnome-extensions enable  gsconnect@andyholmes.github.io; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 LOGOUT=true
 
@@ -197,8 +197,8 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gscon
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 
 #|setup|setup|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if gsettings get org.gnome.shell disable-user-extensions                                            ; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
+if gsettings get org.gnome.shell disable-user-extensions                                            ; then gsettings        set     org.gnome.shell disable-user-extensions false; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions enable  noannoyance-fork@vrba.dev; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 LOGOUT=true
 
@@ -208,8 +208,8 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 LOGOUT=true
 
 #|setup|gnome-shell-extension-no-overview|*|No overview at start-up
-if gsettings get org.gnome.shell disable-user-extensions                                    ; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx ; then gnome-extensions enable no-overview@fthx; fi
+if gsettings get org.gnome.shell disable-user-extensions                                    ; then gsettings        set     org.gnome.shell disable-user-extensions false; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx ; then gnome-extensions enable  no-overview@fthx; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
 LOGOUT=true
 
@@ -418,10 +418,10 @@ kz-desktop --delete=kz-webmin
 # -----------------------------------------------------------------------------
 # This app is not required when "apt-cache show xdg-user-dirs" shows version 0.20 or higher.
 # -----------------------------------------------------------------------------
-if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose             ~/Projecten; fi
-if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS   ~/Projecten; fi
-if [[ ${LANG:0:2} = 'en' ]]; then mkdir --parents --verbose             ~/Projects; fi
-if [[ ${LANG:0:2} = 'en' ]]; then xdg-user-dirs-update --set PROJECTS   ~/Projects; fi
+if [[ ${LANG:0:2} = 'nl' ]]; then mkdir                 --parents --verbose             ~/Projecten; fi
+if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update  --set               PROJECTS    ~/Projecten; fi
+if [[ ${LANG:0:2} = 'en' ]]; then mkdir                 --parents --verbose             ~/Projects; fi
+if [[ ${LANG:0:2} = 'en' ]]; then xdg-user-dirs-update  --set               PROJECTS    ~/Projects; fi
 xdg-user-dirs-update
 
 #|reset|xdg-projects-dir|pc06 pc07|Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs
