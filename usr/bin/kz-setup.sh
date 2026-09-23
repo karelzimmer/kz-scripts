@@ -187,8 +187,8 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info
 LOGOUT=true
 
 #|setup|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
-if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
+if gsettings get org.gnome.shell disable-user-extensions                                                    ; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io   ; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 LOGOUT=true
 
@@ -197,7 +197,7 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gscon
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 
 #|setup|setup|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if gsettings get org.gnome.shell disable-user-extensions                                            ; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 LOGOUT=true
@@ -208,8 +208,8 @@ if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noann
 LOGOUT=true
 
 #|setup|gnome-shell-extension-no-overview|*|No overview at start-up
-if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx; then gnome-extensions enable no-overview@fthx; fi
+if gsettings get org.gnome.shell disable-user-extensions                                    ; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx ; then gnome-extensions enable no-overview@fthx; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
 LOGOUT=true
 

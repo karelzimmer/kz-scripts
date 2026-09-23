@@ -230,10 +230,10 @@ if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status 
 # -----------------------------------------------------------------------------
 # Add firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if (type ssh && systemctl status ufw)       ; then sudo ufw allow ssh; fi
-if (type ssh && systemctl status ufw)       ; then sudo ufw reload; fi
-if (type ssh && systemctl status firewalld) ; then sudo firewall-cmd --permanent --add-service=ssh; fi
-if (type ssh && systemctl status firewalld) ; then sudo firewall-cmd --reload; fi
+if (type ssh && systemctl status ufw)                                                       ; then sudo ufw allow ssh; fi
+if (type ssh && systemctl status ufw)                                                       ; then sudo ufw reload; fi
+if (type ssh && systemctl status firewalld)                                                 ; then sudo firewall-cmd --permanent --add-service=ssh; fi
+if (type ssh && systemctl status firewalld)                                                 ; then sudo firewall-cmd --reload; fi
 
 #|remove|firewall|*|Program for managing a Netfilter firewall
 # -----------------------------------------------------------------------------
@@ -246,17 +246,17 @@ if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status 
 # -----------------------------------------------------------------------------
 # Remove firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if (type ssh && systemctl status ufw)       ; then sudo ufw delete allow ssh; fi
-if (type ssh && systemctl status firewalld) ; then sudo firewall-cmd --permanent --remove-service=ssh; fi
+if (type ssh && systemctl status ufw)                                                       ; then sudo ufw delete allow ssh; fi
+if (type ssh && systemctl status firewalld)                                                 ; then sudo firewall-cmd --permanent --remove-service=ssh; fi
 # -----------------------------------------------------------------------------
 # Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian'       /etc/os-release ; then sudo ufw disable; fi
-if grep --quiet --regexp='debian'       /etc/os-release ; then sudo apt-get remove --assume-yes ufw; fi
+if grep --quiet --regexp='debian'       /etc/os-release                                     ; then sudo ufw disable; fi
+if grep --quiet --regexp='debian'       /etc/os-release                                     ; then sudo apt-get remove --assume-yes ufw; fi
 # -----------------------------------------------------------------------------
 # Firewall configuration application.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release ; then sudo dnf remove --assumeyes firewall-config; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release                                     ; then sudo dnf remove --assumeyes firewall-config; fi
 
 #|install|fwupd-settings|#none|Disable Firmware update daemon
 sudo systemctl stop fwupd.service
@@ -417,9 +417,9 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=1/' /etc/defau
 # -----------------------------------------------------------------------------
 # Suppress warnings.
 # -----------------------------------------------------------------------------
-if  !   grep --quiet --regexp='loglevel=3'      /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
-if      grep --quiet --regexp='debian'          /etc/os-release; then sudo update-grub; fi
-if      grep --quiet --regexp='rhel\|fedora'    /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if  !   grep --quiet --regexp='loglevel=3'      /etc/default/grub   ; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
+if      grep --quiet --regexp='debian'          /etc/os-release     ; then sudo update-grub; fi
+if      grep --quiet --regexp='rhel\|fedora'    /etc/os-release     ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 #|remove|grub-settings|*|Restore GRUB menu display time
