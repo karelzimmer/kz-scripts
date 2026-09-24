@@ -662,8 +662,6 @@ $(find "$HOME" -type d -name ".git" -printf "%P\n" | sed 's|/.git||')
 EOF
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
-    text="ERRORLOG (stderr) $ERROR_LOG"
-    printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
@@ -779,8 +777,6 @@ term() {
     fi
 
     # Error log also to the standard log.
-    text="ERRORLOG (stderr) $ERROR_LOG"
-    printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
     if [[ $BACKUP_RC -eq 0 ]]; then
@@ -834,7 +830,7 @@ term_error() {
     local prompt=''
     local title=''
 
-    title="$PROGRAM_DESC $(gettext 'error messages')"
+    title=$(gettext 'Error messages')
     text="$(gettext 'Backup ended with errors.')
 
 $(gettext 'Possible causes:')

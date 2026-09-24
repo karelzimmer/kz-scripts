@@ -260,7 +260,7 @@ process_option_browse() {
     settings_file_combined=$(mktemp -t "$PROGRAM_NAME-settings-XXXXXXXXXX.sh")
     cat "${settings_files[@]}" > "$settings_file_combined"
 
-    title="$settings_file_combined"
+    title=$(gettext 'All commands and information')
 
     if [[ $UI_MODE = 'gui' ]]; then
         zenity  --text-info                             \
@@ -665,7 +665,7 @@ process_settings_files_by_hostname() {
 process_option_cat() {
     local title=''
 
-    title="$command_file"
+    title=$(gettext 'Selected commands and information')
 
     if [[ $UI_MODE = 'gui' ]]; then
         zenity  --text-info                 \
@@ -710,8 +710,6 @@ setup_apps() {
     fi
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
-    text="ERRORLOG (stderr) $ERROR_LOG"
-    printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Set up apps')
     text=$(gettext 'Preparing set up')
@@ -833,8 +831,6 @@ term() {
     local text=''
 
     # Error log also to the main log.
-    text="ERRORLOG (stderr) $ERROR_LOG"
-    printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
     if [[ -z ${FAILED_APPS[*]} ]]; then
@@ -909,7 +905,7 @@ term_error() {
     local text=''
     local title=''
 
-    title="$PROGRAM_DESC $(gettext 'error messages')"
+    title=$(gettext 'Error messages')
     text="$(gettext "The set up of the following apps contains errors:")
 ${FAILED_APPS[*]}
 

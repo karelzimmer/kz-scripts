@@ -276,7 +276,7 @@ process_option_browse() {
 $(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
     cat "${installation_files[@]}" > "$installation_file_combined"
 
-    title="Browse $installation_file_combined"
+    title=$(gettext 'All commands and information')
 
     if [[ $UI_MODE = 'gui' ]]; then
         zenity  --text-info                                 \
@@ -677,7 +677,7 @@ process_installation_files_by_hostname() {
 process_option_cat() {
     local title=''
 
-    title="Cat $command_file"
+    title=$(gettext 'Selected commands and information')
 
     if [[ $UI_MODE = 'gui' ]]; then
         zenity  --text-info                 \
@@ -743,8 +743,6 @@ install_apps() {
 
     ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
-    text="ERRORLOG (stderr) $ERROR_LOG"
-    printf '%s\n' "$text" > "$ERROR_LOG"
 
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
@@ -955,8 +953,6 @@ execute_command_cli() {
 # This function controls the termination of the script.
 term() {
     # Error log also to the standard log.
-    text="ERRORLOG (stderr) $ERROR_LOG"
-    printf '%s\n' "$text" >> "$ERROR_LOG"
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
     if [[ -z ${FAILED_APPS[*]} ]]; then
@@ -1013,7 +1009,7 @@ term_error() {
     local text=''
     local title=''
 
-    title="$PROGRAM_DESC $(gettext 'error messages')"
+    title=$(gettext 'Error messages')
     text="$(gettext "The installation of the following apps contains errors:")
 ${FAILED_APPS[*]}
 
