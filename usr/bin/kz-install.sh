@@ -636,6 +636,8 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfsprogs-plus; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfsprogs-plus; fi
 # -----------------------------------------------------------------------------
+# Conflicts with ntfs-3g
+# -----------------------------------------------------------------------------
 # Usage:
 # $ findmnt
 # TARGET SOURCE FSTYPE OPTIONS
