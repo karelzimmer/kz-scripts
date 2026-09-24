@@ -609,30 +609,46 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes nmap; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes nmap; fi
 
-#|install|ntfs|#none|Read/write NTFS driver for FUSE
+#|install|ntfs-3g|#none|Read/write NTFS driver for FUSE
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfs-3g; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfs-3g ntfsprogs; fi
 # -----------------------------------------------------------------------------
 # Usage:
-# $ findmnt # or lsblk
+# $ findmnt
 # TARGET SOURCE FSTYPE OPTIONS
 # /media/... /dev/sda1 ntfs3 rw,nosuid,nodev,relatime,uid=...
-# $ lsblk # or findmnt
+# --or--
+# $ lsblk
 # NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
 # sda 8:0 0 931,5G 0 disk
 # +-sda1 8:1 0 931,5G 0 part /media/...
-# $ sudo ntfsfix /dev/sda1 # Fix an NTFS partition
-# $ sudo ntfsfix -b /dev/sda1 # Clear the bad sector list
-# $ sudo ntfsfix -d /dev/sda1 # Clear the volume dirty flag
+#
+# $ sudo ntfsfix /dev/sda1 # Fix an NTFS partition.
+# $ sudo ntfsfix -b /dev/sda1 # Clear the bad sector list.
+# $ sudo ntfsfix -d /dev/sda1 # Clear the volume dirty flag.
 # -----------------------------------------------------------------------------
 
-#|remove|ntfs|#none|Read/write NTFS driver for FUSE
+#|remove|ntfs-3g|#none|Read/write NTFS driver for FUSE
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
 #|install|ntfsprogs-plus|#none|NTFS filesystem userspace utilities
 # -----------------------------------------------------------------------------
 # The ntfsprogs-plus app is available with Linux Kernel version 7.1 or higher.
+# -----------------------------------------------------------------------------
+# Usage:
+# $ findmnt
+# TARGET SOURCE FSTYPE OPTIONS
+# /media/... /dev/sda1 ntfs3 rw,nosuid,nodev,relatime,uid=...
+# --or--
+# $ lsblk
+# NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+# sda 8:0 0 931,5G 0 disk
+# +-sda1 8:1 0 931,5G 0 part /media/...
+#
+# ntfsck -a /dev/sda1 # Automatic repair.
+# ntfsck -n /dev/sda1 # Check the filesystem without making any changes.
+# ntfsck -C /dev/sda1 # Return if the volume is dirty or clean.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfsprogs-plus; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfsprogs-plus; fi
