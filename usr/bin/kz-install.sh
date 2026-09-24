@@ -630,14 +630,14 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ntfs-3g; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
-#|install|ntfsprogs-plus|#none|NTFS filesystem driver and utilities
+#|install|ntfsprogs-plus|#none|NTFS filesystem userspace utilities
 # -----------------------------------------------------------------------------
 # The ntfsprogs-plus app is available with Linux Kernel version 7.1 or higher.
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfsprogs-plus; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfsprogs-plus; fi
 
-#|remove|ntfsprogs-plus|#none|NTFS filesystem driver and utilities
+#|remove|ntfsprogs-plus|#none|NTFS filesystem userspace utilities
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ntfsprogs-plus; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ntfsprogs-plus; fi
 
