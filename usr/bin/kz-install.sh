@@ -623,7 +623,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 # sda 8:0 0 931,5G 0 disk
 # +-sda1 8:1 0 931,5G 0 part /media/...
 #
-# $ sudo ntfsfix /dev/sda1 # Fix an NTFS partition.
+# $ sudo ntfsfix    /dev/sda1 # Fix an NTFS partition.
 # $ sudo ntfsfix -b /dev/sda1 # Clear the bad sector list.
 # $ sudo ntfsfix -d /dev/sda1 # Clear the volume dirty flag.
 # -----------------------------------------------------------------------------
@@ -633,8 +633,8 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
 #|install|ntfsprogs-plus|#none|NTFS filesystem userspace utilities
-# -----------------------------------------------------------------------------
-# The ntfsprogs-plus app is available with Linux Kernel version 7.1 or higher.
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfsprogs-plus; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfsprogs-plus; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ findmnt
@@ -650,8 +650,6 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # ntfsck -n /dev/sda1 # Check the filesystem without making any changes.
 # ntfsck -C /dev/sda1 # Return if the volume is dirty or clean.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfsprogs-plus; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfsprogs-plus; fi
 
 #|remove|ntfsprogs-plus|#none|NTFS filesystem userspace utilities
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ntfsprogs-plus; fi
