@@ -682,8 +682,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install -
 
 #|remove|python|pc06 pc07|Interactive high-level object-oriented language
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes python python3-pip python-is-python3; fi
-if grep --quiet --regexp='debian' /etc/os-release; then sudo rm --force --verbose /usr/bin/pep8; fi
-if grep --quiet --regexp='debian' /etc/os-release; then sudo rm --force --verbose /usr/bin/pip; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo rm --force --verbose /usr/bin/pip /usr/bin/pep8; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pip; fi
 
 #|install|rpm|pc06 pc07|Package manager for RPM
