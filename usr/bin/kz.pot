@@ -378,83 +378,83 @@ msgid "Preparing backup (this may take a while)"
 msgstr ""
 
 #: kz-backup:701 kz-backup:735 kz-backup:761 kz-restore:491 kz-restore:522
-#: kz-restore:556
+#: kz-restore:545
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:833 kz-install:1014 kz-restore:642 kz-setup:910
+#: kz-backup:834 kz-install:1014 kz-restore:643 kz-setup:910
 msgid "Error messages"
 msgstr ""
 
-#: kz-backup:834
+#: kz-backup:835
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:810 kz-backup:836 kz-restore:618 kz-restore:645
+#: kz-backup:811 kz-backup:837 kz-restore:619 kz-restore:646
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:837
+#: kz-backup:838
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:838 kz-restore:647
+#: kz-backup:839 kz-restore:648
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:839
+#: kz-backup:840
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:815 kz-backup:841 kz-install:1018 kz-restore:623 kz-restore:650
+#: kz-backup:816 kz-backup:842 kz-install:1018 kz-restore:624 kz-restore:651
 #: kz-setup:914
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:842 kz-install:1019 kz-restore:651 kz-setup:915
+#: kz-backup:843 kz-install:1019 kz-restore:652 kz-setup:915
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:843
+#: kz-backup:844
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:796
+#: kz-backup:797
 msgid "The backup has been made."
 msgstr ""
 
-#: kz-backup:804 kz-restore:612
+#: kz-backup:805 kz-restore:613
 #, sh-format
 msgid "The USB medium $volume_name can be removed."
 msgstr ""
 
-#: kz-backup:808 kz-restore:616
+#: kz-backup:809 kz-restore:617
 #, sh-format
 msgid "The USB medium $volume_name could not be detached."
 msgstr ""
 
-#: kz-backup:811 kz-restore:619
+#: kz-backup:812 kz-restore:620
 msgid "A USB medium cannot be detached when it is 'busy' - for example,"
 msgstr ""
 
-#: kz-backup:812 kz-restore:620
+#: kz-backup:813 kz-restore:621
 msgid ""
 "when there are open files on it, or when some process has its working "
 "directory there."
 msgstr ""
 
-#: kz-backup:816 kz-restore:624
+#: kz-backup:817 kz-restore:625
 #, sh-format
 msgid "Leave the $MEDIUM folder."
 msgstr ""
 
-#: kz-backup:817 kz-restore:625
+#: kz-backup:818 kz-restore:626
 #, sh-format
 msgid "Close apps and windows related to the $volume_name medium."
 msgstr ""
 
-#: kz-backup:819 kz-restore:627
+#: kz-backup:820 kz-restore:628
 msgid "Remember to safely(!) remove the USB medium."
 msgstr ""
 
@@ -629,8 +629,8 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:221 kz-backup:861 kz-desktop:275 kz-install:989 kz-install:1043
-#: kz-menu:355 kz-menu:555 kz-restore:316 kz-restore:670 kz-setup:872
+#: kz-backup:221 kz-backup:862 kz-desktop:275 kz-install:989 kz-install:1043
+#: kz-menu:355 kz-menu:555 kz-restore:316 kz-restore:671 kz-setup:872
 #: kz-setup:939
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
@@ -1298,24 +1298,24 @@ msgstr ""
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:643
+#: kz-restore:644
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:646
+#: kz-restore:647
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:648
+#: kz-restore:649
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:652
+#: kz-restore:653
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:604
+#: kz-restore:605
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""

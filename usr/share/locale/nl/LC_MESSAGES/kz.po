@@ -383,69 +383,69 @@ msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
 #: kz-backup:701 kz-backup:735 kz-backup:761 kz-restore:491 kz-restore:522
-#: kz-restore:556
+#: kz-restore:545
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:833 kz-install:1014 kz-restore:642 kz-setup:910
+#: kz-backup:834 kz-install:1014 kz-restore:643 kz-setup:910
 msgid "Error messages"
 msgstr "Foutmeldingen"
 
-#: kz-backup:834
+#: kz-backup:835
 msgid "Backup ended with errors."
 msgstr "Back-up maken is geëindigd met fouten."
 
-#: kz-backup:810 kz-backup:836 kz-restore:618 kz-restore:645
+#: kz-backup:811 kz-backup:837 kz-restore:619 kz-restore:646
 msgid "Possible causes:"
 msgstr "Mogelijke oorzaken:"
 
-#: kz-backup:837
+#: kz-backup:838
 msgid "Were any files added or deleted during the backup, or"
 msgstr "Zijn er tijdens de back-up bestanden toegevoegd of verwijderd, of"
 
-#: kz-backup:838 kz-restore:647
+#: kz-backup:839 kz-restore:648
 msgid "some files may not be readable or changeable, or"
 msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 
-#: kz-backup:839
+#: kz-backup:840
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:815 kz-backup:841 kz-install:1018 kz-restore:623 kz-restore:650
+#: kz-backup:816 kz-backup:842 kz-install:1018 kz-restore:624 kz-restore:651
 #: kz-setup:914
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:842 kz-install:1019 kz-restore:651 kz-setup:915
+#: kz-backup:843 kz-install:1019 kz-restore:652 kz-setup:915
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
-#: kz-backup:843
+#: kz-backup:844
 msgid "Try creating the back up again."
 msgstr "Probeer de back-up opnieuw te maken."
 
-#: kz-backup:796
+#: kz-backup:797
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
-#: kz-backup:804 kz-restore:612
+#: kz-backup:805 kz-restore:613
 #, sh-format
 msgid "The USB medium $volume_name can be removed."
 msgstr "Het USB-medium $volume_name kan worden verwijderd."
 
-#: kz-backup:808 kz-restore:616
+#: kz-backup:809 kz-restore:617
 #, sh-format
 msgid "The USB medium $volume_name could not be detached."
 msgstr "Het USB-medium $volume_name kon niet worden losgekoppeld."
 
-#: kz-backup:811 kz-restore:619
+#: kz-backup:812 kz-restore:620
 msgid "A USB medium cannot be detached when it is 'busy' - for example,"
 msgstr ""
 "Een USB-medium kan niet worden ontkoppeld wanneer het 'bezig' is, "
 "bijvoorbeeld"
 
-#: kz-backup:812 kz-restore:620
+#: kz-backup:813 kz-restore:621
 msgid ""
 "when there are open files on it, or when some process has its working "
 "directory there."
@@ -453,18 +453,18 @@ msgstr ""
 "wanneer er bestanden op geopend zijn of wanneer een proces zijn werkmap daar "
 "heeft staan."
 
-#: kz-backup:816 kz-restore:624
+#: kz-backup:817 kz-restore:625
 #, sh-format
 msgid "Leave the $MEDIUM folder."
 msgstr "Verlaat de map $MEDIUM."
 
-#: kz-backup:817 kz-restore:625
+#: kz-backup:818 kz-restore:626
 #, sh-format
 msgid "Close apps and windows related to the $volume_name medium."
 msgstr ""
 "Sluit apps en vensters die met het medium $volume_name te maken hebben."
 
-#: kz-backup:819 kz-restore:627
+#: kz-backup:820 kz-restore:628
 msgid "Remember to safely(!) remove the USB medium."
 msgstr "Vergeet niet het USB-medium veilig(!) te verwijderen."
 
@@ -646,8 +646,8 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz-backup:221 kz-backup:861 kz-desktop:275 kz-install:989 kz-install:1043
-#: kz-menu:355 kz-menu:555 kz-restore:316 kz-restore:670 kz-setup:872
+#: kz-backup:221 kz-backup:862 kz-desktop:275 kz-install:989 kz-install:1043
+#: kz-menu:355 kz-menu:555 kz-restore:316 kz-restore:671 kz-setup:872
 #: kz-setup:939
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
@@ -1340,26 +1340,26 @@ msgstr "Geen backup_${HOSTNAME}_$USER gevonden in $MEDIUM."
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"
 
-#: kz-restore:643
+#: kz-restore:644
 msgid "Restore ended with errors."
 msgstr "Back-up terugzetten is geëindigd met fouten."
 
-#: kz-restore:646
+#: kz-restore:647
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 "Zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up of"
 
-#: kz-restore:648
+#: kz-restore:649
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr "is er te weinig ruimte op $HOME."
 
-#: kz-restore:652
+#: kz-restore:653
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
-#: kz-restore:604
+#: kz-restore:605
 #, sh-format
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."

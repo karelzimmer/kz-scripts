@@ -541,6 +541,13 @@ restore_backup_cli() {
             "$SOURCE/"                      \
             "$HOME/"                        \
             2>> "$ERROR_LOG"                || RESTORE_RC=$?
+
+    text=$(gettext "Writing data from memory (this may take a while)")
+    kz.logmsg "$text"...
+    text+='...'
+    kz.infomsg "
+$text"
+    sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
 }
 
 
@@ -552,12 +559,6 @@ restore_settings() {
         kz.logmsg 'Restore settings...'
         restore_setting_desktop
     fi
-
-    text=$(gettext "Writing data from memory (this may take a while)")
-    kz.logmsg "$text"...
-    text+='...'
-    kz.infomsg "$text"
-    sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
 }
 
 

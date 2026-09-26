@@ -761,7 +761,8 @@ create_backup_cli() {
     text=$(gettext "Writing data from memory (this may take a while)")
     kz.logmsg "$text"...
     text+='...'
-    kz.infomsg "$text"
+    kz.infomsg "
+$text"
     sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
 }
 
