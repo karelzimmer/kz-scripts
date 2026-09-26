@@ -69,12 +69,15 @@ usage,version"
 
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
+declare INSTALL='install'
+declare INSTALLATION_FILE_DEFAULT_GPG=/usr/bin/$PROGRAM_NAME.sh.gpg
+declare INSTALLATION_FILE_DEFAULT=/usr/bin/$PROGRAM_NAME.sh
+declare KZ_PUBLIC_KEY=/usr/share/kz/kz-public-key.gpg
 declare OPTION_REMOVE=false
 declare OPTION_SELECT=false
 declare REBOOT=false
-declare UI_MODE='tui'
-declare INSTALL='install'
 declare REMOVE='remove'
+declare UI_MODE='tui'
 
 
 # #############################################################################
@@ -89,7 +92,6 @@ process() {
     local command_file=''
     local err_flag=false
     local installation_file_decrypted=''
-    local installation_file_default=/usr/bin/$PROGRAM_NAME.sh
     local installation_file=''
     local option_browse=false
     local option_cat=false
@@ -237,15 +239,15 @@ $(gettext "no desktop environment available")"
 # This function checks if the installation files exist.
 check_installation_files() {
     if ! $option_file; then
-        installation_files[$installation_file_default]=\
-$installation_file_default
+        installation_files[$INSTALLATION_FILE_DEFAULT]=\
+$INSTALLATION_FILE_DEFAULT
 
         # Decrypt GPG-encrypted installation file.
         installation_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
         gpg --no-default-keyring                        \
-            --keyring /usr/share/kz/kz-public-key.gpg   \
-            --decrypt /usr/bin/kz-install.sh.gpg        \
+            --keyring "$KZ_PUBLIC_KEY"                  \
+            --decrypt "$INSTALLATION_FILE_DEFAULT_GPG"  \
             > "$installation_file_decrypted"            \
             2> >($PROGRAM_LOGS)
 

@@ -69,10 +69,13 @@ usage,version"
 
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
+declare KZ_PUBLIC_KEY=/usr/share/kz/kz-public-key.gpg
 declare LOGOUT=false
 declare OPTION_RESET=false
 declare OPTION_SELECT=false
 declare RESET='reset'
+declare SETTINGS_FILE_DEFAULT_GPG=/usr/bin/$PROGRAM_NAME.sh.gpg
+declare SETTINGS_FILE_DEFAULT=/usr/bin/$PROGRAM_NAME.sh
 declare SETUP='setup'
 declare UI_MODE='tui'
 
@@ -93,7 +96,6 @@ process() {
     local option_file=false
     local option_list=false
     local settings_file_decrypted=''
-    local settings_file_default=/usr/bin/$PROGRAM_NAME.sh
     local settings_file=''
     local text=''
 
@@ -129,15 +131,15 @@ process() {
 # This function checks if the settings files exist.
 check_settings_files() {
     if ! $option_file; then
-        settings_files[$settings_file_default]=$settings_file_default
+        settings_files[$SETTINGS_FILE_DEFAULT]=$SETTINGS_FILE_DEFAULT
 
         # Decrypt GPG-encrypted settings file.
         settings_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        gpg --no-default-keyring                        \
-            --keyring /usr/share/kz/kz-public-key.gpg   \
-            --decrypt /usr/bin/kz-setup.sh.gpg          \
-            > "$settings_file_decrypted"                \
+        gpg --no-default-keyring                    \
+            --keyring "$KZ_PUBLIC_KEY"              \
+            --decrypt "$SETTINGS_FILE_DEFAULT_GPG"  \
+            > "$settings_file_decrypted"            \
             2> >($PROGRAM_LOGS)
 
         settings_files[$settings_file_decrypted]=$settings_file_decrypted
