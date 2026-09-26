@@ -95,9 +95,7 @@ process() {
     local option_cat=false
     local option_file=false
     local option_list=false
-    local settings_file_decrypted=''
     local settings_file=''
-    local text=''
 
     check_input "$@"
     check_settings_files
@@ -130,6 +128,8 @@ process() {
 
 # This function checks if the settings files exist.
 check_settings_files() {
+    local settings_file_decrypted=''
+
     if ! $option_file; then
         settings_files[$SETTINGS_FILE_DEFAULT]=$SETTINGS_FILE_DEFAULT
 

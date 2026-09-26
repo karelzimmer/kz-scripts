@@ -91,13 +91,11 @@ process() {
     local argument_app=false
     local command_file=''
     local err_flag=false
-    local installation_file_decrypted=''
     local installation_file=''
     local option_browse=false
     local option_cat=false
     local option_file=false
     local option_list=false
-    local text=''
 
     check_input "$@"
     check_installation_files
@@ -238,6 +236,8 @@ $(gettext "no desktop environment available")"
 
 # This function checks if the installation files exist.
 check_installation_files() {
+    local installation_file_decrypted=''
+
     if ! $option_file; then
         installation_files[$INSTALLATION_FILE_DEFAULT]=\
 $INSTALLATION_FILE_DEFAULT
