@@ -505,13 +505,27 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 
 #|install|libreoffice|*|Office productivity suite
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes libreoffice; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes ttf-mscorefonts-installer fonts-croscore fonts-crosextra-carlito fonts-crosextra-caladea fonts-recommended; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
+
+
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes flathub app/org.libreoffice.LibreOffice; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts cabextract xorg-x11-font-utils fontconfig; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rpm --install --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
+
 
 #|remove|libreoffice|*|Office productivity suite
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes libreoffice; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes ttf-mscorefonts-installer fonts-croscore fonts-crosextra-carlito fonts-crosextra-caladea fonts-recommended; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes app/org.libreoffice.LibreOffice; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts cabextract xorg-x11-font-utils fontconfig; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rpm --erase --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
 
 #|install|linters|pc06 pc07|Analyse scripts for errors and style
 # -----------------------------------------------------------------------------
