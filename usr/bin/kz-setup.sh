@@ -41,8 +41,8 @@ if gsettings get org.nemo.preferences click-policy ; then gsettings set org.nemo
 # GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate ; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if gsettings get org.gnome.desktop.input-sources sources ; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources|sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
-if gsettings get org.gnome.desktop.input-sources sources ; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources|sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
+if gsettings get org.gnome.desktop.input-sources sources ; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/, ('ibus', 'mozc-jp')//")"; fi
+if gsettings get org.gnome.desktop.input-sources sources ; then gsettings set org.gnome.desktop.input-sources sources "$(gsettings get org.gnome.desktop.input-sources sources | sed --expression="s/('ibus', 'mozc-jp'), //")"; fi
 if gsettings get org.gnome.desktop.interface clock-show-date ; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if gsettings get org.gnome.desktop.interface clock-show-weekday ; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
 if gsettings get org.gnome.desktop.interface font-antialiasing ; then gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'; fi

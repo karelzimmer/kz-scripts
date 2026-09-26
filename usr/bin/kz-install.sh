@@ -601,8 +601,8 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes lshw; fi
 
 #|install|microsoft-edge|pc06 pc07|The web browser from Microsoft
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc|sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main"|sudo tee /etc/apt/sources.list.d/microsoft-edge.list; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes microsoft-edge-stable; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
@@ -753,8 +753,8 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg|sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free'|sudo tee /etc/apt/sources.list.d/spotify.list; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes spotify-client; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'The spotify app is available as a web app.'; fi
@@ -906,15 +906,15 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_D
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "code code/add-microsoft-repo boolean true"|sudo debconf-set-selections; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc|sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' |sudo tee /etc/apt/sources.list.d/vscode.sources; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' | sudo tee /etc/apt/sources.list.d/vscode.sources; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes apt-transport-https; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes code; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo update-alternatives --set editor /usr/bin/code; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc'|sudo tee /etc/yum.repos.d/vscode.repo; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc'| sudo tee /etc/yum.repos.d/vscode.repo; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes code; fi
 
 #|remove|vscode|pc06 pc07|Code editing. Redefined
