@@ -99,7 +99,7 @@ msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:170 kz-backup:146 kz-build:148 kz-check:116 kz-deploy:122 kz-desktop:180
-#: kz-dev:126 kz-install:222 kz-menu:172 kz-restore:147 kz-setup:241
+#: kz-dev:126 kz-install:220 kz-menu:172 kz-restore:147 kz-setup:241
 #: kz-update:138 kz-wifi:145
 msgid "internal error"
 msgstr ""
@@ -161,7 +161,7 @@ msgstr ""
 msgid "  -T, --tui      run in text-based mode (default)"
 msgstr ""
 
-#: kz-backup:119 kz-desktop:195 kz-install:192 kz-menu:156 kz-restore:116
+#: kz-backup:119 kz-desktop:195 kz-install:190 kz-menu:156 kz-restore:116
 #: kz-setup:211 kz-wifi:128
 msgid "no desktop environment available"
 msgstr ""
