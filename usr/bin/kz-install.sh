@@ -17,10 +17,10 @@
 # Express Advanced Error Reporting) prevents the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if ! grep --quiet --regexp='noaer' /etc/default/grub ; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
-if ! grep --quiet --regexp='noaer' /etc/default/grub ; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
-if grep --quiet --regexp='debian' /etc/os-release ; then sudo update-grub; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if ! grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for available kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -33,9 +33,9 @@ REBOOT=true
 # Express Advanced Error Reporting) to allow 'AER: Corrected errors received'
 # messages to appear in the log. This is usually the case for HP hardware.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='noaer' /etc/default/grub ; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
-if grep --quiet --regexp='debian' /etc/os-release ; then sudo update-grub; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for missing kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
@@ -122,13 +122,11 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_D
 # -----------------------------------------------------------------------------
 # Web app: http://localhost:631
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes cups; fi
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes libcupsimage2; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes cups libcupsimage2; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes cups; fi
 
 #|remove|cups|*|Common UNIX Printing System(tm) - PPD/driver support, web interface
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes cups; fi
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes libcupsimage2; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes cups libcupsimage2; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes cups; fi
 
 #|install|desktop-settings|*|Various desktop environments settings
@@ -190,8 +188,8 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --a
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes fdupes; fi
 # -----------------------------------------------------------------------------
 # Usage:
-# $ fdupes -r /path/to/folder # Report recursively from /path/to/folder
-# $ fdupes -rd /path/to/folder # Delete, interactively, from /path/to/folder
+# $ fdupes -r   /path/to/folder # Report recursively from /path/to/folder
+# $ fdupes -rd  /path/to/folder # Delete, interactively, from /path/to/folder
 # $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
 # -----------------------------------------------------------------------------
 
@@ -211,52 +209,52 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_D
 # -----------------------------------------------------------------------------
 # Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release ; then sudo apt-get install --assume-yes ufw; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]] ; then sudo apt-get install --assume-yes gufw; fi
-if grep --quiet --regexp='debian' /etc/os-release ; then sudo ufw enable; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ufw; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes gufw; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo ufw enable; fi
 # -----------------------------------------------------------------------------
 # Firewall configuration application.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]] ; then sudo dnf install --assumeyes firewall-config; fi
+if grep --quiet --regexp='rhel' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes firewall-config; fi
 # -----------------------------------------------------------------------------
 # Add firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw ; then sudo ufw allow 1714:1764/udp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw ; then sudo ufw allow 1714:1764/tcp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw ; then sudo ufw reload; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld ; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld ; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld ; then sudo firewall-cmd --reload; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw allow 1714:1764/udp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw allow 1714:1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw reload; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
 # Add firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if (type ssh && systemctl status ufw) ; then sudo ufw allow ssh; fi
-if (type ssh && systemctl status ufw) ; then sudo ufw reload; fi
-if (type ssh && systemctl status firewalld) ; then sudo firewall-cmd --permanent --add-service=ssh; fi
-if (type ssh && systemctl status firewalld) ; then sudo firewall-cmd --reload; fi
+if (type ssh && systemctl status ufw); then sudo ufw allow ssh; fi
+if (type ssh && systemctl status ufw); then sudo ufw reload; fi
+if (type ssh && systemctl status firewalld); then sudo firewall-cmd --permanent --add-service=ssh; fi
+if (type ssh && systemctl status firewalld); then sudo firewall-cmd --reload; fi
 
 #|remove|firewall|*|Program for managing a Netfilter firewall
 # -----------------------------------------------------------------------------
 # Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw ; then sudo ufw delete allow 1714:1764/udp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw ; then sudo ufw delete allow 1714:1764/tcp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld ; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld ; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw delete allow 1714:1764/udp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw delete allow 1714:1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
 # -----------------------------------------------------------------------------
 # Remove firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if (type ssh && systemctl status ufw) ; then sudo ufw delete allow ssh; fi
-if (type ssh && systemctl status firewalld) ; then sudo firewall-cmd --permanent --remove-service=ssh; fi
+if (type ssh && systemctl status ufw); then sudo ufw delete allow ssh; fi
+if (type ssh && systemctl status firewalld); then sudo firewall-cmd --permanent --remove-service=ssh; fi
 # -----------------------------------------------------------------------------
 # Program for managing a Netfilter firewall.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release ; then sudo ufw disable; fi
-if grep --quiet --regexp='debian' /etc/os-release ; then sudo apt-get remove --assume-yes ufw; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo ufw disable; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes ufw; fi
 # -----------------------------------------------------------------------------
 # Firewall configuration application.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release ; then sudo dnf remove --assumeyes firewall-config; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes firewall-config; fi
 
 #|install|fwupd-settings|#none|Disable Firmware update daemon
 sudo systemctl stop fwupd.service
@@ -307,22 +305,22 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; t
 
 #|install|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
 if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get install --assume-yes gnome-shell-extension-caffeine; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine) ; then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine); then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
 REBOOT=true
 
 #|remove|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
 if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get remove --assume-yes gnome-shell-extension-caffeine; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine) ; then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine); then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
 REBOOT=true
 
 #|install|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock); then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock); then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 REBOOT=true
 
 #|remove|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock) ; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock) ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock); then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock); then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 REBOOT=true
 
 #|install|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
@@ -334,12 +332,12 @@ if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-
 # -----------------------------------------------------------------------------
 # Add firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
-if systemctl status ufw ; then sudo ufw allow 1714:1764/udp; fi
-if systemctl status ufw ; then sudo ufw allow 1714:1764/tcp; fi
-if systemctl status ufw ; then sudo ufw reload; fi
-if systemctl status firewalld ; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
-if systemctl status firewalld ; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
-if systemctl status firewalld ; then sudo firewall-cmd --reload; fi
+if systemctl status ufw; then sudo ufw allow 1714:1764/udp; fi
+if systemctl status ufw; then sudo ufw allow 1714:1764/tcp; fi
+if systemctl status ufw; then sudo ufw reload; fi
+if systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
+if systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
+if systemctl status firewalld; then sudo firewall-cmd --reload; fi
 
 #|remove|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
 if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect); then sudo apt-get remove --assume-yes gnome-shell-extension-gsconnect; fi
@@ -347,12 +345,12 @@ if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-
 # -----------------------------------------------------------------------------
 # Remove firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
-if systemctl status ufw ; then sudo ufw delete allow 1714:1764/udp; fi
-if systemctl status ufw ; then sudo ufw delete allow 1714:1764/tcp; fi
-if systemctl status ufw ; then sudo ufw reload; fi
-if systemctl status firewalld ; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
-if systemctl status firewalld ; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
-if systemctl status firewalld ; then sudo firewall-cmd --reload; fi
+if systemctl status ufw; then sudo ufw delete allow 1714:1764/udp; fi
+if systemctl status ufw; then sudo ufw delete allow 1714:1764/tcp; fi
+if systemctl status ufw; then sudo ufw reload; fi
+if systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
+if systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
+if systemctl status firewalld; then sudo firewall-cmd --reload; fi
 
 #|install|gnome-shell-extension-manager|pc06 pc07|Utility for managing GNOME Shell Extensions
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gnome-shell-extension-manager; fi
@@ -363,22 +361,22 @@ if grep --quiet --regexp='debian' /etc/os-release && type gnome-session; then su
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && type gnome-session; then sudo dnf remove --assumeyes gnome-extensions-app; fi
 
 #|install|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) ; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance); then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 REBOOT=true
 
 #|remove|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance) ; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance); then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 REBOOT=true
 
 #|install|gnome-shell-extension-no-overview|*|No overview at start-up
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) ; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview); then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
 REBOOT=true
 
 #|remove|gnome-shell-extension-no-overview|*|No overview at start-up
-if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview) ; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
+if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview); then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
 REBOOT=true
 
@@ -417,9 +415,9 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=1/' /etc/defau
 # -----------------------------------------------------------------------------
 # Suppress warnings.
 # -----------------------------------------------------------------------------
-if ! grep --quiet --regexp='loglevel=3' /etc/default/grub ; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
-if grep --quiet --regexp='debian' /etc/os-release ; then sudo update-grub; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
+if ! grep --quiet --regexp='loglevel=3' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 #|remove|grub-settings|*|Restore GRUB menu display time
@@ -504,84 +502,43 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes lftp; fi
 
 #|install|libreoffice|*|Office productivity suite
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes libreoffice; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes ttf-mscorefonts-installer fonts-croscore fonts-crosextra-carlito fonts-crosextra-caladea fonts-recommended; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
-
-
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
+# -----------------------------------------------------------------------------
+# This install includes:
+# - Microsoft TrueType core fonts like Arial, Times New Roman, and Verdana, and
+# - MS Word fonts like Calibri, Cambria, and Arial, for better compatibility
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true' | sudo debconf-set-selections; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes fonts-croscore fonts-crosextra-caladea fonts-crosextra-carlito fonts-recommended libreoffice libreoffice-gtk3 ttf-mscorefonts-installer; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes cabextract flatpak fontconfig google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts xorg-x11-font-utils; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install --assumeyes flathub app/org.libreoffice.LibreOffice; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts cabextract xorg-x11-font-utils fontconfig; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rpm --install --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
-
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
 
 #|remove|libreoffice|*|Office productivity suite
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes libreoffice; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes ttf-mscorefonts-installer fonts-croscore fonts-crosextra-carlito fonts-crosextra-caladea fonts-recommended; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes fonts-croscore fonts-crosextra-caladea fonts-crosextra-carlito fonts-recommended libreoffice libreoffice-gtk3 ttf-mscorefonts-installer; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes cabextract flatpak fontconfig google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts xorg-x11-font-utils; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes app/org.libreoffice.LibreOffice; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf remove --assumeyes google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts cabextract xorg-x11-font-utils fontconfig; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo rpm --erase --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
+if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache --force --verbose; fi
 
 #|install|linters|pc06 pc07|Analyse scripts for errors and style
 # -----------------------------------------------------------------------------
-# MyPy - Optional static typing for Python
+# This install includes:
+# MyPy              - Optional static typing for Python
+# pycodestyle       - Python style guide checker (formerly called pep8)
+# python3-autopep8  - Tool that automatically formats Python code to conform to
+#                       PEP 8
+# Bashate           - Bash script style checker
+# Shellcheck        - Lint tool for shell scripts,
+#                       Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes mypy; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-mypy; fi
-# -----------------------------------------------------------------------------
-# pycodestyle - Python style guide checker (formerly called pep8)
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes pycodestyle; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes pycodestyle; fi
-# -----------------------------------------------------------------------------
-# python3-autopep8 - Tool that automatically formats Python code to conform to PEP 8
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes python3-autopep8; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-autopep8; fi
-# -----------------------------------------------------------------------------
-# Bashate - Bash script style checker
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes python3-bashate; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes python3-bashate; fi
-# -----------------------------------------------------------------------------
-# Shellcheck - Lint tool for shell scripts
-# -----------------------------------------------------------------------------
-# Web app: https://www.shellcheck.net
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes shellcheck; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes shellcheck; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes mypy pycodestyle python3-autopep8 python3-bashate shellcheck; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes pycodestyle python3-autopep8 python3-bashate python3-mypy shellcheck; fi
 
 #|remove|linters|pc06 pc07|Analyse scripts for errors and style
-# -----------------------------------------------------------------------------
-# MyPy - Optional static typing for Python
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes mypy; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-mypy; fi
-# -----------------------------------------------------------------------------
-# pycodestyle - Python style guide checker (formerly called pep8)
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes pycodestyle; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes pycodestyle; fi
-# -----------------------------------------------------------------------------
-# python3-autopep8 - Tool that automatically formats Python code to conform to PEP 8
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes python3-autopep8; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-autopep8; fi
-# -----------------------------------------------------------------------------
-# Bashate - Bash script style checker
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes python3-bashate; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes python3-bashate; fi
-# -----------------------------------------------------------------------------
-# Shellcheck - Lint tool for shell scripts
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes shellcheck; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes shellcheck; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes mypy pycodestyle python3-autopep8 python3-bashate shellcheck; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes pycodestyle python3-autopep8 python3-bashate python3-mypy shellcheck; fi
 
 #|install|locate|pc06 pc07|List files in databases that match a pattern
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes locate; fi
@@ -602,7 +559,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --
 
 #|install|microsoft-edge|pc06 pc07|The web browser from Microsoft
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes microsoft-edge-stable; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install --assumeyes flatpak; fi
@@ -647,10 +604,11 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
 #|install|ntfsprogs-plus|#none|NTFS filesystem userspace utilities
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfsprogs-plus; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfsprogs-plus; fi
 # -----------------------------------------------------------------------------
 # Conflicts with ntfs-3g
+# -----------------------------------------------------------------------------
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes ntfsprogs-plus; fi
+if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf install --assumeyes ntfsprogs-plus; fi
 # -----------------------------------------------------------------------------
 # Usage:
 # $ findmnt
@@ -689,16 +647,18 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_D
 
 #|install|pst-utils|pc06 pc07|Tools for reading Microsoft Outlook PST files
 # -----------------------------------------------------------------------------
-# - readpst - export data from PST files to a variety of formats, including
-# mbox, MH and KMail. Other packages like mb2md are available for subsequent
-# conversions to Maildir and other formats.
-# - lspst - list data in PST files.
-# - pst2ldif - extract contacts from a PST file and prepare them for input in
-# LDAP
-# - pst2dii - export data from PST files to Summation dii load file format
+# This package contains tools based on libpst to read data from Microsoft
+# Outlook PST files:
+# readpst   - export data from PST files to a variety of formats, including
+#               mbox, MH and KMail. Other packages like mb2md are available for
+#               subsequent conversions to Maildir and other formats.
+# lspst     - list data in PST files.
+# pst2ldif  - extract contacts from a PST file and prepare them for input in
+#               LDAP
+# pst2dii   - export data from PST files to Summation dii load file format
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes pst-utils; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'Download pst-utils.rpm from https://www.rpmfind.net/ and install with "sudo dnf install ./pst-utils-*.x86_64.rpm".'; fi
+# For Red Hat and Red Hat-based systems download pst-utils.rpm from https://www.rpmfind.net/ and install with "sudo dnf install sudo apt-get install --assumeyes ./pst-utils-*.x86_64.rpm".
 
 #|remove|pst-utils|pc06 pc07|Tools for reading Microsoft Outlook PST files
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes pst-utils; fi
@@ -757,7 +717,7 @@ if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get update; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes spotify-client; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'The spotify app is available as a web app.'; fi
+# For Red Hat and Red Hat-based systems the spotify app is available as a web app.
 
 #|remove|spotify|pc01 pc06 pc07|Spotify streaming music client
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes spotify-client; fi
@@ -876,7 +836,7 @@ if ! id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo useradd --create-home --sh
 if id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo passwd --delete "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 #|remove|user-guest|pc01 pc06 pc07|Add guest user
-if id "$(TEXTDOMAIN=kz gettext 'guest')" ; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
+if id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 #|install|vlc|*|Multimedia player and streamer
 # -----------------------------------------------------------------------------
@@ -906,7 +866,7 @@ if grep --quiet --regexp='rhel\|fedora' /etc/os-release && [[ -n ${XDG_CURRENT_D
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections; fi
+if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo 'code code/add-microsoft-repo boolean true' | sudo debconf-set-selections; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' | sudo tee /etc/apt/sources.list.d/vscode.sources; fi
 if grep --quiet --regexp='debian' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install --assume-yes apt-transport-https; fi

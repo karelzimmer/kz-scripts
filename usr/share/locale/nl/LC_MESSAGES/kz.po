@@ -1106,11 +1106,11 @@ msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
 
-#: kz-install.sh:875 kz-install.sh:876 kz-install.sh:879
+#: kz-install.sh:835 kz-install.sh:836 kz-install.sh:839
 msgid "guest"
 msgstr "gast"
 
-#: kz-install.sh:875
+#: kz-install.sh:835
 msgid "Guest_user"
 msgstr "Gastgebruiker"
 
