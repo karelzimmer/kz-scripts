@@ -785,7 +785,6 @@ system settings")
     export DEBIAN_FRONTEND=noninteractive
 
     if [[ $UI_MODE = 'cli' ]]; then
-        sudo --validate
         text="$(gettext 'NUM/TOT  APP')
 $(gettext '         COMMAND...')"
         printf '%s\n' "$text"
@@ -940,10 +939,9 @@ execute_command_cli() {
         cmd_dis=$cmd
     fi
 
-    sudo --validate
-
     printf '%s\n' "         $cmd_dis"
 
+    sudo --validate
     check_debian_package_manager
 
     eval    "$cmd"              \
