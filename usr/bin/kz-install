@@ -785,6 +785,7 @@ system settings")
     export DEBIAN_FRONTEND=noninteractive
 
     if [[ $UI_MODE = 'cli' ]]; then
+        sudo --validate
         text="$(gettext 'NUM/TOT  APP')
 $(gettext '         COMMAND...')"
         printf '%s\n' "$text"
@@ -943,7 +944,6 @@ execute_command_cli() {
 
     sudo --validate
     check_debian_package_manager
-
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
             2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name
