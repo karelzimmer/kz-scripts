@@ -60,8 +60,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes ansible-core; fi
 
 #|install|apport-settings|#none|Disable Ubuntu's official crash reporting system
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl stop apport.service; fi
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl disable apport.service; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl disable --now apport.service; fi
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=.*$/enabled=0/' /etc/default/apport; fi
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo rm --force --verbose /var/crash/*; fi
 
@@ -255,14 +254,12 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --as
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo dnf remove --assumeyes firewall-config; fi
 
 #|install|fwupd-settings|#none|Disable Firmware update daemon
-sudo systemctl stop fwupd.service
-sudo systemctl disable fwupd.service
+sudo systemctl disable --now fwupd.service
 sudo systemctl mask fwupd.service
 
 #|remove|fwupd-settings|#none|Enable Firmware update daemon
 sudo systemctl unmask fwupd.service
-sudo systemctl enable fwupd.service
-sudo systemctl start fwupd.service
+sudo systemctl enable --now fwupd.service
 
 #|install|gdebi|#none|Simple tool to view and install deb files - GNOME GUI
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session; then sudo apt-get install --assume-yes gdebi; fi
