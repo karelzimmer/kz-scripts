@@ -222,8 +222,7 @@ if grep --quiet --regexp='rhel' /etc/os-release && [[ -n ${XDG_CURRENT_DESKTOP-}
 if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw allow 1714:1764/udp; fi
 if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw allow 1714:1764/tcp; fi
 if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw reload; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/{udp,tcp}; fi
 if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
 # Add firewall rules for SSH.
@@ -335,8 +334,7 @@ if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-
 if systemctl status ufw; then sudo ufw allow 1714:1764/udp; fi
 if systemctl status ufw; then sudo ufw allow 1714:1764/tcp; fi
 if systemctl status ufw; then sudo ufw reload; fi
-if systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/udp; fi
-if systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/tcp; fi
+if systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/{udp,tcp}; fi
 if systemctl status firewalld; then sudo firewall-cmd --reload; fi
 
 #|remove|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
