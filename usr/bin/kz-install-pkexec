@@ -7,4 +7,4 @@
 # SPDX-License-Identifier: CC0-1.0
 # #############################################################################
 
-XDG_CURRENT_DESKTOP=$1 eval "$2"
+XDG_CURRENT_DESKTOP=$1 DEBIAN_FRONTEND=noninteractive eval "$2"
