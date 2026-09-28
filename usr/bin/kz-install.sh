@@ -238,8 +238,7 @@ if (type ssh && systemctl status firewalld); then sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
 if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw delete allow 1714:1764/udp; fi
 if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw delete allow 1714:1764/tcp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/{udp,tcp}; fi
 # -----------------------------------------------------------------------------
 # Remove firewall rules for SSH.
 # -----------------------------------------------------------------------------
@@ -346,8 +345,7 @@ if grep --quiet --regexp='debian' /etc/os-release && (type gnome-session && apt-
 if systemctl status ufw; then sudo ufw delete allow 1714:1764/udp; fi
 if systemctl status ufw; then sudo ufw delete allow 1714:1764/tcp; fi
 if systemctl status ufw; then sudo ufw reload; fi
-if systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/udp; fi
-if systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/tcp; fi
+if systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/{udp,tcp}; fi
 if systemctl status firewalld; then sudo firewall-cmd --reload; fi
 
 #|install|gnome-shell-extension-manager|pc06 pc07|Utility for managing GNOME Shell Extensions
