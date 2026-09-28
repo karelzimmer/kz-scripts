@@ -311,8 +311,7 @@ LOGOUT=true
 
 #|setup|terminal|pc06 pc07|Terminal emulator application
 sed --in-place --expression='/^alias bin/d' --expression='/^alias docs/d' ~/.bashrc
-echo "alias bin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'" >> ~/.bashrc
-echo "alias docs='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc
+echo -e "alias bin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'\nalias docs='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc
 kz-desktop --addbef=org.gnome.Terminal
 
 #|reset|terminal|pc06 pc07|Terminal emulator application
