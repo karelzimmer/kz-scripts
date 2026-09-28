@@ -17,8 +17,7 @@
 # Express Advanced Error Reporting) prevents the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if ! grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' /etc/default/grub; fi
-if ! grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/' --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
@@ -740,10 +739,7 @@ sudo systemctl restart ssh.service
 # -----------------------------------------------------------------------------
 # Configure static table lookup for hostnames and IP addresses.
 # -----------------------------------------------------------------------------
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='3a192.168.1.2 pc06' /etc/hosts; fi
-if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts; fi
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='/^192.168.1./d' --expression='2a192.168.1.100 pc01' --expression='3a192.168.1.2 pc06' --expression='4a192.168.1.219 pc07' /etc/hosts; fi
 
 #|remove|ssh|pc01 pc06 pc07|Secure shell client and server
 # -----------------------------------------------------------------------------
