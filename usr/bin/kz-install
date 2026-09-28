@@ -884,7 +884,7 @@ check_debian_package_manager() {
 
     while pkexec /usr/bin/kz_common-pkexec; do
         kz.logmsg "$text"
-        sleep 1
+        sleep 2
     done
 }
 

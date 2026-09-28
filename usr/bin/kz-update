@@ -367,7 +367,7 @@ def check_debian_package_manager(PROGRAM_NAME: str) -> int:
             break
         else:
             kz.logmsg(PROGRAM_NAME, text)
-            time.sleep(1)
+            time.sleep(2)
 
     return 0
 
