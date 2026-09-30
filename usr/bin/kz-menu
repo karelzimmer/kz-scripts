@@ -151,9 +151,10 @@ process_options() {
                 shift
                 ;;
             -G | --gui )
-                if [[ -z ${XDG_CURRENT_DESKTOP-} ]]; then
+                if [[ ! ${XDG_CURRENT_DESKTOP-} ]]; then
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"
+                    UI_MODE='cli'
                     kz.infomsg "$text"
                     exit 1
                 fi
@@ -170,13 +171,14 @@ $(gettext "no desktop environment available")"
                 ;;
             * )
                 text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                UI_MODE='cli'
                 kz.errmsg "$text"
                 exit 1
                 ;;
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         UI_MODE='cli'
@@ -276,7 +278,7 @@ process_menu1_cli() {
         kz.logmsg "$prompt"
         read -rp "$prompt" < /dev/tty
 
-        if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+        if [[ ! $REPLY =~ ^[0-9]+$ ]]; then
             continue
         elif [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
             process_menu1_choice
@@ -483,7 +485,7 @@ process_menu2_cli() {
         kz.logmsg "$prompt"
         read -rp "$prompt" < /dev/tty
 
-        if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+        if [[ ! $REPLY =~ ^[0-9]+$ ]]; then
             continue
         elif [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
             process_menu2_choice

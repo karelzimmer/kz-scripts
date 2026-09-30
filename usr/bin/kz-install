@@ -185,9 +185,10 @@ process_options() {
                 shift 2
                 ;;
             -G | --gui )
-                if [[ -z ${XDG_CURRENT_DESKTOP-} ]]; then
+                if [[ ! ${XDG_CURRENT_DESKTOP-} ]]; then
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"
+                    UI_MODE='cli'
                     kz.infomsg "$text"
                     exit 1
                 fi
@@ -218,15 +219,16 @@ $(gettext "no desktop environment available")"
                 ;;
             * )
                 text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                UI_MODE='cli'
                 kz.errmsg "$text"
                 exit 1
                 ;;
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         argument_app=true
-        while [[ -n $* ]]; do
+        while [[ $* ]]; do
             app_arguments[$1]=$1
             shift
         done
@@ -245,10 +247,11 @@ $INSTALLATION_FILE_DEFAULT
         # Decrypt GPG-encrypted installation file.
         installation_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        gpg --no-default-keyring                        \
-            --keyring "$KZ_PUBLIC_KEY"                  \
-            --decrypt "$INSTALLATION_FILE_DEFAULT_GPG"  \
-            > "$installation_file_decrypted"            \
+        GNUPGHOME=$(mktemp -dt "$PROGRAM_NAME-gnupghome-XXXXXXXXXX")    \
+        gpg --no-default-keyring                                        \
+            --keyring "$KZ_PUBLIC_KEY"                                  \
+            --decrypt "$INSTALLATION_FILE_DEFAULT_GPG"                  \
+            > "$installation_file_decrypted"                            \
             2> >($PROGRAM_LOGS)
 
         installation_files[$installation_file_decrypted]=\
@@ -256,7 +259,7 @@ $installation_file_decrypted
     fi
 
     for installation_file in "${installation_files[@]}"; do
-        if ! [[ -f $installation_file ]]; then
+        if [[ ! -f $installation_file ]]; then
             text=$(eval_gettext "Installation file '\$installation_file' not \
 found.")
             kz.errmsg "$text"
@@ -332,7 +335,7 @@ process_option_list() {
 
     readarray -t app_list <<< "$app_records"
 
-    if [[ -z ${app_list[*]} ]]; then
+    if [[ ! ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
         kz.infomsg "$text"
@@ -472,7 +475,7 @@ process_option_select() {
         )
 
     readarray -t app_list <<< "$app_records"
-    if [[ -z ${app_list[*]} ]]; then
+    if [[ ! ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
         kz.infomsg "$text"
@@ -487,7 +490,7 @@ $(gettext 'No apps found.')"
         process_option_select_cli
     fi
 
-    if [[ -z $selected_apps ]]; then
+    if [[ ! $selected_apps ]]; then
         text=$(gettext 'No app selected.')
         kz.infomsg "$text"
         exit 0
@@ -713,7 +716,7 @@ become_check() {
 
     if [[ $UID -eq 0 ]]; then
         return 0
-    elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
+    elif groups "$USER" | grep --quiet --regexp=sudo --regexp=wheel; then
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
@@ -878,7 +881,8 @@ execute_command_gui() {
 check_debian_package_manager() {
     local text='Wait for another package manager to finish...'
 
-    if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
+    if grep --quiet --extended-regexp --regexp='fedora|rhel' /etc/os-release
+    then
         return 0
     fi
 
@@ -955,7 +959,7 @@ term() {
     # Error log also to the standard log.
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
-    if [[ -z ${FAILED_APPS[*]} ]]; then
+    if [[ ! ${FAILED_APPS[*]} ]]; then
         term_success
     else
         term_error

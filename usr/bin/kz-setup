@@ -136,17 +136,18 @@ check_settings_files() {
         # Decrypt GPG-encrypted settings file.
         settings_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        gpg --no-default-keyring                    \
-            --keyring "$KZ_PUBLIC_KEY"              \
-            --decrypt "$SETTINGS_FILE_DEFAULT_GPG"  \
-            > "$settings_file_decrypted"            \
+        GNUPGHOME=$(mktemp -dt "$PROGRAM_NAME-gnupghome-XXXXXXXXXX")    \
+        gpg --no-default-keyring                                        \
+            --keyring "$KZ_PUBLIC_KEY"                                  \
+            --decrypt "$SETTINGS_FILE_DEFAULT_GPG"                      \
+            > "$settings_file_decrypted"                                \
             2> >($PROGRAM_LOGS)
 
         settings_files[$settings_file_decrypted]=$settings_file_decrypted
     fi
 
     for settings_file in "${settings_files[@]}"; do
-        if ! [[ -f $settings_file ]]; then
+        if [[ ! -f $settings_file ]]; then
             text=$(eval_gettext "Settings file '\$settings_file' not found.")
             kz.errmsg "$text"
             err_flag=true
@@ -206,9 +207,10 @@ process_options() {
                 shift 2
                 ;;
             -G | --gui )
-                if [[ -z ${XDG_CURRENT_DESKTOP-} ]]; then
+                if [[ ! ${XDG_CURRENT_DESKTOP-} ]]; then
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"
+                    UI_MODE='cli'
                     kz.infomsg "$text"
                     exit 1
                 fi
@@ -239,15 +241,16 @@ $(gettext "no desktop environment available")"
                 ;;
             * )
                 text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                UI_MODE='cli'
                 kz.errmsg "$text"
                 exit 1
                 ;;
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         argument_app=true
-        while [[ -n $* ]]; do
+        while [[ $* ]]; do
             app_arguments[$1]=$1
             shift
         done
@@ -316,7 +319,7 @@ process_option_list() {
 
     readarray -t app_list <<< "$app_records"
 
-    if [[ -z ${app_list[*]} ]]; then
+    if [[ ! ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
         kz.infomsg "$text"
@@ -459,7 +462,7 @@ process_option_select() {
         )
 
     readarray -t app_list <<< "$app_records"
-    if [[ -z ${app_list[*]} ]]; then
+    if [[ ! ${app_list[*]} ]]; then
             text+="
 $(gettext 'No apps found.')"
         kz.infomsg "$text"
@@ -474,7 +477,7 @@ $(gettext 'No apps found.')"
         process_option_select_cli
     fi
 
-    if [[ -z $selected_apps ]]; then
+    if [[ ! $selected_apps ]]; then
         text=$(gettext 'No app selected.')
         kz.infomsg "$text"
         exit 0
@@ -835,7 +838,7 @@ term() {
     # Error log also to the main log.
     printf '%s' "$(<"$ERROR_LOG")" |& $PROGRAM_LOGS
 
-    if [[ -z ${FAILED_APPS[*]} ]]; then
+    if [[ ! ${FAILED_APPS[*]} ]]; then
         term_success
     else
         term_error
@@ -855,7 +858,7 @@ term_success() {
     fi
 
     if $LOGOUT; then
-        if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
+        if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
             text+="
 
 $(gettext "You will now be logged out of the computer to finish setting up \
@@ -884,7 +887,7 @@ apps and changing user settings.")"
 # This function controls the termination of the script when it ends with
 # success and logout.
 term_success_logout() {
-    if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
+    if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
         # A GUI is available.
         if type cinnamon-session &> /dev/null; then
             cinnamon-session-quit --logout --no-prompt

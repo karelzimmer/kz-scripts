@@ -97,7 +97,7 @@ kz.init() {
     fi
 
     # Check if os release is available.
-    if ! [[ -f /etc/os-release ]]; then
+    if [[ ! -f /etc/os-release ]]; then
         printf  "${RED}%s${NORMAL}\n"   \
                 "$(gettext 'fatal: no os release available')" >&2
         exit 1
@@ -269,9 +269,10 @@ kz.term_exit() {
     fi
 
     if [[ $rc -eq 0 ]]; then
-        text='Cleaning up temporary files...'
+        text='Cleaning up temporary directories/files...'
         kz.logmsg "$text"
         rm  --force                 \
+            --recursive             \
             --verbose               \
             /tmp/"$PROGRAM_NAME"-*  |& $PROGRAM_LOGS || true
     fi

@@ -90,6 +90,7 @@ check_input() {
                 --name          "$program_name"     \
                 --              "$@"
         )   ||  {
+                    UI_MODE='cli'
                     kz.infomsg "$USAGE"
                     exit 1
                 }
@@ -114,15 +115,17 @@ process_options() {
                 ;;
             * )
                 text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                UI_MODE='cli'
                 kz.errmsg "$text"
                 exit 1
                 ;;
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
+        UI_MODE='cli'
         kz.infomsg "$text"
         exit 1
     fi
@@ -222,7 +225,7 @@ check_gettext() {
     # GNU gettext message catalogue template (.pot).
     file=$scripts_repo/usr/bin/kz.pot
 
-    if ! [[ -f $file ]]; then
+    if [[ ! -f $file ]]; then
         kz.infomsg "
     $scripts_repo/usr/bin / kz.pot"
         text=$(eval_gettext "Gettext message catalog template \$file not \
@@ -234,7 +237,7 @@ found.")
     # GNU gettext message catalogue (.po).
     file=$scripts_repo/usr/share/locale/nl/LC_MESSAGES/kz.po
 
-    if ! [[ -f $file ]]; then
+    if [[ ! -f $file ]]; then
         kz.infomsg "
 $scripts_repo/usr/share/locale/nl/LC_MESSAGES / kz.po"
         text=$(eval_gettext "Gettext message catalog \$file not found.")
@@ -245,7 +248,7 @@ $scripts_repo/usr/share/locale/nl/LC_MESSAGES / kz.po"
     # GNU message catalog (.mo).
     file=$scripts_repo/usr/share/locale/nl/LC_MESSAGES/kz.mo
 
-    if ! [[ -f $file ]]; then
+    if [[ ! -f $file ]]; then
         kz.infomsg "
 $scripts_repo/usr/share/locale/nl/LC_MESSAGES / kz.mo"
         text=$(eval_gettext "Message catalog \$file not found.")
@@ -393,7 +396,7 @@ check_script() {
     if grep --quiet --regexp="$gui_option" "$file"; then
         dir=$scripts_repo/usr/share/applications
 
-        if ! [[ -f $dir/$scriptname.desktop ]]; then
+        if [[ ! -f $dir/$scriptname.desktop ]]; then
         kz.infomsg "
 ${BLUE}$scriptdir / $scriptname${NORMAL}"
             text=$(eval_gettext "Desktop configuration file \
@@ -406,7 +409,7 @@ ${BLUE}$scriptdir / $scriptname${NORMAL}"
     # Tab-completion script.
     dir=$scripts_repo/usr/share/bash-completion/completions
 
-    if ! [[ -f $dir/$scriptname ]]; then
+    if [[ ! -f $dir/$scriptname ]]; then
         text=$(eval_gettext "Tab completion script \$dir/\$scriptname not \
 found.")
         kz.errmsg "$text"
@@ -417,7 +420,7 @@ found.")
     if grep --quiet --regexp="$pkexec_script" "$file"; then
         dir=$scripts_repo/usr/share/polkit-1/actions
 
-        if ! [[ -f $dir/nl.karelzimmer.$scriptname.policy ]]; then
+        if [[ ! -f $dir/nl.karelzimmer.$scriptname.policy ]]; then
             text=$(eval_gettext "Polkit action definition file \
 \$dir/nl.karelzimmer.\$scriptname.policy not found.")
             kz.errmsg "$text"
@@ -437,7 +440,7 @@ check_man_page() {
     dir1=$scripts_repo/usr/share/man/man1
     dir5=$scripts_repo/usr/share/man/man5
 
-    if ! [[ -f $dir1/$scriptname.1 || -f $dir5/$scriptname.5 ]]; then
+    if [[ ! -f $dir1/$scriptname.1 && ! -f $dir5/$scriptname.5 ]]; then
         text=$(eval_gettext "Manual \$dir{1,5}/\$scriptname.{1,5} not found.")
         kz.errmsg "$text"
         ERR_FLAG=true
@@ -447,7 +450,7 @@ check_man_page() {
     dir1=$scripts_repo/usr/share/man/nl/man1
     dir5=$scripts_repo/usr/share/man/nl/man5
 
-    if ! [[ -f $dir1/$scriptname.1 || -f $dir5/$scriptname.5 ]]; then
+    if [[ ! -f $dir1/$scriptname.1 && ! -f $dir5/$scriptname.5 ]]; then
         text=$(eval_gettext "Manual \$dir{1,5}/\$scriptname.{1,5} not found.")
         kz.errmsg "$text"
         ERR_FLAG=true
@@ -516,7 +519,6 @@ check_shellcheck() {
     cd "$scriptdir"
     shellcheck  --external-sources                  \
                 --enable add-default-case           \
-                --enable avoid-nullary-conditions   \
                 --enable check-unassigned-uppercase \
                 --enable deprecate-which            \
                 --enable quote-safe-variables       \

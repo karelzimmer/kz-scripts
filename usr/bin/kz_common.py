@@ -10,9 +10,9 @@
 # Imports
 # #############################################################################
 
+from systemd import journal  # type: ignore
 import gettext
 import os
-import socket
 import subprocess
 import sys
 
@@ -221,36 +221,15 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     grey: str = '\033[90m'
     message: str = ''
-    payload: bytes
-    sock: socket.socket
-
-    # This also works fine...
-    # from systemd import journal  # type: ignore
-    # journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
-    # ...but not on older distributions, e.g. Rocky Linux 8.
 
     # If the log message contains unexpected characters such as line breaks,
     # the parser may consider the log line corrupt and *silently* ignore it.
     # Hence, replace all Line Feeds (\n) with LF, all Carriage Returns (\r)
     # with CR, and all Tabs (\t) with TAB.
     message = TEXT.replace('\n', 'LF').replace('\r', 'CR').replace('\t', 'TAB')
+    message = f'{grey}{message}{NORMAL}'
 
-    # Build the structured journal data package (field radius separated by \n).
-    payload = (
-        f"SYSLOG_IDENTIFIER={PROGRAM_NAME}\n"
-        f"MESSAGE={grey}{message}{NORMAL}\n"
-        ).encode('utf-8')
-
-    # Connect to the local systemd journal socket.
-    sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
-    try:
-        sock.connect('/run/systemd/journal/socket')
-        sock.sendall(payload)
-    except Exception:
-        # Fallback to stdout if systemd-journald is not reachable.
-        print(f"[{PROGRAM_NAME}] {TEXT}")
-    finally:
-        sock.close()
+    journal.sendv(f'MESSAGE={message}', f'SYSLOG_IDENTIFIER={PROGRAM_NAME}')
 
 
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
@@ -302,8 +281,8 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         term(PROGRAM_NAME, 1)
     finally:
-        text = f'{_('kz version 4.2.1 (built {}).').format(build_id)}\n\n'
-        text += f'{_("Written by Karel Zimmer <info@karelzimmer.nl>.")}\n'
+        text = f"{_('kz version 4.2.1 (built {}).').format(build_id)}\n\n"
+        text += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         text += _('License CC0 1.0 ' +
                   '<https://creativecommons.org/publicdomain/zero/1.0>.')
         infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)

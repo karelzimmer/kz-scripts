@@ -101,7 +101,7 @@ def process(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             cmd += f' {sys.argv[arg_num]}'
 
     if cmd == '/usr/bin/kz':
-        text = f'{PROGRAM_NAME}: {_('command is required')}\n{USAGE}'
+        text = f"{PROGRAM_NAME}: {_('command is required')}\n{USAGE}"
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
     else:
@@ -167,7 +167,7 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
             kz.term(PROGRAM_NAME, 0)
         else:
-            text = f'{PROGRAM_NAME}: getopt: {_('internal error')}'
+            text = f"{PROGRAM_NAME}: getopt: {_('internal error')}"
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             kz.term(PROGRAM_NAME, 1)
 
@@ -179,7 +179,7 @@ def process_option_list(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     text: str
     command: str = ''
 
-    text = f'{_("The following commands are available:")}\n'
+    text = f"{_('The following commands are available:')}\n"
     command = r'find    /usr/bin/kz-*               \
                         -maxdepth 1                 \
                         -type f                     \
@@ -191,12 +191,9 @@ def process_option_list(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
                 sort                            |   \
                 sed     --expression="s/kz-//"  |   \
                 sed     --expression="s/^/  /"'
-    try:
-        text += subprocess.run(command, stdout=subprocess.PIPE,
-                               shell=True, check=True, text=True).stdout
-    except Exception:
-        text += f'  0  {_('Use "man kz" for available commands.')} \n'
-
+    text += subprocess.run(command, stdout=subprocess.PIPE,
+                           stderr=subprocess.DEVNULL, shell=True,
+                           check=True, text=True).stdout
     text += '\n'
     text += _('Use "kz COMMAND [ARGUMENTS]" to execute a command.')
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)

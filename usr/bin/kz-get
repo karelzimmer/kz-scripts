@@ -46,7 +46,7 @@ declare OPTION_DEV=false
 init() {
     if [[ $* = '-d' || $*  = '--dev' ]]; then
         OPTION_DEV=true
-    elif [[ -n $* ]]; then
+    elif [[ $* ]]; then
         printf '%s\n' 'kz get [-d | --dev]'
         exit 0
     fi
@@ -70,7 +70,8 @@ process() {
 
     if grep --quiet --regexp='debian' /etc/os-release; then
         process_kz_deb_package
-    elif grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
+    elif grep --quiet --extended-regexp --regexp='fedora|rhel' /etc/os-release
+    then
         process_kz_rpm_package
     else
         printf "${RED}%b${NORMAL}\n" 'fatal: unknown os release' >&2
@@ -85,7 +86,7 @@ become_check() {
 
     if [[ $UID -eq 0 ]]; then
         return 0
-    elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
+    elif groups "$USER" | grep --quiet --regexp=sudo --regexp=wheel; then
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
@@ -199,7 +200,7 @@ Checklist installation.")\n"
     text+="$filler$(gettext "Checklist installation can be found on \
 https://karelzimmer.nl/en.")\n\n"
 
-    if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
+    if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
         text+="$filler${BLUE}$(gettext "Type 'exit' to close this window.")\
 ${NORMAL}\n"
     fi

@@ -66,9 +66,9 @@ if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first; then 
 # -----------------------------------------------------------------------------
 # LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
-if type lxqt-session; then sed --in-place --expression='s/Alt%2BF1\./Super_L./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session; then sed --in-place --expression='/single_click_activate=/d' --expression='/\[General\]/a single_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session; then sed --in-place --expression='/categoriesAtRight=/d' --expression='/\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=false' ~/.config/lxqt/panel.conf; fi
+if type lxqt-session; then sed -i 's/Alt%2BF1\./Super_L./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
+if type lxqt-session; then sed -i '/single_click_activate=/d; /\[General\]/a single_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session; then sed -i '/categoriesAtRight=/d; /\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=false' ~/.config/lxqt/panel.conf; fi
 LOGOUT=true
 
 #|reset|desktop-settings|*|Various desktop environments settings
@@ -105,9 +105,9 @@ if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first; then 
 # -----------------------------------------------------------------------------
 # LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
-if type lxqt-session; then sed --in-place --expression='s/Super_L./Alt%2BF1\./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session; then sed --in-place --expression='/single_click_activate=/d' --expression='/\[General\]/a single_click_activate=false' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session; then sed --in-place --expression='/categoriesAtRight=/d' --expression='/\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=true' ~/.config/lxqt/panel.conf; fi
+if type lxqt-session; then sed -i 's/Super_L./Alt%2BF1\./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
+if type lxqt-session; then sed -i '/single_click_activate=/d; /\[General\]/a single_click_activate=false' ~/.config/lxqt/lxqt.conf; fi
+if type lxqt-session; then sed -i '/categoriesAtRight=/d; /\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=true' ~/.config/lxqt/panel.conf; fi
 LOGOUT=true
 
 #|setup|evolution|*|Groupware suite with mail client and organizer
@@ -133,20 +133,20 @@ git config --global --unset alias.logg
 
 #|setup|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
 if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions enable caffeine@patapon.info; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions enable caffeine@patapon.info; fi
+if grep -q debian /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions enable caffeine@patapon.info; fi
+if grep -qE 'fedora|rhel' /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions enable caffeine@patapon.info; fi
 LOGOUT=true
 
 #|reset|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions disable caffeine@patapon.info; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions disable caffeine@patapon.info; fi
+if grep -q debian /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions disable caffeine@patapon.info; fi
+if grep -qE 'fedora|rhel' /etc/os-release && gnome-extensions info caffeine@patapon.info; then gnome-extensions disable caffeine@patapon.info; fi
 LOGOUT=true
 
 #|setup|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
 if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep -q debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep -qE 'fedora|rhel' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep -qE 'fedora|rhel' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock click-action; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink; then gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true; fi
@@ -176,41 +176,41 @@ if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts; then gsett
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-network; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
 if gsettings get org.gnome.shell.extensions.dash-to-dock show-trash; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep -q debian /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if grep -qE 'fedora|rhel' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep -qE 'fedora|rhel' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 LOGOUT=true
 
 #|setup|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
 if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
+if grep -q debian /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io; then gnome-extensions enable gsconnect@andyholmes.github.io; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 LOGOUT=true
 
 #|reset|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
+if grep -q debian /etc/os-release && gnome-extensions info gsconnect@andyholmes.github.io; then gnome-extensions disable gsconnect@andyholmes.github.io; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 
 #|setup|setup|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
 if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
+if grep -q debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions enable noannoyance-fork@vrba.dev; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 LOGOUT=true
 
 #|reset|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
+if grep -q debian /etc/os-release && gnome-extensions info noannoyance-fork@vrba.dev; then gnome-extensions disable noannoyance-fork@vrba.dev; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 LOGOUT=true
 
 #|setup|gnome-shell-extension-no-overview|*|No overview at start-up
 if gsettings get org.gnome.shell disable-user-extensions; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx; then gnome-extensions enable no-overview@fthx; fi
+if grep -q debian /etc/os-release && gnome-extensions info no-overview@fthx; then gnome-extensions enable no-overview@fthx; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
 LOGOUT=true
 
 #|reset|gnome-shell-extension-no-overview|*|No overview at start-up
 # This app is included in dash-to-dock-extension on Debian and Debian-based systems.
-if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info no-overview@fthx; then gnome-extensions disable no-overview@fthx; fi
+if grep -q debian /etc/os-release && gnome-extensions info no-overview@fthx; then gnome-extensions disable no-overview@fthx; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
 LOGOUT=true
 
@@ -279,18 +279,18 @@ chmod 755 ~
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spotify; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
+if grep -q debian /etc/os-release; then kz-desktop --addaft=spotify; fi
+if grep -qE 'fedora|rhel' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
 #|reset|spotify|pc01 pc06 pc07|Spotify streaming music client
-if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify; fi
-if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
+if grep -q debian /etc/os-release; then kz-desktop --delete=spotify; fi
+if grep -qE 'fedora|rhel' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 #|setup|terminal|pc01 pc06 pc07|Terminal emulator application
 # -----------------------------------------------------------------------------
 # Enable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place --expression='s/#alias/alias/g' --expression='s/# alias/alias/g' --expression='s/# export/export/g' --expression='s/# eval/eval/g' ~/.bashrc
+sed -i 's/#alias/alias/g; s/# alias/alias/g; s/# export/export/g; s/# eval/eval/g' ~/.bashrc
 # -----------------------------------------------------------------------------
 # Enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
@@ -302,21 +302,21 @@ LOGOUT=true
 # -----------------------------------------------------------------------------
 # Disable aliases.
 # -----------------------------------------------------------------------------
-sed --in-place --expression='s/^alias/#alias/g' --expression='s/^export/#export/g' --expression='s/^eval/#eval/g' ~/.bashrc
+sed -i 's/^alias/#alias/g; s/^export/#export/g; s/^eval/#eval/g' ~/.bashrc
 # -----------------------------------------------------------------------------
 # Disable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
+sed -i '/^stty -ixon/d' ~/.bashrc
 LOGOUT=true
 
 #|setup|terminal|pc06 pc07|Terminal emulator application
-sed --in-place --expression='/^alias bin/d' --expression='/^alias docs/d' ~/.bashrc
+sed -i '/^alias bin/d; /^alias docs/d' ~/.bashrc
 echo -e "alias bin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'\nalias docs='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc
 kz-desktop --addbef=org.gnome.Terminal
 
 #|reset|terminal|pc06 pc07|Terminal emulator application
 kz-desktop --delete=org.gnome.Terminal
-sed --in-place --expression='/^alias bin/d' --expression='/^alias docs/d' ~/.bashrc
+sed -i '/^alias bin/d; /^alias docs/d' ~/.bashrc
 
 #|setup|thumbnails-cache|#none|Restore thumbnails in nautilus
 rm --force --recursive ~/.cache/thumbnails/

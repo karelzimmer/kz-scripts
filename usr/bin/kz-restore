@@ -111,9 +111,10 @@ process_options() {
     while true; do
         case $1 in
             -G | --gui )
-                if [[ -z ${XDG_CURRENT_DESKTOP-} ]]; then
+                if [[ ! ${XDG_CURRENT_DESKTOP-} ]]; then
                     text="$program_name: $1: \
 $(gettext "no desktop environment available")"
+                    UI_MODE='cli'
                     kz.infomsg "$text"
                     exit 1
                 fi
@@ -124,6 +125,7 @@ $(gettext "no desktop environment available")"
                 if $option_source; then
                     text="$program_name: $1 $2: $(gettext 'too many options')
 $USAGE"
+                    UI_MODE='cli'
                     kz.infomsg "$text"
                     exit 1
                 fi
@@ -145,13 +147,14 @@ $USAGE"
                 ;;
             * )
                 text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                UI_MODE='cli'
                 kz.errmsg "$text"
                 exit 1
                 ;;
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         UI_MODE='cli'
@@ -243,12 +246,13 @@ check_source() {
     local usb_mount_point=/media/$USER
 
     # Correct mouint point for Red Hat and Fedora systems.
-    if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
+    if grep --quiet --extended-regexp --regexp='fedora|rhel' /etc/os-release
+    then
         usb_mount_point=/run/media/$USER
     fi
 
     if $option_source; then
-        if ! [[ -d $source_argument ]]; then
+        if [[ ! -d $source_argument ]]; then
             text="$program_name: $source_argument: \
 $(gettext 'directory does not exist')"
             kz.infomsg "$text"
@@ -287,7 +291,7 @@ $(eval_gettext "to  : \$SOURCE")"
         exit 1
     fi
 
-    if ! [[ -d $SOURCE ]]; then
+    if [[ ! -d $SOURCE ]]; then
         text=$(eval_gettext "No backup_\${HOSTNAME}_\$USER found in \$MEDIUM.")
         kz.errmsg "$text"
         exit 1
@@ -354,7 +358,7 @@ select_medium() {
         select_medium_cli
     fi
 
-    if [[ -z $selected_medium ]]; then
+    if [[ ! $selected_medium ]]; then
         text=$(gettext 'No USB medium selected.')
         kz.infomsg "$text"
         exit 0
@@ -435,7 +439,7 @@ select_medium_cli() {
         kz.logmsg "$prompt"
         read -rp "$prompt" < /dev/tty
 
-        if ! [[ $REPLY =~ ^[0-9]+$ ]]; then
+        if [[ ! $REPLY =~ ^[0-9]+$ ]]; then
             continue
         elif [[ $REPLY -eq $max_choices ]]; then
             exit 0
@@ -555,7 +559,7 @@ $text"
 restore_settings() {
     local settings_dir=$HOME/Settings
 
-    if [[ -n ${XDG_CURRENT_DESKTOP-} ]]; then
+    if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
         kz.logmsg 'Restore settings...'
         restore_setting_desktop
     fi
@@ -581,7 +585,8 @@ term() {
     local usb_mount_point=/media/$USER
 
     # Correct mouint point for Red Hat and Fedora systems.
-    if grep --quiet --regexp='rhel\|fedora' /etc/os-release; then
+    if grep --quiet --extended-regexp --regexp='fedora|rhel' /etc/os-release
+    then
         usb_mount_point=/run/media/$USER
     fi
 

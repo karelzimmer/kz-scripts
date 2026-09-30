@@ -118,6 +118,7 @@ check_input() {
                 --name          "$program_name"     \
                 --              "$@"
         )   ||  {
+                    UI_MODE='cli'
                     kz.infomsg "$USAGE"
                     exit 1
                 }
@@ -146,15 +147,17 @@ process_options() {
                 ;;
             * )
                 text="$PROGRAM_NAME: getopt: $(gettext 'internal error')"
+                UI_MODE='cli'
                 kz.errmsg "$text"
                 exit 1
                 ;;
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ $* ]]; then
         text="$program_name: $*: $(gettext 'arguments are not allowed')
 $USAGE"
+        UI_MODE='cli'
         kz.infomsg "$text"
         exit 1
     fi
