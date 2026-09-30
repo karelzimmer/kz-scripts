@@ -81,20 +81,20 @@ l | l.
 Record^Description
 #|install|calibre|*|Powerful and easy to use e-book manager^Install calib\
 re on every computer, see [1].
-sudo apt-get install --assume-yes calibre^Install command for calibre.
+sudo apt-get install -y calibre^Install command for calibre.
 ^
 #|remove|calibre|*|Powerful and easy to use e-book manager^Remove calibre\
  on every computer, see [1].
-sudo apt-get remove --assume-yes calibre^Remove command for calibre.
+sudo apt-get remove -y calibre^Remove command for calibre.
 ^
 ^
 #|install|vscode|pc06 pc07|Code editing. Redefined^Install vscode on pc06\
  and pc07, see [2].
-sudo apt-get install --assume-yes code^Install command for vscode.
+sudo apt-get install -y code^Install command for vscode.
 
 #|remove|vscode|pc06 pc07|Code editing. Redefined^Remove vscode from pc06\
  and pc07, see [2].
-sudo apt-get remove --assume-yes code^Remove command for vscode.
+sudo apt-get remove -y code^Remove command for vscode.
 .TE
 .sp
 [1]
@@ -116,6 +116,18 @@ and will therefore never be selected by default).
 .br
 An app can still be installed on another computer with the command 'kz install
 APP', e.g. 'kz install vscode'. In that case, the content of HOST is ignored.
+.sp
+N.B.
+.br
+An app can also be installed in the Terminal on the command line using the
+commands as shown with e.g. option '--cat'.
+.br
+Please note that all commands use short options whenever available (e.g. '-y'
+instead of '--assume-yes') to reduce line length.
+Easier to copy and type commands.
+.br
+Scripts use always the long options internally, but short options are provided
+for user convenience.
 
 .SH SEE ALSO
 \fBkz-install\fR(1),

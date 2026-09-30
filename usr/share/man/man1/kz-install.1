@@ -97,11 +97,17 @@ Option \fB-u\fR, \fB--usage\fR shows a short usage summary and exits.
 Option \fB-v\fR, \fB--version\fR shows the program version, author, and
 copyright, and exits.
 .sp
-To uninstall a app, on a Debian or Debian-based system you can use:
-    sudo apt-get remove --assume-yes APP
+To install an app, on a Debian or Debian-based system you can also use:
+    sudo apt-get install -y APP
 .br
 On a Red Hat or Red Hat-based system use:
-   sudo dnf remove --assumeyes APP
+   sudo dnf install -y APP
+.sp
+To uninstall an app, on a Debian or Debian-based system you can also use:
+    sudo apt-get remove -y APP
+.br
+On a Red Hat or Red Hat-based system use:
+   sudo dnf remove -y APP
 .sp
 If the installation of apps fails for some reason, on a Debian or Debian-based
 system you can try the following:
