@@ -378,7 +378,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:839 kz-install:1016 kz-restore:648 kz-setup:913
+#: kz-backup:839 kz-install:1017 kz-restore:648 kz-setup:913
 msgid "Error messages"
 msgstr ""
 
@@ -403,12 +403,12 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:821 kz-backup:847 kz-install:1020 kz-restore:629 kz-restore:656
+#: kz-backup:821 kz-backup:847 kz-install:1021 kz-restore:629 kz-restore:656
 #: kz-setup:917
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:848 kz-install:1021 kz-restore:657 kz-setup:918
+#: kz-backup:848 kz-install:1022 kz-restore:657 kz-setup:918
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -498,11 +498,11 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:626 kz-get:190
+#: kz-build:627 kz-get:191
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:632 kz-check:579 kz-deploy:319
+#: kz-build:633 kz-check:579 kz-deploy:319
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -625,7 +625,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:225 kz-backup:867 kz-desktop:282 kz-install:991 kz-install:1045
+#: kz-backup:225 kz-backup:867 kz-desktop:282 kz-install:992 kz-install:1046
 #: kz-menu:357 kz-menu:557 kz-restore:320 kz-restore:676 kz-setup:875
 #: kz-setup:942
 msgid "Press the Enter key to continue [Enter]: "
@@ -664,12 +664,12 @@ msgstr ""
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:254 kz-get:217
+#: kz_common.sh:254 kz-get:218
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz-get:203
+#: kz-get:204
 msgid "Type 'exit' to close this window."
 msgstr ""
 
@@ -835,15 +835,15 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:195
+#: kz-get:196
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:197
+#: kz-get:198
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:199 kz-menu:345
+#: kz-get:200 kz-menu:345
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
@@ -1025,39 +1025,39 @@ msgstr ""
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:792 kz-setup:751
+#: kz-install:793 kz-setup:751
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:793 kz-setup:752
+#: kz-install:794 kz-setup:752
 msgid "         COMMAND..."
 msgstr ""
 
-#: kz-install:866 kz-install:911
+#: kz-install:867 kz-install:912
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:1017
+#: kz-install:1018
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:1024
+#: kz-install:1025
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:1026
+#: kz-install:1027
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:977
+#: kz-install:978
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:979
+#: kz-install:980
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:985
+#: kz-install:986
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1625,7 +1625,7 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:636 kz-check:583 kz-deploy:323 kz-dev:384 kz-post-migrate:71
+#: kz-build:637 kz-check:583 kz-deploy:323 kz-dev:384 kz-post-migrate:71
 #: kz-update:370
 msgid "Complete!"
 msgstr ""

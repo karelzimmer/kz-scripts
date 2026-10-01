@@ -611,7 +611,8 @@ install_deb_package() {
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
     fi
 
-    # Ensure that the script never asks for input.
+    # Ensure that there is absolutely no interaction with the user when
+    # configuring packages, and standard answers are used for all questions.
     export DEBIAN_FRONTEND=noninteractive
 
     sudo apt-get reinstall --assume-yes "$to_install" |& $PROGRAM_LOGS

@@ -115,7 +115,8 @@ process_kz_deb_package() {
         install='reinstall'
     fi
 
-    # Ensure that the script never asks for input.
+    # Ensure that there is absolutely no interaction with the user when
+    # configuring packages, and standard answers are used for all questions.
     export DEBIAN_FRONTEND=noninteractive
 
     # Refresh package lists before installing apps, to minimize the risk of
