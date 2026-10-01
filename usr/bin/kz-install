@@ -783,6 +783,7 @@ process_command_file() {
     text="$(gettext "Authentication is required to install apps and change \
 system settings")
 "
+
     # Skip user prompts during installations or upgrades.
     # This ensures an uninterrupted, automated installation process.
     export DEBIAN_FRONTEND=noninteractive
@@ -834,11 +835,11 @@ $(gettext '         COMMAND...')"
 
 # This function reports and executes a command from the command file.
 execute_command() {
-    local cmd=$1
     local -i cmd_dis_len=0
     local -i cmd_dis_max=0
-    local cmd_dis=''
     local -i pkexec_rc=0
+    local cmd_dis=''
+    local cmd=$1
 
     kz.logmsg "$app_line\n\n         $cmd"
 

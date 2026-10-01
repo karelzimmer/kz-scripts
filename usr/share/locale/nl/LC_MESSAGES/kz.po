@@ -383,7 +383,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:839 kz-install:1016 kz-restore:648 kz-setup:913
+#: kz-backup:839 kz-install:1017 kz-restore:648 kz-setup:913
 msgid "Error messages"
 msgstr "Foutmeldingen"
 
@@ -408,12 +408,12 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:821 kz-backup:847 kz-install:1020 kz-restore:629 kz-restore:656
+#: kz-backup:821 kz-backup:847 kz-install:1021 kz-restore:629 kz-restore:656
 #: kz-setup:917
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:848 kz-install:1021 kz-restore:657 kz-setup:918
+#: kz-backup:848 kz-install:1022 kz-restore:657 kz-setup:918
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -642,7 +642,7 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz-backup:225 kz-backup:867 kz-desktop:282 kz-install:991 kz-install:1045
+#: kz-backup:225 kz-backup:867 kz-desktop:282 kz-install:992 kz-install:1046
 #: kz-menu:357 kz-menu:557 kz-restore:320 kz-restore:676 kz-setup:875
 #: kz-setup:942
 msgid "Press the Enter key to continue [Enter]: "
@@ -1062,39 +1062,39 @@ msgstr ""
 "Authenticatie is vereist om apps te installeren en systeeminstellingen te "
 "wijzigen"
 
-#: kz-install:792 kz-setup:751
+#: kz-install:793 kz-setup:751
 msgid "NUM/TOT  APP"
 msgstr "NUM/TOT  APP"
 
-#: kz-install:793 kz-setup:752
+#: kz-install:794 kz-setup:752
 msgid "         COMMAND..."
 msgstr "         OPDRACHT..."
 
-#: kz-install:866 kz-install:911
+#: kz-install:867 kz-install:912
 msgid "Authentication is required to continue."
 msgstr "Authenticatie is vereist om door te gaan."
 
-#: kz-install:1017
+#: kz-install:1018
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:1024
+#: kz-install:1025
 msgid "Try to install the apps again."
 msgstr "Probeer de apps opnieuw te installeren."
 
-#: kz-install:1026
+#: kz-install:1027
 msgid "Try to remove the apps again."
 msgstr "Probeer de apps opnieuw te verwijderen."
 
-#: kz-install:977
+#: kz-install:978
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:979
+#: kz-install:980
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:985
+#: kz-install:986
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."

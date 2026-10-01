@@ -611,11 +611,11 @@ install_deb_package() {
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
     fi
 
-    sudo    DEBIAN_FRONTEND=noninteractive  \
-            apt-get                         \
-            reinstall                       \
-            --assume-yes                    \
-            "$to_install"                   |& $PROGRAM_LOGS
+    # Skip user prompts during installations or upgrades.
+    # This ensures an uninterrupted, automated installation process.
+    export DEBIAN_FRONTEND=noninteractive
+
+    sudo apt-get reinstall --assume-yes "$to_install" |& $PROGRAM_LOGS
 }
 
 
