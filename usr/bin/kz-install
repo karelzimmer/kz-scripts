@@ -784,8 +784,7 @@ process_command_file() {
 system settings")
 "
 
-    # Skip user prompts during installations or upgrades.
-    # This ensures an uninterrupted, automated installation process.
+    # Ensure that the script never asks for input.
     export DEBIAN_FRONTEND=noninteractive
 
     if [[ $UI_MODE = 'cli' ]]; then

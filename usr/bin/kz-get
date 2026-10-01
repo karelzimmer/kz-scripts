@@ -115,6 +115,9 @@ process_kz_deb_package() {
         install='reinstall'
     fi
 
+    # Ensure that the script never asks for input.
+    export DEBIAN_FRONTEND=noninteractive
+
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
     printf '%s' 'Debian update.....'
@@ -127,10 +130,6 @@ process_kz_deb_package() {
             "$kz_deb_site_file"                     |& $PROGRAM_LOGS
     # Prevent the message ...'/tmp/...deb' couldn't be accessed by user '_apt'.
     chmod o+r "$kz_deb_local_file"
-
-    # Skip user prompts during installations or upgrades.
-    # This ensures an uninterrupted, automated installation process.
-    export DEBIAN_FRONTEND=noninteractive
 
     # Install kz deb package.
     printf '\n%s' 'Deb kz install....'

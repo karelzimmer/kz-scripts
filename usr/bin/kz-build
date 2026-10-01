@@ -611,8 +611,7 @@ install_deb_package() {
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
     fi
 
-    # Skip user prompts during installations or upgrades.
-    # This ensures an uninterrupted, automated installation process.
+    # Ensure that the script never asks for input.
     export DEBIAN_FRONTEND=noninteractive
 
     sudo apt-get reinstall --assume-yes "$to_install" |& $PROGRAM_LOGS
