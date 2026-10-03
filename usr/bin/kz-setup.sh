@@ -34,11 +34,11 @@ kz-desktop --delete=kz-cockpit
 
 #|setup|desktop-settings|*|Various desktop environments settings
 # -----------------------------------------------------------------------------
-# Cinnamon desktop environment settings.
+# Set Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy; then gsettings set org.nemo.preferences click-policy 'single'; fi
 # -----------------------------------------------------------------------------
-# GNOME desktop environment settings.
+# Set GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if gsettings get org.gnome.desktop.input-sources sources; then gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+intl')]"; fi
@@ -64,20 +64,18 @@ if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-
 if gsettings get org.gnome.shell.extensions.ding show-home; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true; fi
 # -----------------------------------------------------------------------------
-# LXQt desktop environment settings.
+# Set LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
-if type lxqt-session; then sed -i 's/Alt%2BF1\./Super_L./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session; then sed -i '/single_click_activate=/d; /\[General\]/a single_click_activate=true' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session; then sed -i '/categoriesAtRight=/d; /\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=false' ~/.config/lxqt/panel.conf; fi
+if type lxqt-session; then sed -i 's/Alt%2BF1\./Super_L./g' ~/.config/lxqt/globalkeyshortcuts.conf && sed -i '/single_click_activate=/d; /\[General\]/a single_click_activate=true' ~/.config/lxqt/lxqt.conf && sed -i '/categoriesAtRight=/d; /\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=false' ~/.config/lxqt/panel.conf; fi
 LOGOUT=true
 
 #|reset|desktop-settings|*|Various desktop environments settings
 # -----------------------------------------------------------------------------
-# Cinnamon desktop environment settings.
+# Reset Cinnamon desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.nemo.preferences click-policy; then gsettings reset org.nemo.preferences click-policy; fi
 # -----------------------------------------------------------------------------
-# GNOME desktop environment settings.
+# Reset GNOME desktop environment settings.
 # -----------------------------------------------------------------------------
 if gsettings get org.gnome.desktop.calendar show-weekdate; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if gsettings get org.gnome.desktop.input-sources sources; then gsettings reset org.gnome.desktop.input-sources sources; fi
@@ -103,11 +101,9 @@ if gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-battery-
 if gsettings get org.gnome.shell.extensions.ding show-home; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
 if gsettings get org.gtk.gtk4.Settings.FileChooser sort-directories-first; then gsettings reset org.gtk.gtk4.Settings.FileChooser sort-directories-first; fi
 # -----------------------------------------------------------------------------
-# LXQt desktop environment settings.
+# Reset LXQt desktop environment settings.
 # -----------------------------------------------------------------------------
-if type lxqt-session; then sed -i 's/Super_L./Alt%2BF1\./g' ~/.config/lxqt/globalkeyshortcuts.conf; fi
-if type lxqt-session; then sed -i '/single_click_activate=/d; /\[General\]/a single_click_activate=false' ~/.config/lxqt/lxqt.conf; fi
-if type lxqt-session; then sed -i '/categoriesAtRight=/d; /\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=true' ~/.config/lxqt/panel.conf; fi
+if type lxqt-session; then sed -i 's/Super_L./Alt%2BF1\./g' ~/.config/lxqt/globalkeyshortcuts.conf && sed -i '/single_click_activate=/d; /\[General\]/a single_click_activate=false' ~/.config/lxqt/lxqt.conf && sed -i '/categoriesAtRight=/d; /\[mainmenu\]\|\[fancymenu\]/a categoriesAtRight=true' ~/.config/lxqt/panel.conf; fi
 LOGOUT=true
 
 #|setup|evolution|*|Groupware suite with mail client and organizer
@@ -223,14 +219,10 @@ LOGOUT=true
 # Customize Clock on Lock Screen    https://extensions.gnome.org/extension/4663/customize-clock-on-lock-screen/
 # Desktop Cube                      https://extensions.gnome.org/extension/4648/desktop-cube/
 # -----------------------------------------------------------------------------
-if type gnome-session; then pipx install gnome-extensions-cli --system-site-packages; fi
-if type gnome-session; then pipx ensurepath; fi
-if type gnome-session; then ~/.local/bin/gext install 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com'; fi
-if type gnome-session; then ~/.local/bin/gext enable 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com'; fi
+if type gnome-session; then pipx install gnome-extensions-cli --system-site-packages && pipx ensurepath && ~/.local/bin/gext install 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com' && ~/.local/bin/gext enable 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com'; fi
 
 #|reset|gnome-shell-extensions-visual-effects|pc06 pc07|Various GNOME visual effects
-if type gnome-session; then ~/.local/bin/gext disable 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com'; fi
-if type gnome-session; then ~/.local/bin/gext uninstall 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com'; fi
+if type gnome-session; then ~/.local/bin/gext disable 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com' && ~/.local/bin/gext uninstall 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com'; fi
 
 #|setup|google-chrome|pc01 pc06 pc07|The web browser from Google
 kz-desktop --addbef=google-chrome
@@ -245,12 +237,10 @@ kz-desktop --addaft=virt-manager
 kz-desktop --delete=virt-manager
 
 #|setup|libreoffice|#none|Office productivity suite
-kz-desktop --addaft=libreoffice-writer
-kz-desktop --addaft=org.libreoffice.LibreOffice.writer
+kz-desktop --addaft=libreoffice-writer && kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
 #|reset|libreoffice|#none|Office productivity suite
-kz-desktop --delete=libreoffice-writer
-kz-desktop --delete=org.libreoffice.LibreOffice.writer
+kz-desktop --delete=libreoffice-writer && kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
 #|setup|lynis|#none|Security auditing and hardening tool for Linux/Unix
 git clone https://github.com/CISOfy/lynis.git "$HOME/lynis"
@@ -288,14 +278,9 @@ if grep -qE 'fedora|rhel' /etc/os-release; then kz-desktop --delete=kz-spotify; 
 
 #|setup|terminal|pc01 pc06 pc07|Terminal emulator application
 # -----------------------------------------------------------------------------
-# Enable aliases.
+# Enable aliases & enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed -i 's/#alias/alias/g; s/# alias/alias/g; s/# export/export/g; s/# eval/eval/g' ~/.bashrc
-# -----------------------------------------------------------------------------
-# Enable search forward in history (with Ctrl-S).
-# -----------------------------------------------------------------------------
-sed --in-place '/^stty -ixon/d' ~/.bashrc
-echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
+sed -i 's/#alias/alias/g; s/# alias/alias/g; s/# export/export/g; s/# eval/eval/g' ~/.bashrc && sed --in-place '/^stty -ixon/d' ~/.bashrc && echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 LOGOUT=true
 
 #|reset|terminal|pc01 pc06 pc07|Terminal emulator application
@@ -310,13 +295,10 @@ sed -i '/^stty -ixon/d' ~/.bashrc
 LOGOUT=true
 
 #|setup|terminal|pc06 pc07|Terminal emulator application
-sed -i '/^alias bin/d; /^alias docs/d' ~/.bashrc
-echo -e "alias bin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'\nalias docs='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc
-kz-desktop --addbef=org.gnome.Terminal
+sed -i '/^alias bin/d; /^alias docs/d' ~/.bashrc && echo -e "alias bin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'\nalias docs='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc && kz-desktop --addbef=org.gnome.Terminal
 
 #|reset|terminal|pc06 pc07|Terminal emulator application
-kz-desktop --delete=org.gnome.Terminal
-sed -i '/^alias bin/d; /^alias docs/d' ~/.bashrc
+sed -i '/^alias bin/d; /^alias docs/d' ~/.bashrc && kz-desktop --delete=org.gnome.Terminal
 
 #|setup|thumbnails-cache|#none|Restore thumbnails in nautilus
 rm --force --recursive ~/.cache/thumbnails/
@@ -334,16 +316,7 @@ kz-desktop --delete=thunderbird
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-kz-desktop --addbef=code
-if type xdg-mime; then xdg-mime default code.desktop application/json; fi
-if type xdg-mime; then xdg-mime default code.desktop application/x-desktop; fi
-if type xdg-mime; then xdg-mime default code.desktop application/x-shellscript; fi
-if type xdg-mime; then xdg-mime default code.desktop application/xml; fi
-if type xdg-mime; then xdg-mime default code.desktop text/html; fi
-if type xdg-mime; then xdg-mime default code.desktop text/markdown; fi
-if type xdg-mime; then xdg-mime default code.desktop text/plain; fi
-if type xdg-mime; then xdg-mime default code.desktop text/troff; fi
-if type xdg-mime; then xdg-mime default code.desktop text/x-python; fi
+if type xdg-mime; then xdg-mime default code.desktop application/json && xdg-mime default code.desktop application/x-desktop && xdg-mime default code.desktop application/x-shellscript && xdg-mime default code.desktop application/xml && xdg-mime default code.desktop text/html && xdg-mime default code.desktop text/markdown && xdg-mime default code.desktop text/plain && xdg-mime default code.desktop text/troff && xdg-mime default code.desktop text/x-python; fi && kz-desktop --addbef=code
 
 #|reset|vscode|pc06 pc07|Code editing. Redefined
 kz-desktop --delete=code
@@ -361,14 +334,11 @@ kz-desktop --delete=kz-webmin
 # -----------------------------------------------------------------------------
 # This app is not required when "apt-cache show xdg-user-dirs" shows version 0.20 or higher.
 # -----------------------------------------------------------------------------
-if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten; fi
-if [[ ${LANG:0:2} = 'nl' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projecten; fi
-if [[ ${LANG:0:2} = 'en' ]]; then mkdir --parents --verbose ~/Projects; fi
-if [[ ${LANG:0:2} = 'en' ]]; then xdg-user-dirs-update --set PROJECTS ~/Projects; fi
-xdg-user-dirs-update
+if [[ ${LANG:0:2} = 'nl' ]]; then mkdir --parents --verbose ~/Projecten && xdg-user-dirs-update --set PROJECTS ~/Projecten && xdg-user-dirs-update; fi
+if [[ ${LANG:0:2} = 'en' ]]; then mkdir --parents --verbose ~/Projects && xdg-user-dirs-update --set PROJECTS ~/Projects && xdg-user-dirs-update; fi
 
 #|reset|xdg-projects-dir|pc06 pc07|Add XDG_PROJECTS_DIR to ~/.config/user-dirs.dirs
-xdg-user-dirs-update --set PROJECTS ~
+xdg-user-dirs-update --set PROJECTS ~ && xdg-user-dirs-update
 
 #|setup|zoom|pc01|Cloud-based communication and collaboration platform
 kz-desktop --addaft=kz-zoom

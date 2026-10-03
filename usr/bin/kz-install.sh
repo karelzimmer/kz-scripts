@@ -42,10 +42,8 @@ if grep -qE 'fedora|rhel' /etc/os-release; then sudo grub2-mkconfig -o /boot/gru
 REBOOT=true
 
 #|install|angryipscan|pc06 pc07|Fast and friendly network scanner
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y flatpak; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y flatpak; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install -y org.angryip.ipscan; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install -y org.angryip.ipscan; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install -y org.angryip.ipscan; fi
 
 #|remove|angryipscan|pc06 pc07|Fast and friendly network scanner
 if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall -y org.angryip.ipscan; fi
@@ -59,13 +57,10 @@ if grep -q debian /etc/os-release; then sudo apt-get remove -y ansible; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y ansible-core; fi
 
 #|install|apport-settings|#none|Disable Ubuntu's official crash reporting system
-if grep -q 'Ubuntu' /etc/os-release; then sudo systemctl disable --now apport.service; fi
-if grep -q 'Ubuntu' /etc/os-release; then sudo sed -i 's/enabled=.*$/enabled=0/' /etc/default/apport; fi
-if grep -q 'Ubuntu' /etc/os-release; then sudo rm -fv /var/crash/*; fi
+if grep -q 'Ubuntu' /etc/os-release; then sudo systemctl disable --now apport.service && sudo sed -i 's/enabled=.*$/enabled=0/' /etc/default/apport && sudo rm -fv /var/crash/*; fi
 
 #|remove|apport-settings|#none|Enable Ubuntu's official crash reporting system
-if grep -q 'Ubuntu' /etc/os-release; then sudo sed -i 's/enabled=.*$/enabled=1/' /etc/default/apport; fi
-if grep -q 'Ubuntu' /etc/os-release; then sudo systemctl enable --now apport.service; fi
+if grep -q 'Ubuntu' /etc/os-release; then sudo sed -i 's/enabled=.*$/enabled=1/' /etc/default/apport && systemctl enable --now apport.service; fi
 
 #|install|backintime|#none|Simple backup/snapshot system (graphical interface)
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y backintime-qt; fi
@@ -84,10 +79,8 @@ if grep -q debian /etc/os-release; then sudo apt-get remove -y bash-completion; 
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y bash-completion; fi
 
 #|install|bitwarden|*|A secure and free password manager for all of your devices
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y flatpak; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y flatpak; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install -y com.bitwarden.desktop; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install -y com.bitwarden.desktop; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install -y com.bitwarden.desktop; fi
 REBOOT=true
 
 #|remove|bitwarden|*|A secure and free password manager for all of your devices
@@ -95,10 +88,8 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall -y com.bitwarden.d
 REBOOT=true
 
 #|install|bottles|pc06 pc07|Run Windows software
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y flatpak; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y flatpak; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak install -y com.usebottles.bottles; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install -y com.usebottles.bottles; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install -y com.usebottles.bottles; fi
 REBOOT=true
 
 #|remove|bottles|pc06 pc07|Run Windows software
@@ -205,60 +196,43 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then
 
 #|install|firewall|*|Program for managing a Netfilter firewall
 # -----------------------------------------------------------------------------
-# Program for managing a Netfilter firewall.
+# Install [g]ufw & firewall-config.
 # -----------------------------------------------------------------------------
-if grep -q debian /etc/os-release; then sudo apt-get install -y ufw; fi
-if grep -q debian /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install -y gufw; fi
-if grep -q debian /etc/os-release; then sudo ufw enable; fi
-# -----------------------------------------------------------------------------
-# Firewall configuration application.
-# -----------------------------------------------------------------------------
+if grep -q debian /etc/os-release; then if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install -y gufw; else sudo apt-get install -y ufw; fi; sudo ufw enable; fi
 if grep -q rhel /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo dnf install -y firewall-config; fi
 # -----------------------------------------------------------------------------
 # Add firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw allow 1714:1764/udp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw allow 1714:1764/tcp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw reload; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/{udp,tcp}; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --reload; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw allow 1714:1764/udp && sudo ufw allow 1714:1764/tcp && sudo ufw reload; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/{udp,tcp} && sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
 # Add firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if (type ssh && systemctl status ufw); then sudo ufw allow ssh; fi
-if (type ssh && systemctl status ufw); then sudo ufw reload; fi
-if (type ssh && systemctl status firewalld); then sudo firewall-cmd --permanent --add-service=ssh; fi
-if (type ssh && systemctl status firewalld); then sudo firewall-cmd --reload; fi
+if type ssh && systemctl status ufw; then sudo ufw allow ssh && sudo ufw reload; fi
+if type ssh && systemctl status firewalld; then sudo firewall-cmd --permanent --add-service=ssh && sudo firewall-cmd --reload; fi
 
 #|remove|firewall|*|Program for managing a Netfilter firewall
 # -----------------------------------------------------------------------------
-# Program for managing a Netfilter firewall.
+# Remove firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw delete allow 1714:1764/udp; fi
-if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw delete allow 1714:1764/tcp; fi
+if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status ufw; then sudo ufw delete allow 1714:1764/udp && sudo ufw delete allow 1714:1764/tcp; fi
 if gnome-extensions list --enabled | grep --quiet gsconnect && systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/{udp,tcp}; fi
 # -----------------------------------------------------------------------------
 # Remove firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if (type ssh && systemctl status ufw); then sudo ufw delete allow ssh; fi
-if (type ssh && systemctl status firewalld); then sudo firewall-cmd --permanent --remove-service=ssh; fi
+if type ssh && systemctl status ufw; then sudo ufw delete allow ssh && sudo ufw reload; fi
+if type ssh && systemctl status firewalld; then sudo firewall-cmd --permanent --remove-service=ssh && sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
-# Program for managing a Netfilter firewall.
+# Remove [g]ufw & firewall-config.
 # -----------------------------------------------------------------------------
-if grep -q debian /etc/os-release; then sudo ufw disable; fi
-if grep -q debian /etc/os-release; then sudo apt-get remove -y ufw; fi
-# -----------------------------------------------------------------------------
-# Firewall configuration application.
-# -----------------------------------------------------------------------------
+if grep -q debian /etc/os-release; then sudo ufw disable && sudo apt-get remove -y ufw; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y firewall-config; fi
 
 #|install|fwupd-settings|#none|Disable Firmware update daemon
-sudo systemctl disable --now fwupd.service
-sudo systemctl mask fwupd.service
+sudo systemctl disable --now fwupd.service && sudo systemctl mask fwupd.service
 
 #|remove|fwupd-settings|#none|Enable Firmware update daemon
-sudo systemctl unmask fwupd.service
-sudo systemctl enable --now fwupd.service
+sudo systemctl unmask fwupd.service && sudo systemctl enable --now fwupd.service
 
 #|install|gdebi|#none|Simple tool to view and install deb files - GNOME GUI
 if grep -q debian /etc/os-release && type gnome-session; then sudo apt-get install -y gdebi; fi
@@ -288,61 +262,56 @@ if grep -q debian /etc/os-release; then sudo apt-get remove -y git; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y git; fi
 
 #|install|gnome-extensions-cli|pc06 pc07|Execute binaries from Python packages in isolated environments
-if grep -q debian /etc/os-release && type gnome-session; then sudo apt-get install -y pipx; fi
-if grep -q debian /etc/os-release && type gnome-session; then sudo pipx install gnome-extensions-cli; fi
-if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo dnf install -y pipx; fi
-if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo pipx install gnome-extensions-cli; fi
+if grep -q debian /etc/os-release && type gnome-session; then sudo apt-get install -y pipx && sudo pipx install gnome-extensions-cli; fi
+if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo dnf install -y pipx && sudo pipx install gnome-extensions-cli; fi
 
 #|remove|gnome-extensions-cli|pc06 pc07|Execute binaries from Python packages in isolated environments
 if grep -q debian /etc/os-release && type gnome-session; then sudo pipx uninstall gnome-extensions-cli; fi
 if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo pipx uninstall gnome-extensions-cli; fi
 
 #|install|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
-if grep -q debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get install -y gnome-shell-extension-caffeine; fi
-if grep -qE 'fedora|rhel' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine); then sudo dnf install -y gnome-shell-extension-caffeine; fi
+if grep -q debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-caffeine; then sudo apt-get install -y gnome-shell-extension-caffeine; fi
+if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session && dnf list gnome-shell-extension-caffeine; then sudo dnf install -y gnome-shell-extension-caffeine; fi
 REBOOT=true
 
 #|remove|gnome-shell-extension-caffeine|*|Disable the screensaver and auto suspend
-if grep -q debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-caffeine); then sudo apt-get remove -y gnome-shell-extension-caffeine; fi
-if grep -qE 'fedora|rhel' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-caffeine); then sudo dnf remove -y gnome-shell-extension-caffeine; fi
+if grep -q debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-caffeine; then sudo apt-get remove -y gnome-shell-extension-caffeine; fi
+if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session && dnf list gnome-shell-extension-caffeine; then sudo dnf remove -y gnome-shell-extension-caffeine; fi
 REBOOT=true
 
 #|install|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if grep -q debian /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock); then sudo apt-get install -y gnome-shell-extension-dashtodock; fi
-if grep -qE 'fedora|rhel' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock); then sudo dnf install -y gnome-shell-extension-dash-to-dock; fi
+if grep -q debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get install -y gnome-shell-extension-dashtodock; fi
+if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock; then sudo dnf install -y gnome-shell-extension-dash-to-dock; fi
 REBOOT=true
 
 #|remove|gnome-shell-extension-dashtodock|*|A dock for the Gnome Shell
-if grep -q debian /etc/os-release && (type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock); then sudo apt-get remove -y gnome-shell-extension-dashtodock; fi
-if grep -qE 'fedora|rhel' /etc/os-release && (type gnome-session && dnf list gnome-shell-extension-dash-to-dock); then sudo dnf remove -y gnome-shell-extension-dash-to-dock; fi
+if grep -q debian /etc/os-release && type gnome-session && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get remove -y gnome-shell-extension-dashtodock; fi
+if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session && dnf list gnome-shell-extension-dash-to-dock; then sudo dnf remove -y gnome-shell-extension-dash-to-dock; fi
 REBOOT=true
 
 #|install|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
 # -----------------------------------------------------------------------------
-# Securely connect to mobile devices and other desktops.
+# Install gnome-shell-extension-gsconnect.
 # -----------------------------------------------------------------------------
-if grep -q debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect); then sudo apt-get install -y gnome-shell-extension-gsconnect; fi
+if grep -q debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-gsconnect; then sudo apt-get install -y gnome-shell-extension-gsconnect; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
 # -----------------------------------------------------------------------------
 # Add firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
-if systemctl status ufw; then sudo ufw allow 1714:1764/udp; fi
-if systemctl status ufw; then sudo ufw allow 1714:1764/tcp; fi
-if systemctl status ufw; then sudo ufw reload; fi
-if systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/{udp,tcp}; fi
-if systemctl status firewalld; then sudo firewall-cmd --reload; fi
+if systemctl status ufw; then sudo ufw allow 1714:1764/udp && sudo ufw allow 1714:1764/tcp && sudo ufw reload; fi
+if systemctl status firewalld; then sudo firewall-cmd --permanent --add-port=1714-1764/{udp,tcp} && sudo firewall-cmd --reload; fi
 
 #|remove|gnome-shell-extension-gsconnect|pc06 pc07|Securely connect to mobile devices and other desktops
-if grep -q debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-gsconnect); then sudo apt-get remove -y gnome-shell-extension-gsconnect; fi
-# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and enable the extension.
+# -----------------------------------------------------------------------------
+# Remove gnome-shell-extension-gsconnect.
+# -----------------------------------------------------------------------------
+if grep -q debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-gsconnect; then sudo apt-get remove -y gnome-shell-extension-gsconnect; fi
+# For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/1319/gsconnect/ and disable the extension.
 # -----------------------------------------------------------------------------
 # Remove firewall rules for GSConnect.
 # -----------------------------------------------------------------------------
-if systemctl status ufw; then sudo ufw delete allow 1714:1764/udp; fi
-if systemctl status ufw; then sudo ufw delete allow 1714:1764/tcp; fi
-if systemctl status ufw; then sudo ufw reload; fi
-if systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/{udp,tcp}; fi
-if systemctl status firewalld; then sudo firewall-cmd --reload; fi
+if systemctl status ufw; then sudo ufw delete allow 1714:1764/udp && sudo ufw delete allow 1714:1764/tcp && sudo ufw reload; fi
+if systemctl status firewalld; then sudo firewall-cmd --permanent --remove-port=1714-1764/{udp,tcp} && sudo firewall-cmd --reload; fi
 
 #|install|gnome-shell-extension-manager|pc06 pc07|Utility for managing GNOME Shell Extensions
 if grep -q debian /etc/os-release && type gnome-session; then sudo apt-get install -y gnome-shell-extension-manager; fi
@@ -353,22 +322,22 @@ if grep -q debian /etc/os-release && type gnome-session; then sudo apt-get remov
 if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo dnf remove -y gnome-extensions-app; fi
 
 #|install|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep -q debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance); then sudo apt-get install -y gnome-shell-extension-no-annoyance; fi
+if grep -q debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance; then sudo apt-get install -y gnome-shell-extension-no-annoyance; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
 REBOOT=true
 
 #|remove|gnome-shell-extension-no-annoyance|*|Disable the 'Window is ready' notification
-if grep -q debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-annoyance); then sudo apt-get remove -y gnome-shell-extension-no-annoyance; fi
+if grep -q debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-annoyance; then sudo apt-get remove -y gnome-shell-extension-no-annoyance; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
 REBOOT=true
 
 #|install|gnome-shell-extension-no-overview|*|No overview at start-up
-if grep -q debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview); then sudo apt-get install -y gnome-shell-extension-no-overview; fi
+if grep -q debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install -y gnome-shell-extension-no-overview; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
 REBOOT=true
 
 #|remove|gnome-shell-extension-no-overview|*|No overview at start-up
-if grep -q debian /etc/os-release && (type gnome-session && apt-cache show gnome-shell-extension-no-overview); then sudo apt-get remove -y gnome-shell-extension-no-overview; fi
+if grep -q debian /etc/os-release && type gnome-session && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get remove -y gnome-shell-extension-no-overview; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
 REBOOT=true
 
@@ -381,11 +350,8 @@ if grep -q debian /etc/os-release && type gnome-session; then sudo apt-get remov
 if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo dnf remove -y gnome-tweaks; fi
 
 #|install|google-chrome|pc01 pc06 pc07|The web browser from Google
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O /tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y /tmp/google-chrome.deb; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo rm -fv /tmp/google-chrome.deb; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O /tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb && sudo apt-get install -y /tmp/google-chrome.deb && sudo rm -fv /tmp/google-chrome.deb; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub && sudo dnf install -y https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 #|remove|google-chrome|pc01 pc06 pc07|The web browser from Google
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y google-chrome-stable; fi
@@ -401,26 +367,25 @@ if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y groff; fi
 
 #|install|grub-settings|*|Reduce GRUB menu display time
 # -----------------------------------------------------------------------------
-# Reduce GRUB menu display time.
+# Reduce GRUB menu display time & suppress warnings.
 # -----------------------------------------------------------------------------
 sudo sed -i 's/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/' /etc/default/grub
-# -----------------------------------------------------------------------------
-# Suppress warnings.
-# -----------------------------------------------------------------------------
 if ! grep -q 'loglevel=3' /etc/default/grub; then sudo sed -i 's/quiet/quiet loglevel=3/' /etc/default/grub; fi
+# -----------------------------------------------------------------------------
+# Update GRUB.
+# -----------------------------------------------------------------------------
 if grep -q debian /etc/os-release; then sudo update-grub; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
 
 #|remove|grub-settings|*|Restore GRUB menu display time
 # -----------------------------------------------------------------------------
-# Restore default GRUB menu display time.
+# Restore default GRUB menu display time & enable warnings.
 # -----------------------------------------------------------------------------
-sudo sed -i 's/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/' /etc/default/grub
+sudo sed -i 's/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/; s/ loglevel=3//' /etc/default/grub
 # -----------------------------------------------------------------------------
-# Enable warnings.
+# Update GRUB.
 # -----------------------------------------------------------------------------
-sudo sed -i 's/ loglevel=3//' /etc/default/grub
 if grep -q debian /etc/os-release; then sudo update-grub; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 REBOOT=true
@@ -461,8 +426,7 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo ap
 # -----------------------------------------------------------------------------
 # Images are in: /var/lib/libvirt/images/
 # -----------------------------------------------------------------------------
-if grep -q debian /etc/os-release; then sudo apt-get install -y bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; fi
-if grep -q debian /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install -y virt-manager; fi
+if grep -q debian /etc/os-release; then sudo apt-get install -y bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get install -y virt-manager; fi; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf groupinstall "Virtualization Host"; fi
 sudo systemctl enable --now libvirtd
 # -----------------------------------------------------------------------------
@@ -471,18 +435,15 @@ sudo systemctl enable --now libvirtd
 # -----------------------------------------------------------------------------
 sudo virsh --connect=qemu:///system net-autostart default
 # -----------------------------------------------------------------------------
-# Check network 'default' with
+# Check network 'default' with the following command:
 # "sudo virsh --connect=qemu:///system net-info default", should output
 # 'Autostart: yes'.
 # -----------------------------------------------------------------------------
 REBOOT=true
 
 #|remove|kvm|pc06 pc07|KVM (for Kernel-based Virtual Machine) is a full virtualization solution
-if grep -q debian /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
-if grep -q debian /etc/os-release; then sudo apt-get remove -y bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; fi
-if grep -q debian /etc/os-release && [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove -y virt-manager; fi
-if grep -qE 'fedora|rhel' /etc/os-release; then sudo systemctl disable --now libvirtd; fi
-if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf groupremove "Virtualization Host"; fi
+if grep -q debian /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default --disable && sudo apt-get remove -y bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove -y virt-manager; fi; fi
+if grep -qE 'fedora|rhel' /etc/os-release; then sudo systemctl disable --now libvirtd && sudo dnf groupremove "Virtualization Host"; fi
 REBOOT=true
 
 #|install|lftp|pc06 pc07|Sophisticated command-line FTP/HTTP/BitTorrent client programs
@@ -499,20 +460,12 @@ if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y lftp; fi
 # - Microsoft TrueType core fonts like Arial, Times New Roman, and Verdana, and
 # - MS Word fonts like Calibri, Cambria, and Arial, for better compatibility
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then echo 'ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true' | sudo debconf-set-selections; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y fonts-croscore fonts-crosextra-caladea fonts-crosextra-carlito fonts-recommended libreoffice libreoffice-gtk3 ttf-mscorefonts-installer; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y cabextract flatpak fontconfig google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts xorg-x11-font-utils; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo flatpak install -y flathub app/org.libreoffice.LibreOffice; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rpm -i --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache -fv; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then echo 'ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true' | sudo debconf-set-selections && sudo apt-get install -y fonts-croscore fonts-crosextra-caladea fonts-crosextra-carlito fonts-recommended libreoffice libreoffice-gtk3 ttf-mscorefonts-installer && sudo fc-cache -fv; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y cabextract flatpak fontconfig google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts xorg-x11-font-utils && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install -y flathub app/org.libreoffice.LibreOffice && sudo rpm -i --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm && sudo fc-cache -fv; fi
 
 #|remove|libreoffice|*|Office productivity suite
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y fonts-croscore fonts-crosextra-caladea fonts-crosextra-carlito fonts-recommended libreoffice libreoffice-gtk3 ttf-mscorefonts-installer; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y cabextract flatpak fontconfig google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts xorg-x11-font-utils; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo flatpak uninstall -y app/org.libreoffice.LibreOffice; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rpm -e --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo fc-cache -fv; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y fonts-croscore fonts-crosextra-caladea fonts-crosextra-carlito fonts-recommended libreoffice libreoffice-gtk3 ttf-mscorefonts-installer && sudo fc-cache -fv; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y cabextract flatpak fontconfig google-carlito-fonts google-crosextra-caladea-fonts liberation-fonts xorg-x11-font-utils && sudo flatpak uninstall -y app/org.libreoffice.LibreOffice && sudo rpm -e --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm && sudo fc-cache -fv; fi
 
 #|install|linters|pc06 pc07|Analyse scripts for errors and style
 # -----------------------------------------------------------------------------
@@ -550,18 +503,11 @@ if grep -q debian /etc/os-release; then sudo apt-get remove -y lshw; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y lshw; fi
 
 #|install|microsoft-edge|pc06 pc07|The web browser from Microsoft
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get update; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y microsoft-edge-stable; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y flatpak; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo flatpak install -y flathub com.microsoft.Edge; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list && sudo apt-get update && sudo apt-get install -y microsoft-edge-stable; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install -y flathub com.microsoft.Edge; fi
 
 #|remove|microsoft-edge|pc06 pc07|The web browser from Microsoft
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y microsoft-edge-stable; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo rm -fv /etc/apt/sources.list.d/microsoft-edge.list; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get update; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y microsoft-edge-stable && sudo rm -fv /etc/apt/sources.list.d/microsoft-edge.list && sudo apt-get update; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo flatpak uninstall -y flathub com.microsoft.Edge; fi
 
 #|install|nmap|pc06 pc07|The network mapper
@@ -657,14 +603,11 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo ap
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y pst-utils; fi
 
 #|install|python|pc06 pc07|Interactive high-level object-oriented language
-if grep -q debian /etc/os-release; then sudo apt-get install -y python3 python3-pip python-is-python3; fi
-if grep -q debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
-if grep -q debian /etc/os-release; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
+if grep -q debian /etc/os-release; then sudo apt-get install -y python3 python3-pip python-is-python3 && sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8 && sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y python3 python3-pip; fi
 
 #|remove|python|pc06 pc07|Interactive high-level object-oriented language
-if grep -q debian /etc/os-release; then sudo apt-get remove -y python python3-pip python-is-python3; fi
-if grep -q debian /etc/os-release; then sudo rm -fv /usr/bin/pip /usr/bin/pep8; fi
+if grep -q debian /etc/os-release; then sudo apt-get remove -y python python3-pip python-is-python3 && sudo rm -fv /usr/bin/pip /usr/bin/pep8; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y python3 python3-pip; fi
 
 #|install|rpm|pc06 pc07|Package manager for RPM
@@ -693,6 +636,14 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo ap
 # -----------------------------------------------------------------------------
 # Enhancing virtualized guest systems by the use of SPICE (Simple Protocol for
 # Independent Computing Environments) system.
+# Its feature includes:
+# - Client mouse mode (no need to grab mouse by client, no mouse lag)
+#   this is handled by the daemon by feeding mouse events into the kernel
+#   via uinput. This will only work if the active X-session is running a
+#   spice-vdagent process so that its resolution can be determined.
+# - Automatic adjustment of the X-session resolution to the client resolution
+# - Support of copy and paste (text and images) between the active X-session
+#   and the client
 # -----------------------------------------------------------------------------
 if grep -q debian /etc/os-release; then sudo apt-get install -y spice-vdagent; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y spice-vdagent; fi
@@ -705,32 +656,28 @@ if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y spice-vdagent
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get update; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y spotify-client; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt-get update && sudo apt-get install -y spotify-client; fi
 # For Red Hat and Red Hat-based systems the spotify app is available as a web app.
 
 #|remove|spotify|pc01 pc06 pc07|Spotify streaming music client
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y spotify-client; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo rm -fv /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get update; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y spotify-client && sudo rm -fv /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources && sudo apt-get update; fi
 # App spotify cannot be removed from Red Hat and Red Hat-based system.
 
 #|install|ssh|pc01 pc06 pc07|Secure shell client and server
 # -----------------------------------------------------------------------------
-# Secure shell client and server.
+# Install openssh-client & openssh-server.
 # -----------------------------------------------------------------------------
 if grep -q debian /etc/os-release; then sudo apt-get install -y openssh-client openssh-server; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y openssh-clients openssh-server; fi
+# -----------------------------------------------------------------------------
+# Disable direct root login.
+# -----------------------------------------------------------------------------
 sudo sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 # -----------------------------------------------------------------------------
 # Add firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if systemctl status ufw && type ssh; then sudo ufw allow ssh; fi
-if systemctl status ufw && type ssh; then sudo ufw reload; fi
-if systemctl status firewalld && type ssh; then sudo firewall-cmd --permanent --add-service=ssh; fi
-if systemctl status firewalld && type ssh; then sudo firewall-cmd --reload; fi
+if systemctl status ufw && type ssh; then sudo ufw allow ssh && sudo ufw reload; fi
+if systemctl status firewalld && type ssh; then sudo firewall-cmd --permanent --add-service=ssh && sudo firewall-cmd --reload; fi
 # -----------------------------------------------------------------------------
 # Check for remote root access.
 # -----------------------------------------------------------------------------
@@ -743,9 +690,12 @@ if [[ $HOSTNAME =~ ^(pc01|pc06|pc07)$ ]]; then sudo sed -i '/^192.168.1./d; 2a19
 
 #|remove|ssh|pc01 pc06 pc07|Secure shell client and server
 # -----------------------------------------------------------------------------
-# Secure shell client and server.
+# Disable root login using password.
 # -----------------------------------------------------------------------------
 sudo sed -i 's/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+# -----------------------------------------------------------------------------
+# Remove openssh-client & openssh-server.
+# -----------------------------------------------------------------------------
 if grep -q debian /etc/os-release; then sudo apt-get remove -y openssh-client openssh-server; fi
 if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y openssh-clients openssh-server; fi
 # -----------------------------------------------------------------------------
@@ -755,10 +705,8 @@ if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed -i '/^192.168.1./d' /etc/h
 # -----------------------------------------------------------------------------
 # Remove firewall rules for SSH.
 # -----------------------------------------------------------------------------
-if systemctl status ufw && type ssh; then sudo ufw delete allow ssh; fi
-if systemctl status ufw && type ssh; then sudo ufw reload; fi
-if systemctl status firewalld && type ssh; then sudo firewall-cmd --permanent --remove-service=ssh; fi
-if systemctl status firewalld && type ssh; then sudo firewall-cmd --reload; fi
+if systemctl status ufw && type ssh; then sudo ufw delete allow ssh && sudo ufw reload; fi
+if systemctl status firewalld && type ssh; then sudo firewall-cmd --permanent --remove-service=ssh && sudo firewall-cmd --reload; fi
 
 #|install|sushi|#none|Sushi is a quick previewer for nautilus
 if grep -q debian /etc/os-release && type gnome-session; then sudo apt-get install -y gnome-sushi; fi
@@ -776,9 +724,7 @@ if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo dnf r
 # -----------------------------------------------------------------------------
 # Web app: https://start.teamviewer.com
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y /tmp/teamviewer.deb; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo rm -fv /tmp/teamviewer.deb; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb && sudo apt-get install -y /tmp/teamviewer.deb && sudo rm -fv /tmp/teamviewer.deb; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 #|remove|teamviewer|*|Remote control and meeting solution
@@ -824,71 +770,38 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then
 if ! id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo useradd --create-home --shell /usr/bin/bash --comment "$(TEXTDOMAIN=kz gettext 'Guest_user')" "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 if id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo passwd --delete "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
-#|remove|user-guest|pc01 pc06 pc07|Add guest user
+#|remove|user-guest|pc01 pc06 pc07|Remove guest user
 if id "$(TEXTDOMAIN=kz gettext 'guest')"; then sudo userdel --remove "$(TEXTDOMAIN=kz gettext 'guest')"; fi
 
 #|install|vlc|*|Multimedia player and streamer
 # -----------------------------------------------------------------------------
-# Multimedia player and streamer.
+# Multimedia player and streamer & tools for transcoding, streaming and playing of multimedia files.
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y vlc; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y vlc; fi
-# -----------------------------------------------------------------------------
-# Tools for transcoding, streaming and playing of multimedia files.
-# -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y ffmpeg*; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y ffmpeg*; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y vlc ffmpeg*; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y vlc ffmpeg*; fi
 
 #|remove|vlc|*|Multimedia player and streamer
-# -----------------------------------------------------------------------------
-# Multimedia player and streamer.
-# -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y vlc; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y vlc; fi
-# -----------------------------------------------------------------------------
-# Tools for transcoding, streaming and playing of multimedia files.
-# -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y ffmpeg*; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y ffmpeg*; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y vlc ffmpeg*; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y vlc ffmpeg*; fi
 
 #|install|vscode|pc06 pc07|Code editing. Redefined
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then echo 'code code/add-microsoft-repo boolean true' | sudo debconf-set-selections; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' | sudo tee /etc/apt/sources.list.d/vscode.sources; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y apt-transport-https; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get update; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y code; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo update-alternatives --set editor /usr/bin/code; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc'| sudo tee /etc/yum.repos.d/vscode.repo; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y code; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then echo 'code code/add-microsoft-repo boolean true' | sudo debconf-set-selections && sudo wget -nv -O- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg && echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' | sudo tee /etc/apt/sources.list.d/vscode.sources && sudo apt-get install -y apt-transport-https && sudo apt-get update && sudo apt-get install -y code && sudo update-alternatives --set editor /usr/bin/code; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc && echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc'| sudo tee /etc/yum.repos.d/vscode.repo && sudo dnf install -y code; fi
 
 #|remove|vscode|pc06 pc07|Code editing. Redefined
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y code; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y code; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rm -fv /etc/yum.repos.d/vscode.repo; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code && sudo apt-get remove -y code; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y code && sudo rm -fv /etc/yum.repos.d/vscode.repo; fi
 
 #|install|webmin|pc07|Web Console for Linux servers
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo rm -fv /tmp/setup-repos.sh; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get install -y webmin; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo sh /tmp/setup-repos.sh --force; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rm -fv /tmp/setup-repos.sh; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y webmin; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm -fv /tmp/setup-repos.sh && sudo apt-get install -y webmin; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm -fv /tmp/setup-repos.sh && sudo dnf install -y webmin; fi
 
 #|remove|webmin|pc07|Web Console for Linux servers
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y webmin; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo rm -fv /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get update; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y webmin; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo rm -fv /etc/yum.repos.d/webmin.repo; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf update; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y webmin && sudo rm -fv /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources && sudo apt-get update; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y webmin && sudo rm -fv /etc/yum.repos.d/webmin.repo && sudo dnf update; fi
