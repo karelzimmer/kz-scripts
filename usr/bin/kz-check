@@ -337,6 +337,22 @@ check_scripts() {
                     -print                                          |
             sort
             )
+
+    # Check the GPG-encrypted installation and settings files.
+    kzgpgdelete     |& $PROGRAM_LOGS
+    kzgpgdecrypt    |& $PROGRAM_LOGS
+    for script in $HOME/kz-install.sh.gpg $HOME/kz-setup.sh.gpg; do
+        scriptdir=$(realpath "$script")
+        scriptdir=${scriptdir%/*}
+        scriptname=${script##*/}
+        file=$scriptdir/$scriptname
+        kz.logmsg "Process $script..."
+        check_trailing_spaces
+        check_tags
+        check_shellcheck
+        check_man_page
+    done
+
     cd "$GITROOT"
 }
 
