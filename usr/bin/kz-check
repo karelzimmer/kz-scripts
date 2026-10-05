@@ -275,7 +275,7 @@ check_scripts() {
         scriptdir=${scriptdir%/*}
         scriptname=${script##*/}
         file=$scriptdir/$scriptname
-        kz.logmsg "Process $script..."
+        kz.logmsg "Process $file..."
         case $scriptname in
             *.policy | *.its | *.loc )
                 check_trailing_spaces
@@ -338,15 +338,15 @@ check_scripts() {
             sort
             )
 
-    # Check the GPG-encrypted installation and settings files.
-    kzgpgdelete     |& $PROGRAM_LOGS
-    kzgpgdecrypt    |& $PROGRAM_LOGS
+    # Check the GPG-decrypted installation and settings files.
     for script in $HOME/kz-install.sh.gpg $HOME/kz-setup.sh.gpg; do
-        scriptdir=$(realpath "$script")
-        scriptdir=${scriptdir%/*}
+        if [[ ! -f "$script" ]]; then
+            continue
+        fi
+        scriptdir=$HOME
         scriptname=${script##*/}
-        file=$scriptdir/$scriptname
-        kz.logmsg "Process $script..."
+        file=$script
+        kz.logmsg "Process $file..."
         check_trailing_spaces
         check_tags
         check_shellcheck
