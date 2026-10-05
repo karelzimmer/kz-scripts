@@ -67,7 +67,6 @@ def process(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     check_input(PROGRAM_NAME, PROGRAM_DESC, USAGE, HELP)
     check_sudo(PROGRAM_NAME, PROGRAM_DESC)
     perform_update(PROGRAM_NAME, PROGRAM_DESC)
-    check_reboot(PROGRAM_NAME, PROGRAM_DESC)
 
 
 def check_sudo(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
@@ -340,25 +339,6 @@ def check_debian_package_manager(PROGRAM_NAME: str) -> int:
             time.sleep(2)
 
     return 0
-
-
-def check_reboot(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
-    path: str = '/var/run/reboot-required'
-    text: str
-
-    # Controleer of het bestand bestaat
-    if os.path.exists(path):
-        text = f"{_('Please note: system needs to restart!')}"
-        kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-
-        # Read which packages cause the restart.
-        with open(path, 'r') as f:
-            text = f"{_('Packages that cause the restart:')}"
-            kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
-            print(f.read().strip())
-    else:
-        text = f"{_('No restart needed.')}"
-        kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
 
 def term(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
