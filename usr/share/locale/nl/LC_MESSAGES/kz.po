@@ -37,7 +37,7 @@ msgstr "            OPDRACHT [ARGUMENTEN]"
 msgid "Usage: kz [OPTIONS] COMMAND [ARGUMENTS]"
 msgstr "Gebruik: kz [OPTIES] OPDRACHT [ARGUMENTEN]"
 
-#: kz:45 kz-backup:37 kz-build:36 kz-check:35 kz-deploy:36 kz-desktop:37
+#: kz:45 kz-backup:37 kz-build:35 kz-check:34 kz-deploy:35 kz-desktop:37
 #: kz-dev:41 kz-install:39 kz-menu:35 kz-restore:37 kz-setup:39 kz-update:41
 #: kz-wifi:44
 msgid "Options:"
@@ -47,19 +47,19 @@ msgstr "Opties:"
 msgid "  -l, --list     show available commands"
 msgstr "  -l, --list     toon beschikbare opdrachten"
 
-#: kz:46 kz-backup:43 kz-build:38 kz-check:36 kz-deploy:38 kz-desktop:47
+#: kz:46 kz-backup:43 kz-build:37 kz-check:35 kz-deploy:37 kz-desktop:47
 #: kz-dev:42 kz-install:49 kz-menu:38 kz-restore:43 kz-setup:49 kz-update:42
 #: kz-wifi:47
 msgid "  -h, --help     show this help text"
 msgstr "  -h, --help     toon deze hulptekst"
 
-#: kz:48 kz-backup:47 kz-build:39 kz-check:37 kz-deploy:39 kz-desktop:50
+#: kz:48 kz-backup:47 kz-build:38 kz-check:36 kz-deploy:38 kz-desktop:50
 #: kz-dev:43 kz-install:54 kz-menu:40 kz-restore:47 kz-setup:54 kz-update:43
 #: kz-wifi:49
 msgid "  -u, --usage    show a short usage summary"
 msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
 
-#: kz:49 kz-backup:48 kz-build:40 kz-check:38 kz-deploy:40 kz-desktop:51
+#: kz:49 kz-backup:48 kz-build:39 kz-check:37 kz-deploy:39 kz-desktop:51
 #: kz-dev:44 kz-install:55 kz-menu:41 kz-restore:48 kz-setup:55 kz-update:44
 #: kz-wifi:50
 msgid "  -v, --version  show program version"
@@ -97,7 +97,7 @@ msgstr "Programma {} is onderbroken."
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-#: kz:170 kz-backup:148 kz-build:146 kz-check:114 kz-deploy:120 kz-desktop:184
+#: kz:170 kz-backup:148 kz-build:145 kz-check:113 kz-deploy:119 kz-desktop:184
 #: kz-dev:126 kz-install:221 kz-menu:173 kz-restore:149 kz-setup:243
 #: kz-update:138 kz-wifi:145
 msgid "internal error"
@@ -167,7 +167,7 @@ msgstr "geen desktopomgeving beschikbaar"
 msgid "too many options"
 msgstr "te veel opties"
 
-#: kz-backup:157 kz-build:155 kz-check:123 kz-deploy:129 kz-desktop:193
+#: kz-backup:157 kz-build:154 kz-check:122 kz-deploy:128 kz-desktop:193
 #: kz-dev:133 kz-menu:182 kz-restore:158 kz-update:145 kz-wifi:152
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
@@ -464,125 +464,125 @@ msgstr ""
 msgid "Remember to safely(!) remove the USB medium."
 msgstr "Vergeet niet het USB-medium veilig(!) te verwijderen."
 
-#: kz-build:24
+#: kz-build:23
 msgid "Build website and kz packages"
 msgstr "Bouw website en kz-pakketten"
 
-#: kz-build:29
+#: kz-build:28
 msgid "Usage: kz build [-d|--dev] [-h|--help] [-u|--usage] [-v|--version]"
 msgstr "Gebruik: kz build [-d|--dev] [-h|--help] [-u|--usage] [-v|--version]"
 
-#: kz-build:32
+#: kz-build:31
 msgid "Usage: kz build [OPTIONS]"
 msgstr "Gebruik: kz build [OPTIES]"
 
-#: kz-build:37
+#: kz-build:36
 msgid "  -d, --dev      build the development version of package kz"
 msgstr "  -d, --dev      bouw de ontwikkelingsversie van pakket kz"
 
-#: kz-build:86 kz-check:68 kz-deploy:70 kz-dev:170
+#: kz-build:85 kz-check:67 kz-deploy:69 kz-dev:170
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
-#: kz-build:96
+#: kz-build:95
 msgid "Building development versions of package kz (deb + RPM)..."
 msgstr "Bouw ontwikkelingsversies van pakket kz (deb + RPM)..."
 
-#: kz-build:171
+#: kz-build:170
 msgid "Build website..."
 msgstr "Bouw website..."
 
-#: kz-build:223
+#: kz-build:222
 msgid "Generate gettext files.."
 msgstr "Genereer gettext-bestanden.."
 
-#: kz-build:403
+#: kz-build:402
 msgid "Build Debian package..."
 msgstr "Bouw Debian-pakket..."
 
-#: kz-build:505
+#: kz-build:504
 msgid "Build RPM package..."
 msgstr "Bouw RPM-pakket..."
 
-#: kz-build:602
+#: kz-build:601
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:624 kz-get:191
+#: kz-build:623 kz-get:191
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:630 kz-check:592 kz-deploy:316
+#: kz-build:629 kz-check:591 kz-deploy:315
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
-#: kz-check:24 kz-deploy:234
+#: kz-check:23 kz-deploy:233
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 
-#: kz-check:28
+#: kz-check:27
 msgid "Usage: kz check [-h|--help] [-u|--usage] [-v|--version]"
 msgstr "Gebruik: kz check [-h|--help] [-u|--usage] [-v|--version]"
 
-#: kz-check:31
+#: kz-check:30
 msgid "Usage: kz check [OPTIONS]"
 msgstr "Gebruik: kz check [OPTIES]"
 
-#: kz-check:134
+#: kz-check:133
 msgid "Check website..."
 msgstr "Controleer website..."
 
-#: kz-check:199
+#: kz-check:198
 msgid "Files not used in html that can probably be removed:"
 msgstr ""
 "Bestanden die niet in html worden gebruikt en waarschijnlijk wel verwijderd "
 "kunnen worden:"
 
-#: kz-check:219
+#: kz-check:218
 msgid "Check language files..."
 msgstr "Controleer taalbestanden..."
 
-#: kz-check:228
+#: kz-check:227
 #, sh-format
 msgid "Gettext message catalog template $file not found."
 msgstr "Gettext berichtencatalogus-sjabloon $file niet gevonden."
 
-#: kz-check:240
+#: kz-check:239
 #, sh-format
 msgid "Gettext message catalog $file not found."
 msgstr "Gettext berichtencatalogus $file niet gevonden."
 
-#: kz-check:251
+#: kz-check:250
 #, sh-format
 msgid "Message catalog $file not found."
 msgstr "Berichtencatalogus $file niet gevonden."
 
-#: kz-check:266
+#: kz-check:265
 msgid "Check scripts (this may take a while)..."
 msgstr "Controleer scripts (dit kan even duren)..."
 
-#: kz-check:379
+#: kz-check:378
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 "Onbekend script.  FunctieUse \"kz setup APP...\" or \"kz s check_code kan "
 "scriptcode niet controleren."
 
-#: kz-check:403
+#: kz-check:402
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr "Script $scriptname --usage gaf een fout."
 
-#: kz-check:415
+#: kz-check:414
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden."
 
-#: kz-check:426
+#: kz-check:425
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden."
 
-#: kz-check:437
+#: kz-check:436
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
@@ -591,21 +591,21 @@ msgstr ""
 "Polkit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-#: kz-check:457 kz-check:467
+#: kz-check:456 kz-check:466
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr "Man-pagina $dir{1,5}/$scriptname.{1,5} niet gevonden."
 
-#: kz-check:502
+#: kz-check:501
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr "Een of meer regels zijn te lang (>79):"
 
-#: kz-check:556
+#: kz-check:555
 msgid "Flagged annotation found."
 msgstr "Gemarkeerde annotatie gevonden."
 
-#: kz-check:575
+#: kz-check:574
 msgid "End spaces found."
 msgstr "Eindspaties gevonden."
 
@@ -648,20 +648,20 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz-build:354 kz-deploy:185
+#: kz-build:353 kz-deploy:184
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
-#: kz-build:362 kz-deploy:193
+#: kz-build:361 kz-deploy:192
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-#: kz-build:377 kz-deploy:208
+#: kz-build:376 kz-deploy:207
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
-#: kz-build:390 kz-deploy:221
+#: kz-build:389 kz-deploy:220
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
@@ -695,47 +695,47 @@ msgstr "Typ 'exit' om dit venster te sluiten."
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
 
-#: kz-deploy:24
+#: kz-deploy:23
 msgid "Distribute website and kz packages"
 msgstr "Distribueer website en kz-pakketten"
 
-#: kz-deploy:29
+#: kz-deploy:28
 msgid "Usage: kz deploy [-d|--dev] [-h|--help] [-u|--usage] [-v|--version]"
 msgstr "Gebruik: kz deploy [-d|--dev] [-h|--help] [-u|--usage] [-v|--version]"
 
-#: kz-deploy:32
+#: kz-deploy:31
 msgid "Usage: kz deploy [OPTIONS]"
 msgstr "Gebruik: kz deploy [OPTIES]"
 
-#: kz-deploy:37
+#: kz-deploy:36
 msgid "  -d, --dev      deploy the development version of package kz"
 msgstr "  -d, --dev      distribueer de ontwikkelingsversie van pakket kz"
 
-#: kz-deploy:142
+#: kz-deploy:141
 msgid "Check..."
 msgstr "Controleren..."
 
-#: kz-deploy:158
+#: kz-deploy:157
 msgid "Deploy..."
 msgstr "Distribueren..."
 
-#: kz-deploy:260
+#: kz-deploy:259
 msgid "Upload website"
 msgstr "Uploaden website"
 
-#: kz-deploy:264 kz-dev:351
+#: kz-deploy:263 kz-dev:351
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
-#: kz-deploy:278
+#: kz-deploy:277
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-#: kz-deploy:293
+#: kz-deploy:292
 msgid "Install..."
 msgstr "Installeren..."
 
-#: kz-deploy:304
+#: kz-deploy:303
 msgid "Install Debian package failed."
 msgstr "Installatie van Debian-pakket is mislukt."
 
@@ -1690,7 +1690,7 @@ msgstr "Polkit wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:634 kz-check:596 kz-deploy:320 kz-dev:384 kz-post-migrate:71
+#: kz-build:633 kz-check:595 kz-deploy:319 kz-dev:384 kz-post-migrate:71
 #: kz-update:370
 msgid "Complete!"
 msgstr "Klaar!"

@@ -12,7 +12,6 @@
 # Imports
 # #############################################################################
 
-source "$(xdg-user-dir PROJECTS)/kz-scripts/usr/bin/kz_common.sh" as kz ||
 source kz_common.sh as kz
 
 
