@@ -193,8 +193,10 @@ def perform_update_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function updates installed Debian packages.
     """
     command: str
+    text: str
 
-    command = 'sudo apt-get update'
+    text = f"{_('refresh package lists')}"
+    command = f'sudo apt-get update # {text}'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -203,8 +205,10 @@ def perform_upgrade_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function upgrades installed Debian packages.
     """
     command: str
+    text: str
 
-    command = 'sudo apt-get --assume-yes full-upgrade'
+    text = f"{_('update Debian packages')}"
+    command = f'sudo apt-get --assume-yes full-upgrade # {text}'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -214,11 +218,12 @@ def perform_update_snaps(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     command: str
 
+    text = f"{_('update snap apps')}"
     if subprocess.run('type snap', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
-        command = 'sudo snap refresh'
+        command = f'sudo snap refresh # {text}'
         perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -227,12 +232,14 @@ def perform_update_flatpaks(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function updates installed Flatpak packages.
     """
     command: str
+    text: str
 
+    text = f"{_('update flatpak apps')}"
     if subprocess.run('type flatpak', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
-        command = 'sudo flatpak --assumeyes update'
+        command = f'sudo flatpak --assumeyes update # {text}'
         perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -241,12 +248,14 @@ def perform_update_extensions(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function updates all enabled extensions.
     """
     command: str
+    text: str
 
+    text = f"{_('update user extensions')}"
     if subprocess.run('type gext', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
-        command = 'gext update'
+        command = f'gext update # {text}'
         perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -255,8 +264,10 @@ def perform_upgrade_rpms(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function upgrades installed RPM packages.
     """
     command: str
+    text: str
 
-    command = 'sudo dnf upgrade --assumeyes --refresh'
+    text = f"{_('update packages')}"
+    command = f'sudo dnf upgrade --assumeyes --refresh # {text}'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -265,11 +276,14 @@ def perform_cleanup_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function performs a Debian packages cleanup.
     """
     command: str
+    text: str
 
-    command = 'sudo apt-get autoclean'
+    text = f"{_('clear out the local repository')}"
+    command = f'sudo apt-get autoclean # {text}'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
-    command = 'sudo apt-get autoremove --assume-yes'
+    text = f"{_('remove unnecessary packages')}"
+    command = f'sudo apt-get autoremove --assume-yes # {text}'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -278,11 +292,13 @@ def perform_cleanup_rpms(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function performs a RPM packages cleanup.
     """
     command: str
+    text: str
 
-    command = 'sudo dnf clean all'
+    text = f"{_('cleanup packages')}"
+    command = f'sudo dnf clean all # {text}'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
-    command = 'sudo dnf autoremove --assumeyes'
+    command = f'sudo dnf autoremove --assumeyes # {text}'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 

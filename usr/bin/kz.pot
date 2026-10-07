@@ -88,13 +88,13 @@ msgstr ""
 
 #: kz:113 kz_common.py:70 kz_common.py:98 kz_common.py:147 kz_common.py:174
 #: kz-dev:149 kz-dev:223 kz-dev:238 kz-dev:255 kz-dev:287 kz-dev:319 kz-dev:363
-#: kz-update:82 kz-update:304
+#: kz-update:82 kz-update:320
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz_common.py:76 kz_common.py:104 kz_common.py:153 kz_common.py:180
 #: kz_common.py:280 kz-dev:155 kz-dev:229 kz-dev:244 kz-dev:261 kz-dev:293
-#: kz-dev:325 kz-update:88 kz-update:310
+#: kz-dev:325 kz-update:88 kz-update:326
 msgid "Program {} encountered an error."
 msgstr ""
 
@@ -1485,6 +1485,42 @@ msgstr ""
 msgid "fatal: unknown os release"
 msgstr ""
 
+#: kz-update:198
+msgid "refresh package lists"
+msgstr ""
+
+#: kz-update:210
+msgid "update Debian packages"
+msgstr ""
+
+#: kz-update:221
+msgid "update snap apps"
+msgstr ""
+
+#: kz-update:237
+msgid "update flatpak apps"
+msgstr ""
+
+#: kz-update:253
+msgid "update user extensions"
+msgstr ""
+
+#: kz-update:269
+msgid "update packages"
+msgstr ""
+
+#: kz-update:281
+msgid "clear out the local repository"
+msgstr ""
+
+#: kz-update:285
+msgid "remove unnecessary packages"
+msgstr ""
+
+#: kz-update:297
+msgid "cleanup packages"
+msgstr ""
+
 #: kz-wifi:33
 msgid "Usage: kz wifi [-C|--cli] [-G|--gui] [-h|--help] [-T|--tui]"
 msgstr ""
@@ -1614,6 +1650,6 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
 #: kz-build:633 kz-check:595 kz-deploy:319 kz-dev:384 kz-post-migrate:71
-#: kz-update:350
+#: kz-update:366
 msgid "Complete!"
 msgstr ""
