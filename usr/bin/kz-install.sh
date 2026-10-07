@@ -720,14 +720,14 @@ if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo dnf i
 if grep -q debian /etc/os-release && type gnome-session; then sudo apt-get remove -y gnome-sushi; fi
 if grep -qE 'fedora|rhel' /etc/os-release && type gnome-session; then sudo dnf remove -y sushi; fi
 
-#|install|teamviewer|*|Remote control and meeting solution
+#|install|teamviewer|*|Remote control and meeting solution (full client)
 # -----------------------------------------------------------------------------
-# Web app: https://start.teamviewer.com
+# Web app: https://start.teamviewer.com (Provide support and remote control)
 # -----------------------------------------------------------------------------
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo wget -nv -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb && sudo apt-get install -y /tmp/teamviewer.deb && sudo rm -fv /tmp/teamviewer.deb; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf install -y https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
-#|remove|teamviewer|*|Remote control and meeting solution
+#|remove|teamviewer|*|Remote control and meeting solution (full client)
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -q debian /etc/os-release; then sudo apt-get remove -y teamviewer; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y teamviewer; fi
 
