@@ -207,16 +207,10 @@ build_website() {
 # 2. the readable Portable Object (PO) file from the POT file, and
 # 3. the binary Machine Object (MO) file from the PO file.
 generate_gettext_files() {
-    local bash_script='#!''/usr/bin/env bash'
     local gettext_language=''
-    local its_dir=$GITROOT/kz-scripts/usr/share/gettext/its
     local lc_messages_dir=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES
     local pot_dir=$SCRIPTS_REPO/usr/bin/
-    local python_script='#!''/usr/bin/env python3'
     local text=''
-    local gettext_dir_scripts=$GITROOT/kz-scripts/usr/bin
-    local gettext_dir_applications=$GITROOT/kz-scripts/usr/share/applications
-    local gettext_dir_policies=$GITROOT/kz-scripts/usr/share/polkit-1/actions
     local gettext_file=''
 
     text=$(gettext 'Generate gettext files..')
@@ -240,6 +234,10 @@ generate_gettext_files() {
 
 # This function generates the gettext files PO and POT for scripts.
 generate_gettext_files_for_scripts() {
+    local bash_script='#!''/usr/bin/env bash'
+    local gettext_dir_scripts=$GITROOT/kz-scripts/usr/bin
+    local python_script='#!''/usr/bin/env python3'
+
     cd "$gettext_dir_scripts"
     for gettext_file in *; do
         if [[ -d $gettext_file ]]; then
@@ -282,6 +280,8 @@ generate_gettext_files_for_scripts() {
 
 # This function generates the gettext files PO and POT for applications.
 generate_gettext_files_for_applications() {
+    local gettext_dir_applications=$GITROOT/kz-scripts/usr/share/applications
+
     gettext_language='--language=Desktop'
 
     cd "$gettext_dir_applications"
@@ -306,6 +306,9 @@ generate_gettext_files_for_applications() {
 
 # This function generates the gettext files PO and POT for policies.
 generate_gettext_files_for_policies() {
+    local gettext_dir_policies=$GITROOT/kz-scripts/usr/share/polkit-1/actions
+    local its_dir=$GITROOT/kz-scripts/usr/share/gettext/its
+
     gettext_language="--its=$its_dir/kz-policy.its"
 
     cd "$gettext_dir_policies"

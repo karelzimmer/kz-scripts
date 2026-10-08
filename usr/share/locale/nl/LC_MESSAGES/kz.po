@@ -492,27 +492,27 @@ msgstr "Bouw ontwikkelingsversies van pakket kz (deb + RPM)..."
 msgid "Build website..."
 msgstr "Bouw website..."
 
-#: kz-build:222
+#: kz-build:216
 msgid "Generate gettext files.."
 msgstr "Genereer gettext-bestanden.."
 
-#: kz-build:402
+#: kz-build:405
 msgid "Build Debian package..."
 msgstr "Bouw Debian-pakket..."
 
-#: kz-build:504
+#: kz-build:507
 msgid "Build RPM package..."
 msgstr "Bouw RPM-pakket..."
 
-#: kz-build:601
+#: kz-build:604
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:623 kz-get:191
+#: kz-build:626 kz-get:191
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:629 kz-check:591 kz-deploy:315
+#: kz-build:632 kz-check:591 kz-deploy:315
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -648,20 +648,20 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz-build:353 kz-deploy:184
+#: kz-build:356 kz-deploy:184
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
 
-#: kz-build:361 kz-deploy:192
+#: kz-build:364 kz-deploy:192
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-#: kz-build:376 kz-deploy:207
+#: kz-build:379 kz-deploy:207
 msgid "Check that all repos are clean"
 msgstr "Controleer of alle repo's schoon zijn"
 
-#: kz-build:389 kz-deploy:220
+#: kz-build:392 kz-deploy:220
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
@@ -1714,7 +1714,7 @@ msgstr "Polkit wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:633 kz-check:595 kz-deploy:319 kz-dev:384 kz-post-migrate:71
+#: kz-build:636 kz-check:595 kz-deploy:319 kz-dev:384 kz-post-migrate:71
 #: kz-update:366
 msgid "Complete!"
 msgstr "Klaar!"
