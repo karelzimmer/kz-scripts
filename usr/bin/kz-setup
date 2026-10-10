@@ -356,7 +356,7 @@ process_option_list_gui() {
             "$text"                 |
 
     zenity  --text-info             \
-            --width     900         \
+            --width     700         \
             --height    500         \
             --title     "$title"    \
             --font="Monospace 10"   \
@@ -503,7 +503,7 @@ process_option_select_gui() {
         zenity  --list                                  \
                 --checklist                             \
                 --separator ' '                         \
-                --width     820                         \
+                --width     700                         \
                 --height    500                         \
                 --title     "$title"                    \
                 --text      "$text"                     \
