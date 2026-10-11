@@ -244,7 +244,7 @@ check_installation_files() {
         installation_files[$INSTALLATION_FILE_DEFAULT]=\
 $INSTALLATION_FILE_DEFAULT
 
-        # Decrypt GPG-encrypted installation file.
+        # Decrypt GPG-signed installation file.
         installation_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
         GNUPGHOME=$(mktemp -dt "$PROGRAM_NAME-gnupghome-XXXXXXXXXX")    \

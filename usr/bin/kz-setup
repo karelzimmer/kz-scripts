@@ -133,7 +133,7 @@ check_settings_files() {
     if ! $option_file; then
         settings_files[$SETTINGS_FILE_DEFAULT]=$SETTINGS_FILE_DEFAULT
 
-        # Decrypt GPG-encrypted settings file.
+        # Decrypt GPG-signed settings file.
         settings_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
         GNUPGHOME=$(mktemp -dt "$PROGRAM_NAME-gnupghome-XXXXXXXXXX")    \

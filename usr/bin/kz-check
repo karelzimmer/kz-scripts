@@ -334,7 +334,7 @@ check_scripts() {
             sort
             )
 
-    # Check the GPG-decrypted installation and settings files.
+    # Check the decrypted GPG-signed installation and settings files.
     for script in $HOME/kz-install.sh.gpg $HOME/kz-setup.sh.gpg; do
         if [[ ! -f "$script" ]]; then
             continue
