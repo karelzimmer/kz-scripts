@@ -31,15 +31,15 @@ are separated by the pipe character '|':
 .br
 #|ACTION|APP|HOST|DESCRIPTION
 .TS
-box tab(^);
+box tab(:);
 lb lb lbx
 l l l.
-Field number^Field^Description
-1^#^Hash, comment symbol
-2^ACTION^Action, 'install' or 'remove'
-3^APP^Name of the app
-4^HOST^Name of the computer(s) on which the command should be executed
-5^DESCRIPTION^Description of the app
+Field number:Field:Description
+1:#:Hash, comment symbol
+2:ACTION:Action, 'install' or 'remove'
+3:APP:Name of the app
+4:HOST:Name of the computer(s) on which the command should be executed
+5:DESCRIPTION:Description of the app
 .TE
 .sp
 This record is followed by one or more records with commands, the
@@ -58,41 +58,41 @@ More examples can be seen through the \fBkz install --browse\fR and
 .LP
 .B Table 1. Record types and their processing
 .TS
-allbox tab(^);
+allbox tab(:);
 lb lbx
 l l.
-Record^Description
-#|install|APP|HOST|DESCRIPTION^Install the app (\fBapp record\fR), wil\
+Record:Description
+#|install|APP|HOST|DESCRIPTION:Install the app (\fBapp record\fR), wil\
 l be processed.
-#...^Comment line (none, one or more), will be skipped.
-Command^Install command (one or more \fBcommand record\fRs), will be executed.
-^Empty line (none, one or more), will be skipped.
-#|remove|APP|HOST|DESCRIPTION^Remove the app (\fBapp record\fR for opt\
+#...:Comment line (none, one or more), will be skipped.
+Command:Install command (one or more \fBcommand record\fRs), will be executed.
+:Empty line (none, one or more), will be skipped.
+#|remove|APP|HOST|DESCRIPTION:Remove the app (\fBapp record\fR for opt\
 ion \fB-r\fR, \fB--remove\fR), will be processed.
-Command^Remove command (one or more \fBcommand record\fRs), will be executed.
+Command:Remove command (one or more \fBcommand record\fRs), will be executed.
 .TE
 .LP
 .B Table 2. Example of records and their processing
 .TS
-box tab(^);
+box tab(:);
 lb | lbx
 - | -
 l | l.
-Record^Description
-#|install|calibre|*|E-book manager^Install calibre on every computer, see [1].
-sudo apt-get install -y calibre^Install command for calibre.
-^
-#|remove|calibre|*|E-book manager^Remove calibre on every computer, see [1].
-sudo apt-get remove -y calibre^Remove command for calibre.
-^
-^
-#|install|vscode|pc06 pc07|Code editor^Install vscode on pc06 and pc07, see \
+Record:Description
+#|install|calibre|*|E-book manager:Install calibre on every computer, see [1].
+sudo apt-get install -y calibre:Install command for calibre.
+:
+#|remove|calibre|*|E-book manager:Remove calibre on every computer, see [1].
+sudo apt-get remove -y calibre:Remove command for calibre.
+:
+:
+#|install|vscode|pc06 pc07|Code editor:Install vscode on pc06 and pc07, see \
 [2].
-sudo apt-get install -y code^Install command for vscode.
+sudo apt-get install -y code:Install command for vscode.
 
-#|remove|vscode|pc06 pc07|Code editor^Remove vscode from pc06 and pc07, see \
+#|remove|vscode|pc06 pc07|Code editor:Remove vscode from pc06 and pc07, see \
 [2].
-sudo apt-get remove -y code^Remove command for vscode.
+sudo apt-get remove -y code:Remove command for vscode.
 .TE
 .sp
 [1]

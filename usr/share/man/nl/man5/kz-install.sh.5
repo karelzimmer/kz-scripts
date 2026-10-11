@@ -32,15 +32,15 @@ worden gescheiden door het pipe-teken '|':
 .br
 #|ACTIE|APP|HOST|BESCHRIJVING
 .TS
-box tab(^);
+box tab(:);
 lb lb lbx
 l l l.
-Veld-nummer^Veld^Beschrijving
-1^#^Hekje, commentaarsymbool
-2^ACTIE^Actie, 'install' of 'remove'
-3^APP^Naam van de app
-4^HOST^Naam van de computer(s) waarop de opdracht uitgevoerd moet worden
-5^BESCHRIJVING^Beschrijving van de app
+Veld-nummer:Veld:Beschrijving
+1:#:Hekje, commentaarsymbool
+2:ACTIE:Actie, 'install' of 'remove'
+3:APP:Naam van de app
+4:HOST:Naam van de computer(s) waarop de opdracht uitgevoerd moet worden
+5:BESCHRIJVING:Beschrijving van de app
 .TE
 .sp
 Deze regels worden gevolgd door één of meer regels met opdrachten, de
@@ -60,45 +60,45 @@ Meer voorbeelden zijn te zien met de opdrachten \fBkz install --browse\fR en
 .LP
 .B Tabel 1. Soorten regels en hun verwerking
 .TS
-allbox tab(^);
+allbox tab(:);
 lb lbx
 l l.
-Regel^Beschrijving
-#|install|APP|HOST|BESCHRIJVING^De app installeren (\fBapp-regel\fR), \
+Regel:Beschrijving
+#|install|APP|HOST|BESCHRIJVING:De app installeren (\fBapp-regel\fR), \
 wordt verwerkt.
-#...^Commentaarregel (geen, één of meer), wordt overgeslagen.
-Opdracht^Installatie-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitge\
+#...:Commentaarregel (geen, één of meer), wordt overgeslagen.
+Opdracht:Installatie-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitge\
 voerd.
-^Lege regel (geen, één of meer), wordt overgeslagen.
-#|remove|APP|HOST|BESCHRIJVING^De app verwijderen (\fBapp-regel\fR voo\
+:Lege regel (geen, één of meer), wordt overgeslagen.
+#|remove|APP|HOST|BESCHRIJVING:De app verwijderen (\fBapp-regel\fR voo\
 r optie \fB-r\fR, \fB--remove\fR), wordt verwerkt.
-Opdracht^Verwijder-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevo\
+Opdracht:Verwijder-opdracht (één of meer \fBopdracht-regel\fRs), wordt uitgevo\
 erd.
 .TE
 .LP
 .B Tabel 2. Voorbeeld van regels en hun verwerking
 .TS
-box tab(^);
+box tab(:);
 lb | lbx
 - | -
 l | l.
-Regel^Beschrijving
-#|install|calibre|*|E-book manager^Calibre installeren op iedere computer, \
+Regel:Beschrijving
+#|install|calibre|*|E-book manager:Calibre installeren op iedere computer, \
 zie [1].
-sudo apt-get install -y calibre^Installatie-opdracht voor calibre.
-^
-#|remove|calibre|*|E-book manager^Verwijder calibre van iedere computer, \
+sudo apt-get install -y calibre:Installatie-opdracht voor calibre.
+:
+#|remove|calibre|*|E-book manager:Verwijder calibre van iedere computer, \
 zie [1].
-sudo apt-get remove -y calibre^Verwijder-opdracht voor calibre.
-^
-^
-#|install|vscode|pc06 pc07|Code editor^Vscode installeren op pc06 en pc07, \
+sudo apt-get remove -y calibre:Verwijder-opdracht voor calibre.
+:
+:
+#|install|vscode|pc06 pc07|Code editor:Vscode installeren op pc06 en pc07, \
 zie [2].
-sudo apt-get install -y code^Installatie-opdracht voor vscode.
+sudo apt-get install -y code:Installatie-opdracht voor vscode.
 
-#|remove|vscode|pc06 pc07|Code editor^Verwijder vscode van pc06 en pc07, \
+#|remove|vscode|pc06 pc07|Code editor:Verwijder vscode van pc06 en pc07, \
 zie [2].
-sudo apt-get remove -y code^Verwijder-opdracht voor vscode.
+sudo apt-get remove -y code:Verwijder-opdracht voor vscode.
 .TE
 .sp
 [1]
