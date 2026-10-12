@@ -106,7 +106,10 @@ process() {
         process_option_list
     fi
 
-    command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
+    command_file=$(
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-commands.sh'
+        )
     # To minimize the risk of errors due to outdated Debian package lists.
     if  grep    --quiet             \
                 --regexp='debian'   \
@@ -768,9 +771,9 @@ install_apps() {
     fi
 
     ERROR_LOG=$(
-    mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
-            --suffix='-error.log'
-    )
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-error.log'
+        )
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
 
     title=$(gettext 'Install apps')

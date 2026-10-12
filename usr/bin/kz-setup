@@ -735,9 +735,9 @@ setup_apps() {
     fi
 
     ERROR_LOG=$(
-    mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
-            --suffix='-error.log'
-    )
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-error.log'
+        )
 
     title=$(gettext 'Set up apps')
     text=$(gettext 'Preparing set up')
