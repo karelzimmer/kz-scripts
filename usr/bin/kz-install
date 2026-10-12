@@ -106,7 +106,11 @@ process() {
         process_option_list
     fi
 
-    command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
+    command_file=$(
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-commands.sh'
+        )
+
     # To minimize the risk of errors due to outdated Debian package lists.
     if  grep    --quiet             \
                 --regexp='debian'   \
@@ -245,9 +249,16 @@ check_installation_files() {
 $INSTALLATION_FILE_DEFAULT
 
         # Decrypt GPG-signed installation file.
-        installation_file_decrypted=\
-$(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        GNUPGHOME=$(mktemp -dt "$PROGRAM_NAME-gnupghome-XXXXXXXXXX")    \
+        installation_file_decrypted=$(
+            mktemp  --directory                     \
+                    -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                    --suffix='-decrypted.sh'
+            )
+        GNUPGHOME=$(
+            mktemp  --directory                     \
+                    -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                    --suffix='-gnupghome'
+            )                                                           \
         gpg --no-default-keyring                                        \
             --keyring "$KZ_PUBLIC_KEY"                                  \
             --decrypt "$INSTALLATION_FILE_DEFAULT_GPG"                  \
@@ -277,8 +288,11 @@ process_option_browse() {
     local title=''
     local installation_file_combined=''
 
-    installation_file_combined=\
-$(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
+    installation_file_combined=$(
+    mktemp  --directory                     \
+            -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+            --suffix='-installation.sh'
+    )
     cat "${installation_files[@]}" > "$installation_file_combined"
 
     title=$(gettext 'All commands and information')

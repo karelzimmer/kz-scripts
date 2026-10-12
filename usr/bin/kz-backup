@@ -656,7 +656,10 @@ create_backup() {
     local text=''
     local title=''
 
-    exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX.list")
+    exclude_file=$(
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-exclude.list'
+        )
 
     cat <<EOF > "$exclude_file"
 # Exclude cache files
@@ -665,7 +668,10 @@ create_backup() {
 $(find "$HOME" -type d -name ".git" -printf "%P\n" | sed 's|/.git||')
 EOF
 
-    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
+    ERROR_LOG=$(
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-error.log'
+        )
 
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')

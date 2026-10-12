@@ -673,7 +673,7 @@ msgstr ""
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:298
+#: kz_common.sh:299
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
