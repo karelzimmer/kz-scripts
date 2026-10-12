@@ -1490,39 +1490,39 @@ msgid "fatal: unknown os release"
 msgstr ""
 
 #: kz-update:198
-msgid "refresh package lists"
+msgid "Refresh package lists"
 msgstr ""
 
 #: kz-update:210
-msgid "update Debian packages"
+msgid "Update Debian packages"
 msgstr ""
 
 #: kz-update:221
-msgid "update snap apps"
+msgid "Update snap apps"
 msgstr ""
 
 #: kz-update:237
-msgid "update flatpak apps"
+msgid "Update flatpak apps"
 msgstr ""
 
 #: kz-update:253
-msgid "update user extensions"
+msgid "Update user extensions"
 msgstr ""
 
 #: kz-update:269
-msgid "update packages"
+msgid "Update packages"
 msgstr ""
 
 #: kz-update:281
-msgid "clear out the local repository"
+msgid "Clear out the local repository"
 msgstr ""
 
 #: kz-update:285
-msgid "remove unnecessary packages"
+msgid "Remove unnecessary packages"
 msgstr ""
 
 #: kz-update:297
-msgid "cleanup packages"
+msgid "Cleanup packages"
 msgstr ""
 
 #: kz-wifi:33
