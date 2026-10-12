@@ -357,7 +357,11 @@ check_repos_are_on_main() {
     text=$(gettext 'Check that all repos are on branch main')...
     kz.infomsg "$text"
 
-    repos=$(find "$GITROOT/kz-"* -prune -printf '%f\n')
+    repos=$(
+        find    "$GITROOT/kz-"* \
+                -prune          \
+                -printf '%f\n'
+        )
 
     for repo in $repos; do
         cd "$GITROOT/$repo"
@@ -380,7 +384,11 @@ check_repos_are_clean() {
     text=$(gettext 'Check that all repos are clean')...
     kz.infomsg "$text"
 
-    repos=$(find "$GITROOT/kz-"* -prune -printf '%f\n')
+    repos=$(
+        find    "$GITROOT/kz-"* \
+                -prune          \
+                -printf '%f\n'
+        )
 
     for repo in $repos; do
         cd "$GITROOT/$repo"
