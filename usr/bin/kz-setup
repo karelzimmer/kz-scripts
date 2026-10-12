@@ -74,8 +74,8 @@ declare LOGOUT=false
 declare OPTION_RESET=false
 declare OPTION_SELECT=false
 declare RESET='reset'
-declare SETTINGS_FILE_DEFAULT_GPG=/usr/bin/$PROGRAM_NAME.sh.gpg
-declare SETTINGS_FILE_DEFAULT=/usr/bin/$PROGRAM_NAME.sh
+declare SETTINGS_FILE_GPG=/usr/bin/$PROGRAM_NAME.sh.gpg
+declare SETTINGS_FILE=/usr/bin/$PROGRAM_NAME.sh
 declare SETUP='setup'
 declare UI_MODE='tui'
 
@@ -106,7 +106,10 @@ process() {
         process_option_list
     fi
 
-    command_file=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX.sh")
+    command_file=$(
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-commands.sh'
+        )
 
     if $OPTION_SELECT; then
         process_option_select
@@ -128,12 +131,13 @@ process() {
 
 # This function checks if the settings files exist.
 check_settings_files() {
-    local settings_file_decrypted=''
+    local settings_file_gpg=''
 
     if ! $option_file; then
-        settings_files[$SETTINGS_FILE_DEFAULT]=$SETTINGS_FILE_DEFAULT
+        settings_files[$SETTINGS_FILE]=$SETTINGS_FILE
 
         # Decrypt GPG-signed settings file.
+<<<<<<< HEAD
         settings_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
         GNUPGHOME=$(mktemp -dt "$PROGRAM_NAME-gnupghome-XXXXXXXXXX")    \
@@ -141,9 +145,24 @@ $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
             --keyring "$KZ_PUBLIC_KEY"                                  \
             --decrypt "$SETTINGS_FILE_DEFAULT_GPG"                      \
             > "$settings_file_decrypted"                                \
+=======
+        settings_file_gpg=$(
+            mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                    --suffix='.sh.gpg'
+            )
+        GNUPGHOME=$(
+            mktemp  --directory                     \
+                    -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                    --suffix='-gnupghome'
+            )                                       \
+        gpg --no-default-keyring                    \
+            --keyring "$KZ_PUBLIC_KEY"              \
+            --decrypt "$SETTINGS_FILE_GPG"          \
+            > "$settings_file_gpg"                  \
+>>>>>>> refactor/rename-files
             2> >($PROGRAM_LOGS)
 
-        settings_files[$settings_file_decrypted]=$settings_file_decrypted
+        settings_files[$settings_file_gpg]=$settings_file_gpg
     fi
 
     for settings_file in "${settings_files[@]}"; do
@@ -262,7 +281,10 @@ process_option_browse() {
     local title=''
     local settings_file_combined=''
 
-    settings_file_combined=$(mktemp -t "$PROGRAM_NAME-settings-XXXXXXXXXX.sh")
+    settings_file_combined=$(
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-settings.sh'
+        )
     cat "${settings_files[@]}" > "$settings_file_combined"
 
     title=$(gettext 'All commands and information')
@@ -299,7 +321,6 @@ process_option_list() {
     local app_list_row=''
     local app_name=''
     local app_records=''
-    local text_file=''
     local text=''
     local title=''
 
@@ -361,12 +382,15 @@ process_option_list_gui() {
             --title     "$title"    \
             --font="Monospace 10"   \
             2> /dev/null            || true
+
     exit 0
 }
 
 
 # This function shows the available apps from the settings files using a TUI.
 process_option_list_tui() {
+    local app_list=''
+
     text=$(
         printf '%s|%s\n'                \
                 "${choices[@]}"         |
@@ -376,17 +400,20 @@ process_option_list_tui() {
                 "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
 
-    text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
+    app_list=$(
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-app.list'
+        )
 
     printf  '%s\n'                      \
             "$text"                     \
-            > "$text_file"
+            > "$app_list"
 
     dialog  --mouse                     \
             --scrollbar                 \
             --backtitle "$PROGRAM_NAME" \
             --title     "$title"        \
-            --textbox   "$text_file"    \
+            --textbox   "$app_list"    \
             0 0                         || true
 
     exit 0
@@ -405,6 +432,7 @@ process_option_list_cli() {
                 --table-columns         \
                 " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
+
     if [[ $SETUP = 'setup' ]]; then
         text+="
 
@@ -426,7 +454,9 @@ commands and information.")"
     fi
     text+="
 $(gettext "Use \"kz setup --browse\" to view all commands and information.")"
+
     kz.infomsg "$text"
+
     exit 0
 }
 
@@ -714,7 +744,10 @@ setup_apps() {
         exit 0
     fi
 
-    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
+    ERROR_LOG=$(
+    mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+            --suffix='-error.log'
+    )
 
     title=$(gettext 'Set up apps')
     text=$(gettext 'Preparing set up')

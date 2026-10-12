@@ -25,8 +25,13 @@ This file is decrypted before the commands are used in the kz-setup script,
 and as an example with the command:
 .br
 .nf
+<<<<<<< HEAD
 gpg --output ~/kz-setup.sh.gpg --no-default-keyring --keyring /usr/share\
 /kz/kz-public-key.gpg --decrypt /usr/bin/kz-setup.sh.gpg
+=======
+gpg --output ~/kz-setup.sh.gpg --no-default-keyring --keyring /usr/share/kz/\
+kz-public-key.gpg --decrypt /usr/bin/kz-setup.sh.gpg
+>>>>>>> refactor/rename-files
 .fi
 .sp
 For the format of the records in this installation file please use "man kz

@@ -70,8 +70,8 @@ usage,version"
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
 declare INSTALL='install'
-declare INSTALLATION_FILE_DEFAULT_GPG=/usr/bin/$PROGRAM_NAME.sh.gpg
-declare INSTALLATION_FILE_DEFAULT=/usr/bin/$PROGRAM_NAME.sh
+declare INSTALLATION_FILE_GPG=/usr/bin/$PROGRAM_NAME.sh.gpg
+declare INSTALLATION_FILE=/usr/bin/$PROGRAM_NAME.sh
 declare KZ_PUBLIC_KEY=/usr/share/kz/kz-public-key.gpg
 declare OPTION_REMOVE=false
 declare OPTION_SELECT=false
@@ -238,24 +238,28 @@ $(gettext "no desktop environment available")"
 
 # This function checks if the installation files exist.
 check_installation_files() {
-    local installation_file_decrypted=''
+    local installation_file_gpg=''
 
     if ! $option_file; then
-        installation_files[$INSTALLATION_FILE_DEFAULT]=\
-$INSTALLATION_FILE_DEFAULT
+        installation_files[$INSTALLATION_FILE]=$INSTALLATION_FILE
 
         # Decrypt GPG-signed installation file.
-        installation_file_decrypted=\
-$(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        GNUPGHOME=$(mktemp -dt "$PROGRAM_NAME-gnupghome-XXXXXXXXXX")    \
-        gpg --no-default-keyring                                        \
-            --keyring "$KZ_PUBLIC_KEY"                                  \
-            --decrypt "$INSTALLATION_FILE_DEFAULT_GPG"                  \
-            > "$installation_file_decrypted"                            \
+        installation_file_gpg=$(
+            mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                    --suffix='.sh.gpg'
+            )
+        GNUPGHOME=$(
+            mktemp  --directory                     \
+                    -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                    --suffix='-gnupghome'
+            )                                       \
+        gpg --no-default-keyring                    \
+            --keyring "$KZ_PUBLIC_KEY"              \
+            --decrypt "$INSTALLATION_FILE_GPG"      \
+            > "$installation_file_gpg"              \
             2> >($PROGRAM_LOGS)
 
-        installation_files[$installation_file_decrypted]=\
-$installation_file_decrypted
+        installation_files[$installation_file_gpg]=$installation_file_gpg
     fi
 
     for installation_file in "${installation_files[@]}"; do
@@ -277,8 +281,11 @@ process_option_browse() {
     local title=''
     local installation_file_combined=''
 
-    installation_file_combined=\
-$(mktemp -t "$PROGRAM_NAME-installation-XXXXXXXXXX.sh")
+    installation_file_combined=$(
+    mktemp  --directory                     \
+            -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+            --suffix='-installation.sh'
+    )
     cat "${installation_files[@]}" > "$installation_file_combined"
 
     title=$(gettext 'All commands and information')
@@ -315,7 +322,6 @@ process_option_list() {
     local app_list_row=''
     local app_name=''
     local app_records=''
-    local text_file=''
     local text=''
     local title=''
 
@@ -368,6 +374,7 @@ process_option_list_gui() {
                 --table-columns     \
                 "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
+
     printf  '%s\n'                  \
             "$text"                 |
     zenity  --text-info             \
@@ -376,6 +383,7 @@ process_option_list_gui() {
             --title     "$title"    \
             --font="Monospace 10"   \
             2> /dev/null            || true
+
     exit 0
 }
 
@@ -383,24 +391,33 @@ process_option_list_gui() {
 # This function shows the available apps from the installation files using a
 # TUI.
 process_option_list_tui() {
+    local app_list=''
+
     text=$(
-        printf '%s|%s\n'                \
-                "${choices[@]}"         |
-        column  --table                 \
-                --separator '|'         \
-                --table-columns         \
+        printf '%s|%s\n'                        \
+                "${choices[@]}"                 |
+        column  --table                         \
+                --separator '|'                 \
+                --table-columns                 \
                 "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
-    text_file=$(mktemp -t "$PROGRAM_NAME-app-list-XXXXXXXXXX.txt")
-    printf  '%s\n'                      \
-            "$text"                     \
-            > "$text_file"
-    dialog  --mouse                     \
-            --scrollbar                 \
-            --backtitle "$PROGRAM_NAME" \
-            --title     "$title"        \
-            --textbox   "$text_file"    \
-            0 0                         || true
+
+    app_list=$(
+        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+                --suffix='-app.list'
+        )
+
+    printf  '%s\n'                              \
+            "$text"                             \
+            > "$app_list"
+
+    dialog  --mouse                             \
+            --scrollbar                         \
+            --backtitle "$PROGRAM_NAME"         \
+            --title     "$title"                \
+            --textbox   "$app_list"             \
+            0 0                                 || true
+
     exit 0
 }
 
@@ -418,6 +435,7 @@ process_option_list_cli() {
                 --table-columns         \
                 " ,$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
+
     if [[ $INSTALL = 'install' ]]; then
         text+="
 
@@ -437,9 +455,12 @@ self-selected commands and information.")
 $(gettext "Use \"kz install --cat --remove\" to view the automatically \
 selected commands and information.")"
     fi
+
     text+="
 $(gettext "Use \"kz install --browse\" to view all commands and information.")"
+
     kz.infomsg "$text"
+
     exit 0
 }
 
@@ -746,7 +767,10 @@ install_apps() {
         exit 0
     fi
 
-    ERROR_LOG=$(mktemp -t "$PROGRAM_NAME-error-XXXXXXXXXX.log")
+    ERROR_LOG=$(
+    mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+            --suffix='-error.log'
+    )
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
 
     title=$(gettext 'Install apps')

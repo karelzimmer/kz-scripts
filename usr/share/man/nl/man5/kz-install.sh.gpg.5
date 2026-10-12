@@ -28,8 +28,13 @@ Dit bestand wordt ontsleuteld voordat de opdrachten worden gebruikt in script
 kz-install, en als voorbeeld met de opdracht:
 .br
 .nf
+<<<<<<< HEAD
 gpg --output ~/kz-install.sh.gpg --no-default-keyring --keyring /usr/sha\
 re/kz/kz-public-key.gpg --decrypt /usr/bin/kz-install.sh.gpg
+=======
+gpg --output ~/kz-install.sh.gpg --no-default-keyring --keyring /usr/share/kz/\
+kz-public-key.gpg --decrypt /usr/bin/kz-install.sh.gpg
+>>>>>>> refactor/rename-files
 .fi
 .sp
 Gebruik voor de opmaak van de records in dit installatiebestand "man kz
