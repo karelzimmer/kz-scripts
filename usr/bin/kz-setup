@@ -136,11 +136,7 @@ check_settings_files() {
         # Decrypt GPG-signed settings file.
         settings_file_decrypted=\
 $(mktemp -t "$PROGRAM_NAME-decrypted-XXXXXXXXXX.sh")
-        GNUPGHOME=$(
-            mktemp  --directory                     \
-                    -t "$PROGRAM_NAME-XXXXXXXXXX"   \
-                    --suffix='-gnupghome'
-            )                                                           \
+        GNUPGHOME=$(mktemp -dt "$PROGRAM_NAME-gnupghome-XXXXXXXXXX")    \
         gpg --no-default-keyring                                        \
             --keyring "$KZ_PUBLIC_KEY"                                  \
             --decrypt "$SETTINGS_FILE_DEFAULT_GPG"                      \

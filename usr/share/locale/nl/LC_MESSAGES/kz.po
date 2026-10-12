@@ -690,7 +690,7 @@ msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 msgid "Type 'exit' to close this window."
 msgstr "Typ 'exit' om dit venster te sluiten."
 
-#: kz_common.sh:299
+#: kz_common.sh:298
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
