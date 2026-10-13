@@ -107,9 +107,9 @@ process() {
     fi
 
     command_file=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-commands.sh'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-commands.sh'     \
+                --tmpdir
         )
     # To minimize the risk of errors due to outdated Debian package lists.
     if  grep    --quiet             \
@@ -249,15 +249,15 @@ check_installation_files() {
 
         # Decrypt GPG-signed installation file.
         installation_file_gpg=$(
-            mktemp  --tmpdir                    \
-                    "$PROGRAM_NAME-XXXXXXXXXX"  \
-                    --suffix='.sh.gpg'
+            mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                    --suffix='.sh.gpg'          \
+                    --tmpdir
             )
         GNUPGHOME=$(
-            mktemp  --tmpdir                    \
+            mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                    --suffix='-gnupghome'       \
                     --directory                 \
-                    "$PROGRAM_NAME-XXXXXXXXXX"  \
-                    --suffix='-gnupghome'
+                    --tmpdir
             )                                   \
         gpg --no-default-keyring                \
             --keyring "$KZ_PUBLIC_KEY"          \
@@ -288,9 +288,9 @@ process_option_browse() {
     local installation_file_combined=''
 
     installation_file_combined=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-browse.sh'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-browse.sh'       \
+                --tmpdir
     )
     cat "${installation_files[@]}" > "$installation_file_combined"
 
@@ -409,9 +409,9 @@ process_option_list_tui() {
         )
 
     app_list=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-app.list'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-app.list'        \
+                --tmpdir
         )
 
     printf  '%s\n'                          \
@@ -775,9 +775,9 @@ install_apps() {
     fi
 
     ERROR_LOG=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-error.log'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-error.log'       \
+                --tmpdir
         )
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
 

@@ -657,9 +657,9 @@ create_backup() {
     local title=''
 
     exclude_file=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-exclude.list'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-exclude.list'    \
+                --tmpdir
         )
 
     cat <<EOF > "$exclude_file"
@@ -670,9 +670,9 @@ $(find "$HOME" -type d -name ".git" -printf "%P\n" | sed 's|/.git||')
 EOF
 
     ERROR_LOG=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-error.log'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-error.log'       \
+                --tmpdir
         )
 
     title=$(gettext 'Make backup')

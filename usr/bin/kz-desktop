@@ -273,14 +273,14 @@ capture_gnome_changes() {
     local text=''
 
     config_a_file=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-a.config'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-a.config'        \
+                --tmpdir
         )
     config_b_file=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-b.config'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-b.config'        \
+                --tmpdir
         )
     # Capturing the configuration database before.
     save_configuration_database A "$config_a_file"

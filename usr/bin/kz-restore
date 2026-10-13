@@ -459,9 +459,9 @@ restore_backup() {
     local title=''
 
     ERROR_LOG=$(
-        mktemp  --tmpdir                    \
-                "$PROGRAM_NAME-XXXXXXXXXX"  \
-                --suffix='-error.log'
+        mktemp  "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-error.log'       \
+                --tmpdir
         )
 
     title=$(gettext 'Restore backup')
