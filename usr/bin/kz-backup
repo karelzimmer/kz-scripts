@@ -657,7 +657,8 @@ create_backup() {
     local title=''
 
     exclude_file=$(
-        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+        mktemp  --tmpdir                    \
+                "$PROGRAM_NAME-XXXXXXXXXX"  \
                 --suffix='-exclude.list'
         )
 
@@ -669,7 +670,8 @@ $(find "$HOME" -type d -name ".git" -printf "%P\n" | sed 's|/.git||')
 EOF
 
     ERROR_LOG=$(
-        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+        mktemp  --tmpdir                    \
+                "$PROGRAM_NAME-XXXXXXXXXX"  \
                 --suffix='-error.log'
         )
 

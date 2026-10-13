@@ -107,7 +107,8 @@ process() {
     fi
 
     command_file=$(
-        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+        mktemp  --tmpdir                    \
+                "$PROGRAM_NAME-XXXXXXXXXX"  \
                 --suffix='-commands.sh'
         )
 
@@ -138,18 +139,20 @@ check_settings_files() {
 
         # Decrypt GPG-signed settings file.
         settings_file_gpg=$(
-            mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+            mktemp  --tmpdir                    \
+                    "$PROGRAM_NAME-XXXXXXXXXX"  \
                     --suffix='.sh.gpg'
             )
         GNUPGHOME=$(
-            mktemp  --directory                     \
-                    -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+            mktemp  --tmpdir                    \
+                    --directory                 \
+                    "$PROGRAM_NAME-XXXXXXXXXX"  \
                     --suffix='-gnupghome'
-            )                                       \
-        gpg --no-default-keyring                    \
-            --keyring "$KZ_PUBLIC_KEY"              \
-            --decrypt "$SETTINGS_FILE_GPG"          \
-            > "$settings_file_gpg"                  \
+            )                                   \
+        gpg --no-default-keyring                \
+            --keyring "$KZ_PUBLIC_KEY"          \
+            --decrypt "$SETTINGS_FILE_GPG"      \
+            > "$settings_file_gpg"              \
             2> >($PROGRAM_LOGS)
 
         settings_files[$settings_file_gpg]=$settings_file_gpg
@@ -272,8 +275,9 @@ process_option_browse() {
     local settings_file_combined=''
 
     settings_file_combined=$(
-        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
-                --suffix='-settings.sh'
+        mktemp  --tmpdir                    \
+                "$PROGRAM_NAME-XXXXXXXXXX"  \
+                --suffix='-browse.sh'
         )
     cat "${settings_files[@]}" > "$settings_file_combined"
 
@@ -382,29 +386,30 @@ process_option_list_tui() {
     local app_list=''
 
     text=$(
-        printf '%s|%s\n'                \
-                "${choices[@]}"         |
-        column  --table                 \
-                --separator '|'         \
-                --table-columns         \
+        printf '%s|%s\n'                    \
+                "${choices[@]}"             |
+        column  --table                     \
+                --separator '|'             \
+                --table-columns             \
                 "$(gettext 'APP'),$(gettext 'DESCRIPTION')"
         )
 
     app_list=$(
-        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+        mktemp  --tmpdir                    \
+                "$PROGRAM_NAME-XXXXXXXXXX"  \
                 --suffix='-app.list'
         )
 
-    printf  '%s\n'                      \
-            "$text"                     \
+    printf  '%s\n'                          \
+            "$text"                         \
             > "$app_list"
 
-    dialog  --mouse                     \
-            --scrollbar                 \
-            --backtitle "$PROGRAM_NAME" \
-            --title     "$title"        \
-            --textbox   "$app_list"    \
-            0 0                         || true
+    dialog  --mouse                         \
+            --scrollbar                     \
+            --backtitle "$PROGRAM_NAME"     \
+            --title     "$title"            \
+            --textbox   "$app_list"         \
+            0 0                             || true
 
     exit 0
 }
@@ -735,7 +740,8 @@ setup_apps() {
     fi
 
     ERROR_LOG=$(
-        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+        mktemp  --tmpdir                    \
+                "$PROGRAM_NAME-XXXXXXXXXX"  \
                 --suffix='-error.log'
         )
 

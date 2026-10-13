@@ -459,7 +459,8 @@ restore_backup() {
     local title=''
 
     ERROR_LOG=$(
-        mktemp  -t "$PROGRAM_NAME-XXXXXXXXXX"   \
+        mktemp  --tmpdir                    \
+                "$PROGRAM_NAME-XXXXXXXXXX"  \
                 --suffix='-error.log'
         )
 
