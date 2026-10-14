@@ -151,7 +151,7 @@ def perform_update(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function performs the system update.
     """
-    check_debian: str = 'grep --quiet debian /etc/os-release'
+    check_debian: str = "grep --quiet --regexp='debian' /etc/os-release"
     check_rhel: str = "grep --quiet --extended-regexp " \
                       "--regexp='fedora|rhel' /etc/os-release"
 
