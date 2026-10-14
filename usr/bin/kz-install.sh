@@ -121,14 +121,14 @@ if grep -qE 'fedora|rhel' /etc/os-release; then sudo dnf remove -y cups; fi
 
 #|install|desktop-settings|*|Desktop settings
 # -----------------------------------------------------------------------------
-# Enable Cinnamon user greeter.
+# Enable LightDM user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed -i 's/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
 
 #|remove|desktop-settings|*|Desktop settings
 # -----------------------------------------------------------------------------
-# Disable Cinnamon user greeter.
+# Disable LightDM user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed -i 's/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
 REBOOT=true
