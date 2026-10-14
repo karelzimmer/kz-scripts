@@ -295,10 +295,10 @@ sed -i '/^stty -ixon/d' ~/.bashrc
 LOGOUT=true
 
 #|setup|terminal|pc06 pc07|Terminal
-sed -i '/^alias bin/d; /^alias docs/d' ~/.bashrc && echo -e "alias bin='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'\nalias docs='cd $(xdg-user-dir PROJECTS)/kz-docs'" >> ~/.bashrc && kz-desktop --addbef=org.gnome.Terminal
+sed -i '/^alias bin/d; /^alias kzdocs/d; /^alias kzscripts/d' ~/.bashrc && echo -e "alias bin='cd $HOME/bin'\nalias kzdocs='cd $(xdg-user-dir PROJECTS)/kz-docs'\nalias kzscripts='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'" >> ~/.bashrc && kz-desktop --addbef=org.gnome.Terminal
 
 #|reset|terminal|pc06 pc07|Terminal
-sed -i '/^alias bin/d; /^alias docs/d' ~/.bashrc && kz-desktop --delete=org.gnome.Terminal
+sed -i '/^alias bin/d; /^alias kzdocs/d; /^alias kzscripts/d' ~/.bashrc && kz-desktop --delete=org.gnome.Terminal
 
 #|setup|thumbnails-cache|#none|Restore thumbnails
 rm --force --recursive ~/.cache/thumbnails/
