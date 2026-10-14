@@ -123,10 +123,6 @@ process_kz_deb_package() {
         install='reinstall'
     fi
 
-    # Ensure that there is no interaction with the user when configuring
-    # packages, and standard answers are used for all questions.
-    export DEBIAN_FRONTEND=noninteractive
-
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
     printf '%s' 'Debian update.....'
@@ -143,7 +139,11 @@ process_kz_deb_package() {
     # Install kz deb package.
     printf '\n%s' 'Deb kz install....'
     check_debian_package_manager
-    sudo apt-get "$install" --assume-yes "$kz_deb_local_file" |& $PROGRAM_LOGS
+    sudo    DEBIAN_FRONTEND=noninteractive  \
+            apt-get                         \
+            "$install"                      \
+            --assume-yes                    \
+            "$kz_deb_local_file"            |& $PROGRAM_LOGS
 }
 
 
