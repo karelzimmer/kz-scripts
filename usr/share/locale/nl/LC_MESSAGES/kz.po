@@ -1553,11 +1553,11 @@ msgstr "OPRUIMEN"
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os-release"
 
-#: kz-update:209
+#: kz-update:221
 msgid "Update source code of package kz"
 msgstr "Werk de broncode van pakket kz bij"
 
-#: kz-update:221
+#: kz-update:204
 msgid "Install package kz"
 msgstr "Installeer pakket kz"
 

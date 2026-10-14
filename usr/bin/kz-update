@@ -194,6 +194,18 @@ def perform_update(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         kz.term(PROGRAM_NAME, 1)
 
 
+def perform_install_kz(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
+    """
+    This function installs the latest version of the KZ package.
+    """
+    command: str
+    text: str
+
+    text = f"{_('Install package kz')}"
+    command = f'cd ~ && wget karelzimmer.nl/getkz && bash getkz # {text}'
+    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
+
+
 def perform_gitpull(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function performs a git pull of all local branches in the home
@@ -209,18 +221,6 @@ def perform_gitpull(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         text = f"{_('Update source code of package kz')}"
         command = f'gitpull # {text}'
         perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
-
-
-def perform_install_kz(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
-    """
-    This function installs the latest version of the KZ package.
-    """
-    command: str
-    text: str
-
-    text = f"{_('Install package kz')}"
-    command = f'cd ~ && wget karelzimmer.nl/getkz && bash getkz # {text}'
-    perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
 def perform_update_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
