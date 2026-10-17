@@ -17,13 +17,13 @@
 # Express Advanced Error Reporting) prevents the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if ! grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/; s/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/; s/quiet/quiet pci=noaer/' /etc/default/grub; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for available kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
-grep --quiet --regexp='noaer' /etc/default/grub
+grep --quiet --regexp='pci=noaer' /etc/default/grub
 touch /tmp/kz-install-need-reboot
 
 #|remove|aer-settings|#none|Advanced Error Reporting settings
@@ -32,13 +32,13 @@ touch /tmp/kz-install-need-reboot
 # Express Advanced Error Reporting) to allow 'AER: Corrected errors received'
 # messages to appear in the log. This is usually the case for HP hardware.
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='noaer' /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
+if grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/ pci=noaer//' /etc/default/grub; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
 # Check for missing kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
-! grep --quiet --regexp='noaer' /etc/default/grub
+! grep --quiet --regexp='pci=noaer' /etc/default/grub
 touch /tmp/kz-install-need-reboot
 
 #|install|angryipscan|pc06 pc07|Network scanner
@@ -57,7 +57,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=non
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes ansible-core; fi
 
 #|install|apport-settings|#none|Apport settings
-if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl disable --now apport.service && sudo sed --in-place --expression='s/enabled=.*$/enabled=0/' /etc/default/apport && sudo rm -fv /var/crash/*; fi
+if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo systemctl disable --now apport.service && sudo sed --in-place --expression='s/enabled=.*$/enabled=0/' /etc/default/apport && sudo rm --force --verbose /var/crash/*; fi
 
 #|remove|apport-settings|#none|Apport settings
 if grep --quiet --regexp='Ubuntu' /etc/os-release; then sudo sed --in-place --expression='s/enabled=.*$/enabled=1/' /etc/default/apport && systemctl enable --now apport.service; fi
@@ -351,7 +351,7 @@ if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
 #|install|google-chrome|pc01 pc06 pc07|Browser
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes /tmp/google-chrome.deb && sudo rm -fv /tmp/google-chrome.deb; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes /tmp/google-chrome.deb && sudo rm --force --verbose /tmp/google-chrome.deb; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub && sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 #|remove|google-chrome|pc01 pc06 pc07|Browser
@@ -365,31 +365,6 @@ if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install -
 #|remove|groff|pc06 pc07|Text-formatting system
 if grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes groff; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes groff; fi
-
-#|install|grub-settings|*|GRUB settings
-# -----------------------------------------------------------------------------
-# Reduce GRUB menu display time & suppress warnings.
-# -----------------------------------------------------------------------------
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=2/' /etc/default/grub
-if ! grep --quiet --regexp='loglevel=3' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet loglevel=3/' /etc/default/grub; fi
-# -----------------------------------------------------------------------------
-# Update GRUB.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-touch /tmp/kz-install-need-reboot
-
-#|remove|grub-settings|*|GRUB settings
-# -----------------------------------------------------------------------------
-# Restore default GRUB menu display time & enable warnings.
-# -----------------------------------------------------------------------------
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=.*$/GRUB_TIMEOUT=5/; s/ loglevel=3//' /etc/default/grub
-# -----------------------------------------------------------------------------
-# Update GRUB.
-# -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
-touch /tmp/kz-install-need-reboot
 
 #|install|htop|pc01 pc06 pc07|Processes viewer
 if grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes htop; fi
@@ -509,7 +484,7 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-relea
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install --assumeyes flathub com.microsoft.Edge; fi
 
 #|remove|microsoft-edge|pc06 pc07|Browser
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes microsoft-edge-stable && sudo rm -fv /etc/apt/sources.list.d/microsoft-edge.list && sudo apt-get update; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes microsoft-edge-stable && sudo rm --force --verbose /etc/apt/sources.list.d/microsoft-edge.list && sudo apt-get update; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo flatpak uninstall --assumeyes flathub com.microsoft.Edge; fi
 
 #|install|needrestart|pc06 pc07|Service restart management
@@ -617,7 +592,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=non
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes python3 python3-pip; fi
 
 #|remove|python|pc06 pc07|Programming language
-if grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes python python3-pip python-is-python3 && sudo rm -fv /usr/bin/pip /usr/bin/pep8; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes python python3-pip python-is-python3 && sudo rm --force --verbose /usr/bin/pip /usr/bin/pep8; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pip; fi
 
 #|install|rpm|pc06 pc07|Package manager
@@ -670,7 +645,7 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-relea
 # For Red Hat and Red Hat-based systems the spotify app is available as a web app.
 
 #|remove|spotify|pc01 pc06 pc07|Streaming music
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes spotify-client && sudo rm -fv /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources && sudo apt-get update; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes spotify-client && sudo rm --force --verbose /usr/share/keyrings/spotify.gpg /etc/apt/sources.list.d/spotify.list /etc/apt/sources.list.d/spotify.sources && sudo apt-get update; fi
 # App spotify cannot be removed from Red Hat and Red Hat-based system.
 
 #|install|ssh|pc01 pc06 pc07|Secure shell
@@ -734,7 +709,7 @@ if grep --quiet --regexp='fedora\|rhel' /etc/os-release && type gnome-session &>
 # -----------------------------------------------------------------------------
 # Web app: https://start.teamviewer.com (Provide support and remote control)
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes /tmp/teamviewer.deb && sudo rm -fv /tmp/teamviewer.deb; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes /tmp/teamviewer.deb && sudo rm --force --verbose /tmp/teamviewer.deb; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 #|remove|teamviewer|*|Remote control
@@ -800,15 +775,15 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os
 
 #|remove|vscode|pc06 pc07|Code editor
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo update-alternatives --remove editor /usr/bin/code && sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes code; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes code && sudo rm -fv /etc/yum.repos.d/vscode.repo; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes code && sudo rm --force --verbose /etc/yum.repos.d/vscode.repo; fi
 
 #|install|webmin|pc07|Manage servers
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm -fv /tmp/setup-repos.sh && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes webmin; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm -fv /tmp/setup-repos.sh && sudo dnf install --assumeyes webmin; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm --force --verbose /tmp/setup-repos.sh && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes webmin; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm --force --verbose /tmp/setup-repos.sh && sudo dnf install --assumeyes webmin; fi
 
 #|remove|webmin|pc07|Manage servers
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes webmin && sudo rm -fv /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources && sudo apt-get update; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes webmin && sudo rm -fv /etc/yum.repos.d/webmin.repo && sudo dnf update; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes webmin && sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources && sudo apt-get update; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes webmin && sudo rm --force --verbose /etc/yum.repos.d/webmin.repo && sudo dnf update; fi
