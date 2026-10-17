@@ -296,7 +296,7 @@ sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
 touch /tmp/kz-setup-need-logout
 
 #|setup|terminal|pc06 pc07|Terminal
-sed --in-place --expression='/^alias bin/d; /^alias kzdeb/d; /^alias kzdocs/d; /^alias kzrpm/d; /^alias kzscripts/d; /^alias kzuploads/d' ~/.bashrc && echo -e "alias bin='cd $HOME/bin'\nalias kzdeb='cd $(xdg-user-dir PROJECTS)/kz-deb'\nalias kzdocs='cd $(xdg-user-dir PROJECTS)/kz-docs'\nalias kzrpm='cd $(xdg-user-dir PROJECTS)/kz-rpm'\nalias kzscripts='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'\nalias kzuploads='cd $(xdg-user-dir PROJECTS)/kz-uploads'" >> ~/.bashrc && kz-desktop --addbef=org.gnome.Terminal
+sed --in-place --expression='/^alias bin/d; /^alias kzdeb/d; /^alias kzdocs/d; /^alias kzrpm/d; /^alias kzscripts/d; /^alias kzuploads/d' ~/.bashrc && echo -e "alias bin='cd $HOME/bin'\nalias kzdeb='cd $(xdg-user-dir PROJECTS)/kz-deb/src'\nalias kzdocs='cd $(xdg-user-dir PROJECTS)/kz-docs'\nalias kzrpm='cd $(xdg-user-dir PROJECTS)/kz-rpm/src'\nalias kzscripts='cd $(xdg-user-dir PROJECTS)/kz-scripts/usr/bin'\nalias kzuploads='cd $(xdg-user-dir PROJECTS)/kz-uploads/src'" >> ~/.bashrc && kz-desktop --addbef=org.gnome.Terminal
 touch /tmp/kz-setup-need-logout
 
 #|reset|terminal|pc06 pc07|Terminal
