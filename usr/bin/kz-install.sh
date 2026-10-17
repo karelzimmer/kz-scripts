@@ -11,7 +11,7 @@
 # format of this file.
 # =============================================================================
 
-#|install|aer-settings|pc06|Advanced Error Reporting settings
+#|install|aer-settings|#none|Advanced Error Reporting settings
 # -----------------------------------------------------------------------------
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) prevents the log gets flooded with
@@ -26,7 +26,7 @@ if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo grub2-mkconfi
 grep --quiet --regexp='pci=noaer' /etc/default/grub
 touch /tmp/kz-install-need-reboot
 
-#|remove|aer-settings|pc06|Advanced Error Reporting settings
+#|remove|aer-settings|#none|Advanced Error Reporting settings
 # -----------------------------------------------------------------------------
 # Enable kernel config parameter PCIEAER (Peripheral Component Interconnect
 # Express Advanced Error Reporting) to allow 'AER: Corrected errors received'
