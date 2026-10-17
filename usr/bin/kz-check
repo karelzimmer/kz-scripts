@@ -184,7 +184,7 @@ check_website_files() {
             # If it is not a file that can be deleted, then it is an error.
             case $file in
                 *.asc | *icons/LF* | *kz-dev*.deb | *kz-dev*.rpm | \
-                *sources.list | *wallpapers.tar )
+                *debian.sources | *sources.list | *wallpapers.tar )
                     continue
                     ;;
                 *)
