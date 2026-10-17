@@ -70,7 +70,6 @@ usage,version"
 declare -A FAILED_APPS=()
 declare ERROR_LOG=''
 declare KZ_PUBLIC_KEY=/usr/share/kz/kz-public-key.gpg
-declare LOGOUT=false
 declare OPTION_RESET=false
 declare OPTION_SELECT=false
 declare RESET='reset'
@@ -328,7 +327,7 @@ process_option_list() {
                 "${settings_files[@]}"          |
         cut     --delimiter='|'                 \
                 --fields=3,5                    |
-        sed     's/|/ /'                        |
+        sed     --expression='s/|/ /'           |
         sort    --unique                        || true
         )
 
@@ -482,7 +481,7 @@ process_option_select() {
                 "${settings_files[@]}"          |
         cut     --delimiter='|'                 \
                 --fields=3,5                    |
-        sed     's/|/ /'                        |
+        sed     --expression='s/|/ /'           |
         sort    --unique                        || true
         )
 
@@ -749,19 +748,16 @@ setup_apps() {
     text=$(gettext 'Preparing set up')
 
     if [[ $UI_MODE = 'gui' ]]; then
-        # With '|& zenity --progress' global variables from called functions
-        # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_command_file > >(
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     700         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     \
-                    2> /dev/null
-            )
+        process_command_file            |
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     700         \
+                --height    50          \
+                --title     "$title"    \
+                --text      "$text"     \
+                2> /dev/null
     else
         process_command_file
     fi
@@ -830,15 +826,15 @@ execute_command() {
     kz.logmsg "$app_line\n\n         $cmd"
 
     if [[ $UI_MODE = 'gui' ]]; then
-        printf '%s\n' "#$app_line\n\n$cmd"
+        printf '%s\n' "#$app_line"
     elif [[ $UI_MODE = 'tui' ]]; then
         # This tput locks the cursor position top-left to prevent flickering.
         tput cup 0 0
-        dialog  --mouse                                     \
-                --backtitle "$PROGRAM_NAME"                 \
-                --title     "$title"                        \
-                --infobox   "$app_line\n\n         $cmd"    \
-                10 90                                       || true
+        dialog  --mouse                     \
+                --backtitle "$PROGRAM_NAME" \
+                --title     "$title"        \
+                --infobox   "$app_line"     \
+                10 90                       || true
     else
         # Ellipsize terminal output.
         # Width 9 characters less, 9 for leading spaces.
@@ -886,7 +882,7 @@ term_success() {
         text=$(gettext "Apps reset completed.")
     fi
 
-    if $LOGOUT; then
+    if [[ -f /tmp/kz-setup-need-logout ]]; then
         if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
             text+="
 
@@ -900,7 +896,7 @@ apps and changing user settings.")"
         fi
         kz.infomsg "$text"
 
-        if $LOGOUT && [[ $UI_MODE = 'cli' ]]; then
+        if [[ -f /tmp/kz-setup-need-logout && $UI_MODE = 'cli' ]]; then
             prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
             read -rp "$prompt" < /dev/tty
         fi

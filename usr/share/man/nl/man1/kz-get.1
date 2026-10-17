@@ -46,11 +46,11 @@ verwijderd):
 .br
  of (er wordt geen kopie van getkz opgeslagen):
 .br
-    \fBwget -O- karelzimmer.nl/getkz | bash\fR
+    \fBwget --output-document=- karelzimmer.nl/getkz | bash\fR
 .br
  of (als curl is geïnstalleerd, geen kopie):
 .br
-    \fBcurl -sL karelzimmer.nl/getkz | bash\fR
+    \fBcurl --silent --location karelzimmer.nl/getkz | bash\fR
 .br
  of (als pakket kz al is geïnstalleerd):
 .br

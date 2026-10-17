@@ -174,8 +174,10 @@ check_target() {
     local usb_mount_point=/media/$USER
 
     # Correct mouint point for Red Hat and Fedora systems.
-    if grep --quiet --extended-regexp --regexp='fedora|rhel' /etc/os-release
-    then
+    if grep --quiet                 \
+            --extended-regexp       \
+            --regexp='fedora|rhel'  \
+            /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 
@@ -785,8 +787,10 @@ term() {
     local usb_mount_point=/media/$USER
 
     # Correct mouint point for Red Hat and Fedora systems.
-    if grep --quiet --extended-regexp --regexp='fedora|rhel' /etc/os-release
-    then
+    if grep --quiet                 \
+            --extended-regexp       \
+            --regexp='fedora|rhel'  \
+            /etc/os-release; then
         usb_mount_point=/run/media/$USER
     fi
 

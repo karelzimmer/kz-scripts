@@ -45,11 +45,11 @@ run (copy of getkz will be saved and later deleted):
 .br
  or (no copy of getkz is saved):
 .br
-    \fBwget -O- karelzimmer.nl/getkz | bash\fR
+    \fBwget --output-document=- karelzimmer.nl/getkz | bash\fR
 .br
  or (if curl is installed, no copy):
 .br
-    \fBcurl -sL karelzimmer.nl/getkz | bash\fR
+    \fBcurl --silent --location karelzimmer.nl/getkz | bash\fR
 .br
  or (if package kz is already installed):
 .br

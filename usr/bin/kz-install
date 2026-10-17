@@ -75,7 +75,6 @@ declare INSTALLATION_FILE=/usr/bin/$PROGRAM_NAME.sh
 declare KZ_PUBLIC_KEY=/usr/share/kz/kz-public-key.gpg
 declare OPTION_REMOVE=false
 declare OPTION_SELECT=false
-declare REBOOT=false
 declare REMOVE='remove'
 declare UI_MODE='tui'
 
@@ -341,7 +340,7 @@ process_option_list() {
                 "${installation_files[@]}"      |
         cut     --delimiter='|'                 \
                 --fields=3,5                    |
-        sed     's/|/ /'                        |
+        sed     --expression='s/|/ /'           |
         sort    --unique                        || true
         )
 
@@ -498,7 +497,7 @@ process_option_select() {
                 "${installation_files[@]}"      |
         cut     --delimiter='|'                 \
                 --fields=3,5                    |
-        sed     's/|/ /'                        |
+        sed     --expression='s/|/ /'           |
         sort    --unique                        || true
         )
 
@@ -785,9 +784,7 @@ install_apps() {
     text=$(gettext 'Prepare installation')
 
     if [[ $UI_MODE = 'gui' ]]; then
-        # With '|& zenity --progress' global variables from called functions
-        # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_command_file > >(
+        process_command_file                |
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -797,7 +794,6 @@ install_apps() {
                     --title     "$title"    \
                     --text      "$text"     \
                     2> /dev/null
-            )
     else
         process_command_file
     fi
@@ -884,7 +880,7 @@ execute_command() {
 # This function reports and executes a command from the command file in the
 # GUI.
 execute_command_gui() {
-    printf '%s\n' "#$app_line\n\n$cmd"
+    printf '%s\n' "#$app_line"
     check_debian_package_manager
     pkexec  /usr/bin/kz-install-pkexec  \
             "${XDG_CURRENT_DESKTOP-}"   \
@@ -898,10 +894,6 @@ execute_command_gui() {
     elif [[ $pkexec_rc -ne 0 ]]; then
         FAILED_APPS[$app_name]=$app_name
     fi
-
-    if [[ $cmd = 'REBOOT=true' ]]; then
-        REBOOT=true
-    fi
 }
 
 
@@ -910,8 +902,10 @@ execute_command_gui() {
 check_debian_package_manager() {
     local text='Wait for another package manager to finish...'
 
-    if grep --quiet --extended-regexp --regexp='fedora|rhel' /etc/os-release
-    then
+    if grep --quiet                 \
+            --extended-regexp       \
+            --regexp='fedora|rhel'  \
+            /etc/os-release; then
         return 0
     fi
 
@@ -946,11 +940,11 @@ execute_command_tui() {
 
     # This tput locks the cursor position top-left to prevent flickering.
     tput cup 0 0
-    dialog  --mouse                                     \
-            --backtitle "$PROGRAM_NAME"                 \
-            --title     "$title"                        \
-            --infobox   "$app_line\n\n         $cmd"    \
-            10 90                                       || true
+    dialog  --mouse                     \
+            --backtitle "$PROGRAM_NAME" \
+            --title     "$title"        \
+            --infobox   "$app_line"     \
+            10 90                       || true
     check_debian_package_manager
     DEBIAN_FRONTEND=noninteractive  \
     eval    "$cmd"                  \
@@ -1010,7 +1004,12 @@ term_success() {
         text=$(gettext "Apps remove completed.")
     fi
 
-    if $REBOOT; then
+    text=$(gettext "Apps install completed.")
+    if $OPTION_REMOVE; then
+        text=$(gettext "Apps remove completed.")
+    fi
+
+    if [[ -f /tmp/kz-install-need-reboot ]]; then
         text+="
 
 $(gettext "The computer will now reboot to finish installing the apps and \
@@ -1018,12 +1017,34 @@ changing system settings.")"
     fi
     kz.infomsg "$text"
 
-    if $REBOOT && [[ $UI_MODE = 'cli' ]]; then
+    if [[ -f /tmp/kz-install-need-reboot && $UI_MODE = 'cli' ]]; then
         prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
         read -rp "$prompt" < /dev/tty
     fi
 
-    if $REBOOT; then
+    if [[ -f /tmp/kz-install-need-reboot ]]; then
+        if [[ $UI_MODE = 'gui' ]]; then
+            pkexec  /usr/bin/kz-install-pkexec  \
+                    "${XDG_CURRENT_DESKTOP-}"   \
+                    "$reboot"
+        else
+            eval "$reboot"
+        fi
+    fi
+
+
+    if [[ -f /tmp/kz-install-need-reboot ]]; then
+        text+="
+
+$(gettext "The computer will now reboot to finish installing the apps and \
+changing system settings.")"
+        kz.infomsg "$text"
+
+        if [[ $UI_MODE = 'cli' ]]; then
+            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
+            read -rp "$prompt" < /dev/tty
+        fi
+
         if [[ $UI_MODE = 'gui' ]]; then
             pkexec  /usr/bin/kz-install-pkexec  \
                     "${XDG_CURRENT_DESKTOP-}"   \

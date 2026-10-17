@@ -68,10 +68,14 @@ process() {
     become_check
     sudo --validate || exit 1
 
-    if grep --quiet --regexp='debian' /etc/os-release; then
+    if grep --quiet             \
+            --regexp='debian'   \
+            /etc/os-release; then
         process_kz_deb_package
-    elif grep --quiet --extended-regexp --regexp='fedora|rhel' /etc/os-release
-    then
+    elif grep   --quiet                 \
+                --extended-regexp       \
+                --regexp='fedora|rhel'  \
+                /etc/os-release; then
         process_kz_rpm_package
     else
         printf "${RED}%b${NORMAL}\n" 'fatal: unknown os release' >&2

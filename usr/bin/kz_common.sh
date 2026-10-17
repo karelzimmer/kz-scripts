@@ -121,6 +121,13 @@ kz.init() {
     kz.logmsg "$text"
     text="Started ($0 $* as $USER)."
     kz.logmsg "$text"
+
+    text='Cleaning up temporary directories/files...'
+    kz.logmsg "$text"
+    rm  --force                 \
+        --recursive             \
+        --verbose               \
+        /tmp/"$PROGRAM_NAME"-*  |& $PROGRAM_LOGS || true
 }
 
 

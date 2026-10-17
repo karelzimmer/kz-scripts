@@ -327,7 +327,8 @@ check_scripts() {
                     -not -path './etc/*'                            \
                     -not -path './usr/bin/__pycache__/*'            \
                     -not -path './usr/bin/.mypy_cache/*'            \
-                    -not -path './usr/share/kz*'                    \
+                    -not -path './usr/share/doc/kz/*'               \
+                    -not -path './usr/share/kz/*'                   \
                     -not -path './usr/share/locale/nl/LC_MESSAGES*' \
                     -not -path './usr/share/pixmaps*'               \
                     -print                                          |

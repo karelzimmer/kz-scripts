@@ -99,7 +99,7 @@ msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:170 kz-backup:148 kz-build:146 kz-check:113 kz-deploy:120 kz-desktop:184
-#: kz-dev:126 kz-install:225 kz-menu:173 kz-restore:149 kz-setup:255
+#: kz-dev:126 kz-install:224 kz-menu:173 kz-restore:149 kz-setup:254
 #: kz-update:137 kz-wifi:145
 msgid "internal error"
 msgstr ""
@@ -157,8 +157,8 @@ msgstr ""
 msgid "  -T, --tui      run in text-based mode (default)"
 msgstr ""
 
-#: kz-backup:119 kz-desktop:201 kz-install:194 kz-menu:156 kz-restore:116
-#: kz-setup:224 kz-wifi:128
+#: kz-backup:119 kz-desktop:201 kz-install:193 kz-menu:156 kz-restore:116
+#: kz-setup:223 kz-wifi:128
 msgid "no desktop environment available"
 msgstr ""
 
@@ -171,286 +171,286 @@ msgstr ""
 msgid "arguments are not allowed"
 msgstr ""
 
-#: kz-backup:185 kz-restore:257
+#: kz-backup:187 kz-restore:259
 msgid "directory does not exist"
 msgstr ""
 
-#: kz-backup:218 kz-restore:313
+#: kz-backup:220 kz-restore:315
 #, sh-format
 msgid "No usb medium found on $usb_mount_point."
 msgstr ""
 
-#: kz-backup:220 kz-restore:315
+#: kz-backup:222 kz-restore:317
 msgid "Connect a usb medium."
 msgstr ""
 
-#: kz-backup:279 kz-backup:355 kz-restore:351 kz-restore:427
+#: kz-backup:281 kz-backup:357 kz-restore:353 kz-restore:429
 msgid "Select a USB medium:"
 msgstr ""
 
-#: kz-backup:312 kz-backup:333 kz-install:551 kz-install:574 kz-menu:203
-#: kz-menu:239 kz-menu:410 kz-menu:446 kz-restore:384 kz-restore:405
-#: kz-setup:535 kz-setup:558
+#: kz-backup:314 kz-backup:335 kz-install:550 kz-install:573 kz-menu:203
+#: kz-menu:239 kz-menu:410 kz-menu:446 kz-restore:386 kz-restore:407
+#: kz-setup:534 kz-setup:557
 msgid "Continue"
 msgstr ""
 
-#: kz-backup:313 kz-install:552 kz-restore:385 kz-setup:536
+#: kz-backup:315 kz-install:551 kz-restore:387 kz-setup:535
 msgid "SELECT"
 msgstr ""
 
-#: kz-backup:314 kz-restore:386
+#: kz-backup:316 kz-restore:388
 msgid "MEDIUM"
 msgstr ""
 
-#: kz-backup:352 kz-restore:424
+#: kz-backup:354 kz-restore:426
 msgid "More than one USB medium is connected."
 msgstr ""
 
-#: kz-backup:290 kz-restore:362
+#: kz-backup:292 kz-restore:364
 msgid "No USB medium selected."
 msgstr ""
 
-#: kz-backup:253 kz-backup:262 kz-restore:278 kz-restore:287
+#: kz-backup:255 kz-backup:264 kz-restore:280 kz-restore:289
 msgid "The backup has to be renamed!"
 msgstr ""
 
-#: kz-backup:254 kz-backup:263 kz-restore:279 kz-restore:288
+#: kz-backup:256 kz-backup:265 kz-restore:281 kz-restore:290
 #, sh-format
 msgid "From: $old"
 msgstr ""
 
-#: kz-backup:255 kz-backup:264
+#: kz-backup:257 kz-backup:266
 #, sh-format
 msgid "to  : $TARGET"
 msgstr ""
 
-#: kz-backup:474
+#: kz-backup:476
 msgid "This folder contains files created by kz-backup."
 msgstr ""
 
-#: kz-backup:475
+#: kz-backup:477
 msgid "These files are used by kz-restore and others."
 msgstr ""
 
-#: kz-backup:477
+#: kz-backup:479
 msgid "Further reading:"
 msgstr ""
 
-#: kz-backup:432
+#: kz-backup:434
 msgid "START list of manual installed packages"
 msgstr ""
 
-#: kz-backup:433
+#: kz-backup:435
 msgid "END list of manual installed packages"
 msgstr ""
 
-#: kz-backup:434
+#: kz-backup:436
 msgid "START list of installed snaps"
 msgstr ""
 
-#: kz-backup:435
+#: kz-backup:437
 msgid "END list of installed snaps"
 msgstr ""
 
-#: kz-backup:436
+#: kz-backup:438
 msgid "START list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:437
+#: kz-backup:439
 msgid "END list of installed Flatpak apps"
 msgstr ""
 
-#: kz-backup:494
+#: kz-backup:496
 msgid "USERNAME|UID|GID|USER"
 msgstr ""
 
-#: kz-backup:529 kz-backup:545
+#: kz-backup:531 kz-backup:547
 msgid "Additional users can be added manually:"
 msgstr ""
 
-#: kz-backup:531 kz-backup:579
+#: kz-backup:533 kz-backup:581
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users."
 msgstr ""
 
-#: kz-backup:533
+#: kz-backup:535
 msgid "2. Click on Unlock and then Add User."
 msgstr ""
 
-#: kz-backup:534
+#: kz-backup:536
 msgid "3. Enter Name [USER] and Username [USERNAME]."
 msgstr ""
 
-#: kz-backup:536 kz-backup:586 kz-backup:647
+#: kz-backup:538 kz-backup:588 kz-backup:649
 msgid "[1] Windows, command, or magnifying glass key."
 msgstr ""
 
-#: kz-backup:547
+#: kz-backup:549
 msgid "# Standard user:"
 msgstr ""
 
-#: kz-backup:548
+#: kz-backup:550
 msgid "sudo useradd --create-home --comment '[USER]' [USERNAME]"
 msgstr ""
 
-#: kz-backup:549
+#: kz-backup:551
 msgid "# Administrator:"
 msgstr ""
 
-#: kz-backup:550
+#: kz-backup:552
 msgid "# Debian or Debian-based:"
 msgstr ""
 
-#: kz-backup:551
+#: kz-backup:553
 msgid "sudo usermod --append --groups adm,sudo [USERNAME]"
 msgstr ""
 
-#: kz-backup:552
+#: kz-backup:554
 msgid "# Red Hat or Red Hat-based:"
 msgstr ""
 
-#: kz-backup:553
+#: kz-backup:555
 msgid "sudo usermod --append --groups wheel [USERNAME]"
 msgstr ""
 
-#: kz-backup:554
+#: kz-backup:556
 msgid "# User sets password on first login:"
 msgstr ""
 
-#: kz-backup:555
+#: kz-backup:557
 msgid "sudo passwd --delete --expire [USERNAME]"
 msgstr ""
 
-#: kz-backup:577
+#: kz-backup:579
 msgid "To set the users avatar:"
 msgstr ""
 
-#: kz-backup:581
+#: kz-backup:583
 msgid "2. Click on Change avatar (pencil icon)."
 msgstr ""
 
-#: kz-backup:582
+#: kz-backup:584
 msgid "3. Click Select a file."
 msgstr ""
 
-#: kz-backup:583
+#: kz-backup:585
 msgid "4. Select avatar.ico in Personal folder / Settings,"
 msgstr ""
 
-#: kz-backup:584
+#: kz-backup:586
 msgid "   or another picture file."
 msgstr ""
 
-#: kz-backup:598
+#: kz-backup:600
 msgid "START list of favorite apps in the dash"
 msgstr ""
 
-#: kz-backup:599
+#: kz-backup:601
 msgid "END list of favorite apps in the dash"
 msgstr ""
 
-#: kz-backup:641
+#: kz-backup:643
 msgid "To set the desktop background:"
 msgstr ""
 
-#: kz-backup:643
+#: kz-backup:645
 msgid "1.  Press the Super key[1], type 'file' and click on Files."
 msgstr ""
 
-#: kz-backup:644
+#: kz-backup:646
 msgid "2.  Right-click on desktop.ico in Personal folder / Settings,"
 msgstr ""
 
-#: kz-backup:645
+#: kz-backup:647
 msgid "    or another picture file, and choose Set as Background."
 msgstr ""
 
-#: kz-backup:278 kz-backup:678 kz-menu:77 kz-backup.desktop:10
+#: kz-backup:280 kz-backup:680 kz-menu:77 kz-backup.desktop:10
 msgid "Make backup"
 msgstr ""
 
-#: kz-backup:679
+#: kz-backup:681
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-#: kz-backup:713 kz-backup:747 kz-backup:773 kz-restore:499 kz-restore:530
-#: kz-restore:553
+#: kz-backup:715 kz-backup:749 kz-backup:775 kz-restore:501 kz-restore:532
+#: kz-restore:555
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:847 kz-install:1047 kz-restore:652 kz-setup:944
+#: kz-backup:851 kz-install:1068 kz-restore:656 kz-setup:940
 msgid "Error messages"
 msgstr ""
 
-#: kz-backup:848
+#: kz-backup:852
 msgid "Backup ended with errors."
 msgstr ""
 
-#: kz-backup:824 kz-backup:850 kz-restore:628 kz-restore:655
+#: kz-backup:828 kz-backup:854 kz-restore:632 kz-restore:659
 msgid "Possible causes:"
 msgstr ""
 
-#: kz-backup:851
+#: kz-backup:855
 msgid "Were any files added or deleted during the backup, or"
 msgstr ""
 
-#: kz-backup:852 kz-restore:657
+#: kz-backup:856 kz-restore:661
 msgid "some files may not be readable or changeable, or"
 msgstr ""
 
-#: kz-backup:853
+#: kz-backup:857
 #, sh-format
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:829 kz-backup:855 kz-install:1051 kz-restore:633 kz-restore:660
-#: kz-setup:948
+#: kz-backup:833 kz-backup:859 kz-install:1072 kz-restore:637 kz-restore:664
+#: kz-setup:944
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:856 kz-install:1052 kz-restore:661 kz-setup:949
+#: kz-backup:860 kz-install:1073 kz-restore:665 kz-setup:945
 msgid "Check the error messages after this."
 msgstr ""
 
-#: kz-backup:857
+#: kz-backup:861
 msgid "Try creating the back up again."
 msgstr ""
 
-#: kz-backup:810
+#: kz-backup:814
 msgid "The backup has been made."
-msgstr ""
-
-#: kz-backup:818 kz-restore:622
-#, sh-format
-msgid "The USB medium $volume_name can be removed."
 msgstr ""
 
 #: kz-backup:822 kz-restore:626
 #, sh-format
-msgid "The USB medium $volume_name could not be detached."
-msgstr ""
-
-#: kz-backup:825 kz-restore:629
-msgid "A USB medium cannot be detached when it is 'busy' - for example,"
+msgid "The USB medium $volume_name can be removed."
 msgstr ""
 
 #: kz-backup:826 kz-restore:630
+#, sh-format
+msgid "The USB medium $volume_name could not be detached."
+msgstr ""
+
+#: kz-backup:829 kz-restore:633
+msgid "A USB medium cannot be detached when it is 'busy' - for example,"
+msgstr ""
+
+#: kz-backup:830 kz-restore:634
 msgid ""
 "when there are open files on it, or when some process has its working "
 "directory there."
 msgstr ""
 
-#: kz-backup:830 kz-restore:634
+#: kz-backup:834 kz-restore:638
 #, sh-format
 msgid "Leave the $MEDIUM folder."
 msgstr ""
 
-#: kz-backup:831 kz-restore:635
+#: kz-backup:835 kz-restore:639
 #, sh-format
 msgid "Close apps and windows related to the $volume_name medium."
 msgstr ""
 
-#: kz-backup:833 kz-restore:637
+#: kz-backup:837 kz-restore:641
 msgid "Remember to safely(!) remove the USB medium."
 msgstr ""
 
@@ -502,11 +502,11 @@ msgstr ""
 msgid "Install Debian package (this may take a while)..."
 msgstr ""
 
-#: kz-build:635 kz-get:199
+#: kz-build:635 kz-get:203
 msgid "Please note: the development version of the kz package is installed"
 msgstr ""
 
-#: kz-build:641 kz-check:591 kz-deploy:324
+#: kz-build:641 kz-check:592 kz-deploy:324
 msgid "Please check all the messages above and fix them."
 msgstr ""
 
@@ -553,51 +553,51 @@ msgstr ""
 msgid "Check scripts (this may take a while)..."
 msgstr ""
 
-#: kz-check:378
+#: kz-check:379
 msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
-#: kz-check:402
+#: kz-check:403
 #, sh-format
 msgid "Script $scriptname --usage returned an error."
 msgstr ""
 
-#: kz-check:414
+#: kz-check:415
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."
 msgstr ""
 
-#: kz-check:425
+#: kz-check:426
 #, sh-format
 msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
-#: kz-check:436
+#: kz-check:437
 #, sh-format
 msgid ""
 "Polkit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
 msgstr ""
 
-#: kz-check:456 kz-check:466
+#: kz-check:457 kz-check:467
 #, sh-format
 msgid "Manual $dir{1,5}/$scriptname.{1,5} not found."
 msgstr ""
 
-#: kz-check:501
+#: kz-check:502
 #, sh-format
 msgid "One or more lines are too long (>79):"
 msgstr ""
 
-#: kz-check:555
+#: kz-check:556
 msgid "Flagged annotation found."
 msgstr ""
 
-#: kz-check:574
+#: kz-check:575
 msgid "End spaces found."
 msgstr ""
 
-#: kz-get:92 kz-install:750
+#: kz-get:96 kz-install:749
 msgid "Already performed by the administrator."
 msgstr ""
 
@@ -621,17 +621,17 @@ msgstr ""
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:285 kz_common.sh:212
+#: kz_common.py:285 kz_common.sh:219
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:286 kz_common.sh:213
+#: kz_common.py:286 kz_common.sh:220
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:225 kz-backup:875 kz-desktop:290 kz-install:1022 kz-install:1076
-#: kz-menu:357 kz-menu:557 kz-restore:320 kz-restore:680 kz-setup:904
-#: kz-setup:973
+#: kz-backup:227 kz-backup:879 kz-desktop:290 kz-install:1021 kz-install:1044
+#: kz-install:1097 kz-menu:357 kz-menu:557 kz-restore:322 kz-restore:684
+#: kz-setup:900 kz-setup:969
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
@@ -653,31 +653,31 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-#: kz_common.sh:177
+#: kz_common.sh:184
 #, sh-format
 msgid "Type 'man $program_name' for more information."
 msgstr ""
 
-#: kz_common.sh:195
+#: kz_common.sh:202
 #, sh-format
 msgid "Type '$program_name --help' for more information."
 msgstr ""
 
-#: kz_common.sh:210
+#: kz_common.sh:217
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."
 msgstr ""
 
-#: kz_common.sh:254 kz-get:226
+#: kz_common.sh:261 kz-get:230
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-#: kz-get:212
+#: kz-get:216
 msgid "Type 'exit' to close this window."
 msgstr ""
 
-#: kz_common.sh:298
+#: kz_common.sh:305
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
@@ -839,15 +839,15 @@ msgstr ""
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
-#: kz-get:204
+#: kz-get:208
 msgid "Package kz has been successfully installed."
 msgstr ""
 
-#: kz-get:206
+#: kz-get:210
 msgid "Now follow the steps as described in the Checklist installation."
 msgstr ""
 
-#: kz-get:208 kz-menu:345
+#: kz-get:212 kz-menu:345
 msgid "Checklist installation can be found on https://karelzimmer.nl/en."
 msgstr ""
 
@@ -911,157 +911,157 @@ msgstr ""
 msgid "  APP            process specified apps"
 msgstr ""
 
-#: kz-install:273
+#: kz-install:272
 #, sh-format
 msgid "Installation file '$installation_file' not found."
 msgstr ""
 
-#: kz-install:297 kz-setup:284
+#: kz-install:296 kz-setup:283
 msgid "All commands and information"
 msgstr ""
 
-#: kz-install:334 kz-setup:321
+#: kz-install:333 kz-setup:320
 msgid "The following apps are available:"
 msgstr ""
 
-#: kz-install:352 kz-install:508 kz-setup:339 kz-setup:492
+#: kz-install:351 kz-install:507 kz-setup:338 kz-setup:491
 msgid "No apps found."
 msgstr ""
 
-#: kz-install:449 kz-install:609
+#: kz-install:448 kz-install:608
 msgid ""
 "Use \"kz install APP...\" or \"kz install --select\" to install the self-"
 "selected apps."
 msgstr ""
 
-#: kz-install:451
+#: kz-install:450
 msgid ""
 "Use \"kz install --cat APP...\" to view the self-selected commands and "
 "information."
 msgstr ""
 
-#: kz-install:453
+#: kz-install:452
 msgid ""
 "Use \"kz install --cat\" to view the automatically selected commands and "
 "information."
 msgstr ""
 
-#: kz-install:458 kz-install:615
+#: kz-install:457 kz-install:614
 msgid ""
 "Use \"kz install --remove APP...\" or \"kz install --remove --select\" to "
 "remove the self-selected apps."
 msgstr ""
 
-#: kz-install:460
+#: kz-install:459
 msgid ""
 "Use \"kz install --cat --remove APP...\" to view the self-selected commands "
 "and information."
 msgstr ""
 
-#: kz-install:462
+#: kz-install:461
 msgid ""
 "Use \"kz install --cat --remove\" to view the automatically selected "
 "commands and information."
 msgstr ""
 
-#: kz-install:467
+#: kz-install:466
 msgid "Use \"kz install --browse\" to view all commands and information."
 msgstr ""
 
-#: kz-install:487 kz-install:784 kz-menu:79 kz-install.desktop:10
+#: kz-install:486 kz-install:783 kz-menu:79 kz-install.desktop:10
 #: nl.karelzimmer.kz-install.policy:21
 msgid "Install apps"
 msgstr ""
 
-#: kz-install:488 kz-install.desktop:11
+#: kz-install:487 kz-install.desktop:11
 msgid "Select apps to install"
 msgstr ""
 
-#: kz-install:490
+#: kz-install:489
 msgid "Remove apps"
 msgstr ""
 
-#: kz-install:491
+#: kz-install:490
 msgid "Select apps to remove"
 msgstr ""
 
-#: kz-install:381 kz-install:408 kz-install:443 kz-install:553 kz-install:603
-#: kz-setup:367 kz-setup:394 kz-setup:428 kz-setup:537 kz-setup:587
+#: kz-install:380 kz-install:407 kz-install:442 kz-install:552 kz-install:602
+#: kz-setup:366 kz-setup:393 kz-setup:427 kz-setup:536 kz-setup:586
 msgid "APP"
 msgstr ""
 
-#: kz-install:381 kz-install:408 kz-install:443 kz-install:554 kz-install:603
-#: kz-menu:208 kz-menu:268 kz-menu:415 kz-menu:475 kz-setup:367 kz-setup:394
-#: kz-setup:428 kz-setup:538 kz-setup:587
+#: kz-install:380 kz-install:407 kz-install:442 kz-install:553 kz-install:602
+#: kz-menu:208 kz-menu:268 kz-menu:415 kz-menu:475 kz-setup:366 kz-setup:393
+#: kz-setup:427 kz-setup:537 kz-setup:586
 msgid "DESCRIPTION"
 msgstr ""
 
-#: kz-install:611
+#: kz-install:610
 msgid "Use \"kz install\" to install the automatically selected apps."
 msgstr ""
 
-#: kz-install:617
+#: kz-install:616
 msgid "Use \"kz install\" to remove the automatically selected apps."
 msgstr ""
 
-#: kz-install:522 kz-setup:506
+#: kz-install:521 kz-setup:505
 msgid "No app selected."
 msgstr ""
 
-#: kz-install:674 kz-setup:659
+#: kz-install:673 kz-setup:658
 #, sh-format
 msgid "App '$app_argument' not found."
 msgstr ""
 
-#: kz-install:713 kz-setup:698
+#: kz-install:712 kz-setup:697
 msgid "Selected commands and information"
 msgstr ""
 
-#: kz-install:772 kz-setup:737
+#: kz-install:771 kz-setup:736
 msgid "No commands to execute."
 msgstr ""
 
-#: kz-install:785 kz-menu:55
+#: kz-install:784 kz-menu:55
 msgid "Prepare installation"
 msgstr ""
 
-#: kz-install:815 nl.karelzimmer.kz-install.policy:22
+#: kz-install:811 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
-#: kz-install:821 kz-setup:780
+#: kz-install:817 kz-setup:776
 msgid "NUM/TOT  APP"
 msgstr ""
 
-#: kz-install:822 kz-setup:781
+#: kz-install:818 kz-setup:777
 msgid "         COMMAND..."
 msgstr ""
 
-#: kz-install:895 kz-install:940
+#: kz-install:891 kz-install:934
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:1048
+#: kz-install:1069
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:1055
+#: kz-install:1076
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:1057
+#: kz-install:1078
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:1008
+#: kz-install:1002 kz-install:1007
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:1010
+#: kz-install:1004 kz-install:1009
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:1016
+#: kz-install:1015 kz-install:1039
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1127,11 +1127,11 @@ msgstr ""
 msgid "Command menu"
 msgstr ""
 
-#: kz-backup:362 kz-menu:60 kz-menu:204 kz-menu:240 kz-restore:434
+#: kz-backup:364 kz-menu:60 kz-menu:204 kz-menu:240 kz-restore:436
 msgid "Exit"
 msgstr ""
 
-#: kz-backup:366 kz-restore:438
+#: kz-backup:368 kz-restore:440
 #, sh-format
 msgid "Select number [1-$max_choices]: "
 msgstr ""
@@ -1164,12 +1164,12 @@ msgstr ""
 msgid "Show WiFi details"
 msgstr ""
 
-#: kz-menu:80 kz-restore:173 kz-restore:350 kz-restore:467
+#: kz-menu:80 kz-restore:173 kz-restore:352 kz-restore:469
 #: kz-restore.desktop:10
 msgid "Restore backup"
 msgstr ""
 
-#: kz-menu:81 kz-setup:471 kz-setup:748 kz-setup.desktop:10
+#: kz-menu:81 kz-setup:470 kz-setup:747 kz-setup.desktop:10
 msgid "Set up apps"
 msgstr ""
 
@@ -1284,38 +1284,38 @@ msgstr ""
 msgid "The backup will be restored"
 msgstr ""
 
-#: kz-restore:280 kz-restore:289
+#: kz-restore:282 kz-restore:291
 #, sh-format
 msgid "to  : $SOURCE"
 msgstr ""
 
-#: kz-restore:295
+#: kz-restore:297
 #, sh-format
 msgid "No backup_${HOSTNAME}_$USER found in $MEDIUM."
 msgstr ""
 
-#: kz-restore:468
+#: kz-restore:470
 msgid "Preparing restore (this can take a while)"
 msgstr ""
 
-#: kz-restore:653
+#: kz-restore:657
 msgid "Restore ended with errors."
 msgstr ""
 
-#: kz-restore:656
+#: kz-restore:660
 msgid "Were any files added or deleted during the restore, or"
 msgstr ""
 
-#: kz-restore:658
+#: kz-restore:662
 #, sh-format
 msgid "is there not enough space on $HOME."
 msgstr ""
 
-#: kz-restore:662
+#: kz-restore:666
 msgid "Try restoring the back up again."
 msgstr ""
 
-#: kz-restore:614
+#: kz-restore:618
 #, sh-format
 msgid "The backup has been restored."
 msgstr ""
@@ -1356,108 +1356,108 @@ msgstr ""
 msgid "  -r, --reset    set apps on default values"
 msgstr ""
 
-#: kz-setup:163
+#: kz-setup:162
 #, sh-format
 msgid "Settings file '$settings_file' not found."
 msgstr ""
 
-#: kz-setup:434 kz-setup:593
+#: kz-setup:433 kz-setup:592
 msgid ""
 "Use \"kz setup APP...\" or \"kz setup --select\" to set up the self-selected "
 "apps."
 msgstr ""
 
-#: kz-setup:436
+#: kz-setup:435
 msgid ""
 "Use \"kz setup --cat APP...\" to view the self-selected commands and "
 "information."
 msgstr ""
 
-#: kz-setup:438
+#: kz-setup:437
 msgid ""
 "Use \"kz setup --cat\" to view the automatically selected commands and "
 "information."
 msgstr ""
 
-#: kz-setup:443 kz-setup:599
+#: kz-setup:442 kz-setup:598
 msgid ""
 "Use \"kz setup --reset APP...\" or \"kz setup --select --reset\" to reset "
 "the self-selected apps."
 msgstr ""
 
-#: kz-setup:445
+#: kz-setup:444
 msgid ""
 "Use \"kz setup --cat --reset APP...\" to view the self-selected commands and "
 "information."
 msgstr ""
 
-#: kz-setup:447
+#: kz-setup:446
 msgid ""
 "Use \"kz setup --cat --reset\" to view the automatically selected commands "
 "and information."
 msgstr ""
 
-#: kz-setup:451
+#: kz-setup:450
 msgid "Use \"kz setup --browse\" to view all commands and information."
 msgstr ""
 
-#: kz-setup:472 kz-setup.desktop:11
+#: kz-setup:471 kz-setup.desktop:11
 msgid "Select apps to set up"
 msgstr ""
 
-#: kz-setup:474
+#: kz-setup:473
 msgid "Reset apps"
 msgstr ""
 
-#: kz-setup:475
+#: kz-setup:474
 msgid "Select apps to reset"
 msgstr ""
 
-#: kz-setup:595
+#: kz-setup:594
 msgid "Use \"kz setup\" to set up the automatically selected apps."
 msgstr ""
 
-#: kz-setup:601
+#: kz-setup:600
 msgid "Use \"kz setup --reset\" to reset the automatically selected apps."
 msgstr ""
 
-#: kz-setup:749
+#: kz-setup:748
 msgid "Preparing set up"
 msgstr ""
 
-#: kz-setup:945
+#: kz-setup:941
 msgid "The set up of the following apps contains errors:"
 msgstr ""
 
-#: kz-setup:952
+#: kz-setup:948
 msgid "Try to set up the apps again."
 msgstr ""
 
-#: kz-setup:954
+#: kz-setup:950
 msgid "Try to reset the apps again."
 msgstr ""
 
-#: kz-setup:884
+#: kz-setup:880
 msgid "Apps set up completed."
 msgstr ""
 
-#: kz-setup:886
+#: kz-setup:882
 msgid "Apps reset completed."
 msgstr ""
 
-#: kz-setup:893
+#: kz-setup:889
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:898
+#: kz-setup:894
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
 msgstr ""
 
-#: kz-setup:930
+#: kz-setup:926
 msgid "Log out of the computer yourself."
 msgstr ""
 
@@ -1659,7 +1659,7 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:645 kz-check:595 kz-deploy:328 kz-dev:384 kz-post-migrate:71
+#: kz-build:645 kz-check:596 kz-deploy:328 kz-dev:384 kz-post-migrate:71
 #: kz-update:366
 msgid "Complete!"
 msgstr ""
