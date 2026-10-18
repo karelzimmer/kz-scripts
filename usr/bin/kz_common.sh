@@ -122,7 +122,7 @@ kz.init() {
     text="Started ($0 $* as $USER)."
     kz.logmsg "$text"
 
-    text='Cleaning up temporary directories/files...'
+    text='Cleaning up temporary directories/files (pre)...'
     kz.logmsg "$text"
     rm  --force                 \
         --recursive             \
@@ -276,7 +276,7 @@ kz.term_exit() {
     fi
 
     if [[ $rc -eq 0 ]]; then
-        text='Cleaning up temporary directories/files...'
+        text='Cleaning up temporary directories/files (post)...'
         kz.logmsg "$text"
         rm  --force                 \
             --recursive             \
