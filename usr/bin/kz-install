@@ -1032,28 +1032,6 @@ changing system settings.")"
         fi
     fi
 
-
-    if [[ -f /tmp/kz-install-need-reboot ]]; then
-        text+="
-
-$(gettext "The computer will now reboot to finish installing the apps and \
-changing system settings.")"
-        kz.infomsg "$text"
-
-        if [[ $UI_MODE = 'cli' ]]; then
-            prompt=$(gettext 'Press the Enter key to continue [Enter]: ')
-            read -rp "$prompt" < /dev/tty
-        fi
-
-        if [[ $UI_MODE = 'gui' ]]; then
-            pkexec  /usr/bin/kz-install-pkexec  \
-                    "${XDG_CURRENT_DESKTOP-}"   \
-                    "$reboot"
-        else
-            eval "$reboot"
-        fi
-    fi
-
     exit 0
 }
 
