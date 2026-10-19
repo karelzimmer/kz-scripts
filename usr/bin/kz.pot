@@ -378,7 +378,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:851 kz-install:1046 kz-restore:656 kz-setup:940
+#: kz-backup:851 kz-install:1045 kz-restore:656 kz-setup:940
 msgid "Error messages"
 msgstr ""
 
@@ -403,12 +403,12 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:833 kz-backup:859 kz-install:1050 kz-restore:637 kz-restore:664
+#: kz-backup:833 kz-backup:859 kz-install:1049 kz-restore:637 kz-restore:664
 #: kz-setup:944
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:860 kz-install:1051 kz-restore:665 kz-setup:945
+#: kz-backup:860 kz-install:1050 kz-restore:665 kz-setup:945
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -629,7 +629,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:227 kz-backup:879 kz-desktop:290 kz-install:1021 kz-install:1075
+#: kz-backup:227 kz-backup:879 kz-desktop:290 kz-install:1020 kz-install:1074
 #: kz-menu:357 kz-menu:557 kz-restore:322 kz-restore:684 kz-setup:900
 #: kz-setup:969
 msgid "Press the Enter key to continue [Enter]: "
@@ -1041,27 +1041,27 @@ msgstr ""
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:1047
+#: kz-install:1046
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:1054
+#: kz-install:1053
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:1056
+#: kz-install:1055
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:1002 kz-install:1007
+#: kz-install:1002
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:1004 kz-install:1009
+#: kz-install:1004 kz-install:1008
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:1015
+#: kz-install:1014
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
