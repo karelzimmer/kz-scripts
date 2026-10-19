@@ -211,13 +211,13 @@ Examples are \fBkz build\fR and \fBkz deploy\fR.
 .sp
 \fBCI/CD Pipeline flow\fR
 .br
-Code ------> SCM -------> Build -----> Test ------> QA --------> Deploy ---->
+Coding ---> SCM ------> Building -> Testing ---> QA -------> Deploy ------>
 .sp
+
+vscode      GitHub      kz-build    CLI/TUI/GUI  kz-check    kz-deploy
 .sp
-vscode       GitHub       kz-build     CLI/TUI/GUI  kz-check     kz-deploy
-.sp
-.sp
-[--------- DEV ---------] [--------- TEST --------] [--------- PROD --------]
+
+[-------- DEV --------] [-------- TEST --------] [-------- DEPLOY --------]
 .sp
 SCM stands for Source Code Management.
 .sp
@@ -230,6 +230,12 @@ CLI stands for Command Line Interface.
 TUI stands for Text User Interface.
 .sp
 GUI stands for Graphical User Interface.
+.sp
+DEV stands for Development.
+.sp
+TEST stands for Testing.
+.sp
+DEPLOY stands for Deployment, Implementation.
 .sp
 \fB3. Day 0/Day 1/Day 2 Operations\fR
 .br

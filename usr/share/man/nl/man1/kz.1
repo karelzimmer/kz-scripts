@@ -214,25 +214,31 @@ Voorbeelden zijn \fBkz build\fR en \fBkz deploy\fR.
 .sp
 \fBCI/CD Pijpleidingstroom\fR
 .br
-Coderen ---> SCM -------> Bouwen ----> Testen ----> QA --------> Distr. ---->
+Coderen --> SCM ------> Bouwen ---> Testen ----> QA -------> Distrib. ---->
 .sp
+
+vscode      GitHub      kz-build    CLI/TUI/GUI  kz-check    kz-deploy
 .sp
-vscode       GitHub       kz-build     CLI/TUI/GUI  kz-check     kz-deploy
-.sp
-.sp
-[--------- ONT ---------] [--------- TEST --------] [--------- PROD --------]
+
+[-------- DEV --------] [-------- TEST --------] [-------- DEPLOY --------]
 .sp
 SCM staat voor Source Code Management, Broncodebeheer.
 .sp
 QA staat voor Quality Assurance, Kwaliteitsborging.
 .sp
-Distr. is een afkorting voor Distribueren (alles beschikbaar stellen).
+Distrib. is een afkorting voor Distribueren (alles beschikbaar stellen).
 .sp
 CLI staat voor Command Line Interface, Opdrachtregelinterface.
 .sp
 TUI staat voor Text User Interface, Tekstgebaseerde gebruikersinterface.
 .sp
 GUI staat voor Graphical User Interface, Grafische gebruikersinterface.
+.sp
+DEV staat voor Development, Ontwikkeling.
+.sp
+TEST staat voor Testing, Testen.
+.sp
+DEPLOY staat voor Deployment, Implementatie.
 .sp
 \fB3. Day 0/Day 1/Day 2 Operations\fR
 .br
