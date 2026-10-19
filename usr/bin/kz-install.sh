@@ -351,7 +351,7 @@ if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
 #|install|google-chrome|pc01 pc06 pc07|Browser
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes /tmp/google-chrome.deb && sudo rm --force --verbose /tmp/google-chrome.deb; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes /tmp/google-chrome.deb && sudo rm --force --verbose /tmp/google-chrome.deb; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub && sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 #|remove|google-chrome|pc01 pc06 pc07|Browser
@@ -480,7 +480,7 @@ if grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=non
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes lshw; fi
 
 #|install|microsoft-edge|pc06 pc07|Browser
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list && sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes microsoft-edge-stable; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list && sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes microsoft-edge-stable; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install --assumeyes flathub com.microsoft.Edge; fi
 
 #|remove|microsoft-edge|pc06 pc07|Browser
@@ -641,7 +641,7 @@ if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --
 # -----------------------------------------------------------------------------
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes spotify-client; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget --no-verbose --output-document=- https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] https://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list && sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes spotify-client; fi
 # For Red Hat and Red Hat-based systems the spotify app is available as a web app.
 
 #|remove|spotify|pc01 pc06 pc07|Streaming music
@@ -709,7 +709,7 @@ if grep --quiet --regexp='fedora\|rhel' /etc/os-release && type gnome-session &>
 # -----------------------------------------------------------------------------
 # Web app: https://start.teamviewer.com (Provide support and remote control)
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes /tmp/teamviewer.deb && sudo rm --force --verbose /tmp/teamviewer.deb; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes /tmp/teamviewer.deb && sudo rm --force --verbose /tmp/teamviewer.deb; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 #|remove|teamviewer|*|Remote control
@@ -770,7 +770,7 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then echo 'code code/add-microsoft-repo boolean true' | sudo debconf-set-selections && sudo wget -nv -O- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg && echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' | sudo tee /etc/apt/sources.list.d/vscode.sources && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes apt-transport-https && sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes code && sudo update-alternatives --set editor /usr/bin/code; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then echo 'code code/add-microsoft-repo boolean true' | sudo debconf-set-selections && sudo wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft.gpg && echo -e 'Types: deb\nURIs: https://packages.microsoft.com/repos/code\nSuites: stable\nComponents: main\nArchitectures: amd64,arm64,armhf\nSigned-By: /usr/share/keyrings/microsoft.gpg' | sudo tee /etc/apt/sources.list.d/vscode.sources && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes apt-transport-https && sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes code && sudo update-alternatives --set editor /usr/bin/code; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc && echo -e '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc'| sudo tee /etc/yum.repos.d/vscode.repo && sudo dnf install --assumeyes code; fi
 
 #|remove|vscode|pc06 pc07|Code editor
@@ -781,8 +781,8 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os
 # -----------------------------------------------------------------------------
 # Web app: https://localhost:10000
 # -----------------------------------------------------------------------------
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm --force --verbose /tmp/setup-repos.sh && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes webmin; fi
-if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo wget -nv -O /tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm --force --verbose /tmp/setup-repos.sh && sudo dnf install --assumeyes webmin; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm --force --verbose /tmp/setup-repos.sh && sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes webmin; fi
+if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo wget --no-verbose --output-document=/tmp/setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh && sudo sh /tmp/setup-repos.sh --force && sudo rm --force --verbose /tmp/setup-repos.sh && sudo dnf install --assumeyes webmin; fi
 
 #|remove|webmin|pc07|Manage servers
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo DEBIAN_FRONTEND=noninteractive apt-get remove --assume-yes webmin && sudo rm --force --verbose /usr/share/keyrings/*webmin*.gpg /etc/apt/sources.list.d/webmin*.list /etc/apt/sources.list.d/webmin*.sources && sudo apt-get update; fi
