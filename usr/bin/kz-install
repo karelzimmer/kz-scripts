@@ -1004,7 +1004,6 @@ term_success() {
         text=$(gettext "Apps remove completed.")
     fi
 
-    text=$(gettext "Apps install completed.")
     if $OPTION_REMOVE; then
         text=$(gettext "Apps remove completed.")
     fi
