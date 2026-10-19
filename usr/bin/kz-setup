@@ -744,8 +744,13 @@ setup_apps() {
                 --tmpdir
         )
 
-    title=$(gettext 'Set up apps')
-    text=$(gettext 'Preparing set up')
+    if [[ $SETUP = 'setup' ]]; then
+        title=$(gettext 'Set up apps')
+        text=$(gettext 'Preparing set up')
+    else
+        title=$(gettext 'Reset apps')
+        text=$(gettext 'Preparing reset')
+    fi
 
     if [[ $UI_MODE = 'gui' ]]; then
         process_command_file            |

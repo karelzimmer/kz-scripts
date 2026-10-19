@@ -780,8 +780,13 @@ install_apps() {
         )
     chmod --verbose 775 "$ERROR_LOG" |& $PROGRAM_LOGS
 
-    title=$(gettext 'Install apps')
-    text=$(gettext 'Prepare installation')
+    if [[ $INSTALL = 'install' ]]; then
+        title=$(gettext 'Install apps')
+        text=$(gettext 'Prepare installation')
+    else
+        title=$(gettext 'Remove apps')
+        text=$(gettext 'Prepare removal')
+    fi
 
     if [[ $UI_MODE = 'gui' ]]; then
         process_command_file                |
