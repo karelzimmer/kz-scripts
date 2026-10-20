@@ -13,6 +13,8 @@
 
 import getopt
 import gettext
+
+import apt
 import kz_common as kz
 import os
 import subprocess
@@ -208,7 +210,8 @@ def perform_upgrade_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     text: str
 
     text = f"{_('Update Debian packages')}"
-    command = f'sudo apt-get --assume-yes full-upgrade # {text}'
+    command = 'sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a '
+    command += f'apt-get --assume-yes full-upgrade # {text}'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 

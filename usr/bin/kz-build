@@ -432,26 +432,9 @@ build_deb_package_sync_deb() {
 }
 
 
-# This function synchronizes the Debian package scripts with the
-# distribution directory.
+# This function synchronizes the Debian package scripts with the distribution
+# directory.
 build_deb_package_sync_scripts() {
-    # Make sure the permissions are correct for the sync with repo kz-scripts.
-    chmod   --verbose                   \
-            'u=rwx,g=rx,o=rx'           \
-            --                          \
-            "$SCRIPTS_REPO/usr/bin/"*   |& $PROGRAM_LOGS
-    chmod   --verbose                   \
-            'a-x'                       \
-            --                          \
-            "$SCRIPTS_REPO/usr/bin/"*.* |& $PROGRAM_LOGS
-    find    "$SCRIPTS_REPO/etc"         \
-            -name '*.json'              \
-            -type f                     \
-            -exec                       \
-            chmod                       \
-            --verbose                   \
-            'u=rw,g=rw,o=r' {} \;       |& $PROGRAM_LOGS
-
     rsync   --archive               \
             --verbose               \
             --exclude='.mypy_cache' \
@@ -484,9 +467,28 @@ build_deb_package_create_deb() {
     if $OPTION_DEV; then
         build_id+=' *** DEV ***'
     fi
-
-    mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/build.id"
+
+    # Make sure the permissions are correct for the Debian package build.
+    find    "$DEB_REPO_DISTDIR/etc"                 \
+            -name '*.json'                          \
+            -type f                                 \
+            -exec                                   \
+            chmod                                   \
+            --verbose                               \
+            'u=rw,g=rw,o=r' {} \;                   |& $PROGRAM_LOGS
+    chmod   --verbose                               \
+            'u=r,g=r,o='                            \
+            --                                      \
+            "$DEB_REPO_DISTDIR/etc/sudoers.d/kz"    |& $PROGRAM_LOGS
+    chmod   --verbose                               \
+            'u=rwx,g=rx,o=rx'                       \
+            --                                      \
+            "$DEB_REPO_DISTDIR/usr/bin/"*           |& $PROGRAM_LOGS
+    chmod   --verbose                               \
+            'a-x'                                   \
+            --                                      \
+            "$DEB_REPO_DISTDIR/usr/bin/"*.*         |& $PROGRAM_LOGS
     chmod   --verbose                               \
             'u=rw,g=r,o=r'                          \
             --                                      \
@@ -538,16 +540,6 @@ build_rpm_package_sync_rpm() {
 # This function synchronizes the RPM package scripts with the
 # distribution directory.
 build_rpm_package_sync_scripts() {
-    # Make sure the permissions are correct for the sync with repo kz-scripts.
-    chmod   --verbose                   \
-            'u=rwx,g=rx,o=rx'           \
-            --                          \
-            "$SCRIPTS_REPO/usr/bin/"*   |& $PROGRAM_LOGS
-    chmod   --verbose                   \
-            'a-x'                       \
-            --                          \
-            "$SCRIPTS_REPO/usr/bin/"*.* |& $PROGRAM_LOGS
-
     rsync   --archive               \
             --verbose               \
             --exclude='.mypy_cache' \
@@ -575,8 +567,28 @@ build_rpm_package_compress_man_pages() {
 
 # This function creates the RPM package kz.
 build_rpm_package_create_rpm() {
-    mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $PROGRAM_LOGS
     printf '%s' "$build_id" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/build.id"
+
+    # Make sure the permissions are correct for the RPM package build.
+    find    "$RPM_REPO_DISTDIR/etc"                 \
+            -name '*.json'                          \
+            -type f                                 \
+            -exec                                   \
+            chmod                                   \
+            --verbose                               \
+            'u=rw,g=rw,o=r' {} \;                   |& $PROGRAM_LOGS
+    chmod   --verbose                               \
+            'u=r,g=r,o='                            \
+            --                                      \
+            "$RPM_REPO_DISTDIR/etc/sudoers.d/kz"    |& $PROGRAM_LOGS
+    chmod   --verbose                               \
+            'u=rwx,g=rx,o=rx'                       \
+            --                                      \
+            "$RPM_REPO_DISTDIR/usr/bin/"*           |& $PROGRAM_LOGS
+    chmod   --verbose                               \
+            'a-x'                                   \
+            --                                      \
+            "$RPM_REPO_DISTDIR/usr/bin/"*.*         |& $PROGRAM_LOGS
     chmod   --verbose                               \
             'u=rw,g=r,o=r'                          \
             --                                      \
@@ -620,6 +632,7 @@ install_deb_package() {
     fi
 
     sudo    DEBIAN_FRONTEND=noninteractive  \
+            NEEDRESTART_MODE=a              \
             apt-get                         \
             reinstall                       \
             --assume-yes                    \

@@ -145,6 +145,7 @@ process_kz_deb_package() {
     printf '\n%s' 'Deb kz install....'
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
+            NEEDRESTART_MODE=a              \
             apt-get                         \
             "$install"                      \
             --assume-yes                    \
@@ -169,7 +170,7 @@ check_debian_package_manager() {
 
 # This function installs RPM package kz.
 process_kz_rpm_package() {
-    local install='install'
+    local install=''
     local kz_rpm_site_file=''
     local packages_url='https://karelzimmer.nl/assets/packages'
 
@@ -181,6 +182,8 @@ process_kz_rpm_package() {
 
     if type kz &> /dev/null; then
         install='reinstall'
+    else
+        install='install'
     fi
 
     # Install kz rpm package.
@@ -240,5 +243,6 @@ term_err() {
 init "$@"
 process
 term
+
 } # End of wrapping.
 

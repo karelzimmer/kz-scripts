@@ -1,0 +1,2 @@
+Defaults env_keep += "DEBIAN_FRONTEND"
+Defaults env_keep += "NEEDRESTART_MODE"
