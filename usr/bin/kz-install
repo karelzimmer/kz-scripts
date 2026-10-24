@@ -683,7 +683,16 @@ process_installation_files_by_hostname() {
 
     while read -r install_record; do
         case $install_record in
-            "#|$INSTALL|"*'|*|'* | "#|$INSTALL|"*'|'*"$HOSTNAME"*'|'* )
+            # any host (*),
+            # $HOSTNAME is the only specified host,
+            # $HOSTNAME is the first of multiple hosts,
+            # $HOSTNAME is the middle one of multiple hosts,
+            # $HOSTNAME is the last of multiple hosts.
+            "#|$INSTALL|"*'|*|'*                    | \
+            "#|$INSTALL|"*"|$HOSTNAME|"*            | \
+            "#|$INSTALL|"*"|$HOSTNAME "*'|'*        | \
+            "#|$INSTALL|"*'|'*" $HOSTNAME "*'|'*    | \
+            "#|$INSTALL|"*'|'*" $HOSTNAME|"* )
                 # Add record to command file.
                 printf '%s\n' "$install_record"
                 # Set switch.

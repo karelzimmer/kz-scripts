@@ -668,7 +668,16 @@ process_settings_files_by_hostname() {
 
     while read -r setup_record; do
         case $setup_record in
-            "#|$SETUP|"*'|*|'* | "#|$SETUP|"*'|'*"$HOSTNAME"*'|'* )
+            # any host (*),
+            # $HOSTNAME is the only specified host,
+            # $HOSTNAME is the first of multiple hosts,
+            # $HOSTNAME is the middle one of multiple hosts,
+            # $HOSTNAME is the last of multiple hosts.
+            "#|$SETUP|"*'|*|'*                  | \
+            "#|$SETUP|"*"|$HOSTNAME|"*          | \
+            "#|$SETUP|"*"|$HOSTNAME "*'|'*      | \
+            "#|$SETUP|"*'|'*" $HOSTNAME "*'|'*  | \
+            "#|$SETUP|"*'|'*" $HOSTNAME|"* )
                 # Add record to command file.
                 printf '%s\n' "$setup_record"
                 # Set switch.
