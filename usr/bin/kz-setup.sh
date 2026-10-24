@@ -281,18 +281,14 @@ if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then kz-desktop --delet
 # -----------------------------------------------------------------------------
 # Enable aliases & enable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place --expression='s/#alias/alias/g; s/# alias/alias/g; s/# export/export/g; s/# eval/eval/g' ~/.bashrc && sed --in-place '/^stty -ixon/d' ~/.bashrc && echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
+sed --in-place --expression='s/^#alias / alias /g; s/^    #alias /     alias /g; /^stty -ixon/d' ~/.bashrc && echo 'stty -ixon # Enable fwd search history (i-search)' >> ~/.bashrc
 touch /tmp/kz-setup-need-logout
 
 #|reset|terminal|pc01 pc06 pc07|Terminal
 # -----------------------------------------------------------------------------
-# Disable aliases.
+# Disable aliases & disable search forward in history (with Ctrl-S).
 # -----------------------------------------------------------------------------
-sed --in-place --expression='s/^alias/#alias/g; s/^export/#export/g; s/^eval/#eval/g' ~/.bashrc
-# -----------------------------------------------------------------------------
-# Disable search forward in history (with Ctrl-S).
-# -----------------------------------------------------------------------------
-sed --in-place --expression='/^stty -ixon/d' ~/.bashrc
+sed --in-place --expression='s/^ alias /#alias /g; s/^     alias /    #alias /g; /^stty -ixon/d' ~/.bashrc
 touch /tmp/kz-setup-need-logout
 
 #|setup|terminal|pc06 pc07|Terminal
