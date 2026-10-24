@@ -23,7 +23,7 @@ an GPG-signed installation file, kz-install.sh.gpg.
 .sp
 The installation file contains so-called \fBapp-\fR and \fBcommand record\fRs.
 .sp
-The \fBapp record\fR indicates for which app and which computer the commands
+The \fBapp record\fR indicates for which app and which computer(s) the commands
 should be executed and provides a description of the app.
 .br
 Such a record is formatted as a psv record (pipe-separated values), the fields
@@ -38,7 +38,7 @@ Field number:Field:Description
 1:#:Hash, comment symbol
 2:ACTION:Action, 'install' or 'remove'
 3:APP:Name of the app
-4:HOST:Name of the computer(s) on which the command should be executed
+4:HOST:Name of the computer(s)
 5:DESCRIPTION:Description of the app
 .TE
 .sp
