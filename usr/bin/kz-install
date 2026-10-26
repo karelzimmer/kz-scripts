@@ -647,7 +647,7 @@ process_installation_files_by_app_argument() {
 
     while read -r install_record; do
         case $install_record in
-            # App record: #|ACTION|APP|HOST|DESCRIPTION
+            # App record (#|ACTION|APP|HOST|DESCRIPTION).
             # APP: equal specified app (|$app_argument|).
             "#|$INSTALL|$app_argument|"*'|'* )
                 # Add record to command file.
@@ -685,9 +685,9 @@ process_installation_files_by_hostname() {
 
     while read -r install_record; do
         case $install_record in
-            # App record: #|ACTION|APP|HOST|DESCRIPTION
+            # App record (#|ACTION|APP|HOST|DESCRIPTION).
             # HOST: any host (|*|),
-            # HOST: the only current host (|$HOSTNAME|),
+            # HOST: the only host (|$HOSTNAME|),
             # HOST: the first one of multiple hosts (|$HOSTNAME ...|),
             # HOST: the middle one of multiple hosts (|... $HOSTNAME ...|),
             # HOST: the last one of multiple hosts (|... $HOSTNAME|).
