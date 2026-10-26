@@ -47,6 +47,7 @@ init() {
     # Check the script input for valid options.
     case "$*" in
         '' )
+            # No options/arguments provided.
             ;;
         -d|--d|--de|--dev )
             OPTION_DEV=true
