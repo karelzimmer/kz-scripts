@@ -1,6 +1,6 @@
 # shellcheck shell=bash disable=SC2034,SC2129
 # #############################################################################
-# SPDX-FileComment: Settings file for use with kz setup.
+# SPDX-FileComment: Settings file for use with kz setup
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
