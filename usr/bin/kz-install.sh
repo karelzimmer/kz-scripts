@@ -488,11 +488,11 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-relea
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo flatpak uninstall --assumeyes flathub com.microsoft.Edge; fi
 
 #|install|needrestart|pc06 pc07|Service restart management
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes needrestart-session; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes needrestart; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes needrestart; fi
 
 #|remove|needrestart|pc06 pc07|Service restart management
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes needrestart-session; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes needrestart; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes needrestart; fi
 
 #|install|nmap|pc06 pc07|Network mapper
