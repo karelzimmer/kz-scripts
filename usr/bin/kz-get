@@ -95,7 +95,7 @@ become_check() {
 
     if [[ $UID -eq 0 ]]; then
         return 0
-    elif groups "$USER" | grep --quiet --regexp=sudo --regexp=wheel; then
+    elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
     else
         text=$(gettext 'Already performed by the administrator.')
