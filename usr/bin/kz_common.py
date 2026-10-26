@@ -15,6 +15,7 @@ import gettext
 import os
 import subprocess
 import sys
+import time
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -35,6 +36,34 @@ NORMAL: str = '\033[0m'
 # #############################################################################
 # Functions
 # #############################################################################
+
+def check_debian_package_manager(PROGRAM_NAME: str) -> int:
+    """
+    This function checks if a Debian package manager is already running and
+    waits for the next check if so.
+    """
+    check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
+    check_rhel: str = "grep --quiet --extended-regexp " \
+                      "--regexp='fedora|rhel' /etc/os-release"
+    text: str = 'Wait for another package manager to finish...'
+
+    if subprocess.run(check_rhel, executable='bash',
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                      shell=True).returncode == 0:
+        return 0
+
+    while True:
+        try:
+            subprocess.run(check_debian_package_manager, executable='bash',
+                           shell=True, check=True)
+        except Exception:
+            break
+        else:
+            logmsg(PROGRAM_NAME, text)
+            time.sleep(2)
+
+    return 0
+
 
 def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
            TEXT: str) -> None:

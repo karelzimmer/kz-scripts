@@ -31,6 +31,25 @@ readonly NORMAL='\033[0m'
 # Functions
 # #############################################################################
 
+# This function checks if a Debian package manager is already running and waits
+# for the next check if so.
+kz.check_debian_package_manager() {
+    local text='Wait for another package manager to finish...'
+
+    if grep --quiet                 \
+            --extended-regexp       \
+            --regexp='fedora|rhel'  \
+            /etc/os-release; then
+        return 0
+    fi
+
+    while pkexec /usr/bin/kz_common-pkexec; do
+        kz.logmsg "$text"
+        sleep 2
+    done
+}
+
+
 # This function returns an error message.
 kz.errmsg() {
     kz.logmsg "${RED}$*${NORMAL}"

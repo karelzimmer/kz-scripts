@@ -898,7 +898,7 @@ execute_command() {
 # GUI.
 execute_command_gui() {
     printf '%s\n' "#$app_line"
-    check_debian_package_manager
+    kz.check_debian_package_manager
     pkexec  /usr/bin/kz-install-pkexec  \
             "${XDG_CURRENT_DESKTOP-}"   \
             "$cmd"                      \
@@ -911,25 +911,6 @@ execute_command_gui() {
     elif [[ $pkexec_rc -ne 0 ]]; then
         FAILED_APPS[$app_name]=$app_name
     fi
-}
-
-
-# This function checks if a Debian package manager is already running and waits
-# for the next check if so.
-check_debian_package_manager() {
-    local text='Wait for another package manager to finish...'
-
-    if grep --quiet                 \
-            --extended-regexp       \
-            --regexp='fedora|rhel'  \
-            /etc/os-release; then
-        return 0
-    fi
-
-    while pkexec /usr/bin/kz_common-pkexec; do
-        kz.logmsg "$text"
-        sleep 2
-    done
 }
 
 
@@ -962,7 +943,7 @@ execute_command_tui() {
             --title     "$title"        \
             --infobox   "$app_line"     \
             10 90                       || true
-    check_debian_package_manager
+    kz.check_debian_package_manager
     eval    "$cmd"                      \
             1> >($PROGRAM_LOGS)         \
             2>> "$ERROR_LOG"            || FAILED_APPS[$app_name]=$app_name
@@ -987,7 +968,7 @@ execute_command_cli() {
     printf '%s\n' "         $cmd_dis"
 
     sudo --validate
-    check_debian_package_manager
+    kz.check_debian_package_manager
     eval    "$cmd"              \
             1> >($PROGRAM_LOGS) \
             2>> "$ERROR_LOG"    || FAILED_APPS[$app_name]=$app_name

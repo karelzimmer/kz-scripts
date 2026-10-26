@@ -16,7 +16,6 @@ import gettext
 import kz_common as kz
 import subprocess
 import sys
-import time
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -313,7 +312,7 @@ def perform_command(PROGRAM_NAME: str, PROGRAM_DESC: str,
     text = f'{kz.BLUE}{command}{kz.NORMAL}'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
-    check_debian_package_manager(PROGRAM_NAME)
+    kz.check_debian_package_manager(PROGRAM_NAME)
     try:
         subprocess.run(command, executable='bash', shell=True, check=True)
     except KeyboardInterrupt:
@@ -327,34 +326,6 @@ def perform_command(PROGRAM_NAME: str, PROGRAM_DESC: str,
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
     print()  # Print a newline after the command output.
-
-
-def check_debian_package_manager(PROGRAM_NAME: str) -> int:
-    """
-    This function checks if a Debian package manager is already running and
-    waits for the next check if so.
-    """
-    check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
-    check_rhel: str = "grep --quiet --extended-regexp " \
-                      "--regexp='fedora|rhel' /etc/os-release"
-    text: str = 'Wait for another package manager to finish...'
-
-    if subprocess.run(check_rhel, executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode == 0:
-        return 0
-
-    while True:
-        try:
-            subprocess.run(check_debian_package_manager, executable='bash',
-                           shell=True, check=True)
-        except Exception:
-            break
-        else:
-            kz.logmsg(PROGRAM_NAME, text)
-            time.sleep(2)
-
-    return 0
 
 
 def term(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
