@@ -685,9 +685,9 @@ process_installation_files_by_hostname() {
         case $install_record in
             # any host (*),
             # $HOSTNAME is the only specified host (|HOST|),
-            # $HOSTNAME is the first one of multiple hosts (|HOST...|),
-            # $HOSTNAME is the middle one of multiple hosts (|...HOST...|),
-            # $HOSTNAME is the last one of multiple hosts (|...HOST|).
+            # $HOSTNAME is the first one of multiple hosts (|HOST ...|),
+            # $HOSTNAME is the middle one of multiple hosts (|... HOST ...|),
+            # $HOSTNAME is the last one of multiple hosts (|... HOST|).
             "#|$INSTALL|"*'|*|'*                    | \
             "#|$INSTALL|"*"|$HOSTNAME|"*            | \
             "#|$INSTALL|"*"|$HOSTNAME "*'|'*        | \
