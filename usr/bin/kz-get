@@ -52,7 +52,7 @@ init() {
             ;;
         * )
             printf '%s\n' "$0 [-d | --dev]"
-            exit 1
+            exit 0
             ;;
     esac
 
