@@ -668,11 +668,12 @@ process_settings_files_by_hostname() {
 
     while read -r setup_record; do
         case $setup_record in
-            # any host (*),
-            # $HOSTNAME is the only specified host (|HOST|),
-            # $HOSTNAME is the first one of multiple hosts (|HOST ...|),
-            # $HOSTNAME is the middle one of multiple hosts (|... HOST ...|),
-            # $HOSTNAME is the last one of multiple hosts (|... HOST|).
+            # App record: #|ACTION|APP|HOST|DESCRIPTION
+            # HOST: any host (|*|),
+            # HOST: the only specified host (|$HOSTNAME|),
+            # HOST: the first one of multiple hosts (|$HOSTNAME ...|),
+            # HOST: the middle one of multiple hosts (|... $HOSTNAME ...|),
+            # HOST: the last one of multiple hosts (|... $HOSTNAME|).
             "#|$SETUP|"*'|*|'*                  | \
             "#|$SETUP|"*"|$HOSTNAME|"*          | \
             "#|$SETUP|"*"|$HOSTNAME "*'|'*      | \
