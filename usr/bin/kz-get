@@ -51,7 +51,7 @@ init() {
             OPTION_DEV=true
             ;;
         * )
-            printf '%s\n' 'kz get [-d | --dev]'
+            printf '%s\n' "$0 [-d | --dev]"
             exit 0
             ;;
     esac
