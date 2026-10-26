@@ -34,7 +34,8 @@ readonly NORMAL='\033[0m'
 # This function checks if a Debian package manager is already running and waits
 # for the next check if so.
 kz.check_debian_package_manager() {
-    local text='Wait for another package manager to finish...'
+    local -i sleep=5
+    local text="Wait ${sleep}s for another package manager to finish..."
 
     if grep --quiet                 \
             --extended-regexp       \
@@ -45,7 +46,7 @@ kz.check_debian_package_manager() {
 
     while pkexec /usr/bin/kz_common-pkexec; do
         kz.logmsg "$text"
-        sleep 2
+        sleep "$sleep"
     done
 }
 
