@@ -44,6 +44,7 @@ declare OPTION_DEV=false
 
 # This function performs initial actions.
 init() {
+    # Check the script input for valid options.
     case "$*" in
         '' )
             ;;
