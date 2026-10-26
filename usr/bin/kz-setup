@@ -632,6 +632,8 @@ process_settings_files_by_app_argument() {
 
     while read -r setup_record; do
         case $setup_record in
+            # App record: #|ACTION|APP|HOST|DESCRIPTION
+            # APP: equal specified app (|$app_argument|).
             "#|$SETUP|$app_argument|"*'|'* )
                 # Add record to command file.
                 printf '%s\n' "$setup_record"
@@ -670,7 +672,7 @@ process_settings_files_by_hostname() {
         case $setup_record in
             # App record: #|ACTION|APP|HOST|DESCRIPTION
             # HOST: any host (|*|),
-            # HOST: the only specified host (|$HOSTNAME|),
+            # HOST: the only current host (|$HOSTNAME|),
             # HOST: the first one of multiple hosts (|$HOSTNAME ...|),
             # HOST: the middle one of multiple hosts (|... $HOSTNAME ...|),
             # HOST: the last one of multiple hosts (|... $HOSTNAME|).
