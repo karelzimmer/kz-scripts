@@ -17,7 +17,7 @@
 # Express Advanced Error Reporting) prevents the log gets flooded with
 # 'AER: Corrected errors received'. This is usually needed for HP hardware.
 # -----------------------------------------------------------------------------
-if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/loglevel=3/loglevel=3 pci=noaer/; s/quiet/quiet pci=noaer/' /etc/default/grub; fi
+if ! grep --quiet --regexp='pci=noaer' /etc/default/grub; then sudo sed --in-place --expression='s/quiet/quiet pci=noaer/' /etc/default/grub; fi
 if grep --quiet --regexp='debian' /etc/os-release; then sudo update-grub; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # -----------------------------------------------------------------------------
