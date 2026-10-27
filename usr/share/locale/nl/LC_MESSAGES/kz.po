@@ -87,13 +87,13 @@ msgstr "opdracht is vereist"
 
 #: kz:113 kz_common.py:100 kz_common.py:128 kz_common.py:177 kz_common.py:204
 #: kz-dev:149 kz-dev:223 kz-dev:238 kz-dev:255 kz-dev:287 kz-dev:319 kz-dev:363
-#: kz-update:80 kz-update:319
+#: kz-update:80 kz-update:318
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz_common.py:106 kz_common.py:134 kz_common.py:183 kz_common.py:210
 #: kz_common.py:310 kz-dev:155 kz-dev:229 kz-dev:244 kz-dev:261 kz-dev:293
-#: kz-dev:325 kz-update:86 kz-update:325
+#: kz-dev:325 kz-update:86 kz-update:324
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
@@ -1568,40 +1568,36 @@ msgid "Install package kz"
 msgstr "Installeer pakket kz"
 
 #: kz-update:196
-msgid "Refresh package lists"
-msgstr "Ververs de pakketlijsten"
+msgid "refresh package lists"
+msgstr "ververs de pakketlijsten"
 
-#: kz-update:208
-msgid "Update Debian packages"
-msgstr "Werk Debian-pakketten bij"
+#: kz-update:208 kz-update:267
+msgid "update packages"
+msgstr "werk Debian-pakketten bij"
 
-#: kz-update:220
-msgid "Update snap apps"
-msgstr "Werk snap-apps bij"
+#: kz-update:219
+msgid "update snap apps"
+msgstr "werk snap-apps bij"
 
-#: kz-update:236
-msgid "Update flatpak apps"
-msgstr "Werk flatpak-apps bij"
+#: kz-update:235
+msgid "update flatpak apps"
+msgstr "werk flatpak-apps bij"
 
-#: kz-update:252
-msgid "Update user extensions"
-msgstr "Werk gebruikers-extensies bij"
+#: kz-update:251
+msgid "update user extensions"
+msgstr "werk gebruikers-extensies bij"
 
-#: kz-update:268
-msgid "Update packages"
-msgstr "Werk pakketten bij"
+#: kz-update:279
+msgid "clear out the local repository"
+msgstr "ruim de lokale repository op"
 
-#: kz-update:280
-msgid "Clear out the local repository"
-msgstr "Ruim de lokale repository op"
+#: kz-update:283
+msgid "remove unnecessary packages"
+msgstr "verwijder onnodige pakketten"
 
-#: kz-update:284
-msgid "Remove unnecessary packages"
-msgstr "Verwijder onnodige pakketten"
-
-#: kz-update:296
-msgid "Cleanup packages"
-msgstr "Schoon pakketten op"
+#: kz-update:295
+msgid "cleanup packages"
+msgstr "schoon pakketten op"
 
 #: kz-wifi:33
 msgid "Usage: kz wifi [-C|--cli] [-G|--gui] [-h|--help] [-T|--tui]"
@@ -1733,6 +1729,6 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
 #: kz-build:658 kz-check:596 kz-deploy:328 kz-dev:384 kz-post-migrate:71
-#: kz-update:337
+#: kz-update:336
 msgid "Complete!"
 msgstr "Klaar!"

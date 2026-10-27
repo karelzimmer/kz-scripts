@@ -193,8 +193,8 @@ def perform_update_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    text = f"{_('Refresh package lists')}"
-    command = f'sudo apt-get update # {text} #'
+    text = f"{_('refresh package lists')}"
+    command = f'sudo apt-get update #--- {text} ---#'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -205,9 +205,8 @@ def perform_upgrade_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    text = f"{_('Update Debian packages')}"
-    command = 'sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a '
-    command += f'apt-get --assume-yes full-upgrade # {text} #'
+    text = f"{_('update packages')}"
+    command = f'sudo apt-get --assume-yes full-upgrade #--- {text} ---#'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -217,12 +216,12 @@ def perform_update_snaps(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     command: str
 
-    text = f"{_('Update snap apps')}"
+    text = f"{_('update snap apps')}"
     if subprocess.run('type snap', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
-        command = f'sudo snap refresh # {text} #'
+        command = f'sudo snap refresh #--- {text} ---#'
         perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -233,12 +232,12 @@ def perform_update_flatpaks(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    text = f"{_('Update flatpak apps')}"
+    text = f"{_('update flatpak apps')}"
     if subprocess.run('type flatpak', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
-        command = f'sudo flatpak --assumeyes update # {text} #'
+        command = f'sudo flatpak --assumeyes update #--- {text} ---#'
         perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -249,12 +248,12 @@ def perform_update_extensions(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    text = f"{_('Update user extensions')}"
+    text = f"{_('update user extensions')}"
     if subprocess.run('type gext', executable='bash',
                       stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL,
                       shell=True,).returncode == 0:
-        command = f'gext update # {text} #'
+        command = f'gext update #--- {text} ---#'
         perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -265,8 +264,8 @@ def perform_upgrade_rpms(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    text = f"{_('Update packages')}"
-    command = f'sudo dnf upgrade --assumeyes --refresh # {text} #'
+    text = f"{_('update packages')}"
+    command = f'sudo dnf upgrade --assumeyes --refresh #--- {text} ---#'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -277,12 +276,12 @@ def perform_cleanup_debs(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    text = f"{_('Clear out the local repository')}"
-    command = f'sudo apt-get autoclean # {text} #'
+    text = f"{_('clear out the local repository')}"
+    command = f'sudo apt-get autoclean #--- {text} ---#'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
-    text = f"{_('Remove unnecessary packages')}"
-    command = f'sudo apt-get autoremove --assume-yes # {text} #'
+    text = f"{_('remove unnecessary packages')}"
+    command = f'sudo apt-get autoremove --assume-yes #--- {text} ---#'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
@@ -293,11 +292,11 @@ def perform_cleanup_rpms(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     command: str
     text: str
 
-    text = f"{_('Cleanup packages')}"
-    command = f'sudo dnf clean all # {text} #'
+    text = f"{_('cleanup packages')}"
+    command = f'sudo dnf clean all #--- {text} ---#'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
-    command = f'sudo dnf autoremove --assumeyes # {text} #'
+    command = f'sudo dnf autoremove --assumeyes #--- {text} ---#'
     perform_command(PROGRAM_NAME, PROGRAM_DESC, command)
 
 
