@@ -631,12 +631,10 @@ install_deb_package() {
         to_install=$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME
     fi
 
-    sudo    DEBIAN_FRONTEND=noninteractive  \
-            NEEDRESTART_MODE=a              \
-            apt-get                         \
-            reinstall                       \
-            --assume-yes                    \
-            "$to_install"                   |& $PROGRAM_LOGS
+    export DEBIAN_FRONTEND=noninteractive
+    export NEEDRESTART_MODE=a
+
+    sudo apt-get reinstall --assume-yes "$to_install" |& $PROGRAM_LOGS
 }
 
 

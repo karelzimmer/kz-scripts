@@ -512,11 +512,11 @@ msgstr "Bouw RPM-pakket..."
 msgid "Install Debian package (this may take a while)..."
 msgstr "Installeer Debian-pakket (dit kan even duren)..."
 
-#: kz-build:648 kz-get:214
+#: kz-build:646 kz-get:214
 msgid "Please note: the development version of the kz package is installed"
 msgstr "Let op: de ontwikkelingsversie van het kz-pakket is geïnstalleerd"
 
-#: kz-build:654 kz-check:592 kz-deploy:324
+#: kz-build:652 kz-check:592 kz-deploy:324
 msgid "Please check all the messages above and fix them."
 msgstr "Controleer alle meldingen hierboven en los ze op."
 
@@ -1728,7 +1728,7 @@ msgstr "Polkit wrapper-script voor kz-wifi"
 msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
-#: kz-build:658 kz-check:596 kz-deploy:328 kz-dev:384 kz-post-migrate:71
+#: kz-build:656 kz-check:596 kz-deploy:328 kz-dev:384 kz-post-migrate:71
 #: kz-update:336
 msgid "Complete!"
 msgstr "Klaar!"
