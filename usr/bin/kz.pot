@@ -104,11 +104,11 @@ msgstr ""
 msgid "internal error"
 msgstr ""
 
-#: kz:181
+#: kz:184
 msgid "The following commands are available:"
 msgstr ""
 
-#: kz:198
+#: kz:201
 msgid "Use \"kz COMMAND [ARGUMENTS]\" to execute a command."
 msgstr ""
 

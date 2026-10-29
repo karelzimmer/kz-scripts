@@ -103,11 +103,11 @@ msgstr "In programma {} is een fout opgetreden."
 msgid "internal error"
 msgstr "interne fout"
 
-#: kz:181
+#: kz:184
 msgid "The following commands are available:"
 msgstr "De volgende opdrachten zijn beschikbaar:"
 
-#: kz:198
+#: kz:201
 msgid "Use \"kz COMMAND [ARGUMENTS]\" to execute a command."
 msgstr "Gebruik \"kz OPDRACHT [ARGUMENTEN]\" om een opdracht uit te voeren."
 
