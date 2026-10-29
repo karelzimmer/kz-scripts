@@ -149,11 +149,10 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
     """
     This function handles the script options and arguments.
     """
-    arg: str = ''
     opt: str = ''
     text: str
 
-    for opt, arg in opts:
+    for opt, _arg in opts:
         if opt in ('-h', '--help'):
             kz.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
             kz.term(PROGRAM_NAME, 0)
