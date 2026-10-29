@@ -45,7 +45,7 @@ def check_debian_package_manager(PROGRAM_NAME: str) -> int:
     check_debian_package_manager: list[str] = ['pkexec',
                                                '/usr/bin/kz_common-pkexec']
     check_rhel: list[str] = ['grep', '--quiet', '--extended-regexp',
-                             "--regexp='fedora|rhel'", '/etc/os-release']
+                             '--regexp=fedora|rhel', '/etc/os-release']
     sleep: int = 5
     text: str = f'Wait {sleep}s for another package manager to finish...'
 
