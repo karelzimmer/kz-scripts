@@ -42,21 +42,21 @@ def check_debian_package_manager(PROGRAM_NAME: str) -> int:
     This function checks if a Debian package manager is already running and
     waits for the next check if so.
     """
-    check_debian_package_manager: str = 'pkexec /usr/bin/kz_common-pkexec'
-    check_rhel: str = "grep --quiet --extended-regexp " \
-                      "--regexp='fedora|rhel' /etc/os-release"
+    check_debian_package_manager: list[str] = ['pkexec',
+                                               '/usr/bin/kz_common-pkexec']
+    check_rhel: list[str] = ['grep', '--quiet', '--extended-regexp',
+                             "--regexp='fedora|rhel'", '/etc/os-release']
     sleep: int = 5
     text: str = f'Wait {sleep}s for another package manager to finish...'
 
-    if subprocess.run(check_rhel, executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode == 0:
+    if subprocess.run(check_rhel,
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL).returncode == 0:
         return 0
 
     while True:
         try:
-            subprocess.run(check_debian_package_manager, executable='bash',
-                           shell=True, check=True)
+            subprocess.run(check_debian_package_manager, check=True)
         except Exception:
             break
         else:
@@ -86,16 +86,16 @@ def errmsg_gui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     This function returns an error message in the GUI.
     """
     text: str = ''
-    zenity: str = f'zenity      --error                         \
-                                --no-markup                     \
-                                --width     600                 \
-                                --height    100                 \
-                                --title     "{PROGRAM_DESC}"    \
-                                --text      "{TEXT}"            || true'
+    zenity: list[str] = ['zenity',
+                         '--error',
+                         '--no-markup',
+                         '--width', '600',
+                         '--height', '100',
+                         '--title', PROGRAM_DESC,
+                         '--text', TEXT]
 
     try:
-        subprocess.run(zenity, executable='bash', shell=True,
-                       stderr=subprocess.DEVNULL)
+        subprocess.run(zenity, stderr=subprocess.DEVNULL)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
@@ -113,17 +113,17 @@ def errmsg_tui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an error message using a TUI.
     """
-    dialog: str = f'dialog  --mouse                             \
-                            --colors                            \
-                            --backtitle "{PROGRAM_NAME}"        \
-                            --title     "{PROGRAM_DESC}"        \
-                            --msgbox    "\\Zb\\Z1{TEXT}\\Zn"    \
-                            0 0                                 || true'
+    dialog: list[str] = ['dialog',
+                         '--mouse',
+                         '--colors',
+                         '--backtitle', PROGRAM_NAME,
+                         '--title', PROGRAM_DESC,
+                         '--msgbox', f'\\Zb\\Z1{TEXT}\\Zn',
+                         '0', '0']
     text: str = ''
 
     try:
-        subprocess.run(dialog, executable='bash', shell=True,
-                       stderr=subprocess.DEVNULL)
+        subprocess.run(dialog, stderr=subprocess.DEVNULL)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
@@ -163,16 +163,16 @@ def infomsg_gui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     This function returns an informational message in the GUI.
     """
     text: str = ''
-    zenity: str = f'zenity      --info                          \
-                                --no-markup                     \
-                                --width     600                 \
-                                --height    100                 \
-                                --title     "{PROGRAM_DESC}"    \
-                                --text      "{TEXT}"            || true'
+    zenity: list[str] = ['zenity',
+                         '--info',
+                         '--no-markup',
+                         '--width', '600',
+                         '--height', '100',
+                         '--title', PROGRAM_DESC,
+                         '--text', TEXT]
 
     try:
-        subprocess.run(zenity, executable='bash', shell=True,
-                       stderr=subprocess.DEVNULL)
+        subprocess.run(zenity, stderr=subprocess.DEVNULL)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
@@ -190,16 +190,17 @@ def infomsg_tui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an informational message using a TUI.
     """
-    dialog: str = f'dialog  --mouse                         \
-                            --backtitle "{PROGRAM_NAME}"    \
-                            --title     "{PROGRAM_DESC}"    \
-                            --msgbox    "{TEXT}"            \
-                            0 0                             || true'
+    dialog: list[str] = ['dialog',
+                         '--mouse',
+                         '--colors',
+                         '--backtitle', PROGRAM_NAME,
+                         '--title', PROGRAM_DESC,
+                         '--msgbox', TEXT,
+                         '0', '0']
     text: str = ''
 
     try:
-        subprocess.run(dialog, executable='bash', shell=True,
-                       stderr=subprocess.DEVNULL)
+        subprocess.run(dialog, stderr=subprocess.DEVNULL)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
@@ -227,8 +228,8 @@ def init(PROGRAM_NAME: str) -> None:
     text: str = ''
 
     # Check if systemd is available.
-    if subprocess.run('type systemctl', executable='bash',
-                      stdout=subprocess.DEVNULL, shell=True).returncode != 0:
+    if subprocess.run('type systemctl', shell=True,
+                      stdout=subprocess.DEVNULL).returncode != 0:
         text = _('fatal: no systemd available')
         print(f'{RED}{text}{NORMAL}', file=sys.stderr)
         sys.exit(1)
@@ -327,8 +328,8 @@ def term(PROGRAM_NAME: str, rc: int, UI_MODE: str = 'cli') -> None:
     text: str = ''
 
     if UI_MODE == 'tui':
-        subprocess.run('reset', executable='bash', shell=True)
-        subprocess.run('clear -x', executable='bash', shell=True)
+        subprocess.run(['reset'])
+        subprocess.run(['clear', '-x'])
 
     if rc == 0:
         status = '0/SUCCESS'

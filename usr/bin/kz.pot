@@ -39,8 +39,8 @@ msgid "Usage: kz [OPTIONS] COMMAND [ARGUMENTS]"
 msgstr ""
 
 #: kz:45 kz-backup:37 kz-build:36 kz-check:34 kz-deploy:36 kz-desktop:37
-#: kz-dev:41 kz-install:39 kz-menu:35 kz-restore:37 kz-setup:39 kz-update:39
-#: kz-wifi:44
+#: kz-dev:41 kz-install:39 kz-menu:35 kz-restore:37 kz-setup:39 kz-update:40
+#: kz-wifi:45
 msgid "Options:"
 msgstr ""
 
@@ -49,20 +49,20 @@ msgid "  -l, --list     show available commands"
 msgstr ""
 
 #: kz:46 kz-backup:43 kz-build:38 kz-check:35 kz-deploy:38 kz-desktop:47
-#: kz-dev:42 kz-install:49 kz-menu:38 kz-restore:43 kz-setup:49 kz-update:40
-#: kz-wifi:47
+#: kz-dev:42 kz-install:49 kz-menu:38 kz-restore:43 kz-setup:49 kz-update:41
+#: kz-wifi:48
 msgid "  -h, --help     show this help text"
 msgstr ""
 
 #: kz:48 kz-backup:47 kz-build:39 kz-check:36 kz-deploy:39 kz-desktop:50
-#: kz-dev:43 kz-install:54 kz-menu:40 kz-restore:47 kz-setup:54 kz-update:41
-#: kz-wifi:49
+#: kz-dev:43 kz-install:54 kz-menu:40 kz-restore:47 kz-setup:54 kz-update:42
+#: kz-wifi:50
 msgid "  -u, --usage    show a short usage summary"
 msgstr ""
 
 #: kz:49 kz-backup:48 kz-build:40 kz-check:37 kz-deploy:40 kz-desktop:51
-#: kz-dev:44 kz-install:55 kz-menu:41 kz-restore:48 kz-setup:55 kz-update:42
-#: kz-wifi:50
+#: kz-dev:44 kz-install:55 kz-menu:41 kz-restore:48 kz-setup:55 kz-update:43
+#: kz-wifi:51
 msgid "  -v, --version  show program version"
 msgstr ""
 
@@ -86,21 +86,21 @@ msgstr ""
 msgid "command is required"
 msgstr ""
 
-#: kz:113 kz_common.py:100 kz_common.py:128 kz_common.py:177 kz_common.py:204
-#: kz-dev:149 kz-dev:223 kz-dev:238 kz-dev:255 kz-dev:287 kz-dev:319 kz-dev:363
-#: kz-update:80 kz-update:318
+#: kz:113 kz_common.py:100 kz_common.py:128 kz_common.py:177 kz_common.py:205
+#: kz-dev:150 kz-dev:225 kz-dev:240 kz-dev:257 kz-dev:289 kz-dev:321 kz-dev:370
+#: kz-update:81 kz-update:312
 msgid "Program {} has been interrupted."
 msgstr ""
 
-#: kz_common.py:106 kz_common.py:134 kz_common.py:183 kz_common.py:210
-#: kz_common.py:310 kz-dev:155 kz-dev:229 kz-dev:244 kz-dev:261 kz-dev:293
-#: kz-dev:325 kz-update:86 kz-update:324
+#: kz_common.py:106 kz_common.py:134 kz_common.py:183 kz_common.py:211
+#: kz_common.py:311 kz-dev:156 kz-dev:231 kz-dev:246 kz-dev:263 kz-dev:295
+#: kz-dev:327 kz-update:87 kz-update:318
 msgid "Program {} encountered an error."
 msgstr ""
 
 #: kz:170 kz-backup:148 kz-build:146 kz-check:113 kz-deploy:120 kz-desktop:184
-#: kz-dev:126 kz-install:224 kz-menu:173 kz-restore:149 kz-setup:254
-#: kz-update:135 kz-wifi:145
+#: kz-dev:127 kz-install:224 kz-menu:173 kz-restore:149 kz-setup:254
+#: kz-update:136 kz-wifi:142
 msgid "internal error"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgstr ""
 msgid "The following commands are available:"
 msgstr ""
 
-#: kz:198
+#: kz:199
 msgid "Use \"kz COMMAND [ARGUMENTS]\" to execute a command."
 msgstr ""
 
@@ -137,11 +137,11 @@ msgid ""
 "  Mandatory arguments to long options are mandatory for short options too."
 msgstr ""
 
-#: kz-backup:41 kz-install:45 kz-menu:36 kz-restore:41 kz-setup:45 kz-wifi:45
+#: kz-backup:41 kz-install:45 kz-menu:36 kz-restore:41 kz-setup:45 kz-wifi:46
 msgid "  -C, --cli      run in command-line mode"
 msgstr ""
 
-#: kz-backup:42 kz-install:48 kz-menu:37 kz-restore:42 kz-setup:48 kz-wifi:46
+#: kz-backup:42 kz-install:48 kz-menu:37 kz-restore:42 kz-setup:48 kz-wifi:47
 msgid "  -G, --gui      run in graphical mode"
 msgstr ""
 
@@ -153,12 +153,12 @@ msgstr ""
 msgid "                 place backup in specified directory"
 msgstr ""
 
-#: kz-backup:46 kz-install:53 kz-menu:39 kz-restore:46 kz-setup:53 kz-wifi:48
+#: kz-backup:46 kz-install:53 kz-menu:39 kz-restore:46 kz-setup:53 kz-wifi:49
 msgid "  -T, --tui      run in text-based mode (default)"
 msgstr ""
 
 #: kz-backup:119 kz-desktop:201 kz-install:193 kz-menu:156 kz-restore:116
-#: kz-setup:223 kz-wifi:128
+#: kz-setup:223 kz-wifi:125
 msgid "no desktop environment available"
 msgstr ""
 
@@ -167,7 +167,7 @@ msgid "too many options"
 msgstr ""
 
 #: kz-backup:157 kz-build:155 kz-check:122 kz-deploy:129 kz-desktop:193
-#: kz-dev:133 kz-menu:182 kz-restore:158 kz-update:142 kz-wifi:152
+#: kz-dev:134 kz-menu:182 kz-restore:158 kz-update:143 kz-wifi:149
 msgid "arguments are not allowed"
 msgstr ""
 
@@ -474,7 +474,7 @@ msgstr ""
 msgid "  -d, --dev      build the development version of package kz"
 msgstr ""
 
-#: kz-build:86 kz-check:67 kz-deploy:70 kz-dev:170
+#: kz-build:86 kz-check:67 kz-deploy:70 kz-dev:172
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
@@ -601,31 +601,31 @@ msgstr ""
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.py:232 kz_common.sh:115
+#: kz_common.py:233 kz_common.sh:115
 msgid "fatal: no systemd available"
 msgstr ""
 
-#: kz_common.py:238 kz_common.sh:122
+#: kz_common.py:239 kz_common.sh:122
 msgid "fatal: no os release available"
 msgstr ""
 
-#: kz_common.py:274
+#: kz_common.py:275
 msgid "Type 'man {}' for more information."
 msgstr ""
 
-#: kz_common.py:287
+#: kz_common.py:288
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-#: kz_common.py:314
+#: kz_common.py:315
 msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
-#: kz_common.py:315 kz_common.sh:239
+#: kz_common.py:316 kz_common.sh:239
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-#: kz_common.py:316 kz_common.sh:240
+#: kz_common.py:317 kz_common.sh:240
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
@@ -710,7 +710,7 @@ msgstr ""
 msgid "Upload website"
 msgstr ""
 
-#: kz-deploy:272 kz-dev:351
+#: kz-deploy:272 kz-dev:354
 msgid "Password for"
 msgstr ""
 
@@ -823,19 +823,19 @@ msgstr ""
 msgid "Usage: kz dev [OPTIONS]"
 msgstr ""
 
-#: kz-dev:185
+#: kz-dev:187
 msgid "First install git, use \"sudo apt install git\"."
 msgstr ""
 
-#: kz-dev:200
+#: kz-dev:202
 msgid "First install lftp, use \"sudo apt install lftp\"."
 msgstr ""
 
-#: kz-dev:368
+#: kz-dev:375
 msgid "Website download failed."
 msgstr ""
 
-#: kz-dev:378
+#: kz-dev:385
 msgid "To complete the set up of the development environment, please run:"
 msgstr ""
 
@@ -1103,7 +1103,7 @@ msgstr ""
 msgid "Usage: kz menu [-C|--cli] [-G|--gui] [-h|--help] [-T|--tui]"
 msgstr ""
 
-#: kz-menu:28 kz-wifi:34
+#: kz-menu:28 kz-wifi:35
 msgid "               [-u|--usage] [-v|--version]"
 msgstr ""
 
@@ -1164,7 +1164,7 @@ msgstr ""
 msgid "Exit menu"
 msgstr ""
 
-#: kz-menu:78 kz-wifi:30 kz-wifi.desktop:10
+#: kz-menu:78 kz-wifi:31 kz-wifi.desktop:10
 msgid "Show WiFi details"
 msgstr ""
 
@@ -1469,31 +1469,30 @@ msgstr ""
 msgid "Log out of the computer yourself."
 msgstr ""
 
-#: kz-update:30
+#: kz-update:31
 msgid "Update and cleanup the system"
 msgstr ""
 
-#: kz-update:32
+#: kz-update:33
 msgid "Usage: kz update [-h|--help] [-u|--usage] [-v|--version]"
 msgstr ""
 
-#: kz-update:35
+#: kz-update:36
 msgid "Usage: kz update [OPTIONS]"
 msgstr ""
 
-#: kz-update:159
+#: kz-update:165 kz-update:180
 msgid "UPDATE"
 msgstr ""
 
-#: kz-update:162 kz-update:174
+#: kz-update:168 kz-update:181
 msgid "UPGRADE"
 msgstr ""
 
-#: kz-update:168 kz-update:180
+#: kz-update:174 kz-update:187
 msgid "CLEANUP"
 msgstr ""
 
-#: kz-update:184
 msgid "fatal: unknown os release"
 msgstr ""
 
@@ -1503,51 +1502,19 @@ msgstr ""
 msgid "Install package kz"
 msgstr ""
 
-#: kz-update:196
-msgid "refresh package lists"
-msgstr ""
-
-#: kz-update:208 kz-update:267
-msgid "update packages"
-msgstr ""
-
-#: kz-update:219
-msgid "update snap apps"
-msgstr ""
-
-#: kz-update:235
-msgid "update flatpak apps"
-msgstr ""
-
-#: kz-update:251
-msgid "update user extensions"
-msgstr ""
-
-#: kz-update:279
-msgid "clear out the local repository"
-msgstr ""
-
-#: kz-update:283
-msgid "remove unnecessary packages"
-msgstr ""
-
-#: kz-update:295
-msgid "cleanup packages"
-msgstr ""
-
-#: kz-wifi:33
+#: kz-wifi:34
 msgid "Usage: kz wifi [-C|--cli] [-G|--gui] [-h|--help] [-T|--tui]"
 msgstr ""
 
-#: kz-wifi:40
+#: kz-wifi:41
 msgid "Usage: kz wifi [OPTIONS]"
 msgstr ""
 
-#: kz-wifi:167
+#: kz-wifi:164
 msgid "Use this data to connect to the wireless network."
 msgstr ""
 
-#: kz-wifi:177 kz-wifi:188
+#: kz-wifi:174 kz-wifi:184
 msgid "No WiFi device found."
 msgstr ""
 
@@ -1663,7 +1630,11 @@ msgstr ""
 msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
-#: kz-build:656 kz-check:596 kz-deploy:328 kz-dev:384 kz-post-migrate:71
-#: kz-update:336
+#: kz-build:656 kz-check:596 kz-deploy:328 kz-dev:391 kz-post-migrate:71
+#: kz-update:330
 msgid "Complete!"
+msgstr ""
+
+#: kz-update:191
+msgid "fatal: unknown os release (kz-update)"
 msgstr ""

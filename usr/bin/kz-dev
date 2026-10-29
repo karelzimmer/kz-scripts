@@ -50,8 +50,9 @@ OPTIONS_SHORT: str = 'huv'
 OPTIONS_LONG: list[str] = ['help', 'usage', 'version']
 
 # Where the the code is stored locally.
-GITROOT: str = subprocess.run('xdg-user-dir PROJECTS', stdout=subprocess.PIPE,
-                              shell=True, text=True).stdout.strip('\n')
+GITROOT: str = subprocess.run(['xdg-user-dir', 'PROJECTS'],
+                              stdout=subprocess.PIPE,
+                              text=True).stdout.strip('\n')
 
 
 # #############################################################################
@@ -140,11 +141,11 @@ def check_sudo(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function checks if sudo is available.
     """
-    check_sudo: str = 'sudo --validate'
+    check_sudo: list[str] = ['sudo', '--validate']
     text: str
 
     try:
-        subprocess.run(check_sudo, executable='bash', shell=True, check=True)
+        subprocess.run(check_sudo, check=True)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -161,12 +162,13 @@ def check_debian(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function checks if the script is running on a Debian-based system.
     """
-    check_debian: str = "grep --quiet --regexp='debian' /etc/os-release"
+    check_debian: list[str] = ['grep', '--quiet', '--regexp=debian',
+                               '/etc/os-release']
     text: str
 
-    if subprocess.run(check_debian, executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode != 0:
+    if subprocess.run(check_debian,
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL).returncode != 0:
         text = _('Must run on a Debian or Debian-based system.')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
@@ -179,9 +181,9 @@ def check_git(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     check_git: str = 'type git'
     text: str
 
-    if subprocess.run(check_git, executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode != 0:
+    if subprocess.run(check_git, shell=True,
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL).returncode != 0:
         text = _('First install git, use "sudo apt install git".')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
@@ -194,9 +196,9 @@ def check_lftp(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     check_lftp: str = 'type lftp'
     text: str
 
-    if subprocess.run(check_lftp, executable='bash',
-                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                      shell=True).returncode != 0:
+    if subprocess.run(check_lftp, shell=True,
+                      stdout=subprocess.DEVNULL,
+                      stderr=subprocess.DEVNULL).returncode != 0:
         text = _('First install lftp, use "sudo apt install lftp".')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
@@ -207,7 +209,7 @@ def clone_repos(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function clones the public repos.
     """
     bin_repo: str = f'{GITROOT}/bin'
-    command: str
+    command: list[str] = []
     exc: BaseException
     text: str
 
@@ -216,9 +218,9 @@ def clone_repos(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
 
     # Populate GITROOT/bin first.
     if os.path.exists(bin_repo):
-        command = f'git -C {bin_repo} pull'
+        command = ['git', '-C', bin_repo, 'pull']
         try:
-            subprocess.run(command, executable='bash', shell=True, check=True)
+            subprocess.run(command, check=True)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -230,10 +232,10 @@ def clone_repos(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
             kz.term(PROGRAM_NAME, exc.returncode)
     else:
-        command = 'git clone https://github.com/karelzimmer/bin.git '
-        command += bin_repo
+        command = ['git', 'clone', 'https://github.com/karelzimmer/bin.git',
+                   bin_repo]
         try:
-            subprocess.run(command, executable='bash', shell=True, check=True)
+            subprocess.run(command, check=True)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -248,9 +250,9 @@ def clone_repos(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     # Call gitclone.
     text = 'Calling gitclone...'
     kz.logmsg(PROGRAM_NAME, text)
-    command = f'{bin_repo}/gitclone'
+    command = [f'{bin_repo}/gitclone']
     try:
-        subprocess.run(command, executable='bash', shell=True, check=True)
+        subprocess.run(command, check=True)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -270,7 +272,7 @@ def pull_repos(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function retrieves the public repos.
     """
     bin_repo: str = f'{GITROOT}/bin'
-    command: str
+    command: list[str] = []
     exc: BaseException
     text: str
 
@@ -280,9 +282,9 @@ def pull_repos(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     # Call gitpull.
     text = 'Calling gitpull...'
     kz.logmsg(PROGRAM_NAME, text)
-    command = f'{bin_repo}/gitpull'
+    command = [f'{bin_repo}/gitclone']
     try:
-        subprocess.run(command, executable='bash', shell=True, check=True)
+        subprocess.run(command, check=True)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -302,7 +304,7 @@ def status_repos(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function checks the status of the public repos.
     """
     bin_repo: str = f'{GITROOT}/bin'
-    command: str
+    command: list[str] = []
     exc: BaseException
     text: str
 
@@ -312,9 +314,9 @@ def status_repos(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     # Call gitstatus.
     text = 'Calling gitstatus...'
     kz.logmsg(PROGRAM_NAME, text)
-    command = f'{bin_repo}/gitstatus'
+    command = [f'{bin_repo}/gitstatus']
     try:
-        subprocess.run(command, executable='bash', shell=True, check=True)
+        subprocess.run(command, check=True)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -334,6 +336,7 @@ def download_website(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     This function downloads the website.
     """
     file = None
+    ftp_credentials: str = ''
     ftp_from: str = '/httpdocs'
     ftp_host: str = 'server106.hosting2go.nl'
     ftp_login: str = f"{os.getenv('HOME')}/.{ftp_host}.login"
@@ -353,12 +356,16 @@ def download_website(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
             file.write(getpass.getpass(text))
         os.chmod(ftp_login, 0o600)
 
-    lftp: str = f"lftp  --user      {ftp_user}                  \
-                        --password  $(cat {ftp_login})          \
-                        -e          '{ftp_set}; {ftp_x_cmd}'    \
-                        {ftp_host}"
+    with open(ftp_login, 'r') as file:
+        ftp_credentials = file.read()
+
+    lftp: list[str] = ['lftp',
+                       '--user', ftp_user,
+                       '--password', ftp_credentials,
+                       '-e', f'{ftp_set}; {ftp_x_cmd}',
+                       ftp_host]
     try:
-        subprocess.run(lftp, executable='bash', shell=True, check=True)
+        subprocess.run(lftp, check=True)
     except KeyboardInterrupt:
         text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
@@ -377,8 +384,8 @@ def term(PROGRAM_NAME: str) -> None:
     text = '\n'
     text += _('To complete the set up of the development environment, ' +
               'please run:')
-    text += '\nkz-install ansible fakeroot groff jq nmap poedit rpm shellcheck'
-    text += ' spice-vdagent usbutils\n'
+    text += '\nkz-install ansible fakeroot groff jq linters nmap poedit rpm '
+    text += 'spice-vdagent usbutils\n'
     kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
 
     text = f"{kz.GREEN}{_('Complete!')}{kz.NORMAL}"
