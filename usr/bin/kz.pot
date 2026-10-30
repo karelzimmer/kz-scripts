@@ -88,13 +88,13 @@ msgstr ""
 
 #: kz:113 kz_common.py:100 kz_common.py:128 kz_common.py:177 kz_common.py:205
 #: kz-dev:149 kz-dev:224 kz-dev:239 kz-dev:256 kz-dev:288 kz-dev:320 kz-dev:369
-#: kz-update:81 kz-update:311
+#: kz-update:81 kz-update:314
 msgid "Program {} has been interrupted."
 msgstr ""
 
 #: kz_common.py:106 kz_common.py:134 kz_common.py:183 kz_common.py:211
 #: kz_common.py:311 kz-dev:155 kz-dev:230 kz-dev:245 kz-dev:262 kz-dev:294
-#: kz-dev:326 kz-update:87 kz-update:317
+#: kz-dev:326 kz-update:87 kz-update:320
 msgid "Program {} encountered an error."
 msgstr ""
 
@@ -1631,7 +1631,7 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr ""
 
 #: kz-build:656 kz-check:596 kz-deploy:328 kz-dev:390 kz-post-migrate:71
-#: kz-update:329
+#: kz-update:332
 msgid "Complete!"
 msgstr ""
 
