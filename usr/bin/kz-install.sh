@@ -187,11 +187,11 @@ if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install -
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes fdupes; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes fdupes; fi
 
-#|install|firefox|#none|browser
+#|install|firefox|*|browser
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || sudo apt-get install --assume-yes firefox firefox-locale-"${LANG:0:2}"; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes firefox; fi
 
-#|remove|firefox|#none|browser
+#|remove|firefox|*|browser
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes firefox-esr firefox-esr-l10n-"${LANG:0:2}" || sudo apt-get remove --assume-yes firefox firefox-locale-"${LANG:0:2}"; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes firefox; fi
 

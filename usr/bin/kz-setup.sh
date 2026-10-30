@@ -120,6 +120,12 @@ kz-desktop --addaft=org.gnome.Evolution
 #|reset|evolution|pc06 pc07|email & agenda
 kz-desktop --delete=org.gnome.Evolution
 
+#|setup|firefox|*|browser
+kz-desktop --addbef=firefox && kz-desktop --addbef=firefox-esr
+
+#|reset|firefox|*|browser
+kz-desktop --delete=firefox && kz-desktop --delete=firefox-esr
+
 #|setup|git|pc06 pc07|version control system
 # -----------------------------------------------------------------------------
 # Web app: https://github.com
