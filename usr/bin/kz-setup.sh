@@ -241,10 +241,10 @@ kz-desktop --addaft=virt-manager
 #|reset|kvm|pc06 pc07|virtualization
 kz-desktop --delete=virt-manager
 
-#|setup|libreoffice|#none|office suite
+#|setup|libreoffice|*|office suite
 kz-desktop --addaft=libreoffice-writer && kz-desktop --addaft=org.libreoffice.LibreOffice.writer
 
-#|reset|libreoffice|#none|office suite
+#|reset|libreoffice|*|office suite
 kz-desktop --delete=libreoffice-writer && kz-desktop --delete=org.libreoffice.LibreOffice.writer
 
 #|setup|lynis|#none|security auditing & hardening
