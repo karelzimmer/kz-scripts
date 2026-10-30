@@ -309,10 +309,10 @@ rm --force --recursive ~/.cache/thumbnails/
 #|reset|thumbnails-cache|#none|restore thumbnails
 rm --force --recursive ~/.cache/thumbnails/
 
-#|setup|thunderbird|#none|email & agenda
+#|setup|thunderbird|*|email & agenda
 kz-desktop --addbef=thunderbird
 
-#|reset|thunderbird|#none|email & agenda
+#|reset|thunderbird|*|email & agenda
 kz-desktop --delete=thunderbird
 
 #|setup|vscode|pc06 pc07|code editor

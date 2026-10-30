@@ -716,11 +716,11 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes teamviewer; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes teamviewer; fi
 
-#|install|thunderbird|#none|email & agenda
+#|install|thunderbird|*|email & agenda
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}" || sudo apt-get install --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}"; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes thunderbird; fi
 
-#|remove|thunderbird|#none|email & agenda
+#|remove|thunderbird|*|email & agenda
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes thunderbird thunderbird-l10n-"${LANG:0:2}" || sudo apt-get remove --assume-yes thunderbird thunderbird-locale-"${LANG:0:2}"; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes thunderbird; fi
 
