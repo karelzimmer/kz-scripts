@@ -108,7 +108,7 @@ def process(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         text = f'Start {cmd}...)'
         kz.logmsg(PROGRAM_NAME, text)
         try:
-            subprocess.run([cmd], check=True)
+            subprocess.run(f'{cmd}', shell=True, check=True)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
