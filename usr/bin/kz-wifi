@@ -109,12 +109,13 @@ def process_options(PROGRAM_NAME: str, PROGRAM_DESC: str,
     """
     This function handles the script options and arguments.
     """
+    arg: str = ''
     opt: str = ''
     program_name: str = PROGRAM_NAME.replace('kz-', 'kz ')
     text: str
     UI_MODE: str = 'tui'
 
-    for opt, _arg in opts:
+    for opt, arg in opts:
         if opt in ('-C', '--cli'):
             UI_MODE = 'cli'
         elif opt in ('-G', '--gui'):
