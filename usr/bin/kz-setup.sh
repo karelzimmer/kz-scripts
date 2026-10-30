@@ -46,6 +46,7 @@ if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.interface 
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.interface clock-show-weekday &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.interface font-antialiasing &> /dev/null; then gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.interface show-battery-percentage &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
+if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.peripherals.touchpad click-method &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad click-method 'areas'; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.screensaver lock-enabled &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.session idle-delay &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay 900; fi
@@ -83,6 +84,7 @@ if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.interface 
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.interface clock-show-weekday &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.interface font-antialiasing &> /dev/null; then gsettings reset org.gnome.desktop.interface font-antialiasing; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.interface show-battery-percentage &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
+if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.peripherals.touchpad click-method &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad click-method; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.screensaver lock-enabled &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.desktop.session idle-delay &> /dev/null; then gsettings reset org.gnome.desktop.session idle-delay; fi
@@ -315,10 +317,10 @@ kz-desktop --delete=thunderbird
 # -----------------------------------------------------------------------------
 # Web app: https://vscode.dev
 # -----------------------------------------------------------------------------
-if type xdg-mime &> /dev/null; then xdg-mime default code.desktop application/json && xdg-mime default code.desktop application/x-desktop && xdg-mime default code.desktop application/x-shellscript && xdg-mime default code.desktop application/xml && xdg-mime default code.desktop text/html && xdg-mime default code.desktop text/markdown && xdg-mime default code.desktop text/plain && xdg-mime default code.desktop text/troff && xdg-mime default code.desktop text/x-python; fi && kz-desktop --addbef=code
+if type xdg-mime &> /dev/null; then xdg-mime default code.desktop application/json && xdg-mime default code.desktop application/x-desktop && xdg-mime default code.desktop application/x-shellscript && xdg-mime default code.desktop application/xml && xdg-mime default code.desktop text/html && xdg-mime default code.desktop text/markdown && xdg-mime default code.desktop text/plain && xdg-mime default code.desktop text/troff && xdg-mime default code.desktop text/x-python; fi && kz-desktop --addbef=com.microsoft.VSCode
 
 #|reset|vscode|pc06 pc07|Code editor
-kz-desktop --delete=code
+kz-desktop --delete=com.microsoft.VSCode
 
 #|setup|webmin|pc07|Manage servers
 # -----------------------------------------------------------------------------
