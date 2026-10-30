@@ -536,7 +536,7 @@ restore_backup_tui() {
             --backtitle "$PROGRAM_NAME" \
             --title     "$title"        \
             --infobox   "$text"         \
-            0 0                         || true
+            20 70                       || true
     sync 1> >($PROGRAM_LOGS) 2>> "$ERROR_LOG"
 }
 
