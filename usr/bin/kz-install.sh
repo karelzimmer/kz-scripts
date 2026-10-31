@@ -448,11 +448,11 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os
 # Shellcheck        - Lint tool for shell scripts,
 #                       Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes mypy pipx pycodestyle python3-autopep8 python3-bashate shellcheck; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes mypy pycodestyle python3-autopep8 python3-bashate shellcheck; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes pycodestyle python3-autopep8 python3-bashate python3-mypy shellcheck; fi
 
 #|remove|linters|pc06 pc07|analyse scripts
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes mypy pipx pycodestyle python3-autopep8 python3-bashate shellcheck; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes mypy pycodestyle python3-autopep8 python3-bashate shellcheck; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes pycodestyle python3-autopep8 python3-bashate python3-mypy shellcheck; fi
 
 #|install|locate|pc06 pc07|locate files
@@ -581,12 +581,12 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-relea
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes pst-utils; fi
 
 #|install|python|pc06 pc07|programming language
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes python3 python3-pip python-is-python3 && sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8 && sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes python3 python3-pip; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes pipx  python3 python3-pip python-is-python3 && sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8 && sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
+if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes pipx python3 python3-pip; fi
 
 #|remove|python|pc06 pc07|programming language
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes python python3-pip python-is-python3 && sudo rm --force --verbose /usr/bin/pip /usr/bin/pep8; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes python3 python3-pip; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes pipx python python3-pip python-is-python3 && sudo rm --force --verbose /usr/bin/pip /usr/bin/pep8; fi
+if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes pipx python3 python3-pip; fi
 
 #|install|rpm|pc06 pc07|package manager
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes rpm; fi
