@@ -440,7 +440,6 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os
 # -----------------------------------------------------------------------------
 # This install includes:
 # MyPy              - Optional static typing for Python
-# pipx              - Install and run Python applications in isolated envs
 # pycodestyle       - Python style guide checker (formerly called pep8)
 # python3-autopep8  - Tool that automatically formats Python code to conform to
 #                       PEP 8
