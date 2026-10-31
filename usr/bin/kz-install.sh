@@ -262,14 +262,6 @@ if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install -
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes git; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes git; fi
 
-#|install|gnome-extensions-cli|pc06 pc07|gnome extensions command line interface
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes pipx; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf install --assumeyes pipx; fi
-
-#|remove|gnome-extensions-cli|pc06 pc07|gnome extensions command line interface
-if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get remove --assume-yes pipx; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release && type gnome-session &> /dev/null; then sudo dnf remove --assumeyes pipx; fi
-
 #|install|gnome-shell-extension-caffeine|*|gnome disable screensaver & suspend
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && apt-cache show gnome-shell-extension-caffeine; then sudo apt-get install --assume-yes gnome-shell-extension-caffeine; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release && type gnome-session &> /dev/null && dnf list gnome-shell-extension-caffeine; then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
@@ -448,6 +440,7 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os
 # -----------------------------------------------------------------------------
 # This install includes:
 # MyPy              - Optional static typing for Python
+# pipx              - Install and run Python applications in isolated envs
 # pycodestyle       - Python style guide checker (formerly called pep8)
 # python3-autopep8  - Tool that automatically formats Python code to conform to
 #                       PEP 8
@@ -455,11 +448,11 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora\|rhel' /etc/os
 # Shellcheck        - Lint tool for shell scripts,
 #                       Web app: https://www.shellcheck.net
 # -----------------------------------------------------------------------------
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes mypy pycodestyle python3-autopep8 python3-bashate shellcheck; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes mypy pipx pycodestyle python3-autopep8 python3-bashate shellcheck; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf install --assumeyes pycodestyle python3-autopep8 python3-bashate python3-mypy shellcheck; fi
 
 #|remove|linters|pc06 pc07|analyse scripts
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes mypy pycodestyle python3-autopep8 python3-bashate shellcheck; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get remove --assume-yes mypy pipx pycodestyle python3-autopep8 python3-bashate shellcheck; fi
 if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then sudo dnf remove --assumeyes pycodestyle python3-autopep8 python3-bashate python3-mypy shellcheck; fi
 
 #|install|locate|pc06 pc07|locate files
