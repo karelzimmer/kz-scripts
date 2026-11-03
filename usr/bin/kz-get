@@ -80,8 +80,8 @@ process() {
             /etc/os-release; then
         process_kz_deb_package
     elif grep   --quiet                 \
-                --extended-regexp       \
                 --regexp='fedora|rhel'  \
+                --extended-regexp       \
                 /etc/os-release; then
         process_kz_rpm_package
     else

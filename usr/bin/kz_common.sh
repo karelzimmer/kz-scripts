@@ -38,8 +38,8 @@ kz.check_debian_package_manager() {
     local text="Wait ${sleep}s for another package manager to finish..."
 
     if grep --quiet                 \
-            --extended-regexp       \
             --regexp='fedora|rhel'  \
+            --extended-regexp       \
             /etc/os-release; then
         return 0
     fi

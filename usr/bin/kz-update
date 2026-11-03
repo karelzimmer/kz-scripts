@@ -151,8 +151,8 @@ def perform_update(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     check_debian: list[str] = ['grep', '--quiet', '--regexp=debian',
                                '/etc/os-release']
-    check_rhel: list[str] = ['grep', '--quiet', '--extended-regexp',
-                             '--regexp=fedora|rhel', '/etc/os-release']
+    check_rhel: list[str] = ['grep', '--quiet', '--regexp=fedora|rhel',
+                             '--extended-regexp', '/etc/os-release']
 
     custom_env = os.environ.copy()
     custom_env['DEBIAN_FRONTEND'] = 'noninteractive'
