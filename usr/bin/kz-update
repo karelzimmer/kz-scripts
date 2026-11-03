@@ -248,7 +248,7 @@ def perform_update_extensions(PROGRAM_NAME: str, PROGRAM_DESC: str,
     check_gext: str = 'type gext'
     command: list[str] = ['gext', 'update']
 
-    if os.geteuid() == 0:
+    if os.getuid() == 0:
         return
 
     if subprocess.run(check_gext, shell=True,
