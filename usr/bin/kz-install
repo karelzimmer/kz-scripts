@@ -115,7 +115,7 @@ process() {
                 --regexp='debian'   \
                 /etc/os-release     &&
         [[ $INSTALL = 'install' ]]; then
-        printf '%s\n' "#|install|update|*|Refresh package lists *** automatica\
+        printf '%s\n' "#|install|update|*|refresh package lists *** automatica\
 lly added ***
 sudo apt-get update
 "       > "$command_file"
