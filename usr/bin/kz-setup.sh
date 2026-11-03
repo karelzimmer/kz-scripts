@@ -138,19 +138,19 @@ git config --global --unset alias.logg
 #|setup|gnome-shell-extension-caffeine|*|gnome disable screensaver & suspend
 if type gnome-session &> /dev/null && gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions enable caffeine@patapon.info; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions enable caffeine@patapon.info; fi
+if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions enable caffeine@patapon.info; fi
 touch /tmp/kz-setup-need-logout
 
 #|reset|gnome-shell-extension-caffeine|*|gnome isable screensaver & suspend
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions disable caffeine@patapon.info; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions disable caffeine@patapon.info; fi
+if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && gnome-extensions info caffeine@patapon.info &> /dev/null; then gnome-extensions disable caffeine@patapon.info; fi
 touch /tmp/kz-setup-need-logout
 
 #|setup|gnome-shell-extension-dashtodock|*|gnome dock
 if type gnome-session &> /dev/null && gsettings get org.gnome.shell disable-user-extensions &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.shell.extensions.dash-to-dock apply-custom-theme &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.shell.extensions.dash-to-dock click-action &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.shell.extensions.dash-to-dock custom-theme-shrink &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true; fi
@@ -181,8 +181,8 @@ if type gnome-session &> /dev/null && gsettings get org.gnome.shell.extensions.d
 if type gnome-session &> /dev/null && gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted; fi
 if type gnome-session &> /dev/null && gsettings get org.gnome.shell.extensions.dash-to-dock show-trash &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-trash; fi
 if type gnome-session &> /dev/null &&  grep --quiet --regexp='debian' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
-if type gnome-session &> /dev/null && grep --quiet --regexp='fedora\|rhel' /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if type gnome-session &> /dev/null && grep --quiet --regexp='fedora\|rhel' /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if type gnome-session &> /dev/null && grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && gnome-extensions info dash-to-dock@gnome-shell-extensions.gcampax.github.com &> /dev/null; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if type gnome-session &> /dev/null && grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && gnome-extensions info dash-to-dock@micxgx.gmail.com &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 touch /tmp/kz-setup-need-logout
 
 #|setup|gnome-shell-extension-gsconnect|pc06 pc07|gnome connect mobile devices & desktops
@@ -281,11 +281,11 @@ chmod 755 ~
 # Web app: https://open.spotify.com
 # -----------------------------------------------------------------------------
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --addaft=spotify; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
+if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then kz-desktop --addaft=kz-spotify; fi
 
 #|reset|spotify|pc01 pc06 pc07|streaming music
 if grep --quiet --regexp='debian' /etc/os-release; then kz-desktop --delete=spotify; fi
-if grep --quiet --regexp='fedora\|rhel' /etc/os-release; then kz-desktop --delete=kz-spotify; fi
+if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then kz-desktop --delete=kz-spotify; fi
 
 #|setup|terminal|pc01 pc06 pc07|terminal
 # -----------------------------------------------------------------------------
