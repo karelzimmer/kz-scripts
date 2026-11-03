@@ -95,7 +95,7 @@ process() {
 become_check() {
     local text=''
 
-    if [[ $UID -eq 0 ]]; then
+    if [[ $EUID -eq 0 ]]; then
         return 0
     elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return 0
