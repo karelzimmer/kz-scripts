@@ -229,6 +229,18 @@ Show install commands and information for Google Chrome.
 .RS
 Show remove commands and information for Google Chrome.
 .RE
+.sp
+\fBHOSTNAME=* kz install\fR
+.RS
+Execute commands for "all computers" (HOST is marked as * in the installation
+files, see \fB man kz-install.sh\fR).
+.RE
+.sp
+\fBHOSTNAME=pc01 kz install\fR
+.RS
+Execute commands for all computers and pc01 (even if this command is run on
+pc06).
+.RE
 .EE
 
 .SH SEE ALSO

@@ -209,6 +209,18 @@ Show set up commands and information for Google Chrome.
 .RS
 Show reset commands and information for Google Chrome.
 .RE
+.sp
+\fBHOSTNAME=* kz setup\fR
+.RS
+Execute commands for "all computers" (HOST has the value * in the settings
+files, see \fB man kz-setup.sh\fR).
+.RE
+.sp
+\fBHOSTNAME=pc01 kz setup\fR
+.RS
+Execute commands for all computers and pc01 (even if this command is run on
+pc06).
+.RE
 .EE
 
 .SH SEE ALSO
