@@ -228,7 +228,7 @@ touch /tmp/kz-setup-need-logout
 # Customize Clock on Lock Screen    https://extensions.gnome.org/extension/4663/customize-clock-on-lock-screen/
 # Desktop Cube                      https://extensions.gnome.org/extension/4648/desktop-cube/
 # -----------------------------------------------------------------------------
-if type gnome-session &> /dev/null && [[ $EUID -ne 0 ]]; then pipx install gnome-extensions-cli --system-site-packages && pipx ensurepath && ~/.local/bin/gext install 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com' && ~/.local/bin/gext enable 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com'; fi
+if type gnome-session &> /dev/null && [[ $EUID -ne 0 ]]; then pipx install gnome-extensions-cli --system-site-packages --force && pipx ensurepath && ~/.local/bin/gext install 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com' && ~/.local/bin/gext enable 'compiz-alike-magic-lamp-effect@hermes83.github.com' 'compiz-windows-effect@hermes83.github.com' 'CoverflowAltTab@palatis.blogspot.com' 'CustomizeClockOnLockScreen@pratap.fastmail.fm' 'desktop-cube@schneegans.github.com'; fi
 touch /tmp/kz-setup-need-logout
 
 #|reset|gnome-shell-extensions-visual-effects|pc06 pc07|gnome visual effects

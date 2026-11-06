@@ -580,7 +580,7 @@ if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-relea
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then sudo dnf remove --assumeyes pst-utils; fi
 
 #|install|python|pc06 pc07|programming language
-if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes pipx  python3 python3-pip python-is-python3 && sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8 && sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
+if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes pipx python3 python3-pip python-is-python3 && sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8 && sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
 if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then sudo dnf install --assumeyes pipx python3 python3-pip; fi
 
 #|remove|python|pc06 pc07|programming language
