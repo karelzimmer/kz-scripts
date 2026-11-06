@@ -588,7 +588,7 @@ restore_settings_desktop() {
 
 # This function restores the favorite apps in the dash.
 restore_settings_favorites() {
-    local input_file=$settings_dir/favorites.txt
+    local input_file=$settings_dir/favorites.lst
 
     if type gsettings &> /dev/null && [[ -f $input_file ]]; then
         kz.logmsg 'Restore the favorite apps in the dash...'
