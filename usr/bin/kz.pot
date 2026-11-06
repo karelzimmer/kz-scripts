@@ -341,14 +341,6 @@ msgstr ""
 msgid "   or another picture file."
 msgstr ""
 
-#: kz-backup:600
-msgid "START list of favorite apps in the dash"
-msgstr ""
-
-#: kz-backup:601
-msgid "END list of favorite apps in the dash"
-msgstr ""
-
 #: kz-backup:643
 msgid "To set the desktop background:"
 msgstr ""

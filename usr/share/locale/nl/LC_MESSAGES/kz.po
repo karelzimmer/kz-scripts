@@ -344,14 +344,6 @@ msgstr "4. Selecteer avatar.ico in Persoonlijke map / Instellingen,"
 msgid "   or another picture file."
 msgstr "   of een ander afbeeldingsbestand."
 
-#: kz-backup:600
-msgid "START list of favorite apps in the dash"
-msgstr "BEGIN lijst met favoriete apps in de dash"
-
-#: kz-backup:601
-msgid "END list of favorite apps in the dash"
-msgstr "EINDE lijst met favoriete apps in de dash"
-
 #: kz-backup:643
 msgid "To set the desktop background:"
 msgstr "Om de bureaubladachtergrond in te stellen:"
