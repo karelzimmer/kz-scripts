@@ -416,7 +416,7 @@ backup_settings() {
         --verbose                       \
         "$settings_dir/avatar"          \
         "$settings_dir/desktop"         \
-        "$settings_dir/favorites.lst"   \
+        "$settings_dir/favorites.txt"   \
         "$settings_dir/favs.txt"        \
         "$settings_dir/wifi.txt"        |& $PROGRAM_LOGS
 }
