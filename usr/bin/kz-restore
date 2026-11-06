@@ -567,14 +567,14 @@ restore_settings() {
 
     if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
         kz.logmsg 'Restore settings...'
-        restore_setting_desktop
-        restore_setting_favorites
+        restore_settings_desktop
+        restore_settings_favorites
     fi
 }
 
 
 # This function restores the desktop background,.
-restore_setting_desktop() {
+restore_settings_desktop() {
     local input_file=$settings_dir/desktop.ico
 
     if type gsettings &> /dev/null && [[ -f $input_file ]]; then
@@ -587,7 +587,7 @@ restore_setting_desktop() {
 
 
 # This function restores the favorite apps in the dash.
-restore_setting_favorites() {
+restore_settings_favorites() {
     local input_file=$settings_dir/favorites.json
 
     if type gsettings &> /dev/null && [[ -f $input_file ]]; then

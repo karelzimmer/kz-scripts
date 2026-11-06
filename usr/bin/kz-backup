@@ -394,14 +394,14 @@ backup_settings() {
         mkdir --verbose "$settings_dir" |& $PROGRAM_LOGS
     fi
 
-    backup_setting_apps
-    backup_setting_readme
-    backup_setting_users
+    backup_settings_apps
+    backup_settings_readme
+    backup_settings_users
 
     if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
-        backup_setting_avatar
-        backup_setting_desktop
-        backup_setting_favorites
+        backup_settings_avatar
+        backup_settings_desktop
+        backup_settings_favorites
     fi
 
     # Remove old naming of folders/files.
@@ -422,7 +422,7 @@ backup_settings() {
 }
 
 # This function creates a list of installed apps.
-backup_setting_apps() {
+backup_settings_apps() {
     local footer1=''
     local footer2=''
     local header1=''
@@ -468,7 +468,7 @@ backup_setting_apps() {
 
 
 # This function creates a README.
-backup_setting_readme() {
+backup_settings_readme() {
     local output_file=$settings_dir/README
     local text=''
 
@@ -486,7 +486,7 @@ $(gettext 'Further reading:')\n"
 
 
 # This function saves instructions for adding additional users.
-backup_setting_users() {
+backup_settings_users() {
     local groups=''
     local output_file=$settings_dir/users.txt
     local text=''
@@ -518,9 +518,9 @@ backup_setting_users() {
 
     kz.logmsg 'Save instructions for adding additional users...'
     if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
-        backup_setting_users_gui
+        backup_settings_users_gui
     else
-        backup_setting_users_cli
+        backup_settings_users_cli
     fi
 
     printf '%s\n' "$text" > "$output_file"
@@ -528,7 +528,7 @@ backup_setting_users() {
 
 
 # This function saves instructions for adding additional users in the GUI.
-backup_setting_users_gui() {
+backup_settings_users_gui() {
     text="$(gettext 'Additional users can be added manually:')
 
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
@@ -544,7 +544,7 @@ $groups"
 
 
 # This function saves instructions for adding additional users via the CLI.
-backup_setting_users_cli() {
+backup_settings_users_cli() {
     text="$(gettext 'Additional users can be added manually:')
 
 $(gettext '# Standard user:')
@@ -564,7 +564,7 @@ $groups"
 
 # This function copies the user avatar and saves instructions for restoring, if
 # possible.
-backup_setting_avatar() {
+backup_settings_avatar() {
     local input_file=/var/lib/AccountsService/icons/$USER
     local output_file_1=$settings_dir/avatar.ico
     local output_file_2=$settings_dir/avatar.txt
@@ -593,7 +593,7 @@ $(gettext '[1] Windows, command, or magnifying glass key.')"
 
 
 # This function saves the favorite apps in the dash.
-backup_setting_favorites() {
+backup_settings_favorites() {
     local output_file=$settings_dir/favorites.json
 
     kz.logmsg 'Save the favorite apps...'
@@ -608,7 +608,7 @@ backup_setting_favorites() {
 
 # This function copies the desktop background, if available, and saves
 # instructions for setting desktop background.
-backup_setting_desktop() {
+backup_settings_desktop() {
     local input_file
     local output_file_1=$settings_dir/desktop.ico
     local output_file_2=$settings_dir/desktop.txt
