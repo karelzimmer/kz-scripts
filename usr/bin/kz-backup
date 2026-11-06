@@ -405,20 +405,19 @@ backup_settings() {
     fi
 
     # Remove old naming of folders/files.
-    rm  --force                         \
-        --recursive                     \
-        --verbose                       \
-        "$HOME/.kz-backup-settings"     \
-        "$HOME/.kz"                     \
-        "$HOME/Instellingen"            \
-        "$HOME/kz-backup"               |& $PROGRAM_LOGS
-    rm  --force                         \
-        --verbose                       \
-        "$settings_dir/avatar"          \
-        "$settings_dir/desktop"         \
-        "$settings_dir/favorites.txt"   \
-        "$settings_dir/favs.txt"        \
-        "$settings_dir/wifi.txt"        |& $PROGRAM_LOGS
+    rm  --force                     \
+        --recursive                 \
+        --verbose                   \
+        "$HOME/.kz-backup-settings" \
+        "$HOME/.kz"                 \
+        "$HOME/Instellingen"        \
+        "$HOME/kz-backup"           |& $PROGRAM_LOGS
+    rm  --force                     \
+        --verbose                   \
+        "$settings_dir/avatar"      \
+        "$settings_dir/desktop"     \
+        "$settings_dir/favs.txt"    \
+        "$settings_dir/wifi.txt"    |& $PROGRAM_LOGS
 }
 
 # This function creates a list of installed apps.
@@ -594,7 +593,7 @@ $(gettext '[1] Windows, command, or magnifying glass key.')"
 
 # This function saves the favorite apps in the dash.
 backup_settings_favorites() {
-    local output_file=$settings_dir/favorites.json
+    local output_file=$settings_dir/favorites.txt
 
     kz.logmsg 'Save the favorite apps...'
 
