@@ -133,7 +133,7 @@ check_website() {
     text=$(gettext 'Check website...')
     kz.infomsg "$text"
 
-    # Perl script checklink (W3C® Link Checker) checks whether links are valid,
+    # Perl script checklink (W3C Link Checker) checks whether links are valid,
     # i.e. whether each link can be followed/whether a file is present.
     # This function does the opposite: are all files used?
 
@@ -147,7 +147,7 @@ check_website() {
             --exclude='packages'        \
             --exclude='scripts'         || ERR_FLAG=true
 
-    # Perl script checklink (W3C® Link Checker) checks whether links are valid.
+    # Perl script checklink (W3C Link Checker) checks whether links are valid.
     # Check the validity of links of website https://karelzimmer.nl:
     # sudo apt-get install w3c-linkchecker
     # checklink --summary https://karelzimmer.nl/html/nl/start.html
