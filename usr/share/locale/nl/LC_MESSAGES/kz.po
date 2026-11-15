@@ -375,7 +375,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:842 kz-install:1044 kz-restore:670 kz-setup:957
+#: kz-backup:842 kz-install:1045 kz-restore:670 kz-setup:958
 msgid "Error messages"
 msgstr "Foutmeldingen"
 
@@ -400,12 +400,12 @@ msgstr "sommige bestanden zijn mogelijk niet leesbaar of veranderbaar, of"
 msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
-#: kz-backup:824 kz-backup:850 kz-install:1048 kz-restore:651 kz-restore:678
-#: kz-setup:961
+#: kz-backup:824 kz-backup:850 kz-install:1049 kz-restore:651 kz-restore:678
+#: kz-setup:962
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:851 kz-install:1049 kz-restore:679 kz-setup:962
+#: kz-backup:851 kz-install:1050 kz-restore:679 kz-setup:963
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -638,9 +638,9 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#: kz-backup:227 kz-backup:870 kz-desktop:290 kz-install:1019 kz-install:1073
-#: kz-menu:357 kz-menu:557 kz-restore:322 kz-restore:698 kz-setup:917
-#: kz-setup:986
+#: kz-backup:227 kz-backup:870 kz-desktop:290 kz-install:1020 kz-install:1074
+#: kz-menu:357 kz-menu:557 kz-restore:322 kz-restore:698 kz-setup:918
+#: kz-setup:987
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -1056,45 +1056,45 @@ msgstr "Installatie voorbereiden"
 msgid "Prepare removal"
 msgstr "Verwijderen voorbereiden"
 
-#: kz-install:831 nl.karelzimmer.kz-install.policy:22
+#: kz-install:838 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 "Authenticatie is vereist om apps te installeren en systeeminstellingen te "
 "wijzigen"
 
-#: kz-install:837 kz-setup:793
-msgid "NUM/TOT  APP"
-msgstr "NUM/TOT  APP"
+#: kz-install:834 kz-setup:794
+msgid "NUM/TOT  APP - DESCRIPTION"
+msgstr "NUM/TOT  APP - BESCHRIJVING"
 
-#: kz-install:838 kz-setup:794
+#: kz-install:835 kz-setup:795
 msgid "         COMMAND..."
 msgstr "         OPDRACHT..."
 
-#: kz-install:911 kz-install:935
+#: kz-install:912 kz-install:936
 msgid "Authentication is required to continue."
 msgstr "Authenticatie is vereist om door te gaan."
 
-#: kz-install:1045
+#: kz-install:1046
 msgid "The installation of the following apps contains errors:"
 msgstr "De installatie van de volgende apps bevat fouten:"
 
-#: kz-install:1052
+#: kz-install:1053
 msgid "Try to install the apps again."
 msgstr "Probeer de apps opnieuw te installeren."
 
-#: kz-install:1054
+#: kz-install:1055
 msgid "Try to remove the apps again."
 msgstr "Probeer de apps opnieuw te verwijderen."
 
-#: kz-install:1001
+#: kz-install:1002
 msgid "Apps install completed."
 msgstr "Apps installeren is voltooid."
 
-#: kz-install:1003 kz-install:1007
+#: kz-install:1004 kz-install:1008
 msgid "Apps remove completed."
 msgstr "Apps verwijderen is voltooid."
 
-#: kz-install:1013
+#: kz-install:1014
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
@@ -1485,27 +1485,27 @@ msgstr "Instellen voorbereiden"
 msgid "Preparing reset"
 msgstr "Resetten voorbereiden"
 
-#: kz-setup:958
+#: kz-setup:959
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:965
+#: kz-setup:966
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:967
+#: kz-setup:968
 msgid "Try to reset the apps again."
 msgstr "Probeer de apps opnieuw te resetten."
 
-#: kz-setup:897
+#: kz-setup:898
 msgid "Apps set up completed."
 msgstr "Apps instellen is voltooid."
 
-#: kz-setup:899
+#: kz-setup:900
 msgid "Apps reset completed."
 msgstr "Apps resetten is voltooid."
 
-#: kz-setup:906
+#: kz-setup:907
 msgid ""
 "You will now be logged out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1513,7 +1513,7 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om het instellen van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:911
+#: kz-setup:912
 msgid ""
 "Type 'logout' to log out of the computer to finish setting up the apps and "
 "changing user settings."
@@ -1521,7 +1521,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:943
+#: kz-setup:944
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
@@ -1697,3 +1697,8 @@ msgstr "Klaar!"
 #| msgid "fatal: unknown os release"
 msgid "fatal: unknown os release (kz-update)"
 msgstr "fataal: onbekende os-release"
+
+#, fuzzy
+#| msgid "NUM/TOT  APP - DESCRIPTION"
+msgid "NUM/TOT  APP"
+msgstr "NUM/TOT  APP - BESCHRIJVING"

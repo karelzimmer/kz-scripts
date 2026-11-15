@@ -828,15 +828,16 @@ process_command_file() {
     local app_name=''
     local command_record=''
 
-    text="$(gettext "Authentication is required to install apps and change \
-system settings")
-"
-
     if [[ $UI_MODE = 'cli' ]]; then
         sudo --validate
-        text="$(gettext 'NUM/TOT  APP')
+        text="         *** $title ***
+$(gettext 'NUM/TOT  APP - DESCRIPTION')
 $(gettext '         COMMAND...')"
         printf '%s\n' "$text"
+    else
+        text="$(gettext "Authentication is required to install apps and \
+change system settings")
+"
     fi
 
     while read -r command_record; do

@@ -790,7 +790,8 @@ process_command_file() {
     local command_record=''
 
     if [[ $UI_MODE = 'cli' ]]; then
-        text="$(gettext 'NUM/TOT  APP')
+        text="         *** $title ***
+$(gettext 'NUM/TOT  APP - DESCRIPTION')
 $(gettext '         COMMAND...')"
         printf '%s\n' "$text"
     fi
