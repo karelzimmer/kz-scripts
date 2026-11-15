@@ -136,12 +136,12 @@ process_kz_deb_package() {
 
     # Refresh package lists before installing apps, to minimize the risk of
     # errors due to outdated package lists.
-    printf '%s' 'Update.....'
+    printf '%s' '[1/3] Update.....'
     check_debian_package_manager
     sudo apt-get update |& $PROGRAM_LOGS
 
     # Download kz deb package.
-    printf '\n%s' 'Download...'
+    printf '\n%s' '[2/3] Download...'
     wget    --no-verbose                            \
             --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_file"                     |& $PROGRAM_LOGS
@@ -149,7 +149,7 @@ process_kz_deb_package() {
     chmod o+r "$kz_deb_local_file"
 
     # Install kz deb package.
-    printf '\n%s' 'Install....'
+    printf '\n%s' '[3/3] Install....'
     check_debian_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
             NEEDRESTART_MODE=a              \
@@ -194,7 +194,7 @@ process_kz_rpm_package() {
     fi
 
     # Install kz rpm package.
-    printf '%s' 'Install...'
+    printf '%s' '[1/1] Install...'
     sudo dnf "$install" --assumeyes "$kz_rpm_site_file" |& $PROGRAM_LOGS
 }
 
