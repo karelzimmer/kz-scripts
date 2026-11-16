@@ -834,10 +834,6 @@ process_command_file() {
 $(gettext 'NUM/TOT  APP - DESCRIPTION')
 $(gettext '         COMMAND...')"
         printf '%s\n' "$text"
-    else
-        text="$(gettext "Authentication is required to install apps and \
-change system settings")
-"
     fi
 
     while read -r command_record; do
@@ -925,6 +921,9 @@ execute_command_tui() {
         if sudo --non-interactive --validate 2> /dev/null; then
             break
         else
+            text="$(gettext "Authentication is required to install apps and \
+change system settings")
+"
             if ! sudo   --stdin <<< "$(
                         dialog  --insecure                      \
                                 --backtitle     "$PROGRAM_NAME" \

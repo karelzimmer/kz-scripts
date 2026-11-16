@@ -370,7 +370,7 @@ msgstr ""
 msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
-#: kz-backup:842 kz-install:1045 kz-restore:670 kz-setup:958
+#: kz-backup:842 kz-install:1044 kz-restore:670 kz-setup:958
 msgid "Error messages"
 msgstr ""
 
@@ -395,12 +395,12 @@ msgstr ""
 msgid "is there not enough space on $TARGET."
 msgstr ""
 
-#: kz-backup:824 kz-backup:850 kz-install:1049 kz-restore:651 kz-restore:678
+#: kz-backup:824 kz-backup:850 kz-install:1048 kz-restore:651 kz-restore:678
 #: kz-setup:962
 msgid "Actions to take:"
 msgstr ""
 
-#: kz-backup:851 kz-install:1050 kz-restore:679 kz-setup:963
+#: kz-backup:851 kz-install:1049 kz-restore:679 kz-setup:963
 msgid "Check the error messages after this."
 msgstr ""
 
@@ -621,7 +621,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#: kz-backup:227 kz-backup:870 kz-desktop:290 kz-install:1020 kz-install:1074
+#: kz-backup:227 kz-backup:870 kz-desktop:290 kz-install:1019 kz-install:1073
 #: kz-menu:357 kz-menu:557 kz-restore:322 kz-restore:698 kz-setup:918
 #: kz-setup:987
 msgid "Press the Enter key to continue [Enter]: "
@@ -1021,7 +1021,7 @@ msgstr ""
 msgid "Prepare removal"
 msgstr ""
 
-#: kz-install:838 nl.karelzimmer.kz-install.policy:22
+#: kz-install:924 nl.karelzimmer.kz-install.policy:22
 msgid "Authentication is required to install apps and change system settings"
 msgstr ""
 
@@ -1033,31 +1033,31 @@ msgstr ""
 msgid "         COMMAND..."
 msgstr ""
 
-#: kz-install:912 kz-install:936
+#: kz-install:908 kz-install:935
 msgid "Authentication is required to continue."
 msgstr ""
 
-#: kz-install:1046
+#: kz-install:1045
 msgid "The installation of the following apps contains errors:"
 msgstr ""
 
-#: kz-install:1053
+#: kz-install:1052
 msgid "Try to install the apps again."
 msgstr ""
 
-#: kz-install:1055
+#: kz-install:1054
 msgid "Try to remove the apps again."
 msgstr ""
 
-#: kz-install:1002
+#: kz-install:1001
 msgid "Apps install completed."
 msgstr ""
 
-#: kz-install:1004 kz-install:1008
+#: kz-install:1003 kz-install:1007
 msgid "Apps remove completed."
 msgstr ""
 
-#: kz-install:1014
+#: kz-install:1013
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
