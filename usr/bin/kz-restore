@@ -284,6 +284,15 @@ $(eval_gettext "to  : \$SOURCE")"
         exit 1
     fi
 
+    old=$MEDIUM/BACKUP_${HOSTNAME}_$USER
+    if [[ -e $old ]]; then
+        text="$(gettext 'The backup has to be renamed!')
+$(eval_gettext "From: \$old")
+$(eval_gettext "to  : \$SOURCE")"
+        kz.infomsg "$text"
+        exit 1
+    fi
+
     if [[ ! -d $SOURCE ]]; then
         text=$(eval_gettext "No backup_\${HOSTNAME}_\$USER found in \$MEDIUM.")
         kz.errmsg "$text"
