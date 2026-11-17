@@ -204,7 +204,7 @@ $(gettext 'directory does not exist')"
 
     fstype=$(findmnt --noheadings --output FSTYPE --target "$MEDIUM")
     case "${fstype,,}" in
-        *fat )
+        *fat* )
             text=$(eval_gettext "FAT-based filesystems (\$fstype) are not \
 supported for backups.")
             text+='\n'
