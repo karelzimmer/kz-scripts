@@ -176,18 +176,18 @@ msgstr "argumenten zijn niet toegestaan"
 msgid "directory does not exist"
 msgstr "map bestaat niet"
 
-#: kz-backup:208
+#: kz-backup:210
 #, sh-format
-msgid "FAT-based filesystems ($fstype) are not supported for backups."
-msgstr ""
-"FAT-gebaseerde bestandssystemen ($fstype) worden niet ondersteund voor back-"
-"ups."
+msgid "Unsupported filesystem '$fstype' on $MEDIUM."
+msgstr "Niet-ondersteund bestandssysteem '$fstype' op $MEDIUM."
 
-#: kz-backup:211
-msgid "Please use a drive formatted with ext4, NTFS, XFS, or Btrfs instead."
+#: kz-backup:213
+msgid ""
+"Please use a drive formatted with a Linux filesystem such as ext4, XFS, or "
+"Btrfs."
 msgstr ""
-"Gebruik in plaats daarvan een schijf die is geformatteerd met ext4, NTFS, "
-"XFS of Btrfs."
+"Gebruik een schijf die is geformatteerd met een Linux-bestandssysteem, zoals "
+"ext4, XFS of Btrfs."
 
 #: kz-backup:244 kz-backup:887 kz-desktop:290 kz-install:1019 kz-install:1073
 #: kz-menu:357 kz-menu:557 kz-restore:322 kz-restore:698 kz-setup:918
