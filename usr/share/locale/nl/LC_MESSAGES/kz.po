@@ -179,15 +179,11 @@ msgstr "map bestaat niet"
 #: kz-backup:210
 #, sh-format
 msgid "Unsupported filesystem '$fstype' on $MEDIUM."
-msgstr "Niet-ondersteund bestandssysteem '$fstype' op $MEDIUM."
+msgstr "Niet-ondersteunde bestandssysteem '$fstype' op $MEDIUM."
 
 #: kz-backup:213
-msgid ""
-"Please use a drive formatted with a Linux filesystem such as ext4, XFS, or "
-"Btrfs."
-msgstr ""
-"Gebruik een schijf die is geformatteerd met een Linux-bestandssysteem, zoals "
-"ext4, XFS of Btrfs."
+msgid "Supported filesystems include, for example, ext4, XFS, or Btrfs."
+msgstr "Ondersteunde bestandssystemen zijn bijvoorbeeld ext4, XFS of Btrfs."
 
 #: kz-backup:244 kz-backup:887 kz-desktop:290 kz-install:1019 kz-install:1073
 #: kz-menu:357 kz-menu:557 kz-restore:322 kz-restore:698 kz-setup:918

@@ -181,9 +181,7 @@ msgid "Unsupported filesystem '$fstype' on $MEDIUM."
 msgstr ""
 
 #: kz-backup:213
-msgid ""
-"Please use a drive formatted with a Linux filesystem such as ext4, XFS, or "
-"Btrfs."
+msgid "Supported filesystems include, for example, ext4, XFS, or Btrfs."
 msgstr ""
 
 #: kz-backup:244 kz-backup:887 kz-desktop:290 kz-install:1019 kz-install:1073

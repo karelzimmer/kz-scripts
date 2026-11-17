@@ -210,8 +210,8 @@ $(gettext 'directory does not exist')"
             text=$(eval_gettext "Unsupported filesystem '\$fstype' on \
 \$MEDIUM.")
             text+='\n'
-            text+=$(gettext "Please use a drive formatted with a Linux \
-filesystem such as ext4, XFS, or Btrfs.")
+            text+=$(gettext "Supported filesystems include, for example, \
+ext4, XFS, or Btrfs.")
             kz.errmsg "$text"
             exit 1
             ;;
