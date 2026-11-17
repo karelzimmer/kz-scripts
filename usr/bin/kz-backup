@@ -203,15 +203,18 @@ $(gettext 'directory does not exist')"
     fi
 
     fstype=$(findmnt --noheadings --output FSTYPE --target "$MEDIUM")
-    if [[ "$fstype" == "vfat" ]]; then
-        text=$(gettext "VFAT (FAT32) filesystems are not supported for \
-backups.")
-        text+='\n'
-        text+=$(gettext "Please use a drive formatted with ext4, NTFS, or \
-exFAT instead.")
-        kz.errmsg "$text"
-        exit 1
-    fi
+    case "${fstype,,}" in
+        *fat )
+            # 
+            text=$(eval_gettext "FAT-based filesystems (\$fstype) are not \
+supported for backups.")
+            text+='\n'
+            text+=$(gettext "Please use a drive formatted with ext4, NTFS, \
+XFS, or Btrfs instead.")
+            kz.errmsg "$text"
+            exit 1
+            ;;
+esac
 
 
     TARGET=$MEDIUM/backup_${HOSTNAME}_$USER
