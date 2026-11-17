@@ -204,16 +204,16 @@ $(gettext 'directory does not exist')"
 
     fstype=$(findmnt --noheadings --output FSTYPE --target "$MEDIUM")
     case ${fstype,,} in
-        ext2 | ext3 | ext4 | xfs | btrfs | zfs | f2fs | jfs | reiserfs )
-            ;;
-        * )
-            text=$(eval_gettext "Unsupported filesystem '\$fstype' on \
-\$MEDIUM.")
+        *fat* )
+            text=$(eval_gettext "FAT-based filesystems (\$fstype) are not \
+supported for backups.")
             text+='\n'
             text+=$(gettext "Supported filesystems include, for example, \
 ext4, XFS, or Btrfs.")
             kz.errmsg "$text"
             exit 1
+            ;;
+        * )
             ;;
     esac
 

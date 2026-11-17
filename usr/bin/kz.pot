@@ -175,12 +175,12 @@ msgstr ""
 msgid "directory does not exist"
 msgstr ""
 
-#: kz-backup:210
+#: kz-backup:208
 #, sh-format
-msgid "Unsupported filesystem '$fstype' on $MEDIUM."
+msgid "FAT-based filesystems ($fstype) are not supported for backups."
 msgstr ""
 
-#: kz-backup:213
+#: kz-backup:211
 msgid "Supported filesystems include, for example, ext4, XFS, or Btrfs."
 msgstr ""
 
