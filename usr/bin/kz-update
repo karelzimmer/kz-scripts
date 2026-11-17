@@ -187,7 +187,7 @@ def perform_update(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         kz.infomsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         perform_cleanup_rpms(PROGRAM_NAME, PROGRAM_DESC, custom_env)
     else:
-        text = _('fatal: unknown os release (kz-update)')
+        text = _('fatal: unknown os release')
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)
 

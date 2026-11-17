@@ -166,6 +166,7 @@ $USAGE"
 # This function checks if the target is available.
 check_target() {
     local -a media=()
+    local fstype=''
     local medium=''
     local old=''
     local program_name=${PROGRAM_NAME/kz-/kz }
@@ -200,6 +201,18 @@ $(gettext 'directory does not exist')"
             MEDIUM=$usb_mount_point/$selected_medium
         fi
     fi
+
+    fstype=$(findmnt --noheadings --output FSTYPE --target "$MEDIUM")
+    if [[ "$fstype" == "vfat" ]]; then
+        text=$(gettext "VFAT (FAT32) filesystems are not supported for \
+backups.")
+        text+='\n'
+        text+=$(gettext "Please use a drive formatted with ext4, NTFS, or \
+exFAT instead.")
+        kz.errmsg "$text"
+        exit 1
+    fi
+
 
     TARGET=$MEDIUM/backup_${HOSTNAME}_$USER
     check_target_for_old_backups
