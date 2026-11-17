@@ -205,7 +205,6 @@ $(gettext 'directory does not exist')"
     fstype=$(findmnt --noheadings --output FSTYPE --target "$MEDIUM")
     case "${fstype,,}" in
         *fat )
-            # 
             text=$(eval_gettext "FAT-based filesystems (\$fstype) are not \
 supported for backups.")
             text+='\n'
@@ -214,7 +213,9 @@ XFS, or Btrfs instead.")
             kz.errmsg "$text"
             exit 1
             ;;
-esac
+        *)
+            ;;
+    esac
 
 
     TARGET=$MEDIUM/backup_${HOSTNAME}_$USER

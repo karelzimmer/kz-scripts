@@ -187,8 +187,7 @@ check_website_files() {
                 *debian.sources | *sources.list | *wallpapers.tar )
                     continue
                     ;;
-                *)
-                    :
+                * )
                     ;;
             esac
 
