@@ -204,7 +204,7 @@ $(gettext 'directory does not exist')"
 
     fstype=$(findmnt --noheadings --output FSTYPE --target "$MEDIUM")
     case ${fstype,,} in
-        ext* | xfs | btrfs | zfs | f2fs | jfs | reiserfs | ntfs* )
+        ext2 | ext3 | ext4 | xfs | btrfs | zfs | f2fs | jfs | reiserfs )
             ;;
         * )
             text=$(eval_gettext "Unsupported filesystem '\$fstype' on \
