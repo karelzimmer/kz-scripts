@@ -24,7 +24,7 @@ if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then s
 # Check for available kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
 grep --quiet --regexp='pci=noaer' /etc/default/grub
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|aer-settings|#none|advanced error reporting settings
 # -----------------------------------------------------------------------------
@@ -39,7 +39,7 @@ if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then s
 # Check for missing kernel config parameter pci=noaer.
 # -----------------------------------------------------------------------------
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|angryipscan|pc06 pc07|network scanner
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install --assumeyes org.angryip.ipscan; fi
@@ -81,20 +81,20 @@ if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then s
 #|install|bitwarden|*|password manager
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install --assumeyes com.bitwarden.desktop; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then sudo dnf install --assumeyes flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install --assumeyes com.bitwarden.desktop; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|bitwarden|*|password manager
 if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes com.bitwarden.desktop; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|bottles|pc06 pc07|run Windows software
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install --assumeyes com.usebottles.bottles; fi
 if [[ ${XDG_CURRENT_DESKTOP-} ]] && grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then sudo dnf install --assumeyes flatpak && sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && sudo flatpak install --assumeyes com.usebottles.bottles; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|bottles|pc06 pc07|run Windows software
 if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo flatpak uninstall --assumeyes com.usebottles.bottles; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|cockpit|pc06|server management
 # -----------------------------------------------------------------------------
@@ -124,14 +124,14 @@ if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then s
 # Enable LightDM user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=false/' /etc/lightdm/lightdm.conf; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|desktop-settings|*|desktop settings
 # -----------------------------------------------------------------------------
 # Disable LightDM user greeter.
 # -----------------------------------------------------------------------------
 if [[ -f /etc/lightdm/lightdm.conf ]]; then sudo sed --in-place --expression='s/.*greeter-hide-users=.*$/greeter-hide-users=true/' /etc/lightdm/lightdm.conf; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|dos2unix|pc06 pc07|convert text files
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes dos2unix; fi
@@ -265,22 +265,22 @@ if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then s
 #|install|gnome-shell-extension-caffeine|*|gnome disable screensaver & suspend
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && apt-cache show gnome-shell-extension-caffeine; then sudo apt-get install --assume-yes gnome-shell-extension-caffeine; fi
 if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && type gnome-session &> /dev/null && dnf list gnome-shell-extension-caffeine; then sudo dnf install --assumeyes gnome-shell-extension-caffeine; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|gnome-shell-extension-caffeine|*|gnome disable screensaver & suspend
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && apt-cache show gnome-shell-extension-caffeine; then sudo apt-get remove --assume-yes gnome-shell-extension-caffeine; fi
 if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && type gnome-session &> /dev/null && dnf list gnome-shell-extension-caffeine; then sudo dnf remove --assumeyes gnome-shell-extension-caffeine; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|gnome-shell-extension-dashtodock|*|gnome dock
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && type gnome-session &> /dev/null && dnf list gnome-shell-extension-dash-to-dock; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|gnome-shell-extension-dashtodock|*|gnome dock
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && ! apt-cache show gnome-shell-extension-ubuntu-dock; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && type gnome-session &> /dev/null && dnf list gnome-shell-extension-dash-to-dock; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|gnome-shell-extension-gsconnect|pc06 pc07|gnome connect mobile devices & desktops
 # -----------------------------------------------------------------------------
@@ -317,22 +317,22 @@ if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release && type
 #|install|gnome-shell-extension-no-annoyance|*|gnome disable 'Window is ready'
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && apt-cache show gnome-shell-extension-no-annoyance; then sudo apt-get install --assume-yes gnome-shell-extension-no-annoyance; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and enable the extension.
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|gnome-shell-extension-no-annoyance|*|gnome disable 'Window is ready'
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && apt-cache show gnome-shell-extension-no-annoyance; then sudo apt-get remove --assume-yes gnome-shell-extension-no-annoyance; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/6109/noannoyance-fork/ and disable the extension.
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|gnome-shell-extension-no-overview|*|gnome no overview at start-up
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get install --assume-yes gnome-shell-extension-no-overview; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and enable the extension.
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|gnome-shell-extension-no-overview|*|gnome no overview at start-up
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null && apt-cache show gnome-shell-extension-no-overview; then sudo apt-get remove --assume-yes gnome-shell-extension-no-overview; fi
 # For Red Hat and Red Hat-based systems go to https://extensions.gnome.org/extension/4099/no-overview/ and disable the extension.
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|gnome-tweaks|pc06 pc07|gnome tweaks
 if grep --quiet --regexp='debian' /etc/os-release && type gnome-session &> /dev/null; then sudo apt-get install --assume-yes gnome-tweaks; fi
@@ -408,12 +408,12 @@ sudo virsh --connect=qemu:///system net-autostart default
 # "sudo virsh --connect=qemu:///system net-info default", should output
 # 'Autostart: yes'.
 # -----------------------------------------------------------------------------
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|remove|kvm|pc06 pc07|virtualization
 if grep --quiet --regexp='debian' /etc/os-release; then sudo virsh --connect=qemu:///system net-autostart default --disable && sudo apt-get remove --assume-yes bridge-utils libvirt-clients libvirt-daemon-system qemu-system virtinst; if [[ ${XDG_CURRENT_DESKTOP-} ]]; then sudo apt-get remove --assume-yes virt-manager; fi; fi
 if grep --quiet --regexp='fedora|rhel' --extended-regexp /etc/os-release; then sudo systemctl disable --now libvirtd && sudo dnf groupremove "Virtualization Host"; fi
-touch /tmp/kz-install-need-reboot
+sudo touch /tmp/kz-install-need-reboot
 
 #|install|lftp|pc06 pc07|ftp client
 if grep --quiet --regexp='debian' /etc/os-release; then sudo apt-get install --assume-yes lftp; fi
