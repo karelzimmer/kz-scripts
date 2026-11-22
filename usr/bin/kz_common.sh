@@ -45,7 +45,7 @@ kz.check_debian_package_manager() {
     fi
 
     while pkexec /usr/bin/kz_common-pkexec; do
-        kz.logmsg "$text"
+        kz.logmsg info "$text"
         sleep "$sleep"
     done
 }
@@ -53,7 +53,7 @@ kz.check_debian_package_manager() {
 
 # This function returns an error message.
 kz.errmsg() {
-    kz.logmsg "${RED}$*${NORMAL}"
+    kz.logmsg error "$*"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         # shellcheck disable=SC2154
         zenity  --error                     \
@@ -81,7 +81,7 @@ kz.errmsg() {
 
 # This function returns an informational message.
 kz.infomsg() {
-    kz.logmsg "$*"
+    kz.logmsg info "$*"
     if [[ ${UI_MODE-} = 'gui' ]]; then
         zenity  --info                      \
                 --no-markup                 \
@@ -137,13 +137,13 @@ kz.init() {
     trap 'kz.term sigint  $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGINT
     trap 'kz.term sigterm $LINENO ${FUNCNAME:-n/a} "$BASH_COMMAND" $?' SIGTERM
 
-    text="${bold}START logging for script $PROGRAM_NAME${NORMAL}"
-    kz.logmsg "$text"
+    text="Logging for script $PROGRAM_NAME"
+    kz.logmsg start "$text"
     text="Started ($0 $* as $USER)."
-    kz.logmsg "$text"
+    kz.logmsg info "$text"
 
     text='Cleaning up temporary directories/files (pre)...'
-    kz.logmsg "$text"
+    kz.logmsg info "$text"
     rm  --force                 \
         --recursive             \
         --verbose               \
@@ -153,9 +153,11 @@ kz.init() {
 
 # This function records a message to the log.
 kz.logmsg() {
-    local grey='\033[90m'
     local message=''
+    local priority=''
 
+    priority=$1
+    shift
     message=$*
 
     # If the log message contains unexpected characters such as line breaks,
@@ -166,7 +168,26 @@ kz.logmsg() {
     message="${message//$'\r'/CR}"
     message="${message//$'\t'/TAB}"
 
-    printf "${grey}%b${NORMAL}\n" "$message" |& $PROGRAM_LOGS
+    case "${priority^^}" in
+        ERROR )
+            printf      '%b\n'                          \
+                        "*** [ERROR] $message"          |
+            systemd-cat --identifier="$PROGRAM_NAME"    \
+                        --priority=err
+            ;;
+        START | STOP )
+            printf      '%b\n'                          \
+                        "*** [${priority^^}] $message"  |
+            systemd-cat --identifier="$PROGRAM_NAME"    \
+                        --priority=notice
+            ;;
+        *)
+            printf      '%b\n'                          \
+                        "*** [${priority^^}] $message"  |
+            systemd-cat --identifier="$PROGRAM_NAME"    \
+                        --priority=info
+            ;;
+    esac
 }
 
 
@@ -253,12 +274,16 @@ kz.term() {
     local command=$4
     local -i rc=$5
 
-    text="Signal   : $signal\n"
-    text+="Line     : $lineno\n"
-    text+="Function : $function\n"
-    text+="Command  : $command\n"
-    text+="Exit code: $rc"
-    kz.logmsg "$text"
+    text="Signal   : $signal"
+    kz.logmsg info "$text"
+    text="Line     : $lineno"
+    kz.logmsg info "$text"
+    text="Function : $function"
+    kz.logmsg info "$text"
+    text="Command  : $command"
+    kz.logmsg info "$text"
+    text="Exit code: $rc"
+    kz.logmsg info "$text"
 
     case $signal in
         err )
@@ -297,15 +322,15 @@ kz.term_exit() {
 
     if [[ $rc -eq 0 ]]; then
         text='Cleaning up temporary directories/files (post)...'
-        kz.logmsg "$text"
+        kz.logmsg info "$text"
         rm  --force                 \
             --recursive             \
             --verbose               \
             /tmp/"$PROGRAM_NAME"-*  |& $PROGRAM_LOGS || true
     fi
 
-    text="${bold}END logging for script $PROGRAM_NAME${NORMAL}"
-    kz.logmsg "$text"
+    text="Logging for script $PROGRAM_NAME"
+    kz.logmsg stop "$text"
 
     trap - ERR EXIT SIGHUP SIGINT SIGTERM
 

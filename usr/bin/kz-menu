@@ -21,7 +21,7 @@ source kz_common.sh as kz
 readonly PROGRAM_NAME='kz-menu'
 PROGRAM_DESC=$(gettext 'Execute the kz commands through a menu')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
 
 USAGE="\
 $(gettext 'Usage: kz menu [-C|--cli] [-G|--gui] [-h|--help] [-T|--tui]')
@@ -275,7 +275,7 @@ process_menu1_cli() {
 
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
-        kz.logmsg "$prompt"
+        kz.logmsg info "$prompt"
         read -rp "$prompt" < /dev/tty
 
         if [[ ! $REPLY =~ ^[0-9]+$ ]]; then
@@ -482,7 +482,7 @@ process_menu2_cli() {
 
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
-        kz.logmsg "$prompt"
+        kz.logmsg info "$prompt"
         read -rp "$prompt" < /dev/tty
 
         if [[ ! $REPLY =~ ^[0-9]+$ ]]; then
@@ -714,7 +714,7 @@ execute_command() {
     local -i rc=0
 
     $command --"$UI_MODE" || rc=$?
-    kz.logmsg "$command --$UI_MODE: rc=$rc"
+    kz.logmsg info "$command --$UI_MODE: rc=$rc"
 }
 
 

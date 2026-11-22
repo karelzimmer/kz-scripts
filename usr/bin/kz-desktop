@@ -22,7 +22,7 @@ source kz_common.sh as kz
 readonly PROGRAM_NAME='kz-desktop'
 PROGRAM_DESC=$(gettext 'Change the GNOME-based desktop')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
 
 USAGE="\
 $(gettext 'Usage: kz desktop [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]')

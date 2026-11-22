@@ -22,7 +22,7 @@ source kz_common.sh as kz
 readonly PROGRAM_NAME='kz-check'
 PROGRAM_DESC=$(gettext 'Check scripts and website')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
 
 USAGE=$(gettext 'Usage: kz check [-h|--help] [-u|--usage] [-v|--version]')
 readonly USAGE
@@ -270,7 +270,7 @@ check_scripts() {
         scriptdir=${scriptdir%/*}
         scriptname=${script##*/}
         file=$scriptdir/$scriptname
-        kz.logmsg "Process $file..."
+        kz.logmsg info "Process $file..."
         case $scriptname in
             *.policy | *.its | *.loc )
                 check_trailing_spaces
@@ -342,7 +342,7 @@ check_scripts() {
         scriptdir=$HOME
         scriptname=${script##*/}
         file=$script
-        kz.logmsg "Process $file..."
+        kz.logmsg info "Process $file..."
         check_trailing_spaces
         check_tags
         check_shellcheck

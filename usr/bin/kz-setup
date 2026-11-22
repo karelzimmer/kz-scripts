@@ -22,7 +22,7 @@ source kz_common.sh as kz
 readonly PROGRAM_NAME='kz-setup'
 PROGRAM_DESC=$(gettext 'Set up apps and change user settings')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
 
 USAGE="\
 $(gettext 'Usage: kz setup [-b|--browse] [-c|--cat] [-C|--cli]')
@@ -819,7 +819,7 @@ $(gettext '         COMMAND...')"
 
                 # To correlate possible error messages with app name and
                 # description.
-                printf 'APP %s\n' "$app_name" >> "$ERROR_LOG"
+                printf '*** APP %s\n' "$app_name" >> "$ERROR_LOG"
                 ;;
             '#'* )
                 # Skip comment record.
@@ -841,7 +841,7 @@ execute_command() {
     local -i cmd_dis_max=0
     local cmd_dis=''
 
-    kz.logmsg "$app_line\n\n         $cmd"
+    kz.logmsg info "$app_line\n\n         $cmd"
 
     if [[ $UI_MODE = 'gui' ]]; then
         printf '%s\n' "#$app_line"

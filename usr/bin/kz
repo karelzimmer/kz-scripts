@@ -106,7 +106,7 @@ def process(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
         kz.term(PROGRAM_NAME, 1)
     else:
         text = f'Start {cmd}...)'
-        kz.logmsg(PROGRAM_NAME, text)
+        kz.logmsg(PROGRAM_NAME, 'info', text)
         try:
             subprocess.run(f'{cmd}', shell=True, check=True)
         except KeyboardInterrupt:
@@ -115,7 +115,7 @@ def process(PROGRAM_NAME: str, PROGRAM_DESC: str, USAGE: str,
             kz.term(PROGRAM_NAME, 130)
         except subprocess.CalledProcessError as exc:
             text = str(exc)
-            kz.logmsg(PROGRAM_NAME, text)
+            kz.logmsg(PROGRAM_NAME, 'error', text)
             kz.term(PROGRAM_NAME, exc.returncode)
         else:
             term(PROGRAM_NAME)

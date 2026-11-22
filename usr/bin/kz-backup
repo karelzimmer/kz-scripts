@@ -22,7 +22,7 @@ source kz_common.sh as kz
 readonly PROGRAM_NAME='kz-backup'
 PROGRAM_DESC=$(gettext 'Make a backup copy of the Home folder')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
 
 USAGE="\
 $(gettext "Usage: kz backup [-C|--cli] [-G|--gui] [-h|--help]")
@@ -207,11 +207,9 @@ $(gettext 'directory does not exist')"
         ext2 | ext3 | ext4 | xfs | btrfs | zfs | f2fs | jfs | reiserfs )
             ;;
         * )
-            text=$(eval_gettext "Unsupported filesystem '\$fstype' on \
+            text="$(eval_gettext "Unsupported filesystem '\$fstype' on \
 \$MEDIUM.")
-            text+='\n'
-            text+=$(gettext "Supported filesystems include, for example, \
-ext4, XFS, or Btrfs.")
+$(gettext "Supported filesystems include, for example, ext4, XFS, or Btrfs.")"
             kz.errmsg "$text"
             exit 1
             ;;
@@ -382,7 +380,7 @@ select_medium_cli() {
     printf '\n'
     while true; do
         prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
-        kz.logmsg "$prompt"
+        kz.logmsg info "$prompt"
         read -rp "$prompt" < /dev/tty
 
         if [[ ! $REPLY =~ ^[0-9]+$ ]]; then
@@ -403,7 +401,7 @@ select_medium_cli() {
 backup_settings() {
     local settings_dir=''
 
-    kz.logmsg 'Backup settings...'
+    kz.logmsg info 'Backup settings...'
 
     settings_dir=$HOME/Settings
     if [[ ! -d $settings_dir ]]; then
@@ -448,14 +446,14 @@ backup_settings_apps() {
     local output_file=$settings_dir/apps.txt
     local text=''
 
-    header1=$(gettext "START list of manual installed packages")
-    footer1=$(gettext "END list of manual installed packages")
-    header2=$(gettext "START list of installed snaps")
-    footer2=$(gettext "END list of installed snaps")
-    header3=$(gettext "START list of installed Flatpak apps")
-    footer3=$(gettext "END list of installed Flatpak apps")
+    header1=$(gettext "*** BEGIN list of manual installed packages")
+    footer1=$(gettext "*** END list of manual installed packages")
+    header2=$(gettext "*** BEGIN list of installed snaps")
+    footer2=$(gettext "*** END list of installed snaps")
+    header3=$(gettext "*** BEGIN list of installed Flatpak apps")
+    footer3=$(gettext "*** END list of installed Flatpak apps")
 
-    kz.logmsg 'Create a list of installed apps...(ignore WARNING).'
+    kz.logmsg info 'Create a list of installed apps...(ignore WARNING).'
 
     printf '%s\n' "$header1" > "$output_file"
     apt list                \
@@ -488,7 +486,7 @@ backup_settings_readme() {
     local output_file=$settings_dir/README
     local text=''
 
-    kz.logmsg 'Create settings README...'
+    kz.logmsg info 'Create settings README...'
 
     text="$(gettext 'This folder contains files created by kz-backup.')
 $(gettext 'These files are used by kz-restore and others.')
@@ -532,7 +530,7 @@ backup_settings_users() {
                     --fields=1)
             )
 
-    kz.logmsg 'Save instructions for adding additional users...'
+    kz.logmsg info 'Save instructions for adding additional users...'
     if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
         backup_settings_users_gui
     else
@@ -587,11 +585,11 @@ backup_settings_avatar() {
     local text=''
 
     if [[ -f $input_file ]]; then
-        kz.logmsg 'Copy the user avatar...'
+        kz.logmsg info 'Copy the user avatar...'
         cp --verbose "$input_file" "$output_file_1" |& $PROGRAM_LOGS
     fi
 
-    kz.logmsg 'Save instructions for restoring the avatar...'
+    kz.logmsg info 'Save instructions for restoring the avatar...'
 
     text="$(gettext 'To set the users avatar:')
 
@@ -612,7 +610,7 @@ $(gettext '[1] Windows, command, or magnifying glass key.')"
 backup_settings_favorites() {
     local output_file=$settings_dir/favorites.lst
 
-    kz.logmsg 'Save the favorite apps...'
+    kz.logmsg info 'Save the favorite apps...'
 
     if type gsettings &> /dev/null; then
         gsettings   get                             \
@@ -641,11 +639,11 @@ backup_settings_desktop() {
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
     if [[ -f $input_file && $input_file != *.xml ]]; then
-        kz.logmsg 'Copy the desktop background...'
+        kz.logmsg info 'Copy the desktop background...'
         cp "$input_file" "$output_file_1" |& $PROGRAM_LOGS || true
     fi
 
-    kz.logmsg 'Save instructions for setting the desktop background...'
+    kz.logmsg info 'Save instructions for setting the desktop background...'
 
     text="$(gettext 'To set the desktop background:')
 
@@ -686,7 +684,7 @@ EOF
 
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
-    kz.logmsg "$title"...
+    kz.logmsg info "$title"...
 
     if [[ $UI_MODE = 'gui' ]]; then
         create_backup_gui
@@ -720,7 +718,7 @@ create_backup_gui() {
             2> /dev/null                    || BACKUP_RC=$?
 
     text=$(gettext "Writing data from memory (this may take a while)")
-    kz.logmsg "$text"...
+    kz.logmsg info "$text"...
     sync                                    |
     zenity  --progress                      \
             --pulsate                       \
@@ -754,7 +752,7 @@ create_backup_tui() {
             20 70                           || BACKUP_RC=$?
 
     text=$(gettext "Writing data from memory (this may take a while)")
-    kz.logmsg "$text"...
+    kz.logmsg info "$text"...
     text+='...'
     dialog  --mouse                     \
             --backtitle "$PROGRAM_NAME" \
@@ -780,7 +778,7 @@ create_backup_cli() {
             2>> "$ERROR_LOG"                || BACKUP_RC=$?
 
     text=$(gettext "Writing data from memory (this may take a while)")
-    kz.logmsg "$text"...
+    kz.logmsg info "$text"...
     text+='...'
     kz.infomsg "
 $text"

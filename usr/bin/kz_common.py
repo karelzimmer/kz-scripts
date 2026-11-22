@@ -60,7 +60,7 @@ def check_debian_package_manager(PROGRAM_NAME: str) -> int:
         except Exception:
             break
         else:
-            logmsg(PROGRAM_NAME, text)
+            logmsg(PROGRAM_NAME, 'info', text)
             time.sleep(sleep)
 
     return 0
@@ -71,7 +71,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an error message.
     """
-    logmsg(PROGRAM_NAME, f'{RED}{TEXT}{NORMAL}')
+    logmsg(PROGRAM_NAME, 'error', TEXT)
     if UI_MODE == 'gui':
         errmsg_gui(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, TEXT)
     elif UI_MODE == 'tui':
@@ -102,7 +102,7 @@ def errmsg_gui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         term(PROGRAM_NAME, 130)
     except Exception as exc:
         text = str(exc)
-        logmsg(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, 'error', text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         term(PROGRAM_NAME, 1)
@@ -130,7 +130,7 @@ def errmsg_tui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         term(PROGRAM_NAME, 130)
     except Exception as exc:
         text = str(exc)
-        logmsg(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, 'error', text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         term(PROGRAM_NAME, 1)
@@ -148,7 +148,7 @@ def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
     """
     This function returns an informational message.
     """
-    logmsg(PROGRAM_NAME, TEXT)
+    logmsg(PROGRAM_NAME, 'info', TEXT)
     if UI_MODE == 'gui':
         infomsg_gui(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, TEXT)
     elif UI_MODE == 'tui':
@@ -179,7 +179,7 @@ def infomsg_gui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         term(PROGRAM_NAME, 130)
     except Exception as exc:
         text = str(exc)
-        logmsg(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, 'error', text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         term(PROGRAM_NAME, 1)
@@ -207,7 +207,10 @@ def infomsg_tui(PROGRAM_NAME: str, PROGRAM_DESC: str, UI_MODE: str,
         term(PROGRAM_NAME, 130)
     except Exception as exc:
         text = str(exc)
-        logmsg(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, 'error', text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
+        term(PROGRAM_NAME, 1)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, UI_MODE, text)
         term(PROGRAM_NAME, 1)
@@ -241,26 +244,37 @@ def init(PROGRAM_NAME: str) -> None:
         sys.exit(1)
 
     text = f'{bold}START logging for script {PROGRAM_NAME}{NORMAL}'
-    logmsg(PROGRAM_NAME, text)
+    logmsg(PROGRAM_NAME, 'start', text)
     text = f"Started ({' '.join(sys.argv)} as {os.getlogin()})."
-    logmsg(PROGRAM_NAME, text)
+    logmsg(PROGRAM_NAME, 'info', text)
 
 
-def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
+def logmsg(PROGRAM_NAME: str, PRIORITY: str, TEXT: str) -> None:
     """
     This function records a message to the log.
     """
-    grey: str = '\033[90m'
     message: str = ''
+    priority: str = ''
 
     # If the log message contains unexpected characters such as line breaks,
     # the parser may consider the log line corrupt and *silently* ignore it.
     # Hence, replace all Line Feeds (\n) with LF, all Carriage Returns (\r)
     # with CR, and all Tabs (\t) with TAB.
     message = TEXT.replace('\n', 'LF').replace('\r', 'CR').replace('\t', 'TAB')
-    message = f'{grey}{message}{NORMAL}'
 
-    journal.sendv(f'MESSAGE={message}', f'SYSLOG_IDENTIFIER={PROGRAM_NAME}')
+    priority = PRIORITY.upper()
+    if priority == 'ERROR':
+        message = f'*** [ERROR] {message} ***'
+        journal.sendv(f'MESSAGE={message}', f'PRIORITY={journal.LOG_ERR}',
+                      f'SYSLOG_IDENTIFIER={PROGRAM_NAME}')
+    elif priority in ('START', 'STOP'):
+        message = f'*** [{priority}] {message} ***'
+        journal.sendv(f'MESSAGE={message}', f'PRIORITY={journal.LOG_NOTICE}',
+                      f'SYSLOG_IDENTIFIER={PROGRAM_NAME}')
+    else:
+        message = f'[{priority}] {message}'
+        journal.sendv(f'MESSAGE={message}', f'PRIORITY={journal.LOG_INFO}',
+                      f'SYSLOG_IDENTIFIER={PROGRAM_NAME}')
 
 
 def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
@@ -304,10 +318,10 @@ def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
             build_id = f'{fh.read()}'
     except FileNotFoundError as fnf:
         text = str(fnf)
-        logmsg(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, 'error', text)
     except Exception as exc:
         text = str(exc)
-        logmsg(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, 'error', text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         term(PROGRAM_NAME, 1)
@@ -335,9 +349,9 @@ def term(PROGRAM_NAME: str, rc: int, UI_MODE: str = 'cli') -> None:
         status = '0/SUCCESS'
 
     text = f'Ended (code=exited, status={status}).'
-    logmsg(PROGRAM_NAME, text)
-    text = f'{bold}END logging for script {PROGRAM_NAME}{NORMAL}'
-    logmsg(PROGRAM_NAME, text)
+    logmsg(PROGRAM_NAME, 'info', text)
+    text = f'Logging for script {PROGRAM_NAME}'
+    logmsg(PROGRAM_NAME, 'stop', text)
 
     if rc == 0:
         sys.exit(0)

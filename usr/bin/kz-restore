@@ -22,7 +22,7 @@ source kz_common.sh as kz
 readonly PROGRAM_NAME='kz-restore'
 PROGRAM_DESC=$(gettext 'Restore a backup copy of the Home folder')
 readonly PROGRAM_DESC
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
 
 USAGE="\
 $(gettext 'Usage: kz restore [-C|--cli] [-G|--gui] [-h|--help]')
@@ -438,7 +438,7 @@ select_medium_cli() {
     printf '\n'
     while true; do
         prompt=$(eval_gettext "Select number [1-\$max_choices]: ")
-        kz.logmsg "$prompt"
+        kz.logmsg info "$prompt"
         read -rp "$prompt" < /dev/tty
 
         if [[ ! $REPLY =~ ^[0-9]+$ ]]; then
@@ -468,7 +468,7 @@ restore_backup() {
 
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
-    kz.logmsg "$title"...
+    kz.logmsg info "$title"...
 
     if [[ $UI_MODE = 'gui' ]]; then
         restore_backup_gui
@@ -499,7 +499,7 @@ restore_backup_gui() {
             2> /dev/null                    || RESTORE_RC=$?
 
     text=$(gettext "Writing data from memory (this may take a while)")
-    kz.logmsg "$text"...
+    kz.logmsg info "$text"...
     sync                                    |
     zenity  --progress                      \
             --pulsate                       \
@@ -530,7 +530,7 @@ restore_backup_tui() {
             20 70                           || RESTORE_RC=$?
 
     text=$(gettext "Writing data from memory (this may take a while)")
-    kz.logmsg "$text"...
+    kz.logmsg info "$text"...
     text+='...'
     dialog  --mouse                     \
             --backtitle "$PROGRAM_NAME" \
@@ -553,7 +553,7 @@ restore_backup_cli() {
             2>> "$ERROR_LOG"                || RESTORE_RC=$?
 
     text=$(gettext "Writing data from memory (this may take a while)")
-    kz.logmsg "$text"...
+    kz.logmsg info "$text"...
     text+='...'
     kz.infomsg "
 $text"
@@ -566,7 +566,7 @@ restore_settings() {
     local settings_dir=$HOME/Settings
 
     if [[ ${XDG_CURRENT_DESKTOP-} ]]; then
-        kz.logmsg 'Restore settings...'
+        kz.logmsg info 'Restore settings...'
         restore_settings_desktop
         restore_settings_favorites
     fi
@@ -578,7 +578,7 @@ restore_settings_desktop() {
     local input_file=$settings_dir/desktop.ico
 
     if type gsettings &> /dev/null && [[ -f $input_file ]]; then
-        kz.logmsg 'Restore the desktop background...'
+        kz.logmsg info 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
                     "file://$input_file"
@@ -591,7 +591,7 @@ restore_settings_favorites() {
     local input_file=$settings_dir/favorites.lst
 
     if type gsettings &> /dev/null && [[ -f $input_file ]]; then
-        kz.logmsg 'Restore the favorite apps in the dash...'
+        kz.logmsg info 'Restore the favorite apps in the dash...'
         gsettings   set                             \
                     org.gnome.shell favorite-apps   \
                     "$(cat "$input_file")"

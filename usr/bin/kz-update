@@ -83,7 +83,7 @@ def check_sudo(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
         kz.term(PROGRAM_NAME, 130)
     except subprocess.CalledProcessError as exc:
         text = str(exc)
-        kz.logmsg(PROGRAM_NAME, text)
+        kz.logmsg(PROGRAM_NAME, 'error', text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, exc.returncode)
@@ -316,7 +316,7 @@ def perform_command(PROGRAM_NAME: str, PROGRAM_DESC: str,
         kz.term(PROGRAM_NAME, 130)
     except Exception as exc:
         text = str(exc)
-        kz.logmsg(PROGRAM_NAME, text)
+        kz.logmsg(PROGRAM_NAME, 'error', text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz.errmsg(PROGRAM_NAME, PROGRAM_DESC, 'cli', text)
         kz.term(PROGRAM_NAME, 1)

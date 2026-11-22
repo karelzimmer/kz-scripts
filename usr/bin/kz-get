@@ -23,7 +23,7 @@ source /usr/bin/gettext.sh
 # #############################################################################
 
 readonly PROGRAM_NAME='kz-get'
-readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME"
+readonly PROGRAM_LOGS="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
 
 # List NORMAL last here so that -x doesn't bork the display.
 readonly BLUE='\033[1;34m'
