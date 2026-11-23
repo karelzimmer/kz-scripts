@@ -87,13 +87,13 @@ msgstr "opdracht is vereist"
 
 #: kz:113 kz_common.py:100 kz_common.py:128 kz_common.py:177 kz_common.py:205
 #: kz-dev:149 kz-dev:224 kz-dev:239 kz-dev:256 kz-dev:288 kz-dev:320 kz-dev:369
-#: kz-update:81 kz-update:314
+#: kz-update:81 kz-update:326
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
 
 #: kz_common.py:106 kz_common.py:134 kz_common.py:183 kz_common.py:211
 #: kz_common.py:214 kz_common.py:325 kz-dev:155 kz-dev:230 kz-dev:245
-#: kz-dev:262 kz-dev:294 kz-dev:326 kz-update:87 kz-update:320
+#: kz-dev:262 kz-dev:294 kz-dev:326 kz-update:87 kz-update:332
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
@@ -1547,18 +1547,18 @@ msgid "Usage: kz update [OPTIONS]"
 msgstr "Gebruik: kz update [OPTIES]"
 
 #: kz-update:164 kz-update:179
-msgid "UPDATE"
-msgstr "BIJWERKEN"
+msgid "[1/3] UPDATE"
+msgstr "[1/3] BIJWERKEN"
 
-#: kz-update:167 kz-update:180
-msgid "UPGRADE"
-msgstr "OPWAARDEREN"
+#: kz-update:167 kz-update:181
+msgid "[2/3] UPGRADE"
+msgstr "[2/3] OPWAARDEREN"
 
-#: kz-update:173 kz-update:186
-msgid "CLEANUP"
-msgstr "OPRUIMEN"
+#: kz-update:173 kz-update:188
+msgid "[3/3] CLEANUP"
+msgstr "[3/3] OPRUIMEN"
 
-#: kz-update:190
+#: kz-update:192
 msgid "fatal: unknown os release"
 msgstr "fataal: onbekende os-release"
 
@@ -1698,6 +1698,6 @@ msgid "Execute the nmcli command requiring root privileges"
 msgstr "Voer de opdracht nmcli uit waarvoor root-rechten nodig zijn"
 
 #: kz-build:656 kz-check:595 kz-deploy:328 kz-dev:390 kz-post-migrate:71
-#: kz-update:332
+#: kz-update:344
 msgid "Complete!"
 msgstr "Klaar!"
