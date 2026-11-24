@@ -187,7 +187,7 @@ msgstr "Ondersteunde bestandssystemen zijn bijvoorbeeld ext4, XFS of Btrfs."
 
 #: kz-backup:241 kz-backup:884 kz-desktop:290 kz-install:1019 kz-install:1073
 #: kz-menu:357 kz-menu:557 kz-restore:322 kz-restore:698 kz-setup:918
-#: kz-setup:987
+#: kz-setup:989
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
@@ -390,7 +390,7 @@ msgstr "Back-up voorbereiden (dit kan even duren)"
 msgid "Writing data from memory (this may take a while)"
 msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
-#: kz-backup:856 kz-install:1044 kz-restore:670 kz-setup:958
+#: kz-backup:856 kz-install:1044 kz-restore:670 kz-setup:960
 msgid "Error messages"
 msgstr "Foutmeldingen"
 
@@ -416,11 +416,11 @@ msgid "is there not enough space on $TARGET."
 msgstr "is er te weinig ruimte op $TARGET."
 
 #: kz-backup:838 kz-backup:864 kz-install:1048 kz-restore:651 kz-restore:678
-#: kz-setup:962
+#: kz-setup:964
 msgid "Actions to take:"
 msgstr "Te nemen acties:"
 
-#: kz-backup:865 kz-install:1049 kz-restore:679 kz-setup:963
+#: kz-backup:865 kz-install:1049 kz-restore:679 kz-setup:965
 msgid "Check the error messages after this."
 msgstr "Controleer de foutmeldingen hierna."
 
@@ -1494,15 +1494,15 @@ msgstr "Instellen voorbereiden"
 msgid "Preparing reset"
 msgstr "Resetten voorbereiden"
 
-#: kz-setup:959
+#: kz-setup:961
 msgid "The set up of the following apps contains errors:"
 msgstr "Het instellen van de volgende apps bevat fouten:"
 
-#: kz-setup:966
+#: kz-setup:968
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#: kz-setup:968
+#: kz-setup:970
 msgid "Try to reset the apps again."
 msgstr "Probeer de apps opnieuw te resetten."
 
@@ -1530,7 +1530,7 @@ msgstr ""
 "Typ 'logout' om uit te loggen van de computer om het instellen van de apps "
 "en het wijzigen van de gebruikersinstellingen te voltooien."
 
-#: kz-setup:944
+#: kz-setup:946
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
 
