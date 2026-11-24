@@ -110,7 +110,7 @@ process() {
                 --suffix='-commands.sh'     \
                 --tmpdir
         )
-    # To minimize the risk of errors due to outdated Debian package lists.
+    # To minimize the risk of errors caused by outdated Debian package lists.
     if  grep    --quiet             \
                 --regexp='debian'   \
                 /etc/os-release     &&
