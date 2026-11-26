@@ -45,7 +45,7 @@ msgstr "Opties:"
 
 #: kz:47
 msgid "  -l, --list     Show available commands"
-msgstr "  -l, --list     toon beschikbare opdrachten"
+msgstr "  -l, --list     Toon beschikbare opdrachten"
 
 #: kz:46 kz-backup:43 kz-build:38 kz-check:35 kz-deploy:38 kz-desktop:47
 #: kz-dev:42 kz-install:49 kz-menu:38 kz-restore:43 kz-setup:49 kz-update:41
