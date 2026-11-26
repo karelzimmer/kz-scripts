@@ -40,22 +40,22 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -b, --browse   browse through all commands and information')
-$(gettext '  -c, --cat      show selected commands and information')
-$(gettext '  -C, --cli      run in command-line mode')
+$(gettext '  -b, --browse   Browse through all commands and information')
+$(gettext '  -c, --cat      Show selected commands and information')
+$(gettext '  -C, --cli      Run in command-line mode')
 $(gettext '  -f, --file FILE')
-$(gettext '                 process specified settings files')
-$(gettext '  -G, --gui      run in graphical mode')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -l, --list     show available apps')
-$(gettext '  -r, --reset    set apps on default values')
-$(gettext '  -s, --select   select apps')
-$(gettext '  -T, --tui      run in text-based mode (default)')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')
+$(gettext '                 Process specified settings files')
+$(gettext '  -G, --gui      Run in graphical mode')
+$(gettext '  -h, --help     Show this help text')
+$(gettext '  -l, --list     Show available apps')
+$(gettext '  -r, --reset    Set apps on default values')
+$(gettext '  -s, --select   Select apps')
+$(gettext '  -T, --tui      Run in text-based mode (default)')
+$(gettext '  -u, --usage    Show a short usage summary')
+$(gettext '  -v, --version  Show program version')
 
 $(gettext 'Arguments:')
-$(gettext '  APP            process specified apps')"
+$(gettext '  APP            Process specified apps')"
 readonly HELP
 
 readonly OPTIONS_SHORT='bcCf:GhlrsTuv'

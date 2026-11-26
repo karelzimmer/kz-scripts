@@ -39,16 +39,16 @@ $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
 $(gettext '  -a, --addaft FAVORITE')
-$(gettext '                 add favorite at the end')
+$(gettext '                 Add favorite at the end')
 $(gettext '  -b, --addbef FAVORITE')
-$(gettext '                 add favorite at the beginning')
+$(gettext '                 Add favorite at the beginning')
 $(gettext '  -d, --delete FAVORITE')
-$(gettext '                 delete favorite')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -l, --list     show favorites')
-$(gettext '  -r, --reset    set favorites on default values')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '                 Delete favorite')
+$(gettext '  -h, --help     Show this help text')
+$(gettext '  -l, --list     Show favorites')
+$(gettext '  -r, --reset    Set favorites on default values')
+$(gettext '  -u, --usage    Show a short usage summary')
+$(gettext '  -v, --version  Show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='a:b:d:hlruv'

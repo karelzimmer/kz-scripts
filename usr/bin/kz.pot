@@ -45,25 +45,25 @@ msgid "Options:"
 msgstr ""
 
 #: kz:47
-msgid "  -l, --list     show available commands"
+msgid "  -l, --list     Show available commands"
 msgstr ""
 
 #: kz:46 kz-backup:43 kz-build:38 kz-check:35 kz-deploy:38 kz-desktop:47
 #: kz-dev:42 kz-install:49 kz-menu:38 kz-restore:43 kz-setup:49 kz-update:41
 #: kz-wifi:48
-msgid "  -h, --help     show this help text"
+msgid "  -h, --help     Show this help text"
 msgstr ""
 
 #: kz:48 kz-backup:47 kz-build:39 kz-check:36 kz-deploy:39 kz-desktop:50
 #: kz-dev:43 kz-install:54 kz-menu:40 kz-restore:47 kz-setup:54 kz-update:42
 #: kz-wifi:50
-msgid "  -u, --usage    show a short usage summary"
+msgid "  -u, --usage    Show a short usage summary"
 msgstr ""
 
 #: kz:49 kz-backup:48 kz-build:40 kz-check:37 kz-deploy:40 kz-desktop:51
 #: kz-dev:44 kz-install:55 kz-menu:41 kz-restore:48 kz-setup:55 kz-update:43
 #: kz-wifi:51
-msgid "  -v, --version  show program version"
+msgid "  -v, --version  Show program version"
 msgstr ""
 
 #: kz:51 kz-install:57 kz-setup:57
@@ -71,11 +71,11 @@ msgid "Arguments:"
 msgstr ""
 
 #: kz:52
-msgid "  COMMAND        execute command"
+msgid "  COMMAND        Execute command"
 msgstr ""
 
 #: kz:53
-msgid "  ARGUMENTS      arguments for command"
+msgid "  ARGUMENTS      Arguments for command"
 msgstr ""
 
 #: kz:95
@@ -138,11 +138,11 @@ msgid ""
 msgstr ""
 
 #: kz-backup:41 kz-install:45 kz-menu:36 kz-restore:41 kz-setup:45 kz-wifi:46
-msgid "  -C, --cli      run in command-line mode"
+msgid "  -C, --cli      Run in command-line mode"
 msgstr ""
 
 #: kz-backup:42 kz-install:48 kz-menu:37 kz-restore:42 kz-setup:48 kz-wifi:47
-msgid "  -G, --gui      run in graphical mode"
+msgid "  -G, --gui      Run in graphical mode"
 msgstr ""
 
 #: kz-backup:44
@@ -150,11 +150,11 @@ msgid "  -t, --target DIRECTORY"
 msgstr ""
 
 #: kz-backup:45
-msgid "                 place backup in specified directory"
+msgid "                 Place backup in specified directory"
 msgstr ""
 
 #: kz-backup:46 kz-install:53 kz-menu:39 kz-restore:46 kz-setup:53 kz-wifi:49
-msgid "  -T, --tui      run in text-based mode (default)"
+msgid "  -T, --tui      Run in text-based mode (default)"
 msgstr ""
 
 #: kz-backup:119 kz-desktop:201 kz-install:196 kz-menu:156 kz-restore:116
@@ -478,7 +478,7 @@ msgid "Usage: kz build [OPTIONS]"
 msgstr ""
 
 #: kz-build:37
-msgid "  -d, --dev      build the development version of package kz"
+msgid "  -d, --dev      Build the development version of package kz"
 msgstr ""
 
 #: kz-build:86 kz-check:67 kz-deploy:70 kz-dev:171
@@ -696,7 +696,7 @@ msgid "Usage: kz deploy [OPTIONS]"
 msgstr ""
 
 #: kz-deploy:37
-msgid "  -d, --dev      deploy the development version of package kz"
+msgid "  -d, --dev      Deploy the development version of package kz"
 msgstr ""
 
 #: kz-deploy:142
@@ -752,7 +752,7 @@ msgid "  -a, --addaft FAVORITE"
 msgstr ""
 
 #: kz-desktop:42
-msgid "                 add favorite at the end"
+msgid "                 Add favorite at the end"
 msgstr ""
 
 #: kz-desktop:43
@@ -760,7 +760,7 @@ msgid "  -b, --addbef FAVORITE"
 msgstr ""
 
 #: kz-desktop:44
-msgid "                 add favorite at the beginning"
+msgid "                 Add favorite at the beginning"
 msgstr ""
 
 #: kz-desktop:45
@@ -768,15 +768,15 @@ msgid "  -d, --delete FAVORITE"
 msgstr ""
 
 #: kz-desktop:46
-msgid "                 delete favorite"
+msgid "                 Delete favorite"
 msgstr ""
 
 #: kz-desktop:48
-msgid "  -l, --list     show favorites"
+msgid "  -l, --list     Show favorites"
 msgstr ""
 
 #: kz-desktop:49
-msgid "  -r, --reset    set favorites on default values"
+msgid "  -r, --reset    Set favorites on default values"
 msgstr ""
 
 #: kz-desktop:84
@@ -881,11 +881,11 @@ msgid "Usage: kz install [OPTIONS] [ARGUMENTS]"
 msgstr ""
 
 #: kz-install:43 kz-setup:43
-msgid "  -b, --browse   browse through all commands and information"
+msgid "  -b, --browse   Browse through all commands and information"
 msgstr ""
 
 #: kz-install:44 kz-setup:44
-msgid "  -c, --cat      show selected commands and information"
+msgid "  -c, --cat      Show selected commands and information"
 msgstr ""
 
 #: kz-install:46 kz-setup:46
@@ -893,23 +893,23 @@ msgid "  -f, --file FILE"
 msgstr ""
 
 #: kz-install:47
-msgid "                 process specified installation files"
+msgid "                 Process specified installation files"
 msgstr ""
 
 #: kz-install:50 kz-setup:50
-msgid "  -l, --list     show available apps"
+msgid "  -l, --list     Show available apps"
 msgstr ""
 
 #: kz-install:51
-msgid "  -r, --remove   delete apps"
+msgid "  -r, --remove   Delete apps"
 msgstr ""
 
 #: kz-install:52 kz-setup:52
-msgid "  -s, --select   select apps"
+msgid "  -s, --select   Select apps"
 msgstr ""
 
 #: kz-install:58 kz-setup:58
-msgid "  APP            process specified apps"
+msgid "  APP            Process specified apps"
 msgstr ""
 
 #: kz-install:275
@@ -1282,7 +1282,7 @@ msgid "  -s, --source DIRECTORY"
 msgstr ""
 
 #: kz-restore:45
-msgid "                 use backup in specified directory"
+msgid "                 Use backup in specified directory"
 msgstr ""
 
 #: kz-restore:174
@@ -1354,11 +1354,11 @@ msgid "Usage: kz setup [OPTIONS] [ARGUMENTS]"
 msgstr ""
 
 #: kz-setup:47
-msgid "                 process specified settings files"
+msgid "                 Process specified settings files"
 msgstr ""
 
 #: kz-setup:51
-msgid "  -r, --reset    set apps on default values"
+msgid "  -r, --reset    Set apps on default values"
 msgstr ""
 
 #: kz-setup:162

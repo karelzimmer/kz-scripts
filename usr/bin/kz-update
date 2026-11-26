@@ -38,9 +38,9 @@ HELP_LINES: list[str] = [
     f'{PROGRAM_DESC}.',
     '',
     _('Options:'),
-    _('  -h, --help     show this help text'),
-    _('  -u, --usage    show a short usage summary'),
-    _('  -v, --version  show program version'),
+    _('  -h, --help     Show this help text'),
+    _('  -u, --usage    Show a short usage summary'),
+    _('  -v, --version  Show program version'),
     ]
 HELP: str = '\n'.join(HELP_LINES)
 del HELP_LINES

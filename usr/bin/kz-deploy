@@ -34,10 +34,10 @@ HELP="$(gettext 'Usage: kz deploy [OPTIONS]')
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -d, --dev      deploy the development version of package kz')
-$(gettext '  -h, --help     show this help text')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '  -d, --dev      Deploy the development version of package kz')
+$(gettext '  -h, --help     Show this help text')
+$(gettext '  -u, --usage    Show a short usage summary')
+$(gettext '  -v, --version  Show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='dhuv'

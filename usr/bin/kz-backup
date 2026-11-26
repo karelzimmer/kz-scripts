@@ -38,14 +38,14 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext '  -C, --cli      run in command-line mode')
-$(gettext '  -G, --gui      run in graphical mode')
-$(gettext '  -h, --help     show this help text')
+$(gettext '  -C, --cli      Run in command-line mode')
+$(gettext '  -G, --gui      Run in graphical mode')
+$(gettext '  -h, --help     Show this help text')
 $(gettext '  -t, --target DIRECTORY')
-$(gettext '                 place backup in specified directory')
-$(gettext '  -T, --tui      run in text-based mode (default)')
-$(gettext '  -u, --usage    show a short usage summary')
-$(gettext '  -v, --version  show program version')"
+$(gettext '                 Place backup in specified directory')
+$(gettext '  -T, --tui      Run in text-based mode (default)')
+$(gettext '  -u, --usage    Show a short usage summary')
+$(gettext '  -v, --version  Show program version')"
 readonly HELP
 
 readonly OPTIONS_SHORT='CGht:Tuv'

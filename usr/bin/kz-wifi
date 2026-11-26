@@ -43,12 +43,12 @@ HELP_LINES: list[str] = [
     f'{PROGRAM_DESC}.',
     '',
     _('Options:'),
-    _('  -C, --cli      run in command-line mode'),
-    _('  -G, --gui      run in graphical mode'),
-    _('  -h, --help     show this help text'),
-    _('  -T, --tui      run in text-based mode (default)'),
-    _('  -u, --usage    show a short usage summary'),
-    _('  -v, --version  show program version'),
+    _('  -C, --cli      Run in command-line mode'),
+    _('  -G, --gui      Run in graphical mode'),
+    _('  -h, --help     Show this help text'),
+    _('  -T, --tui      Run in text-based mode (default)'),
+    _('  -u, --usage    Show a short usage summary'),
+    _('  -v, --version  Show program version'),
     ]
 HELP: str = '\n'.join(HELP_LINES)
 del HELP_LINES
