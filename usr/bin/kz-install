@@ -110,13 +110,16 @@ process() {
                 --suffix='-commands.sh'     \
                 --tmpdir
         )
-    # To minimize the risk of errors caused by outdated Debian package lists.
+
     if  grep    --quiet             \
                 --regexp='debian'   \
                 /etc/os-release     &&
         [[ $INSTALL = 'install' ]]; then
         printf '%s\n' "#|install|update|*|refresh package lists *** automatica\
 lly added ***
+# -----------------------------------------------------------------------------
+# To minimize the risk of errors caused by outdated Debian package lists.
+# -----------------------------------------------------------------------------
 sudo apt-get update
 "       > "$command_file"
     fi
