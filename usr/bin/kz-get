@@ -49,7 +49,7 @@ init() {
         '' )
             # No input provided.
             ;;
-        -d|--d|--de|--dev )
+        -d | --d | --de | --dev )
             OPTION_DEV=true
             ;;
         * )
